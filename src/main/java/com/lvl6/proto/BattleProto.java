@@ -6369,39 +6369,69 @@ public final class BattleProto {
         int index);
 
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    boolean hasAttackerUuid();
+    boolean hasAttacker();
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    java.lang.String getAttackerUuid();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker();
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    com.google.protobuf.ByteString
-        getAttackerUuidBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder();
 
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    boolean hasDefenderUuid();
+    boolean hasDefender();
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    java.lang.String getDefenderUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getDefender();
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    com.google.protobuf.ByteString
-        getDefenderUuidBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
 
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     boolean hasBattleEndTime();
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     long getBattleEndTime();
 
@@ -6409,7 +6439,7 @@ public final class BattleProto {
      * <code>optional int64 avengeRequestTime = 6;</code>
      *
      * <pre>
-     *TODO: DBConstants, change there too
+     *time of entry into clan_avenge table
      * </pre>
      */
     boolean hasAvengeRequestTime();
@@ -6417,24 +6447,24 @@ public final class BattleProto {
      * <code>optional int64 avengeRequestTime = 6;</code>
      *
      * <pre>
-     *TODO: DBConstants, change there too
+     *time of entry into clan_avenge table
      * </pre>
      */
     long getAvengeRequestTime();
 
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    boolean hasClanUuid();
+    boolean hasDefenderClanUuid();
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    java.lang.String getClanUuid();
+    java.lang.String getDefenderClanUuid();
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
     com.google.protobuf.ByteString
-        getClanUuidBytes();
+        getDefenderClanUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpClanAvengeProto}
@@ -6508,15 +6538,29 @@ public final class BattleProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = attacker_.toBuilder();
+              }
+              attacker_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(attacker_);
+                attacker_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              attackerUuid_ = bs;
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = defender_.toBuilder();
+              }
+              defender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(defender_);
+                defender_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              defenderUuid_ = bs;
               break;
             }
             case 40: {
@@ -6532,7 +6576,7 @@ public final class BattleProto {
             case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              clanUuid_ = bs;
+              defenderClanUuid_ = bs;
               break;
             }
           }
@@ -6655,100 +6699,90 @@ public final class BattleProto {
       return usersAvenging_.get(index);
     }
 
-    public static final int ATTACKERUUID_FIELD_NUMBER = 3;
-    private java.lang.Object attackerUuid_;
+    public static final int ATTACKER_FIELD_NUMBER = 3;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_;
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    public boolean hasAttackerUuid() {
+    public boolean hasAttacker() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    public java.lang.String getAttackerUuid() {
-      java.lang.Object ref = attackerUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          attackerUuid_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
+      return attacker_;
     }
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
-    public com.google.protobuf.ByteString
-        getAttackerUuidBytes() {
-      java.lang.Object ref = attackerUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        attackerUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
+      return attacker_;
     }
 
-    public static final int DEFENDERUUID_FIELD_NUMBER = 4;
-    private java.lang.Object defenderUuid_;
+    public static final int DEFENDER_FIELD_NUMBER = 4;
+    private com.lvl6.proto.UserProto.MinimumUserProto defender_;
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    public boolean hasDefenderUuid() {
+    public boolean hasDefender() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    public java.lang.String getDefenderUuid() {
-      java.lang.Object ref = defenderUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          defenderUuid_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
+      return defender_;
     }
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
-    public com.google.protobuf.ByteString
-        getDefenderUuidBytes() {
-      java.lang.Object ref = defenderUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        defenderUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
+      return defender_;
     }
 
     public static final int BATTLEENDTIME_FIELD_NUMBER = 5;
     private long battleEndTime_;
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     public boolean hasBattleEndTime() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     public long getBattleEndTime() {
       return battleEndTime_;
@@ -6760,7 +6794,7 @@ public final class BattleProto {
      * <code>optional int64 avengeRequestTime = 6;</code>
      *
      * <pre>
-     *TODO: DBConstants, change there too
+     *time of entry into clan_avenge table
      * </pre>
      */
     public boolean hasAvengeRequestTime() {
@@ -6770,26 +6804,26 @@ public final class BattleProto {
      * <code>optional int64 avengeRequestTime = 6;</code>
      *
      * <pre>
-     *TODO: DBConstants, change there too
+     *time of entry into clan_avenge table
      * </pre>
      */
     public long getAvengeRequestTime() {
       return avengeRequestTime_;
     }
 
-    public static final int CLANUUID_FIELD_NUMBER = 7;
-    private java.lang.Object clanUuid_;
+    public static final int DEFENDERCLANUUID_FIELD_NUMBER = 7;
+    private java.lang.Object defenderClanUuid_;
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    public boolean hasClanUuid() {
+    public boolean hasDefenderClanUuid() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    public java.lang.String getClanUuid() {
-      java.lang.Object ref = clanUuid_;
+    public java.lang.String getDefenderClanUuid() {
+      java.lang.Object ref = defenderClanUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -6797,22 +6831,22 @@ public final class BattleProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          clanUuid_ = s;
+          defenderClanUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
     public com.google.protobuf.ByteString
-        getClanUuidBytes() {
-      java.lang.Object ref = clanUuid_;
+        getDefenderClanUuidBytes() {
+      java.lang.Object ref = defenderClanUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        clanUuid_ = b;
+        defenderClanUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -6822,11 +6856,11 @@ public final class BattleProto {
     private void initFields() {
       clanAvengeUuid_ = "";
       usersAvenging_ = java.util.Collections.emptyList();
-      attackerUuid_ = "";
-      defenderUuid_ = "";
+      attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       battleEndTime_ = 0L;
       avengeRequestTime_ = 0L;
-      clanUuid_ = "";
+      defenderClanUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6848,10 +6882,10 @@ public final class BattleProto {
         output.writeMessage(2, usersAvenging_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(3, getAttackerUuidBytes());
+        output.writeMessage(3, attacker_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(4, getDefenderUuidBytes());
+        output.writeMessage(4, defender_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(5, battleEndTime_);
@@ -6860,7 +6894,7 @@ public final class BattleProto {
         output.writeInt64(6, avengeRequestTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(7, getClanUuidBytes());
+        output.writeBytes(7, getDefenderClanUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6881,11 +6915,11 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getAttackerUuidBytes());
+          .computeMessageSize(3, attacker_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getDefenderUuidBytes());
+          .computeMessageSize(4, defender_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6897,7 +6931,7 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getClanUuidBytes());
+          .computeBytesSize(7, getDefenderClanUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7014,6 +7048,8 @@ public final class BattleProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getUsersAvengingFieldBuilder();
+          getAttackerFieldBuilder();
+          getDefenderFieldBuilder();
         }
       }
       private static Builder create() {
@@ -7030,15 +7066,23 @@ public final class BattleProto {
         } else {
           usersAvengingBuilder_.clear();
         }
-        attackerUuid_ = "";
+        if (attackerBuilder_ == null) {
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+        } else {
+          attackerBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        defenderUuid_ = "";
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          defenderBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
         battleEndTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
         avengeRequestTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
-        clanUuid_ = "";
+        defenderClanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -7084,11 +7128,19 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.attackerUuid_ = attackerUuid_;
+        if (attackerBuilder_ == null) {
+          result.attacker_ = attacker_;
+        } else {
+          result.attacker_ = attackerBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.defenderUuid_ = defenderUuid_;
+        if (defenderBuilder_ == null) {
+          result.defender_ = defender_;
+        } else {
+          result.defender_ = defenderBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -7100,7 +7152,7 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.clanUuid_ = clanUuid_;
+        result.defenderClanUuid_ = defenderClanUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7148,15 +7200,11 @@ public final class BattleProto {
             }
           }
         }
-        if (other.hasAttackerUuid()) {
-          bitField0_ |= 0x00000004;
-          attackerUuid_ = other.attackerUuid_;
-          onChanged();
+        if (other.hasAttacker()) {
+          mergeAttacker(other.getAttacker());
         }
-        if (other.hasDefenderUuid()) {
-          bitField0_ |= 0x00000008;
-          defenderUuid_ = other.defenderUuid_;
-          onChanged();
+        if (other.hasDefender()) {
+          mergeDefender(other.getDefender());
         }
         if (other.hasBattleEndTime()) {
           setBattleEndTime(other.getBattleEndTime());
@@ -7164,9 +7212,9 @@ public final class BattleProto {
         if (other.hasAvengeRequestTime()) {
           setAvengeRequestTime(other.getAvengeRequestTime());
         }
-        if (other.hasClanUuid()) {
+        if (other.hasDefenderClanUuid()) {
           bitField0_ |= 0x00000040;
-          clanUuid_ = other.clanUuid_;
+          defenderClanUuid_ = other.defenderClanUuid_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -7512,173 +7560,337 @@ public final class BattleProto {
         return usersAvengingBuilder_;
       }
 
-      private java.lang.Object attackerUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> attackerBuilder_;
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
-      public boolean hasAttackerUuid() {
+      public boolean hasAttacker() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
-      public java.lang.String getAttackerUuid() {
-        java.lang.Object ref = attackerUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            attackerUuid_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
+        if (attackerBuilder_ == null) {
+          return attacker_;
+        } else {
+          return attackerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
+       */
+      public Builder setAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (attackerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          attacker_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          attackerBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string attackerUuid = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAttackerUuidBytes() {
-        java.lang.Object ref = attackerUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          attackerUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string attackerUuid = 3;</code>
-       */
-      public Builder setAttackerUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        attackerUuid_ = value;
-        onChanged();
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
-      public Builder clearAttackerUuid() {
+      public Builder setAttacker(
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+        if (attackerBuilder_ == null) {
+          attacker_ = builderForValue.build();
+          onChanged();
+        } else {
+          attackerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
+       */
+      public Builder mergeAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (attackerBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              attacker_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+            attacker_ =
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(attacker_).mergeFrom(value).buildPartial();
+          } else {
+            attacker_ = value;
+          }
+          onChanged();
+        } else {
+          attackerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
+       */
+      public Builder clearAttacker() {
+        if (attackerBuilder_ == null) {
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          onChanged();
+        } else {
+          attackerBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        attackerUuid_ = getDefaultInstance().getAttackerUuid();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
-      public Builder setAttackerUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        attackerUuid_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getAttackerBuilder() {
+        bitField0_ |= 0x00000004;
         onChanged();
-        return this;
+        return getAttackerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
+        if (attackerBuilder_ != null) {
+          return attackerBuilder_.getMessageOrBuilder();
+        } else {
+          return attacker_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          getAttackerFieldBuilder() {
+        if (attackerBuilder_ == null) {
+          attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+                  getAttacker(),
+                  getParentForChildren(),
+                  isClean());
+          attacker_ = null;
+        }
+        return attackerBuilder_;
       }
 
-      private java.lang.Object defenderUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
-      public boolean hasDefenderUuid() {
+      public boolean hasDefender() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
-      public java.lang.String getDefenderUuid() {
-        java.lang.Object ref = defenderUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            defenderUuid_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
+        if (defenderBuilder_ == null) {
+          return defender_;
+        } else {
+          return defenderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
+       */
+      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          defender_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          defenderBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string defenderUuid = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDefenderUuidBytes() {
-        java.lang.Object ref = defenderUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          defenderUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string defenderUuid = 4;</code>
-       */
-      public Builder setDefenderUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        defenderUuid_ = value;
-        onChanged();
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
-      public Builder clearDefenderUuid() {
+      public Builder setDefender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (defenderBuilder_ == null) {
+          defender_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
+       */
+      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              defender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            defender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(defender_).mergeFrom(value).buildPartial();
+          } else {
+            defender_ = value;
+          }
+          onChanged();
+        } else {
+          defenderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
+       */
+      public Builder clearDefender() {
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        defenderUuid_ = getDefaultInstance().getDefenderUuid();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
-      public Builder setDefenderUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        defenderUuid_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getDefenderBuilder() {
+        bitField0_ |= 0x00000008;
         onChanged();
-        return this;
+        return getDefenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
+        if (defenderBuilder_ != null) {
+          return defenderBuilder_.getMessageOrBuilder();
+        } else {
+          return defender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getDefenderFieldBuilder() {
+        if (defenderBuilder_ == null) {
+          defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getDefender(),
+                  getParentForChildren(),
+                  isClean());
+          defender_ = null;
+        }
+        return defenderBuilder_;
       }
 
       private long battleEndTime_ ;
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public boolean hasBattleEndTime() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public long getBattleEndTime() {
         return battleEndTime_;
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public Builder setBattleEndTime(long value) {
         bitField0_ |= 0x00000010;
@@ -7688,6 +7900,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public Builder clearBattleEndTime() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -7701,7 +7917,7 @@ public final class BattleProto {
        * <code>optional int64 avengeRequestTime = 6;</code>
        *
        * <pre>
-       *TODO: DBConstants, change there too
+       *time of entry into clan_avenge table
        * </pre>
        */
       public boolean hasAvengeRequestTime() {
@@ -7711,7 +7927,7 @@ public final class BattleProto {
        * <code>optional int64 avengeRequestTime = 6;</code>
        *
        * <pre>
-       *TODO: DBConstants, change there too
+       *time of entry into clan_avenge table
        * </pre>
        */
       public long getAvengeRequestTime() {
@@ -7721,7 +7937,7 @@ public final class BattleProto {
        * <code>optional int64 avengeRequestTime = 6;</code>
        *
        * <pre>
-       *TODO: DBConstants, change there too
+       *time of entry into clan_avenge table
        * </pre>
        */
       public Builder setAvengeRequestTime(long value) {
@@ -7734,7 +7950,7 @@ public final class BattleProto {
        * <code>optional int64 avengeRequestTime = 6;</code>
        *
        * <pre>
-       *TODO: DBConstants, change there too
+       *time of entry into clan_avenge table
        * </pre>
        */
       public Builder clearAvengeRequestTime() {
@@ -7744,24 +7960,24 @@ public final class BattleProto {
         return this;
       }
 
-      private java.lang.Object clanUuid_ = "";
+      private java.lang.Object defenderClanUuid_ = "";
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public boolean hasClanUuid() {
+      public boolean hasDefenderClanUuid() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public java.lang.String getClanUuid() {
-        java.lang.Object ref = clanUuid_;
+      public java.lang.String getDefenderClanUuid() {
+        java.lang.Object ref = defenderClanUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            clanUuid_ = s;
+            defenderClanUuid_ = s;
           }
           return s;
         } else {
@@ -7769,53 +7985,53 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
       public com.google.protobuf.ByteString
-          getClanUuidBytes() {
-        java.lang.Object ref = clanUuid_;
+          getDefenderClanUuidBytes() {
+        java.lang.Object ref = defenderClanUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          clanUuid_ = b;
+          defenderClanUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder setClanUuid(
+      public Builder setDefenderClanUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        clanUuid_ = value;
+        defenderClanUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder clearClanUuid() {
+      public Builder clearDefenderClanUuid() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        clanUuid_ = getDefaultInstance().getClanUuid();
+        defenderClanUuid_ = getDefaultInstance().getDefenderClanUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder setClanUuidBytes(
+      public Builder setDefenderClanUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        clanUuid_ = value;
+        defenderClanUuid_ = value;
         onChanged();
         return this;
       }
@@ -8816,18 +9032,19 @@ public final class BattleProto {
       " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanA" +
       "venged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010league" +
       "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi",
-      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\333\001\n\022PvpClan" +
+      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022PvpClan" +
       "AvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\ru" +
       "sersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpU" +
-      "serClanAvengeProto\022\024\n\014attackerUuid\030\003 \001(\t" +
-      "\022\024\n\014defenderUuid\030\004 \001(\t\022\025\n\rbattleEndTime\030" +
-      "\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\020\n\010clan" +
-      "Uuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n\010" +
-      "userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clan" +
-      "AvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014" +
-      "BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFEND",
-      "ER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattlePro" +
-      "to"
+      "serClanAvengeProto\022;\n\010attacker\030\003 \001(\0132).c" +
+      "om.lvl6.proto.MinimumUserProtoWithLevel\022" +
+      "2\n\010defender\030\004 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021av" +
+      "engeRequestTime\030\006 \001(\003\022\030\n\020defenderClanUui" +
+      "d\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n\010use" +
+      "rUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clanAve",
+      "ngeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014Bat" +
+      "tleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_" +
+      "WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8872,7 +9089,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
-        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "AttackerUuid", "DefenderUuid", "BattleEndTime", "AvengeRequestTime", "ClanUuid", });
+        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "DefenderClanUuid", });
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new

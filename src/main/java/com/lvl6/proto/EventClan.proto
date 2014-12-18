@@ -536,7 +536,7 @@ message BeginClanAvengingResponseProto {
 	repeated PvpClanAvengeProto clanAvengings = 2;
 	optional BeginClanAvengingStatus status = 3;
 	
-	//send to clan
+	//SEND TO CLAN
 	
 	enum BeginClanAvengingStatus {
 		SUCCESS = 1;
@@ -564,4 +564,25 @@ message EndClanAvengingResponseProto {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message AvengeClanMateRequestProto {
+	optional MinimumUserProto sender = 1;
+	//don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+	optional PvpClanAvengeProto clanAvenge = 2;
+	optional int64 clientTime = 3;
+}
+
+message AvengeClanMateResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional PvpProto victim = 2;
+	optional AvengeClanMateStatus status = 3;
+	
+	enum AvengeClanMateStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+	
 }

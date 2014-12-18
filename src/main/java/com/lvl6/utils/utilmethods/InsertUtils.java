@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -27,6 +29,7 @@ import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
@@ -35,8 +38,6 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
 public class InsertUtils implements InsertUtil{
-
-	
 	
 	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
@@ -1497,7 +1498,7 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+			//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
 
 			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 			return numUpdated;
@@ -1730,5 +1731,93 @@ public class InsertUtils implements InsertUtil{
 			}
 			return ids;
 		}
+
+		@Override
+		public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList,
+			String clanId)
+		{
+			String tableName = DBConstants.TABLE_CLAN_AVENGE;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			List<String> ids = new ArrayList<String>();
+			for (ClanAvenge ca : caList) {
+				String id = randomUUID();
+				ids.add(id);
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.CLAN_AVENGE__ID, id);
+				newRow.put(DBConstants.CLAN_AVENGE__ATTACKER_ID,
+					ca.getAttackerId());
+				newRow.put(DBConstants.CLAN_AVENGE__DEFENDER_ID,
+					ca.getDefenderId());
+				newRow.put(DBConstants.CLAN_AVENGE__BATTLE_END_TIME,
+					new Timestamp(ca.getBattleEndTime().getTime()));
+				newRow.put(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME,
+					new Timestamp(ca.getAvengeRequestTime().getTime()));
+				
+				newRow.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
+				newRows.add(newRow);
+			}
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != caList.size()) {
+			  ids = new ArrayList<String>();
+			}
+			return ids;
+		}
+
+		@Override
+		public int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList)
+		{
+			String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (ClanAvengeUser cau : cauList) {
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_ID,
+					cau.getClanId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_AVENGE_ID,
+					cau.getClanAvengeId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__USER_ID,
+					cau.getUserId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__AVENGE_TIME,
+					new Timestamp(cau.getAvengeTime().getTime()));
+				
+				newRows.add(newRow);
+			}
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			
+			return numUpdated;
+		}
 		
+		@Override
+		public int insertIntoUpdateClientTaskState(
+			List<TaskForUserClientState> tfucsList)
+		{
+			String tableName = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (TaskForUserClientState tfucs : tfucsList) {
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
+					tfucs.getUserId());
+				
+				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE,
+					tfucs.getClientState());
+					
+					
+				newRows.add(newRow);
+			}
+			
+			Set<String> replaceTheseColumns = Collections.singleton(
+				DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
+			
+			int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
 }

@@ -54,6 +54,7 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -95,6 +96,8 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
+import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
@@ -119,6 +122,7 @@ import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
+import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
@@ -133,6 +137,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
@@ -218,6 +223,12 @@ public class StartupController extends EventController {
 	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 
 	@Autowired
+	protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
+	
+	@Autowired
+	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	
+	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 
 	@Autowired
@@ -235,6 +246,9 @@ public class StartupController extends EventController {
 	@Autowired
 	protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
 
+	@Autowired
+	protected TaskForUserClientStateRetrieveUtil taskForUserClientStateRetrieveUtil;
+	
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
 
@@ -567,14 +581,21 @@ public class StartupController extends EventController {
 			
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
-			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, user, getClanChatPostRetrieveUtils());
+			SetClanChatMessageAction sccma = new SetClanChatMessageAction(
+				cdpb, user, getClanChatPostRetrieveUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			
-			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user, playerId, clanHelpRetrieveUtil);
+			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb,
+				user, playerId, clanHelpRetrieveUtil);
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
+			SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
+				cdpb, user, playerId, clanAvengeRetrieveUtil,
+				clanAvengeUserRetrieveUtil);
+			scra.setUp(fillMe);
+			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			
 			
 			//Now since all the ids of resources are known, get them from db
@@ -593,7 +614,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			scha.execute(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
-
+			scra.execute(fillMe);
+			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
@@ -829,9 +851,11 @@ public class StartupController extends EventController {
 		TaskForUserOngoing aTaskForUser = getTaskForUserOngoingRetrieveUtils()
 			.getUserTaskForUserId(userId);
 		if(null != aTaskForUser) {
+			TaskForUserClientState tfucs = taskForUserClientStateRetrieveUtil
+				.getTaskForUserClientState(userId);
 			log.warn(String.format(
 				"user has incompleted task userTask=%s", aTaskForUser));
-			setOngoingTask(resBuilder, userId, aTaskForUser);
+			setOngoingTask(resBuilder, userId, aTaskForUser, tfucs);
 		}
 	}
 
@@ -1022,10 +1046,10 @@ public class StartupController extends EventController {
 	}
 
 	private void setOngoingTask(Builder resBuilder, String userId,
-		TaskForUserOngoing aTaskForUser) {
+		TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		try {
 			MinimumUserTaskProto mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(
-				userId, aTaskForUser);
+				userId, aTaskForUser, tfucs);
 			resBuilder.setCurTask(mutp);
 
 			//create protos for stages
@@ -2089,6 +2113,25 @@ public class StartupController extends EventController {
 	{
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
 	}
+	
+	public ClanAvengeRetrieveUtil getClanAvengeRetrieveUtil()
+	{
+		return clanAvengeRetrieveUtil;
+	}
+	public void setClanAvengeRetrieveUtil( ClanAvengeRetrieveUtil clanAvengeRetrieveUtil )
+	{
+		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
+	}
+	
+	public ClanAvengeUserRetrieveUtil getClanAvengeUserRetrieveUtil()
+	{
+		return clanAvengeUserRetrieveUtil;
+	}
+	public void setClanAvengeUserRetrieveUtil( ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil )
+	{
+		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
+	}
+	
 	public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
 		return questForUserRetrieveUtils;
 	}
@@ -2096,6 +2139,7 @@ public class StartupController extends EventController {
 		QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
 		this.questForUserRetrieveUtils = questForUserRetrieveUtils;
 	}
+	
 	public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtils() {
 		return monsterEnhancingForUserRetrieveUtils;
 	}
@@ -2103,6 +2147,7 @@ public class StartupController extends EventController {
 		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
 		this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
 	}
+	
 	public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
 		return monsterHealingForUserRetrieveUtils;
 	}
@@ -2110,6 +2155,7 @@ public class StartupController extends EventController {
 		MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
 		this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
 	}
+	
 	public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtils() {
 		return monsterEvolvingForUserRetrieveUtils;
 	}
@@ -2117,6 +2163,7 @@ public class StartupController extends EventController {
 		MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
 		this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
 	}
+	
 	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
 		return monsterForUserRetrieveUtils;
 	}
@@ -2124,6 +2171,7 @@ public class StartupController extends EventController {
 		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
+	
 	public TaskForUserCompletedRetrieveUtils getTaskForUserCompletedRetrieveUtils() {
 		return taskForUserCompletedRetrieveUtils;
 	}
@@ -2131,6 +2179,7 @@ public class StartupController extends EventController {
 		TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils) {
 		this.taskForUserCompletedRetrieveUtils = taskForUserCompletedRetrieveUtils;
 	}
+	
 	public TaskForUserOngoingRetrieveUtils2 getTaskForUserOngoingRetrieveUtils() {
 		return taskForUserOngoingRetrieveUtils;
 	}
@@ -2138,6 +2187,17 @@ public class StartupController extends EventController {
 		TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils) {
 		this.taskForUserOngoingRetrieveUtils = taskForUserOngoingRetrieveUtils;
 	}
+	
+	public TaskForUserClientStateRetrieveUtil getTaskForUserClientStateRetrieveUtil()
+	{
+		return taskForUserClientStateRetrieveUtil;
+	}
+	public void setTaskForUserClientStateRetrieveUtil(
+		TaskForUserClientStateRetrieveUtil taskForUserClientStateRetrieveUtil )
+	{
+		this.taskForUserClientStateRetrieveUtil = taskForUserClientStateRetrieveUtil;
+	}
+	
 	public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtils() {
 		return taskStageForUserRetrieveUtils;
 	}
@@ -2145,6 +2205,7 @@ public class StartupController extends EventController {
 		TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils) {
 		this.taskStageForUserRetrieveUtils = taskStageForUserRetrieveUtils;
 	}
+	
 	public EventPersistentForUserRetrieveUtils2 getEventPersistentForUserRetrieveUtils() {
 		return eventPersistentForUserRetrieveUtils;
 	}
@@ -2152,6 +2213,7 @@ public class StartupController extends EventController {
 		EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils) {
 		this.eventPersistentForUserRetrieveUtils = eventPersistentForUserRetrieveUtils;
 	}
+	
 	public PvpBattleForUserRetrieveUtils2 getPvpBattleForUserRetrieveUtils() {
 		return pvpBattleForUserRetrieveUtils;
 	}
@@ -2159,6 +2221,7 @@ public class StartupController extends EventController {
 		PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils) {
 		this.pvpBattleForUserRetrieveUtils = pvpBattleForUserRetrieveUtils;
 	}
+	
 	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
 		return iapHistoryRetrieveUtils;
 	}
@@ -2166,6 +2229,7 @@ public class StartupController extends EventController {
 		IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
 		this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
 	}
+	
 	public ClanEventPersistentForClanRetrieveUtils2 getClanEventPersistentForClanRetrieveUtils() {
 		return clanEventPersistentForClanRetrieveUtils;
 	}
@@ -2173,6 +2237,7 @@ public class StartupController extends EventController {
 		ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils) {
 		this.clanEventPersistentForClanRetrieveUtils = clanEventPersistentForClanRetrieveUtils;
 	}
+	
 	public ClanEventPersistentForUserRetrieveUtils2 getClanEventPersistentForUserRetrieveUtils() {
 		return clanEventPersistentForUserRetrieveUtils;
 	}
@@ -2180,6 +2245,7 @@ public class StartupController extends EventController {
 		ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
 		this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
 	}
+	
 	public CepfuRaidStageHistoryRetrieveUtils2 getCepfuRaidStageHistoryRetrieveUtils() {
 		return cepfuRaidStageHistoryRetrieveUtils;
 	}
@@ -2187,6 +2253,7 @@ public class StartupController extends EventController {
 		CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils) {
 		this.cepfuRaidStageHistoryRetrieveUtils = cepfuRaidStageHistoryRetrieveUtils;
 	}
+	
 	public ClanEventPersistentUserRewardRetrieveUtils2 getClanEventPersistentUserRewardRetrieveUtils() {
 		return clanEventPersistentUserRewardRetrieveUtils;
 	}
@@ -2194,12 +2261,14 @@ public class StartupController extends EventController {
 		ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils) {
 		this.clanEventPersistentUserRewardRetrieveUtils = clanEventPersistentUserRewardRetrieveUtils;
 	}
+	
 	public ClanRetrieveUtils2 getClanRetrieveUtils() {
 		return clanRetrieveUtils;
 	}
 	public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
 		this.clanRetrieveUtils = clanRetrieveUtils;
 	}
+	
 	public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
 		return userClanRetrieveUtils;
 	}
@@ -2207,6 +2276,7 @@ public class StartupController extends EventController {
 		UserClanRetrieveUtils2 userClanRetrieveUtils) {
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 	}
+	
 	public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
 		return userFacebookInviteForSlotRetrieveUtils;
 	}
@@ -2214,6 +2284,7 @@ public class StartupController extends EventController {
 		UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
 		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
 	}
+	
 	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
 		return clanChatPostRetrieveUtils;
 	}
@@ -2221,6 +2292,7 @@ public class StartupController extends EventController {
 		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
 		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
 	}
+	
 	public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
 		return privateChatPostRetrieveUtils;
 	}
@@ -2228,6 +2300,7 @@ public class StartupController extends EventController {
 		PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 	}
+	
 	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
 	{
 		return itemSecretGiftForUserRetrieveUtil;
@@ -2237,6 +2310,7 @@ public class StartupController extends EventController {
 	{
 		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
 	}
+	
 	public InsertUtil getInsertUtil()
 	{
 		return insertUtil;

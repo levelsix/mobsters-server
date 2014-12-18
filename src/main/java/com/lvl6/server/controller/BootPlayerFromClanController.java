@@ -25,6 +25,8 @@ import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.ExitClanAction;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -36,6 +38,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected TimeUtils timeUtil;
 	
   public BootPlayerFromClanController() {
     numAllocatedThreads = 4;
@@ -200,14 +205,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  String userId = playerToBoot.getId();
 	  String clanId = playerToBoot.getClanId();
     if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
-      log.error("problem with deleting user clan info for playerToBoot with id " + playerToBoot.getId() + " and clan id " + playerToBoot.getClanId()); 
+      log.error("can't delete user clan info for playerToBoot with id={} \t and clanId={}",
+    	  playerToBoot.getId(), playerToBoot.getClanId()); 
+      
+      return false;
     }
     if (!playerToBoot.updateRelativeCoinsAbsoluteClan(0, null)) {
-      log.error("problem with change playerToBoot " + playerToBoot + " clan id to nothing");
+      log.error("can't change playerToBoot={} clan id to nothing",
+    	  playerToBoot);
+      
+      return false;
     }
 
-    int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
-    log.info(String.format("num ClanHelps closed: %s", numUpdated));
+    ExitClanAction eca = new ExitClanAction(userId, clanId, timeUtil, UpdateUtils.get());
+    eca.execute();
     
     return true;
   }
@@ -217,6 +228,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public TimeUtils getTimeUtil()
+  {
+	  return timeUtil;
+  }
+
+  public void setTimeUtil( TimeUtils timeUtil )
+  {
+	  this.timeUtil = timeUtil;
   }
 
 }

@@ -13,6 +13,8 @@ public class DBConstants {
 	public static final String TABLE_CITY_CONFIG = "city_config";					//TODO: delete
 	public static final String TABLE_CITY_ELEMENT_CONFIG = "city_element_config";	//TODO: delete
 	public static final String TABLE_CLANS = "clan";
+	public static final String TABLE_CLAN_AVENGE = "clan_avenge";
+	public static final String TABLE_CLAN_AVENGE_USER = "clan_avenge_user";
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
 	public static final String TABLE_CEPFU_RAID_HISTORY = "cepfu_raid_history";	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CEPFU_RAID_STAGE_HISTORY = "cepfu_raid_stage_history";
@@ -93,6 +95,7 @@ public class DBConstants {
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
 	public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
+	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_HISTORY = "task_history";
 	public static final String TABLE_TASK_MAP_ELEMENT_CONFIG = "task_map_element_config";
 	public static final String TABLE_TASK_STAGE_CONFIG = "task_stage_config";
@@ -151,7 +154,21 @@ public class DBConstants {
 	public static final String CLANS__TAG = "tag";
 	public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
 	public static final String CLANS__CLAN_ICON_ID = "clan_icon_id";  
+	
+	/*CLAN AVENGE*/
+	public static final String CLAN_AVENGE__ID = GENERIC__ID;
+	public static final String CLAN_AVENGE__CLAN_ID = "clan_id";
+	public static final String CLAN_AVENGE__ATTACKER_ID = "attacker_id";
+	public static final String CLAN_AVENGE__DEFENDER_ID = "defender_id";
+	public static final String CLAN_AVENGE__BATTLE_END_TIME = "battle_end_time";
+	public static final String CLAN_AVENGE__AVENGE_REQUEST_TIME = "avenge_request_time";
 
+	/*CLAN AVENGE USER*/
+	public static final String CLAN_AVENGE_USER__CLAN_ID = "clan_id";
+	public static final String CLAN_AVENGE_USER__CLAN_AVENGE_ID = "clan_avenge_id";
+	public static final String CLAN_AVENGE_USER__USER_ID = "user_id";
+	public static final String CLAN_AVENGE_USER__AVENGE_TIME = "avenge_time";
+	
 	/*CLAN_CHAT_POSTS*/
 	public static final String CLAN_CHAT_POST__ID = GENERIC__ID;
 	public static final String CLAN_CHAT_POST__POSTER_ID = "poster_id";
@@ -489,7 +506,8 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
 	public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
-	public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
+	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
+	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
 
 	/*PVP LEAGUE FOR USER*/
 	public static final String PVP_LEAGUE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -547,6 +565,10 @@ public class DBConstants {
 	public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
 	public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 	public static final String TASK_FOR_USER_ONGOING__TASK_STAGE_ID = "task_stage_id";
+	
+	/*TASK FOR USER CLIENT STATE TABLE*/
+	public static final String TASK_FOR_USER_CLIENT_STATE__USER_ID = "user_id";
+	public static final String TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE = "client_state";
 
 	/*TASK FOR USER COMPLETED TABLE*/
 	public static final String TASK_FOR_USER_COMPLETED__USER_ID = GENERIC__USER_ID;
@@ -881,8 +903,10 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
-	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
-	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL_EXPONENT = "cost_to_fully_heal_exponent";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";

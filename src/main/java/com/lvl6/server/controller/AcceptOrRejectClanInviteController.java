@@ -26,6 +26,8 @@ import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatu
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
+import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
@@ -35,6 +37,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AcceptOrRejectClanInviteAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -55,13 +58,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Autowired
 	protected ClanInviteRetrieveUtil clanInviteRetrieveUtil;
-  
-  @Autowired
-  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-  
-  @Autowired
-  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
 
+	@Autowired
+	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+
+	@Autowired
+	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+
+	@Autowired
+	protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
+
+	@Autowired
+	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	public AcceptOrRejectClanInviteController() {
 		numAllocatedThreads = 4;
@@ -196,20 +204,29 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	private ClanDataProto setClanData( String clanId,
 		Clan c, User u, String userId )
 	{
+		log.info("setting clanData proto for clan {}", c);
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 		StartUpResource fillMe = new StartUpResource(
 			userRetrieveUtil, clanRetrieveUtil );
 
-		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u, getClanChatPostRetrieveUtils());
+		SetClanChatMessageAction sccma = new SetClanChatMessageAction(
+			cdpb, u, getClanChatPostRetrieveUtils());
 		sccma.setUp(fillMe);
-		SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
+		SetClanHelpingsAction scha = new SetClanHelpingsAction(
+			cdpb, u, userId, clanHelpRetrieveUtil);
 		scha.setUp(fillMe);
+		SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
+			cdpb, u, userId, clanAvengeRetrieveUtil,
+			clanAvengeUserRetrieveUtil);
+		scra.setUp(fillMe);
 
+		
 		fillMe.fetchUsersOnly();
 		fillMe.addClan(clanId, c);
 
 		sccma.execute(fillMe);
 		scha.execute(fillMe);
+		scra.execute(fillMe);
 
 		return cdpb.build();
 	}
@@ -282,13 +299,33 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
 	}
 
-  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
-    return clanChatPostRetrieveUtils;
-  }
+	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+		return clanChatPostRetrieveUtils;
+	}
 
-  public void setClanChatPostRetrieveUtils(
-      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
-    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
-  }
+	public void setClanChatPostRetrieveUtils(
+		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
+	}
+
+	public ClanAvengeRetrieveUtil getClanAvengeRetrieveUtil()
+	{
+		return clanAvengeRetrieveUtil;
+	}
+
+	public void setClanAvengeRetrieveUtil( ClanAvengeRetrieveUtil clanAvengeRetrieveUtil )
+	{
+		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
+	}
+
+	public ClanAvengeUserRetrieveUtil getClanAvengeUserRetrieveUtil()
+	{
+		return clanAvengeUserRetrieveUtil;
+	}
+
+	public void setClanAvengeUserRetrieveUtil( ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil )
+	{
+		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
+	}
 
 }

@@ -82,9 +82,11 @@ public class PvpBattleHistoryRetrieveUtil2 {
 			history.setAttackerCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK));
 			history.setDefenderPrevRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK));
 			history.setDefenderCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK));
-			
-			history.setDefenderCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE));
-			history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
+            
+            history.setDefenderCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE));
+            history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
+            history.setAttackerCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE));
+            history.setAttackerOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE));
 			history.setAttackerWon(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
 //			history.setClanAvenged(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
@@ -202,14 +204,14 @@ public class PvpBattleHistoryRetrieveUtil2 {
 	public List<PvpBattleHistory> getRecentNBattlesForUserId(String userId, int n) {
 		List<PvpBattleHistory> recentNBattles = null;
 		
-		Object[] values = { userId, userId, false, true };
+		Object[] values = { userId, userId, false};//, true };
 		String query = String.format(
-			"select * from %s where %s in (?) or %s in (?) and %s=? and %s=?",
+			"select * from %s where (%s in (?) or %s in (?)) and %s=?",
 			TABLE_NAME,
 			DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID,
 			DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID,
-			DBConstants.PVP_BATTLE_HISTORY__CANCELLED,
-			DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER);
+			DBConstants.PVP_BATTLE_HISTORY__CANCELLED);//,
+			//DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER);
 		
 		if (n >= 1) {
 			StringBuilder querySb = new StringBuilder();
@@ -221,7 +223,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
 
 			query = querySb.toString(); 
 		}
-		log.info("query={}", query);
+		log.info("query={}, values={}", query, values);
 		try {
 			recentNBattles = this.jdbcTemplate.query(query, values,
 				rowMapper);
@@ -231,6 +233,37 @@ public class PvpBattleHistoryRetrieveUtil2 {
 			recentNBattles = new ArrayList<PvpBattleHistory>();
 		}
 		return recentNBattles;
+	}
+	
+	public PvpBattleHistory getPvpBattle(String attackerId,
+		String defenderId, Timestamp battleEndTime)
+    {
+		PvpBattleHistory battle = null;
+		
+		Object[] values = { attackerId, defenderId, battleEndTime, false };
+		String query = String.format(
+			"select * from %s where %s in (?) and %s in (?) and %s=? and %s=?",
+			TABLE_NAME,
+			DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID,
+			DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID,
+			DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME,
+			DBConstants.PVP_BATTLE_HISTORY__CANCELLED);//,
+			//DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER);
+		
+		log.info("query={}, values={}", query, values);
+		try {
+			List<PvpBattleHistory> battles = this.jdbcTemplate.query(query, values,
+				rowMapper);
+			
+			if (null != battles && !battles.isEmpty()) {
+				battle = battles.get(0);
+			}
+		} catch (Exception e) {
+			log.error(String.format(
+				"error retrieving pvp_battle_history for attackerId=%s, defenderId=%s, battleEndTime=%s",
+				new Object[] {attackerId, defenderId, battleEndTime}), e);
+		}
+		return battle;
 	}
 	
 }

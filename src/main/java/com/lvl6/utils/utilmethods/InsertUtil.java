@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -18,6 +20,7 @@ import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 
@@ -222,4 +225,11 @@ public interface InsertUtil {
 	
 	public abstract List<String> insertIntoItemSecretGiftForUserGetId(
 		List<ItemSecretGiftForUser> gifts);
+	
+	public abstract List<String> insertIntoClanAvengeGetId(
+		List<ClanAvenge> caList, String clanId);
+	
+	public abstract int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList);
+	
+	public abstract int insertIntoUpdateClientTaskState(List<TaskForUserClientState> tfucsList);
 }

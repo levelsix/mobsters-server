@@ -834,6 +834,9 @@ public class MiscMethods {
 		pcb.setMaxPvpDmgDelta(ControllerConstants.PVP__MAX_DMG_DELTA);
 		pcb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
 		pcb.setDefendingMsgCharLimit(ControllerConstants.PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG);
+		pcb.setBeginAvengingTimeLimitMins(ControllerConstants.PVP__BEGIN_AVENGING_TIME_LIMIT_MINS);
+		pcb.setRequestClanToAvengeTimeLimitMins(ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS);
+		cb.setPvpConstant(pcb.build());
 		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()

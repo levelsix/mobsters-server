@@ -1520,4 +1520,62 @@ public class UpdateUtils implements UpdateUtil {
 
 			return numUpdated;
 		}
+		
+		@Override
+		public int updatePvpBattleHistoryClanRetaliated(
+			List<String> historyAttackerId, List<String> historyDefenderId,
+			List<Timestamp> battleEndTime)
+		{
+			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			String clanAvenge = DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED;
+			String attackerId = DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID;
+			String defenderId = DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID;
+			String battleEndTimeStr = DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME;
+			
+			List<String> questions = Collections.nCopies(
+				historyAttackerId.size(), "?");
+			String questionMarks = StringUtils.implode(questions, ",");
+			
+			String query = String.format(
+				"UPDATE %s SET %s=? WHERE %s in (%s) and %s in (%s) and %s in (%s)",
+				tableName, clanAvenge,
+				attackerId, questionMarks, defenderId, questionMarks,
+				battleEndTimeStr, questionMarks); 
+			
+			List<Object> values = new ArrayList<Object>();
+			values.add(true);
+			values.addAll(historyAttackerId);
+			values.addAll(historyDefenderId);
+			values.addAll(battleEndTime);
+
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateRecentPvpBattleHistoryClanRetaliated(
+			String historyDefenderId, Timestamp battleEndTime)
+		{
+			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			String clanAvenge = DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED;
+			String defenderId = DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID;
+			String battleEndTimeStr = DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME;
+			
+			List<String> questions = Collections.nCopies(1, "?");
+			String questionMarks = StringUtils.implode(questions, ",");
+			
+			String query = String.format(
+				"UPDATE %s SET %s=? WHERE %s in (%s) and %s > ?",
+				tableName, clanAvenge,
+				defenderId, questionMarks,
+				battleEndTimeStr); 
+			
+			List<Object> values = new ArrayList<Object>();
+			values.add(true);
+			values.add(historyDefenderId);
+			values.add(battleEndTime);
+
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			return numUpdated;
+		}
 }

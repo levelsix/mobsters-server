@@ -280,7 +280,10 @@ message StartupResponseProto {
 			
 			optional int32 defendingMsgCharLimit = 5;
 			
+			//time limit after a user opens up an enemy for clan avenging
 			optional int32 beginAvengingTimeLimitMins = 6;
+			
+			//time limit after a pvp battle has ended
 			optional int32 requestClanToAvengeTimeLimitMins = 7;
 		}
 		message SpeedUpConstantProto {

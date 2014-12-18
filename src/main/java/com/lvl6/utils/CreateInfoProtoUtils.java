@@ -13,6 +13,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.ByteString;
 import com.lvl6.info.Achievement;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
@@ -22,6 +23,8 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -79,6 +82,7 @@ import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStage;
@@ -92,11 +96,13 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
+import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -310,13 +316,34 @@ public class CreateInfoProtoUtils {
     return mupwbhb.build();
   }*/
 
-	public static PvpProto createPvpProto(User u, Clan clan, PvpLeagueForUser plfu,
-		PvpUser pu, Collection<MonsterForUser> userMonsters,
+	public static PvpProto createPvpProto(User defender, Clan clan,
+		PvpLeagueForUser plfu, PvpUser pu,
+		Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings) {
 
+		MinimumUserProtoWithLevel defenderProto =
+			createMinimumUserProtoWithLevel(defender, clan, null);
+		String userId = defender.getId();
+		String msg = defender.getPvpDefendingMessage();
+		return createPvpProto(userId, plfu, pu, userMonsters,
+			userMonsterIdToDropped, prospectiveCashWinnings,
+			prospectiveOilWinnings, defenderProto, msg);
+	}
+
+	public static PvpProto createPvpProto(
+		String defenderId,
+		PvpLeagueForUser plfu,
+		PvpUser pu,
+		Collection<MonsterForUser> userMonsters,
+		Map<String, Integer> userMonsterIdToDropped,
+		int prospectiveCashWinnings,
+		int prospectiveOilWinnings,
+		MinimumUserProtoWithLevel defender,
+		String defenderMsg)
+	{
 		PvpProto.Builder ppb = PvpProto.newBuilder();
-		MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevel(u, clan, null);
+		
 		Collection<PvpMonsterProto> defenderMonsters = 
 			createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
 		ppb.addAllDefenderMonsters(defenderMonsters);
@@ -325,14 +352,14 @@ public class CreateInfoProtoUtils {
 		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
-		String userId = u.getId();
-		UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, true);
+		UserPvpLeagueProto uplp = 
+			createUserPvpLeagueProto(defenderId, plfu, pu, true);
 		ppb.setPvpLeagueStats(uplp);
 
-		String msg = u.getPvpDefendingMessage();
-		if (null != msg)
+		
+		if (null != defenderMsg)
 		{
-			ppb.setDefenderMsg(msg);
+			ppb.setDefenderMsg(defenderMsg);
 		}
 		
 		return ppb.build();
@@ -398,8 +425,11 @@ public class CreateInfoProtoUtils {
 	{
 		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
 		pmpb.setDefenderMonster(mump);
-		pmpb.setMonsterIdDropped(monsterIdDropped);
+		if (monsterIdDropped > 0) {
+			pmpb.setMonsterIdDropped(monsterIdDropped);
+		}
 		PvpMonsterProto pmp = pmpb.build();
+		
 		return pmp;
 	}
 	
@@ -488,7 +518,6 @@ public class CreateInfoProtoUtils {
 		int prospectiveCashWinnings, int prospectiveOilWinnings)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
-		//there is db call for clan...
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null,
 			c);
 		phpb.setAttacker(fup);
@@ -616,7 +645,7 @@ public class CreateInfoProtoUtils {
 		int attackerOilChange = info.getAttackerOilChange();
 		phpb.setAttackerOilChange(attackerOilChange);
 		
-//		phpb.setClanAvenged(info.isClanAvenged());
+		phpb.setClanAvenged(info.isClanAvenged());
 	}
 	
 	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
@@ -710,6 +739,146 @@ public class CreateInfoProtoUtils {
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 
 		return uplpb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations,
+		Map<String, List<ClanAvengeUser>> clanAvengeIdToClanAvengeUser,
+		Map<String, User> userIdsToUsers,
+		Map<String, Clan> userIdsToClans)
+	{
+		List<PvpClanAvengeProto> pcapList = new ArrayList<PvpClanAvengeProto>();
+		
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			createMinimumUserProtoWithLevel(userIdsToUsers, userIdsToClans);
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String clanAvengeId = ca.getId();
+			List<ClanAvengeUser> cauList = null;
+			
+			if (clanAvengeIdToClanAvengeUser.containsKey(clanAvengeId))
+			{
+				cauList = clanAvengeIdToClanAvengeUser
+					.get(clanAvengeId);
+			}
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(ca, cauList, userIdToMupwl);
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		ClanAvenge ca, List<ClanAvengeUser> cauList,
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl)
+	{
+		String attackerId = ca.getAttackerId();
+		String defenderId = ca.getDefenderId();
+		String defenderClanUuid = ca.getClanId();
+		
+		MinimumUserProtoWithLevel attacker = userIdToMupwl
+			.get(attackerId);
+		MinimumUserProtoWithLevel defender = userIdToMupwl
+			.get(defenderId);
+		
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender.getMinUserProto());
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		//could be that no clan mate started retaliating
+		//against person who attacked clan member
+		if (null != cauList && !cauList.isEmpty())
+		{
+			List<PvpUserClanAvengeProto> pucapList =
+				createPvpUserClanAvengeProto(cauList);
+			pcapb.addAllUsersAvenging(pucapList);
+		}
+		
+		return pcapb.build();
+	}
+	
+	public static List<PvpUserClanAvengeProto> createPvpUserClanAvengeProto(
+		List<ClanAvengeUser> cauList )
+	{
+		List<PvpUserClanAvengeProto> pucapList = new
+			ArrayList<PvpUserClanAvengeProto>();
+		
+		for (ClanAvengeUser cau : cauList)
+		{
+			PvpUserClanAvengeProto pucap =
+				createPvpUserClanAvengeProto(cau);
+			pucapList.add(pucap);
+		}
+		
+		return pucapList;
+	}
+	
+	public static PvpUserClanAvengeProto createPvpUserClanAvengeProto(
+		ClanAvengeUser cau)
+	{
+		PvpUserClanAvengeProto.Builder pucapb =
+			PvpUserClanAvengeProto.newBuilder();
+		
+		pucapb.setUserUuid(cau.getUserId());
+		pucapb.setClanAvengeUuid(cau.getClanAvengeId());
+		pucapb.setClanUuid(cau.getClanId());
+		
+		Date date = cau.getAvengeTime();
+		pucapb.setAvengeTime(date.getTime());
+		
+		return pucapb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
+		String clanUuid,
+		Map<String, MinimumUserProtoWithLevel> attackerIdsToMupwls)
+	{
+		List<PvpClanAvengeProto> pcapList =
+			new ArrayList<PvpClanAvengeProto>();
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String attackerId = ca.getAttackerId();
+			MinimumUserProtoWithLevel attackerMupwl = attackerIdsToMupwls
+				.get(attackerId);
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(
+				attackerMupwl, defenderMup, clanUuid, ca);
+			
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		MinimumUserProtoWithLevel attacker, MinimumUserProto defender,
+		String defenderClanUuid, ClanAvenge ca)
+	{
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender);
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		return pcapb.build();
 	}
 
 	/**BoosterPackStuff.proto****************************************/
@@ -1890,8 +2059,10 @@ public class CreateInfoProtoUtils {
 			mlipb.setExpLvlExponent(info.getExpLvlExponent());
 			mlipb.setSellAmount(info.getSellAmount());
 			mlipb.setTeamCost(info.getTeamCost());
-			mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
-			mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
+            mlipb.setCostToFullyHealExponent(info.getCostToFullyHealExponent());
+            mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setSecsToFullyHealExponent(info.getSecsToFullyHealExponent());
 			
 			mlipb.setEnhanceCostPerFeeder(info.getEnhanceCostPerFeeder());
 			mlipb.setEnhanceCostExponent(info.getEnhanceCostExponent());
@@ -2991,7 +3162,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static MinimumUserTaskProto createMinimumUserTaskProto(String userId,
-		TaskForUserOngoing aTaskForUser) {
+		TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		MinimumUserTaskProto.Builder mutpb = MinimumUserTaskProto.newBuilder();
 		mutpb.setUserUuid(userId);
 
@@ -3002,6 +3173,26 @@ public class CreateInfoProtoUtils {
 		String userTaskId = aTaskForUser.getId();
 		mutpb.setUserTaskUuid(userTaskId);
 
+		try {
+			byte[] bites = null;
+			if (null != tfucs) {
+				bites = tfucs.getClientState();
+			}
+			
+			if (null != bites) {
+				ByteString bs = ByteString.copyFrom(bites);
+				mutpb.setClientState(bs);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error(String.format(
+				"unable to convert byte[] to google.ByteString, userId=%s",
+				userId),
+				e);
+		}
+
+		
 		return mutpb.build();
 	}
 
@@ -3490,11 +3681,57 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
+	public static MinimumUserProtoWithLevel createMinimumUserProto(FullUserProto fup)
+	{
+		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+		String str = fup.getUserUuid();
+		if (null != str)
+		{
+			mupb.setUserUuid(str);
+		}
+		
+		str = fup.getName();
+		if (null != str)
+		{
+			mupb.setName(str);
+		}
+		
+		MinimumClanProto mcp = fup.getClan();
+		if (null != mcp)
+		{
+			mupb.setClan(mcp);
+		}
+		
+		int avatarMonsterId = fup.getAvatarMonsterId();
+		if (avatarMonsterId > 0)
+		{
+			mupb.setAvatarMonsterId(avatarMonsterId);
+		}
+		
+		MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+		mupwlb.setLevel(fup.getLevel());
+		mupwlb.setMinUserProto(mupb.build());
+		
+		return mupwlb.build();
+	}
 
-
-
-
-
+	public static Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
+		Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans)
+	{
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			new HashMap<String, MinimumUserProtoWithLevel>();
+		for (User u : userIdsToUsers.values())
+		{
+			String userId = u.getId();
+			Clan c = userIdsToClans.get(userId);
+			
+			MinimumUserProtoWithLevel mupwl =
+				createMinimumUserProtoWithLevel(u, c, null);
+			
+			userIdToMupwl.put(userId, mupwl);
+		}
+		return userIdToMupwl;
+	}
 
 
 

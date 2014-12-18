@@ -186,4 +186,11 @@ public interface UpdateUtil {
   public int updateClanHelp(String userId, String clanId, List<String> clanHelpIds);
   
   public int closeClanHelp(String userId, String clanId);
+  
+  public abstract int updatePvpBattleHistoryClanRetaliated(
+	  List<String> historyAttackerId, List<String> historyDefenderId,
+	  List<Timestamp> battleEndTime);
+  
+  public abstract int updateRecentPvpBattleHistoryClanRetaliated(
+		String historyDefenderId, Timestamp battleEndTime);
 }

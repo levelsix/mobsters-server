@@ -2,10 +2,12 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -18,11 +20,15 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Clan;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
@@ -32,14 +38,19 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -66,6 +77,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 
+  @Autowired
+  protected PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil2;
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
   
   public EndPvpBattleController() {
     numAllocatedThreads = 7;
@@ -121,6 +140,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     EndPvpBattleResponseProto.Builder resBuilder = EndPvpBattleResponseProto.newBuilder();
     resBuilder.setSender(senderProtoMaxResources);
     resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
+    resBuilder.setAttackerAttacked(attackerAttacked);
+    resBuilder.setAttackerWon(attackerWon);
+    
     EndPvpBattleResponseEvent resEvent = new EndPvpBattleResponseEvent(attackerId);
     resEvent.setTag(event.getTag());
 
@@ -206,7 +228,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     				changeMap, previousCurrencyMap, monsterDropIds, resBuilder);
     	}
 
+    	
+    	PvpBattleHistory battleJustEnded = null;
     	if (successful) {
+    		//TODO: construct the history proto instead of db retrieving
+    		Timestamp ts = new Timestamp(curDate.getTime());
+    		battleJustEnded = pvpBattleHistoryRetrieveUtil2
+    			  .getPvpBattle(attackerId, defenderId, ts);
+    		
+    		if (null != battleJustEnded) 
+    		{
+    			List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+    				.createAttackedOthersPvpHistoryProto(attackerId, users,
+    					Collections.singletonList(battleJustEnded));
+    			PvpHistoryProto attackedOtherHistory = historyProtoList.get(0);
+    			log.info("attackedOtherHistory {}", attackedOtherHistory);
+    			resBuilder.setBattleThatJustEnded(attackedOtherHistory);
+    		}
+    		
     		resBuilder.setStatus(EndPvpBattleStatus.SUCCESS);
     	}
 
@@ -216,12 +255,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     	if (successful) {
     		//respond to the defender
-    		EndPvpBattleResponseEvent resEventDefender =
+    		if (null != defender) {
+    			if (null != battleJustEnded) {
+    				PvpHistoryProto php = createPvpProto(attacker, defender,
+    					curDate, battleJustEnded);
+    				log.info("gotAttackedHistory {}", php);
+    				resBuilder.setBattleThatJustEnded(php);
+    			}
+    			
+    			EndPvpBattleResponseEvent resEventDefender =
     				new EndPvpBattleResponseEvent(defenderId);
-    		resEvent.setTag(0);
-    		resEventDefender.setEndPvpBattleResponseProto(resBuilder.build());
-    		server.writeEvent(resEventDefender);
-
+    			resEvent.setTag(0);
+    			resEventDefender.setEndPvpBattleResponseProto(resBuilder.build());
+    			server.writeEvent(resEventDefender);
+    		}
     		//regardless of whether the attacker won, his elo will change
     		UpdateClientUserResponseEvent resEventUpdate =  MiscMethods
     				.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -652,8 +699,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int attackerOilChange, int attackerEloChange,
 		  float nuPvpDmgMultiplier, boolean attackerWon) {
 	  
-	  //update attacker's cash, oil, elo
-	  if (0 != attackerOilChange || 0 != attackerEloChange) {
+	  //update attacker's cash, oil
+	  if (0 != attackerOilChange || 0 != attackerCashChange) {
 		  log.info(String.format(
 			  "attacker before currency update: %s", attacker));
 		  int numUpdated = attacker.updateRelativeCashAndOilAndGems(
@@ -691,7 +738,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(curElo,
 			  attackerCurLeague);
 	  
-	  //don't update his shields
+	  //don't update his shields and elo
 	  int numUpdated = UpdateUtils.get().updatePvpLeagueForUser(attackerId,
 			  attackerCurLeague, attackerCurRank, attackerEloChange, null,
 			  null, attacksWonDelta, defensesWonDelta, attacksLostDelta,
@@ -745,22 +792,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
 	  //the history for this battle should have the display_to_defender set to false;
 	  Date shieldEndTime = defenderPlfu.getShieldEndTime();
-	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
-		  log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
-				  pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
-		  defenderCashChange = 0;
-		  defenderOilChange = 0;
-		  defenderEloChange = 0;
-		  displayToDefender = false;
-
-	  } else {
+//	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
+//		  log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
+//				  pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
+//		  defenderCashChange = 0;
+//		  defenderOilChange = 0;
+//		  defenderEloChange = 0;
+//		  displayToDefender = false;
+//
+//	  } else {
 		  log.info(String.format(
 			  "penalizing/rewarding for losing/winning. defenderWon=%s",
 			  defenderWon));
 		  updateUnshieldedDefender(attacker, defenderId, defender, defenderPlfu,
 				  shieldEndTime, pvpBattleInfo, clientDate, attackerWon,
 				  defenderEloChange, defenderCashChange, defenderOilChange);
-	  }
+//	  }
 
 	  defenderEloChangeList.add(defenderEloChange);
 	  defenderCashChangeList.add(defenderCashChange);
@@ -1032,6 +1079,188 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
   }
 
+  //TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
+  private PvpHistoryProto createPvpProto(User attacker,
+	  User defender, Date curDate, PvpBattleHistory gotAttackedHistory)
+  {
+	  if (null == defender) {
+		  return null;
+	  }
+	  
+	  ///need to get the elo
+	  String attackerId = attacker.getId();
+	  String defenderId = defender.getId();
+	  List<String> userIds = new ArrayList<String>();
+	  userIds.add(attackerId);
+	  userIds.add(defenderId);
+	  
+	  Map<String, PvpUser> idsToPvpUsers = hazelcastPvpUtil
+			.getPvpUsers(userIds);
+	  PvpUser attackerPu = idsToPvpUsers.get(attackerId);
+	  PvpUser defenderPu = idsToPvpUsers.get(defenderId);
+	  
+	  int attackerElo = attackerPu.getElo();
+	  int defenderElo = defenderPu.getElo();
+	  
+	  
+	  //hopefully this gets this pvpHistory just created
+	  List<PvpBattleHistory> gotAttackedHistoryList = Collections
+		  .singletonList(gotAttackedHistory);
+	  
+	  log.info("gotAttackedHistoryList {}", gotAttackedHistoryList);
+	  
+	  String attackerClanId = attacker.getClanId();
+	  
+	  //need clan info for attacker
+	  Clan attackerClan = clanRetrieveUtil.getClanWithId(attackerClanId);
+	  Map<String, Clan> attackerIdsToClans = Collections
+		  .singletonMap(attackerId, attackerClan);
+	  
+	  
+	  Map<String, User> idsToAttackers = Collections.singletonMap(
+		  attackerId, attacker);
+
+	  //need the monsters for the attacker
+	  Map<String, List<MonsterForUser>> userIdsToUserMonsters =
+		  calculateAttackerMonsters(attackerId);
+
+	  
+	  //need the drop rates
+	  Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
+			MonsterStuffUtils.calculatePvpDrops(userIdsToUserMonsters);
+
+	  
+	  //need to calculate the resources defender can steal
+	  PvpBattleOutcome potentialResult = new PvpBattleOutcome(
+			defender.getId(), defenderElo, attackerId, attackerElo,
+			defender.getCash(), defender.getOil());
+	  
+	  Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
+		  .singletonMap(attackerId, potentialResult.getUnsignedCashAttackerWins());
+	  Map<String, Integer> attackerIdsToProspectiveOilWinnings = Collections
+		  .singletonMap(attackerId, potentialResult.getUnsignedOilAttackerWins());
+		
+	  
+	  //this PvpHistoryProto contains information for a person who
+	  //is going to attack
+	  List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		  .createGotAttackedPvpHistoryProto(gotAttackedHistoryList, idsToAttackers,
+			  attackerIdsToClans, userIdsToUserMonsters,
+			  userIdToUserMonsterIdToDroppedId,
+			  attackerIdsToProspectiveCashWinnings,
+			  attackerIdsToProspectiveOilWinnings);
+
+
+	  if (null != historyProtoList && !historyProtoList.isEmpty())
+	  {
+		  PvpHistoryProto pp = historyProtoList.get(0);
+		  return pp;
+	  }
+	  
+	  return null;
+  }
+
+  private Map<String, List<MonsterForUser>> calculateAttackerMonsters(
+	  String attackerId)
+  {
+	  List<String> attackerIds = Collections.singletonList(attackerId);
+	  //need monsters for attacker
+	  Map<String, Map<String, MonsterForUser>> userIdsToMfuIdsToMonsters =
+		  monsterForUserRetrieveUtil.getCompleteMonstersForUser(attackerIds);
+
+	  Map<String, MonsterForUser> attackerIdToMonsters =
+		  userIdsToMfuIdsToMonsters.get(attackerId);
+
+	  //try to select at most 3 monsters for this user
+	  List<MonsterForUser> attackerMonsters = selectMonstersForUser(attackerIdToMonsters);
+
+	  Map<String, List<MonsterForUser>> userIdsToUserMonsters =
+		  Collections.singletonMap(attackerId, attackerMonsters);
+	  return userIdsToUserMonsters;
+  }
+  
+  private List<MonsterForUser> selectMonstersForUser(Map<String, MonsterForUser> mfuIdsToMonsters) {
+
+		//get all the monsters the user has on a team (at the moment, max is 3)
+		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
+
+		if (defenderMonsters.size() < 3) {
+			//need more monsters so select them randomly, fill up "defenderMonsters" list
+			getRandomMonsters(mfuIdsToMonsters, defenderMonsters);
+		}
+		
+		if (defenderMonsters.size() > 3) {
+			//only get three monsters
+			defenderMonsters = defenderMonsters.subList(0, 3);
+		}
+		
+		return defenderMonsters;
+	}
+	
+	
+	private List<MonsterForUser> getEquippedMonsters(Map<String, MonsterForUser> userMonsters) {
+		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
+		
+		for (MonsterForUser mfu : userMonsters.values()) {
+			if (mfu.getTeamSlotNum() <= 0) {
+				//only want equipped monsters
+				continue;
+			}
+			equipped.add(mfu);
+			
+		}
+		return equipped;
+	}
+
+	private void getRandomMonsters(Map<String, MonsterForUser> possibleMonsters,
+			List<MonsterForUser> defenderMonsters) {
+		
+		Map<String, MonsterForUser> possibleMonstersTemp =
+				new HashMap<String, MonsterForUser>(possibleMonsters);
+		
+		//remove the defender monsters from possibleMonstersTemp, since defenderMonsters
+		//were already selected from possibleMonsters
+		for (MonsterForUser m : defenderMonsters) {
+		  String mfuId = m.getId();
+			
+			possibleMonstersTemp.remove(mfuId);
+		}
+		
+		int amountLeftOver = possibleMonstersTemp.size();
+		int amountNeeded = 3 - defenderMonsters.size();
+		
+		if (amountLeftOver < amountNeeded) {
+			defenderMonsters.addAll(possibleMonstersTemp.values());
+			return;
+		}
+		
+		//randomly select enough monsters to total 3
+		List<MonsterForUser> mfuList = new ArrayList<MonsterForUser>(possibleMonstersTemp.values());
+		Random rand = new Random();
+		
+		//for each monster gen rand float, and if it "drops" select it
+		for (int i = 0; i < mfuList.size(); i++) {
+			
+			//eg. need 2, have 3. If first one is not picked, then need 2, have 2.
+			float probToBeChosen = amountNeeded / (amountLeftOver - i);
+			float randFloat = rand.nextFloat();
+			
+			if (randFloat < probToBeChosen) {
+				//we have a winner! select this monster
+				MonsterForUser mfu = mfuList.get(i);
+				defenderMonsters.add(mfu);
+				
+				//need to decrement amount needed
+				amountNeeded--;
+			}
+			
+			//stop at three monsters, don't want to get more
+			if (defenderMonsters.size() >= 3) {
+				break;
+			}
+		}
+	}
+  
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
@@ -1086,6 +1315,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
 	{
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+	}
+
+	public PvpBattleHistoryRetrieveUtil2 getPvpBattleHistoryRetrieveUtil2()
+	{
+		return pvpBattleHistoryRetrieveUtil2;
+	}
+
+	public void setPvpBattleHistoryRetrieveUtil2(
+		PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil2 )
+	{
+		this.pvpBattleHistoryRetrieveUtil2 = pvpBattleHistoryRetrieveUtil2;
+	}
+
+	public ClanRetrieveUtils2 getClanRetrieveUtil()
+	{
+		return clanRetrieveUtil;
+	}
+
+	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+	{
+		this.clanRetrieveUtil = clanRetrieveUtil;
+	}
+
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
+	{
+		return monsterForUserRetrieveUtil;
+	}
+
+	public void setMonsterForUserRetrieveUtil(
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
+	{
+		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
 }
