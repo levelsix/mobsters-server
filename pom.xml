@@ -97,16 +97,7 @@
 		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
 
-		<!-- deprecated -->
 		<lvl6.application.version>1.2f</lvl6.application.version>
-		<!--  -->
-		
-		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
-		<lvl6.application.version.majorNumber>1</lvl6.application.version.majorNumber>
-		<lvl6.application.version.minorNumber>10</lvl6.application.version.minorNumber>
-<!-- 		<lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
-		
-		
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
 		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
@@ -149,6 +140,7 @@
 		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
+		<amqp.client.messages.queue>messagesFromPlayers1.1</amqp.client.messages.queue>
 		<amqp.client.messages.routing.key>messagesFromPlayers1.1</amqp.client.messages.routing.key>
 		
 		<!-- Amazon SNS -->
