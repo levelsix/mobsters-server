@@ -158,7 +158,7 @@ public class SNSMobilePush implements SNSService {
 		return isSandBox;
 	}
 
-	public void setSandBox(boolean isSandBox) {
+	public void setIsSandBox(boolean isSandBox) {
 		this.isSandBox = isSandBox;
 	}
 }
