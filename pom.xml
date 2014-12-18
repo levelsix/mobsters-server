@@ -141,6 +141,15 @@
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
 		<amqp.client.messages.routing.key>messagesFromPlayers</amqp.client.messages.routing.key>
+		
+		<!-- Amazon SNS -->
+		<apnsCertificate></apnsCertificate>
+		<apnsPrivateKey></apnsPrivateKey>
+		<apnsApplicationName></apnsApplicationName>
+		<isSandBox>true</isSandBox>
+		<gcmServerAPIKey></gcmServerAPIKey>
+		<gcmApplicationName></gcmApplicationName>
+		<gcmRegistrationId></gcmRegistrationId>
 	</properties>
 
 	<profiles>
