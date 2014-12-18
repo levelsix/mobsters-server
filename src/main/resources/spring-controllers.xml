@@ -44,7 +44,7 @@
 		<property name="apnsCertificate" value="${apnsCertificate}" />
 		<property name="apnsPrivateKey" value="${apnsPrivateKey}" />
 		<property name="apnsApplicationName" value="${apnsApplicationName}" />
-		<property name="isSandBox" value="${apnsIsSandBox}" />
+		<property name="isSandBox" value="${isSandBox}" />
 		<property name="gcmServerAPIKey" value="${gcmServerAPIKey}" />
 		<property name="gcmApplicationName" value="${gcmApplicationName}" />
 		<property name="gcmRegistrationId" value="${gcmRegistrationId}" />
