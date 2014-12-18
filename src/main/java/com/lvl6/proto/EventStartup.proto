@@ -25,7 +25,8 @@ option java_outer_classname = "EventStartupProto";
 
 message StartupRequestProto {				//client will also send ChangeUserLocationRequestProto
      optional string udid = 1;
-     optional float versionNum = 2;			//1.0->2.0 critical, 1.0->1.1 minor. server checks db for latest vnum
+     //replaced by VersionNumberProto
+     optional float versionNum = 2 [deprecated = true];			//1.0->2.0 critical, 1.0->1.1 minor. server checks db for latest vnum
      optional string apsalarId = 3;
      optional string macAddress = 4;	//don't think is used
      optional string advertiserId = 5;
@@ -38,7 +39,15 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      
      //if user is starting up app and the app is not a background process
      optional bool isFreshRestart = 8;
-     
+
+	optional VersionNumberProto versionNumberProto = 9;
+
+	message VersionNumberProto {
+		optional int32 superNum = 1;
+		optional int32 majorNum = 2;
+		optional int32 minorNum = 3;
+	}
+	
 }
 
 //TODO: organize properties according to which .proto file they are related to

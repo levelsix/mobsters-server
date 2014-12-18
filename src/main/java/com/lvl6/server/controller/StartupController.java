@@ -72,6 +72,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
@@ -323,17 +324,68 @@ public class StartupController extends EventController {
 		MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 		log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
 
-		double tempClientVersionNum = reqProto.getVersionNum() * 10;
-		double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
 		
-		// Check version number
-		if ((int) tempClientVersionNum < (int) tempLatestVersionNum && tempClientVersionNum > 12.5) {
-			updateStatus = UpdateStatus.MAJOR_UPDATE;
-			log.info("player has been notified of forced update");
-		} else if (tempClientVersionNum < tempLatestVersionNum) {
-			updateStatus = UpdateStatus.MINOR_UPDATE;
+		VersionNumberProto version = null;
+		
+		if (reqProto.hasVersionNumberProto()) {
+			version = reqProto.getVersionNumberProto();
+		}
+		
+		if (null != version) {
+			int superNum = version.getSuperNum();
+			int majorNum = version.getMajorNum();
+			int minorNum = version.getMinorNum();
+			
+			int serverSuperNum = Globals.VERSION_SUPER_NUMBER();
+			int serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
+			int serverMinorNum = Globals.VERSION_MINOR_NUMBER();
+			
+			boolean clientSuperGreater = superNum > serverSuperNum;
+			boolean clientSuperEqual = superNum == serverSuperNum; 
+			
+			boolean clientMajorGreater = majorNum > serverMajorNum; 
+			boolean clientMajorEqual = majorNum == serverMajorNum;
+
+			boolean clientMinorGreater = minorNum > serverMinorNum;
+			
+			if ( clientSuperGreater ||
+				( clientSuperEqual && clientMajorGreater ) ||
+				( clientSuperEqual && clientMajorEqual && clientMinorGreater ))
+			{
+				String preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
+				log.error("{} clientVersion={}.{}.{} \t serverVersion={}.{}.{}",
+					new Object[] { preface, superNum, majorNum, minorNum, 
+					serverSuperNum, serverMajorNum, serverMinorNum });
+				
+				updateStatus = UpdateStatus.NO_UPDATE;
+			}
+				 
+			if ( superNum < serverSuperNum ||
+				majorNum < serverMajorNum )
+			{
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
+				log.info("player has been notified of forced update");
+				
+			} else if (minorNum < serverMinorNum) {
+				updateStatus = UpdateStatus.MINOR_UPDATE;
+				log.info("player has been notified of minor update");
+			} else {
+				updateStatus = UpdateStatus.NO_UPDATE;
+			}
+			
 		} else {
-			updateStatus = UpdateStatus.NO_UPDATE;
+			double tempClientVersionNum = reqProto.getVersionNum() * 10;
+			double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
+			// Check version number
+			if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
+				log.info("player has been notified of forced update");
+			} else if (tempClientVersionNum < tempLatestVersionNum) {
+				updateStatus = UpdateStatus.MINOR_UPDATE;
+			} else {
+				updateStatus = UpdateStatus.NO_UPDATE;
+			}
+
 		}
 
 		Builder resBuilder = StartupResponseProto.newBuilder();
