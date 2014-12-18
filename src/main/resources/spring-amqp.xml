@@ -88,7 +88,7 @@
 		concurrency="42" 
 		prefetch="42"
 		error-handler="amqpErrorHandler">
-		<rabbit:listener queues="clientMessages" ref="clientEventHandler"	method="onMessage" />
+		<rabbit:listener queues="${amqp.client.messages.queue}" ref="clientEventHandler"	method="onMessage" />
 	</rabbit:listener-container>
 
 	<rabbit:template id="clientMessagesTemplate"
