@@ -1,0 +1,27 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+import "SharedEnumConfig.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "BoardProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message BoardLayoutProto {
+	optional int32 boardId = 1;
+	optional int32 height = 2;
+	optional int32 width = 3;
+	optional string orbElements = 4; 
+}
+
+message BoardPropertyProto {
+	optional int32 boardPropertyId = 1;
+	optional int32 boardId = 2;
+	optional string name = 3;
+	optional int32 posX = 4;
+	optional int32 posY = 5;
+	optional Element elem = 6;
+	
+	//At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+	optional int32 value = 7;
+}
