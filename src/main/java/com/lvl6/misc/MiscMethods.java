@@ -30,6 +30,8 @@ import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Achievement;
 import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.Board;
+import com.lvl6.info.BoardProperty;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -75,6 +77,7 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
+import com.lvl6.proto.BoardProto.BoardLayoutProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
@@ -128,6 +131,8 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -1007,6 +1012,8 @@ public class MiscMethods {
 		log.info("Reloading rare change static data");
 		AchievementRetrieveUtils.reload();
 		BannedUserRetrieveUtils.reload();
+		BoardRetrieveUtils.reload();
+		BoardPropertyRetrieveUtils.reload();
 		BoosterDisplayItemRetrieveUtils.reload();
 		BoosterItemRetrieveUtils.reload();
 		BoosterPackRetrieveUtils.reload();
@@ -1877,6 +1884,7 @@ public class MiscMethods {
 		setAchievementStuff(sdpb);
 		setSkillStuff(sdpb);
 		setPrereqs(sdpb);
+		setBoards(sdpb);
 
 		return sdpb.build();
 	}
@@ -2361,6 +2369,33 @@ public class MiscMethods {
 
 			PrereqProto pp = CreateInfoProtoUtils.createPrerequisiteProto(prereq);
 			sdpb.addPrereqs(pp);
+		}
+	}
+	
+	private static void setBoards(Builder sdpb) {
+		Map<Integer, Board> idsToBoards =
+			BoardRetrieveUtils.getIdsToBoards();
+		
+		if (null == idsToBoards || idsToBoards.isEmpty()) {
+			log.warn("setBoards() no boards");
+		}
+		
+		Map<Integer, Collection<BoardProperty>> boardIdsToProperties =
+			BoardPropertyRetrieveUtils.getBoardIdsToProperties();
+		
+		for (Integer boardId : idsToBoards.keySet())
+		{
+			Board b = idsToBoards.get(boardId);
+			
+			//board can have no properties
+			Collection<BoardProperty> propertyz = null;
+			if (boardIdsToProperties.containsKey(boardId)) {
+				propertyz = boardIdsToProperties.get(boardId);
+			}
+
+			BoardLayoutProto blp = CreateInfoProtoUtils
+				.createBoardLayoutProto(b, propertyz);
+			sdpb.addBoards(blp);
 		}
 	}
 }

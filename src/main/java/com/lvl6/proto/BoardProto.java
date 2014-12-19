@@ -40,18 +40,37 @@ public final class BoardProto {
     int getWidth();
 
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
      */
     boolean hasOrbElements();
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
      */
-    java.lang.String getOrbElements();
+    com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements();
+
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
      */
-    com.google.protobuf.ByteString
-        getOrbElementsBytes();
+    java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> 
+        getPropertiesList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    int getPropertiesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+        getPropertiesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
@@ -120,10 +139,23 @@ public final class BoardProto {
               width_ = input.readInt32();
               break;
             }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              orbElements_ = bs;
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                orbElements_ = value;
+              }
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              properties_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardPropertyProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -134,6 +166,9 @@ public final class BoardProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          properties_ = java.util.Collections.unmodifiableList(properties_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -212,52 +247,61 @@ public final class BoardProto {
     }
 
     public static final int ORBELEMENTS_FIELD_NUMBER = 4;
-    private java.lang.Object orbElements_;
+    private com.lvl6.proto.SharedEnumConfigProto.Element orbElements_;
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
      */
     public boolean hasOrbElements() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
      */
-    public java.lang.String getOrbElements() {
-      java.lang.Object ref = orbElements_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          orbElements_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements() {
+      return orbElements_;
+    }
+
+    public static final int PROPERTIES_FIELD_NUMBER = 5;
+    private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_;
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
+      return properties_;
     }
     /**
-     * <code>optional string orbElements = 4;</code>
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
      */
-    public com.google.protobuf.ByteString
-        getOrbElementsBytes() {
-      java.lang.Object ref = orbElements_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        orbElements_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+        getPropertiesOrBuilderList() {
+      return properties_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public int getPropertiesCount() {
+      return properties_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index) {
+      return properties_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+        int index) {
+      return properties_.get(index);
     }
 
     private void initFields() {
       boardId_ = 0;
       height_ = 0;
       width_ = 0;
-      orbElements_ = "";
+      orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      properties_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -282,7 +326,10 @@ public final class BoardProto {
         output.writeInt32(3, width_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getOrbElementsBytes());
+        output.writeEnum(4, orbElements_.getNumber());
+      }
+      for (int i = 0; i < properties_.size(); i++) {
+        output.writeMessage(5, properties_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -307,7 +354,11 @@ public final class BoardProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getOrbElementsBytes());
+          .computeEnumSize(4, orbElements_.getNumber());
+      }
+      for (int i = 0; i < properties_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, properties_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -418,6 +469,7 @@ public final class BoardProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPropertiesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -432,8 +484,14 @@ public final class BoardProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         width_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        orbElements_ = "";
+        orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (propertiesBuilder_ == null) {
+          properties_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          propertiesBuilder_.clear();
+        }
         return this;
       }
 
@@ -478,6 +536,15 @@ public final class BoardProto {
           to_bitField0_ |= 0x00000008;
         }
         result.orbElements_ = orbElements_;
+        if (propertiesBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            properties_ = java.util.Collections.unmodifiableList(properties_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.properties_ = properties_;
+        } else {
+          result.properties_ = propertiesBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -504,9 +571,33 @@ public final class BoardProto {
           setWidth(other.getWidth());
         }
         if (other.hasOrbElements()) {
-          bitField0_ |= 0x00000008;
-          orbElements_ = other.orbElements_;
-          onChanged();
+          setOrbElements(other.getOrbElements());
+        }
+        if (propertiesBuilder_ == null) {
+          if (!other.properties_.isEmpty()) {
+            if (properties_.isEmpty()) {
+              properties_ = other.properties_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensurePropertiesIsMutable();
+              properties_.addAll(other.properties_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.properties_.isEmpty()) {
+            if (propertiesBuilder_.isEmpty()) {
+              propertiesBuilder_.dispose();
+              propertiesBuilder_ = null;
+              properties_ = other.properties_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              propertiesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPropertiesFieldBuilder() : null;
+            } else {
+              propertiesBuilder_.addAllMessages(other.properties_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -631,80 +722,279 @@ public final class BoardProto {
         return this;
       }
 
-      private java.lang.Object orbElements_ = "";
+      private com.lvl6.proto.SharedEnumConfigProto.Element orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
       /**
-       * <code>optional string orbElements = 4;</code>
+       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
        */
       public boolean hasOrbElements() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string orbElements = 4;</code>
+       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
        */
-      public java.lang.String getOrbElements() {
-        java.lang.Object ref = orbElements_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            orbElements_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements() {
+        return orbElements_;
       }
       /**
-       * <code>optional string orbElements = 4;</code>
+       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
        */
-      public com.google.protobuf.ByteString
-          getOrbElementsBytes() {
-        java.lang.Object ref = orbElements_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          orbElements_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string orbElements = 4;</code>
-       */
-      public Builder setOrbElements(
-          java.lang.String value) {
+      public Builder setOrbElements(com.lvl6.proto.SharedEnumConfigProto.Element value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         orbElements_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string orbElements = 4;</code>
+       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
        */
       public Builder clearOrbElements() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        orbElements_ = getDefaultInstance().getOrbElements();
+        orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
         onChanged();
         return this;
       }
+
+      private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_ =
+        java.util.Collections.emptyList();
+      private void ensurePropertiesIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>(properties_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> propertiesBuilder_;
+
       /**
-       * <code>optional string orbElements = 4;</code>
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
        */
-      public Builder setOrbElementsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        orbElements_ = value;
-        onChanged();
+      public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
+        if (propertiesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(properties_);
+        } else {
+          return propertiesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public int getPropertiesCount() {
+        if (propertiesBuilder_ == null) {
+          return properties_.size();
+        } else {
+          return propertiesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index) {
+        if (propertiesBuilder_ == null) {
+          return properties_.get(index);
+        } else {
+          return propertiesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder setProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.set(index, value);
+          onChanged();
+        } else {
+          propertiesBuilder_.setMessage(index, value);
+        }
         return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder setProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.add(value);
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.add(index, value);
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.add(builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addAllProperties(
+          java.lang.Iterable<? extends com.lvl6.proto.BoardProto.BoardPropertyProto> values) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, properties_);
+          onChanged();
+        } else {
+          propertiesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder clearProperties() {
+        if (propertiesBuilder_ == null) {
+          properties_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          propertiesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder removeProperties(int index) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.remove(index);
+          onChanged();
+        } else {
+          propertiesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder getPropertiesBuilder(
+          int index) {
+        return getPropertiesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+          int index) {
+        if (propertiesBuilder_ == null) {
+          return properties_.get(index);  } else {
+          return propertiesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+           getPropertiesOrBuilderList() {
+        if (propertiesBuilder_ != null) {
+          return propertiesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(properties_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder() {
+        return getPropertiesFieldBuilder().addBuilder(
+            com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder(
+          int index) {
+        return getPropertiesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto.Builder> 
+           getPropertiesBuilderList() {
+        return getPropertiesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+          getPropertiesFieldBuilder() {
+        if (propertiesBuilder_ == null) {
+          propertiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder>(
+                  properties_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          properties_ = null;
+        }
+        return propertiesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoardLayoutProto)
@@ -1723,13 +2013,15 @@ public final class BoardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Board.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\"W\n\020BoardLayoutProto\022\017\n\007boa" +
-      "rdId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001(" +
-      "\005\022\023\n\013orbElements\030\004 \001(\t\"\236\001\n\022BoardProperty" +
-      "Proto\022\027\n\017boardPropertyId\030\001 \001(\005\022\017\n\007boardI" +
-      "d\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014\n\004posX\030\004 \001(\005\022\014\n\004p" +
-      "osY\030\005 \001(\005\022%\n\004elem\030\006 \001(\0162\027.com.lvl6.proto" +
-      ".Element\022\r\n\005value\030\007 \001(\005B\014B\nBoardProto"
+      "mConfig.proto\"\250\001\n\020BoardLayoutProto\022\017\n\007bo" +
+      "ardId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001" +
+      "(\005\022,\n\013orbElements\030\004 \001(\0162\027.com.lvl6.proto" +
+      ".Element\0226\n\nproperties\030\005 \003(\0132\".com.lvl6." +
+      "proto.BoardPropertyProto\"\236\001\n\022BoardProper" +
+      "tyProto\022\027\n\017boardPropertyId\030\001 \001(\005\022\017\n\007boar" +
+      "dId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014\n\004posX\030\004 \001(\005\022\014\n" +
+      "\004posY\030\005 \001(\005\022%\n\004elem\030\006 \001(\0162\027.com.lvl6.pro" +
+      "to.Element\022\r\n\005value\030\007 \001(\005B\014B\nBoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1749,7 +2041,7 @@ public final class BoardProto {
     internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoardLayoutProto_descriptor,
-        new java.lang.String[] { "BoardId", "Height", "Width", "OrbElements", });
+        new java.lang.String[] { "BoardId", "Height", "Width", "OrbElements", "Properties", });
     internal_static_com_lvl6_proto_BoardPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new

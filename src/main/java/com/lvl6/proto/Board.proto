@@ -11,7 +11,9 @@ message BoardLayoutProto {
 	optional int32 boardId = 1;
 	optional int32 height = 2;
 	optional int32 width = 3;
-	optional string orbElements = 4; 
+	optional Element orbElements = 4; 
+	
+	repeated BoardPropertyProto properties = 5;
 }
 
 message BoardPropertyProto {
