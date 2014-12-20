@@ -18,6 +18,9 @@ public class PvpBattleOutcome
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 	
+	private static final int CASH__MIN_REWARD = 350;
+	private static final int OIL__MIN_REWARD = 350;
+	
 	private String attackerId;
 	private double attackerElo;
 	
@@ -203,9 +206,11 @@ public class PvpBattleOutcome
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal); 
+		intRetVal += CASH__MIN_REWARD;
+		
 		log.info(String.format(
-			"cashAttackerWins() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d",
-			(winnerLoserCndVal - offset), retVal, intRetVal));
+			"cashAttackerWins() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d, min=%s",
+			(winnerLoserCndVal - offset), retVal, intRetVal, CASH__MIN_REWARD));
 		
 		return intRetVal;
 	}
@@ -219,19 +224,19 @@ public class PvpBattleOutcome
 		
 		double eloDiff = attackerElo - defenderElo;
 		log.info(String.format(
-			"oilAttackerWins() attackerElo=%f,  defenderElo=%f, eloDiff=%f",
+			"oilAttackerWins() attackerElo=%s,  defenderElo=%s, eloDiff=%s",
 			attackerElo, defenderElo, eloDiff));
 		
 		double winnerLoserCndVal = getAttackerWonCnd().cumulativeProbability(eloDiff);
 		log.info(String.format(
-			"oilAttackerWins() winnerLoserCndVal=%f",
+			"oilAttackerWins() winnerLoserCndVal=%s",
 			winnerLoserCndVal));
 		
 		//double matchRange = defenderOil;
 		double matchRange = OFFSET__VALID_MATCH_RANGE * lowerElo;
 		double offset = getAttackerWonCnd().cumulativeProbability(matchRange);
 		log.info(String.format(
-			"oilAttackerWins() matchRange (defenderOil)=%f, offset=%f",
+			"oilAttackerWins() matchRange (defenderOil)=%s, offset=%s",
 			matchRange, offset));
 		
 
@@ -240,16 +245,18 @@ public class PvpBattleOutcome
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
 		log.info(String.format(
-			"oilAttackerWins() scaleDividend=%f, scaleDivisor=%f, scale=%f",
+			"oilAttackerWins() scaleDividend=%s, scaleDivisor=%s, scale=%s",
 			scaleDividend, scaleDivisor, scale));
 		
 		double retVal = (winnerLoserCndVal - offset) * scale;
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal); 
+		intRetVal += OIL__MIN_REWARD;
+		
 		log.info(String.format(
-			"oilAttackerWins() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d",
-			(winnerLoserCndVal - offset), retVal, intRetVal));
+			"oilAttackerWins() (winnerLoserCndVal - offset)=%s, retVal=%s, intRetVal=%s, min=%s",
+			(winnerLoserCndVal - offset), retVal, intRetVal, OIL__MIN_REWARD));
 		
 		return intRetVal;
 	}
