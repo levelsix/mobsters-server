@@ -765,8 +765,8 @@ public class MonsterStuffUtils {
 		  if (null != mon) {
 			  pvpMonsterDropId = mon.getPvpMonsterDropId();
 		  }
-		  log.info("for mfu {}, set pvpMonsterDropId={}",
-				userMonster, pvpMonsterDropId);
+//		  log.info("for mfu {}, set pvpMonsterDropId={}",
+//				userMonster, pvpMonsterDropId);
 		  //if cases not nested in order to decrease nesting
 		  userMonsterIdToDroppedId.put(mfuId, pvpMonsterDropId);
 	  }
