@@ -331,8 +331,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.info("there are people to attack!");
 			log.info(String.format(
 				"queuedOpponentIdsList=%s", queuedOpponentIdsList));
-			log.info(String.format(
-				"queuedOpponents:%s", queuedOpponents));
+//			log.info(String.format(
+//				"queuedOpponents:%s", queuedOpponents));
 			
 			Map<String, Clan> userIdToClan = getClans(queuedOpponents);
 			
