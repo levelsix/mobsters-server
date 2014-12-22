@@ -175,10 +175,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				setProspectivePvpMatches(resBuilder, attacker, uniqSeenUserIds, clientDate,
 						plfu.getElo());
 				
-				//update the user, and his shield
-				success = writeChangesToDB(attackerId, attacker, clientTime, plfu,
+				try {
+					//update the user, and his shield
+					success = writeChangesToDB(attackerId, attacker, clientTime, plfu,
 						currencyChange);
-						//gemsSpent, cashChange, clientTime,
+					//gemsSpent, cashChange, clientTime,
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					log.error( "writeChangesToDB() exceptioned out.", e );
+				}
 			}				
 
 			if (success) {
@@ -308,21 +313,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
 					retrievePvpMonsters(minElo, maxElo);
 			
-			//group monsters off
-			//IGNORE //by 3;
-			//25% of the time one monster
-			//50% of the time two monsters
-			//25% of the tiem three monsters
-			//limit the number of groups of 3
-			//NOTE: this is assuming there are more than enough monsters...
-			List<List<MonsterForPvp>> fakeUserMonsters = createFakeUserMonsters(fakeMonsters,numWanted);
-			
-			if (!fakeUserMonsters.isEmpty())
-			{
-				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(fakeUserMonsters);
-				pvpProtoList.addAll(pvpProtoListTemp);
-			} else {
-				log.error("no fake users generated. minElo={} \t maxElo={}", minElo, maxElo);
+			try {
+				//group monsters off
+				//IGNORE //by 3;
+				//25% of the time one monster
+				//50% of the time two monsters
+				//25% of the tiem three monsters
+				//limit the number of groups of 3
+				//NOTE: this is assuming there are more than enough monsters...
+				List<List<MonsterForPvp>> fakeUserMonsters = createFakeUserMonsters(fakeMonsters,numWanted);
+				
+				if (!fakeUserMonsters.isEmpty())
+				{
+					List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(fakeUserMonsters);
+					pvpProtoList.addAll(pvpProtoListTemp);
+				} else {
+					log.error("no fake users generated. minElo={} \t maxElo={}", minElo, maxElo);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				log.error(String.format(
+					"creating fake user exceptioned out. fakeMonsters=%s, numWanted=%s",
+					fakeMonsters, numWanted),
+					e);
 			}
 			
 		} 
@@ -364,7 +377,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			pvpProtoList.addAll(0, pvpProtoListTemp);
 		}
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
-		log.info("pvpProtoList=" + pvpProtoList);
+		//log.info("pvpProtoList={}", pvpProtoList);
 		
 	}
 	
@@ -606,11 +619,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 						"\t will move on to next guy.");
 				continue;
 			}
-			//try to select at most 3 monsters for this user
-			List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
 			
-			//if the user still doesn't have 3 monsters, then too bad
-			userIdsToUserMonsters.put(defenderId, defenderMonsters);
+			try {
+				//try to select at most 3 monsters for this user
+				List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
+				
+				//if the user still doesn't have 3 monsters, then too bad
+				userIdsToUserMonsters.put(defenderId, defenderMonsters);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				log.error(String.format(
+					"selectMonstersForUser() exceptioned out. defenderId=% \t mfuIdsToMonsters=%s",
+					defenderId, mfuIdsToMonsters),
+					e);
+			}
 		}
 		
 		return userIdsToUserMonsters;
@@ -622,8 +644,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
 
 		if (defenderMonsters.size() < 3) {
-			//need more monsters so select them randomly, fill up "defenderMonsters" list
-			getRandomMonsters(mfuIdsToMonsters, defenderMonsters);
+			try {
+				//need more monsters so select them randomly, fill up "defenderMonsters" list
+				getRandomMonsters(mfuIdsToMonsters, defenderMonsters);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				log.error(String.format(
+					"getRandomMonsters() exceptioned out. mfuIdsToMonsters=%s, defenderMonsters=%s",
+					mfuIdsToMonsters, defenderMonsters), e);
+			}
 		}
 		
 		if (defenderMonsters.size() > 3) {
