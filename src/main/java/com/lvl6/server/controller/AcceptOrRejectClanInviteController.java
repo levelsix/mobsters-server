@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AcceptOrRejectClanInviteRequestEvent;
 import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
@@ -71,6 +72,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
+	@Autowired
+	protected ClanSearch clanSearch;
+	
 	public AcceptOrRejectClanInviteController() {
 		numAllocatedThreads = 4;
 	}
@@ -174,9 +178,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				
 				User user = aorcia.getProspectiveMember();
 				Clan clan = aorcia.getProspectiveClan();
-				ClanDataProto cdp = setClanData(clanId, clan, user, userId);
+				List<Date> lastChatTimeContainer = new ArrayList<Date>();
+				ClanDataProto cdp = setClanData(clanId, clan, user,
+					userId, lastChatTimeContainer);
 				sendClanData(event, senderProto, userId, cdp);
 				
+				//update clan cache
+		        updateClanCache(clanId, aorcia.getClanSize(), lastChatTimeContainer);
+
 			} else {
 				//only write to user if just reject or fail
 				server.writeEvent(resEvent);
@@ -202,7 +211,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 	private ClanDataProto setClanData( String clanId,
-		Clan c, User u, String userId )
+		Clan c, User u, String userId, List<Date> lastChatTimeContainer )
 	{
 		log.info("setting clanData proto for clan {}", c);
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
@@ -228,29 +237,43 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		scha.execute(fillMe);
 		scra.execute(fillMe);
 
+		lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
+		
 		return cdpb.build();
 	}
-	
+
 	private void sendClanData(
-		  RequestEvent event,
-		  MinimumUserProto senderProto,
-		  String userId,
-		  ClanDataProto cdp )
-	  {
-		  if (null == cdp) {
-			  return;
-		  }
-		  RetrieveClanDataResponseEvent rcdre =
-			  new RetrieveClanDataResponseEvent(userId);
-		  rcdre.setTag(event.getTag());
-		  RetrieveClanDataResponseProto.Builder rcdrpb =
-			  RetrieveClanDataResponseProto.newBuilder();
-		  rcdrpb.setMup(senderProto);
-		  rcdrpb.setClanData(cdp);
-		  
-		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		  server.writeEvent(rcdre);
-	  }
+		RequestEvent event,
+		MinimumUserProto senderProto,
+		String userId,
+		ClanDataProto cdp )
+	{
+		if (null == cdp) {
+			return;
+		}
+		RetrieveClanDataResponseEvent rcdre =
+			new RetrieveClanDataResponseEvent(userId);
+		rcdre.setTag(event.getTag());
+		RetrieveClanDataResponseProto.Builder rcdrpb =
+			RetrieveClanDataResponseProto.newBuilder();
+		rcdrpb.setMup(senderProto);
+		rcdrpb.setClanData(cdp);
+
+		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
+		server.writeEvent(rcdre);
+	}
+
+	private void updateClanCache(String clanId,
+		int clanSize, List<Date> lastChatTimeContainer )
+	{
+		//need to account for this user joining clan
+		clanSize += 1;
+		Date lastChatTime = lastChatTimeContainer.get(0);
+
+		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+	}
+
+	
 	
 	public Locker getLocker() {
 		return locker;
@@ -326,6 +349,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	public void setClanAvengeUserRetrieveUtil( ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil )
 	{
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
+	}
+
+	public ClanSearch getClanSearch()
+	{
+		return clanSearch;
+	}
+
+	public void setClanSearch( ClanSearch clanSearch )
+	{
+		this.clanSearch = clanSearch;
 	}
 
 }

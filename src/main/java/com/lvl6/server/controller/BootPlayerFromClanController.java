@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
@@ -24,6 +26,8 @@ import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerF
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ExitClanAction;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -41,7 +45,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected TimeUtils timeUtil;
-	
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
+
+  @Autowired
+  protected ClanSearch clanSearch;
+  
   public BootPlayerFromClanController() {
     numAllocatedThreads = 4;
   }
@@ -111,11 +124,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       User user = users.get(userId);
       User playerToBoot = users.get(playerToBootId);
 
-      boolean legitBoot = checkLegitBoot(resBuilder, lockedClan, user, playerToBoot);
+      List<Integer> clanSizeContainer = new ArrayList<Integer>();
+      boolean legitBoot = checkLegitBoot(resBuilder, lockedClan, user,
+    	  playerToBoot, clanSizeContainer);
 
       boolean success = false;
       if (legitBoot) { 
-      	success = writeChangesToDB(user, playerToBoot);
+    	  int clanSize = clanSizeContainer.get(0);
+    	  success = writeChangesToDB(user, playerToBoot, clanSize);
       }
       
       if (success) {
@@ -152,8 +168,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private boolean checkLegitBoot(Builder resBuilder, boolean lockedClan, User user,
-      User playerToBoot) {
+  private boolean checkLegitBoot(Builder resBuilder, boolean lockedClan,
+	  User user, User playerToBoot, List<Integer> clanSizeContainer) {
   	
   	if (!lockedClan) {
   		log.error("couldn't obtain clan lock");
@@ -169,16 +185,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     String clanId = user.getClanId();
-    List<String> statuses = new ArrayList<String>();
-    statuses.add(UserClanStatus.LEADER.name());
-    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-    List<String> userIds = RetrieveUtils.userClanRetrieveUtils()
-    		.getUserIdsWithStatuses(clanId, statuses);
+    String leaderStatus = UserClanStatus.LEADER.name();
+    String jrLeaderStatus = UserClanStatus.JUNIOR_LEADER.name();
     
-    Set<String> uniqUserIds = new HashSet<String>(); 
-    if (null != userIds && !userIds.isEmpty()) {
-    	uniqUserIds.addAll(userIds);
-    }
+    List<String> statuses = new ArrayList<String>();
+    statuses.add(leaderStatus);
+    statuses.add(jrLeaderStatus);
+    statuses.add(UserClanStatus.CAPTAIN.name());
+    statuses.add(UserClanStatus.MEMBER.name());
+    Map<String, String> userIdsToStatuses = userClanRetrieveUtils
+    		.getUserIdsToStatuses(clanId, statuses);
+    
+    Set<String> uniqUserIds = getAuthorizedClanMembers(leaderStatus,
+    	jrLeaderStatus, userIdsToStatuses);
     
     String userId = user.getId();
     if (!uniqUserIds.contains(userId)) {
@@ -197,11 +216,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  playerToBootClanId, user.getClanId()));
       return false;
     }
+    
+    clanSizeContainer.add(userIdsToStatuses.size());
     resBuilder.setStatus(BootPlayerFromClanStatus.SUCCESS);
     return true;
   }
+  
+  private Set<String> getAuthorizedClanMembers(
+		String leaderStatus,
+		String jrLeaderStatus,
+		Map<String, String> userIdsAndStatuses )
+	{
+		Set<String> uniqUserIds = new HashSet<String>();
+		if (null != userIdsAndStatuses && !userIdsAndStatuses.isEmpty()) {
+	    	
+	    	//gather up only the leader or jr leader userIds
+	    	for (String userId : userIdsAndStatuses.keySet())
+	    	{
+	    		String status = userIdsAndStatuses.get(userId);
+	    		if (leaderStatus.equals(status) ||
+	    			jrLeaderStatus.equals(status))
+	    		{
+	    			uniqUserIds.add(userId);
+	    		}
+	    	}
+	    }
+		
+		return uniqUserIds;
+	}
 
-  private boolean writeChangesToDB(User user, User playerToBoot) {
+  private boolean writeChangesToDB(User user, User playerToBoot,
+	  int clanSize)
+  {
 	  String userId = playerToBoot.getId();
 	  String clanId = playerToBoot.getClanId();
     if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
@@ -217,7 +263,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
 
-    ExitClanAction eca = new ExitClanAction(userId, clanId, timeUtil, UpdateUtils.get());
+    Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
+
+    //need to account for this user leaving clan
+    ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
+    	lastChatPost, timeUtil, UpdateUtils.get(), clanSearch);
     eca.execute();
     
     return true;
@@ -238,6 +288,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void setTimeUtil( TimeUtils timeUtil )
   {
 	  this.timeUtil = timeUtil;
+  }
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+	  this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil()
+  {
+	  return clanChatPostRetrieveUtil;
+  }
+
+  public void setClanChatPostRetrieveUtil( ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil )
+  {
+	  this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
+  }
+
+  public ClanSearch getClanSearch()
+  {
+	  return clanSearch;
+  }
+
+  public void setClanSearch( ClanSearch clanSearch )
+  {
+	  this.clanSearch = clanSearch;
   }
 
 }

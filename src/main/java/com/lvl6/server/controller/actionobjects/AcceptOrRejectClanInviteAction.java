@@ -244,4 +244,9 @@ public class AcceptOrRejectClanInviteAction
 		return prospectiveMember;
 	}
 
+	public int getClanSize()
+	{
+		return clanSize;
+	}
+
 }
