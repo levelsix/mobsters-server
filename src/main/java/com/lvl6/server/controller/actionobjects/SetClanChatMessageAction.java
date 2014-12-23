@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +37,11 @@ public class SetClanChatMessageAction implements StartUpAction
 		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
 	}
 	
+	//derived state
 	private Set<String> userIds;
 	private String clanId;
-	List<ClanChatPost> activeClanChatPosts;
+	private List<ClanChatPost> activeClanChatPosts;
+	private Date lastClanChatPostTime = ControllerConstants.INCEPTION_DATE;
 	
 	//Extracted from Startup
 	@Override
@@ -95,7 +98,19 @@ public class SetClanChatMessageAction implements StartUpAction
 			.createGroupChatMessageProtoFromClanChatPost(pwp, u, c);
 			
 			cdpBuilder.addClanChats(gcmp);
+			
+			
+			//find the last clan chat time
+			Date timeOfPost = pwp.getTimeOfPost();
+			if (timeOfPost.compareTo(lastClanChatPostTime) > 0) {
+				lastClanChatPostTime = timeOfPost;
+			}
 		}
 	}
 
+	public Date getLastClanChatPostTime()
+	{
+		return lastClanChatPostTime;
+	}
+	
 }

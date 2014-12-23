@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
@@ -102,6 +103,7 @@ public class DeleteUtils implements DeleteUtil {
 
   
   //@CacheEvict(value="clanById", key="#clanId")
+  @CacheEvict(value="clanWithId", key="#clanId")
   public boolean deleteClanWithClanId(String clanId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.CLANS__ID, clanId);

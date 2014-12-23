@@ -31,6 +31,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	private final String TABLE_NAME = DBConstants.TABLE_CLAN_FOR_USER;
 	private static final UserClanForClientMapper rowMapper = new UserClanForClientMapper();
 	private static final ClanSizeMapper clanSizeMapper = new ClanSizeMapper();
+	private static final UserIdAndStatusMapper userIdAndStatusMapper = new UserIdAndStatusMapper();
 	private static final UserIdMapper userIdMapper = new UserIdMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -187,6 +188,45 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return userClans;
 	}
 
+	public Map<String, String> getUserIdsToStatuses(String clanId, List<String> statuses)
+	{
+		int numQuestionMarks = statuses.size();
+		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+		
+		String query = String.format(
+			"SELECT %s, %s FROM %s WHERE %s=? AND %s in (%s);",
+			DBConstants.CLAN_FOR_USER__USER_ID,
+			DBConstants.CLAN_FOR_USER__STATUS,
+			TABLE_NAME,
+			DBConstants.CLAN_FOR_USER__CLAN_ID,
+			DBConstants.CLAN_FOR_USER__STATUS,
+			questionMarkStr);
+		
+		List<Object> values = new ArrayList<Object>();
+		values.add(clanId);
+		values.addAll(statuses);
+
+		log.info("user clan query={} \t values={}", query, values);
+
+		Map<String, String> userIdsToStatuses = new HashMap<String, String>();
+		try {
+			List<UserIdAndStatus> userIdsAndStatuses = this.jdbcTemplate
+				.query(query, values.toArray(), userIdAndStatusMapper);
+			
+			for (UserIdAndStatus uias : userIdsAndStatuses) {
+				userIdsToStatuses.put(uias.getUserId(), uias.getStatus());
+			}
+			
+		} catch (Exception e) {
+			log.error("getUserIdsToStatuses() retrieve db error.", e);
+//		} finally {
+//			DBConnection.get().close(rs, null, conn);
+		}
+		
+		return userIdsToStatuses;
+	}
+	
 	public List<String> getUserIdsWithStatuses(String clanId, List<String> statuses) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT ");
@@ -379,6 +419,46 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}	
 	}
 
+	protected static class UserIdAndStatus {
+		private String userId;
+		private String status;
+		
+		public UserIdAndStatus( String userId, String status )
+		{
+			super();
+			this.userId = userId;
+			this.status = status;
+		}
+		public String getUserId()
+		{
+			return userId;
+		}
+		public void setUserId( String userId )
+		{
+			this.userId = userId;
+		}
+		public String getStatus()
+		{
+			return status;
+		}
+		public void setStatus( String status )
+		{
+			this.status = status;
+		}
+
+	}
+	
+	private static final class UserIdAndStatusMapper implements RowMapper<UserIdAndStatus> {
+
+		public UserIdAndStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			String userId = rs.getString(DBConstants.CLAN_FOR_USER__USER_ID);
+			String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
+			return new UserIdAndStatus(userId, status);
+		}	
+	}
+
+	
 	private static final class UserIdMapper implements RowMapper<String> {
 
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {

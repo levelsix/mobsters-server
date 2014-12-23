@@ -48,7 +48,7 @@ import com.lvl6.properties.DBConstants;
 			clanChatPosts = this.jdbcTemplate
 				.query(query, values, rowMapper);
 		} catch (Exception e) {
-			log.error("clan chat post retrieve db error.", e);
+			log.error("ClanChatPost retrieve db error.", e);
 			clanChatPosts = new ArrayList<ClanChatPost>();
 //		} finally {
 //			DBConnection.get().close(rs, null, conn);
@@ -56,6 +56,31 @@ import com.lvl6.properties.DBConstants;
 		return clanChatPosts;
 	}
 
+	public Date getLastChatPost(String clanId)
+	{
+		Object[] values = { clanId };
+		String query = String.format(
+			"select max(%s) from %s where %s=?;",
+			DBConstants.CLAN_CHAT_POST__TIME_OF_POST,
+			TABLE_NAME,
+			DBConstants.CLAN_CHAT_POST__CLAN_ID);
+		
+		Date lastChatPost = null;
+	    try {
+	    	List<Date> dateList = this.jdbcTemplate
+	    		.queryForList(query, values, Date.class);
+
+	    	if (null == dateList || dateList.isEmpty()) {
+	    		lastChatPost = dateList.get(0);
+	    	}
+
+	    } catch (Exception e) {
+	    	log.error("ClanChatPost retrieve db error.", e);
+	    	//    } finally {
+	    	//    	DBConnection.get().close(rs, null, conn);
+	    }
+	    return lastChatPost;
+	}
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
