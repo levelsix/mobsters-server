@@ -133,7 +133,7 @@ import com.lvl6.properties.DBConstants;
 	{
 		String query = String.format(
 			//"select %s, max(%s) from %s where ?=? group by %s;",
-			"select %s, max(%s) from %s group by %s;",
+			"select ccp.%s, max(ccp.%s) from %s as ccp group by %s;",
 			DBConstants.CLAN_CHAT_POST__CLAN_ID,
 			DBConstants.CLAN_CHAT_POST__TIME_OF_POST,
 			TABLE_NAME,

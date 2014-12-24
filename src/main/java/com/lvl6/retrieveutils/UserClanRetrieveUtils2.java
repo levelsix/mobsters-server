@@ -342,6 +342,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		List<Object> values = new ArrayList<Object>();
 		//values.add(1);
 		//values.add(1);
+		values.addAll(statuses);
 
 		String query = querySb.toString();
 		log.info(String.format(
