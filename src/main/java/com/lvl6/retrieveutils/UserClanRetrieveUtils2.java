@@ -318,6 +318,53 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return clanIdsToSize;
 	}
 
+	public Map<String, Integer> getClanSizeForStatuses( List<String> statuses )
+	{
+		StringBuilder querySb = new StringBuilder();
+		querySb.append("SELECT ");
+		querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+		querySb.append(", count(*) FROM ");
+		querySb.append(TABLE_NAME);
+		//querySb.append(" WHERE ?=?");
+		//querySb.append(" AND ");
+
+		querySb.append(" WHERE ");
+		querySb.append(DBConstants.CLAN_FOR_USER__STATUS);
+		querySb.append(" IN (");
+
+		int numQuestionMarks = statuses.size();
+		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+		String questionMarkStr = StringUtils.csvList(questionMarks);
+		querySb.append(questionMarkStr);
+		querySb.append(") GROUP BY ");
+		querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+
+		List<Object> values = new ArrayList<Object>();
+		//values.add(1);
+		//values.add(1);
+
+		String query = querySb.toString();
+		log.info(String.format(
+			"all clan's size query=%s, values=%s",
+			query, values));
+
+		Map<String, Integer> clanIdsToSize = new HashMap<String, Integer>();
+		try {
+			List<ClanSize> sizes = this.jdbcTemplate
+				.query(query, values.toArray(), clanSizeMapper);
+			
+			for (ClanSize size : sizes) {
+				clanIdsToSize.put(size.getClanId(), size.getSize());
+			}
+		} catch (Exception e) {
+			log.error("user clan retrieve db error.", e);
+//		} finally {
+//			DBConnection.get().close(rs, null, conn);
+		}
+		//should not be null and should be a list object
+		return clanIdsToSize;
+	}
+	
 	public List<String> getUserIdsRelatedToClan(String clanId) {
 		List<UserClan> userClans = getUserClansRelatedToClan(clanId);
 		List<String> userIds = new ArrayList<String>();

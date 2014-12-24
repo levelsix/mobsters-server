@@ -13,12 +13,11 @@ import com.hazelcast.core.HazelcastInstance;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
-import com.lvl6.utils.DBConnection;
 
 
 @Component
 public class ClanSearch {
-	private static final Logger log = LoggerFactory.getLogger(DBConnection.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	
 	private static Long DAY = 24L*60L*60L*1000L;
@@ -102,6 +101,5 @@ public class ClanSearch {
 		this.hz = hz;
 		rankedClans = new DistributedZSetHazelcast("clanSearch", hz);
 	}
-
-
+	
 }
