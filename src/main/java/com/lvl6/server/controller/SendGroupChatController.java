@@ -1,7 +1,10 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,6 +17,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
@@ -24,6 +28,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
@@ -32,6 +37,7 @@ import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatSta
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.server.EventWriter;
@@ -60,6 +66,11 @@ public class SendGroupChatController extends EventController {
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
 
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtil;
+  
+  @Autowired
+  protected ClanSearch clanSearch;
 
   public SendGroupChatController() {
     numAllocatedThreads = 4;
@@ -221,9 +232,24 @@ public class SendGroupChatController extends EventController {
     // log.error("problem with decrementing a global chat");
     // }
 
-    if (scope == GroupChatScope.CLAN) {
-      InsertUtils.get().insertClanChatPost(user.getId(), user.getClanId(), content, timeOfPost);
-    }
+	  if (scope == GroupChatScope.CLAN) {
+		  String clanId = user.getClanId();
+		  InsertUtils.get().insertClanChatPost(user.getId(), clanId, content, timeOfPost);
+
+		  //update clan cache
+		  List<String> statuses = new ArrayList<String>();
+		  statuses.add(UserClanStatus.LEADER.name());
+		  statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+		  statuses.add(UserClanStatus.CAPTAIN.name());
+		  statuses.add(UserClanStatus.MEMBER.name());
+		  Map<String, String> userIdsToStatuses = userClanRetrieveUtil
+			  .getUserIdsToStatuses(clanId, statuses);
+
+		  int clanSize = userIdsToStatuses.size();
+		  Date lastChatTime = new Date(timeOfPost.getTime());
+		  
+		  clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+	  }
   }
 
   private boolean checkLegitSend(Builder resBuilder, User user, GroupChatScope scope, String chatMessage) {
@@ -282,7 +308,27 @@ public class SendGroupChatController extends EventController {
   }
 
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
+	  this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
+  {
+	  return userClanRetrieveUtil;
+  }
+
+  public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
+  {
+	  this.userClanRetrieveUtil = userClanRetrieveUtil;
+  }
+
+public ClanSearch getClanSearch()
+  {
+	  return clanSearch;
+  }
+
+  public void setClanSearch( ClanSearch clanSearch )
+  {
+	  this.clanSearch = clanSearch;
   }
 
 }
