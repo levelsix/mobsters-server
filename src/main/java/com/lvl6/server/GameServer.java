@@ -204,6 +204,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	}
 	
 	public void reloadRecommendedClans() {
+		log.info("init : populating recommended clans");
 		try {
 			//find the last chat time for every clan
 			Map<String, Date> clanIdsToLastChatTime = clanChatPostRetrieveUtil.

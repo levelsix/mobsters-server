@@ -118,6 +118,7 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 	}
 
 	public void reloadRecommendedClans() {
+		log.info("recalculating recommended clans");
 		try {
 			//find the last chat time for every clan
 			Map<String, Date> clanIdsToLastChatTime = clanChatPostRetrieveUtil.
