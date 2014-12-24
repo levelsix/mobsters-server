@@ -76,11 +76,12 @@ public class ClanSearch {
 	 */
 	
 	
-	public void getTopNClans(int numberOfClansToRetrieve) {
+	public List<String> getTopNClans(int numberOfClansToRetrieve) {
 		List<String> clans = new ArrayList<String>();
 		for(ZSetMember m : rankedClans.range(0, numberOfClansToRetrieve)) {
 			clans.add(m.getKey());
 		}
+		return clans;
 	}
 	
 	

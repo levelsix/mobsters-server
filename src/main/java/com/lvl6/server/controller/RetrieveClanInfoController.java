@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
@@ -70,8 +71,11 @@ import com.lvl6.utils.CreateInfoProtoUtils;
   @Autowired
   protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
   
-	public RetrieveClanInfoController() {
-    numAllocatedThreads = 8;
+  @Autowired
+  protected ClanSearch cs;
+  
+  public RetrieveClanInfoController() {
+	  numAllocatedThreads = 8;
   }
 
   @Override
@@ -178,7 +182,15 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	  RetrieveClanInfoResponseProto.Builder resBuilder )
   {
 	  if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
-		  List<Clan> clanList = getClanRetrieveUtils().getRandomClans(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP);
+		  List<String> clanIds = cs.getTopNClans(
+			  ControllerConstants.CLAN__TOP_N_CLANS);
+		  Map<String, Clan> clanMap = clanRetrieveUtils
+			  .getClansByIds(clanIds);
+		  
+		  List<Clan> clanList = null;
+		  if (null != clanMap) {
+			  clanList = new ArrayList<Clan>(clanMap.values());
+		  }
 
 		  log.info(String.format("clanList=%s", clanList));
 		  setClanProtosWithSize(resBuilder, clanList);
@@ -191,10 +203,10 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	  if (grabType == ClanInfoGrabType.ALL || grabType == ClanInfoGrabType.CLAN_INFO) {
 		  if (reqProto.hasClanName()) {
 			  // Can search for clan name or tag name
-			  clanList = getClanRetrieveUtils().getClansWithSimilarNameOrTag(clanName, clanName);
+			  clanList = clanRetrieveUtils.getClansWithSimilarNameOrTag(clanName, clanName);
 			  resBuilder.setIsForSearch(true);
 		  } else if (reqProto.hasClanUuid()) {
-			  Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
+			  Clan clan = clanRetrieveUtils.getClanWithId(clanId);
 			  clanList = new ArrayList<Clan>();
 			  clanList.add(clan);
 		  }
@@ -209,7 +221,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	  Map<String, Clan> clanIdToClan = new HashMap<String, Clan>();
 	  if (ClanInfoGrabType.MEMBERS.equals(grabType)) {
 		  
-		  Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
+		  Clan clan = clanRetrieveUtils.getClanWithId(clanId);
 		  clanIdToClan.put(clanId, clan);
 		  
 	  } else if (null != clanList){
@@ -295,7 +307,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     if (null == clanList || clanList.isEmpty()) {
     	return;
     }
-    List<String> clanIds = getClanRetrieveUtils().getClanIdsFromClans(clanList);
+    List<String> clanIds = clanRetrieveUtils.getClanIdsFromClans(clanList);
     
     List<String> statuses = new ArrayList<String>();
     statuses.add(UserClanStatus.LEADER.name());
@@ -446,4 +458,15 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
     this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
+
+  public ClanSearch getCs()
+  {
+	  return cs;
+  }
+
+  public void setCs( ClanSearch cs )
+  {
+	  this.cs = cs;
+  }
+  
 }
