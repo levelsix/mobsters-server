@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +13,18 @@ import com.hazelcast.core.HazelcastInstance;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
+import com.lvl6.utils.DBConnection;
 
 
 @Component
 public class ClanSearch {
-	
+	private static final Logger log = LoggerFactory.getLogger(DBConnection.class);
+
 	
 	private static Long DAY = 24L*60L*60L*1000L;
 	private static Long HOUR = 60L * 60L * 1000L;
 	private static Integer idealNumberOfMembers = 80;
 	
-	@Autowired
 	protected HazelcastInstance hz;
 	protected DistributedZSet rankedClans;
 	
@@ -93,7 +96,9 @@ public class ClanSearch {
 	}
 
 
+	@Autowired
 	public void setHz(HazelcastInstance hz) {
+		log.info("!!!!!!SETTING rankedClans FOR ClanSearch!!!!!!");
 		this.hz = hz;
 		rankedClans = new DistributedZSetHazelcast("clanSearch", hz);
 	}
