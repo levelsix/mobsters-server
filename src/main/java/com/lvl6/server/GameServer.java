@@ -1,6 +1,8 @@
 package com.lvl6.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -19,10 +21,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.HazelcastInstanceAware;
 import com.hazelcast.core.IMap;
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.ResponseEvent;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.PlayerInAction;
@@ -122,6 +129,41 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		this.apnsWriter = apnsWriter;
 	}
 
+
+	@Autowired
+	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
+	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil()
+	{
+		return clanChatPostRetrieveUtil;
+	}
+	public void setClanChatPostRetrieveUtil( ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil )
+	{
+		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
+	}
+
+	@Autowired
+	protected UserClanRetrieveUtils2 userClanRetrieveUtil;
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
+	{
+		return userClanRetrieveUtil;
+	}
+	public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
+	{
+		this.userClanRetrieveUtil = userClanRetrieveUtil;
+	}
+
+	@Autowired
+	protected ClanSearch clanSearch;
+	public ClanSearch getClanSearch()
+	{
+		return clanSearch;
+	}
+	public void setClanSearch( ClanSearch clanSearch )
+	{
+		this.clanSearch = clanSearch;
+	}
+
+	
 	protected boolean block = true;
 
 	public boolean isBlock() {
@@ -158,6 +200,46 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		log.info("init : Server initializing");
 		loadEventControllers();
 		MiscMethods.reloadAllRareChangeStaticData();
+		reloadRecommendedClans();
+	}
+	
+	public void reloadRecommendedClans() {
+		try {
+			//find the last chat time for every clan
+			Map<String, Date> clanIdsToLastChatTime = clanChatPostRetrieveUtil.
+				getLastChatPostForAllClans();
+			
+			//find the amount of members for every clan
+			List<String> statuses = new ArrayList<String>();
+			statuses.add(UserClanStatus.LEADER.name());
+			statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+			statuses.add(UserClanStatus.CAPTAIN.name());
+			statuses.add(UserClanStatus.MEMBER.name());
+			Map<String, Integer> clanIdsToClanSize = userClanRetrieveUtil
+				.getClanSizeForStatuses(statuses);
+			
+			Collection<String> clanIds = clanIdsToClanSize.keySet();
+			
+			for (String cId : clanIds)
+			{
+				int clanSize =  clanIdsToClanSize.get(cId);
+				
+				//not all clans may have chatted
+				Date lastChatTime = ControllerConstants.INCEPTION_DATE;
+				if (clanIdsToLastChatTime.containsKey(cId)) {
+					lastChatTime = clanIdsToLastChatTime.get(cId);
+				}
+				
+				clanSearch.updateClanSearchRank(cId, clanSize, lastChatTime);
+			}
+			
+			log.info("finished calculating recommended clans");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("failed to calculate recommended clans",e);
+		}
+		
+		
 	}
 
 	/**
