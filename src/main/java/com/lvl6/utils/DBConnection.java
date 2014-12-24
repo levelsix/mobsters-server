@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
-import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -125,17 +124,17 @@ public class DBConnection {
 		printConnectionInfoInDebug();
 	}
 
-	public ResultSet selectRowsByUserId(Connection conn, int userId, String tablename) {
-		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__USER_ID, userId, tablename);
-	}
-
-	public ResultSet selectRowsById(Connection conn, int id, String tablename) {
-		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
-	}
+//	public ResultSet selectRowsByUserId(Connection conn, int userId, String tablename) {
+//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__USER_ID, userId, tablename);
+//	}
+//
+//	public ResultSet selectRowsById(Connection conn, int id, String tablename) {
+//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
+//	}
 	
-	public ResultSet selectRowsByLongId(Connection conn, long id, String tablename) {
-		return selectRowsByLongAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
-	}
+//	public ResultSet selectRowsByLongId(Connection conn, long id, String tablename) {
+//		return selectRowsByLongAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
+//	}
 
 	public ResultSet selectWholeTable(Connection conn, String tablename) {
 		return selectRows(conn, null, null, null, null, null, tablename, null, null, false,
@@ -317,7 +316,7 @@ public class DBConnection {
 			numUpdated = stmt.executeUpdate();
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		} finally {
 			close(null, stmt, conn);
 		}
@@ -354,7 +353,7 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
+//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
@@ -456,7 +455,7 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
+//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
@@ -465,6 +464,7 @@ public class DBConnection {
 	}
 
 	/* returns 0 if error */
+	/*
 	public int insertIntoTableBasicReturnId(String tablename, Map<String, Object> insertParams) {
 		List<String> questions = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
@@ -481,6 +481,7 @@ public class DBConnection {
 					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
 			Connection conn = null;
 			PreparedStatement stmt = null;
+			ResultSet rs = null;
 			try {
 				conn = dataSource.getConnection();
 				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -493,7 +494,7 @@ public class DBConnection {
 				}
 				int numUpdated = stmt.executeUpdate();
 				if (numUpdated == 1) {
-					ResultSet rs = stmt.getGeneratedKeys();
+					rs = stmt.getGeneratedKeys();
 					if (rs.next()) {
 						generatedKey = rs.getInt(1);
 					}
@@ -502,11 +503,11 @@ public class DBConnection {
 				log.error("problem with " + query + ", values are " + values, e);
 				e.printStackTrace();
 			} finally {
-				close(null, stmt, conn);
+				close(rs, stmt, conn);
 			}
 		}
 		return generatedKey;
-	}
+	}*/
 //	
 //	/* returns 0 if error */
 //	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
@@ -562,6 +563,7 @@ public class DBConnection {
 	 *        (2, 5, 100), <---- are collectively referred to as 
 	 *        (3, 9, 0)    <---- valuesListCollection in the code
 	 */
+	/*
 	public List<Integer> insertIntoTableBasicReturnIds(String tableName, List<Map<String, Object>> newRows) {
 		List<String> questions = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
@@ -577,8 +579,9 @@ public class DBConnection {
 			return queryDBAndReturnAutoIncIds(query, valuesListCollection);
 		}
 		return null;
-	}
+	}*/
 	
+	/*
 	public List<Long> insertIntoTableBasicReturnLongIds(String tableName, List<Map<String, Object>> newRows) {
 		List<String> questions = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
@@ -594,7 +597,7 @@ public class DBConnection {
 			return queryDBAndReturnAutoIncLongIds(query, valuesListCollection);
 		}
 		return new ArrayList<Long>();
-	}
+	}*/
   
   public int insertIntoTableBasicReturnNumUpdated(String tableName, List<Map<String, Object>> newRows) {
     List<String> questions = new LinkedList<String>();
@@ -616,7 +619,7 @@ public class DBConnection {
 	// assumption: ordering of keys returned matches ordering of the list
 	// elements in list inserted in a specific order, the keys/ids returned
 	// should respect that order
-	private List<Integer> queryDBAndReturnAutoIncIds(String query, List<List<Object>> valuesListCollection) {
+	/*private List<Integer> queryDBAndReturnAutoIncIds(String query, List<List<Object>> valuesListCollection) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		List<Integer> generatedKeys = new ArrayList<Integer>();
@@ -628,15 +631,16 @@ public class DBConnection {
 
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
 			close(null, stmt, conn);
 		}
 		return generatedKeys;
-	}
+	}*/
 
+  /*
 	private List<Long> queryDBAndReturnAutoIncLongIds(String query, List<List<Object>> valuesListCollection) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -649,36 +653,53 @@ public class DBConnection {
 
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
 			close(null, stmt, conn);
 		}
 		return generatedKeys;
-	}
+	}*/
 	
+  /*
 	private void executeStmtReturnAutoIncIds(PreparedStatement stmt, List<Integer> generatedKeys)
 			throws SQLException {
 		int numUpdated = stmt.executeUpdate();
 		if (numUpdated > 0) {
-			ResultSet rs = stmt.getGeneratedKeys();
-			while (rs.next()) {
-				generatedKeys.add(rs.getInt(1));
+			ResultSet rs = null;
+			try {
+				rs = stmt.getGeneratedKeys();
+				while (rs.next()) {
+					generatedKeys.add(rs.getInt(1));
+				}
+			} catch (Exception e) {
+				log.error("executeStmtReturnAutoIncIds() error", e);
+			} finally {
+				close(rs, null, null);
 			}
 		}
-	}
+	}*/
 	
+  /*
 	private void executeStmtReturnAutoIncLongIds(PreparedStatement stmt, List<Long> generatedKeys)
 			throws SQLException {
 		int numUpdated = stmt.executeUpdate();
 		if (numUpdated > 0) {
-			ResultSet rs = stmt.getGeneratedKeys();
-			while (rs.next()) {
-				generatedKeys.add(rs.getLong(1));
+			ResultSet rs = null;
+			try {
+				rs = stmt.getGeneratedKeys();
+				while (rs.next()) {
+					generatedKeys.add(rs.getLong(1));
+				}
+			} catch (Exception e) {
+				log.error("executeStmtReturnAutoIncLongIds() error", e);
+//				e.printStackTrace();
+			} finally {
+				close(rs, null, null);
 			}
 		}
-	}
+	}*/
 
 	/*
 	 * public int insertOnDuplicateKeyRelativeUpdate(String tablename,
@@ -743,7 +764,7 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
+//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
@@ -955,7 +976,7 @@ public class DBConnection {
 			
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
@@ -1095,6 +1116,7 @@ public class DBConnection {
 		return 0;
 	}
 
+	/*
 	private ResultSet selectRowsByIntAttr(Connection conn, List<String> columns, String attr, int value,
 			String tablename) {
 		String query = "select ";
@@ -1116,10 +1138,10 @@ public class DBConnection {
 			log.error("problem with " + query, e);
 		}
 		return rs;
-	}
+	}*/
 	
 	//works with longs instead of int, like above
-	private ResultSet selectRowsByLongAttr(Connection conn, List<String> columns, String attr, long value,
+	/*private ResultSet selectRowsByLongAttr(Connection conn, List<String> columns, String attr, long value,
 			String tablename) {
 		String query = "select ";
 		if (columns != null) {
@@ -1140,7 +1162,7 @@ public class DBConnection {
 			log.error("problem with " + query, e);
 		}
 		return rs;
-	}
+	}*/
 
 	public ResultSet selectRows(Connection conn, List<String> columns,
 			Map<String, Object> absoluteConditionParams,
@@ -1242,8 +1264,9 @@ public class DBConnection {
 		}
 
 		ResultSet rs = null;
+		PreparedStatement stmt = null;
 		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt = conn.prepareStatement(query);
 			if (values.size() > 0) {
 				int i = 1;
 				for (Object value : values) {
@@ -1256,6 +1279,8 @@ public class DBConnection {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
 			log.error("problem with " + query + ", values are " + values, e);
+		} finally {
+			close(null, stmt, null);
 		}
 		return rs;
 	}
