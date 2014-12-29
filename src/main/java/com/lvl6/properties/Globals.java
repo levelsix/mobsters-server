@@ -16,9 +16,18 @@ public class Globals {
 	protected boolean addAllFbFriends = false;
 	protected boolean sandbox = true;
 	protected boolean iddictionOn = true;
-	protected float versionNumber = 1.0f;
+	
 	protected int healthCheckTimeoutSeconds = 6;
 	protected int initialDiamonds = 20;
+	
+	/**deprecated**************************/
+	protected float versionNumber = 1.0f;
+	/************************************/
+//	protected String appVersion = "0.1.0";
+	
+	protected int versionSuperNumber = 0;
+	protected int versionMajorNumber = 1;
+	protected int versionMinorNumber = 0;
 	
 	public boolean isOfferChartEnabled() {
 		return offerChartEnabled;
@@ -109,6 +118,36 @@ public class Globals {
 		this.addAllFbFriends = addAllFbFriends;
 	}
 
+	public int getVersionSuperNumber()
+	{
+		return versionSuperNumber;
+	}
+
+	public void setVersionSuperNumber( int versionSuperNumber )
+	{
+		this.versionSuperNumber = versionSuperNumber;
+	}
+
+	public int getVersionMajorNumber()
+	{
+		return versionMajorNumber;
+	}
+
+	public void setVersionMajorNumber( int versionMajorNumber )
+	{
+		this.versionMajorNumber = versionMajorNumber;
+	}
+
+	public int getVersionMinorNumber()
+	{
+		return versionMinorNumber;
+	}
+
+	public void setVersionMinorNumber( int versionMinorNumber )
+	{
+		this.versionMinorNumber = versionMinorNumber;
+	}
+
 
 	/** size of ByteBuffer for reading/writing from channels */
 
@@ -153,8 +192,12 @@ public class Globals {
     
     public static final Integer INITIAL_DIAMONDS() {return AppContext.getApplicationContext().getBean(Globals.class).getInitialDiamonds();};
 
+    public static final Integer VERSION_SUPER_NUMBER(){return AppContext.getApplicationContext().getBean(Globals.class).getVersionSuperNumber();};
 
-
+    public static final Integer VERSION_MAJOR_NUMBER(){return AppContext.getApplicationContext().getBean(Globals.class).getVersionMajorNumber();};
+    
+    public static final Integer VERSION_MINOR_NUMBER(){return AppContext.getApplicationContext().getBean(Globals.class).getVersionMinorNumber();};
+    
     public static final boolean IDDICTION_ON(){return AppContext.getApplicationContext().getBean(Globals.class).isIddictionOn();};;
 
 }

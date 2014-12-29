@@ -437,7 +437,8 @@ public class InsertUtils implements InsertUtil{
         timeOfPost);
     insertParams.put(DBConstants.CLAN_CHAT_POST__CONTENT, content);
 
-    int numChanged = DBConnection.get().insertIntoTableBasicReturnId(
+    //int numChanged = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_CLAN_CHAT_POST, insertParams);
     if (numChanged != 1) {
       wallPostId = null;

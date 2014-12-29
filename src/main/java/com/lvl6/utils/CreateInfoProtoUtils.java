@@ -17,6 +17,8 @@ import com.google.protobuf.ByteString;
 import com.lvl6.info.Achievement;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.Board;
+import com.lvl6.info.BoardProperty;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -103,6 +105,8 @@ import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
+import com.lvl6.proto.BoardProto.BoardLayoutProto;
+import com.lvl6.proto.BoardProto.BoardPropertyProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -747,7 +751,7 @@ public class CreateInfoProtoUtils {
 		Map<String, User> userIdsToUsers,
 		Map<String, Clan> userIdsToClans)
 	{
-		List<PvpClanAvengeProto> pcapList = new ArrayList<>();
+		List<PvpClanAvengeProto> pcapList = new ArrayList<PvpClanAvengeProto>();
 		
 		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
 			createMinimumUserProtoWithLevel(userIdsToUsers, userIdsToClans);
@@ -881,6 +885,81 @@ public class CreateInfoProtoUtils {
 		return pcapb.build();
 	}
 
+	/**Board.proto****************************************/
+	public static BoardLayoutProto createBoardLayoutProto(Board b,
+		Collection<BoardProperty> boardProperties)
+	{
+		BoardLayoutProto.Builder blpb = BoardLayoutProto.newBuilder();
+		
+		blpb.setBoardId(b.getId());
+		blpb.setHeight(b.getHeight());
+		blpb.setWidth(b.getWidth());
+		
+		String str = b.getOrbElements();
+		if (null != str && !str.isEmpty())
+		{
+			try {
+				Element elem = Element.valueOf(str);
+				blpb.setOrbElements(elem);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid element. Board=%s", b),
+					e);
+			}
+		}
+		
+		List<BoardPropertyProto> bpList = createBoardProto(boardProperties);
+		blpb.addAllProperties(bpList);
+		
+		return blpb.build();
+	}
+	
+	public static List<BoardPropertyProto> createBoardProto(
+		Collection<BoardProperty> bpCollection)
+	{
+		List<BoardPropertyProto> retVal = new ArrayList<BoardPropertyProto>();
+		for (BoardProperty bp : bpCollection)
+		{
+			BoardPropertyProto bpp = createBoardProto(bp);
+			
+			retVal.add(bpp);
+		}
+		
+		return retVal;
+	}
+	
+	public static BoardPropertyProto createBoardProto(BoardProperty bp)
+	{
+		BoardPropertyProto.Builder blpb = BoardPropertyProto.newBuilder();
+		
+		blpb.setBoardPropertyId(bp.getId());
+		blpb.setBoardId(bp.getId());
+		
+		String str = bp.getName();
+		if (null != str && !str.isEmpty()){
+			blpb.setName(str);
+		}
+		
+		blpb.setPosX(bp.getPosX());
+		blpb.setPosY(bp.getPosY());
+		
+		str = bp.getElement();
+		if (null != str && !str.isEmpty())
+		{
+			try {
+				Element elem = Element.valueOf(str);
+				blpb.setElem(elem);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid element. BoardProperty=%s", bp),
+					e);
+			}
+		}
+		
+		return blpb.build();
+	}
+	
+	
 	/**BoosterPackStuff.proto****************************************/
 	//  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
 	//    return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
@@ -2059,8 +2138,10 @@ public class CreateInfoProtoUtils {
 			mlipb.setExpLvlExponent(info.getExpLvlExponent());
 			mlipb.setSellAmount(info.getSellAmount());
 			mlipb.setTeamCost(info.getTeamCost());
-			mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
-			mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
+            mlipb.setCostToFullyHealExponent(info.getCostToFullyHealExponent());
+            mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setSecsToFullyHealExponent(info.getSecsToFullyHealExponent());
 			
 			mlipb.setEnhanceCostPerFeeder(info.getEnhanceCostPerFeeder());
 			mlipb.setEnhanceCostExponent(info.getEnhanceCostExponent());

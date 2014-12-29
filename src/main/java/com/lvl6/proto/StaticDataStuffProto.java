@@ -908,6 +908,30 @@ public final class StaticDataStuffProto {
      */
     com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder getPrereqsOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> 
+        getBoardsList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardLayoutProto getBoards(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    int getBoardsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder> 
+        getBoardsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder getBoardsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.StaticDataProto}
@@ -944,6 +968,7 @@ public final class StaticDataStuffProto {
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
+      int mutable_bitField1_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1222,6 +1247,14 @@ public final class StaticDataStuffProto {
               prereqs_.add(input.readMessage(com.lvl6.proto.PrerequisiteProto.PrereqProto.PARSER, extensionRegistry));
               break;
             }
+            case 274: {
+              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+                boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>();
+                mutable_bitField1_ |= 0x00000001;
+              }
+              boards_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardLayoutProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1322,6 +1355,9 @@ public final class StaticDataStuffProto {
         }
         if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
           prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+        }
+        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+          boards_ = java.util.Collections.unmodifiableList(boards_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2601,6 +2637,41 @@ public final class StaticDataStuffProto {
       return prereqs_.get(index);
     }
 
+    public static final int BOARDS_FIELD_NUMBER = 34;
+    private java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> boards_;
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    public java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> getBoardsList() {
+      return boards_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder> 
+        getBoardsOrBuilderList() {
+      return boards_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    public int getBoardsCount() {
+      return boards_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardLayoutProto getBoards(int index) {
+      return boards_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder getBoardsOrBuilder(
+        int index) {
+      return boards_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -2634,6 +2705,7 @@ public final class StaticDataStuffProto {
       achievements_ = java.util.Collections.emptyList();
       skills_ = java.util.Collections.emptyList();
       prereqs_ = java.util.Collections.emptyList();
+      boards_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2743,6 +2815,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < prereqs_.size(); i++) {
         output.writeMessage(33, prereqs_.get(i));
+      }
+      for (int i = 0; i < boards_.size(); i++) {
+        output.writeMessage(34, boards_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2880,6 +2955,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < prereqs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(33, prereqs_.get(i));
+      }
+      for (int i = 0; i < boards_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(34, boards_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3022,6 +3101,7 @@ public final class StaticDataStuffProto {
           getAchievementsFieldBuilder();
           getSkillsFieldBuilder();
           getPrereqsFieldBuilder();
+          getBoardsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3222,6 +3302,12 @@ public final class StaticDataStuffProto {
         } else {
           prereqsBuilder_.clear();
         }
+        if (boardsBuilder_ == null) {
+          boards_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000001);
+        } else {
+          boardsBuilder_.clear();
+        }
         return this;
       }
 
@@ -3249,6 +3335,7 @@ public final class StaticDataStuffProto {
       public com.lvl6.proto.StaticDataStuffProto.StaticDataProto buildPartial() {
         com.lvl6.proto.StaticDataStuffProto.StaticDataProto result = new com.lvl6.proto.StaticDataStuffProto.StaticDataProto(this);
         int from_bitField0_ = bitField0_;
+        int from_bitField1_ = bitField1_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
@@ -3536,6 +3623,15 @@ public final class StaticDataStuffProto {
           result.prereqs_ = prereqs_;
         } else {
           result.prereqs_ = prereqsBuilder_.build();
+        }
+        if (boardsBuilder_ == null) {
+          if (((bitField1_ & 0x00000001) == 0x00000001)) {
+            boards_ = java.util.Collections.unmodifiableList(boards_);
+            bitField1_ = (bitField1_ & ~0x00000001);
+          }
+          result.boards_ = boards_;
+        } else {
+          result.boards_ = boardsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4362,6 +4458,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (boardsBuilder_ == null) {
+          if (!other.boards_.isEmpty()) {
+            if (boards_.isEmpty()) {
+              boards_ = other.boards_;
+              bitField1_ = (bitField1_ & ~0x00000001);
+            } else {
+              ensureBoardsIsMutable();
+              boards_.addAll(other.boards_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.boards_.isEmpty()) {
+            if (boardsBuilder_.isEmpty()) {
+              boardsBuilder_.dispose();
+              boardsBuilder_ = null;
+              boards_ = other.boards_;
+              bitField1_ = (bitField1_ & ~0x00000001);
+              boardsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBoardsFieldBuilder() : null;
+            } else {
+              boardsBuilder_.addAllMessages(other.boards_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -4388,6 +4510,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       private int bitField0_;
+      private int bitField1_;
 
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
@@ -12449,6 +12572,246 @@ public final class StaticDataStuffProto {
         return prereqsBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> boards_ =
+        java.util.Collections.emptyList();
+      private void ensureBoardsIsMutable() {
+        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+          boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>(boards_);
+          bitField1_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardLayoutProto, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder, com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder> boardsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> getBoardsList() {
+        if (boardsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(boards_);
+        } else {
+          return boardsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public int getBoardsCount() {
+        if (boardsBuilder_ == null) {
+          return boards_.size();
+        } else {
+          return boardsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardLayoutProto getBoards(int index) {
+        if (boardsBuilder_ == null) {
+          return boards_.get(index);
+        } else {
+          return boardsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder setBoards(
+          int index, com.lvl6.proto.BoardProto.BoardLayoutProto value) {
+        if (boardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBoardsIsMutable();
+          boards_.set(index, value);
+          onChanged();
+        } else {
+          boardsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder setBoards(
+          int index, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder builderForValue) {
+        if (boardsBuilder_ == null) {
+          ensureBoardsIsMutable();
+          boards_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          boardsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder addBoards(com.lvl6.proto.BoardProto.BoardLayoutProto value) {
+        if (boardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBoardsIsMutable();
+          boards_.add(value);
+          onChanged();
+        } else {
+          boardsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder addBoards(
+          int index, com.lvl6.proto.BoardProto.BoardLayoutProto value) {
+        if (boardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBoardsIsMutable();
+          boards_.add(index, value);
+          onChanged();
+        } else {
+          boardsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder addBoards(
+          com.lvl6.proto.BoardProto.BoardLayoutProto.Builder builderForValue) {
+        if (boardsBuilder_ == null) {
+          ensureBoardsIsMutable();
+          boards_.add(builderForValue.build());
+          onChanged();
+        } else {
+          boardsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder addBoards(
+          int index, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder builderForValue) {
+        if (boardsBuilder_ == null) {
+          ensureBoardsIsMutable();
+          boards_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          boardsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder addAllBoards(
+          java.lang.Iterable<? extends com.lvl6.proto.BoardProto.BoardLayoutProto> values) {
+        if (boardsBuilder_ == null) {
+          ensureBoardsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, boards_);
+          onChanged();
+        } else {
+          boardsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder clearBoards() {
+        if (boardsBuilder_ == null) {
+          boards_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000001);
+          onChanged();
+        } else {
+          boardsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public Builder removeBoards(int index) {
+        if (boardsBuilder_ == null) {
+          ensureBoardsIsMutable();
+          boards_.remove(index);
+          onChanged();
+        } else {
+          boardsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardLayoutProto.Builder getBoardsBuilder(
+          int index) {
+        return getBoardsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder getBoardsOrBuilder(
+          int index) {
+        if (boardsBuilder_ == null) {
+          return boards_.get(index);  } else {
+          return boardsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder> 
+           getBoardsOrBuilderList() {
+        if (boardsBuilder_ != null) {
+          return boardsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(boards_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardLayoutProto.Builder addBoardsBuilder() {
+        return getBoardsFieldBuilder().addBuilder(
+            com.lvl6.proto.BoardProto.BoardLayoutProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardLayoutProto.Builder addBoardsBuilder(
+          int index) {
+        return getBoardsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BoardProto.BoardLayoutProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardLayoutProto boards = 34;</code>
+       */
+      public java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto.Builder> 
+           getBoardsBuilderList() {
+        return getBoardsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardLayoutProto, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder, com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder> 
+          getBoardsFieldBuilder() {
+        if (boardsBuilder_ == null) {
+          boardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BoardProto.BoardLayoutProto, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder, com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder>(
+                  boards_,
+                  ((bitField1_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          boards_ = null;
+        }
+        return boardsBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
 
@@ -12475,56 +12838,58 @@ public final class StaticDataStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Achi" +
-      "evementStuff.proto\032\014Battle.proto\032\026Booste" +
-      "rPackStuff.proto\032\nCity.proto\032\nClan.proto" +
-      "\032\nItem.proto\032\022MonsterStuff.proto\032\022Prereq" +
-      "uisite.proto\032\013Quest.proto\032\013Skill.proto\032\017" +
-      "Structure.proto\032\nTask.proto\032\nUser.proto\"" +
-      "\346\r\n\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022>\n\016expansi" +
-      "onCosts\030\002 \003(\0132&.com.lvl6.proto.CityExpan" +
-      "sionCostProto\0220\n\tallCities\030\003 \003(\0132\035.com.l",
-      "vl6.proto.FullCityProto\022/\n\010allTasks\030\004 \003(" +
-      "\0132\035.com.lvl6.proto.FullTaskProto\022?\n\022allT" +
-      "askMapElements\030\034 \003(\0132#.com.lvl6.proto.Ta" +
-      "skMapElementProto\0221\n\013allMonsters\030\005 \003(\0132\034" +
-      ".com.lvl6.proto.MonsterProto\0226\n\004slip\030\006 \003" +
-      "(\0132(.com.lvl6.proto.StaticUserLevelInfoP" +
-      "roto\0228\n\020inProgressQuests\030\007 \003(\0132\036.com.lvl" +
-      "6.proto.FullQuestProto\0228\n\020unredeemedQues" +
-      "ts\030\010 \003(\0132\036.com.lvl6.proto.FullQuestProto" +
-      "\0227\n\017availableQuests\030\t \003(\0132\036.com.lvl6.pro",
-      "to.FullQuestProto\0226\n\014boosterPacks\030\013 \003(\0132" +
-      " .com.lvl6.proto.BoosterPackProto\022=\n\rall" +
-      "Generators\030\014 \003(\0132&.com.lvl6.proto.Resour" +
-      "ceGeneratorProto\0229\n\013allStorages\030\r \003(\0132$." +
-      "com.lvl6.proto.ResourceStorageProto\0223\n\014a" +
-      "llHospitals\030\016 \003(\0132\035.com.lvl6.proto.Hospi" +
-      "talProto\0225\n\rallResidences\030\017 \003(\0132\036.com.lv" +
-      "l6.proto.ResidenceProto\0223\n\014allTownHalls\030" +
-      "\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022)\n\007" +
-      "allLabs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\022",
-      "=\n\021allMiniJobCenters\030\033 \003(\0132\".com.lvl6.pr" +
-      "oto.MiniJobCenterProto\0227\n\016allEvoChambers" +
-      "\030\035 \003(\0132\037.com.lvl6.proto.EvoChamberProto\022" +
-      "7\n\016allTeamCenters\030\036 \003(\0132\037.com.lvl6.proto" +
-      ".TeamCenterProto\0225\n\rallClanHouses\030  \003(\0132" +
-      "\036.com.lvl6.proto.ClanHouseProto\022>\n\020persi" +
-      "stentEvents\030\022 \003(\0132$.com.lvl6.proto.Persi" +
-      "stentEventProto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6" +
-      ".proto.MonsterBattleDialogueProto\022,\n\005rai" +
-      "ds\030\024 \003(\0132\035.com.lvl6.proto.ClanRaidProto\022",
-      "F\n\024persistentClanEvents\030\025 \003(\0132(.com.lvl6" +
-      ".proto.PersistentClanEventProto\022(\n\005items" +
-      "\030\026 \003(\0132\031.com.lvl6.proto.ItemProto\0220\n\tobs" +
-      "tacles\030\027 \003(\0132\035.com.lvl6.proto.ObstaclePr" +
-      "oto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6.proto." +
-      "ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036.com.lvl" +
-      "6.proto.PvpLeagueProto\0226\n\014achievements\030\032" +
-      " \003(\0132 .com.lvl6.proto.AchievementProto\022*" +
-      "\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.SkillPro" +
-      "to\022,\n\007prereqs\030! \003(\0132\033.com.lvl6.proto.Pre",
-      "reqProtoB\026B\024StaticDataStuffProto"
+      "evementStuff.proto\032\014Battle.proto\032\013Board." +
+      "proto\032\026BoosterPackStuff.proto\032\nCity.prot" +
+      "o\032\nClan.proto\032\nItem.proto\032\022MonsterStuff." +
+      "proto\032\022Prerequisite.proto\032\013Quest.proto\032\013" +
+      "Skill.proto\032\017Structure.proto\032\nTask.proto" +
+      "\032\nUser.proto\"\230\016\n\017StaticDataProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.pr" +
+      "oto.CityExpansionCostProto\0220\n\tallCities\030",
+      "\003 \003(\0132\035.com.lvl6.proto.FullCityProto\022/\n\010" +
+      "allTasks\030\004 \003(\0132\035.com.lvl6.proto.FullTask" +
+      "Proto\022?\n\022allTaskMapElements\030\034 \003(\0132#.com." +
+      "lvl6.proto.TaskMapElementProto\0221\n\013allMon" +
+      "sters\030\005 \003(\0132\034.com.lvl6.proto.MonsterProt" +
+      "o\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto.StaticU" +
+      "serLevelInfoProto\0228\n\020inProgressQuests\030\007 " +
+      "\003(\0132\036.com.lvl6.proto.FullQuestProto\0228\n\020u" +
+      "nredeemedQuests\030\010 \003(\0132\036.com.lvl6.proto.F" +
+      "ullQuestProto\0227\n\017availableQuests\030\t \003(\0132\036",
+      ".com.lvl6.proto.FullQuestProto\0226\n\014booste" +
+      "rPacks\030\013 \003(\0132 .com.lvl6.proto.BoosterPac" +
+      "kProto\022=\n\rallGenerators\030\014 \003(\0132&.com.lvl6" +
+      ".proto.ResourceGeneratorProto\0229\n\013allStor" +
+      "ages\030\r \003(\0132$.com.lvl6.proto.ResourceStor" +
+      "ageProto\0223\n\014allHospitals\030\016 \003(\0132\035.com.lvl" +
+      "6.proto.HospitalProto\0225\n\rallResidences\030\017" +
+      " \003(\0132\036.com.lvl6.proto.ResidenceProto\0223\n\014" +
+      "allTownHalls\030\020 \003(\0132\035.com.lvl6.proto.Town" +
+      "HallProto\022)\n\007allLabs\030\021 \003(\0132\030.com.lvl6.pr",
+      "oto.LabProto\022=\n\021allMiniJobCenters\030\033 \003(\0132" +
+      "\".com.lvl6.proto.MiniJobCenterProto\0227\n\016a" +
+      "llEvoChambers\030\035 \003(\0132\037.com.lvl6.proto.Evo" +
+      "ChamberProto\0227\n\016allTeamCenters\030\036 \003(\0132\037.c" +
+      "om.lvl6.proto.TeamCenterProto\0225\n\rallClan" +
+      "Houses\030  \003(\0132\036.com.lvl6.proto.ClanHouseP" +
+      "roto\022>\n\020persistentEvents\030\022 \003(\0132$.com.lvl" +
+      "6.proto.PersistentEventProto\0228\n\004mbds\030\023 \003" +
+      "(\0132*.com.lvl6.proto.MonsterBattleDialogu" +
+      "eProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.proto.C",
+      "lanRaidProto\022F\n\024persistentClanEvents\030\025 \003" +
+      "(\0132(.com.lvl6.proto.PersistentClanEventP" +
+      "roto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.proto.Ite" +
+      "mProto\0220\n\tobstacles\030\027 \003(\0132\035.com.lvl6.pro" +
+      "to.ObstacleProto\0220\n\tclanIcons\030\030 \003(\0132\035.co" +
+      "m.lvl6.proto.ClanIconProto\022/\n\007leagues\030\031 " +
+      "\003(\0132\036.com.lvl6.proto.PvpLeagueProto\0226\n\014a" +
+      "chievements\030\032 \003(\0132 .com.lvl6.proto.Achie" +
+      "vementProto\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.p" +
+      "roto.SkillProto\022,\n\007prereqs\030! \003(\0132\033.com.l",
+      "vl6.proto.PrereqProto\0220\n\006boards\030\" \003(\0132 ." +
+      "com.lvl6.proto.BoardLayoutProtoB\026B\024Stati" +
+      "cDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12539,6 +12904,7 @@ public final class StaticDataStuffProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.AchievementStuffProto.getDescriptor(),
           com.lvl6.proto.BattleProto.getDescriptor(),
+          com.lvl6.proto.BoardProto.getDescriptor(),
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
           com.lvl6.proto.CityProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
@@ -12556,9 +12922,10 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BoardProto.getDescriptor();
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.CityProto.getDescriptor();
     com.lvl6.proto.ClanProto.getDescriptor();

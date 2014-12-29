@@ -56,7 +56,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   	Predicate predicate = e.get(elo).between(minElo, maxElo);
 
   	Set<MonsterForPvp> monsters = (Set<MonsterForPvp>) idToMonsterForPvp.values(predicate);
-  	log.info("users:" + monsters);
+  	//log.info("users:" + monsters);
 
   	return monsters;
   }

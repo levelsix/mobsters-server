@@ -113,7 +113,7 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 	
 	@Override
 	public List<ZSetMember> get(String... keys) {
-		List<ZSetMember> m = new ArrayList<>();
+		List<ZSetMember> m = new ArrayList<ZSetMember>();
 		for(String key : keys) {
 			m.add(get(key));
 		}
@@ -133,14 +133,14 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 			minRank = minRank - maxRank;
 		}
 		if(minRank >= ranks.size()) {
-			return new ArrayList<>();
+			return new ArrayList<ZSetMember>();
 		}
 		if(maxRank >= ranks.size()) {
 			maxRank = ranks.size() - 1;
 		}
 		List<Long> scores = ranks.subList(minRank, maxRank);
 		log.trace(" scores: {}",scores);
-		List<ZSetMember> members = new ArrayList<>();
+		List<ZSetMember> members = new ArrayList<ZSetMember>();
 		log.trace(" members: ", members);
 		int rank = minRank;
 		for(Long score : scores) {

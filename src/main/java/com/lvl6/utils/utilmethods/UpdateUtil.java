@@ -191,4 +191,6 @@ public interface UpdateUtil {
 	  List<String> historyAttackerId, List<String> historyDefenderId,
 	  List<Timestamp> battleEndTime);
   
+  public abstract int updateRecentPvpBattleHistoryClanRetaliated(
+		String historyDefenderId, Timestamp battleEndTime);
 }

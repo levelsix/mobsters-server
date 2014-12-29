@@ -6,6 +6,8 @@ public class DBConstants {
 	public static final String TABLE_ACHIEVEMENT_CONFIG = "achievement_config";
 	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
+	public static final String TABLE_BOARD_CONFIG = "board_config";
+	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM_CONFIG = "booster_display_item_config";
 	public static final String TABLE_BOOSTER_ITEM_CONFIG = "booster_item_config";
 	public static final String TABLE_BOOSTER_PACK_CONFIG = "booster_pack_config";
@@ -130,7 +132,7 @@ public class DBConstants {
 	/*AVAILABLE REFERRAL CODES*/
 	public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
 	public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
-
+	
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
@@ -763,6 +765,21 @@ public class DBConstants {
 
 	public static final String BANNED_USER__USER_ID = GENERIC__USER_ID;
 
+	/*BOARD*/
+	public static final String BOARD__ID = GENERIC__ID;
+	public static final String BOARD__WIDTH = "width";
+	public static final String BOARD__HEIGHT = "height";
+	public static final String BOARD__ORB_ELEMENTS = "orb_elements";
+	
+	/*BOARD PROPERTY*/
+	public static final String BOARD_PROPERTY__ID = GENERIC__ID;
+	public static final String BOARD_PROPERTY__BOARD_ID = "board_id";
+	public static final String BOARD_PROPERTY__NAME = "name";
+	public static final String BOARD_PROPERTY__POS_X = "pos_x";
+	public static final String BOARD_PROPERTY__POS_Y = "pos_y";
+	public static final String BOARD_PROPERTY__ELEMENT = "element";
+	public static final String BOARD_PROPERTY__VALUE = "value";
+	
 	public static final String BOOSTER_DISPLAY_ITEM__ID = GENERIC__ID;
 	public static final String BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
 	public static final String BOOSTER_DISPLAY_ITEM__IS_MONSTER = "is_monster";
@@ -903,8 +920,10 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
-	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
-	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL_EXPONENT = "cost_to_fully_heal_exponent";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";

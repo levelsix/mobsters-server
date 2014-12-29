@@ -71,6 +71,7 @@ public class AdminPage extends TemplatePage {
 	private void setTools() {
 		add(new ReloadStaticDataLink("reloadStaticDataLink"));
 		add(new ReloadLeaderboardLink("reloadLeaderboardLink"));
+//		add(new ReloadRecommendedClansLink("reloadRecommendedClansLink"));
 	}
 
 	protected void setStats() {

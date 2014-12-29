@@ -1,7 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
@@ -24,10 +25,13 @@ import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.ExitClanAction;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -39,6 +43,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected Locker locker;
   
   @Autowired
+  protected TimeUtils timeUtil;
+  
+  @Autowired
   protected ClanRetrieveUtils2 clanRetrieveUtils;
   
   @Autowired
@@ -46,7 +53,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
+  @Autowired
+  protected ClanSearch clanSearch;
+  
   public LeaveClanController() {
     numAllocatedThreads = 4;
   }
@@ -115,12 +128,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
 
       List<String> clanOwnerIdList = new ArrayList<String>();
-      boolean legitLeave = checkLegitLeave(resBuilder, lockedClan, user, clan, clanOwnerIdList);
+      List<Integer> clanSizeContainer = new ArrayList<Integer>();
+      boolean legitLeave = checkLegitLeave(resBuilder, lockedClan,
+    	  user, clan, clanOwnerIdList, clanSizeContainer);
       
       boolean success = false;
       if (legitLeave) {
         String clanOwnerId = clanOwnerIdList.get(0);
-      	success = writeChangesToDB(user, clan, clanOwnerId);
+        int clanSize = clanSizeContainer.get(0);
+      	success = writeChangesToDB(user, clan, clanOwnerId, clanSize);
       }
 
       LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
@@ -160,7 +176,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitLeave(Builder resBuilder, boolean lockedClan, User user,
-  		Clan clan, List<String> clanOwnerIdList) {
+  		Clan clan, List<String> clanOwnerIdList, List<Integer> clanSizeContainer) {
 
   	if (!lockedClan) {
   		log.error("couldn't obtain clan lock");
@@ -178,42 +194,57 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
 
+    //one query to get the leader and the members in a clan
     String clanId = user.getClanId();
+    String leaderStatus = UserClanStatus.LEADER.name();
     List<String> statuses = new ArrayList<String>();
-    statuses.add(UserClanStatus.LEADER.name());
-    List<String> userIds = getUserClanRetrieveUtils()
-    		.getUserIdsWithStatuses(clanId, statuses);
-    //should just be one id
-    String clanOwnerId = null;
-    if (null != userIds && !userIds.isEmpty()) {
-    	clanOwnerId = userIds.get(0);
-    }
+    statuses.add(leaderStatus);
+    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+    statuses.add(UserClanStatus.CAPTAIN.name());
+    statuses.add(UserClanStatus.MEMBER.name());
+    Map<String, String> userIdsAndStatuses = userClanRetrieveUtils
+    		.getUserIdsToStatuses(clanId, statuses);
     
+    String clanOwnerId = getClanOwnerId(leaderStatus, userIdsAndStatuses);
+
+    int userClanMembersInClan = userIdsAndStatuses.size();
     if (clanOwnerId.equals(user.getId())) {
-    	List<String> clanIdList = Collections.singletonList(clanId);
-    	//add in the other "in clan" statuses with the existing leader status
-    	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-	    statuses.add(UserClanStatus.CAPTAIN.name());
-	    statuses.add(UserClanStatus.MEMBER.name());
-    	Map<String, Integer> clanIdToSize = getUserClanRetrieveUtils()
-    			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
-    	int userClanMembersInClan = clanIdToSize.get(clanId);
-      if (userClanMembersInClan > 1) {
-        resBuilder.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
-        String preface = "user is owner and he's not alone in clan,";
-        String preface2 = "can't leave without switching ownership."; 
-        log.error(String.format(
-        	"%s %s user clan members are %s", 
-            preface, preface2, userClanMembersInClan));
-        return false;
-      }
+    	if (userClanMembersInClan > 1) {
+    		resBuilder.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
+    		String preface = "user is owner and he's not alone in clan,";
+    		String preface2 = "can't leave without switching ownership."; 
+    		log.error(String.format(
+    			"%s %s user clan members are %s", 
+    			preface, preface2, userClanMembersInClan));
+    		return false;
+    	}
     }
-    
+
     clanOwnerIdList.add(clanOwnerId);
+    clanSizeContainer.add(userClanMembersInClan);
     return true;
   }
 
-  private boolean writeChangesToDB(User user, Clan clan, String clanOwnerId) {
+  private String getClanOwnerId( String leaderStatus, Map<String, String> userIdsAndStatuses )
+  {
+	  String clanOwnerId = null;
+	  if (null != userIdsAndStatuses && !userIdsAndStatuses.isEmpty()) {
+
+		  //find clanOwnerId
+		  for (String userId : userIdsAndStatuses.keySet()) {
+			  String status = userIdsAndStatuses.get(userId);
+
+			  if (leaderStatus.equals(status)) {
+				  clanOwnerId = userId;
+			  }
+		  }
+	  }
+	  return clanOwnerId;
+  }
+
+  private boolean writeChangesToDB(User user, Clan clan,
+	  String clanOwnerId, int clanSize)
+  {
     String userId = user.getId();
     String clanId = clan.getId();
 
@@ -225,36 +256,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.error(String.format(
         	"problem deleting UserClan. user=%s, clan=%s",
         	user, clan));
+        return false;
       }
       if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
         log.error("problem with making clanid for user null");
+        return false;
       }
     }
-    
-    
-    int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
-    log.info(String.format("num ClanHelps closed: %s", numUpdated));
+    Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
+
+    //need to account for this user leaving clan
+    ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
+    	lastChatPost, timeUtil, UpdateUtils.get(), clanSearch);
+    eca.execute();
     
     return true;
   }
 
   private void deleteClan(Clan clan, List<String> userIds, User user) {
-    if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
-      log.error(String.format(
-    	  "problem marking clan id null for users with ids in %s", userIds));
-    } else {
-      if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {
-        log.error(String.format(
-        	"problem with deleting user clan data for clan with id %s",
-        	clan.getId()));
-      } else {
-        if (!DeleteUtils.get().deleteClanWithClanId(clan.getId())) {
-          log.error(String.format(
-        	  "problem with deleting clan with id %s",
-        	  clan.getId()));
-        }
-      }
-    }
+	  if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
+		  log.error(String.format(
+			  "problem marking clan id null for users with ids in %s", userIds));
+		  return;
+	  }
+
+	  if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {
+		  log.error(String.format(
+			  "problem with deleting user clan data for clan with id %s",
+			  clan.getId()));
+	  } else {
+		  if (!DeleteUtils.get().deleteClanWithClanId(clan.getId())) {
+			  log.error(String.format(
+				  "problem with deleting clan with id %s",
+				  clan.getId()));
+		  }
+	  }
+
   }
   /*
   private void notifyClan(User aUser, Clan aClan) {
@@ -297,7 +334,37 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setUserClanRetrieveUtils(
       UserClanRetrieveUtils2 userClanRetrieveUtils) {
-    this.userClanRetrieveUtils = userClanRetrieveUtils;
+	  this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil()
+  {
+	  return clanChatPostRetrieveUtil;
+  }
+
+  public void setClanChatPostRetrieveUtil( ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil )
+  {
+	  this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
+  }
+
+  public TimeUtils getTimeUtil()
+  {
+	  return timeUtil;
+  }
+
+  public void setTimeUtil( TimeUtils timeUtil )
+  {
+	  this.timeUtil = timeUtil;
+  }
+
+  public ClanSearch getClanSearch()
+  {
+	  return clanSearch;
+  }
+
+  public void setClanSearch( ClanSearch clanSearch )
+  {
+	  this.clanSearch = clanSearch;
   }
   
 }

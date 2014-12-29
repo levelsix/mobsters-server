@@ -44,7 +44,7 @@
 	<rabbit:direct-exchange name="${amqp.exchange}"
 		auto-delete="false" durable="true">
 		<rabbit:bindings>
-			<rabbit:binding queue="clientMessages"
+			<rabbit:binding queue="${amqp.client.messages.queue}"
 				key="${amqp.client.messages.routing.key}" />
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
@@ -64,7 +64,7 @@
 
 	<rabbit:queue id="serverMessagesQueue" />
 
-	<rabbit:queue id="clientMessages" name="clientMessages"
+	<rabbit:queue id="${amqp.client.messages.queue}" name="${amqp.client.messages.queue}"
 		durable="true" auto-delete="false" />
 
 	<rabbit:listener-container
@@ -88,7 +88,7 @@
 		concurrency="42" 
 		prefetch="42"
 		error-handler="amqpErrorHandler">
-		<rabbit:listener queues="clientMessages" ref="clientEventHandler"	method="onMessage" />
+		<rabbit:listener queues="${amqp.client.messages.queue}" ref="clientEventHandler"	method="onMessage" />
 	</rabbit:listener-container>
 
 	<rabbit:template id="clientMessagesTemplate"

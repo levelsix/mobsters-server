@@ -84,11 +84,17 @@ message MonsterLevelInfoProto {
 	optional int32 sellAmount = 16;
 	optional int32 teamCost = 17;
 	optional int32 costToFullyHeal = 18;
+	optional float costToFullyHealExponent = 24;
 	optional int32 secsToFullyHeal = 19;
+	optional float secsToFullyHealExponent = 25;
 	optional int32 enhanceCostPerFeeder = 20;
 	optional float enhanceCostExponent = 21;
 	optional float enhanceExpPerSecond = 22;
 	optional float enhanceExpPerSecondExponent = 23;
+	
+	// placed above
+	//optional int32 costToFullyHealExponent = 24;
+	//optional int32 secsToFullyHealExponent = 25;
 }
 
 //------------------------------------------------------------------------------------------

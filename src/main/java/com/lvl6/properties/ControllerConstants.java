@@ -1,8 +1,10 @@
 package com.lvl6.properties;
 
+import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+import org.joda.time.DateTime;
 
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
@@ -13,6 +15,8 @@ public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
 	public static final Random RAND = new Random();
+	//Date we launched the game...close enough
+	public static final Date INCEPTION_DATE = new DateTime(2014, 12, 4, 0, 0).toDate();
 
 	//includes oil and cash, 1 gem per 1000 resource? 
 	public static final float GEMS_PER_RESOURCE = 0.001F;
@@ -29,6 +33,7 @@ public class ControllerConstants {
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 5 : 100;
 	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
+	public static final int CLAN__TOP_N_CLANS = 50;
 
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;

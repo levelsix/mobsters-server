@@ -3,6 +3,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "Board.proto";
 import "BoosterPackStuff.proto";
 import "City.proto";
 import "Clan.proto";
@@ -69,5 +70,7 @@ message StaticDataProto {
 	repeated SkillProto skills = 31;
 	//repeated ClanHouseProto allClanHouses = 32; defined above
 	repeated PrereqProto prereqs = 33;
+	
+	repeated BoardLayoutProto boards = 34;
 }
 	

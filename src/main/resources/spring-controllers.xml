@@ -39,6 +39,18 @@
 		<property name="certPassword" value="${apns.cert.password}"></property>
 	</bean>
 	
+	
+	<bean id="snsMobilePush" class="com.lvl6.aws.SNSMobilePush" >
+		<property name="apnsCertificate" value="${apnsCertificate}" />
+		<property name="apnsPrivateKey" value="${apnsPrivateKey}" />
+		<property name="apnsApplicationName" value="${apnsApplicationName}" />
+		<property name="isSandBox" value="${isSandBox}" />
+		<property name="gcmServerAPIKey" value="${gcmServerAPIKey}" />
+		<property name="gcmApplicationName" value="${gcmApplicationName}" />
+		<property name="gcmRegistrationId" value="${gcmRegistrationId}" />
+	</bean>
+	
+	
 	<bean id="apnsWriter" class="com.lvl6.server.APNSWriter" />
 
 
@@ -59,8 +71,18 @@
 		<property name="reviewPageUrl" ><value><![CDATA[${globals.reviewPageUrl}]]></value></property>
 		<property name="appleBundleId" value="${globals.appleBundleId}" />
 		<property name="initialDiamonds" value="${globals.initial.diamonds}" />
-		<property name="versionNumber" value="${lvl6.application.version}" />
+		
 		<property name="healthCheckTimeoutSeconds" value="${lvl6.application.healthcheck.timeout.seconds}" />
+		
+		<!-- deprecated -->
+		<property name="versionNumber" value="${lvl6.application.version}" />
+		<!--  -->
+				
+		<property name="versionSuperNumber" value="${lvl6.application.version.superNumber}" />
+		<property name="versionMajorNumber" value="${lvl6.application.version.majorNumber}" />
+		<property name="versionMinorNumber" value="${lvl6.application.version.minorNumber}" />
+		
+<!-- 		<property name="appVersion" value="${lvl6.app.version}" -->
 	</bean>
 	
 	
