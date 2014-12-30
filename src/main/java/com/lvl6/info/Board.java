@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Board implements Serializable {
 	
-	private static final long serialVersionUID = -4012142356784810208L;
+	private static final long serialVersionUID = 4796237251890111519L;
 	
 	private int id;
 	private int width;
 	private int height;
-	private String orbElements;
+	private int orbElements;
 	
-	public Board( int id, int width, int height, String orbElements )
+	public Board( int id, int width, int height, int orbElements )
 	{
 		super();
 		this.id = id;
@@ -50,12 +50,12 @@ public class Board implements Serializable {
 		this.height = height;
 	}
 
-	public String getOrbElements()
+	public int getOrbElements()
 	{
 		return orbElements;
 	}
 
-	public void setOrbElements( String orbElements )
+	public void setOrbElements( int orbElements )
 	{
 		this.orbElements = orbElements;
 	}

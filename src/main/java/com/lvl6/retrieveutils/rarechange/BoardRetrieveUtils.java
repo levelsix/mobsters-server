@@ -116,7 +116,9 @@ import com.lvl6.utils.DBConnection;
 				orbElements, id));
 	    }
 		
-		Board board = new Board(id, width, height, orbElements);
+		int orbElementsInt = Integer.parseInt(orbElements);
+		
+		Board board = new Board(id, width, height, orbElementsInt);
 		return board;
 	}
 	

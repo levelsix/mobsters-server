@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-	private static final long serialVersionUID = -4555554369465514352L;
+	private static final long serialVersionUID = -8868875499547952534L;
 	
 	private int id;
 	private String goodName;
@@ -18,6 +18,7 @@ public class Task implements Serializable {
 	private String groundImgPrefix;
 	private String initDefeatedDialogue;
 	private int expReward;
+	private int boardId;
 	
 	//non persisted information
 	private Dialogue initDefeatedD;
@@ -35,7 +36,8 @@ public class Task implements Serializable {
 		String groundImgPrefix,
 		String initDefeatedDialogue,
 		Dialogue initDefeatedD,
-		int expReward)
+		int expReward,
+		int boardId )
 	{
 		super();
 		this.id = id;
@@ -51,6 +53,7 @@ public class Task implements Serializable {
 		this.initDefeatedDialogue = initDefeatedDialogue;
 		this.initDefeatedD = initDefeatedD;
 		this.expReward = expReward;
+		this.boardId = boardId;
 	}
 	
 	public int getId() {
@@ -156,6 +159,16 @@ public class Task implements Serializable {
 		this.initDefeatedD = initDefeatedD;
 	}
 
+	public int getBoardId()
+	{
+		return boardId;
+	}
+
+	public void setBoardId( int boardId )
+	{
+		this.boardId = boardId;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -183,9 +196,12 @@ public class Task implements Serializable {
 			+ initDefeatedDialogue
 			+ ", expReward="
 			+ expReward
+			+ ", boardId="
+			+ boardId
 			+ ", initDefeatedD="
 			+ initDefeatedD
 			+ "]";
 	}
+
 
 }

@@ -221,6 +221,7 @@ import com.lvl6.utils.DBConnection;
 		String groundImgPrefix = rs.getString(DBConstants.TASK__GROUND_IMG_PREFIX);
 		String initDefeatedD =  rs.getString(DBConstants.TASK__INIT_DEFEATED_DIALOGUE);
 		int expReward = rs.getInt(DBConstants.TASK__EXP_REWARD);
+		int boardId = rs.getInt(DBConstants.TASK__BOARD_ID);
 		
 		Dialogue initD = null;
 		if (null != initDefeatedD && !initDefeatedD.isEmpty()) {
@@ -230,7 +231,7 @@ import com.lvl6.utils.DBConnection;
 
 		Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
 			prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight,
-			groundImgPrefix, initDefeatedD, initD, expReward);
+			groundImgPrefix, initDefeatedD, initD, expReward, boardId);
 		return task;
 	}
 }

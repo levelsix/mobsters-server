@@ -40,13 +40,21 @@ public final class BoardProto {
     int getWidth();
 
     /**
-     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
      */
     boolean hasOrbElements();
     /**
-     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
      */
-    com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements();
+    int getOrbElements();
 
     /**
      * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
@@ -140,14 +148,8 @@ public final class BoardProto {
               break;
             }
             case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                orbElements_ = value;
-              }
+              bitField0_ |= 0x00000008;
+              orbElements_ = input.readInt32();
               break;
             }
             case 42: {
@@ -247,17 +249,25 @@ public final class BoardProto {
     }
 
     public static final int ORBELEMENTS_FIELD_NUMBER = 4;
-    private com.lvl6.proto.SharedEnumConfigProto.Element orbElements_;
+    private int orbElements_;
     /**
-     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
      */
     public boolean hasOrbElements() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements() {
+    public int getOrbElements() {
       return orbElements_;
     }
 
@@ -300,7 +310,7 @@ public final class BoardProto {
       boardId_ = 0;
       height_ = 0;
       width_ = 0;
-      orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      orbElements_ = 0;
       properties_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -326,7 +336,7 @@ public final class BoardProto {
         output.writeInt32(3, width_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, orbElements_.getNumber());
+        output.writeInt32(4, orbElements_);
       }
       for (int i = 0; i < properties_.size(); i++) {
         output.writeMessage(5, properties_.get(i));
@@ -354,7 +364,7 @@ public final class BoardProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, orbElements_.getNumber());
+          .computeInt32Size(4, orbElements_);
       }
       for (int i = 0; i < properties_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -484,7 +494,7 @@ public final class BoardProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         width_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        orbElements_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         if (propertiesBuilder_ == null) {
           properties_ = java.util.Collections.emptyList();
@@ -722,37 +732,50 @@ public final class BoardProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Element orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      private int orbElements_ ;
       /**
-       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
        */
       public boolean hasOrbElements() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.Element getOrbElements() {
+      public int getOrbElements() {
         return orbElements_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
        */
-      public Builder setOrbElements(com.lvl6.proto.SharedEnumConfigProto.Element value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+      public Builder setOrbElements(int value) {
         bitField0_ |= 0x00000008;
         orbElements_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element orbElements = 4;</code>
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
        */
       public Builder clearOrbElements() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        orbElements_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        orbElements_ = 0;
         onChanged();
         return this;
       }
@@ -2013,15 +2036,15 @@ public final class BoardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Board.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\"\250\001\n\020BoardLayoutProto\022\017\n\007bo" +
+      "mConfig.proto\"\217\001\n\020BoardLayoutProto\022\017\n\007bo" +
       "ardId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001" +
-      "(\005\022,\n\013orbElements\030\004 \001(\0162\027.com.lvl6.proto" +
-      ".Element\0226\n\nproperties\030\005 \003(\0132\".com.lvl6." +
-      "proto.BoardPropertyProto\"\236\001\n\022BoardProper" +
-      "tyProto\022\027\n\017boardPropertyId\030\001 \001(\005\022\017\n\007boar" +
-      "dId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014\n\004posX\030\004 \001(\005\022\014\n" +
-      "\004posY\030\005 \001(\005\022%\n\004elem\030\006 \001(\0162\027.com.lvl6.pro" +
-      "to.Element\022\r\n\005value\030\007 \001(\005B\014B\nBoardProto"
+      "(\005\022\023\n\013orbElements\030\004 \001(\005\0226\n\nproperties\030\005 " +
+      "\003(\0132\".com.lvl6.proto.BoardPropertyProto\"" +
+      "\236\001\n\022BoardPropertyProto\022\027\n\017boardPropertyI" +
+      "d\030\001 \001(\005\022\017\n\007boardId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014" +
+      "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\022%\n\004elem\030\006 \001(\016" +
+      "2\027.com.lvl6.proto.Element\022\r\n\005value\030\007 \001(\005" +
+      "B\014B\nBoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

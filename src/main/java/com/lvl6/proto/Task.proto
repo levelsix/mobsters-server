@@ -30,6 +30,8 @@ message FullTaskProto {
 	optional int32 boardHeight = 9;
 	optional string groundImgPrefix = 10;
 	optional DialogueProto initialDefeatedDialogue = 11;
+	
+	optional int32 boardId = 12;
 }
 
 //------------------------------------------------------------------------------------------

@@ -895,17 +895,21 @@ public class CreateInfoProtoUtils {
 		blpb.setHeight(b.getHeight());
 		blpb.setWidth(b.getWidth());
 		
-		String str = b.getOrbElements();
-		if (null != str && !str.isEmpty())
-		{
-			try {
-				Element elem = Element.valueOf(str);
-				blpb.setOrbElements(elem);
-			} catch (Exception e) {
-				log.error(String.format(
-					"invalid element. Board=%s", b),
-					e);
-			}
+//		String str = b.getOrbElements();
+//		if (null != str && !str.isEmpty())
+//		{
+//			try {
+//				Element elem = Element.valueOf(str);
+//				blpb.setOrbElements(elem);
+//			} catch (Exception e) {
+//				log.error(String.format(
+//					"invalid element. Board=%s", b),
+//					e);
+//			}
+//		}
+		int elements = b.getOrbElements();
+		if (elements > 0) {
+			blpb.setOrbElements(elements);
 		}
 		
 		List<BoardPropertyProto> bpList = createBoardProto(boardProperties);
@@ -3235,6 +3239,11 @@ public class CreateInfoProtoUtils {
 		Dialogue initDefeatedD = task.getInitDefeatedD();
 		if (null != initDefeatedD) {
 			builder.setInitialDefeatedDialogue(createDialogueProtoFromDialogue(initDefeatedD));
+		}
+		
+		int boardId = task.getBoardId();
+		if (boardId > 0) {
+			builder.setBoardId(boardId);
 		}
 		
 		return builder.build();
