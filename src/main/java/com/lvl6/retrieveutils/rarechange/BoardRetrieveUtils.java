@@ -103,6 +103,7 @@ import com.lvl6.utils.DBConnection;
 	    		orbElements = newOrbElements;
 	    	}
 	    } else {
+	    	log.error("elements is not set boardId={}", id);
 	    	return null;
 	    }
 		
