@@ -1264,9 +1264,9 @@ public class DBConnection {
 		}
 
 		ResultSet rs = null;
-		PreparedStatement stmt = null;
+//		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement(query);
+			PreparedStatement stmt = conn.prepareStatement(query);
 			if (values.size() > 0) {
 				int i = 1;
 				for (Object value : values) {
@@ -1279,8 +1279,9 @@ public class DBConnection {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
 			log.error("problem with " + query + ", values are " + values, e);
-		} finally {
-			close(null, stmt, null);
+			//caller will get the result set and when result set closes the statement will be to
+//		} finally {
+//			close(null, stmt, null);
 		}
 		return rs;
 	}

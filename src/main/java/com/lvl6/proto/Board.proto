@@ -11,7 +11,13 @@ message BoardLayoutProto {
 	optional int32 boardId = 1;
 	optional int32 height = 2;
 	optional int32 width = 3;
+<<<<<<< HEAD
 	optional Element orbElements = 4 [default = NO_ELEMENT]; 
+=======
+	
+	//bit representation of what elements are active. Example 100001, only two elements are active
+	optional int32 orbElements = 4; 
+>>>>>>> 2374814dce3bc8f888675f6b0eadc52fa17e7b7c
 	
 	repeated BoardPropertyProto properties = 5;
 }

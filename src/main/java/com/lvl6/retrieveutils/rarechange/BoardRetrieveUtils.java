@@ -103,6 +103,7 @@ import com.lvl6.utils.DBConnection;
 	    		orbElements = newOrbElements;
 	    	}
 	    } else {
+	    	log.error("elements is not set boardId={}", id);
 	    	return null;
 	    }
 		
@@ -116,7 +117,9 @@ import com.lvl6.utils.DBConnection;
 				orbElements, id));
 	    }
 		
-		Board board = new Board(id, width, height, orbElements);
+		int orbElementsInt = Integer.parseInt(orbElements);
+		
+		Board board = new Board(id, width, height, orbElementsInt);
 		return board;
 	}
 	
