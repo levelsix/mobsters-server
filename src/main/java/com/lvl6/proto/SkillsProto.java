@@ -466,32 +466,18 @@ public final class SkillsProto {
         getDescBytes();
 
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
-    boolean hasIconImgName();
+    boolean hasImgNamePrefix();
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
-    java.lang.String getIconImgName();
+    java.lang.String getImgNamePrefix();
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
     com.google.protobuf.ByteString
-        getIconImgNameBytes();
-
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    boolean hasLogoImgName();
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    java.lang.String getLogoImgName();
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    com.google.protobuf.ByteString
-        getLogoImgNameBytes();
+        getImgNamePrefixBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SkillProto}
@@ -607,16 +593,10 @@ public final class SkillsProto {
               desc_ = bs;
               break;
             }
-            case 82: {
+            case 98: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              iconImgName_ = bs;
-              break;
-            }
-            case 90: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000200;
-              logoImgName_ = bs;
+              imgNamePrefix_ = bs;
               break;
             }
           }
@@ -913,19 +893,19 @@ public final class SkillsProto {
       }
     }
 
-    public static final int ICONIMGNAME_FIELD_NUMBER = 10;
-    private java.lang.Object iconImgName_;
+    public static final int IMGNAMEPREFIX_FIELD_NUMBER = 12;
+    private java.lang.Object imgNamePrefix_;
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
-    public boolean hasIconImgName() {
+    public boolean hasImgNamePrefix() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
-    public java.lang.String getIconImgName() {
-      java.lang.Object ref = iconImgName_;
+    public java.lang.String getImgNamePrefix() {
+      java.lang.Object ref = imgNamePrefix_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -933,64 +913,22 @@ public final class SkillsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          iconImgName_ = s;
+          imgNamePrefix_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string iconImgName = 10;</code>
+     * <code>optional string imgNamePrefix = 12;</code>
      */
     public com.google.protobuf.ByteString
-        getIconImgNameBytes() {
-      java.lang.Object ref = iconImgName_;
+        getImgNamePrefixBytes() {
+      java.lang.Object ref = imgNamePrefix_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        iconImgName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int LOGOIMGNAME_FIELD_NUMBER = 11;
-    private java.lang.Object logoImgName_;
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    public boolean hasLogoImgName() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    public java.lang.String getLogoImgName() {
-      java.lang.Object ref = logoImgName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          logoImgName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string logoImgName = 11;</code>
-     */
-    public com.google.protobuf.ByteString
-        getLogoImgNameBytes() {
-      java.lang.Object ref = logoImgName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        logoImgName_ = b;
+        imgNamePrefix_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1007,8 +945,7 @@ public final class SkillsProto {
       sucId_ = 0;
       properties_ = java.util.Collections.emptyList();
       desc_ = "";
-      iconImgName_ = "";
-      logoImgName_ = "";
+      imgNamePrefix_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1051,10 +988,7 @@ public final class SkillsProto {
         output.writeBytes(9, getDescBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(10, getIconImgNameBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(11, getLogoImgNameBytes());
+        output.writeBytes(12, getImgNamePrefixBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1103,11 +1037,7 @@ public final class SkillsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, getIconImgNameBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getLogoImgNameBytes());
+          .computeBytesSize(12, getImgNamePrefixBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1249,10 +1179,8 @@ public final class SkillsProto {
         }
         desc_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        iconImgName_ = "";
+        imgNamePrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        logoImgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1325,11 +1253,7 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.iconImgName_ = iconImgName_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.logoImgName_ = logoImgName_;
+        result.imgNamePrefix_ = imgNamePrefix_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1400,14 +1324,9 @@ public final class SkillsProto {
           desc_ = other.desc_;
           onChanged();
         }
-        if (other.hasIconImgName()) {
+        if (other.hasImgNamePrefix()) {
           bitField0_ |= 0x00000200;
-          iconImgName_ = other.iconImgName_;
-          onChanged();
-        }
-        if (other.hasLogoImgName()) {
-          bitField0_ |= 0x00000400;
-          logoImgName_ = other.logoImgName_;
+          imgNamePrefix_ = other.imgNamePrefix_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -2111,24 +2030,24 @@ public final class SkillsProto {
         return this;
       }
 
-      private java.lang.Object iconImgName_ = "";
+      private java.lang.Object imgNamePrefix_ = "";
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
-      public boolean hasIconImgName() {
+      public boolean hasImgNamePrefix() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
-      public java.lang.String getIconImgName() {
-        java.lang.Object ref = iconImgName_;
+      public java.lang.String getImgNamePrefix() {
+        java.lang.Object ref = imgNamePrefix_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            iconImgName_ = s;
+            imgNamePrefix_ = s;
           }
           return s;
         } else {
@@ -2136,129 +2055,53 @@ public final class SkillsProto {
         }
       }
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
       public com.google.protobuf.ByteString
-          getIconImgNameBytes() {
-        java.lang.Object ref = iconImgName_;
+          getImgNamePrefixBytes() {
+        java.lang.Object ref = imgNamePrefix_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          iconImgName_ = b;
+          imgNamePrefix_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
-      public Builder setIconImgName(
+      public Builder setImgNamePrefix(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000200;
-        iconImgName_ = value;
+        imgNamePrefix_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
-      public Builder clearIconImgName() {
+      public Builder clearImgNamePrefix() {
         bitField0_ = (bitField0_ & ~0x00000200);
-        iconImgName_ = getDefaultInstance().getIconImgName();
+        imgNamePrefix_ = getDefaultInstance().getImgNamePrefix();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string iconImgName = 10;</code>
+       * <code>optional string imgNamePrefix = 12;</code>
        */
-      public Builder setIconImgNameBytes(
+      public Builder setImgNamePrefixBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000200;
-        iconImgName_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object logoImgName_ = "";
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public boolean hasLogoImgName() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public java.lang.String getLogoImgName() {
-        java.lang.Object ref = logoImgName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            logoImgName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public com.google.protobuf.ByteString
-          getLogoImgNameBytes() {
-        java.lang.Object ref = logoImgName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          logoImgName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public Builder setLogoImgName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
-        logoImgName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public Builder clearLogoImgName() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        logoImgName_ = getDefaultInstance().getLogoImgName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string logoImgName = 11;</code>
-       */
-      public Builder setLogoImgNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
-        logoImgName_ = value;
+        imgNamePrefix_ = value;
         onChanged();
         return this;
       }
@@ -3013,24 +2856,24 @@ public final class SkillsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Skill.proto\022\016com.lvl6.proto\"\263\002\n\nSkillP" +
+      "\n\013Skill.proto\022\016com.lvl6.proto\"\240\002\n\nSkillP" +
       "roto\022\017\n\007skillId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007o" +
       "rbCost\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.pr" +
       "oto.SkillType\022;\n\016activationType\030\005 \001(\0162#." +
       "com.lvl6.proto.SkillActivationType\022\020\n\010pr" +
       "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
       "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
-      "oto\022\014\n\004desc\030\t \001(\t\022\023\n\013iconImgName\030\n \001(\t\022\023" +
-      "\n\013logoImgName\030\013 \001(\t\"O\n\022SkillPropertyProt" +
-      "o\022\027\n\017skillPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t",
-      "\022\022\n\nskillValue\030\003 \001(\002*\315\001\n\tSkillType\022\014\n\010NO" +
-      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QU" +
-      "ICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006P" +
-      "OISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\n" +
-      "THICK_SKIN\020\n\022\022\n\016CRIT_AND_EVADE\020\013\022\013\n\007SHUF" +
-      "FLE\020\014\022\014\n\010HEADSHOT\020\r\022\007\n\003MUD\020\016*J\n\023SkillAct" +
-      "ivationType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_" +
-      "ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
+      "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
+      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
+      "\002*\315\001\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
+      "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
+      "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
+      "T_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r" +
+      "\022\007\n\003MUD\020\016*J\n\023SkillActivationType\022\022\n\016USER" +
+      "_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASS" +
+      "IVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3049,7 +2892,7 @@ public final class SkillsProto {
     internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SkillProto_descriptor,
-        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "IconImgName", "LogoImgName", });
+        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", });
     internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new

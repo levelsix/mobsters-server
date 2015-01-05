@@ -2699,15 +2699,10 @@ public class CreateInfoProtoUtils {
 		if (null != str) {
 			spb.setDesc(str);
 		}
-
-		str = s.getIconImgName();
+		
+		str = s.getImgNamePrefix();
 		if (null != str) {
-			spb.setIconImgName(str);
-		}
-
-		str = s.getLogoImgName();
-		if (null != str) {
-			spb.setLogoImgName(str);
+			spb.setImgNamePrefix(str);
 		}
 
 		return spb.build();
