@@ -209,7 +209,7 @@ message ClanHelpProto {
 	optional string clanUuid = 2;
 	optional MinimumUserProto mup = 3;
 	optional string userDataUuid = 4; //user's structure, monster, mini_job, etc
-	optional GameActionType helpType = 5 [default = NO_HELP];
+	optional GameActionType helpType = 5;
 	optional int64 timeRequested = 6;
 	optional int32 maxHelpers = 7;
 	repeated string helperUuids = 8;
