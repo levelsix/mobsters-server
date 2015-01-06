@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Skill implements Serializable {
 	
-	private static final long serialVersionUID = 4765942258700594117L;
+	private static final long serialVersionUID = 4899187857899742882L;
 	
 	private int id;
 	private String name;
@@ -14,8 +14,7 @@ public class Skill implements Serializable {
 	private int predecId;
 	private int successorId;
 	private String desc;
-	private String iconImgName;
-	private String logoImgName;
+	private String imgNamePrefix;
 	
 	public Skill(
 		int id,
@@ -26,8 +25,7 @@ public class Skill implements Serializable {
 		int predecId,
 		int successorId,
 		String desc,
-		String iconImgName,
-		String logoImgName )
+		String imgNamePrefix )
 	{
 		super();
 		this.id = id;
@@ -38,8 +36,7 @@ public class Skill implements Serializable {
 		this.predecId = predecId;
 		this.successorId = successorId;
 		this.desc = desc;
-		this.iconImgName = iconImgName;
-		this.logoImgName = logoImgName;
+		this.imgNamePrefix = imgNamePrefix;
 	}
 
 	public int getId()
@@ -122,24 +119,14 @@ public class Skill implements Serializable {
 		this.desc = desc;
 	}
 
-	public String getIconImgName()
+	public String getImgNamePrefix()
 	{
-		return iconImgName;
+		return imgNamePrefix;
 	}
 
-	public void setIconImgName( String iconImgName )
+	public void setImgNamePrefix( String imgNamePrefix )
 	{
-		this.iconImgName = iconImgName;
-	}
-
-	public String getLogoImgName()
-	{
-		return logoImgName;
-	}
-
-	public void setLogoImgName( String logoImgName )
-	{
-		this.logoImgName = logoImgName;
+		this.imgNamePrefix = imgNamePrefix;
 	}
 
 	@Override
@@ -161,11 +148,9 @@ public class Skill implements Serializable {
 			+ successorId
 			+ ", desc="
 			+ desc
-			+ ", iconImgName="
-			+ iconImgName
-			+ ", logoImgName="
-			+ logoImgName
+			+ ", imgNamePrefix="
+			+ imgNamePrefix
 			+ "]";
 	}
-
+	
 }

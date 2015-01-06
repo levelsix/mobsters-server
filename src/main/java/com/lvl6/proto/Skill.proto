@@ -34,8 +34,12 @@ message SkillProto {
 	repeated SkillPropertyProto properties = 8;
 	
 	optional string desc = 9;
-	optional string iconImgName = 10;
-	optional string logoImgName = 11;
+	
+	//optional string iconImgName = 10;
+	//Animation shown when skill activates.
+	//optional string logoImgName = 11;
+	
+	optional string imgNamePrefix = 12;
 }
 
 message SkillPropertyProto {

@@ -115,9 +115,19 @@ import com.lvl6.utils.DBConnection;
 			log.error(String.format(
 				"ORB_ELEMENTS INCORRECT: %s, ID=%s",
 				orbElements, id));
+			return null;
 	    }
 		
-		int orbElementsInt = Integer.parseInt(orbElements);
+		int orbElementsInt = 0;
+		try {
+			orbElementsInt = Integer.parseInt(orbElements);
+			
+		} catch (NumberFormatException e) {
+			log.error(String.format(
+				"ORB_ELEMENTS INCORRECT: %s, ID=%s",
+				orbElements, id),
+				e);
+		}
 		
 		Board board = new Board(id, width, height, orbElementsInt);
 		return board;
