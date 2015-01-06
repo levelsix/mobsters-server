@@ -95,9 +95,9 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_TEAM_CENTER_CONFIG = "structure_team_center_config";
 	public static final String TABLE_STRUCTURE_TOWN_HALL_CONFIG = "structure_town_hall_config";
 	public static final String TABLE_TASK_CONFIG = "task_config";
+	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
 	public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
-	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_HISTORY = "task_history";
 	public static final String TABLE_TASK_MAP_ELEMENT_CONFIG = "task_map_element_config";
 	public static final String TABLE_TASK_STAGE_CONFIG = "task_stage_config";

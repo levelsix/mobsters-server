@@ -148,35 +148,35 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return clan;
 	}
 
-	public List<Clan> getMostRecentClans(int limit) {
-		Object[] values = { limit };
-		String query = String.format(
-		           "SELECT * FROM %s ORDER BY %s LIMIT ?",
-		           TABLE_NAME, DBConstants.CLANS__CREATE_TIME);
+//	public List<Clan> getMostRecentClans(int limit) {
+//		Object[] values = { limit };
+//		String query = String.format(
+//		           "SELECT * FROM %s ORDER BY %s LIMIT ?",
+//		           TABLE_NAME, DBConstants.CLANS__CREATE_TIME);
+//
+//		List<Clan> clans = null;
+//		try {
+//			clans = this.jdbcTemplate.query(query, values, rowMapper);
+//		} catch (Exception e) {
+//			log.error("clan retrieve db error.", e);
+//		}
+//		return clans;
+//	}
 
-		List<Clan> clans = null;
-		try {
-			clans = this.jdbcTemplate.query(query, values, rowMapper);
-		} catch (Exception e) {
-			log.error("clan retrieve db error.", e);
-		}
-		return clans;
-	}
-
-    public List<Clan> getRandomClans(int limit) {
-        Object[] values = { limit };
-        String query = String.format(
-                   "SELECT * FROM %s ORDER BY rand() LIMIT ?",
-                   TABLE_NAME);
-
-        List<Clan> clans = null;
-        try {
-            clans = this.jdbcTemplate.query(query, values, rowMapper);
-        } catch (Exception e) {
-            log.error("clan retrieve db error.", e);
-        }
-        return clans;
-    }
+//    public List<Clan> getRandomClans(int limit) {
+//        Object[] values = { limit };
+//        String query = String.format(
+//                   "SELECT * FROM %s ORDER BY rand() LIMIT ?",
+//                   TABLE_NAME);
+//
+//        List<Clan> clans = null;
+//        try {
+//            clans = this.jdbcTemplate.query(query, values, rowMapper);
+//        } catch (Exception e) {
+//            log.error("clan retrieve db error.", e);
+//        }
+//        return clans;
+//    }
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)

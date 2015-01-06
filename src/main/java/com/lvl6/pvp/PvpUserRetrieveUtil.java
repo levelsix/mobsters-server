@@ -66,7 +66,7 @@ public class PvpUserRetrieveUtil {
 					columnsToSelect, TABLE_NAME, inConditions, conditionDelimiter, values,
 					preparedStatement);
 
-			log.info("query=" + query);
+			log.info("query={}", query);
 
 			List<PvpUser> puList = this.jdbcTemplate.query(
 					query, new PvpUserMapper());
@@ -171,7 +171,7 @@ public class PvpUserRetrieveUtil {
 					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
 					values, preparedStatement);
 
-			log.info("getUserPvpLeagueForId query=" + query);
+			log.info("getUserPvpLeagueForId query={}", query);
 
 //			List<PvpLeagueForUser> plfuList = this.jdbcTemplate.query(query, new UserPvpLeagueForClientMapper());
 //			if (null != plfuList && !plfuList.isEmpty()) {
@@ -206,7 +206,7 @@ public class PvpUserRetrieveUtil {
 					columnsToSelect, TABLE_NAME, inConditions, conditionDelimiter, values,
 					preparedStatement);
 
-			log.info("query=" + query);
+			log.info("query={}", query);
 
 			List<PvpUser> puList = this.jdbcTemplate
 					.query(query, new PvpUserMapper());
