@@ -11,6 +11,7 @@ import "Item.proto";
 import "MonsterStuff.proto";
 import "Prerequisite.proto";
 import "Quest.proto";
+import "Research.proto";
 import "Skill.proto";
 import "Structure.proto";
 import "Task.proto";
@@ -72,5 +73,7 @@ message StaticDataProto {
 	repeated PrereqProto prereqs = 33;
 	
 	repeated BoardLayoutProto boards = 34;
+	
+	repeated ResearchProto research = 35;
 }
 	

@@ -69,6 +69,8 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJob;
 import com.lvl6.info.QuestJobForUser;
+import com.lvl6.info.Research;
+import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.Structure;
@@ -160,6 +162,8 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
+import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -912,19 +916,21 @@ public class CreateInfoProtoUtils {
 			blpb.setOrbElements(elements);
 		}
 		
-		List<BoardPropertyProto> bpList = createBoardProto(boardProperties);
-		blpb.addAllProperties(bpList);
+		if (null != boardProperties) {
+			List<BoardPropertyProto> bpList = createBoardPropertyProto(boardProperties);
+			blpb.addAllProperties(bpList);
+		}
 		
 		return blpb.build();
 	}
 	
-	public static List<BoardPropertyProto> createBoardProto(
+	public static List<BoardPropertyProto> createBoardPropertyProto(
 		Collection<BoardProperty> bpCollection)
 	{
 		List<BoardPropertyProto> retVal = new ArrayList<BoardPropertyProto>();
 		for (BoardProperty bp : bpCollection)
 		{
-			BoardPropertyProto bpp = createBoardProto(bp);
+			BoardPropertyProto bpp = createBoardPropertyProto(bp);
 			
 			retVal.add(bpp);
 		}
@@ -932,7 +938,7 @@ public class CreateInfoProtoUtils {
 		return retVal;
 	}
 	
-	public static BoardPropertyProto createBoardProto(BoardProperty bp)
+	public static BoardPropertyProto createBoardPropertyProto(BoardProperty bp)
 	{
 		BoardPropertyProto.Builder blpb = BoardPropertyProto.newBuilder();
 		
@@ -2636,6 +2642,118 @@ public class CreateInfoProtoUtils {
 
 		return uqjpb.build();
 	}
+	
+	/**Research.proto****************************************/
+	public static ResearchProto createResearchProto(Research r,
+		Collection<ResearchProperty> researchProperties)
+	{
+		ResearchProto.Builder rpb = ResearchProto.newBuilder();
+		
+		rpb.setResearchId(r.getId());
+		String str = r.getResearchType();
+		if (null != str && !str.isEmpty()) {
+//			try {
+//				Element elem = Element.valueOf(str);
+//				blpb.setOrbElements(elem);
+//			} catch (Exception e) {
+//				log.error(String.format(
+//					"invalid element. Board=%s", b),
+//					e);
+//			}
+			rpb.setResearchType(str);
+		}
+		
+		str = r.getResearchDomain();
+		if (null != str && !str.isEmpty()) {
+//			try {
+//				Element elem = Element.valueOf(str);
+//				blpb.setOrbElements(elem);
+//			} catch (Exception e) {
+//				log.error(String.format(
+//					"invalid element. Board=%s", b),
+//					e);
+//			}
+			rpb.setResearchDomain(str);
+		}
+		
+		str = r.getIconImgName();
+		if (null != str && !str.isEmpty()) {
+			rpb.setIconImgName(str);
+		}
+		
+		str = r.getName();
+		if (null != str && !str.isEmpty()) {
+			rpb.setName(str);
+		}
+		
+		int predId = r.getPredId();
+		if (predId > 0) {
+			rpb.setPredId(predId);
+		}
+		int succId = r.getSuccId();
+		if (predId > 0) {
+			rpb.setSuccId(succId);
+		}
+		
+		str = r.getDesc();
+		if (null != str) {
+			rpb.setDesc(str);
+		}
+		
+		rpb.setDurationMin(r.getDurationMin());
+		rpb.setCostAmt(r.getCostAmt());
+		
+		str = r.getCostType();
+		if (null != str && !str.isEmpty()) {
+			try {
+				ResourceType resType = ResourceType.valueOf(str);
+				rpb.setCostType(resType);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid ResourceType. Research=%s", r),
+					e);
+			}
+		}
+		
+		if (null != researchProperties) {
+			List<ResearchPropertyProto> rppList = createResearchPropertyProto(researchProperties);
+			rpb.addAllProperties(rppList);
+		}
+		
+		return rpb.build();
+	}
+	
+	public static List<ResearchPropertyProto> createResearchPropertyProto(
+		Collection<ResearchProperty> rpCollection)
+	{
+		List<ResearchPropertyProto> retVal = new ArrayList<ResearchPropertyProto>();
+		for (ResearchProperty bp : rpCollection)
+		{
+			ResearchPropertyProto bpp = createResearchPropertyProto(bp);
+			
+			retVal.add(bpp);
+		}
+		
+		return retVal;
+	}
+	
+	public static ResearchPropertyProto createResearchPropertyProto(ResearchProperty rp)
+	{
+		ResearchPropertyProto.Builder rppb = ResearchPropertyProto.newBuilder();
+		
+		rppb.setResearchPropertyId(rp.getId());
+		
+		String str = rp.getName();
+		if (null != str && !str.isEmpty()){
+			rppb.setName(str);
+		}
+		
+		rppb.setResearchValue(rp.getValue());
+		rppb.setResearchId(rp.getId());
+		
+		return rppb.build();
+	}
+	
 	/**Skill.proto***************************************************/
 	public static SkillProto createSkillProtoFromSkill(Skill s,
 		Map<Integer, SkillProperty> skillPropertyIdToProperty)

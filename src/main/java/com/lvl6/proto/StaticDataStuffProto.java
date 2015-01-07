@@ -932,6 +932,30 @@ public final class StaticDataStuffProto {
      */
     com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder getBoardsOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> 
+        getResearchList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    com.lvl6.proto.ResearchsProto.ResearchProto getResearch(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    int getResearchCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+        getResearchOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getResearchOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.StaticDataProto}
@@ -1255,6 +1279,14 @@ public final class StaticDataStuffProto {
               boards_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardLayoutProto.PARSER, extensionRegistry));
               break;
             }
+            case 282: {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+                research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>();
+                mutable_bitField1_ |= 0x00000002;
+              }
+              research_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1358,6 +1390,9 @@ public final class StaticDataStuffProto {
         }
         if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
           boards_ = java.util.Collections.unmodifiableList(boards_);
+        }
+        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+          research_ = java.util.Collections.unmodifiableList(research_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2672,6 +2707,41 @@ public final class StaticDataStuffProto {
       return boards_.get(index);
     }
 
+    public static final int RESEARCH_FIELD_NUMBER = 35;
+    private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> research_;
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getResearchList() {
+      return research_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+        getResearchOrBuilderList() {
+      return research_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    public int getResearchCount() {
+      return research_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.ResearchProto getResearch(int index) {
+      return research_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getResearchOrBuilder(
+        int index) {
+      return research_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -2706,6 +2776,7 @@ public final class StaticDataStuffProto {
       skills_ = java.util.Collections.emptyList();
       prereqs_ = java.util.Collections.emptyList();
       boards_ = java.util.Collections.emptyList();
+      research_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2818,6 +2889,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < boards_.size(); i++) {
         output.writeMessage(34, boards_.get(i));
+      }
+      for (int i = 0; i < research_.size(); i++) {
+        output.writeMessage(35, research_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2959,6 +3033,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < boards_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(34, boards_.get(i));
+      }
+      for (int i = 0; i < research_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(35, research_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3102,6 +3180,7 @@ public final class StaticDataStuffProto {
           getSkillsFieldBuilder();
           getPrereqsFieldBuilder();
           getBoardsFieldBuilder();
+          getResearchFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3307,6 +3386,12 @@ public final class StaticDataStuffProto {
           bitField1_ = (bitField1_ & ~0x00000001);
         } else {
           boardsBuilder_.clear();
+        }
+        if (researchBuilder_ == null) {
+          research_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000002);
+        } else {
+          researchBuilder_.clear();
         }
         return this;
       }
@@ -3632,6 +3717,15 @@ public final class StaticDataStuffProto {
           result.boards_ = boards_;
         } else {
           result.boards_ = boardsBuilder_.build();
+        }
+        if (researchBuilder_ == null) {
+          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+            research_ = java.util.Collections.unmodifiableList(research_);
+            bitField1_ = (bitField1_ & ~0x00000002);
+          }
+          result.research_ = research_;
+        } else {
+          result.research_ = researchBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4481,6 +4575,32 @@ public final class StaticDataStuffProto {
                    getBoardsFieldBuilder() : null;
             } else {
               boardsBuilder_.addAllMessages(other.boards_);
+            }
+          }
+        }
+        if (researchBuilder_ == null) {
+          if (!other.research_.isEmpty()) {
+            if (research_.isEmpty()) {
+              research_ = other.research_;
+              bitField1_ = (bitField1_ & ~0x00000002);
+            } else {
+              ensureResearchIsMutable();
+              research_.addAll(other.research_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.research_.isEmpty()) {
+            if (researchBuilder_.isEmpty()) {
+              researchBuilder_.dispose();
+              researchBuilder_ = null;
+              research_ = other.research_;
+              bitField1_ = (bitField1_ & ~0x00000002);
+              researchBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getResearchFieldBuilder() : null;
+            } else {
+              researchBuilder_.addAllMessages(other.research_);
             }
           }
         }
@@ -12812,6 +12932,246 @@ public final class StaticDataStuffProto {
         return boardsBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> research_ =
+        java.util.Collections.emptyList();
+      private void ensureResearchIsMutable() {
+        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
+          research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>(research_);
+          bitField1_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> researchBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getResearchList() {
+        if (researchBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(research_);
+        } else {
+          return researchBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public int getResearchCount() {
+        if (researchBuilder_ == null) {
+          return research_.size();
+        } else {
+          return researchBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto getResearch(int index) {
+        if (researchBuilder_ == null) {
+          return research_.get(index);
+        } else {
+          return researchBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder setResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (researchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResearchIsMutable();
+          research_.set(index, value);
+          onChanged();
+        } else {
+          researchBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder setResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (researchBuilder_ == null) {
+          ensureResearchIsMutable();
+          research_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          researchBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder addResearch(com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (researchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResearchIsMutable();
+          research_.add(value);
+          onChanged();
+        } else {
+          researchBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder addResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (researchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResearchIsMutable();
+          research_.add(index, value);
+          onChanged();
+        } else {
+          researchBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder addResearch(
+          com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (researchBuilder_ == null) {
+          ensureResearchIsMutable();
+          research_.add(builderForValue.build());
+          onChanged();
+        } else {
+          researchBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder addResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (researchBuilder_ == null) {
+          ensureResearchIsMutable();
+          research_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          researchBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder addAllResearch(
+          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.ResearchProto> values) {
+        if (researchBuilder_ == null) {
+          ensureResearchIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, research_);
+          onChanged();
+        } else {
+          researchBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder clearResearch() {
+        if (researchBuilder_ == null) {
+          research_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000002);
+          onChanged();
+        } else {
+          researchBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public Builder removeResearch(int index) {
+        if (researchBuilder_ == null) {
+          ensureResearchIsMutable();
+          research_.remove(index);
+          onChanged();
+        } else {
+          researchBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder getResearchBuilder(
+          int index) {
+        return getResearchFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getResearchOrBuilder(
+          int index) {
+        if (researchBuilder_ == null) {
+          return research_.get(index);  } else {
+          return researchBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+           getResearchOrBuilderList() {
+        if (researchBuilder_ != null) {
+          return researchBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(research_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addResearchBuilder() {
+        return getResearchFieldBuilder().addBuilder(
+            com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addResearchBuilder(
+          int index) {
+        return getResearchFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto research = 35;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto.Builder> 
+           getResearchBuilderList() {
+        return getResearchFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+          getResearchFieldBuilder() {
+        if (researchBuilder_ == null) {
+          researchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder>(
+                  research_,
+                  ((bitField1_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          research_ = null;
+        }
+        return researchBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
 
@@ -12841,55 +13201,56 @@ public final class StaticDataStuffProto {
       "evementStuff.proto\032\014Battle.proto\032\013Board." +
       "proto\032\026BoosterPackStuff.proto\032\nCity.prot" +
       "o\032\nClan.proto\032\nItem.proto\032\022MonsterStuff." +
-      "proto\032\022Prerequisite.proto\032\013Quest.proto\032\013" +
-      "Skill.proto\032\017Structure.proto\032\nTask.proto" +
-      "\032\nUser.proto\"\230\016\n\017StaticDataProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.pr" +
-      "oto.CityExpansionCostProto\0220\n\tallCities\030",
-      "\003 \003(\0132\035.com.lvl6.proto.FullCityProto\022/\n\010" +
-      "allTasks\030\004 \003(\0132\035.com.lvl6.proto.FullTask" +
-      "Proto\022?\n\022allTaskMapElements\030\034 \003(\0132#.com." +
-      "lvl6.proto.TaskMapElementProto\0221\n\013allMon" +
-      "sters\030\005 \003(\0132\034.com.lvl6.proto.MonsterProt" +
-      "o\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto.StaticU" +
-      "serLevelInfoProto\0228\n\020inProgressQuests\030\007 " +
-      "\003(\0132\036.com.lvl6.proto.FullQuestProto\0228\n\020u" +
-      "nredeemedQuests\030\010 \003(\0132\036.com.lvl6.proto.F" +
-      "ullQuestProto\0227\n\017availableQuests\030\t \003(\0132\036",
-      ".com.lvl6.proto.FullQuestProto\0226\n\014booste" +
-      "rPacks\030\013 \003(\0132 .com.lvl6.proto.BoosterPac" +
-      "kProto\022=\n\rallGenerators\030\014 \003(\0132&.com.lvl6" +
-      ".proto.ResourceGeneratorProto\0229\n\013allStor" +
-      "ages\030\r \003(\0132$.com.lvl6.proto.ResourceStor" +
-      "ageProto\0223\n\014allHospitals\030\016 \003(\0132\035.com.lvl" +
-      "6.proto.HospitalProto\0225\n\rallResidences\030\017" +
-      " \003(\0132\036.com.lvl6.proto.ResidenceProto\0223\n\014" +
-      "allTownHalls\030\020 \003(\0132\035.com.lvl6.proto.Town" +
-      "HallProto\022)\n\007allLabs\030\021 \003(\0132\030.com.lvl6.pr",
-      "oto.LabProto\022=\n\021allMiniJobCenters\030\033 \003(\0132" +
-      "\".com.lvl6.proto.MiniJobCenterProto\0227\n\016a" +
-      "llEvoChambers\030\035 \003(\0132\037.com.lvl6.proto.Evo" +
-      "ChamberProto\0227\n\016allTeamCenters\030\036 \003(\0132\037.c" +
-      "om.lvl6.proto.TeamCenterProto\0225\n\rallClan" +
-      "Houses\030  \003(\0132\036.com.lvl6.proto.ClanHouseP" +
-      "roto\022>\n\020persistentEvents\030\022 \003(\0132$.com.lvl" +
-      "6.proto.PersistentEventProto\0228\n\004mbds\030\023 \003" +
-      "(\0132*.com.lvl6.proto.MonsterBattleDialogu" +
-      "eProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.proto.C",
-      "lanRaidProto\022F\n\024persistentClanEvents\030\025 \003" +
-      "(\0132(.com.lvl6.proto.PersistentClanEventP" +
-      "roto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.proto.Ite" +
-      "mProto\0220\n\tobstacles\030\027 \003(\0132\035.com.lvl6.pro" +
-      "to.ObstacleProto\0220\n\tclanIcons\030\030 \003(\0132\035.co" +
-      "m.lvl6.proto.ClanIconProto\022/\n\007leagues\030\031 " +
-      "\003(\0132\036.com.lvl6.proto.PvpLeagueProto\0226\n\014a" +
-      "chievements\030\032 \003(\0132 .com.lvl6.proto.Achie" +
-      "vementProto\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.p" +
-      "roto.SkillProto\022,\n\007prereqs\030! \003(\0132\033.com.l",
-      "vl6.proto.PrereqProto\0220\n\006boards\030\" \003(\0132 ." +
-      "com.lvl6.proto.BoardLayoutProtoB\026B\024Stati" +
-      "cDataStuffProto"
+      "proto\032\022Prerequisite.proto\032\013Quest.proto\032\016" +
+      "Research.proto\032\013Skill.proto\032\017Structure.p" +
+      "roto\032\nTask.proto\032\nUser.proto\"\311\016\n\017StaticD" +
+      "ataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022>\n\016expansionCosts\030\002 \003" +
+      "(\0132&.com.lvl6.proto.CityExpansionCostPro",
+      "to\0220\n\tallCities\030\003 \003(\0132\035.com.lvl6.proto.F" +
+      "ullCityProto\022/\n\010allTasks\030\004 \003(\0132\035.com.lvl" +
+      "6.proto.FullTaskProto\022?\n\022allTaskMapEleme" +
+      "nts\030\034 \003(\0132#.com.lvl6.proto.TaskMapElemen" +
+      "tProto\0221\n\013allMonsters\030\005 \003(\0132\034.com.lvl6.p" +
+      "roto.MonsterProto\0226\n\004slip\030\006 \003(\0132(.com.lv" +
+      "l6.proto.StaticUserLevelInfoProto\0228\n\020inP" +
+      "rogressQuests\030\007 \003(\0132\036.com.lvl6.proto.Ful" +
+      "lQuestProto\0228\n\020unredeemedQuests\030\010 \003(\0132\036." +
+      "com.lvl6.proto.FullQuestProto\0227\n\017availab",
+      "leQuests\030\t \003(\0132\036.com.lvl6.proto.FullQues" +
+      "tProto\0226\n\014boosterPacks\030\013 \003(\0132 .com.lvl6." +
+      "proto.BoosterPackProto\022=\n\rallGenerators\030" +
+      "\014 \003(\0132&.com.lvl6.proto.ResourceGenerator" +
+      "Proto\0229\n\013allStorages\030\r \003(\0132$.com.lvl6.pr" +
+      "oto.ResourceStorageProto\0223\n\014allHospitals" +
+      "\030\016 \003(\0132\035.com.lvl6.proto.HospitalProto\0225\n" +
+      "\rallResidences\030\017 \003(\0132\036.com.lvl6.proto.Re" +
+      "sidenceProto\0223\n\014allTownHalls\030\020 \003(\0132\035.com" +
+      ".lvl6.proto.TownHallProto\022)\n\007allLabs\030\021 \003",
+      "(\0132\030.com.lvl6.proto.LabProto\022=\n\021allMiniJ" +
+      "obCenters\030\033 \003(\0132\".com.lvl6.proto.MiniJob" +
+      "CenterProto\0227\n\016allEvoChambers\030\035 \003(\0132\037.co" +
+      "m.lvl6.proto.EvoChamberProto\0227\n\016allTeamC" +
+      "enters\030\036 \003(\0132\037.com.lvl6.proto.TeamCenter" +
+      "Proto\0225\n\rallClanHouses\030  \003(\0132\036.com.lvl6." +
+      "proto.ClanHouseProto\022>\n\020persistentEvents" +
+      "\030\022 \003(\0132$.com.lvl6.proto.PersistentEventP" +
+      "roto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6.proto.Mons" +
+      "terBattleDialogueProto\022,\n\005raids\030\024 \003(\0132\035.",
+      "com.lvl6.proto.ClanRaidProto\022F\n\024persiste" +
+      "ntClanEvents\030\025 \003(\0132(.com.lvl6.proto.Pers" +
+      "istentClanEventProto\022(\n\005items\030\026 \003(\0132\031.co" +
+      "m.lvl6.proto.ItemProto\0220\n\tobstacles\030\027 \003(" +
+      "\0132\035.com.lvl6.proto.ObstacleProto\0220\n\tclan" +
+      "Icons\030\030 \003(\0132\035.com.lvl6.proto.ClanIconPro" +
+      "to\022/\n\007leagues\030\031 \003(\0132\036.com.lvl6.proto.Pvp" +
+      "LeagueProto\0226\n\014achievements\030\032 \003(\0132 .com." +
+      "lvl6.proto.AchievementProto\022*\n\006skills\030\037 " +
+      "\003(\0132\032.com.lvl6.proto.SkillProto\022,\n\007prere",
+      "qs\030! \003(\0132\033.com.lvl6.proto.PrereqProto\0220\n" +
+      "\006boards\030\" \003(\0132 .com.lvl6.proto.BoardLayo" +
+      "utProto\022/\n\010research\030# \003(\0132\035.com.lvl6.pro" +
+      "to.ResearchProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12912,6 +13273,7 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.PrerequisiteProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
+          com.lvl6.proto.ResearchsProto.getDescriptor(),
           com.lvl6.proto.SkillsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
@@ -12922,7 +13284,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", "Research", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BoardProto.getDescriptor();
@@ -12933,6 +13295,7 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.PrerequisiteProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.ResearchsProto.getDescriptor();
     com.lvl6.proto.SkillsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.TaskProto.getDescriptor();

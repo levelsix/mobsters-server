@@ -79,6 +79,9 @@ public class DBConstants {
 	public static final String TABLE_REFERRAL = "referral";			//TODO: delete
 	public static final String TABLE_REFERRAL_CODE_AVAILABLE_CONFIG = "referral_code_available_config";	//TODO: delete
 	public static final String TABLE_REFERRAL_CODE_GENERATED_CONFIG = "referral_code_generated_config";	//TODO: delete
+	public static final String TABLE_RESEARCH_CONFIG = "research_config";
+	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
+	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
@@ -543,6 +546,13 @@ public class DBConstants {
 	public static final String REFERRALS__TIME_OF_REFERRAL = "time_of_referral";
 	public static final String REFERRALS__COINS_GIVEN_TO_REFERRER = "coins_given_to_referrer";
 
+	/*RESEARCH FOR USER TABLE*/
+	public static final String RESEARCH_FOR_USER__ID = GENERIC__ID;
+	public static final String RESEARCH_FOR_USER__USER_ID = "user_id";
+	public static final String RESEARCH_FOR_USER__RESEARCH_ID = "research_id";
+	public static final String RESEARCH_FOR_USER__TIME_PURCHASED = "time_purchased";
+	public static final String RESEARCH_FOR_USER__IS_COMPLETE = "is_complete";
+	
 	/*USER STRUCTS TABLE*/
 	public static final String STRUCTURE_FOR_USER__ID = GENERIC__ID;
 	public static final String STRUCTURE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -988,6 +998,23 @@ public class DBConstants {
 	public static final String QUEST_JOB_MONSTER_ITEM__ITEM_ID = "item_id";
 	public static final String QUEST_JOB_MONSTER_ITEM__ITEM_DROP_RATE = "item_drop_rate";
 
+	public static final String RESEARCH__ID = GENERIC__ID;
+	public static final String RESEARCH__RESEARCH_TYPE = "research_type";
+	public static final String RESEARCH__RESEARCH_DOMAIN = "research_domain";
+	public static final String RESEARCH__ICON_IMG_NAME = "icon_img_name";
+	public static final String RESEARCH__NAME = "name";
+	public static final String RESEARCH__PRED_ID = "pred_id";
+	public static final String RESEARCH__SUCC_ID = "succ_id";
+	public static final String RESEARCH__DESC = "desc";
+	public static final String RESEARCH__DURATION_MIN = "duration_min";
+	public static final String RESEARCH__COST_AMT = "cost_amt";
+	public static final String RESEARCH__COST_TYPE = "cost_type";
+	
+	public static final String RESEARCH_PROPERTY__ID = GENERIC__ID;
+	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
+	public static final String RESEARCH_PROPERTY__NAME = "name";
+	public static final String RESEARCH_PROPERTY__VALUE = "value";
+	
 	public static final String SKILL__ID = GENERIC__ID;
 	public static final String SKILL__NAME = "name";
 	public static final String SKILL__ORB_COST = "orb_cost";

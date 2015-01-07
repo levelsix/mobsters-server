@@ -34,6 +34,7 @@ import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Prerequisite.proto";
 import "Quest.proto";
+import "Research.proto";
 import "SharedEnumConfig.proto";
 import "Skill.proto";
 import "StaticData.proto";

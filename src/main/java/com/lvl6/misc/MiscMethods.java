@@ -53,6 +53,8 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.Research;
+import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -103,6 +105,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -156,6 +159,8 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -1045,6 +1050,8 @@ public class MiscMethods {
 		QuestJobRetrieveUtils.reload();
 		QuestJobMonsterItemRetrieveUtils.reload();
 		QuestRetrieveUtils.reload();
+		ResearchRetrieveUtils.reload();
+		ResearchPropertyRetrieveUtils.reload();
 		SkillRetrieveUtils.reload();
 		SkillPropertyRetrieveUtils.reload();
 		StartupStuffRetrieveUtils.reload();
@@ -1066,6 +1073,7 @@ public class MiscMethods {
 		TaskStageRetrieveUtils.reload();
 //		TournamentEventRetrieveUtils.reload();
 //		TournamentEventRewardRetrieveUtils.reload();
+		
 	}
 
 
@@ -1866,12 +1874,20 @@ public class MiscMethods {
 		boolean userIdSet, QuestForUserRetrieveUtils2 qfuRetrieveUtils) {
 		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
 
+		setInProgressAndAvailableQuests(sdpb, userId, userIdSet, qfuRetrieveUtils);
+		
+		setStaticData(sdpb);
+
+		return sdpb.build();
+	}
+
+	private static void setStaticData( StaticDataProto.Builder sdpb )
+	{
 //		setPlayerCityExpansions(sdpb);
 //		setCities(sdpb);
 		setTasks(sdpb);
 		setMonsters(sdpb);
 		setUserLevelStuff(sdpb);
-		setInProgressAndAvailableQuests(sdpb, userId, userIdSet, qfuRetrieveUtils);
 		setBoosterPackStuff(sdpb);
 		setStructures(sdpb);
 		setEvents(sdpb);
@@ -1885,8 +1901,7 @@ public class MiscMethods {
 		setSkillStuff(sdpb);
 		setPrereqs(sdpb);
 		setBoards(sdpb);
-
-		return sdpb.build();
+		setResearch(sdpb);
 	}
 //	private static void setPlayerCityExpansions(Builder sdpb) {
 //		//Player city expansions
@@ -1906,6 +1921,7 @@ public class MiscMethods {
 //			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
 //		}
 //	}
+	
 	private static void setTasks(Builder sdpb) {
 		//Tasks
 		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
@@ -2396,6 +2412,35 @@ public class MiscMethods {
 			BoardLayoutProto blp = CreateInfoProtoUtils
 				.createBoardLayoutProto(b, propertyz);
 			sdpb.addBoards(blp);
+		}
+	}
+	
+	private static void setResearch(Builder sdpb) {
+		Map<Integer, Research> idsToResearch =
+			ResearchRetrieveUtils.getIdsToResearch();
+		
+		if (null == idsToResearch || idsToResearch.isEmpty()) {
+			log.warn("setResearch() no research");
+		}
+		
+		for (Integer researchId : idsToResearch.keySet())
+		{
+			Research r = idsToResearch.get(researchId);
+			
+			//research can have no properties
+			Map<Integer, ResearchProperty> properties =
+				ResearchPropertyRetrieveUtils.
+				getResearchPropertiesForResearchId(researchId);
+			
+			Collection<ResearchProperty> propertyz = null;
+			
+			if (null != properties) {
+				propertyz = properties.values();
+			}
+
+			ResearchProto rlp = CreateInfoProtoUtils
+				.createResearchProto(r, propertyz);
+			sdpb.addResearch(rlp);
 		}
 	}
 }
