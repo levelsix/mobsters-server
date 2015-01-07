@@ -21,20 +21,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
-import com.lvl6.events.request.DevRequestEvent;
-import com.lvl6.events.request.InviteToClanRequestEvent;
-import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
-import com.lvl6.info.ClanInvite;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.User;
-import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.DevProto.DevRequest;
-import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
-import com.lvl6.proto.EventDevProto.DevRequestProto;
-import com.lvl6.proto.EventStartupProto.StartupRequestProto;
+import com.lvl6.misc.StaticDataContainer;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -51,10 +43,7 @@ import com.lvl6.server.controller.UserCreateController;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
-import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -712,6 +701,27 @@ public class ControllerTest extends TestCase {
 		DeleteUtils.get().deleteClanInvite(prospectiveMemberId, null);
 		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
 		assertNull(ci);*/
+	}
+	
+	@Test
+	public void testStaticDataContainer() {
+		StaticDataProto staticData = StaticDataContainer.getStaticData();
+		assertNotNull("StaticDataContainer returns null StaticDataProto", staticData);
+		List<MonsterProto> allMonsters = staticData.getAllMonstersList(); 
+		assertNotNull("Expected: monsters. Actual: no monsters exist",
+			allMonsters);
+		assertTrue("2 Expected: monsters. Actual: no monsters exist",
+			!(allMonsters.isEmpty()) );
+		
+		
+		StaticDataProto staticData2 = staticData.toBuilder().build();
+		allMonsters = staticData2.getAllMonstersList();
+		assertNotNull("Expected: monsters. Actual: no monsters exist",
+			allMonsters);
+		assertTrue("2 Expected: monsters. Actual: no monsters exist",
+			!(allMonsters.isEmpty()) );
+		
+		log.info("staticData2={}", staticData2);
 	}
 	
 	private String getUnitTesterId() {
