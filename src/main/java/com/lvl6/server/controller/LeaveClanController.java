@@ -18,6 +18,7 @@ import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto;
@@ -265,6 +266,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
 
+    if (null == lastChatPost) {
+    	//for the clans that have not chatted at all
+    	lastChatPost = ControllerConstants.INCEPTION_DATE;
+    }
+    
     //need to account for this user leaving clan
     ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
     	lastChatPost, timeUtil, UpdateUtils.get(), clanSearch);
