@@ -184,13 +184,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	  if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
 		  List<String> clanIds = cs.getTopNClans(
 			  ControllerConstants.CLAN__TOP_N_CLANS);
-		  Map<String, Clan> clanMap = clanRetrieveUtils
-			  .getClansByIds(clanIds);
 		  
-		  List<Clan> clanList = null;
-		  if (null != clanMap) {
-			  clanList = new ArrayList<Clan>(clanMap.values());
-		  }
+		  List<Clan> clanList = orderRecommendedClans(clanIds);
 
 		  log.info(String.format("clanList=%s", clanList));
 		  setClanProtosWithSize(resBuilder, clanList);
@@ -301,8 +296,31 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		  }
 	  }
   }
+
+  private List<Clan> orderRecommendedClans( List<String> clanIds )
+  {
+	  Map<String, Clan> clanMap = clanRetrieveUtils
+		  .getClansByIds(clanIds);
+	  
+	  List<Clan> clanList = new ArrayList<Clan>();
+	  if (null == clanMap || clanMap.isEmpty()) {
+		  return clanList;
+	  }
+	  
+	  //need to order clans by rank
+	  for (String cId : clanIds) {
+		  if (!clanMap.containsKey(cId)) {
+			  continue;
+		  }
+		  clanList.add(
+			  clanMap.get(cId));
+	  }
+	  return clanList;
+  }
   
-  private  void setClanProtosWithSize(Builder resBuilder, List<Clan> clanList) {
+  private  void setClanProtosWithSize(Builder resBuilder,
+	  List<Clan> clanList)
+  {
 
     if (null == clanList || clanList.isEmpty()) {
     	return;
