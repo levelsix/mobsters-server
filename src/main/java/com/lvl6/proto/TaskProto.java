@@ -927,6 +927,53 @@ public final class TaskProto {
      * <code>optional int32 boardId = 12;</code>
      */
     int getBoardId();
+
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> getRaritiesList();
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    int getRaritiesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Quality getRarities(int index);
+
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    java.util.List<java.lang.Integer> getMonsterIdsList();
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    int getMonsterIdsCount();
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    int getMonsterIds(int index);
+
+    /**
+     * <code>optional bool displayRarity = 15;</code>
+     */
+    boolean hasDisplayRarity();
+    /**
+     * <code>optional bool displayRarity = 15;</code>
+     */
+    boolean getDisplayRarity();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FullTaskProto}
@@ -1051,6 +1098,65 @@ public final class TaskProto {
               boardId_ = input.readInt32();
               break;
             }
+            case 104: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(13, rawValue);
+                } else {
+                if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                  rarities_ = new java.util.ArrayList<com.lvl6.proto.SharedEnumConfigProto.Quality>();
+                  mutable_bitField0_ |= 0x00001000;
+                }
+                rarities_.add(value);
+              }
+              break;
+            }
+            case 106: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int rawValue = input.readEnum();
+                com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(13, rawValue);
+                  } else {
+                  if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                    rarities_ = new java.util.ArrayList<com.lvl6.proto.SharedEnumConfigProto.Quality>();
+                    mutable_bitField0_ |= 0x00001000;
+                  }
+                  rarities_.add(value);
+                }
+              }
+              input.popLimit(oldLimit);
+              break;
+            }
+            case 112: {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                monsterIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              monsterIds_.add(input.readInt32());
+              break;
+            }
+            case 114: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000) && input.getBytesUntilLimit() > 0) {
+                monsterIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                monsterIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00001000;
+              displayRarity_ = input.readBool();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1059,6 +1165,12 @@ public final class TaskProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          rarities_ = java.util.Collections.unmodifiableList(rarities_);
+        }
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          monsterIds_ = java.util.Collections.unmodifiableList(monsterIds_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1358,6 +1470,76 @@ public final class TaskProto {
       return boardId_;
     }
 
+    public static final int RARITIES_FIELD_NUMBER = 13;
+    private java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> rarities_;
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> getRaritiesList() {
+      return rarities_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    public int getRaritiesCount() {
+      return rarities_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+     *
+     * <pre>
+     *either this or the next one will be displayed, based on a toggle.
+     * </pre>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getRarities(int index) {
+      return rarities_.get(index);
+    }
+
+    public static final int MONSTERIDS_FIELD_NUMBER = 14;
+    private java.util.List<java.lang.Integer> monsterIds_;
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getMonsterIdsList() {
+      return monsterIds_;
+    }
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    public int getMonsterIdsCount() {
+      return monsterIds_.size();
+    }
+    /**
+     * <code>repeated int32 monsterIds = 14;</code>
+     */
+    public int getMonsterIds(int index) {
+      return monsterIds_.get(index);
+    }
+
+    public static final int DISPLAYRARITY_FIELD_NUMBER = 15;
+    private boolean displayRarity_;
+    /**
+     * <code>optional bool displayRarity = 15;</code>
+     */
+    public boolean hasDisplayRarity() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional bool displayRarity = 15;</code>
+     */
+    public boolean getDisplayRarity() {
+      return displayRarity_;
+    }
+
     private void initFields() {
       taskId_ = 0;
       name_ = "";
@@ -1371,6 +1553,9 @@ public final class TaskProto {
       groundImgPrefix_ = "";
       initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
       boardId_ = 0;
+      rarities_ = java.util.Collections.emptyList();
+      monsterIds_ = java.util.Collections.emptyList();
+      displayRarity_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1420,6 +1605,15 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(12, boardId_);
+      }
+      for (int i = 0; i < rarities_.size(); i++) {
+        output.writeEnum(13, rarities_.get(i).getNumber());
+      }
+      for (int i = 0; i < monsterIds_.size(); i++) {
+        output.writeInt32(14, monsterIds_.get(i));
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBool(15, displayRarity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1477,6 +1671,28 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, boardId_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < rarities_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeEnumSizeNoTag(rarities_.get(i).getNumber());
+        }
+        size += dataSize;
+        size += 1 * rarities_.size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < monsterIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(monsterIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getMonsterIdsList().size();
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(15, displayRarity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1624,6 +1840,12 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000400);
         boardId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
+        rarities_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
+        monsterIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
+        displayRarity_ = false;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -1704,6 +1926,20 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000800;
         }
         result.boardId_ = boardId_;
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          rarities_ = java.util.Collections.unmodifiableList(rarities_);
+          bitField0_ = (bitField0_ & ~0x00001000);
+        }
+        result.rarities_ = rarities_;
+        if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          monsterIds_ = java.util.Collections.unmodifiableList(monsterIds_);
+          bitField0_ = (bitField0_ & ~0x00002000);
+        }
+        result.monsterIds_ = monsterIds_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.displayRarity_ = displayRarity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1761,6 +1997,29 @@ public final class TaskProto {
         }
         if (other.hasBoardId()) {
           setBoardId(other.getBoardId());
+        }
+        if (!other.rarities_.isEmpty()) {
+          if (rarities_.isEmpty()) {
+            rarities_ = other.rarities_;
+            bitField0_ = (bitField0_ & ~0x00001000);
+          } else {
+            ensureRaritiesIsMutable();
+            rarities_.addAll(other.rarities_);
+          }
+          onChanged();
+        }
+        if (!other.monsterIds_.isEmpty()) {
+          if (monsterIds_.isEmpty()) {
+            monsterIds_ = other.monsterIds_;
+            bitField0_ = (bitField0_ & ~0x00002000);
+          } else {
+            ensureMonsterIdsIsMutable();
+            monsterIds_.addAll(other.monsterIds_);
+          }
+          onChanged();
+        }
+        if (other.hasDisplayRarity()) {
+          setDisplayRarity(other.getDisplayRarity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2385,6 +2644,204 @@ public final class TaskProto {
       public Builder clearBoardId() {
         bitField0_ = (bitField0_ & ~0x00000800);
         boardId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> rarities_ =
+        java.util.Collections.emptyList();
+      private void ensureRaritiesIsMutable() {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+          rarities_ = new java.util.ArrayList<com.lvl6.proto.SharedEnumConfigProto.Quality>(rarities_);
+          bitField0_ |= 0x00001000;
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> getRaritiesList() {
+        return java.util.Collections.unmodifiableList(rarities_);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public int getRaritiesCount() {
+        return rarities_.size();
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getRarities(int index) {
+        return rarities_.get(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public Builder setRarities(
+          int index, com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureRaritiesIsMutable();
+        rarities_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public Builder addRarities(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureRaritiesIsMutable();
+        rarities_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public Builder addAllRarities(
+          java.lang.Iterable<? extends com.lvl6.proto.SharedEnumConfigProto.Quality> values) {
+        ensureRaritiesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, rarities_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
+       *
+       * <pre>
+       *either this or the next one will be displayed, based on a toggle.
+       * </pre>
+       */
+      public Builder clearRarities() {
+        rarities_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> monsterIds_ = java.util.Collections.emptyList();
+      private void ensureMonsterIdsIsMutable() {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          monsterIds_ = new java.util.ArrayList<java.lang.Integer>(monsterIds_);
+          bitField0_ |= 0x00002000;
+         }
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getMonsterIdsList() {
+        return java.util.Collections.unmodifiableList(monsterIds_);
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public int getMonsterIdsCount() {
+        return monsterIds_.size();
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public int getMonsterIds(int index) {
+        return monsterIds_.get(index);
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public Builder setMonsterIds(
+          int index, int value) {
+        ensureMonsterIdsIsMutable();
+        monsterIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public Builder addMonsterIds(int value) {
+        ensureMonsterIdsIsMutable();
+        monsterIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public Builder addAllMonsterIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureMonsterIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, monsterIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterIds = 14;</code>
+       */
+      public Builder clearMonsterIds() {
+        monsterIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onChanged();
+        return this;
+      }
+
+      private boolean displayRarity_ ;
+      /**
+       * <code>optional bool displayRarity = 15;</code>
+       */
+      public boolean hasDisplayRarity() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional bool displayRarity = 15;</code>
+       */
+      public boolean getDisplayRarity() {
+        return displayRarity_;
+      }
+      /**
+       * <code>optional bool displayRarity = 15;</code>
+       */
+      public Builder setDisplayRarity(boolean value) {
+        bitField0_ |= 0x00004000;
+        displayRarity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool displayRarity = 15;</code>
+       */
+      public Builder clearDisplayRarity() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        displayRarity_ = false;
         onChanged();
         return this;
       }
@@ -9067,7 +9524,7 @@ public final class TaskProto {
       "ff.proto\032\013Quest.proto\032\026SharedEnumConfig." +
       "proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 \001(\005" +
       "\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.proto" +
-      ".TaskStageMonsterProto\"\272\002\n\rFullTaskProto" +
+      ".TaskStageMonsterProto\"\220\003\n\rFullTaskProto" +
       "\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013descri" +
       "ption\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNumW" +
       "ithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId\030\006 " +
@@ -9075,45 +9532,47 @@ public final class TaskProto {
       "dWidth\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017gro",
       "undImgPrefix\030\n \001(\t\022>\n\027initialDefeatedDia" +
       "logue\030\013 \001(\0132\035.com.lvl6.proto.DialoguePro" +
-      "to\022\017\n\007boardId\030\014 \001(\005\"{\n\024MinimumUserTaskPr" +
-      "oto\022\020\n\010userUuid\030\001 \001(\t\022\016\n\006taskId\030\002 \001(\005\022\026\n" +
-      "\016curTaskStageId\030\003 \001(\005\022\024\n\014userTaskUuid\030\004 " +
-      "\001(\t\022\023\n\013clientState\030\005 \001(\014\"\253\004\n\025TaskStageMo" +
-      "nsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005tsmId\030\013 " +
-      "\001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 " +
-      "\001(\01621.com.lvl6.proto.TaskStageMonsterPro" +
-      "to.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpRewa",
-      "rd\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRewar" +
-      "d\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n\024p" +
-      "uzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 \001(" +
-      "\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveSki" +
-      "llId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!\n\031" +
-      "puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n\010initi" +
-      "alD\030\020 \001(\0132\035.com.lvl6.proto.DialogueProto" +
-      "\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.proto.Dial" +
-      "ogueProto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEve",
-      "ntProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 " +
-      "\001(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021" +
-      "\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinute" +
-      "s\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinut" +
-      "es\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto." +
-      "PersistentEventProto.EventType\022;\n\016monste" +
-      "rElement\030\010 \001(\0162\027.com.lvl6.proto.Element:" +
-      "\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
-      "\tEVOLUTION\020\002\"X\n\030UserPersistentEventProto" +
-      "\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\005\022\031\n\021c",
-      "oolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMapElemen" +
-      "tProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002" +
-      " \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007elem" +
-      "ent\030\005 \001(\0162\027.com.lvl6.proto.Element\022\014\n\004bo" +
-      "ss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\nitemDro" +
-      "pId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\ncashRe" +
-      "ward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020charact" +
-      "erImgName\030\014 \001(\t\022\036\n\026charImgVertPixelOffse" +
-      "t\030\r \001(\005\022\037\n\027charImgHorizPixelOffset\030\016 \001(\005" +
-      "\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTaskProt",
-      "o"
+      "to\022\017\n\007boardId\030\014 \001(\005\022)\n\010rarities\030\r \003(\0162\027." +
+      "com.lvl6.proto.Quality\022\022\n\nmonsterIds\030\016 \003" +
+      "(\005\022\025\n\rdisplayRarity\030\017 \001(\010\"{\n\024MinimumUser" +
+      "TaskProto\022\020\n\010userUuid\030\001 \001(\t\022\016\n\006taskId\030\002 " +
+      "\001(\005\022\026\n\016curTaskStageId\030\003 \001(\005\022\024\n\014userTaskU" +
+      "uid\030\004 \001(\t\022\023\n\013clientState\030\005 \001(\014\"\253\004\n\025TaskS" +
+      "tageMonsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005ts" +
+      "mId\030\013 \001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterT",
+      "ype\030\002 \001(\01621.com.lvl6.proto.TaskStageMons" +
+      "terProto.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\te" +
+      "xpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
+      "lReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(" +
+      "\010\022\034\n\024puzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemI" +
+      "d\030\007 \001(\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defens" +
+      "iveSkillId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001" +
+      "(\005\022!\n\031puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n" +
+      "\010initialD\030\020 \001(\0132\035.com.lvl6.proto.Dialogu" +
+      "eProto\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.prot",
+      "o.DialogueProto\"3\n\013MonsterType\022\013\n\007REGULA" +
+      "R\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024Persist" +
+      "entEventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfW" +
+      "eek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MO" +
+      "NDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDuration" +
+      "Minutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldow" +
+      "nMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6." +
+      "proto.PersistentEventProto.EventType\022;\n\016" +
+      "monsterElement\030\010 \001(\0162\027.com.lvl6.proto.El" +
+      "ement:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANC",
+      "E\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEven" +
+      "tProto\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(" +
+      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMap" +
+      "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
+      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(" +
+      "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
+      "\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\ni" +
+      "temDropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\n" +
+      "cashReward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020c" +
+      "haracterImgName\030\014 \001(\t\022\036\n\026charImgVertPixe",
+      "lOffset\030\r \001(\005\022\037\n\027charImgHorizPixelOffset" +
+      "\030\016 \001(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTa" +
+      "skProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9141,7 +9600,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-        new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", "InitialDefeatedDialogue", "BoardId", });
+        new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", "InitialDefeatedDialogue", "BoardId", "Rarities", "MonsterIds", "DisplayRarity", });
     internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
