@@ -790,7 +790,7 @@ public class MiscMethods {
 		
 		boolean displayQuality = ServerToggleRetrieveUtils
 			.getToggleValueForName(
-				ControllerConstants.SERVER_TOGGLE__DISPLAY_RARITY);
+				ControllerConstants.SERVER_TOGGLE__TASK_DISPLAY_RARITY);
 		cb.setDisplayRarity(displayQuality);
 		
 		//set more properties above
