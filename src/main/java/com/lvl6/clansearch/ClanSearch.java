@@ -3,6 +3,7 @@ package com.lvl6.clansearch;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,10 @@ public class ClanSearch {
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	
-	private static Long DAY = 24L*60L*60L*1000L;
-	private static Long HOUR = 60L * 60L * 1000L;
-	private static Integer idealNumberOfMembers = 80;
+//	private static Long DAY = 24L*60L*60L*1000L;
+	private static Double ONE_DAY_IN_HOURS = 24D;
+	private static Double ONE_HOUR_IN_MILLIS = 60D * 60D * 1000D;
+//	private static Integer idealNumberOfMembers = 80;
 	
 	protected HazelcastInstance hz;
 	protected DistributedZSet rankedClans;
@@ -36,7 +38,7 @@ public class ClanSearch {
 	 */
 	public void updateClanSearchRank(String clanID, Integer numberOfMembers, Date lastChat) {
 		//Integer members = numberOfMembers > idealNumberOfMembers ? idealNumberOfMembers - (numberOfMembers - idealNumberOfMembers) : numberOfMembers;
-		long timeToLastChat = System.currentTimeMillis() - lastChat.getTime();
+		double timeToLastChat = System.currentTimeMillis() - lastChat.getTime();
 		//Long rawScore = (members * DAY) - timeToLastChat;
 		//if(timeToLastChat > DAY) {
 		//	rawScore = rawScore / 2;
@@ -44,20 +46,24 @@ public class ClanSearch {
 		
 		long rawScore = 0;
 		
-		long firstMemberPart = ((long) numberOfMembers) * DAY;
-		long timePart = HOUR * timeToLastChat;
-		long memberPenalty = (long) Math.pow(
+		double firstMemberPart = ((double) numberOfMembers) * ONE_DAY_IN_HOURS;
+//		long timePart = HOUR * timeToLastChat;
+		double timePart = timeToLastChat / ONE_HOUR_IN_MILLIS;
+		double memberPenalty = (double) Math.pow(
 			Math.max(0, 40 - numberOfMembers),
-			7);
+			5);
 		
-		if (timeToLastChat <= DAY) {
-			timePart =  timePart * 10;
+		if (timeToLastChat <= ONE_DAY_IN_HOURS) {
+			timePart =  timePart * 10D;
 		} else {
-			timePart = timePart* 240;
+			timePart = timePart* 240D;
 		}
 		
-		rawScore = firstMemberPart - (timePart + memberPenalty);
+		rawScore = (long) Math.round(firstMemberPart - (timePart + memberPenalty));
 		rankedClans.add(clanID, rawScore);
+		
+		log.info("clanId={} clansize={} lastChatTime={} rawScore={}",
+			new Object[] {clanID, numberOfMembers, lastChat, rawScore});
 	}
 	
 	/*
@@ -81,8 +87,19 @@ public class ClanSearch {
 	public List<String> getTopNClans(int numberOfClansToRetrieve) {
 		List<String> clans = new ArrayList<String>();
 		for(ZSetMember m : rankedClans.range(0, numberOfClansToRetrieve)) {
+			log.info("{}", m);
 			clans.add(m.getKey());
 		}
+		int size = rankedClans.size();
+		log.info("rankedClans.size={}", size);
+		
+		Set<String> clanIds = rankedClans.getAllIds();
+		log.info("clanIds.size={}", clanIds.size());
+		
+		for (String clanId : clanIds) {
+			log.info("clanId={}, index={}", clanId, rankedClans.get(clanId));
+		}
+		
 		return clans;
 	}
 	

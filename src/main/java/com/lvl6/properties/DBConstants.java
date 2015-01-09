@@ -79,6 +79,10 @@ public class DBConstants {
 	public static final String TABLE_REFERRAL = "referral";			//TODO: delete
 	public static final String TABLE_REFERRAL_CODE_AVAILABLE_CONFIG = "referral_code_available_config";	//TODO: delete
 	public static final String TABLE_REFERRAL_CODE_GENERATED_CONFIG = "referral_code_generated_config";	//TODO: delete
+	public static final String TABLE_RESEARCH_CONFIG = "research_config";
+	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
+	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
+	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config"; 
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
@@ -112,7 +116,6 @@ public class DBConstants {
 	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT = "user_facebook_invite_for_slot";
-	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED = "user_facebook_invite_for_slot_accepted";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
 	public static final String TABLE_USER_SESSION = "user_session";
 
@@ -544,6 +547,13 @@ public class DBConstants {
 	public static final String REFERRALS__TIME_OF_REFERRAL = "time_of_referral";
 	public static final String REFERRALS__COINS_GIVEN_TO_REFERRER = "coins_given_to_referrer";
 
+	/*RESEARCH FOR USER TABLE*/
+	public static final String RESEARCH_FOR_USER__ID = GENERIC__ID;
+	public static final String RESEARCH_FOR_USER__USER_ID = "user_id";
+	public static final String RESEARCH_FOR_USER__RESEARCH_ID = "research_id";
+	public static final String RESEARCH_FOR_USER__TIME_PURCHASED = "time_purchased";
+	public static final String RESEARCH_FOR_USER__IS_COMPLETE = "is_complete";
+	
 	/*USER STRUCTS TABLE*/
 	public static final String STRUCTURE_FOR_USER__ID = GENERIC__ID;
 	public static final String STRUCTURE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -716,16 +726,6 @@ public class DBConstants {
 	public static final String USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID = "user_struct_id";
 	public static final String USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL = "user_struct_fb_lvl";
 	public static final String USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED = "time_redeemed";
-
-	/*USER FACEBOOK INVITE ACCEPTED
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID = GENERIC__ID;
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID = "inviter_user_id";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID = "recipient_facebook_id";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_INVITE = "time_of_invite";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_ACCEPTED = "time_accepted";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__NTH_EXTRA_SLOTS_VIA_FB = "nth_extra_slots_via_fb";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_ENTRY = "time_of_entry";
-	 */
 
 	/*USER PRIVATE CHAT POSTS*/
 	public static final String USER_PRIVATE_CHAT_POSTS__ID = GENERIC__ID;
@@ -999,6 +999,27 @@ public class DBConstants {
 	public static final String QUEST_JOB_MONSTER_ITEM__ITEM_ID = "item_id";
 	public static final String QUEST_JOB_MONSTER_ITEM__ITEM_DROP_RATE = "item_drop_rate";
 
+	public static final String RESEARCH__ID = GENERIC__ID;
+	public static final String RESEARCH__RESEARCH_TYPE = "research_type";
+	public static final String RESEARCH__RESEARCH_DOMAIN = "research_domain";
+	public static final String RESEARCH__ICON_IMG_NAME = "icon_img_name";
+	public static final String RESEARCH__NAME = "name";
+	public static final String RESEARCH__PRED_ID = "pred_id";
+	public static final String RESEARCH__SUCC_ID = "succ_id";
+	public static final String RESEARCH__DESC = "desc";
+	public static final String RESEARCH__DURATION_MIN = "duration_min";
+	public static final String RESEARCH__COST_AMT = "cost_amt";
+	public static final String RESEARCH__COST_TYPE = "cost_type";
+	
+	public static final String RESEARCH_PROPERTY__ID = GENERIC__ID;
+	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
+	public static final String RESEARCH_PROPERTY__NAME = "name";
+	public static final String RESEARCH_PROPERTY__VALUE = "value";
+	
+	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
+	public static final String SERVER_TOGGLE__NAME = "name";
+	public static final String SERVER_TOGGLE__ON = "on";
+	
 	public static final String SKILL__ID = GENERIC__ID;
 	public static final String SKILL__NAME = "name";
 	public static final String SKILL__ORB_COST = "orb_cost";

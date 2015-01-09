@@ -210,6 +210,8 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 			Map<String, Date> clanIdsToLastChatTime = clanChatPostRetrieveUtil.
 				getLastChatPostForAllClans();
 			
+			log.info("clanLastChats: {}", clanIdsToLastChatTime);
+			
 			//find the amount of members for every clan
 			List<String> statuses = new ArrayList<String>();
 			statuses.add(UserClanStatus.LEADER.name());
@@ -218,6 +220,11 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 			statuses.add(UserClanStatus.MEMBER.name());
 			Map<String, Integer> clanIdsToClanSize = userClanRetrieveUtil
 				.getClanSizeForStatuses(statuses);
+			
+			int amount = 1000;
+			log.info("clanSizes: {}. calling getTopNClans({})", clanIdsToClanSize, amount);
+			clanSearch.getTopNClans(amount);
+			log.info("finished calling getTopNClans({})", amount);
 			
 			Collection<String> clanIds = clanIdsToClanSize.keySet();
 			
@@ -233,6 +240,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 				
 				clanSearch.updateClanSearchRank(cId, clanSize, lastChatTime);
 			}
+			
+			List<String> allClanIds = clanSearch.getTopNClans(1000);
+			log.info("allClanIds in recommended order {}\n\n", allClanIds);
 			
 			log.info("finished calculating recommended clans");
 		} catch (Exception e) {

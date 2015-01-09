@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,8 @@ public class TaskStageMonsterRetrieveUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
+	private static Map<Integer, Set<Integer>> taskStageIdsToMonsterIds;
+	private static Map<Integer, Set<String>> taskStageIdsToRarities;
 	private static Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonsters;
 
 	private static boolean reassignedSkills = false;
@@ -47,7 +51,7 @@ public class TaskStageMonsterRetrieveUtils {
 	}
 
 	public static TaskStageMonster getTaskStageMonsterForId(int tsmId) {
-		log.debug("retrieve task stage monster for id=" + tsmId);
+		log.debug("retrieve task stage monster for id={}", tsmId);
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();      
 		}
@@ -55,15 +59,49 @@ public class TaskStageMonsterRetrieveUtils {
 			reassignSkills();
 		}
 		if (!taskStageMonsterIdsToTaskStageMonsters.containsKey(tsmId)) {
-			log.error("no task stage monsters for tsm id=" + tsmId);
+			log.error("no task stage monsters for tsm id={}", tsmId);
 			return null;
 		}
 
 		return taskStageMonsterIdsToTaskStageMonsters.get(tsmId);
 	}
 
+	public static Set<Integer> getMonsterIdsForTaskStageId(int taskStageId) {
+		log.debug("retrieve stage monster data for stage {}", taskStageId);
+		if (null == taskStageIdsToMonsterIds) {
+			setStaticTaskStageIdsToTaskStageMonster();      
+		}
+		if (!reassignedSkills) {
+			reassignSkills();
+		}
+
+		if (!taskStageIdsToMonsterIds.containsKey(taskStageId)) {
+			log.error("no monster ids for task stage id={}", taskStageId);
+			return new HashSet<Integer>();
+		}
+
+		return taskStageIdsToMonsterIds.get(taskStageId);
+	}
+	
+	public static Set<String> getQualitiesForTaskStageId(int taskStageId) {
+		log.debug("retrieve stage monster quality data for stage {}", taskStageId);
+		if (null == taskStageIdsToRarities) {
+			setStaticTaskStageIdsToTaskStageMonster();      
+		}
+		if (!reassignedSkills) {
+			reassignSkills();
+		}
+
+		if (!taskStageIdsToRarities.containsKey(taskStageId)) {
+			log.error("no monster qualities for task stage id={}", taskStageId);
+			return new HashSet<String>();
+		}
+
+		return taskStageIdsToRarities.get(taskStageId);
+	}	
+
 	public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
-		log.debug("retrieve task stage monster data for stage " + taskStageId);
+		log.debug("retrieve task stage monster data for stage {}", taskStageId);
 		if (null == taskStageIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();      
 		}
@@ -72,7 +110,7 @@ public class TaskStageMonsterRetrieveUtils {
 		}
 
 		if (!taskStageIdsToTaskStageMonsters.containsKey(taskStageId)) {
-			log.error("no task stage monsters for task stage id=" + taskStageId);
+			log.error("no task stage monsters for task stage id={}", taskStageId);
 			return new ArrayList<TaskStageMonster>();
 		}
 
@@ -108,13 +146,19 @@ public class TaskStageMonsterRetrieveUtils {
 		}
 
 		boolean resetAllSkills = true;
+		//incorporating nonskill logic
+		Map<Integer, Set<Integer>> taskStageIdsToMonsterIdsTemp =
+			new HashMap<Integer, Set<Integer>>();
+		Map<Integer, Set<String>> taskStageIdsToRaritiesTemp =
+			new HashMap<Integer, Set<String>>();
 
 		//for the TaskStageMonsters that have their defensive skill not set
 		//reassign to the skill the monster has, also set the offensive skill
 		for (TaskStageMonster tsm : taskStageMonsterIdsToTaskStageMonsters.values()) {
 			Monster monzter = null;
-			if (idToMonster.containsKey(tsm.getMonsterId())) {
-				monzter = idToMonster.get(tsm.getMonsterId());
+			int monsterId = tsm.getMonsterId();
+			if (idToMonster.containsKey(monsterId)) {
+				monzter = idToMonster.get(monsterId);
 			}
 
 			if (null == monzter) {
@@ -127,9 +171,30 @@ public class TaskStageMonsterRetrieveUtils {
 			if (ControllerConstants.NOT_SET == tsm.getDefensiveSkillId()) {
 				tsm.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
 			}
+			
+			//incorporating nonskill logic
+			int stageId = tsm.getStageId();
+			if (!taskStageIdsToMonsterIdsTemp.containsKey(stageId)) {
+				//base case
+				taskStageIdsToMonsterIdsTemp.put(stageId, new HashSet<Integer>());
+			}
+			if (!taskStageIdsToRaritiesTemp.containsKey(stageId)) {
+				//base case
+				taskStageIdsToRaritiesTemp.put(stageId, new HashSet<String>());
+			}
+			
+			Set<Integer> stageMonsterIds = taskStageIdsToMonsterIdsTemp
+				.get(stageId);
+			stageMonsterIds.add(monsterId);
+			Set<String> stageMonsterQualities = taskStageIdsToRaritiesTemp.
+				get(stageId);
+			stageMonsterQualities.add(
+				monzter.getQuality());
 		}
 
 		reassignedSkills = resetAllSkills;
+		taskStageIdsToMonsterIds = taskStageIdsToMonsterIdsTemp;
+		taskStageIdsToRarities = taskStageIdsToRaritiesTemp;
 	}
 
 	private static void setStaticTaskStageIdsToTaskStageMonster() {
@@ -159,9 +224,10 @@ public class TaskStageMonsterRetrieveUtils {
 
 							int stageId = taskStageMonster.getStageId();
 							if (!taskStageIdsToTaskStageMonstersTemp.containsKey(stageId)) {
+								//base case
 								taskStageIdsToTaskStageMonstersTemp.put(stageId, new ArrayList<TaskStageMonster>());
 							}
-
+							
 							List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
 							monsters.add(taskStageMonster);
 

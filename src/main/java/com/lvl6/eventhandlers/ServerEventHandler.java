@@ -124,6 +124,8 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 			Map<String, Date> clanIdsToLastChatTime = clanChatPostRetrieveUtil.
 				getLastChatPostForAllClans();
 			
+			//log.info("clanLastChats: {}", clanIdsToLastChatTime);
+			
 			//find the amount of members for every clan
 			List<String> statuses = new ArrayList<String>();
 			statuses.add(UserClanStatus.LEADER.name());
@@ -132,6 +134,8 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 			statuses.add(UserClanStatus.MEMBER.name());
 			Map<String, Integer> clanIdsToClanSize = userClanRetrieveUtil
 				.getClanSizeForStatuses(statuses);
+			
+			//log.info("clanSizes: {}", clanIdsToClanSize);
 			
 			Collection<String> clanIds = clanIdsToClanSize.keySet();
 			

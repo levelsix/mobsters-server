@@ -1,0 +1,64 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Structure.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "ResearchsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message ResearchProto {
+	optional int32 researchId = 1;
+	
+	//reducing resource cost or speed
+	//TODO: turn into enum later on
+	//optional ResearchType researchType = 2;
+	optional string researchType = 2; 
+	
+	//battle, resources, restorative/healing
+	//TODO: turn into enum later on
+	//optional ResearchDomain researchDomain = 3;
+	optional string researchDomain = 3;
+	
+	optional string iconImgName = 4;
+	optional string name = 5;
+	
+	//the research that is before this research in the research tree
+	optional int32 predId = 6;
+	
+	//the research that is after this research in the research tree
+	optional int32 succId = 7;
+	
+	optional string desc = 8;
+	optional int32 durationMin = 9;
+	optional int32 costAmt = 10;
+	optional ResourceType costType = 11;
+
+	repeated ResearchPropertyProto properties = 12;
+	
+}
+
+message ResearchPropertyProto {
+	optional int32 researchPropertyId = 1;
+	
+	//TODO: should be an enum later on
+	optional string name = 2;
+	
+	//Do not use the word 'value'
+	optional float researchValue = 3; 
+	
+	optional int32 researchId = 4;
+}
+
+
+enum ResearchType {
+	NO_RESEARCH = 1;
+}
+
+enum ResearchDomain {
+	NO_DOMAIN = 1;
+}

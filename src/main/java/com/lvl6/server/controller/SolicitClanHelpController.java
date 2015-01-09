@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User user = getUserRetrieveUtils().getUserById(userId);
       
-      boolean legitLeave = checkLegitLeave(resBuilder, user);
+      boolean legitLeave = checkLegitLeave(resBuilder, user, clanId);
       
       boolean success = false;
       List<ClanHelp> clanHelpStore = new ArrayList<ClanHelp>();
@@ -173,24 +173,32 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }*/
   }
 
-  private boolean checkLegitLeave(Builder resBuilder, User user) {
-
+  private boolean checkLegitLeave(Builder resBuilder, User user,
+	  String clanId)
+  {
     if (null == user) {
       log.error("user is null");
       return false;      
     }
-    if (user.getClanId() == null) {
+    
+    String clanIdUser = user.getClanId();  
+    if (null == clanIdUser || clanIdUser.isEmpty()) {
       resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
-      log.error(String.format(
-    	  "user's clanId=%s",
-    	  user.getClanId()));
+      log.error( "user's clanId={}", clanId );
       return false;
     }
 
-    Clan clan = getClanRetrieveUtil().getClanWithId(user.getClanId());
+    Clan clan = getClanRetrieveUtil().getClanWithId(clanIdUser);
     if (null == clan) {
     	resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
-        log.error("user not in clan=%s", user.getClanId());
+        log.error("no clan with clanId={}", clanIdUser);
+        return false;
+    }
+
+    if (!clanIdUser.equals(clanId)) {
+    	resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
+        log.error("inconsistent clanIds. proto clanId={}, clanIdUser={}",
+        	clanId, clanIdUser);
         return false;
     }
     
