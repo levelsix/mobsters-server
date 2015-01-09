@@ -36,7 +36,6 @@ message FullTaskProto {
 	//either this or the next one will be displayed, based on a toggle.
 	repeated Quality rarities = 13;
 	repeated int32 monsterIds = 14;
-	optional bool displayRarity = 15;
 }
 
 //------------------------------------------------------------------------------------------

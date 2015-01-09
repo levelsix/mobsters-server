@@ -5972,6 +5972,25 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProtoOrBuilder getRccpOrBuilder(
           int index);
+
+      /**
+       * <code>optional bool displayRarity = 37;</code>
+       *
+       * <pre>
+       *optional bool facebookPopUp = 36; defined above
+       *whether or not to only display rarity or monster id
+       * </pre>
+       */
+      boolean hasDisplayRarity();
+      /**
+       * <code>optional bool displayRarity = 37;</code>
+       *
+       * <pre>
+       *optional bool facebookPopUp = 36; defined above
+       *whether or not to only display rarity or monster id
+       * </pre>
+       */
+      boolean getDisplayRarity();
     }
     /**
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants}
@@ -6292,6 +6311,11 @@ public final class EventStartupProto {
               case 288: {
                 bitField0_ |= 0x01000000;
                 facebookPopUp_ = input.readBool();
+                break;
+              }
+              case 296: {
+                bitField0_ |= 0x80000000;
+                displayRarity_ = input.readBool();
                 break;
               }
             }
@@ -15229,6 +15253,31 @@ public final class EventStartupProto {
         return rccp_.get(index);
       }
 
+      public static final int DISPLAYRARITY_FIELD_NUMBER = 37;
+      private boolean displayRarity_;
+      /**
+       * <code>optional bool displayRarity = 37;</code>
+       *
+       * <pre>
+       *optional bool facebookPopUp = 36; defined above
+       *whether or not to only display rarity or monster id
+       * </pre>
+       */
+      public boolean hasDisplayRarity() {
+        return ((bitField0_ & 0x80000000) == 0x80000000);
+      }
+      /**
+       * <code>optional bool displayRarity = 37;</code>
+       *
+       * <pre>
+       *optional bool facebookPopUp = 36; defined above
+       *whether or not to only display rarity or monster id
+       * </pre>
+       */
+      public boolean getDisplayRarity() {
+        return displayRarity_;
+      }
+
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -15266,6 +15315,7 @@ public final class EventStartupProto {
         pvpConstant_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants.getDefaultInstance();
         sucp_ = java.util.Collections.emptyList();
         rccp_ = java.util.Collections.emptyList();
+        displayRarity_ = false;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -15387,6 +15437,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x01000000) == 0x01000000)) {
           output.writeBool(36, facebookPopUp_);
+        }
+        if (((bitField0_ & 0x80000000) == 0x80000000)) {
+          output.writeBool(37, displayRarity_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -15540,6 +15593,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x01000000) == 0x01000000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(36, facebookPopUp_);
+        }
+        if (((bitField0_ & 0x80000000) == 0x80000000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBoolSize(37, displayRarity_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -15800,6 +15857,8 @@ public final class EventStartupProto {
           } else {
             rccpBuilder_.clear();
           }
+          displayRarity_ = false;
+          bitField1_ = (bitField1_ & ~0x00000010);
           return this;
         }
 
@@ -16034,6 +16093,10 @@ public final class EventStartupProto {
           } else {
             result.rccp_ = rccpBuilder_.build();
           }
+          if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x80000000;
+          }
+          result.displayRarity_ = displayRarity_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -16274,6 +16337,9 @@ public final class EventStartupProto {
                 rccpBuilder_.addAllMessages(other.rccp_);
               }
             }
+          }
+          if (other.hasDisplayRarity()) {
+            setDisplayRarity(other.getDisplayRarity());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -19409,6 +19475,58 @@ public final class EventStartupProto {
             rccp_ = null;
           }
           return rccpBuilder_;
+        }
+
+        private boolean displayRarity_ ;
+        /**
+         * <code>optional bool displayRarity = 37;</code>
+         *
+         * <pre>
+         *optional bool facebookPopUp = 36; defined above
+         *whether or not to only display rarity or monster id
+         * </pre>
+         */
+        public boolean hasDisplayRarity() {
+          return ((bitField1_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional bool displayRarity = 37;</code>
+         *
+         * <pre>
+         *optional bool facebookPopUp = 36; defined above
+         *whether or not to only display rarity or monster id
+         * </pre>
+         */
+        public boolean getDisplayRarity() {
+          return displayRarity_;
+        }
+        /**
+         * <code>optional bool displayRarity = 37;</code>
+         *
+         * <pre>
+         *optional bool facebookPopUp = 36; defined above
+         *whether or not to only display rarity or monster id
+         * </pre>
+         */
+        public Builder setDisplayRarity(boolean value) {
+          bitField1_ |= 0x00000010;
+          displayRarity_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional bool displayRarity = 37;</code>
+         *
+         * <pre>
+         *optional bool facebookPopUp = 36; defined above
+         *whether or not to only display rarity or monster id
+         * </pre>
+         */
+        public Builder clearDisplayRarity() {
+          bitField1_ = (bitField1_ & ~0x00000010);
+          displayRarity_ = false;
+          onChanged();
+          return this;
         }
 
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -34544,7 +34662,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\3017\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\3307\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -34615,7 +34733,7 @@ public final class EventStartupProto {
       "Stolen\030\003 \001(\005\032\202\001\n\031ReferralNotificationPro" +
       "to\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024c" +
-      "oinsGivenToReferrer\030\003 \001(\005\032\350\033\n\020StartupCon" +
+      "oinsGivenToReferrer\030\003 \001(\005\032\377\033\n\020StartupCon" +
       "stants\022H\n\025inAppPurchasePackages\030\001 \003(\0132)." +
       "com.lvl6.proto.InAppPurchasePackageProto",
       "\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSin" +
@@ -34665,66 +34783,66 @@ public final class EventStartupProto {
       "Proto.StartupConstants.SpeedUpConstantPr" +
       "oto\022c\n\004rccp\030# \003(\0132U.com.lvl6.proto.Start" +
       "upResponseProto.StartupConstants.Resourc" +
-      "eConversionConstantProto\032_\n\031AnimatedSpri" +
-      "teOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offS" +
-      "et\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProt",
-      "o\032\325\001\n\rClanConstants\022\035\n\025coinPriceToCreate" +
-      "Clan\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002" +
-      " \001(\005\022\'\n\037maxCharLengthForClanDescription\030" +
-      "\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\022\023" +
-      "\n\013maxClanSize\030\005 \001(\005\022$\n\034achievementIdsFor" +
-      "ClanRewards\030\006 \003(\005\032c\n\030DownloadableNibCons" +
-      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
-      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y" +
-      "\n\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(" +
-      "\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003",
-      " \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(" +
-      "\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumTeamS" +
-      "lots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030" +
-      "\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPerHea" +
-      "lthPoint\030\001 \001(\002\022#\n\033secondsToHealPerHealth" +
-      "Point\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031" +
-      "\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilPerMonst" +
-      "erLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035\n\025ma" +
-      "pSectionImagePrefix\030\001 \001(\t\022\033\n\023mapNumberOf" +
-      "Sections\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002",
-      "\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeigh" +
-      "t\030\005 \001(\002\032K\n\025MiniTutorialConstants\022\032\n\022mini" +
-      "TutorialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002" +
-      " \001(\005\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001" +
-      " \001(\0162\036.com.lvl6.proto.GameActionType\022\034\n\024" +
-      "amountRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRem" +
-      "ovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pv" +
-      "pDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030" +
-      "\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequ" +
-      "iredMinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimi",
-      "t\030\005 \001(\005\022\"\n\032beginAvengingTimeLimitMins\030\006 " +
-      "\001(\005\022(\n requestClanToAvengeTimeLimitMins\030" +
-      "\007 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds" +
-      "\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConve" +
-      "rsionConstantProto\0222\n\014resourceType\030\001 \001(\016" +
-      "2\034.com.lvl6.proto.ResourceType\022\023\n\013resour" +
-      "ceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021Tutoria" +
-      "lConstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n" +
-      "\016guideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030" +
-      "\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enem",
-      "yBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n" +
-      " \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.l" +
-      "vl6.proto.TutorialStructProto\022\036\n\026structu" +
-      "reIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n" +
-      "\017cityOneElements\030\006 \003(\0132 .com.lvl6.proto." +
-      "CityElementProto\022$\n\034cityElementIdForFirs" +
-      "tDungeon\030\007 \001(\005\022%\n\035cityElementIdForSecond" +
-      "Dungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilIn" +
-      "it\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialOb" +
-      "stacles\030\016 \003(\0132$.com.lvl6.proto.MinimumOb",
-      "stacleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE" +
-      "\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N" +
-      "\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_" +
-      "NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C" +
-      "\n\030ForceLogoutResponseProto\022\031\n\021previousLo" +
-      "ginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStar" +
-      "tupProto"
+      "eConversionConstantProto\022\025\n\rdisplayRarit" +
+      "y\030% \001(\010\032_\n\031AnimatedSpriteOffsetProto\022\021\n\t" +
+      "imageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lv",
+      "l6.proto.CoordinateProto\032\325\001\n\rClanConstan" +
+      "ts\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030max" +
+      "CharLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLe" +
+      "ngthForClanDescription\030\003 \001(\005\022\037\n\027maxCharL" +
+      "engthForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001" +
+      "(\005\022$\n\034achievementIdsForClanRewards\030\006 \003(\005" +
+      "\032c\n\030DownloadableNibConstants\022\022\n\nmapNibNa" +
+      "me\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021go" +
+      "ldShoppeNibName\030\003 \001(\t\032y\n\023TournamentConst" +
+      "ants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight",
+      "\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursT" +
+      "oShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonsterC" +
+      "onstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031ini" +
+      "tialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Monster" +
+      "Constants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n" +
+      "\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021el" +
+      "ementalStrength\030\003 \001(\002\022\031\n\021elementalWeakne" +
+      "ss\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n" +
+      "\020TaskMapConstants\022\035\n\025mapSectionImagePref" +
+      "ix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n",
+      "\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth" +
+      "\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniTu" +
+      "torialConstants\022\032\n\022miniTutorialTaskId\030\001 " +
+      "\001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\032\202\001\n\021ClanHelp" +
+      "Constants\0220\n\010helpType\030\001 \001(\0162\036.com.lvl6.p" +
+      "roto.GameActionType\022\034\n\024amountRemovedPerH" +
+      "elp\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(\002" +
+      "\032\341\001\n\014PvpConstants\022\031\n\021pvpDmgsWindowSize\030\001" +
+      " \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDm" +
+      "gDelta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022",
+      "\035\n\025defendingMsgCharLimit\030\005 \001(\005\022\"\n\032beginA" +
+      "vengingTimeLimitMins\030\006 \001(\005\022(\n requestCla" +
+      "nToAvengeTimeLimitMins\030\007 \001(\005\0328\n\024SpeedUpC" +
+      "onstantProto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems" +
+      "\030\002 \001(\005\032{\n\037ResourceConversionConstantProt" +
+      "o\0222\n\014resourceType\030\001 \001(\0162\034.com.lvl6.proto" +
+      ".ResourceType\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007nu" +
+      "mGems\030\003 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021sta" +
+      "rtingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020" +
+      " \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMon",
+      "sterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t " +
+      "\001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialS" +
+      "tructures\030\003 \003(\0132#.com.lvl6.proto.Tutoria" +
+      "lStructProto\022\036\n\026structureIdsToBeBuillt\030\004" +
+      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030" +
+      "\006 \003(\0132 .com.lvl6.proto.CityElementProto\022" +
+      "$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n" +
+      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010" +
+      "cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsI" +
+      "nit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.c",
+      "om.lvl6.proto.MinimumObstacleProto\"A\n\014Up" +
+      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
+      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016" +
+      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SE" +
+      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp" +
+      "onseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004" +
+      "udid\030\002 \001(\tB\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -34789,7 +34907,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", });
+        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
