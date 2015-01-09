@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,28 +61,44 @@ import com.lvl6.utils.DBConnection;
 		  setStatictaskIdsToTaskStageIdsToTaskStages();      
 	  }
 	  if (!taskStageIdsToTaskStages.containsKey(taskStageId)) {
-		  log.warn("no task stage for taskStageId=" + taskStageId);
+		  log.warn("no task stage for taskStageId={}", taskStageId);
 		  return null;
 	  }
 	  return taskStageIdsToTaskStages.get(taskStageId); 
   }
 
   public static Map<Integer, TaskStage> getTaskStagesForTaskId(int taskId) {
-    log.debug("retrieve monster data for monster " + taskId);
+    log.debug("getTaskStagesForTaskId {}", taskId);
     if (null == taskIdsToTaskStageIdsToTaskStages) {
-		  setStatictaskIdsToTaskStageIdsToTaskStages();
-	  }
+    	setStatictaskIdsToTaskStageIdsToTaskStages();
+    }
     return taskIdsToTaskStageIdsToTaskStages.get(taskId);
   }
 
+  public static Set<Integer> getTaskStageIdsForTaskId(int taskId) {
+	  log.debug("getTaskStageIdsForTaskId {}", taskId);
+	  if (null == taskIdsToTaskStageIdsToTaskStages) {
+		  setStatictaskIdsToTaskStageIdsToTaskStages();
+	  }
+	  
+	  if (!taskIdsToTaskStageIdsToTaskStages.containsKey(taskId)) {
+		  log.warn("no taskStageIds for taskId={}", taskId);
+		  return new HashSet<Integer>();
+	  }
+	  
+	  Map<Integer, TaskStage> taskStages = taskIdsToTaskStageIdsToTaskStages
+		  .get(taskId);
+	  return taskStages.keySet();
+  }
+  
   public static int getFirstTaskStageIdForTaskId(int taskId) {
-	  log.debug("retrieving the first task stage for taskId " + taskId);
+	  log.debug("retrieving the first task stage for taskId {}", taskId);
 	  if (null == taskIdsToFirstTaskStageIds) {
 		  setStatictaskIdsToTaskStageIdsToTaskStages();
 	  }
 	  
 	  if (!taskIdsToFirstTaskStageIds.containsKey(taskId)) {
-		  log.info("no task for taskId=" + taskId);
+		  log.info("no task for taskId={}", taskId);
 		  return 0;
 	  }
 	  return taskIdsToFirstTaskStageIds.get(taskId);

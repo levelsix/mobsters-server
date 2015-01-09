@@ -1,19 +1,13 @@
 package com.lvl6.misc;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Achievement;
@@ -51,7 +45,6 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
-import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoardProto.BoardLayoutProto;
@@ -118,7 +111,6 @@ import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.DBConnection;
 
 //goal is to not compute proto analog of static data
 //and to provide a consistent view of static data.

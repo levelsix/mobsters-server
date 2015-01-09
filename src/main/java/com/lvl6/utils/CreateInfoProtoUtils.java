@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -3314,12 +3315,14 @@ public class CreateInfoProtoUtils {
 		return tspb.build();
 	}
 
-	public static FullTaskProto createFullTaskProtoFromTask(Task task) {
+	public static FullTaskProto createFullTaskProtoFromTask(Task task)
+	{
 		String name = task.getGoodName();
 		String description = task.getDescription();
+		int taskId = task.getId();
 
 		FullTaskProto.Builder builder = FullTaskProto.newBuilder();
-		builder.setTaskId(task.getId());
+		builder.setTaskId(taskId);
 		if (null != name) {
 			builder.setName(name);
 		}
@@ -3359,7 +3362,45 @@ public class CreateInfoProtoUtils {
 			builder.setBoardId(boardId);
 		}
 		
+		setDetails(taskId, builder);
+		
 		return builder.build();
+	}
+
+	private static void setDetails(
+		int taskId,
+		com.lvl6.proto.TaskProto.FullTaskProto.Builder builder )
+	{
+		Set<Integer> stageIds = TaskStageRetrieveUtils
+			.getTaskStageIdsForTaskId(taskId);
+		//aggregating all the monsterIds and rarities for a task
+		
+		Set<Integer> monsterIdsForTask = new HashSet<Integer>();
+		Set<String> qualitiesStrForTask = new HashSet<String>();
+		for (int stageId : stageIds) {
+			
+			Set<Integer> stageMonsterIds = TaskStageMonsterRetrieveUtils.
+				getMonsterIdsForTaskStageId(stageId);
+			monsterIdsForTask.addAll(stageMonsterIds);
+			
+			Set<String> stageQualities = TaskStageMonsterRetrieveUtils.
+				getQualitiesForTaskStageId(stageId);
+			qualitiesStrForTask.addAll(stageQualities);
+		}
+		
+		Set<Quality> qualitiesForTask = new HashSet<Quality>();
+		for (String quality : qualitiesStrForTask) {
+			try {
+				Quality q = Quality.valueOf(quality);
+				qualitiesForTask.add(q);
+			} catch (Exception e) {
+				log.error("illegal Quality type {}. taskId={}",
+					quality, taskId);
+			}
+		}
+		
+		builder.addAllMonsterIds(monsterIdsForTask);
+		builder.addAllRarities(qualitiesForTask);
 	}
 
 	public static MinimumUserTaskProto createMinimumUserTaskProto(String userId,

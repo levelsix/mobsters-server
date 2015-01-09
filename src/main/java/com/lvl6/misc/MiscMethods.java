@@ -28,62 +28,22 @@ import au.com.bytecode.opencsv.CSVReader;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Achievement;
 import com.lvl6.info.AnimatedSpriteOffset;
-import com.lvl6.info.Board;
-import com.lvl6.info.BoardProperty;
-import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
-import com.lvl6.info.BoosterPack;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ClanEventPersistent;
-import com.lvl6.info.ClanIcon;
-import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
-import com.lvl6.info.EventPersistent;
 import com.lvl6.info.GoldSale;
-import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.MonsterLevelInfo;
-import com.lvl6.info.Obstacle;
-import com.lvl6.info.Prerequisite;
-import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
-import com.lvl6.info.Research;
-import com.lvl6.info.ResearchProperty;
-import com.lvl6.info.Skill;
-import com.lvl6.info.SkillProperty;
-import com.lvl6.info.StaticUserLevelInfo;
-import com.lvl6.info.Structure;
-import com.lvl6.info.StructureClanHouse;
-import com.lvl6.info.StructureEvoChamber;
-import com.lvl6.info.StructureHospital;
-import com.lvl6.info.StructureLab;
-import com.lvl6.info.StructureMiniJob;
-import com.lvl6.info.StructureResidence;
-import com.lvl6.info.StructureResourceGenerator;
-import com.lvl6.info.StructureResourceStorage;
-import com.lvl6.info.StructureTeamCenter;
-import com.lvl6.info.StructureTownHall;
-import com.lvl6.info.Task;
-import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
-import com.lvl6.proto.AchievementStuffProto.AchievementProto;
-import com.lvl6.proto.BattleProto.PvpLeagueProto;
-import com.lvl6.proto.BoardProto.BoardLayoutProto;
-import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
-import com.lvl6.proto.ClanProto.ClanIconProto;
-import com.lvl6.proto.ClanProto.ClanRaidProto;
-import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -100,36 +60,15 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
-import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
-import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
-import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
-import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
-import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
-import com.lvl6.proto.StructureProto.ClanHouseProto;
-import com.lvl6.proto.StructureProto.EvoChamberProto;
-import com.lvl6.proto.StructureProto.HospitalProto;
-import com.lvl6.proto.StructureProto.LabProto;
-import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
-import com.lvl6.proto.StructureProto.ObstacleProto;
-import com.lvl6.proto.StructureProto.ResidenceProto;
-import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
-import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
-import com.lvl6.proto.StructureProto.StructureInfoProto;
-import com.lvl6.proto.StructureProto.TeamCenterProto;
-import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
-import com.lvl6.proto.TaskProto.FullTaskProto;
-import com.lvl6.proto.TaskProto.PersistentEventProto;
-import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
@@ -161,6 +100,7 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -847,6 +787,11 @@ public class MiscMethods {
 		pcb.setBeginAvengingTimeLimitMins(ControllerConstants.PVP__BEGIN_AVENGING_TIME_LIMIT_MINS);
 		pcb.setRequestClanToAvengeTimeLimitMins(ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS);
 		cb.setPvpConstant(pcb.build());
+		
+		boolean displayQuality = ServerToggleRetrieveUtils
+			.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__DISPLAY_RARITY);
+		cb.setDisplayRarity(displayQuality);
 		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
@@ -1648,54 +1593,54 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//no arguments are modified
-	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
-		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
-		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
-		//return value
-		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-
-		Random rand = new Random();
-		List<Integer> newBoosterItemIdsUserCanGet = new ArrayList<Integer>(boosterItemIdsUserCanGet);
-		List<Integer> newQuantitiesInStock = new ArrayList<Integer>(quantitiesInStock);
-		int newSumOfQuantities = sumOfQuantitiesInStock;
-
-		//selects one of the ids at random without replacement
-		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-			int sumSoFar = 0;
-			int randomNum = rand.nextInt(newSumOfQuantities) + 1; //range [1, newSumOfQuantities]
-
-			for(int i = 0; i < newBoosterItemIdsUserCanGet.size(); i++) {
-				int bItemId = newBoosterItemIdsUserCanGet.get(i);
-				int quantity = newQuantitiesInStock.get(i);
-
-				sumSoFar += quantity;
-
-				if(randomNum <= sumSoFar) {
-					//we have a winner! current boosterItemId is what the user gets
-					BoosterItem selectedBoosterItem = allBoosterItemIdsToBoosterItems.get(bItemId);
-					itemsUserReceives.add(selectedBoosterItem);
-
-					//preparation for next BoosterItem to be selected
-					if (1 == quantity) {
-						newBoosterItemIdsUserCanGet.remove(i);
-						newQuantitiesInStock.remove(i);
-					} else if (1 < quantity){
-						//booster item id has more than one quantity
-						int decrementedQuantity = newQuantitiesInStock.remove(i) - 1;
-						newQuantitiesInStock.add(i, decrementedQuantity);
-					} else {
-						//ignore those with quantity of 0
-						continue;
-					}
-
-					newSumOfQuantities -= 1;
-					break;
-				}
-			}
-		}
-
-		return itemsUserReceives;
-	}
+//	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+//		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
+//		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
+//		//return value
+//		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
+//
+//		Random rand = new Random();
+//		List<Integer> newBoosterItemIdsUserCanGet = new ArrayList<Integer>(boosterItemIdsUserCanGet);
+//		List<Integer> newQuantitiesInStock = new ArrayList<Integer>(quantitiesInStock);
+//		int newSumOfQuantities = sumOfQuantitiesInStock;
+//
+//		//selects one of the ids at random without replacement
+//		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
+//			int sumSoFar = 0;
+//			int randomNum = rand.nextInt(newSumOfQuantities) + 1; //range [1, newSumOfQuantities]
+//
+//			for(int i = 0; i < newBoosterItemIdsUserCanGet.size(); i++) {
+//				int bItemId = newBoosterItemIdsUserCanGet.get(i);
+//				int quantity = newQuantitiesInStock.get(i);
+//
+//				sumSoFar += quantity;
+//
+//				if(randomNum <= sumSoFar) {
+//					//we have a winner! current boosterItemId is what the user gets
+//					BoosterItem selectedBoosterItem = allBoosterItemIdsToBoosterItems.get(bItemId);
+//					itemsUserReceives.add(selectedBoosterItem);
+//
+//					//preparation for next BoosterItem to be selected
+//					if (1 == quantity) {
+//						newBoosterItemIdsUserCanGet.remove(i);
+//						newQuantitiesInStock.remove(i);
+//					} else if (1 < quantity){
+//						//booster item id has more than one quantity
+//						int decrementedQuantity = newQuantitiesInStock.remove(i) - 1;
+//						newQuantitiesInStock.add(i, decrementedQuantity);
+//					} else {
+//						//ignore those with quantity of 0
+//						continue;
+//					}
+//
+//					newSumOfQuantities -= 1;
+//					break;
+//				}
+//			}
+//		}
+//
+//		return itemsUserReceives;
+//	}
 	//  /*cut out from purchase booster pack controller*/
 	//  public static List<Long> insertNewUserEquips(int userId,
 	//      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
@@ -1769,17 +1714,17 @@ public class MiscMethods {
 	/*cut out from purchase booster pack controller*/
 	//if the user has bought out the whole deck, then for the booster items
 	//the user did not get, record in the db that the user has 0 of them collected
-	private static void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
-		Map<Integer, Integer> newBoosterItemIdsToNumCollected, boolean refilled) {
-		if (refilled) {
-			for (int boosterItemId : newBoosterItemIdsToNumCollected.keySet()) {
-				if (!changedBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-					int value = newBoosterItemIdsToNumCollected.get(boosterItemId);
-					changedBoosterItemIdsToNumCollected.put(boosterItemId, value);
-				}
-			}
-		}
-	}
+//	private static void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
+//		Map<Integer, Integer> newBoosterItemIdsToNumCollected, boolean refilled) {
+//		if (refilled) {
+//			for (int boosterItemId : newBoosterItemIdsToNumCollected.keySet()) {
+//				if (!changedBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+//					int value = newBoosterItemIdsToNumCollected.get(boosterItemId);
+//					changedBoosterItemIdsToNumCollected.put(boosterItemId, value);
+//				}
+//			}
+//		}
+//	}
 
 	/* public static Set<Long> getEquippedEquips(User aUser) {
     Set<Long> equippedUserEquipIds = new HashSet<Long>();
@@ -1940,59 +1885,59 @@ public class MiscMethods {
 			sdpb.addAvailableQuests(fqp);
 		}
 	}
-	
-	private static void setStaticData(StaticDataProto.Builder sdpb) {
-		StaticDataProto staticData = StaticDataContainer.getStaticData();
-		
-		if (null == staticData) {
-			log.error("NO STATIC DATA!!!");
-			return;
-		}
-		setTasks(sdpb, staticData);
-		sdpb.addAllAllMonsters(staticData.getAllMonstersList());
-		sdpb.addAllSlip(staticData.getSlipList());
-		sdpb.addAllBoosterPacks(sdpb.getBoosterPacksList());
-		setStructures(sdpb, staticData);
-		sdpb.addAllPersistentEvents(staticData.getPersistentEventsList());
-		sdpb.addAllMbds(staticData.getMbdsList());
-		setClanRaidStuff(sdpb, staticData);
-		sdpb.addAllItems(staticData.getItemsList());
-		sdpb.addAllObstacles(staticData.getObstaclesList());
-		sdpb.addAllClanIcons(staticData.getClanIconsList());
-		sdpb.addAllLeagues(staticData.getLeaguesList());
-		sdpb.addAllAchievements(staticData.getAchievementsList());
-		sdpb.addAllSkills(staticData.getSkillsList());
-		sdpb.addAllPrereqs(staticData.getPrereqsList());
-		sdpb.addAllBoards(staticData.getBoardsList());
-		sdpb.addAllResearch(staticData.getResearchList());
-	}
-
-	private static void setTasks( StaticDataProto.Builder sdpb, StaticDataProto staticData )
-	{
-		sdpb.addAllAllTasks(staticData.getAllTasksList());
-		sdpb.addAllAllTaskMapElements(staticData.getAllTaskMapElementsList());
-	}
-
-	private static void setStructures( StaticDataProto.Builder sdpb, StaticDataProto staticData )
-	{
-		sdpb.addAllAllGenerators(staticData.getAllGeneratorsList());
-		sdpb.addAllAllStorages(staticData.getAllStoragesList());
-		sdpb.addAllAllHospitals(staticData.getAllHospitalsList());
-		sdpb.addAllAllResidences(staticData.getAllResidencesList());
-		sdpb.addAllAllTownHalls(staticData.getAllTownHallsList());
-		sdpb.addAllAllLabs(staticData.getAllLabsList());
-		sdpb.addAllAllMiniJobCenters(staticData.getAllMiniJobCentersList());
-		sdpb.addAllAllEvoChambers(staticData.getAllEvoChambersList());
-		sdpb.addAllAllTeamCenters(staticData.getAllTeamCentersList());
-		sdpb.addAllAllClanHouses(staticData.getAllClanHousesList());
-	}
-
-	private static void setClanRaidStuff(
-		StaticDataProto.Builder sdpb,
-		StaticDataProto staticData )
-	{
-		sdpb.addAllRaids(staticData.getRaidsList());
-		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
-	}
+//	
+//	private static void setStaticData(StaticDataProto.Builder sdpb) {
+//		StaticDataProto staticData = StaticDataContainer.getStaticData();
+//		
+//		if (null == staticData) {
+//			log.error("NO STATIC DATA!!!");
+//			return;
+//		}
+//		setTasks(sdpb, staticData);
+//		sdpb.addAllAllMonsters(staticData.getAllMonstersList());
+//		sdpb.addAllSlip(staticData.getSlipList());
+//		sdpb.addAllBoosterPacks(sdpb.getBoosterPacksList());
+//		setStructures(sdpb, staticData);
+//		sdpb.addAllPersistentEvents(staticData.getPersistentEventsList());
+//		sdpb.addAllMbds(staticData.getMbdsList());
+//		setClanRaidStuff(sdpb, staticData);
+//		sdpb.addAllItems(staticData.getItemsList());
+//		sdpb.addAllObstacles(staticData.getObstaclesList());
+//		sdpb.addAllClanIcons(staticData.getClanIconsList());
+//		sdpb.addAllLeagues(staticData.getLeaguesList());
+//		sdpb.addAllAchievements(staticData.getAchievementsList());
+//		sdpb.addAllSkills(staticData.getSkillsList());
+//		sdpb.addAllPrereqs(staticData.getPrereqsList());
+//		sdpb.addAllBoards(staticData.getBoardsList());
+//		sdpb.addAllResearch(staticData.getResearchList());
+//	}
+//
+//	private static void setTasks( StaticDataProto.Builder sdpb, StaticDataProto staticData )
+//	{
+//		sdpb.addAllAllTasks(staticData.getAllTasksList());
+//		sdpb.addAllAllTaskMapElements(staticData.getAllTaskMapElementsList());
+//	}
+//
+//	private static void setStructures( StaticDataProto.Builder sdpb, StaticDataProto staticData )
+//	{
+//		sdpb.addAllAllGenerators(staticData.getAllGeneratorsList());
+//		sdpb.addAllAllStorages(staticData.getAllStoragesList());
+//		sdpb.addAllAllHospitals(staticData.getAllHospitalsList());
+//		sdpb.addAllAllResidences(staticData.getAllResidencesList());
+//		sdpb.addAllAllTownHalls(staticData.getAllTownHallsList());
+//		sdpb.addAllAllLabs(staticData.getAllLabsList());
+//		sdpb.addAllAllMiniJobCenters(staticData.getAllMiniJobCentersList());
+//		sdpb.addAllAllEvoChambers(staticData.getAllEvoChambersList());
+//		sdpb.addAllAllTeamCenters(staticData.getAllTeamCentersList());
+//		sdpb.addAllAllClanHouses(staticData.getAllClanHousesList());
+//	}
+//
+//	private static void setClanRaidStuff(
+//		StaticDataProto.Builder sdpb,
+//		StaticDataProto staticData )
+//	{
+//		sdpb.addAllRaids(staticData.getRaidsList());
+//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
+//	}
 
 }
