@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import com.hazelcast.core.MultiMap;
  * Adds and removes are async / eventually consistent. Reads immediately after an add/remove may not reflect the change.
  * This is necessary to maintain consistency and read performance.
  */
+
 public class DistributedZSetHazelcast implements DistributedZSet {
 
 	
@@ -52,6 +54,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 	}
 
 
+	/**
+	 * Adds or updates the score of a key
+	 */
 	@Override
 	public void add(String key, Long score) {
 		if(key == null || key.equals("") || score == null ) {
@@ -63,7 +68,10 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 
 	
 
-
+	/**
+	 * Replaces the score for a key if it is higher 
+	 * that than the current score for the key
+	 */
 	@Override
 	public void replaceIfHigher(String key, Long score) {
 		if(key == null || key.equals("") || score == null ) {
@@ -74,6 +82,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 	}
 
 
+	/**
+	 * Increments the score for a key by the increment amount
+	 */
 	@Override
 	public void increment(String key, Long increment) {
 		if(key == null || key.equals("") || increment == null ) {
@@ -83,12 +94,19 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 		processPending();
 	}
 	
-
+	
+	/**
+	 * Returns the size of the set
+	 */
 	@Override
 	public Integer size() {
 		return scoresByKey.size();
 	}
 
+	
+	/**
+	 * Returns the count of items between two scores
+	 */
 	@Override
 	public Integer count(Long minScore, Long maxScore) {
 		int start = findIndex(minScore);
@@ -97,6 +115,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 	}
 
 	
+	/**
+	 * Returns the key, score, and rank of a given key
+	 */
 	@Override
 	public ZSetMember get(String key) {
 		Long score = scoresByKey.get(key);
@@ -123,7 +144,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 
 	
 
-	
+	/**
+	 * Returns all the members between two given ranks
+	 */
 	@Override
 	public List<ZSetMember> range(Integer minRank, Integer maxRank) {
 		log.trace("Getting range");
@@ -155,6 +178,8 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 		return members;
 	}
 
+	
+	
 	@Override
 	public void remove(String... keys) {
 		for(String key : keys) {
@@ -163,7 +188,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 		processPending();
 	}
 	
-	
+	/**
+	 * Removes a key from the set
+	 */
 	@Override
 	public void remove(String key) {
 		pendingQueue.add("remove:"+key);
@@ -171,7 +198,9 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 	}
 
 	
-	
+	/**
+	 * Returns a list of members between two given scores
+	 */
 	@Override
 	public List<ZSetMember> rangeByScore(Long minScore, Long maxScore) {
 		if(minScore > maxScore) {
@@ -184,13 +213,19 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 		return range(start, end);
 	}
 
-	
+	/**
+	 * Returns false if the set is currently consistent or true if pending updates are still being applied
+	 */
 	@Override
 	public boolean hasPendingUpdates() {
 		return !pendingQueue.isEmpty();
 	}
 
-	
+	/**
+	 * Pending updates are applied sequentially by a single thread across the cluster.
+	 * This method attempts to get a cluster wide lock and process the pending items.
+	 * If it cannot get the lock it means another thread is already processing items.
+	 */
 	protected void processPending() {
 		new Thread(new Runnable() {
 			@Override
@@ -198,14 +233,14 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 				if(hasPendingUpdates()) {
 					boolean gotLock = false;
 					try {
-						if(pendingChangesLock.tryLock()) {
+						if(pendingChangesLock.tryLock(1000l, TimeUnit.MILLISECONDS)) {
 							gotLock = true;
 							while(hasPendingUpdates()) {
 								processPendingItems();
 							}
 						}
 					}catch(Throwable e) {
-						
+						log.error("Error processing pending updates in ZSet", e);
 					}finally {
 						if(gotLock) pendingChangesLock.forceUnlock();
 					}
@@ -234,21 +269,25 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 			else if(args[0].equals("increment")) {
 				doIncrement(args[1], Long.valueOf(args[2]));;
 			}
+			pendingQueue.remove(0);
 		}
-		pendingQueue.remove(0);
 	}	
 	
 
 	protected void doAdd(String key, Long score) {
 		log.trace("Adding key: {} score: {}", key, score);
+		if(scoresByKey.containsKey(key)) {
+			doRemove(key);
+		}
+		//This key is not in the set so add it
 		if(!ranks.contains(score)) {
+			//This score is not ranked so rank it
 			ranks.add(findIndex(score), score);
 		}
 		keysByScore.put(score, key);
 		scoresByKey.put(key, score);
 		log.trace("scoresByKey.size: {}",scoresByKey.size());
 	}
-
 	
 	protected void doReplaceIfHigher(String key, Long score) {
 		log.trace("Replacing if higher: {} score: {}", key, score);
