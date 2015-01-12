@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CreateClanRequestEvent;
 import com.lvl6.events.response.CreateClanResponseEvent;
@@ -44,6 +46,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
+
+	@Autowired
+	protected ClanSearch clanSearch;
 
 	public CreateClanController() {
 		numAllocatedThreads = 4;
@@ -124,6 +129,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			if (success) {
 				resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(createdClan));
 				resBuilder.setStatus(CreateClanStatus.SUCCESS);
+				updateClanCache(createdClan);
 			}
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
@@ -320,6 +326,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		createdClan.setClanIconId(clanIconId);
 	}
 
+	private void updateClanCache(Clan clan)
+	{
+		String clanId = clan.getId();
+		//need to account for this user creating clan
+		int clanSize = 1;
+		Date lastChatTime = ControllerConstants.INCEPTION_DATE;
+
+		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+	}
+	
 	private void writeToUserCurrencyHistory(User aUser, Clan clan, Timestamp createTime,
 		Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency) {
 		if (currencyChange.isEmpty()) {
@@ -368,6 +384,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
 	{
 		this.clanRetrieveUtil = clanRetrieveUtil;
+	}
+
+	public ClanSearch getClanSearch()
+	{
+		return clanSearch;
+	}
+
+	public void setClanSearch( ClanSearch clanSearch )
+	{
+		this.clanSearch = clanSearch;
 	}
 
 }
