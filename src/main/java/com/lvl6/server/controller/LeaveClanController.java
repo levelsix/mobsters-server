@@ -250,7 +250,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     if (userId.equals(clanOwnerId)) {
       List<String> userIds = getUserClanRetrieveUtils().getUserIdsRelatedToClan(clanId);
-      deleteClan(clan, userIds, user);
+      deleteClan(clanId, clan, userIds, user);
     } else {
       if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
         log.error(String.format(
@@ -273,7 +273,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private void deleteClan(Clan clan, List<String> userIds, User user) {
+  private void deleteClan(String clanId, Clan clan,
+	  List<String> userIds, User user)
+  {
 	  if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
 		  log.error(String.format(
 			  "problem marking clan id null for users with ids in %s", userIds));
@@ -289,7 +291,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  log.error(String.format(
 				  "problem with deleting clan with id %s",
 				  clan.getId()));
+			  return;
 		  }
+		  clanSearch.removeClanId(clanId);
 	  }
 
   }

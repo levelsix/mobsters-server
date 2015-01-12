@@ -103,7 +103,9 @@ public class ClanSearch {
 		return clans;
 	}
 	
-	
+	public void removeClanId(String clanId) {
+		rankedClans.remove(clanId);
+	}
 	
 	
 	
