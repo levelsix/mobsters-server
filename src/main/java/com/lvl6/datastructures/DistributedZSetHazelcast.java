@@ -161,7 +161,7 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 		if(maxRank >= ranks.size()) {
 			maxRank = ranks.size() - 1;
 		}
-		List<Long> scores = ranks.subList(minRank, maxRank);
+		List<Long> scores = ranks.subList(minRank, maxRank+1);
 		log.trace(" scores: {}",scores);
 		List<ZSetMember> members = new ArrayList<ZSetMember>();
 		log.trace(" members: ", members);
