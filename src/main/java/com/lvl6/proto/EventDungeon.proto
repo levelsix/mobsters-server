@@ -95,6 +95,9 @@ message EndDungeonResponseProto {
 	optional UserItemProto userItem = 6;
 	optional string taskMapSectionName = 7; //TODO: Consider having client calculate this
 	
+	//contains the cash and oil remaining in the task
+	optional UserTaskCompletedProto utcp = 8;
+	
 	enum EndDungeonStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;

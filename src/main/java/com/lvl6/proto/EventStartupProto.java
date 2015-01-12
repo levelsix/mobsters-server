@@ -2464,17 +2464,41 @@ public final class EventStartupProto {
         int index);
 
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    java.util.List<java.lang.Integer> getCompletedTaskIdsList();
+    @java.lang.Deprecated java.util.List<java.lang.Integer> getCompletedTaskIdsList();
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    int getCompletedTaskIdsCount();
+    @java.lang.Deprecated int getCompletedTaskIdsCount();
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    int getCompletedTaskIds(int index);
+    @java.lang.Deprecated int getCompletedTaskIds(int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> 
+        getCompletedTasksList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    com.lvl6.proto.TaskProto.UserTaskCompletedProto getCompletedTasks(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    int getCompletedTasksCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> 
+        getCompletedTasksOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getCompletedTasksOrBuilder(
+        int index);
 
     /**
      * <code>optional string appStoreURL = 9;</code>
@@ -3499,66 +3523,66 @@ public final class EventStartupProto {
               break;
             }
             case 106: {
-              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
                 attackNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto>();
-                mutable_bitField0_ |= 0x00004000;
+                mutable_bitField0_ |= 0x00008000;
               }
               attackNotifications_.add(input.readMessage(com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto.PARSER, extensionRegistry));
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
                 referralNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto>();
-                mutable_bitField0_ |= 0x00008000;
+                mutable_bitField0_ |= 0x00010000;
               }
               referralNotifications_.add(input.readMessage(com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto.PARSER, extensionRegistry));
               break;
             }
             case 122: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+              if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
                 noticesToPlayers_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00010000;
+                mutable_bitField0_ |= 0x00020000;
               }
               noticesToPlayers_.add(bs);
               break;
             }
             case 130: {
-              if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
+              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
                 globalChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>();
-                mutable_bitField0_ |= 0x00020000;
+                mutable_bitField0_ |= 0x00040000;
               }
               globalChats_.add(input.readMessage(com.lvl6.proto.ChatProto.GroupChatMessageProto.PARSER, extensionRegistry));
               break;
             }
             case 138: {
-              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+              if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
                 clanChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>();
-                mutable_bitField0_ |= 0x00040000;
+                mutable_bitField0_ |= 0x00080000;
               }
               clanChats_.add(input.readMessage(com.lvl6.proto.ChatProto.GroupChatMessageProto.PARSER, extensionRegistry));
               break;
             }
             case 146: {
-              if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
                 pcpp_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>();
-                mutable_bitField0_ |= 0x00080000;
+                mutable_bitField0_ |= 0x00100000;
               }
               pcpp_.add(input.readMessage(com.lvl6.proto.ChatProto.PrivateChatPostProto.PARSER, extensionRegistry));
               break;
             }
             case 154: {
-              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+              if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
                 usersMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
-                mutable_bitField0_ |= 0x00100000;
+                mutable_bitField0_ |= 0x00200000;
               }
               usersMonsters_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
               break;
             }
             case 162: {
-              if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
+              if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
                 monstersHealing_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto>();
-                mutable_bitField0_ |= 0x00200000;
+                mutable_bitField0_ |= 0x00400000;
               }
               monstersHealing_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.PARSER, extensionRegistry));
               break;
@@ -3577,9 +3601,9 @@ public final class EventStartupProto {
               break;
             }
             case 178: {
-              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
                 rareBoosterPurchases_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto>();
-                mutable_bitField0_ |= 0x01000000;
+                mutable_bitField0_ |= 0x02000000;
               }
               rareBoosterPurchases_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.PARSER, extensionRegistry));
               break;
@@ -3591,17 +3615,17 @@ public final class EventStartupProto {
               break;
             }
             case 194: {
-              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
                 invitesToMeForSlots_ = new java.util.ArrayList<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto>();
-                mutable_bitField0_ |= 0x04000000;
+                mutable_bitField0_ |= 0x08000000;
               }
               invitesToMeForSlots_.add(input.readMessage(com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.PARSER, extensionRegistry));
               break;
             }
             case 202: {
-              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
                 invitesFromMeForSlots_ = new java.util.ArrayList<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto>();
-                mutable_bitField0_ |= 0x08000000;
+                mutable_bitField0_ |= 0x10000000;
               }
               invitesFromMeForSlots_.add(input.readMessage(com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.PARSER, extensionRegistry));
               break;
@@ -3641,9 +3665,9 @@ public final class EventStartupProto {
               break;
             }
             case 224: {
-              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
                 taskIdForCurrentCityBoss_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x20000000;
+                mutable_bitField0_ |= 0x40000000;
               }
               taskIdForCurrentCityBoss_.add(input.readInt32());
               break;
@@ -3651,9 +3675,9 @@ public final class EventStartupProto {
             case 226: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000) && input.getBytesUntilLimit() > 0) {
                 taskIdForCurrentCityBoss_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x20000000;
+                mutable_bitField0_ |= 0x40000000;
               }
               while (input.getBytesUntilLimit() > 0) {
                 taskIdForCurrentCityBoss_.add(input.readInt32());
@@ -3675,9 +3699,9 @@ public final class EventStartupProto {
               break;
             }
             case 242: {
-              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
                 userEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.UserPersistentEventProto>();
-                mutable_bitField0_ |= 0x40000000;
+                mutable_bitField0_ |= 0x80000000;
               }
               userEvents_.add(input.readMessage(com.lvl6.proto.TaskProto.UserPersistentEventProto.PARSER, extensionRegistry));
               break;
@@ -3696,17 +3720,17 @@ public final class EventStartupProto {
               break;
             }
             case 258: {
-              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
                 curRaidClanUserInfo_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto>();
-                mutable_bitField1_ |= 0x00000001;
+                mutable_bitField1_ |= 0x00000002;
               }
               curRaidClanUserInfo_.add(input.readMessage(com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.PARSER, extensionRegistry));
               break;
             }
             case 266: {
-              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
                 raidStageHistory_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto>();
-                mutable_bitField1_ |= 0x00000002;
+                mutable_bitField1_ |= 0x00000004;
               }
               raidStageHistory_.add(input.readMessage(com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto.PARSER, extensionRegistry));
               break;
@@ -3725,9 +3749,9 @@ public final class EventStartupProto {
               break;
             }
             case 282: {
-              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
                 recentNBattles_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpHistoryProto>();
-                mutable_bitField1_ |= 0x00000004;
+                mutable_bitField1_ |= 0x00000008;
               }
               recentNBattles_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpHistoryProto.PARSER, extensionRegistry));
               break;
@@ -3746,49 +3770,49 @@ public final class EventStartupProto {
               break;
             }
             case 298: {
-              if (!((mutable_bitField1_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField1_ & 0x00000020) == 0x00000020)) {
                 curTaskStages_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.TaskStageProto>();
-                mutable_bitField1_ |= 0x00000010;
+                mutable_bitField1_ |= 0x00000020;
               }
               curTaskStages_.add(input.readMessage(com.lvl6.proto.TaskProto.TaskStageProto.PARSER, extensionRegistry));
               break;
             }
             case 306: {
-              if (!((mutable_bitField1_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField1_ & 0x00000040) == 0x00000040)) {
                 userAchievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>();
-                mutable_bitField1_ |= 0x00000020;
+                mutable_bitField1_ |= 0x00000040;
               }
               userAchievements_.add(input.readMessage(com.lvl6.proto.AchievementStuffProto.UserAchievementProto.PARSER, extensionRegistry));
               break;
             }
             case 314: {
-              if (!((mutable_bitField1_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
                 userMiniJobProtos_ = new java.util.ArrayList<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto>();
-                mutable_bitField1_ |= 0x00000040;
+                mutable_bitField1_ |= 0x00000080;
               }
               userMiniJobProtos_.add(input.readMessage(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.PARSER, extensionRegistry));
               break;
             }
             case 322: {
-              if (!((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
                 userItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>();
-                mutable_bitField1_ |= 0x00000080;
+                mutable_bitField1_ |= 0x00000100;
               }
               userItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
               break;
             }
             case 330: {
-              if (!((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
+              if (!((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
                 clanHelpings_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpProto>();
-                mutable_bitField1_ |= 0x00000100;
+                mutable_bitField1_ |= 0x00000200;
               }
               clanHelpings_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanHelpProto.PARSER, extensionRegistry));
               break;
             }
             case 338: {
-              if (!((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
+              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
                 clanInvites_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanInviteProto>();
-                mutable_bitField1_ |= 0x00000200;
+                mutable_bitField1_ |= 0x00000400;
               }
               clanInvites_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanInviteProto.PARSER, extensionRegistry));
               break;
@@ -3807,19 +3831,27 @@ public final class EventStartupProto {
               break;
             }
             case 354: {
-              if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+              if (!((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
                 itemsInUse_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>();
-                mutable_bitField1_ |= 0x00000800;
+                mutable_bitField1_ |= 0x00001000;
               }
               itemsInUse_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemUsageProto.PARSER, extensionRegistry));
               break;
             }
             case 362: {
-              if (!((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
+              if (!((mutable_bitField1_ & 0x00002000) == 0x00002000)) {
                 gifts_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto>();
-                mutable_bitField1_ |= 0x00001000;
+                mutable_bitField1_ |= 0x00002000;
               }
               gifts_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 370: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                completedTasks_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.UserTaskCompletedProto>();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              completedTasks_.add(input.readMessage(com.lvl6.proto.TaskProto.UserTaskCompletedProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -3839,80 +3871,83 @@ public final class EventStartupProto {
         if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           completedTaskIds_ = java.util.Collections.unmodifiableList(completedTaskIds_);
         }
-        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
           attackNotifications_ = java.util.Collections.unmodifiableList(attackNotifications_);
         }
-        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           referralNotifications_ = java.util.Collections.unmodifiableList(referralNotifications_);
         }
-        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+        if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
           noticesToPlayers_ = noticesToPlayers_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
+        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
           globalChats_ = java.util.Collections.unmodifiableList(globalChats_);
         }
-        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+        if (((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
           clanChats_ = java.util.Collections.unmodifiableList(clanChats_);
         }
-        if (((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
           pcpp_ = java.util.Collections.unmodifiableList(pcpp_);
         }
-        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+        if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
           usersMonsters_ = java.util.Collections.unmodifiableList(usersMonsters_);
         }
-        if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
+        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
           monstersHealing_ = java.util.Collections.unmodifiableList(monstersHealing_);
         }
-        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
           rareBoosterPurchases_ = java.util.Collections.unmodifiableList(rareBoosterPurchases_);
         }
-        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
           invitesToMeForSlots_ = java.util.Collections.unmodifiableList(invitesToMeForSlots_);
         }
-        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
           invitesFromMeForSlots_ = java.util.Collections.unmodifiableList(invitesFromMeForSlots_);
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           redeemedQuestIds_ = java.util.Collections.unmodifiableList(redeemedQuestIds_);
         }
-        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
           taskIdForCurrentCityBoss_ = java.util.Collections.unmodifiableList(taskIdForCurrentCityBoss_);
         }
-        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
           userEvents_ = java.util.Collections.unmodifiableList(userEvents_);
         }
-        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
           curRaidClanUserInfo_ = java.util.Collections.unmodifiableList(curRaidClanUserInfo_);
         }
-        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
           raidStageHistory_ = java.util.Collections.unmodifiableList(raidStageHistory_);
         }
-        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
           recentNBattles_ = java.util.Collections.unmodifiableList(recentNBattles_);
         }
-        if (((mutable_bitField1_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField1_ & 0x00000020) == 0x00000020)) {
           curTaskStages_ = java.util.Collections.unmodifiableList(curTaskStages_);
         }
-        if (((mutable_bitField1_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField1_ & 0x00000040) == 0x00000040)) {
           userAchievements_ = java.util.Collections.unmodifiableList(userAchievements_);
         }
-        if (((mutable_bitField1_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
           userMiniJobProtos_ = java.util.Collections.unmodifiableList(userMiniJobProtos_);
         }
-        if (((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
           userItems_ = java.util.Collections.unmodifiableList(userItems_);
         }
-        if (((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
           clanHelpings_ = java.util.Collections.unmodifiableList(clanHelpings_);
         }
-        if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
+        if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
           clanInvites_ = java.util.Collections.unmodifiableList(clanInvites_);
         }
-        if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+        if (((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
           itemsInUse_ = java.util.Collections.unmodifiableList(itemsInUse_);
         }
-        if (((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField1_ & 0x00002000) == 0x00002000)) {
           gifts_ = java.util.Collections.unmodifiableList(gifts_);
+        }
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          completedTasks_ = java.util.Collections.unmodifiableList(completedTasks_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -22558,23 +22593,58 @@ public final class EventStartupProto {
     public static final int COMPLETEDTASKIDS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Integer> completedTaskIds_;
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    public java.util.List<java.lang.Integer>
+    @java.lang.Deprecated public java.util.List<java.lang.Integer>
         getCompletedTaskIdsList() {
       return completedTaskIds_;
     }
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    public int getCompletedTaskIdsCount() {
+    @java.lang.Deprecated public int getCompletedTaskIdsCount() {
       return completedTaskIds_.size();
     }
     /**
-     * <code>repeated int32 completedTaskIds = 8;</code>
+     * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
-    public int getCompletedTaskIds(int index) {
+    @java.lang.Deprecated public int getCompletedTaskIds(int index) {
       return completedTaskIds_.get(index);
+    }
+
+    public static final int COMPLETEDTASKS_FIELD_NUMBER = 46;
+    private java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> completedTasks_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    public java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> getCompletedTasksList() {
+      return completedTasks_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> 
+        getCompletedTasksOrBuilderList() {
+      return completedTasks_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    public int getCompletedTasksCount() {
+      return completedTasks_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    public com.lvl6.proto.TaskProto.UserTaskCompletedProto getCompletedTasks(int index) {
+      return completedTasks_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+     */
+    public com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getCompletedTasksOrBuilder(
+        int index) {
+      return completedTasks_.get(index);
     }
 
     public static final int APPSTOREURL_FIELD_NUMBER = 9;
@@ -23867,6 +23937,7 @@ public final class EventStartupProto {
       redeemedQuestIds_ = java.util.Collections.emptyList();
       userClanInfo_ = java.util.Collections.emptyList();
       completedTaskIds_ = java.util.Collections.emptyList();
+      completedTasks_ = java.util.Collections.emptyList();
       appStoreURL_ = "";
       reviewPageURL_ = "";
       reviewPageConfirmationMessage_ = "";
@@ -24050,6 +24121,9 @@ public final class EventStartupProto {
       }
       for (int i = 0; i < gifts_.size(); i++) {
         output.writeMessage(45, gifts_.get(i));
+      }
+      for (int i = 0; i < completedTasks_.size(); i++) {
+        output.writeMessage(46, completedTasks_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -24260,6 +24334,10 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(45, gifts_.get(i));
       }
+      for (int i = 0; i < completedTasks_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(46, completedTasks_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -24378,6 +24456,7 @@ public final class EventStartupProto {
           getTutorialConstantsFieldBuilder();
           getUserQuestsFieldBuilder();
           getUserClanInfoFieldBuilder();
+          getCompletedTasksFieldBuilder();
           getAttackNotificationsFieldBuilder();
           getReferralNotificationsFieldBuilder();
           getGlobalChatsFieldBuilder();
@@ -24454,55 +24533,61 @@ public final class EventStartupProto {
         }
         completedTaskIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
+        if (completedTasksBuilder_ == null) {
+          completedTasks_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+        } else {
+          completedTasksBuilder_.clear();
+        }
         appStoreURL_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
-        reviewPageURL_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
-        reviewPageConfirmationMessage_ = "";
+        reviewPageURL_ = "";
         bitField0_ = (bitField0_ & ~0x00001000);
-        playerHasBoughtInAppPurchase_ = false;
+        reviewPageConfirmationMessage_ = "";
         bitField0_ = (bitField0_ & ~0x00002000);
+        playerHasBoughtInAppPurchase_ = false;
+        bitField0_ = (bitField0_ & ~0x00004000);
         if (attackNotificationsBuilder_ == null) {
           attackNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           attackNotificationsBuilder_.clear();
         }
         if (referralNotificationsBuilder_ == null) {
           referralNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         } else {
           referralNotificationsBuilder_.clear();
         }
         noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         if (globalChatsBuilder_ == null) {
           globalChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00040000);
         } else {
           globalChatsBuilder_.clear();
         }
         if (clanChatsBuilder_ == null) {
           clanChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00080000);
         } else {
           clanChatsBuilder_.clear();
         }
         if (pcppBuilder_ == null) {
           pcpp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
         } else {
           pcppBuilder_.clear();
         }
         if (usersMonstersBuilder_ == null) {
           usersMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
         } else {
           usersMonstersBuilder_.clear();
         }
         if (monstersHealingBuilder_ == null) {
           monstersHealing_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
         } else {
           monstersHealingBuilder_.clear();
         }
@@ -24511,30 +24596,30 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00800000);
         if (evolutionBuilder_ == null) {
           evolution_ = com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance();
         } else {
           evolutionBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x01000000);
         if (rareBoosterPurchasesBuilder_ == null) {
           rareBoosterPurchases_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
         } else {
           rareBoosterPurchasesBuilder_.clear();
         }
         kabamNaid_ = "";
-        bitField0_ = (bitField0_ & ~0x02000000);
+        bitField0_ = (bitField0_ & ~0x04000000);
         if (invitesToMeForSlotsBuilder_ == null) {
           invitesToMeForSlots_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
         } else {
           invitesToMeForSlotsBuilder_.clear();
         }
         if (invitesFromMeForSlotsBuilder_ == null) {
           invitesFromMeForSlots_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
         } else {
           invitesFromMeForSlotsBuilder_.clear();
         }
@@ -24543,12 +24628,12 @@ public final class EventStartupProto {
         } else {
           staticDataStuffProtoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x10000000);
-        taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x20000000);
+        taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x40000000);
         if (userEventsBuilder_ == null) {
           userEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x40000000);
+          bitField0_ = (bitField0_ & ~0x80000000);
         } else {
           userEventsBuilder_.clear();
         }
@@ -24557,22 +24642,22 @@ public final class EventStartupProto {
         } else {
           curRaidClanInfoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x80000000);
+        bitField1_ = (bitField1_ & ~0x00000001);
         if (curRaidClanUserInfoBuilder_ == null) {
           curRaidClanUserInfo_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
         } else {
           curRaidClanUserInfoBuilder_.clear();
         }
         if (raidStageHistoryBuilder_ == null) {
           raidStageHistory_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
         } else {
           raidStageHistoryBuilder_.clear();
         }
         if (recentNBattlesBuilder_ == null) {
           recentNBattles_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
         } else {
           recentNBattlesBuilder_.clear();
         }
@@ -24581,40 +24666,40 @@ public final class EventStartupProto {
         } else {
           curTaskBuilder_.clear();
         }
-        bitField1_ = (bitField1_ & ~0x00000008);
+        bitField1_ = (bitField1_ & ~0x00000010);
         if (curTaskStagesBuilder_ == null) {
           curTaskStages_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000010);
+          bitField1_ = (bitField1_ & ~0x00000020);
         } else {
           curTaskStagesBuilder_.clear();
         }
         if (userAchievementsBuilder_ == null) {
           userAchievements_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000020);
+          bitField1_ = (bitField1_ & ~0x00000040);
         } else {
           userAchievementsBuilder_.clear();
         }
         if (userMiniJobProtosBuilder_ == null) {
           userMiniJobProtos_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000040);
+          bitField1_ = (bitField1_ & ~0x00000080);
         } else {
           userMiniJobProtosBuilder_.clear();
         }
         if (userItemsBuilder_ == null) {
           userItems_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000080);
+          bitField1_ = (bitField1_ & ~0x00000100);
         } else {
           userItemsBuilder_.clear();
         }
         if (clanHelpingsBuilder_ == null) {
           clanHelpings_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000100);
+          bitField1_ = (bitField1_ & ~0x00000200);
         } else {
           clanHelpingsBuilder_.clear();
         }
         if (clanInvitesBuilder_ == null) {
           clanInvites_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000200);
+          bitField1_ = (bitField1_ & ~0x00000400);
         } else {
           clanInvitesBuilder_.clear();
         }
@@ -24623,16 +24708,16 @@ public final class EventStartupProto {
         } else {
           clanDataBuilder_.clear();
         }
-        bitField1_ = (bitField1_ & ~0x00000400);
+        bitField1_ = (bitField1_ & ~0x00000800);
         if (itemsInUseBuilder_ == null) {
           itemsInUse_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00001000);
         } else {
           itemsInUseBuilder_.clear();
         }
         if (giftsBuilder_ == null) {
           gifts_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00001000);
+          bitField1_ = (bitField1_ & ~0x00002000);
         } else {
           giftsBuilder_.clear();
         }
@@ -24729,91 +24814,100 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.completedTaskIds_ = completedTaskIds_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (completedTasksBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+            completedTasks_ = java.util.Collections.unmodifiableList(completedTasks_);
+            bitField0_ = (bitField0_ & ~0x00000400);
+          }
+          result.completedTasks_ = completedTasks_;
+        } else {
+          result.completedTasks_ = completedTasksBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000040;
         }
         result.appStoreURL_ = appStoreURL_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00000080;
         }
         result.reviewPageURL_ = reviewPageURL_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00000100;
         }
         result.reviewPageConfirmationMessage_ = reviewPageConfirmationMessage_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00000200;
         }
         result.playerHasBoughtInAppPurchase_ = playerHasBoughtInAppPurchase_;
         if (attackNotificationsBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             attackNotifications_ = java.util.Collections.unmodifiableList(attackNotifications_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.attackNotifications_ = attackNotifications_;
         } else {
           result.attackNotifications_ = attackNotificationsBuilder_.build();
         }
         if (referralNotificationsBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((bitField0_ & 0x00010000) == 0x00010000)) {
             referralNotifications_ = java.util.Collections.unmodifiableList(referralNotifications_);
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           }
           result.referralNotifications_ = referralNotifications_;
         } else {
           result.referralNotifications_ = referralNotificationsBuilder_.build();
         }
-        if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (((bitField0_ & 0x00020000) == 0x00020000)) {
           noticesToPlayers_ = noticesToPlayers_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00020000);
         }
         result.noticesToPlayers_ = noticesToPlayers_;
         if (globalChatsBuilder_ == null) {
-          if (((bitField0_ & 0x00020000) == 0x00020000)) {
+          if (((bitField0_ & 0x00040000) == 0x00040000)) {
             globalChats_ = java.util.Collections.unmodifiableList(globalChats_);
-            bitField0_ = (bitField0_ & ~0x00020000);
+            bitField0_ = (bitField0_ & ~0x00040000);
           }
           result.globalChats_ = globalChats_;
         } else {
           result.globalChats_ = globalChatsBuilder_.build();
         }
         if (clanChatsBuilder_ == null) {
-          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+          if (((bitField0_ & 0x00080000) == 0x00080000)) {
             clanChats_ = java.util.Collections.unmodifiableList(clanChats_);
-            bitField0_ = (bitField0_ & ~0x00040000);
+            bitField0_ = (bitField0_ & ~0x00080000);
           }
           result.clanChats_ = clanChats_;
         } else {
           result.clanChats_ = clanChatsBuilder_.build();
         }
         if (pcppBuilder_ == null) {
-          if (((bitField0_ & 0x00080000) == 0x00080000)) {
+          if (((bitField0_ & 0x00100000) == 0x00100000)) {
             pcpp_ = java.util.Collections.unmodifiableList(pcpp_);
-            bitField0_ = (bitField0_ & ~0x00080000);
+            bitField0_ = (bitField0_ & ~0x00100000);
           }
           result.pcpp_ = pcpp_;
         } else {
           result.pcpp_ = pcppBuilder_.build();
         }
         if (usersMonstersBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          if (((bitField0_ & 0x00200000) == 0x00200000)) {
             usersMonsters_ = java.util.Collections.unmodifiableList(usersMonsters_);
-            bitField0_ = (bitField0_ & ~0x00100000);
+            bitField0_ = (bitField0_ & ~0x00200000);
           }
           result.usersMonsters_ = usersMonsters_;
         } else {
           result.usersMonsters_ = usersMonstersBuilder_.build();
         }
         if (monstersHealingBuilder_ == null) {
-          if (((bitField0_ & 0x00200000) == 0x00200000)) {
+          if (((bitField0_ & 0x00400000) == 0x00400000)) {
             monstersHealing_ = java.util.Collections.unmodifiableList(monstersHealing_);
-            bitField0_ = (bitField0_ & ~0x00200000);
+            bitField0_ = (bitField0_ & ~0x00400000);
           }
           result.monstersHealing_ = monstersHealing_;
         } else {
           result.monstersHealing_ = monstersHealingBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
           to_bitField0_ |= 0x00000400;
         }
         if (enhancementsBuilder_ == null) {
@@ -24821,7 +24915,7 @@ public final class EventStartupProto {
         } else {
           result.enhancements_ = enhancementsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+        if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
           to_bitField0_ |= 0x00000800;
         }
         if (evolutionBuilder_ == null) {
@@ -24830,37 +24924,37 @@ public final class EventStartupProto {
           result.evolution_ = evolutionBuilder_.build();
         }
         if (rareBoosterPurchasesBuilder_ == null) {
-          if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          if (((bitField0_ & 0x02000000) == 0x02000000)) {
             rareBoosterPurchases_ = java.util.Collections.unmodifiableList(rareBoosterPurchases_);
-            bitField0_ = (bitField0_ & ~0x01000000);
+            bitField0_ = (bitField0_ & ~0x02000000);
           }
           result.rareBoosterPurchases_ = rareBoosterPurchases_;
         } else {
           result.rareBoosterPurchases_ = rareBoosterPurchasesBuilder_.build();
         }
-        if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
+        if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
           to_bitField0_ |= 0x00001000;
         }
         result.kabamNaid_ = kabamNaid_;
         if (invitesToMeForSlotsBuilder_ == null) {
-          if (((bitField0_ & 0x04000000) == 0x04000000)) {
+          if (((bitField0_ & 0x08000000) == 0x08000000)) {
             invitesToMeForSlots_ = java.util.Collections.unmodifiableList(invitesToMeForSlots_);
-            bitField0_ = (bitField0_ & ~0x04000000);
+            bitField0_ = (bitField0_ & ~0x08000000);
           }
           result.invitesToMeForSlots_ = invitesToMeForSlots_;
         } else {
           result.invitesToMeForSlots_ = invitesToMeForSlotsBuilder_.build();
         }
         if (invitesFromMeForSlotsBuilder_ == null) {
-          if (((bitField0_ & 0x08000000) == 0x08000000)) {
+          if (((bitField0_ & 0x10000000) == 0x10000000)) {
             invitesFromMeForSlots_ = java.util.Collections.unmodifiableList(invitesFromMeForSlots_);
-            bitField0_ = (bitField0_ & ~0x08000000);
+            bitField0_ = (bitField0_ & ~0x10000000);
           }
           result.invitesFromMeForSlots_ = invitesFromMeForSlots_;
         } else {
           result.invitesFromMeForSlots_ = invitesFromMeForSlotsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x10000000) == 0x10000000)) {
+        if (((from_bitField0_ & 0x20000000) == 0x20000000)) {
           to_bitField0_ |= 0x00002000;
         }
         if (staticDataStuffProtoBuilder_ == null) {
@@ -24868,21 +24962,21 @@ public final class EventStartupProto {
         } else {
           result.staticDataStuffProto_ = staticDataStuffProtoBuilder_.build();
         }
-        if (((bitField0_ & 0x20000000) == 0x20000000)) {
+        if (((bitField0_ & 0x40000000) == 0x40000000)) {
           taskIdForCurrentCityBoss_ = java.util.Collections.unmodifiableList(taskIdForCurrentCityBoss_);
-          bitField0_ = (bitField0_ & ~0x20000000);
+          bitField0_ = (bitField0_ & ~0x40000000);
         }
         result.taskIdForCurrentCityBoss_ = taskIdForCurrentCityBoss_;
         if (userEventsBuilder_ == null) {
-          if (((bitField0_ & 0x40000000) == 0x40000000)) {
+          if (((bitField0_ & 0x80000000) == 0x80000000)) {
             userEvents_ = java.util.Collections.unmodifiableList(userEvents_);
-            bitField0_ = (bitField0_ & ~0x40000000);
+            bitField0_ = (bitField0_ & ~0x80000000);
           }
           result.userEvents_ = userEvents_;
         } else {
           result.userEvents_ = userEventsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x80000000) == 0x80000000)) {
+        if (((from_bitField1_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00004000;
         }
         if (curRaidClanInfoBuilder_ == null) {
@@ -24891,33 +24985,33 @@ public final class EventStartupProto {
           result.curRaidClanInfo_ = curRaidClanInfoBuilder_.build();
         }
         if (curRaidClanUserInfoBuilder_ == null) {
-          if (((bitField1_ & 0x00000001) == 0x00000001)) {
+          if (((bitField1_ & 0x00000002) == 0x00000002)) {
             curRaidClanUserInfo_ = java.util.Collections.unmodifiableList(curRaidClanUserInfo_);
-            bitField1_ = (bitField1_ & ~0x00000001);
+            bitField1_ = (bitField1_ & ~0x00000002);
           }
           result.curRaidClanUserInfo_ = curRaidClanUserInfo_;
         } else {
           result.curRaidClanUserInfo_ = curRaidClanUserInfoBuilder_.build();
         }
         if (raidStageHistoryBuilder_ == null) {
-          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+          if (((bitField1_ & 0x00000004) == 0x00000004)) {
             raidStageHistory_ = java.util.Collections.unmodifiableList(raidStageHistory_);
-            bitField1_ = (bitField1_ & ~0x00000002);
+            bitField1_ = (bitField1_ & ~0x00000004);
           }
           result.raidStageHistory_ = raidStageHistory_;
         } else {
           result.raidStageHistory_ = raidStageHistoryBuilder_.build();
         }
         if (recentNBattlesBuilder_ == null) {
-          if (((bitField1_ & 0x00000004) == 0x00000004)) {
+          if (((bitField1_ & 0x00000008) == 0x00000008)) {
             recentNBattles_ = java.util.Collections.unmodifiableList(recentNBattles_);
-            bitField1_ = (bitField1_ & ~0x00000004);
+            bitField1_ = (bitField1_ & ~0x00000008);
           }
           result.recentNBattles_ = recentNBattles_;
         } else {
           result.recentNBattles_ = recentNBattlesBuilder_.build();
         }
-        if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
+        if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00008000;
         }
         if (curTaskBuilder_ == null) {
@@ -24926,60 +25020,60 @@ public final class EventStartupProto {
           result.curTask_ = curTaskBuilder_.build();
         }
         if (curTaskStagesBuilder_ == null) {
-          if (((bitField1_ & 0x00000010) == 0x00000010)) {
+          if (((bitField1_ & 0x00000020) == 0x00000020)) {
             curTaskStages_ = java.util.Collections.unmodifiableList(curTaskStages_);
-            bitField1_ = (bitField1_ & ~0x00000010);
+            bitField1_ = (bitField1_ & ~0x00000020);
           }
           result.curTaskStages_ = curTaskStages_;
         } else {
           result.curTaskStages_ = curTaskStagesBuilder_.build();
         }
         if (userAchievementsBuilder_ == null) {
-          if (((bitField1_ & 0x00000020) == 0x00000020)) {
+          if (((bitField1_ & 0x00000040) == 0x00000040)) {
             userAchievements_ = java.util.Collections.unmodifiableList(userAchievements_);
-            bitField1_ = (bitField1_ & ~0x00000020);
+            bitField1_ = (bitField1_ & ~0x00000040);
           }
           result.userAchievements_ = userAchievements_;
         } else {
           result.userAchievements_ = userAchievementsBuilder_.build();
         }
         if (userMiniJobProtosBuilder_ == null) {
-          if (((bitField1_ & 0x00000040) == 0x00000040)) {
+          if (((bitField1_ & 0x00000080) == 0x00000080)) {
             userMiniJobProtos_ = java.util.Collections.unmodifiableList(userMiniJobProtos_);
-            bitField1_ = (bitField1_ & ~0x00000040);
+            bitField1_ = (bitField1_ & ~0x00000080);
           }
           result.userMiniJobProtos_ = userMiniJobProtos_;
         } else {
           result.userMiniJobProtos_ = userMiniJobProtosBuilder_.build();
         }
         if (userItemsBuilder_ == null) {
-          if (((bitField1_ & 0x00000080) == 0x00000080)) {
+          if (((bitField1_ & 0x00000100) == 0x00000100)) {
             userItems_ = java.util.Collections.unmodifiableList(userItems_);
-            bitField1_ = (bitField1_ & ~0x00000080);
+            bitField1_ = (bitField1_ & ~0x00000100);
           }
           result.userItems_ = userItems_;
         } else {
           result.userItems_ = userItemsBuilder_.build();
         }
         if (clanHelpingsBuilder_ == null) {
-          if (((bitField1_ & 0x00000100) == 0x00000100)) {
+          if (((bitField1_ & 0x00000200) == 0x00000200)) {
             clanHelpings_ = java.util.Collections.unmodifiableList(clanHelpings_);
-            bitField1_ = (bitField1_ & ~0x00000100);
+            bitField1_ = (bitField1_ & ~0x00000200);
           }
           result.clanHelpings_ = clanHelpings_;
         } else {
           result.clanHelpings_ = clanHelpingsBuilder_.build();
         }
         if (clanInvitesBuilder_ == null) {
-          if (((bitField1_ & 0x00000200) == 0x00000200)) {
+          if (((bitField1_ & 0x00000400) == 0x00000400)) {
             clanInvites_ = java.util.Collections.unmodifiableList(clanInvites_);
-            bitField1_ = (bitField1_ & ~0x00000200);
+            bitField1_ = (bitField1_ & ~0x00000400);
           }
           result.clanInvites_ = clanInvites_;
         } else {
           result.clanInvites_ = clanInvitesBuilder_.build();
         }
-        if (((from_bitField1_ & 0x00000400) == 0x00000400)) {
+        if (((from_bitField1_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00010000;
         }
         if (clanDataBuilder_ == null) {
@@ -24988,18 +25082,18 @@ public final class EventStartupProto {
           result.clanData_ = clanDataBuilder_.build();
         }
         if (itemsInUseBuilder_ == null) {
-          if (((bitField1_ & 0x00000800) == 0x00000800)) {
+          if (((bitField1_ & 0x00001000) == 0x00001000)) {
             itemsInUse_ = java.util.Collections.unmodifiableList(itemsInUse_);
-            bitField1_ = (bitField1_ & ~0x00000800);
+            bitField1_ = (bitField1_ & ~0x00001000);
           }
           result.itemsInUse_ = itemsInUse_;
         } else {
           result.itemsInUse_ = itemsInUseBuilder_.build();
         }
         if (giftsBuilder_ == null) {
-          if (((bitField1_ & 0x00001000) == 0x00001000)) {
+          if (((bitField1_ & 0x00002000) == 0x00002000)) {
             gifts_ = java.util.Collections.unmodifiableList(gifts_);
-            bitField1_ = (bitField1_ & ~0x00001000);
+            bitField1_ = (bitField1_ & ~0x00002000);
           }
           result.gifts_ = gifts_;
         } else {
@@ -25111,18 +25205,44 @@ public final class EventStartupProto {
           }
           onChanged();
         }
+        if (completedTasksBuilder_ == null) {
+          if (!other.completedTasks_.isEmpty()) {
+            if (completedTasks_.isEmpty()) {
+              completedTasks_ = other.completedTasks_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+            } else {
+              ensureCompletedTasksIsMutable();
+              completedTasks_.addAll(other.completedTasks_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.completedTasks_.isEmpty()) {
+            if (completedTasksBuilder_.isEmpty()) {
+              completedTasksBuilder_.dispose();
+              completedTasksBuilder_ = null;
+              completedTasks_ = other.completedTasks_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+              completedTasksBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getCompletedTasksFieldBuilder() : null;
+            } else {
+              completedTasksBuilder_.addAllMessages(other.completedTasks_);
+            }
+          }
+        }
         if (other.hasAppStoreURL()) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000800;
           appStoreURL_ = other.appStoreURL_;
           onChanged();
         }
         if (other.hasReviewPageURL()) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           reviewPageURL_ = other.reviewPageURL_;
           onChanged();
         }
         if (other.hasReviewPageConfirmationMessage()) {
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
           reviewPageConfirmationMessage_ = other.reviewPageConfirmationMessage_;
           onChanged();
         }
@@ -25133,7 +25253,7 @@ public final class EventStartupProto {
           if (!other.attackNotifications_.isEmpty()) {
             if (attackNotifications_.isEmpty()) {
               attackNotifications_ = other.attackNotifications_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureAttackNotificationsIsMutable();
               attackNotifications_.addAll(other.attackNotifications_);
@@ -25146,7 +25266,7 @@ public final class EventStartupProto {
               attackNotificationsBuilder_.dispose();
               attackNotificationsBuilder_ = null;
               attackNotifications_ = other.attackNotifications_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               attackNotificationsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAttackNotificationsFieldBuilder() : null;
@@ -25159,7 +25279,7 @@ public final class EventStartupProto {
           if (!other.referralNotifications_.isEmpty()) {
             if (referralNotifications_.isEmpty()) {
               referralNotifications_ = other.referralNotifications_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
             } else {
               ensureReferralNotificationsIsMutable();
               referralNotifications_.addAll(other.referralNotifications_);
@@ -25172,7 +25292,7 @@ public final class EventStartupProto {
               referralNotificationsBuilder_.dispose();
               referralNotificationsBuilder_ = null;
               referralNotifications_ = other.referralNotifications_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
               referralNotificationsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getReferralNotificationsFieldBuilder() : null;
@@ -25184,7 +25304,7 @@ public final class EventStartupProto {
         if (!other.noticesToPlayers_.isEmpty()) {
           if (noticesToPlayers_.isEmpty()) {
             noticesToPlayers_ = other.noticesToPlayers_;
-            bitField0_ = (bitField0_ & ~0x00010000);
+            bitField0_ = (bitField0_ & ~0x00020000);
           } else {
             ensureNoticesToPlayersIsMutable();
             noticesToPlayers_.addAll(other.noticesToPlayers_);
@@ -25195,7 +25315,7 @@ public final class EventStartupProto {
           if (!other.globalChats_.isEmpty()) {
             if (globalChats_.isEmpty()) {
               globalChats_ = other.globalChats_;
-              bitField0_ = (bitField0_ & ~0x00020000);
+              bitField0_ = (bitField0_ & ~0x00040000);
             } else {
               ensureGlobalChatsIsMutable();
               globalChats_.addAll(other.globalChats_);
@@ -25208,7 +25328,7 @@ public final class EventStartupProto {
               globalChatsBuilder_.dispose();
               globalChatsBuilder_ = null;
               globalChats_ = other.globalChats_;
-              bitField0_ = (bitField0_ & ~0x00020000);
+              bitField0_ = (bitField0_ & ~0x00040000);
               globalChatsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getGlobalChatsFieldBuilder() : null;
@@ -25221,7 +25341,7 @@ public final class EventStartupProto {
           if (!other.clanChats_.isEmpty()) {
             if (clanChats_.isEmpty()) {
               clanChats_ = other.clanChats_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
             } else {
               ensureClanChatsIsMutable();
               clanChats_.addAll(other.clanChats_);
@@ -25234,7 +25354,7 @@ public final class EventStartupProto {
               clanChatsBuilder_.dispose();
               clanChatsBuilder_ = null;
               clanChats_ = other.clanChats_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
               clanChatsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanChatsFieldBuilder() : null;
@@ -25247,7 +25367,7 @@ public final class EventStartupProto {
           if (!other.pcpp_.isEmpty()) {
             if (pcpp_.isEmpty()) {
               pcpp_ = other.pcpp_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
             } else {
               ensurePcppIsMutable();
               pcpp_.addAll(other.pcpp_);
@@ -25260,7 +25380,7 @@ public final class EventStartupProto {
               pcppBuilder_.dispose();
               pcppBuilder_ = null;
               pcpp_ = other.pcpp_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
               pcppBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPcppFieldBuilder() : null;
@@ -25273,7 +25393,7 @@ public final class EventStartupProto {
           if (!other.usersMonsters_.isEmpty()) {
             if (usersMonsters_.isEmpty()) {
               usersMonsters_ = other.usersMonsters_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
             } else {
               ensureUsersMonstersIsMutable();
               usersMonsters_.addAll(other.usersMonsters_);
@@ -25286,7 +25406,7 @@ public final class EventStartupProto {
               usersMonstersBuilder_.dispose();
               usersMonstersBuilder_ = null;
               usersMonsters_ = other.usersMonsters_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
               usersMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUsersMonstersFieldBuilder() : null;
@@ -25299,7 +25419,7 @@ public final class EventStartupProto {
           if (!other.monstersHealing_.isEmpty()) {
             if (monstersHealing_.isEmpty()) {
               monstersHealing_ = other.monstersHealing_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
             } else {
               ensureMonstersHealingIsMutable();
               monstersHealing_.addAll(other.monstersHealing_);
@@ -25312,7 +25432,7 @@ public final class EventStartupProto {
               monstersHealingBuilder_.dispose();
               monstersHealingBuilder_ = null;
               monstersHealing_ = other.monstersHealing_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
               monstersHealingBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMonstersHealingFieldBuilder() : null;
@@ -25331,7 +25451,7 @@ public final class EventStartupProto {
           if (!other.rareBoosterPurchases_.isEmpty()) {
             if (rareBoosterPurchases_.isEmpty()) {
               rareBoosterPurchases_ = other.rareBoosterPurchases_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
             } else {
               ensureRareBoosterPurchasesIsMutable();
               rareBoosterPurchases_.addAll(other.rareBoosterPurchases_);
@@ -25344,7 +25464,7 @@ public final class EventStartupProto {
               rareBoosterPurchasesBuilder_.dispose();
               rareBoosterPurchasesBuilder_ = null;
               rareBoosterPurchases_ = other.rareBoosterPurchases_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
               rareBoosterPurchasesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRareBoosterPurchasesFieldBuilder() : null;
@@ -25354,7 +25474,7 @@ public final class EventStartupProto {
           }
         }
         if (other.hasKabamNaid()) {
-          bitField0_ |= 0x02000000;
+          bitField0_ |= 0x04000000;
           kabamNaid_ = other.kabamNaid_;
           onChanged();
         }
@@ -25362,7 +25482,7 @@ public final class EventStartupProto {
           if (!other.invitesToMeForSlots_.isEmpty()) {
             if (invitesToMeForSlots_.isEmpty()) {
               invitesToMeForSlots_ = other.invitesToMeForSlots_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
             } else {
               ensureInvitesToMeForSlotsIsMutable();
               invitesToMeForSlots_.addAll(other.invitesToMeForSlots_);
@@ -25375,7 +25495,7 @@ public final class EventStartupProto {
               invitesToMeForSlotsBuilder_.dispose();
               invitesToMeForSlotsBuilder_ = null;
               invitesToMeForSlots_ = other.invitesToMeForSlots_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
               invitesToMeForSlotsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInvitesToMeForSlotsFieldBuilder() : null;
@@ -25388,7 +25508,7 @@ public final class EventStartupProto {
           if (!other.invitesFromMeForSlots_.isEmpty()) {
             if (invitesFromMeForSlots_.isEmpty()) {
               invitesFromMeForSlots_ = other.invitesFromMeForSlots_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
             } else {
               ensureInvitesFromMeForSlotsIsMutable();
               invitesFromMeForSlots_.addAll(other.invitesFromMeForSlots_);
@@ -25401,7 +25521,7 @@ public final class EventStartupProto {
               invitesFromMeForSlotsBuilder_.dispose();
               invitesFromMeForSlotsBuilder_ = null;
               invitesFromMeForSlots_ = other.invitesFromMeForSlots_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
               invitesFromMeForSlotsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getInvitesFromMeForSlotsFieldBuilder() : null;
@@ -25416,7 +25536,7 @@ public final class EventStartupProto {
         if (!other.taskIdForCurrentCityBoss_.isEmpty()) {
           if (taskIdForCurrentCityBoss_.isEmpty()) {
             taskIdForCurrentCityBoss_ = other.taskIdForCurrentCityBoss_;
-            bitField0_ = (bitField0_ & ~0x20000000);
+            bitField0_ = (bitField0_ & ~0x40000000);
           } else {
             ensureTaskIdForCurrentCityBossIsMutable();
             taskIdForCurrentCityBoss_.addAll(other.taskIdForCurrentCityBoss_);
@@ -25427,7 +25547,7 @@ public final class EventStartupProto {
           if (!other.userEvents_.isEmpty()) {
             if (userEvents_.isEmpty()) {
               userEvents_ = other.userEvents_;
-              bitField0_ = (bitField0_ & ~0x40000000);
+              bitField0_ = (bitField0_ & ~0x80000000);
             } else {
               ensureUserEventsIsMutable();
               userEvents_.addAll(other.userEvents_);
@@ -25440,7 +25560,7 @@ public final class EventStartupProto {
               userEventsBuilder_.dispose();
               userEventsBuilder_ = null;
               userEvents_ = other.userEvents_;
-              bitField0_ = (bitField0_ & ~0x40000000);
+              bitField0_ = (bitField0_ & ~0x80000000);
               userEventsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUserEventsFieldBuilder() : null;
@@ -25456,7 +25576,7 @@ public final class EventStartupProto {
           if (!other.curRaidClanUserInfo_.isEmpty()) {
             if (curRaidClanUserInfo_.isEmpty()) {
               curRaidClanUserInfo_ = other.curRaidClanUserInfo_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
             } else {
               ensureCurRaidClanUserInfoIsMutable();
               curRaidClanUserInfo_.addAll(other.curRaidClanUserInfo_);
@@ -25469,7 +25589,7 @@ public final class EventStartupProto {
               curRaidClanUserInfoBuilder_.dispose();
               curRaidClanUserInfoBuilder_ = null;
               curRaidClanUserInfo_ = other.curRaidClanUserInfo_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
               curRaidClanUserInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getCurRaidClanUserInfoFieldBuilder() : null;
@@ -25482,7 +25602,7 @@ public final class EventStartupProto {
           if (!other.raidStageHistory_.isEmpty()) {
             if (raidStageHistory_.isEmpty()) {
               raidStageHistory_ = other.raidStageHistory_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
             } else {
               ensureRaidStageHistoryIsMutable();
               raidStageHistory_.addAll(other.raidStageHistory_);
@@ -25495,7 +25615,7 @@ public final class EventStartupProto {
               raidStageHistoryBuilder_.dispose();
               raidStageHistoryBuilder_ = null;
               raidStageHistory_ = other.raidStageHistory_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
               raidStageHistoryBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRaidStageHistoryFieldBuilder() : null;
@@ -25508,7 +25628,7 @@ public final class EventStartupProto {
           if (!other.recentNBattles_.isEmpty()) {
             if (recentNBattles_.isEmpty()) {
               recentNBattles_ = other.recentNBattles_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
             } else {
               ensureRecentNBattlesIsMutable();
               recentNBattles_.addAll(other.recentNBattles_);
@@ -25521,7 +25641,7 @@ public final class EventStartupProto {
               recentNBattlesBuilder_.dispose();
               recentNBattlesBuilder_ = null;
               recentNBattles_ = other.recentNBattles_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
               recentNBattlesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRecentNBattlesFieldBuilder() : null;
@@ -25537,7 +25657,7 @@ public final class EventStartupProto {
           if (!other.curTaskStages_.isEmpty()) {
             if (curTaskStages_.isEmpty()) {
               curTaskStages_ = other.curTaskStages_;
-              bitField1_ = (bitField1_ & ~0x00000010);
+              bitField1_ = (bitField1_ & ~0x00000020);
             } else {
               ensureCurTaskStagesIsMutable();
               curTaskStages_.addAll(other.curTaskStages_);
@@ -25550,7 +25670,7 @@ public final class EventStartupProto {
               curTaskStagesBuilder_.dispose();
               curTaskStagesBuilder_ = null;
               curTaskStages_ = other.curTaskStages_;
-              bitField1_ = (bitField1_ & ~0x00000010);
+              bitField1_ = (bitField1_ & ~0x00000020);
               curTaskStagesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getCurTaskStagesFieldBuilder() : null;
@@ -25563,7 +25683,7 @@ public final class EventStartupProto {
           if (!other.userAchievements_.isEmpty()) {
             if (userAchievements_.isEmpty()) {
               userAchievements_ = other.userAchievements_;
-              bitField1_ = (bitField1_ & ~0x00000020);
+              bitField1_ = (bitField1_ & ~0x00000040);
             } else {
               ensureUserAchievementsIsMutable();
               userAchievements_.addAll(other.userAchievements_);
@@ -25576,7 +25696,7 @@ public final class EventStartupProto {
               userAchievementsBuilder_.dispose();
               userAchievementsBuilder_ = null;
               userAchievements_ = other.userAchievements_;
-              bitField1_ = (bitField1_ & ~0x00000020);
+              bitField1_ = (bitField1_ & ~0x00000040);
               userAchievementsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUserAchievementsFieldBuilder() : null;
@@ -25589,7 +25709,7 @@ public final class EventStartupProto {
           if (!other.userMiniJobProtos_.isEmpty()) {
             if (userMiniJobProtos_.isEmpty()) {
               userMiniJobProtos_ = other.userMiniJobProtos_;
-              bitField1_ = (bitField1_ & ~0x00000040);
+              bitField1_ = (bitField1_ & ~0x00000080);
             } else {
               ensureUserMiniJobProtosIsMutable();
               userMiniJobProtos_.addAll(other.userMiniJobProtos_);
@@ -25602,7 +25722,7 @@ public final class EventStartupProto {
               userMiniJobProtosBuilder_.dispose();
               userMiniJobProtosBuilder_ = null;
               userMiniJobProtos_ = other.userMiniJobProtos_;
-              bitField1_ = (bitField1_ & ~0x00000040);
+              bitField1_ = (bitField1_ & ~0x00000080);
               userMiniJobProtosBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUserMiniJobProtosFieldBuilder() : null;
@@ -25615,7 +25735,7 @@ public final class EventStartupProto {
           if (!other.userItems_.isEmpty()) {
             if (userItems_.isEmpty()) {
               userItems_ = other.userItems_;
-              bitField1_ = (bitField1_ & ~0x00000080);
+              bitField1_ = (bitField1_ & ~0x00000100);
             } else {
               ensureUserItemsIsMutable();
               userItems_.addAll(other.userItems_);
@@ -25628,7 +25748,7 @@ public final class EventStartupProto {
               userItemsBuilder_.dispose();
               userItemsBuilder_ = null;
               userItems_ = other.userItems_;
-              bitField1_ = (bitField1_ & ~0x00000080);
+              bitField1_ = (bitField1_ & ~0x00000100);
               userItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUserItemsFieldBuilder() : null;
@@ -25641,7 +25761,7 @@ public final class EventStartupProto {
           if (!other.clanHelpings_.isEmpty()) {
             if (clanHelpings_.isEmpty()) {
               clanHelpings_ = other.clanHelpings_;
-              bitField1_ = (bitField1_ & ~0x00000100);
+              bitField1_ = (bitField1_ & ~0x00000200);
             } else {
               ensureClanHelpingsIsMutable();
               clanHelpings_.addAll(other.clanHelpings_);
@@ -25654,7 +25774,7 @@ public final class EventStartupProto {
               clanHelpingsBuilder_.dispose();
               clanHelpingsBuilder_ = null;
               clanHelpings_ = other.clanHelpings_;
-              bitField1_ = (bitField1_ & ~0x00000100);
+              bitField1_ = (bitField1_ & ~0x00000200);
               clanHelpingsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanHelpingsFieldBuilder() : null;
@@ -25667,7 +25787,7 @@ public final class EventStartupProto {
           if (!other.clanInvites_.isEmpty()) {
             if (clanInvites_.isEmpty()) {
               clanInvites_ = other.clanInvites_;
-              bitField1_ = (bitField1_ & ~0x00000200);
+              bitField1_ = (bitField1_ & ~0x00000400);
             } else {
               ensureClanInvitesIsMutable();
               clanInvites_.addAll(other.clanInvites_);
@@ -25680,7 +25800,7 @@ public final class EventStartupProto {
               clanInvitesBuilder_.dispose();
               clanInvitesBuilder_ = null;
               clanInvites_ = other.clanInvites_;
-              bitField1_ = (bitField1_ & ~0x00000200);
+              bitField1_ = (bitField1_ & ~0x00000400);
               clanInvitesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanInvitesFieldBuilder() : null;
@@ -25696,7 +25816,7 @@ public final class EventStartupProto {
           if (!other.itemsInUse_.isEmpty()) {
             if (itemsInUse_.isEmpty()) {
               itemsInUse_ = other.itemsInUse_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00001000);
             } else {
               ensureItemsInUseIsMutable();
               itemsInUse_.addAll(other.itemsInUse_);
@@ -25709,7 +25829,7 @@ public final class EventStartupProto {
               itemsInUseBuilder_.dispose();
               itemsInUseBuilder_ = null;
               itemsInUse_ = other.itemsInUse_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00001000);
               itemsInUseBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getItemsInUseFieldBuilder() : null;
@@ -25722,7 +25842,7 @@ public final class EventStartupProto {
           if (!other.gifts_.isEmpty()) {
             if (gifts_.isEmpty()) {
               gifts_ = other.gifts_;
-              bitField1_ = (bitField1_ & ~0x00001000);
+              bitField1_ = (bitField1_ & ~0x00002000);
             } else {
               ensureGiftsIsMutable();
               gifts_.addAll(other.gifts_);
@@ -25735,7 +25855,7 @@ public final class EventStartupProto {
               giftsBuilder_.dispose();
               giftsBuilder_ = null;
               gifts_ = other.gifts_;
-              bitField1_ = (bitField1_ & ~0x00001000);
+              bitField1_ = (bitField1_ & ~0x00002000);
               giftsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getGiftsFieldBuilder() : null;
@@ -26848,28 +26968,28 @@ public final class EventStartupProto {
          }
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public java.util.List<java.lang.Integer>
+      @java.lang.Deprecated public java.util.List<java.lang.Integer>
           getCompletedTaskIdsList() {
         return java.util.Collections.unmodifiableList(completedTaskIds_);
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public int getCompletedTaskIdsCount() {
+      @java.lang.Deprecated public int getCompletedTaskIdsCount() {
         return completedTaskIds_.size();
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public int getCompletedTaskIds(int index) {
+      @java.lang.Deprecated public int getCompletedTaskIds(int index) {
         return completedTaskIds_.get(index);
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public Builder setCompletedTaskIds(
+      @java.lang.Deprecated public Builder setCompletedTaskIds(
           int index, int value) {
         ensureCompletedTaskIdsIsMutable();
         completedTaskIds_.set(index, value);
@@ -26877,18 +26997,18 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public Builder addCompletedTaskIds(int value) {
+      @java.lang.Deprecated public Builder addCompletedTaskIds(int value) {
         ensureCompletedTaskIdsIsMutable();
         completedTaskIds_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public Builder addAllCompletedTaskIds(
+      @java.lang.Deprecated public Builder addAllCompletedTaskIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureCompletedTaskIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -26897,13 +27017,253 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated int32 completedTaskIds = 8;</code>
+       * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
        */
-      public Builder clearCompletedTaskIds() {
+      @java.lang.Deprecated public Builder clearCompletedTaskIds() {
         completedTaskIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> completedTasks_ =
+        java.util.Collections.emptyList();
+      private void ensureCompletedTasksIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          completedTasks_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.UserTaskCompletedProto>(completedTasks_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> completedTasksBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> getCompletedTasksList() {
+        if (completedTasksBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(completedTasks_);
+        } else {
+          return completedTasksBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public int getCompletedTasksCount() {
+        if (completedTasksBuilder_ == null) {
+          return completedTasks_.size();
+        } else {
+          return completedTasksBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto getCompletedTasks(int index) {
+        if (completedTasksBuilder_ == null) {
+          return completedTasks_.get(index);
+        } else {
+          return completedTasksBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder setCompletedTasks(
+          int index, com.lvl6.proto.TaskProto.UserTaskCompletedProto value) {
+        if (completedTasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCompletedTasksIsMutable();
+          completedTasks_.set(index, value);
+          onChanged();
+        } else {
+          completedTasksBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder setCompletedTasks(
+          int index, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder builderForValue) {
+        if (completedTasksBuilder_ == null) {
+          ensureCompletedTasksIsMutable();
+          completedTasks_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          completedTasksBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder addCompletedTasks(com.lvl6.proto.TaskProto.UserTaskCompletedProto value) {
+        if (completedTasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCompletedTasksIsMutable();
+          completedTasks_.add(value);
+          onChanged();
+        } else {
+          completedTasksBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder addCompletedTasks(
+          int index, com.lvl6.proto.TaskProto.UserTaskCompletedProto value) {
+        if (completedTasksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCompletedTasksIsMutable();
+          completedTasks_.add(index, value);
+          onChanged();
+        } else {
+          completedTasksBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder addCompletedTasks(
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder builderForValue) {
+        if (completedTasksBuilder_ == null) {
+          ensureCompletedTasksIsMutable();
+          completedTasks_.add(builderForValue.build());
+          onChanged();
+        } else {
+          completedTasksBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder addCompletedTasks(
+          int index, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder builderForValue) {
+        if (completedTasksBuilder_ == null) {
+          ensureCompletedTasksIsMutable();
+          completedTasks_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          completedTasksBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder addAllCompletedTasks(
+          java.lang.Iterable<? extends com.lvl6.proto.TaskProto.UserTaskCompletedProto> values) {
+        if (completedTasksBuilder_ == null) {
+          ensureCompletedTasksIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, completedTasks_);
+          onChanged();
+        } else {
+          completedTasksBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder clearCompletedTasks() {
+        if (completedTasksBuilder_ == null) {
+          completedTasks_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+          onChanged();
+        } else {
+          completedTasksBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public Builder removeCompletedTasks(int index) {
+        if (completedTasksBuilder_ == null) {
+          ensureCompletedTasksIsMutable();
+          completedTasks_.remove(index);
+          onChanged();
+        } else {
+          completedTasksBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder getCompletedTasksBuilder(
+          int index) {
+        return getCompletedTasksFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getCompletedTasksOrBuilder(
+          int index) {
+        if (completedTasksBuilder_ == null) {
+          return completedTasks_.get(index);  } else {
+          return completedTasksBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> 
+           getCompletedTasksOrBuilderList() {
+        if (completedTasksBuilder_ != null) {
+          return completedTasksBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(completedTasks_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder addCompletedTasksBuilder() {
+        return getCompletedTasksFieldBuilder().addBuilder(
+            com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder addCompletedTasksBuilder(
+          int index) {
+        return getCompletedTasksFieldBuilder().addBuilder(
+            index, com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
+       */
+      public java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder> 
+           getCompletedTasksBuilderList() {
+        return getCompletedTasksFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> 
+          getCompletedTasksFieldBuilder() {
+        if (completedTasksBuilder_ == null) {
+          completedTasksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder>(
+                  completedTasks_,
+                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  getParentForChildren(),
+                  isClean());
+          completedTasks_ = null;
+        }
+        return completedTasksBuilder_;
       }
 
       private java.lang.Object appStoreURL_ = "";
@@ -26911,7 +27271,7 @@ public final class EventStartupProto {
        * <code>optional string appStoreURL = 9;</code>
        */
       public boolean hasAppStoreURL() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional string appStoreURL = 9;</code>
@@ -26954,7 +27314,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         appStoreURL_ = value;
         onChanged();
         return this;
@@ -26963,7 +27323,7 @@ public final class EventStartupProto {
        * <code>optional string appStoreURL = 9;</code>
        */
       public Builder clearAppStoreURL() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         appStoreURL_ = getDefaultInstance().getAppStoreURL();
         onChanged();
         return this;
@@ -26976,7 +27336,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         appStoreURL_ = value;
         onChanged();
         return this;
@@ -26987,7 +27347,7 @@ public final class EventStartupProto {
        * <code>optional string reviewPageURL = 10;</code>
        */
       public boolean hasReviewPageURL() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional string reviewPageURL = 10;</code>
@@ -27030,7 +27390,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         reviewPageURL_ = value;
         onChanged();
         return this;
@@ -27039,7 +27399,7 @@ public final class EventStartupProto {
        * <code>optional string reviewPageURL = 10;</code>
        */
       public Builder clearReviewPageURL() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         reviewPageURL_ = getDefaultInstance().getReviewPageURL();
         onChanged();
         return this;
@@ -27052,7 +27412,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         reviewPageURL_ = value;
         onChanged();
         return this;
@@ -27063,7 +27423,7 @@ public final class EventStartupProto {
        * <code>optional string reviewPageConfirmationMessage = 11;</code>
        */
       public boolean hasReviewPageConfirmationMessage() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional string reviewPageConfirmationMessage = 11;</code>
@@ -27106,7 +27466,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00001000;
+  bitField0_ |= 0x00002000;
         reviewPageConfirmationMessage_ = value;
         onChanged();
         return this;
@@ -27115,7 +27475,7 @@ public final class EventStartupProto {
        * <code>optional string reviewPageConfirmationMessage = 11;</code>
        */
       public Builder clearReviewPageConfirmationMessage() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         reviewPageConfirmationMessage_ = getDefaultInstance().getReviewPageConfirmationMessage();
         onChanged();
         return this;
@@ -27128,7 +27488,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00001000;
+  bitField0_ |= 0x00002000;
         reviewPageConfirmationMessage_ = value;
         onChanged();
         return this;
@@ -27139,7 +27499,7 @@ public final class EventStartupProto {
        * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
        */
       public boolean hasPlayerHasBoughtInAppPurchase() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
        * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
@@ -27151,7 +27511,7 @@ public final class EventStartupProto {
        * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
        */
       public Builder setPlayerHasBoughtInAppPurchase(boolean value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         playerHasBoughtInAppPurchase_ = value;
         onChanged();
         return this;
@@ -27160,7 +27520,7 @@ public final class EventStartupProto {
        * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
        */
       public Builder clearPlayerHasBoughtInAppPurchase() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         playerHasBoughtInAppPurchase_ = false;
         onChanged();
         return this;
@@ -27169,9 +27529,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> attackNotifications_ =
         java.util.Collections.emptyList();
       private void ensureAttackNotificationsIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           attackNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto>(attackNotifications_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
 
@@ -27321,7 +27681,7 @@ public final class EventStartupProto {
       public Builder clearAttackNotifications() {
         if (attackNotificationsBuilder_ == null) {
           attackNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           attackNotificationsBuilder_.clear();
@@ -27398,7 +27758,7 @@ public final class EventStartupProto {
           attackNotificationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder>(
                   attackNotifications_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           attackNotifications_ = null;
@@ -27409,9 +27769,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> referralNotifications_ =
         java.util.Collections.emptyList();
       private void ensureReferralNotificationsIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           referralNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto>(referralNotifications_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
 
@@ -27561,7 +27921,7 @@ public final class EventStartupProto {
       public Builder clearReferralNotifications() {
         if (referralNotificationsBuilder_ == null) {
           referralNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           onChanged();
         } else {
           referralNotificationsBuilder_.clear();
@@ -27638,7 +27998,7 @@ public final class EventStartupProto {
           referralNotificationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder>(
                   referralNotifications_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  ((bitField0_ & 0x00010000) == 0x00010000),
                   getParentForChildren(),
                   isClean());
           referralNotifications_ = null;
@@ -27648,9 +28008,9 @@ public final class EventStartupProto {
 
       private com.google.protobuf.LazyStringList noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureNoticesToPlayersIsMutable() {
-        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
           noticesToPlayers_ = new com.google.protobuf.LazyStringArrayList(noticesToPlayers_);
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00020000;
          }
       }
       /**
@@ -27721,7 +28081,7 @@ public final class EventStartupProto {
        */
       public Builder clearNoticesToPlayers() {
         noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         onChanged();
         return this;
       }
@@ -27742,9 +28102,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> globalChats_ =
         java.util.Collections.emptyList();
       private void ensureGlobalChatsIsMutable() {
-        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
+        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
           globalChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>(globalChats_);
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00040000;
          }
       }
 
@@ -27894,7 +28254,7 @@ public final class EventStartupProto {
       public Builder clearGlobalChats() {
         if (globalChatsBuilder_ == null) {
           globalChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00040000);
           onChanged();
         } else {
           globalChatsBuilder_.clear();
@@ -27971,7 +28331,7 @@ public final class EventStartupProto {
           globalChatsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder>(
                   globalChats_,
-                  ((bitField0_ & 0x00020000) == 0x00020000),
+                  ((bitField0_ & 0x00040000) == 0x00040000),
                   getParentForChildren(),
                   isClean());
           globalChats_ = null;
@@ -27982,9 +28342,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_ =
         java.util.Collections.emptyList();
       private void ensureClanChatsIsMutable() {
-        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
           clanChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>(clanChats_);
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00080000;
          }
       }
 
@@ -28134,7 +28494,7 @@ public final class EventStartupProto {
       @java.lang.Deprecated public Builder clearClanChats() {
         if (clanChatsBuilder_ == null) {
           clanChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00080000);
           onChanged();
         } else {
           clanChatsBuilder_.clear();
@@ -28211,7 +28571,7 @@ public final class EventStartupProto {
           clanChatsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder>(
                   clanChats_,
-                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  ((bitField0_ & 0x00080000) == 0x00080000),
                   getParentForChildren(),
                   isClean());
           clanChats_ = null;
@@ -28222,9 +28582,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> pcpp_ =
         java.util.Collections.emptyList();
       private void ensurePcppIsMutable() {
-        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
           pcpp_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>(pcpp_);
-          bitField0_ |= 0x00080000;
+          bitField0_ |= 0x00100000;
          }
       }
 
@@ -28418,7 +28778,7 @@ public final class EventStartupProto {
       public Builder clearPcpp() {
         if (pcppBuilder_ == null) {
           pcpp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
           onChanged();
         } else {
           pcppBuilder_.clear();
@@ -28523,7 +28883,7 @@ public final class EventStartupProto {
           pcppBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder>(
                   pcpp_,
-                  ((bitField0_ & 0x00080000) == 0x00080000),
+                  ((bitField0_ & 0x00100000) == 0x00100000),
                   getParentForChildren(),
                   isClean());
           pcpp_ = null;
@@ -28534,9 +28894,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> usersMonsters_ =
         java.util.Collections.emptyList();
       private void ensureUsersMonstersIsMutable() {
-        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
           usersMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(usersMonsters_);
-          bitField0_ |= 0x00100000;
+          bitField0_ |= 0x00200000;
          }
       }
 
@@ -28686,7 +29046,7 @@ public final class EventStartupProto {
       public Builder clearUsersMonsters() {
         if (usersMonstersBuilder_ == null) {
           usersMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
           onChanged();
         } else {
           usersMonstersBuilder_.clear();
@@ -28763,7 +29123,7 @@ public final class EventStartupProto {
           usersMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
                   usersMonsters_,
-                  ((bitField0_ & 0x00100000) == 0x00100000),
+                  ((bitField0_ & 0x00200000) == 0x00200000),
                   getParentForChildren(),
                   isClean());
           usersMonsters_ = null;
@@ -28774,9 +29134,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> monstersHealing_ =
         java.util.Collections.emptyList();
       private void ensureMonstersHealingIsMutable() {
-        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
           monstersHealing_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto>(monstersHealing_);
-          bitField0_ |= 0x00200000;
+          bitField0_ |= 0x00400000;
          }
       }
 
@@ -28926,7 +29286,7 @@ public final class EventStartupProto {
       public Builder clearMonstersHealing() {
         if (monstersHealingBuilder_ == null) {
           monstersHealing_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
           onChanged();
         } else {
           monstersHealingBuilder_.clear();
@@ -29003,7 +29363,7 @@ public final class EventStartupProto {
           monstersHealingBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder>(
                   monstersHealing_,
-                  ((bitField0_ & 0x00200000) == 0x00200000),
+                  ((bitField0_ & 0x00400000) == 0x00400000),
                   getParentForChildren(),
                   isClean());
           monstersHealing_ = null;
@@ -29018,7 +29378,7 @@ public final class EventStartupProto {
        * <code>optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;</code>
        */
       public boolean hasEnhancements() {
-        return ((bitField0_ & 0x00400000) == 0x00400000);
+        return ((bitField0_ & 0x00800000) == 0x00800000);
       }
       /**
        * <code>optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;</code>
@@ -29043,7 +29403,7 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00800000;
         return this;
       }
       /**
@@ -29057,7 +29417,7 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00800000;
         return this;
       }
       /**
@@ -29065,7 +29425,7 @@ public final class EventStartupProto {
        */
       public Builder mergeEnhancements(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
         if (enhancementsBuilder_ == null) {
-          if (((bitField0_ & 0x00400000) == 0x00400000) &&
+          if (((bitField0_ & 0x00800000) == 0x00800000) &&
               enhancements_ != com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance()) {
             enhancements_ =
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.newBuilder(enhancements_).mergeFrom(value).buildPartial();
@@ -29076,7 +29436,7 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00800000;
         return this;
       }
       /**
@@ -29089,14 +29449,14 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00800000);
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;</code>
        */
       public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder getEnhancementsBuilder() {
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00800000;
         onChanged();
         return getEnhancementsFieldBuilder().getBuilder();
       }
@@ -29134,7 +29494,7 @@ public final class EventStartupProto {
        * <code>optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;</code>
        */
       public boolean hasEvolution() {
-        return ((bitField0_ & 0x00800000) == 0x00800000);
+        return ((bitField0_ & 0x01000000) == 0x01000000);
       }
       /**
        * <code>optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;</code>
@@ -29159,7 +29519,7 @@ public final class EventStartupProto {
         } else {
           evolutionBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x01000000;
         return this;
       }
       /**
@@ -29173,7 +29533,7 @@ public final class EventStartupProto {
         } else {
           evolutionBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x01000000;
         return this;
       }
       /**
@@ -29181,7 +29541,7 @@ public final class EventStartupProto {
        */
       public Builder mergeEvolution(com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto value) {
         if (evolutionBuilder_ == null) {
-          if (((bitField0_ & 0x00800000) == 0x00800000) &&
+          if (((bitField0_ & 0x01000000) == 0x01000000) &&
               evolution_ != com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance()) {
             evolution_ =
               com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.newBuilder(evolution_).mergeFrom(value).buildPartial();
@@ -29192,7 +29552,7 @@ public final class EventStartupProto {
         } else {
           evolutionBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x01000000;
         return this;
       }
       /**
@@ -29205,14 +29565,14 @@ public final class EventStartupProto {
         } else {
           evolutionBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x01000000);
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;</code>
        */
       public com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder getEvolutionBuilder() {
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x01000000;
         onChanged();
         return getEvolutionFieldBuilder().getBuilder();
       }
@@ -29246,9 +29606,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> rareBoosterPurchases_ =
         java.util.Collections.emptyList();
       private void ensureRareBoosterPurchasesIsMutable() {
-        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
           rareBoosterPurchases_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto>(rareBoosterPurchases_);
-          bitField0_ |= 0x01000000;
+          bitField0_ |= 0x02000000;
          }
       }
 
@@ -29398,7 +29758,7 @@ public final class EventStartupProto {
       public Builder clearRareBoosterPurchases() {
         if (rareBoosterPurchasesBuilder_ == null) {
           rareBoosterPurchases_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
           onChanged();
         } else {
           rareBoosterPurchasesBuilder_.clear();
@@ -29475,7 +29835,7 @@ public final class EventStartupProto {
           rareBoosterPurchasesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.Builder, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder>(
                   rareBoosterPurchases_,
-                  ((bitField0_ & 0x01000000) == 0x01000000),
+                  ((bitField0_ & 0x02000000) == 0x02000000),
                   getParentForChildren(),
                   isClean());
           rareBoosterPurchases_ = null;
@@ -29488,7 +29848,7 @@ public final class EventStartupProto {
        * <code>optional string kabamNaid = 23;</code>
        */
       public boolean hasKabamNaid() {
-        return ((bitField0_ & 0x02000000) == 0x02000000);
+        return ((bitField0_ & 0x04000000) == 0x04000000);
       }
       /**
        * <code>optional string kabamNaid = 23;</code>
@@ -29531,7 +29891,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x02000000;
+  bitField0_ |= 0x04000000;
         kabamNaid_ = value;
         onChanged();
         return this;
@@ -29540,7 +29900,7 @@ public final class EventStartupProto {
        * <code>optional string kabamNaid = 23;</code>
        */
       public Builder clearKabamNaid() {
-        bitField0_ = (bitField0_ & ~0x02000000);
+        bitField0_ = (bitField0_ & ~0x04000000);
         kabamNaid_ = getDefaultInstance().getKabamNaid();
         onChanged();
         return this;
@@ -29553,7 +29913,7 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x02000000;
+  bitField0_ |= 0x04000000;
         kabamNaid_ = value;
         onChanged();
         return this;
@@ -29562,9 +29922,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesToMeForSlots_ =
         java.util.Collections.emptyList();
       private void ensureInvitesToMeForSlotsIsMutable() {
-        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
           invitesToMeForSlots_ = new java.util.ArrayList<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto>(invitesToMeForSlots_);
-          bitField0_ |= 0x04000000;
+          bitField0_ |= 0x08000000;
          }
       }
 
@@ -29769,7 +30129,7 @@ public final class EventStartupProto {
       public Builder clearInvitesToMeForSlots() {
         if (invitesToMeForSlotsBuilder_ == null) {
           invitesToMeForSlots_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
           onChanged();
         } else {
           invitesToMeForSlotsBuilder_.clear();
@@ -29881,7 +30241,7 @@ public final class EventStartupProto {
           invitesToMeForSlotsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto, com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.Builder, com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder>(
                   invitesToMeForSlots_,
-                  ((bitField0_ & 0x04000000) == 0x04000000),
+                  ((bitField0_ & 0x08000000) == 0x08000000),
                   getParentForChildren(),
                   isClean());
           invitesToMeForSlots_ = null;
@@ -29892,9 +30252,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesFromMeForSlots_ =
         java.util.Collections.emptyList();
       private void ensureInvitesFromMeForSlotsIsMutable() {
-        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
+        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
           invitesFromMeForSlots_ = new java.util.ArrayList<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto>(invitesFromMeForSlots_);
-          bitField0_ |= 0x08000000;
+          bitField0_ |= 0x10000000;
          }
       }
 
@@ -30099,7 +30459,7 @@ public final class EventStartupProto {
       public Builder clearInvitesFromMeForSlots() {
         if (invitesFromMeForSlotsBuilder_ == null) {
           invitesFromMeForSlots_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
           onChanged();
         } else {
           invitesFromMeForSlotsBuilder_.clear();
@@ -30211,7 +30571,7 @@ public final class EventStartupProto {
           invitesFromMeForSlotsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto, com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.Builder, com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder>(
                   invitesFromMeForSlots_,
-                  ((bitField0_ & 0x08000000) == 0x08000000),
+                  ((bitField0_ & 0x10000000) == 0x10000000),
                   getParentForChildren(),
                   isClean());
           invitesFromMeForSlots_ = null;
@@ -30226,7 +30586,7 @@ public final class EventStartupProto {
        * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;</code>
        */
       public boolean hasStaticDataStuffProto() {
-        return ((bitField0_ & 0x10000000) == 0x10000000);
+        return ((bitField0_ & 0x20000000) == 0x20000000);
       }
       /**
        * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;</code>
@@ -30251,7 +30611,7 @@ public final class EventStartupProto {
         } else {
           staticDataStuffProtoBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x10000000;
+        bitField0_ |= 0x20000000;
         return this;
       }
       /**
@@ -30265,7 +30625,7 @@ public final class EventStartupProto {
         } else {
           staticDataStuffProtoBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x10000000;
+        bitField0_ |= 0x20000000;
         return this;
       }
       /**
@@ -30273,7 +30633,7 @@ public final class EventStartupProto {
        */
       public Builder mergeStaticDataStuffProto(com.lvl6.proto.StaticDataStuffProto.StaticDataProto value) {
         if (staticDataStuffProtoBuilder_ == null) {
-          if (((bitField0_ & 0x10000000) == 0x10000000) &&
+          if (((bitField0_ & 0x20000000) == 0x20000000) &&
               staticDataStuffProto_ != com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance()) {
             staticDataStuffProto_ =
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.newBuilder(staticDataStuffProto_).mergeFrom(value).buildPartial();
@@ -30284,7 +30644,7 @@ public final class EventStartupProto {
         } else {
           staticDataStuffProtoBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x10000000;
+        bitField0_ |= 0x20000000;
         return this;
       }
       /**
@@ -30297,14 +30657,14 @@ public final class EventStartupProto {
         } else {
           staticDataStuffProtoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x10000000);
+        bitField0_ = (bitField0_ & ~0x20000000);
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;</code>
        */
       public com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder getStaticDataStuffProtoBuilder() {
-        bitField0_ |= 0x10000000;
+        bitField0_ |= 0x20000000;
         onChanged();
         return getStaticDataStuffProtoFieldBuilder().getBuilder();
       }
@@ -30337,9 +30697,9 @@ public final class EventStartupProto {
 
       private java.util.List<java.lang.Integer> taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();
       private void ensureTaskIdForCurrentCityBossIsMutable() {
-        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
           taskIdForCurrentCityBoss_ = new java.util.ArrayList<java.lang.Integer>(taskIdForCurrentCityBoss_);
-          bitField0_ |= 0x20000000;
+          bitField0_ |= 0x40000000;
          }
       }
       /**
@@ -30431,7 +30791,7 @@ public final class EventStartupProto {
        */
       public Builder clearTaskIdForCurrentCityBoss() {
         taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x20000000);
+        bitField0_ = (bitField0_ & ~0x40000000);
         onChanged();
         return this;
       }
@@ -30439,9 +30799,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.TaskProto.UserPersistentEventProto> userEvents_ =
         java.util.Collections.emptyList();
       private void ensureUserEventsIsMutable() {
-        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
           userEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.UserPersistentEventProto>(userEvents_);
-          bitField0_ |= 0x40000000;
+          bitField0_ |= 0x80000000;
          }
       }
 
@@ -30635,7 +30995,7 @@ public final class EventStartupProto {
       public Builder clearUserEvents() {
         if (userEventsBuilder_ == null) {
           userEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x40000000);
+          bitField0_ = (bitField0_ & ~0x80000000);
           onChanged();
         } else {
           userEventsBuilder_.clear();
@@ -30740,7 +31100,7 @@ public final class EventStartupProto {
           userEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.TaskProto.UserPersistentEventProto, com.lvl6.proto.TaskProto.UserPersistentEventProto.Builder, com.lvl6.proto.TaskProto.UserPersistentEventProtoOrBuilder>(
                   userEvents_,
-                  ((bitField0_ & 0x40000000) == 0x40000000),
+                  ((bitField0_ & 0x80000000) == 0x80000000),
                   getParentForChildren(),
                   isClean());
           userEvents_ = null;
@@ -30759,7 +31119,7 @@ public final class EventStartupProto {
        * </pre>
        */
       public boolean hasCurRaidClanInfo() {
-        return ((bitField0_ & 0x80000000) == 0x80000000);
+        return ((bitField1_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;</code>
@@ -30792,7 +31152,7 @@ public final class EventStartupProto {
         } else {
           curRaidClanInfoBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x80000000;
+        bitField1_ |= 0x00000001;
         return this;
       }
       /**
@@ -30810,7 +31170,7 @@ public final class EventStartupProto {
         } else {
           curRaidClanInfoBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x80000000;
+        bitField1_ |= 0x00000001;
         return this;
       }
       /**
@@ -30822,7 +31182,7 @@ public final class EventStartupProto {
        */
       public Builder mergeCurRaidClanInfo(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
         if (curRaidClanInfoBuilder_ == null) {
-          if (((bitField0_ & 0x80000000) == 0x80000000) &&
+          if (((bitField1_ & 0x00000001) == 0x00000001) &&
               curRaidClanInfo_ != com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance()) {
             curRaidClanInfo_ =
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder(curRaidClanInfo_).mergeFrom(value).buildPartial();
@@ -30833,7 +31193,7 @@ public final class EventStartupProto {
         } else {
           curRaidClanInfoBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x80000000;
+        bitField1_ |= 0x00000001;
         return this;
       }
       /**
@@ -30850,7 +31210,7 @@ public final class EventStartupProto {
         } else {
           curRaidClanInfoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x80000000);
+        bitField1_ = (bitField1_ & ~0x00000001);
         return this;
       }
       /**
@@ -30861,7 +31221,7 @@ public final class EventStartupProto {
        * </pre>
        */
       public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder getCurRaidClanInfoBuilder() {
-        bitField0_ |= 0x80000000;
+        bitField1_ |= 0x00000001;
         onChanged();
         return getCurRaidClanInfoFieldBuilder().getBuilder();
       }
@@ -30903,9 +31263,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> curRaidClanUserInfo_ =
         java.util.Collections.emptyList();
       private void ensureCurRaidClanUserInfoIsMutable() {
-        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
           curRaidClanUserInfo_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto>(curRaidClanUserInfo_);
-          bitField1_ |= 0x00000001;
+          bitField1_ |= 0x00000002;
          }
       }
 
@@ -31055,7 +31415,7 @@ public final class EventStartupProto {
       public Builder clearCurRaidClanUserInfo() {
         if (curRaidClanUserInfoBuilder_ == null) {
           curRaidClanUserInfo_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
           onChanged();
         } else {
           curRaidClanUserInfoBuilder_.clear();
@@ -31132,7 +31492,7 @@ public final class EventStartupProto {
           curRaidClanUserInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder>(
                   curRaidClanUserInfo_,
-                  ((bitField1_ & 0x00000001) == 0x00000001),
+                  ((bitField1_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           curRaidClanUserInfo_ = null;
@@ -31143,9 +31503,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto> raidStageHistory_ =
         java.util.Collections.emptyList();
       private void ensureRaidStageHistoryIsMutable() {
-        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
           raidStageHistory_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto>(raidStageHistory_);
-          bitField1_ |= 0x00000002;
+          bitField1_ |= 0x00000004;
          }
       }
 
@@ -31295,7 +31655,7 @@ public final class EventStartupProto {
       public Builder clearRaidStageHistory() {
         if (raidStageHistoryBuilder_ == null) {
           raidStageHistory_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
           onChanged();
         } else {
           raidStageHistoryBuilder_.clear();
@@ -31372,7 +31732,7 @@ public final class EventStartupProto {
           raidStageHistoryBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto, com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProtoOrBuilder>(
                   raidStageHistory_,
-                  ((bitField1_ & 0x00000002) == 0x00000002),
+                  ((bitField1_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           raidStageHistory_ = null;
@@ -31383,9 +31743,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_ =
         java.util.Collections.emptyList();
       private void ensureRecentNBattlesIsMutable() {
-        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField1_ & 0x00000008) == 0x00000008)) {
           recentNBattles_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpHistoryProto>(recentNBattles_);
-          bitField1_ |= 0x00000004;
+          bitField1_ |= 0x00000008;
          }
       }
 
@@ -31579,7 +31939,7 @@ public final class EventStartupProto {
       public Builder clearRecentNBattles() {
         if (recentNBattlesBuilder_ == null) {
           recentNBattles_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
           onChanged();
         } else {
           recentNBattlesBuilder_.clear();
@@ -31684,7 +32044,7 @@ public final class EventStartupProto {
           recentNBattlesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder>(
                   recentNBattles_,
-                  ((bitField1_ & 0x00000004) == 0x00000004),
+                  ((bitField1_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           recentNBattles_ = null;
@@ -31703,7 +32063,7 @@ public final class EventStartupProto {
        * </pre>
        */
       public boolean hasCurTask() {
-        return ((bitField1_ & 0x00000008) == 0x00000008);
+        return ((bitField1_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserTaskProto curTask = 36;</code>
@@ -31736,7 +32096,7 @@ public final class EventStartupProto {
         } else {
           curTaskBuilder_.setMessage(value);
         }
-        bitField1_ |= 0x00000008;
+        bitField1_ |= 0x00000010;
         return this;
       }
       /**
@@ -31754,7 +32114,7 @@ public final class EventStartupProto {
         } else {
           curTaskBuilder_.setMessage(builderForValue.build());
         }
-        bitField1_ |= 0x00000008;
+        bitField1_ |= 0x00000010;
         return this;
       }
       /**
@@ -31766,7 +32126,7 @@ public final class EventStartupProto {
        */
       public Builder mergeCurTask(com.lvl6.proto.TaskProto.MinimumUserTaskProto value) {
         if (curTaskBuilder_ == null) {
-          if (((bitField1_ & 0x00000008) == 0x00000008) &&
+          if (((bitField1_ & 0x00000010) == 0x00000010) &&
               curTask_ != com.lvl6.proto.TaskProto.MinimumUserTaskProto.getDefaultInstance()) {
             curTask_ =
               com.lvl6.proto.TaskProto.MinimumUserTaskProto.newBuilder(curTask_).mergeFrom(value).buildPartial();
@@ -31777,7 +32137,7 @@ public final class EventStartupProto {
         } else {
           curTaskBuilder_.mergeFrom(value);
         }
-        bitField1_ |= 0x00000008;
+        bitField1_ |= 0x00000010;
         return this;
       }
       /**
@@ -31794,7 +32154,7 @@ public final class EventStartupProto {
         } else {
           curTaskBuilder_.clear();
         }
-        bitField1_ = (bitField1_ & ~0x00000008);
+        bitField1_ = (bitField1_ & ~0x00000010);
         return this;
       }
       /**
@@ -31805,7 +32165,7 @@ public final class EventStartupProto {
        * </pre>
        */
       public com.lvl6.proto.TaskProto.MinimumUserTaskProto.Builder getCurTaskBuilder() {
-        bitField1_ |= 0x00000008;
+        bitField1_ |= 0x00000010;
         onChanged();
         return getCurTaskFieldBuilder().getBuilder();
       }
@@ -31847,9 +32207,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.TaskProto.TaskStageProto> curTaskStages_ =
         java.util.Collections.emptyList();
       private void ensureCurTaskStagesIsMutable() {
-        if (!((bitField1_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField1_ & 0x00000020) == 0x00000020)) {
           curTaskStages_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.TaskStageProto>(curTaskStages_);
-          bitField1_ |= 0x00000010;
+          bitField1_ |= 0x00000020;
          }
       }
 
@@ -31999,7 +32359,7 @@ public final class EventStartupProto {
       public Builder clearCurTaskStages() {
         if (curTaskStagesBuilder_ == null) {
           curTaskStages_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000010);
+          bitField1_ = (bitField1_ & ~0x00000020);
           onChanged();
         } else {
           curTaskStagesBuilder_.clear();
@@ -32076,7 +32436,7 @@ public final class EventStartupProto {
           curTaskStagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.TaskProto.TaskStageProto, com.lvl6.proto.TaskProto.TaskStageProto.Builder, com.lvl6.proto.TaskProto.TaskStageProtoOrBuilder>(
                   curTaskStages_,
-                  ((bitField1_ & 0x00000010) == 0x00000010),
+                  ((bitField1_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           curTaskStages_ = null;
@@ -32087,9 +32447,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> userAchievements_ =
         java.util.Collections.emptyList();
       private void ensureUserAchievementsIsMutable() {
-        if (!((bitField1_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField1_ & 0x00000040) == 0x00000040)) {
           userAchievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>(userAchievements_);
-          bitField1_ |= 0x00000020;
+          bitField1_ |= 0x00000040;
          }
       }
 
@@ -32239,7 +32599,7 @@ public final class EventStartupProto {
       public Builder clearUserAchievements() {
         if (userAchievementsBuilder_ == null) {
           userAchievements_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000020);
+          bitField1_ = (bitField1_ & ~0x00000040);
           onChanged();
         } else {
           userAchievementsBuilder_.clear();
@@ -32316,7 +32676,7 @@ public final class EventStartupProto {
           userAchievementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder>(
                   userAchievements_,
-                  ((bitField1_ & 0x00000020) == 0x00000020),
+                  ((bitField1_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           userAchievements_ = null;
@@ -32327,9 +32687,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> userMiniJobProtos_ =
         java.util.Collections.emptyList();
       private void ensureUserMiniJobProtosIsMutable() {
-        if (!((bitField1_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField1_ & 0x00000080) == 0x00000080)) {
           userMiniJobProtos_ = new java.util.ArrayList<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto>(userMiniJobProtos_);
-          bitField1_ |= 0x00000040;
+          bitField1_ |= 0x00000080;
          }
       }
 
@@ -32479,7 +32839,7 @@ public final class EventStartupProto {
       public Builder clearUserMiniJobProtos() {
         if (userMiniJobProtosBuilder_ == null) {
           userMiniJobProtos_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000040);
+          bitField1_ = (bitField1_ & ~0x00000080);
           onChanged();
         } else {
           userMiniJobProtosBuilder_.clear();
@@ -32556,7 +32916,7 @@ public final class EventStartupProto {
           userMiniJobProtosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder>(
                   userMiniJobProtos_,
-                  ((bitField1_ & 0x00000040) == 0x00000040),
+                  ((bitField1_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
                   isClean());
           userMiniJobProtos_ = null;
@@ -32567,9 +32927,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> userItems_ =
         java.util.Collections.emptyList();
       private void ensureUserItemsIsMutable() {
-        if (!((bitField1_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField1_ & 0x00000100) == 0x00000100)) {
           userItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>(userItems_);
-          bitField1_ |= 0x00000080;
+          bitField1_ |= 0x00000100;
          }
       }
 
@@ -32719,7 +33079,7 @@ public final class EventStartupProto {
       public Builder clearUserItems() {
         if (userItemsBuilder_ == null) {
           userItems_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000080);
+          bitField1_ = (bitField1_ & ~0x00000100);
           onChanged();
         } else {
           userItemsBuilder_.clear();
@@ -32796,7 +33156,7 @@ public final class EventStartupProto {
           userItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
                   userItems_,
-                  ((bitField1_ & 0x00000080) == 0x00000080),
+                  ((bitField1_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
                   isClean());
           userItems_ = null;
@@ -32807,9 +33167,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_ =
         java.util.Collections.emptyList();
       private void ensureClanHelpingsIsMutable() {
-        if (!((bitField1_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField1_ & 0x00000200) == 0x00000200)) {
           clanHelpings_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpProto>(clanHelpings_);
-          bitField1_ |= 0x00000100;
+          bitField1_ |= 0x00000200;
          }
       }
 
@@ -32959,7 +33319,7 @@ public final class EventStartupProto {
       @java.lang.Deprecated public Builder clearClanHelpings() {
         if (clanHelpingsBuilder_ == null) {
           clanHelpings_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000100);
+          bitField1_ = (bitField1_ & ~0x00000200);
           onChanged();
         } else {
           clanHelpingsBuilder_.clear();
@@ -33036,7 +33396,7 @@ public final class EventStartupProto {
           clanHelpingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder>(
                   clanHelpings_,
-                  ((bitField1_ & 0x00000100) == 0x00000100),
+                  ((bitField1_ & 0x00000200) == 0x00000200),
                   getParentForChildren(),
                   isClean());
           clanHelpings_ = null;
@@ -33047,9 +33407,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanInviteProto> clanInvites_ =
         java.util.Collections.emptyList();
       private void ensureClanInvitesIsMutable() {
-        if (!((bitField1_ & 0x00000200) == 0x00000200)) {
+        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
           clanInvites_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanInviteProto>(clanInvites_);
-          bitField1_ |= 0x00000200;
+          bitField1_ |= 0x00000400;
          }
       }
 
@@ -33199,7 +33559,7 @@ public final class EventStartupProto {
       public Builder clearClanInvites() {
         if (clanInvitesBuilder_ == null) {
           clanInvites_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000200);
+          bitField1_ = (bitField1_ & ~0x00000400);
           onChanged();
         } else {
           clanInvitesBuilder_.clear();
@@ -33276,7 +33636,7 @@ public final class EventStartupProto {
           clanInvitesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanInviteProto, com.lvl6.proto.ClanProto.ClanInviteProto.Builder, com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder>(
                   clanInvites_,
-                  ((bitField1_ & 0x00000200) == 0x00000200),
+                  ((bitField1_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           clanInvites_ = null;
@@ -33291,7 +33651,7 @@ public final class EventStartupProto {
        * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
        */
       public boolean hasClanData() {
-        return ((bitField1_ & 0x00000400) == 0x00000400);
+        return ((bitField1_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
@@ -33316,7 +33676,7 @@ public final class EventStartupProto {
         } else {
           clanDataBuilder_.setMessage(value);
         }
-        bitField1_ |= 0x00000400;
+        bitField1_ |= 0x00000800;
         return this;
       }
       /**
@@ -33330,7 +33690,7 @@ public final class EventStartupProto {
         } else {
           clanDataBuilder_.setMessage(builderForValue.build());
         }
-        bitField1_ |= 0x00000400;
+        bitField1_ |= 0x00000800;
         return this;
       }
       /**
@@ -33338,7 +33698,7 @@ public final class EventStartupProto {
        */
       public Builder mergeClanData(com.lvl6.proto.ClanProto.ClanDataProto value) {
         if (clanDataBuilder_ == null) {
-          if (((bitField1_ & 0x00000400) == 0x00000400) &&
+          if (((bitField1_ & 0x00000800) == 0x00000800) &&
               clanData_ != com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance()) {
             clanData_ =
               com.lvl6.proto.ClanProto.ClanDataProto.newBuilder(clanData_).mergeFrom(value).buildPartial();
@@ -33349,7 +33709,7 @@ public final class EventStartupProto {
         } else {
           clanDataBuilder_.mergeFrom(value);
         }
-        bitField1_ |= 0x00000400;
+        bitField1_ |= 0x00000800;
         return this;
       }
       /**
@@ -33362,14 +33722,14 @@ public final class EventStartupProto {
         } else {
           clanDataBuilder_.clear();
         }
-        bitField1_ = (bitField1_ & ~0x00000400);
+        bitField1_ = (bitField1_ & ~0x00000800);
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
        */
       public com.lvl6.proto.ClanProto.ClanDataProto.Builder getClanDataBuilder() {
-        bitField1_ |= 0x00000400;
+        bitField1_ |= 0x00000800;
         onChanged();
         return getClanDataFieldBuilder().getBuilder();
       }
@@ -33403,9 +33763,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsInUse_ =
         java.util.Collections.emptyList();
       private void ensureItemsInUseIsMutable() {
-        if (!((bitField1_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField1_ & 0x00001000) == 0x00001000)) {
           itemsInUse_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>(itemsInUse_);
-          bitField1_ |= 0x00000800;
+          bitField1_ |= 0x00001000;
          }
       }
 
@@ -33555,7 +33915,7 @@ public final class EventStartupProto {
       public Builder clearItemsInUse() {
         if (itemsInUseBuilder_ == null) {
           itemsInUse_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00001000);
           onChanged();
         } else {
           itemsInUseBuilder_.clear();
@@ -33632,7 +33992,7 @@ public final class EventStartupProto {
           itemsInUseBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder>(
                   itemsInUse_,
-                  ((bitField1_ & 0x00000800) == 0x00000800),
+                  ((bitField1_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
                   isClean());
           itemsInUse_ = null;
@@ -33643,9 +34003,9 @@ public final class EventStartupProto {
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> gifts_ =
         java.util.Collections.emptyList();
       private void ensureGiftsIsMutable() {
-        if (!((bitField1_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField1_ & 0x00002000) == 0x00002000)) {
           gifts_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto>(gifts_);
-          bitField1_ |= 0x00001000;
+          bitField1_ |= 0x00002000;
          }
       }
 
@@ -33795,7 +34155,7 @@ public final class EventStartupProto {
       public Builder clearGifts() {
         if (giftsBuilder_ == null) {
           gifts_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00001000);
+          bitField1_ = (bitField1_ & ~0x00002000);
           onChanged();
         } else {
           giftsBuilder_.clear();
@@ -33872,7 +34232,7 @@ public final class EventStartupProto {
           giftsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.UserItemSecretGiftProto, com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.Builder, com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder>(
                   gifts_,
-                  ((bitField1_ & 0x00001000) == 0x00001000),
+                  ((bitField1_ & 0x00002000) == 0x00002000),
                   getParentForChildren(),
                   isClean());
           gifts_ = null;
@@ -34662,7 +35022,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\3307\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\2348\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -34676,173 +35036,175 @@ public final class EventStartupProto {
       "2\".com.lvl6.proto.FullUserQuestProto\022\030\n\020" +
       "redeemedQuestIds\030\033 \003(\005\0227\n\014userClanInfo\030\007" +
       " \003(\0132!.com.lvl6.proto.FullUserClanProto\022",
-      "\030\n\020completedTaskIds\030\010 \003(\005\022\023\n\013appStoreURL" +
-      "\030\t \001(\t\022\025\n\rreviewPageURL\030\n \001(\t\022%\n\035reviewP" +
-      "ageConfirmationMessage\030\013 \001(\t\022$\n\034playerHa" +
-      "sBoughtInAppPurchase\030\014 \001(\010\022[\n\023attackNoti" +
-      "fications\030\r \003(\0132>.com.lvl6.proto.Startup" +
-      "ResponseProto.AttackedNotificationProto\022" +
-      "]\n\025referralNotifications\030\016 \003(\0132>.com.lvl" +
-      "6.proto.StartupResponseProto.ReferralNot" +
-      "ificationProto\022\030\n\020noticesToPlayers\030\017 \003(\t" +
-      "\022:\n\013globalChats\030\020 \003(\0132%.com.lvl6.proto.G",
-      "roupChatMessageProto\022<\n\tclanChats\030\021 \003(\0132" +
-      "%.com.lvl6.proto.GroupChatMessageProtoB\002" +
-      "\030\001\0222\n\004pcpp\030\022 \003(\0132$.com.lvl6.proto.Privat" +
-      "eChatPostProto\022;\n\rusersMonsters\030\023 \003(\0132$." +
-      "com.lvl6.proto.FullUserMonsterProto\022@\n\017m" +
-      "onstersHealing\030\024 \003(\0132\'.com.lvl6.proto.Us" +
-      "erMonsterHealingProto\022:\n\014enhancements\030\025 " +
-      "\001(\0132$.com.lvl6.proto.UserEnhancementProt" +
-      "o\022<\n\tevolution\030\035 \001(\0132).com.lvl6.proto.Us" +
-      "erMonsterEvolutionProto\022F\n\024rareBoosterPu",
-      "rchases\030\026 \003(\0132(.com.lvl6.proto.RareBoost" +
-      "erPurchaseProto\022\021\n\tkabamNaid\030\027 \001(\t\022K\n\023in" +
-      "vitesToMeForSlots\030\030 \003(\0132..com.lvl6.proto" +
-      ".UserFacebookInviteForSlotProto\022M\n\025invit" +
-      "esFromMeForSlots\030\031 \003(\0132..com.lvl6.proto." +
-      "UserFacebookInviteForSlotProto\022=\n\024static" +
-      "DataStuffProto\030\032 \001(\0132\037.com.lvl6.proto.St" +
-      "aticDataProto\022 \n\030taskIdForCurrentCityBos" +
-      "s\030\034 \003(\005\022<\n\nuserEvents\030\036 \003(\0132(.com.lvl6.p" +
-      "roto.UserPersistentEventProto\022I\n\017curRaid",
-      "ClanInfo\030\037 \001(\01320.com.lvl6.proto.Persiste" +
-      "ntClanEventClanInfoProto\022M\n\023curRaidClanU" +
-      "serInfo\030  \003(\01320.com.lvl6.proto.Persisten" +
-      "tClanEventUserInfoProto\022R\n\020raidStageHist" +
-      "ory\030! \003(\01328.com.lvl6.proto.PersistentCla" +
-      "nEventRaidStageHistoryProto\0227\n\016recentNBa" +
-      "ttles\030# \003(\0132\037.com.lvl6.proto.PvpHistoryP" +
-      "roto\0225\n\007curTask\030$ \001(\0132$.com.lvl6.proto.M" +
-      "inimumUserTaskProto\0225\n\rcurTaskStages\030% \003" +
-      "(\0132\036.com.lvl6.proto.TaskStageProto\022>\n\020us",
-      "erAchievements\030& \003(\0132$.com.lvl6.proto.Us" +
-      "erAchievementProto\022;\n\021userMiniJobProtos\030" +
-      "\' \003(\0132 .com.lvl6.proto.UserMiniJobProto\022" +
-      "0\n\tuserItems\030( \003(\0132\035.com.lvl6.proto.User" +
-      "ItemProto\0227\n\014clanHelpings\030) \003(\0132\035.com.lv" +
-      "l6.proto.ClanHelpProtoB\002\030\001\0224\n\013clanInvite" +
-      "s\030* \003(\0132\037.com.lvl6.proto.ClanInviteProto" +
-      "\022/\n\010clanData\030+ \001(\0132\035.com.lvl6.proto.Clan" +
-      "DataProto\0226\n\nitemsInUse\030, \003(\0132\".com.lvl6" +
-      ".proto.UserItemUsageProto\0226\n\005gifts\030- \003(\013",
-      "2\'.com.lvl6.proto.UserItemSecretGiftProt" +
-      "o\032\200\001\n\031AttackedNotificationProto\0222\n\010attac" +
-      "ker\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023\n\013coins" +
-      "Stolen\030\003 \001(\005\032\202\001\n\031ReferralNotificationPro" +
-      "to\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024c" +
-      "oinsGivenToReferrer\030\003 \001(\005\032\377\033\n\020StartupCon" +
-      "stants\022H\n\025inAppPurchasePackages\030\001 \003(\0132)." +
-      "com.lvl6.proto.InAppPurchasePackageProto",
-      "\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSin" +
-      "gleStruct\030\003 \001(\005\022n\n\025animatedSpriteOffsets" +
-      "\030\004 \003(\0132O.com.lvl6.proto.StartupResponseP" +
-      "roto.StartupConstants.AnimatedSpriteOffs" +
-      "etProto\022\025\n\rminNameLength\030\005 \001(\005\022\025\n\rmaxNam" +
-      "eLength\030\006 \001(\005\022\035\n\025maxLengthOfChatString\030\007" +
-      " \001(\005\022Z\n\rclanConstants\030\010 \001(\0132C.com.lvl6.p" +
-      "roto.StartupResponseProto.StartupConstan" +
-      "ts.ClanConstants\022p\n\030downloadableNibConst" +
-      "ants\030\t \001(\0132N.com.lvl6.proto.StartupRespo",
-      "nseProto.StartupConstants.DownloadableNi" +
-      "bConstants\022\'\n\037numHoursBeforeReshowingGol" +
-      "dSale\030\n \001(\005\022\036\n\026levelToShowRateUsPopup\030\013 " +
-      "\001(\005\022e\n\022touramentConstants\030\014 \001(\0132I.com.lv" +
-      "l6.proto.StartupResponseProto.StartupCon" +
-      "stants.TournamentConstants\022\037\n\027fbConnectR" +
-      "ewardDiamonds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t" +
-      "\022<\n\022adminChatUserProto\030\017 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\037\n\027numBeginnerSal" +
-      "esAllowed\030\020 \001(\005\022h\n\024userMonsterConstants\030",
-      "\021 \001(\0132J.com.lvl6.proto.StartupResponsePr" +
-      "oto.StartupConstants.UserMonsterConstant" +
-      "s\022`\n\020monsterConstants\030\022 \001(\0132F.com.lvl6.p" +
-      "roto.StartupResponseProto.StartupConstan" +
-      "ts.MonsterConstants\022\025\n\rminutesPerGem\030\023 \001" +
-      "(\002\022\027\n\017gemsPerResource\030\025 \001(\002\022\035\n\021pvpRequir" +
-      "edMinLvl\030\024 \001(\005B\002\030\001\022 \n\024monsterDmgMultipli" +
-      "er\030\037 \001(\002B\002\030\001\022\'\n\037continueBattleGemCostMul" +
-      "tiplier\030\026 \001(\002\022 \n\030battleRunAwayBasePercen" +
-      "t\030\034 \001(\002\022\036\n\026battleRunAwayIncrement\030\035 \001(\002\022",
-      "\027\n\017addAllFbFriends\030\027 \001(\010\022\025\n\rfacebookPopU" +
-      "p\030$ \001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6.pro" +
-      "to.StartupResponseProto.StartupConstants" +
-      ".MiniTutorialConstants\022\024\n\014maxObstacles\030\031" +
-      " \001(\005\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020task" +
-      "MapConstants\030\033 \001(\0132F.com.lvl6.proto.Star" +
-      "tupResponseProto.StartupConstants.TaskMa" +
-      "pConstants\022 \n\030maxMinutesForFreeSpeedUp\030\036" +
-      " \001(\005\022b\n\021clanHelpConstants\030  \003(\0132G.com.lv" +
-      "l6.proto.StartupResponseProto.StartupCon",
-      "stants.ClanHelpConstants\022W\n\013pvpConstant\030" +
-      "! \001(\0132B.com.lvl6.proto.StartupResponsePr" +
-      "oto.StartupConstants.PvpConstants\022X\n\004suc" +
-      "p\030\" \003(\0132J.com.lvl6.proto.StartupResponse" +
-      "Proto.StartupConstants.SpeedUpConstantPr" +
-      "oto\022c\n\004rccp\030# \003(\0132U.com.lvl6.proto.Start" +
-      "upResponseProto.StartupConstants.Resourc" +
-      "eConversionConstantProto\022\025\n\rdisplayRarit" +
-      "y\030% \001(\010\032_\n\031AnimatedSpriteOffsetProto\022\021\n\t" +
-      "imageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lv",
-      "l6.proto.CoordinateProto\032\325\001\n\rClanConstan" +
-      "ts\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030max" +
-      "CharLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLe" +
-      "ngthForClanDescription\030\003 \001(\005\022\037\n\027maxCharL" +
-      "engthForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001" +
-      "(\005\022$\n\034achievementIdsForClanRewards\030\006 \003(\005" +
-      "\032c\n\030DownloadableNibConstants\022\022\n\nmapNibNa" +
-      "me\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021go" +
-      "ldShoppeNibName\030\003 \001(\t\032y\n\023TournamentConst" +
-      "ants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight",
-      "\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursT" +
-      "oShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonsterC" +
-      "onstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031ini" +
-      "tialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Monster" +
-      "Constants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n" +
-      "\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021el" +
-      "ementalStrength\030\003 \001(\002\022\031\n\021elementalWeakne" +
-      "ss\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n" +
-      "\020TaskMapConstants\022\035\n\025mapSectionImagePref" +
-      "ix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n",
-      "\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth" +
-      "\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniTu" +
-      "torialConstants\022\032\n\022miniTutorialTaskId\030\001 " +
-      "\001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\032\202\001\n\021ClanHelp" +
-      "Constants\0220\n\010helpType\030\001 \001(\0162\036.com.lvl6.p" +
-      "roto.GameActionType\022\034\n\024amountRemovedPerH" +
-      "elp\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(\002" +
-      "\032\341\001\n\014PvpConstants\022\031\n\021pvpDmgsWindowSize\030\001" +
-      " \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDm" +
-      "gDelta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022",
-      "\035\n\025defendingMsgCharLimit\030\005 \001(\005\022\"\n\032beginA" +
-      "vengingTimeLimitMins\030\006 \001(\005\022(\n requestCla" +
-      "nToAvengeTimeLimitMins\030\007 \001(\005\0328\n\024SpeedUpC" +
-      "onstantProto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems" +
-      "\030\002 \001(\005\032{\n\037ResourceConversionConstantProt" +
-      "o\0222\n\014resourceType\030\001 \001(\0162\034.com.lvl6.proto" +
-      ".ResourceType\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007nu" +
-      "mGems\030\003 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021sta" +
-      "rtingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020" +
-      " \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMon",
-      "sterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t " +
-      "\001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialS" +
-      "tructures\030\003 \003(\0132#.com.lvl6.proto.Tutoria" +
-      "lStructProto\022\036\n\026structureIdsToBeBuillt\030\004" +
-      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030" +
-      "\006 \003(\0132 .com.lvl6.proto.CityElementProto\022" +
-      "$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n" +
-      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010" +
-      "cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsI" +
-      "nit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.c",
-      "om.lvl6.proto.MinimumObstacleProto\"A\n\014Up" +
-      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
-      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016" +
-      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SE" +
-      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp" +
-      "onseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004" +
-      "udid\030\002 \001(\tB\023B\021EventStartupProto"
+      "\034\n\020completedTaskIds\030\010 \003(\005B\002\030\001\022>\n\016complet" +
+      "edTasks\030. \003(\0132&.com.lvl6.proto.UserTaskC" +
+      "ompletedProto\022\023\n\013appStoreURL\030\t \001(\t\022\025\n\rre" +
+      "viewPageURL\030\n \001(\t\022%\n\035reviewPageConfirmat" +
+      "ionMessage\030\013 \001(\t\022$\n\034playerHasBoughtInApp" +
+      "Purchase\030\014 \001(\010\022[\n\023attackNotifications\030\r " +
+      "\003(\0132>.com.lvl6.proto.StartupResponseProt" +
+      "o.AttackedNotificationProto\022]\n\025referralN" +
+      "otifications\030\016 \003(\0132>.com.lvl6.proto.Star" +
+      "tupResponseProto.ReferralNotificationPro",
+      "to\022\030\n\020noticesToPlayers\030\017 \003(\t\022:\n\013globalCh" +
+      "ats\030\020 \003(\0132%.com.lvl6.proto.GroupChatMess" +
+      "ageProto\022<\n\tclanChats\030\021 \003(\0132%.com.lvl6.p" +
+      "roto.GroupChatMessageProtoB\002\030\001\0222\n\004pcpp\030\022" +
+      " \003(\0132$.com.lvl6.proto.PrivateChatPostPro" +
+      "to\022;\n\rusersMonsters\030\023 \003(\0132$.com.lvl6.pro" +
+      "to.FullUserMonsterProto\022@\n\017monstersHeali" +
+      "ng\030\024 \003(\0132\'.com.lvl6.proto.UserMonsterHea" +
+      "lingProto\022:\n\014enhancements\030\025 \001(\0132$.com.lv" +
+      "l6.proto.UserEnhancementProto\022<\n\tevoluti",
+      "on\030\035 \001(\0132).com.lvl6.proto.UserMonsterEvo" +
+      "lutionProto\022F\n\024rareBoosterPurchases\030\026 \003(" +
+      "\0132(.com.lvl6.proto.RareBoosterPurchasePr" +
+      "oto\022\021\n\tkabamNaid\030\027 \001(\t\022K\n\023invitesToMeFor" +
+      "Slots\030\030 \003(\0132..com.lvl6.proto.UserFaceboo" +
+      "kInviteForSlotProto\022M\n\025invitesFromMeForS" +
+      "lots\030\031 \003(\0132..com.lvl6.proto.UserFacebook" +
+      "InviteForSlotProto\022=\n\024staticDataStuffPro" +
+      "to\030\032 \001(\0132\037.com.lvl6.proto.StaticDataProt" +
+      "o\022 \n\030taskIdForCurrentCityBoss\030\034 \003(\005\022<\n\nu",
+      "serEvents\030\036 \003(\0132(.com.lvl6.proto.UserPer" +
+      "sistentEventProto\022I\n\017curRaidClanInfo\030\037 \001" +
+      "(\01320.com.lvl6.proto.PersistentClanEventC" +
+      "lanInfoProto\022M\n\023curRaidClanUserInfo\030  \003(" +
+      "\01320.com.lvl6.proto.PersistentClanEventUs" +
+      "erInfoProto\022R\n\020raidStageHistory\030! \003(\01328." +
+      "com.lvl6.proto.PersistentClanEventRaidSt" +
+      "ageHistoryProto\0227\n\016recentNBattles\030# \003(\0132" +
+      "\037.com.lvl6.proto.PvpHistoryProto\0225\n\007curT" +
+      "ask\030$ \001(\0132$.com.lvl6.proto.MinimumUserTa",
+      "skProto\0225\n\rcurTaskStages\030% \003(\0132\036.com.lvl" +
+      "6.proto.TaskStageProto\022>\n\020userAchievemen" +
+      "ts\030& \003(\0132$.com.lvl6.proto.UserAchievemen" +
+      "tProto\022;\n\021userMiniJobProtos\030\' \003(\0132 .com." +
+      "lvl6.proto.UserMiniJobProto\0220\n\tuserItems" +
+      "\030( \003(\0132\035.com.lvl6.proto.UserItemProto\0227\n" +
+      "\014clanHelpings\030) \003(\0132\035.com.lvl6.proto.Cla" +
+      "nHelpProtoB\002\030\001\0224\n\013clanInvites\030* \003(\0132\037.co" +
+      "m.lvl6.proto.ClanInviteProto\022/\n\010clanData" +
+      "\030+ \001(\0132\035.com.lvl6.proto.ClanDataProto\0226\n",
+      "\nitemsInUse\030, \003(\0132\".com.lvl6.proto.UserI" +
+      "temUsageProto\0226\n\005gifts\030- \003(\0132\'.com.lvl6." +
+      "proto.UserItemSecretGiftProto\032\200\001\n\031Attack" +
+      "edNotificationProto\0222\n\010attacker\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\032\n\022battl" +
+      "eCompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005" +
+      "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
+      "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
+      "eferrer\030\003 \001(\005\032\377\033\n\020StartupConstants\022H\n\025in",
+      "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
+      "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
+      "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
+      "\001(\005\022n\n\025animatedSpriteOffsets\030\004 \003(\0132O.com" +
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.AnimatedSpriteOffsetProto\022\025\n\rm" +
+      "inNameLength\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001(" +
+      "\005\022\035\n\025maxLengthOfChatString\030\007 \001(\005\022Z\n\rclan" +
+      "Constants\030\010 \001(\0132C.com.lvl6.proto.Startup" +
+      "ResponseProto.StartupConstants.ClanConst",
+      "ants\022p\n\030downloadableNibConstants\030\t \001(\0132N" +
+      ".com.lvl6.proto.StartupResponseProto.Sta" +
+      "rtupConstants.DownloadableNibConstants\022\'" +
+      "\n\037numHoursBeforeReshowingGoldSale\030\n \001(\005\022" +
+      "\036\n\026levelToShowRateUsPopup\030\013 \001(\005\022e\n\022toura" +
+      "mentConstants\030\014 \001(\0132I.com.lvl6.proto.Sta" +
+      "rtupResponseProto.StartupConstants.Tourn" +
+      "amentConstants\022\037\n\027fbConnectRewardDiamond" +
+      "s\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022<\n\022adminCha" +
+      "tUserProto\030\017 \001(\0132 .com.lvl6.proto.Minimu",
+      "mUserProto\022\037\n\027numBeginnerSalesAllowed\030\020 " +
+      "\001(\005\022h\n\024userMonsterConstants\030\021 \001(\0132J.com." +
+      "lvl6.proto.StartupResponseProto.StartupC" +
+      "onstants.UserMonsterConstants\022`\n\020monster" +
+      "Constants\030\022 \001(\0132F.com.lvl6.proto.Startup" +
+      "ResponseProto.StartupConstants.MonsterCo" +
+      "nstants\022\025\n\rminutesPerGem\030\023 \001(\002\022\027\n\017gemsPe" +
+      "rResource\030\025 \001(\002\022\035\n\021pvpRequiredMinLvl\030\024 \001" +
+      "(\005B\002\030\001\022 \n\024monsterDmgMultiplier\030\037 \001(\002B\002\030\001" +
+      "\022\'\n\037continueBattleGemCostMultiplier\030\026 \001(",
+      "\002\022 \n\030battleRunAwayBasePercent\030\034 \001(\002\022\036\n\026b" +
+      "attleRunAwayIncrement\030\035 \001(\002\022\027\n\017addAllFbF" +
+      "riends\030\027 \001(\010\022\025\n\rfacebookPopUp\030$ \001(\010\022]\n\010m" +
+      "iniTuts\030\030 \001(\0132K.com.lvl6.proto.StartupRe" +
+      "sponseProto.StartupConstants.MiniTutoria" +
+      "lConstants\022\024\n\014maxObstacles\030\031 \001(\005\022\032\n\022minu" +
+      "tesPerObstacle\030\032 \001(\005\022`\n\020taskMapConstants" +
+      "\030\033 \001(\0132F.com.lvl6.proto.StartupResponseP" +
+      "roto.StartupConstants.TaskMapConstants\022 " +
+      "\n\030maxMinutesForFreeSpeedUp\030\036 \001(\005\022b\n\021clan",
+      "HelpConstants\030  \003(\0132G.com.lvl6.proto.Sta" +
+      "rtupResponseProto.StartupConstants.ClanH" +
+      "elpConstants\022W\n\013pvpConstant\030! \001(\0132B.com." +
+      "lvl6.proto.StartupResponseProto.StartupC" +
+      "onstants.PvpConstants\022X\n\004sucp\030\" \003(\0132J.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.SpeedUpConstantProto\022c\n\004rccp\030" +
+      "# \003(\0132U.com.lvl6.proto.StartupResponsePr" +
+      "oto.StartupConstants.ResourceConversionC" +
+      "onstantProto\022\025\n\rdisplayRarity\030% \001(\010\032_\n\031A",
+      "nimatedSpriteOffsetProto\022\021\n\timageName\030\001 " +
+      "\001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\032\325\001\n\rClanConstants\022\035\n\025coinPr" +
+      "iceToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthFo" +
+      "rClanName\030\002 \001(\005\022\'\n\037maxCharLengthForClanD" +
+      "escription\030\003 \001(\005\022\037\n\027maxCharLengthForClan" +
+      "Tag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achiev" +
+      "ementIdsForClanRewards\030\006 \003(\005\032c\n\030Download" +
+      "ableNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020" +
+      "expansionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibN",
+      "ame\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwins" +
+      "Weight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fl" +
+      "eesWeight\030\003 \001(\005\022#\n\033numHoursToShowAfterEv" +
+      "entEnd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017" +
+      "maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMo" +
+      "nsterLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n" +
+      "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
+      "alPerHealthPoint\030\002 \001(\002\022\031\n\021elementalStren" +
+      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022" +
+      "oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapCons",
+      "tants\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023" +
+      "mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSectionH" +
+      "eight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016ma" +
+      "pTotalHeight\030\005 \001(\002\032K\n\025MiniTutorialConsta" +
+      "nts\022\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guide" +
+      "MonsterId\030\002 \001(\005\032\202\001\n\021ClanHelpConstants\0220\n" +
+      "\010helpType\030\001 \001(\0162\036.com.lvl6.proto.GameAct" +
+      "ionType\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n" +
+      "\025percentRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpCons" +
+      "tants\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minP",
+      "vpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002" +
+      "\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defending" +
+      "MsgCharLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeL" +
+      "imitMins\030\006 \001(\005\022(\n requestClanToAvengeTim" +
+      "eLimitMins\030\007 \001(\005\0328\n\024SpeedUpConstantProto" +
+      "\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037Re" +
+      "sourceConversionConstantProto\0222\n\014resourc" +
+      "eType\030\001 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
+      "e\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032" +
+      "\234\004\n\021TutorialConstants\022\031\n\021startingMonster",
+      "Id\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enem" +
+      "yMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 " +
+      "\001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZ" +
+      "MonsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 " +
+      "\003(\0132#.com.lvl6.proto.TutorialStructProto" +
+      "\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006city" +
+      "Id\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com." +
+      "lvl6.proto.CityElementProto\022$\n\034cityEleme" +
+      "ntIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElement" +
+      "IdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001",
+      "(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n" +
+      "\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.prot" +
+      "o.MinimumObstacleProto\"A\n\014UpdateStatus\022\r" +
+      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
+      "_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
+      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAIN" +
+      "TENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n" +
+      "\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023" +
+      "B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -34889,7 +35251,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-        new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", "ClanData", "ItemsInUse", "Gifts", });
+        new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "CompletedTasks", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", "ClanData", "ItemsInUse", "Gifts", });
     internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_fieldAccessorTable = new

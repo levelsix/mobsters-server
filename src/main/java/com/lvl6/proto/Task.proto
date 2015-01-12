@@ -51,6 +51,15 @@ message MinimumUserTaskProto {
 
 //------------------------------------------------------------------------------------------
 
+message UserTaskCompletedProto {
+	optional int32 taskId = 1;
+	optional int32 unclaimedCash = 2;
+	optional int32 unclaimedOil = 3;
+	optional string userId = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
 message TaskStageMonsterProto {
 	//the property that differentiates one taskStageMonster from another
 	optional string tsfuUuid = 15;

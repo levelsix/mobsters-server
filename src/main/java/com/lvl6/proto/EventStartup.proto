@@ -63,7 +63,8 @@ message StartupResponseProto {
 	repeated FullUserQuestProto userQuests = 6;
 	repeated int32 redeemedQuestIds = 27;
 	repeated FullUserClanProto userClanInfo = 7;
-	repeated int32 completedTaskIds = 8; 
+	repeated int32 completedTaskIds = 8 [deprecated = true]; 
+	repeated UserTaskCompletedProto completedTasks = 46;
 	
 	optional string appStoreURL = 9;
 	optional string reviewPageURL = 10;
@@ -129,6 +130,7 @@ message StartupResponseProto {
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
 	
+	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
