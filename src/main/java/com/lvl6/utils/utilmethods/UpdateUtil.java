@@ -19,6 +19,7 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 
 public interface UpdateUtil {
 
@@ -193,4 +194,6 @@ public interface UpdateUtil {
   
   public abstract int updateRecentPvpBattleHistoryClanRetaliated(
 		String historyDefenderId, Timestamp battleEndTime);
+  
+  public abstract int updateTaskForUserCompleted(UserTaskCompleted utc);
 }

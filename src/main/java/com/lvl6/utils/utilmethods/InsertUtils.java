@@ -34,6 +34,7 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -705,13 +706,17 @@ public class InsertUtils implements InsertUtil{
   }
   
   @Override
-  public int insertIntoTaskForUserCompleted(String userId, int taskId, 
+  public int insertIntoTaskForUserCompleted(UserTaskCompleted utc, 
   		Timestamp timeOfEntry) {
   	Map<String, Object> insertParams = new HashMap<String, Object>();
   	
-  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID, userId);
-  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID, taskId);
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID, utc.getUserId());
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID, utc.getTaskId());
   	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY, timeOfEntry);
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_CASH,
+  		utc.getUnclaimedCash());
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_OIL,
+  		utc.getUnclaimedOil());
   	
   	int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_FOR_USER_COMPLETED, insertParams);

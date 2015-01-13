@@ -28,6 +28,7 @@ import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -1576,6 +1577,35 @@ public class UpdateUtils implements UpdateUtil {
 			values.add(battleEndTime);
 
 			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateTaskForUserCompleted(UserTaskCompleted utc)
+		{
+			String tableName = DBConstants.TABLE_TASK_FOR_USER_COMPLETED;
+			
+			int unclaimedCash = utc.getUnclaimedCash();
+			int unclaimedOil = utc.getUnclaimedOil();
+			Map<String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID,
+				utc.getUserId());
+			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_CASH,
+				unclaimedCash);
+			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_OIL,
+				unclaimedOil);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_CASH,
+				unclaimedCash);
+			absoluteParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_OIL,
+				unclaimedOil);
+			
+			Map<String, Object> relativeParams = null;
+			
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(
+				tableName, insertParams, relativeParams, absoluteParams);
+			
 			return numUpdated;
 		}
 }
