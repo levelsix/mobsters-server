@@ -168,25 +168,25 @@ import com.lvl6.utils.DBConnection;
 		  Map<Integer, MonsterLevelInfo> allLvlToPartialInfo =
 			  new HashMap<Integer, MonsterLevelInfo>();
 			  
-		  List<Integer> orderedLvls = new ArrayList<Integer>(
+		  List<Integer> lvls = new ArrayList<Integer>(
 			  lvlToInfo.keySet());
 		  
-		  if (orderedLvls.size() < 2) {
+		  if (lvls.size() < 2) {
 			  allLvlToPartialInfo.putAll(lvlToInfo);
 			  log.warn(String.format(
 				  "monsterId=%s has only one specified lvl=%s",
-				  monsterId, orderedLvls));
+				  monsterId, lvls));
 			  continue;
-		  } else if (orderedLvls.size() > 2) {
+		  } else if (lvls.size() > 2) {
 			  log.warn(String.format(
 				  "monsterId=%s has more than one specified lvl=%s",
-				  monsterId, orderedLvls));
+				  monsterId, lvls));
 			  continue;
 		  }
 		  
 		  
-		  int lvl1 = orderedLvls.get(0);
-		  int lvl2 = orderedLvls.get(1);
+		  int lvl1 = lvls.get(0);
+		  int lvl2 = lvls.get(1);
 		  int minLvl = Math.min(lvl1, lvl2);
 		  int maxLvl = Math.max(lvl1, lvl2);
 		  
@@ -196,6 +196,7 @@ import com.lvl6.utils.DBConnection;
 		  //given min and max range, generate MonsterLevelInfo data inbetween
 		  allLvlToPartialInfo.put(minLvl, minLvlInfo);
 		  
+		  // Don't know why this comment is here. IGNORE the following:
 		  //due to hackery the max lvl info needs to be calculated as well,
 		  //specifically exp. The exp value is the max value
 		  //corresponding to the max lvl of 99, not max.getLevel()
@@ -255,15 +256,15 @@ import com.lvl6.utils.DBConnection;
 	  return  (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
   }
   
-  private static float calculatePvpDropRate(MonsterLevelInfo min,
-	  MonsterLevelInfo max, int currentLvl)
+  private static float calculatePvpDropRate(MonsterLevelInfo minLvlInfo,
+	  MonsterLevelInfo maxLvlInfo, int currentLvl)
   {
 	  //min.rate + (max.rate-min.rate)*(curLvl - minLvl) / (maxLvl - minLvl)
-	  float minRate = min.getPvpDropRate();
-	  float maxRate = max.getPvpDropRate();
+	  float minRate = minLvlInfo.getPvpDropRate();
+	  float maxRate = maxLvlInfo.getPvpDropRate();
 	
-	  float minLvl = min.getLevel();
-	  float maxLvl = max.getLevel();
+	  float minLvl = minLvlInfo.getLevel();
+	  float maxLvl = maxLvlInfo.getLevel();
 	  
 	  float maxMinLvlDiff = (maxLvl - minLvl);
 	  float lvlDiff = (currentLvl - minLvl);
