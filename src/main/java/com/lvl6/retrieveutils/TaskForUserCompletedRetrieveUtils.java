@@ -91,7 +91,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		List <Object> values = new ArrayList<Object>();
 		values.add(userId);
-
+		values.add(taskId);
+		
 		String query = querySb.toString();
 		log.info(String.format("query=%s, values=%s",
 			query, values));
