@@ -4433,6 +4433,31 @@ public final class EventDungeonProto {
      */
     com.google.protobuf.ByteString
         getTaskMapSectionNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    boolean hasUtcp();
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    com.lvl6.proto.TaskProto.UserTaskCompletedProto getUtcp();
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getUtcpOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndDungeonResponseProto}
@@ -4545,6 +4570,19 @@ public final class EventDungeonProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               taskMapSectionName_ = bs;
+              break;
+            }
+            case 66: {
+              com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = utcp_.toBuilder();
+              }
+              utcp_ = input.readMessage(com.lvl6.proto.TaskProto.UserTaskCompletedProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(utcp_);
+                utcp_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
               break;
             }
           }
@@ -4876,6 +4914,39 @@ public final class EventDungeonProto {
       }
     }
 
+    public static final int UTCP_FIELD_NUMBER = 8;
+    private com.lvl6.proto.TaskProto.UserTaskCompletedProto utcp_;
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    public boolean hasUtcp() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    public com.lvl6.proto.TaskProto.UserTaskCompletedProto getUtcp() {
+      return utcp_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+     *
+     * <pre>
+     *contains the cash and oil remaining in the task
+     * </pre>
+     */
+    public com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getUtcpOrBuilder() {
+      return utcp_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
@@ -4884,6 +4955,7 @@ public final class EventDungeonProto {
       userWon_ = false;
       userItem_ = com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance();
       taskMapSectionName_ = "";
+      utcp_ = com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4918,6 +4990,9 @@ public final class EventDungeonProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(7, getTaskMapSectionNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(8, utcp_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4955,6 +5030,10 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getTaskMapSectionNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, utcp_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5068,6 +5147,7 @@ public final class EventDungeonProto {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
           getUserItemFieldBuilder();
+          getUtcpFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5102,6 +5182,12 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         taskMapSectionName_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (utcpBuilder_ == null) {
+          utcp_ = com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
+        } else {
+          utcpBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -5171,6 +5257,14 @@ public final class EventDungeonProto {
           to_bitField0_ |= 0x00000020;
         }
         result.taskMapSectionName_ = taskMapSectionName_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (utcpBuilder_ == null) {
+          result.utcp_ = utcp_;
+        } else {
+          result.utcp_ = utcpBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5232,6 +5326,9 @@ public final class EventDungeonProto {
           bitField0_ |= 0x00000040;
           taskMapSectionName_ = other.taskMapSectionName_;
           onChanged();
+        }
+        if (other.hasUtcp()) {
+          mergeUtcp(other.getUtcp());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6017,6 +6114,158 @@ public final class EventDungeonProto {
         taskMapSectionName_ = value;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.TaskProto.UserTaskCompletedProto utcp_ = com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> utcpBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public boolean hasUtcp() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto getUtcp() {
+        if (utcpBuilder_ == null) {
+          return utcp_;
+        } else {
+          return utcpBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public Builder setUtcp(com.lvl6.proto.TaskProto.UserTaskCompletedProto value) {
+        if (utcpBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          utcp_ = value;
+          onChanged();
+        } else {
+          utcpBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public Builder setUtcp(
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder builderForValue) {
+        if (utcpBuilder_ == null) {
+          utcp_ = builderForValue.build();
+          onChanged();
+        } else {
+          utcpBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public Builder mergeUtcp(com.lvl6.proto.TaskProto.UserTaskCompletedProto value) {
+        if (utcpBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+              utcp_ != com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance()) {
+            utcp_ =
+              com.lvl6.proto.TaskProto.UserTaskCompletedProto.newBuilder(utcp_).mergeFrom(value).buildPartial();
+          } else {
+            utcp_ = value;
+          }
+          onChanged();
+        } else {
+          utcpBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public Builder clearUtcp() {
+        if (utcpBuilder_ == null) {
+          utcp_ = com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
+          onChanged();
+        } else {
+          utcpBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder getUtcpBuilder() {
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return getUtcpFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getUtcpOrBuilder() {
+        if (utcpBuilder_ != null) {
+          return utcpBuilder_.getMessageOrBuilder();
+        } else {
+          return utcp_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
+       *
+       * <pre>
+       *contains the cash and oil remaining in the task
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> 
+          getUtcpFieldBuilder() {
+        if (utcpBuilder_ == null) {
+          utcpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder>(
+                  getUtcp(),
+                  getParentForChildren(),
+                  isClean());
+          utcp_ = null;
+        }
+        return utcpBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndDungeonResponseProto)
@@ -8032,7 +8281,7 @@ public final class EventDungeonProto {
       "rces\022\024\n\014userTaskUuid\030\002 \001(\t\022\017\n\007userWon\030\003 " +
       "\001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUser" +
       "WonTask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030\006 " +
-      "\001(\010\022\031\n\021droplessTsfuUuids\030\007 \003(\t\"\200\003\n\027EndDu" +
+      "\001(\010\022\031\n\021droplessTsfuUuids\030\007 \003(\t\"\266\003\n\027EndDu" +
       "ngeonResponseProto\022@\n\006sender\030\001 \001(\01320.com" +
       ".lvl6.proto.MinimumUserProtoWithMaxResou" +
       "rces\022H\n\006status\030\002 \001(\01628.com.lvl6.proto.En" +
@@ -8041,20 +8290,21 @@ public final class EventDungeonProto {
       "llUserMonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007us" +
       "erWon\030\005 \001(\010\022/\n\010userItem\030\006 \001(\0132\035.com.lvl6" +
       ".proto.UserItemProto\022\032\n\022taskMapSectionNa" +
-      "me\030\007 \001(\t\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\"\315\001\n\033ReviveInDungeonReq" +
-      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022\024\n\014userTaskUuid\030\002 \001(" +
-      "\t\022\022\n\nclientTime\030\003 \001(\003\022?\n\010reviveMe\030\004 \003(\0132" +
-      "-.com.lvl6.proto.UserMonsterCurrentHealt" +
-      "hProto\022\021\n\tgemsSpent\030\005 \001(\005\"\367\001\n\034ReviveInDu",
-      "ngeonResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022R\n\006status\030\002" +
-      " \001(\0162B.com.lvl6.proto.ReviveInDungeonRes" +
-      "ponseProto.ReviveInDungeonStatus\"Q\n\025Revi" +
-      "veInDungeonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_I" +
-      "NSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021E" +
-      "ventDungeonProto"
+      "me\030\007 \001(\t\0224\n\004utcp\030\010 \001(\0132&.com.lvl6.proto." +
+      "UserTaskCompletedProto\"/\n\020EndDungeonStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\315\001\n\033Revi" +
+      "veInDungeonRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\024\n\014use" +
+      "rTaskUuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\022?\n\010r" +
+      "eviveMe\030\004 \003(\0132-.com.lvl6.proto.UserMonst",
+      "erCurrentHealthProto\022\021\n\tgemsSpent\030\005 \001(\005\"" +
+      "\367\001\n\034ReviveInDungeonResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Revi" +
+      "veInDungeonResponseProto.ReviveInDungeon" +
+      "Status\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAI" +
+      "L_OTHER\020\003B\023B\021EventDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8096,7 +8346,7 @@ public final class EventDungeonProto {
     internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "TaskId", "UserWon", "UserItem", "TaskMapSectionName", });
+        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "TaskId", "UserWon", "UserItem", "TaskMapSectionName", "Utcp", });
     internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable = new

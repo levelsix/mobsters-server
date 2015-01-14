@@ -71,8 +71,8 @@ import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
@@ -92,6 +92,7 @@ import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
+import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
@@ -125,6 +126,7 @@ import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
@@ -895,8 +897,14 @@ public class StartupController extends EventController {
 
 	private void setTaskStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<Integer> taskIds = getTaskForUserCompletedRetrieveUtils()
-			.getAllTaskIdsForUser(userId);
+		List<UserTaskCompleted> utcList = taskForUserCompletedRetrieveUtils
+			.getAllCompletedTasksForUser(userId);
+		List<UserTaskCompletedProto> utcpList = CreateInfoProtoUtils.
+			createUserTaskCompletedProto(utcList);
+		resBuilder.addAllCompletedTasks(utcpList);
+		
+		List<Integer> taskIds = taskForUserCompletedRetrieveUtils
+			.getTaskIds(utcList);
 		resBuilder.addAllCompletedTaskIds(taskIds);
 
 		/*NOTE: DB CALL*/

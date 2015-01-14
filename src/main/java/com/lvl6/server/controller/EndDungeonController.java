@@ -38,9 +38,12 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -53,6 +56,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class EndDungeonController extends EventController {
 
@@ -69,6 +73,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   @Autowired
   protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtil;
+  
+  @Autowired
+  protected TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtil;
   
   @Autowired
   protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil;
@@ -152,9 +159,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
       int taskId = 0;
       TaskMapElement tme = null;
       int itemId = 0;
+      UserTaskCompleted newUtc = new UserTaskCompleted();
+      UserTaskCompleted oldUtc = null;
       if(legit) {
     	  taskId = ut.getTaskId();
     	  resBuilder.setTaskId(taskId);
+    	  
+    	  oldUtc = taskForUserCompletedRetrieveUtil
+    		  .getCompletedTaskForUser(userId, taskId);
     	  
     	  if (firstTimeUserWonTask) {
     		  tme = TaskMapElementRetrieveUtils
@@ -168,7 +180,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	  previousCash = aUser.getCash();
     	  previousOil = aUser.getOil();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
-    		  money, maxCash, maxOil, firstTimeUserWonTask, tme);
+    		  money, maxCash, maxOil, firstTimeUserWonTask, tme, oldUtc,
+    		  newUtc);
 
       }
       if (successful) {
@@ -187,7 +200,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
       	recordStageHistory(tsfuList, droplessTsfuIds,
       		monsterIdToNumPieces, monsterIdToLvlToQuantity);
       	
-      	
       	if (userWon) {
       		log.info("user won dungeon, awarding the monsters and items");
       		//update user's monsters
@@ -202,7 +214,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       		
       		awardOneTimeItem(resBuilder, userId, itemId, taskId, tme);
       		
-      		setResponseBuilder(resBuilder, newOrUpdated);
+      		setResponseBuilder(resBuilder, newOrUpdated, newUtc);
       		
 //      		//MAYBE NEED TO SEND THESE TO THE CLIENT?
 //      		Map<Integer, ItemForUser> itemIdsToItems = updateUserItems(tsfuList, userId);
@@ -224,7 +236,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
       	server.writeEvent(resEventUpdate);
       	writeToUserCurrencyHistory(aUser, curTime, userTaskId, taskId,
       			previousCash, previousOil, money);
-      	writeToTaskForUserCompleted(userId, taskId, userWon, firstTimeUserWonTask, curTime);
+      	writeToTaskForUserCompleted(userWon, firstTimeUserWonTask,
+      		curTime, newUtc, oldUtc);
       }
       
     } catch (Exception e) {
@@ -266,23 +279,40 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return true;
   }
 
+  //newUtc will be filled out
   private boolean writeChangesToDb(User u, String uId, TaskForUserOngoing ut,
 		  boolean userWon, Timestamp clientTime, Map<String, Integer> money,
-		  int maxCash, int maxOil, boolean firstTimeUserWonTask, TaskMapElement tme) {
-	  int cashGained = ut.getCashGained();
+		  int maxCash, int maxOil, boolean firstTimeUserWonTask, TaskMapElement tme,
+		  UserTaskCompleted oldUtc, UserTaskCompleted newUtc)
+  {
+	  int taskId = ut.getTaskId();
+	  newUtc.setUserId(uId);
+	  newUtc.setTaskId(taskId);
+	  
+	  List<Integer> cashGainedContainer = new ArrayList<Integer>();
+	  List<Integer> oilGainedContainer = new ArrayList<Integer>();
 	  int expGained = ut.getExpGained();
-	  int oilGained = ut.getOilGained();
-
+	  
+	  int remainingCash = 0;
+	  int remainingOil = 0;
+	  
 	  if (firstTimeUserWonTask && null != tme) {
-		  cashGained += tme.getCashReward();
-		  oilGained += tme.getOilReward();
-		  
-		  Task t = TaskRetrieveUtils.getTaskForTaskId(ut.getTaskId());
+		  //first time user completed task, TaskMapElement has extra rewards
+		  Task t = TaskRetrieveUtils.getTaskForTaskId(taskId);
 		  expGained += t.getExpReward();
+		  remainingCash = tme.getCashReward();
+		  remainingOil = tme.getOilReward();
+	  } else if (!firstTimeUserWonTask && null != tme && null != oldUtc) {
+		  //user completed task, but TaskMapElement might have leftover rewards
+		  remainingCash = oldUtc.getUnclaimedCash();
+		  remainingOil = oldUtc.getUnclaimedOil();
 	  }
-
-	  cashGained = MiscMethods.capResourceGain(u.getCash(), cashGained, maxCash);
-	  oilGained = MiscMethods.capResourceGain(u.getOil(), oilGained, maxOil);
+	  
+	  calculateResourcesGained(u, ut, maxCash, maxOil, remainingCash,
+		  remainingOil, newUtc, cashGainedContainer, oilGainedContainer);
+	  
+	  int cashGained = cashGainedContainer.get(0);
+	  int oilGained = oilGainedContainer.get(0);
 
 	  log.info(String.format("user before currency change. ", u));
 	  if (userWon) {
@@ -303,14 +333,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  //TODO: MOVE THIS INTO A UTIL METHOD FOR TASK 
 	  //delete from user_task and insert it into user_task_history
 	  String utId = ut.getId();
-	  int tId = ut.getTaskId();
 	  int numRevives = ut.getNumRevives();
 	  Date startDate = ut.getStartDate();
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
 	  boolean cancelled = false;
 	  int tsId = ut.getTaskStageId(); 
-	  int num = InsertUtils.get().insertIntoTaskHistory(utId, uId, tId,
+	  int num = InsertUtils.get().insertIntoTaskHistory(utId, uId, taskId,
 			  expGained, cashGained, oilGained, numRevives, startTime,
 			  clientTime, userWon, cancelled, tsId);
 	  if (1 != num) {
@@ -328,7 +357,102 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  
 	  return true;
   }
-  
+
+  private void calculateResourcesGained(
+	  User u,
+	  TaskForUserOngoing ut,
+	  int maxCash,
+	  int maxOil,
+	  int remainingCash,
+	  int remainingOil,
+	  UserTaskCompleted utc,
+	  List<Integer> cashGainedContainer,
+	  List<Integer> oilGainedContainer )
+  {
+	  List<Integer> unclaimedResourceContainer = new ArrayList<Integer>();
+	  
+	  //unclaimedCash is populated after this call
+	  int cashGained = calcResourceGained(MiscMethods.CASH,
+		  u.getCash(), ut.getCashGained(), maxCash, remainingCash,
+		  unclaimedResourceContainer);
+	  
+	  utc.setUnclaimedCash(
+		  unclaimedResourceContainer.get(0));
+	  //could reset unclaimedResourceContainer... 
+	  
+	  //unclaimedOil is populated after this call
+	  int oilGained = calcResourceGained(MiscMethods.OIL,
+		  u.getOil(), ut.getOilGained(), maxOil, remainingOil,
+		  unclaimedResourceContainer);
+	  utc.setUnclaimedOil(
+		  unclaimedResourceContainer.get(1));
+
+	  cashGainedContainer.add(cashGained);
+	  oilGainedContainer.add(oilGained);
+  }
+
+  private int calcResourceGained(
+	  String resource,
+	  int currentResourceAmt,
+	  int resourceGained,
+	  int maxResourceAmt,
+	  int additionalResources,
+	  List<Integer> unclaimedResourceContainer )
+  {
+	  int cappedResourceGained = MiscMethods.capResourceGain(
+		  currentResourceAmt, resourceGained, maxResourceAmt);
+	  if (cappedResourceGained < resourceGained) {
+		  //this means the user collected resources beyond storage capacity
+		  //so no need to continue calculating
+		  unclaimedResourceContainer.add(additionalResources);
+		  String prefix = "resources gained from task ";
+		  log.info(
+			  "{} (not including stored resources) overflow{} user storage.",
+			  prefix);
+		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+			  resourceGained, additionalResources }
+		  );
+		  return cappedResourceGained;
+	  }
+	  
+	  if (additionalResources <= 0) {
+		  //this means there is no more resource stored in this task
+		  //so no need to continue calculating
+		  unclaimedResourceContainer.add(0);
+		  return cappedResourceGained;
+	  }
+	  
+	  int resourceGained2 = resourceGained + additionalResources;
+	  cappedResourceGained = MiscMethods.capResourceGain(
+		  currentResourceAmt, resourceGained2, maxResourceAmt);
+	  
+	  if (cappedResourceGained < resourceGained2) {
+		  //calculate amount of resource that is beyond storage capacity
+		  int resourceOverflow = resourceGained2 - cappedResourceGained;
+		  unclaimedResourceContainer.add(resourceOverflow);
+		  
+		  String prefix = String.format(
+			  "task resources overflow user %s storage.",
+			  resource); 
+		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+			  resourceGained, additionalResources }
+		  );
+		  return cappedResourceGained;
+	  } else {
+		  String prefix = String.format(
+			  "task resources do not overflow user %s storage.",
+			  resource); 
+		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+			  resourceGained, additionalResources }
+		  );
+		  unclaimedResourceContainer.add(0);
+		  return cappedResourceGained;
+	  }
+  }
+
   private boolean updateUser(User u, int expGained, int cashGained, int oilGained,
 	  Timestamp clientTime)
   {
@@ -519,12 +643,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private void setResponseBuilder(Builder resBuilder,
-		  List<FullUserMonsterProto> protos) {
+		  List<FullUserMonsterProto> protos, UserTaskCompleted utc)
+  {
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
 	  
 	  if (!protos.isEmpty()) {
 	  	resBuilder.addAllUpdatedOrNew(protos);
 	  }
+
+	  resBuilder.setUtcp(
+		  CreateInfoProtoUtils.createUserTaskCompletedProto(utc));
   }
   
   //not using this method because how many items the user has is kept track through
@@ -640,15 +768,35 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   }
   
-  private void writeToTaskForUserCompleted(String userId, int taskId, 
-  		boolean userWon, boolean firstTimeUserWonTask, Timestamp now) {
+  private void writeToTaskForUserCompleted( 
+  		boolean userWon, boolean firstTimeUserWonTask, Timestamp now,
+  		UserTaskCompleted newUtc, UserTaskCompleted oldUtc)
+  {
   	if (userWon && firstTimeUserWonTask) {
   		int numInserted = InsertUtils.get()
-  				.insertIntoTaskForUserCompleted(userId, taskId, now);
+  				.insertIntoTaskForUserCompleted(newUtc, now);
   		
   		log.info(String.format(
   			"numInserted into task_for_user_completed: %s", numInserted));
+  		return;
   	}
+  	
+  	int previousUnclaimedCash = 0;
+  	int previousUnclaimedOil = 0;
+ 
+  	if (null != oldUtc) {
+  		//just a precaution
+  		previousUnclaimedCash = oldUtc.getUnclaimedCash();
+  		previousUnclaimedOil = oldUtc.getUnclaimedOil();
+  	}
+  	if (0 == previousUnclaimedCash && 0 == previousUnclaimedOil) {
+  		//no need to update since user depleted the task of its resources
+  		return;
+  	}
+  	
+  	//persist newUtc to the db
+  	int numUpdated = UpdateUtils.get().updateTaskForUserCompleted(newUtc);
+  	log.info("numUpdated task_for_user_completed: {}", numUpdated);
   }
 
   public Locker getLocker() {
@@ -688,6 +836,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtil )
   {
 	  this.taskForUserOngoingRetrieveUtil = taskForUserOngoingRetrieveUtil;
+  }
+
+  public TaskForUserCompletedRetrieveUtils getTaskForUserCompletedRetrieveUtil()
+  {
+	  return taskForUserCompletedRetrieveUtil;
+  }
+
+  public void setTaskForUserCompletedRetrieveUtil(
+	  TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtil )
+  {
+	  this.taskForUserCompletedRetrieveUtil = taskForUserCompletedRetrieveUtil;
   }
 
   public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtil()

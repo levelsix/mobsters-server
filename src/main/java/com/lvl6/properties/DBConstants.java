@@ -586,6 +586,8 @@ public class DBConstants {
 	public static final String TASK_FOR_USER_COMPLETED__USER_ID = GENERIC__USER_ID;
 	public static final String TASK_FOR_USER_COMPLETED__TASK_ID = "task_id";
 	public static final String TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY = "time_of_entry";
+	public static final String TASK_FOR_USER_COMPLETED__UNCLAIMED_CASH = "unclaimed_cash";
+	public static final String TASK_FOR_USER_COMPLETED__UNCLAIMED_OIL = "unclaimed_oil";
 
 	/*TASK HISTORY TABLE*/
 	public static final String TASK_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";

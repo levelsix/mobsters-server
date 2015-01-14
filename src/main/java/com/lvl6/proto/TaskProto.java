@@ -3649,6 +3649,716 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserTaskProto)
   }
 
+  public interface UserTaskCompletedProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserTaskCompletedProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 taskId = 1;</code>
+     */
+    boolean hasTaskId();
+    /**
+     * <code>optional int32 taskId = 1;</code>
+     */
+    int getTaskId();
+
+    /**
+     * <code>optional int32 unclaimedCash = 2;</code>
+     */
+    boolean hasUnclaimedCash();
+    /**
+     * <code>optional int32 unclaimedCash = 2;</code>
+     */
+    int getUnclaimedCash();
+
+    /**
+     * <code>optional int32 unclaimedOil = 3;</code>
+     */
+    boolean hasUnclaimedOil();
+    /**
+     * <code>optional int32 unclaimedOil = 3;</code>
+     */
+    int getUnclaimedOil();
+
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserTaskCompletedProto}
+   */
+  public static final class UserTaskCompletedProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserTaskCompletedProto)
+      UserTaskCompletedProtoOrBuilder {
+    // Use UserTaskCompletedProto.newBuilder() to construct.
+    private UserTaskCompletedProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserTaskCompletedProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserTaskCompletedProto defaultInstance;
+    public static UserTaskCompletedProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserTaskCompletedProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserTaskCompletedProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              taskId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              unclaimedCash_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              unclaimedOil_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              userId_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.TaskProto.UserTaskCompletedProto.class, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserTaskCompletedProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserTaskCompletedProto>() {
+      public UserTaskCompletedProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserTaskCompletedProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserTaskCompletedProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TASKID_FIELD_NUMBER = 1;
+    private int taskId_;
+    /**
+     * <code>optional int32 taskId = 1;</code>
+     */
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 taskId = 1;</code>
+     */
+    public int getTaskId() {
+      return taskId_;
+    }
+
+    public static final int UNCLAIMEDCASH_FIELD_NUMBER = 2;
+    private int unclaimedCash_;
+    /**
+     * <code>optional int32 unclaimedCash = 2;</code>
+     */
+    public boolean hasUnclaimedCash() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 unclaimedCash = 2;</code>
+     */
+    public int getUnclaimedCash() {
+      return unclaimedCash_;
+    }
+
+    public static final int UNCLAIMEDOIL_FIELD_NUMBER = 3;
+    private int unclaimedOil_;
+    /**
+     * <code>optional int32 unclaimedOil = 3;</code>
+     */
+    public boolean hasUnclaimedOil() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 unclaimedOil = 3;</code>
+     */
+    public int getUnclaimedOil() {
+      return unclaimedOil_;
+    }
+
+    public static final int USERID_FIELD_NUMBER = 4;
+    private java.lang.Object userId_;
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userId = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      taskId_ = 0;
+      unclaimedCash_ = 0;
+      unclaimedOil_ = 0;
+      userId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, taskId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, unclaimedCash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, unclaimedOil_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getUserIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, taskId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, unclaimedCash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, unclaimedOil_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getUserIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.TaskProto.UserTaskCompletedProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.TaskProto.UserTaskCompletedProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserTaskCompletedProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserTaskCompletedProto)
+        com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.TaskProto.UserTaskCompletedProto.class, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.TaskProto.UserTaskCompletedProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        taskId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        unclaimedCash_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        unclaimedOil_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
+      }
+
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto getDefaultInstanceForType() {
+        return com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto build() {
+        com.lvl6.proto.TaskProto.UserTaskCompletedProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.TaskProto.UserTaskCompletedProto buildPartial() {
+        com.lvl6.proto.TaskProto.UserTaskCompletedProto result = new com.lvl6.proto.TaskProto.UserTaskCompletedProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.taskId_ = taskId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.unclaimedCash_ = unclaimedCash_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.unclaimedOil_ = unclaimedOil_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.userId_ = userId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.TaskProto.UserTaskCompletedProto) {
+          return mergeFrom((com.lvl6.proto.TaskProto.UserTaskCompletedProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.TaskProto.UserTaskCompletedProto other) {
+        if (other == com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance()) return this;
+        if (other.hasTaskId()) {
+          setTaskId(other.getTaskId());
+        }
+        if (other.hasUnclaimedCash()) {
+          setUnclaimedCash(other.getUnclaimedCash());
+        }
+        if (other.hasUnclaimedOil()) {
+          setUnclaimedOil(other.getUnclaimedOil());
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000008;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.TaskProto.UserTaskCompletedProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.TaskProto.UserTaskCompletedProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int taskId_ ;
+      /**
+       * <code>optional int32 taskId = 1;</code>
+       */
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 taskId = 1;</code>
+       */
+      public int getTaskId() {
+        return taskId_;
+      }
+      /**
+       * <code>optional int32 taskId = 1;</code>
+       */
+      public Builder setTaskId(int value) {
+        bitField0_ |= 0x00000001;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 taskId = 1;</code>
+       */
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        taskId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int unclaimedCash_ ;
+      /**
+       * <code>optional int32 unclaimedCash = 2;</code>
+       */
+      public boolean hasUnclaimedCash() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 unclaimedCash = 2;</code>
+       */
+      public int getUnclaimedCash() {
+        return unclaimedCash_;
+      }
+      /**
+       * <code>optional int32 unclaimedCash = 2;</code>
+       */
+      public Builder setUnclaimedCash(int value) {
+        bitField0_ |= 0x00000002;
+        unclaimedCash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 unclaimedCash = 2;</code>
+       */
+      public Builder clearUnclaimedCash() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        unclaimedCash_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int unclaimedOil_ ;
+      /**
+       * <code>optional int32 unclaimedOil = 3;</code>
+       */
+      public boolean hasUnclaimedOil() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 unclaimedOil = 3;</code>
+       */
+      public int getUnclaimedOil() {
+        return unclaimedOil_;
+      }
+      /**
+       * <code>optional int32 unclaimedOil = 3;</code>
+       */
+      public Builder setUnclaimedOil(int value) {
+        bitField0_ |= 0x00000004;
+        unclaimedOil_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 unclaimedOil = 3;</code>
+       */
+      public Builder clearUnclaimedOil() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        unclaimedOil_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userId = 4;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserTaskCompletedProto)
+    }
+
+    static {
+      defaultInstance = new UserTaskCompletedProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserTaskCompletedProto)
+  }
+
   public interface TaskStageMonsterProtoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TaskStageMonsterProto)
       com.google.protobuf.MessageOrBuilder {
@@ -9414,6 +10124,11 @@ public final class TaskProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9459,41 +10174,44 @@ public final class TaskProto {
       "(\005\"{\n\024MinimumUserTaskProto\022\020\n\010userUuid\030\001" +
       " \001(\t\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003" +
       " \001(\005\022\024\n\014userTaskUuid\030\004 \001(\t\022\023\n\013clientStat" +
-      "e\030\005 \001(\014\"\253\004\n\025TaskStageMonsterProto\022\020\n\010tsf" +
-      "uUuid\030\017 \001(\t\022\r\n\005tsmId\030\013 \001(\005\022\021\n\tmonsterId\030" +
-      "\001 \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.pr",
-      "oto.TaskStageMonsterProto.MonsterType\022\r\n" +
-      "\005level\030\006 \001(\005\022\021\n\texpReward\030\003 \001(\005\022\022\n\ncashR" +
-      "eward\030\004 \001(\005\022\021\n\toilReward\030\010 \001(\005\022\032\n\022puzzle" +
-      "PieceDropped\030\005 \001(\010\022\034\n\024puzzlePieceMonster" +
-      "Id\030\n \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdmgMultiplie" +
-      "r\030\t \001(\002\022\030\n\020defensiveSkillId\030\014 \001(\005\022\030\n\020off" +
-      "ensiveSkillId\030\016 \001(\005\022!\n\031puzzlePieceMonste" +
-      "rDropLvl\030\r \001(\005\022/\n\010initialD\030\020 \001(\0132\035.com.l" +
-      "vl6.proto.DialogueProto\022/\n\010defaultD\030\021 \001(" +
-      "\0132\035.com.lvl6.proto.DialogueProto\"3\n\013Mons",
-      "terType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004B" +
-      "OSS\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventI" +
-      "d\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.pr" +
-      "oto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(\005" +
-      "\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\016\n\006taskId" +
-      "\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005\022<\n\004type\030" +
-      "\007 \001(\0162..com.lvl6.proto.PersistentEventPr" +
-      "oto.EventType\022;\n\016monsterElement\030\010 \001(\0162\027." +
-      "com.lvl6.proto.Element:\nNO_ELEMENT\"\'\n\tEv" +
-      "entType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030U",
-      "serPersistentEventProto\022\020\n\010userUuid\030\001 \001(" +
-      "\t\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030" +
-      "\003 \001(\003\"\353\002\n\023TaskMapElementProto\022\024\n\014mapElem" +
-      "entId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(" +
-      "\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.l" +
-      "vl6.proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossI" +
-      "mgName\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sect" +
-      "ionName\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toil" +
-      "Reward\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036" +
-      "\n\026charImgVertPixelOffset\030\r \001(\005\022\037\n\027charIm",
-      "gHorizPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleF" +
-      "actor\030\017 \001(\002B\013B\tTaskProto"
+      "e\030\005 \001(\014\"e\n\026UserTaskCompletedProto\022\016\n\006tas" +
+      "kId\030\001 \001(\005\022\025\n\runclaimedCash\030\002 \001(\005\022\024\n\014uncl" +
+      "aimedOil\030\003 \001(\005\022\016\n\006userId\030\004 \001(\t\"\253\004\n\025TaskS",
+      "tageMonsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005ts" +
+      "mId\030\013 \001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterT" +
+      "ype\030\002 \001(\01621.com.lvl6.proto.TaskStageMons" +
+      "terProto.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\te" +
+      "xpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
+      "lReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(" +
+      "\010\022\034\n\024puzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemI" +
+      "d\030\007 \001(\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defens" +
+      "iveSkillId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001" +
+      "(\005\022!\n\031puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n",
+      "\010initialD\030\020 \001(\0132\035.com.lvl6.proto.Dialogu" +
+      "eProto\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.prot" +
+      "o.DialogueProto\"3\n\013MonsterType\022\013\n\007REGULA" +
+      "R\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024Persist" +
+      "entEventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfW" +
+      "eek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MO" +
+      "NDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDuration" +
+      "Minutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldow" +
+      "nMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6." +
+      "proto.PersistentEventProto.EventType\022;\n\016",
+      "monsterElement\030\010 \001(\0162\027.com.lvl6.proto.El" +
+      "ement:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANC" +
+      "E\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEven" +
+      "tProto\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(" +
+      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMap" +
+      "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
+      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(" +
+      "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
+      "\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\ni" +
+      "temDropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\n",
+      "cashReward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020c" +
+      "haracterImgName\030\014 \001(\t\022\036\n\026charImgVertPixe" +
+      "lOffset\030\r \001(\005\022\037\n\027charImgHorizPixelOffset" +
+      "\030\016 \001(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTa" +
+      "skProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9528,26 +10246,32 @@ public final class TaskProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
         new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", "ClientState", });
-    internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
+    internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor,
+        new java.lang.String[] { "TaskId", "UnclaimedCash", "UnclaimedOil", "UserId", });
+    internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
         new java.lang.String[] { "TsfuUuid", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
     internal_static_com_lvl6_proto_PersistentEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PersistentEventProto_descriptor,
         new java.lang.String[] { "EventId", "DayOfWeek", "StartHour", "EventDurationMinutes", "TaskId", "CooldownMinutes", "Type", "MonsterElement", });
     internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor,
         new java.lang.String[] { "UserUuid", "EventId", "CoolDownStartTime", });
     internal_static_com_lvl6_proto_TaskMapElementProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,

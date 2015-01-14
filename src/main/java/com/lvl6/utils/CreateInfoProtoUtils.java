@@ -203,6 +203,7 @@ import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
+import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -211,6 +212,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -3436,6 +3438,28 @@ public class CreateInfoProtoUtils {
 
 		
 		return mutpb.build();
+	}
+	
+	public static List<UserTaskCompletedProto> createUserTaskCompletedProto(
+		List<UserTaskCompleted> utcList)
+	{
+		List<UserTaskCompletedProto> retVal = new ArrayList<UserTaskCompletedProto>();
+		for (UserTaskCompleted utc : utcList) {
+			UserTaskCompletedProto utcp = createUserTaskCompletedProto(utc);
+			retVal.add(utcp);
+		}
+		return retVal;
+	}
+	
+	public static UserTaskCompletedProto createUserTaskCompletedProto(
+		UserTaskCompleted utc)
+	{
+		UserTaskCompletedProto.Builder utcpb = UserTaskCompletedProto.newBuilder();
+		utcpb.setTaskId(utc.getTaskId());
+		utcpb.setUnclaimedCash(utc.getUnclaimedCash());
+		utcpb.setUnclaimedOil(utc.getUnclaimedOil());
+		utcpb.setUserId(utc.getUserId());
+		return utcpb.build();
 	}
 
 	/*

@@ -56,12 +56,12 @@ public class StringUtils {
 //	}
 
   public  static String csvList(List<?> clauses) {
-    StringBuilder toreturn = new StringBuilder();
     if (clauses == null || clauses.size() < 1) {
       log.error("invalid parameters passed into StringUtils csvList. clauses=" + clauses);
       return "";
     }
     
+    StringBuilder toreturn = new StringBuilder();
     for (Object clause : clauses) {
       toreturn.append(clause); 
       toreturn.append(comma);

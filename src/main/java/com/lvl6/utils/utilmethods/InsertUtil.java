@@ -23,6 +23,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 
 public interface InsertUtil {
 
@@ -130,8 +131,8 @@ public interface InsertUtil {
 			int numRevives, Timestamp startTime, Timestamp endTime,
 			boolean userWon, boolean cancelled, int taskStageId);
 	
-	public abstract int insertIntoTaskForUserCompleted(String userId, int task,
-			Timestamp timeOfEntry);
+	public abstract int insertIntoTaskForUserCompleted(UserTaskCompleted utc, 
+  		Timestamp timeOfEntry);
 	
 	public abstract int insertIntoTaskForUserCompleted(List<String> userIdList,
 			List<Integer> taskIdList, List<Timestamp> timeOfEntryList);
