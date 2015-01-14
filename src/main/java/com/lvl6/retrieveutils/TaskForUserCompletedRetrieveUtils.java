@@ -242,6 +242,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		{
 			this.unclaimedOil = unclaimedOil;
 		}
+		@Override
+		public String toString()
+		{
+			return "UserTaskCompleted [userId="
+				+ userId
+				+ ", taskId="
+				+ taskId
+				+ ", unclaimedCash="
+				+ unclaimedCash
+				+ ", unclaimedOil="
+				+ unclaimedOil
+				+ "]";
+		}
+		
 	}
 
 

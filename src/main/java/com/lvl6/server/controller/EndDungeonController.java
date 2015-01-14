@@ -306,6 +306,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  //user completed task, but TaskMapElement might have leftover rewards
 		  remainingCash = oldUtc.getUnclaimedCash();
 		  remainingOil = oldUtc.getUnclaimedOil();
+		  log.info("setting the unclaimed resources. {}", oldUtc);
 	  }
 	  
 	  calculateResourcesGained(u, ut, maxCash, maxOil, remainingCash,
