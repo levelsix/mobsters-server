@@ -38,7 +38,6 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -304,7 +303,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  //user completed task, but TaskMapElement might have leftover rewards
 		  remainingCash = oldUtc.getUnclaimedCash();
 		  remainingOil = oldUtc.getUnclaimedOil();
-		  log.info("setting the unclaimed resources. {}", oldUtc);
 	  }
 	  
 	  calculateResourcesGained(u, ut, maxCash, maxOil, remainingCash,
@@ -405,22 +403,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  //this means the user collected resources beyond storage capacity
 		  //so no need to continue calculating
 		  unclaimedResourceContainer.add(additionalResources);
-		  String prefix = "resources gained from task ";
-		  log.info(
-			  "{} (not including stored resources) overflow{} user storage.",
-			  prefix);
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = "resources gained from task ";
+//		  log.info(
+//			  "{} (not including stored resources) overflow{} user storage.",
+//			  prefix);
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  return cappedResourceGained;
 	  }
 	  
 	  if (additionalResources <= 0) {
 		  //this means there is no more resource stored in this task
 		  //so no need to continue calculating
-		  log.info("no more resources. type={}, current={}, additional={}",
-			  new Object[] { resource, currentResourceAmt, additionalResources } );
+//		  log.info("no more resources. type={}, current={}, additional={}",
+//			  new Object[] { resource, currentResourceAmt, additionalResources } );
 		  unclaimedResourceContainer.add(0);
 		  return cappedResourceGained;
 	  }
@@ -434,22 +432,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int resourceOverflow = resourceGained2 - cappedResourceGained;
 		  unclaimedResourceContainer.add(resourceOverflow);
 		  
-		  String prefix = String.format(
-			  "task resources overflow user %s storage.",
-			  resource); 
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = String.format(
+//			  "task resources overflow user %s storage.",
+//			  resource); 
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  return cappedResourceGained;
 	  } else {
-		  String prefix = String.format(
-			  "task resources do not overflow user %s storage.",
-			  resource); 
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = String.format(
+//			  "task resources do not overflow user %s storage.",
+//			  resource); 
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  unclaimedResourceContainer.add(0);
 		  return cappedResourceGained;
 	  }
