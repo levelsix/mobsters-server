@@ -314,7 +314,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int cashGained = cashGainedContainer.get(0);
 	  int oilGained = oilGainedContainer.get(0);
 
-	  log.info(String.format("user before currency change. ", u));
+	  log.info("user before currency change. {}, newUtc={}, oldUtc={}, cashGained={}, oilGained={}",
+		  new Object[] { u, newUtc, oldUtc, cashGained, oilGained } );
 	  if (userWon) {
 		  log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
@@ -419,6 +420,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  if (additionalResources <= 0) {
 		  //this means there is no more resource stored in this task
 		  //so no need to continue calculating
+		  log.info("no more resources. type={}, current={}, additional={}",
+			  new Object[] { resource, currentResourceAmt, additionalResources } );
 		  unclaimedResourceContainer.add(0);
 		  return cappedResourceGained;
 	  }
