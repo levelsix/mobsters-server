@@ -165,15 +165,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  taskId = ut.getTaskId();
     	  resBuilder.setTaskId(taskId);
     	  
+    	  tme = TaskMapElementRetrieveUtils
+    		  .getTaskMapElementForTaskId(taskId);
     	  oldUtc = taskForUserCompletedRetrieveUtil
     		  .getCompletedTaskForUser(userId, taskId);
     	  
-    	  if (firstTimeUserWonTask) {
-    		  tme = TaskMapElementRetrieveUtils
-    			  .getTaskMapElementForTaskId(taskId);
-    	  }
     	  //award the item only once
-    	  if (null != tme) {
+    	  if (firstTimeUserWonTask && null != tme && null == oldUtc) {
     		  itemId = tme.getItemDropId();
     	  }
 
@@ -776,31 +774,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		boolean userWon, boolean firstTimeUserWonTask, Timestamp now,
   		UserTaskCompleted newUtc, UserTaskCompleted oldUtc)
   {
-  	if (userWon && firstTimeUserWonTask) {
-  		int numInserted = InsertUtils.get()
-  				.insertIntoTaskForUserCompleted(newUtc, now);
-  		
-  		log.info(String.format(
-  			"numInserted into task_for_user_completed: %s", numInserted));
-  		return;
-  	}
-  	
-  	int previousUnclaimedCash = 0;
-  	int previousUnclaimedOil = 0;
- 
-  	if (null != oldUtc) {
-  		//just a precaution
-  		previousUnclaimedCash = oldUtc.getUnclaimedCash();
-  		previousUnclaimedOil = oldUtc.getUnclaimedOil();
-  	}
-  	if (0 == previousUnclaimedCash && 0 == previousUnclaimedOil) {
-  		//no need to update since user depleted the task of its resources
-  		return;
-  	}
-  	
-  	//persist newUtc to the db
-  	int numUpdated = UpdateUtils.get().updateTaskForUserCompleted(newUtc);
-  	log.info("numUpdated task_for_user_completed: {}", numUpdated);
+	  if (!userWon) {
+		  return;
+	  }
+	  if (firstTimeUserWonTask) {
+		  int numInserted = InsertUtils.get()
+			  .insertIntoTaskForUserCompleted(newUtc, now);
+
+		  log.info(String.format(
+			  "numInserted into task_for_user_completed: %s", numInserted));
+		  return;
+	  }
+
+	  int previousUnclaimedCash = 0;
+	  int previousUnclaimedOil = 0;
+
+	  if (null != oldUtc) {
+		  //just a precaution
+		  previousUnclaimedCash = oldUtc.getUnclaimedCash();
+		  previousUnclaimedOil = oldUtc.getUnclaimedOil();
+	  }
+	  if (0 == previousUnclaimedCash && 0 == previousUnclaimedOil) {
+		  //no need to update since user depleted the task of its resources
+		  return;
+	  }
+
+	  //persist newUtc to the db
+	  int numUpdated = UpdateUtils.get().updateTaskForUserCompleted(newUtc);
+	  log.info("numUpdated task_for_user_completed: {}", numUpdated);
   }
 
   public Locker getLocker() {
