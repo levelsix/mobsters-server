@@ -6026,6 +6026,15 @@ public final class EventStartupProto {
        * </pre>
        */
       boolean getDisplayRarity();
+
+      /**
+       * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+       */
+      boolean hasTaskIdOfFirstSkill();
+      /**
+       * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+       */
+      int getTaskIdOfFirstSkill();
     }
     /**
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants}
@@ -6351,6 +6360,11 @@ public final class EventStartupProto {
               case 296: {
                 bitField0_ |= 0x80000000;
                 displayRarity_ = input.readBool();
+                break;
+              }
+              case 304: {
+                bitField1_ |= 0x00000001;
+                taskIdOfFirstSkill_ = input.readInt32();
                 break;
               }
             }
@@ -14509,6 +14523,7 @@ public final class EventStartupProto {
       }
 
       private int bitField0_;
+      private int bitField1_;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
       private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_;
       /**
@@ -15313,6 +15328,21 @@ public final class EventStartupProto {
         return displayRarity_;
       }
 
+      public static final int TASKIDOFFIRSTSKILL_FIELD_NUMBER = 38;
+      private int taskIdOfFirstSkill_;
+      /**
+       * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+       */
+      public boolean hasTaskIdOfFirstSkill() {
+        return ((bitField1_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+       */
+      public int getTaskIdOfFirstSkill() {
+        return taskIdOfFirstSkill_;
+      }
+
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -15351,6 +15381,7 @@ public final class EventStartupProto {
         sucp_ = java.util.Collections.emptyList();
         rccp_ = java.util.Collections.emptyList();
         displayRarity_ = false;
+        taskIdOfFirstSkill_ = 0;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -15475,6 +15506,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x80000000) == 0x80000000)) {
           output.writeBool(37, displayRarity_);
+        }
+        if (((bitField1_ & 0x00000001) == 0x00000001)) {
+          output.writeInt32(38, taskIdOfFirstSkill_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -15632,6 +15666,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x80000000) == 0x80000000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(37, displayRarity_);
+        }
+        if (((bitField1_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(38, taskIdOfFirstSkill_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -15894,6 +15932,8 @@ public final class EventStartupProto {
           }
           displayRarity_ = false;
           bitField1_ = (bitField1_ & ~0x00000010);
+          taskIdOfFirstSkill_ = 0;
+          bitField1_ = (bitField1_ & ~0x00000020);
           return this;
         }
 
@@ -15923,6 +15963,7 @@ public final class EventStartupProto {
           int from_bitField0_ = bitField0_;
           int from_bitField1_ = bitField1_;
           int to_bitField0_ = 0;
+          int to_bitField1_ = 0;
           if (inAppPurchasePackagesBuilder_ == null) {
             if (((bitField0_ & 0x00000001) == 0x00000001)) {
               inAppPurchasePackages_ = java.util.Collections.unmodifiableList(inAppPurchasePackages_);
@@ -16132,7 +16173,12 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x80000000;
           }
           result.displayRarity_ = displayRarity_;
+          if (((from_bitField1_ & 0x00000020) == 0x00000020)) {
+            to_bitField1_ |= 0x00000001;
+          }
+          result.taskIdOfFirstSkill_ = taskIdOfFirstSkill_;
           result.bitField0_ = to_bitField0_;
+          result.bitField1_ = to_bitField1_;
           onBuilt();
           return result;
         }
@@ -16375,6 +16421,9 @@ public final class EventStartupProto {
           }
           if (other.hasDisplayRarity()) {
             setDisplayRarity(other.getDisplayRarity());
+          }
+          if (other.hasTaskIdOfFirstSkill()) {
+            setTaskIdOfFirstSkill(other.getTaskIdOfFirstSkill());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -19560,6 +19609,38 @@ public final class EventStartupProto {
         public Builder clearDisplayRarity() {
           bitField1_ = (bitField1_ & ~0x00000010);
           displayRarity_ = false;
+          onChanged();
+          return this;
+        }
+
+        private int taskIdOfFirstSkill_ ;
+        /**
+         * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+         */
+        public boolean hasTaskIdOfFirstSkill() {
+          return ((bitField1_ & 0x00000020) == 0x00000020);
+        }
+        /**
+         * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+         */
+        public int getTaskIdOfFirstSkill() {
+          return taskIdOfFirstSkill_;
+        }
+        /**
+         * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+         */
+        public Builder setTaskIdOfFirstSkill(int value) {
+          bitField1_ |= 0x00000020;
+          taskIdOfFirstSkill_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 taskIdOfFirstSkill = 38;</code>
+         */
+        public Builder clearTaskIdOfFirstSkill() {
+          bitField1_ = (bitField1_ & ~0x00000020);
+          taskIdOfFirstSkill_ = 0;
           onChanged();
           return this;
         }
@@ -35022,7 +35103,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\2348\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\2708\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -35095,7 +35176,7 @@ public final class EventStartupProto {
       "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
       "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
-      "eferrer\030\003 \001(\005\032\377\033\n\020StartupConstants\022H\n\025in",
+      "eferrer\030\003 \001(\005\032\233\034\n\020StartupConstants\022H\n\025in",
       "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
       "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
       "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
@@ -35145,66 +35226,67 @@ public final class EventStartupProto {
       "pConstants.SpeedUpConstantProto\022c\n\004rccp\030" +
       "# \003(\0132U.com.lvl6.proto.StartupResponsePr" +
       "oto.StartupConstants.ResourceConversionC" +
-      "onstantProto\022\025\n\rdisplayRarity\030% \001(\010\032_\n\031A",
-      "nimatedSpriteOffsetProto\022\021\n\timageName\030\001 " +
-      "\001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
-      "rdinateProto\032\325\001\n\rClanConstants\022\035\n\025coinPr" +
-      "iceToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthFo" +
-      "rClanName\030\002 \001(\005\022\'\n\037maxCharLengthForClanD" +
-      "escription\030\003 \001(\005\022\037\n\027maxCharLengthForClan" +
-      "Tag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achiev" +
-      "ementIdsForClanRewards\030\006 \003(\005\032c\n\030Download" +
-      "ableNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020" +
-      "expansionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibN",
-      "ame\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwins" +
-      "Weight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fl" +
-      "eesWeight\030\003 \001(\005\022#\n\033numHoursToShowAfterEv" +
-      "entEnd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017" +
-      "maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMo" +
-      "nsterLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n" +
-      "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
-      "alPerHealthPoint\030\002 \001(\002\022\031\n\021elementalStren" +
-      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022" +
-      "oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapCons",
-      "tants\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023" +
-      "mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSectionH" +
-      "eight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016ma" +
-      "pTotalHeight\030\005 \001(\002\032K\n\025MiniTutorialConsta" +
-      "nts\022\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guide" +
-      "MonsterId\030\002 \001(\005\032\202\001\n\021ClanHelpConstants\0220\n" +
-      "\010helpType\030\001 \001(\0162\036.com.lvl6.proto.GameAct" +
-      "ionType\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n" +
-      "\025percentRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpCons" +
-      "tants\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minP",
-      "vpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002" +
-      "\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defending" +
-      "MsgCharLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeL" +
-      "imitMins\030\006 \001(\005\022(\n requestClanToAvengeTim" +
-      "eLimitMins\030\007 \001(\005\0328\n\024SpeedUpConstantProto" +
-      "\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037Re" +
-      "sourceConversionConstantProto\0222\n\014resourc" +
-      "eType\030\001 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
-      "e\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032" +
-      "\234\004\n\021TutorialConstants\022\031\n\021startingMonster",
-      "Id\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enem" +
-      "yMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 " +
-      "\001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZ" +
-      "MonsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 " +
-      "\003(\0132#.com.lvl6.proto.TutorialStructProto" +
-      "\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006city" +
-      "Id\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com." +
-      "lvl6.proto.CityElementProto\022$\n\034cityEleme" +
-      "ntIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElement" +
-      "IdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001",
-      "(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n" +
-      "\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.prot" +
-      "o.MinimumObstacleProto\"A\n\014UpdateStatus\022\r" +
-      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
-      "_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
-      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAIN" +
-      "TENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n" +
-      "\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023" +
-      "B\021EventStartupProto"
+      "onstantProto\022\025\n\rdisplayRarity\030% \001(\010\022\032\n\022t",
+      "askIdOfFirstSkill\030& \001(\005\032_\n\031AnimatedSprit" +
+      "eOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSe" +
+      "t\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProto" +
+      "\032\325\001\n\rClanConstants\022\035\n\025coinPriceToCreateC" +
+      "lan\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 " +
+      "\001(\005\022\'\n\037maxCharLengthForClanDescription\030\003" +
+      " \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\022\023\n" +
+      "\013maxClanSize\030\005 \001(\005\022$\n\034achievementIdsForC" +
+      "lanRewards\030\006 \003(\005\032c\n\030DownloadableNibConst" +
+      "ants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNib",
+      "Name\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n" +
+      "\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(\005" +
+      "\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 " +
+      "\001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005" +
+      "\032R\n\024UserMonsterConstants\022\027\n\017maxNumTeamSl" +
+      "ots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002" +
+      " \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPerHeal" +
+      "thPoint\030\001 \001(\002\022#\n\033secondsToHealPerHealthP" +
+      "oint\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n" +
+      "\021elementalWeakness\030\004 \001(\002\022\032\n\022oilPerMonste",
+      "rLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035\n\025map" +
+      "SectionImagePrefix\030\001 \001(\t\022\033\n\023mapNumberOfS" +
+      "ections\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002\022" +
+      "\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeight" +
+      "\030\005 \001(\002\032K\n\025MiniTutorialConstants\022\032\n\022miniT" +
+      "utorialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 " +
+      "\001(\005\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001 " +
+      "\001(\0162\036.com.lvl6.proto.GameActionType\022\034\n\024a" +
+      "mountRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemo" +
+      "vedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pvp",
+      "DmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002" +
+      " \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequi" +
+      "redMinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimit" +
+      "\030\005 \001(\005\022\"\n\032beginAvengingTimeLimitMins\030\006 \001" +
+      "(\005\022(\n requestClanToAvengeTimeLimitMins\030\007" +
+      " \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030" +
+      "\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConver" +
+      "sionConstantProto\0222\n\014resourceType\030\001 \001(\0162" +
+      "\034.com.lvl6.proto.ResourceType\022\023\n\013resourc" +
+      "eAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021Tutorial",
+      "Constants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016" +
+      "guideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002" +
+      " \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemy" +
+      "BossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n " +
+      "\001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lv" +
+      "l6.proto.TutorialStructProto\022\036\n\026structur" +
+      "eIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017" +
+      "cityOneElements\030\006 \003(\0132 .com.lvl6.proto.C" +
+      "ityElementProto\022$\n\034cityElementIdForFirst" +
+      "Dungeon\030\007 \001(\005\022%\n\035cityElementIdForSecondD",
+      "ungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilIni" +
+      "t\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObs" +
+      "tacles\030\016 \003(\0132$.com.lvl6.proto.MinimumObs" +
+      "tacleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020" +
+      "\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n" +
+      "\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_N" +
+      "OT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n" +
+      "\030ForceLogoutResponseProto\022\031\n\021previousLog" +
+      "inTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStart" +
+      "upProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -35269,7 +35351,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", });
+        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", "TaskIdOfFirstSkill", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
