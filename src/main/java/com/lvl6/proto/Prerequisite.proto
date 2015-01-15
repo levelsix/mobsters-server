@@ -9,9 +9,9 @@ option java_outer_classname = "PrerequisiteProto";
 
 message PrereqProto {
 	optional int32 prereqId = 1;
-	optional GameType gameType = 2; //(the type of the object that has a prerequisite, e.g. structure, research, skill)
+	optional GameType gameType = 2 [default = NO_TYPE]; //(the type of the object that has a prerequisite, e.g. structure, research, skill)
 	optional int32 gameEntityId = 3; //(the id of the object that has a prerequisite, e.g. id of structure in structure table)
-	optional GameType prereqGameType = 4; //(what the user needs to be have before the object can be built/acquired)
+	optional GameType prereqGameType = 4 [default = NO_TYPE]; //(what the user needs to be have before the object can be built/acquired)
 	optional int32 prereqGameEntityId = 5;
 	optional int32 quantity = 6;
 }

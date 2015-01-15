@@ -11,7 +11,6 @@ message BoardLayoutProto {
 	optional int32 boardId = 1;
 	optional int32 height = 2;
 	optional int32 width = 3;
-	
 	//bit representation of what elements are active. Example 100001, only two elements are active
 	optional int32 orbElements = 4; 
 	
@@ -24,7 +23,7 @@ message BoardPropertyProto {
 	optional string name = 3;
 	optional int32 posX = 4;
 	optional int32 posY = 5;
-	optional Element elem = 6;
+	optional Element elem = 6 [default = NO_ELEMENT];
 	
 	//At the moment, mostly used for jelly, as in break jelly twice kind of thing.
 	optional int32 value = 7;

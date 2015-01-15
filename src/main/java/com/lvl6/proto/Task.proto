@@ -139,7 +139,7 @@ message TaskMapElementProto {
 	optional int32 taskId = 2;
 	optional int32 xPos = 3;
 	optional int32 yPos = 4;
-	optional Element element = 5;
+	optional Element element = 5 [default = NO_ELEMENT];
 	optional bool boss = 6;
 	optional string bossImgName = 7;
 	optional int32 itemDropId = 8;

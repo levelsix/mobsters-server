@@ -54,7 +54,7 @@ message UserItemUsageProto {
 	optional int32 itemId = 3;
 	optional int64 timeOfEntry = 4;
 	optional string userDataUuid = 5;
-	optional GameActionType actionType = 6;
+	optional GameActionType actionType = 6 [default = NO_HELP];
 }
 
 //------------------------------------------------------------------------------------------

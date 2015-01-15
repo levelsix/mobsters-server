@@ -266,7 +266,7 @@ message StartupResponseProto {
 			optional int32 guideMonsterId = 2;
 		}
 		message ClanHelpConstants {
-			optional GameActionType helpType = 1;
+			optional GameActionType helpType = 1 [default = NO_HELP];
 			
 			//of the two, client should use the
 			//one that benefits the user the most
@@ -306,7 +306,7 @@ message StartupResponseProto {
 			optional int32 numGems = 2;
 		}
 		message ResourceConversionConstantProto {
-			optional ResourceType resourceType = 1;
+			optional ResourceType resourceType = 1 [default = NO_RESOURCE];
 			optional int32 resourceAmt = 2;
 			optional int32 numGems = 3;
 		}

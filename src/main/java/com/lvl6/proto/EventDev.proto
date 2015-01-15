@@ -12,7 +12,7 @@ option java_outer_classname = "EventDevProto";
 
 message DevRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional DevRequest devRequest = 2;
+	optional DevRequest devRequest = 2 [default = RESET_ACCOUNT];
 	
 	//could be for cash, oil, and or gems, or monster id
 	//optional int32 num = 3;

@@ -252,7 +252,7 @@ message UserObstacleProto {
 
 message EvoChamberProto {
 	optional StructureInfoProto structInfo = 1; 
-	optional Quality qualityUnlocked = 2;
+	optional Quality qualityUnlocked = 2 [default = COMMON];
 	optional int32 evoTierUnlocked = 3;
 }
 
