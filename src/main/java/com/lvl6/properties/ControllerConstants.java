@@ -177,8 +177,9 @@ public class ControllerConstants {
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
 	//TOGGLES
+	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
-	
+	 
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = {
 		1, 300, 3600, 86400, 604800, 157852800

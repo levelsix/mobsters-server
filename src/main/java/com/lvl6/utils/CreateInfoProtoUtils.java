@@ -449,7 +449,7 @@ public class CreateInfoProtoUtils {
 	public static PvpProto createFakePvpProto(String userId, String name,
 		int lvl, int elo, int prospectiveCashWinnings,
 		int prospectiveOilWinnings, List<MonsterForPvp> mfpList,
-		List<Integer> monsterIdsDropped)
+		List<Integer> monsterIdsDropped, boolean setElo)
 	{
 
 		//create the fake user
@@ -476,7 +476,8 @@ public class CreateInfoProtoUtils {
 		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
-		UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo, false);
+		UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(
+			userId, elo, setElo);
 		ppb.setPvpLeagueStats(uplp);
 
 		return ppb.build();
@@ -737,8 +738,9 @@ public class CreateInfoProtoUtils {
 		return uplpb.build();
 	}
 
-	public static UserPvpLeagueProto createFakeUserPvpLeagueProto(String userId, int elo,
-		boolean setElo) {
+	public static UserPvpLeagueProto createFakeUserPvpLeagueProto(
+		String userId, int elo, boolean setElo)
+	{
 		UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 		//uplpb.setUserUuid(userId);
 
@@ -749,6 +751,10 @@ public class CreateInfoProtoUtils {
 
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 
+		if (setElo) {
+			uplpb.setElo(elo);
+		}
+		
 		return uplpb.build();
 	}
 	
