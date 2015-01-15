@@ -14,6 +14,7 @@ import com.hazelcast.core.HazelcastInstance;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
+import com.lvl6.properties.ControllerConstants;
 
 
 @Component
@@ -25,6 +26,9 @@ public class ClanSearch {
 	private static Double ONE_DAY_IN_HOURS = 24D;
 	private static Double ONE_HOUR_IN_MILLIS = 60D * 60D * 1000D;
 //	private static Integer idealNumberOfMembers = 80;
+	private static int maxCutOffClanSize = (int) (0.98F * (float)ControllerConstants.CLAN__MAX_NUM_MEMBERS);
+	private static int penalizedClanSize = 2;
+	private static String penalizingStr = "clan hit limit. Changing numMembers, lastChat.";
 	
 	protected HazelcastInstance hz;
 	protected DistributedZSet rankedClans;
@@ -43,6 +47,14 @@ public class ClanSearch {
 		//if(timeToLastChat > DAY) {
 		//	rawScore = rawScore / 2;
 		//}
+		
+		if (numberOfMembers > maxCutOffClanSize) {
+			
+			log.warn("{} lastChat={}, numMembers={}, maxCutOffClanSize={}.",
+				new Object[] {penalizingStr, lastChat, numberOfMembers, maxCutOffClanSize});
+			numberOfMembers = penalizedClanSize;
+			lastChat = ControllerConstants.INCEPTION_DATE;
+		}
 		
 		long rawScore = 0;
 		

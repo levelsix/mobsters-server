@@ -1590,6 +1590,8 @@ public class UpdateUtils implements UpdateUtil {
 			Map<String, Object> insertParams = new HashMap<String, Object>();
 			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID,
 				utc.getUserId());
+			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID,
+				utc.getTaskId());
 			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_CASH,
 				unclaimedCash);
 			insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__UNCLAIMED_OIL,

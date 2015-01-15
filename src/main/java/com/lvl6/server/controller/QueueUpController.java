@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -837,9 +838,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private List<PvpProto> createPvpProtosFromFakeUser(List<List<MonsterForPvp>> fakeUserMonsters) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
+		boolean setElo = ServerToggleRetrieveUtils
+			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
 		
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
-			PvpProto user = createFakeUser(mons);
+			PvpProto user = createFakeUser(mons, setElo);
 			ppList.add(user);
 		}
 		
@@ -848,7 +851,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 	
 	//CREATES ONE FAKE USER FOR PVP
-	private PvpProto createFakeUser(List<MonsterForPvp> mfpList) {
+	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
+		boolean setElo)
+	{
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
 		//for cur elo avg out the monsters elos
@@ -874,7 +879,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//as mfpList
 		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId,
 			randomName, lvl, avgElo, prospectiveCashWinnings,
-			prospectiveOilWinnings, mfpList, monsterIdsDropped);
+			prospectiveOilWinnings, mfpList, monsterIdsDropped, setElo);
 		return fakeUser;
 	}
 	

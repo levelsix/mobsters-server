@@ -38,7 +38,6 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -165,15 +164,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  taskId = ut.getTaskId();
     	  resBuilder.setTaskId(taskId);
     	  
+    	  tme = TaskMapElementRetrieveUtils
+    		  .getTaskMapElementForTaskId(taskId);
     	  oldUtc = taskForUserCompletedRetrieveUtil
     		  .getCompletedTaskForUser(userId, taskId);
     	  
-    	  if (firstTimeUserWonTask) {
-    		  tme = TaskMapElementRetrieveUtils
-    			  .getTaskMapElementForTaskId(taskId);
-    	  }
     	  //award the item only once
-    	  if (null != tme) {
+    	  if (firstTimeUserWonTask && null != tme && null == oldUtc) {
     		  itemId = tme.getItemDropId();
     	  }
 
@@ -314,7 +311,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int cashGained = cashGainedContainer.get(0);
 	  int oilGained = oilGainedContainer.get(0);
 
-	  log.info(String.format("user before currency change. ", u));
+	  log.info("user before currency change. {}, newUtc={}, oldUtc={}, cashGained={}, oilGained={}",
+		  new Object[] { u, newUtc, oldUtc, cashGained, oilGained } );
 	  if (userWon) {
 		  log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
@@ -405,20 +403,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  //this means the user collected resources beyond storage capacity
 		  //so no need to continue calculating
 		  unclaimedResourceContainer.add(additionalResources);
-		  String prefix = "resources gained from task ";
-		  log.info(
-			  "{} (not including stored resources) overflow{} user storage.",
-			  prefix);
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = "resources gained from task ";
+//		  log.info(
+//			  "{} (not including stored resources) overflow{} user storage.",
+//			  prefix);
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  return cappedResourceGained;
 	  }
 	  
 	  if (additionalResources <= 0) {
 		  //this means there is no more resource stored in this task
 		  //so no need to continue calculating
+//		  log.info("no more resources. type={}, current={}, additional={}",
+//			  new Object[] { resource, currentResourceAmt, additionalResources } );
 		  unclaimedResourceContainer.add(0);
 		  return cappedResourceGained;
 	  }
@@ -432,22 +432,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int resourceOverflow = resourceGained2 - cappedResourceGained;
 		  unclaimedResourceContainer.add(resourceOverflow);
 		  
-		  String prefix = String.format(
-			  "task resources overflow user %s storage.",
-			  resource); 
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = String.format(
+//			  "task resources overflow user %s storage.",
+//			  resource); 
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  return cappedResourceGained;
 	  } else {
-		  String prefix = String.format(
-			  "task resources do not overflow user %s storage.",
-			  resource); 
-		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
-			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
-			  resourceGained, additionalResources }
-		  );
+//		  String prefix = String.format(
+//			  "task resources do not overflow user %s storage.",
+//			  resource); 
+//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
+//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
+//			  resourceGained, additionalResources }
+//		  );
 		  unclaimedResourceContainer.add(0);
 		  return cappedResourceGained;
 	  }
@@ -772,31 +772,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		boolean userWon, boolean firstTimeUserWonTask, Timestamp now,
   		UserTaskCompleted newUtc, UserTaskCompleted oldUtc)
   {
-  	if (userWon && firstTimeUserWonTask) {
-  		int numInserted = InsertUtils.get()
-  				.insertIntoTaskForUserCompleted(newUtc, now);
-  		
-  		log.info(String.format(
-  			"numInserted into task_for_user_completed: %s", numInserted));
-  		return;
-  	}
-  	
-  	int previousUnclaimedCash = 0;
-  	int previousUnclaimedOil = 0;
- 
-  	if (null != oldUtc) {
-  		//just a precaution
-  		previousUnclaimedCash = oldUtc.getUnclaimedCash();
-  		previousUnclaimedOil = oldUtc.getUnclaimedOil();
-  	}
-  	if (0 == previousUnclaimedCash && 0 == previousUnclaimedOil) {
-  		//no need to update since user depleted the task of its resources
-  		return;
-  	}
-  	
-  	//persist newUtc to the db
-  	int numUpdated = UpdateUtils.get().updateTaskForUserCompleted(newUtc);
-  	log.info("numUpdated task_for_user_completed: {}", numUpdated);
+	  if (!userWon) {
+		  return;
+	  }
+	  if (firstTimeUserWonTask) {
+		  int numInserted = InsertUtils.get()
+			  .insertIntoTaskForUserCompleted(newUtc, now);
+
+		  log.info(String.format(
+			  "numInserted into task_for_user_completed: %s", numInserted));
+		  return;
+	  }
+
+	  int previousUnclaimedCash = 0;
+	  int previousUnclaimedOil = 0;
+
+	  if (null != oldUtc) {
+		  //just a precaution
+		  previousUnclaimedCash = oldUtc.getUnclaimedCash();
+		  previousUnclaimedOil = oldUtc.getUnclaimedOil();
+	  }
+	  if (0 == previousUnclaimedCash && 0 == previousUnclaimedOil) {
+		  //no need to update since user depleted the task of its resources
+		  return;
+	  }
+
+	  //persist newUtc to the db
+	  int numUpdated = UpdateUtils.get().updateTaskForUserCompleted(newUtc);
+	  log.info("numUpdated task_for_user_completed: {}", numUpdated);
   }
 
   public Locker getLocker() {
