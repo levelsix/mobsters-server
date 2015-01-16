@@ -173,6 +173,11 @@ public class TaskStageMonsterRetrieveUtils {
 			}
 			
 			//incorporating nonskill logic
+			if (tsm.getPuzzlePieceDropRate() <= 0F) {
+				//only care about the ones that can drop
+				continue;
+			}
+			
 			int stageId = tsm.getStageId();
 			if (!taskStageIdsToMonsterIdsTemp.containsKey(stageId)) {
 				//base case
