@@ -15285,11 +15285,11 @@ public final class StructureProto {
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
      */
     boolean hasQualityUnlocked();
     /**
-     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked();
 
@@ -15447,13 +15447,13 @@ public final class StructureProto {
     public static final int QUALITYUNLOCKED_FIELD_NUMBER = 2;
     private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_;
     /**
-     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
      */
     public boolean hasQualityUnlocked() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
      */
     public com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked() {
       return qualityUnlocked_;
@@ -15476,7 +15476,7 @@ public final class StructureProto {
 
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.COMMON;
       evoTierUnlocked_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -15646,7 +15646,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.COMMON;
         bitField0_ = (bitField0_ & ~0x00000002);
         evoTierUnlocked_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -15862,21 +15862,21 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.COMMON;
       /**
-       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
        */
       public boolean hasQualityUnlocked() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
        */
       public com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked() {
         return qualityUnlocked_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
        */
       public Builder setQualityUnlocked(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
         if (value == null) {
@@ -15888,11 +15888,11 @@ public final class StructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
        */
       public Builder clearQualityUnlocked() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.COMMON;
         onChanged();
         return this;
       }
@@ -17289,20 +17289,21 @@ public final class StructureProto {
       "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
       "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
-      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\224\001\n\017EvoCha" +
+      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCha" +
       "mberProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\0220\n\017qualityUnlo" +
-      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality\022\027\n\017e" +
-      "voTierUnlocked\030\003 \001(\005\"`\n\017TeamCenterProto\022" +
-      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k",
-      "\n\016ClanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\022!\n\031maxH" +
-      "elpersPerSolicitation\030\002 \001(\005*I\n\014ResourceT" +
-      "ype\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022" +
-      "\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientat" +
-      "ion\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022" +
-      "\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      ".proto.StructureInfoProto\0228\n\017qualityUnlo" +
+      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COM" +
+      "MON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCent" +
+      "erProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p" +
+      "roto.StructureInfoProto\022\025\n\rteamCostLimit",
+      "\030\002 \001(\005\"k\n\016ClanHouseProto\0226\n\nstructInfo\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005*I\n\014R" +
+      "esourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007" +
+      "\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021Struct" +
+      "Orientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSIT" +
+      "ION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

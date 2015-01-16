@@ -1893,11 +1893,11 @@ public final class ItemsProto {
         getUserDataUuidBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
      */
     boolean hasActionType();
     /**
-     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
      */
     com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType();
   }
@@ -2210,13 +2210,13 @@ public final class ItemsProto {
     public static final int ACTIONTYPE_FIELD_NUMBER = 6;
     private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_;
     /**
-     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
      */
     public boolean hasActionType() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
      */
     public com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType() {
       return actionType_;
@@ -2867,19 +2867,19 @@ public final class ItemsProto {
 
       private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       /**
-       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
        */
       public boolean hasActionType() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
        */
       public com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType() {
         return actionType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
        */
       public Builder setActionType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
         if (value == null) {
@@ -2891,7 +2891,7 @@ public final class ItemsProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
        */
       public Builder clearActionType() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -3822,16 +3822,17 @@ public final class ItemsProto {
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
-      "ance\030\007 \001(\002\"\250\001\n\022UserItemUsageProto\022\021\n\tusa" +
+      "ance\030\007 \001(\002\"\261\001\n\022UserItemUsageProto\022\021\n\tusa" +
       "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
       "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
-      "uid\030\005 \001(\t\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType\"}\n\027UserItemSecretG" +
-      "iftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
-      " \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006item" +
-      "Id\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType" +
-      "\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM" +
-      "_CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
+      "uid\030\005 \001(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
+      ".proto.GameActionType:\007NO_HELP\"}\n\027UserIt" +
+      "emSecretGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010u" +
+      "serUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(" +
+      "\005\022\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n" +
+      "\010ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020" +
+      "\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

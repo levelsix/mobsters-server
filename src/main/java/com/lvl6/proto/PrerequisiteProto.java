@@ -22,7 +22,7 @@ public final class PrerequisiteProto {
     int getPrereqId();
 
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+     * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
      *
      * <pre>
      *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -30,7 +30,7 @@ public final class PrerequisiteProto {
      */
     boolean hasGameType();
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+     * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
      *
      * <pre>
      *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -56,7 +56,7 @@ public final class PrerequisiteProto {
     int getGameEntityId();
 
     /**
-     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
      *
      * <pre>
      *(what the user needs to be have before the object can be built/acquired)
@@ -64,7 +64,7 @@ public final class PrerequisiteProto {
      */
     boolean hasPrereqGameType();
     /**
-     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
      *
      * <pre>
      *(what the user needs to be have before the object can be built/acquired)
@@ -242,7 +242,7 @@ public final class PrerequisiteProto {
     public static final int GAMETYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_;
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+     * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
      *
      * <pre>
      *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -252,7 +252,7 @@ public final class PrerequisiteProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+     * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
      *
      * <pre>
      *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -288,7 +288,7 @@ public final class PrerequisiteProto {
     public static final int PREREQGAMETYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.SharedEnumConfigProto.GameType prereqGameType_;
     /**
-     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
      *
      * <pre>
      *(what the user needs to be have before the object can be built/acquired)
@@ -298,7 +298,7 @@ public final class PrerequisiteProto {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+     * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
      *
      * <pre>
      *(what the user needs to be have before the object can be built/acquired)
@@ -686,7 +686,7 @@ public final class PrerequisiteProto {
 
       private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+       * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
        *
        * <pre>
        *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -696,7 +696,7 @@ public final class PrerequisiteProto {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+       * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
        *
        * <pre>
        *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -706,7 +706,7 @@ public final class PrerequisiteProto {
         return gameType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+       * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
        *
        * <pre>
        *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -722,7 +722,7 @@ public final class PrerequisiteProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 2;</code>
+       * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
        *
        * <pre>
        *(the type of the object that has a prerequisite, e.g. structure, research, skill)
@@ -785,7 +785,7 @@ public final class PrerequisiteProto {
 
       private com.lvl6.proto.SharedEnumConfigProto.GameType prereqGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
       /**
-       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
        *
        * <pre>
        *(what the user needs to be have before the object can be built/acquired)
@@ -795,7 +795,7 @@ public final class PrerequisiteProto {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
        *
        * <pre>
        *(what the user needs to be have before the object can be built/acquired)
@@ -805,7 +805,7 @@ public final class PrerequisiteProto {
         return prereqGameType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
        *
        * <pre>
        *(what the user needs to be have before the object can be built/acquired)
@@ -821,7 +821,7 @@ public final class PrerequisiteProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4;</code>
+       * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
        *
        * <pre>
        *(what the user needs to be have before the object can be built/acquired)
@@ -924,12 +924,13 @@ public final class PrerequisiteProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022Prerequisite.proto\022\016com.lvl6.proto\032\026Sh" +
-      "aredEnumConfig.proto\"\301\001\n\013PrereqProto\022\020\n\010" +
-      "prereqId\030\001 \001(\005\022*\n\010gameType\030\002 \001(\0162\030.com.l" +
-      "vl6.proto.GameType\022\024\n\014gameEntityId\030\003 \001(\005" +
-      "\0220\n\016prereqGameType\030\004 \001(\0162\030.com.lvl6.prot" +
-      "o.GameType\022\032\n\022prereqGameEntityId\030\005 \001(\005\022\020" +
-      "\n\010quantity\030\006 \001(\005B\023B\021PrerequisiteProto"
+      "aredEnumConfig.proto\"\323\001\n\013PrereqProto\022\020\n\010" +
+      "prereqId\030\001 \001(\005\0223\n\010gameType\030\002 \001(\0162\030.com.l" +
+      "vl6.proto.GameType:\007NO_TYPE\022\024\n\014gameEntit" +
+      "yId\030\003 \001(\005\0229\n\016prereqGameType\030\004 \001(\0162\030.com." +
+      "lvl6.proto.GameType:\007NO_TYPE\022\032\n\022prereqGa" +
+      "meEntityId\030\005 \001(\005\022\020\n\010quantity\030\006 \001(\005B\023B\021Pr" +
+      "erequisiteProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

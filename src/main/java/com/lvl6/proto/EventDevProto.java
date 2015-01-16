@@ -26,11 +26,11 @@ public final class EventDevProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
      */
     boolean hasDevRequest();
     /**
-     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
      */
     com.lvl6.proto.DevProto.DevRequest getDevRequest();
 
@@ -212,13 +212,13 @@ public final class EventDevProto {
     public static final int DEVREQUEST_FIELD_NUMBER = 2;
     private com.lvl6.proto.DevProto.DevRequest devRequest_;
     /**
-     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
      */
     public boolean hasDevRequest() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+     * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
      */
     public com.lvl6.proto.DevProto.DevRequest getDevRequest() {
       return devRequest_;
@@ -671,19 +671,19 @@ public final class EventDevProto {
 
       private com.lvl6.proto.DevProto.DevRequest devRequest_ = com.lvl6.proto.DevProto.DevRequest.RESET_ACCOUNT;
       /**
-       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
        */
       public boolean hasDevRequest() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
        */
       public com.lvl6.proto.DevProto.DevRequest getDevRequest() {
         return devRequest_;
       }
       /**
-       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
        */
       public Builder setDevRequest(com.lvl6.proto.DevProto.DevRequest value) {
         if (value == null) {
@@ -695,7 +695,7 @@ public final class EventDevProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2;</code>
+       * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
        */
       public Builder clearDevRequest() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2054,18 +2054,18 @@ public final class EventDevProto {
     java.lang.String[] descriptorData = {
       "\n\016EventDev.proto\022\016com.lvl6.proto\032\tDev.pr" +
       "oto\032\nItem.proto\032\022MonsterStuff.proto\032\nUse" +
-      "r.proto\"\233\001\n\017DevRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
+      "r.proto\"\252\001\n\017DevRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022=\n" +
       "\ndevRequest\030\002 \001(\0162\032.com.lvl6.proto.DevRe" +
-      "quest\022\024\n\014staticDataId\030\003 \001(\005\022\020\n\010quantity\030" +
-      "\004 \001(\005\"\212\002\n\020DevResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022:\n\006" +
-      "status\030\002 \001(\0162*.com.lvl6.proto.DevRespons" +
-      "eProto.DevStatus\0222\n\004fump\030\003 \003(\0132$.com.lvl",
-      "6.proto.FullUserMonsterProto\022*\n\003uip\030\004 \001(" +
-      "\0132\035.com.lvl6.proto.UserItemProto\"(\n\tDevS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEv" +
-      "entDevProto"
+      "quest:\rRESET_ACCOUNT\022\024\n\014staticDataId\030\003 \001" +
+      "(\005\022\020\n\010quantity\030\004 \001(\005\"\212\002\n\020DevResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022:\n\006status\030\002 \001(\0162*.com.lvl6.p" +
+      "roto.DevResponseProto.DevStatus\0222\n\004fump\030",
+      "\003 \003(\0132$.com.lvl6.proto.FullUserMonsterPr" +
+      "oto\022*\n\003uip\030\004 \001(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\"(\n\tDevStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
+      "L_OTHER\020\002B\017B\rEventDevProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

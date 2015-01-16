@@ -1489,11 +1489,11 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
      */
     boolean hasScope();
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
      */
     com.lvl6.proto.ChatProto.GroupChatScope getScope();
 
@@ -1671,13 +1671,13 @@ public final class EventChatProto {
     public static final int SCOPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.ChatProto.GroupChatScope scope_;
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
      */
     public boolean hasScope() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
      */
     public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
       return scope_;
@@ -2149,19 +2149,19 @@ public final class EventChatProto {
 
       private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
        */
       public boolean hasScope() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
        */
       public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
         return scope_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
        */
       public Builder setScope(com.lvl6.proto.ChatProto.GroupChatScope value) {
         if (value == null) {
@@ -2173,7 +2173,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2;</code>
+       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
        */
       public Builder clearScope() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -7703,47 +7703,47 @@ public final class EventChatProto {
       "ponseProto\022\022\n\nsenderUuid\030\001 \001(\t\022\017\n\007messag" +
       "e\030\002 \001(\t\"l\n GeneralNotificationResponsePr" +
       "oto\022\r\n\005title\030\001 \001(\t\022\020\n\010subtitle\030\002 \001(\t\022\'\n\003" +
-      "rgb\030\003 \001(\0132\032.com.lvl6.proto.ColorProto\"\245\001" +
+      "rgb\030\003 \001(\0132\032.com.lvl6.proto.ColorProto\"\253\001" +
       "\n\031SendGroupChatRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022-\n" +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\0223\n" +
       "\005scope\030\002 \001(\0162\036.com.lvl6.proto.GroupChatS" +
-      "cope\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclientTime\030",
-      "\004 \001(\003\"\354\001\n\032SendGroupChatResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto." +
-      "SendGroupChatResponseProto.SendGroupChat" +
-      "Status\"L\n\023SendGroupChatStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\014\n\010TOO_LONG\020\002\022\016\n\nOTHER_FAIL\020\003\022\n\n\006BANN" +
-      "ED\020\004\"\266\001\n\036ReceivedGroupChatResponseProto\022" +
-      "9\n\006sender\030\001 \001(\0132).com.lvl6.proto.Minimum" +
-      "UserProtoWithLevel\022\023\n\013chatMessage\030\002 \001(\t\022" +
-      "3\n\005scope\030\003 \001(\0162\036.com.lvl6.proto.GroupCha",
-      "tScope:\004CLAN\022\017\n\007isAdmin\030\004 \001(\010\"w\n\033Private" +
-      "ChatPostRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\025\n\rrecipi" +
-      "entUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\"\303\002\n\034Priva" +
-      "teChatPostResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022R\n\006sta" +
-      "tus\030\002 \001(\0162B.com.lvl6.proto.PrivateChatPo" +
-      "stResponseProto.PrivateChatPostStatus\0222\n" +
-      "\004post\030\003 \001(\0132$.com.lvl6.proto.PrivateChat" +
-      "PostProto\"i\n\025PrivateChatPostStatus\022\013\n\007SU",
-      "CCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO" +
-      "_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\220\001\n" +
-      "$RetrievePrivateChatPostsRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\025\n\rotherUserUuid\030\002 \001(\t\022\037\n\023before" +
-      "PrivateChatId\030\003 \001(\005B\002\030\001\"\346\002\n%RetrievePriv" +
-      "ateChatPostsResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\0224\n\005p" +
-      "osts\030\002 \003(\0132%.com.lvl6.proto.GroupChatMes" +
-      "sageProto\022\037\n\023beforePrivateChatId\030\003 \001(\005B\002",
-      "\030\001\022d\n\006status\030\004 \001(\0162T.com.lvl6.proto.Retr" +
-      "ievePrivateChatPostsResponseProto.Retrie" +
-      "vePrivateChatPostsStatus\022\025\n\rotherUserUui" +
-      "d\030\005 \001(\t\"7\n\036RetrievePrivateChatPostsStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002B\020B\016EventChatPro" +
-      "to"
+      "cope:\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclien",
+      "tTime\030\004 \001(\003\"\354\001\n\032SendGroupChatResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6." +
+      "proto.SendGroupChatResponseProto.SendGro" +
+      "upChatStatus\"L\n\023SendGroupChatStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\014\n\010TOO_LONG\020\002\022\016\n\nOTHER_FAIL\020\003\022\n" +
+      "\n\006BANNED\020\004\"\266\001\n\036ReceivedGroupChatResponse" +
+      "Proto\0229\n\006sender\030\001 \001(\0132).com.lvl6.proto.M" +
+      "inimumUserProtoWithLevel\022\023\n\013chatMessage\030" +
+      "\002 \001(\t\0223\n\005scope\030\003 \001(\0162\036.com.lvl6.proto.Gr",
+      "oupChatScope:\004CLAN\022\017\n\007isAdmin\030\004 \001(\010\"w\n\033P" +
+      "rivateChatPostRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\r" +
+      "recipientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\"\303\002\n" +
+      "\034PrivateChatPostResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Private" +
+      "ChatPostResponseProto.PrivateChatPostSta" +
+      "tus\0222\n\004post\030\003 \001(\0132$.com.lvl6.proto.Priva" +
+      "teChatPostProto\"i\n\025PrivateChatPostStatus",
+      "\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n\016PO" +
+      "ST_TOO_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BANNED" +
+      "\020\005\"\220\001\n$RetrievePrivateChatPostsRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\025\n\rotherUserUuid\030\002 \001(\t\022\037\n\023" +
+      "beforePrivateChatId\030\003 \001(\005B\002\030\001\"\346\002\n%Retrie" +
+      "vePrivateChatPostsResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\0224\n\005posts\030\002 \003(\0132%.com.lvl6.proto.GroupC" +
+      "hatMessageProto\022\037\n\023beforePrivateChatId\030\003",
+      " \001(\005B\002\030\001\022d\n\006status\030\004 \001(\0162T.com.lvl6.prot" +
+      "o.RetrievePrivateChatPostsResponseProto." +
+      "RetrievePrivateChatPostsStatus\022\025\n\rotherU" +
+      "serUuid\030\005 \001(\t\"7\n\036RetrievePrivateChatPost" +
+      "sStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002B\020B\016EventC" +
+      "hatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

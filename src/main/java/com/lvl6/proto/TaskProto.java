@@ -8414,11 +8414,11 @@ public final class TaskProto {
     int getYPos();
 
     /**
-     * <code>optional .com.lvl6.proto.Element element = 5;</code>
+     * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
      */
     boolean hasElement();
     /**
-     * <code>optional .com.lvl6.proto.Element element = 5;</code>
+     * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
 
@@ -8766,13 +8766,13 @@ public final class TaskProto {
     public static final int ELEMENT_FIELD_NUMBER = 5;
     private com.lvl6.proto.SharedEnumConfigProto.Element element_;
     /**
-     * <code>optional .com.lvl6.proto.Element element = 5;</code>
+     * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
      */
     public boolean hasElement() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.Element element = 5;</code>
+     * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
      */
     public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
       return element_;
@@ -9014,7 +9014,7 @@ public final class TaskProto {
       taskId_ = 0;
       xPos_ = 0;
       yPos_ = 0;
-      element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       boss_ = false;
       bossImgName_ = "";
       itemDropId_ = 0;
@@ -9278,7 +9278,7 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         yPos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000010);
         boss_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -9610,21 +9610,21 @@ public final class TaskProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
-       * <code>optional .com.lvl6.proto.Element element = 5;</code>
+       * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
        */
       public boolean hasElement() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.Element element = 5;</code>
+       * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
        */
       public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
         return element_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element element = 5;</code>
+       * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
        */
       public Builder setElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
         if (value == null) {
@@ -9636,11 +9636,11 @@ public final class TaskProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element element = 5;</code>
+       * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
        */
       public Builder clearElement() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         onChanged();
         return this;
       }
@@ -10201,17 +10201,17 @@ public final class TaskProto {
       "ement:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANC" +
       "E\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEven" +
       "tProto\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(" +
-      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMap" +
+      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\367\002\n\023TaskMap" +
       "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
-      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(" +
+      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\0224" +
       "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
-      "\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\ni" +
-      "temDropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\n",
-      "cashReward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020c" +
-      "haracterImgName\030\014 \001(\t\022\036\n\026charImgVertPixe" +
-      "lOffset\030\r \001(\005\022\037\n\027charImgHorizPixelOffset" +
-      "\030\016 \001(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTa" +
-      "skProto"
+      ":\nNO_ELEMENT\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgNam" +
+      "e\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sectionNa",
+      "me\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilRewar" +
+      "d\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026cha" +
+      "rImgVertPixelOffset\030\r \001(\005\022\037\n\027charImgHori" +
+      "zPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleFactor" +
+      "\030\017 \001(\002B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
