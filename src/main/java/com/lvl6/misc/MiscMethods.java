@@ -793,6 +793,8 @@ public class MiscMethods {
 				ControllerConstants.SERVER_TOGGLE__TASK_DISPLAY_RARITY);
 		cb.setDisplayRarity(displayQuality);
 		
+		cb.setTaskIdOfFirstSkill(ControllerConstants.SKILL_FIRST_TASK_ID);
+		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
 		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)

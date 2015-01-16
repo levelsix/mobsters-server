@@ -11823,11 +11823,11 @@ public final class EventStartupProto {
           com.google.protobuf.MessageOrBuilder {
 
         /**
-         * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+         * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
          */
         boolean hasHelpType();
         /**
-         * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+         * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
          */
         com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType();
 
@@ -11985,13 +11985,13 @@ public final class EventStartupProto {
         public static final int HELPTYPE_FIELD_NUMBER = 1;
         private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_;
         /**
-         * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+         * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
          */
         public boolean hasHelpType() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+         * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
          */
         public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
           return helpType_;
@@ -12312,19 +12312,19 @@ public final class EventStartupProto {
 
           private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
           /**
-           * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+           * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
            */
           public boolean hasHelpType() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
           /**
-           * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+           * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
            */
           public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
             return helpType_;
           }
           /**
-           * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+           * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
            */
           public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
             if (value == null) {
@@ -12336,7 +12336,7 @@ public final class EventStartupProto {
             return this;
           }
           /**
-           * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
+           * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
            */
           public Builder clearHelpType() {
             bitField0_ = (bitField0_ & ~0x00000001);
@@ -13965,11 +13965,11 @@ public final class EventStartupProto {
           com.google.protobuf.MessageOrBuilder {
 
         /**
-         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
         boolean hasResourceType();
         /**
-         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
         com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
@@ -14107,13 +14107,13 @@ public final class EventStartupProto {
         public static final int RESOURCETYPE_FIELD_NUMBER = 1;
         private com.lvl6.proto.StructureProto.ResourceType resourceType_;
         /**
-         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
         public boolean hasResourceType() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+         * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
         public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
           return resourceType_;
@@ -14414,19 +14414,19 @@ public final class EventStartupProto {
 
           private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
           /**
-           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
           public boolean hasResourceType() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
           /**
-           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
           public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
             return resourceType_;
           }
           /**
-           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
           public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
             if (value == null) {
@@ -14438,7 +14438,7 @@ public final class EventStartupProto {
             return this;
           }
           /**
-           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1;</code>
+           * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
           public Builder clearResourceType() {
             bitField0_ = (bitField0_ & ~0x00000001);
@@ -35103,7 +35103,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\2708\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\3178\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -35176,7 +35176,7 @@ public final class EventStartupProto {
       "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
       "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
-      "eferrer\030\003 \001(\005\032\233\034\n\020StartupConstants\022H\n\025in",
+      "eferrer\030\003 \001(\005\032\262\034\n\020StartupConstants\022H\n\025in",
       "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
       "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
       "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
@@ -35253,40 +35253,40 @@ public final class EventStartupProto {
       "\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeight" +
       "\030\005 \001(\002\032K\n\025MiniTutorialConstants\022\032\n\022miniT" +
       "utorialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 " +
-      "\001(\005\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001 " +
-      "\001(\0162\036.com.lvl6.proto.GameActionType\022\034\n\024a" +
-      "mountRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemo" +
-      "vedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pvp",
-      "DmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002" +
-      " \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequi" +
-      "redMinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimit" +
-      "\030\005 \001(\005\022\"\n\032beginAvengingTimeLimitMins\030\006 \001" +
-      "(\005\022(\n requestClanToAvengeTimeLimitMins\030\007" +
-      " \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030" +
-      "\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConver" +
-      "sionConstantProto\0222\n\014resourceType\030\001 \001(\0162" +
-      "\034.com.lvl6.proto.ResourceType\022\023\n\013resourc" +
-      "eAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021Tutorial",
-      "Constants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016" +
-      "guideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002" +
-      " \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemy" +
-      "BossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n " +
-      "\001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lv" +
-      "l6.proto.TutorialStructProto\022\036\n\026structur" +
-      "eIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017" +
-      "cityOneElements\030\006 \003(\0132 .com.lvl6.proto.C" +
-      "ityElementProto\022$\n\034cityElementIdForFirst" +
-      "Dungeon\030\007 \001(\005\022%\n\035cityElementIdForSecondD",
-      "ungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilIni" +
-      "t\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObs" +
-      "tacles\030\016 \003(\0132$.com.lvl6.proto.MinimumObs" +
-      "tacleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020" +
-      "\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n" +
-      "\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_N" +
-      "OT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n" +
-      "\030ForceLogoutResponseProto\022\031\n\021previousLog" +
-      "inTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStart" +
-      "upProto"
+      "\001(\005\032\213\001\n\021ClanHelpConstants\0229\n\010helpType\030\001 " +
+      "\001(\0162\036.com.lvl6.proto.GameActionType:\007NO_" +
+      "HELP\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025pe" +
+      "rcentRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstan",
+      "ts\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpD" +
+      "mgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n" +
+      "\021pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defendingMsg" +
+      "CharLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeLimi" +
+      "tMins\030\006 \001(\005\022(\n requestClanToAvengeTimeLi" +
+      "mitMins\030\007 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n" +
+      "\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037Reso" +
+      "urceConversionConstantProto\022?\n\014resourceT" +
+      "ype\030\001 \001(\0162\034.com.lvl6.proto.ResourceType:" +
+      "\013NO_RESOURCE\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007num",
+      "Gems\030\003 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021star" +
+      "tingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 " +
+      "\001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMons" +
+      "terIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001" +
+      "(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialSt" +
+      "ructures\030\003 \003(\0132#.com.lvl6.proto.Tutorial" +
+      "StructProto\022\036\n\026structureIdsToBeBuillt\030\004 " +
+      "\003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006" +
+      " \003(\0132 .com.lvl6.proto.CityElementProto\022$" +
+      "\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n\035",
+      "cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010c" +
+      "ashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsIn" +
+      "it\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.co" +
+      "m.lvl6.proto.MinimumObstacleProto\"A\n\014Upd" +
+      "ateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE" +
+      "\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n" +
+      "\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SER" +
+      "VER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutRespo" +
+      "nseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004u" +
+      "did\030\002 \001(\tB\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

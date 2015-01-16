@@ -179,6 +179,9 @@ public class ControllerConstants {
 	//TOGGLES
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
+	
+	//SKILL
+	public static final int SKILL_FIRST_TASK_ID = 6;
 	 
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = {
