@@ -223,8 +223,8 @@ public class ControllerConstants {
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
 	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON = 5; 
 	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON = 6;
-	public static final int TUTORIAL__INIT_CASH = 750;
-	public static final int TUTORIAL__INIT_OIL = 750;
+	public static final int TUTORIAL__INIT_CASH = 2500;
+	public static final int TUTORIAL__INIT_OIL = 2500;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final int TUTORIAL__INIT_RANK = 100;
 	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,   2, 2, 2,   2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5,  5};
