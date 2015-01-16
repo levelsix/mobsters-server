@@ -39,6 +39,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -293,8 +294,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  Date now, int gemReward, boolean freeBoosterPack)
   {
 	  //UPDATE exp
-	  int expDelta = 0;//aPack.getExpPerItem() * itemsUserReceives.size();
+	  int expDelta = 0;
   	
+	  if (ServerToggleRetrieveUtils.getToggleValueForName(
+		  ControllerConstants.SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP))
+	  {
+		  expDelta = aPack.getExpPerItem() * itemsUserReceives.size();
+	  }
+	  
     //update user, user_monsters
     String userId = user.getId();
   	int currencyChange = -1 * gemPrice; //should be negative
