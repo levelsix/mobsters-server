@@ -293,7 +293,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  Date now, int gemReward, boolean freeBoosterPack)
   {
 	  //UPDATE exp
-	  int expDelta = aPack.getExpPerItem() * itemsUserReceives.size();
+	  int expDelta = 0;//aPack.getExpPerItem() * itemsUserReceives.size();
   	
     //update user, user_monsters
     String userId = user.getId();
