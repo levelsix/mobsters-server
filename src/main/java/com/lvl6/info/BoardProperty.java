@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BoardProperty implements Serializable {
 	
-	private static final long serialVersionUID = 5685688105654346112L;
+	private static final long serialVersionUID = 7898934463668873913L;
 	
 	private int id;
 	private int boardId;
@@ -13,6 +13,8 @@ public class BoardProperty implements Serializable {
 	private int posY;
 	private String element;
 	private int value;
+	//Mostly used for jelly, as in break jelly twice kind of thing.
+	private int quanity;
 	
 	public BoardProperty(
 		int id,
@@ -21,7 +23,8 @@ public class BoardProperty implements Serializable {
 		int posX,
 		int posY,
 		String element,
-		int value )
+		int value,
+		int quanity )
 	{
 		super();
 		this.id = id;
@@ -31,6 +34,7 @@ public class BoardProperty implements Serializable {
 		this.posY = posY;
 		this.element = element;
 		this.value = value;
+		this.quanity = quanity;
 	}
 
 	public int getId()
@@ -103,6 +107,16 @@ public class BoardProperty implements Serializable {
 		this.value = value;
 	}
 
+	public int getQuanity()
+	{
+		return quanity;
+	}
+
+	public void setQuanity( int quanity )
+	{
+		this.quanity = quanity;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -120,6 +134,8 @@ public class BoardProperty implements Serializable {
 			+ element
 			+ ", value="
 			+ value
+			+ ", quanity="
+			+ quanity
 			+ "]";
 	}
 

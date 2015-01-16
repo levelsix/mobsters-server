@@ -781,6 +781,7 @@ public class DBConstants {
 	public static final String BOARD_PROPERTY__POS_Y = "pos_y";
 	public static final String BOARD_PROPERTY__ELEMENT = "element";
 	public static final String BOARD_PROPERTY__VALUE = "value";
+	public static final String BOARD_PROPERTY__QUANTITY = "quantity";
 	
 	public static final String BOOSTER_DISPLAY_ITEM__ID = GENERIC__ID;
 	public static final String BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID = "booster_pack_id";

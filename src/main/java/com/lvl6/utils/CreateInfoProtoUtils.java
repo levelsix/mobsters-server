@@ -974,6 +974,8 @@ public class CreateInfoProtoUtils {
 					e);
 			}
 		}
+		blpb.setValue(bp.getValue());
+		blpb.setQuantity(bp.getQuanity());
 		
 		return blpb.build();
 	}

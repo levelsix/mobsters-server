@@ -25,6 +25,8 @@ message BoardPropertyProto {
 	optional int32 posY = 5;
 	optional Element elem = 6 [default = NO_ELEMENT];
 	
-	//At the moment, mostly used for jelly, as in break jelly twice kind of thing.
 	optional int32 value = 7;
+	
+	//At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+	optional int32 quantity = 8;
 }

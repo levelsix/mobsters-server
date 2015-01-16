@@ -1086,30 +1086,39 @@ public final class BoardProto {
     int getPosY();
 
     /**
-     * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
      */
     boolean hasElem();
     /**
-     * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElem();
 
     /**
      * <code>optional int32 value = 7;</code>
-     *
-     * <pre>
-     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-     * </pre>
      */
     boolean hasValue();
     /**
      * <code>optional int32 value = 7;</code>
+     */
+    int getValue();
+
+    /**
+     * <code>optional int32 quantity = 8;</code>
      *
      * <pre>
      *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
      * </pre>
      */
-    int getValue();
+    boolean hasQuantity();
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    int getQuantity();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
@@ -1203,6 +1212,11 @@ public final class BoardProto {
             case 56: {
               bitField0_ |= 0x00000040;
               value_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              quantity_ = input.readInt32();
               break;
             }
           }
@@ -1350,13 +1364,13 @@ public final class BoardProto {
     public static final int ELEM_FIELD_NUMBER = 6;
     private com.lvl6.proto.SharedEnumConfigProto.Element elem_;
     /**
-     * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
      */
     public boolean hasElem() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
      */
     public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
       return elem_;
@@ -1366,23 +1380,38 @@ public final class BoardProto {
     private int value_;
     /**
      * <code>optional int32 value = 7;</code>
-     *
-     * <pre>
-     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-     * </pre>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int32 value = 7;</code>
+     */
+    public int getValue() {
+      return value_;
+    }
+
+    public static final int QUANTITY_FIELD_NUMBER = 8;
+    private int quantity_;
+    /**
+     * <code>optional int32 quantity = 8;</code>
      *
      * <pre>
      *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
      * </pre>
      */
-    public int getValue() {
-      return value_;
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    public int getQuantity() {
+      return quantity_;
     }
 
     private void initFields() {
@@ -1391,8 +1420,9 @@ public final class BoardProto {
       name_ = "";
       posX_ = 0;
       posY_ = 0;
-      elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       value_ = 0;
+      quantity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1427,6 +1457,9 @@ public final class BoardProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, value_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, quantity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1464,6 +1497,10 @@ public final class BoardProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, value_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, quantity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1592,10 +1629,12 @@ public final class BoardProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         posY_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000020);
         value_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        quantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -1652,6 +1691,10 @@ public final class BoardProto {
           to_bitField0_ |= 0x00000040;
         }
         result.value_ = value_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.quantity_ = quantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1690,6 +1733,9 @@ public final class BoardProto {
         }
         if (other.hasValue()) {
           setValue(other.getValue());
+        }
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1922,21 +1968,21 @@ public final class BoardProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
-       * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
        */
       public boolean hasElem() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
        */
       public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
         return elem_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
        */
       public Builder setElem(com.lvl6.proto.SharedEnumConfigProto.Element value) {
         if (value == null) {
@@ -1948,11 +1994,11 @@ public final class BoardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Element elem = 6;</code>
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
        */
       public Builder clearElem() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         onChanged();
         return this;
       }
@@ -1960,30 +2006,18 @@ public final class BoardProto {
       private int value_ ;
       /**
        * <code>optional int32 value = 7;</code>
-       *
-       * <pre>
-       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-       * </pre>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int32 value = 7;</code>
-       *
-       * <pre>
-       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-       * </pre>
        */
       public int getValue() {
         return value_;
       }
       /**
        * <code>optional int32 value = 7;</code>
-       *
-       * <pre>
-       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-       * </pre>
        */
       public Builder setValue(int value) {
         bitField0_ |= 0x00000040;
@@ -1993,14 +2027,58 @@ public final class BoardProto {
       }
       /**
        * <code>optional int32 value = 7;</code>
+       */
+      public Builder clearValue() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        value_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int quantity_ ;
+      /**
+       * <code>optional int32 quantity = 8;</code>
        *
        * <pre>
        *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
        * </pre>
        */
-      public Builder clearValue() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        value_ = 0;
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public int getQuantity() {
+        return quantity_;
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000080;
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public Builder clearQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        quantity_ = 0;
         onChanged();
         return this;
       }
@@ -2040,11 +2118,12 @@ public final class BoardProto {
       "ardId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001" +
       "(\005\022\023\n\013orbElements\030\004 \001(\005\0226\n\nproperties\030\005 " +
       "\003(\0132\".com.lvl6.proto.BoardPropertyProto\"" +
-      "\236\001\n\022BoardPropertyProto\022\027\n\017boardPropertyI" +
+      "\274\001\n\022BoardPropertyProto\022\027\n\017boardPropertyI" +
       "d\030\001 \001(\005\022\017\n\007boardId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014" +
-      "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\022%\n\004elem\030\006 \001(\016" +
-      "2\027.com.lvl6.proto.Element\022\r\n\005value\030\007 \001(\005" +
-      "B\014B\nBoardProto"
+      "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\0221\n\004elem\030\006 \001(\016" +
+      "2\027.com.lvl6.proto.Element:\nNO_ELEMENT\022\r\n" +
+      "\005value\030\007 \001(\005\022\020\n\010quantity\030\010 \001(\005B\014B\nBoardP",
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2070,7 +2149,7 @@ public final class BoardProto {
     internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoardPropertyProto_descriptor,
-        new java.lang.String[] { "BoardPropertyId", "BoardId", "Name", "PosX", "PosY", "Elem", "Value", });
+        new java.lang.String[] { "BoardPropertyId", "BoardId", "Name", "PosX", "PosY", "Elem", "Value", "Quantity", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

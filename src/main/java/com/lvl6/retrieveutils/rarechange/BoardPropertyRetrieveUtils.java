@@ -144,6 +144,7 @@ import com.lvl6.utils.DBConnection;
 		int posY = rs.getInt(DBConstants.BOARD_PROPERTY__POS_Y);
 		String element = rs.getString(DBConstants.BOARD_PROPERTY__ELEMENT);
 		int value = rs.getInt(DBConstants.BOARD_PROPERTY__VALUE);
+		int quantity = rs.getInt(DBConstants.BOARD_PROPERTY__QUANTITY);
 		
 		if (null != name) {
 			String newName = name.trim().toUpperCase();
@@ -165,8 +166,10 @@ import com.lvl6.utils.DBConnection;
 	    	}
 	    }
 		
+		
+		
 		BoardProperty boardProperty = new BoardProperty(id, boardId,
-			name, posX, posY, element, value);
+			name, posX, posY, element, value, quantity);
 		return boardProperty;
 	}
 	
