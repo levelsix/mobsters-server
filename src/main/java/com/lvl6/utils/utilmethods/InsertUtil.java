@@ -151,7 +151,7 @@ public interface InsertUtil {
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
-			List<Integer> monsterDropLvls);
+			List<Integer> monsterDropLvls, List<Boolean> attackedFirstList);
 	
 	public abstract List<String> insertIntoMonsterForUserReturnIds(String userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);

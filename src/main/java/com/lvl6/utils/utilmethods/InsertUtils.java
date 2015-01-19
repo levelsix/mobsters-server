@@ -802,7 +802,7 @@ public class InsertUtils implements InsertUtil{
   		  
   			Map<String, Object> newRow = new HashMap<String, Object>();
 
-        newRow.put(DBConstants.TASK_STAGE_FOR_USER__ID, tsfuId);
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ID, tsfuId);
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, tsfu.getUserTaskId());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, tsfu.getStageNum());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsfu.getTaskStageMonsterId());
@@ -812,6 +812,7 @@ public class InsertUtils implements InsertUtil{
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, tsfu.getOilGained());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, tsfu.isMonsterPieceDropped());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, tsfu.getItemIdDropped());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST, tsfu.isAttackedFirst());
   		    
   			newRows.add(newRow);
   		}
@@ -830,28 +831,30 @@ public class InsertUtils implements InsertUtil{
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
-			List<Integer> monsterDropLvls) {
+			List<Integer> monsterDropLvls, List<Boolean> attackedFirstList)
+	{
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNums.size();
-		
-    Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageIds);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskIds);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, tsmIds);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE, monsterTypes);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__CASH_GAINED, cashGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__OIL_GAINED, oilGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID_DROPPED, monsterIdDrops);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL, monsterDropLvls);
-    
-    int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
-        insertParams, numRows);
-    
-    return numInserted;
+
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageIds);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskIds);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNums);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, tsmIds);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE, monsterTypes);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__CASH_GAINED, cashGained);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__OIL_GAINED, oilGained);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID_DROPPED, monsterIdDrops);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL, monsterDropLvls);
+		insertParams.put(DBConstants.TASK_STAGE_HISTORY__ATTACKED_FIRST, attackedFirstList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+			insertParams, numRows);
+
+		return numInserted;
 	}
 
 	/*

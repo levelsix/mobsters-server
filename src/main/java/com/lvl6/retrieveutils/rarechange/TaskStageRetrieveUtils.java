@@ -205,8 +205,10 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(DBConstants.TASK_STAGE__ID);
     int taskId = rs.getInt(DBConstants.TASK_STAGE__TASK_ID);
     int stageNum = rs.getInt(DBConstants.TASK_STAGE__STAGE_NUM);
-    
-    TaskStage taskStage = new TaskStage(id, taskId, stageNum);
+    boolean attackerAlwaysHitFirst = rs.getBoolean(DBConstants
+    	.TASK_STAGE__ATTACKER_ALWAYS_HITS_FIRST);
+    TaskStage taskStage = new TaskStage(id, taskId, stageNum,
+    	attackerAlwaysHitFirst);
         
     return taskStage;
   }

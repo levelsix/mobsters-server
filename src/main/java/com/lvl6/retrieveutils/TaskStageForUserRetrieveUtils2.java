@@ -106,7 +106,7 @@ import com.lvl6.properties.DBConstants;
 			tsfu.setOilGained(rs.getInt(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED));
 			tsfu.setMonsterPieceDropped(rs.getBoolean(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED));
 			tsfu.setItemIdDropped(rs.getInt(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED));
-			
+			tsfu.setAttackedFirst(rs.getBoolean(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST));
 
 			return tsfu;
 		}        
@@ -124,6 +124,7 @@ import com.lvl6.properties.DBConstants;
 				columnsSelected.add(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED);
 				columnsSelected.add(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED);
 				columnsSelected.add(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED);
+				columnsSelected.add(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST);
 			}
 			return columnsSelected;
 		}

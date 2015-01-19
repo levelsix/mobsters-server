@@ -3316,12 +3316,13 @@ public class CreateInfoProtoUtils {
 			stageNum);
 		int taskStageId = ts.getId();
 		tspb.setStageId(taskStageId);
+		tspb.setAttackerAlwaysHitsFirst(ts.isAttackerAlwaysHitsFirst());
 
 		for (TaskStageForUser tsfu : monsters) {
 			TaskStageMonsterProto tsmp = createTaskStageMonsterProto(tsfu); 
 			tspb.addStageMonsters(tsmp);
 		}
-
+		
 		return tspb.build();
 	}
 

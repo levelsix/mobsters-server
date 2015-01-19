@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = 5131106379287360222L;
+	private static final long serialVersionUID = -5818927353360595314L;
 	
 	private String id;
 	private String userTaskId;
@@ -17,11 +17,23 @@ public class TaskStageForUser implements Serializable {
 	private boolean monsterPieceDropped;
 	private int itemIdDropped;
 	//maybe should specify the (enhancement) level of monster dropped
+	private boolean attackedFirst;
 	
-	public TaskStageForUser(String id, String userTaskId, int stageNum,
-			int taskStageMonsterId, String monsterType, int expGained,
-			int cashGained, int oilGained, boolean monsterPieceDropped,
-			int itemIdDropped) {
+	public TaskStageForUser() { }
+	
+	public TaskStageForUser(
+		String id,
+		String userTaskId,
+		int stageNum,
+		int taskStageMonsterId,
+		String monsterType,
+		int expGained,
+		int cashGained,
+		int oilGained,
+		boolean monsterPieceDropped,
+		int itemIdDropped,
+		boolean attackedFirst )
+	{
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
@@ -33,9 +45,8 @@ public class TaskStageForUser implements Serializable {
 		this.oilGained = oilGained;
 		this.monsterPieceDropped = monsterPieceDropped;
 		this.itemIdDropped = itemIdDropped;
+		this.attackedFirst = attackedFirst;
 	}
-
-	public TaskStageForUser() { }
 
 	public String getId() {
 		return id;
@@ -117,6 +128,16 @@ public class TaskStageForUser implements Serializable {
 		this.itemIdDropped = itemIdDropped;
 	}
 
+	public boolean isAttackedFirst()
+	{
+		return attackedFirst;
+	}
+
+	public void setAttackedFirst( boolean attackedFirst )
+	{
+		this.attackedFirst = attackedFirst;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -140,6 +161,8 @@ public class TaskStageForUser implements Serializable {
 			+ monsterPieceDropped
 			+ ", itemIdDropped="
 			+ itemIdDropped
+			+ ", attackedFirst="
+			+ attackedFirst
 			+ "]";
 	}
 

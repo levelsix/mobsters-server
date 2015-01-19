@@ -52,9 +52,30 @@ public final class TaskProto {
      */
     com.lvl6.proto.TaskProto.TaskStageMonsterProtoOrBuilder getStageMonstersOrBuilder(
         int index);
+
+    /**
+     * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+     *
+     * <pre>
+     *if false, then attacker or defender can hit first
+     * </pre>
+     */
+    boolean hasAttackerAlwaysHitsFirst();
+    /**
+     * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+     *
+     * <pre>
+     *if false, then attacker or defender can hit first
+     * </pre>
+     */
+    boolean getAttackerAlwaysHitsFirst();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TaskStageProto}
+   *
+   * <pre>
+   *Not rows from config table. This is what user sees in the current task
+   * </pre>
    */
   public static final class TaskStageProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -116,6 +137,11 @@ public final class TaskProto {
                 mutable_bitField0_ |= 0x00000002;
               }
               stageMonsters_.add(input.readMessage(com.lvl6.proto.TaskProto.TaskStageMonsterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              attackerAlwaysHitsFirst_ = input.readBool();
               break;
             }
           }
@@ -219,9 +245,33 @@ public final class TaskProto {
       return stageMonsters_.get(index);
     }
 
+    public static final int ATTACKERALWAYSHITSFIRST_FIELD_NUMBER = 3;
+    private boolean attackerAlwaysHitsFirst_;
+    /**
+     * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+     *
+     * <pre>
+     *if false, then attacker or defender can hit first
+     * </pre>
+     */
+    public boolean hasAttackerAlwaysHitsFirst() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+     *
+     * <pre>
+     *if false, then attacker or defender can hit first
+     * </pre>
+     */
+    public boolean getAttackerAlwaysHitsFirst() {
+      return attackerAlwaysHitsFirst_;
+    }
+
     private void initFields() {
       stageId_ = 0;
       stageMonsters_ = java.util.Collections.emptyList();
+      attackerAlwaysHitsFirst_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -242,6 +292,9 @@ public final class TaskProto {
       for (int i = 0; i < stageMonsters_.size(); i++) {
         output.writeMessage(2, stageMonsters_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(3, attackerAlwaysHitsFirst_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -258,6 +311,10 @@ public final class TaskProto {
       for (int i = 0; i < stageMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, stageMonsters_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, attackerAlwaysHitsFirst_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -339,6 +396,10 @@ public final class TaskProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.TaskStageProto}
+     *
+     * <pre>
+     *Not rows from config table. This is what user sees in the current task
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -385,6 +446,8 @@ public final class TaskProto {
         } else {
           stageMonstersBuilder_.clear();
         }
+        attackerAlwaysHitsFirst_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -426,6 +489,10 @@ public final class TaskProto {
         } else {
           result.stageMonsters_ = stageMonstersBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.attackerAlwaysHitsFirst_ = attackerAlwaysHitsFirst_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -470,6 +537,9 @@ public final class TaskProto {
               stageMonstersBuilder_.addAllMessages(other.stageMonsters_);
             }
           }
+        }
+        if (other.hasAttackerAlwaysHitsFirst()) {
+          setAttackerAlwaysHitsFirst(other.getAttackerAlwaysHitsFirst());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -784,6 +854,54 @@ public final class TaskProto {
           stageMonsters_ = null;
         }
         return stageMonstersBuilder_;
+      }
+
+      private boolean attackerAlwaysHitsFirst_ ;
+      /**
+       * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+       *
+       * <pre>
+       *if false, then attacker or defender can hit first
+       * </pre>
+       */
+      public boolean hasAttackerAlwaysHitsFirst() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+       *
+       * <pre>
+       *if false, then attacker or defender can hit first
+       * </pre>
+       */
+      public boolean getAttackerAlwaysHitsFirst() {
+        return attackerAlwaysHitsFirst_;
+      }
+      /**
+       * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+       *
+       * <pre>
+       *if false, then attacker or defender can hit first
+       * </pre>
+       */
+      public Builder setAttackerAlwaysHitsFirst(boolean value) {
+        bitField0_ |= 0x00000004;
+        attackerAlwaysHitsFirst_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
+       *
+       * <pre>
+       *if false, then attacker or defender can hit first
+       * </pre>
+       */
+      public Builder clearAttackerAlwaysHitsFirst() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attackerAlwaysHitsFirst_ = false;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskStageProto)
@@ -10159,59 +10277,60 @@ public final class TaskProto {
     java.lang.String[] descriptorData = {
       "\n\nTask.proto\022\016com.lvl6.proto\032\022MonsterStu" +
       "ff.proto\032\013Quest.proto\032\026SharedEnumConfig." +
-      "proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 \001(\005" +
-      "\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.proto" +
-      ".TaskStageMonsterProto\"\371\002\n\rFullTaskProto" +
-      "\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013descri" +
-      "ption\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNumW" +
-      "ithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId\030\006 " +
-      "\001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\022\022\n\nboar" +
-      "dWidth\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017gro",
-      "undImgPrefix\030\n \001(\t\022>\n\027initialDefeatedDia" +
-      "logue\030\013 \001(\0132\035.com.lvl6.proto.DialoguePro" +
-      "to\022\017\n\007boardId\030\014 \001(\005\022)\n\010rarities\030\r \003(\0162\027." +
-      "com.lvl6.proto.Quality\022\022\n\nmonsterIds\030\016 \003" +
-      "(\005\"{\n\024MinimumUserTaskProto\022\020\n\010userUuid\030\001" +
-      " \001(\t\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003" +
-      " \001(\005\022\024\n\014userTaskUuid\030\004 \001(\t\022\023\n\013clientStat" +
-      "e\030\005 \001(\014\"e\n\026UserTaskCompletedProto\022\016\n\006tas" +
-      "kId\030\001 \001(\005\022\025\n\runclaimedCash\030\002 \001(\005\022\024\n\014uncl" +
-      "aimedOil\030\003 \001(\005\022\016\n\006userId\030\004 \001(\t\"\253\004\n\025TaskS",
-      "tageMonsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005ts" +
-      "mId\030\013 \001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterT" +
-      "ype\030\002 \001(\01621.com.lvl6.proto.TaskStageMons" +
-      "terProto.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\te" +
-      "xpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
-      "lReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(" +
-      "\010\022\034\n\024puzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemI" +
-      "d\030\007 \001(\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defens" +
-      "iveSkillId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001" +
-      "(\005\022!\n\031puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n",
-      "\010initialD\030\020 \001(\0132\035.com.lvl6.proto.Dialogu" +
-      "eProto\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.prot" +
-      "o.DialogueProto\"3\n\013MonsterType\022\013\n\007REGULA" +
-      "R\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024Persist" +
-      "entEventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfW" +
-      "eek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MO" +
-      "NDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDuration" +
-      "Minutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldow" +
-      "nMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6." +
-      "proto.PersistentEventProto.EventType\022;\n\016",
-      "monsterElement\030\010 \001(\0162\027.com.lvl6.proto.El" +
-      "ement:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANC" +
-      "E\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEven" +
-      "tProto\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(" +
-      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\367\002\n\023TaskMap" +
-      "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
-      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\0224" +
-      "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
-      ":\nNO_ELEMENT\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgNam" +
-      "e\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sectionNa",
-      "me\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilRewar" +
-      "d\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026cha" +
-      "rImgVertPixelOffset\030\r \001(\005\022\037\n\027charImgHori" +
-      "zPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleFactor" +
-      "\030\017 \001(\002B\013B\tTaskProto"
+      "proto\"\200\001\n\016TaskStageProto\022\017\n\007stageId\030\001 \001(" +
+      "\005\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.prot" +
+      "o.TaskStageMonsterProto\022\037\n\027attackerAlway" +
+      "sHitsFirst\030\003 \001(\010\"\371\002\n\rFullTaskProto\022\016\n\006ta" +
+      "skId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030" +
+      "\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNumWithinC" +
+      "ity\030\005 \001(\005\022\032\n\022prerequisiteTaskId\030\006 \001(\005\022\033\n" +
+      "\023prerequisiteQuestId\030\007 \001(\005\022\022\n\nboardWidth",
+      "\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017groundImg" +
+      "Prefix\030\n \001(\t\022>\n\027initialDefeatedDialogue\030" +
+      "\013 \001(\0132\035.com.lvl6.proto.DialogueProto\022\017\n\007" +
+      "boardId\030\014 \001(\005\022)\n\010rarities\030\r \003(\0162\027.com.lv" +
+      "l6.proto.Quality\022\022\n\nmonsterIds\030\016 \003(\005\"{\n\024" +
+      "MinimumUserTaskProto\022\020\n\010userUuid\030\001 \001(\t\022\016" +
+      "\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003 \001(\005\022\024" +
+      "\n\014userTaskUuid\030\004 \001(\t\022\023\n\013clientState\030\005 \001(" +
+      "\014\"e\n\026UserTaskCompletedProto\022\016\n\006taskId\030\001 " +
+      "\001(\005\022\025\n\runclaimedCash\030\002 \001(\005\022\024\n\014unclaimedO",
+      "il\030\003 \001(\005\022\016\n\006userId\030\004 \001(\t\"\253\004\n\025TaskStageMo" +
+      "nsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005tsmId\030\013 " +
+      "\001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 " +
+      "\001(\01621.com.lvl6.proto.TaskStageMonsterPro" +
+      "to.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpRewa" +
+      "rd\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRewar" +
+      "d\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n\024p" +
+      "uzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 \001(" +
+      "\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveSki" +
+      "llId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!\n\031",
+      "puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n\010initi" +
+      "alD\030\020 \001(\0132\035.com.lvl6.proto.DialogueProto" +
+      "\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.proto.Dial" +
+      "ogueProto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
+      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEve" +
+      "ntProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 " +
+      "\001(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021" +
+      "\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinute" +
+      "s\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinut" +
+      "es\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.",
+      "PersistentEventProto.EventType\022;\n\016monste" +
+      "rElement\030\010 \001(\0162\027.com.lvl6.proto.Element:" +
+      "\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
+      "\tEVOLUTION\020\002\"X\n\030UserPersistentEventProto" +
+      "\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\005\022\031\n\021c" +
+      "oolDownStartTime\030\003 \001(\003\"\367\002\n\023TaskMapElemen" +
+      "tProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002" +
+      " \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\0224\n\007elem" +
+      "ent\030\005 \001(\0162\027.com.lvl6.proto.Element:\nNO_E" +
+      "LEMENT\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(",
+      "\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001" +
+      "(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilReward\030\013 \001(" +
+      "\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026charImgVe" +
+      "rtPixelOffset\030\r \001(\005\022\037\n\027charImgHorizPixel" +
+      "Offset\030\016 \001(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002" +
+      "B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10233,7 +10352,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_TaskStageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskStageProto_descriptor,
-        new java.lang.String[] { "StageId", "StageMonsters", });
+        new java.lang.String[] { "StageId", "StageMonsters", "AttackerAlwaysHitsFirst", });
     internal_static_com_lvl6_proto_FullTaskProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new

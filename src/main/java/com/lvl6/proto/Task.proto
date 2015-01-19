@@ -10,10 +10,14 @@ package com.lvl6.proto;
 option java_outer_classname = "TaskProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+//Not rows from config table. This is what user sees in the current task
 message TaskStageProto {
 	//not to be confused with stageNum, but seems to make more sense if it is
 	optional int32 stageId = 1;
 	repeated TaskStageMonsterProto stageMonsters = 2;
+	
+	//if false, then attacker or defender can hit first
+	optional bool attackerAlwaysHitsFirst = 3;
 }
 
 //------------------------------------------------------------------------------------------

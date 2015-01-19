@@ -616,6 +616,7 @@ public class DBConstants {
 	public static final String TASK_STAGE_FOR_USER__OIL_GAINED = "oil_gained";
 	public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
 	public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
+	public static final String TASK_STAGE_FOR_USER__ATTACKED_FIRST = "attacked_first";
 
 	/*USER TASK STAGE HISTORY TABLE*/
 	public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
@@ -631,6 +632,7 @@ public class DBConstants {
 	public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
 	public static final String TASK_STAGE_HISTORY__MONSTER_ID_DROPPED = "monster_id_dropped";
 	public static final String TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL = "monster_dropped_lvl";
+	public static final String TASK_STAGE_HISTORY__ATTACKED_FIRST = "attacked_first";
 
 	/*TOURNAMENT EVENT*/
 	public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
@@ -1173,5 +1175,6 @@ public class DBConstants {
 	public static final String TASK_STAGE__ID = GENERIC__ID;
 	public static final String TASK_STAGE__TASK_ID = "task_id";
 	public static final String TASK_STAGE__STAGE_NUM = "stage_num";
+	public static final String TASK_STAGE__ATTACKER_ALWAYS_HITS_FIRST = "attacker_always_hits_first";
 
 }

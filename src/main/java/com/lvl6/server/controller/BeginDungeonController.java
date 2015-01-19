@@ -295,6 +295,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	List<Integer> monsterIdDrops = new ArrayList<Integer>();
   	List<Integer> monsterDropLvls = new ArrayList<Integer>();
+  	List<Boolean> attackedFirstList = new ArrayList<Boolean>();
+  	
   	for (int i = 0; i < taskStages.size(); i++) {
   		TaskStageForUser tsfu = taskStages.get(i);
   		userTaskStageId.add(tsfu.getId());
@@ -317,6 +319,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			tsm.getMonsterIdDrop());
   		monsterDropLvls.add(
   			tsm.getMonsterDropLvl());
+  		attackedFirstList.add(tsfu.isAttackedFirst());
   	}
   	
   	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
@@ -327,7 +330,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
   			cashGained, oilGained, monsterPieceDropped, itemIdDropped,
-  			monsterIdDrops, monsterDropLvls);
+  			monsterIdDrops, monsterDropLvls, attackedFirstList);
   	log.warn(String.format(
   		"num task stage history rows inserted: %s, taskStageForUser=%s",
   		num, taskStages));
@@ -414,7 +417,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, List<TaskStageForUser>> stageNumToUserTaskStages = 
 			new HashMap<Integer, List<TaskStageForUser>>();
 	
-	  Random rand = new Random();
+	  Random rand = ControllerConstants.RAND;
 	  //quest monster items are dropped based on QUEST JOB IDS not quest ids
 	  List<Integer> questJobIds = QuestJobRetrieveUtils
 			  .getQuestJobIdsForQuestIds(questIds);
@@ -422,8 +425,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //for each stage, calculate the monster(s) the user will face and
 	  //reward(s) that might be given if the user wins
 	  for (int tsId : tsMap.keySet()) {
-		  TaskStage ts = tsMap.get(tsId);
-		  int stageNum = ts.getStageNum();
 		  
 		  //calculate the monster(s) the user will face for this stage
 		  //at the moment only one monster will be generated
@@ -435,12 +436,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		    above, then user has potential to get the cash and exp from all
 		    the monsters including the one above.*/
 		  
+		  TaskStage ts = tsMap.get(tsId);
+		  int stageNum = ts.getStageNum();
+		  boolean userFirst = ts.isAttackerAlwaysHitsFirst();
 		  List<Integer> stageExpReward = new ArrayList<Integer>();
 		  List<Integer> stageCashReward = new ArrayList<Integer>();
 		  List<Integer> stageOilReward = new ArrayList<Integer>();
 		  List<TaskStageForUser> userTaskStages = createUserTaskStagesFromMonsters(
-			  stageNum, spawnedTaskStageMonsters, questJobIds, stageExpReward,
-			  stageCashReward, stageOilReward);
+			  stageNum, userFirst, spawnedTaskStageMonsters, questJobIds,
+			  stageExpReward, stageCashReward, stageOilReward);
 		  stageNumToUserTaskStages.put(stageNum, userTaskStages);
 	  }
 	  
@@ -509,6 +513,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private List<TaskStageForUser> createUserTaskStagesFromMonsters(
 		int stageNum,
+		boolean attackedFirst,
 		List<TaskStageMonster> spawnedTaskStageMonsters,
 		List<Integer> questJobIds,
 		List<Integer> stageExpReward,
@@ -526,6 +531,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  for (TaskStageMonster tsm : spawnedTaskStageMonsters) {
 		  TaskStageForUser tsfu = createTaskStageFromMonster(stageNum,
 			  tsm, questJobIds);
+		  tsfu.setAttackedFirst(attackedFirst);
+		  
 		  expReward += tsfu.getExpGained();
 		  cashReward += tsfu.getCashGained();
 		  oilReward += tsfu.getOilGained();
