@@ -492,6 +492,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	List<Integer> monsterIdDrops = new ArrayList<Integer>();
   	List<Integer> monsterDropLvls = new ArrayList<Integer>();
+  	List<Boolean> attackedFirstList = new ArrayList<Boolean>();
   	
   	for (int i = 0; i < tsfuList.size(); i++) {
   		TaskStageForUser tsfu = tsfuList.get(i);
@@ -518,6 +519,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			tsm.getMonsterIdDrop());
   		monsterDropLvls.add(
   			tsm.getMonsterDropLvl());
+  		attackedFirstList.add(tsfu.isAttackedFirst());
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces
@@ -542,7 +544,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
   			cashGained, oilGained, monsterPieceDropped, itemIdDropped,
-  			monsterIdDrops, monsterDropLvls);
+  			monsterIdDrops, monsterDropLvls, attackedFirstList);
   	log.info(String.format(
   		"num task stage history rows inserted: num=%s, taskStageForUser=%s",
   		num, tsfuList));
