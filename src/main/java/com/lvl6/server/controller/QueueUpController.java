@@ -865,7 +865,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		String userId = null;
 		String randomName = getHazelcastPvpUtil().getRandomName();
 		if (prependEloToName) {
-			randomName += avgElo;
+			randomName = avgElo + randomName;
 		}
 		int lvl = avgElo / ControllerConstants.PVP__FAKE_USER_LVL_DIVISOR;
 		
