@@ -186,8 +186,13 @@ public class MiscMethods {
 		float unnormalizedProbabilitySoFar = 0f;
 		float randFloat = rand.nextFloat();
 
-		log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
-			"\t randFloat=" + randFloat);
+		boolean logBoosterItemDetails = ServerToggleRetrieveUtils.getToggleValueForName(
+			ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS); 
+		if (logBoosterItemDetails)
+		{
+			log.info("selecting booster item. sumOfProbabilities={} \t randFloat={}",
+				sumOfProbabilities, randFloat);
+		}
 
 		int size = itemsList.size();
 		//for each item, normalize before seeing if it is selected
@@ -198,8 +203,11 @@ public class MiscMethods {
 			unnormalizedProbabilitySoFar += item.getChanceToAppear();
 			float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
 
-			log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
-				normalizedProbabilitySoFar);
+			if (logBoosterItemDetails)
+			{
+				log.info("boosterItem={} \t normalizedProbabilitySoFar={}",
+					 item, normalizedProbabilitySoFar);
+			}
 
 			if(randFloat < normalizedProbabilitySoFar) {
 				//we have a winner! current boosterItem is what the user gets
@@ -207,7 +215,7 @@ public class MiscMethods {
 			}
 		}
 
-		log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
+		log.error("maybe no boosterItems exist. boosterItems={}", itemsList);
 		return null;
 	}
 

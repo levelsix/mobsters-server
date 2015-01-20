@@ -1112,9 +1112,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  String attackerClanId = attacker.getClanId();
 	  
 	  //need clan info for attacker
-	  Clan attackerClan = clanRetrieveUtil.getClanWithId(attackerClanId);
-	  Map<String, Clan> attackerIdsToClans = Collections
-		  .singletonMap(attackerId, attackerClan);
+	  Map<String, Clan> attackerIdsToClans = new HashMap<String, Clan>();
+	  
+	  if (null != attackerClanId && !attackerClanId.isEmpty()) {
+		  Clan attackerClan = clanRetrieveUtil.getClanWithId(attackerClanId);
+		  attackerIdsToClans.put(attackerId, attackerClan);
+	  }
 	  
 	  
 	  Map<String, User> idsToAttackers = Collections.singletonMap(
