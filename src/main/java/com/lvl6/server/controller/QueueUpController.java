@@ -308,8 +308,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			numWanted = numWanted - queuedOpponentIdsList.size();
 			
 			//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
-			log.info(String.format(
-				"no valid users for attacker=%s", attacker));
+			log.info("no valid users for attacker={}", attacker);
 			log.info("generating fake users.");
 			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
 					retrievePvpMonsters(minElo, maxElo);
@@ -840,19 +839,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
 		boolean setElo = ServerToggleRetrieveUtils
 			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
-		
+		boolean prependEloToName = ServerToggleRetrieveUtils
+			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
-			PvpProto user = createFakeUser(mons, setElo);
+			PvpProto user = createFakeUser(mons, setElo, prependEloToName);
 			ppList.add(user);
 		}
 		
-		log.info("num fake users created: " + ppList.size());
+		log.info("num fake users created: {}", ppList.size());
 		return ppList;
 	}
 	
 	//CREATES ONE FAKE USER FOR PVP
 	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
-		boolean setElo)
+		boolean setElo, boolean prependEloToName)
 	{
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
@@ -864,14 +864,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		String userId = null;
 		String randomName = getHazelcastPvpUtil().getRandomName();
+		if (prependEloToName) {
+			randomName += avgElo;
+		}
 		int lvl = avgElo / ControllerConstants.PVP__FAKE_USER_LVL_DIVISOR;
 		
 		int prospectiveCashWinnings = cashWinnings.get(0);
 		int prospectiveOilWinnings = oilWinnings.get(0);
 		
-		log.info("fake user created: name={} \t avgElo={} \t cash={} \t oil={} \t lvl={}",
-			new Object[] { randomName, avgElo, prospectiveCashWinnings,
-			prospectiveOilWinnings, lvl } );
+//		log.info("fake user created: name={} \t avgElo={} \t cash={} \t oil={} \t lvl={}",
+//			new Object[] { randomName, avgElo, prospectiveCashWinnings,
+//			prospectiveOilWinnings, lvl } );
 		
 		List<Integer> monsterIdsDropped = calculateDrops(mfpList);
 		
