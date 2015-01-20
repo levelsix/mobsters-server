@@ -316,7 +316,7 @@ public class MiscMethods {
 
 	public static final double ELO__RANDOM_VAR_MIN = 0.1D;
 	public static final double ELO__RANDOM_VAR_MAX = 0.9D;
-	public static final double ELO__ICND_MEAN = -0.2D;
+	public static final double ELO__ICND_MEAN = -0.1D;
 	public static final double ELO__ICND_STANDARD_DEVIATION = 0.608D;
 	public static final double ELO__MAX_RANGE = 0.4D;
 

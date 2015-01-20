@@ -13,7 +13,7 @@ public class PvpBattleOutcome
 	private static double SCORING_CURVE_LINEARITY = 0.15D;
 	
 	private static double ELO_SCALE_DIVIDEND_MULTIPLE = 0.05D;
-	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;
+	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.40D;
 	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;

@@ -127,14 +127,15 @@ public class ControllerConstants {
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
 	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
 	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
-	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
-	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
-	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
 	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
 	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
+	public static final int PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS = 1050;
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
+	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
+	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
+	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
@@ -181,6 +182,7 @@ public class ControllerConstants {
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
+	public static final String SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO = "pvp_bots_only_below_some_elo";
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
 	
 	//SKILL
