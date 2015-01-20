@@ -236,11 +236,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		battleJustEnded = pvpBattleHistoryRetrieveUtil2
     			  .getPvpBattle(attackerId, defenderId, ts);
     		
+    		List<PvpHistoryProto> historyProtoList = null;
     		if (null != battleJustEnded) 
     		{
-    			List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+    			//Note: no protos for fake defenders are created
+    			historyProtoList = CreateInfoProtoUtils
     				.createAttackedOthersPvpHistoryProto(attackerId, users,
     					Collections.singletonList(battleJustEnded));
+    		}
+    		
+    		if (null != historyProtoList && !historyProtoList.isEmpty())
+    		{
     			PvpHistoryProto attackedOtherHistory = historyProtoList.get(0);
     			log.info("attackedOtherHistory {}", attackedOtherHistory);
     			resBuilder.setBattleThatJustEnded(attackedOtherHistory);
