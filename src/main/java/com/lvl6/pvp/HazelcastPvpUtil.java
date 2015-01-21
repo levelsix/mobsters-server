@@ -24,6 +24,7 @@ import com.hazelcast.query.PagingPredicate;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.SqlPredicate;
 import com.hazelcast.util.IterationType;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
 import com.lvl6.server.Locker;
@@ -349,7 +350,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//creates the random names for fake users
 	protected void createRandomNames() {
-		rand = new Random();
+		rand = ControllerConstants.RAND;
 		Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
 
 		try {

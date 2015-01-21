@@ -297,9 +297,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Map<String, PvpUser> userIdToPvpUser = new HashMap<String, PvpUser>();
 		
 		//get the users that the attacker will fight
-		List<User> queuedOpponents = getQueuedOpponents(attacker, attackerElo, minElo,
+		List<User> queuedOpponents = null;
+		
+		boolean attackerBelowSomeElo = attackerElo < 
+			ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
+		boolean showBotsBelowSomeElo = ServerToggleRetrieveUtils.getToggleValueForName(
+			ControllerConstants.SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO);
+		boolean pvpBotsOnly = showBotsBelowSomeElo && attackerBelowSomeElo;
+		
+		if (!pvpBotsOnly) {
+			queuedOpponents = getQueuedOpponents(attacker, attackerElo, minElo,
 				maxElo, uniqSeenUserIds, clientDate, queuedOpponentIdsList,
 				userIdToPvpUser);
+		}
 		
 		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
@@ -308,8 +318,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			numWanted = numWanted - queuedOpponentIdsList.size();
 			
 			//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
-			log.info(String.format(
-				"no valid users for attacker=%s", attacker));
+			log.info("no valid users for attacker={}", attacker);
 			log.info("generating fake users.");
 			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
 					retrievePvpMonsters(minElo, maxElo);
@@ -326,7 +335,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				
 				if (!fakeUserMonsters.isEmpty())
 				{
-					List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(fakeUserMonsters);
+					List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
+						fakeUserMonsters, attackerElo);
 					pvpProtoList.addAll(pvpProtoListTemp);
 				} else {
 					log.error("no fake users generated. minElo={} \t maxElo={}", minElo, maxElo);
@@ -835,24 +845,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 	
-	private List<PvpProto> createPvpProtosFromFakeUser(List<List<MonsterForPvp>> fakeUserMonsters) {
+	private List<PvpProto> createPvpProtosFromFakeUser(
+		List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo)
+	{
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
 		boolean setElo = ServerToggleRetrieveUtils
 			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
+		boolean displayBotElo = ServerToggleRetrieveUtils
+			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 		
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
-			PvpProto user = createFakeUser(mons, setElo);
+			PvpProto user = createFakeUser(mons, setElo, displayBotElo, attackerElo);
 			ppList.add(user);
 		}
 		
-		log.info("num fake users created: " + ppList.size());
+		log.info("num fake users created: {}", ppList.size());
 		return ppList;
 	}
 	
 	//CREATES ONE FAKE USER FOR PVP
 	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
-		boolean setElo)
+		boolean setElo, boolean displayBotElo, int attackerElo)
 	{
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
@@ -864,14 +878,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		String userId = null;
 		String randomName = getHazelcastPvpUtil().getRandomName();
+		if (displayBotElo) {
+			randomName = String.format("a%sd%s", attackerElo, avgElo);
+		}
 		int lvl = avgElo / ControllerConstants.PVP__FAKE_USER_LVL_DIVISOR;
 		
 		int prospectiveCashWinnings = cashWinnings.get(0);
 		int prospectiveOilWinnings = oilWinnings.get(0);
 		
-		log.info("fake user created: name={} \t avgElo={} \t cash={} \t oil={} \t lvl={}",
-			new Object[] { randomName, avgElo, prospectiveCashWinnings,
-			prospectiveOilWinnings, lvl } );
+//		log.info("fake user created: name={} \t avgElo={} \t cash={} \t oil={} \t lvl={}",
+//			new Object[] { randomName, avgElo, prospectiveCashWinnings,
+//			prospectiveOilWinnings, lvl } );
 		
 		List<Integer> monsterIdsDropped = calculateDrops(mfpList);
 		

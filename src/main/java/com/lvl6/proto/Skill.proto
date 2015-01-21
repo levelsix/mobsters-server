@@ -69,7 +69,8 @@ enum SkillType {
 	SHUFFLE = 12;
 	HEADSHOT = 13;
 	MUD = 14;
-	COUNTER_STRIKE = 15;
+	LIFE_STEAL = 15;
+	COUNTER_STRIKE = 16;
 }
 
 enum SkillActivationType {

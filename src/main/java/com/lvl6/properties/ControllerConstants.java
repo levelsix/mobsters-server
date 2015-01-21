@@ -127,14 +127,15 @@ public class ControllerConstants {
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
 	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
 	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
-	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
-	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
-	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
 	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
 	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
+	public static final int PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS = 1050;
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
+	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
+	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
+	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
@@ -178,7 +179,10 @@ public class ControllerConstants {
 
 	//TOGGLES
 	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
+	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
+	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
+	public static final String SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO = "pvp_bots_only_below_some_elo";
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
 	
 	//SKILL
@@ -209,9 +213,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
 	//the monster id the user gets to use after tutorial
 	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 37;
-	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
+	public static final int TUTORIAL__GUIDE_MONSTER_ID = 2012;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
-	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1100;
 	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 2001;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 

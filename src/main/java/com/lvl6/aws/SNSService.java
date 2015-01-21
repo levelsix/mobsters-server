@@ -6,8 +6,8 @@ public interface SNSService {
 	
 	
 	
-	public void sendAppleNotification(String message, String token);
+/*	public void sendAppleNotification(String message, String token);
 	
-	public void sendAppleNotifications(String message, List<String> tokens);
+	public void sendAppleNotifications(String message, List<String> tokens);*/
 	
 }

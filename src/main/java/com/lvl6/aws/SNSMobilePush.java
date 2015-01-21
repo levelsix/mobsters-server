@@ -1,22 +1,9 @@
 package com.lvl6.aws;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.sns.AmazonSNS;
-import com.amazonaws.services.sns.AmazonSNSClient;
-import com.amazonaws.services.sns.model.MessageAttributeValue;
-import com.lvl6.aws.MessageGenerator.Platform;
 
 public class SNSMobilePush implements SNSService {
 
-	private static final Logger		log					= LoggerFactory.getLogger(SNSMobilePush.class);
+	/*private static final Logger		log					= LoggerFactory.getLogger(SNSMobilePush.class);
 
 	private AmazonSNSClientWrapper	snsClientWrapper;
 
@@ -49,23 +36,7 @@ public class SNSMobilePush implements SNSService {
 		attributesMap.put(Platform.APNS_SANDBOX, null);
 	}
 
-	/*
-	 * try {
-	 * 
-	 * } catch (AmazonServiceException ase) { System.out.println(
-	 * "Caught an AmazonServiceException, which means your request made it " +
-	 * "to Amazon SNS, but was rejected with an error response for some reason."
-	 * ); System.out.println("Error Message:    " + ase.getMessage());
-	 * System.out.println("HTTP Status Code: " + ase.getStatusCode());
-	 * System.out.println("AWS Error Code:   " + ase.getErrorCode());
-	 * System.out.println("Error Type:       " + ase.getErrorType());
-	 * System.out.println("Request ID:       " + ase.getRequestId()); } catch
-	 * (AmazonClientException ace) { System.out.println(
-	 * "Caught an AmazonClientException, which means the client encountered " +
-	 * "a serious internal problem while trying to communicate with SNS, such as not "
-	 * + "being able to access the network.");
-	 * System.out.println("Error Message: " + ace.getMessage()); }
-	 */
+
 
 	public void androidAppNotification() {
 		// TODO: Please fill in following values for your application. You can
@@ -160,5 +131,5 @@ public class SNSMobilePush implements SNSService {
 
 	public void setIsSandBox(boolean isSandBox) {
 		this.isSandBox = isSandBox;
-	}
+	}*/
 }

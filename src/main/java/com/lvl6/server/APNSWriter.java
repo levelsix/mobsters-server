@@ -1,7 +1,8 @@
 package com.lvl6.server;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -109,7 +110,8 @@ public class APNSWriter extends Wrap {
 		String playerId = event.getPlayerId();
 		ConnectedPlayer connectedPlayer = server.getPlayerById(playerId);
 		if (connectedPlayer != null) {
-			log.info("wrote a response event to connected player with id " + playerId
+			log.info("wrote a response event to connected player with id " 
+					+ playerId
 					+ " instead of sending APNS message");
 			server.writeEvent(event);
 		} else {
@@ -189,25 +191,20 @@ public class APNSWriter extends Wrap {
 		}
 	}*/
 
-	protected void buildService() throws FileNotFoundException {
+	protected void buildService() {
 		log.info("Building ApnsService");
-		File certFile = new File(apnsProperties.pathToCert);
-		log.info(certFile.getAbsolutePath());
 		try {
-			if (certFile.exists() && certFile.canRead()) {
-				ApnsServiceBuilder builder = APNS.newService()
-						.withCert(apnsProperties.pathToCert, apnsProperties.certPassword).asNonBlocking();
-				if (Globals.IS_SANDBOX()) {
-					log.info("Building apns with sandbox=true");
-					builder.withSandboxDestination();
-				} else {
-					builder.withProductionDestination();
-				}
-				service = builder.build();
-				service.start();
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
+			ApnsServiceBuilder builder = APNS.newService()
+					.withCert(inputStream, apnsProperties.certPassword);
+			if (Globals.IS_SANDBOX()) {
+				log.info("Building apns with sandbox=true");
+				builder.withSandboxDestination();
 			} else {
-				log.error("Apns Certificate exists: {}  can read: {}", certFile.exists(), certFile.canRead());
+				builder.withProductionDestination();
 			}
+			service = builder.build();
+			service.start();
 		} catch (Exception e) {
 			log.error("Error getting apns cert.. Invalid SSL Config Exception", e);
 		}
