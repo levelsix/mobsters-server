@@ -104,10 +104,10 @@
 		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
 		<lvl6.application.version.majorNumber>1</lvl6.application.version.majorNumber>
 		<lvl6.application.version.minorNumber>10</lvl6.application.version.minorNumber>
-<!--	<lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
+		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
-		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
+		<apns.path.to.cert>/mobsters_dev.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
 		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
@@ -152,9 +152,13 @@
 		<amqp.client.messages.routing.key>messagesFromPlayers1.1</amqp.client.messages.routing.key>
 
 		<!-- Amazon SNS -->
-		<apnsCertificate></apnsCertificate>
-		<apnsPrivateKey></apnsPrivateKey>
-		<apnsApplicationName></apnsApplicationName>
+		<apnsCertificate>
+		<![CDATA[-----BEGIN CERTIFICATE-----\nMIIFhzCCBG+gAwIBAgIIXInSCkIEGN0wDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNV\nBAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSwwKgYDVQQLDCNBcHBsZSBXb3Js\nZHdpZGUgRGV2ZWxvcGVyIFJlbGF0aW9uczFEMEIGA1UEAww7QXBwbGUgV29ybGR3\naWRlIERldmVsb3BlciBSZWxhdGlvbnMgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkw\nHhcNMTQxMjEwMjMzOTEwWhcNMTUxMjEwMjMzOTEwWjCBhjEhMB8GCgmSJomT8ixk\nAQEMEWNvbS5sdmw2Lm1vYnN0ZXJzMT8wPQYDVQQDDDZBcHBsZSBEZXZlbG9wbWVu\ndCBJT1MgUHVzaCBTZXJ2aWNlczogY29tLmx2bDYubW9ic3RlcnMxEzARBgNVBAsM\nCjVRVEs3QTk0NkoxCzAJBgNVBAYTAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A\nMIIBCgKCAQEAvmqvekDbl5VtbIakeInGmFpNfWK6HB+8cGbxOUYNXhXobbtSKBxg\nesRD5NXJgnuiyWYzHANnPmmrmQoJWOifhQQHqN1/2iixnlQ2w/5crCZIJoGNLr1s\ni+Sw9RHwjV5St/j6QvgQ+S0z4efBG6KTKVREa5jIg0HJV4ilTZ7oQJ9a0SymII6i\nSIcqoRyfZWMK5t02giTEFPiVVyoxMwshrr6rhqJAGI7agE0mIAnxjHQErmNqJKxJ\nEoK32wFa1KbB5rTC1U+bSPmtxSbtCQwSjaRarNZZodRyy9967aJsPELY0XTWdBMr\nuSXRzzqlWkhr/80rn42gJBaM3+UB8QDh/wIDAQABo4IB5TCCAeEwHQYDVR0OBBYE\nFHdofm7J07sIEswrVKQNvvePkheUMAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUiCcX\nCam2GGCL7Ou69kdZxVJUo7cwggEPBgNVHSAEggEGMIIBAjCB/wYJKoZIhvdjZAUB\nMIHxMIHDBggrBgEFBQcCAjCBtgyBs1JlbGlhbmNlIG9uIHRoaXMgY2VydGlmaWNh\ndGUgYnkgYW55IHBhcnR5IGFzc3VtZXMgYWNjZXB0YW5jZSBvZiB0aGUgdGhlbiBh\ncHBsaWNhYmxlIHN0YW5kYXJkIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHVzZSwg\nY2VydGlmaWNhdGUgcG9saWN5IGFuZCBjZXJ0aWZpY2F0aW9uIHByYWN0aWNlIHN0\nYXRlbWVudHMuMCkGCCsGAQUFBwIBFh1odHRwOi8vd3d3LmFwcGxlLmNvbS9hcHBs\nZWNhLzBNBgNVHR8ERjBEMEKgQKA+hjxodHRwOi8vZGV2ZWxvcGVyLmFwcGxlLmNv\nbS9jZXJ0aWZpY2F0aW9uYXV0aG9yaXR5L3d3ZHJjYS5jcmwwCwYDVR0PBAQDAgeA\nMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBAGCiqGSIb3Y2QGAwEEAgUAMA0GCSqGSIb3\nDQEBBQUAA4IBAQAhX8O7Pp1Ut4Ai5EJfwLfxvd/7ZU15aZeRS/KL7fz8C6XQUHIc\nWD/0HCHDQbs0vIMJoulR+k9MERYthyZ67vKcjmwy5vA6eLJpUWtS9BWN2Y7fqL02\n25spd8m84+uVvGSFWyM3wBW0jeJcwKlIcEjJxnF97Ly5WqqcEm3YGN2eacuXKX5c\n5SbVhKsjFS42C4/eiFmx8QL9WzgvQLMhj3q7xKfQz5GYHHhbpkuEje0J/cUpOFBf\nBo7ll2r6XKc5Wy0YMDQbzAD7+cluO1vdZDYtljgWyIDn6GpBJ5deSDopr0J9dxg9\nv4zxUdGgeRoBMYj8MJfzaX6jXY7W+M4Z/ZOA\n-----END CERTIFICATE-----]]]>
+		</apnsCertificate>
+		<apnsPrivateKey>
+		<![CDATA[-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC+aq96QNuXlW1s\nhqR4icaYWk19YrocH7xwZvE5Rg1eFehtu1IoHGB6xEPk1cmCe6LJZjMcA2c+aauZ\nCglY6J+FBAeo3X/aKLGeVDbD/lysJkgmgY0uvWyL5LD1EfCNXlK3+PpC+BD5LTPh\n58EbopMpVERrmMiDQclXiKVNnuhAn1rRLKYgjqJIhyqhHJ9lYwrm3TaCJMQU+JVX\nKjEzCyGuvquGokAYjtqATSYgCfGMdASuY2okrEkSgrfbAVrUpsHmtMLVT5tI+a3F\nJu0JDBKNpFqs1lmh1HLL33rtomw8QtjRdNZ0Eyu5JdHPOqVaSGv/zSufjaAkFozf\n5QHxAOH/AgMBAAECggEBAJ63yIrLsv5X9HyogkFi/iGR69NezqiQn37Fn75QsOXC\ntxl4MVPzy0uperospSnZKmhbgrCP+afhZsJKxl3QkN7L7CKKdn5+uwaxRXD6/X4U\n7sEB7Y+PHwJAXmv4Rx1fCO4GX3wgz+0TC5L6nVEOo0Go1tsk38XguRX4dWkM0qTB\nfGdR3hILtRVEag+d5EHgDltjCEsaS7qAkPG4v/VEkVe7viOXKdLnS/FPbebMQrtt\nHLMffy5ySjBlFCFjHvBPCzSsp3u4CdUi6NrSk/xUxKDROtukT7ABGm5QHpY/TIp2\n2dSc333D8CLtoKtuelzMsafw1esVlGV2nkXQozJPJEECgYEA+p0/6x/aAwSCcdr7\nAMvfoY1ZEG8RCfmhbA4+cY2ZXdus4F8p6MXKffGYRlR7iCRhXuoqzIkiHG2M12tu\nNx/YWm7Pq8eS09GJYMB48CdQ09+XNmvUVEkPqgBi30H+Slyt8neCHFZPx2yvXzGz\n77MuqVJqHZAkXNVyY1/vynxsQJ8CgYEAwoJCljv3F6ci+aRWpCdv8YSpUUbyfzz0\nQRXZyZTJZq15sw0DrEzXy+WlQiQu8HyYUdodYJZRJLw+3SE6Qc8piWmokfEEZJ32\nJHRmT7Qidh3MJzT4/SFQ/OQMxiet7Ezl05z9/N64g+nMQGasC+hxG1W+4SWVpRZT\nWjGEv9i1AqECgYEAlwSTM9hpw0/AW2OdxYkVJYDLnr+PAPfQchDTSBIPzSNHNZ2i\n34Xw05v2KstV9WAW3N83EzG/wGmzaUxvigBCm5wSwGzu6X1mz0qslerbJhGiSUUJ\nGhE8wzCgY/Ccj6rxlx605OaOBJpVw4Nr7pGHGLl1AIOPpfFpkMCK+vWnNfkCgYAj\neP4LyAPYHHMUdBQY+9g+g6MdX4L6EXO6KvH9AVV5lEmNjeINmjYAyXDKDy9ATHi6\n9LxG0SMbP/l2+ohVWCKLHOnRM9NJRkWNgGzoPEHMqMKCo/aEs37BoBV0Teg6IAwJ\n+6eWZkfgRtMpK5BU259FDO4ywVf5M4kf+cfr9OmOAQKBgQDbytt0czZkAQxgi19B\nu/rI/x4CnnZwz8TpS6wuau58OQDS+f/FTTczcrxdzUW+S3adi/05FiUEd0GbzLS2\nqXr2+SmxirGJIK9Pf4D9Q8EXrNpF/sBfWh6mSp/I4CtokI+UoFaymatOVQOQYzA7\ns3kzxGciLJ0Jv6LEFqBXsptvbg==\n-----END PRIVATE KEY-----]]>
+		</apnsPrivateKey>
+		<apnsApplicationName>com.lvl6.toonsquad</apnsApplicationName>
 		<isSandBox>true</isSandBox>
 		<gcmServerAPIKey></gcmServerAPIKey>
 		<gcmApplicationName></gcmApplicationName>
@@ -470,7 +474,7 @@
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
 				<artifactId>apns</artifactId>
-				<version>0.1.6</version>
+				<version>1.0.0.Beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>json-java</groupId>

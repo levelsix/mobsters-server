@@ -14,10 +14,6 @@ package com.lvl6.aws;
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-import java.util.HashMap;
-import java.util.Map;
-
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class MessageGenerator {
 
@@ -26,7 +22,7 @@ public class MessageGenerator {
 	 * for the end point. It must be set. It is received by the device as the
 	 * value of the key "default".
 	 */
-	public static final String defaultMessage = "This is the default message";
+/*	public static final String defaultMessage = "This is the default message";
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -114,5 +110,5 @@ public class MessageGenerator {
 				+ "</wp:Count><wp:Title>"
 				+ mpnsMessageMap.get("payload")
 				+ "</wp:Title></wp:Tile></wp:Notification>";
-	}
+	}*/
 }

@@ -15,24 +15,13 @@ package com.lvl6.aws;
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.amazonaws.services.sns.AmazonSNS;
-import com.amazonaws.services.sns.model.CreatePlatformApplicationRequest;
-import com.amazonaws.services.sns.model.CreatePlatformApplicationResult;
-import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest;
-import com.amazonaws.services.sns.model.CreatePlatformEndpointResult;
-import com.amazonaws.services.sns.model.DeletePlatformApplicationRequest;
-import com.amazonaws.services.sns.model.MessageAttributeValue;
-import com.amazonaws.services.sns.model.PublishRequest;
-import com.amazonaws.services.sns.model.PublishResult;
-import com.lvl6.aws.MessageGenerator.Platform;
 
 public class AmazonSNSClientWrapper {
 
+	
+/*	
+	private static final Logger log = LoggerFactory.getLogger(AmazonSNSClientWrapper.class);
+	
 	private final AmazonSNS snsClient;
 
 	public AmazonSNSClientWrapper(AmazonSNS client) {
@@ -40,7 +29,9 @@ public class AmazonSNSClientWrapper {
 	}
 
 	private CreatePlatformApplicationResult createPlatformApplication(
-			String applicationName, Platform platform, String principal,
+			String applicationName, 
+			Platform platform, 
+			String principal,
 			String credential) {
 		CreatePlatformApplicationRequest platformApplicationRequest = new CreatePlatformApplicationRequest();
 		Map<String, String> attributes = new HashMap<String, String>();
@@ -53,7 +44,9 @@ public class AmazonSNSClientWrapper {
 	}
 
 	private CreatePlatformEndpointResult createPlatformEndpoint(
-			Platform platform, String customData, String platformToken,
+			Platform platform, 
+			String customData, 
+			String platformToken,
 			String applicationArn) {
 		CreatePlatformEndpointRequest platformEndpointRequest = new CreatePlatformEndpointRequest();
 		platformEndpointRequest.setCustomUserData(customData);
@@ -79,8 +72,12 @@ public class AmazonSNSClientWrapper {
 		snsClient.deletePlatformApplication(request);
 	}
 
-	private PublishResult publish(String endpointArn, Platform platform,
-			Map<Platform, Map<String, MessageAttributeValue>> attributesMap) {
+	private PublishResult publish(
+			String endpointArn, 
+			Platform platform,
+			Map<Platform, 
+			Map<String, 
+			MessageAttributeValue>> attributesMap) {
 		PublishRequest publishRequest = new PublishRequest();
 		Map<String, MessageAttributeValue> notificationAttributes = getValidNotificationAttributes(attributesMap
 				.get(platform));
@@ -98,7 +95,7 @@ public class AmazonSNSClientWrapper {
 		publishRequest.setTargetArn(endpointArn);
 
 		// Display the message that will be sent to the endpoint/
-		System.out.println("{Message Body: " + message + "}");
+		log.info("{Message Body: " + message + "}");
 		StringBuilder builder = new StringBuilder();
 		builder.append("{Message Attributes: ");
 		for (Map.Entry<String, MessageAttributeValue> entry : notificationAttributes
@@ -108,20 +105,25 @@ public class AmazonSNSClientWrapper {
 		}
 		builder.deleteCharAt(builder.length() - 1);
 		builder.append("}");
-		System.out.println(builder.toString());
+		log.info(builder.toString());
 
 		publishRequest.setMessage(message);
 		return snsClient.publish(publishRequest);
 	}
 
-	public void demoNotification(Platform platform, String principal,
-			String credential, String platformToken, String applicationName,
-			Map<Platform, Map<String, MessageAttributeValue>> attrsMap) {
+	public void demoNotification(
+			Platform platform, 
+			String principal,
+			String credential, 
+			String platformToken, 
+			String applicationName,
+			Map<Platform, 
+			Map<String, MessageAttributeValue>> attrsMap) {
 		// Create Platform Application. This corresponds to an app on a
 		// platform.
 		CreatePlatformApplicationResult platformApplicationResult = createPlatformApplication(
 				applicationName, platform, principal, credential);
-		System.out.println(platformApplicationResult);
+		log.info(platformApplicationResult.toString());
 
 		// The Platform Application Arn can be used to uniquely identify the
 		// Platform Application.
@@ -132,13 +134,16 @@ public class AmazonSNSClientWrapper {
 		CreatePlatformEndpointResult platformEndpointResult = createPlatformEndpoint(
 				platform,
 				"CustomData - Useful to store endpoint specific data",
-				platformToken, platformApplicationArn);
-		System.out.println(platformEndpointResult);
+				platformToken, 
+				platformApplicationArn);
+		log.info(platformEndpointResult.toString());
 
 		// Publish a push notification to an Endpoint.
 		PublishResult publishResult = publish(
-				platformEndpointResult.getEndpointArn(), platform, attrsMap);
-		System.out.println("Published! \n{MessageId="
+				platformEndpointResult.getEndpointArn(), 
+				platform, 
+				attrsMap);
+		log.info("Published! \n{MessageId="
 				+ publishResult.getMessageId() + "}");
 		// Delete the Platform Application since we will no longer be using it.
 		deletePlatformApplication(platformApplicationArn);
@@ -179,5 +184,5 @@ public class AmazonSNSClientWrapper {
 			}
 		}
 		return validAttributes;
-	}
+	}*/
 }
