@@ -99,10 +99,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleResult)
   }
 
-  public interface PvpProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
      */
@@ -116,6 +116,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder();
 
+    // repeated .com.lvl6.proto.PvpMonsterProto defenderMonsters = 3;
     /**
      * <code>repeated .com.lvl6.proto.PvpMonsterProto defenderMonsters = 3;</code>
      *
@@ -160,6 +161,7 @@ public final class BattleProto {
     com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder getDefenderMonstersOrBuilder(
         int index);
 
+    // optional int32 prospectiveCashWinnings = 4;
     /**
      * <code>optional int32 prospectiveCashWinnings = 4;</code>
      */
@@ -169,6 +171,7 @@ public final class BattleProto {
      */
     int getProspectiveCashWinnings();
 
+    // optional int32 prospectiveOilWinnings = 5;
     /**
      * <code>optional int32 prospectiveOilWinnings = 5;</code>
      */
@@ -178,6 +181,7 @@ public final class BattleProto {
      */
     int getProspectiveOilWinnings();
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueStats = 6;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueStats = 6;</code>
      *
@@ -203,6 +207,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueStatsOrBuilder();
 
+    // optional string defenderMsg = 7;
     /**
      * <code>optional string defenderMsg = 7;</code>
      */
@@ -221,9 +226,8 @@ public final class BattleProto {
    * Protobuf type {@code com.lvl6.proto.PvpProto}
    */
   public static final class PvpProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpProto)
-      PvpProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpProtoOrBuilder {
     // Use PvpProto.newBuilder() to construct.
     private PvpProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -314,9 +318,8 @@ public final class BattleProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              defenderMsg_ = bs;
+              defenderMsg_ = input.readBytes();
               break;
             }
           }
@@ -362,6 +365,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
     public static final int DEFENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_;
     /**
@@ -383,6 +387,7 @@ public final class BattleProto {
       return defender_;
     }
 
+    // repeated .com.lvl6.proto.PvpMonsterProto defenderMonsters = 3;
     public static final int DEFENDERMONSTERS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.BattleProto.PvpMonsterProto> defenderMonsters_;
     /**
@@ -438,6 +443,7 @@ public final class BattleProto {
       return defenderMonsters_.get(index);
     }
 
+    // optional int32 prospectiveCashWinnings = 4;
     public static final int PROSPECTIVECASHWINNINGS_FIELD_NUMBER = 4;
     private int prospectiveCashWinnings_;
     /**
@@ -453,6 +459,7 @@ public final class BattleProto {
       return prospectiveCashWinnings_;
     }
 
+    // optional int32 prospectiveOilWinnings = 5;
     public static final int PROSPECTIVEOILWINNINGS_FIELD_NUMBER = 5;
     private int prospectiveOilWinnings_;
     /**
@@ -468,6 +475,7 @@ public final class BattleProto {
       return prospectiveOilWinnings_;
     }
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueStats = 6;
     public static final int PVPLEAGUESTATS_FIELD_NUMBER = 6;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueStats_;
     /**
@@ -501,6 +509,7 @@ public final class BattleProto {
       return pvpLeagueStats_;
     }
 
+    // optional string defenderMsg = 7;
     public static final int DEFENDERMSG_FIELD_NUMBER = 7;
     private java.lang.Object defenderMsg_;
     /**
@@ -554,8 +563,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -697,9 +705,8 @@ public final class BattleProto {
      * Protobuf type {@code com.lvl6.proto.PvpProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpProto)
-        com.lvl6.proto.BattleProto.PvpProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpProto_descriptor;
@@ -910,6 +917,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> defenderBuilder_;
@@ -1018,7 +1026,7 @@ public final class BattleProto {
         if (defenderBuilder_ == null) {
           defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  getDefender(),
+                  defender_,
                   getParentForChildren(),
                   isClean());
           defender_ = null;
@@ -1026,6 +1034,7 @@ public final class BattleProto {
         return defenderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PvpMonsterProto defenderMonsters = 3;
       private java.util.List<com.lvl6.proto.BattleProto.PvpMonsterProto> defenderMonsters_ =
         java.util.Collections.emptyList();
       private void ensureDefenderMonstersIsMutable() {
@@ -1207,8 +1216,7 @@ public final class BattleProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpMonsterProto> values) {
         if (defenderMonstersBuilder_ == null) {
           ensureDefenderMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, defenderMonsters_);
+          super.addAll(values, defenderMonsters_);
           onChanged();
         } else {
           defenderMonstersBuilder_.addAllMessages(values);
@@ -1338,6 +1346,7 @@ public final class BattleProto {
         return defenderMonstersBuilder_;
       }
 
+      // optional int32 prospectiveCashWinnings = 4;
       private int prospectiveCashWinnings_ ;
       /**
        * <code>optional int32 prospectiveCashWinnings = 4;</code>
@@ -1370,6 +1379,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int32 prospectiveOilWinnings = 5;
       private int prospectiveOilWinnings_ ;
       /**
        * <code>optional int32 prospectiveOilWinnings = 5;</code>
@@ -1402,6 +1412,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueStats = 6;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueStats_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> pvpLeagueStatsBuilder_;
@@ -1546,7 +1557,7 @@ public final class BattleProto {
         if (pvpLeagueStatsBuilder_ == null) {
           pvpLeagueStatsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  getPvpLeagueStats(),
+                  pvpLeagueStats_,
                   getParentForChildren(),
                   isClean());
           pvpLeagueStats_ = null;
@@ -1554,6 +1565,7 @@ public final class BattleProto {
         return pvpLeagueStatsBuilder_;
       }
 
+      // optional string defenderMsg = 7;
       private java.lang.Object defenderMsg_ = "";
       /**
        * <code>optional string defenderMsg = 7;</code>
@@ -1567,12 +1579,9 @@ public final class BattleProto {
       public java.lang.String getDefenderMsg() {
         java.lang.Object ref = defenderMsg_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            defenderMsg_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          defenderMsg_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1641,10 +1650,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpProto)
   }
 
-  public interface PvpMonsterProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpMonsterProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpMonsterProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserMonsterProto defenderMonster = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserMonsterProto defenderMonster = 1;</code>
      */
@@ -1658,6 +1667,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder getDefenderMonsterOrBuilder();
 
+    // optional int32 monsterIdDropped = 2;
     /**
      * <code>optional int32 monsterIdDropped = 2;</code>
      *
@@ -1679,9 +1689,8 @@ public final class BattleProto {
    * Protobuf type {@code com.lvl6.proto.PvpMonsterProto}
    */
   public static final class PvpMonsterProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpMonsterProto)
-      PvpMonsterProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpMonsterProtoOrBuilder {
     // Use PvpMonsterProto.newBuilder() to construct.
     private PvpMonsterProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1785,6 +1794,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserMonsterProto defenderMonster = 1;
     public static final int DEFENDERMONSTER_FIELD_NUMBER = 1;
     private com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto defenderMonster_;
     /**
@@ -1806,6 +1816,7 @@ public final class BattleProto {
       return defenderMonster_;
     }
 
+    // optional int32 monsterIdDropped = 2;
     public static final int MONSTERIDDROPPED_FIELD_NUMBER = 2;
     private int monsterIdDropped_;
     /**
@@ -1836,8 +1847,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1951,9 +1961,8 @@ public final class BattleProto {
      * Protobuf type {@code com.lvl6.proto.PvpMonsterProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpMonsterProto)
-        com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpMonsterProto_descriptor;
@@ -2084,6 +2093,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserMonsterProto defenderMonster = 1;
       private com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto defenderMonster_ = com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> defenderMonsterBuilder_;
@@ -2192,7 +2202,7 @@ public final class BattleProto {
         if (defenderMonsterBuilder_ == null) {
           defenderMonsterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder>(
-                  getDefenderMonster(),
+                  defenderMonster_,
                   getParentForChildren(),
                   isClean());
           defenderMonster_ = null;
@@ -2200,6 +2210,7 @@ public final class BattleProto {
         return defenderMonsterBuilder_;
       }
 
+      // optional int32 monsterIdDropped = 2;
       private int monsterIdDropped_ ;
       /**
        * <code>optional int32 monsterIdDropped = 2;</code>
@@ -2259,10 +2270,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpMonsterProto)
   }
 
-  public interface PvpHistoryProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpHistoryProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpHistoryProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int64 battleEndTime = 9;
     /**
      * <code>optional int64 battleEndTime = 9;</code>
      *
@@ -2282,6 +2293,7 @@ public final class BattleProto {
      */
     long getBattleEndTime();
 
+    // optional .com.lvl6.proto.FullUserProto attacker = 1;
     /**
      * <code>optional .com.lvl6.proto.FullUserProto attacker = 1;</code>
      *
@@ -2307,6 +2319,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.FullUserProtoOrBuilder getAttackerOrBuilder();
 
+    // repeated .com.lvl6.proto.PvpMonsterProto attackersMonsters = 2;
     /**
      * <code>repeated .com.lvl6.proto.PvpMonsterProto attackersMonsters = 2;</code>
      *
@@ -2351,6 +2364,7 @@ public final class BattleProto {
     com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder getAttackersMonstersOrBuilder(
         int index);
 
+    // optional bool attackerWon = 3;
     /**
      * <code>optional bool attackerWon = 3;</code>
      */
@@ -2360,6 +2374,7 @@ public final class BattleProto {
      */
     boolean getAttackerWon();
 
+    // optional sint32 defenderCashChange = 4;
     /**
      * <code>optional sint32 defenderCashChange = 4;</code>
      */
@@ -2369,6 +2384,7 @@ public final class BattleProto {
      */
     int getDefenderCashChange();
 
+    // optional sint32 defenderOilChange = 5;
     /**
      * <code>optional sint32 defenderOilChange = 5;</code>
      */
@@ -2378,6 +2394,7 @@ public final class BattleProto {
      */
     int getDefenderOilChange();
 
+    // optional bool exactedRevenge = 6;
     /**
      * <code>optional bool exactedRevenge = 6;</code>
      *
@@ -2395,6 +2412,7 @@ public final class BattleProto {
      */
     boolean getExactedRevenge();
 
+    // optional int32 prospectiveCashWinnings = 7;
     /**
      * <code>optional int32 prospectiveCashWinnings = 7;</code>
      *
@@ -2412,6 +2430,7 @@ public final class BattleProto {
      */
     int getProspectiveCashWinnings();
 
+    // optional int32 prospectiveOilWinnings = 8;
     /**
      * <code>optional int32 prospectiveOilWinnings = 8;</code>
      */
@@ -2421,6 +2440,7 @@ public final class BattleProto {
      */
     int getProspectiveOilWinnings();
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;</code>
      *
@@ -2452,6 +2472,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getAttackerBeforeOrBuilder();
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;</code>
      *
@@ -2477,6 +2498,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getAttackerAfterOrBuilder();
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;</code>
      *
@@ -2502,6 +2524,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getDefenderBeforeOrBuilder();
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;</code>
      *
@@ -2527,6 +2550,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getDefenderAfterOrBuilder();
 
+    // optional .com.lvl6.proto.FullUserProto defender = 14;
     /**
      * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
      *
@@ -2552,6 +2576,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.FullUserProtoOrBuilder getDefenderOrBuilder();
 
+    // optional int32 attackerCashChange = 15;
     /**
      * <code>optional int32 attackerCashChange = 15;</code>
      */
@@ -2561,6 +2586,7 @@ public final class BattleProto {
      */
     int getAttackerCashChange();
 
+    // optional int32 attackerOilChange = 16;
     /**
      * <code>optional int32 attackerOilChange = 16;</code>
      */
@@ -2570,6 +2596,7 @@ public final class BattleProto {
      */
     int getAttackerOilChange();
 
+    // optional bool clanAvenged = 17;
     /**
      * <code>optional bool clanAvenged = 17;</code>
      */
@@ -2583,9 +2610,8 @@ public final class BattleProto {
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
    */
   public static final class PvpHistoryProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpHistoryProto)
-      PvpHistoryProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpHistoryProtoOrBuilder {
     // Use PvpHistoryProto.newBuilder() to construct.
     private PvpHistoryProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2810,6 +2836,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional int64 battleEndTime = 9;
     public static final int BATTLEENDTIME_FIELD_NUMBER = 9;
     private long battleEndTime_;
     /**
@@ -2835,6 +2862,7 @@ public final class BattleProto {
       return battleEndTime_;
     }
 
+    // optional .com.lvl6.proto.FullUserProto attacker = 1;
     public static final int ATTACKER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.FullUserProto attacker_;
     /**
@@ -2868,6 +2896,7 @@ public final class BattleProto {
       return attacker_;
     }
 
+    // repeated .com.lvl6.proto.PvpMonsterProto attackersMonsters = 2;
     public static final int ATTACKERSMONSTERS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleProto.PvpMonsterProto> attackersMonsters_;
     /**
@@ -2923,6 +2952,7 @@ public final class BattleProto {
       return attackersMonsters_.get(index);
     }
 
+    // optional bool attackerWon = 3;
     public static final int ATTACKERWON_FIELD_NUMBER = 3;
     private boolean attackerWon_;
     /**
@@ -2938,6 +2968,7 @@ public final class BattleProto {
       return attackerWon_;
     }
 
+    // optional sint32 defenderCashChange = 4;
     public static final int DEFENDERCASHCHANGE_FIELD_NUMBER = 4;
     private int defenderCashChange_;
     /**
@@ -2953,6 +2984,7 @@ public final class BattleProto {
       return defenderCashChange_;
     }
 
+    // optional sint32 defenderOilChange = 5;
     public static final int DEFENDEROILCHANGE_FIELD_NUMBER = 5;
     private int defenderOilChange_;
     /**
@@ -2968,6 +3000,7 @@ public final class BattleProto {
       return defenderOilChange_;
     }
 
+    // optional bool exactedRevenge = 6;
     public static final int EXACTEDREVENGE_FIELD_NUMBER = 6;
     private boolean exactedRevenge_;
     /**
@@ -2991,6 +3024,7 @@ public final class BattleProto {
       return exactedRevenge_;
     }
 
+    // optional int32 prospectiveCashWinnings = 7;
     public static final int PROSPECTIVECASHWINNINGS_FIELD_NUMBER = 7;
     private int prospectiveCashWinnings_;
     /**
@@ -3014,6 +3048,7 @@ public final class BattleProto {
       return prospectiveCashWinnings_;
     }
 
+    // optional int32 prospectiveOilWinnings = 8;
     public static final int PROSPECTIVEOILWINNINGS_FIELD_NUMBER = 8;
     private int prospectiveOilWinnings_;
     /**
@@ -3029,6 +3064,7 @@ public final class BattleProto {
       return prospectiveOilWinnings_;
     }
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
     public static final int ATTACKERBEFORE_FIELD_NUMBER = 10;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto attackerBefore_;
     /**
@@ -3068,6 +3104,7 @@ public final class BattleProto {
       return attackerBefore_;
     }
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
     public static final int ATTACKERAFTER_FIELD_NUMBER = 11;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto attackerAfter_;
     /**
@@ -3101,6 +3138,7 @@ public final class BattleProto {
       return attackerAfter_;
     }
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
     public static final int DEFENDERBEFORE_FIELD_NUMBER = 12;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto defenderBefore_;
     /**
@@ -3134,6 +3172,7 @@ public final class BattleProto {
       return defenderBefore_;
     }
 
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
     public static final int DEFENDERAFTER_FIELD_NUMBER = 13;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto defenderAfter_;
     /**
@@ -3167,6 +3206,7 @@ public final class BattleProto {
       return defenderAfter_;
     }
 
+    // optional .com.lvl6.proto.FullUserProto defender = 14;
     public static final int DEFENDER_FIELD_NUMBER = 14;
     private com.lvl6.proto.UserProto.FullUserProto defender_;
     /**
@@ -3200,6 +3240,7 @@ public final class BattleProto {
       return defender_;
     }
 
+    // optional int32 attackerCashChange = 15;
     public static final int ATTACKERCASHCHANGE_FIELD_NUMBER = 15;
     private int attackerCashChange_;
     /**
@@ -3215,6 +3256,7 @@ public final class BattleProto {
       return attackerCashChange_;
     }
 
+    // optional int32 attackerOilChange = 16;
     public static final int ATTACKEROILCHANGE_FIELD_NUMBER = 16;
     private int attackerOilChange_;
     /**
@@ -3230,6 +3272,7 @@ public final class BattleProto {
       return attackerOilChange_;
     }
 
+    // optional bool clanAvenged = 17;
     public static final int CLANAVENGED_FIELD_NUMBER = 17;
     private boolean clanAvenged_;
     /**
@@ -3267,8 +3310,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3487,9 +3529,8 @@ public final class BattleProto {
      * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpHistoryProto)
-        com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpHistoryProto_descriptor;
@@ -3833,6 +3874,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional int64 battleEndTime = 9;
       private long battleEndTime_ ;
       /**
        * <code>optional int64 battleEndTime = 9;</code>
@@ -3885,6 +3927,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.FullUserProto attacker = 1;
       private com.lvl6.proto.UserProto.FullUserProto attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder> attackerBuilder_;
@@ -4029,7 +4072,7 @@ public final class BattleProto {
         if (attackerBuilder_ == null) {
           attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder>(
-                  getAttacker(),
+                  attacker_,
                   getParentForChildren(),
                   isClean());
           attacker_ = null;
@@ -4037,6 +4080,7 @@ public final class BattleProto {
         return attackerBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PvpMonsterProto attackersMonsters = 2;
       private java.util.List<com.lvl6.proto.BattleProto.PvpMonsterProto> attackersMonsters_ =
         java.util.Collections.emptyList();
       private void ensureAttackersMonstersIsMutable() {
@@ -4218,8 +4262,7 @@ public final class BattleProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpMonsterProto> values) {
         if (attackersMonstersBuilder_ == null) {
           ensureAttackersMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, attackersMonsters_);
+          super.addAll(values, attackersMonsters_);
           onChanged();
         } else {
           attackersMonstersBuilder_.addAllMessages(values);
@@ -4349,6 +4392,7 @@ public final class BattleProto {
         return attackersMonstersBuilder_;
       }
 
+      // optional bool attackerWon = 3;
       private boolean attackerWon_ ;
       /**
        * <code>optional bool attackerWon = 3;</code>
@@ -4381,6 +4425,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional sint32 defenderCashChange = 4;
       private int defenderCashChange_ ;
       /**
        * <code>optional sint32 defenderCashChange = 4;</code>
@@ -4413,6 +4458,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional sint32 defenderOilChange = 5;
       private int defenderOilChange_ ;
       /**
        * <code>optional sint32 defenderOilChange = 5;</code>
@@ -4445,6 +4491,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional bool exactedRevenge = 6;
       private boolean exactedRevenge_ ;
       /**
        * <code>optional bool exactedRevenge = 6;</code>
@@ -4493,6 +4540,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int32 prospectiveCashWinnings = 7;
       private int prospectiveCashWinnings_ ;
       /**
        * <code>optional int32 prospectiveCashWinnings = 7;</code>
@@ -4541,6 +4589,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int32 prospectiveOilWinnings = 8;
       private int prospectiveOilWinnings_ ;
       /**
        * <code>optional int32 prospectiveOilWinnings = 8;</code>
@@ -4573,6 +4622,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto attackerBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> attackerBeforeBuilder_;
@@ -4735,7 +4785,7 @@ public final class BattleProto {
         if (attackerBeforeBuilder_ == null) {
           attackerBeforeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  getAttackerBefore(),
+                  attackerBefore_,
                   getParentForChildren(),
                   isClean());
           attackerBefore_ = null;
@@ -4743,6 +4793,7 @@ public final class BattleProto {
         return attackerBeforeBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto attackerAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> attackerAfterBuilder_;
@@ -4887,7 +4938,7 @@ public final class BattleProto {
         if (attackerAfterBuilder_ == null) {
           attackerAfterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  getAttackerAfter(),
+                  attackerAfter_,
                   getParentForChildren(),
                   isClean());
           attackerAfter_ = null;
@@ -4895,6 +4946,7 @@ public final class BattleProto {
         return attackerAfterBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto defenderBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> defenderBeforeBuilder_;
@@ -5039,7 +5091,7 @@ public final class BattleProto {
         if (defenderBeforeBuilder_ == null) {
           defenderBeforeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  getDefenderBefore(),
+                  defenderBefore_,
                   getParentForChildren(),
                   isClean());
           defenderBefore_ = null;
@@ -5047,6 +5099,7 @@ public final class BattleProto {
         return defenderBeforeBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto defenderAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> defenderAfterBuilder_;
@@ -5191,7 +5244,7 @@ public final class BattleProto {
         if (defenderAfterBuilder_ == null) {
           defenderAfterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  getDefenderAfter(),
+                  defenderAfter_,
                   getParentForChildren(),
                   isClean());
           defenderAfter_ = null;
@@ -5199,6 +5252,7 @@ public final class BattleProto {
         return defenderAfterBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullUserProto defender = 14;
       private com.lvl6.proto.UserProto.FullUserProto defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder> defenderBuilder_;
@@ -5343,7 +5397,7 @@ public final class BattleProto {
         if (defenderBuilder_ == null) {
           defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder>(
-                  getDefender(),
+                  defender_,
                   getParentForChildren(),
                   isClean());
           defender_ = null;
@@ -5351,6 +5405,7 @@ public final class BattleProto {
         return defenderBuilder_;
       }
 
+      // optional int32 attackerCashChange = 15;
       private int attackerCashChange_ ;
       /**
        * <code>optional int32 attackerCashChange = 15;</code>
@@ -5383,6 +5438,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int32 attackerOilChange = 16;
       private int attackerOilChange_ ;
       /**
        * <code>optional int32 attackerOilChange = 16;</code>
@@ -5415,6 +5471,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional bool clanAvenged = 17;
       private boolean clanAvenged_ ;
       /**
        * <code>optional bool clanAvenged = 17;</code>
@@ -5458,10 +5515,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpHistoryProto)
   }
 
-  public interface PvpLeagueProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpLeagueProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpLeagueProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 leagueId = 1;
     /**
      * <code>optional int32 leagueId = 1;</code>
      */
@@ -5471,6 +5528,7 @@ public final class BattleProto {
      */
     int getLeagueId();
 
+    // optional string leagueName = 2;
     /**
      * <code>optional string leagueName = 2;</code>
      */
@@ -5485,6 +5543,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getLeagueNameBytes();
 
+    // optional string imgPrefix = 3;
     /**
      * <code>optional string imgPrefix = 3;</code>
      */
@@ -5499,6 +5558,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getImgPrefixBytes();
 
+    // optional string description = 5;
     /**
      * <code>optional string description = 5;</code>
      */
@@ -5517,9 +5577,8 @@ public final class BattleProto {
    * Protobuf type {@code com.lvl6.proto.PvpLeagueProto}
    */
   public static final class PvpLeagueProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpLeagueProto)
-      PvpLeagueProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpLeagueProtoOrBuilder {
     // Use PvpLeagueProto.newBuilder() to construct.
     private PvpLeagueProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5571,21 +5630,18 @@ public final class BattleProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              leagueName_ = bs;
+              leagueName_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              imgPrefix_ = bs;
+              imgPrefix_ = input.readBytes();
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              description_ = bs;
+              description_ = input.readBytes();
               break;
             }
           }
@@ -5628,6 +5684,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional int32 leagueId = 1;
     public static final int LEAGUEID_FIELD_NUMBER = 1;
     private int leagueId_;
     /**
@@ -5643,6 +5700,7 @@ public final class BattleProto {
       return leagueId_;
     }
 
+    // optional string leagueName = 2;
     public static final int LEAGUENAME_FIELD_NUMBER = 2;
     private java.lang.Object leagueName_;
     /**
@@ -5685,6 +5743,7 @@ public final class BattleProto {
       }
     }
 
+    // optional string imgPrefix = 3;
     public static final int IMGPREFIX_FIELD_NUMBER = 3;
     private java.lang.Object imgPrefix_;
     /**
@@ -5727,6 +5786,7 @@ public final class BattleProto {
       }
     }
 
+    // optional string description = 5;
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private java.lang.Object description_;
     /**
@@ -5778,8 +5838,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5907,9 +5966,8 @@ public final class BattleProto {
      * Protobuf type {@code com.lvl6.proto.PvpLeagueProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpLeagueProto)
-        com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpLeagueProto_descriptor;
@@ -6055,6 +6113,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional int32 leagueId = 1;
       private int leagueId_ ;
       /**
        * <code>optional int32 leagueId = 1;</code>
@@ -6087,6 +6146,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string leagueName = 2;
       private java.lang.Object leagueName_ = "";
       /**
        * <code>optional string leagueName = 2;</code>
@@ -6100,12 +6160,9 @@ public final class BattleProto {
       public java.lang.String getLeagueName() {
         java.lang.Object ref = leagueName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            leagueName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          leagueName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6163,6 +6220,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string imgPrefix = 3;
       private java.lang.Object imgPrefix_ = "";
       /**
        * <code>optional string imgPrefix = 3;</code>
@@ -6176,12 +6234,9 @@ public final class BattleProto {
       public java.lang.String getImgPrefix() {
         java.lang.Object ref = imgPrefix_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imgPrefix_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          imgPrefix_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6239,6 +6294,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string description = 5;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 5;</code>
@@ -6252,12 +6308,9 @@ public final class BattleProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6326,10 +6379,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpLeagueProto)
   }
 
-  public interface PvpClanAvengeProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpClanAvengeProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpClanAvengeProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string clanAvengeUuid = 1;
     /**
      * <code>optional string clanAvengeUuid = 1;</code>
      */
@@ -6344,6 +6397,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getClanAvengeUuidBytes();
 
+    // repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;
     /**
      * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
      */
@@ -6368,6 +6422,7 @@ public final class BattleProto {
     com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder getUsersAvengingOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
      *
@@ -6393,6 +6448,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder();
 
+    // optional .com.lvl6.proto.MinimumUserProto defender = 4;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      *
@@ -6418,6 +6474,7 @@ public final class BattleProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
 
+    // optional int64 battleEndTime = 5;
     /**
      * <code>optional int64 battleEndTime = 5;</code>
      *
@@ -6435,6 +6492,7 @@ public final class BattleProto {
      */
     long getBattleEndTime();
 
+    // optional int64 avengeRequestTime = 6;
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
      *
@@ -6452,6 +6510,7 @@ public final class BattleProto {
      */
     long getAvengeRequestTime();
 
+    // optional string defenderClanUuid = 7;
     /**
      * <code>optional string defenderClanUuid = 7;</code>
      */
@@ -6475,9 +6534,8 @@ public final class BattleProto {
    * </pre>
    */
   public static final class PvpClanAvengeProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpClanAvengeProto)
-      PvpClanAvengeProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpClanAvengeProtoOrBuilder {
     // Use PvpClanAvengeProto.newBuilder() to construct.
     private PvpClanAvengeProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6524,9 +6582,8 @@ public final class BattleProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              clanAvengeUuid_ = bs;
+              clanAvengeUuid_ = input.readBytes();
               break;
             }
             case 18: {
@@ -6574,9 +6631,8 @@ public final class BattleProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              defenderClanUuid_ = bs;
+              defenderClanUuid_ = input.readBytes();
               break;
             }
           }
@@ -6622,6 +6678,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional string clanAvengeUuid = 1;
     public static final int CLANAVENGEUUID_FIELD_NUMBER = 1;
     private java.lang.Object clanAvengeUuid_;
     /**
@@ -6664,6 +6721,7 @@ public final class BattleProto {
       }
     }
 
+    // repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;
     public static final int USERSAVENGING_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> usersAvenging_;
     /**
@@ -6699,6 +6757,7 @@ public final class BattleProto {
       return usersAvenging_.get(index);
     }
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;
     public static final int ATTACKER_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_;
     /**
@@ -6732,6 +6791,7 @@ public final class BattleProto {
       return attacker_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto defender = 4;
     public static final int DEFENDER_FIELD_NUMBER = 4;
     private com.lvl6.proto.UserProto.MinimumUserProto defender_;
     /**
@@ -6765,6 +6825,7 @@ public final class BattleProto {
       return defender_;
     }
 
+    // optional int64 battleEndTime = 5;
     public static final int BATTLEENDTIME_FIELD_NUMBER = 5;
     private long battleEndTime_;
     /**
@@ -6788,6 +6849,7 @@ public final class BattleProto {
       return battleEndTime_;
     }
 
+    // optional int64 avengeRequestTime = 6;
     public static final int AVENGEREQUESTTIME_FIELD_NUMBER = 6;
     private long avengeRequestTime_;
     /**
@@ -6811,6 +6873,7 @@ public final class BattleProto {
       return avengeRequestTime_;
     }
 
+    // optional string defenderClanUuid = 7;
     public static final int DEFENDERCLANUUID_FIELD_NUMBER = 7;
     private java.lang.Object defenderClanUuid_;
     /**
@@ -6865,8 +6928,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7020,9 +7082,8 @@ public final class BattleProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpClanAvengeProto)
-        com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
@@ -7244,6 +7305,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional string clanAvengeUuid = 1;
       private java.lang.Object clanAvengeUuid_ = "";
       /**
        * <code>optional string clanAvengeUuid = 1;</code>
@@ -7257,12 +7319,9 @@ public final class BattleProto {
       public java.lang.String getClanAvengeUuid() {
         java.lang.Object ref = clanAvengeUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanAvengeUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanAvengeUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7320,6 +7379,7 @@ public final class BattleProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;
       private java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> usersAvenging_ =
         java.util.Collections.emptyList();
       private void ensureUsersAvengingIsMutable() {
@@ -7461,8 +7521,7 @@ public final class BattleProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> values) {
         if (usersAvengingBuilder_ == null) {
           ensureUsersAvengingIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, usersAvenging_);
+          super.addAll(values, usersAvenging_);
           onChanged();
         } else {
           usersAvengingBuilder_.addAllMessages(values);
@@ -7560,6 +7619,7 @@ public final class BattleProto {
         return usersAvengingBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> attackerBuilder_;
@@ -7704,7 +7764,7 @@ public final class BattleProto {
         if (attackerBuilder_ == null) {
           attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  getAttacker(),
+                  attacker_,
                   getParentForChildren(),
                   isClean());
           attacker_ = null;
@@ -7712,6 +7772,7 @@ public final class BattleProto {
         return attackerBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto defender = 4;
       private com.lvl6.proto.UserProto.MinimumUserProto defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
@@ -7856,7 +7917,7 @@ public final class BattleProto {
         if (defenderBuilder_ == null) {
           defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getDefender(),
+                  defender_,
                   getParentForChildren(),
                   isClean());
           defender_ = null;
@@ -7864,6 +7925,7 @@ public final class BattleProto {
         return defenderBuilder_;
       }
 
+      // optional int64 battleEndTime = 5;
       private long battleEndTime_ ;
       /**
        * <code>optional int64 battleEndTime = 5;</code>
@@ -7912,6 +7974,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int64 avengeRequestTime = 6;
       private long avengeRequestTime_ ;
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
@@ -7960,6 +8023,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string defenderClanUuid = 7;
       private java.lang.Object defenderClanUuid_ = "";
       /**
        * <code>optional string defenderClanUuid = 7;</code>
@@ -7973,12 +8037,9 @@ public final class BattleProto {
       public java.lang.String getDefenderClanUuid() {
         java.lang.Object ref = defenderClanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            defenderClanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          defenderClanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8047,10 +8108,10 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpClanAvengeProto)
   }
 
-  public interface PvpUserClanAvengeProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpUserClanAvengeProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PvpUserClanAvengeProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      *
@@ -8077,6 +8138,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional string clanUuid = 2;
     /**
      * <code>optional string clanUuid = 2;</code>
      */
@@ -8091,6 +8153,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional string clanAvengeUuid = 3;
     /**
      * <code>optional string clanAvengeUuid = 3;</code>
      */
@@ -8105,6 +8168,7 @@ public final class BattleProto {
     com.google.protobuf.ByteString
         getClanAvengeUuidBytes();
 
+    // optional int64 avengeTime = 4;
     /**
      * <code>optional int64 avengeTime = 4;</code>
      */
@@ -8118,9 +8182,8 @@ public final class BattleProto {
    * Protobuf type {@code com.lvl6.proto.PvpUserClanAvengeProto}
    */
   public static final class PvpUserClanAvengeProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpUserClanAvengeProto)
-      PvpUserClanAvengeProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PvpUserClanAvengeProtoOrBuilder {
     // Use PvpUserClanAvengeProto.newBuilder() to construct.
     private PvpUserClanAvengeProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8167,21 +8230,18 @@ public final class BattleProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              clanAvengeUuid_ = bs;
+              clanAvengeUuid_ = input.readBytes();
               break;
             }
             case 32: {
@@ -8229,6 +8289,7 @@ public final class BattleProto {
     }
 
     private int bitField0_;
+    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -8283,6 +8344,7 @@ public final class BattleProto {
       }
     }
 
+    // optional string clanUuid = 2;
     public static final int CLANUUID_FIELD_NUMBER = 2;
     private java.lang.Object clanUuid_;
     /**
@@ -8325,6 +8387,7 @@ public final class BattleProto {
       }
     }
 
+    // optional string clanAvengeUuid = 3;
     public static final int CLANAVENGEUUID_FIELD_NUMBER = 3;
     private java.lang.Object clanAvengeUuid_;
     /**
@@ -8367,6 +8430,7 @@ public final class BattleProto {
       }
     }
 
+    // optional int64 avengeTime = 4;
     public static final int AVENGETIME_FIELD_NUMBER = 4;
     private long avengeTime_;
     /**
@@ -8391,8 +8455,7 @@ public final class BattleProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8520,9 +8583,8 @@ public final class BattleProto {
      * Protobuf type {@code com.lvl6.proto.PvpUserClanAvengeProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpUserClanAvengeProto)
-        com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
@@ -8668,6 +8730,7 @@ public final class BattleProto {
       }
       private int bitField0_;
 
+      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -8689,12 +8752,9 @@ public final class BattleProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8768,6 +8828,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string clanUuid = 2;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 2;</code>
@@ -8781,12 +8842,9 @@ public final class BattleProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8844,6 +8902,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional string clanAvengeUuid = 3;
       private java.lang.Object clanAvengeUuid_ = "";
       /**
        * <code>optional string clanAvengeUuid = 3;</code>
@@ -8857,12 +8916,9 @@ public final class BattleProto {
       public java.lang.String getClanAvengeUuid() {
         java.lang.Object ref = clanAvengeUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanAvengeUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanAvengeUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8920,6 +8976,7 @@ public final class BattleProto {
         return this;
       }
 
+      // optional int64 avengeTime = 4;
       private long avengeTime_ ;
       /**
        * <code>optional int64 avengeTime = 4;</code>
@@ -8963,32 +9020,32 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpUserClanAvengeProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpHistoryProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9047,57 +9104,55 @@ public final class BattleProto {
       "WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_PvpProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpProto_descriptor,
+              new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", });
+          internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpMonsterProto_descriptor,
+              new java.lang.String[] { "DefenderMonster", "MonsterIdDropped", });
+          internal_static_com_lvl6_proto_PvpHistoryProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
+              new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", });
+          internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpLeagueProto_descriptor,
+              new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "Description", });
+          internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
+              new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "DefenderClanUuid", });
+          internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
+              new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_PvpProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", });
-    internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpMonsterProto_descriptor,
-        new java.lang.String[] { "DefenderMonster", "MonsterIdDropped", });
-    internal_static_com_lvl6_proto_PvpHistoryProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", });
-    internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpLeagueProto_descriptor,
-        new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "Description", });
-    internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
-        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "DefenderClanUuid", });
-    internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
-        new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

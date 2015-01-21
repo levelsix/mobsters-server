@@ -70,6 +70,7 @@ enum SkillType {
 	HEADSHOT = 13;
 	MUD = 14;
 	LIFE_STEAL = 15;
+	COUNTER_STRIKE = 16;
 }
 
 enum SkillActivationType {

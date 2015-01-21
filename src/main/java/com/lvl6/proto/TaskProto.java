@@ -8,10 +8,10 @@ public final class TaskProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface TaskStageProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TaskStageProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TaskStageProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 stageId = 1;
     /**
      * <code>optional int32 stageId = 1;</code>
      *
@@ -29,6 +29,7 @@ public final class TaskProto {
      */
     int getStageId();
 
+    // repeated .com.lvl6.proto.TaskStageMonsterProto stageMonsters = 2;
     /**
      * <code>repeated .com.lvl6.proto.TaskStageMonsterProto stageMonsters = 2;</code>
      */
@@ -53,6 +54,7 @@ public final class TaskProto {
     com.lvl6.proto.TaskProto.TaskStageMonsterProtoOrBuilder getStageMonstersOrBuilder(
         int index);
 
+    // optional bool attackerAlwaysHitsFirst = 3;
     /**
      * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
      *
@@ -78,9 +80,8 @@ public final class TaskProto {
    * </pre>
    */
   public static final class TaskStageProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TaskStageProto)
-      TaskStageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TaskStageProtoOrBuilder {
     // Use TaskStageProto.newBuilder() to construct.
     private TaskStageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -187,6 +188,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional int32 stageId = 1;
     public static final int STAGEID_FIELD_NUMBER = 1;
     private int stageId_;
     /**
@@ -210,6 +212,7 @@ public final class TaskProto {
       return stageId_;
     }
 
+    // repeated .com.lvl6.proto.TaskStageMonsterProto stageMonsters = 2;
     public static final int STAGEMONSTERS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.TaskProto.TaskStageMonsterProto> stageMonsters_;
     /**
@@ -245,6 +248,7 @@ public final class TaskProto {
       return stageMonsters_.get(index);
     }
 
+    // optional bool attackerAlwaysHitsFirst = 3;
     public static final int ATTACKERALWAYSHITSFIRST_FIELD_NUMBER = 3;
     private boolean attackerAlwaysHitsFirst_;
     /**
@@ -276,8 +280,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -402,9 +405,8 @@ public final class TaskProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TaskStageProto)
-        com.lvl6.proto.TaskProto.TaskStageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.TaskStageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskStageProto_descriptor;
@@ -568,6 +570,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional int32 stageId = 1;
       private int stageId_ ;
       /**
        * <code>optional int32 stageId = 1;</code>
@@ -616,6 +619,7 @@ public final class TaskProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.TaskStageMonsterProto stageMonsters = 2;
       private java.util.List<com.lvl6.proto.TaskProto.TaskStageMonsterProto> stageMonsters_ =
         java.util.Collections.emptyList();
       private void ensureStageMonstersIsMutable() {
@@ -757,8 +761,7 @@ public final class TaskProto {
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.TaskStageMonsterProto> values) {
         if (stageMonstersBuilder_ == null) {
           ensureStageMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, stageMonsters_);
+          super.addAll(values, stageMonsters_);
           onChanged();
         } else {
           stageMonstersBuilder_.addAllMessages(values);
@@ -856,6 +859,7 @@ public final class TaskProto {
         return stageMonstersBuilder_;
       }
 
+      // optional bool attackerAlwaysHitsFirst = 3;
       private boolean attackerAlwaysHitsFirst_ ;
       /**
        * <code>optional bool attackerAlwaysHitsFirst = 3;</code>
@@ -915,10 +919,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TaskStageProto)
   }
 
-  public interface FullTaskProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FullTaskProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface FullTaskProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 taskId = 1;
     /**
      * <code>optional int32 taskId = 1;</code>
      */
@@ -928,6 +932,7 @@ public final class TaskProto {
      */
     int getTaskId();
 
+    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -942,6 +947,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional string description = 3;
     /**
      * <code>optional string description = 3;</code>
      */
@@ -956,6 +962,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
+    // optional int32 cityId = 4;
     /**
      * <code>optional int32 cityId = 4;</code>
      */
@@ -965,6 +972,7 @@ public final class TaskProto {
      */
     int getCityId();
 
+    // optional int32 assetNumWithinCity = 5;
     /**
      * <code>optional int32 assetNumWithinCity = 5;</code>
      */
@@ -974,6 +982,7 @@ public final class TaskProto {
      */
     int getAssetNumWithinCity();
 
+    // optional int32 prerequisiteTaskId = 6;
     /**
      * <code>optional int32 prerequisiteTaskId = 6;</code>
      */
@@ -983,6 +992,7 @@ public final class TaskProto {
      */
     int getPrerequisiteTaskId();
 
+    // optional int32 prerequisiteQuestId = 7;
     /**
      * <code>optional int32 prerequisiteQuestId = 7;</code>
      */
@@ -992,6 +1002,7 @@ public final class TaskProto {
      */
     int getPrerequisiteQuestId();
 
+    // optional int32 boardWidth = 8;
     /**
      * <code>optional int32 boardWidth = 8;</code>
      */
@@ -1001,6 +1012,7 @@ public final class TaskProto {
      */
     int getBoardWidth();
 
+    // optional int32 boardHeight = 9;
     /**
      * <code>optional int32 boardHeight = 9;</code>
      */
@@ -1010,6 +1022,7 @@ public final class TaskProto {
      */
     int getBoardHeight();
 
+    // optional string groundImgPrefix = 10;
     /**
      * <code>optional string groundImgPrefix = 10;</code>
      */
@@ -1024,6 +1037,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getGroundImgPrefixBytes();
 
+    // optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;
     /**
      * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
      */
@@ -1037,6 +1051,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDefeatedDialogueOrBuilder();
 
+    // optional int32 boardId = 12;
     /**
      * <code>optional int32 boardId = 12;</code>
      */
@@ -1046,6 +1061,7 @@ public final class TaskProto {
      */
     int getBoardId();
 
+    // repeated .com.lvl6.proto.Quality rarities = 13;
     /**
      * <code>repeated .com.lvl6.proto.Quality rarities = 13;</code>
      *
@@ -1071,6 +1087,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getRarities(int index);
 
+    // repeated int32 monsterIds = 14;
     /**
      * <code>repeated int32 monsterIds = 14;</code>
      */
@@ -1088,9 +1105,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.FullTaskProto}
    */
   public static final class FullTaskProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FullTaskProto)
-      FullTaskProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements FullTaskProtoOrBuilder {
     // Use FullTaskProto.newBuilder() to construct.
     private FullTaskProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1142,15 +1158,13 @@ public final class TaskProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              description_ = bs;
+              description_ = input.readBytes();
               break;
             }
             case 32: {
@@ -1184,9 +1198,8 @@ public final class TaskProto {
               break;
             }
             case 82: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
-              groundImgPrefix_ = bs;
+              groundImgPrefix_ = input.readBytes();
               break;
             }
             case 90: {
@@ -1212,7 +1225,7 @@ public final class TaskProto {
               com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(13, rawValue);
-                } else {
+              } else {
                 if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
                   rarities_ = new java.util.ArrayList<com.lvl6.proto.SharedEnumConfigProto.Quality>();
                   mutable_bitField0_ |= 0x00001000;
@@ -1229,7 +1242,7 @@ public final class TaskProto {
                 com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
                 if (value == null) {
                   unknownFields.mergeVarintField(13, rawValue);
-                  } else {
+                } else {
                   if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
                     rarities_ = new java.util.ArrayList<com.lvl6.proto.SharedEnumConfigProto.Quality>();
                     mutable_bitField0_ |= 0x00001000;
@@ -1307,6 +1320,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional int32 taskId = 1;
     public static final int TASKID_FIELD_NUMBER = 1;
     private int taskId_;
     /**
@@ -1322,6 +1336,7 @@ public final class TaskProto {
       return taskId_;
     }
 
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -1364,6 +1379,7 @@ public final class TaskProto {
       }
     }
 
+    // optional string description = 3;
     public static final int DESCRIPTION_FIELD_NUMBER = 3;
     private java.lang.Object description_;
     /**
@@ -1406,6 +1422,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 cityId = 4;
     public static final int CITYID_FIELD_NUMBER = 4;
     private int cityId_;
     /**
@@ -1421,6 +1438,7 @@ public final class TaskProto {
       return cityId_;
     }
 
+    // optional int32 assetNumWithinCity = 5;
     public static final int ASSETNUMWITHINCITY_FIELD_NUMBER = 5;
     private int assetNumWithinCity_;
     /**
@@ -1436,6 +1454,7 @@ public final class TaskProto {
       return assetNumWithinCity_;
     }
 
+    // optional int32 prerequisiteTaskId = 6;
     public static final int PREREQUISITETASKID_FIELD_NUMBER = 6;
     private int prerequisiteTaskId_;
     /**
@@ -1451,6 +1470,7 @@ public final class TaskProto {
       return prerequisiteTaskId_;
     }
 
+    // optional int32 prerequisiteQuestId = 7;
     public static final int PREREQUISITEQUESTID_FIELD_NUMBER = 7;
     private int prerequisiteQuestId_;
     /**
@@ -1466,6 +1486,7 @@ public final class TaskProto {
       return prerequisiteQuestId_;
     }
 
+    // optional int32 boardWidth = 8;
     public static final int BOARDWIDTH_FIELD_NUMBER = 8;
     private int boardWidth_;
     /**
@@ -1481,6 +1502,7 @@ public final class TaskProto {
       return boardWidth_;
     }
 
+    // optional int32 boardHeight = 9;
     public static final int BOARDHEIGHT_FIELD_NUMBER = 9;
     private int boardHeight_;
     /**
@@ -1496,6 +1518,7 @@ public final class TaskProto {
       return boardHeight_;
     }
 
+    // optional string groundImgPrefix = 10;
     public static final int GROUNDIMGPREFIX_FIELD_NUMBER = 10;
     private java.lang.Object groundImgPrefix_;
     /**
@@ -1538,6 +1561,7 @@ public final class TaskProto {
       }
     }
 
+    // optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;
     public static final int INITIALDEFEATEDDIALOGUE_FIELD_NUMBER = 11;
     private com.lvl6.proto.QuestProto.DialogueProto initialDefeatedDialogue_;
     /**
@@ -1559,6 +1583,7 @@ public final class TaskProto {
       return initialDefeatedDialogue_;
     }
 
+    // optional int32 boardId = 12;
     public static final int BOARDID_FIELD_NUMBER = 12;
     private int boardId_;
     /**
@@ -1574,6 +1599,7 @@ public final class TaskProto {
       return boardId_;
     }
 
+    // repeated .com.lvl6.proto.Quality rarities = 13;
     public static final int RARITIES_FIELD_NUMBER = 13;
     private java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> rarities_;
     /**
@@ -1607,6 +1633,7 @@ public final class TaskProto {
       return rarities_.get(index);
     }
 
+    // repeated int32 monsterIds = 14;
     public static final int MONSTERIDS_FIELD_NUMBER = 14;
     private java.util.List<java.lang.Integer> monsterIds_;
     /**
@@ -1648,8 +1675,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1857,9 +1883,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.FullTaskProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FullTaskProto)
-        com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_FullTaskProto_descriptor;
@@ -2120,6 +2145,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional int32 taskId = 1;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 1;</code>
@@ -2152,6 +2178,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -2165,12 +2192,9 @@ public final class TaskProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2228,6 +2252,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string description = 3;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 3;</code>
@@ -2241,12 +2266,9 @@ public final class TaskProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2304,6 +2326,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 cityId = 4;
       private int cityId_ ;
       /**
        * <code>optional int32 cityId = 4;</code>
@@ -2336,6 +2359,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 assetNumWithinCity = 5;
       private int assetNumWithinCity_ ;
       /**
        * <code>optional int32 assetNumWithinCity = 5;</code>
@@ -2368,6 +2392,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 prerequisiteTaskId = 6;
       private int prerequisiteTaskId_ ;
       /**
        * <code>optional int32 prerequisiteTaskId = 6;</code>
@@ -2400,6 +2425,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 prerequisiteQuestId = 7;
       private int prerequisiteQuestId_ ;
       /**
        * <code>optional int32 prerequisiteQuestId = 7;</code>
@@ -2432,6 +2458,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 boardWidth = 8;
       private int boardWidth_ ;
       /**
        * <code>optional int32 boardWidth = 8;</code>
@@ -2464,6 +2491,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 boardHeight = 9;
       private int boardHeight_ ;
       /**
        * <code>optional int32 boardHeight = 9;</code>
@@ -2496,6 +2524,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string groundImgPrefix = 10;
       private java.lang.Object groundImgPrefix_ = "";
       /**
        * <code>optional string groundImgPrefix = 10;</code>
@@ -2509,12 +2538,9 @@ public final class TaskProto {
       public java.lang.String getGroundImgPrefix() {
         java.lang.Object ref = groundImgPrefix_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            groundImgPrefix_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          groundImgPrefix_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2572,6 +2598,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;
       private com.lvl6.proto.QuestProto.DialogueProto initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> initialDefeatedDialogueBuilder_;
@@ -2680,7 +2707,7 @@ public final class TaskProto {
         if (initialDefeatedDialogueBuilder_ == null) {
           initialDefeatedDialogueBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
-                  getInitialDefeatedDialogue(),
+                  initialDefeatedDialogue_,
                   getParentForChildren(),
                   isClean());
           initialDefeatedDialogue_ = null;
@@ -2688,6 +2715,7 @@ public final class TaskProto {
         return initialDefeatedDialogueBuilder_;
       }
 
+      // optional int32 boardId = 12;
       private int boardId_ ;
       /**
        * <code>optional int32 boardId = 12;</code>
@@ -2720,6 +2748,7 @@ public final class TaskProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.Quality rarities = 13;
       private java.util.List<com.lvl6.proto.SharedEnumConfigProto.Quality> rarities_ =
         java.util.Collections.emptyList();
       private void ensureRaritiesIsMutable() {
@@ -2801,8 +2830,7 @@ public final class TaskProto {
       public Builder addAllRarities(
           java.lang.Iterable<? extends com.lvl6.proto.SharedEnumConfigProto.Quality> values) {
         ensureRaritiesIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, rarities_);
+        super.addAll(values, rarities_);
         onChanged();
         return this;
       }
@@ -2820,6 +2848,7 @@ public final class TaskProto {
         return this;
       }
 
+      // repeated int32 monsterIds = 14;
       private java.util.List<java.lang.Integer> monsterIds_ = java.util.Collections.emptyList();
       private void ensureMonsterIdsIsMutable() {
         if (!((bitField0_ & 0x00002000) == 0x00002000)) {
@@ -2871,8 +2900,7 @@ public final class TaskProto {
       public Builder addAllMonsterIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureMonsterIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, monsterIds_);
+        super.addAll(values, monsterIds_);
         onChanged();
         return this;
       }
@@ -2897,10 +2925,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullTaskProto)
   }
 
-  public interface MinimumUserTaskProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserTaskProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserTaskProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -2915,6 +2943,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 taskId = 2;
     /**
      * <code>optional int32 taskId = 2;</code>
      */
@@ -2924,6 +2953,7 @@ public final class TaskProto {
      */
     int getTaskId();
 
+    // optional int32 curTaskStageId = 3;
     /**
      * <code>optional int32 curTaskStageId = 3;</code>
      */
@@ -2933,6 +2963,7 @@ public final class TaskProto {
      */
     int getCurTaskStageId();
 
+    // optional string userTaskUuid = 4;
     /**
      * <code>optional string userTaskUuid = 4;</code>
      */
@@ -2947,6 +2978,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
 
+    // optional bytes clientState = 5;
     /**
      * <code>optional bytes clientState = 5;</code>
      */
@@ -2960,9 +2992,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.MinimumUserTaskProto}
    */
   public static final class MinimumUserTaskProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserTaskProto)
-      MinimumUserTaskProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MinimumUserTaskProtoOrBuilder {
     // Use MinimumUserTaskProto.newBuilder() to construct.
     private MinimumUserTaskProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3009,9 +3040,8 @@ public final class TaskProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 16: {
@@ -3025,9 +3055,8 @@ public final class TaskProto {
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              userTaskUuid_ = bs;
+              userTaskUuid_ = input.readBytes();
               break;
             }
             case 42: {
@@ -3075,6 +3104,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -3117,6 +3147,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 taskId = 2;
     public static final int TASKID_FIELD_NUMBER = 2;
     private int taskId_;
     /**
@@ -3132,6 +3163,7 @@ public final class TaskProto {
       return taskId_;
     }
 
+    // optional int32 curTaskStageId = 3;
     public static final int CURTASKSTAGEID_FIELD_NUMBER = 3;
     private int curTaskStageId_;
     /**
@@ -3147,6 +3179,7 @@ public final class TaskProto {
       return curTaskStageId_;
     }
 
+    // optional string userTaskUuid = 4;
     public static final int USERTASKUUID_FIELD_NUMBER = 4;
     private java.lang.Object userTaskUuid_;
     /**
@@ -3189,6 +3222,7 @@ public final class TaskProto {
       }
     }
 
+    // optional bytes clientState = 5;
     public static final int CLIENTSTATE_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString clientState_;
     /**
@@ -3214,8 +3248,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3350,9 +3383,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.MinimumUserTaskProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserTaskProto)
-        com.lvl6.proto.TaskProto.MinimumUserTaskProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.MinimumUserTaskProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor;
@@ -3505,6 +3537,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -3518,12 +3551,9 @@ public final class TaskProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3581,6 +3611,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 taskId = 2;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 2;</code>
@@ -3613,6 +3644,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 curTaskStageId = 3;
       private int curTaskStageId_ ;
       /**
        * <code>optional int32 curTaskStageId = 3;</code>
@@ -3645,6 +3677,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string userTaskUuid = 4;
       private java.lang.Object userTaskUuid_ = "";
       /**
        * <code>optional string userTaskUuid = 4;</code>
@@ -3658,12 +3691,9 @@ public final class TaskProto {
       public java.lang.String getUserTaskUuid() {
         java.lang.Object ref = userTaskUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userTaskUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userTaskUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3721,6 +3751,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional bytes clientState = 5;
       private com.google.protobuf.ByteString clientState_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes clientState = 5;</code>
@@ -3767,10 +3798,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserTaskProto)
   }
 
-  public interface UserTaskCompletedProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserTaskCompletedProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserTaskCompletedProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 taskId = 1;
     /**
      * <code>optional int32 taskId = 1;</code>
      */
@@ -3780,6 +3811,7 @@ public final class TaskProto {
      */
     int getTaskId();
 
+    // optional int32 unclaimedCash = 2;
     /**
      * <code>optional int32 unclaimedCash = 2;</code>
      */
@@ -3789,6 +3821,7 @@ public final class TaskProto {
      */
     int getUnclaimedCash();
 
+    // optional int32 unclaimedOil = 3;
     /**
      * <code>optional int32 unclaimedOil = 3;</code>
      */
@@ -3798,6 +3831,7 @@ public final class TaskProto {
      */
     int getUnclaimedOil();
 
+    // optional string userId = 4;
     /**
      * <code>optional string userId = 4;</code>
      */
@@ -3816,9 +3850,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.UserTaskCompletedProto}
    */
   public static final class UserTaskCompletedProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserTaskCompletedProto)
-      UserTaskCompletedProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserTaskCompletedProtoOrBuilder {
     // Use UserTaskCompletedProto.newBuilder() to construct.
     private UserTaskCompletedProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3880,9 +3913,8 @@ public final class TaskProto {
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              userId_ = bs;
+              userId_ = input.readBytes();
               break;
             }
           }
@@ -3925,6 +3957,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional int32 taskId = 1;
     public static final int TASKID_FIELD_NUMBER = 1;
     private int taskId_;
     /**
@@ -3940,6 +3973,7 @@ public final class TaskProto {
       return taskId_;
     }
 
+    // optional int32 unclaimedCash = 2;
     public static final int UNCLAIMEDCASH_FIELD_NUMBER = 2;
     private int unclaimedCash_;
     /**
@@ -3955,6 +3989,7 @@ public final class TaskProto {
       return unclaimedCash_;
     }
 
+    // optional int32 unclaimedOil = 3;
     public static final int UNCLAIMEDOIL_FIELD_NUMBER = 3;
     private int unclaimedOil_;
     /**
@@ -3970,6 +4005,7 @@ public final class TaskProto {
       return unclaimedOil_;
     }
 
+    // optional string userId = 4;
     public static final int USERID_FIELD_NUMBER = 4;
     private java.lang.Object userId_;
     /**
@@ -4021,8 +4057,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4150,9 +4185,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.UserTaskCompletedProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserTaskCompletedProto)
-        com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
@@ -4294,6 +4328,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional int32 taskId = 1;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 1;</code>
@@ -4326,6 +4361,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 unclaimedCash = 2;
       private int unclaimedCash_ ;
       /**
        * <code>optional int32 unclaimedCash = 2;</code>
@@ -4358,6 +4394,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 unclaimedOil = 3;
       private int unclaimedOil_ ;
       /**
        * <code>optional int32 unclaimedOil = 3;</code>
@@ -4390,6 +4427,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string userId = 4;
       private java.lang.Object userId_ = "";
       /**
        * <code>optional string userId = 4;</code>
@@ -4403,12 +4441,9 @@ public final class TaskProto {
       public java.lang.String getUserId() {
         java.lang.Object ref = userId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4477,10 +4512,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserTaskCompletedProto)
   }
 
-  public interface TaskStageMonsterProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TaskStageMonsterProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TaskStageMonsterProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string tsfuUuid = 15;
     /**
      * <code>optional string tsfuUuid = 15;</code>
      *
@@ -4507,6 +4542,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getTsfuUuidBytes();
 
+    // optional int32 tsmId = 11;
     /**
      * <code>optional int32 tsmId = 11;</code>
      */
@@ -4516,6 +4552,7 @@ public final class TaskProto {
      */
     int getTsmId();
 
+    // optional int32 monsterId = 1;
     /**
      * <code>optional int32 monsterId = 1;</code>
      */
@@ -4525,6 +4562,7 @@ public final class TaskProto {
      */
     int getMonsterId();
 
+    // optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;
     /**
      * <code>optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;</code>
      */
@@ -4534,6 +4572,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType getMonsterType();
 
+    // optional int32 level = 6;
     /**
      * <code>optional int32 level = 6;</code>
      */
@@ -4543,6 +4582,7 @@ public final class TaskProto {
      */
     int getLevel();
 
+    // optional int32 expReward = 3;
     /**
      * <code>optional int32 expReward = 3;</code>
      */
@@ -4552,6 +4592,7 @@ public final class TaskProto {
      */
     int getExpReward();
 
+    // optional int32 cashReward = 4;
     /**
      * <code>optional int32 cashReward = 4;</code>
      */
@@ -4561,6 +4602,7 @@ public final class TaskProto {
      */
     int getCashReward();
 
+    // optional int32 oilReward = 8;
     /**
      * <code>optional int32 oilReward = 8;</code>
      */
@@ -4570,6 +4612,7 @@ public final class TaskProto {
      */
     int getOilReward();
 
+    // optional bool puzzlePieceDropped = 5;
     /**
      * <code>optional bool puzzlePieceDropped = 5;</code>
      */
@@ -4579,6 +4622,7 @@ public final class TaskProto {
      */
     boolean getPuzzlePieceDropped();
 
+    // optional int32 puzzlePieceMonsterId = 10;
     /**
      * <code>optional int32 puzzlePieceMonsterId = 10;</code>
      */
@@ -4588,6 +4632,7 @@ public final class TaskProto {
      */
     int getPuzzlePieceMonsterId();
 
+    // optional int32 itemId = 7;
     /**
      * <code>optional int32 itemId = 7;</code>
      *
@@ -4611,6 +4656,7 @@ public final class TaskProto {
      */
     int getItemId();
 
+    // optional float dmgMultiplier = 9;
     /**
      * <code>optional float dmgMultiplier = 9;</code>
      *
@@ -4628,6 +4674,7 @@ public final class TaskProto {
      */
     float getDmgMultiplier();
 
+    // optional int32 defensiveSkillId = 12;
     /**
      * <code>optional int32 defensiveSkillId = 12;</code>
      *
@@ -4647,6 +4694,7 @@ public final class TaskProto {
      */
     int getDefensiveSkillId();
 
+    // optional int32 offensiveSkillId = 14;
     /**
      * <code>optional int32 offensiveSkillId = 14;</code>
      */
@@ -4656,6 +4704,7 @@ public final class TaskProto {
      */
     int getOffensiveSkillId();
 
+    // optional int32 puzzlePieceMonsterDropLvl = 13;
     /**
      * <code>optional int32 puzzlePieceMonsterDropLvl = 13;</code>
      *
@@ -4677,6 +4726,7 @@ public final class TaskProto {
      */
     int getPuzzlePieceMonsterDropLvl();
 
+    // optional .com.lvl6.proto.DialogueProto initialD = 16;
     /**
      * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
      *
@@ -4702,6 +4752,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDOrBuilder();
 
+    // optional .com.lvl6.proto.DialogueProto defaultD = 17;
     /**
      * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
      */
@@ -4719,9 +4770,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.TaskStageMonsterProto}
    */
   public static final class TaskStageMonsterProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TaskStageMonsterProto)
-      TaskStageMonsterProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TaskStageMonsterProtoOrBuilder {
     // Use TaskStageMonsterProto.newBuilder() to construct.
     private TaskStageMonsterProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4844,9 +4894,8 @@ public final class TaskProto {
               break;
             }
             case 122: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              tsfuUuid_ = bs;
+              tsfuUuid_ = input.readBytes();
               break;
             }
             case 130: {
@@ -5006,6 +5055,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional string tsfuUuid = 15;
     public static final int TSFUUUID_FIELD_NUMBER = 15;
     private java.lang.Object tsfuUuid_;
     /**
@@ -5060,6 +5110,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 tsmId = 11;
     public static final int TSMID_FIELD_NUMBER = 11;
     private int tsmId_;
     /**
@@ -5075,6 +5126,7 @@ public final class TaskProto {
       return tsmId_;
     }
 
+    // optional int32 monsterId = 1;
     public static final int MONSTERID_FIELD_NUMBER = 1;
     private int monsterId_;
     /**
@@ -5090,6 +5142,7 @@ public final class TaskProto {
       return monsterId_;
     }
 
+    // optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;
     public static final int MONSTERTYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType monsterType_;
     /**
@@ -5105,6 +5158,7 @@ public final class TaskProto {
       return monsterType_;
     }
 
+    // optional int32 level = 6;
     public static final int LEVEL_FIELD_NUMBER = 6;
     private int level_;
     /**
@@ -5120,6 +5174,7 @@ public final class TaskProto {
       return level_;
     }
 
+    // optional int32 expReward = 3;
     public static final int EXPREWARD_FIELD_NUMBER = 3;
     private int expReward_;
     /**
@@ -5135,6 +5190,7 @@ public final class TaskProto {
       return expReward_;
     }
 
+    // optional int32 cashReward = 4;
     public static final int CASHREWARD_FIELD_NUMBER = 4;
     private int cashReward_;
     /**
@@ -5150,6 +5206,7 @@ public final class TaskProto {
       return cashReward_;
     }
 
+    // optional int32 oilReward = 8;
     public static final int OILREWARD_FIELD_NUMBER = 8;
     private int oilReward_;
     /**
@@ -5165,6 +5222,7 @@ public final class TaskProto {
       return oilReward_;
     }
 
+    // optional bool puzzlePieceDropped = 5;
     public static final int PUZZLEPIECEDROPPED_FIELD_NUMBER = 5;
     private boolean puzzlePieceDropped_;
     /**
@@ -5180,6 +5238,7 @@ public final class TaskProto {
       return puzzlePieceDropped_;
     }
 
+    // optional int32 puzzlePieceMonsterId = 10;
     public static final int PUZZLEPIECEMONSTERID_FIELD_NUMBER = 10;
     private int puzzlePieceMonsterId_;
     /**
@@ -5195,6 +5254,7 @@ public final class TaskProto {
       return puzzlePieceMonsterId_;
     }
 
+    // optional int32 itemId = 7;
     public static final int ITEMID_FIELD_NUMBER = 7;
     private int itemId_;
     /**
@@ -5224,6 +5284,7 @@ public final class TaskProto {
       return itemId_;
     }
 
+    // optional float dmgMultiplier = 9;
     public static final int DMGMULTIPLIER_FIELD_NUMBER = 9;
     private float dmgMultiplier_;
     /**
@@ -5247,6 +5308,7 @@ public final class TaskProto {
       return dmgMultiplier_;
     }
 
+    // optional int32 defensiveSkillId = 12;
     public static final int DEFENSIVESKILLID_FIELD_NUMBER = 12;
     private int defensiveSkillId_;
     /**
@@ -5272,6 +5334,7 @@ public final class TaskProto {
       return defensiveSkillId_;
     }
 
+    // optional int32 offensiveSkillId = 14;
     public static final int OFFENSIVESKILLID_FIELD_NUMBER = 14;
     private int offensiveSkillId_;
     /**
@@ -5287,6 +5350,7 @@ public final class TaskProto {
       return offensiveSkillId_;
     }
 
+    // optional int32 puzzlePieceMonsterDropLvl = 13;
     public static final int PUZZLEPIECEMONSTERDROPLVL_FIELD_NUMBER = 13;
     private int puzzlePieceMonsterDropLvl_;
     /**
@@ -5314,6 +5378,7 @@ public final class TaskProto {
       return puzzlePieceMonsterDropLvl_;
     }
 
+    // optional .com.lvl6.proto.DialogueProto initialD = 16;
     public static final int INITIALD_FIELD_NUMBER = 16;
     private com.lvl6.proto.QuestProto.DialogueProto initialD_;
     /**
@@ -5347,6 +5412,7 @@ public final class TaskProto {
       return initialD_;
     }
 
+    // optional .com.lvl6.proto.DialogueProto defaultD = 17;
     public static final int DEFAULTD_FIELD_NUMBER = 17;
     private com.lvl6.proto.QuestProto.DialogueProto defaultD_;
     /**
@@ -5390,8 +5456,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5610,9 +5675,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.TaskStageMonsterProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TaskStageMonsterProto)
-        com.lvl6.proto.TaskProto.TaskStageMonsterProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.TaskStageMonsterProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor;
@@ -5889,6 +5953,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional string tsfuUuid = 15;
       private java.lang.Object tsfuUuid_ = "";
       /**
        * <code>optional string tsfuUuid = 15;</code>
@@ -5910,12 +5975,9 @@ public final class TaskProto {
       public java.lang.String getTsfuUuid() {
         java.lang.Object ref = tsfuUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            tsfuUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          tsfuUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5989,6 +6051,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 tsmId = 11;
       private int tsmId_ ;
       /**
        * <code>optional int32 tsmId = 11;</code>
@@ -6021,6 +6084,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 monsterId = 1;
       private int monsterId_ ;
       /**
        * <code>optional int32 monsterId = 1;</code>
@@ -6053,6 +6117,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;
       private com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
       /**
        * <code>optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;</code>
@@ -6088,6 +6153,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 level = 6;
       private int level_ ;
       /**
        * <code>optional int32 level = 6;</code>
@@ -6120,6 +6186,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 expReward = 3;
       private int expReward_ ;
       /**
        * <code>optional int32 expReward = 3;</code>
@@ -6152,6 +6219,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 cashReward = 4;
       private int cashReward_ ;
       /**
        * <code>optional int32 cashReward = 4;</code>
@@ -6184,6 +6252,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 oilReward = 8;
       private int oilReward_ ;
       /**
        * <code>optional int32 oilReward = 8;</code>
@@ -6216,6 +6285,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional bool puzzlePieceDropped = 5;
       private boolean puzzlePieceDropped_ ;
       /**
        * <code>optional bool puzzlePieceDropped = 5;</code>
@@ -6248,6 +6318,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 puzzlePieceMonsterId = 10;
       private int puzzlePieceMonsterId_ ;
       /**
        * <code>optional int32 puzzlePieceMonsterId = 10;</code>
@@ -6280,6 +6351,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 itemId = 7;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 7;</code>
@@ -6340,6 +6412,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional float dmgMultiplier = 9;
       private float dmgMultiplier_ ;
       /**
        * <code>optional float dmgMultiplier = 9;</code>
@@ -6388,6 +6461,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 defensiveSkillId = 12;
       private int defensiveSkillId_ ;
       /**
        * <code>optional int32 defensiveSkillId = 12;</code>
@@ -6440,6 +6514,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 offensiveSkillId = 14;
       private int offensiveSkillId_ ;
       /**
        * <code>optional int32 offensiveSkillId = 14;</code>
@@ -6472,6 +6547,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 puzzlePieceMonsterDropLvl = 13;
       private int puzzlePieceMonsterDropLvl_ ;
       /**
        * <code>optional int32 puzzlePieceMonsterDropLvl = 13;</code>
@@ -6528,6 +6604,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.DialogueProto initialD = 16;
       private com.lvl6.proto.QuestProto.DialogueProto initialD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> initialDBuilder_;
@@ -6672,7 +6749,7 @@ public final class TaskProto {
         if (initialDBuilder_ == null) {
           initialDBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
-                  getInitialD(),
+                  initialD_,
                   getParentForChildren(),
                   isClean());
           initialD_ = null;
@@ -6680,6 +6757,7 @@ public final class TaskProto {
         return initialDBuilder_;
       }
 
+      // optional .com.lvl6.proto.DialogueProto defaultD = 17;
       private com.lvl6.proto.QuestProto.DialogueProto defaultD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> defaultDBuilder_;
@@ -6788,7 +6866,7 @@ public final class TaskProto {
         if (defaultDBuilder_ == null) {
           defaultDBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
-                  getDefaultD(),
+                  defaultD_,
                   getParentForChildren(),
                   isClean());
           defaultD_ = null;
@@ -6807,10 +6885,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TaskStageMonsterProto)
   }
 
-  public interface PersistentEventProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PersistentEventProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PersistentEventProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 eventId = 1;
     /**
      * <code>optional int32 eventId = 1;</code>
      */
@@ -6820,6 +6898,7 @@ public final class TaskProto {
      */
     int getEventId();
 
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     /**
      * <code>optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];</code>
      */
@@ -6829,6 +6908,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek();
 
+    // optional int32 startHour = 3;
     /**
      * <code>optional int32 startHour = 3;</code>
      */
@@ -6838,6 +6918,7 @@ public final class TaskProto {
      */
     int getStartHour();
 
+    // optional int32 eventDurationMinutes = 4;
     /**
      * <code>optional int32 eventDurationMinutes = 4;</code>
      */
@@ -6847,6 +6928,7 @@ public final class TaskProto {
      */
     int getEventDurationMinutes();
 
+    // optional int32 taskId = 5;
     /**
      * <code>optional int32 taskId = 5;</code>
      */
@@ -6856,6 +6938,7 @@ public final class TaskProto {
      */
     int getTaskId();
 
+    // optional int32 cooldownMinutes = 6;
     /**
      * <code>optional int32 cooldownMinutes = 6;</code>
      */
@@ -6865,6 +6948,7 @@ public final class TaskProto {
      */
     int getCooldownMinutes();
 
+    // optional .com.lvl6.proto.PersistentEventProto.EventType type = 7;
     /**
      * <code>optional .com.lvl6.proto.PersistentEventProto.EventType type = 7;</code>
      */
@@ -6874,6 +6958,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.TaskProto.PersistentEventProto.EventType getType();
 
+    // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
     /**
      * <code>optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];</code>
      */
@@ -6887,9 +6972,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.PersistentEventProto}
    */
   public static final class PersistentEventProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PersistentEventProto)
-      PersistentEventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PersistentEventProtoOrBuilder {
     // Use PersistentEventProto.newBuilder() to construct.
     private PersistentEventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7115,6 +7199,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional int32 eventId = 1;
     public static final int EVENTID_FIELD_NUMBER = 1;
     private int eventId_;
     /**
@@ -7130,6 +7215,7 @@ public final class TaskProto {
       return eventId_;
     }
 
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     public static final int DAYOFWEEK_FIELD_NUMBER = 2;
     private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_;
     /**
@@ -7145,6 +7231,7 @@ public final class TaskProto {
       return dayOfWeek_;
     }
 
+    // optional int32 startHour = 3;
     public static final int STARTHOUR_FIELD_NUMBER = 3;
     private int startHour_;
     /**
@@ -7160,6 +7247,7 @@ public final class TaskProto {
       return startHour_;
     }
 
+    // optional int32 eventDurationMinutes = 4;
     public static final int EVENTDURATIONMINUTES_FIELD_NUMBER = 4;
     private int eventDurationMinutes_;
     /**
@@ -7175,6 +7263,7 @@ public final class TaskProto {
       return eventDurationMinutes_;
     }
 
+    // optional int32 taskId = 5;
     public static final int TASKID_FIELD_NUMBER = 5;
     private int taskId_;
     /**
@@ -7190,6 +7279,7 @@ public final class TaskProto {
       return taskId_;
     }
 
+    // optional int32 cooldownMinutes = 6;
     public static final int COOLDOWNMINUTES_FIELD_NUMBER = 6;
     private int cooldownMinutes_;
     /**
@@ -7205,6 +7295,7 @@ public final class TaskProto {
       return cooldownMinutes_;
     }
 
+    // optional .com.lvl6.proto.PersistentEventProto.EventType type = 7;
     public static final int TYPE_FIELD_NUMBER = 7;
     private com.lvl6.proto.TaskProto.PersistentEventProto.EventType type_;
     /**
@@ -7220,6 +7311,7 @@ public final class TaskProto {
       return type_;
     }
 
+    // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
     public static final int MONSTERELEMENT_FIELD_NUMBER = 8;
     private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_;
     /**
@@ -7248,8 +7340,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7405,9 +7496,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.PersistentEventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PersistentEventProto)
-        com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_PersistentEventProto_descriptor;
@@ -7583,6 +7673,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional int32 eventId = 1;
       private int eventId_ ;
       /**
        * <code>optional int32 eventId = 1;</code>
@@ -7615,6 +7706,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
       private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
       /**
        * <code>optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];</code>
@@ -7650,6 +7742,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 startHour = 3;
       private int startHour_ ;
       /**
        * <code>optional int32 startHour = 3;</code>
@@ -7682,6 +7775,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 eventDurationMinutes = 4;
       private int eventDurationMinutes_ ;
       /**
        * <code>optional int32 eventDurationMinutes = 4;</code>
@@ -7714,6 +7808,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 taskId = 5;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 5;</code>
@@ -7746,6 +7841,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 cooldownMinutes = 6;
       private int cooldownMinutes_ ;
       /**
        * <code>optional int32 cooldownMinutes = 6;</code>
@@ -7778,6 +7874,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.PersistentEventProto.EventType type = 7;
       private com.lvl6.proto.TaskProto.PersistentEventProto.EventType type_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
       /**
        * <code>optional .com.lvl6.proto.PersistentEventProto.EventType type = 7;</code>
@@ -7813,6 +7910,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
       private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
        * <code>optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];</code>
@@ -7859,10 +7957,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PersistentEventProto)
   }
 
-  public interface UserPersistentEventProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserPersistentEventProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserPersistentEventProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -7877,6 +7975,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 eventId = 2;
     /**
      * <code>optional int32 eventId = 2;</code>
      */
@@ -7886,6 +7985,7 @@ public final class TaskProto {
      */
     int getEventId();
 
+    // optional int64 coolDownStartTime = 3;
     /**
      * <code>optional int64 coolDownStartTime = 3;</code>
      */
@@ -7899,9 +7999,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.UserPersistentEventProto}
    */
   public static final class UserPersistentEventProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserPersistentEventProto)
-      UserPersistentEventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserPersistentEventProtoOrBuilder {
     // Use UserPersistentEventProto.newBuilder() to construct.
     private UserPersistentEventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7948,9 +8047,8 @@ public final class TaskProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 16: {
@@ -8003,6 +8101,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -8045,6 +8144,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 eventId = 2;
     public static final int EVENTID_FIELD_NUMBER = 2;
     private int eventId_;
     /**
@@ -8060,6 +8160,7 @@ public final class TaskProto {
       return eventId_;
     }
 
+    // optional int64 coolDownStartTime = 3;
     public static final int COOLDOWNSTARTTIME_FIELD_NUMBER = 3;
     private long coolDownStartTime_;
     /**
@@ -8083,8 +8184,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8205,9 +8305,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.UserPersistentEventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserPersistentEventProto)
-        com.lvl6.proto.TaskProto.UserPersistentEventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.UserPersistentEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor;
@@ -8340,6 +8439,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -8353,12 +8453,9 @@ public final class TaskProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8416,6 +8513,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 eventId = 2;
       private int eventId_ ;
       /**
        * <code>optional int32 eventId = 2;</code>
@@ -8448,6 +8546,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int64 coolDownStartTime = 3;
       private long coolDownStartTime_ ;
       /**
        * <code>optional int64 coolDownStartTime = 3;</code>
@@ -8491,10 +8590,10 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserPersistentEventProto)
   }
 
-  public interface TaskMapElementProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TaskMapElementProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TaskMapElementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 mapElementId = 1;
     /**
      * <code>optional int32 mapElementId = 1;</code>
      */
@@ -8504,6 +8603,7 @@ public final class TaskProto {
      */
     int getMapElementId();
 
+    // optional int32 taskId = 2;
     /**
      * <code>optional int32 taskId = 2;</code>
      */
@@ -8513,6 +8613,7 @@ public final class TaskProto {
      */
     int getTaskId();
 
+    // optional int32 xPos = 3;
     /**
      * <code>optional int32 xPos = 3;</code>
      */
@@ -8522,6 +8623,7 @@ public final class TaskProto {
      */
     int getXPos();
 
+    // optional int32 yPos = 4;
     /**
      * <code>optional int32 yPos = 4;</code>
      */
@@ -8531,6 +8633,7 @@ public final class TaskProto {
      */
     int getYPos();
 
+    // optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];
     /**
      * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
      */
@@ -8540,6 +8643,7 @@ public final class TaskProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
 
+    // optional bool boss = 6;
     /**
      * <code>optional bool boss = 6;</code>
      */
@@ -8549,6 +8653,7 @@ public final class TaskProto {
      */
     boolean getBoss();
 
+    // optional string bossImgName = 7;
     /**
      * <code>optional string bossImgName = 7;</code>
      */
@@ -8563,6 +8668,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getBossImgNameBytes();
 
+    // optional int32 itemDropId = 8;
     /**
      * <code>optional int32 itemDropId = 8;</code>
      */
@@ -8572,6 +8678,7 @@ public final class TaskProto {
      */
     int getItemDropId();
 
+    // optional string sectionName = 9;
     /**
      * <code>optional string sectionName = 9;</code>
      */
@@ -8586,6 +8693,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getSectionNameBytes();
 
+    // optional int32 cashReward = 10;
     /**
      * <code>optional int32 cashReward = 10;</code>
      */
@@ -8595,6 +8703,7 @@ public final class TaskProto {
      */
     int getCashReward();
 
+    // optional int32 oilReward = 11;
     /**
      * <code>optional int32 oilReward = 11;</code>
      */
@@ -8604,6 +8713,7 @@ public final class TaskProto {
      */
     int getOilReward();
 
+    // optional string characterImgName = 12;
     /**
      * <code>optional string characterImgName = 12;</code>
      */
@@ -8618,6 +8728,7 @@ public final class TaskProto {
     com.google.protobuf.ByteString
         getCharacterImgNameBytes();
 
+    // optional int32 charImgVertPixelOffset = 13;
     /**
      * <code>optional int32 charImgVertPixelOffset = 13;</code>
      */
@@ -8627,6 +8738,7 @@ public final class TaskProto {
      */
     int getCharImgVertPixelOffset();
 
+    // optional int32 charImgHorizPixelOffset = 14;
     /**
      * <code>optional int32 charImgHorizPixelOffset = 14;</code>
      */
@@ -8636,6 +8748,7 @@ public final class TaskProto {
      */
     int getCharImgHorizPixelOffset();
 
+    // optional float charImgScaleFactor = 15;
     /**
      * <code>optional float charImgScaleFactor = 15;</code>
      */
@@ -8649,9 +8762,8 @@ public final class TaskProto {
    * Protobuf type {@code com.lvl6.proto.TaskMapElementProto}
    */
   public static final class TaskMapElementProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TaskMapElementProto)
-      TaskMapElementProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TaskMapElementProtoOrBuilder {
     // Use TaskMapElementProto.newBuilder() to construct.
     private TaskMapElementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8734,9 +8846,8 @@ public final class TaskProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              bossImgName_ = bs;
+              bossImgName_ = input.readBytes();
               break;
             }
             case 64: {
@@ -8745,9 +8856,8 @@ public final class TaskProto {
               break;
             }
             case 74: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              sectionName_ = bs;
+              sectionName_ = input.readBytes();
               break;
             }
             case 80: {
@@ -8761,9 +8871,8 @@ public final class TaskProto {
               break;
             }
             case 98: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
-              characterImgName_ = bs;
+              characterImgName_ = input.readBytes();
               break;
             }
             case 104: {
@@ -8821,6 +8930,7 @@ public final class TaskProto {
     }
 
     private int bitField0_;
+    // optional int32 mapElementId = 1;
     public static final int MAPELEMENTID_FIELD_NUMBER = 1;
     private int mapElementId_;
     /**
@@ -8836,6 +8946,7 @@ public final class TaskProto {
       return mapElementId_;
     }
 
+    // optional int32 taskId = 2;
     public static final int TASKID_FIELD_NUMBER = 2;
     private int taskId_;
     /**
@@ -8851,6 +8962,7 @@ public final class TaskProto {
       return taskId_;
     }
 
+    // optional int32 xPos = 3;
     public static final int XPOS_FIELD_NUMBER = 3;
     private int xPos_;
     /**
@@ -8866,6 +8978,7 @@ public final class TaskProto {
       return xPos_;
     }
 
+    // optional int32 yPos = 4;
     public static final int YPOS_FIELD_NUMBER = 4;
     private int yPos_;
     /**
@@ -8881,6 +8994,7 @@ public final class TaskProto {
       return yPos_;
     }
 
+    // optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];
     public static final int ELEMENT_FIELD_NUMBER = 5;
     private com.lvl6.proto.SharedEnumConfigProto.Element element_;
     /**
@@ -8896,6 +9010,7 @@ public final class TaskProto {
       return element_;
     }
 
+    // optional bool boss = 6;
     public static final int BOSS_FIELD_NUMBER = 6;
     private boolean boss_;
     /**
@@ -8911,6 +9026,7 @@ public final class TaskProto {
       return boss_;
     }
 
+    // optional string bossImgName = 7;
     public static final int BOSSIMGNAME_FIELD_NUMBER = 7;
     private java.lang.Object bossImgName_;
     /**
@@ -8953,6 +9069,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 itemDropId = 8;
     public static final int ITEMDROPID_FIELD_NUMBER = 8;
     private int itemDropId_;
     /**
@@ -8968,6 +9085,7 @@ public final class TaskProto {
       return itemDropId_;
     }
 
+    // optional string sectionName = 9;
     public static final int SECTIONNAME_FIELD_NUMBER = 9;
     private java.lang.Object sectionName_;
     /**
@@ -9010,6 +9128,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 cashReward = 10;
     public static final int CASHREWARD_FIELD_NUMBER = 10;
     private int cashReward_;
     /**
@@ -9025,6 +9144,7 @@ public final class TaskProto {
       return cashReward_;
     }
 
+    // optional int32 oilReward = 11;
     public static final int OILREWARD_FIELD_NUMBER = 11;
     private int oilReward_;
     /**
@@ -9040,6 +9160,7 @@ public final class TaskProto {
       return oilReward_;
     }
 
+    // optional string characterImgName = 12;
     public static final int CHARACTERIMGNAME_FIELD_NUMBER = 12;
     private java.lang.Object characterImgName_;
     /**
@@ -9082,6 +9203,7 @@ public final class TaskProto {
       }
     }
 
+    // optional int32 charImgVertPixelOffset = 13;
     public static final int CHARIMGVERTPIXELOFFSET_FIELD_NUMBER = 13;
     private int charImgVertPixelOffset_;
     /**
@@ -9097,6 +9219,7 @@ public final class TaskProto {
       return charImgVertPixelOffset_;
     }
 
+    // optional int32 charImgHorizPixelOffset = 14;
     public static final int CHARIMGHORIZPIXELOFFSET_FIELD_NUMBER = 14;
     private int charImgHorizPixelOffset_;
     /**
@@ -9112,6 +9235,7 @@ public final class TaskProto {
       return charImgHorizPixelOffset_;
     }
 
+    // optional float charImgScaleFactor = 15;
     public static final int CHARIMGSCALEFACTOR_FIELD_NUMBER = 15;
     private float charImgScaleFactor_;
     /**
@@ -9147,8 +9271,7 @@ public final class TaskProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -9353,9 +9476,8 @@ public final class TaskProto {
      * Protobuf type {@code com.lvl6.proto.TaskMapElementProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TaskMapElementProto)
-        com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskMapElementProto_descriptor;
@@ -9600,6 +9722,7 @@ public final class TaskProto {
       }
       private int bitField0_;
 
+      // optional int32 mapElementId = 1;
       private int mapElementId_ ;
       /**
        * <code>optional int32 mapElementId = 1;</code>
@@ -9632,6 +9755,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 taskId = 2;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 2;</code>
@@ -9664,6 +9788,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 xPos = 3;
       private int xPos_ ;
       /**
        * <code>optional int32 xPos = 3;</code>
@@ -9696,6 +9821,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 yPos = 4;
       private int yPos_ ;
       /**
        * <code>optional int32 yPos = 4;</code>
@@ -9728,6 +9854,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];
       private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
        * <code>optional .com.lvl6.proto.Element element = 5 [default = NO_ELEMENT];</code>
@@ -9763,6 +9890,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional bool boss = 6;
       private boolean boss_ ;
       /**
        * <code>optional bool boss = 6;</code>
@@ -9795,6 +9923,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string bossImgName = 7;
       private java.lang.Object bossImgName_ = "";
       /**
        * <code>optional string bossImgName = 7;</code>
@@ -9808,12 +9937,9 @@ public final class TaskProto {
       public java.lang.String getBossImgName() {
         java.lang.Object ref = bossImgName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            bossImgName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          bossImgName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -9871,6 +9997,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 itemDropId = 8;
       private int itemDropId_ ;
       /**
        * <code>optional int32 itemDropId = 8;</code>
@@ -9903,6 +10030,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string sectionName = 9;
       private java.lang.Object sectionName_ = "";
       /**
        * <code>optional string sectionName = 9;</code>
@@ -9916,12 +10044,9 @@ public final class TaskProto {
       public java.lang.String getSectionName() {
         java.lang.Object ref = sectionName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            sectionName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sectionName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -9979,6 +10104,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 cashReward = 10;
       private int cashReward_ ;
       /**
        * <code>optional int32 cashReward = 10;</code>
@@ -10011,6 +10137,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 oilReward = 11;
       private int oilReward_ ;
       /**
        * <code>optional int32 oilReward = 11;</code>
@@ -10043,6 +10170,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional string characterImgName = 12;
       private java.lang.Object characterImgName_ = "";
       /**
        * <code>optional string characterImgName = 12;</code>
@@ -10056,12 +10184,9 @@ public final class TaskProto {
       public java.lang.String getCharacterImgName() {
         java.lang.Object ref = characterImgName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            characterImgName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          characterImgName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10119,6 +10244,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 charImgVertPixelOffset = 13;
       private int charImgVertPixelOffset_ ;
       /**
        * <code>optional int32 charImgVertPixelOffset = 13;</code>
@@ -10151,6 +10277,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional int32 charImgHorizPixelOffset = 14;
       private int charImgHorizPixelOffset_ ;
       /**
        * <code>optional int32 charImgHorizPixelOffset = 14;</code>
@@ -10183,6 +10310,7 @@ public final class TaskProto {
         return this;
       }
 
+      // optional float charImgScaleFactor = 15;
       private float charImgScaleFactor_ ;
       /**
        * <code>optional float charImgScaleFactor = 15;</code>
@@ -10226,42 +10354,42 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TaskMapElementProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskStageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TaskStageProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullTaskProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PersistentEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskMapElementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10333,13 +10461,61 @@ public final class TaskProto {
       "B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_TaskStageProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_TaskStageProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TaskStageProto_descriptor,
+              new java.lang.String[] { "StageId", "StageMonsters", "AttackerAlwaysHitsFirst", });
+          internal_static_com_lvl6_proto_FullTaskProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_FullTaskProto_descriptor,
+              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", "InitialDefeatedDialogue", "BoardId", "Rarities", "MonsterIds", });
+          internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
+              new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", "ClientState", });
+          internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor,
+              new java.lang.String[] { "TaskId", "UnclaimedCash", "UnclaimedOil", "UserId", });
+          internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
+              new java.lang.String[] { "TsfuUuid", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
+          internal_static_com_lvl6_proto_PersistentEventProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PersistentEventProto_descriptor,
+              new java.lang.String[] { "EventId", "DayOfWeek", "StartHour", "EventDurationMinutes", "TaskId", "CooldownMinutes", "Type", "MonsterElement", });
+          internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor,
+              new java.lang.String[] { "UserUuid", "EventId", "CoolDownStartTime", });
+          internal_static_com_lvl6_proto_TaskMapElementProto_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -10347,57 +10523,6 @@ public final class TaskProto {
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_TaskStageProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_TaskStageProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TaskStageProto_descriptor,
-        new java.lang.String[] { "StageId", "StageMonsters", "AttackerAlwaysHitsFirst", });
-    internal_static_com_lvl6_proto_FullTaskProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-        new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", "InitialDefeatedDialogue", "BoardId", "Rarities", "MonsterIds", });
-    internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
-        new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", "ClientState", });
-    internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_UserTaskCompletedProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserTaskCompletedProto_descriptor,
-        new java.lang.String[] { "TaskId", "UnclaimedCash", "UnclaimedOil", "UserId", });
-    internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-        new java.lang.String[] { "TsfuUuid", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
-    internal_static_com_lvl6_proto_PersistentEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PersistentEventProto_descriptor,
-        new java.lang.String[] { "EventId", "DayOfWeek", "StartHour", "EventDurationMinutes", "TaskId", "CooldownMinutes", "Type", "MonsterElement", });
-    internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor,
-        new java.lang.String[] { "UserUuid", "EventId", "CoolDownStartTime", });
-    internal_static_com_lvl6_proto_TaskMapElementProto_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-        new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", });
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.QuestProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

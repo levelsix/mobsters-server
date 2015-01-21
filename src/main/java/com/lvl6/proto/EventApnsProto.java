@@ -8,10 +8,10 @@ public final class EventApnsProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface EnableAPNSRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnableAPNSRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EnableAPNSRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventApnsProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string deviceToken = 2;
     /**
      * <code>optional string deviceToken = 2;</code>
      */
@@ -43,9 +44,8 @@ public final class EventApnsProto {
    * Protobuf type {@code com.lvl6.proto.EnableAPNSRequestProto}
    */
   public static final class EnableAPNSRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnableAPNSRequestProto)
-      EnableAPNSRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EnableAPNSRequestProtoOrBuilder {
     // Use EnableAPNSRequestProto.newBuilder() to construct.
     private EnableAPNSRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -105,9 +105,8 @@ public final class EventApnsProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              deviceToken_ = bs;
+              deviceToken_ = input.readBytes();
               break;
             }
           }
@@ -150,6 +149,7 @@ public final class EventApnsProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -171,6 +171,7 @@ public final class EventApnsProto {
       return sender_;
     }
 
+    // optional string deviceToken = 2;
     public static final int DEVICETOKEN_FIELD_NUMBER = 2;
     private java.lang.Object deviceToken_;
     /**
@@ -220,8 +221,7 @@ public final class EventApnsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -335,9 +335,8 @@ public final class EventApnsProto {
      * Protobuf type {@code com.lvl6.proto.EnableAPNSRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnableAPNSRequestProto)
-        com.lvl6.proto.EventApnsProto.EnableAPNSRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventApnsProto.EnableAPNSRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventApnsProto.internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor;
@@ -470,6 +469,7 @@ public final class EventApnsProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -578,7 +578,7 @@ public final class EventApnsProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -586,6 +586,7 @@ public final class EventApnsProto {
         return senderBuilder_;
       }
 
+      // optional string deviceToken = 2;
       private java.lang.Object deviceToken_ = "";
       /**
        * <code>optional string deviceToken = 2;</code>
@@ -599,12 +600,9 @@ public final class EventApnsProto {
       public java.lang.String getDeviceToken() {
         java.lang.Object ref = deviceToken_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            deviceToken_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          deviceToken_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -673,10 +671,10 @@ public final class EventApnsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnableAPNSRequestProto)
   }
 
-  public interface EnableAPNSResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnableAPNSResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EnableAPNSResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -690,6 +688,7 @@ public final class EventApnsProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
      */
@@ -707,9 +706,8 @@ public final class EventApnsProto {
    * </pre>
    */
   public static final class EnableAPNSResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnableAPNSResponseProto)
-      EnableAPNSResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EnableAPNSResponseProtoOrBuilder {
     // Use EnableAPNSResponseProto.newBuilder() to construct.
     private EnableAPNSResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -901,6 +899,7 @@ public final class EventApnsProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -922,6 +921,7 @@ public final class EventApnsProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus status_;
     /**
@@ -944,8 +944,7 @@ public final class EventApnsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1063,9 +1062,8 @@ public final class EventApnsProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnableAPNSResponseProto)
-        com.lvl6.proto.EventApnsProto.EnableAPNSResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventApnsProto.EnableAPNSResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventApnsProto.internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor;
@@ -1196,6 +1194,7 @@ public final class EventApnsProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1304,7 +1303,7 @@ public final class EventApnsProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1312,6 +1311,7 @@ public final class EventApnsProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;
       private com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus status_ = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
@@ -1358,12 +1358,12 @@ public final class EventApnsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnableAPNSResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnableAPNSRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -1389,31 +1389,30 @@ public final class EventApnsProto {
       "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_EnableAPNSRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "DeviceToken", });
+          internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_EnableAPNSResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_EnableAPNSRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DeviceToken", });
-    internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_EnableAPNSResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
