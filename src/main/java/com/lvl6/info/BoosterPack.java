@@ -4,22 +4,31 @@ import java.io.Serializable;
 
 public class BoosterPack implements Serializable {
 	
-	private static final long serialVersionUID = 7358496244395749953L;
+	private static final long serialVersionUID = 2173449531868242237L;
 	
 	private int id;
 	private String name;
-	private int gemPrice;
+	private int gemPrice;//prices for all booster packs should be same
 	private String listBackgroundImgName;
 	private String listDescription;
 	private String navBarImgName;
 	private String navTitleImgName;
 	private String machineImgName;
 	private int expPerItem;
+	private boolean displayToUser;
   
-	public BoosterPack(int id, String name, int gemPrice,
-			String listBackgroundImgName, String listDescription,
-			String navBarImgName, String navTitleImgName,
-			String machineImgName, int expPerItem) {
+	public BoosterPack(
+		int id,
+		String name,
+		int gemPrice,
+		String listBackgroundImgName,
+		String listDescription,
+		String navBarImgName,
+		String navTitleImgName,
+		String machineImgName,
+		int expPerItem,
+		boolean displayToUser )
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,6 +39,7 @@ public class BoosterPack implements Serializable {
 		this.navTitleImgName = navTitleImgName;
 		this.machineImgName = machineImgName;
 		this.expPerItem = expPerItem;
+		this.displayToUser = displayToUser;
 	}
 
 	public int getId() {
@@ -106,6 +116,16 @@ public class BoosterPack implements Serializable {
 		this.expPerItem = expPerItem;
 	}
 
+	public boolean isDisplayToUser()
+	{
+		return displayToUser;
+	}
+
+	public void setDisplayToUser( boolean displayToUser )
+	{
+		this.displayToUser = displayToUser;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -127,6 +147,8 @@ public class BoosterPack implements Serializable {
 			+ machineImgName
 			+ ", expPerItem="
 			+ expPerItem
+			+ ", displayToUser="
+			+ displayToUser
 			+ "]";
 	}
 

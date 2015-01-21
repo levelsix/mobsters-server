@@ -103,16 +103,16 @@ import com.lvl6.utils.DBConnection;
     String navTitleImgName = rs.getString(DBConstants.BOOSTER_PACK__NAV_TITLE_IMG_NAME);
     String machineImgName = rs.getString(DBConstants.BOOSTER_PACK__MACHINE_IMG_NAME);
     int expPerItem = 0;
-    
     try {
 		expPerItem = rs.getInt(DBConstants.BOOSTER_PACK__EXP_PER_ITEM);
 	} catch (Exception e) {
 		log.error("most likely db does not have column EXP_PER_ITEM.", e);
 	}
+    boolean displayToUser = rs.getBoolean(DBConstants.BOOSTER_PACK__DISPLAY_TO_USER);
     
     BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
     		listBackgroundImgName, listDescription, navBarImgName,
-    		navTitleImgName, machineImgName, expPerItem);
+    		navTitleImgName, machineImgName, expPerItem, displayToUser);
     return boosterPack; 
   }
 }
