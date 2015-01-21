@@ -479,8 +479,8 @@
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
 				<artifactId>apns</artifactId>
-				<version>0.1.6</version>
-				<!--<version>1.0.0.Beta5</version>-->
+				<!-- <version>0.1.6</version>-->
+				<version>1.0.0.Beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>json-java</groupId>
