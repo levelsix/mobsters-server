@@ -8,10 +8,10 @@ public final class AchievementStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface AchievementProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AchievementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 achievementId = 1;
     /**
      * <code>optional int32 achievementId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class AchievementStuffProto {
      */
     int getAchievementId();
 
+    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -35,6 +36,7 @@ public final class AchievementStuffProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional string description = 3;
     /**
      * <code>optional string description = 3;</code>
      */
@@ -49,6 +51,7 @@ public final class AchievementStuffProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
+    // optional int32 gemReward = 4;
     /**
      * <code>optional int32 gemReward = 4;</code>
      */
@@ -58,6 +61,7 @@ public final class AchievementStuffProto {
      */
     int getGemReward();
 
+    // optional int32 lvl = 5;
     /**
      * <code>optional int32 lvl = 5;</code>
      *
@@ -75,6 +79,7 @@ public final class AchievementStuffProto {
      */
     int getLvl();
 
+    // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
     /**
      * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
      */
@@ -84,6 +89,7 @@ public final class AchievementStuffProto {
      */
     com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType();
 
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
      *
@@ -101,6 +107,7 @@ public final class AchievementStuffProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
+    // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
     /**
      * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
      *
@@ -118,6 +125,7 @@ public final class AchievementStuffProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
 
+    // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
      *
@@ -135,6 +143,7 @@ public final class AchievementStuffProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
 
+    // optional int32 staticDataId = 10;
     /**
      * <code>optional int32 staticDataId = 10;</code>
      *
@@ -152,6 +161,7 @@ public final class AchievementStuffProto {
      */
     int getStaticDataId();
 
+    // optional int32 quantity = 11;
     /**
      * <code>optional int32 quantity = 11;</code>
      */
@@ -161,6 +171,7 @@ public final class AchievementStuffProto {
      */
     int getQuantity();
 
+    // optional int32 priority = 12;
     /**
      * <code>optional int32 priority = 12;</code>
      */
@@ -170,6 +181,7 @@ public final class AchievementStuffProto {
      */
     int getPriority();
 
+    // optional int32 prerequisiteId = 13;
     /**
      * <code>optional int32 prerequisiteId = 13;</code>
      */
@@ -179,6 +191,7 @@ public final class AchievementStuffProto {
      */
     int getPrerequisiteId();
 
+    // optional int32 successorId = 14;
     /**
      * <code>optional int32 successorId = 14;</code>
      */
@@ -192,9 +205,8 @@ public final class AchievementStuffProto {
    * Protobuf type {@code com.lvl6.proto.AchievementProto}
    */
   public static final class AchievementProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProto)
-      AchievementProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AchievementProtoOrBuilder {
     // Use AchievementProto.newBuilder() to construct.
     private AchievementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -246,15 +258,13 @@ public final class AchievementStuffProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              description_ = bs;
+              description_ = input.readBytes();
               break;
             }
             case 32: {
@@ -648,6 +658,7 @@ public final class AchievementStuffProto {
     }
 
     private int bitField0_;
+    // optional int32 achievementId = 1;
     public static final int ACHIEVEMENTID_FIELD_NUMBER = 1;
     private int achievementId_;
     /**
@@ -663,6 +674,7 @@ public final class AchievementStuffProto {
       return achievementId_;
     }
 
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -705,6 +717,7 @@ public final class AchievementStuffProto {
       }
     }
 
+    // optional string description = 3;
     public static final int DESCRIPTION_FIELD_NUMBER = 3;
     private java.lang.Object description_;
     /**
@@ -747,6 +760,7 @@ public final class AchievementStuffProto {
       }
     }
 
+    // optional int32 gemReward = 4;
     public static final int GEMREWARD_FIELD_NUMBER = 4;
     private int gemReward_;
     /**
@@ -762,6 +776,7 @@ public final class AchievementStuffProto {
       return gemReward_;
     }
 
+    // optional int32 lvl = 5;
     public static final int LVL_FIELD_NUMBER = 5;
     private int lvl_;
     /**
@@ -785,6 +800,7 @@ public final class AchievementStuffProto {
       return lvl_;
     }
 
+    // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
     public static final int ACHIEVEMENTTYPE_FIELD_NUMBER = 6;
     private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_;
     /**
@@ -800,6 +816,7 @@ public final class AchievementStuffProto {
       return achievementType_;
     }
 
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -823,6 +840,7 @@ public final class AchievementStuffProto {
       return resourceType_;
     }
 
+    // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
     public static final int ELEMENT_FIELD_NUMBER = 8;
     private com.lvl6.proto.SharedEnumConfigProto.Element element_;
     /**
@@ -846,6 +864,7 @@ public final class AchievementStuffProto {
       return element_;
     }
 
+    // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
     public static final int QUALITY_FIELD_NUMBER = 9;
     private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
@@ -869,6 +888,7 @@ public final class AchievementStuffProto {
       return quality_;
     }
 
+    // optional int32 staticDataId = 10;
     public static final int STATICDATAID_FIELD_NUMBER = 10;
     private int staticDataId_;
     /**
@@ -892,6 +912,7 @@ public final class AchievementStuffProto {
       return staticDataId_;
     }
 
+    // optional int32 quantity = 11;
     public static final int QUANTITY_FIELD_NUMBER = 11;
     private int quantity_;
     /**
@@ -907,6 +928,7 @@ public final class AchievementStuffProto {
       return quantity_;
     }
 
+    // optional int32 priority = 12;
     public static final int PRIORITY_FIELD_NUMBER = 12;
     private int priority_;
     /**
@@ -922,6 +944,7 @@ public final class AchievementStuffProto {
       return priority_;
     }
 
+    // optional int32 prerequisiteId = 13;
     public static final int PREREQUISITEID_FIELD_NUMBER = 13;
     private int prerequisiteId_;
     /**
@@ -937,6 +960,7 @@ public final class AchievementStuffProto {
       return prerequisiteId_;
     }
 
+    // optional int32 successorId = 14;
     public static final int SUCCESSORID_FIELD_NUMBER = 14;
     private int successorId_;
     /**
@@ -971,8 +995,7 @@ public final class AchievementStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1170,9 +1193,8 @@ public final class AchievementStuffProto {
      * Protobuf type {@code com.lvl6.proto.AchievementProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProto)
-        com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
@@ -1406,6 +1428,7 @@ public final class AchievementStuffProto {
       }
       private int bitField0_;
 
+      // optional int32 achievementId = 1;
       private int achievementId_ ;
       /**
        * <code>optional int32 achievementId = 1;</code>
@@ -1438,6 +1461,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -1451,12 +1475,9 @@ public final class AchievementStuffProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1514,6 +1535,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional string description = 3;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 3;</code>
@@ -1527,12 +1549,9 @@ public final class AchievementStuffProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1590,6 +1609,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 gemReward = 4;
       private int gemReward_ ;
       /**
        * <code>optional int32 gemReward = 4;</code>
@@ -1622,6 +1642,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 lvl = 5;
       private int lvl_ ;
       /**
        * <code>optional int32 lvl = 5;</code>
@@ -1670,6 +1691,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
       private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
       /**
        * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
@@ -1705,6 +1727,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
@@ -1756,6 +1779,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
       private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
        * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
@@ -1807,6 +1831,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
       private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
@@ -1858,6 +1883,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 staticDataId = 10;
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 10;</code>
@@ -1906,6 +1932,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 quantity = 11;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 11;</code>
@@ -1938,6 +1965,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 priority = 12;
       private int priority_ ;
       /**
        * <code>optional int32 priority = 12;</code>
@@ -1970,6 +1998,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 prerequisiteId = 13;
       private int prerequisiteId_ ;
       /**
        * <code>optional int32 prerequisiteId = 13;</code>
@@ -2002,6 +2031,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 successorId = 14;
       private int successorId_ ;
       /**
        * <code>optional int32 successorId = 14;</code>
@@ -2045,10 +2075,10 @@ public final class AchievementStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProto)
   }
 
-  public interface UserAchievementProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserAchievementProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserAchievementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 achievementId = 1;
     /**
      * <code>optional int32 achievementId = 1;</code>
      */
@@ -2058,6 +2088,7 @@ public final class AchievementStuffProto {
      */
     int getAchievementId();
 
+    // optional int32 progress = 2;
     /**
      * <code>optional int32 progress = 2;</code>
      */
@@ -2067,6 +2098,7 @@ public final class AchievementStuffProto {
      */
     int getProgress();
 
+    // optional bool isComplete = 3;
     /**
      * <code>optional bool isComplete = 3;</code>
      */
@@ -2076,6 +2108,7 @@ public final class AchievementStuffProto {
      */
     boolean getIsComplete();
 
+    // optional bool isRedeemed = 4;
     /**
      * <code>optional bool isRedeemed = 4;</code>
      */
@@ -2089,9 +2122,8 @@ public final class AchievementStuffProto {
    * Protobuf type {@code com.lvl6.proto.UserAchievementProto}
    */
   public static final class UserAchievementProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserAchievementProto)
-      UserAchievementProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserAchievementProtoOrBuilder {
     // Use UserAchievementProto.newBuilder() to construct.
     private UserAchievementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2197,6 +2229,7 @@ public final class AchievementStuffProto {
     }
 
     private int bitField0_;
+    // optional int32 achievementId = 1;
     public static final int ACHIEVEMENTID_FIELD_NUMBER = 1;
     private int achievementId_;
     /**
@@ -2212,6 +2245,7 @@ public final class AchievementStuffProto {
       return achievementId_;
     }
 
+    // optional int32 progress = 2;
     public static final int PROGRESS_FIELD_NUMBER = 2;
     private int progress_;
     /**
@@ -2227,6 +2261,7 @@ public final class AchievementStuffProto {
       return progress_;
     }
 
+    // optional bool isComplete = 3;
     public static final int ISCOMPLETE_FIELD_NUMBER = 3;
     private boolean isComplete_;
     /**
@@ -2242,6 +2277,7 @@ public final class AchievementStuffProto {
       return isComplete_;
     }
 
+    // optional bool isRedeemed = 4;
     public static final int ISREDEEMED_FIELD_NUMBER = 4;
     private boolean isRedeemed_;
     /**
@@ -2266,8 +2302,7 @@ public final class AchievementStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2395,9 +2430,8 @@ public final class AchievementStuffProto {
      * Protobuf type {@code com.lvl6.proto.UserAchievementProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserAchievementProto)
-        com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
@@ -2537,6 +2571,7 @@ public final class AchievementStuffProto {
       }
       private int bitField0_;
 
+      // optional int32 achievementId = 1;
       private int achievementId_ ;
       /**
        * <code>optional int32 achievementId = 1;</code>
@@ -2569,6 +2604,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional int32 progress = 2;
       private int progress_ ;
       /**
        * <code>optional int32 progress = 2;</code>
@@ -2601,6 +2637,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional bool isComplete = 3;
       private boolean isComplete_ ;
       /**
        * <code>optional bool isComplete = 3;</code>
@@ -2633,6 +2670,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
+      // optional bool isRedeemed = 4;
       private boolean isRedeemed_ ;
       /**
        * <code>optional bool isRedeemed = 4;</code>
@@ -2676,12 +2714,12 @@ public final class AchievementStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserAchievementProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2724,33 +2762,31 @@ public final class AchievementStuffProto {
       "\030\004 \001(\010B\027B\025AchievementStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_AchievementProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AchievementProto_descriptor,
+              new java.lang.String[] { "AchievementId", "Name", "Description", "GemReward", "Lvl", "AchievementType", "ResourceType", "Element", "Quality", "StaticDataId", "Quantity", "Priority", "PrerequisiteId", "SuccessorId", });
+          internal_static_com_lvl6_proto_UserAchievementProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
+              new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_AchievementProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AchievementProto_descriptor,
-        new java.lang.String[] { "AchievementId", "Name", "Description", "GemReward", "Lvl", "AchievementType", "ResourceType", "Element", "Quality", "StaticDataId", "Quantity", "Priority", "PrerequisiteId", "SuccessorId", });
-    internal_static_com_lvl6_proto_UserAchievementProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
-        new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", });
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

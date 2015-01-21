@@ -8,10 +8,10 @@ public final class PrerequisiteProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface PrereqProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrereqProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PrereqProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 prereqId = 1;
     /**
      * <code>optional int32 prereqId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class PrerequisiteProto {
      */
     int getPrereqId();
 
+    // optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];
     /**
      * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
      *
@@ -38,6 +39,7 @@ public final class PrerequisiteProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.GameType getGameType();
 
+    // optional int32 gameEntityId = 3;
     /**
      * <code>optional int32 gameEntityId = 3;</code>
      *
@@ -55,6 +57,7 @@ public final class PrerequisiteProto {
      */
     int getGameEntityId();
 
+    // optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];
     /**
      * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
      *
@@ -72,6 +75,7 @@ public final class PrerequisiteProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.GameType getPrereqGameType();
 
+    // optional int32 prereqGameEntityId = 5;
     /**
      * <code>optional int32 prereqGameEntityId = 5;</code>
      */
@@ -81,6 +85,7 @@ public final class PrerequisiteProto {
      */
     int getPrereqGameEntityId();
 
+    // optional int32 quantity = 6;
     /**
      * <code>optional int32 quantity = 6;</code>
      */
@@ -94,9 +99,8 @@ public final class PrerequisiteProto {
    * Protobuf type {@code com.lvl6.proto.PrereqProto}
    */
   public static final class PrereqProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrereqProto)
-      PrereqProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PrereqProtoOrBuilder {
     // Use PrereqProto.newBuilder() to construct.
     private PrereqProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -224,6 +228,7 @@ public final class PrerequisiteProto {
     }
 
     private int bitField0_;
+    // optional int32 prereqId = 1;
     public static final int PREREQID_FIELD_NUMBER = 1;
     private int prereqId_;
     /**
@@ -239,6 +244,7 @@ public final class PrerequisiteProto {
       return prereqId_;
     }
 
+    // optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];
     public static final int GAMETYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_;
     /**
@@ -262,6 +268,7 @@ public final class PrerequisiteProto {
       return gameType_;
     }
 
+    // optional int32 gameEntityId = 3;
     public static final int GAMEENTITYID_FIELD_NUMBER = 3;
     private int gameEntityId_;
     /**
@@ -285,6 +292,7 @@ public final class PrerequisiteProto {
       return gameEntityId_;
     }
 
+    // optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];
     public static final int PREREQGAMETYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.SharedEnumConfigProto.GameType prereqGameType_;
     /**
@@ -308,6 +316,7 @@ public final class PrerequisiteProto {
       return prereqGameType_;
     }
 
+    // optional int32 prereqGameEntityId = 5;
     public static final int PREREQGAMEENTITYID_FIELD_NUMBER = 5;
     private int prereqGameEntityId_;
     /**
@@ -323,6 +332,7 @@ public final class PrerequisiteProto {
       return prereqGameEntityId_;
     }
 
+    // optional int32 quantity = 6;
     public static final int QUANTITY_FIELD_NUMBER = 6;
     private int quantity_;
     /**
@@ -349,8 +359,7 @@ public final class PrerequisiteProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -492,9 +501,8 @@ public final class PrerequisiteProto {
      * Protobuf type {@code com.lvl6.proto.PrereqProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrereqProto)
-        com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.PrerequisiteProto.internal_static_com_lvl6_proto_PrereqProto_descriptor;
@@ -652,6 +660,7 @@ public final class PrerequisiteProto {
       }
       private int bitField0_;
 
+      // optional int32 prereqId = 1;
       private int prereqId_ ;
       /**
        * <code>optional int32 prereqId = 1;</code>
@@ -684,6 +693,7 @@ public final class PrerequisiteProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];
       private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
       /**
        * <code>optional .com.lvl6.proto.GameType gameType = 2 [default = NO_TYPE];</code>
@@ -735,6 +745,7 @@ public final class PrerequisiteProto {
         return this;
       }
 
+      // optional int32 gameEntityId = 3;
       private int gameEntityId_ ;
       /**
        * <code>optional int32 gameEntityId = 3;</code>
@@ -783,6 +794,7 @@ public final class PrerequisiteProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];
       private com.lvl6.proto.SharedEnumConfigProto.GameType prereqGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
       /**
        * <code>optional .com.lvl6.proto.GameType prereqGameType = 4 [default = NO_TYPE];</code>
@@ -834,6 +846,7 @@ public final class PrerequisiteProto {
         return this;
       }
 
+      // optional int32 prereqGameEntityId = 5;
       private int prereqGameEntityId_ ;
       /**
        * <code>optional int32 prereqGameEntityId = 5;</code>
@@ -866,6 +879,7 @@ public final class PrerequisiteProto {
         return this;
       }
 
+      // optional int32 quantity = 6;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 6;</code>
@@ -909,7 +923,7 @@ public final class PrerequisiteProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrereqProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrereqProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -933,25 +947,24 @@ public final class PrerequisiteProto {
       "erequisiteProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_PrereqProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_PrereqProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PrereqProto_descriptor,
+              new java.lang.String[] { "PrereqId", "GameType", "GameEntityId", "PrereqGameType", "PrereqGameEntityId", "Quantity", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_PrereqProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_PrereqProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PrereqProto_descriptor,
-        new java.lang.String[] { "PrereqId", "GameType", "GameEntityId", "PrereqGameType", "PrereqGameEntityId", "Quantity", });
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

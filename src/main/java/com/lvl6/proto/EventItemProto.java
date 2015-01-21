@@ -8,10 +8,10 @@ public final class EventItemProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface TradeItemForBoosterRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForBoosterRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForBoosterRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int32 itemId = 2;
     /**
      * <code>optional int32 itemId = 2;</code>
      */
@@ -34,6 +35,7 @@ public final class EventItemProto {
      */
     int getItemId();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      *
@@ -55,9 +57,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.TradeItemForBoosterRequestProto}
    */
   public static final class TradeItemForBoosterRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForBoosterRequestProto)
-      TradeItemForBoosterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForBoosterRequestProtoOrBuilder {
     // Use TradeItemForBoosterRequestProto.newBuilder() to construct.
     private TradeItemForBoosterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -166,6 +167,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -187,6 +189,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional int32 itemId = 2;
     public static final int ITEMID_FIELD_NUMBER = 2;
     private int itemId_;
     /**
@@ -202,6 +205,7 @@ public final class EventItemProto {
       return itemId_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -233,8 +237,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -355,9 +358,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.TradeItemForBoosterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForBoosterRequestProto)
-        com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor;
@@ -497,6 +499,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -605,7 +608,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -613,6 +616,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional int32 itemId = 2;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 2;</code>
@@ -645,6 +649,7 @@ public final class EventItemProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -704,10 +709,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForBoosterRequestProto)
   }
 
-  public interface TradeItemForBoosterResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForBoosterResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForBoosterResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -721,6 +726,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
      */
@@ -730,6 +736,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus getStatus();
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;</code>
      *
@@ -789,6 +796,7 @@ public final class EventItemProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
     /**
      * <code>optional .com.lvl6.proto.BoosterItemProto prize = 4;</code>
      */
@@ -810,9 +818,8 @@ public final class EventItemProto {
    * </pre>
    */
   public static final class TradeItemForBoosterResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForBoosterResponseProto)
-      TradeItemForBoosterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForBoosterResponseProtoOrBuilder {
     // Use TradeItemForBoosterResponseProto.newBuilder() to construct.
     private TradeItemForBoosterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1037,6 +1044,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1058,6 +1066,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status_;
     /**
@@ -1073,6 +1082,7 @@ public final class EventItemProto {
       return status_;
     }
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     public static final int UPDATEDORNEW_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
     /**
@@ -1143,6 +1153,7 @@ public final class EventItemProto {
       return updatedOrNew_.get(index);
     }
 
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
     public static final int PRIZE_FIELD_NUMBER = 4;
     private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_;
     /**
@@ -1173,8 +1184,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1306,9 +1316,8 @@ public final class EventItemProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForBoosterResponseProto)
-        com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor;
@@ -1499,6 +1508,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1607,7 +1617,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1615,6 +1625,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;
       private com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
@@ -1650,6 +1661,7 @@ public final class EventItemProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedOrNewIsMutable() {
@@ -1861,8 +1873,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (updatedOrNewBuilder_ == null) {
           ensureUpdatedOrNewIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedOrNew_);
+          super.addAll(values, updatedOrNew_);
           onChanged();
         } else {
           updatedOrNewBuilder_.addAllMessages(values);
@@ -2016,6 +2027,7 @@ public final class EventItemProto {
         return updatedOrNewBuilder_;
       }
 
+      // optional .com.lvl6.proto.BoosterItemProto prize = 4;
       private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> prizeBuilder_;
@@ -2124,7 +2136,7 @@ public final class EventItemProto {
         if (prizeBuilder_ == null) {
           prizeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
-                  getPrize(),
+                  prize_,
                   getParentForChildren(),
                   isClean());
           prize_ = null;
@@ -2143,10 +2155,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForBoosterResponseProto)
   }
 
-  public interface TradeItemForSpeedUpsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForSpeedUpsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2160,6 +2172,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
      *
@@ -2204,6 +2217,7 @@ public final class EventItemProto {
     com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
      *
@@ -2257,9 +2271,8 @@ public final class EventItemProto {
    * </pre>
    */
   public static final class TradeItemForSpeedUpsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
-      TradeItemForSpeedUpsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForSpeedUpsRequestProtoOrBuilder {
     // Use TradeItemForSpeedUpsRequestProto.newBuilder() to construct.
     private TradeItemForSpeedUpsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2380,6 +2393,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2401,6 +2415,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;
     public static final int ITEMSUSED_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_;
     /**
@@ -2456,6 +2471,7 @@ public final class EventItemProto {
       return itemsUsed_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
     public static final int NUUSERITEMS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_;
     /**
@@ -2519,8 +2535,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2646,9 +2661,8 @@ public final class EventItemProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
-        com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor;
@@ -2854,6 +2868,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2962,7 +2977,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2970,6 +2985,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_ =
         java.util.Collections.emptyList();
       private void ensureItemsUsedIsMutable() {
@@ -3151,8 +3167,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemUsageProto> values) {
         if (itemsUsedBuilder_ == null) {
           ensureItemsUsedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, itemsUsed_);
+          super.addAll(values, itemsUsed_);
           onChanged();
         } else {
           itemsUsedBuilder_.addAllMessages(values);
@@ -3282,6 +3297,7 @@ public final class EventItemProto {
         return itemsUsedBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_ =
         java.util.Collections.emptyList();
       private void ensureNuUserItemsIsMutable() {
@@ -3463,8 +3479,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (nuUserItemsBuilder_ == null) {
           ensureNuUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, nuUserItems_);
+          super.addAll(values, nuUserItems_);
           onChanged();
         } else {
           nuUserItemsBuilder_.addAllMessages(values);
@@ -3605,10 +3620,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
   }
 
-  public interface TradeItemForSpeedUpsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForSpeedUpsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForSpeedUpsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3622,6 +3637,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
      */
@@ -3631,6 +3647,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus getStatus();
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 3;</code>
      *
@@ -3679,9 +3696,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.TradeItemForSpeedUpsResponseProto}
    */
   public static final class TradeItemForSpeedUpsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForSpeedUpsResponseProto)
-      TradeItemForSpeedUpsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForSpeedUpsResponseProtoOrBuilder {
     // Use TradeItemForSpeedUpsResponseProto.newBuilder() to construct.
     private TradeItemForSpeedUpsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3884,6 +3900,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3905,6 +3922,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status_;
     /**
@@ -3920,6 +3938,7 @@ public final class EventItemProto {
       return status_;
     }
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 3;
     public static final int ITEMSUSED_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_;
     /**
@@ -3983,8 +4002,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4105,9 +4123,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.TradeItemForSpeedUpsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForSpeedUpsResponseProto)
-        com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor;
@@ -4280,6 +4297,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4388,7 +4406,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4396,6 +4414,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;
       private com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
@@ -4431,6 +4450,7 @@ public final class EventItemProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 3;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_ =
         java.util.Collections.emptyList();
       private void ensureItemsUsedIsMutable() {
@@ -4612,8 +4632,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemUsageProto> values) {
         if (itemsUsedBuilder_ == null) {
           ensureItemsUsedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, itemsUsed_);
+          super.addAll(values, itemsUsed_);
           onChanged();
         } else {
           itemsUsedBuilder_.addAllMessages(values);
@@ -4754,10 +4773,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForSpeedUpsResponseProto)
   }
 
-  public interface RemoveUserItemUsedRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveUserItemUsedRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RemoveUserItemUsedRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4771,6 +4790,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string userItemUsedUuid = 2;
     /**
      * <code>repeated string userItemUsedUuid = 2;</code>
      *
@@ -4778,8 +4798,8 @@ public final class EventItemProto {
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    com.google.protobuf.ProtocolStringList
-        getUserItemUsedUuidList();
+    java.util.List<java.lang.String>
+    getUserItemUsedUuidList();
     /**
      * <code>repeated string userItemUsedUuid = 2;</code>
      *
@@ -4814,9 +4834,8 @@ public final class EventItemProto {
    * </pre>
    */
   public static final class RemoveUserItemUsedRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveUserItemUsedRequestProto)
-      RemoveUserItemUsedRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RemoveUserItemUsedRequestProtoOrBuilder {
     // Use RemoveUserItemUsedRequestProto.newBuilder() to construct.
     private RemoveUserItemUsedRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4876,12 +4895,11 @@ public final class EventItemProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 userItemUsedUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userItemUsedUuid_.add(bs);
+              userItemUsedUuid_.add(input.readBytes());
               break;
             }
           }
@@ -4893,7 +4911,7 @@ public final class EventItemProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userItemUsedUuid_ = userItemUsedUuid_.getUnmodifiableView();
+          userItemUsedUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(userItemUsedUuid_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -4927,6 +4945,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4948,6 +4967,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // repeated string userItemUsedUuid = 2;
     public static final int USERITEMUSEDUUID_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList userItemUsedUuid_;
     /**
@@ -4957,7 +4977,7 @@ public final class EventItemProto {
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getUserItemUsedUuidList() {
       return userItemUsedUuid_;
     }
@@ -5000,8 +5020,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5124,9 +5143,8 @@ public final class EventItemProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveUserItemUsedRequestProto)
-        com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
@@ -5205,7 +5223,8 @@ public final class EventItemProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userItemUsedUuid_ = userItemUsedUuid_.getUnmodifiableView();
+          userItemUsedUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              userItemUsedUuid_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userItemUsedUuid_ = userItemUsedUuid_;
@@ -5265,6 +5284,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5373,7 +5393,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5381,6 +5401,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // repeated string userItemUsedUuid = 2;
       private com.google.protobuf.LazyStringList userItemUsedUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserItemUsedUuidIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -5395,9 +5416,9 @@ public final class EventItemProto {
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getUserItemUsedUuidList() {
-        return userItemUsedUuid_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(userItemUsedUuid_);
       }
       /**
        * <code>repeated string userItemUsedUuid = 2;</code>
@@ -5474,8 +5495,7 @@ public final class EventItemProto {
       public Builder addAllUserItemUsedUuid(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserItemUsedUuidIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userItemUsedUuid_);
+        super.addAll(values, userItemUsedUuid_);
         onChanged();
         return this;
       }
@@ -5521,10 +5541,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveUserItemUsedRequestProto)
   }
 
-  public interface RemoveUserItemUsedResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveUserItemUsedResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RemoveUserItemUsedResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5538,6 +5558,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
      */
@@ -5551,9 +5572,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedResponseProto}
    */
   public static final class RemoveUserItemUsedResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveUserItemUsedResponseProto)
-      RemoveUserItemUsedResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RemoveUserItemUsedResponseProtoOrBuilder {
     // Use RemoveUserItemUsedResponseProto.newBuilder() to construct.
     private RemoveUserItemUsedResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5745,6 +5765,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5766,6 +5787,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_;
     /**
@@ -5788,8 +5810,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5903,9 +5924,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveUserItemUsedResponseProto)
-        com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
@@ -6036,6 +6056,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -6144,7 +6165,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6152,6 +6173,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;
       private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
@@ -6198,10 +6220,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveUserItemUsedResponseProto)
   }
 
-  public interface TradeItemForResourcesRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForResourcesRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForResourcesRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      *
@@ -6227,6 +6249,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
+    // repeated int32 itemIdsUsed = 2;
     /**
      * <code>repeated int32 itemIdsUsed = 2;</code>
      */
@@ -6240,6 +6263,7 @@ public final class EventItemProto {
      */
     int getItemIdsUsed(int index);
 
+    // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
      *
@@ -6284,6 +6308,7 @@ public final class EventItemProto {
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
         int index);
 
+    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -6297,9 +6322,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
    */
   public static final class TradeItemForResourcesRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForResourcesRequestProto)
-      TradeItemForResourcesRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForResourcesRequestProtoOrBuilder {
     // Use TradeItemForResourcesRequestProto.newBuilder() to construct.
     private TradeItemForResourcesRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6438,6 +6462,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -6471,6 +6496,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // repeated int32 itemIdsUsed = 2;
     public static final int ITEMIDSUSED_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> itemIdsUsed_;
     /**
@@ -6493,6 +6519,7 @@ public final class EventItemProto {
       return itemIdsUsed_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
     public static final int NUUSERITEMS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_;
     /**
@@ -6548,6 +6575,7 @@ public final class EventItemProto {
       return nuUserItems_.get(index);
     }
 
+    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -6572,8 +6600,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6706,9 +6733,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForResourcesRequestProto)
-        com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
@@ -6898,6 +6924,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -7042,7 +7069,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7050,6 +7077,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // repeated int32 itemIdsUsed = 2;
       private java.util.List<java.lang.Integer> itemIdsUsed_ = java.util.Collections.emptyList();
       private void ensureItemIdsUsedIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -7101,8 +7129,7 @@ public final class EventItemProto {
       public Builder addAllItemIdsUsed(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureItemIdsUsedIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, itemIdsUsed_);
+        super.addAll(values, itemIdsUsed_);
         onChanged();
         return this;
       }
@@ -7116,6 +7143,7 @@ public final class EventItemProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_ =
         java.util.Collections.emptyList();
       private void ensureNuUserItemsIsMutable() {
@@ -7297,8 +7325,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (nuUserItemsBuilder_ == null) {
           ensureNuUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, nuUserItems_);
+          super.addAll(values, nuUserItems_);
           onChanged();
         } else {
           nuUserItemsBuilder_.addAllMessages(values);
@@ -7428,6 +7455,7 @@ public final class EventItemProto {
         return nuUserItemsBuilder_;
       }
 
+      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -7471,10 +7499,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForResourcesRequestProto)
   }
 
-  public interface TradeItemForResourcesResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForResourcesResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TradeItemForResourcesResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -7488,6 +7516,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
      */
@@ -7501,9 +7530,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesResponseProto}
    */
   public static final class TradeItemForResourcesResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForResourcesResponseProto)
-      TradeItemForResourcesResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TradeItemForResourcesResponseProtoOrBuilder {
     // Use TradeItemForResourcesResponseProto.newBuilder() to construct.
     private TradeItemForResourcesResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7695,6 +7723,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -7716,6 +7745,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_;
     /**
@@ -7738,8 +7768,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7853,9 +7882,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForResourcesResponseProto)
-        com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
@@ -7986,6 +8014,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -8094,7 +8123,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8102,6 +8131,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;
       private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
@@ -8148,10 +8178,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForResourcesResponseProto)
   }
 
-  public interface RedeemSecretGiftRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemSecretGiftRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RedeemSecretGiftRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -8165,6 +8195,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -8174,6 +8205,7 @@ public final class EventItemProto {
      */
     long getClientTime();
 
+    // repeated string uisgUuid = 3;
     /**
      * <code>repeated string uisgUuid = 3;</code>
      *
@@ -8181,8 +8213,8 @@ public final class EventItemProto {
      *primary key ids for the user's secret gifs
      * </pre>
      */
-    com.google.protobuf.ProtocolStringList
-        getUisgUuidList();
+    java.util.List<java.lang.String>
+    getUisgUuidList();
     /**
      * <code>repeated string uisgUuid = 3;</code>
      *
@@ -8213,9 +8245,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.RedeemSecretGiftRequestProto}
    */
   public static final class RedeemSecretGiftRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemSecretGiftRequestProto)
-      RedeemSecretGiftRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RedeemSecretGiftRequestProtoOrBuilder {
     // Use RedeemSecretGiftRequestProto.newBuilder() to construct.
     private RedeemSecretGiftRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8280,12 +8311,11 @@ public final class EventItemProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 uisgUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              uisgUuid_.add(bs);
+              uisgUuid_.add(input.readBytes());
               break;
             }
           }
@@ -8297,7 +8327,7 @@ public final class EventItemProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          uisgUuid_ = uisgUuid_.getUnmodifiableView();
+          uisgUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(uisgUuid_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -8331,6 +8361,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -8352,6 +8383,7 @@ public final class EventItemProto {
       return sender_;
     }
 
+    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -8367,6 +8399,7 @@ public final class EventItemProto {
       return clientTime_;
     }
 
+    // repeated string uisgUuid = 3;
     public static final int UISGUUID_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList uisgUuid_;
     /**
@@ -8376,7 +8409,7 @@ public final class EventItemProto {
      *primary key ids for the user's secret gifs
      * </pre>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getUisgUuidList() {
       return uisgUuid_;
     }
@@ -8420,8 +8453,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8547,9 +8579,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.RedeemSecretGiftRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemSecretGiftRequestProto)
-        com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor;
@@ -8634,7 +8665,8 @@ public final class EventItemProto {
         }
         result.clientTime_ = clientTime_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          uisgUuid_ = uisgUuid_.getUnmodifiableView();
+          uisgUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              uisgUuid_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.uisgUuid_ = uisgUuid_;
@@ -8697,6 +8729,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8805,7 +8838,7 @@ public final class EventItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8813,6 +8846,7 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
+      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -8845,6 +8879,7 @@ public final class EventItemProto {
         return this;
       }
 
+      // repeated string uisgUuid = 3;
       private com.google.protobuf.LazyStringList uisgUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUisgUuidIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -8859,9 +8894,9 @@ public final class EventItemProto {
        *primary key ids for the user's secret gifs
        * </pre>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getUisgUuidList() {
-        return uisgUuid_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(uisgUuid_);
       }
       /**
        * <code>repeated string uisgUuid = 3;</code>
@@ -8938,8 +8973,7 @@ public final class EventItemProto {
       public Builder addAllUisgUuid(
           java.lang.Iterable<java.lang.String> values) {
         ensureUisgUuidIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, uisgUuid_);
+        super.addAll(values, uisgUuid_);
         onChanged();
         return this;
       }
@@ -8985,10 +9019,10 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemSecretGiftRequestProto)
   }
 
-  public interface RedeemSecretGiftResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemSecretGiftResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RedeemSecretGiftResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto mup = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
      */
@@ -9002,6 +9036,7 @@ public final class EventItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
 
+    // repeated .com.lvl6.proto.UserItemSecretGiftProto nuGifts = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserItemSecretGiftProto nuGifts = 2;</code>
      *
@@ -9046,6 +9081,7 @@ public final class EventItemProto {
     com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder getNuGiftsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
      */
@@ -9059,9 +9095,8 @@ public final class EventItemProto {
    * Protobuf type {@code com.lvl6.proto.RedeemSecretGiftResponseProto}
    */
   public static final class RedeemSecretGiftResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemSecretGiftResponseProto)
-      RedeemSecretGiftResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RedeemSecretGiftResponseProtoOrBuilder {
     // Use RedeemSecretGiftResponseProto.newBuilder() to construct.
     private RedeemSecretGiftResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -9273,6 +9308,7 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto mup = 1;
     public static final int MUP_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto mup_;
     /**
@@ -9294,6 +9330,7 @@ public final class EventItemProto {
       return mup_;
     }
 
+    // repeated .com.lvl6.proto.UserItemSecretGiftProto nuGifts = 2;
     public static final int NUGIFTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> nuGifts_;
     /**
@@ -9349,6 +9386,7 @@ public final class EventItemProto {
       return nuGifts_.get(index);
     }
 
+    // optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status_;
     /**
@@ -9372,8 +9410,7 @@ public final class EventItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -9494,9 +9531,8 @@ public final class EventItemProto {
      * Protobuf type {@code com.lvl6.proto.RedeemSecretGiftResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemSecretGiftResponseProto)
-        com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor;
@@ -9669,6 +9705,7 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto mup = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
@@ -9777,7 +9814,7 @@ public final class EventItemProto {
         if (mupBuilder_ == null) {
           mupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getMup(),
+                  mup_,
                   getParentForChildren(),
                   isClean());
           mup_ = null;
@@ -9785,6 +9822,7 @@ public final class EventItemProto {
         return mupBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemSecretGiftProto nuGifts = 2;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> nuGifts_ =
         java.util.Collections.emptyList();
       private void ensureNuGiftsIsMutable() {
@@ -9966,8 +10004,7 @@ public final class EventItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> values) {
         if (nuGiftsBuilder_ == null) {
           ensureNuGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, nuGifts_);
+          super.addAll(values, nuGifts_);
           onChanged();
         } else {
           nuGiftsBuilder_.addAllMessages(values);
@@ -10097,6 +10134,7 @@ public final class EventItemProto {
         return nuGiftsBuilder_;
       }
 
+      // optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;
       private com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status_ = com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
@@ -10143,52 +10181,52 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemSecretGiftResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10263,13 +10301,73 @@ public final class EventItemProto {
       "ventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ItemId", "ClientTime", });
+          internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", });
+          internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
+          internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "ItemsUsed", });
+          internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "UserItemUsedUuid", });
+          internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", });
+          internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+          internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClientTime", "UisgUuid", });
+          internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor,
+              new java.lang.String[] { "Mup", "NuGifts", "Status", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -10278,70 +10376,6 @@ public final class EventItemProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemId", "ClientTime", });
-    internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", });
-    internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
-    internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "ItemsUsed", });
-    internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserItemUsedUuid", });
-    internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", });
-    internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClientTime", "UisgUuid", });
-    internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor,
-        new java.lang.String[] { "Mup", "NuGifts", "Status", });
-    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
-    com.lvl6.proto.ItemsProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
