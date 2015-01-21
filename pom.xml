@@ -447,6 +447,11 @@
 				<version>2.6.0</version>
 			</dependency>
 			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.4.0</version>
+			</dependency>
+			<dependency>
 				<groupId>spy</groupId>
 				<artifactId>spymemcached</artifactId>
 				<version>2.8.1</version>
@@ -474,7 +479,8 @@
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
 				<artifactId>apns</artifactId>
-				<version>1.0.0.Beta5</version>
+				<version>0.1.6</version>
+				<!--<version>1.0.0.Beta5</version>-->
 			</dependency>
 			<dependency>
 				<groupId>json-java</groupId>
@@ -740,6 +746,10 @@
 		<dependency>
 			<groupId>com.notnoop.apns</groupId>
 			<artifactId>apns</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>json-java</groupId>

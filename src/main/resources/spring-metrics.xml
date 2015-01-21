@@ -15,5 +15,9 @@
         http://www.springframework.org/schema/task/spring-task.xsd
 		">
 
-<bean id="hazelcastScheduledTasks" class="com.lvl6.scheduledtasks.HazelcastScheduledTasks" />
+<!-- 	<task:scheduler id="taskScheduler" pool-size="5" /> -->
+
+<!-- 	<bean id="clanTowersScheduledTasks" class="com.lvl6.scheduledtasks.ClanTowersScheduledTasks" /> -->
+<!--	<bean id="tournamentEventScheduledTasks" class="com.lvl6.scheduledtasks.TournamentEventScheduledTasks" /> -->
+	<bean id="hazelcastScheduledTasks" class="com.lvl6.scheduledtasks.HazelcastScheduledTasks" />
 </beans>
