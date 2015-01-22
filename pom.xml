@@ -108,7 +108,7 @@
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
 		
-		<apns.path.to.cert>/mobsters_dev.p12</apns.path.to.cert>
+		<apns.path.to.cert>mobsters_dev.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
 		
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
