@@ -11,7 +11,10 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.ClassPathResource;
 
 import com.lvl6.events.GameEvent;
@@ -37,7 +40,7 @@ import com.notnoop.apns.ApnsService;
 import com.notnoop.apns.ApnsServiceBuilder;
 import com.notnoop.apns.PayloadBuilder;
 
-public class APNSWriter extends Wrap {
+public class APNSWriter extends Wrap implements ApplicationContextAware {
 	// reference to game server
 
 	@Autowired
@@ -197,7 +200,7 @@ public class APNSWriter extends Wrap {
 		log.info("Building ApnsService");
 		try {
 			//InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
-			org.springframework.core.io.Resource resource = new ClassPathResource(apnsProperties.pathToCert, this.getClass());
+			org.springframework.core.io.Resource resource = context.getResource("classpath*:"+apnsProperties.pathToCert);
 			Object[] args = {apnsProperties.pathToCert, resource.exists(), resource.contentLength()};
 			log.info("Loading cert: {}, exists: {}, length: {}", args);
 			ApnsServiceBuilder builder = APNS.newService()
@@ -327,6 +330,14 @@ public class APNSWriter extends Wrap {
 	      }
 	    }
 	  }
+
+	 
+	 private ApplicationContext context; 
+	@Override
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+		context = arg0;
+		
+	}
 	
 
 }// APNSWriter
