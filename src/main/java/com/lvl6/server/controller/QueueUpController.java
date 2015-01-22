@@ -904,8 +904,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private int determineAvgEloAndCashOilReward(List<MonsterForPvp> mons,
 			List<Integer> cashWinnings, List<Integer> oilWinnings) {
 		int avgElo = 0;
-		int prospectiveCashWinnings = 0;
-		int prospectiveOilWinnings = 0;
+		int prospectiveCashWinnings = PvpBattleOutcome.CASH__MIN_REWARD;//0;
+		int prospectiveOilWinnings = PvpBattleOutcome.OIL__MIN_REWARD;//0;
 		
 		for (MonsterForPvp mon : mons) {
 			avgElo += mon.getElo();
