@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -163,6 +164,8 @@ public class APNSWriter extends Wrap {
 
 	protected ApnsService service;
 
+	
+	@PostConstruct
 	public ApnsService getApnsService() throws FileNotFoundException {
 		if (service == null) {
 			log.info("Apns Service null... building new");
