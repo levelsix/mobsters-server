@@ -72,6 +72,7 @@ enum SkillType {
 	LIFE_STEAL = 15;
 	COUNTER_STRIKE = 16;
 	FLAME_STRIKE = 17;
+	CONFUSION = 18;
 }
 
 enum SkillActivationType {

@@ -89,6 +89,10 @@ public final class SkillsProto {
      * <code>FLAME_STRIKE = 17;</code>
      */
     FLAME_STRIKE(16, 17),
+    /**
+     * <code>CONFUSION = 18;</code>
+     */
+    CONFUSION(17, 18),
     ;
 
     /**
@@ -167,6 +171,10 @@ public final class SkillsProto {
      * <code>FLAME_STRIKE = 17;</code>
      */
     public static final int FLAME_STRIKE_VALUE = 17;
+    /**
+     * <code>CONFUSION = 18;</code>
+     */
+    public static final int CONFUSION_VALUE = 18;
 
 
     public final int getNumber() { return value; }
@@ -190,6 +198,7 @@ public final class SkillsProto {
         case 15: return LIFE_STEAL;
         case 16: return COUNTER_STRIKE;
         case 17: return FLAME_STRIKE;
+        case 18: return CONFUSION;
         default: return null;
       }
     }
@@ -2893,15 +2902,16 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
       "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\203\002\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "\002*\222\002\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
       "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
       "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
       "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
       "T_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r" +
       "\022\007\n\003MUD\020\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STR" +
-      "IKE\020\020\022\020\n\014FLAME_STRIKE\020\021*J\n\023SkillActivati" +
-      "onType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIV" +
-      "ATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "IKE\020\020\022\020\n\014FLAME_STRIKE\020\021\022\r\n\tCONFUSION\020\022*J" +
+      "\n\023SkillActivationType\022\022\n\016USER_ACTIVATED\020" +
+      "\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Sk" +
+      "illsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

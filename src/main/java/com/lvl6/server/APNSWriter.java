@@ -1,18 +1,21 @@
 package com.lvl6.server;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.io.ClassPathResource;
 
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
@@ -37,7 +40,7 @@ import com.notnoop.apns.ApnsService;
 import com.notnoop.apns.ApnsServiceBuilder;
 import com.notnoop.apns.PayloadBuilder;
 
-public class APNSWriter extends Wrap {
+public class APNSWriter extends Wrap implements ApplicationContextAware {
 	// reference to game server
 
 	@Autowired
@@ -164,6 +167,8 @@ public class APNSWriter extends Wrap {
 
 	protected ApnsService service;
 
+	
+	@PostConstruct
 	public ApnsService getApnsService() throws FileNotFoundException {
 		if (service == null) {
 			log.info("Apns Service null... building new");
@@ -194,9 +199,12 @@ public class APNSWriter extends Wrap {
 	protected void buildService() {
 		log.info("Building ApnsService");
 		try {
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
+			//InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
+			org.springframework.core.io.Resource resource = context.getResource(apnsProperties.pathToCert);
+			Object[] args = {apnsProperties.pathToCert, resource.exists(), resource.contentLength()};
+			log.info("Loading cert: {}, exists: {}, length: {}", args);
 			ApnsServiceBuilder builder = APNS.newService()
-					.withCert(inputStream, apnsProperties.certPassword);
+					.withCert(resource.getInputStream(), apnsProperties.certPassword);
 			if (Globals.IS_SANDBOX()) {
 				log.info("Building apns with sandbox=true");
 				builder.withSandboxDestination();
@@ -322,6 +330,14 @@ public class APNSWriter extends Wrap {
 	      }
 	    }
 	  }
+
+	 
+	 private ApplicationContext context; 
+	@Override
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+		context = arg0;
+		
+	}
 	
 
 }// APNSWriter
