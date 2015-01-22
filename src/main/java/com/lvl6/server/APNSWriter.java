@@ -197,7 +197,7 @@ public class APNSWriter extends Wrap {
 		log.info("Building ApnsService");
 		try {
 			//InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
-			org.springframework.core.io.Resource resource = new ClassPathResource(apnsProperties.pathToCert);
+			org.springframework.core.io.Resource resource = new ClassPathResource(apnsProperties.pathToCert, this.getClass());
 			Object[] args = {apnsProperties.pathToCert, resource.exists(), resource.contentLength()};
 			log.info("Loading cert: {}, exists: {}, length: {}", args);
 			ApnsServiceBuilder builder = APNS.newService()
