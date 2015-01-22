@@ -8,10 +8,10 @@ public final class BoardProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface BoardLayoutProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BoardLayoutProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardLayoutProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 boardId = 1;
     /**
      * <code>optional int32 boardId = 1;</code>
      */
@@ -21,7 +21,6 @@ public final class BoardProto {
      */
     int getBoardId();
 
-    // optional int32 height = 2;
     /**
      * <code>optional int32 height = 2;</code>
      */
@@ -31,7 +30,6 @@ public final class BoardProto {
      */
     int getHeight();
 
-    // optional int32 width = 3;
     /**
      * <code>optional int32 width = 3;</code>
      */
@@ -41,7 +39,6 @@ public final class BoardProto {
      */
     int getWidth();
 
-    // optional int32 orbElements = 4;
     /**
      * <code>optional int32 orbElements = 4;</code>
      *
@@ -59,7 +56,6 @@ public final class BoardProto {
      */
     int getOrbElements();
 
-    // repeated .com.lvl6.proto.BoardPropertyProto properties = 5;
     /**
      * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
      */
@@ -88,8 +84,9 @@ public final class BoardProto {
    * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
    */
   public static final class BoardLayoutProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BoardLayoutProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardLayoutProto)
+      BoardLayoutProtoOrBuilder {
     // Use BoardLayoutProto.newBuilder() to construct.
     private BoardLayoutProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -206,7 +203,6 @@ public final class BoardProto {
     }
 
     private int bitField0_;
-    // optional int32 boardId = 1;
     public static final int BOARDID_FIELD_NUMBER = 1;
     private int boardId_;
     /**
@@ -222,7 +218,6 @@ public final class BoardProto {
       return boardId_;
     }
 
-    // optional int32 height = 2;
     public static final int HEIGHT_FIELD_NUMBER = 2;
     private int height_;
     /**
@@ -238,7 +233,6 @@ public final class BoardProto {
       return height_;
     }
 
-    // optional int32 width = 3;
     public static final int WIDTH_FIELD_NUMBER = 3;
     private int width_;
     /**
@@ -254,7 +248,6 @@ public final class BoardProto {
       return width_;
     }
 
-    // optional int32 orbElements = 4;
     public static final int ORBELEMENTS_FIELD_NUMBER = 4;
     private int orbElements_;
     /**
@@ -278,7 +271,6 @@ public final class BoardProto {
       return orbElements_;
     }
 
-    // repeated .com.lvl6.proto.BoardPropertyProto properties = 5;
     public static final int PROPERTIES_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_;
     /**
@@ -324,7 +316,8 @@ public final class BoardProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -459,8 +452,9 @@ public final class BoardProto {
      * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardLayoutProto)
+        com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
@@ -642,7 +636,6 @@ public final class BoardProto {
       }
       private int bitField0_;
 
-      // optional int32 boardId = 1;
       private int boardId_ ;
       /**
        * <code>optional int32 boardId = 1;</code>
@@ -675,7 +668,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 height = 2;
       private int height_ ;
       /**
        * <code>optional int32 height = 2;</code>
@@ -708,7 +700,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 width = 3;
       private int width_ ;
       /**
        * <code>optional int32 width = 3;</code>
@@ -741,7 +732,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 orbElements = 4;
       private int orbElements_ ;
       /**
        * <code>optional int32 orbElements = 4;</code>
@@ -790,7 +780,6 @@ public final class BoardProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.BoardPropertyProto properties = 5;
       private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_ =
         java.util.Collections.emptyList();
       private void ensurePropertiesIsMutable() {
@@ -932,7 +921,8 @@ public final class BoardProto {
           java.lang.Iterable<? extends com.lvl6.proto.BoardProto.BoardPropertyProto> values) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
-          super.addAll(values, properties_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, properties_);
           onChanged();
         } else {
           propertiesBuilder_.addAllMessages(values);
@@ -1041,10 +1031,10 @@ public final class BoardProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardLayoutProto)
   }
 
-  public interface BoardPropertyProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BoardPropertyProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardPropertyProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 boardPropertyId = 1;
     /**
      * <code>optional int32 boardPropertyId = 1;</code>
      */
@@ -1054,7 +1044,6 @@ public final class BoardProto {
      */
     int getBoardPropertyId();
 
-    // optional int32 boardId = 2;
     /**
      * <code>optional int32 boardId = 2;</code>
      */
@@ -1064,7 +1053,6 @@ public final class BoardProto {
      */
     int getBoardId();
 
-    // optional string name = 3;
     /**
      * <code>optional string name = 3;</code>
      */
@@ -1079,7 +1067,6 @@ public final class BoardProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 posX = 4;
     /**
      * <code>optional int32 posX = 4;</code>
      */
@@ -1089,7 +1076,6 @@ public final class BoardProto {
      */
     int getPosX();
 
-    // optional int32 posY = 5;
     /**
      * <code>optional int32 posY = 5;</code>
      */
@@ -1099,7 +1085,6 @@ public final class BoardProto {
      */
     int getPosY();
 
-    // optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];
     /**
      * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
      */
@@ -1109,7 +1094,6 @@ public final class BoardProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElem();
 
-    // optional int32 value = 7;
     /**
      * <code>optional int32 value = 7;</code>
      */
@@ -1119,7 +1103,6 @@ public final class BoardProto {
      */
     int getValue();
 
-    // optional int32 quantity = 8;
     /**
      * <code>optional int32 quantity = 8;</code>
      *
@@ -1141,8 +1124,9 @@ public final class BoardProto {
    * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
    */
   public static final class BoardPropertyProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BoardPropertyProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardPropertyProto)
+      BoardPropertyProtoOrBuilder {
     // Use BoardPropertyProto.newBuilder() to construct.
     private BoardPropertyProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1199,8 +1183,9 @@ public final class BoardProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 32: {
@@ -1274,7 +1259,6 @@ public final class BoardProto {
     }
 
     private int bitField0_;
-    // optional int32 boardPropertyId = 1;
     public static final int BOARDPROPERTYID_FIELD_NUMBER = 1;
     private int boardPropertyId_;
     /**
@@ -1290,7 +1274,6 @@ public final class BoardProto {
       return boardPropertyId_;
     }
 
-    // optional int32 boardId = 2;
     public static final int BOARDID_FIELD_NUMBER = 2;
     private int boardId_;
     /**
@@ -1306,7 +1289,6 @@ public final class BoardProto {
       return boardId_;
     }
 
-    // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
     private java.lang.Object name_;
     /**
@@ -1349,7 +1331,6 @@ public final class BoardProto {
       }
     }
 
-    // optional int32 posX = 4;
     public static final int POSX_FIELD_NUMBER = 4;
     private int posX_;
     /**
@@ -1365,7 +1346,6 @@ public final class BoardProto {
       return posX_;
     }
 
-    // optional int32 posY = 5;
     public static final int POSY_FIELD_NUMBER = 5;
     private int posY_;
     /**
@@ -1381,7 +1361,6 @@ public final class BoardProto {
       return posY_;
     }
 
-    // optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];
     public static final int ELEM_FIELD_NUMBER = 6;
     private com.lvl6.proto.SharedEnumConfigProto.Element elem_;
     /**
@@ -1397,7 +1376,6 @@ public final class BoardProto {
       return elem_;
     }
 
-    // optional int32 value = 7;
     public static final int VALUE_FIELD_NUMBER = 7;
     private int value_;
     /**
@@ -1413,7 +1391,6 @@ public final class BoardProto {
       return value_;
     }
 
-    // optional int32 quantity = 8;
     public static final int QUANTITY_FIELD_NUMBER = 8;
     private int quantity_;
     /**
@@ -1450,7 +1427,8 @@ public final class BoardProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1606,8 +1584,9 @@ public final class BoardProto {
      * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardPropertyProto)
+        com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
@@ -1785,7 +1764,6 @@ public final class BoardProto {
       }
       private int bitField0_;
 
-      // optional int32 boardPropertyId = 1;
       private int boardPropertyId_ ;
       /**
        * <code>optional int32 boardPropertyId = 1;</code>
@@ -1818,7 +1796,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 boardId = 2;
       private int boardId_ ;
       /**
        * <code>optional int32 boardId = 2;</code>
@@ -1851,7 +1828,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional string name = 3;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 3;</code>
@@ -1865,9 +1841,12 @@ public final class BoardProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1925,7 +1904,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 posX = 4;
       private int posX_ ;
       /**
        * <code>optional int32 posX = 4;</code>
@@ -1958,7 +1936,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 posY = 5;
       private int posY_ ;
       /**
        * <code>optional int32 posY = 5;</code>
@@ -1991,7 +1968,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];
       private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
        * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
@@ -2027,7 +2003,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 value = 7;
       private int value_ ;
       /**
        * <code>optional int32 value = 7;</code>
@@ -2060,7 +2035,6 @@ public final class BoardProto {
         return this;
       }
 
-      // optional int32 quantity = 8;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 8;</code>
@@ -2120,12 +2094,12 @@ public final class BoardProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardPropertyProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2152,30 +2126,31 @@ public final class BoardProto {
       "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_BoardLayoutProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BoardLayoutProto_descriptor,
-              new java.lang.String[] { "BoardId", "Height", "Width", "OrbElements", "Properties", });
-          internal_static_com_lvl6_proto_BoardPropertyProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BoardPropertyProto_descriptor,
-              new java.lang.String[] { "BoardPropertyId", "BoardId", "Name", "PosX", "PosY", "Elem", "Value", "Quantity", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_BoardLayoutProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoardLayoutProto_descriptor,
+        new java.lang.String[] { "BoardId", "Height", "Width", "OrbElements", "Properties", });
+    internal_static_com_lvl6_proto_BoardPropertyProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoardPropertyProto_descriptor,
+        new java.lang.String[] { "BoardPropertyId", "BoardId", "Name", "PosX", "PosY", "Elem", "Value", "Quantity", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

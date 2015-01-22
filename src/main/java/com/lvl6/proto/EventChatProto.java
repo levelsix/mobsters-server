@@ -8,10 +8,10 @@ public final class EventChatProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface SendAdminMessageResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SendAdminMessageResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SendAdminMessageResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string senderUuid = 1;
     /**
      * <code>optional string senderUuid = 1;</code>
      */
@@ -26,7 +26,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getSenderUuidBytes();
 
-    // optional string message = 2;
     /**
      * <code>optional string message = 2;</code>
      */
@@ -49,8 +48,9 @@ public final class EventChatProto {
    * </pre>
    */
   public static final class SendAdminMessageResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SendAdminMessageResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SendAdminMessageResponseProto)
+      SendAdminMessageResponseProtoOrBuilder {
     // Use SendAdminMessageResponseProto.newBuilder() to construct.
     private SendAdminMessageResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -97,13 +97,15 @@ public final class EventChatProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              senderUuid_ = input.readBytes();
+              senderUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              message_ = input.readBytes();
+              message_ = bs;
               break;
             }
           }
@@ -146,7 +148,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional string senderUuid = 1;
     public static final int SENDERUUID_FIELD_NUMBER = 1;
     private java.lang.Object senderUuid_;
     /**
@@ -189,7 +190,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional string message = 2;
     public static final int MESSAGE_FIELD_NUMBER = 2;
     private java.lang.Object message_;
     /**
@@ -239,7 +239,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -357,8 +358,9 @@ public final class EventChatProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.SendAdminMessageResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SendAdminMessageResponseProto)
+        com.lvl6.proto.EventChatProto.SendAdminMessageResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor;
@@ -484,7 +486,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional string senderUuid = 1;
       private java.lang.Object senderUuid_ = "";
       /**
        * <code>optional string senderUuid = 1;</code>
@@ -498,9 +499,12 @@ public final class EventChatProto {
       public java.lang.String getSenderUuid() {
         java.lang.Object ref = senderUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          senderUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            senderUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -558,7 +562,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional string message = 2;
       private java.lang.Object message_ = "";
       /**
        * <code>optional string message = 2;</code>
@@ -572,9 +575,12 @@ public final class EventChatProto {
       public java.lang.String getMessage() {
         java.lang.Object ref = message_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          message_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -643,10 +649,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SendAdminMessageResponseProto)
   }
 
-  public interface GeneralNotificationResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface GeneralNotificationResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GeneralNotificationResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string title = 1;
     /**
      * <code>optional string title = 1;</code>
      */
@@ -661,7 +667,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getTitleBytes();
 
-    // optional string subtitle = 2;
     /**
      * <code>optional string subtitle = 2;</code>
      */
@@ -676,7 +681,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getSubtitleBytes();
 
-    // optional .com.lvl6.proto.ColorProto rgb = 3;
     /**
      * <code>optional .com.lvl6.proto.ColorProto rgb = 3;</code>
      */
@@ -694,8 +698,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.GeneralNotificationResponseProto}
    */
   public static final class GeneralNotificationResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements GeneralNotificationResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GeneralNotificationResponseProto)
+      GeneralNotificationResponseProtoOrBuilder {
     // Use GeneralNotificationResponseProto.newBuilder() to construct.
     private GeneralNotificationResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -742,13 +747,15 @@ public final class EventChatProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              title_ = input.readBytes();
+              title_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              subtitle_ = input.readBytes();
+              subtitle_ = bs;
               break;
             }
             case 26: {
@@ -804,7 +811,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional string title = 1;
     public static final int TITLE_FIELD_NUMBER = 1;
     private java.lang.Object title_;
     /**
@@ -847,7 +853,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional string subtitle = 2;
     public static final int SUBTITLE_FIELD_NUMBER = 2;
     private java.lang.Object subtitle_;
     /**
@@ -890,7 +895,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional .com.lvl6.proto.ColorProto rgb = 3;
     public static final int RGB_FIELD_NUMBER = 3;
     private com.lvl6.proto.ChatProto.ColorProto rgb_;
     /**
@@ -920,7 +924,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1041,8 +1046,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.GeneralNotificationResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.GeneralNotificationResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GeneralNotificationResponseProto)
+        com.lvl6.proto.EventChatProto.GeneralNotificationResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor;
@@ -1186,7 +1192,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional string title = 1;
       private java.lang.Object title_ = "";
       /**
        * <code>optional string title = 1;</code>
@@ -1200,9 +1205,12 @@ public final class EventChatProto {
       public java.lang.String getTitle() {
         java.lang.Object ref = title_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          title_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            title_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1260,7 +1268,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional string subtitle = 2;
       private java.lang.Object subtitle_ = "";
       /**
        * <code>optional string subtitle = 2;</code>
@@ -1274,9 +1281,12 @@ public final class EventChatProto {
       public java.lang.String getSubtitle() {
         java.lang.Object ref = subtitle_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          subtitle_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            subtitle_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1334,7 +1344,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ColorProto rgb = 3;
       private com.lvl6.proto.ChatProto.ColorProto rgb_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> rgbBuilder_;
@@ -1443,7 +1452,7 @@ public final class EventChatProto {
         if (rgbBuilder_ == null) {
           rgbBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder>(
-                  rgb_,
+                  getRgb(),
                   getParentForChildren(),
                   isClean());
           rgb_ = null;
@@ -1462,10 +1471,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GeneralNotificationResponseProto)
   }
 
-  public interface SendGroupChatRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SendGroupChatRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SendGroupChatRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1479,7 +1488,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];
     /**
      * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
      */
@@ -1489,7 +1497,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.ChatProto.GroupChatScope getScope();
 
-    // optional string chatMessage = 3;
     /**
      * <code>optional string chatMessage = 3;</code>
      */
@@ -1504,7 +1511,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getChatMessageBytes();
 
-    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -1518,8 +1524,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.SendGroupChatRequestProto}
    */
   public static final class SendGroupChatRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SendGroupChatRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SendGroupChatRequestProto)
+      SendGroupChatRequestProtoOrBuilder {
     // Use SendGroupChatRequestProto.newBuilder() to construct.
     private SendGroupChatRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1590,8 +1597,9 @@ public final class EventChatProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              chatMessage_ = input.readBytes();
+              chatMessage_ = bs;
               break;
             }
             case 32: {
@@ -1639,7 +1647,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1661,7 +1668,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];
     public static final int SCOPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.ChatProto.GroupChatScope scope_;
     /**
@@ -1677,7 +1683,6 @@ public final class EventChatProto {
       return scope_;
     }
 
-    // optional string chatMessage = 3;
     public static final int CHATMESSAGE_FIELD_NUMBER = 3;
     private java.lang.Object chatMessage_;
     /**
@@ -1720,7 +1725,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -1745,7 +1749,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1873,8 +1878,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.SendGroupChatRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.SendGroupChatRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SendGroupChatRequestProto)
+        com.lvl6.proto.EventChatProto.SendGroupChatRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor;
@@ -2025,7 +2031,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2134,7 +2139,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2142,7 +2147,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];
       private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
       /**
        * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
@@ -2178,7 +2182,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional string chatMessage = 3;
       private java.lang.Object chatMessage_ = "";
       /**
        * <code>optional string chatMessage = 3;</code>
@@ -2192,9 +2195,12 @@ public final class EventChatProto {
       public java.lang.String getChatMessage() {
         java.lang.Object ref = chatMessage_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          chatMessage_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            chatMessage_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2252,7 +2258,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -2296,10 +2301,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SendGroupChatRequestProto)
   }
 
-  public interface SendGroupChatResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SendGroupChatResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SendGroupChatResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2313,7 +2318,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
      */
@@ -2327,8 +2331,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.SendGroupChatResponseProto}
    */
   public static final class SendGroupChatResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SendGroupChatResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SendGroupChatResponseProto)
+      SendGroupChatResponseProtoOrBuilder {
     // Use SendGroupChatResponseProto.newBuilder() to construct.
     private SendGroupChatResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2538,7 +2543,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2560,7 +2564,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus status_;
     /**
@@ -2583,7 +2586,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2697,8 +2701,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.SendGroupChatResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.SendGroupChatResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SendGroupChatResponseProto)
+        com.lvl6.proto.EventChatProto.SendGroupChatResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor;
@@ -2829,7 +2834,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2938,7 +2942,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2946,7 +2950,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;
       private com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus status_ = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
@@ -2993,10 +2996,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SendGroupChatResponseProto)
   }
 
-  public interface ReceivedGroupChatResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ReceivedGroupChatResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReceivedGroupChatResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
      */
@@ -3010,7 +3013,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
 
-    // optional string chatMessage = 2;
     /**
      * <code>optional string chatMessage = 2;</code>
      */
@@ -3025,7 +3027,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getChatMessageBytes();
 
-    // optional .com.lvl6.proto.GroupChatScope scope = 3 [default = CLAN];
     /**
      * <code>optional .com.lvl6.proto.GroupChatScope scope = 3 [default = CLAN];</code>
      */
@@ -3035,7 +3036,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.ChatProto.GroupChatScope getScope();
 
-    // optional bool isAdmin = 4;
     /**
      * <code>optional bool isAdmin = 4;</code>
      */
@@ -3049,8 +3049,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.ReceivedGroupChatResponseProto}
    */
   public static final class ReceivedGroupChatResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ReceivedGroupChatResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReceivedGroupChatResponseProto)
+      ReceivedGroupChatResponseProtoOrBuilder {
     // Use ReceivedGroupChatResponseProto.newBuilder() to construct.
     private ReceivedGroupChatResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3110,8 +3111,9 @@ public final class EventChatProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              chatMessage_ = input.readBytes();
+              chatMessage_ = bs;
               break;
             }
             case 24: {
@@ -3170,7 +3172,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_;
     /**
@@ -3192,7 +3193,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional string chatMessage = 2;
     public static final int CHATMESSAGE_FIELD_NUMBER = 2;
     private java.lang.Object chatMessage_;
     /**
@@ -3235,7 +3235,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional .com.lvl6.proto.GroupChatScope scope = 3 [default = CLAN];
     public static final int SCOPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.ChatProto.GroupChatScope scope_;
     /**
@@ -3251,7 +3250,6 @@ public final class EventChatProto {
       return scope_;
     }
 
-    // optional bool isAdmin = 4;
     public static final int ISADMIN_FIELD_NUMBER = 4;
     private boolean isAdmin_;
     /**
@@ -3276,7 +3274,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3404,8 +3403,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.ReceivedGroupChatResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReceivedGroupChatResponseProto)
+        com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor;
@@ -3556,7 +3556,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> senderBuilder_;
@@ -3665,7 +3664,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3673,7 +3672,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional string chatMessage = 2;
       private java.lang.Object chatMessage_ = "";
       /**
        * <code>optional string chatMessage = 2;</code>
@@ -3687,9 +3685,12 @@ public final class EventChatProto {
       public java.lang.String getChatMessage() {
         java.lang.Object ref = chatMessage_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          chatMessage_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            chatMessage_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3747,7 +3748,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.GroupChatScope scope = 3 [default = CLAN];
       private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
       /**
        * <code>optional .com.lvl6.proto.GroupChatScope scope = 3 [default = CLAN];</code>
@@ -3783,7 +3783,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional bool isAdmin = 4;
       private boolean isAdmin_ ;
       /**
        * <code>optional bool isAdmin = 4;</code>
@@ -3827,10 +3826,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReceivedGroupChatResponseProto)
   }
 
-  public interface PrivateChatPostRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PrivateChatPostRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrivateChatPostRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3844,7 +3843,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string recipientUuid = 2;
     /**
      * <code>optional string recipientUuid = 2;</code>
      */
@@ -3859,7 +3857,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getRecipientUuidBytes();
 
-    // optional string content = 3;
     /**
      * <code>optional string content = 3;</code>
      */
@@ -3878,8 +3875,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.PrivateChatPostRequestProto}
    */
   public static final class PrivateChatPostRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PrivateChatPostRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrivateChatPostRequestProto)
+      PrivateChatPostRequestProtoOrBuilder {
     // Use PrivateChatPostRequestProto.newBuilder() to construct.
     private PrivateChatPostRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3939,13 +3937,15 @@ public final class EventChatProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              recipientUuid_ = input.readBytes();
+              recipientUuid_ = bs;
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              content_ = input.readBytes();
+              content_ = bs;
               break;
             }
           }
@@ -3988,7 +3988,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4010,7 +4009,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional string recipientUuid = 2;
     public static final int RECIPIENTUUID_FIELD_NUMBER = 2;
     private java.lang.Object recipientUuid_;
     /**
@@ -4053,7 +4051,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional string content = 3;
     public static final int CONTENT_FIELD_NUMBER = 3;
     private java.lang.Object content_;
     /**
@@ -4104,7 +4101,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4225,8 +4223,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.PrivateChatPostRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.PrivateChatPostRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrivateChatPostRequestProto)
+        com.lvl6.proto.EventChatProto.PrivateChatPostRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor;
@@ -4370,7 +4369,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4479,7 +4477,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4487,7 +4485,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional string recipientUuid = 2;
       private java.lang.Object recipientUuid_ = "";
       /**
        * <code>optional string recipientUuid = 2;</code>
@@ -4501,9 +4498,12 @@ public final class EventChatProto {
       public java.lang.String getRecipientUuid() {
         java.lang.Object ref = recipientUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          recipientUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            recipientUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4561,7 +4561,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional string content = 3;
       private java.lang.Object content_ = "";
       /**
        * <code>optional string content = 3;</code>
@@ -4575,9 +4574,12 @@ public final class EventChatProto {
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          content_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            content_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4646,10 +4648,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrivateChatPostRequestProto)
   }
 
-  public interface PrivateChatPostResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PrivateChatPostResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrivateChatPostResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4663,7 +4665,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
      */
@@ -4673,7 +4674,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus getStatus();
 
-    // optional .com.lvl6.proto.PrivateChatPostProto post = 3;
     /**
      * <code>optional .com.lvl6.proto.PrivateChatPostProto post = 3;</code>
      */
@@ -4695,8 +4695,9 @@ public final class EventChatProto {
    * </pre>
    */
   public static final class PrivateChatPostResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PrivateChatPostResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrivateChatPostResponseProto)
+      PrivateChatPostResponseProtoOrBuilder {
     // Use PrivateChatPostResponseProto.newBuilder() to construct.
     private PrivateChatPostResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4928,7 +4929,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4950,7 +4950,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus status_;
     /**
@@ -4966,7 +4965,6 @@ public final class EventChatProto {
       return status_;
     }
 
-    // optional .com.lvl6.proto.PrivateChatPostProto post = 3;
     public static final int POST_FIELD_NUMBER = 3;
     private com.lvl6.proto.ChatProto.PrivateChatPostProto post_;
     /**
@@ -4996,7 +4994,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5121,8 +5120,9 @@ public final class EventChatProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.PrivateChatPostResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrivateChatPostResponseProto)
+        com.lvl6.proto.EventChatProto.PrivateChatPostResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor;
@@ -5271,7 +5271,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5380,7 +5379,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5388,7 +5387,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;
       private com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
@@ -5424,7 +5422,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.PrivateChatPostProto post = 3;
       private com.lvl6.proto.ChatProto.PrivateChatPostProto post_ = com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> postBuilder_;
@@ -5533,7 +5530,7 @@ public final class EventChatProto {
         if (postBuilder_ == null) {
           postBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder>(
-                  post_,
+                  getPost(),
                   getParentForChildren(),
                   isClean());
           post_ = null;
@@ -5552,10 +5549,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrivateChatPostResponseProto)
   }
 
-  public interface RetrievePrivateChatPostsRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrievePrivateChatPostsRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrievePrivateChatPostsRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5569,7 +5566,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string otherUserUuid = 2;
     /**
      * <code>optional string otherUserUuid = 2;</code>
      */
@@ -5584,7 +5580,6 @@ public final class EventChatProto {
     com.google.protobuf.ByteString
         getOtherUserUuidBytes();
 
-    // optional int32 beforePrivateChatId = 3 [deprecated = true];
     /**
      * <code>optional int32 beforePrivateChatId = 3 [deprecated = true];</code>
      *
@@ -5610,8 +5605,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.RetrievePrivateChatPostsRequestProto}
    */
   public static final class RetrievePrivateChatPostsRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrievePrivateChatPostsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrievePrivateChatPostsRequestProto)
+      RetrievePrivateChatPostsRequestProtoOrBuilder {
     // Use RetrievePrivateChatPostsRequestProto.newBuilder() to construct.
     private RetrievePrivateChatPostsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5671,8 +5667,9 @@ public final class EventChatProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              otherUserUuid_ = input.readBytes();
+              otherUserUuid_ = bs;
               break;
             }
             case 24: {
@@ -5720,7 +5717,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5742,7 +5738,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // optional string otherUserUuid = 2;
     public static final int OTHERUSERUUID_FIELD_NUMBER = 2;
     private java.lang.Object otherUserUuid_;
     /**
@@ -5785,7 +5780,6 @@ public final class EventChatProto {
       }
     }
 
-    // optional int32 beforePrivateChatId = 3 [deprecated = true];
     public static final int BEFOREPRIVATECHATID_FIELD_NUMBER = 3;
     private int beforePrivateChatId_;
     /**
@@ -5821,7 +5815,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5942,8 +5937,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.RetrievePrivateChatPostsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrievePrivateChatPostsRequestProto)
+        com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor;
@@ -6085,7 +6081,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -6194,7 +6189,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6202,7 +6197,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // optional string otherUserUuid = 2;
       private java.lang.Object otherUserUuid_ = "";
       /**
        * <code>optional string otherUserUuid = 2;</code>
@@ -6216,9 +6210,12 @@ public final class EventChatProto {
       public java.lang.String getOtherUserUuid() {
         java.lang.Object ref = otherUserUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          otherUserUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            otherUserUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6276,7 +6273,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional int32 beforePrivateChatId = 3 [deprecated = true];
       private int beforePrivateChatId_ ;
       /**
        * <code>optional int32 beforePrivateChatId = 3 [deprecated = true];</code>
@@ -6344,10 +6340,10 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrievePrivateChatPostsRequestProto)
   }
 
-  public interface RetrievePrivateChatPostsResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrievePrivateChatPostsResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrievePrivateChatPostsResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -6361,7 +6357,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.GroupChatMessageProto posts = 2;
     /**
      * <code>repeated .com.lvl6.proto.GroupChatMessageProto posts = 2;</code>
      */
@@ -6386,7 +6381,6 @@ public final class EventChatProto {
     com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getPostsOrBuilder(
         int index);
 
-    // optional int32 beforePrivateChatId = 3 [deprecated = true];
     /**
      * <code>optional int32 beforePrivateChatId = 3 [deprecated = true];</code>
      *
@@ -6404,7 +6398,6 @@ public final class EventChatProto {
      */
     @java.lang.Deprecated int getBeforePrivateChatId();
 
-    // optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;
     /**
      * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
      */
@@ -6414,7 +6407,6 @@ public final class EventChatProto {
      */
     com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus getStatus();
 
-    // optional string otherUserUuid = 5;
     /**
      * <code>optional string otherUserUuid = 5;</code>
      */
@@ -6433,8 +6425,9 @@ public final class EventChatProto {
    * Protobuf type {@code com.lvl6.proto.RetrievePrivateChatPostsResponseProto}
    */
   public static final class RetrievePrivateChatPostsResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrievePrivateChatPostsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrievePrivateChatPostsResponseProto)
+      RetrievePrivateChatPostsResponseProtoOrBuilder {
     // Use RetrievePrivateChatPostsResponseProto.newBuilder() to construct.
     private RetrievePrivateChatPostsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6518,8 +6511,9 @@ public final class EventChatProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              otherUserUuid_ = input.readBytes();
+              otherUserUuid_ = bs;
               break;
             }
           }
@@ -6647,7 +6641,6 @@ public final class EventChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6669,7 +6662,6 @@ public final class EventChatProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.GroupChatMessageProto posts = 2;
     public static final int POSTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> posts_;
     /**
@@ -6705,7 +6697,6 @@ public final class EventChatProto {
       return posts_.get(index);
     }
 
-    // optional int32 beforePrivateChatId = 3 [deprecated = true];
     public static final int BEFOREPRIVATECHATID_FIELD_NUMBER = 3;
     private int beforePrivateChatId_;
     /**
@@ -6729,7 +6720,6 @@ public final class EventChatProto {
       return beforePrivateChatId_;
     }
 
-    // optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;
     public static final int STATUS_FIELD_NUMBER = 4;
     private com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status_;
     /**
@@ -6745,7 +6735,6 @@ public final class EventChatProto {
       return status_;
     }
 
-    // optional string otherUserUuid = 5;
     public static final int OTHERUSERUUID_FIELD_NUMBER = 5;
     private java.lang.Object otherUserUuid_;
     /**
@@ -6798,7 +6787,8 @@ public final class EventChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6933,8 +6923,9 @@ public final class EventChatProto {
      * Protobuf type {@code com.lvl6.proto.RetrievePrivateChatPostsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrievePrivateChatPostsResponseProto)
+        com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventChatProto.internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor;
@@ -7127,7 +7118,6 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7236,7 +7226,7 @@ public final class EventChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7244,7 +7234,6 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.GroupChatMessageProto posts = 2;
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> posts_ =
         java.util.Collections.emptyList();
       private void ensurePostsIsMutable() {
@@ -7386,7 +7375,8 @@ public final class EventChatProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.GroupChatMessageProto> values) {
         if (postsBuilder_ == null) {
           ensurePostsIsMutable();
-          super.addAll(values, posts_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, posts_);
           onChanged();
         } else {
           postsBuilder_.addAllMessages(values);
@@ -7484,7 +7474,6 @@ public final class EventChatProto {
         return postsBuilder_;
       }
 
-      // optional int32 beforePrivateChatId = 3 [deprecated = true];
       private int beforePrivateChatId_ ;
       /**
        * <code>optional int32 beforePrivateChatId = 3 [deprecated = true];</code>
@@ -7533,7 +7522,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;
       private com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status_ = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
@@ -7569,7 +7557,6 @@ public final class EventChatProto {
         return this;
       }
 
-      // optional string otherUserUuid = 5;
       private java.lang.Object otherUserUuid_ = "";
       /**
        * <code>optional string otherUserUuid = 5;</code>
@@ -7583,9 +7570,12 @@ public final class EventChatProto {
       public java.lang.String getOtherUserUuid() {
         java.lang.Object ref = otherUserUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          otherUserUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            otherUserUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7654,47 +7644,47 @@ public final class EventChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrievePrivateChatPostsResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SendAdminMessageResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GeneralNotificationResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SendGroupChatRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SendGroupChatResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PrivateChatPostRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PrivateChatPostResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7756,73 +7746,75 @@ public final class EventChatProto {
       "hatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_SendAdminMessageResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor,
-              new java.lang.String[] { "SenderUuid", "Message", });
-          internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_GeneralNotificationResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor,
-              new java.lang.String[] { "Title", "Subtitle", "Rgb", });
-          internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_SendGroupChatRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Scope", "ChatMessage", "ClientTime", });
-          internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_SendGroupChatResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "ChatMessage", "Scope", "IsAdmin", });
-          internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_PrivateChatPostRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "RecipientUuid", "Content", });
-          internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_PrivateChatPostResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Post", });
-          internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "OtherUserUuid", "BeforePrivateChatId", });
-          internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Posts", "BeforePrivateChatId", "Status", "OtherUserUuid", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_SendAdminMessageResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor,
+        new java.lang.String[] { "SenderUuid", "Message", });
+    internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_GeneralNotificationResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_GeneralNotificationResponseProto_descriptor,
+        new java.lang.String[] { "Title", "Subtitle", "Rgb", });
+    internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_SendGroupChatRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SendGroupChatRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Scope", "ChatMessage", "ClientTime", });
+    internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_SendGroupChatResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SendGroupChatResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ReceivedGroupChatResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "ChatMessage", "Scope", "IsAdmin", });
+    internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_PrivateChatPostRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PrivateChatPostRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "RecipientUuid", "Content", });
+    internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_PrivateChatPostResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "Post", });
+    internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "OtherUserUuid", "BeforePrivateChatId", });
+    internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Posts", "BeforePrivateChatId", "Status", "OtherUserUuid", });
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

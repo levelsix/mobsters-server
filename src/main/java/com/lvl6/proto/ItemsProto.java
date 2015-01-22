@@ -17,7 +17,6 @@ public final class ItemsProto {
      * <code>BOOSTER_PACK = 1;</code>
      *
      * <pre>
-     *
      *prefaced with "ITEM_" because without it, error is:
      *"com.lvl6.proto.OIL" is already defined in file "Structure.proto".
      *Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "OIL" must be unique within "com.lvl6.proto", not just within "ItemType".
@@ -42,7 +41,6 @@ public final class ItemsProto {
      * <code>BOOSTER_PACK = 1;</code>
      *
      * <pre>
-     *
      *prefaced with "ITEM_" because without it, error is:
      *"com.lvl6.proto.OIL" is already defined in file "Structure.proto".
      *Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "OIL" must be unique within "com.lvl6.proto", not just within "ItemType".
@@ -122,10 +120,10 @@ public final class ItemsProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ItemType)
   }
 
-  public interface UserItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -140,7 +138,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 itemId = 2;
     /**
      * <code>optional int32 itemId = 2;</code>
      */
@@ -150,7 +147,6 @@ public final class ItemsProto {
      */
     int getItemId();
 
-    // optional int32 quantity = 3;
     /**
      * <code>optional int32 quantity = 3;</code>
      */
@@ -164,8 +160,9 @@ public final class ItemsProto {
    * Protobuf type {@code com.lvl6.proto.UserItemProto}
    */
   public static final class UserItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserItemProto)
+      UserItemProtoOrBuilder {
     // Use UserItemProto.newBuilder() to construct.
     private UserItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -212,8 +209,9 @@ public final class ItemsProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -266,7 +264,6 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -309,7 +306,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional int32 itemId = 2;
     public static final int ITEMID_FIELD_NUMBER = 2;
     private int itemId_;
     /**
@@ -325,7 +321,6 @@ public final class ItemsProto {
       return itemId_;
     }
 
-    // optional int32 quantity = 3;
     public static final int QUANTITY_FIELD_NUMBER = 3;
     private int quantity_;
     /**
@@ -349,7 +344,8 @@ public final class ItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -470,8 +466,9 @@ public final class ItemsProto {
      * Protobuf type {@code com.lvl6.proto.UserItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserItemProto)
+        com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemProto_descriptor;
@@ -604,7 +601,6 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -618,9 +614,12 @@ public final class ItemsProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -678,7 +677,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 itemId = 2;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 2;</code>
@@ -711,7 +709,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 quantity = 3;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 3;</code>
@@ -755,10 +752,10 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemProto)
   }
 
-  public interface ItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 itemId = 1;
     /**
      * <code>optional int32 itemId = 1;</code>
      */
@@ -768,7 +765,6 @@ public final class ItemsProto {
      */
     int getItemId();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -783,7 +779,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional string imgName = 3;
     /**
      * <code>optional string imgName = 3;</code>
      */
@@ -798,7 +793,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getImgNameBytes();
 
-    // optional .com.lvl6.proto.ItemType itemType = 4;
     /**
      * <code>optional .com.lvl6.proto.ItemType itemType = 4;</code>
      */
@@ -808,7 +802,6 @@ public final class ItemsProto {
      */
     com.lvl6.proto.ItemsProto.ItemType getItemType();
 
-    // optional int32 staticDataId = 5;
     /**
      * <code>optional int32 staticDataId = 5;</code>
      *
@@ -826,7 +819,6 @@ public final class ItemsProto {
      */
     int getStaticDataId();
 
-    // optional int32 amount = 6;
     /**
      * <code>optional int32 amount = 6;</code>
      */
@@ -836,7 +828,6 @@ public final class ItemsProto {
      */
     int getAmount();
 
-    // optional float secretGiftChance = 7;
     /**
      * <code>optional float secretGiftChance = 7;</code>
      */
@@ -850,8 +841,9 @@ public final class ItemsProto {
    * Protobuf type {@code com.lvl6.proto.ItemProto}
    */
   public static final class ItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ItemProto)
+      ItemProtoOrBuilder {
     // Use ItemProto.newBuilder() to construct.
     private ItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -903,13 +895,15 @@ public final class ItemsProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              imgName_ = input.readBytes();
+              imgName_ = bs;
               break;
             }
             case 32: {
@@ -978,7 +972,6 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    // optional int32 itemId = 1;
     public static final int ITEMID_FIELD_NUMBER = 1;
     private int itemId_;
     /**
@@ -994,7 +987,6 @@ public final class ItemsProto {
       return itemId_;
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -1037,7 +1029,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional string imgName = 3;
     public static final int IMGNAME_FIELD_NUMBER = 3;
     private java.lang.Object imgName_;
     /**
@@ -1080,7 +1071,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional .com.lvl6.proto.ItemType itemType = 4;
     public static final int ITEMTYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.ItemsProto.ItemType itemType_;
     /**
@@ -1096,7 +1086,6 @@ public final class ItemsProto {
       return itemType_;
     }
 
-    // optional int32 staticDataId = 5;
     public static final int STATICDATAID_FIELD_NUMBER = 5;
     private int staticDataId_;
     /**
@@ -1120,7 +1109,6 @@ public final class ItemsProto {
       return staticDataId_;
     }
 
-    // optional int32 amount = 6;
     public static final int AMOUNT_FIELD_NUMBER = 6;
     private int amount_;
     /**
@@ -1136,7 +1124,6 @@ public final class ItemsProto {
       return amount_;
     }
 
-    // optional float secretGiftChance = 7;
     public static final int SECRETGIFTCHANCE_FIELD_NUMBER = 7;
     private float secretGiftChance_;
     /**
@@ -1164,7 +1151,8 @@ public final class ItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1313,8 +1301,9 @@ public final class ItemsProto {
      * Protobuf type {@code com.lvl6.proto.ItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ItemsProto.ItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ItemProto)
+        com.lvl6.proto.ItemsProto.ItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemProto_descriptor;
@@ -1485,7 +1474,6 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      // optional int32 itemId = 1;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 1;</code>
@@ -1518,7 +1506,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -1532,9 +1519,12 @@ public final class ItemsProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1592,7 +1582,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional string imgName = 3;
       private java.lang.Object imgName_ = "";
       /**
        * <code>optional string imgName = 3;</code>
@@ -1606,9 +1595,12 @@ public final class ItemsProto {
       public java.lang.String getImgName() {
         java.lang.Object ref = imgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1666,7 +1658,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ItemType itemType = 4;
       private com.lvl6.proto.ItemsProto.ItemType itemType_ = com.lvl6.proto.ItemsProto.ItemType.BOOSTER_PACK;
       /**
        * <code>optional .com.lvl6.proto.ItemType itemType = 4;</code>
@@ -1702,7 +1693,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 staticDataId = 5;
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 5;</code>
@@ -1751,7 +1741,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 amount = 6;
       private int amount_ ;
       /**
        * <code>optional int32 amount = 6;</code>
@@ -1784,7 +1773,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional float secretGiftChance = 7;
       private float secretGiftChance_ ;
       /**
        * <code>optional float secretGiftChance = 7;</code>
@@ -1828,10 +1816,10 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ItemProto)
   }
 
-  public interface UserItemUsageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserItemUsageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserItemUsageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string usageUuid = 1;
     /**
      * <code>optional string usageUuid = 1;</code>
      *
@@ -1858,7 +1846,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUsageUuidBytes();
 
-    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -1873,7 +1860,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 itemId = 3;
     /**
      * <code>optional int32 itemId = 3;</code>
      */
@@ -1883,7 +1869,6 @@ public final class ItemsProto {
      */
     int getItemId();
 
-    // optional int64 timeOfEntry = 4;
     /**
      * <code>optional int64 timeOfEntry = 4;</code>
      */
@@ -1893,7 +1878,6 @@ public final class ItemsProto {
      */
     long getTimeOfEntry();
 
-    // optional string userDataUuid = 5;
     /**
      * <code>optional string userDataUuid = 5;</code>
      */
@@ -1908,7 +1892,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUserDataUuidBytes();
 
-    // optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];
     /**
      * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
      */
@@ -1929,8 +1912,9 @@ public final class ItemsProto {
    * </pre>
    */
   public static final class UserItemUsageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserItemUsageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserItemUsageProto)
+      UserItemUsageProtoOrBuilder {
     // Use UserItemUsageProto.newBuilder() to construct.
     private UserItemUsageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1977,13 +1961,15 @@ public final class ItemsProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              usageUuid_ = input.readBytes();
+              usageUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -1997,8 +1983,9 @@ public final class ItemsProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userDataUuid_ = input.readBytes();
+              userDataUuid_ = bs;
               break;
             }
             case 48: {
@@ -2052,7 +2039,6 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    // optional string usageUuid = 1;
     public static final int USAGEUUID_FIELD_NUMBER = 1;
     private java.lang.Object usageUuid_;
     /**
@@ -2107,7 +2093,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -2150,7 +2135,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional int32 itemId = 3;
     public static final int ITEMID_FIELD_NUMBER = 3;
     private int itemId_;
     /**
@@ -2166,7 +2150,6 @@ public final class ItemsProto {
       return itemId_;
     }
 
-    // optional int64 timeOfEntry = 4;
     public static final int TIMEOFENTRY_FIELD_NUMBER = 4;
     private long timeOfEntry_;
     /**
@@ -2182,7 +2165,6 @@ public final class ItemsProto {
       return timeOfEntry_;
     }
 
-    // optional string userDataUuid = 5;
     public static final int USERDATAUUID_FIELD_NUMBER = 5;
     private java.lang.Object userDataUuid_;
     /**
@@ -2225,7 +2207,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];
     public static final int ACTIONTYPE_FIELD_NUMBER = 6;
     private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_;
     /**
@@ -2252,7 +2233,8 @@ public final class ItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2401,8 +2383,9 @@ public final class ItemsProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserItemUsageProto)
+        com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
@@ -2566,7 +2549,6 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      // optional string usageUuid = 1;
       private java.lang.Object usageUuid_ = "";
       /**
        * <code>optional string usageUuid = 1;</code>
@@ -2588,9 +2570,12 @@ public final class ItemsProto {
       public java.lang.String getUsageUuid() {
         java.lang.Object ref = usageUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          usageUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            usageUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2664,7 +2649,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -2678,9 +2662,12 @@ public final class ItemsProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2738,7 +2725,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 itemId = 3;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 3;</code>
@@ -2771,7 +2757,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int64 timeOfEntry = 4;
       private long timeOfEntry_ ;
       /**
        * <code>optional int64 timeOfEntry = 4;</code>
@@ -2804,7 +2789,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional string userDataUuid = 5;
       private java.lang.Object userDataUuid_ = "";
       /**
        * <code>optional string userDataUuid = 5;</code>
@@ -2818,9 +2802,12 @@ public final class ItemsProto {
       public java.lang.String getUserDataUuid() {
         java.lang.Object ref = userDataUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userDataUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userDataUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2878,7 +2865,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];
       private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       /**
        * <code>optional .com.lvl6.proto.GameActionType actionType = 6 [default = NO_HELP];</code>
@@ -2925,10 +2911,10 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemUsageProto)
   }
 
-  public interface UserItemSecretGiftProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserItemSecretGiftProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserItemSecretGiftProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string uisgUuid = 1;
     /**
      * <code>optional string uisgUuid = 1;</code>
      */
@@ -2943,7 +2929,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUisgUuidBytes();
 
-    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -2958,7 +2943,6 @@ public final class ItemsProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 secsTillCollection = 3;
     /**
      * <code>optional int32 secsTillCollection = 3;</code>
      */
@@ -2968,7 +2952,6 @@ public final class ItemsProto {
      */
     int getSecsTillCollection();
 
-    // optional int32 itemId = 4;
     /**
      * <code>optional int32 itemId = 4;</code>
      */
@@ -2978,7 +2961,6 @@ public final class ItemsProto {
      */
     int getItemId();
 
-    // optional int64 createTime = 5;
     /**
      * <code>optional int64 createTime = 5;</code>
      */
@@ -2996,8 +2978,9 @@ public final class ItemsProto {
    * </pre>
    */
   public static final class UserItemSecretGiftProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserItemSecretGiftProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserItemSecretGiftProto)
+      UserItemSecretGiftProtoOrBuilder {
     // Use UserItemSecretGiftProto.newBuilder() to construct.
     private UserItemSecretGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3044,13 +3027,15 @@ public final class ItemsProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              uisgUuid_ = input.readBytes();
+              uisgUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -3108,7 +3093,6 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    // optional string uisgUuid = 1;
     public static final int UISGUUID_FIELD_NUMBER = 1;
     private java.lang.Object uisgUuid_;
     /**
@@ -3151,7 +3135,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -3194,7 +3177,6 @@ public final class ItemsProto {
       }
     }
 
-    // optional int32 secsTillCollection = 3;
     public static final int SECSTILLCOLLECTION_FIELD_NUMBER = 3;
     private int secsTillCollection_;
     /**
@@ -3210,7 +3192,6 @@ public final class ItemsProto {
       return secsTillCollection_;
     }
 
-    // optional int32 itemId = 4;
     public static final int ITEMID_FIELD_NUMBER = 4;
     private int itemId_;
     /**
@@ -3226,7 +3207,6 @@ public final class ItemsProto {
       return itemId_;
     }
 
-    // optional int64 createTime = 5;
     public static final int CREATETIME_FIELD_NUMBER = 5;
     private long createTime_;
     /**
@@ -3252,7 +3232,8 @@ public final class ItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3391,8 +3372,9 @@ public final class ItemsProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserItemSecretGiftProto)
+        com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
@@ -3545,7 +3527,6 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      // optional string uisgUuid = 1;
       private java.lang.Object uisgUuid_ = "";
       /**
        * <code>optional string uisgUuid = 1;</code>
@@ -3559,9 +3540,12 @@ public final class ItemsProto {
       public java.lang.String getUisgUuid() {
         java.lang.Object ref = uisgUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          uisgUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            uisgUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3619,7 +3603,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -3633,9 +3616,12 @@ public final class ItemsProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3693,7 +3679,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 secsTillCollection = 3;
       private int secsTillCollection_ ;
       /**
        * <code>optional int32 secsTillCollection = 3;</code>
@@ -3726,7 +3711,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int32 itemId = 4;
       private int itemId_ ;
       /**
        * <code>optional int32 itemId = 4;</code>
@@ -3759,7 +3743,6 @@ public final class ItemsProto {
         return this;
       }
 
-      // optional int64 createTime = 5;
       private long createTime_ ;
       /**
        * <code>optional int64 createTime = 5;</code>
@@ -3803,22 +3786,22 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemSecretGiftProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserItemProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3852,42 +3835,43 @@ public final class ItemsProto {
       "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_UserItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_UserItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserItemProto_descriptor,
-              new java.lang.String[] { "UserUuid", "ItemId", "Quantity", });
-          internal_static_com_lvl6_proto_ItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ItemProto_descriptor,
-              new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", });
-          internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserItemUsageProto_descriptor,
-              new java.lang.String[] { "UsageUuid", "UserUuid", "ItemId", "TimeOfEntry", "UserDataUuid", "ActionType", });
-          internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
-              new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "ItemId", "CreateTime", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_UserItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_UserItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserItemProto_descriptor,
+        new java.lang.String[] { "UserUuid", "ItemId", "Quantity", });
+    internal_static_com_lvl6_proto_ItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ItemProto_descriptor,
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", });
+    internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserItemUsageProto_descriptor,
+        new java.lang.String[] { "UsageUuid", "UserUuid", "ItemId", "TimeOfEntry", "UserDataUuid", "ActionType", });
+    internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
+        new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "ItemId", "CreateTime", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

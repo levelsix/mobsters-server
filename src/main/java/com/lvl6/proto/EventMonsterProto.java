@@ -8,10 +8,10 @@ public final class EventMonsterProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface EvolveMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EvolveMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EvolveMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 2;
     /**
      * <code>optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 2;</code>
      *
@@ -60,7 +59,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder getEvolutionOrBuilder();
 
-    // optional int32 gemsSpent = 3;
     /**
      * <code>optional int32 gemsSpent = 3;</code>
      *
@@ -80,7 +78,6 @@ public final class EventMonsterProto {
      */
     int getGemsSpent();
 
-    // optional sint32 oilChange = 4;
     /**
      * <code>optional sint32 oilChange = 4;</code>
      *
@@ -102,8 +99,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EvolveMonsterRequestProto}
    */
   public static final class EvolveMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EvolveMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EvolveMonsterRequestProto)
+      EvolveMonsterRequestProtoOrBuilder {
     // Use EvolveMonsterRequestProto.newBuilder() to construct.
     private EvolveMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -225,7 +223,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -247,7 +244,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 2;
     public static final int EVOLUTION_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto evolution_;
     /**
@@ -290,7 +286,6 @@ public final class EventMonsterProto {
       return evolution_;
     }
 
-    // optional int32 gemsSpent = 3;
     public static final int GEMSSPENT_FIELD_NUMBER = 3;
     private int gemsSpent_;
     /**
@@ -316,7 +311,6 @@ public final class EventMonsterProto {
       return gemsSpent_;
     }
 
-    // optional sint32 oilChange = 4;
     public static final int OILCHANGE_FIELD_NUMBER = 4;
     private int oilChange_;
     /**
@@ -349,7 +343,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -477,8 +472,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EvolveMonsterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EvolveMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor;
@@ -636,7 +632,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -745,7 +740,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -753,7 +748,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 2;
       private com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto evolution_ = com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder> evolutionBuilder_;
@@ -925,7 +919,7 @@ public final class EventMonsterProto {
         if (evolutionBuilder_ == null) {
           evolutionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder>(
-                  evolution_,
+                  getEvolution(),
                   getParentForChildren(),
                   isClean());
           evolution_ = null;
@@ -933,7 +927,6 @@ public final class EventMonsterProto {
         return evolutionBuilder_;
       }
 
-      // optional int32 gemsSpent = 3;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 3;</code>
@@ -986,7 +979,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional sint32 oilChange = 4;
       private int oilChange_ ;
       /**
        * <code>optional sint32 oilChange = 4;</code>
@@ -1046,10 +1038,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvolveMonsterRequestProto)
   }
 
-  public interface EvolveMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EvolveMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EvolveMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1063,7 +1055,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
      */
@@ -1077,8 +1068,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EvolveMonsterResponseProto}
    */
   public static final class EvolveMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EvolveMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EvolveMonsterResponseProto)
+      EvolveMonsterResponseProtoOrBuilder {
     // Use EvolveMonsterResponseProto.newBuilder() to construct.
     private EvolveMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1323,7 +1315,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1345,7 +1336,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus status_;
     /**
@@ -1368,7 +1358,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1482,8 +1473,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EvolveMonsterResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EvolveMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor;
@@ -1614,7 +1606,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1723,7 +1714,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1731,7 +1722,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
@@ -1778,10 +1768,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvolveMonsterResponseProto)
   }
 
-  public interface EvolutionFinishedRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EvolutionFinishedRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EvolutionFinishedRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1795,7 +1785,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 gemsSpent = 2;
     /**
      * <code>optional int32 gemsSpent = 2;</code>
      *
@@ -1819,8 +1808,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EvolutionFinishedRequestProto}
    */
   public static final class EvolutionFinishedRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EvolutionFinishedRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EvolutionFinishedRequestProto)
+      EvolutionFinishedRequestProtoOrBuilder {
     // Use EvolutionFinishedRequestProto.newBuilder() to construct.
     private EvolutionFinishedRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1924,7 +1914,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1946,7 +1935,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional int32 gemsSpent = 2;
     public static final int GEMSSPENT_FIELD_NUMBER = 2;
     private int gemsSpent_;
     /**
@@ -1979,7 +1967,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2093,8 +2082,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EvolutionFinishedRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EvolutionFinishedRequestProto)
+        com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor;
@@ -2225,7 +2215,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2334,7 +2323,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2342,7 +2331,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional int32 gemsSpent = 2;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 2;</code>
@@ -2406,10 +2394,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvolutionFinishedRequestProto)
   }
 
-  public interface EvolutionFinishedResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EvolutionFinishedResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EvolutionFinishedResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2423,7 +2411,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.FullUserMonsterProto evolvedMonster = 2;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto evolvedMonster = 2;</code>
      */
@@ -2437,7 +2424,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getEvolvedMonsterOrBuilder();
 
-    // optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
      */
@@ -2451,8 +2437,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EvolutionFinishedResponseProto}
    */
   public static final class EvolutionFinishedResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EvolutionFinishedResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EvolutionFinishedResponseProto)
+      EvolutionFinishedResponseProtoOrBuilder {
     // Use EvolutionFinishedResponseProto.newBuilder() to construct.
     private EvolutionFinishedResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2666,7 +2653,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2688,7 +2674,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.FullUserMonsterProto evolvedMonster = 2;
     public static final int EVOLVEDMONSTER_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto evolvedMonster_;
     /**
@@ -2710,7 +2695,6 @@ public final class EventMonsterProto {
       return evolvedMonster_;
     }
 
-    // optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status_;
     /**
@@ -2734,7 +2718,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2855,8 +2840,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EvolutionFinishedResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EvolutionFinishedResponseProto)
+        com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor;
@@ -3005,7 +2991,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3114,7 +3099,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3122,7 +3107,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.FullUserMonsterProto evolvedMonster = 2;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto evolvedMonster_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> evolvedMonsterBuilder_;
@@ -3231,7 +3215,7 @@ public final class EventMonsterProto {
         if (evolvedMonsterBuilder_ == null) {
           evolvedMonsterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  evolvedMonster_,
+                  getEvolvedMonster(),
                   getParentForChildren(),
                   isClean());
           evolvedMonster_ = null;
@@ -3239,7 +3223,6 @@ public final class EventMonsterProto {
         return evolvedMonsterBuilder_;
       }
 
-      // optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;
       private com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status_ = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
@@ -3286,10 +3269,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvolutionFinishedResponseProto)
   }
 
-  public interface SubmitMonsterEnhancementRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SubmitMonsterEnhancementRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -3303,7 +3286,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];
     /**
      * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
@@ -3348,7 +3330,6 @@ public final class EventMonsterProto {
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];
     /**
      * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
@@ -3373,7 +3354,6 @@ public final class EventMonsterProto {
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipNew = 4;
     /**
      * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipNew = 4;</code>
      */
@@ -3398,7 +3378,6 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipNewOrBuilder(
         int index);
 
-    // optional int32 gemsSpent = 5;
     /**
      * <code>optional int32 gemsSpent = 5;</code>
      *
@@ -3418,7 +3397,6 @@ public final class EventMonsterProto {
      */
     int getGemsSpent();
 
-    // optional sint32 oilChange = 6;
     /**
      * <code>optional sint32 oilChange = 6;</code>
      *
@@ -3446,8 +3424,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementRequestProto}
    */
   public static final class SubmitMonsterEnhancementRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SubmitMonsterEnhancementRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
+      SubmitMonsterEnhancementRequestProtoOrBuilder {
     // Use SubmitMonsterEnhancementRequestProto.newBuilder() to construct.
     private SubmitMonsterEnhancementRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3589,7 +3568,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -3611,7 +3589,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];
     public static final int UEIPDELETE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipDelete_;
     /**
@@ -3667,7 +3644,6 @@ public final class EventMonsterProto {
       return ueipDelete_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];
     public static final int UEIPUPDATE_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipUpdate_;
     /**
@@ -3703,7 +3679,6 @@ public final class EventMonsterProto {
       return ueipUpdate_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserEnhancementItemProto ueipNew = 4;
     public static final int UEIPNEW_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipNew_;
     /**
@@ -3739,7 +3714,6 @@ public final class EventMonsterProto {
       return ueipNew_.get(index);
     }
 
-    // optional int32 gemsSpent = 5;
     public static final int GEMSSPENT_FIELD_NUMBER = 5;
     private int gemsSpent_;
     /**
@@ -3765,7 +3739,6 @@ public final class EventMonsterProto {
       return gemsSpent_;
     }
 
-    // optional sint32 oilChange = 6;
     public static final int OILCHANGE_FIELD_NUMBER = 6;
     private int oilChange_;
     /**
@@ -3806,7 +3779,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3948,8 +3922,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
+        com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
@@ -4215,7 +4190,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -4324,7 +4298,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4332,7 +4306,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipDelete_ =
         java.util.Collections.emptyList();
       private void ensureUeipDeleteIsMutable() {
@@ -4514,7 +4487,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> values) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
-          super.addAll(values, ueipDelete_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ueipDelete_);
           onChanged();
         } else {
           ueipDeleteBuilder_.addAllMessages(values);
@@ -4644,7 +4618,6 @@ public final class EventMonsterProto {
         return ueipDeleteBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipUpdate_ =
         java.util.Collections.emptyList();
       private void ensureUeipUpdateIsMutable() {
@@ -4786,7 +4759,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> values) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
-          super.addAll(values, ueipUpdate_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ueipUpdate_);
           onChanged();
         } else {
           ueipUpdateBuilder_.addAllMessages(values);
@@ -4884,7 +4858,6 @@ public final class EventMonsterProto {
         return ueipUpdateBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserEnhancementItemProto ueipNew = 4;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipNew_ =
         java.util.Collections.emptyList();
       private void ensureUeipNewIsMutable() {
@@ -5026,7 +4999,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> values) {
         if (ueipNewBuilder_ == null) {
           ensureUeipNewIsMutable();
-          super.addAll(values, ueipNew_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ueipNew_);
           onChanged();
         } else {
           ueipNewBuilder_.addAllMessages(values);
@@ -5124,7 +5098,6 @@ public final class EventMonsterProto {
         return ueipNewBuilder_;
       }
 
-      // optional int32 gemsSpent = 5;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 5;</code>
@@ -5177,7 +5150,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional sint32 oilChange = 6;
       private int oilChange_ ;
       /**
        * <code>optional sint32 oilChange = 6;</code>
@@ -5249,10 +5221,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
   }
 
-  public interface SubmitMonsterEnhancementResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SubmitMonsterEnhancementResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -5266,7 +5238,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
      */
@@ -5280,8 +5251,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementResponseProto}
    */
   public static final class SubmitMonsterEnhancementResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SubmitMonsterEnhancementResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
+      SubmitMonsterEnhancementResponseProtoOrBuilder {
     // Use SubmitMonsterEnhancementResponseProto.newBuilder() to construct.
     private SubmitMonsterEnhancementResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5499,7 +5471,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -5521,7 +5492,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status_;
     /**
@@ -5544,7 +5514,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5658,8 +5629,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
+        com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor;
@@ -5790,7 +5762,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -5899,7 +5870,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5907,7 +5878,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
@@ -5954,10 +5924,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
   }
 
-  public interface EnhancementWaitTimeCompleteRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EnhancementWaitTimeCompleteRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5971,7 +5941,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional bool isSpeedup = 2;
     /**
      * <code>optional bool isSpeedup = 2;</code>
      *
@@ -5989,7 +5958,6 @@ public final class EventMonsterProto {
      */
     boolean getIsSpeedup();
 
-    // optional int32 gemsForSpeedup = 3;
     /**
      * <code>optional int32 gemsForSpeedup = 3;</code>
      *
@@ -6007,7 +5975,6 @@ public final class EventMonsterProto {
      */
     int getGemsForSpeedup();
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
@@ -6033,7 +6000,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
-    // repeated string userMonsterUuids = 5 [deprecated = true];
     /**
      * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
@@ -6041,8 +6007,8 @@ public final class EventMonsterProto {
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    @java.lang.Deprecated com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
@@ -6069,7 +6035,6 @@ public final class EventMonsterProto {
     @java.lang.Deprecated com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
 
-    // optional string userMonsterUuid = 6;
     /**
      * <code>optional string userMonsterUuid = 6;</code>
      *
@@ -6100,8 +6065,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
    */
   public static final class EnhancementWaitTimeCompleteRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EnhancementWaitTimeCompleteRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto)
+      EnhancementWaitTimeCompleteRequestProtoOrBuilder {
     // Use EnhancementWaitTimeCompleteRequestProto.newBuilder() to construct.
     private EnhancementWaitTimeCompleteRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6184,16 +6150,18 @@ public final class EventMonsterProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000010;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userMonsterUuid_ = input.readBytes();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -6205,7 +6173,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -6239,7 +6207,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6261,7 +6228,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional bool isSpeedup = 2;
     public static final int ISSPEEDUP_FIELD_NUMBER = 2;
     private boolean isSpeedup_;
     /**
@@ -6285,7 +6251,6 @@ public final class EventMonsterProto {
       return isSpeedup_;
     }
 
-    // optional int32 gemsForSpeedup = 3;
     public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 3;
     private int gemsForSpeedup_;
     /**
@@ -6309,7 +6274,6 @@ public final class EventMonsterProto {
       return gemsForSpeedup_;
     }
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];
     public static final int UMCEP_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_;
     /**
@@ -6343,7 +6307,6 @@ public final class EventMonsterProto {
       return umcep_;
     }
 
-    // repeated string userMonsterUuids = 5 [deprecated = true];
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 5;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
@@ -6353,7 +6316,7 @@ public final class EventMonsterProto {
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated public java.util.List<java.lang.String>
+    @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -6389,7 +6352,6 @@ public final class EventMonsterProto {
       return userMonsterUuids_.getByteString(index);
     }
 
-    // optional string userMonsterUuid = 6;
     public static final int USERMONSTERUUID_FIELD_NUMBER = 6;
     private java.lang.Object userMonsterUuid_;
     /**
@@ -6455,7 +6417,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6602,8 +6565,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto)
+        com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor;
@@ -6711,8 +6675,7 @@ public final class EventMonsterProto {
           result.umcep_ = umcepBuilder_.build();
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -6790,7 +6753,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -6899,7 +6861,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6907,7 +6869,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional bool isSpeedup = 2;
       private boolean isSpeedup_ ;
       /**
        * <code>optional bool isSpeedup = 2;</code>
@@ -6956,7 +6917,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional int32 gemsForSpeedup = 3;
       private int gemsForSpeedup_ ;
       /**
        * <code>optional int32 gemsForSpeedup = 3;</code>
@@ -7005,7 +6965,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];
       private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> umcepBuilder_;
@@ -7150,7 +7109,7 @@ public final class EventMonsterProto {
         if (umcepBuilder_ == null) {
           umcepBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder>(
-                  umcep_,
+                  getUmcep(),
                   getParentForChildren(),
                   isClean());
           umcep_ = null;
@@ -7158,7 +7117,6 @@ public final class EventMonsterProto {
         return umcepBuilder_;
       }
 
-      // repeated string userMonsterUuids = 5 [deprecated = true];
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
@@ -7173,9 +7131,9 @@ public final class EventMonsterProto {
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public java.util.List<java.lang.String>
+      @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
@@ -7252,7 +7210,8 @@ public final class EventMonsterProto {
       @java.lang.Deprecated public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -7287,7 +7246,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional string userMonsterUuid = 6;
       private java.lang.Object userMonsterUuid_ = "";
       /**
        * <code>optional string userMonsterUuid = 6;</code>
@@ -7309,9 +7267,12 @@ public final class EventMonsterProto {
       public java.lang.String getUserMonsterUuid() {
         java.lang.Object ref = userMonsterUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMonsterUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7396,10 +7357,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto)
   }
 
-  public interface EnhancementWaitTimeCompleteResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EnhancementWaitTimeCompleteResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -7413,7 +7374,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
      */
@@ -7427,8 +7387,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto}
    */
   public static final class EnhancementWaitTimeCompleteResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EnhancementWaitTimeCompleteResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto)
+      EnhancementWaitTimeCompleteResponseProtoOrBuilder {
     // Use EnhancementWaitTimeCompleteResponseProto.newBuilder() to construct.
     private EnhancementWaitTimeCompleteResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7629,7 +7590,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -7651,7 +7611,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status_;
     /**
@@ -7674,7 +7633,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7788,8 +7748,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto)
+        com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor;
@@ -7920,7 +7881,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8029,7 +7989,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8037,7 +7997,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status_ = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
@@ -8084,10 +8043,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto)
   }
 
-  public interface CollectMonsterEnhancementRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CollectMonsterEnhancementRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -8101,7 +8060,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;
     /**
      * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
      *
@@ -8127,7 +8085,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
-    // repeated string userMonsterUuids = 3;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      *
@@ -8135,8 +8092,8 @@ public final class EventMonsterProto {
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      *
@@ -8167,8 +8124,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
    */
   public static final class CollectMonsterEnhancementRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CollectMonsterEnhancementRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+      CollectMonsterEnhancementRequestProtoOrBuilder {
     // Use CollectMonsterEnhancementRequestProto.newBuilder() to construct.
     private CollectMonsterEnhancementRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8241,11 +8199,12 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -8257,7 +8216,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -8291,7 +8250,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -8313,7 +8271,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;
     public static final int UMCEP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_;
     /**
@@ -8347,7 +8304,6 @@ public final class EventMonsterProto {
       return umcep_;
     }
 
-    // repeated string userMonsterUuids = 3;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
@@ -8357,7 +8313,7 @@ public final class EventMonsterProto {
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -8401,7 +8357,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8527,8 +8484,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
@@ -8622,8 +8580,7 @@ public final class EventMonsterProto {
           result.umcep_ = umcepBuilder_.build();
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -8686,7 +8643,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8795,7 +8751,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8803,7 +8759,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;
       private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> umcepBuilder_;
@@ -8948,7 +8903,7 @@ public final class EventMonsterProto {
         if (umcepBuilder_ == null) {
           umcepBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder>(
-                  umcep_,
+                  getUmcep(),
                   getParentForChildren(),
                   isClean());
           umcep_ = null;
@@ -8956,7 +8911,6 @@ public final class EventMonsterProto {
         return umcepBuilder_;
       }
 
-      // repeated string userMonsterUuids = 3;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -8971,9 +8925,9 @@ public final class EventMonsterProto {
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
@@ -9050,7 +9004,8 @@ public final class EventMonsterProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -9096,10 +9051,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
   }
 
-  public interface CollectMonsterEnhancementResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CollectMonsterEnhancementResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -9113,7 +9068,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
      */
@@ -9127,8 +9081,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto}
    */
   public static final class CollectMonsterEnhancementResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CollectMonsterEnhancementResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+      CollectMonsterEnhancementResponseProtoOrBuilder {
     // Use CollectMonsterEnhancementResponseProto.newBuilder() to construct.
     private CollectMonsterEnhancementResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -9329,7 +9284,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -9351,7 +9305,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_;
     /**
@@ -9374,7 +9327,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -9488,8 +9442,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
@@ -9620,7 +9575,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -9729,7 +9683,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -9737,7 +9691,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
@@ -9784,10 +9737,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
   }
 
-  public interface EnhanceMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EnhanceMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhanceMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
@@ -9801,7 +9754,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
      *
@@ -9827,7 +9779,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder();
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
      *
@@ -9853,7 +9804,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder();
 
-    // optional int32 gemsSpent = 4 [deprecated = true];
     /**
      * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
      *
@@ -9873,7 +9823,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated int getGemsSpent();
 
-    // optional sint32 oilChange = 5 [deprecated = true];
     /**
      * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
      *
@@ -9899,8 +9848,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class EnhanceMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EnhanceMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnhanceMonsterRequestProto)
+      EnhanceMonsterRequestProtoOrBuilder {
     // Use EnhanceMonsterRequestProto.newBuilder() to construct.
     private EnhanceMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10035,7 +9985,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -10057,7 +10006,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];
     public static final int UEP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto uep_;
     /**
@@ -10091,7 +10039,6 @@ public final class EventMonsterProto {
       return uep_;
     }
 
-    // optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];
     public static final int ENHANCINGRESULT_FIELD_NUMBER = 3;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto enhancingResult_;
     /**
@@ -10125,7 +10072,6 @@ public final class EventMonsterProto {
       return enhancingResult_;
     }
 
-    // optional int32 gemsSpent = 4 [deprecated = true];
     public static final int GEMSSPENT_FIELD_NUMBER = 4;
     private int gemsSpent_;
     /**
@@ -10151,7 +10097,6 @@ public final class EventMonsterProto {
       return gemsSpent_;
     }
 
-    // optional sint32 oilChange = 5 [deprecated = true];
     public static final int OILCHANGE_FIELD_NUMBER = 5;
     private int oilChange_;
     /**
@@ -10185,7 +10130,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -10324,8 +10270,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnhanceMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor;
@@ -10501,7 +10448,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -10610,7 +10556,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -10618,7 +10564,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];
       private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto uep_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder> uepBuilder_;
@@ -10763,7 +10708,7 @@ public final class EventMonsterProto {
         if (uepBuilder_ == null) {
           uepBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder>(
-                  uep_,
+                  getUep(),
                   getParentForChildren(),
                   isClean());
           uep_ = null;
@@ -10771,7 +10716,6 @@ public final class EventMonsterProto {
         return uepBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];
       private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto enhancingResult_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> enhancingResultBuilder_;
@@ -10916,7 +10860,7 @@ public final class EventMonsterProto {
         if (enhancingResultBuilder_ == null) {
           enhancingResultBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder>(
-                  enhancingResult_,
+                  getEnhancingResult(),
                   getParentForChildren(),
                   isClean());
           enhancingResult_ = null;
@@ -10924,7 +10868,6 @@ public final class EventMonsterProto {
         return enhancingResultBuilder_;
       }
 
-      // optional int32 gemsSpent = 4 [deprecated = true];
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
@@ -10977,7 +10920,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional sint32 oilChange = 5 [deprecated = true];
       private int oilChange_ ;
       /**
        * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
@@ -11037,10 +10979,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnhanceMonsterRequestProto)
   }
 
-  public interface EnhanceMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EnhanceMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhanceMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
@@ -11054,7 +10996,6 @@ public final class EventMonsterProto {
      */
     @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;</code>
      */
@@ -11072,8 +11013,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class EnhanceMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EnhanceMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EnhanceMonsterResponseProto)
+      EnhanceMonsterResponseProtoOrBuilder {
     // Use EnhanceMonsterResponseProto.newBuilder() to construct.
     private EnhanceMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -11283,7 +11225,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -11305,7 +11246,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status_;
     /**
@@ -11328,7 +11268,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11446,8 +11387,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.EnhanceMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EnhanceMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.EnhanceMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor;
@@ -11578,7 +11520,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -11687,7 +11628,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -11695,7 +11636,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.EnhanceMonsterResponseProto.EnhanceMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;</code>
@@ -11742,10 +11682,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnhanceMonsterResponseProto)
   }
 
-  public interface UpdateMonsterHealthRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpdateMonsterHealthRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpdateMonsterHealthRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -11759,7 +11699,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;</code>
      *
@@ -11804,7 +11743,6 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getUmchpOrBuilder(
         int index);
 
-    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      *
@@ -11822,7 +11760,6 @@ public final class EventMonsterProto {
      */
     long getClientTime();
 
-    // optional string userTaskUuid = 4;
     /**
      * <code>optional string userTaskUuid = 4;</code>
      *
@@ -11855,7 +11792,6 @@ public final class EventMonsterProto {
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
 
-    // optional bool isUpdateTaskStageForUser = 5;
     /**
      * <code>optional bool isUpdateTaskStageForUser = 5;</code>
      */
@@ -11865,7 +11801,6 @@ public final class EventMonsterProto {
      */
     boolean getIsUpdateTaskStageForUser();
 
-    // optional int32 nuTaskStageId = 6;
     /**
      * <code>optional int32 nuTaskStageId = 6;</code>
      */
@@ -11875,7 +11810,6 @@ public final class EventMonsterProto {
      */
     int getNuTaskStageId();
 
-    // optional string droplessTsfuUuid = 7;
     /**
      * <code>optional string droplessTsfuUuid = 7;</code>
      *
@@ -11902,7 +11836,6 @@ public final class EventMonsterProto {
     com.google.protobuf.ByteString
         getDroplessTsfuUuidBytes();
 
-    // optional bool changeNuPvpDmgMultiplier = 8;
     /**
      * <code>optional bool changeNuPvpDmgMultiplier = 8;</code>
      *
@@ -11920,7 +11853,6 @@ public final class EventMonsterProto {
      */
     boolean getChangeNuPvpDmgMultiplier();
 
-    // optional float nuPvpDmgMultiplier = 9;
     /**
      * <code>optional float nuPvpDmgMultiplier = 9;</code>
      */
@@ -11938,8 +11870,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class UpdateMonsterHealthRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpdateMonsterHealthRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpdateMonsterHealthRequestProto)
+      UpdateMonsterHealthRequestProtoOrBuilder {
     // Use UpdateMonsterHealthRequestProto.newBuilder() to construct.
     private UpdateMonsterHealthRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -12012,8 +11945,9 @@ public final class EventMonsterProto {
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userTaskUuid_ = input.readBytes();
+              userTaskUuid_ = bs;
               break;
             }
             case 40: {
@@ -12027,8 +11961,9 @@ public final class EventMonsterProto {
               break;
             }
             case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              droplessTsfuUuid_ = input.readBytes();
+              droplessTsfuUuid_ = bs;
               break;
             }
             case 64: {
@@ -12084,7 +12019,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -12106,7 +12040,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
     public static final int UMCHP_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_;
     /**
@@ -12162,7 +12095,6 @@ public final class EventMonsterProto {
       return umchp_.get(index);
     }
 
-    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -12186,7 +12118,6 @@ public final class EventMonsterProto {
       return clientTime_;
     }
 
-    // optional string userTaskUuid = 4;
     public static final int USERTASKUUID_FIELD_NUMBER = 4;
     private java.lang.Object userTaskUuid_;
     /**
@@ -12247,7 +12178,6 @@ public final class EventMonsterProto {
       }
     }
 
-    // optional bool isUpdateTaskStageForUser = 5;
     public static final int ISUPDATETASKSTAGEFORUSER_FIELD_NUMBER = 5;
     private boolean isUpdateTaskStageForUser_;
     /**
@@ -12263,7 +12193,6 @@ public final class EventMonsterProto {
       return isUpdateTaskStageForUser_;
     }
 
-    // optional int32 nuTaskStageId = 6;
     public static final int NUTASKSTAGEID_FIELD_NUMBER = 6;
     private int nuTaskStageId_;
     /**
@@ -12279,7 +12208,6 @@ public final class EventMonsterProto {
       return nuTaskStageId_;
     }
 
-    // optional string droplessTsfuUuid = 7;
     public static final int DROPLESSTSFUUUID_FIELD_NUMBER = 7;
     private java.lang.Object droplessTsfuUuid_;
     /**
@@ -12334,7 +12262,6 @@ public final class EventMonsterProto {
       }
     }
 
-    // optional bool changeNuPvpDmgMultiplier = 8;
     public static final int CHANGENUPVPDMGMULTIPLIER_FIELD_NUMBER = 8;
     private boolean changeNuPvpDmgMultiplier_;
     /**
@@ -12358,7 +12285,6 @@ public final class EventMonsterProto {
       return changeNuPvpDmgMultiplier_;
     }
 
-    // optional float nuPvpDmgMultiplier = 9;
     public static final int NUPVPDMGMULTIPLIER_FIELD_NUMBER = 9;
     private float nuPvpDmgMultiplier_;
     /**
@@ -12388,7 +12314,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -12555,8 +12482,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpdateMonsterHealthRequestProto)
+        com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor;
@@ -12787,7 +12715,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -12896,7 +12823,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -12904,7 +12831,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_ =
         java.util.Collections.emptyList();
       private void ensureUmchpIsMutable() {
@@ -13086,7 +13012,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
         if (umchpBuilder_ == null) {
           ensureUmchpIsMutable();
-          super.addAll(values, umchp_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umchp_);
           onChanged();
         } else {
           umchpBuilder_.addAllMessages(values);
@@ -13216,7 +13143,6 @@ public final class EventMonsterProto {
         return umchpBuilder_;
       }
 
-      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -13265,7 +13191,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional string userTaskUuid = 4;
       private java.lang.Object userTaskUuid_ = "";
       /**
        * <code>optional string userTaskUuid = 4;</code>
@@ -13291,9 +13216,12 @@ public final class EventMonsterProto {
       public java.lang.String getUserTaskUuid() {
         java.lang.Object ref = userTaskUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userTaskUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13375,7 +13303,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional bool isUpdateTaskStageForUser = 5;
       private boolean isUpdateTaskStageForUser_ ;
       /**
        * <code>optional bool isUpdateTaskStageForUser = 5;</code>
@@ -13408,7 +13335,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional int32 nuTaskStageId = 6;
       private int nuTaskStageId_ ;
       /**
        * <code>optional int32 nuTaskStageId = 6;</code>
@@ -13441,7 +13367,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional string droplessTsfuUuid = 7;
       private java.lang.Object droplessTsfuUuid_ = "";
       /**
        * <code>optional string droplessTsfuUuid = 7;</code>
@@ -13463,9 +13388,12 @@ public final class EventMonsterProto {
       public java.lang.String getDroplessTsfuUuid() {
         java.lang.Object ref = droplessTsfuUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          droplessTsfuUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            droplessTsfuUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13539,7 +13467,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional bool changeNuPvpDmgMultiplier = 8;
       private boolean changeNuPvpDmgMultiplier_ ;
       /**
        * <code>optional bool changeNuPvpDmgMultiplier = 8;</code>
@@ -13588,7 +13515,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional float nuPvpDmgMultiplier = 9;
       private float nuPvpDmgMultiplier_ ;
       /**
        * <code>optional float nuPvpDmgMultiplier = 9;</code>
@@ -13632,10 +13558,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMonsterHealthRequestProto)
   }
 
-  public interface UpdateMonsterHealthResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpdateMonsterHealthResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpdateMonsterHealthResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -13649,7 +13575,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
      */
@@ -13663,8 +13588,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.UpdateMonsterHealthResponseProto}
    */
   public static final class UpdateMonsterHealthResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpdateMonsterHealthResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpdateMonsterHealthResponseProto)
+      UpdateMonsterHealthResponseProtoOrBuilder {
     // Use UpdateMonsterHealthResponseProto.newBuilder() to construct.
     private UpdateMonsterHealthResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -13865,7 +13791,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -13887,7 +13812,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_;
     /**
@@ -13910,7 +13834,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14024,8 +13949,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.UpdateMonsterHealthResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpdateMonsterHealthResponseProto)
+        com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor;
@@ -14156,7 +14082,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -14265,7 +14190,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -14273,7 +14198,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
@@ -14320,10 +14244,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMonsterHealthResponseProto)
   }
 
-  public interface HealMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface HealMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.HealMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -14337,7 +14261,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhDelete = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterHealingProto umhDelete = 2;</code>
      *
@@ -14382,7 +14305,6 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhDeleteOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhUpdate = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterHealingProto umhUpdate = 3;</code>
      *
@@ -14432,7 +14354,6 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhUpdateOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhNew = 4;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterHealingProto umhNew = 4;</code>
      *
@@ -14477,7 +14398,6 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhNewOrBuilder(
         int index);
 
-    // optional sint32 cashChange = 5;
     /**
      * <code>optional sint32 cashChange = 5;</code>
      *
@@ -14501,7 +14421,6 @@ public final class EventMonsterProto {
      */
     int getCashChange();
 
-    // optional int32 gemCostForHealing = 6;
     /**
      * <code>optional int32 gemCostForHealing = 6;</code>
      *
@@ -14519,7 +14438,6 @@ public final class EventMonsterProto {
      */
     int getGemCostForHealing();
 
-    // optional bool isSpeedup = 7;
     /**
      * <code>optional bool isSpeedup = 7;</code>
      *
@@ -14537,7 +14455,6 @@ public final class EventMonsterProto {
      */
     boolean getIsSpeedup();
 
-    // optional int32 gemsForSpeedup = 8;
     /**
      * <code>optional int32 gemsForSpeedup = 8;</code>
      *
@@ -14555,7 +14472,6 @@ public final class EventMonsterProto {
      */
     int getGemsForSpeedup();
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 9;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 9;</code>
      */
@@ -14584,8 +14500,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.HealMonsterRequestProto}
    */
   public static final class HealMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements HealMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.HealMonsterRequestProto)
+      HealMonsterRequestProtoOrBuilder {
     // Use HealMonsterRequestProto.newBuilder() to construct.
     private HealMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -14748,7 +14665,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -14770,7 +14686,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhDelete = 2;
     public static final int UMHDELETE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhDelete_;
     /**
@@ -14826,7 +14741,6 @@ public final class EventMonsterProto {
       return umhDelete_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhUpdate = 3;
     public static final int UMHUPDATE_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhUpdate_;
     /**
@@ -14887,7 +14801,6 @@ public final class EventMonsterProto {
       return umhUpdate_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhNew = 4;
     public static final int UMHNEW_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhNew_;
     /**
@@ -14943,7 +14856,6 @@ public final class EventMonsterProto {
       return umhNew_.get(index);
     }
 
-    // optional sint32 cashChange = 5;
     public static final int CASHCHANGE_FIELD_NUMBER = 5;
     private int cashChange_;
     /**
@@ -14973,7 +14885,6 @@ public final class EventMonsterProto {
       return cashChange_;
     }
 
-    // optional int32 gemCostForHealing = 6;
     public static final int GEMCOSTFORHEALING_FIELD_NUMBER = 6;
     private int gemCostForHealing_;
     /**
@@ -14997,7 +14908,6 @@ public final class EventMonsterProto {
       return gemCostForHealing_;
     }
 
-    // optional bool isSpeedup = 7;
     public static final int ISSPEEDUP_FIELD_NUMBER = 7;
     private boolean isSpeedup_;
     /**
@@ -15021,7 +14931,6 @@ public final class EventMonsterProto {
       return isSpeedup_;
     }
 
-    // optional int32 gemsForSpeedup = 8;
     public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 8;
     private int gemsForSpeedup_;
     /**
@@ -15045,7 +14954,6 @@ public final class EventMonsterProto {
       return gemsForSpeedup_;
     }
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 9;
     public static final int UMCHP_FIELD_NUMBER = 9;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_;
     /**
@@ -15095,7 +15003,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -15258,8 +15167,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.HealMonsterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.HealMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.HealMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.HealMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor;
@@ -15585,7 +15495,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -15694,7 +15603,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -15702,7 +15611,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterHealingProto umhDelete = 2;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhDelete_ =
         java.util.Collections.emptyList();
       private void ensureUmhDeleteIsMutable() {
@@ -15884,7 +15792,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> values) {
         if (umhDeleteBuilder_ == null) {
           ensureUmhDeleteIsMutable();
-          super.addAll(values, umhDelete_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umhDelete_);
           onChanged();
         } else {
           umhDeleteBuilder_.addAllMessages(values);
@@ -16014,7 +15923,6 @@ public final class EventMonsterProto {
         return umhDeleteBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterHealingProto umhUpdate = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhUpdate_ =
         java.util.Collections.emptyList();
       private void ensureUmhUpdateIsMutable() {
@@ -16206,7 +16114,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> values) {
         if (umhUpdateBuilder_ == null) {
           ensureUmhUpdateIsMutable();
-          super.addAll(values, umhUpdate_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umhUpdate_);
           onChanged();
         } else {
           umhUpdateBuilder_.addAllMessages(values);
@@ -16344,7 +16253,6 @@ public final class EventMonsterProto {
         return umhUpdateBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterHealingProto umhNew = 4;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhNew_ =
         java.util.Collections.emptyList();
       private void ensureUmhNewIsMutable() {
@@ -16526,7 +16434,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> values) {
         if (umhNewBuilder_ == null) {
           ensureUmhNewIsMutable();
-          super.addAll(values, umhNew_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umhNew_);
           onChanged();
         } else {
           umhNewBuilder_.addAllMessages(values);
@@ -16656,7 +16565,6 @@ public final class EventMonsterProto {
         return umhNewBuilder_;
       }
 
-      // optional sint32 cashChange = 5;
       private int cashChange_ ;
       /**
        * <code>optional sint32 cashChange = 5;</code>
@@ -16717,7 +16625,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional int32 gemCostForHealing = 6;
       private int gemCostForHealing_ ;
       /**
        * <code>optional int32 gemCostForHealing = 6;</code>
@@ -16766,7 +16673,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional bool isSpeedup = 7;
       private boolean isSpeedup_ ;
       /**
        * <code>optional bool isSpeedup = 7;</code>
@@ -16815,7 +16721,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional int32 gemsForSpeedup = 8;
       private int gemsForSpeedup_ ;
       /**
        * <code>optional int32 gemsForSpeedup = 8;</code>
@@ -16864,7 +16769,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 9;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_ =
         java.util.Collections.emptyList();
       private void ensureUmchpIsMutable() {
@@ -17006,7 +16910,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
         if (umchpBuilder_ == null) {
           ensureUmchpIsMutable();
-          super.addAll(values, umchp_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umchp_);
           onChanged();
         } else {
           umchpBuilder_.addAllMessages(values);
@@ -17115,10 +17020,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.HealMonsterRequestProto)
   }
 
-  public interface HealMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface HealMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.HealMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -17132,7 +17037,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
      */
@@ -17146,8 +17050,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.HealMonsterResponseProto}
    */
   public static final class HealMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements HealMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.HealMonsterResponseProto)
+      HealMonsterResponseProtoOrBuilder {
     // Use HealMonsterResponseProto.newBuilder() to construct.
     private HealMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -17375,7 +17280,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -17397,7 +17301,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus status_;
     /**
@@ -17420,7 +17323,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -17534,8 +17438,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.HealMonsterResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.HealMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.HealMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.HealMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor;
@@ -17666,7 +17571,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -17775,7 +17679,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -17783,7 +17687,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
@@ -17830,10 +17733,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.HealMonsterResponseProto)
   }
 
-  public interface AddMonsterToBattleTeamRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AddMonsterToBattleTeamRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AddMonsterToBattleTeamRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -17847,7 +17750,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 teamSlotNum = 2;
     /**
      * <code>optional int32 teamSlotNum = 2;</code>
      */
@@ -17857,7 +17759,6 @@ public final class EventMonsterProto {
      */
     int getTeamSlotNum();
 
-    // optional string userMonsterUuid = 3;
     /**
      * <code>optional string userMonsterUuid = 3;</code>
      */
@@ -17876,8 +17777,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamRequestProto}
    */
   public static final class AddMonsterToBattleTeamRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AddMonsterToBattleTeamRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AddMonsterToBattleTeamRequestProto)
+      AddMonsterToBattleTeamRequestProtoOrBuilder {
     // Use AddMonsterToBattleTeamRequestProto.newBuilder() to construct.
     private AddMonsterToBattleTeamRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -17942,8 +17844,9 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userMonsterUuid_ = input.readBytes();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -17986,7 +17889,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -18008,7 +17910,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional int32 teamSlotNum = 2;
     public static final int TEAMSLOTNUM_FIELD_NUMBER = 2;
     private int teamSlotNum_;
     /**
@@ -18024,7 +17925,6 @@ public final class EventMonsterProto {
       return teamSlotNum_;
     }
 
-    // optional string userMonsterUuid = 3;
     public static final int USERMONSTERUUID_FIELD_NUMBER = 3;
     private java.lang.Object userMonsterUuid_;
     /**
@@ -18075,7 +17975,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -18196,8 +18097,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AddMonsterToBattleTeamRequestProto)
+        com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor;
@@ -18339,7 +18241,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -18448,7 +18349,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -18456,7 +18357,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional int32 teamSlotNum = 2;
       private int teamSlotNum_ ;
       /**
        * <code>optional int32 teamSlotNum = 2;</code>
@@ -18489,7 +18389,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional string userMonsterUuid = 3;
       private java.lang.Object userMonsterUuid_ = "";
       /**
        * <code>optional string userMonsterUuid = 3;</code>
@@ -18503,9 +18402,12 @@ public final class EventMonsterProto {
       public java.lang.String getUserMonsterUuid() {
         java.lang.Object ref = userMonsterUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMonsterUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -18574,10 +18476,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AddMonsterToBattleTeamRequestProto)
   }
 
-  public interface AddMonsterToBattleTeamResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AddMonsterToBattleTeamResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AddMonsterToBattleTeamResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -18591,7 +18493,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
      */
@@ -18605,8 +18506,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamResponseProto}
    */
   public static final class AddMonsterToBattleTeamResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AddMonsterToBattleTeamResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AddMonsterToBattleTeamResponseProto)
+      AddMonsterToBattleTeamResponseProtoOrBuilder {
     // Use AddMonsterToBattleTeamResponseProto.newBuilder() to construct.
     private AddMonsterToBattleTeamResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -18798,7 +18700,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -18820,7 +18721,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_;
     /**
@@ -18843,7 +18743,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -18957,8 +18858,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AddMonsterToBattleTeamResponseProto)
+        com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor;
@@ -19089,7 +18991,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -19198,7 +19099,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -19206,7 +19107,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
@@ -19253,10 +19153,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AddMonsterToBattleTeamResponseProto)
   }
 
-  public interface RemoveMonsterFromBattleTeamRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RemoveMonsterFromBattleTeamRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -19270,7 +19170,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userMonsterUuid = 3;
     /**
      * <code>optional string userMonsterUuid = 3;</code>
      */
@@ -19289,8 +19188,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto}
    */
   public static final class RemoveMonsterFromBattleTeamRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RemoveMonsterFromBattleTeamRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto)
+      RemoveMonsterFromBattleTeamRequestProtoOrBuilder {
     // Use RemoveMonsterFromBattleTeamRequestProto.newBuilder() to construct.
     private RemoveMonsterFromBattleTeamRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -19350,8 +19250,9 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userMonsterUuid_ = input.readBytes();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -19394,7 +19295,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -19416,7 +19316,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional string userMonsterUuid = 3;
     public static final int USERMONSTERUUID_FIELD_NUMBER = 3;
     private java.lang.Object userMonsterUuid_;
     /**
@@ -19466,7 +19365,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -19580,8 +19480,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto)
+        com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor;
@@ -19714,7 +19615,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -19823,7 +19723,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -19831,7 +19731,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional string userMonsterUuid = 3;
       private java.lang.Object userMonsterUuid_ = "";
       /**
        * <code>optional string userMonsterUuid = 3;</code>
@@ -19845,9 +19744,12 @@ public final class EventMonsterProto {
       public java.lang.String getUserMonsterUuid() {
         java.lang.Object ref = userMonsterUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMonsterUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -19916,10 +19818,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto)
   }
 
-  public interface RemoveMonsterFromBattleTeamResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RemoveMonsterFromBattleTeamResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -19933,7 +19835,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
      */
@@ -19947,8 +19848,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto}
    */
   public static final class RemoveMonsterFromBattleTeamResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RemoveMonsterFromBattleTeamResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto)
+      RemoveMonsterFromBattleTeamResponseProtoOrBuilder {
     // Use RemoveMonsterFromBattleTeamResponseProto.newBuilder() to construct.
     private RemoveMonsterFromBattleTeamResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -20140,7 +20042,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -20162,7 +20063,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_;
     /**
@@ -20185,7 +20085,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -20299,8 +20200,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto)
+        com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor;
@@ -20431,7 +20333,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -20540,7 +20441,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -20548,7 +20449,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
@@ -20595,10 +20495,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto)
   }
 
-  public interface IncreaseMonsterInventorySlotRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface IncreaseMonsterInventorySlotRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -20612,7 +20512,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
     /**
      * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;</code>
      */
@@ -20622,7 +20521,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType getIncreaseSlotType();
 
-    // optional string userStructUuid = 3;
     /**
      * <code>optional string userStructUuid = 3;</code>
      */
@@ -20637,7 +20535,6 @@ public final class EventMonsterProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // repeated string userFbInviteForSlotUuids = 4;
     /**
      * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
@@ -20645,8 +20542,8 @@ public final class EventMonsterProto {
      *all these invites are for one userstruct
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getUserFbInviteForSlotUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserFbInviteForSlotUuidsList();
     /**
      * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
@@ -20682,8 +20579,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class IncreaseMonsterInventorySlotRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements IncreaseMonsterInventorySlotRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
+      IncreaseMonsterInventorySlotRequestProtoOrBuilder {
     // Use IncreaseMonsterInventorySlotRequestProto.newBuilder() to construct.
     private IncreaseMonsterInventorySlotRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -20754,16 +20652,18 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 userFbInviteForSlotUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000008;
               }
-              userFbInviteForSlotUuids_.add(input.readBytes());
+              userFbInviteForSlotUuids_.add(bs);
               break;
             }
           }
@@ -20775,7 +20675,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          userFbInviteForSlotUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userFbInviteForSlotUuids_);
+          userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -20891,7 +20791,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -20913,7 +20812,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
     public static final int INCREASESLOTTYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType_;
     /**
@@ -20929,7 +20827,6 @@ public final class EventMonsterProto {
       return increaseSlotType_;
     }
 
-    // optional string userStructUuid = 3;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 3;
     private java.lang.Object userStructUuid_;
     /**
@@ -20972,7 +20869,6 @@ public final class EventMonsterProto {
       }
     }
 
-    // repeated string userFbInviteForSlotUuids = 4;
     public static final int USERFBINVITEFORSLOTUUIDS_FIELD_NUMBER = 4;
     private com.google.protobuf.LazyStringList userFbInviteForSlotUuids_;
     /**
@@ -20982,7 +20878,7 @@ public final class EventMonsterProto {
      *all these invites are for one userstruct
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserFbInviteForSlotUuidsList() {
       return userFbInviteForSlotUuids_;
     }
@@ -21027,7 +20923,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -21165,8 +21062,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor;
@@ -21257,8 +21155,7 @@ public final class EventMonsterProto {
         }
         result.userStructUuid_ = userStructUuid_;
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          userFbInviteForSlotUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userFbInviteForSlotUuids_);
+          userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_;
@@ -21326,7 +21223,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -21435,7 +21331,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -21443,7 +21339,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
       private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
       /**
        * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;</code>
@@ -21479,7 +21374,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional string userStructUuid = 3;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 3;</code>
@@ -21493,9 +21387,12 @@ public final class EventMonsterProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -21553,7 +21450,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // repeated string userFbInviteForSlotUuids = 4;
       private com.google.protobuf.LazyStringList userFbInviteForSlotUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserFbInviteForSlotUuidsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
@@ -21568,9 +21464,9 @@ public final class EventMonsterProto {
        *all these invites are for one userstruct
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserFbInviteForSlotUuidsList() {
-        return java.util.Collections.unmodifiableList(userFbInviteForSlotUuids_);
+        return userFbInviteForSlotUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userFbInviteForSlotUuids = 4;</code>
@@ -21647,7 +21543,8 @@ public final class EventMonsterProto {
       public Builder addAllUserFbInviteForSlotUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserFbInviteForSlotUuidsIsMutable();
-        super.addAll(values, userFbInviteForSlotUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userFbInviteForSlotUuids_);
         onChanged();
         return this;
       }
@@ -21693,10 +21590,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
   }
 
-  public interface IncreaseMonsterInventorySlotResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface IncreaseMonsterInventorySlotResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -21710,7 +21607,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
      */
@@ -21724,8 +21620,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto}
    */
   public static final class IncreaseMonsterInventorySlotResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements IncreaseMonsterInventorySlotResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
+      IncreaseMonsterInventorySlotResponseProtoOrBuilder {
     // Use IncreaseMonsterInventorySlotResponseProto.newBuilder() to construct.
     private IncreaseMonsterInventorySlotResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -21961,7 +21858,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -21983,7 +21879,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_;
     /**
@@ -22006,7 +21901,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -22120,8 +22016,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor;
@@ -22252,7 +22149,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -22361,7 +22257,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -22369,7 +22265,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
@@ -22416,10 +22311,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
   }
 
-  public interface InviteFbFriendsForSlotsRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface InviteFbFriendsForSlotsRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;</code>
      */
@@ -22433,7 +22328,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
     /**
      * <code>repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;</code>
      */
@@ -22468,8 +22362,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class InviteFbFriendsForSlotsRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements InviteFbFriendsForSlotsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto)
+      InviteFbFriendsForSlotsRequestProtoOrBuilder {
     // Use InviteFbFriendsForSlotsRequestProto.newBuilder() to construct.
     private InviteFbFriendsForSlotsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -22578,10 +22473,10 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    public interface FacebookInviteStructureOrBuilder
-        extends com.google.protobuf.MessageOrBuilder {
+    public interface FacebookInviteStructureOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)
+        com.google.protobuf.MessageOrBuilder {
 
-      // optional string fbFriendId = 1;
       /**
        * <code>optional string fbFriendId = 1;</code>
        */
@@ -22596,7 +22491,6 @@ public final class EventMonsterProto {
       com.google.protobuf.ByteString
           getFbFriendIdBytes();
 
-      // optional string userStructUuid = 2;
       /**
        * <code>optional string userStructUuid = 2;</code>
        */
@@ -22611,7 +22505,6 @@ public final class EventMonsterProto {
       com.google.protobuf.ByteString
           getUserStructUuidBytes();
 
-      // optional int32 userStructFbLvl = 3;
       /**
        * <code>optional int32 userStructFbLvl = 3;</code>
        *
@@ -22639,8 +22532,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class FacebookInviteStructure extends
-        com.google.protobuf.GeneratedMessage
-        implements FacebookInviteStructureOrBuilder {
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)
+        FacebookInviteStructureOrBuilder {
       // Use FacebookInviteStructure.newBuilder() to construct.
       private FacebookInviteStructure(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -22687,13 +22581,15 @@ public final class EventMonsterProto {
                 break;
               }
               case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000001;
-                fbFriendId_ = input.readBytes();
+                fbFriendId_ = bs;
                 break;
               }
               case 18: {
+                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000002;
-                userStructUuid_ = input.readBytes();
+                userStructUuid_ = bs;
                 break;
               }
               case 24: {
@@ -22741,7 +22637,6 @@ public final class EventMonsterProto {
       }
 
       private int bitField0_;
-      // optional string fbFriendId = 1;
       public static final int FBFRIENDID_FIELD_NUMBER = 1;
       private java.lang.Object fbFriendId_;
       /**
@@ -22784,7 +22679,6 @@ public final class EventMonsterProto {
         }
       }
 
-      // optional string userStructUuid = 2;
       public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
       private java.lang.Object userStructUuid_;
       /**
@@ -22827,7 +22721,6 @@ public final class EventMonsterProto {
         }
       }
 
-      // optional int32 userStructFbLvl = 3;
       public static final int USERSTRUCTFBLVL_FIELD_NUMBER = 3;
       private int userStructFbLvl_;
       /**
@@ -22861,7 +22754,8 @@ public final class EventMonsterProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized != -1) return isInitialized == 1;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
 
         memoizedIsInitialized = 1;
         return true;
@@ -22986,8 +22880,9 @@ public final class EventMonsterProto {
        * </pre>
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor;
@@ -23122,7 +23017,6 @@ public final class EventMonsterProto {
         }
         private int bitField0_;
 
-        // optional string fbFriendId = 1;
         private java.lang.Object fbFriendId_ = "";
         /**
          * <code>optional string fbFriendId = 1;</code>
@@ -23136,9 +23030,12 @@ public final class EventMonsterProto {
         public java.lang.String getFbFriendId() {
           java.lang.Object ref = fbFriendId_;
           if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            fbFriendId_ = s;
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              fbFriendId_ = s;
+            }
             return s;
           } else {
             return (java.lang.String) ref;
@@ -23196,7 +23093,6 @@ public final class EventMonsterProto {
           return this;
         }
 
-        // optional string userStructUuid = 2;
         private java.lang.Object userStructUuid_ = "";
         /**
          * <code>optional string userStructUuid = 2;</code>
@@ -23210,9 +23106,12 @@ public final class EventMonsterProto {
         public java.lang.String getUserStructUuid() {
           java.lang.Object ref = userStructUuid_;
           if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            userStructUuid_ = s;
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              userStructUuid_ = s;
+            }
             return s;
           } else {
             return (java.lang.String) ref;
@@ -23270,7 +23169,6 @@ public final class EventMonsterProto {
           return this;
         }
 
-        // optional int32 userStructFbLvl = 3;
         private int userStructFbLvl_ ;
         /**
          * <code>optional int32 userStructFbLvl = 3;</code>
@@ -23335,7 +23233,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     /**
@@ -23357,7 +23254,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
     public static final int INVITES_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> invites_;
     /**
@@ -23400,7 +23296,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -23520,8 +23417,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto)
+        com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor;
@@ -23685,7 +23583,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
@@ -23794,7 +23691,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -23802,7 +23699,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
       private java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> invites_ =
         java.util.Collections.emptyList();
       private void ensureInvitesIsMutable() {
@@ -23944,7 +23840,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> values) {
         if (invitesBuilder_ == null) {
           ensureInvitesIsMutable();
-          super.addAll(values, invites_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, invites_);
           onChanged();
         } else {
           invitesBuilder_.addAllMessages(values);
@@ -24053,10 +23950,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto)
   }
 
-  public interface InviteFbFriendsForSlotsResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface InviteFbFriendsForSlotsResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InviteFbFriendsForSlotsResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;</code>
      */
@@ -24070,7 +23967,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
      */
@@ -24080,7 +23976,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus getStatus();
 
-    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesNew = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesNew = 3;</code>
      */
@@ -24113,8 +24008,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class InviteFbFriendsForSlotsResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements InviteFbFriendsForSlotsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InviteFbFriendsForSlotsResponseProto)
+      InviteFbFriendsForSlotsResponseProtoOrBuilder {
     // Use InviteFbFriendsForSlotsResponseProto.newBuilder() to construct.
     private InviteFbFriendsForSlotsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -24317,7 +24213,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     /**
@@ -24339,7 +24234,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status_;
     /**
@@ -24355,7 +24249,6 @@ public final class EventMonsterProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesNew = 3;
     public static final int INVITESNEW_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesNew_;
     /**
@@ -24399,7 +24292,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -24524,8 +24418,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InviteFbFriendsForSlotsResponseProto)
+        com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor;
@@ -24698,7 +24593,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
@@ -24807,7 +24701,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -24815,7 +24709,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
@@ -24851,7 +24744,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesNew = 3;
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesNew_ =
         java.util.Collections.emptyList();
       private void ensureInvitesNewIsMutable() {
@@ -24993,7 +24885,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> values) {
         if (invitesNewBuilder_ == null) {
           ensureInvitesNewIsMutable();
-          super.addAll(values, invitesNew_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, invitesNew_);
           onChanged();
         } else {
           invitesNewBuilder_.addAllMessages(values);
@@ -25102,10 +24995,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InviteFbFriendsForSlotsResponseProto)
   }
 
-  public interface AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;</code>
      */
@@ -25119,7 +25012,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
-    // repeated string acceptedInviteUuids = 2;
     /**
      * <code>repeated string acceptedInviteUuids = 2;</code>
      *
@@ -25127,8 +25019,8 @@ public final class EventMonsterProto {
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getAcceptedInviteUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getAcceptedInviteUuidsList();
     /**
      * <code>repeated string acceptedInviteUuids = 2;</code>
      *
@@ -25155,12 +25047,11 @@ public final class EventMonsterProto {
     com.google.protobuf.ByteString
         getAcceptedInviteUuidsBytes(int index);
 
-    // repeated string rejectedInviteUuids = 3;
     /**
      * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    java.util.List<java.lang.String>
-    getRejectedInviteUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getRejectedInviteUuidsList();
     /**
      * <code>repeated string rejectedInviteUuids = 3;</code>
      */
@@ -25179,8 +25070,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto}
    */
   public static final class AcceptAndRejectFbInviteForSlotsRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto)
+      AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder {
     // Use AcceptAndRejectFbInviteForSlotsRequestProto.newBuilder() to construct.
     private AcceptAndRejectFbInviteForSlotsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -25240,19 +25132,21 @@ public final class EventMonsterProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 acceptedInviteUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              acceptedInviteUuids_.add(input.readBytes());
+              acceptedInviteUuids_.add(bs);
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 rejectedInviteUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              rejectedInviteUuids_.add(input.readBytes());
+              rejectedInviteUuids_.add(bs);
               break;
             }
           }
@@ -25264,10 +25158,10 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          acceptedInviteUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(acceptedInviteUuids_);
+          acceptedInviteUuids_ = acceptedInviteUuids_.getUnmodifiableView();
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          rejectedInviteUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(rejectedInviteUuids_);
+          rejectedInviteUuids_ = rejectedInviteUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -25301,7 +25195,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     /**
@@ -25323,7 +25216,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated string acceptedInviteUuids = 2;
     public static final int ACCEPTEDINVITEUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList acceptedInviteUuids_;
     /**
@@ -25333,7 +25225,7 @@ public final class EventMonsterProto {
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getAcceptedInviteUuidsList() {
       return acceptedInviteUuids_;
     }
@@ -25369,13 +25261,12 @@ public final class EventMonsterProto {
       return acceptedInviteUuids_.getByteString(index);
     }
 
-    // repeated string rejectedInviteUuids = 3;
     public static final int REJECTEDINVITEUUIDS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList rejectedInviteUuids_;
     /**
      * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getRejectedInviteUuidsList() {
       return rejectedInviteUuids_;
     }
@@ -25407,7 +25298,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -25538,8 +25430,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto)
+        com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor;
@@ -25620,14 +25513,12 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          acceptedInviteUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              acceptedInviteUuids_);
+          acceptedInviteUuids_ = acceptedInviteUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.acceptedInviteUuids_ = acceptedInviteUuids_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          rejectedInviteUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              rejectedInviteUuids_);
+          rejectedInviteUuids_ = rejectedInviteUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.rejectedInviteUuids_ = rejectedInviteUuids_;
@@ -25697,7 +25588,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
@@ -25806,7 +25696,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -25814,7 +25704,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated string acceptedInviteUuids = 2;
       private com.google.protobuf.LazyStringList acceptedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureAcceptedInviteUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -25829,9 +25718,9 @@ public final class EventMonsterProto {
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getAcceptedInviteUuidsList() {
-        return java.util.Collections.unmodifiableList(acceptedInviteUuids_);
+        return acceptedInviteUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string acceptedInviteUuids = 2;</code>
@@ -25908,7 +25797,8 @@ public final class EventMonsterProto {
       public Builder addAllAcceptedInviteUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureAcceptedInviteUuidsIsMutable();
-        super.addAll(values, acceptedInviteUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, acceptedInviteUuids_);
         onChanged();
         return this;
       }
@@ -25943,7 +25833,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // repeated string rejectedInviteUuids = 3;
       private com.google.protobuf.LazyStringList rejectedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureRejectedInviteUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -25954,9 +25843,9 @@ public final class EventMonsterProto {
       /**
        * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getRejectedInviteUuidsList() {
-        return java.util.Collections.unmodifiableList(rejectedInviteUuids_);
+        return rejectedInviteUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string rejectedInviteUuids = 3;</code>
@@ -26009,7 +25898,8 @@ public final class EventMonsterProto {
       public Builder addAllRejectedInviteUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureRejectedInviteUuidsIsMutable();
-        super.addAll(values, rejectedInviteUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, rejectedInviteUuids_);
         onChanged();
         return this;
       }
@@ -26047,10 +25937,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto)
   }
 
-  public interface AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;</code>
      */
@@ -26064,7 +25954,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
      */
@@ -26074,7 +25963,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus getStatus();
 
-    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto acceptedInvites = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto acceptedInvites = 3;</code>
      */
@@ -26107,8 +25995,9 @@ public final class EventMonsterProto {
    * </pre>
    */
   public static final class AcceptAndRejectFbInviteForSlotsResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto)
+      AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder {
     // Use AcceptAndRejectFbInviteForSlotsResponseProto.newBuilder() to construct.
     private AcceptAndRejectFbInviteForSlotsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -26337,7 +26226,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     /**
@@ -26359,7 +26247,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status_;
     /**
@@ -26375,7 +26262,6 @@ public final class EventMonsterProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto acceptedInvites = 3;
     public static final int ACCEPTEDINVITES_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> acceptedInvites_;
     /**
@@ -26419,7 +26305,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -26544,8 +26431,9 @@ public final class EventMonsterProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto)
+        com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor;
@@ -26718,7 +26606,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
@@ -26827,7 +26714,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -26835,7 +26722,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status_ = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
@@ -26871,7 +26757,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto acceptedInvites = 3;
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> acceptedInvites_ =
         java.util.Collections.emptyList();
       private void ensureAcceptedInvitesIsMutable() {
@@ -27013,7 +26898,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> values) {
         if (acceptedInvitesBuilder_ == null) {
           ensureAcceptedInvitesIsMutable();
-          super.addAll(values, acceptedInvites_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, acceptedInvites_);
           onChanged();
         } else {
           acceptedInvitesBuilder_.addAllMessages(values);
@@ -27122,10 +27008,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto)
   }
 
-  public interface CombineUserMonsterPiecesRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CombineUserMonsterPiecesRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CombineUserMonsterPiecesRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -27139,12 +27025,11 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated string userMonsterUuids = 2;
     /**
      * <code>repeated string userMonsterUuids = 2;</code>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 2;</code>
      */
@@ -27159,7 +27044,6 @@ public final class EventMonsterProto {
     com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
 
-    // optional int32 gemCost = 3;
     /**
      * <code>optional int32 gemCost = 3;</code>
      *
@@ -27183,8 +27067,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesRequestProto}
    */
   public static final class CombineUserMonsterPiecesRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CombineUserMonsterPiecesRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CombineUserMonsterPiecesRequestProto)
+      CombineUserMonsterPiecesRequestProtoOrBuilder {
     // Use CombineUserMonsterPiecesRequestProto.newBuilder() to construct.
     private CombineUserMonsterPiecesRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -27244,11 +27129,12 @@ public final class EventMonsterProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
             case 24: {
@@ -27265,7 +27151,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -27299,7 +27185,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -27321,13 +27206,12 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated string userMonsterUuids = 2;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 2;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -27351,7 +27235,6 @@ public final class EventMonsterProto {
       return userMonsterUuids_.getByteString(index);
     }
 
-    // optional int32 gemCost = 3;
     public static final int GEMCOST_FIELD_NUMBER = 3;
     private int gemCost_;
     /**
@@ -27385,7 +27268,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -27511,8 +27395,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CombineUserMonsterPiecesRequestProto)
+        com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor;
@@ -27593,8 +27478,7 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -27661,7 +27545,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -27770,7 +27653,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -27778,7 +27661,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated string userMonsterUuids = 2;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -27789,9 +27671,9 @@ public final class EventMonsterProto {
       /**
        * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 2;</code>
@@ -27844,7 +27726,8 @@ public final class EventMonsterProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -27871,7 +27754,6 @@ public final class EventMonsterProto {
         return this;
       }
 
-      // optional int32 gemCost = 3;
       private int gemCost_ ;
       /**
        * <code>optional int32 gemCost = 3;</code>
@@ -27935,10 +27817,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CombineUserMonsterPiecesRequestProto)
   }
 
-  public interface CombineUserMonsterPiecesResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CombineUserMonsterPiecesResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CombineUserMonsterPiecesResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -27952,7 +27834,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
      */
@@ -27966,8 +27847,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesResponseProto}
    */
   public static final class CombineUserMonsterPiecesResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CombineUserMonsterPiecesResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CombineUserMonsterPiecesResponseProto)
+      CombineUserMonsterPiecesResponseProtoOrBuilder {
     // Use CombineUserMonsterPiecesResponseProto.newBuilder() to construct.
     private CombineUserMonsterPiecesResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -28185,7 +28067,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -28207,7 +28088,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status_;
     /**
@@ -28230,7 +28110,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -28344,8 +28225,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CombineUserMonsterPiecesResponseProto)
+        com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor;
@@ -28476,7 +28358,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -28585,7 +28466,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -28593,7 +28474,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status_ = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
@@ -28640,10 +28520,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CombineUserMonsterPiecesResponseProto)
   }
 
-  public interface SellUserMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SellUserMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SellUserMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -28657,7 +28537,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.MinimumUserMonsterSellProto sales = 2;
     /**
      * <code>repeated .com.lvl6.proto.MinimumUserMonsterSellProto sales = 2;</code>
      */
@@ -28686,8 +28565,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.SellUserMonsterRequestProto}
    */
   public static final class SellUserMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SellUserMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SellUserMonsterRequestProto)
+      SellUserMonsterRequestProtoOrBuilder {
     // Use SellUserMonsterRequestProto.newBuilder() to construct.
     private SellUserMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -28797,7 +28677,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -28819,7 +28698,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.MinimumUserMonsterSellProto sales = 2;
     public static final int SALES_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto> sales_;
     /**
@@ -28862,7 +28740,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -28976,8 +28855,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.SellUserMonsterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SellUserMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor;
@@ -29141,7 +29021,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -29250,7 +29129,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -29258,7 +29137,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.MinimumUserMonsterSellProto sales = 2;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto> sales_ =
         java.util.Collections.emptyList();
       private void ensureSalesIsMutable() {
@@ -29400,7 +29278,8 @@ public final class EventMonsterProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto> values) {
         if (salesBuilder_ == null) {
           ensureSalesIsMutable();
-          super.addAll(values, sales_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, sales_);
           onChanged();
         } else {
           salesBuilder_.addAllMessages(values);
@@ -29509,10 +29388,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SellUserMonsterRequestProto)
   }
 
-  public interface SellUserMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SellUserMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SellUserMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -29526,7 +29405,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
      */
@@ -29540,8 +29418,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.SellUserMonsterResponseProto}
    */
   public static final class SellUserMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SellUserMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SellUserMonsterResponseProto)
+      SellUserMonsterResponseProtoOrBuilder {
     // Use SellUserMonsterResponseProto.newBuilder() to construct.
     private SellUserMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -29733,7 +29612,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -29755,7 +29633,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus status_;
     /**
@@ -29778,7 +29655,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -29892,8 +29770,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.SellUserMonsterResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SellUserMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor;
@@ -30024,7 +29903,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -30133,7 +30011,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -30141,7 +30019,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
@@ -30188,10 +30065,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SellUserMonsterResponseProto)
   }
 
-  public interface RestrictUserMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RestrictUserMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RestrictUserMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -30205,12 +30082,11 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated string userMonsterUuids = 3;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
@@ -30229,8 +30105,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterRequestProto}
    */
   public static final class RestrictUserMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RestrictUserMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RestrictUserMonsterRequestProto)
+      RestrictUserMonsterRequestProtoOrBuilder {
     // Use RestrictUserMonsterRequestProto.newBuilder() to construct.
     private RestrictUserMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -30290,11 +30167,12 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -30306,7 +30184,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -30340,7 +30218,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -30362,13 +30239,12 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated string userMonsterUuids = 3;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -30399,7 +30275,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -30518,8 +30395,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RestrictUserMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor;
@@ -30598,8 +30476,7 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -30659,7 +30536,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -30768,7 +30644,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -30776,7 +30652,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated string userMonsterUuids = 3;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -30787,9 +30662,9 @@ public final class EventMonsterProto {
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
@@ -30842,7 +30717,8 @@ public final class EventMonsterProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -30880,10 +30756,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RestrictUserMonsterRequestProto)
   }
 
-  public interface RestrictUserMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RestrictUserMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RestrictUserMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -30897,7 +30773,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
      */
@@ -30911,8 +30786,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterResponseProto}
    */
   public static final class RestrictUserMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RestrictUserMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RestrictUserMonsterResponseProto)
+      RestrictUserMonsterResponseProtoOrBuilder {
     // Use RestrictUserMonsterResponseProto.newBuilder() to construct.
     private RestrictUserMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -31104,7 +30980,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -31126,7 +31001,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_;
     /**
@@ -31149,7 +31023,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -31263,8 +31138,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RestrictUserMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor;
@@ -31395,7 +31271,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -31504,7 +31379,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -31512,7 +31387,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
@@ -31559,10 +31433,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RestrictUserMonsterResponseProto)
   }
 
-  public interface UnrestrictUserMonsterRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UnrestrictUserMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UnrestrictUserMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -31576,12 +31450,11 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated string userMonsterUuids = 3;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
@@ -31600,8 +31473,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterRequestProto}
    */
   public static final class UnrestrictUserMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UnrestrictUserMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UnrestrictUserMonsterRequestProto)
+      UnrestrictUserMonsterRequestProtoOrBuilder {
     // Use UnrestrictUserMonsterRequestProto.newBuilder() to construct.
     private UnrestrictUserMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -31661,11 +31535,12 @@ public final class EventMonsterProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -31677,7 +31552,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -31711,7 +31586,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -31733,13 +31607,12 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // repeated string userMonsterUuids = 3;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -31770,7 +31643,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -31889,8 +31763,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UnrestrictUserMonsterRequestProto)
+        com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor;
@@ -31969,8 +31844,7 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -32030,7 +31904,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -32139,7 +32012,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -32147,7 +32020,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // repeated string userMonsterUuids = 3;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -32158,9 +32030,9 @@ public final class EventMonsterProto {
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
@@ -32213,7 +32085,8 @@ public final class EventMonsterProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -32251,10 +32124,10 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UnrestrictUserMonsterRequestProto)
   }
 
-  public interface UnrestrictUserMonsterResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UnrestrictUserMonsterResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UnrestrictUserMonsterResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -32268,7 +32141,6 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
      */
@@ -32282,8 +32154,9 @@ public final class EventMonsterProto {
    * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterResponseProto}
    */
   public static final class UnrestrictUserMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UnrestrictUserMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UnrestrictUserMonsterResponseProto)
+      UnrestrictUserMonsterResponseProtoOrBuilder {
     // Use UnrestrictUserMonsterResponseProto.newBuilder() to construct.
     private UnrestrictUserMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -32475,7 +32348,6 @@ public final class EventMonsterProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -32497,7 +32369,6 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status_;
     /**
@@ -32520,7 +32391,8 @@ public final class EventMonsterProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -32634,8 +32506,9 @@ public final class EventMonsterProto {
      * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UnrestrictUserMonsterResponseProto)
+        com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor;
@@ -32766,7 +32639,6 @@ public final class EventMonsterProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -32875,7 +32747,7 @@ public final class EventMonsterProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -32883,7 +32755,6 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
@@ -32930,177 +32801,177 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UnrestrictUserMonsterResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvolveMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvolveMonsterResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SellUserMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SellUserMonsterResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -33341,229 +33212,231 @@ public final class EventMonsterProto {
       "rProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_EvolveMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Evolution", "GemsSpent", "OilChange", });
-          internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_EvolveMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "GemsSpent", });
-          internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "EvolvedMonster", "Status", });
-          internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "OilChange", });
-          internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterUuids", "UserMonsterUuid", });
-          internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Umcep", "UserMonsterUuids", });
-          internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
-          internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(10);
-          internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Uep", "EnhancingResult", "GemsSpent", "OilChange", });
-          internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(11);
-          internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(12);
-          internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Umchp", "ClientTime", "UserTaskUuid", "IsUpdateTaskStageForUser", "NuTaskStageId", "DroplessTsfuUuid", "ChangeNuPvpDmgMultiplier", "NuPvpDmgMultiplier", });
-          internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(13);
-          internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(14);
-          internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "GemCostForHealing", "IsSpeedup", "GemsForSpeedup", "Umchp", });
-          internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(15);
-          internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(16);
-          internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "TeamSlotNum", "UserMonsterUuid", });
-          internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(17);
-          internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(18);
-          internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMonsterUuid", });
-          internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(19);
-          internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(20);
-          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "IncreaseSlotType", "UserStructUuid", "UserFbInviteForSlotUuids", });
-          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(21);
-          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(22);
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Invites", });
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor =
-            internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor.getNestedTypes().get(0);
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor,
-              new java.lang.String[] { "FbFriendId", "UserStructUuid", "UserStructFbLvl", });
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(23);
-          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "InvitesNew", });
-          internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(24);
-          internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "AcceptedInviteUuids", "RejectedInviteUuids", });
-          internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(25);
-          internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "AcceptedInvites", });
-          internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(26);
-          internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMonsterUuids", "GemCost", });
-          internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(27);
-          internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(28);
-          internal_static_com_lvl6_proto_SellUserMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "Sales", });
-          internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(29);
-          internal_static_com_lvl6_proto_SellUserMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(30);
-          internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMonsterUuids", });
-          internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(31);
-          internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(32);
-          internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMonsterUuids", });
-          internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(33);
-          internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_EvolveMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Evolution", "GemsSpent", "OilChange", });
+    internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_EvolveMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "GemsSpent", });
+    internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "EvolvedMonster", "Status", });
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "OilChange", });
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterUuids", "UserMonsterUuid", });
+    internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Umcep", "UserMonsterUuids", });
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Uep", "EnhancingResult", "GemsSpent", "OilChange", });
+    internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Umchp", "ClientTime", "UserTaskUuid", "IsUpdateTaskStageForUser", "NuTaskStageId", "DroplessTsfuUuid", "ChangeNuPvpDmgMultiplier", "NuPvpDmgMultiplier", });
+    internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "GemCostForHealing", "IsSpeedup", "GemsForSpeedup", "Umchp", });
+    internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "TeamSlotNum", "UserMonsterUuid", });
+    internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserMonsterUuid", });
+    internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "IncreaseSlotType", "UserStructUuid", "UserFbInviteForSlotUuids", });
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Invites", });
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor =
+      internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor.getNestedTypes().get(0);
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor,
+        new java.lang.String[] { "FbFriendId", "UserStructUuid", "UserStructFbLvl", });
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "InvitesNew", });
+    internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "AcceptedInviteUuids", "RejectedInviteUuids", });
+    internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(25);
+    internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "AcceptedInvites", });
+    internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(26);
+    internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserMonsterUuids", "GemCost", });
+    internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(27);
+    internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(28);
+    internal_static_com_lvl6_proto_SellUserMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Sales", });
+    internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(29);
+    internal_static_com_lvl6_proto_SellUserMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(30);
+    internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserMonsterUuids", });
+    internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(31);
+    internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(32);
+    internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserMonsterUuids", });
+    internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(33);
+    internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

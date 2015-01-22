@@ -8,10 +8,10 @@ public final class EventCityProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface LoadPlayerCityRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LoadPlayerCityRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LoadPlayerCityRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string cityOwnerUuid = 2;
     /**
      * <code>optional string cityOwnerUuid = 2;</code>
      */
@@ -44,8 +43,9 @@ public final class EventCityProto {
    * Protobuf type {@code com.lvl6.proto.LoadPlayerCityRequestProto}
    */
   public static final class LoadPlayerCityRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements LoadPlayerCityRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LoadPlayerCityRequestProto)
+      LoadPlayerCityRequestProtoOrBuilder {
     // Use LoadPlayerCityRequestProto.newBuilder() to construct.
     private LoadPlayerCityRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -105,8 +105,9 @@ public final class EventCityProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              cityOwnerUuid_ = input.readBytes();
+              cityOwnerUuid_ = bs;
               break;
             }
           }
@@ -149,7 +150,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -171,7 +171,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional string cityOwnerUuid = 2;
     public static final int CITYOWNERUUID_FIELD_NUMBER = 2;
     private java.lang.Object cityOwnerUuid_;
     /**
@@ -221,7 +220,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -335,8 +335,9 @@ public final class EventCityProto {
      * Protobuf type {@code com.lvl6.proto.LoadPlayerCityRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LoadPlayerCityRequestProto)
+        com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor;
@@ -469,7 +470,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -578,7 +578,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -586,7 +586,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional string cityOwnerUuid = 2;
       private java.lang.Object cityOwnerUuid_ = "";
       /**
        * <code>optional string cityOwnerUuid = 2;</code>
@@ -600,9 +599,12 @@ public final class EventCityProto {
       public java.lang.String getCityOwnerUuid() {
         java.lang.Object ref = cityOwnerUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          cityOwnerUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            cityOwnerUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -671,10 +673,10 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LoadPlayerCityRequestProto)
   }
 
-  public interface LoadPlayerCityResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LoadPlayerCityResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LoadPlayerCityResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -688,7 +690,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.MinimumUserProto cityOwner = 2;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto cityOwner = 2;</code>
      */
@@ -702,7 +703,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getCityOwnerOrBuilder();
 
-    // optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
      */
@@ -712,7 +712,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus getStatus();
 
-    // repeated .com.lvl6.proto.FullUserStructureProto ownerNormStructs = 4;
     /**
      * <code>repeated .com.lvl6.proto.FullUserStructureProto ownerNormStructs = 4;</code>
      */
@@ -737,7 +736,6 @@ public final class EventCityProto {
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getOwnerNormStructsOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
     /**
      * <code>repeated .com.lvl6.proto.UserCityExpansionDataProto userCityExpansionDataProtoList = 5;</code>
      */
@@ -762,7 +760,6 @@ public final class EventCityProto {
     com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder getUserCityExpansionDataProtoListOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
     /**
      * <code>repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;</code>
      */
@@ -795,8 +792,9 @@ public final class EventCityProto {
    * </pre>
    */
   public static final class LoadPlayerCityResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements LoadPlayerCityResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LoadPlayerCityResponseProto)
+      LoadPlayerCityResponseProtoOrBuilder {
     // Use LoadPlayerCityResponseProto.newBuilder() to construct.
     private LoadPlayerCityResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1043,7 +1041,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1065,7 +1062,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.MinimumUserProto cityOwner = 2;
     public static final int CITYOWNER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProto cityOwner_;
     /**
@@ -1087,7 +1083,6 @@ public final class EventCityProto {
       return cityOwner_;
     }
 
-    // optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status_;
     /**
@@ -1103,7 +1098,6 @@ public final class EventCityProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.FullUserStructureProto ownerNormStructs = 4;
     public static final int OWNERNORMSTRUCTS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> ownerNormStructs_;
     /**
@@ -1139,7 +1133,6 @@ public final class EventCityProto {
       return ownerNormStructs_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
     public static final int USERCITYEXPANSIONDATAPROTOLIST_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.CityProto.UserCityExpansionDataProto> userCityExpansionDataProtoList_;
     /**
@@ -1175,7 +1168,6 @@ public final class EventCityProto {
       return userCityExpansionDataProtoList_.get(index);
     }
 
-    // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
     public static final int OBSTACLES_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> obstacles_;
     /**
@@ -1222,7 +1214,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1368,8 +1361,9 @@ public final class EventCityProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LoadPlayerCityResponseProto)
+        com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor;
@@ -1644,7 +1638,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1753,7 +1746,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1761,7 +1754,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.MinimumUserProto cityOwner = 2;
       private com.lvl6.proto.UserProto.MinimumUserProto cityOwner_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> cityOwnerBuilder_;
@@ -1870,7 +1862,7 @@ public final class EventCityProto {
         if (cityOwnerBuilder_ == null) {
           cityOwnerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  cityOwner_,
+                  getCityOwner(),
                   getParentForChildren(),
                   isClean());
           cityOwner_ = null;
@@ -1878,7 +1870,6 @@ public final class EventCityProto {
         return cityOwnerBuilder_;
       }
 
-      // optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;
       private com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
@@ -1914,7 +1905,6 @@ public final class EventCityProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.FullUserStructureProto ownerNormStructs = 4;
       private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> ownerNormStructs_ =
         java.util.Collections.emptyList();
       private void ensureOwnerNormStructsIsMutable() {
@@ -2056,7 +2046,8 @@ public final class EventCityProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullUserStructureProto> values) {
         if (ownerNormStructsBuilder_ == null) {
           ensureOwnerNormStructsIsMutable();
-          super.addAll(values, ownerNormStructs_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ownerNormStructs_);
           onChanged();
         } else {
           ownerNormStructsBuilder_.addAllMessages(values);
@@ -2154,7 +2145,6 @@ public final class EventCityProto {
         return ownerNormStructsBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
       private java.util.List<com.lvl6.proto.CityProto.UserCityExpansionDataProto> userCityExpansionDataProtoList_ =
         java.util.Collections.emptyList();
       private void ensureUserCityExpansionDataProtoListIsMutable() {
@@ -2296,7 +2286,8 @@ public final class EventCityProto {
           java.lang.Iterable<? extends com.lvl6.proto.CityProto.UserCityExpansionDataProto> values) {
         if (userCityExpansionDataProtoListBuilder_ == null) {
           ensureUserCityExpansionDataProtoListIsMutable();
-          super.addAll(values, userCityExpansionDataProtoList_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userCityExpansionDataProtoList_);
           onChanged();
         } else {
           userCityExpansionDataProtoListBuilder_.addAllMessages(values);
@@ -2394,7 +2385,6 @@ public final class EventCityProto {
         return userCityExpansionDataProtoListBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
       private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> obstacles_ =
         java.util.Collections.emptyList();
       private void ensureObstaclesIsMutable() {
@@ -2536,7 +2526,8 @@ public final class EventCityProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserObstacleProto> values) {
         if (obstaclesBuilder_ == null) {
           ensureObstaclesIsMutable();
-          super.addAll(values, obstacles_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, obstacles_);
           onChanged();
         } else {
           obstaclesBuilder_.addAllMessages(values);
@@ -2645,10 +2636,10 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LoadPlayerCityResponseProto)
   }
 
-  public interface PurchaseCityExpansionRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseCityExpansionRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseCityExpansionRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2662,7 +2653,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional sint32 xPosition = 2;
     /**
      * <code>optional sint32 xPosition = 2;</code>
      *
@@ -2680,7 +2670,6 @@ public final class EventCityProto {
      */
     int getXPosition();
 
-    // optional sint32 yPosition = 3;
     /**
      * <code>optional sint32 yPosition = 3;</code>
      */
@@ -2690,7 +2679,6 @@ public final class EventCityProto {
      */
     int getYPosition();
 
-    // optional int64 timeOfPurchase = 4;
     /**
      * <code>optional int64 timeOfPurchase = 4;</code>
      */
@@ -2708,8 +2696,9 @@ public final class EventCityProto {
    * </pre>
    */
   public static final class PurchaseCityExpansionRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PurchaseCityExpansionRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseCityExpansionRequestProto)
+      PurchaseCityExpansionRequestProtoOrBuilder {
     // Use PurchaseCityExpansionRequestProto.newBuilder() to construct.
     private PurchaseCityExpansionRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2823,7 +2812,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2845,7 +2833,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional sint32 xPosition = 2;
     public static final int XPOSITION_FIELD_NUMBER = 2;
     private int xPosition_;
     /**
@@ -2869,7 +2856,6 @@ public final class EventCityProto {
       return xPosition_;
     }
 
-    // optional sint32 yPosition = 3;
     public static final int YPOSITION_FIELD_NUMBER = 3;
     private int yPosition_;
     /**
@@ -2885,7 +2871,6 @@ public final class EventCityProto {
       return yPosition_;
     }
 
-    // optional int64 timeOfPurchase = 4;
     public static final int TIMEOFPURCHASE_FIELD_NUMBER = 4;
     private long timeOfPurchase_;
     /**
@@ -2910,7 +2895,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3042,8 +3028,9 @@ public final class EventCityProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseCityExpansionRequestProto)
+        com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor;
@@ -3192,7 +3179,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3301,7 +3287,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3309,7 +3295,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional sint32 xPosition = 2;
       private int xPosition_ ;
       /**
        * <code>optional sint32 xPosition = 2;</code>
@@ -3358,7 +3343,6 @@ public final class EventCityProto {
         return this;
       }
 
-      // optional sint32 yPosition = 3;
       private int yPosition_ ;
       /**
        * <code>optional sint32 yPosition = 3;</code>
@@ -3391,7 +3375,6 @@ public final class EventCityProto {
         return this;
       }
 
-      // optional int64 timeOfPurchase = 4;
       private long timeOfPurchase_ ;
       /**
        * <code>optional int64 timeOfPurchase = 4;</code>
@@ -3435,10 +3418,10 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseCityExpansionRequestProto)
   }
 
-  public interface PurchaseCityExpansionResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseCityExpansionResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseCityExpansionResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3452,7 +3435,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status = 2;</code>
      */
@@ -3462,7 +3444,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus getStatus();
 
-    // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
     /**
      * <code>optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;</code>
      */
@@ -3484,8 +3465,9 @@ public final class EventCityProto {
    * </pre>
    */
   public static final class PurchaseCityExpansionResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PurchaseCityExpansionResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseCityExpansionResponseProto)
+      PurchaseCityExpansionResponseProtoOrBuilder {
     // Use PurchaseCityExpansionResponseProto.newBuilder() to construct.
     private PurchaseCityExpansionResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3717,7 +3699,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3739,7 +3720,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status_;
     /**
@@ -3755,7 +3735,6 @@ public final class EventCityProto {
       return status_;
     }
 
-    // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
     public static final int UCEDP_FIELD_NUMBER = 3;
     private com.lvl6.proto.CityProto.UserCityExpansionDataProto ucedp_;
     /**
@@ -3785,7 +3764,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3910,8 +3890,9 @@ public final class EventCityProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseCityExpansionResponseProto)
+        com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor;
@@ -4060,7 +4041,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4169,7 +4149,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4177,7 +4157,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status = 2;
       private com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status_ = com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus status = 2;</code>
@@ -4213,7 +4192,6 @@ public final class EventCityProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
       private com.lvl6.proto.CityProto.UserCityExpansionDataProto ucedp_ = com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.CityProto.UserCityExpansionDataProto, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder, com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder> ucedpBuilder_;
@@ -4322,7 +4300,7 @@ public final class EventCityProto {
         if (ucedpBuilder_ == null) {
           ucedpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.CityProto.UserCityExpansionDataProto, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder, com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder>(
-                  ucedp_,
+                  getUcedp(),
                   getParentForChildren(),
                   isClean());
           ucedp_ = null;
@@ -4341,10 +4319,10 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseCityExpansionResponseProto)
   }
 
-  public interface LoadCityRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LoadCityRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LoadCityRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4358,7 +4336,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 cityId = 2;
     /**
      * <code>optional int32 cityId = 2;</code>
      */
@@ -4376,8 +4353,9 @@ public final class EventCityProto {
    * </pre>
    */
   public static final class LoadCityRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements LoadCityRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LoadCityRequestProto)
+      LoadCityRequestProtoOrBuilder {
     // Use LoadCityRequestProto.newBuilder() to construct.
     private LoadCityRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4481,7 +4459,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4503,7 +4480,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional int32 cityId = 2;
     public static final int CITYID_FIELD_NUMBER = 2;
     private int cityId_;
     /**
@@ -4526,7 +4502,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4644,8 +4621,9 @@ public final class EventCityProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.LoadCityRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LoadCityRequestProto)
+        com.lvl6.proto.EventCityProto.LoadCityRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor;
@@ -4776,7 +4754,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4885,7 +4862,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4893,7 +4870,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional int32 cityId = 2;
       private int cityId_ ;
       /**
        * <code>optional int32 cityId = 2;</code>
@@ -4937,10 +4913,10 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LoadCityRequestProto)
   }
 
-  public interface LoadCityResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LoadCityResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LoadCityResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4954,7 +4930,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.LoadCityResponseProto.LoadCityStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.LoadCityResponseProto.LoadCityStatus status = 2;</code>
      */
@@ -4964,7 +4939,6 @@ public final class EventCityProto {
      */
     com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus getStatus();
 
-    // repeated .com.lvl6.proto.CityElementProto cityElements = 3;
     /**
      * <code>repeated .com.lvl6.proto.CityElementProto cityElements = 3;</code>
      */
@@ -4989,7 +4963,6 @@ public final class EventCityProto {
     com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityElementsOrBuilder(
         int index);
 
-    // optional int32 cityId = 4;
     /**
      * <code>optional int32 cityId = 4;</code>
      */
@@ -5007,8 +4980,9 @@ public final class EventCityProto {
    * </pre>
    */
   public static final class LoadCityResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements LoadCityResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LoadCityResponseProto)
+      LoadCityResponseProtoOrBuilder {
     // Use LoadCityResponseProto.newBuilder() to construct.
     private LoadCityResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5225,7 +5199,6 @@ public final class EventCityProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5247,7 +5220,6 @@ public final class EventCityProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.LoadCityResponseProto.LoadCityStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus status_;
     /**
@@ -5263,7 +5235,6 @@ public final class EventCityProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.CityElementProto cityElements = 3;
     public static final int CITYELEMENTS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityElements_;
     /**
@@ -5299,7 +5270,6 @@ public final class EventCityProto {
       return cityElements_.get(index);
     }
 
-    // optional int32 cityId = 4;
     public static final int CITYID_FIELD_NUMBER = 4;
     private int cityId_;
     /**
@@ -5324,7 +5294,8 @@ public final class EventCityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5456,8 +5427,9 @@ public final class EventCityProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventCityProto.LoadCityResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LoadCityResponseProto)
+        com.lvl6.proto.EventCityProto.LoadCityResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventCityProto.internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor;
@@ -5639,7 +5611,6 @@ public final class EventCityProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5748,7 +5719,7 @@ public final class EventCityProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5756,7 +5727,6 @@ public final class EventCityProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.LoadCityResponseProto.LoadCityStatus status = 2;
       private com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus status_ = com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.LoadCityResponseProto.LoadCityStatus status = 2;</code>
@@ -5792,7 +5762,6 @@ public final class EventCityProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.CityElementProto cityElements = 3;
       private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityElements_ =
         java.util.Collections.emptyList();
       private void ensureCityElementsIsMutable() {
@@ -5934,7 +5903,8 @@ public final class EventCityProto {
           java.lang.Iterable<? extends com.lvl6.proto.CityProto.CityElementProto> values) {
         if (cityElementsBuilder_ == null) {
           ensureCityElementsIsMutable();
-          super.addAll(values, cityElements_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cityElements_);
           onChanged();
         } else {
           cityElementsBuilder_.addAllMessages(values);
@@ -6032,7 +6002,6 @@ public final class EventCityProto {
         return cityElementsBuilder_;
       }
 
-      // optional int32 cityId = 4;
       private int cityId_ ;
       /**
        * <code>optional int32 cityId = 4;</code>
@@ -6076,32 +6045,32 @@ public final class EventCityProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LoadCityResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LoadCityRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -6158,49 +6127,13 @@ public final class EventCityProto {
       "B\016EventCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CityOwnerUuid", });
-          internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "CityOwner", "Status", "OwnerNormStructs", "UserCityExpansionDataProtoList", "Obstacles", });
-          internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "XPosition", "YPosition", "TimeOfPurchase", });
-          internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Ucedp", });
-          internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_LoadCityRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CityId", });
-          internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_LoadCityResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "CityElements", "CityId", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -6208,6 +6141,45 @@ public final class EventCityProto {
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_LoadPlayerCityRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "CityOwnerUuid", });
+    internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "CityOwner", "Status", "OwnerNormStructs", "UserCityExpansionDataProtoList", "Obstacles", });
+    internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "XPosition", "YPosition", "TimeOfPurchase", });
+    internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PurchaseCityExpansionResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "Ucedp", });
+    internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_LoadCityRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_LoadCityRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "CityId", });
+    internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_LoadCityResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "CityElements", "CityId", });
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
