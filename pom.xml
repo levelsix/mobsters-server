@@ -107,10 +107,10 @@
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
-		
+
 		<apns.path.to.cert>mobsters_dev.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
-		
+
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
 		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
 		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
@@ -236,6 +236,14 @@
 							<targetPath>WEB-INF</targetPath>
 							<includes>
 								<include>**/*.xml</include>
+							</includes>
+						</resource>
+						<resource>
+							<directory>${basedir}/src/main/webapp/WEB-INF</directory>
+							<filtering>false</filtering>
+							<targetPath>WEB-INF</targetPath>
+							<includes>
+								<include>**/*.p12</include>
 							</includes>
 						</resource>
 					</webResources>
@@ -399,6 +407,7 @@
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
+		
 	</build>
 
 
@@ -481,7 +490,7 @@
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
 				<artifactId>apns</artifactId>
-				<!-- <version>0.1.6</version>-->
+				<!-- <version>0.1.6</version> -->
 				<version>1.0.0.Beta5</version>
 			</dependency>
 			<dependency>
