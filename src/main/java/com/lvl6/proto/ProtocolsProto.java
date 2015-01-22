@@ -2171,13 +2171,13 @@ public final class ProtocolsProto {
       "_DEV_EVENT\020\310\001B\020B\016ProtocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -2224,6 +2224,48 @@ public final class ProtocolsProto {
           com.lvl6.proto.TournamentStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BoardProto.getDescriptor();
+    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.ClanProto.getDescriptor();
+    com.lvl6.proto.DevProto.getDescriptor();
+    com.lvl6.proto.EventAchievementProto.getDescriptor();
+    com.lvl6.proto.EventApnsProto.getDescriptor();
+    com.lvl6.proto.EventBoosterPackProto.getDescriptor();
+    com.lvl6.proto.EventChatProto.getDescriptor();
+    com.lvl6.proto.EventCityProto.getDescriptor();
+    com.lvl6.proto.EventClanProto.getDescriptor();
+    com.lvl6.proto.EventDevProto.getDescriptor();
+    com.lvl6.proto.EventDungeonProto.getDescriptor();
+    com.lvl6.proto.EventInAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.EventItemProto.getDescriptor();
+    com.lvl6.proto.EventMiniJobProto.getDescriptor();
+    com.lvl6.proto.EventMonsterProto.getDescriptor();
+    com.lvl6.proto.EventPvpProto.getDescriptor();
+    com.lvl6.proto.EventQuestProto.getDescriptor();
+    com.lvl6.proto.EventReferralProto.getDescriptor();
+    com.lvl6.proto.EventStartupProto.getDescriptor();
+    com.lvl6.proto.EventStaticDataProto.getDescriptor();
+    com.lvl6.proto.EventStructureProto.getDescriptor();
+    com.lvl6.proto.EventTournamentProto.getDescriptor();
+    com.lvl6.proto.EventUserProto.getDescriptor();
+    com.lvl6.proto.InAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MiniJobConfigProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.PrerequisiteProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.ResearchsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.SkillsProto.getDescriptor();
+    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.TaskProto.getDescriptor();
+    com.lvl6.proto.TournamentStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

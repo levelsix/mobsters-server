@@ -85,6 +85,10 @@ public final class SkillsProto {
      * <code>COUNTER_STRIKE = 16;</code>
      */
     COUNTER_STRIKE(15, 16),
+    /**
+     * <code>FLAME_STRIKE = 17;</code>
+     */
+    FLAME_STRIKE(16, 17),
     ;
 
     /**
@@ -159,6 +163,10 @@ public final class SkillsProto {
      * <code>COUNTER_STRIKE = 16;</code>
      */
     public static final int COUNTER_STRIKE_VALUE = 16;
+    /**
+     * <code>FLAME_STRIKE = 17;</code>
+     */
+    public static final int FLAME_STRIKE_VALUE = 17;
 
 
     public final int getNumber() { return value; }
@@ -181,6 +189,7 @@ public final class SkillsProto {
         case 14: return MUD;
         case 15: return LIFE_STEAL;
         case 16: return COUNTER_STRIKE;
+        case 17: return FLAME_STRIKE;
         default: return null;
       }
     }
@@ -331,10 +340,10 @@ public final class SkillsProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SkillActivationType)
   }
 
-  public interface SkillProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SkillProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SkillProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 skillId = 1;
     /**
      * <code>optional int32 skillId = 1;</code>
      */
@@ -344,7 +353,6 @@ public final class SkillsProto {
      */
     int getSkillId();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -359,7 +367,6 @@ public final class SkillsProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 orbCost = 3;
     /**
      * <code>optional int32 orbCost = 3;</code>
      */
@@ -369,7 +376,6 @@ public final class SkillsProto {
      */
     int getOrbCost();
 
-    // optional .com.lvl6.proto.SkillType type = 4;
     /**
      * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
      *
@@ -393,7 +399,6 @@ public final class SkillsProto {
      */
     com.lvl6.proto.SkillsProto.SkillType getType();
 
-    // optional .com.lvl6.proto.SkillActivationType activationType = 5;
     /**
      * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
      *
@@ -415,7 +420,6 @@ public final class SkillsProto {
      */
     com.lvl6.proto.SkillsProto.SkillActivationType getActivationType();
 
-    // optional int32 predecId = 6;
     /**
      * <code>optional int32 predecId = 6;</code>
      *
@@ -433,7 +437,6 @@ public final class SkillsProto {
      */
     int getPredecId();
 
-    // optional int32 sucId = 7;
     /**
      * <code>optional int32 sucId = 7;</code>
      *
@@ -451,7 +454,6 @@ public final class SkillsProto {
      */
     int getSucId();
 
-    // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
     /**
      * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
      */
@@ -476,7 +478,6 @@ public final class SkillsProto {
     com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder getPropertiesOrBuilder(
         int index);
 
-    // optional string desc = 9;
     /**
      * <code>optional string desc = 9;</code>
      */
@@ -491,7 +492,6 @@ public final class SkillsProto {
     com.google.protobuf.ByteString
         getDescBytes();
 
-    // optional string imgNamePrefix = 12;
     /**
      * <code>optional string imgNamePrefix = 12;</code>
      */
@@ -510,8 +510,9 @@ public final class SkillsProto {
    * Protobuf type {@code com.lvl6.proto.SkillProto}
    */
   public static final class SkillProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SkillProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SkillProto)
+      SkillProtoOrBuilder {
     // Use SkillProto.newBuilder() to construct.
     private SkillProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -563,8 +564,9 @@ public final class SkillsProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 24: {
@@ -613,13 +615,15 @@ public final class SkillsProto {
               break;
             }
             case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              desc_ = input.readBytes();
+              desc_ = bs;
               break;
             }
             case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              imgNamePrefix_ = input.readBytes();
+              imgNamePrefix_ = bs;
               break;
             }
           }
@@ -665,7 +669,6 @@ public final class SkillsProto {
     }
 
     private int bitField0_;
-    // optional int32 skillId = 1;
     public static final int SKILLID_FIELD_NUMBER = 1;
     private int skillId_;
     /**
@@ -681,7 +684,6 @@ public final class SkillsProto {
       return skillId_;
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -724,7 +726,6 @@ public final class SkillsProto {
       }
     }
 
-    // optional int32 orbCost = 3;
     public static final int ORBCOST_FIELD_NUMBER = 3;
     private int orbCost_;
     /**
@@ -740,7 +741,6 @@ public final class SkillsProto {
       return orbCost_;
     }
 
-    // optional .com.lvl6.proto.SkillType type = 4;
     public static final int TYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.SkillsProto.SkillType type_;
     /**
@@ -770,7 +770,6 @@ public final class SkillsProto {
       return type_;
     }
 
-    // optional .com.lvl6.proto.SkillActivationType activationType = 5;
     public static final int ACTIVATIONTYPE_FIELD_NUMBER = 5;
     private com.lvl6.proto.SkillsProto.SkillActivationType activationType_;
     /**
@@ -798,7 +797,6 @@ public final class SkillsProto {
       return activationType_;
     }
 
-    // optional int32 predecId = 6;
     public static final int PREDECID_FIELD_NUMBER = 6;
     private int predecId_;
     /**
@@ -822,7 +820,6 @@ public final class SkillsProto {
       return predecId_;
     }
 
-    // optional int32 sucId = 7;
     public static final int SUCID_FIELD_NUMBER = 7;
     private int sucId_;
     /**
@@ -846,7 +843,6 @@ public final class SkillsProto {
       return sucId_;
     }
 
-    // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
     public static final int PROPERTIES_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> properties_;
     /**
@@ -882,7 +878,6 @@ public final class SkillsProto {
       return properties_.get(index);
     }
 
-    // optional string desc = 9;
     public static final int DESC_FIELD_NUMBER = 9;
     private java.lang.Object desc_;
     /**
@@ -925,7 +920,6 @@ public final class SkillsProto {
       }
     }
 
-    // optional string imgNamePrefix = 12;
     public static final int IMGNAMEPREFIX_FIELD_NUMBER = 12;
     private java.lang.Object imgNamePrefix_;
     /**
@@ -983,7 +977,8 @@ public final class SkillsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1153,8 +1148,9 @@ public final class SkillsProto {
      * Protobuf type {@code com.lvl6.proto.SkillProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SkillsProto.SkillProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SkillProto)
+        com.lvl6.proto.SkillsProto.SkillProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_descriptor;
@@ -1387,7 +1383,6 @@ public final class SkillsProto {
       }
       private int bitField0_;
 
-      // optional int32 skillId = 1;
       private int skillId_ ;
       /**
        * <code>optional int32 skillId = 1;</code>
@@ -1420,7 +1415,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -1434,9 +1428,12 @@ public final class SkillsProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1494,7 +1491,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional int32 orbCost = 3;
       private int orbCost_ ;
       /**
        * <code>optional int32 orbCost = 3;</code>
@@ -1527,7 +1523,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.SkillType type = 4;
       private com.lvl6.proto.SkillsProto.SkillType type_ = com.lvl6.proto.SkillsProto.SkillType.NO_SKILL;
       /**
        * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
@@ -1591,7 +1586,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.SkillActivationType activationType = 5;
       private com.lvl6.proto.SkillsProto.SkillActivationType activationType_ = com.lvl6.proto.SkillsProto.SkillActivationType.USER_ACTIVATED;
       /**
        * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
@@ -1651,7 +1645,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional int32 predecId = 6;
       private int predecId_ ;
       /**
        * <code>optional int32 predecId = 6;</code>
@@ -1700,7 +1693,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional int32 sucId = 7;
       private int sucId_ ;
       /**
        * <code>optional int32 sucId = 7;</code>
@@ -1749,7 +1741,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
       private java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> properties_ =
         java.util.Collections.emptyList();
       private void ensurePropertiesIsMutable() {
@@ -1891,7 +1882,8 @@ public final class SkillsProto {
           java.lang.Iterable<? extends com.lvl6.proto.SkillsProto.SkillPropertyProto> values) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
-          super.addAll(values, properties_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, properties_);
           onChanged();
         } else {
           propertiesBuilder_.addAllMessages(values);
@@ -1989,7 +1981,6 @@ public final class SkillsProto {
         return propertiesBuilder_;
       }
 
-      // optional string desc = 9;
       private java.lang.Object desc_ = "";
       /**
        * <code>optional string desc = 9;</code>
@@ -2003,9 +1994,12 @@ public final class SkillsProto {
       public java.lang.String getDesc() {
         java.lang.Object ref = desc_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          desc_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            desc_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2063,7 +2057,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional string imgNamePrefix = 12;
       private java.lang.Object imgNamePrefix_ = "";
       /**
        * <code>optional string imgNamePrefix = 12;</code>
@@ -2077,9 +2070,12 @@ public final class SkillsProto {
       public java.lang.String getImgNamePrefix() {
         java.lang.Object ref = imgNamePrefix_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imgNamePrefix_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgNamePrefix_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2148,10 +2144,10 @@ public final class SkillsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SkillProto)
   }
 
-  public interface SkillPropertyProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SkillPropertyProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SkillPropertyProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 skillPropertyId = 1;
     /**
      * <code>optional int32 skillPropertyId = 1;</code>
      */
@@ -2161,7 +2157,6 @@ public final class SkillsProto {
      */
     int getSkillPropertyId();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      *
@@ -2188,7 +2183,6 @@ public final class SkillsProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional float skillValue = 3;
     /**
      * <code>optional float skillValue = 3;</code>
      *
@@ -2212,8 +2206,9 @@ public final class SkillsProto {
    * Protobuf type {@code com.lvl6.proto.SkillPropertyProto}
    */
   public static final class SkillPropertyProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SkillPropertyProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SkillPropertyProto)
+      SkillPropertyProtoOrBuilder {
     // Use SkillPropertyProto.newBuilder() to construct.
     private SkillPropertyProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2265,8 +2260,9 @@ public final class SkillsProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 29: {
@@ -2314,7 +2310,6 @@ public final class SkillsProto {
     }
 
     private int bitField0_;
-    // optional int32 skillPropertyId = 1;
     public static final int SKILLPROPERTYID_FIELD_NUMBER = 1;
     private int skillPropertyId_;
     /**
@@ -2330,7 +2325,6 @@ public final class SkillsProto {
       return skillPropertyId_;
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -2385,7 +2379,6 @@ public final class SkillsProto {
       }
     }
 
-    // optional float skillValue = 3;
     public static final int SKILLVALUE_FIELD_NUMBER = 3;
     private float skillValue_;
     /**
@@ -2419,7 +2412,8 @@ public final class SkillsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2540,8 +2534,9 @@ public final class SkillsProto {
      * Protobuf type {@code com.lvl6.proto.SkillPropertyProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SkillPropertyProto)
+        com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
@@ -2674,7 +2669,6 @@ public final class SkillsProto {
       }
       private int bitField0_;
 
-      // optional int32 skillPropertyId = 1;
       private int skillPropertyId_ ;
       /**
        * <code>optional int32 skillPropertyId = 1;</code>
@@ -2707,7 +2701,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -2729,9 +2722,12 @@ public final class SkillsProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2805,7 +2801,6 @@ public final class SkillsProto {
         return this;
       }
 
-      // optional float skillValue = 3;
       private float skillValue_ ;
       /**
        * <code>optional float skillValue = 3;</code>
@@ -2869,12 +2864,12 @@ public final class SkillsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SkillPropertyProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SkillProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2898,40 +2893,40 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
       "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\361\001\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "\002*\203\002\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
       "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
       "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
       "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
       "T_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r" +
       "\022\007\n\003MUD\020\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STR" +
-      "IKE\020\020*J\n\023SkillActivationType\022\022\n\016USER_ACT" +
-      "IVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020" +
-      "\003B\rB\013SkillsProto"
+      "IKE\020\020\022\020\n\014FLAME_STRIKE\020\021*J\n\023SkillActivati" +
+      "onType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIV" +
+      "ATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_SkillProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SkillProto_descriptor,
-              new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", });
-          internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
-              new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_com_lvl6_proto_SkillProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SkillProto_descriptor,
+        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", });
+    internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
+        new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

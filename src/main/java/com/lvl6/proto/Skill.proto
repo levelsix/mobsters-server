@@ -71,6 +71,7 @@ enum SkillType {
 	MUD = 14;
 	LIFE_STEAL = 15;
 	COUNTER_STRIKE = 16;
+	FLAME_STRIKE = 17;
 }
 
 enum SkillActivationType {

@@ -8,10 +8,10 @@ public final class EventDevProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface DevRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface DevRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DevRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventDevProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];
     /**
      * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
      */
@@ -35,7 +34,6 @@ public final class EventDevProto {
      */
     com.lvl6.proto.DevProto.DevRequest getDevRequest();
 
-    // optional int32 staticDataId = 3;
     /**
      * <code>optional int32 staticDataId = 3;</code>
      *
@@ -55,7 +53,6 @@ public final class EventDevProto {
      */
     int getStaticDataId();
 
-    // optional int32 quantity = 4;
     /**
      * <code>optional int32 quantity = 4;</code>
      */
@@ -69,8 +66,9 @@ public final class EventDevProto {
    * Protobuf type {@code com.lvl6.proto.DevRequestProto}
    */
   public static final class DevRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements DevRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DevRequestProto)
+      DevRequestProtoOrBuilder {
     // Use DevRequestProto.newBuilder() to construct.
     private DevRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -190,7 +188,6 @@ public final class EventDevProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -212,7 +209,6 @@ public final class EventDevProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];
     public static final int DEVREQUEST_FIELD_NUMBER = 2;
     private com.lvl6.proto.DevProto.DevRequest devRequest_;
     /**
@@ -228,7 +224,6 @@ public final class EventDevProto {
       return devRequest_;
     }
 
-    // optional int32 staticDataId = 3;
     public static final int STATICDATAID_FIELD_NUMBER = 3;
     private int staticDataId_;
     /**
@@ -254,7 +249,6 @@ public final class EventDevProto {
       return staticDataId_;
     }
 
-    // optional int32 quantity = 4;
     public static final int QUANTITY_FIELD_NUMBER = 4;
     private int quantity_;
     /**
@@ -279,7 +273,8 @@ public final class EventDevProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -407,8 +402,9 @@ public final class EventDevProto {
      * Protobuf type {@code com.lvl6.proto.DevRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDevProto.DevRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DevRequestProto)
+        com.lvl6.proto.EventDevProto.DevRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDevProto.internal_static_com_lvl6_proto_DevRequestProto_descriptor;
@@ -557,7 +553,6 @@ public final class EventDevProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -666,7 +661,7 @@ public final class EventDevProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -674,7 +669,6 @@ public final class EventDevProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];
       private com.lvl6.proto.DevProto.DevRequest devRequest_ = com.lvl6.proto.DevProto.DevRequest.RESET_ACCOUNT;
       /**
        * <code>optional .com.lvl6.proto.DevRequest devRequest = 2 [default = RESET_ACCOUNT];</code>
@@ -710,7 +704,6 @@ public final class EventDevProto {
         return this;
       }
 
-      // optional int32 staticDataId = 3;
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 3;</code>
@@ -763,7 +756,6 @@ public final class EventDevProto {
         return this;
       }
 
-      // optional int32 quantity = 4;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 4;</code>
@@ -807,10 +799,10 @@ public final class EventDevProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DevRequestProto)
   }
 
-  public interface DevResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface DevResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DevResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -824,7 +816,6 @@ public final class EventDevProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
      */
@@ -834,7 +825,6 @@ public final class EventDevProto {
      */
     com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus getStatus();
 
-    // repeated .com.lvl6.proto.FullUserMonsterProto fump = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto fump = 3;</code>
      */
@@ -859,7 +849,6 @@ public final class EventDevProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder(
         int index);
 
-    // optional .com.lvl6.proto.UserItemProto uip = 4;
     /**
      * <code>optional .com.lvl6.proto.UserItemProto uip = 4;</code>
      */
@@ -881,8 +870,9 @@ public final class EventDevProto {
    * </pre>
    */
   public static final class DevResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements DevResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DevResponseProto)
+      DevResponseProtoOrBuilder {
     // Use DevResponseProto.newBuilder() to construct.
     private DevResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1098,7 +1088,6 @@ public final class EventDevProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1120,7 +1109,6 @@ public final class EventDevProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus status_;
     /**
@@ -1136,7 +1124,6 @@ public final class EventDevProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.FullUserMonsterProto fump = 3;
     public static final int FUMP_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fump_;
     /**
@@ -1172,7 +1159,6 @@ public final class EventDevProto {
       return fump_.get(index);
     }
 
-    // optional .com.lvl6.proto.UserItemProto uip = 4;
     public static final int UIP_FIELD_NUMBER = 4;
     private com.lvl6.proto.ItemsProto.UserItemProto uip_;
     /**
@@ -1203,7 +1189,8 @@ public final class EventDevProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1335,8 +1322,9 @@ public final class EventDevProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDevProto.DevResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DevResponseProto)
+        com.lvl6.proto.EventDevProto.DevResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDevProto.internal_static_com_lvl6_proto_DevResponseProto_descriptor;
@@ -1527,7 +1515,6 @@ public final class EventDevProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1636,7 +1623,7 @@ public final class EventDevProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1644,7 +1631,6 @@ public final class EventDevProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;
       private com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus status_ = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
@@ -1680,7 +1666,6 @@ public final class EventDevProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.FullUserMonsterProto fump = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fump_ =
         java.util.Collections.emptyList();
       private void ensureFumpIsMutable() {
@@ -1822,7 +1807,8 @@ public final class EventDevProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (fumpBuilder_ == null) {
           ensureFumpIsMutable();
-          super.addAll(values, fump_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, fump_);
           onChanged();
         } else {
           fumpBuilder_.addAllMessages(values);
@@ -1920,7 +1906,6 @@ public final class EventDevProto {
         return fumpBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserItemProto uip = 4;
       private com.lvl6.proto.ItemsProto.UserItemProto uip_ = com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> uipBuilder_;
@@ -2029,7 +2014,7 @@ public final class EventDevProto {
         if (uipBuilder_ == null) {
           uipBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
-                  uip_,
+                  getUip(),
                   getParentForChildren(),
                   isClean());
           uip_ = null;
@@ -2048,12 +2033,12 @@ public final class EventDevProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DevResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_DevRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_DevRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_DevResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2083,25 +2068,13 @@ public final class EventDevProto {
       "L_OTHER\020\002B\017B\rEventDevProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_DevRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_DevRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_DevRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "DevRequest", "StaticDataId", "Quantity", });
-          internal_static_com_lvl6_proto_DevResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_DevResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_DevResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Fump", "Uip", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -2110,6 +2083,22 @@ public final class EventDevProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_DevRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_DevRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_DevRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "DevRequest", "StaticDataId", "Quantity", });
+    internal_static_com_lvl6_proto_DevResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_DevResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_DevResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "Fump", "Uip", });
+    com.lvl6.proto.DevProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

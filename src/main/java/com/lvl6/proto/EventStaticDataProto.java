@@ -8,10 +8,10 @@ public final class EventStaticDataProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface PurgeClientStaticDataResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PurgeClientStaticDataResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string senderUuid = 1;
     /**
      * <code>optional string senderUuid = 1;</code>
      */
@@ -26,7 +26,6 @@ public final class EventStaticDataProto {
     com.google.protobuf.ByteString
         getSenderUuidBytes();
 
-    // optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;
     /**
      * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
      */
@@ -44,8 +43,9 @@ public final class EventStaticDataProto {
    * Protobuf type {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
    */
   public static final class PurgeClientStaticDataResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PurgeClientStaticDataResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+      PurgeClientStaticDataResponseProtoOrBuilder {
     // Use PurgeClientStaticDataResponseProto.newBuilder() to construct.
     private PurgeClientStaticDataResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -92,8 +92,9 @@ public final class EventStaticDataProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              senderUuid_ = input.readBytes();
+              senderUuid_ = bs;
               break;
             }
             case 18: {
@@ -149,7 +150,6 @@ public final class EventStaticDataProto {
     }
 
     private int bitField0_;
-    // optional string senderUuid = 1;
     public static final int SENDERUUID_FIELD_NUMBER = 1;
     private java.lang.Object senderUuid_;
     /**
@@ -192,7 +192,6 @@ public final class EventStaticDataProto {
       }
     }
 
-    // optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;
     public static final int STATICDATASTUFF_FIELD_NUMBER = 2;
     private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_;
     /**
@@ -221,7 +220,8 @@ public final class EventStaticDataProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -335,8 +335,9 @@ public final class EventStaticDataProto {
      * Protobuf type {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+        com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
@@ -469,7 +470,6 @@ public final class EventStaticDataProto {
       }
       private int bitField0_;
 
-      // optional string senderUuid = 1;
       private java.lang.Object senderUuid_ = "";
       /**
        * <code>optional string senderUuid = 1;</code>
@@ -483,9 +483,12 @@ public final class EventStaticDataProto {
       public java.lang.String getSenderUuid() {
         java.lang.Object ref = senderUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          senderUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            senderUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -543,7 +546,6 @@ public final class EventStaticDataProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;
       private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> staticDataStuffBuilder_;
@@ -652,7 +654,7 @@ public final class EventStaticDataProto {
         if (staticDataStuffBuilder_ == null) {
           staticDataStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder>(
-                  staticDataStuff_,
+                  getStaticDataStuff(),
                   getParentForChildren(),
                   isClean());
           staticDataStuff_ = null;
@@ -671,7 +673,7 @@ public final class EventStaticDataProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurgeClientStaticDataResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -692,24 +694,25 @@ public final class EventStaticDataProto {
       "aticDataProtoB\026B\024EventStaticDataProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor,
-              new java.lang.String[] { "SenderUuid", "StaticDataStuff", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.StaticDataStuffProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor,
+        new java.lang.String[] { "SenderUuid", "StaticDataStuff", });
+    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

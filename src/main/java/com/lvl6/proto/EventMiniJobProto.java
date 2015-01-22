@@ -8,10 +8,10 @@ public final class EventMiniJobProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface SpawnMiniJobRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SpawnMiniJobRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SpawnMiniJobRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -35,7 +34,6 @@ public final class EventMiniJobProto {
      */
     long getClientTime();
 
-    // optional int32 numToSpawn = 3;
     /**
      * <code>optional int32 numToSpawn = 3;</code>
      *
@@ -53,7 +51,6 @@ public final class EventMiniJobProto {
      */
     int getNumToSpawn();
 
-    // optional int32 structId = 4;
     /**
      * <code>optional int32 structId = 4;</code>
      *
@@ -75,8 +72,9 @@ public final class EventMiniJobProto {
    * Protobuf type {@code com.lvl6.proto.SpawnMiniJobRequestProto}
    */
   public static final class SpawnMiniJobRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SpawnMiniJobRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SpawnMiniJobRequestProto)
+      SpawnMiniJobRequestProtoOrBuilder {
     // Use SpawnMiniJobRequestProto.newBuilder() to construct.
     private SpawnMiniJobRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -190,7 +188,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -212,7 +209,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -228,7 +224,6 @@ public final class EventMiniJobProto {
       return clientTime_;
     }
 
-    // optional int32 numToSpawn = 3;
     public static final int NUMTOSPAWN_FIELD_NUMBER = 3;
     private int numToSpawn_;
     /**
@@ -252,7 +247,6 @@ public final class EventMiniJobProto {
       return numToSpawn_;
     }
 
-    // optional int32 structId = 4;
     public static final int STRUCTID_FIELD_NUMBER = 4;
     private int structId_;
     /**
@@ -285,7 +279,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -413,8 +408,9 @@ public final class EventMiniJobProto {
      * Protobuf type {@code com.lvl6.proto.SpawnMiniJobRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SpawnMiniJobRequestProto)
+        com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor;
@@ -563,7 +559,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -672,7 +667,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -680,7 +675,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -713,7 +707,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional int32 numToSpawn = 3;
       private int numToSpawn_ ;
       /**
        * <code>optional int32 numToSpawn = 3;</code>
@@ -762,7 +755,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional int32 structId = 4;
       private int structId_ ;
       /**
        * <code>optional int32 structId = 4;</code>
@@ -822,10 +814,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnMiniJobRequestProto)
   }
 
-  public interface SpawnMiniJobResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SpawnMiniJobResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SpawnMiniJobResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -839,7 +831,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
      */
@@ -864,7 +855,6 @@ public final class EventMiniJobProto {
     com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder getMiniJobsOrBuilder(
         int index);
 
-    // optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
      */
@@ -882,8 +872,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class SpawnMiniJobResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SpawnMiniJobResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SpawnMiniJobResponseProto)
+      SpawnMiniJobResponseProtoOrBuilder {
     // Use SpawnMiniJobResponseProto.newBuilder() to construct.
     private SpawnMiniJobResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1086,7 +1077,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1108,7 +1098,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;
     public static final int MINIJOBS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> miniJobs_;
     /**
@@ -1144,7 +1133,6 @@ public final class EventMiniJobProto {
       return miniJobs_.get(index);
     }
 
-    // optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status_;
     /**
@@ -1168,7 +1156,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1293,8 +1282,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SpawnMiniJobResponseProto)
+        com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor;
@@ -1467,7 +1457,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1576,7 +1565,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1584,7 +1573,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;
       private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> miniJobs_ =
         java.util.Collections.emptyList();
       private void ensureMiniJobsIsMutable() {
@@ -1726,7 +1714,8 @@ public final class EventMiniJobProto {
           java.lang.Iterable<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> values) {
         if (miniJobsBuilder_ == null) {
           ensureMiniJobsIsMutable();
-          super.addAll(values, miniJobs_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, miniJobs_);
           onChanged();
         } else {
           miniJobsBuilder_.addAllMessages(values);
@@ -1824,7 +1813,6 @@ public final class EventMiniJobProto {
         return miniJobsBuilder_;
       }
 
-      // optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;
       private com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
@@ -1871,10 +1859,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnMiniJobResponseProto)
   }
 
-  public interface BeginMiniJobRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginMiniJobRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginMiniJobRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1888,7 +1876,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -1898,12 +1885,11 @@ public final class EventMiniJobProto {
      */
     long getClientTime();
 
-    // repeated string userMonsterUuids = 3;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
@@ -1918,7 +1904,6 @@ public final class EventMiniJobProto {
     com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
 
-    // optional string userMiniJobUuid = 4;
     /**
      * <code>optional string userMiniJobUuid = 4;</code>
      */
@@ -1942,8 +1927,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class BeginMiniJobRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginMiniJobRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginMiniJobRequestProto)
+      BeginMiniJobRequestProtoOrBuilder {
     // Use BeginMiniJobRequestProto.newBuilder() to construct.
     private BeginMiniJobRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2008,16 +1994,18 @@ public final class EventMiniJobProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userMiniJobUuid_ = input.readBytes();
+              userMiniJobUuid_ = bs;
               break;
             }
           }
@@ -2029,7 +2017,7 @@ public final class EventMiniJobProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2063,7 +2051,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2085,7 +2072,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -2101,13 +2087,12 @@ public final class EventMiniJobProto {
       return clientTime_;
     }
 
-    // repeated string userMonsterUuids = 3;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -2131,7 +2116,6 @@ public final class EventMiniJobProto {
       return userMonsterUuids_.getByteString(index);
     }
 
-    // optional string userMiniJobUuid = 4;
     public static final int USERMINIJOBUUID_FIELD_NUMBER = 4;
     private java.lang.Object userMiniJobUuid_;
     /**
@@ -2183,7 +2167,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2321,8 +2306,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginMiniJobRequestProto)
+        com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor;
@@ -2409,8 +2395,7 @@ public final class EventMiniJobProto {
         }
         result.clientTime_ = clientTime_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -2482,7 +2467,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2591,7 +2575,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2599,7 +2583,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -2632,7 +2615,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // repeated string userMonsterUuids = 3;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -2643,9 +2625,9 @@ public final class EventMiniJobProto {
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 3;</code>
@@ -2698,7 +2680,8 @@ public final class EventMiniJobProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -2725,7 +2708,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional string userMiniJobUuid = 4;
       private java.lang.Object userMiniJobUuid_ = "";
       /**
        * <code>optional string userMiniJobUuid = 4;</code>
@@ -2739,9 +2721,12 @@ public final class EventMiniJobProto {
       public java.lang.String getUserMiniJobUuid() {
         java.lang.Object ref = userMiniJobUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMiniJobUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMiniJobUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2810,10 +2795,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginMiniJobRequestProto)
   }
 
-  public interface BeginMiniJobResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginMiniJobResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginMiniJobResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2827,7 +2812,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
      */
@@ -2845,8 +2829,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class BeginMiniJobResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginMiniJobResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginMiniJobResponseProto)
+      BeginMiniJobResponseProtoOrBuilder {
     // Use BeginMiniJobResponseProto.newBuilder() to construct.
     private BeginMiniJobResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3047,7 +3032,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3069,7 +3053,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus status_;
     /**
@@ -3092,7 +3075,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3210,8 +3194,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginMiniJobResponseProto)
+        com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor;
@@ -3342,7 +3327,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3451,7 +3435,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3459,7 +3443,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;
       private com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
@@ -3506,10 +3489,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginMiniJobResponseProto)
   }
 
-  public interface CompleteMiniJobRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CompleteMiniJobRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CompleteMiniJobRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3523,7 +3506,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -3533,7 +3515,6 @@ public final class EventMiniJobProto {
      */
     long getClientTime();
 
-    // optional string userMiniJobUuid = 3;
     /**
      * <code>optional string userMiniJobUuid = 3;</code>
      */
@@ -3548,7 +3529,6 @@ public final class EventMiniJobProto {
     com.google.protobuf.ByteString
         getUserMiniJobUuidBytes();
 
-    // optional bool isSpeedUp = 4;
     /**
      * <code>optional bool isSpeedUp = 4;</code>
      *
@@ -3566,7 +3546,6 @@ public final class EventMiniJobProto {
      */
     boolean getIsSpeedUp();
 
-    // optional int32 gemCost = 5;
     /**
      * <code>optional int32 gemCost = 5;</code>
      */
@@ -3585,8 +3564,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class CompleteMiniJobRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CompleteMiniJobRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CompleteMiniJobRequestProto)
+      CompleteMiniJobRequestProtoOrBuilder {
     // Use CompleteMiniJobRequestProto.newBuilder() to construct.
     private CompleteMiniJobRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3651,8 +3631,9 @@ public final class EventMiniJobProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userMiniJobUuid_ = input.readBytes();
+              userMiniJobUuid_ = bs;
               break;
             }
             case 32: {
@@ -3705,7 +3686,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3727,7 +3707,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -3743,7 +3722,6 @@ public final class EventMiniJobProto {
       return clientTime_;
     }
 
-    // optional string userMiniJobUuid = 3;
     public static final int USERMINIJOBUUID_FIELD_NUMBER = 3;
     private java.lang.Object userMiniJobUuid_;
     /**
@@ -3786,7 +3764,6 @@ public final class EventMiniJobProto {
       }
     }
 
-    // optional bool isSpeedUp = 4;
     public static final int ISSPEEDUP_FIELD_NUMBER = 4;
     private boolean isSpeedUp_;
     /**
@@ -3810,7 +3787,6 @@ public final class EventMiniJobProto {
       return isSpeedUp_;
     }
 
-    // optional int32 gemCost = 5;
     public static final int GEMCOST_FIELD_NUMBER = 5;
     private int gemCost_;
     /**
@@ -3836,7 +3812,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3976,8 +3953,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.CompleteMiniJobRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CompleteMiniJobRequestProto)
+        com.lvl6.proto.EventMiniJobProto.CompleteMiniJobRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor;
@@ -4137,7 +4115,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4246,7 +4223,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4254,7 +4231,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -4287,7 +4263,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional string userMiniJobUuid = 3;
       private java.lang.Object userMiniJobUuid_ = "";
       /**
        * <code>optional string userMiniJobUuid = 3;</code>
@@ -4301,9 +4276,12 @@ public final class EventMiniJobProto {
       public java.lang.String getUserMiniJobUuid() {
         java.lang.Object ref = userMiniJobUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMiniJobUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMiniJobUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4361,7 +4339,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional bool isSpeedUp = 4;
       private boolean isSpeedUp_ ;
       /**
        * <code>optional bool isSpeedUp = 4;</code>
@@ -4410,7 +4387,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional int32 gemCost = 5;
       private int gemCost_ ;
       /**
        * <code>optional int32 gemCost = 5;</code>
@@ -4454,10 +4430,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CompleteMiniJobRequestProto)
   }
 
-  public interface CompleteMiniJobResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CompleteMiniJobResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CompleteMiniJobResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4471,7 +4447,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
      */
@@ -4489,8 +4464,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class CompleteMiniJobResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CompleteMiniJobResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CompleteMiniJobResponseProto)
+      CompleteMiniJobResponseProtoOrBuilder {
     // Use CompleteMiniJobResponseProto.newBuilder() to construct.
     private CompleteMiniJobResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4700,7 +4676,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4722,7 +4697,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status_;
     /**
@@ -4745,7 +4719,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4863,8 +4838,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CompleteMiniJobResponseProto)
+        com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor;
@@ -4995,7 +4971,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5104,7 +5079,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5112,7 +5087,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;
       private com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
@@ -5159,10 +5133,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CompleteMiniJobResponseProto)
   }
 
-  public interface RedeemMiniJobRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RedeemMiniJobRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemMiniJobRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -5176,7 +5150,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -5186,7 +5159,6 @@ public final class EventMiniJobProto {
      */
     long getClientTime();
 
-    // optional string userMiniJobUuid = 3;
     /**
      * <code>optional string userMiniJobUuid = 3;</code>
      */
@@ -5201,7 +5173,6 @@ public final class EventMiniJobProto {
     com.google.protobuf.ByteString
         getUserMiniJobUuidBytes();
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 6;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 6;</code>
      */
@@ -5235,8 +5206,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class RedeemMiniJobRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RedeemMiniJobRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemMiniJobRequestProto)
+      RedeemMiniJobRequestProtoOrBuilder {
     // Use RedeemMiniJobRequestProto.newBuilder() to construct.
     private RedeemMiniJobRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5301,8 +5273,9 @@ public final class EventMiniJobProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userMiniJobUuid_ = input.readBytes();
+              userMiniJobUuid_ = bs;
               break;
             }
             case 50: {
@@ -5356,7 +5329,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -5378,7 +5350,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -5394,7 +5365,6 @@ public final class EventMiniJobProto {
       return clientTime_;
     }
 
-    // optional string userMiniJobUuid = 3;
     public static final int USERMINIJOBUUID_FIELD_NUMBER = 3;
     private java.lang.Object userMiniJobUuid_;
     /**
@@ -5437,7 +5407,6 @@ public final class EventMiniJobProto {
       }
     }
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 6;
     public static final int UMCHP_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_;
     /**
@@ -5482,7 +5451,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5615,8 +5585,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemMiniJobRequestProto)
+        com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor;
@@ -5800,7 +5771,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -5909,7 +5879,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5917,7 +5887,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -5950,7 +5919,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // optional string userMiniJobUuid = 3;
       private java.lang.Object userMiniJobUuid_ = "";
       /**
        * <code>optional string userMiniJobUuid = 3;</code>
@@ -5964,9 +5932,12 @@ public final class EventMiniJobProto {
       public java.lang.String getUserMiniJobUuid() {
         java.lang.Object ref = userMiniJobUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMiniJobUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMiniJobUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6024,7 +5995,6 @@ public final class EventMiniJobProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 6;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_ =
         java.util.Collections.emptyList();
       private void ensureUmchpIsMutable() {
@@ -6166,7 +6136,8 @@ public final class EventMiniJobProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
         if (umchpBuilder_ == null) {
           ensureUmchpIsMutable();
-          super.addAll(values, umchp_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umchp_);
           onChanged();
         } else {
           umchpBuilder_.addAllMessages(values);
@@ -6275,10 +6246,10 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemMiniJobRequestProto)
   }
 
-  public interface RedeemMiniJobResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RedeemMiniJobResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemMiniJobResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -6292,7 +6263,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
      *
@@ -6318,7 +6288,6 @@ public final class EventMiniJobProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
 
-    // optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
      */
@@ -6336,8 +6305,9 @@ public final class EventMiniJobProto {
    * </pre>
    */
   public static final class RedeemMiniJobResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RedeemMiniJobResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemMiniJobResponseProto)
+      RedeemMiniJobResponseProtoOrBuilder {
     // Use RedeemMiniJobResponseProto.newBuilder() to construct.
     private RedeemMiniJobResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6560,7 +6530,6 @@ public final class EventMiniJobProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -6582,7 +6551,6 @@ public final class EventMiniJobProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
     public static final int FUMP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
     /**
@@ -6616,7 +6584,6 @@ public final class EventMiniJobProto {
       return fump_;
     }
 
-    // optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status_;
     /**
@@ -6640,7 +6607,8 @@ public final class EventMiniJobProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6765,8 +6733,9 @@ public final class EventMiniJobProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemMiniJobResponseProto)
+        com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor;
@@ -6915,7 +6884,6 @@ public final class EventMiniJobProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -7024,7 +6992,7 @@ public final class EventMiniJobProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7032,7 +7000,6 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
@@ -7177,7 +7144,7 @@ public final class EventMiniJobProto {
         if (fumpBuilder_ == null) {
           fumpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  fump_,
+                  getFump(),
                   getParentForChildren(),
                   isClean());
           fump_ = null;
@@ -7185,7 +7152,6 @@ public final class EventMiniJobProto {
         return fumpBuilder_;
       }
 
-      // optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;
       private com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
@@ -7232,42 +7198,42 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemMiniJobResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginMiniJobRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginMiniJobResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7330,61 +7296,13 @@ public final class EventMiniJobProto {
       "NI_JOB_INCOMPLETE\020\004B\023B\021EventMiniJobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "NumToSpawn", "StructId", });
-          internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "MiniJobs", "Status", });
-          internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_BeginMiniJobRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "UserMonsterUuids", "UserMiniJobUuid", });
-          internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_BeginMiniJobResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "UserMiniJobUuid", "IsSpeedUp", "GemCost", });
-          internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "UserMiniJobUuid", "Umchp", });
-          internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Fump", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -7392,6 +7310,57 @@ public final class EventMiniJobProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClientTime", "NumToSpawn", "StructId", });
+    internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SpawnMiniJobResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "MiniJobs", "Status", });
+    internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_BeginMiniJobRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginMiniJobRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClientTime", "UserMonsterUuids", "UserMiniJobUuid", });
+    internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_BeginMiniJobResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginMiniJobResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CompleteMiniJobRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClientTime", "UserMiniJobUuid", "IsSpeedUp", "GemCost", });
+    internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CompleteMiniJobResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RedeemMiniJobRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClientTime", "UserMiniJobUuid", "Umchp", });
+    internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Fump", "Status", });
+    com.lvl6.proto.MiniJobConfigProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

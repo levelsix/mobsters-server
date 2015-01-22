@@ -8,10 +8,10 @@ public final class EventStructureProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface PurchaseNormStructureRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseNormStructureRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseNormStructureRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.CoordinateProto structCoordinates = 2;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto structCoordinates = 2;</code>
      */
@@ -39,7 +38,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getStructCoordinatesOrBuilder();
 
-    // optional int32 structId = 3;
     /**
      * <code>optional int32 structId = 3;</code>
      */
@@ -49,7 +47,6 @@ public final class EventStructureProto {
      */
     int getStructId();
 
-    // optional int64 timeOfPurchase = 4;
     /**
      * <code>optional int64 timeOfPurchase = 4;</code>
      */
@@ -59,7 +56,6 @@ public final class EventStructureProto {
      */
     long getTimeOfPurchase();
 
-    // optional int32 gemsSpent = 5;
     /**
      * <code>optional int32 gemsSpent = 5;</code>
      *
@@ -79,7 +75,6 @@ public final class EventStructureProto {
      */
     int getGemsSpent();
 
-    // optional sint32 resourceChange = 6;
     /**
      * <code>optional sint32 resourceChange = 6;</code>
      *
@@ -97,7 +92,6 @@ public final class EventStructureProto {
      */
     int getResourceChange();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
@@ -117,8 +111,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class PurchaseNormStructureRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PurchaseNormStructureRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseNormStructureRequestProto)
+      PurchaseNormStructureRequestProtoOrBuilder {
     // Use PurchaseNormStructureRequestProto.newBuilder() to construct.
     private PurchaseNormStructureRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -261,7 +256,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -283,7 +277,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto structCoordinates = 2;
     public static final int STRUCTCOORDINATES_FIELD_NUMBER = 2;
     private com.lvl6.proto.StructureProto.CoordinateProto structCoordinates_;
     /**
@@ -305,7 +298,6 @@ public final class EventStructureProto {
       return structCoordinates_;
     }
 
-    // optional int32 structId = 3;
     public static final int STRUCTID_FIELD_NUMBER = 3;
     private int structId_;
     /**
@@ -321,7 +313,6 @@ public final class EventStructureProto {
       return structId_;
     }
 
-    // optional int64 timeOfPurchase = 4;
     public static final int TIMEOFPURCHASE_FIELD_NUMBER = 4;
     private long timeOfPurchase_;
     /**
@@ -337,7 +328,6 @@ public final class EventStructureProto {
       return timeOfPurchase_;
     }
 
-    // optional int32 gemsSpent = 5;
     public static final int GEMSSPENT_FIELD_NUMBER = 5;
     private int gemsSpent_;
     /**
@@ -363,7 +353,6 @@ public final class EventStructureProto {
       return gemsSpent_;
     }
 
-    // optional sint32 resourceChange = 6;
     public static final int RESOURCECHANGE_FIELD_NUMBER = 6;
     private int resourceChange_;
     /**
@@ -387,7 +376,6 @@ public final class EventStructureProto {
       return resourceChange_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -415,7 +403,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -570,8 +559,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseNormStructureRequestProto)
+        com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor;
@@ -756,7 +746,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -865,7 +854,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -873,7 +862,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto structCoordinates = 2;
       private com.lvl6.proto.StructureProto.CoordinateProto structCoordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> structCoordinatesBuilder_;
@@ -982,7 +970,7 @@ public final class EventStructureProto {
         if (structCoordinatesBuilder_ == null) {
           structCoordinatesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  structCoordinates_,
+                  getStructCoordinates(),
                   getParentForChildren(),
                   isClean());
           structCoordinates_ = null;
@@ -990,7 +978,6 @@ public final class EventStructureProto {
         return structCoordinatesBuilder_;
       }
 
-      // optional int32 structId = 3;
       private int structId_ ;
       /**
        * <code>optional int32 structId = 3;</code>
@@ -1023,7 +1010,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int64 timeOfPurchase = 4;
       private long timeOfPurchase_ ;
       /**
        * <code>optional int64 timeOfPurchase = 4;</code>
@@ -1056,7 +1042,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemsSpent = 5;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 5;</code>
@@ -1109,7 +1094,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional sint32 resourceChange = 6;
       private int resourceChange_ ;
       /**
        * <code>optional sint32 resourceChange = 6;</code>
@@ -1158,7 +1142,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
@@ -1205,10 +1188,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseNormStructureRequestProto)
   }
 
-  public interface PurchaseNormStructureResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseNormStructureResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseNormStructureResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1222,7 +1205,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
      */
@@ -1232,7 +1214,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus getStatus();
 
-    // optional string userStructUuid = 3;
     /**
      * <code>optional string userStructUuid = 3;</code>
      */
@@ -1251,8 +1232,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.PurchaseNormStructureResponseProto}
    */
   public static final class PurchaseNormStructureResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PurchaseNormStructureResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseNormStructureResponseProto)
+      PurchaseNormStructureResponseProtoOrBuilder {
     // Use PurchaseNormStructureResponseProto.newBuilder() to construct.
     private PurchaseNormStructureResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1323,8 +1305,9 @@ public final class EventStructureProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
           }
@@ -1476,7 +1459,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1498,7 +1480,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status_;
     /**
@@ -1514,7 +1495,6 @@ public final class EventStructureProto {
       return status_;
     }
 
-    // optional string userStructUuid = 3;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 3;
     private java.lang.Object userStructUuid_;
     /**
@@ -1565,7 +1545,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1686,8 +1667,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.PurchaseNormStructureResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseNormStructureResponseProto)
+        com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor;
@@ -1829,7 +1811,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1938,7 +1919,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1946,7 +1927,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;
       private com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
@@ -1982,7 +1962,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional string userStructUuid = 3;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 3;</code>
@@ -1996,9 +1975,12 @@ public final class EventStructureProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2067,10 +2049,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseNormStructureResponseProto)
   }
 
-  public interface MoveOrRotateNormStructureRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MoveOrRotateNormStructureRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MoveOrRotateNormStructureRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2084,7 +2066,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userStructUuid = 2;
     /**
      * <code>optional string userStructUuid = 2;</code>
      */
@@ -2099,7 +2080,6 @@ public final class EventStructureProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;
     /**
      * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;</code>
      */
@@ -2109,7 +2089,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType getType();
 
-    // optional .com.lvl6.proto.CoordinateProto curStructCoordinates = 4;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto curStructCoordinates = 4;</code>
      */
@@ -2123,7 +2102,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCurStructCoordinatesOrBuilder();
 
-    // optional .com.lvl6.proto.StructOrientation orientationNew = 5 [default = POSITION_1];
     /**
      * <code>optional .com.lvl6.proto.StructOrientation orientationNew = 5 [default = POSITION_1];</code>
      */
@@ -2141,8 +2119,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class MoveOrRotateNormStructureRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MoveOrRotateNormStructureRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MoveOrRotateNormStructureRequestProto)
+      MoveOrRotateNormStructureRequestProtoOrBuilder {
     // Use MoveOrRotateNormStructureRequestProto.newBuilder() to construct.
     private MoveOrRotateNormStructureRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2202,8 +2181,9 @@ public final class EventStructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -2362,7 +2342,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2384,7 +2363,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional string userStructUuid = 2;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
     private java.lang.Object userStructUuid_;
     /**
@@ -2427,7 +2405,6 @@ public final class EventStructureProto {
       }
     }
 
-    // optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;
     public static final int TYPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type_;
     /**
@@ -2443,7 +2420,6 @@ public final class EventStructureProto {
       return type_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto curStructCoordinates = 4;
     public static final int CURSTRUCTCOORDINATES_FIELD_NUMBER = 4;
     private com.lvl6.proto.StructureProto.CoordinateProto curStructCoordinates_;
     /**
@@ -2465,7 +2441,6 @@ public final class EventStructureProto {
       return curStructCoordinates_;
     }
 
-    // optional .com.lvl6.proto.StructOrientation orientationNew = 5 [default = POSITION_1];
     public static final int ORIENTATIONNEW_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.StructOrientation orientationNew_;
     /**
@@ -2491,7 +2466,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2630,8 +2606,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MoveOrRotateNormStructureRequestProto)
+        com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor;
@@ -2800,7 +2777,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2909,7 +2885,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2917,7 +2893,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional string userStructUuid = 2;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 2;</code>
@@ -2931,9 +2906,12 @@ public final class EventStructureProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2991,7 +2969,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;
       private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType.MOVE;
       /**
        * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;</code>
@@ -3027,7 +3004,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto curStructCoordinates = 4;
       private com.lvl6.proto.StructureProto.CoordinateProto curStructCoordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> curStructCoordinatesBuilder_;
@@ -3136,7 +3112,7 @@ public final class EventStructureProto {
         if (curStructCoordinatesBuilder_ == null) {
           curStructCoordinatesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  curStructCoordinates_,
+                  getCurStructCoordinates(),
                   getParentForChildren(),
                   isClean());
           curStructCoordinates_ = null;
@@ -3144,7 +3120,6 @@ public final class EventStructureProto {
         return curStructCoordinatesBuilder_;
       }
 
-      // optional .com.lvl6.proto.StructOrientation orientationNew = 5 [default = POSITION_1];
       private com.lvl6.proto.StructureProto.StructOrientation orientationNew_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
       /**
        * <code>optional .com.lvl6.proto.StructOrientation orientationNew = 5 [default = POSITION_1];</code>
@@ -3191,10 +3166,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MoveOrRotateNormStructureRequestProto)
   }
 
-  public interface MoveOrRotateNormStructureResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MoveOrRotateNormStructureResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MoveOrRotateNormStructureResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3208,7 +3183,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
      */
@@ -3226,8 +3200,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class MoveOrRotateNormStructureResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MoveOrRotateNormStructureResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MoveOrRotateNormStructureResponseProto)
+      MoveOrRotateNormStructureResponseProtoOrBuilder {
     // Use MoveOrRotateNormStructureResponseProto.newBuilder() to construct.
     private MoveOrRotateNormStructureResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3419,7 +3394,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3441,7 +3415,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status_;
     /**
@@ -3464,7 +3437,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3582,8 +3556,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MoveOrRotateNormStructureResponseProto)
+        com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor;
@@ -3714,7 +3689,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3823,7 +3797,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3831,7 +3805,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;
       private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
@@ -3878,10 +3851,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MoveOrRotateNormStructureResponseProto)
   }
 
-  public interface UpgradeNormStructureRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpgradeNormStructureRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpgradeNormStructureRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3895,7 +3868,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userStructUuid = 2;
     /**
      * <code>optional string userStructUuid = 2;</code>
      */
@@ -3910,7 +3882,6 @@ public final class EventStructureProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // optional int64 timeOfUpgrade = 3;
     /**
      * <code>optional int64 timeOfUpgrade = 3;</code>
      */
@@ -3920,7 +3891,6 @@ public final class EventStructureProto {
      */
     long getTimeOfUpgrade();
 
-    // optional int32 gemsSpent = 4;
     /**
      * <code>optional int32 gemsSpent = 4;</code>
      *
@@ -3940,7 +3910,6 @@ public final class EventStructureProto {
      */
     int getGemsSpent();
 
-    // optional sint32 resourceChange = 5;
     /**
      * <code>optional sint32 resourceChange = 5;</code>
      *
@@ -3958,7 +3927,6 @@ public final class EventStructureProto {
      */
     int getResourceChange();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
      */
@@ -3977,8 +3945,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class UpgradeNormStructureRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpgradeNormStructureRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpgradeNormStructureRequestProto)
+      UpgradeNormStructureRequestProtoOrBuilder {
     // Use UpgradeNormStructureRequestProto.newBuilder() to construct.
     private UpgradeNormStructureRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4038,8 +4007,9 @@ public final class EventStructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -4108,7 +4078,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4130,7 +4099,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional string userStructUuid = 2;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
     private java.lang.Object userStructUuid_;
     /**
@@ -4173,7 +4141,6 @@ public final class EventStructureProto {
       }
     }
 
-    // optional int64 timeOfUpgrade = 3;
     public static final int TIMEOFUPGRADE_FIELD_NUMBER = 3;
     private long timeOfUpgrade_;
     /**
@@ -4189,7 +4156,6 @@ public final class EventStructureProto {
       return timeOfUpgrade_;
     }
 
-    // optional int32 gemsSpent = 4;
     public static final int GEMSSPENT_FIELD_NUMBER = 4;
     private int gemsSpent_;
     /**
@@ -4215,7 +4181,6 @@ public final class EventStructureProto {
       return gemsSpent_;
     }
 
-    // optional sint32 resourceChange = 5;
     public static final int RESOURCECHANGE_FIELD_NUMBER = 5;
     private int resourceChange_;
     /**
@@ -4239,7 +4204,6 @@ public final class EventStructureProto {
       return resourceChange_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];
     public static final int RESOURCETYPE_FIELD_NUMBER = 6;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -4266,7 +4230,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4413,8 +4378,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpgradeNormStructureRequestProto)
+        com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor;
@@ -4583,7 +4549,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4692,7 +4657,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4700,7 +4665,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional string userStructUuid = 2;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 2;</code>
@@ -4714,9 +4678,12 @@ public final class EventStructureProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4774,7 +4741,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int64 timeOfUpgrade = 3;
       private long timeOfUpgrade_ ;
       /**
        * <code>optional int64 timeOfUpgrade = 3;</code>
@@ -4807,7 +4773,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemsSpent = 4;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 4;</code>
@@ -4860,7 +4825,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional sint32 resourceChange = 5;
       private int resourceChange_ ;
       /**
        * <code>optional sint32 resourceChange = 5;</code>
@@ -4909,7 +4873,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
@@ -4956,10 +4919,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpgradeNormStructureRequestProto)
   }
 
-  public interface UpgradeNormStructureResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpgradeNormStructureResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpgradeNormStructureResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4973,7 +4936,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
      */
@@ -4991,8 +4953,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class UpgradeNormStructureResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpgradeNormStructureResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpgradeNormStructureResponseProto)
+      UpgradeNormStructureResponseProtoOrBuilder {
     // Use UpgradeNormStructureResponseProto.newBuilder() to construct.
     private UpgradeNormStructureResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5238,7 +5201,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5260,7 +5222,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status_;
     /**
@@ -5283,7 +5244,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5401,8 +5363,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpgradeNormStructureResponseProto)
+        com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor;
@@ -5533,7 +5496,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5642,7 +5604,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5650,7 +5612,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;
       private com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
@@ -5697,10 +5658,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpgradeNormStructureResponseProto)
   }
 
-  public interface FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5714,7 +5675,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userStructUuid = 2;
     /**
      * <code>optional string userStructUuid = 2;</code>
      */
@@ -5729,7 +5689,6 @@ public final class EventStructureProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // optional int64 timeOfSpeedup = 3;
     /**
      * <code>optional int64 timeOfSpeedup = 3;</code>
      *
@@ -5749,7 +5708,6 @@ public final class EventStructureProto {
      */
     long getTimeOfSpeedup();
 
-    // optional int32 gemCostToSpeedup = 4;
     /**
      * <code>optional int32 gemCostToSpeedup = 4;</code>
      */
@@ -5768,8 +5726,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class FinishNormStructWaittimeWithDiamondsRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsRequestProto)
+      FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder {
     // Use FinishNormStructWaittimeWithDiamondsRequestProto.newBuilder() to construct.
     private FinishNormStructWaittimeWithDiamondsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5829,8 +5788,9 @@ public final class EventStructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -5883,7 +5843,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5905,7 +5864,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional string userStructUuid = 2;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
     private java.lang.Object userStructUuid_;
     /**
@@ -5948,7 +5906,6 @@ public final class EventStructureProto {
       }
     }
 
-    // optional int64 timeOfSpeedup = 3;
     public static final int TIMEOFSPEEDUP_FIELD_NUMBER = 3;
     private long timeOfSpeedup_;
     /**
@@ -5974,7 +5931,6 @@ public final class EventStructureProto {
       return timeOfSpeedup_;
     }
 
-    // optional int32 gemCostToSpeedup = 4;
     public static final int GEMCOSTTOSPEEDUP_FIELD_NUMBER = 4;
     private int gemCostToSpeedup_;
     /**
@@ -5999,7 +5955,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6132,8 +6089,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsRequestProto)
+        com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor;
@@ -6284,7 +6242,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -6393,7 +6350,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6401,7 +6358,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional string userStructUuid = 2;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 2;</code>
@@ -6415,9 +6371,12 @@ public final class EventStructureProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6475,7 +6434,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int64 timeOfSpeedup = 3;
       private long timeOfSpeedup_ ;
       /**
        * <code>optional int64 timeOfSpeedup = 3;</code>
@@ -6528,7 +6486,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemCostToSpeedup = 4;
       private int gemCostToSpeedup_ ;
       /**
        * <code>optional int32 gemCostToSpeedup = 4;</code>
@@ -6572,10 +6529,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsRequestProto)
   }
 
-  public interface FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -6589,7 +6546,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
      */
@@ -6607,8 +6563,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class FinishNormStructWaittimeWithDiamondsResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto)
+      FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder {
     // Use FinishNormStructWaittimeWithDiamondsResponseProto.newBuilder() to construct.
     private FinishNormStructWaittimeWithDiamondsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6809,7 +6766,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6831,7 +6787,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status_;
     /**
@@ -6854,7 +6809,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6972,8 +6928,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto)
+        com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor;
@@ -7104,7 +7061,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7213,7 +7169,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7221,7 +7177,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;
       private com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status_ = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
@@ -7268,10 +7223,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto)
   }
 
-  public interface NormStructWaitCompleteRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface NormStructWaitCompleteRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.NormStructWaitCompleteRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -7285,12 +7240,11 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated string userStructUuid = 2;
     /**
      * <code>repeated string userStructUuid = 2;</code>
      */
-    java.util.List<java.lang.String>
-    getUserStructUuidList();
+    com.google.protobuf.ProtocolStringList
+        getUserStructUuidList();
     /**
      * <code>repeated string userStructUuid = 2;</code>
      */
@@ -7305,7 +7259,6 @@ public final class EventStructureProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes(int index);
 
-    // optional int64 curTime = 3;
     /**
      * <code>optional int64 curTime = 3;</code>
      *
@@ -7336,8 +7289,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class NormStructWaitCompleteRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements NormStructWaitCompleteRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.NormStructWaitCompleteRequestProto)
+      NormStructWaitCompleteRequestProtoOrBuilder {
     // Use NormStructWaitCompleteRequestProto.newBuilder() to construct.
     private NormStructWaitCompleteRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7397,11 +7351,12 @@ public final class EventStructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 userStructUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userStructUuid_.add(input.readBytes());
+              userStructUuid_.add(bs);
               break;
             }
             case 24: {
@@ -7418,7 +7373,7 @@ public final class EventStructureProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userStructUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(userStructUuid_);
+          userStructUuid_ = userStructUuid_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -7452,7 +7407,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -7474,13 +7428,12 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // repeated string userStructUuid = 2;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList userStructUuid_;
     /**
      * <code>repeated string userStructUuid = 2;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserStructUuidList() {
       return userStructUuid_;
     }
@@ -7504,7 +7457,6 @@ public final class EventStructureProto {
       return userStructUuid_.getByteString(index);
     }
 
-    // optional int64 curTime = 3;
     public static final int CURTIME_FIELD_NUMBER = 3;
     private long curTime_;
     /**
@@ -7540,7 +7492,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7671,8 +7624,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.NormStructWaitCompleteRequestProto)
+        com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor;
@@ -7753,8 +7707,7 @@ public final class EventStructureProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userStructUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userStructUuid_);
+          userStructUuid_ = userStructUuid_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userStructUuid_ = userStructUuid_;
@@ -7821,7 +7774,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7930,7 +7882,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7938,7 +7890,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // repeated string userStructUuid = 2;
       private com.google.protobuf.LazyStringList userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserStructUuidIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -7949,9 +7900,9 @@ public final class EventStructureProto {
       /**
        * <code>repeated string userStructUuid = 2;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserStructUuidList() {
-        return java.util.Collections.unmodifiableList(userStructUuid_);
+        return userStructUuid_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userStructUuid = 2;</code>
@@ -8004,7 +7955,8 @@ public final class EventStructureProto {
       public Builder addAllUserStructUuid(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserStructUuidIsMutable();
-        super.addAll(values, userStructUuid_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userStructUuid_);
         onChanged();
         return this;
       }
@@ -8031,7 +7983,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int64 curTime = 3;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 3;</code>
@@ -8099,10 +8050,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.NormStructWaitCompleteRequestProto)
   }
 
-  public interface NormStructWaitCompleteResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface NormStructWaitCompleteResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.NormStructWaitCompleteResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -8116,7 +8067,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
      */
@@ -8126,7 +8076,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus getStatus();
 
-    // repeated .com.lvl6.proto.FullUserStructureProto userStruct = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullUserStructureProto userStruct = 3;</code>
      */
@@ -8159,8 +8108,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class NormStructWaitCompleteResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements NormStructWaitCompleteResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.NormStructWaitCompleteResponseProto)
+      NormStructWaitCompleteResponseProtoOrBuilder {
     // Use NormStructWaitCompleteResponseProto.newBuilder() to construct.
     private NormStructWaitCompleteResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8372,7 +8322,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -8394,7 +8343,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status_;
     /**
@@ -8410,7 +8358,6 @@ public final class EventStructureProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.FullUserStructureProto userStruct = 3;
     public static final int USERSTRUCT_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> userStruct_;
     /**
@@ -8454,7 +8401,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8579,8 +8527,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.NormStructWaitCompleteResponseProto)
+        com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor;
@@ -8753,7 +8702,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8862,7 +8810,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8870,7 +8818,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;
       private com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status_ = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
@@ -8906,7 +8853,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.FullUserStructureProto userStruct = 3;
       private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> userStruct_ =
         java.util.Collections.emptyList();
       private void ensureUserStructIsMutable() {
@@ -9048,7 +8994,8 @@ public final class EventStructureProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullUserStructureProto> values) {
         if (userStructBuilder_ == null) {
           ensureUserStructIsMutable();
-          super.addAll(values, userStruct_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userStruct_);
           onChanged();
         } else {
           userStructBuilder_.addAllMessages(values);
@@ -9157,10 +9104,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.NormStructWaitCompleteResponseProto)
   }
 
-  public interface RetrieveCurrencyFromNormStructureRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveCurrencyFromNormStructureRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -9174,7 +9121,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval structRetrievals = 2;
     /**
      * <code>repeated .com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval structRetrievals = 2;</code>
      */
@@ -9208,8 +9154,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class RetrieveCurrencyFromNormStructureRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrieveCurrencyFromNormStructureRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto)
+      RetrieveCurrencyFromNormStructureRequestProtoOrBuilder {
     // Use RetrieveCurrencyFromNormStructureRequestProto.newBuilder() to construct.
     private RetrieveCurrencyFromNormStructureRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -9318,10 +9265,10 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    public interface StructRetrievalOrBuilder
-        extends com.google.protobuf.MessageOrBuilder {
+    public interface StructRetrievalOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval)
+        com.google.protobuf.MessageOrBuilder {
 
-      // optional string userStructUuid = 1;
       /**
        * <code>optional string userStructUuid = 1;</code>
        */
@@ -9336,7 +9283,6 @@ public final class EventStructureProto {
       com.google.protobuf.ByteString
           getUserStructUuidBytes();
 
-      // optional int64 timeOfRetrieval = 2;
       /**
        * <code>optional int64 timeOfRetrieval = 2;</code>
        */
@@ -9346,7 +9292,6 @@ public final class EventStructureProto {
        */
       long getTimeOfRetrieval();
 
-      // optional int32 amountCollected = 3;
       /**
        * <code>optional int32 amountCollected = 3;</code>
        */
@@ -9360,8 +9305,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval}
      */
     public static final class StructRetrieval extends
-        com.google.protobuf.GeneratedMessage
-        implements StructRetrievalOrBuilder {
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval)
+        StructRetrievalOrBuilder {
       // Use StructRetrieval.newBuilder() to construct.
       private StructRetrieval(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -9408,8 +9354,9 @@ public final class EventStructureProto {
                 break;
               }
               case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000001;
-                userStructUuid_ = input.readBytes();
+                userStructUuid_ = bs;
                 break;
               }
               case 16: {
@@ -9462,7 +9409,6 @@ public final class EventStructureProto {
       }
 
       private int bitField0_;
-      // optional string userStructUuid = 1;
       public static final int USERSTRUCTUUID_FIELD_NUMBER = 1;
       private java.lang.Object userStructUuid_;
       /**
@@ -9505,7 +9451,6 @@ public final class EventStructureProto {
         }
       }
 
-      // optional int64 timeOfRetrieval = 2;
       public static final int TIMEOFRETRIEVAL_FIELD_NUMBER = 2;
       private long timeOfRetrieval_;
       /**
@@ -9521,7 +9466,6 @@ public final class EventStructureProto {
         return timeOfRetrieval_;
       }
 
-      // optional int32 amountCollected = 3;
       public static final int AMOUNTCOLLECTED_FIELD_NUMBER = 3;
       private int amountCollected_;
       /**
@@ -9545,7 +9489,8 @@ public final class EventStructureProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized != -1) return isInitialized == 1;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
 
         memoizedIsInitialized = 1;
         return true;
@@ -9666,8 +9611,9 @@ public final class EventStructureProto {
        * Protobuf type {@code com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrievalOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval)
+          com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrievalOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor;
@@ -9800,7 +9746,6 @@ public final class EventStructureProto {
         }
         private int bitField0_;
 
-        // optional string userStructUuid = 1;
         private java.lang.Object userStructUuid_ = "";
         /**
          * <code>optional string userStructUuid = 1;</code>
@@ -9814,9 +9759,12 @@ public final class EventStructureProto {
         public java.lang.String getUserStructUuid() {
           java.lang.Object ref = userStructUuid_;
           if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            userStructUuid_ = s;
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              userStructUuid_ = s;
+            }
             return s;
           } else {
             return (java.lang.String) ref;
@@ -9874,7 +9822,6 @@ public final class EventStructureProto {
           return this;
         }
 
-        // optional int64 timeOfRetrieval = 2;
         private long timeOfRetrieval_ ;
         /**
          * <code>optional int64 timeOfRetrieval = 2;</code>
@@ -9907,7 +9854,6 @@ public final class EventStructureProto {
           return this;
         }
 
-        // optional int32 amountCollected = 3;
         private int amountCollected_ ;
         /**
          * <code>optional int32 amountCollected = 3;</code>
@@ -9952,7 +9898,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -9974,7 +9919,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval structRetrievals = 2;
     public static final int STRUCTRETRIEVALS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval> structRetrievals_;
     /**
@@ -10017,7 +9961,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -10136,8 +10081,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto)
+        com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor;
@@ -10301,7 +10247,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -10410,7 +10355,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -10418,7 +10363,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval structRetrievals = 2;
       private java.util.List<com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval> structRetrievals_ =
         java.util.Collections.emptyList();
       private void ensureStructRetrievalsIsMutable() {
@@ -10560,7 +10504,8 @@ public final class EventStructureProto {
           java.lang.Iterable<? extends com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval> values) {
         if (structRetrievalsBuilder_ == null) {
           ensureStructRetrievalsIsMutable();
-          super.addAll(values, structRetrievals_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, structRetrievals_);
           onChanged();
         } else {
           structRetrievalsBuilder_.addAllMessages(values);
@@ -10669,10 +10614,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveCurrencyFromNormStructureRequestProto)
   }
 
-  public interface RetrieveCurrencyFromNormStructureResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveCurrencyFromNormStructureResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -10686,7 +10631,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
      */
@@ -10704,8 +10648,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class RetrieveCurrencyFromNormStructureResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrieveCurrencyFromNormStructureResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto)
+      RetrieveCurrencyFromNormStructureResponseProtoOrBuilder {
     // Use RetrieveCurrencyFromNormStructureResponseProto.newBuilder() to construct.
     private RetrieveCurrencyFromNormStructureResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10897,7 +10842,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -10919,7 +10863,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_;
     /**
@@ -10942,7 +10885,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11060,8 +11004,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto)
+        com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor;
@@ -11192,7 +11137,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -11301,7 +11245,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -11309,7 +11253,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;
       private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
@@ -11356,10 +11299,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto)
   }
 
-  public interface ExpansionWaitCompleteRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ExpansionWaitCompleteRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ExpansionWaitCompleteRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -11373,7 +11316,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 curTime = 2;
     /**
      * <code>optional int64 curTime = 2;</code>
      *
@@ -11391,7 +11333,6 @@ public final class EventStructureProto {
      */
     long getCurTime();
 
-    // optional sint32 xPosition = 3;
     /**
      * <code>optional sint32 xPosition = 3;</code>
      *
@@ -11411,7 +11352,6 @@ public final class EventStructureProto {
      */
     int getXPosition();
 
-    // optional sint32 yPosition = 4;
     /**
      * <code>optional sint32 yPosition = 4;</code>
      */
@@ -11421,7 +11361,6 @@ public final class EventStructureProto {
      */
     int getYPosition();
 
-    // optional bool speedUp = 5;
     /**
      * <code>optional bool speedUp = 5;</code>
      */
@@ -11431,7 +11370,6 @@ public final class EventStructureProto {
      */
     boolean getSpeedUp();
 
-    // optional int32 gemCostToSpeedup = 6;
     /**
      * <code>optional int32 gemCostToSpeedup = 6;</code>
      */
@@ -11449,8 +11387,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class ExpansionWaitCompleteRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ExpansionWaitCompleteRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ExpansionWaitCompleteRequestProto)
+      ExpansionWaitCompleteRequestProtoOrBuilder {
     // Use ExpansionWaitCompleteRequestProto.newBuilder() to construct.
     private ExpansionWaitCompleteRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -11574,7 +11513,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -11596,7 +11534,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional int64 curTime = 2;
     public static final int CURTIME_FIELD_NUMBER = 2;
     private long curTime_;
     /**
@@ -11620,7 +11557,6 @@ public final class EventStructureProto {
       return curTime_;
     }
 
-    // optional sint32 xPosition = 3;
     public static final int XPOSITION_FIELD_NUMBER = 3;
     private int xPosition_;
     /**
@@ -11646,7 +11582,6 @@ public final class EventStructureProto {
       return xPosition_;
     }
 
-    // optional sint32 yPosition = 4;
     public static final int YPOSITION_FIELD_NUMBER = 4;
     private int yPosition_;
     /**
@@ -11662,7 +11597,6 @@ public final class EventStructureProto {
       return yPosition_;
     }
 
-    // optional bool speedUp = 5;
     public static final int SPEEDUP_FIELD_NUMBER = 5;
     private boolean speedUp_;
     /**
@@ -11678,7 +11612,6 @@ public final class EventStructureProto {
       return speedUp_;
     }
 
-    // optional int32 gemCostToSpeedup = 6;
     public static final int GEMCOSTTOSPEEDUP_FIELD_NUMBER = 6;
     private int gemCostToSpeedup_;
     /**
@@ -11705,7 +11638,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11851,8 +11785,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ExpansionWaitCompleteRequestProto)
+        com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor;
@@ -12019,7 +11954,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -12128,7 +12062,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -12136,7 +12070,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional int64 curTime = 2;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 2;</code>
@@ -12185,7 +12118,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional sint32 xPosition = 3;
       private int xPosition_ ;
       /**
        * <code>optional sint32 xPosition = 3;</code>
@@ -12238,7 +12170,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional sint32 yPosition = 4;
       private int yPosition_ ;
       /**
        * <code>optional sint32 yPosition = 4;</code>
@@ -12271,7 +12202,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional bool speedUp = 5;
       private boolean speedUp_ ;
       /**
        * <code>optional bool speedUp = 5;</code>
@@ -12304,7 +12234,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemCostToSpeedup = 6;
       private int gemCostToSpeedup_ ;
       /**
        * <code>optional int32 gemCostToSpeedup = 6;</code>
@@ -12348,10 +12277,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExpansionWaitCompleteRequestProto)
   }
 
-  public interface ExpansionWaitCompleteResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ExpansionWaitCompleteResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ExpansionWaitCompleteResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -12365,7 +12294,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status = 2;</code>
      */
@@ -12375,7 +12303,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus getStatus();
 
-    // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
     /**
      * <code>optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;</code>
      */
@@ -12397,8 +12324,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class ExpansionWaitCompleteResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ExpansionWaitCompleteResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ExpansionWaitCompleteResponseProto)
+      ExpansionWaitCompleteResponseProtoOrBuilder {
     // Use ExpansionWaitCompleteResponseProto.newBuilder() to construct.
     private ExpansionWaitCompleteResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -12630,7 +12558,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -12652,7 +12579,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status_;
     /**
@@ -12668,7 +12594,6 @@ public final class EventStructureProto {
       return status_;
     }
 
-    // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
     public static final int UCEDP_FIELD_NUMBER = 3;
     private com.lvl6.proto.CityProto.UserCityExpansionDataProto ucedp_;
     /**
@@ -12698,7 +12623,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -12823,8 +12749,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ExpansionWaitCompleteResponseProto)
+        com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor;
@@ -12973,7 +12900,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -13082,7 +13008,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -13090,7 +13016,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status = 2;
       private com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status_ = com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus status = 2;</code>
@@ -13126,7 +13051,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserCityExpansionDataProto ucedp = 3;
       private com.lvl6.proto.CityProto.UserCityExpansionDataProto ucedp_ = com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.CityProto.UserCityExpansionDataProto, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder, com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder> ucedpBuilder_;
@@ -13235,7 +13159,7 @@ public final class EventStructureProto {
         if (ucedpBuilder_ == null) {
           ucedpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.CityProto.UserCityExpansionDataProto, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder, com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder>(
-                  ucedp_,
+                  getUcedp(),
                   getParentForChildren(),
                   isClean());
           ucedp_ = null;
@@ -13254,10 +13178,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExpansionWaitCompleteResponseProto)
   }
 
-  public interface SpawnObstacleRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SpawnObstacleRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SpawnObstacleRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -13271,7 +13195,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
     /**
      * <code>repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;</code>
      */
@@ -13296,7 +13219,6 @@ public final class EventStructureProto {
     com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getProspectiveObstaclesOrBuilder(
         int index);
 
-    // optional int64 curTime = 3;
     /**
      * <code>optional int64 curTime = 3;</code>
      */
@@ -13314,8 +13236,9 @@ public final class EventStructureProto {
    * </pre>
    */
   public static final class SpawnObstacleRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SpawnObstacleRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SpawnObstacleRequestProto)
+      SpawnObstacleRequestProtoOrBuilder {
     // Use SpawnObstacleRequestProto.newBuilder() to construct.
     private SpawnObstacleRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -13430,7 +13353,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -13452,7 +13374,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
     public static final int PROSPECTIVEOBSTACLES_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> prospectiveObstacles_;
     /**
@@ -13488,7 +13409,6 @@ public final class EventStructureProto {
       return prospectiveObstacles_.get(index);
     }
 
-    // optional int64 curTime = 3;
     public static final int CURTIME_FIELD_NUMBER = 3;
     private long curTime_;
     /**
@@ -13512,7 +13432,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -13637,8 +13558,9 @@ public final class EventStructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SpawnObstacleRequestProto)
+        com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor;
@@ -13811,7 +13733,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -13920,7 +13841,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -13928,7 +13849,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
       private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> prospectiveObstacles_ =
         java.util.Collections.emptyList();
       private void ensureProspectiveObstaclesIsMutable() {
@@ -14070,7 +13990,8 @@ public final class EventStructureProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MinimumObstacleProto> values) {
         if (prospectiveObstaclesBuilder_ == null) {
           ensureProspectiveObstaclesIsMutable();
-          super.addAll(values, prospectiveObstacles_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, prospectiveObstacles_);
           onChanged();
         } else {
           prospectiveObstaclesBuilder_.addAllMessages(values);
@@ -14168,7 +14089,6 @@ public final class EventStructureProto {
         return prospectiveObstaclesBuilder_;
       }
 
-      // optional int64 curTime = 3;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 3;</code>
@@ -14212,10 +14132,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnObstacleRequestProto)
   }
 
-  public interface SpawnObstacleResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SpawnObstacleResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SpawnObstacleResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -14229,7 +14149,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;</code>
      */
@@ -14254,7 +14173,6 @@ public final class EventStructureProto {
     com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getSpawnedObstaclesOrBuilder(
         int index);
 
-    // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
      */
@@ -14268,8 +14186,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.SpawnObstacleResponseProto}
    */
   public static final class SpawnObstacleResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SpawnObstacleResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SpawnObstacleResponseProto)
+      SpawnObstacleResponseProtoOrBuilder {
     // Use SpawnObstacleResponseProto.newBuilder() to construct.
     private SpawnObstacleResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -14472,7 +14391,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -14494,7 +14412,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
     public static final int SPAWNEDOBSTACLES_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> spawnedObstacles_;
     /**
@@ -14530,7 +14447,6 @@ public final class EventStructureProto {
       return spawnedObstacles_.get(index);
     }
 
-    // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_;
     /**
@@ -14554,7 +14470,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14675,8 +14592,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.SpawnObstacleResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SpawnObstacleResponseProto)
+        com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor;
@@ -14849,7 +14767,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -14958,7 +14875,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -14966,7 +14883,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
       private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> spawnedObstacles_ =
         java.util.Collections.emptyList();
       private void ensureSpawnedObstaclesIsMutable() {
@@ -15108,7 +15024,8 @@ public final class EventStructureProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserObstacleProto> values) {
         if (spawnedObstaclesBuilder_ == null) {
           ensureSpawnedObstaclesIsMutable();
-          super.addAll(values, spawnedObstacles_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, spawnedObstacles_);
           onChanged();
         } else {
           spawnedObstaclesBuilder_.addAllMessages(values);
@@ -15206,7 +15123,6 @@ public final class EventStructureProto {
         return spawnedObstaclesBuilder_;
       }
 
-      // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
       private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
@@ -15253,10 +15169,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnObstacleResponseProto)
   }
 
-  public interface BeginObstacleRemovalRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginObstacleRemovalRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginObstacleRemovalRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -15270,7 +15186,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 curTime = 2;
     /**
      * <code>optional int64 curTime = 2;</code>
      */
@@ -15280,7 +15195,6 @@ public final class EventStructureProto {
      */
     long getCurTime();
 
-    // optional int32 gemsSpent = 3;
     /**
      * <code>optional int32 gemsSpent = 3;</code>
      *
@@ -15300,7 +15214,6 @@ public final class EventStructureProto {
      */
     int getGemsSpent();
 
-    // optional sint32 resourceChange = 4;
     /**
      * <code>optional sint32 resourceChange = 4;</code>
      *
@@ -15318,7 +15231,6 @@ public final class EventStructureProto {
      */
     int getResourceChange();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
      */
@@ -15328,7 +15240,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
-    // optional string userObstacleUuid = 6;
     /**
      * <code>optional string userObstacleUuid = 6;</code>
      */
@@ -15347,8 +15258,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalRequestProto}
    */
   public static final class BeginObstacleRemovalRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginObstacleRemovalRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginObstacleRemovalRequestProto)
+      BeginObstacleRemovalRequestProtoOrBuilder {
     // Use BeginObstacleRemovalRequestProto.newBuilder() to construct.
     private BeginObstacleRemovalRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -15434,8 +15346,9 @@ public final class EventStructureProto {
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              userObstacleUuid_ = input.readBytes();
+              userObstacleUuid_ = bs;
               break;
             }
           }
@@ -15478,7 +15391,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -15500,7 +15412,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional int64 curTime = 2;
     public static final int CURTIME_FIELD_NUMBER = 2;
     private long curTime_;
     /**
@@ -15516,7 +15427,6 @@ public final class EventStructureProto {
       return curTime_;
     }
 
-    // optional int32 gemsSpent = 3;
     public static final int GEMSSPENT_FIELD_NUMBER = 3;
     private int gemsSpent_;
     /**
@@ -15542,7 +15452,6 @@ public final class EventStructureProto {
       return gemsSpent_;
     }
 
-    // optional sint32 resourceChange = 4;
     public static final int RESOURCECHANGE_FIELD_NUMBER = 4;
     private int resourceChange_;
     /**
@@ -15566,7 +15475,6 @@ public final class EventStructureProto {
       return resourceChange_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
     public static final int RESOURCETYPE_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -15582,7 +15490,6 @@ public final class EventStructureProto {
       return resourceType_;
     }
 
-    // optional string userObstacleUuid = 6;
     public static final int USEROBSTACLEUUID_FIELD_NUMBER = 6;
     private java.lang.Object userObstacleUuid_;
     /**
@@ -15636,7 +15543,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -15778,8 +15686,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginObstacleRemovalRequestProto)
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor;
@@ -15948,7 +15857,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -16057,7 +15965,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -16065,7 +15973,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional int64 curTime = 2;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 2;</code>
@@ -16098,7 +16005,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemsSpent = 3;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 3;</code>
@@ -16151,7 +16057,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional sint32 resourceChange = 4;
       private int resourceChange_ ;
       /**
        * <code>optional sint32 resourceChange = 4;</code>
@@ -16200,7 +16105,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
@@ -16236,7 +16140,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional string userObstacleUuid = 6;
       private java.lang.Object userObstacleUuid_ = "";
       /**
        * <code>optional string userObstacleUuid = 6;</code>
@@ -16250,9 +16153,12 @@ public final class EventStructureProto {
       public java.lang.String getUserObstacleUuid() {
         java.lang.Object ref = userObstacleUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userObstacleUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -16321,10 +16227,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginObstacleRemovalRequestProto)
   }
 
-  public interface BeginObstacleRemovalResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginObstacleRemovalResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginObstacleRemovalResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -16338,7 +16244,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
      */
@@ -16352,8 +16257,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalResponseProto}
    */
   public static final class BeginObstacleRemovalResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginObstacleRemovalResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginObstacleRemovalResponseProto)
+      BeginObstacleRemovalResponseProtoOrBuilder {
     // Use BeginObstacleRemovalResponseProto.newBuilder() to construct.
     private BeginObstacleRemovalResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -16563,7 +16469,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -16585,7 +16490,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_;
     /**
@@ -16608,7 +16512,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -16722,8 +16627,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginObstacleRemovalResponseProto)
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor;
@@ -16854,7 +16760,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -16963,7 +16868,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -16971,7 +16876,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
       private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
@@ -17018,10 +16922,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginObstacleRemovalResponseProto)
   }
 
-  public interface ObstacleRemovalCompleteRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ObstacleRemovalCompleteRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -17035,7 +16939,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 curTime = 2;
     /**
      * <code>optional int64 curTime = 2;</code>
      */
@@ -17045,7 +16948,6 @@ public final class EventStructureProto {
      */
     long getCurTime();
 
-    // optional bool speedUp = 3;
     /**
      * <code>optional bool speedUp = 3;</code>
      */
@@ -17055,7 +16957,6 @@ public final class EventStructureProto {
      */
     boolean getSpeedUp();
 
-    // optional int32 gemsSpent = 4;
     /**
      * <code>optional int32 gemsSpent = 4;</code>
      *
@@ -17075,7 +16976,6 @@ public final class EventStructureProto {
      */
     int getGemsSpent();
 
-    // optional string userObstacleUuid = 5;
     /**
      * <code>optional string userObstacleUuid = 5;</code>
      */
@@ -17090,7 +16990,6 @@ public final class EventStructureProto {
     com.google.protobuf.ByteString
         getUserObstacleUuidBytes();
 
-    // optional bool atMaxObstacles = 6;
     /**
      * <code>optional bool atMaxObstacles = 6;</code>
      *
@@ -17114,8 +17013,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.ObstacleRemovalCompleteRequestProto}
    */
   public static final class ObstacleRemovalCompleteRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ObstacleRemovalCompleteRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
+      ObstacleRemovalCompleteRequestProtoOrBuilder {
     // Use ObstacleRemovalCompleteRequestProto.newBuilder() to construct.
     private ObstacleRemovalCompleteRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -17190,8 +17090,9 @@ public final class EventStructureProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userObstacleUuid_ = input.readBytes();
+              userObstacleUuid_ = bs;
               break;
             }
             case 48: {
@@ -17239,7 +17140,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -17261,7 +17161,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional int64 curTime = 2;
     public static final int CURTIME_FIELD_NUMBER = 2;
     private long curTime_;
     /**
@@ -17277,7 +17176,6 @@ public final class EventStructureProto {
       return curTime_;
     }
 
-    // optional bool speedUp = 3;
     public static final int SPEEDUP_FIELD_NUMBER = 3;
     private boolean speedUp_;
     /**
@@ -17293,7 +17191,6 @@ public final class EventStructureProto {
       return speedUp_;
     }
 
-    // optional int32 gemsSpent = 4;
     public static final int GEMSSPENT_FIELD_NUMBER = 4;
     private int gemsSpent_;
     /**
@@ -17319,7 +17216,6 @@ public final class EventStructureProto {
       return gemsSpent_;
     }
 
-    // optional string userObstacleUuid = 5;
     public static final int USEROBSTACLEUUID_FIELD_NUMBER = 5;
     private java.lang.Object userObstacleUuid_;
     /**
@@ -17362,7 +17258,6 @@ public final class EventStructureProto {
       }
     }
 
-    // optional bool atMaxObstacles = 6;
     public static final int ATMAXOBSTACLES_FIELD_NUMBER = 6;
     private boolean atMaxObstacles_;
     /**
@@ -17399,7 +17294,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -17541,8 +17437,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.ObstacleRemovalCompleteRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor;
@@ -17711,7 +17608,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -17820,7 +17716,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -17828,7 +17724,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional int64 curTime = 2;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 2;</code>
@@ -17861,7 +17756,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional bool speedUp = 3;
       private boolean speedUp_ ;
       /**
        * <code>optional bool speedUp = 3;</code>
@@ -17894,7 +17788,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional int32 gemsSpent = 4;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 4;</code>
@@ -17947,7 +17840,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional string userObstacleUuid = 5;
       private java.lang.Object userObstacleUuid_ = "";
       /**
        * <code>optional string userObstacleUuid = 5;</code>
@@ -17961,9 +17853,12 @@ public final class EventStructureProto {
       public java.lang.String getUserObstacleUuid() {
         java.lang.Object ref = userObstacleUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userObstacleUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -18021,7 +17916,6 @@ public final class EventStructureProto {
         return this;
       }
 
-      // optional bool atMaxObstacles = 6;
       private boolean atMaxObstacles_ ;
       /**
        * <code>optional bool atMaxObstacles = 6;</code>
@@ -18085,10 +17979,10 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
   }
 
-  public interface ObstacleRemovalCompleteResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ObstacleRemovalCompleteResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -18102,7 +17996,6 @@ public final class EventStructureProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
      */
@@ -18116,8 +18009,9 @@ public final class EventStructureProto {
    * Protobuf type {@code com.lvl6.proto.ObstacleRemovalCompleteResponseProto}
    */
   public static final class ObstacleRemovalCompleteResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ObstacleRemovalCompleteResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
+      ObstacleRemovalCompleteResponseProtoOrBuilder {
     // Use ObstacleRemovalCompleteResponseProto.newBuilder() to construct.
     private ObstacleRemovalCompleteResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -18318,7 +18212,6 @@ public final class EventStructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -18340,7 +18233,6 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_;
     /**
@@ -18363,7 +18255,8 @@ public final class EventStructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -18477,8 +18370,9 @@ public final class EventStructureProto {
      * Protobuf type {@code com.lvl6.proto.ObstacleRemovalCompleteResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor;
@@ -18609,7 +18503,6 @@ public final class EventStructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -18718,7 +18611,7 @@ public final class EventStructureProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -18726,7 +18619,6 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
       private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
@@ -18773,107 +18665,107 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -19030,139 +18922,13 @@ public final class EventStructureProto {
       "uctureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "StructCoordinates", "StructId", "TimeOfPurchase", "GemsSpent", "ResourceChange", "ResourceType", });
-          internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "UserStructUuid", });
-          internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructUuid", "Type", "CurStructCoordinates", "OrientationNew", });
-          internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfUpgrade", "GemsSpent", "ResourceChange", "ResourceType", });
-          internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfSpeedup", "GemCostToSpeedup", });
-          internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructUuid", "CurTime", });
-          internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
-          internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "UserStruct", });
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(10);
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "StructRetrievals", });
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor =
-            internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor.getNestedTypes().get(0);
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor,
-              new java.lang.String[] { "UserStructUuid", "TimeOfRetrieval", "AmountCollected", });
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(11);
-          internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(12);
-          internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "XPosition", "YPosition", "SpeedUp", "GemCostToSpeedup", });
-          internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(13);
-          internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Ucedp", });
-          internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(14);
-          internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ProspectiveObstacles", "CurTime", });
-          internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(15);
-          internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "SpawnedObstacles", "Status", });
-          internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(16);
-          internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleUuid", });
-          internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(17);
-          internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(18);
-          internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleUuid", "AtMaxObstacles", });
-          internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(19);
-          internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -19170,6 +18936,135 @@ public final class EventStructureProto {
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "StructCoordinates", "StructId", "TimeOfPurchase", "GemsSpent", "ResourceChange", "ResourceType", });
+    internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "UserStructUuid", });
+    internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserStructUuid", "Type", "CurStructCoordinates", "OrientationNew", });
+    internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfUpgrade", "GemsSpent", "ResourceChange", "ResourceType", });
+    internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfSpeedup", "GemCostToSpeedup", });
+    internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserStructUuid", "CurTime", });
+    internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "UserStruct", });
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "StructRetrievals", });
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor =
+      internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor.getNestedTypes().get(0);
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor,
+        new java.lang.String[] { "UserStructUuid", "TimeOfRetrieval", "AmountCollected", });
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "CurTime", "XPosition", "YPosition", "SpeedUp", "GemCostToSpeedup", });
+    internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "Ucedp", });
+    internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ProspectiveObstacles", "CurTime", });
+    internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "SpawnedObstacles", "Status", });
+    internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleUuid", });
+    internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleUuid", "AtMaxObstacles", });
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -208,10 +208,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.StructOrientation)
   }
 
-  public interface StructureInfoProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface StructureInfoProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StructureInfoProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 structId = 1;
     /**
      * <code>optional int32 structId = 1;</code>
      */
@@ -221,7 +221,6 @@ public final class StructureProto {
      */
     int getStructId();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -236,7 +235,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 level = 3;
     /**
      * <code>optional int32 level = 3;</code>
      */
@@ -246,7 +244,6 @@ public final class StructureProto {
      */
     int getLevel();
 
-    // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;</code>
      */
@@ -256,7 +253,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProto.StructType getStructType();
 
-    // optional .com.lvl6.proto.ResourceType buildResourceType = 5;
     /**
      * <code>optional .com.lvl6.proto.ResourceType buildResourceType = 5;</code>
      *
@@ -274,7 +270,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getBuildResourceType();
 
-    // optional int32 buildCost = 6;
     /**
      * <code>optional int32 buildCost = 6;</code>
      */
@@ -284,7 +279,6 @@ public final class StructureProto {
      */
     int getBuildCost();
 
-    // optional int32 minutesToBuild = 7;
     /**
      * <code>optional int32 minutesToBuild = 7;</code>
      */
@@ -294,7 +288,6 @@ public final class StructureProto {
      */
     int getMinutesToBuild();
 
-    // optional int32 prerequisiteTownHallLvl = 8;
     /**
      * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
      */
@@ -304,7 +297,6 @@ public final class StructureProto {
      */
     int getPrerequisiteTownHallLvl();
 
-    // optional int32 width = 9;
     /**
      * <code>optional int32 width = 9;</code>
      */
@@ -314,7 +306,6 @@ public final class StructureProto {
      */
     int getWidth();
 
-    // optional int32 height = 10;
     /**
      * <code>optional int32 height = 10;</code>
      */
@@ -324,7 +315,6 @@ public final class StructureProto {
      */
     int getHeight();
 
-    // optional int32 predecessorStructId = 12;
     /**
      * <code>optional int32 predecessorStructId = 12;</code>
      */
@@ -334,7 +324,6 @@ public final class StructureProto {
      */
     int getPredecessorStructId();
 
-    // optional int32 successorStructId = 13;
     /**
      * <code>optional int32 successorStructId = 13;</code>
      */
@@ -344,7 +333,6 @@ public final class StructureProto {
      */
     int getSuccessorStructId();
 
-    // optional string imgName = 14;
     /**
      * <code>optional string imgName = 14;</code>
      */
@@ -359,7 +347,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getImgNameBytes();
 
-    // optional float imgVerticalPixelOffset = 15;
     /**
      * <code>optional float imgVerticalPixelOffset = 15;</code>
      */
@@ -369,7 +356,6 @@ public final class StructureProto {
      */
     float getImgVerticalPixelOffset();
 
-    // optional float imgHorizontalPixelOffset = 18;
     /**
      * <code>optional float imgHorizontalPixelOffset = 18;</code>
      */
@@ -379,7 +365,6 @@ public final class StructureProto {
      */
     float getImgHorizontalPixelOffset();
 
-    // optional string description = 16;
     /**
      * <code>optional string description = 16;</code>
      *
@@ -406,7 +391,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
-    // optional string shortDescription = 17;
     /**
      * <code>optional string shortDescription = 17;</code>
      */
@@ -421,7 +405,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getShortDescriptionBytes();
 
-    // optional string shadowImgName = 19;
     /**
      * <code>optional string shadowImgName = 19;</code>
      *
@@ -448,7 +431,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getShadowImgNameBytes();
 
-    // optional float shadowVerticalOffset = 20;
     /**
      * <code>optional float shadowVerticalOffset = 20;</code>
      */
@@ -458,7 +440,6 @@ public final class StructureProto {
      */
     float getShadowVerticalOffset();
 
-    // optional float shadowHorizontalOfffset = 21;
     /**
      * <code>optional float shadowHorizontalOfffset = 21;</code>
      */
@@ -468,7 +449,6 @@ public final class StructureProto {
      */
     float getShadowHorizontalOfffset();
 
-    // optional float shadowScale = 22;
     /**
      * <code>optional float shadowScale = 22;</code>
      */
@@ -487,8 +467,9 @@ public final class StructureProto {
    * </pre>
    */
   public static final class StructureInfoProto extends
-      com.google.protobuf.GeneratedMessage
-      implements StructureInfoProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StructureInfoProto)
+      StructureInfoProtoOrBuilder {
     // Use StructureInfoProto.newBuilder() to construct.
     private StructureInfoProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -540,8 +521,9 @@ public final class StructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 24: {
@@ -607,8 +589,9 @@ public final class StructureProto {
               break;
             }
             case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00001000;
-              imgName_ = input.readBytes();
+              imgName_ = bs;
               break;
             }
             case 125: {
@@ -617,13 +600,15 @@ public final class StructureProto {
               break;
             }
             case 130: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00008000;
-              description_ = input.readBytes();
+              description_ = bs;
               break;
             }
             case 138: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00010000;
-              shortDescription_ = input.readBytes();
+              shortDescription_ = bs;
               break;
             }
             case 149: {
@@ -632,8 +617,9 @@ public final class StructureProto {
               break;
             }
             case 154: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00020000;
-              shadowImgName_ = input.readBytes();
+              shadowImgName_ = bs;
               break;
             }
             case 165: {
@@ -870,7 +856,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional int32 structId = 1;
     public static final int STRUCTID_FIELD_NUMBER = 1;
     private int structId_;
     /**
@@ -886,7 +871,6 @@ public final class StructureProto {
       return structId_;
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -929,7 +913,6 @@ public final class StructureProto {
       }
     }
 
-    // optional int32 level = 3;
     public static final int LEVEL_FIELD_NUMBER = 3;
     private int level_;
     /**
@@ -945,7 +928,6 @@ public final class StructureProto {
       return level_;
     }
 
-    // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
     public static final int STRUCTTYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_;
     /**
@@ -961,7 +943,6 @@ public final class StructureProto {
       return structType_;
     }
 
-    // optional .com.lvl6.proto.ResourceType buildResourceType = 5;
     public static final int BUILDRESOURCETYPE_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.ResourceType buildResourceType_;
     /**
@@ -985,7 +966,6 @@ public final class StructureProto {
       return buildResourceType_;
     }
 
-    // optional int32 buildCost = 6;
     public static final int BUILDCOST_FIELD_NUMBER = 6;
     private int buildCost_;
     /**
@@ -1001,7 +981,6 @@ public final class StructureProto {
       return buildCost_;
     }
 
-    // optional int32 minutesToBuild = 7;
     public static final int MINUTESTOBUILD_FIELD_NUMBER = 7;
     private int minutesToBuild_;
     /**
@@ -1017,7 +996,6 @@ public final class StructureProto {
       return minutesToBuild_;
     }
 
-    // optional int32 prerequisiteTownHallLvl = 8;
     public static final int PREREQUISITETOWNHALLLVL_FIELD_NUMBER = 8;
     private int prerequisiteTownHallLvl_;
     /**
@@ -1033,7 +1011,6 @@ public final class StructureProto {
       return prerequisiteTownHallLvl_;
     }
 
-    // optional int32 width = 9;
     public static final int WIDTH_FIELD_NUMBER = 9;
     private int width_;
     /**
@@ -1049,7 +1026,6 @@ public final class StructureProto {
       return width_;
     }
 
-    // optional int32 height = 10;
     public static final int HEIGHT_FIELD_NUMBER = 10;
     private int height_;
     /**
@@ -1065,7 +1041,6 @@ public final class StructureProto {
       return height_;
     }
 
-    // optional int32 predecessorStructId = 12;
     public static final int PREDECESSORSTRUCTID_FIELD_NUMBER = 12;
     private int predecessorStructId_;
     /**
@@ -1081,7 +1056,6 @@ public final class StructureProto {
       return predecessorStructId_;
     }
 
-    // optional int32 successorStructId = 13;
     public static final int SUCCESSORSTRUCTID_FIELD_NUMBER = 13;
     private int successorStructId_;
     /**
@@ -1097,7 +1071,6 @@ public final class StructureProto {
       return successorStructId_;
     }
 
-    // optional string imgName = 14;
     public static final int IMGNAME_FIELD_NUMBER = 14;
     private java.lang.Object imgName_;
     /**
@@ -1140,7 +1113,6 @@ public final class StructureProto {
       }
     }
 
-    // optional float imgVerticalPixelOffset = 15;
     public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 15;
     private float imgVerticalPixelOffset_;
     /**
@@ -1156,7 +1128,6 @@ public final class StructureProto {
       return imgVerticalPixelOffset_;
     }
 
-    // optional float imgHorizontalPixelOffset = 18;
     public static final int IMGHORIZONTALPIXELOFFSET_FIELD_NUMBER = 18;
     private float imgHorizontalPixelOffset_;
     /**
@@ -1172,7 +1143,6 @@ public final class StructureProto {
       return imgHorizontalPixelOffset_;
     }
 
-    // optional string description = 16;
     public static final int DESCRIPTION_FIELD_NUMBER = 16;
     private java.lang.Object description_;
     /**
@@ -1227,7 +1197,6 @@ public final class StructureProto {
       }
     }
 
-    // optional string shortDescription = 17;
     public static final int SHORTDESCRIPTION_FIELD_NUMBER = 17;
     private java.lang.Object shortDescription_;
     /**
@@ -1270,7 +1239,6 @@ public final class StructureProto {
       }
     }
 
-    // optional string shadowImgName = 19;
     public static final int SHADOWIMGNAME_FIELD_NUMBER = 19;
     private java.lang.Object shadowImgName_;
     /**
@@ -1325,7 +1293,6 @@ public final class StructureProto {
       }
     }
 
-    // optional float shadowVerticalOffset = 20;
     public static final int SHADOWVERTICALOFFSET_FIELD_NUMBER = 20;
     private float shadowVerticalOffset_;
     /**
@@ -1341,7 +1308,6 @@ public final class StructureProto {
       return shadowVerticalOffset_;
     }
 
-    // optional float shadowHorizontalOfffset = 21;
     public static final int SHADOWHORIZONTALOFFFSET_FIELD_NUMBER = 21;
     private float shadowHorizontalOfffset_;
     /**
@@ -1357,7 +1323,6 @@ public final class StructureProto {
       return shadowHorizontalOfffset_;
     }
 
-    // optional float shadowScale = 22;
     public static final int SHADOWSCALE_FIELD_NUMBER = 22;
     private float shadowScale_;
     /**
@@ -1399,7 +1364,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1651,8 +1617,9 @@ public final class StructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StructureInfoProto)
+        com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
@@ -1955,7 +1922,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional int32 structId = 1;
       private int structId_ ;
       /**
        * <code>optional int32 structId = 1;</code>
@@ -1988,7 +1954,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -2002,9 +1967,12 @@ public final class StructureProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2062,7 +2030,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 level = 3;
       private int level_ ;
       /**
        * <code>optional int32 level = 3;</code>
@@ -2095,7 +2062,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
       private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
       /**
        * <code>optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;</code>
@@ -2131,7 +2097,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType buildResourceType = 5;
       private com.lvl6.proto.StructureProto.ResourceType buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType buildResourceType = 5;</code>
@@ -2183,7 +2148,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 buildCost = 6;
       private int buildCost_ ;
       /**
        * <code>optional int32 buildCost = 6;</code>
@@ -2216,7 +2180,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 minutesToBuild = 7;
       private int minutesToBuild_ ;
       /**
        * <code>optional int32 minutesToBuild = 7;</code>
@@ -2249,7 +2212,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 prerequisiteTownHallLvl = 8;
       private int prerequisiteTownHallLvl_ ;
       /**
        * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
@@ -2282,7 +2244,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 width = 9;
       private int width_ ;
       /**
        * <code>optional int32 width = 9;</code>
@@ -2315,7 +2276,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 height = 10;
       private int height_ ;
       /**
        * <code>optional int32 height = 10;</code>
@@ -2348,7 +2308,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 predecessorStructId = 12;
       private int predecessorStructId_ ;
       /**
        * <code>optional int32 predecessorStructId = 12;</code>
@@ -2381,7 +2340,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 successorStructId = 13;
       private int successorStructId_ ;
       /**
        * <code>optional int32 successorStructId = 13;</code>
@@ -2414,7 +2372,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string imgName = 14;
       private java.lang.Object imgName_ = "";
       /**
        * <code>optional string imgName = 14;</code>
@@ -2428,9 +2385,12 @@ public final class StructureProto {
       public java.lang.String getImgName() {
         java.lang.Object ref = imgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2488,7 +2448,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float imgVerticalPixelOffset = 15;
       private float imgVerticalPixelOffset_ ;
       /**
        * <code>optional float imgVerticalPixelOffset = 15;</code>
@@ -2521,7 +2480,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float imgHorizontalPixelOffset = 18;
       private float imgHorizontalPixelOffset_ ;
       /**
        * <code>optional float imgHorizontalPixelOffset = 18;</code>
@@ -2554,7 +2512,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string description = 16;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 16;</code>
@@ -2576,9 +2533,12 @@ public final class StructureProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          description_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            description_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2652,7 +2612,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string shortDescription = 17;
       private java.lang.Object shortDescription_ = "";
       /**
        * <code>optional string shortDescription = 17;</code>
@@ -2666,9 +2625,12 @@ public final class StructureProto {
       public java.lang.String getShortDescription() {
         java.lang.Object ref = shortDescription_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          shortDescription_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            shortDescription_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2726,7 +2688,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string shadowImgName = 19;
       private java.lang.Object shadowImgName_ = "";
       /**
        * <code>optional string shadowImgName = 19;</code>
@@ -2748,9 +2709,12 @@ public final class StructureProto {
       public java.lang.String getShadowImgName() {
         java.lang.Object ref = shadowImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          shadowImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            shadowImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2824,7 +2788,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float shadowVerticalOffset = 20;
       private float shadowVerticalOffset_ ;
       /**
        * <code>optional float shadowVerticalOffset = 20;</code>
@@ -2857,7 +2820,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float shadowHorizontalOfffset = 21;
       private float shadowHorizontalOfffset_ ;
       /**
        * <code>optional float shadowHorizontalOfffset = 21;</code>
@@ -2890,7 +2852,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float shadowScale = 22;
       private float shadowScale_ ;
       /**
        * <code>optional float shadowScale = 22;</code>
@@ -2934,10 +2895,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.StructureInfoProto)
   }
 
-  public interface ResourceGeneratorProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ResourceGeneratorProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ResourceGeneratorProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -2951,7 +2912,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 2;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
      *
@@ -2969,7 +2929,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
-    // optional float productionRate = 3;
     /**
      * <code>optional float productionRate = 3;</code>
      *
@@ -2987,7 +2946,6 @@ public final class StructureProto {
      */
     float getProductionRate();
 
-    // optional int32 capacity = 4;
     /**
      * <code>optional int32 capacity = 4;</code>
      */
@@ -3001,8 +2959,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.ResourceGeneratorProto}
    */
   public static final class ResourceGeneratorProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ResourceGeneratorProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ResourceGeneratorProto)
+      ResourceGeneratorProtoOrBuilder {
     // Use ResourceGeneratorProto.newBuilder() to construct.
     private ResourceGeneratorProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3122,7 +3081,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -3144,7 +3102,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 2;
     public static final int RESOURCETYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -3168,7 +3125,6 @@ public final class StructureProto {
       return resourceType_;
     }
 
-    // optional float productionRate = 3;
     public static final int PRODUCTIONRATE_FIELD_NUMBER = 3;
     private float productionRate_;
     /**
@@ -3192,7 +3148,6 @@ public final class StructureProto {
       return productionRate_;
     }
 
-    // optional int32 capacity = 4;
     public static final int CAPACITY_FIELD_NUMBER = 4;
     private int capacity_;
     /**
@@ -3217,7 +3172,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3345,8 +3301,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.ResourceGeneratorProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ResourceGeneratorProto)
+        com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor;
@@ -3495,7 +3452,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -3604,7 +3560,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -3612,7 +3568,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 2;
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
@@ -3664,7 +3619,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float productionRate = 3;
       private float productionRate_ ;
       /**
        * <code>optional float productionRate = 3;</code>
@@ -3713,7 +3667,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 capacity = 4;
       private int capacity_ ;
       /**
        * <code>optional int32 capacity = 4;</code>
@@ -3757,10 +3710,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ResourceGeneratorProto)
   }
 
-  public interface ResourceStorageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ResourceStorageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ResourceStorageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -3774,7 +3727,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 2;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
      *
@@ -3792,7 +3744,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
-    // optional int32 capacity = 3;
     /**
      * <code>optional int32 capacity = 3;</code>
      */
@@ -3806,8 +3757,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.ResourceStorageProto}
    */
   public static final class ResourceStorageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ResourceStorageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ResourceStorageProto)
+      ResourceStorageProtoOrBuilder {
     // Use ResourceStorageProto.newBuilder() to construct.
     private ResourceStorageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3922,7 +3874,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -3944,7 +3895,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 2;
     public static final int RESOURCETYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -3968,7 +3918,6 @@ public final class StructureProto {
       return resourceType_;
     }
 
-    // optional int32 capacity = 3;
     public static final int CAPACITY_FIELD_NUMBER = 3;
     private int capacity_;
     /**
@@ -3992,7 +3941,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4113,8 +4063,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.ResourceStorageProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ResourceStorageProto)
+        com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ResourceStorageProto_descriptor;
@@ -4254,7 +4205,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -4363,7 +4313,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -4371,7 +4321,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 2;
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
@@ -4423,7 +4372,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 capacity = 3;
       private int capacity_ ;
       /**
        * <code>optional int32 capacity = 3;</code>
@@ -4467,10 +4415,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ResourceStorageProto)
   }
 
-  public interface HospitalProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface HospitalProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.HospitalProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -4484,7 +4432,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 queueSize = 2;
     /**
      * <code>optional int32 queueSize = 2;</code>
      */
@@ -4494,7 +4441,6 @@ public final class StructureProto {
      */
     int getQueueSize();
 
-    // optional float healthPerSecond = 3 [deprecated = true];
     /**
      * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
      *
@@ -4514,7 +4460,6 @@ public final class StructureProto {
      */
     @java.lang.Deprecated float getHealthPerSecond();
 
-    // optional float secsToFullyHealMultiplier = 4;
     /**
      * <code>optional float secsToFullyHealMultiplier = 4;</code>
      */
@@ -4528,8 +4473,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.HospitalProto}
    */
   public static final class HospitalProto extends
-      com.google.protobuf.GeneratedMessage
-      implements HospitalProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.HospitalProto)
+      HospitalProtoOrBuilder {
     // Use HospitalProto.newBuilder() to construct.
     private HospitalProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4643,7 +4589,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -4665,7 +4610,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 queueSize = 2;
     public static final int QUEUESIZE_FIELD_NUMBER = 2;
     private int queueSize_;
     /**
@@ -4681,7 +4625,6 @@ public final class StructureProto {
       return queueSize_;
     }
 
-    // optional float healthPerSecond = 3 [deprecated = true];
     public static final int HEALTHPERSECOND_FIELD_NUMBER = 3;
     private float healthPerSecond_;
     /**
@@ -4707,7 +4650,6 @@ public final class StructureProto {
       return healthPerSecond_;
     }
 
-    // optional float secsToFullyHealMultiplier = 4;
     public static final int SECSTOFULLYHEALMULTIPLIER_FIELD_NUMBER = 4;
     private float secsToFullyHealMultiplier_;
     /**
@@ -4732,7 +4674,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4860,8 +4803,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.HospitalProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.HospitalProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.HospitalProto)
+        com.lvl6.proto.StructureProto.HospitalProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_HospitalProto_descriptor;
@@ -5010,7 +4954,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -5119,7 +5062,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -5127,7 +5070,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 queueSize = 2;
       private int queueSize_ ;
       /**
        * <code>optional int32 queueSize = 2;</code>
@@ -5160,7 +5102,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float healthPerSecond = 3 [deprecated = true];
       private float healthPerSecond_ ;
       /**
        * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
@@ -5213,7 +5154,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float secsToFullyHealMultiplier = 4;
       private float secsToFullyHealMultiplier_ ;
       /**
        * <code>optional float secsToFullyHealMultiplier = 4;</code>
@@ -5257,10 +5197,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.HospitalProto)
   }
 
-  public interface LabProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LabProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LabProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -5274,7 +5214,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 queueSize = 2;
     /**
      * <code>optional int32 queueSize = 2;</code>
      */
@@ -5284,7 +5223,6 @@ public final class StructureProto {
      */
     int getQueueSize();
 
-    // optional float pointsPerSecond = 3;
     /**
      * <code>optional float pointsPerSecond = 3;</code>
      *
@@ -5306,7 +5244,6 @@ public final class StructureProto {
      */
     float getPointsPerSecond();
 
-    // optional float pointsMultiplier = 4;
     /**
      * <code>optional float pointsMultiplier = 4;</code>
      */
@@ -5324,8 +5261,9 @@ public final class StructureProto {
    * </pre>
    */
   public static final class LabProto extends
-      com.google.protobuf.GeneratedMessage
-      implements LabProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LabProto)
+      LabProtoOrBuilder {
     // Use LabProto.newBuilder() to construct.
     private LabProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5439,7 +5377,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -5461,7 +5398,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 queueSize = 2;
     public static final int QUEUESIZE_FIELD_NUMBER = 2;
     private int queueSize_;
     /**
@@ -5477,7 +5413,6 @@ public final class StructureProto {
       return queueSize_;
     }
 
-    // optional float pointsPerSecond = 3;
     public static final int POINTSPERSECOND_FIELD_NUMBER = 3;
     private float pointsPerSecond_;
     /**
@@ -5505,7 +5440,6 @@ public final class StructureProto {
       return pointsPerSecond_;
     }
 
-    // optional float pointsMultiplier = 4;
     public static final int POINTSMULTIPLIER_FIELD_NUMBER = 4;
     private float pointsMultiplier_;
     /**
@@ -5530,7 +5464,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5662,8 +5597,9 @@ public final class StructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.LabProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LabProto)
+        com.lvl6.proto.StructureProto.LabProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_LabProto_descriptor;
@@ -5812,7 +5748,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -5921,7 +5856,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -5929,7 +5864,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 queueSize = 2;
       private int queueSize_ ;
       /**
        * <code>optional int32 queueSize = 2;</code>
@@ -5962,7 +5896,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float pointsPerSecond = 3;
       private float pointsPerSecond_ ;
       /**
        * <code>optional float pointsPerSecond = 3;</code>
@@ -6019,7 +5952,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float pointsMultiplier = 4;
       private float pointsMultiplier_ ;
       /**
        * <code>optional float pointsMultiplier = 4;</code>
@@ -6063,10 +5995,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LabProto)
   }
 
-  public interface ResidenceProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ResidenceProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ResidenceProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -6080,7 +6012,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 numMonsterSlots = 2;
     /**
      * <code>optional int32 numMonsterSlots = 2;</code>
      *
@@ -6100,7 +6031,6 @@ public final class StructureProto {
      */
     int getNumMonsterSlots();
 
-    // optional int32 numBonusMonsterSlots = 3;
     /**
      * <code>optional int32 numBonusMonsterSlots = 3;</code>
      *
@@ -6118,7 +6048,6 @@ public final class StructureProto {
      */
     int getNumBonusMonsterSlots();
 
-    // optional int32 numGemsRequired = 4;
     /**
      * <code>optional int32 numGemsRequired = 4;</code>
      *
@@ -6136,7 +6065,6 @@ public final class StructureProto {
      */
     int getNumGemsRequired();
 
-    // optional int32 numAcceptedFbInvites = 5;
     /**
      * <code>optional int32 numAcceptedFbInvites = 5;</code>
      *
@@ -6154,7 +6082,6 @@ public final class StructureProto {
      */
     int getNumAcceptedFbInvites();
 
-    // optional string occupationName = 6;
     /**
      * <code>optional string occupationName = 6;</code>
      */
@@ -6169,7 +6096,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getOccupationNameBytes();
 
-    // optional string imgSuffix = 7;
     /**
      * <code>optional string imgSuffix = 7;</code>
      */
@@ -6188,8 +6114,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.ResidenceProto}
    */
   public static final class ResidenceProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ResidenceProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ResidenceProto)
+      ResidenceProtoOrBuilder {
     // Use ResidenceProto.newBuilder() to construct.
     private ResidenceProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6269,13 +6196,15 @@ public final class StructureProto {
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              occupationName_ = input.readBytes();
+              occupationName_ = bs;
               break;
             }
             case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              imgSuffix_ = input.readBytes();
+              imgSuffix_ = bs;
               break;
             }
           }
@@ -6318,7 +6247,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -6340,7 +6268,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 numMonsterSlots = 2;
     public static final int NUMMONSTERSLOTS_FIELD_NUMBER = 2;
     private int numMonsterSlots_;
     /**
@@ -6366,7 +6293,6 @@ public final class StructureProto {
       return numMonsterSlots_;
     }
 
-    // optional int32 numBonusMonsterSlots = 3;
     public static final int NUMBONUSMONSTERSLOTS_FIELD_NUMBER = 3;
     private int numBonusMonsterSlots_;
     /**
@@ -6390,7 +6316,6 @@ public final class StructureProto {
       return numBonusMonsterSlots_;
     }
 
-    // optional int32 numGemsRequired = 4;
     public static final int NUMGEMSREQUIRED_FIELD_NUMBER = 4;
     private int numGemsRequired_;
     /**
@@ -6414,7 +6339,6 @@ public final class StructureProto {
       return numGemsRequired_;
     }
 
-    // optional int32 numAcceptedFbInvites = 5;
     public static final int NUMACCEPTEDFBINVITES_FIELD_NUMBER = 5;
     private int numAcceptedFbInvites_;
     /**
@@ -6438,7 +6362,6 @@ public final class StructureProto {
       return numAcceptedFbInvites_;
     }
 
-    // optional string occupationName = 6;
     public static final int OCCUPATIONNAME_FIELD_NUMBER = 6;
     private java.lang.Object occupationName_;
     /**
@@ -6481,7 +6404,6 @@ public final class StructureProto {
       }
     }
 
-    // optional string imgSuffix = 7;
     public static final int IMGSUFFIX_FIELD_NUMBER = 7;
     private java.lang.Object imgSuffix_;
     /**
@@ -6536,7 +6458,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6685,8 +6608,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.ResidenceProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ResidenceProto)
+        com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ResidenceProto_descriptor;
@@ -6866,7 +6790,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -6975,7 +6898,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -6983,7 +6906,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 numMonsterSlots = 2;
       private int numMonsterSlots_ ;
       /**
        * <code>optional int32 numMonsterSlots = 2;</code>
@@ -7036,7 +6958,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numBonusMonsterSlots = 3;
       private int numBonusMonsterSlots_ ;
       /**
        * <code>optional int32 numBonusMonsterSlots = 3;</code>
@@ -7085,7 +7006,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numGemsRequired = 4;
       private int numGemsRequired_ ;
       /**
        * <code>optional int32 numGemsRequired = 4;</code>
@@ -7134,7 +7054,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numAcceptedFbInvites = 5;
       private int numAcceptedFbInvites_ ;
       /**
        * <code>optional int32 numAcceptedFbInvites = 5;</code>
@@ -7183,7 +7102,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string occupationName = 6;
       private java.lang.Object occupationName_ = "";
       /**
        * <code>optional string occupationName = 6;</code>
@@ -7197,9 +7115,12 @@ public final class StructureProto {
       public java.lang.String getOccupationName() {
         java.lang.Object ref = occupationName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          occupationName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            occupationName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7257,7 +7178,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string imgSuffix = 7;
       private java.lang.Object imgSuffix_ = "";
       /**
        * <code>optional string imgSuffix = 7;</code>
@@ -7271,9 +7191,12 @@ public final class StructureProto {
       public java.lang.String getImgSuffix() {
         java.lang.Object ref = imgSuffix_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imgSuffix_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgSuffix_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7342,10 +7265,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ResidenceProto)
   }
 
-  public interface TownHallProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TownHallProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TownHallProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -7359,7 +7282,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 numResourceOneGenerators = 2;
     /**
      * <code>optional int32 numResourceOneGenerators = 2;</code>
      */
@@ -7369,7 +7291,6 @@ public final class StructureProto {
      */
     int getNumResourceOneGenerators();
 
-    // optional int32 numResourceOneStorages = 3;
     /**
      * <code>optional int32 numResourceOneStorages = 3;</code>
      */
@@ -7379,7 +7300,6 @@ public final class StructureProto {
      */
     int getNumResourceOneStorages();
 
-    // optional int32 numResourceTwoGenerators = 4;
     /**
      * <code>optional int32 numResourceTwoGenerators = 4;</code>
      */
@@ -7389,7 +7309,6 @@ public final class StructureProto {
      */
     int getNumResourceTwoGenerators();
 
-    // optional int32 numResourceTwoStorages = 5;
     /**
      * <code>optional int32 numResourceTwoStorages = 5;</code>
      */
@@ -7399,7 +7318,6 @@ public final class StructureProto {
      */
     int getNumResourceTwoStorages();
 
-    // optional int32 numHospitals = 6;
     /**
      * <code>optional int32 numHospitals = 6;</code>
      */
@@ -7409,7 +7327,6 @@ public final class StructureProto {
      */
     int getNumHospitals();
 
-    // optional int32 numResidences = 7;
     /**
      * <code>optional int32 numResidences = 7;</code>
      */
@@ -7419,7 +7336,6 @@ public final class StructureProto {
      */
     int getNumResidences();
 
-    // optional int32 numMonsterSlots = 8;
     /**
      * <code>optional int32 numMonsterSlots = 8;</code>
      *
@@ -7437,7 +7353,6 @@ public final class StructureProto {
      */
     int getNumMonsterSlots();
 
-    // optional int32 numLabs = 9;
     /**
      * <code>optional int32 numLabs = 9;</code>
      */
@@ -7447,7 +7362,6 @@ public final class StructureProto {
      */
     int getNumLabs();
 
-    // optional int32 pvpQueueCashCost = 10;
     /**
      * <code>optional int32 pvpQueueCashCost = 10;</code>
      *
@@ -7465,7 +7379,6 @@ public final class StructureProto {
      */
     int getPvpQueueCashCost();
 
-    // optional int32 resourceCapacity = 11;
     /**
      * <code>optional int32 resourceCapacity = 11;</code>
      *
@@ -7483,7 +7396,6 @@ public final class StructureProto {
      */
     int getResourceCapacity();
 
-    // optional int32 numEvoChambers = 12;
     /**
      * <code>optional int32 numEvoChambers = 12;</code>
      */
@@ -7497,8 +7409,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.TownHallProto}
    */
   public static final class TownHallProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TownHallProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TownHallProto)
+      TownHallProtoOrBuilder {
     // Use TownHallProto.newBuilder() to construct.
     private TownHallProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7652,7 +7565,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -7674,7 +7586,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 numResourceOneGenerators = 2;
     public static final int NUMRESOURCEONEGENERATORS_FIELD_NUMBER = 2;
     private int numResourceOneGenerators_;
     /**
@@ -7690,7 +7601,6 @@ public final class StructureProto {
       return numResourceOneGenerators_;
     }
 
-    // optional int32 numResourceOneStorages = 3;
     public static final int NUMRESOURCEONESTORAGES_FIELD_NUMBER = 3;
     private int numResourceOneStorages_;
     /**
@@ -7706,7 +7616,6 @@ public final class StructureProto {
       return numResourceOneStorages_;
     }
 
-    // optional int32 numResourceTwoGenerators = 4;
     public static final int NUMRESOURCETWOGENERATORS_FIELD_NUMBER = 4;
     private int numResourceTwoGenerators_;
     /**
@@ -7722,7 +7631,6 @@ public final class StructureProto {
       return numResourceTwoGenerators_;
     }
 
-    // optional int32 numResourceTwoStorages = 5;
     public static final int NUMRESOURCETWOSTORAGES_FIELD_NUMBER = 5;
     private int numResourceTwoStorages_;
     /**
@@ -7738,7 +7646,6 @@ public final class StructureProto {
       return numResourceTwoStorages_;
     }
 
-    // optional int32 numHospitals = 6;
     public static final int NUMHOSPITALS_FIELD_NUMBER = 6;
     private int numHospitals_;
     /**
@@ -7754,7 +7661,6 @@ public final class StructureProto {
       return numHospitals_;
     }
 
-    // optional int32 numResidences = 7;
     public static final int NUMRESIDENCES_FIELD_NUMBER = 7;
     private int numResidences_;
     /**
@@ -7770,7 +7676,6 @@ public final class StructureProto {
       return numResidences_;
     }
 
-    // optional int32 numMonsterSlots = 8;
     public static final int NUMMONSTERSLOTS_FIELD_NUMBER = 8;
     private int numMonsterSlots_;
     /**
@@ -7794,7 +7699,6 @@ public final class StructureProto {
       return numMonsterSlots_;
     }
 
-    // optional int32 numLabs = 9;
     public static final int NUMLABS_FIELD_NUMBER = 9;
     private int numLabs_;
     /**
@@ -7810,7 +7714,6 @@ public final class StructureProto {
       return numLabs_;
     }
 
-    // optional int32 pvpQueueCashCost = 10;
     public static final int PVPQUEUECASHCOST_FIELD_NUMBER = 10;
     private int pvpQueueCashCost_;
     /**
@@ -7834,7 +7737,6 @@ public final class StructureProto {
       return pvpQueueCashCost_;
     }
 
-    // optional int32 resourceCapacity = 11;
     public static final int RESOURCECAPACITY_FIELD_NUMBER = 11;
     private int resourceCapacity_;
     /**
@@ -7858,7 +7760,6 @@ public final class StructureProto {
       return resourceCapacity_;
     }
 
-    // optional int32 numEvoChambers = 12;
     public static final int NUMEVOCHAMBERS_FIELD_NUMBER = 12;
     private int numEvoChambers_;
     /**
@@ -7891,7 +7792,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8075,8 +7977,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.TownHallProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.TownHallProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TownHallProto)
+        com.lvl6.proto.StructureProto.TownHallProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TownHallProto_descriptor;
@@ -8297,7 +8200,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -8406,7 +8308,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -8414,7 +8316,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 numResourceOneGenerators = 2;
       private int numResourceOneGenerators_ ;
       /**
        * <code>optional int32 numResourceOneGenerators = 2;</code>
@@ -8447,7 +8348,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numResourceOneStorages = 3;
       private int numResourceOneStorages_ ;
       /**
        * <code>optional int32 numResourceOneStorages = 3;</code>
@@ -8480,7 +8380,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numResourceTwoGenerators = 4;
       private int numResourceTwoGenerators_ ;
       /**
        * <code>optional int32 numResourceTwoGenerators = 4;</code>
@@ -8513,7 +8412,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numResourceTwoStorages = 5;
       private int numResourceTwoStorages_ ;
       /**
        * <code>optional int32 numResourceTwoStorages = 5;</code>
@@ -8546,7 +8444,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numHospitals = 6;
       private int numHospitals_ ;
       /**
        * <code>optional int32 numHospitals = 6;</code>
@@ -8579,7 +8476,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numResidences = 7;
       private int numResidences_ ;
       /**
        * <code>optional int32 numResidences = 7;</code>
@@ -8612,7 +8508,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numMonsterSlots = 8;
       private int numMonsterSlots_ ;
       /**
        * <code>optional int32 numMonsterSlots = 8;</code>
@@ -8661,7 +8556,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numLabs = 9;
       private int numLabs_ ;
       /**
        * <code>optional int32 numLabs = 9;</code>
@@ -8694,7 +8588,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 pvpQueueCashCost = 10;
       private int pvpQueueCashCost_ ;
       /**
        * <code>optional int32 pvpQueueCashCost = 10;</code>
@@ -8743,7 +8636,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 resourceCapacity = 11;
       private int resourceCapacity_ ;
       /**
        * <code>optional int32 resourceCapacity = 11;</code>
@@ -8792,7 +8684,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 numEvoChambers = 12;
       private int numEvoChambers_ ;
       /**
        * <code>optional int32 numEvoChambers = 12;</code>
@@ -8836,10 +8727,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TownHallProto)
   }
 
-  public interface MiniJobCenterProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MiniJobCenterProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniJobCenterProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -8853,7 +8744,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 generatedJobLimit = 2;
     /**
      * <code>optional int32 generatedJobLimit = 2;</code>
      */
@@ -8863,7 +8753,6 @@ public final class StructureProto {
      */
     int getGeneratedJobLimit();
 
-    // optional int32 hoursBetweenJobGeneration = 3;
     /**
      * <code>optional int32 hoursBetweenJobGeneration = 3;</code>
      */
@@ -8877,8 +8766,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.MiniJobCenterProto}
    */
   public static final class MiniJobCenterProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MiniJobCenterProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniJobCenterProto)
+      MiniJobCenterProtoOrBuilder {
     // Use MiniJobCenterProto.newBuilder() to construct.
     private MiniJobCenterProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8987,7 +8877,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -9009,7 +8898,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 generatedJobLimit = 2;
     public static final int GENERATEDJOBLIMIT_FIELD_NUMBER = 2;
     private int generatedJobLimit_;
     /**
@@ -9025,7 +8913,6 @@ public final class StructureProto {
       return generatedJobLimit_;
     }
 
-    // optional int32 hoursBetweenJobGeneration = 3;
     public static final int HOURSBETWEENJOBGENERATION_FIELD_NUMBER = 3;
     private int hoursBetweenJobGeneration_;
     /**
@@ -9049,7 +8936,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -9170,8 +9058,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.MiniJobCenterProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniJobCenterProto)
+        com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor;
@@ -9311,7 +9200,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -9420,7 +9308,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -9428,7 +9316,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 generatedJobLimit = 2;
       private int generatedJobLimit_ ;
       /**
        * <code>optional int32 generatedJobLimit = 2;</code>
@@ -9461,7 +9348,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 hoursBetweenJobGeneration = 3;
       private int hoursBetweenJobGeneration_ ;
       /**
        * <code>optional int32 hoursBetweenJobGeneration = 3;</code>
@@ -9505,10 +9391,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniJobCenterProto)
   }
 
-  public interface FullUserStructureProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FullUserStructureProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FullUserStructureProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userStructUuid = 1;
     /**
      * <code>optional string userStructUuid = 1;</code>
      */
@@ -9523,7 +9409,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -9538,7 +9423,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 structId = 3;
     /**
      * <code>optional int32 structId = 3;</code>
      */
@@ -9548,7 +9432,6 @@ public final class StructureProto {
      */
     int getStructId();
 
-    // optional int64 lastRetrieved = 4;
     /**
      * <code>optional int64 lastRetrieved = 4;</code>
      */
@@ -9558,7 +9441,6 @@ public final class StructureProto {
      */
     long getLastRetrieved();
 
-    // optional int64 purchaseTime = 5;
     /**
      * <code>optional int64 purchaseTime = 5;</code>
      */
@@ -9568,7 +9450,6 @@ public final class StructureProto {
      */
     long getPurchaseTime();
 
-    // optional bool isComplete = 6;
     /**
      * <code>optional bool isComplete = 6;</code>
      */
@@ -9578,7 +9459,6 @@ public final class StructureProto {
      */
     boolean getIsComplete();
 
-    // optional .com.lvl6.proto.CoordinateProto coordinates = 7;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto coordinates = 7;</code>
      */
@@ -9592,7 +9472,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinatesOrBuilder();
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 8;
     /**
      * <code>optional .com.lvl6.proto.StructOrientation orientation = 8;</code>
      */
@@ -9602,7 +9481,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
 
-    // optional int32 fbInviteStructLvl = 9;
     /**
      * <code>optional int32 fbInviteStructLvl = 9;</code>
      */
@@ -9616,8 +9494,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.FullUserStructureProto}
    */
   public static final class FullUserStructureProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FullUserStructureProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FullUserStructureProto)
+      FullUserStructureProtoOrBuilder {
     // Use FullUserStructureProto.newBuilder() to construct.
     private FullUserStructureProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -9664,13 +9543,15 @@ public final class StructureProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -9762,7 +9643,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional string userStructUuid = 1;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 1;
     private java.lang.Object userStructUuid_;
     /**
@@ -9805,7 +9685,6 @@ public final class StructureProto {
       }
     }
 
-    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -9848,7 +9727,6 @@ public final class StructureProto {
       }
     }
 
-    // optional int32 structId = 3;
     public static final int STRUCTID_FIELD_NUMBER = 3;
     private int structId_;
     /**
@@ -9864,7 +9742,6 @@ public final class StructureProto {
       return structId_;
     }
 
-    // optional int64 lastRetrieved = 4;
     public static final int LASTRETRIEVED_FIELD_NUMBER = 4;
     private long lastRetrieved_;
     /**
@@ -9880,7 +9757,6 @@ public final class StructureProto {
       return lastRetrieved_;
     }
 
-    // optional int64 purchaseTime = 5;
     public static final int PURCHASETIME_FIELD_NUMBER = 5;
     private long purchaseTime_;
     /**
@@ -9896,7 +9772,6 @@ public final class StructureProto {
       return purchaseTime_;
     }
 
-    // optional bool isComplete = 6;
     public static final int ISCOMPLETE_FIELD_NUMBER = 6;
     private boolean isComplete_;
     /**
@@ -9912,7 +9787,6 @@ public final class StructureProto {
       return isComplete_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto coordinates = 7;
     public static final int COORDINATES_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.CoordinateProto coordinates_;
     /**
@@ -9934,7 +9808,6 @@ public final class StructureProto {
       return coordinates_;
     }
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 8;
     public static final int ORIENTATION_FIELD_NUMBER = 8;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
     /**
@@ -9950,7 +9823,6 @@ public final class StructureProto {
       return orientation_;
     }
 
-    // optional int32 fbInviteStructLvl = 9;
     public static final int FBINVITESTRUCTLVL_FIELD_NUMBER = 9;
     private int fbInviteStructLvl_;
     /**
@@ -9980,7 +9852,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -10143,8 +10016,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.FullUserStructureProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FullUserStructureProto)
+        com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_FullUserStructureProto_descriptor;
@@ -10342,7 +10216,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional string userStructUuid = 1;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 1;</code>
@@ -10356,9 +10229,12 @@ public final class StructureProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10416,7 +10292,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -10430,9 +10305,12 @@ public final class StructureProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10490,7 +10368,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 structId = 3;
       private int structId_ ;
       /**
        * <code>optional int32 structId = 3;</code>
@@ -10523,7 +10400,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int64 lastRetrieved = 4;
       private long lastRetrieved_ ;
       /**
        * <code>optional int64 lastRetrieved = 4;</code>
@@ -10556,7 +10432,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int64 purchaseTime = 5;
       private long purchaseTime_ ;
       /**
        * <code>optional int64 purchaseTime = 5;</code>
@@ -10589,7 +10464,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional bool isComplete = 6;
       private boolean isComplete_ ;
       /**
        * <code>optional bool isComplete = 6;</code>
@@ -10622,7 +10496,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto coordinates = 7;
       private com.lvl6.proto.StructureProto.CoordinateProto coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordinatesBuilder_;
@@ -10731,7 +10604,7 @@ public final class StructureProto {
         if (coordinatesBuilder_ == null) {
           coordinatesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  coordinates_,
+                  getCoordinates(),
                   getParentForChildren(),
                   isClean());
           coordinates_ = null;
@@ -10739,7 +10612,6 @@ public final class StructureProto {
         return coordinatesBuilder_;
       }
 
-      // optional .com.lvl6.proto.StructOrientation orientation = 8;
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       /**
        * <code>optional .com.lvl6.proto.StructOrientation orientation = 8;</code>
@@ -10775,7 +10647,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 fbInviteStructLvl = 9;
       private int fbInviteStructLvl_ ;
       /**
        * <code>optional int32 fbInviteStructLvl = 9;</code>
@@ -10819,10 +10690,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserStructureProto)
   }
 
-  public interface CoordinateProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CoordinateProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CoordinateProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional float x = 1;
     /**
      * <code>optional float x = 1;</code>
      */
@@ -10832,7 +10703,6 @@ public final class StructureProto {
      */
     float getX();
 
-    // optional float y = 2;
     /**
      * <code>optional float y = 2;</code>
      */
@@ -10846,8 +10716,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.CoordinateProto}
    */
   public static final class CoordinateProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CoordinateProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CoordinateProto)
+      CoordinateProtoOrBuilder {
     // Use CoordinateProto.newBuilder() to construct.
     private CoordinateProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10943,7 +10814,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional float x = 1;
     public static final int X_FIELD_NUMBER = 1;
     private float x_;
     /**
@@ -10959,7 +10829,6 @@ public final class StructureProto {
       return x_;
     }
 
-    // optional float y = 2;
     public static final int Y_FIELD_NUMBER = 2;
     private float y_;
     /**
@@ -10982,7 +10851,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11096,8 +10966,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.CoordinateProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CoordinateProto)
+        com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_CoordinateProto_descriptor;
@@ -11219,7 +11090,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional float x = 1;
       private float x_ ;
       /**
        * <code>optional float x = 1;</code>
@@ -11252,7 +11122,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float y = 2;
       private float y_ ;
       /**
        * <code>optional float y = 2;</code>
@@ -11296,10 +11165,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CoordinateProto)
   }
 
-  public interface TutorialStructProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TutorialStructProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TutorialStructProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 structId = 1;
     /**
      * <code>optional int32 structId = 1;</code>
      */
@@ -11309,7 +11178,6 @@ public final class StructureProto {
      */
     int getStructId();
 
-    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto coordinate = 2;</code>
      */
@@ -11327,8 +11195,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.TutorialStructProto}
    */
   public static final class TutorialStructProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TutorialStructProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TutorialStructProto)
+      TutorialStructProtoOrBuilder {
     // Use TutorialStructProto.newBuilder() to construct.
     private TutorialStructProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -11432,7 +11301,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional int32 structId = 1;
     public static final int STRUCTID_FIELD_NUMBER = 1;
     private int structId_;
     /**
@@ -11448,7 +11316,6 @@ public final class StructureProto {
       return structId_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
     public static final int COORDINATE_FIELD_NUMBER = 2;
     private com.lvl6.proto.StructureProto.CoordinateProto coordinate_;
     /**
@@ -11477,7 +11344,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11591,8 +11459,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.TutorialStructProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TutorialStructProto)
+        com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TutorialStructProto_descriptor;
@@ -11723,7 +11592,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional int32 structId = 1;
       private int structId_ ;
       /**
        * <code>optional int32 structId = 1;</code>
@@ -11756,7 +11624,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
       private com.lvl6.proto.StructureProto.CoordinateProto coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordinateBuilder_;
@@ -11865,7 +11732,7 @@ public final class StructureProto {
         if (coordinateBuilder_ == null) {
           coordinateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  coordinate_,
+                  getCoordinate(),
                   getParentForChildren(),
                   isClean());
           coordinate_ = null;
@@ -11884,10 +11751,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TutorialStructProto)
   }
 
-  public interface ObstacleProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ObstacleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ObstacleProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 obstacleId = 1;
     /**
      * <code>optional int32 obstacleId = 1;</code>
      */
@@ -11897,7 +11764,6 @@ public final class StructureProto {
      */
     int getObstacleId();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -11912,7 +11778,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional .com.lvl6.proto.ResourceType removalCostType = 3;
     /**
      * <code>optional .com.lvl6.proto.ResourceType removalCostType = 3;</code>
      *
@@ -11930,7 +11795,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getRemovalCostType();
 
-    // optional int32 cost = 4;
     /**
      * <code>optional int32 cost = 4;</code>
      */
@@ -11940,7 +11804,6 @@ public final class StructureProto {
      */
     int getCost();
 
-    // optional int32 secondsToRemove = 5;
     /**
      * <code>optional int32 secondsToRemove = 5;</code>
      */
@@ -11950,7 +11813,6 @@ public final class StructureProto {
      */
     int getSecondsToRemove();
 
-    // optional int32 width = 6;
     /**
      * <code>optional int32 width = 6;</code>
      */
@@ -11960,7 +11822,6 @@ public final class StructureProto {
      */
     int getWidth();
 
-    // optional int32 height = 7;
     /**
      * <code>optional int32 height = 7;</code>
      */
@@ -11970,7 +11831,6 @@ public final class StructureProto {
      */
     int getHeight();
 
-    // optional string imgName = 8;
     /**
      * <code>optional string imgName = 8;</code>
      */
@@ -11985,7 +11845,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getImgNameBytes();
 
-    // optional float imgVerticalPixelOffset = 9;
     /**
      * <code>optional float imgVerticalPixelOffset = 9;</code>
      */
@@ -11995,7 +11854,6 @@ public final class StructureProto {
      */
     float getImgVerticalPixelOffset();
 
-    // optional string description = 10;
     /**
      * <code>optional string description = 10;</code>
      */
@@ -12010,7 +11868,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
-    // optional float chanceToAppear = 11;
     /**
      * <code>optional float chanceToAppear = 11;</code>
      */
@@ -12020,7 +11877,6 @@ public final class StructureProto {
      */
     float getChanceToAppear();
 
-    // optional string shadowImgName = 12;
     /**
      * <code>optional string shadowImgName = 12;</code>
      */
@@ -12035,7 +11891,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getShadowImgNameBytes();
 
-    // optional float shadowVerticalOffset = 13;
     /**
      * <code>optional float shadowVerticalOffset = 13;</code>
      */
@@ -12045,7 +11900,6 @@ public final class StructureProto {
      */
     float getShadowVerticalOffset();
 
-    // optional float shadowHorizontalOfffset = 14;
     /**
      * <code>optional float shadowHorizontalOfffset = 14;</code>
      */
@@ -12064,8 +11918,9 @@ public final class StructureProto {
    * </pre>
    */
   public static final class ObstacleProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ObstacleProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ObstacleProto)
+      ObstacleProtoOrBuilder {
     // Use ObstacleProto.newBuilder() to construct.
     private ObstacleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -12117,8 +11972,9 @@ public final class StructureProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 24: {
@@ -12153,8 +12009,9 @@ public final class StructureProto {
               break;
             }
             case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              imgName_ = input.readBytes();
+              imgName_ = bs;
               break;
             }
             case 77: {
@@ -12163,8 +12020,9 @@ public final class StructureProto {
               break;
             }
             case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
-              description_ = input.readBytes();
+              description_ = bs;
               break;
             }
             case 93: {
@@ -12173,8 +12031,9 @@ public final class StructureProto {
               break;
             }
             case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
-              shadowImgName_ = input.readBytes();
+              shadowImgName_ = bs;
               break;
             }
             case 109: {
@@ -12227,7 +12086,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional int32 obstacleId = 1;
     public static final int OBSTACLEID_FIELD_NUMBER = 1;
     private int obstacleId_;
     /**
@@ -12243,7 +12101,6 @@ public final class StructureProto {
       return obstacleId_;
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -12286,7 +12143,6 @@ public final class StructureProto {
       }
     }
 
-    // optional .com.lvl6.proto.ResourceType removalCostType = 3;
     public static final int REMOVALCOSTTYPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.StructureProto.ResourceType removalCostType_;
     /**
@@ -12310,7 +12166,6 @@ public final class StructureProto {
       return removalCostType_;
     }
 
-    // optional int32 cost = 4;
     public static final int COST_FIELD_NUMBER = 4;
     private int cost_;
     /**
@@ -12326,7 +12181,6 @@ public final class StructureProto {
       return cost_;
     }
 
-    // optional int32 secondsToRemove = 5;
     public static final int SECONDSTOREMOVE_FIELD_NUMBER = 5;
     private int secondsToRemove_;
     /**
@@ -12342,7 +12196,6 @@ public final class StructureProto {
       return secondsToRemove_;
     }
 
-    // optional int32 width = 6;
     public static final int WIDTH_FIELD_NUMBER = 6;
     private int width_;
     /**
@@ -12358,7 +12211,6 @@ public final class StructureProto {
       return width_;
     }
 
-    // optional int32 height = 7;
     public static final int HEIGHT_FIELD_NUMBER = 7;
     private int height_;
     /**
@@ -12374,7 +12226,6 @@ public final class StructureProto {
       return height_;
     }
 
-    // optional string imgName = 8;
     public static final int IMGNAME_FIELD_NUMBER = 8;
     private java.lang.Object imgName_;
     /**
@@ -12417,7 +12268,6 @@ public final class StructureProto {
       }
     }
 
-    // optional float imgVerticalPixelOffset = 9;
     public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 9;
     private float imgVerticalPixelOffset_;
     /**
@@ -12433,7 +12283,6 @@ public final class StructureProto {
       return imgVerticalPixelOffset_;
     }
 
-    // optional string description = 10;
     public static final int DESCRIPTION_FIELD_NUMBER = 10;
     private java.lang.Object description_;
     /**
@@ -12476,7 +12325,6 @@ public final class StructureProto {
       }
     }
 
-    // optional float chanceToAppear = 11;
     public static final int CHANCETOAPPEAR_FIELD_NUMBER = 11;
     private float chanceToAppear_;
     /**
@@ -12492,7 +12340,6 @@ public final class StructureProto {
       return chanceToAppear_;
     }
 
-    // optional string shadowImgName = 12;
     public static final int SHADOWIMGNAME_FIELD_NUMBER = 12;
     private java.lang.Object shadowImgName_;
     /**
@@ -12535,7 +12382,6 @@ public final class StructureProto {
       }
     }
 
-    // optional float shadowVerticalOffset = 13;
     public static final int SHADOWVERTICALOFFSET_FIELD_NUMBER = 13;
     private float shadowVerticalOffset_;
     /**
@@ -12551,7 +12397,6 @@ public final class StructureProto {
       return shadowVerticalOffset_;
     }
 
-    // optional float shadowHorizontalOfffset = 14;
     public static final int SHADOWHORIZONTALOFFFSET_FIELD_NUMBER = 14;
     private float shadowHorizontalOfffset_;
     /**
@@ -12586,7 +12431,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -12789,8 +12635,9 @@ public final class StructureProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ObstacleProto)
+        com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ObstacleProto_descriptor;
@@ -13028,7 +12875,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional int32 obstacleId = 1;
       private int obstacleId_ ;
       /**
        * <code>optional int32 obstacleId = 1;</code>
@@ -13061,7 +12907,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -13075,9 +12920,12 @@ public final class StructureProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13135,7 +12983,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType removalCostType = 3;
       private com.lvl6.proto.StructureProto.ResourceType removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType removalCostType = 3;</code>
@@ -13187,7 +13034,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 cost = 4;
       private int cost_ ;
       /**
        * <code>optional int32 cost = 4;</code>
@@ -13220,7 +13066,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 secondsToRemove = 5;
       private int secondsToRemove_ ;
       /**
        * <code>optional int32 secondsToRemove = 5;</code>
@@ -13253,7 +13098,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 width = 6;
       private int width_ ;
       /**
        * <code>optional int32 width = 6;</code>
@@ -13286,7 +13130,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 height = 7;
       private int height_ ;
       /**
        * <code>optional int32 height = 7;</code>
@@ -13319,7 +13162,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string imgName = 8;
       private java.lang.Object imgName_ = "";
       /**
        * <code>optional string imgName = 8;</code>
@@ -13333,9 +13175,12 @@ public final class StructureProto {
       public java.lang.String getImgName() {
         java.lang.Object ref = imgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13393,7 +13238,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float imgVerticalPixelOffset = 9;
       private float imgVerticalPixelOffset_ ;
       /**
        * <code>optional float imgVerticalPixelOffset = 9;</code>
@@ -13426,7 +13270,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string description = 10;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 10;</code>
@@ -13440,9 +13283,12 @@ public final class StructureProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          description_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            description_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13500,7 +13346,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float chanceToAppear = 11;
       private float chanceToAppear_ ;
       /**
        * <code>optional float chanceToAppear = 11;</code>
@@ -13533,7 +13378,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string shadowImgName = 12;
       private java.lang.Object shadowImgName_ = "";
       /**
        * <code>optional string shadowImgName = 12;</code>
@@ -13547,9 +13391,12 @@ public final class StructureProto {
       public java.lang.String getShadowImgName() {
         java.lang.Object ref = shadowImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          shadowImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            shadowImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13607,7 +13454,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float shadowVerticalOffset = 13;
       private float shadowVerticalOffset_ ;
       /**
        * <code>optional float shadowVerticalOffset = 13;</code>
@@ -13640,7 +13486,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional float shadowHorizontalOfffset = 14;
       private float shadowHorizontalOfffset_ ;
       /**
        * <code>optional float shadowHorizontalOfffset = 14;</code>
@@ -13684,10 +13529,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleProto)
   }
 
-  public interface MinimumObstacleProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumObstacleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumObstacleProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 obstacleId = 1;
     /**
      * <code>optional int32 obstacleId = 1;</code>
      */
@@ -13697,7 +13542,6 @@ public final class StructureProto {
      */
     int getObstacleId();
 
-    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto coordinate = 2;</code>
      */
@@ -13711,7 +13555,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinateOrBuilder();
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 5;
     /**
      * <code>optional .com.lvl6.proto.StructOrientation orientation = 5;</code>
      */
@@ -13725,8 +13568,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.MinimumObstacleProto}
    */
   public static final class MinimumObstacleProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumObstacleProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumObstacleProto)
+      MinimumObstacleProtoOrBuilder {
     // Use MinimumObstacleProto.newBuilder() to construct.
     private MinimumObstacleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -13841,7 +13685,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional int32 obstacleId = 1;
     public static final int OBSTACLEID_FIELD_NUMBER = 1;
     private int obstacleId_;
     /**
@@ -13857,7 +13700,6 @@ public final class StructureProto {
       return obstacleId_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
     public static final int COORDINATE_FIELD_NUMBER = 2;
     private com.lvl6.proto.StructureProto.CoordinateProto coordinate_;
     /**
@@ -13879,7 +13721,6 @@ public final class StructureProto {
       return coordinate_;
     }
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 5;
     public static final int ORIENTATION_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
     /**
@@ -13903,7 +13744,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14024,8 +13866,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.MinimumObstacleProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumObstacleProto)
+        com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor;
@@ -14165,7 +14008,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional int32 obstacleId = 1;
       private int obstacleId_ ;
       /**
        * <code>optional int32 obstacleId = 1;</code>
@@ -14198,7 +14040,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
       private com.lvl6.proto.StructureProto.CoordinateProto coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordinateBuilder_;
@@ -14307,7 +14148,7 @@ public final class StructureProto {
         if (coordinateBuilder_ == null) {
           coordinateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  coordinate_,
+                  getCoordinate(),
                   getParentForChildren(),
                   isClean());
           coordinate_ = null;
@@ -14315,7 +14156,6 @@ public final class StructureProto {
         return coordinateBuilder_;
       }
 
-      // optional .com.lvl6.proto.StructOrientation orientation = 5;
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       /**
        * <code>optional .com.lvl6.proto.StructOrientation orientation = 5;</code>
@@ -14362,10 +14202,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumObstacleProto)
   }
 
-  public interface UserObstacleProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserObstacleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserObstacleProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userObstacleUuid = 1;
     /**
      * <code>optional string userObstacleUuid = 1;</code>
      */
@@ -14380,7 +14220,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getUserObstacleUuidBytes();
 
-    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -14395,7 +14234,6 @@ public final class StructureProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 obstacleId = 3;
     /**
      * <code>optional int32 obstacleId = 3;</code>
      */
@@ -14405,7 +14243,6 @@ public final class StructureProto {
      */
     int getObstacleId();
 
-    // optional .com.lvl6.proto.CoordinateProto coordinates = 4;
     /**
      * <code>optional .com.lvl6.proto.CoordinateProto coordinates = 4;</code>
      */
@@ -14419,7 +14256,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinatesOrBuilder();
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 5;
     /**
      * <code>optional .com.lvl6.proto.StructOrientation orientation = 5;</code>
      */
@@ -14429,7 +14265,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
 
-    // optional int64 removalStartTime = 6;
     /**
      * <code>optional int64 removalStartTime = 6;</code>
      */
@@ -14443,8 +14278,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.UserObstacleProto}
    */
   public static final class UserObstacleProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserObstacleProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserObstacleProto)
+      UserObstacleProtoOrBuilder {
     // Use UserObstacleProto.newBuilder() to construct.
     private UserObstacleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -14491,13 +14327,15 @@ public final class StructureProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userObstacleUuid_ = input.readBytes();
+              userObstacleUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -14574,7 +14412,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional string userObstacleUuid = 1;
     public static final int USEROBSTACLEUUID_FIELD_NUMBER = 1;
     private java.lang.Object userObstacleUuid_;
     /**
@@ -14617,7 +14454,6 @@ public final class StructureProto {
       }
     }
 
-    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -14660,7 +14496,6 @@ public final class StructureProto {
       }
     }
 
-    // optional int32 obstacleId = 3;
     public static final int OBSTACLEID_FIELD_NUMBER = 3;
     private int obstacleId_;
     /**
@@ -14676,7 +14511,6 @@ public final class StructureProto {
       return obstacleId_;
     }
 
-    // optional .com.lvl6.proto.CoordinateProto coordinates = 4;
     public static final int COORDINATES_FIELD_NUMBER = 4;
     private com.lvl6.proto.StructureProto.CoordinateProto coordinates_;
     /**
@@ -14698,7 +14532,6 @@ public final class StructureProto {
       return coordinates_;
     }
 
-    // optional .com.lvl6.proto.StructOrientation orientation = 5;
     public static final int ORIENTATION_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
     /**
@@ -14714,7 +14547,6 @@ public final class StructureProto {
       return orientation_;
     }
 
-    // optional int64 removalStartTime = 6;
     public static final int REMOVALSTARTTIME_FIELD_NUMBER = 6;
     private long removalStartTime_;
     /**
@@ -14741,7 +14573,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14883,8 +14716,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.UserObstacleProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserObstacleProto)
+        com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserObstacleProto_descriptor;
@@ -15055,7 +14889,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional string userObstacleUuid = 1;
       private java.lang.Object userObstacleUuid_ = "";
       /**
        * <code>optional string userObstacleUuid = 1;</code>
@@ -15069,9 +14902,12 @@ public final class StructureProto {
       public java.lang.String getUserObstacleUuid() {
         java.lang.Object ref = userObstacleUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userObstacleUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -15129,7 +14965,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -15143,9 +14978,12 @@ public final class StructureProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -15203,7 +15041,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 obstacleId = 3;
       private int obstacleId_ ;
       /**
        * <code>optional int32 obstacleId = 3;</code>
@@ -15236,7 +15073,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.CoordinateProto coordinates = 4;
       private com.lvl6.proto.StructureProto.CoordinateProto coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordinatesBuilder_;
@@ -15345,7 +15181,7 @@ public final class StructureProto {
         if (coordinatesBuilder_ == null) {
           coordinatesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  coordinates_,
+                  getCoordinates(),
                   getParentForChildren(),
                   isClean());
           coordinates_ = null;
@@ -15353,7 +15189,6 @@ public final class StructureProto {
         return coordinatesBuilder_;
       }
 
-      // optional .com.lvl6.proto.StructOrientation orientation = 5;
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       /**
        * <code>optional .com.lvl6.proto.StructOrientation orientation = 5;</code>
@@ -15389,7 +15224,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int64 removalStartTime = 6;
       private long removalStartTime_ ;
       /**
        * <code>optional int64 removalStartTime = 6;</code>
@@ -15433,10 +15267,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserObstacleProto)
   }
 
-  public interface EvoChamberProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EvoChamberProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EvoChamberProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -15450,7 +15284,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];
     /**
      * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
      */
@@ -15460,7 +15293,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked();
 
-    // optional int32 evoTierUnlocked = 3;
     /**
      * <code>optional int32 evoTierUnlocked = 3;</code>
      */
@@ -15474,8 +15306,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.EvoChamberProto}
    */
   public static final class EvoChamberProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EvoChamberProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EvoChamberProto)
+      EvoChamberProtoOrBuilder {
     // Use EvoChamberProto.newBuilder() to construct.
     private EvoChamberProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -15590,7 +15423,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -15612,7 +15444,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];
     public static final int QUALITYUNLOCKED_FIELD_NUMBER = 2;
     private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_;
     /**
@@ -15628,7 +15459,6 @@ public final class StructureProto {
       return qualityUnlocked_;
     }
 
-    // optional int32 evoTierUnlocked = 3;
     public static final int EVOTIERUNLOCKED_FIELD_NUMBER = 3;
     private int evoTierUnlocked_;
     /**
@@ -15652,7 +15482,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -15773,8 +15604,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.EvoChamberProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EvoChamberProto)
+        com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_EvoChamberProto_descriptor;
@@ -15914,7 +15746,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -16023,7 +15854,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -16031,7 +15862,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];
       private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.COMMON;
       /**
        * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2 [default = COMMON];</code>
@@ -16067,7 +15897,6 @@ public final class StructureProto {
         return this;
       }
 
-      // optional int32 evoTierUnlocked = 3;
       private int evoTierUnlocked_ ;
       /**
        * <code>optional int32 evoTierUnlocked = 3;</code>
@@ -16111,10 +15940,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvoChamberProto)
   }
 
-  public interface TeamCenterProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TeamCenterProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TeamCenterProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -16128,7 +15957,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 teamCostLimit = 2;
     /**
      * <code>optional int32 teamCostLimit = 2;</code>
      */
@@ -16142,8 +15970,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.TeamCenterProto}
    */
   public static final class TeamCenterProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TeamCenterProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TeamCenterProto)
+      TeamCenterProtoOrBuilder {
     // Use TeamCenterProto.newBuilder() to construct.
     private TeamCenterProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -16247,7 +16076,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -16269,7 +16097,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 teamCostLimit = 2;
     public static final int TEAMCOSTLIMIT_FIELD_NUMBER = 2;
     private int teamCostLimit_;
     /**
@@ -16292,7 +16119,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -16406,8 +16234,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.TeamCenterProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TeamCenterProto)
+        com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TeamCenterProto_descriptor;
@@ -16538,7 +16367,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -16647,7 +16475,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -16655,7 +16483,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 teamCostLimit = 2;
       private int teamCostLimit_ ;
       /**
        * <code>optional int32 teamCostLimit = 2;</code>
@@ -16699,10 +16526,10 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TeamCenterProto)
   }
 
-  public interface ClanHouseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ClanHouseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanHouseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     /**
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
@@ -16716,7 +16543,6 @@ public final class StructureProto {
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
-    // optional int32 maxHelpersPerSolicitation = 2;
     /**
      * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
@@ -16730,8 +16556,9 @@ public final class StructureProto {
    * Protobuf type {@code com.lvl6.proto.ClanHouseProto}
    */
   public static final class ClanHouseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ClanHouseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanHouseProto)
+      ClanHouseProtoOrBuilder {
     // Use ClanHouseProto.newBuilder() to construct.
     private ClanHouseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -16835,7 +16662,6 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
     public static final int STRUCTINFO_FIELD_NUMBER = 1;
     private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
     /**
@@ -16857,7 +16683,6 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    // optional int32 maxHelpersPerSolicitation = 2;
     public static final int MAXHELPERSPERSOLICITATION_FIELD_NUMBER = 2;
     private int maxHelpersPerSolicitation_;
     /**
@@ -16880,7 +16705,8 @@ public final class StructureProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -16994,8 +16820,9 @@ public final class StructureProto {
      * Protobuf type {@code com.lvl6.proto.ClanHouseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanHouseProto)
+        com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ClanHouseProto_descriptor;
@@ -17126,7 +16953,6 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
       private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
@@ -17235,7 +17061,7 @@ public final class StructureProto {
         if (structInfoBuilder_ == null) {
           structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
-                  structInfo_,
+                  getStructInfo(),
                   getParentForChildren(),
                   isClean());
           structInfo_ = null;
@@ -17243,7 +17069,6 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      // optional int32 maxHelpersPerSolicitation = 2;
       private int maxHelpersPerSolicitation_ ;
       /**
        * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
@@ -17287,87 +17112,87 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanHouseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ResourceGeneratorProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResourceStorageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ResourceStorageProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_HospitalProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LabProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LabProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResidenceProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TownHallProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullUserStructureProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CoordinateProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TutorialStructProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TutorialStructProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ObstacleProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserObstacleProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EvoChamberProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TeamCenterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ClanHouseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -17481,120 +17306,121 @@ public final class StructureProto {
       "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_StructureInfoProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
-              new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", "ShadowScale", });
-          internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_ResourceGeneratorProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor,
-              new java.lang.String[] { "StructInfo", "ResourceType", "ProductionRate", "Capacity", });
-          internal_static_com_lvl6_proto_ResourceStorageProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_ResourceStorageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ResourceStorageProto_descriptor,
-              new java.lang.String[] { "StructInfo", "ResourceType", "Capacity", });
-          internal_static_com_lvl6_proto_HospitalProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_HospitalProto_descriptor,
-              new java.lang.String[] { "StructInfo", "QueueSize", "HealthPerSecond", "SecsToFullyHealMultiplier", });
-          internal_static_com_lvl6_proto_LabProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_LabProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LabProto_descriptor,
-              new java.lang.String[] { "StructInfo", "QueueSize", "PointsPerSecond", "PointsMultiplier", });
-          internal_static_com_lvl6_proto_ResidenceProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ResidenceProto_descriptor,
-              new java.lang.String[] { "StructInfo", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", "OccupationName", "ImgSuffix", });
-          internal_static_com_lvl6_proto_TownHallProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TownHallProto_descriptor,
-              new java.lang.String[] { "StructInfo", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", "NumLabs", "PvpQueueCashCost", "ResourceCapacity", "NumEvoChambers", });
-          internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor,
-              new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", });
-          internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
-              new java.lang.String[] { "UserStructUuid", "UserUuid", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", });
-          internal_static_com_lvl6_proto_CoordinateProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
-          internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CoordinateProto_descriptor,
-              new java.lang.String[] { "X", "Y", });
-          internal_static_com_lvl6_proto_TutorialStructProto_descriptor =
-            getDescriptor().getMessageTypes().get(10);
-          internal_static_com_lvl6_proto_TutorialStructProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TutorialStructProto_descriptor,
-              new java.lang.String[] { "StructId", "Coordinate", });
-          internal_static_com_lvl6_proto_ObstacleProto_descriptor =
-            getDescriptor().getMessageTypes().get(11);
-          internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ObstacleProto_descriptor,
-              new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", });
-          internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor =
-            getDescriptor().getMessageTypes().get(12);
-          internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor,
-              new java.lang.String[] { "ObstacleId", "Coordinate", "Orientation", });
-          internal_static_com_lvl6_proto_UserObstacleProto_descriptor =
-            getDescriptor().getMessageTypes().get(13);
-          internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserObstacleProto_descriptor,
-              new java.lang.String[] { "UserObstacleUuid", "UserUuid", "ObstacleId", "Coordinates", "Orientation", "RemovalStartTime", });
-          internal_static_com_lvl6_proto_EvoChamberProto_descriptor =
-            getDescriptor().getMessageTypes().get(14);
-          internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EvoChamberProto_descriptor,
-              new java.lang.String[] { "StructInfo", "QualityUnlocked", "EvoTierUnlocked", });
-          internal_static_com_lvl6_proto_TeamCenterProto_descriptor =
-            getDescriptor().getMessageTypes().get(15);
-          internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TeamCenterProto_descriptor,
-              new java.lang.String[] { "StructInfo", "TeamCostLimit", });
-          internal_static_com_lvl6_proto_ClanHouseProto_descriptor =
-            getDescriptor().getMessageTypes().get(16);
-          internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
-              new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_StructureInfoProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
+        new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", "ShadowScale", });
+    internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_ResourceGeneratorProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor,
+        new java.lang.String[] { "StructInfo", "ResourceType", "ProductionRate", "Capacity", });
+    internal_static_com_lvl6_proto_ResourceStorageProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_ResourceStorageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ResourceStorageProto_descriptor,
+        new java.lang.String[] { "StructInfo", "ResourceType", "Capacity", });
+    internal_static_com_lvl6_proto_HospitalProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_HospitalProto_descriptor,
+        new java.lang.String[] { "StructInfo", "QueueSize", "HealthPerSecond", "SecsToFullyHealMultiplier", });
+    internal_static_com_lvl6_proto_LabProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_LabProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_LabProto_descriptor,
+        new java.lang.String[] { "StructInfo", "QueueSize", "PointsPerSecond", "PointsMultiplier", });
+    internal_static_com_lvl6_proto_ResidenceProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ResidenceProto_descriptor,
+        new java.lang.String[] { "StructInfo", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", "OccupationName", "ImgSuffix", });
+    internal_static_com_lvl6_proto_TownHallProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TownHallProto_descriptor,
+        new java.lang.String[] { "StructInfo", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", "NumLabs", "PvpQueueCashCost", "ResourceCapacity", "NumEvoChambers", });
+    internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor,
+        new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", });
+    internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
+        new java.lang.String[] { "UserStructUuid", "UserUuid", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", });
+    internal_static_com_lvl6_proto_CoordinateProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CoordinateProto_descriptor,
+        new java.lang.String[] { "X", "Y", });
+    internal_static_com_lvl6_proto_TutorialStructProto_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_com_lvl6_proto_TutorialStructProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TutorialStructProto_descriptor,
+        new java.lang.String[] { "StructId", "Coordinate", });
+    internal_static_com_lvl6_proto_ObstacleProto_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ObstacleProto_descriptor,
+        new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", });
+    internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor,
+        new java.lang.String[] { "ObstacleId", "Coordinate", "Orientation", });
+    internal_static_com_lvl6_proto_UserObstacleProto_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserObstacleProto_descriptor,
+        new java.lang.String[] { "UserObstacleUuid", "UserUuid", "ObstacleId", "Coordinates", "Orientation", "RemovalStartTime", });
+    internal_static_com_lvl6_proto_EvoChamberProto_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EvoChamberProto_descriptor,
+        new java.lang.String[] { "StructInfo", "QualityUnlocked", "EvoTierUnlocked", });
+    internal_static_com_lvl6_proto_TeamCenterProto_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TeamCenterProto_descriptor,
+        new java.lang.String[] { "StructInfo", "TeamCostLimit", });
+    internal_static_com_lvl6_proto_ClanHouseProto_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
+        new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

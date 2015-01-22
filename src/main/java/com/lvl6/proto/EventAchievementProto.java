@@ -8,10 +8,10 @@ public final class EventAchievementProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface AchievementProgressRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AchievementProgressRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventAchievementProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserAchievementProto uapList = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
      *
@@ -70,7 +69,6 @@ public final class EventAchievementProto {
     com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
         int index);
 
-    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -88,8 +86,9 @@ public final class EventAchievementProto {
    * </pre>
    */
   public static final class AchievementProgressRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AchievementProgressRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressRequestProto)
+      AchievementProgressRequestProtoOrBuilder {
     // Use AchievementProgressRequestProto.newBuilder() to construct.
     private AchievementProgressRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -204,7 +203,6 @@ public final class EventAchievementProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -226,7 +224,6 @@ public final class EventAchievementProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserAchievementProto uapList = 2;
     public static final int UAPLIST_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_;
     /**
@@ -282,7 +279,6 @@ public final class EventAchievementProto {
       return uapList_.get(index);
     }
 
-    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -306,7 +302,8 @@ public final class EventAchievementProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -431,8 +428,9 @@ public final class EventAchievementProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressRequestProto)
+        com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
@@ -605,7 +603,6 @@ public final class EventAchievementProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -714,7 +711,7 @@ public final class EventAchievementProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -722,7 +719,6 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserAchievementProto uapList = 2;
       private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_ =
         java.util.Collections.emptyList();
       private void ensureUapListIsMutable() {
@@ -904,7 +900,8 @@ public final class EventAchievementProto {
           java.lang.Iterable<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProto> values) {
         if (uapListBuilder_ == null) {
           ensureUapListIsMutable();
-          super.addAll(values, uapList_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, uapList_);
           onChanged();
         } else {
           uapListBuilder_.addAllMessages(values);
@@ -1034,7 +1031,6 @@ public final class EventAchievementProto {
         return uapListBuilder_;
       }
 
-      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -1078,10 +1074,10 @@ public final class EventAchievementProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressRequestProto)
   }
 
-  public interface AchievementProgressResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AchievementProgressResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1095,7 +1091,6 @@ public final class EventAchievementProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
      */
@@ -1113,8 +1108,9 @@ public final class EventAchievementProto {
    * </pre>
    */
   public static final class AchievementProgressResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AchievementProgressResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressResponseProto)
+      AchievementProgressResponseProtoOrBuilder {
     // Use AchievementProgressResponseProto.newBuilder() to construct.
     private AchievementProgressResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1306,7 +1302,6 @@ public final class EventAchievementProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1328,7 +1323,6 @@ public final class EventAchievementProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_;
     /**
@@ -1351,7 +1345,8 @@ public final class EventAchievementProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1469,8 +1464,9 @@ public final class EventAchievementProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressResponseProto)
+        com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
@@ -1601,7 +1597,6 @@ public final class EventAchievementProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1710,7 +1705,7 @@ public final class EventAchievementProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1718,7 +1713,6 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;
       private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
@@ -1765,10 +1759,10 @@ public final class EventAchievementProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressResponseProto)
   }
 
-  public interface AchievementRedeemRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AchievementRedeemRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1782,7 +1776,6 @@ public final class EventAchievementProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 achievementId = 2;
     /**
      * <code>optional int32 achievementId = 2;</code>
      */
@@ -1792,7 +1785,6 @@ public final class EventAchievementProto {
      */
     int getAchievementId();
 
-    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -1811,8 +1803,9 @@ public final class EventAchievementProto {
    * </pre>
    */
   public static final class AchievementRedeemRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AchievementRedeemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemRequestProto)
+      AchievementRedeemRequestProtoOrBuilder {
     // Use AchievementRedeemRequestProto.newBuilder() to construct.
     private AchievementRedeemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1921,7 +1914,6 @@ public final class EventAchievementProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1943,7 +1935,6 @@ public final class EventAchievementProto {
       return sender_;
     }
 
-    // optional int32 achievementId = 2;
     public static final int ACHIEVEMENTID_FIELD_NUMBER = 2;
     private int achievementId_;
     /**
@@ -1959,7 +1950,6 @@ public final class EventAchievementProto {
       return achievementId_;
     }
 
-    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -1983,7 +1973,8 @@ public final class EventAchievementProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2109,8 +2100,9 @@ public final class EventAchievementProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemRequestProto)
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
@@ -2250,7 +2242,6 @@ public final class EventAchievementProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2359,7 +2350,7 @@ public final class EventAchievementProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2367,7 +2358,6 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      // optional int32 achievementId = 2;
       private int achievementId_ ;
       /**
        * <code>optional int32 achievementId = 2;</code>
@@ -2400,7 +2390,6 @@ public final class EventAchievementProto {
         return this;
       }
 
-      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -2444,10 +2433,10 @@ public final class EventAchievementProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemRequestProto)
   }
 
-  public interface AchievementRedeemResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface AchievementRedeemResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2461,7 +2450,6 @@ public final class EventAchievementProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
      */
@@ -2479,8 +2467,9 @@ public final class EventAchievementProto {
    * </pre>
    */
   public static final class AchievementRedeemResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AchievementRedeemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemResponseProto)
+      AchievementRedeemResponseProtoOrBuilder {
     // Use AchievementRedeemResponseProto.newBuilder() to construct.
     private AchievementRedeemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2690,7 +2679,6 @@ public final class EventAchievementProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2712,7 +2700,6 @@ public final class EventAchievementProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_;
     /**
@@ -2735,7 +2722,8 @@ public final class EventAchievementProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2853,8 +2841,9 @@ public final class EventAchievementProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemResponseProto)
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
@@ -2985,7 +2974,6 @@ public final class EventAchievementProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3094,7 +3082,7 @@ public final class EventAchievementProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3102,7 +3090,6 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
       private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
@@ -3149,22 +3136,22 @@ public final class EventAchievementProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3203,43 +3190,45 @@ public final class EventAchievementProto {
       "\027B\025EventAchievementProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UapList", "ClientTime", });
-          internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "AchievementId", "ClientTime", });
-          internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.AchievementStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UapList", "ClientTime", });
+    internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "AchievementId", "ClientTime", });
+    internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
