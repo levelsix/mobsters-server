@@ -107,8 +107,10 @@
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
+		
 		<apns.path.to.cert>/mobsters_dev.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
+		
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
 		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
 		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
@@ -378,17 +380,17 @@
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<excludes>
-					<exclude>*.p12</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<includes>
 					<include>*.p12</include>
 				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>*.p12</exclude>
+				</excludes>
 			</resource>
 		</resources>
 		<testResources>
