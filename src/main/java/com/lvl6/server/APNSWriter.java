@@ -200,7 +200,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 		log.info("Building ApnsService");
 		try {
 			//InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
-			org.springframework.core.io.Resource resource = context.getResource("classpath*:"+apnsProperties.pathToCert);
+			org.springframework.core.io.Resource resource = context.getResource(apnsProperties.pathToCert);
 			Object[] args = {apnsProperties.pathToCert, resource.exists(), resource.contentLength()};
 			log.info("Loading cert: {}, exists: {}, length: {}", args);
 			ApnsServiceBuilder builder = APNS.newService()
