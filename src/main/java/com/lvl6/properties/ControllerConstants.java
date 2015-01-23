@@ -212,7 +212,7 @@ public class ControllerConstants {
 	//the monster id that is used in tutorial
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
 	//the monster id the user gets to use after tutorial
-	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 37;
+	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 2011;
 	public static final int TUTORIAL__GUIDE_MONSTER_ID = 2012;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1100;
