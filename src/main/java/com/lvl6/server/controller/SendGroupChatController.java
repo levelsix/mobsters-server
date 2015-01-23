@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendGroupChatResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -37,6 +39,7 @@ import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatSta
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
@@ -68,6 +71,9 @@ public class SendGroupChatController extends EventController {
 
   @Autowired
   protected UserClanRetrieveUtils2 userClanRetrieveUtil;
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
   
   @Autowired
   protected ClanSearch clanSearch;
@@ -237,17 +243,26 @@ public class SendGroupChatController extends EventController {
 		  InsertUtils.get().insertClanChatPost(user.getId(), clanId, content, timeOfPost);
 
 		  //update clan cache
-		  List<String> statuses = new ArrayList<String>();
-		  statuses.add(UserClanStatus.LEADER.name());
-		  statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-		  statuses.add(UserClanStatus.CAPTAIN.name());
-		  statuses.add(UserClanStatus.MEMBER.name());
-		  Map<String, String> userIdsToStatuses = userClanRetrieveUtil
-			  .getUserIdsToStatuses(clanId, statuses);
-
-		  int clanSize = userIdsToStatuses.size();
-		  Date lastChatTime = new Date(timeOfPost.getTime());
+		  Clan c = clanRetrieveUtil.getClanWithId(clanId);
+		  int clanSize = ClanSearch.penalizedClanSize;
+		  Date lastChatTime = null;
 		  
+		  if (!c.isRequestToJoinRequired())
+		  {
+			  //people can join clan freely
+			  List<String> clanIdList = Collections.singletonList(clanId);
+			  List<String> statuses = new ArrayList<String>();
+			  statuses.add(UserClanStatus.LEADER.name());
+			  statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+			  statuses.add(UserClanStatus.CAPTAIN.name());
+			  statuses.add(UserClanStatus.MEMBER.name());
+			  Map<String, Integer> clanIdToSize = userClanRetrieveUtil
+				  .getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+
+			  clanSize = clanIdToSize.get(clanId);
+			  lastChatTime = new Date(timeOfPost.getTime());
+		  }
+
 		  clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
 	  }
   }
@@ -321,7 +336,17 @@ public class SendGroupChatController extends EventController {
 	  this.userClanRetrieveUtil = userClanRetrieveUtil;
   }
 
-public ClanSearch getClanSearch()
+  public ClanRetrieveUtils2 getClanRetrieveUtil()
+  {
+	  return clanRetrieveUtil;
+  }
+
+  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+  {
+	  this.clanRetrieveUtil = clanRetrieveUtil;
+  }
+
+  public ClanSearch getClanSearch()
   {
 	  return clanSearch;
   }
