@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ChangeClanSettingsRequestEvent;
 import com.lvl6.events.response.ChangeClanSettingsResponseEvent;
@@ -28,13 +30,13 @@ import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class ChangeClanSettingsController extends EventController {
@@ -55,6 +57,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected ClanIconRetrieveUtils clanIconRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
+  
+  @Autowired
+  protected ClanSearch clanSearch;
 	
   public ChangeClanSettingsController() {
 	  numAllocatedThreads = 4;
@@ -126,11 +134,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legitChange = checkLegitChange(resBuilder, lockedClan, userId, user,
       		clanId, clan);
 
+      List<Integer> clanSizeContainer = new ArrayList<Integer>();
       if (legitChange) {
       	//clan will be modified
         writeChangesToDB(resBuilder, clanId, clan, isChangeDescription, description,
         		isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId);
-        setResponseBuilderStuff(resBuilder, clanId, clan);
+        setResponseBuilderStuff(resBuilder, clanId, clan, clanSizeContainer);
       }
       
       ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserUuid());
@@ -144,6 +153,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       } else {
       	//only write to clan if successful 
       	server.writeClanEvent(resEvent, clan.getId());
+      	
+      	updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
+      		requestToJoinRequired);
       }
 
     } catch (Exception e) {
@@ -244,21 +256,48 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		"numUpdated (should be 1)=%s", numUpdated));
   }
   
-  private void setResponseBuilderStuff(Builder resBuilder, String clanId, Clan clan) {
+  private void setResponseBuilderStuff(Builder resBuilder,
+	  String clanId, Clan clan, List<Integer> clanSizeContainer)
+  {
 	  List<String> clanIdList = Collections.singletonList(clanId);
-  	
-  	List<String> statuses = new ArrayList<String>();
-  	statuses.add(UserClanStatus.LEADER.name());
-  	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-  	statuses.add(UserClanStatus.CAPTAIN.name());
-  	statuses.add(UserClanStatus.MEMBER.name());
-  	Map<String, Integer> clanIdToSize = userClanRetrieveUtil
-  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
-  	
-    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
 
-    int size = clanIdToSize.get(clanId);
-    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
+	  List<String> statuses = new ArrayList<String>();
+	  statuses.add(UserClanStatus.LEADER.name());
+	  statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+	  statuses.add(UserClanStatus.CAPTAIN.name());
+	  statuses.add(UserClanStatus.MEMBER.name());
+	  Map<String, Integer> clanIdToSize = userClanRetrieveUtil
+		  .getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+
+	  resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+
+	  int size = clanIdToSize.get(clanId);
+	  resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
+	  
+	  clanSizeContainer.add(size);
+  }
+  
+  private void updateClanCache(String clanId,
+	  List<Integer> clanSizeContainer, boolean isChangeJoinType,
+	  boolean requestToJoinRequired)
+  {
+	  if (!isChangeJoinType) {
+		  return;
+	  }
+	  
+	  Date lastChatTime = null; 
+	  int clanSize = clanSizeContainer.get(0);
+	  if (requestToJoinRequired)
+	  {
+		  //since people can't join freely, this clan has a low rank 
+		  lastChatTime = ControllerConstants.INCEPTION_DATE;
+		  clanSize = ClanSearch.penalizedClanSize;
+	  } else {
+		  lastChatTime = clanChatPostRetrieveUtil
+			  .getLastChatPost(clanId);
+	  }
+	  
+	  clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
   }
   
   public Locker getLocker() {
@@ -288,21 +327,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  this.clanRetrieveUtil = clanRetrieveUtil;
   }
 
-public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
-{
-	return userClanRetrieveUtil;
-}
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
+  {
+	  return userClanRetrieveUtil;
+  }
 
-public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
-{
-	this.userClanRetrieveUtil = userClanRetrieveUtil;
-}
+  public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
+  {
+	  this.userClanRetrieveUtil = userClanRetrieveUtil;
+  }
 
-public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
+  public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
 	  return clanIconRetrieveUtils;
   }
   public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {
 	  this.clanIconRetrieveUtils = clanIconRetrieveUtils;
+  }
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil()
+  {
+	  return clanChatPostRetrieveUtil;
+  }
+
+  public void setClanChatPostRetrieveUtil( ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil )
+  {
+	  this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
+  }
+
+  public ClanSearch getClanSearch()
+  {
+	  return clanSearch;
+  }
+
+  public void setClanSearch( ClanSearch clanSearch )
+  {
+	  this.clanSearch = clanSearch;
   }
 
 }

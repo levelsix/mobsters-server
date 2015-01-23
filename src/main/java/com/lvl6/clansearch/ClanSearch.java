@@ -27,7 +27,7 @@ public class ClanSearch {
 	private static Double ONE_HOUR_IN_MILLIS = 60D * 60D * 1000D;
 //	private static Integer idealNumberOfMembers = 80;
 	private static int maxCutOffClanSize = (int) (0.98F * (float)ControllerConstants.CLAN__MAX_NUM_MEMBERS);
-	private static int penalizedClanSize = 2;
+	public static int penalizedClanSize = 2;
 	private static String penalizingStr = "clan hit limit. Changing numMembers, lastChat.";
 	
 	protected HazelcastInstance hz;

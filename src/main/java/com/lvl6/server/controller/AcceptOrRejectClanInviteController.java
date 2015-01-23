@@ -18,6 +18,7 @@ import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
@@ -184,7 +185,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				sendClanData(event, senderProto, userId, cdp);
 				
 				//update clan cache
-		        updateClanCache(clanId, aorcia.getClanSize(), lastChatTimeContainer);
+		        updateClanCache(clanId, aorcia.getClanSize(),
+		        	lastChatTimeContainer, clan.isRequestToJoinRequired());
 
 			} else {
 				//only write to user if just reject or fail
@@ -264,12 +266,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 
 	private void updateClanCache(String clanId,
-		int clanSize, List<Date> lastChatTimeContainer )
+		int clanSize, List<Date> lastChatTimeContainer,
+		boolean requestToJoinRequired)
 	{
 		//need to account for this user joining clan
 		clanSize += 1;
 		Date lastChatTime = lastChatTimeContainer.get(0);
 
+		if (requestToJoinRequired) {
+			clanSize = ClanSearch.penalizedClanSize;
+			lastChatTime = ControllerConstants.INCEPTION_DATE;
+		}
+		
 		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
 	}
 
