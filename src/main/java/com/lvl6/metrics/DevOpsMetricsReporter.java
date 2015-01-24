@@ -10,14 +10,13 @@ import metrics_influxdb.InfluxdbReporter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
 
 
 
-@Component
+//@Component
 public class DevOpsMetricsReporter {
 	private static final Logger log = LoggerFactory.getLogger(DevOpsMetricsReporter.class);
 	
@@ -37,6 +36,8 @@ public class DevOpsMetricsReporter {
 	public void setup()  {
 		try {
 			hostname = InetAddress.getLocalHost().getHostName();
+			Object[] args = {influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword};
+			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
 		    final Influxdb influxdb = new Influxdb(influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword); // http transport
 		    // = new InfluxDbUdp("127.0.0.1", 1234); // udp transport
 		    //influxdb.debugJson = true; // to print json on System.err
