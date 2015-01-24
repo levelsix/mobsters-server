@@ -183,7 +183,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			        cdp = setClanData(clanId, clan, user, userId, lastChatTimeContainer);
 
 			        //update clan cache
-			        updateClanCache(clanId, clanSizeList, lastChatTimeContainer);
+			        updateClanCache(clanId, clanSizeList, lastChatTimeContainer,
+			        	clan.isRequestToJoinRequired());
 
 					log.info(String.format("ClanDataProto=%s", cdp));
 					setResponseBuilderStuff(resBuilder, clan, clanSizeList);
@@ -430,12 +431,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	private void updateClanCache(String clanId,
 		List<Integer> clanSizeList,
-		List<Date> lastChatTimeContainer)
+		List<Date> lastChatTimeContainer,
+		boolean requestToJoinRequired)
 	{
 		//need to account for this user joining clan
 		int clanSize = clanSizeList.get(0) + 1;
 		Date lastChatTime = lastChatTimeContainer.get(0);
 
+		if (requestToJoinRequired) {
+			clanSize = ClanSearch.penalizedClanSize;
+			lastChatTime = ControllerConstants.INCEPTION_DATE;
+		}
+		
 		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
 	}
 

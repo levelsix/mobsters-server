@@ -130,7 +130,7 @@ public class ControllerConstants {
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
 	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
 	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
-	public static final int PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS = 1050;
+	public static final int PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS = 1100;
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
@@ -212,7 +212,7 @@ public class ControllerConstants {
 	//the monster id that is used in tutorial
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
 	//the monster id the user gets to use after tutorial
-	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 37;
+	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 2011;
 	public static final int TUTORIAL__GUIDE_MONSTER_ID = 2012;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1100;
