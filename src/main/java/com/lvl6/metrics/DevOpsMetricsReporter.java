@@ -37,7 +37,7 @@ public class DevOpsMetricsReporter {
 	public void setup()  {
 		try {
 			hostname = InetAddress.getLocalHost().getHostName();
-		    final Influxdb influxdb = new Influxdb("127.0.0.1", 8086, "mydb", "user", "pass"); // http transport
+		    final Influxdb influxdb = new Influxdb(influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword); // http transport
 		    // = new InfluxDbUdp("127.0.0.1", 1234); // udp transport
 		    //influxdb.debugJson = true; // to print json on System.err
 		    //influxdb.jsonBuilder = new MyJsonBuildler(); // to use MyJsonBuilder to create json
