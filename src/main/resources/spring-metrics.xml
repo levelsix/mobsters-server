@@ -27,7 +27,7 @@
     <!-- Beans and other Spring config -->
 	<bean id="devopsMetricsReporter" class="com.lvl6.metrics.DevOpsMetricsReporter">
 		<property name="registry" ref="metrics"/>
-		<property name="enviroment" value="${metrics.environment}"/>
+		<property name="environment" value="${metrics.environment}"/>
 		<property name="influxdbAddress" value="${metrics.influxdbAddress}"/>
 		<property name="influxdbName" value="${metrics.influxdbName}"/>
 		<property name="influxdbUser" value="${metrics.influxdbUser}"/>
