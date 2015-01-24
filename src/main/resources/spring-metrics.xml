@@ -1,23 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:hz="http://www.hazelcast.com/schema/spring"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.hazelcast.com/schema/spring
-        http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd
-        http://www.springframework.org/schema/cache 
-        http://www.springframework.org/schema/cache/spring-cache.xsd
-        http://www.springframework.org/schema/task
-        http://www.springframework.org/schema/task/spring-task.xsd
-		">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.ryantenney.com/schema/metrics
+           http://www.ryantenney.com/schema/metrics/metrics-3.0.xsd">
 
-<!-- 	<task:scheduler id="taskScheduler" pool-size="5" /> -->
+    <!-- Registry should be defined in only one context XML file -->
+    <metrics:metric-registry id="metrics" />
 
-<!-- 	<bean id="clanTowersScheduledTasks" class="com.lvl6.scheduledtasks.ClanTowersScheduledTasks" /> -->
-<!--	<bean id="tournamentEventScheduledTasks" class="com.lvl6.scheduledtasks.TournamentEventScheduledTasks" /> -->
-	<bean id="hazelcastScheduledTasks" class="com.lvl6.scheduledtasks.HazelcastScheduledTasks" />
+    <!-- annotation-driven must be included in all context files -->
+    <metrics:annotation-driven metric-registry="metrics" />
+
+    <!-- (Optional) Registry should be defined in only one context XML file -->
+    <!-- <metrics:reporter type="console" metric-registry="metrics" period="1m" /> -->
+
+    <!-- (Optional) The metrics in this example require the metrics-jvm jar-->
+    <metrics:register metric-registry="metrics">
+        <bean metrics:name="jvm.gc" class="com.codahale.metrics.jvm.GarbageCollectorMetricSet" />
+        <bean metrics:name="jvm.memory" class="com.codahale.metrics.jvm.MemoryUsageGaugeSet" />
+        <bean metrics:name="jvm.thread-states" class="com.codahale.metrics.jvm.ThreadStatesGaugeSet" />
+        <bean metrics:name="jvm.fd.usage" class="com.codahale.metrics.jvm.FileDescriptorRatioGauge" />
+    </metrics:register>
+
+    <!-- Beans and other Spring config -->
+	<bean id="devopsMetricsReporter" class="com.lvl6.metrics.DevOpsMetricsReporter">
+		<property name="registry" ref="metrics"/>
+		<property name="enviroment" value="${metrics.environment}"/>
+		<property name="influxdbAddress" value="${metrics.influxdbAddress}"/>
+		<property name="influxdbName" value="${metrics.influxdbName}"/>
+		<property name="influxdbUser" value="${metrics.influxdbUser}"/>
+		<property name="influxdbPassword" value="${metrics.influxdbPassword}"/>
+	</bean>
 </beans>

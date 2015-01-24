@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.misc.MiscMethods;
@@ -26,6 +28,13 @@ public abstract class EventController extends Wrap {
 	protected TransactionTemplate transactionTemplate;
 
 	protected PlatformTransactionManager transactionManager;
+
+	protected MetricRegistry registry;
+	
+	@Autowired
+	public void setRegistry(MetricRegistry registry) {
+		this.registry = registry;
+	}
 
 	public TransactionTemplate getTransactionTemplate() {
 		return transactionTemplate;
@@ -93,38 +102,48 @@ public abstract class EventController extends Wrap {
 	 * @throws Exception
 	 */
 
+	protected String getMetricName() {
+		return "controllers."+getClass().getSimpleName().toLowerCase()+".processEvent";
+	}
+	
 	protected void processEvent(GameEvent event) throws Exception {
-		final RequestEvent reqEvent = (RequestEvent) event;
-		MiscMethods
-				.setMDCProperties(
-						null,
-						reqEvent.getPlayerId(),
-						MiscMethods.getIPOfPlayer(server,
-								reqEvent.getPlayerId(), null));
-		log.info("Received event: {}", event.getClass().getSimpleName());
-
-		final long startTime = System.nanoTime();
-		final long endTime;
+		Timer timer = registry.timer(getMetricName());
+		Timer.Context context = timer.time();
 		try {
-			Exception e = doInTransaction(reqEvent);
-			if (e != null) {
+			final RequestEvent reqEvent = (RequestEvent) event;
+			MiscMethods
+					.setMDCProperties(
+							null,
+							reqEvent.getPlayerId(),
+							MiscMethods.getIPOfPlayer(server,
+									reqEvent.getPlayerId(), null));
+			log.info("Received event: {}", event.getClass().getSimpleName());
+	
+			final long startTime = System.nanoTime();
+			final long endTime;
+			try {
+				Exception e = doInTransaction(reqEvent);
+				if (e != null) {
+					throw e;
+				}
+			} catch (Exception e) {
 				throw e;
+			} finally {
+				endTime = System.nanoTime();
+				DBConnection.get().getConnection().close();
 			}
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			endTime = System.nanoTime();
-			DBConnection.get().getConnection().close();
+			double numSeconds = (endTime - startTime) / 1000000;
+	
+			log.info("Finished processing event: {}, took ~{}ms", event.getClass().getSimpleName(), numSeconds);
+	
+			if (numSeconds / 1000 > Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING) {
+				log.warn("Event {} took over {} seconds", event.getClass().getSimpleName(),  Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING);
+			}
+	
+			MiscMethods.purgeMDCProperties();
+		}finally {
+			context.close();
 		}
-		double numSeconds = (endTime - startTime) / 1000000;
-
-		log.info("Finished processing event: {}, took ~{}ms", event.getClass().getSimpleName(), numSeconds);
-
-		if (numSeconds / 1000 > Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING) {
-			log.warn("Event {} took over {} seconds", event.getClass().getSimpleName(),  Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING);
-		}
-
-		MiscMethods.purgeMDCProperties();
 	}
 
 	protected Exception doInTransaction(final RequestEvent reqEvent) {
