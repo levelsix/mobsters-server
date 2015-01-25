@@ -38,8 +38,6 @@ public class StatsWriterImpl implements StatsWriter {
 	@Autowired
 	protected MetricsReporter metricsReporter;
 
-	@Autowired
-	protected MetricRegistry registry;
 
 	protected IAtomicLong lastUpdate;
 	
@@ -103,15 +101,7 @@ public class StatsWriterImpl implements StatsWriter {
 		
 	}
 
-	
-	
-	
-	
-	
 
-	public void setRegistry(MetricRegistry registry) {
-		this.registry = registry;
-	}
 
 	public void setHazel(HazelcastInstance hazel) {
 		this.hazel = hazel;
