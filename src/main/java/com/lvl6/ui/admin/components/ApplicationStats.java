@@ -1,7 +1,12 @@
 package com.lvl6.ui.admin.components;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ApplicationStats {
 
+	
+	public Map<String, Number> values = new HashMap<>();
 	public Integer connectedPlayersCount = 0;
 	public Integer totalPlayersCount = 0;
 	public Integer loggedInToday = 0;
@@ -26,6 +31,7 @@ public class ApplicationStats {
 
 	public void setLoggedInThisWeek(Integer loggedInThisWeek) {
 		this.loggedInThisWeek = loggedInThisWeek;
+		values.put("loggedInThisWeek", loggedInThisWeek);
 	}
 
 	public Integer getLoggedInToday() {
@@ -34,6 +40,7 @@ public class ApplicationStats {
 
 	public void setLoggedInToday(Integer loggedInToday) {
 		this.loggedInToday = loggedInToday;
+		values.put("loggedInToday", loggedInToday);
 	}
 
 	public Long getAfterAppleTax() {
@@ -42,6 +49,7 @@ public class ApplicationStats {
 
 	public void setAfterAppleTax(Long afterAppleTax) {
 		this.afterAppleTax = afterAppleTax;
+		values.put("afterAppleTax", afterAppleTax);
 	}
 
 	protected void setRevenuePerPlayer() {
@@ -49,6 +57,7 @@ public class ApplicationStats {
 			revenuePerPlayer = getSumOfInAppPurchases().doubleValue()
 					/ getTotalPlayersCount().doubleValue();
 		}
+		values.put("revenuePerPlayer", revenuePerPlayer);
 	}
 
 	protected void setPurchasesPerPaidPlayer() {
@@ -56,12 +65,14 @@ public class ApplicationStats {
 			purchasesPerPaidPlayer = getTotalInAppPurchases().doubleValue()
 					/ getTotalPayingPlayers().doubleValue();
 		}
+		values.put("purchasesPerPaidPlayer", purchasesPerPaidPlayer);
 	}
 
 	protected void setRevenuePerPayingPlayer() {
 		if (getSumOfInAppPurchases() > 0 && getTotalPayingPlayers() > 0) {
 			revenuePerPayingPlayer = getSumOfInAppPurchases().doubleValue() / getTotalPayingPlayers().doubleValue();
 		}
+		values.put("revenuePerPayingPlayer", revenuePerPayingPlayer);
 	}
 
 	protected void setPercentagePaidPlayers() {
@@ -69,6 +80,7 @@ public class ApplicationStats {
 			percentageOfPaidPlayers = 100d * (getTotalPayingPlayers().doubleValue()
 					/ getTotalPlayersCount().doubleValue());
 		}
+		values.put("percentageOfPaidPlayers", percentageOfPaidPlayers);
 	}
 
 
@@ -91,6 +103,7 @@ public class ApplicationStats {
 		setRevenuePerPayingPlayer();
 		setPercentagePaidPlayers();
 		setPurchasesPerPaidPlayer();
+		values.put("totalPayingPlayers", totalPayingPlayers);
 	}
 
 	public Long getTotalInAppPurchases() {
@@ -101,6 +114,7 @@ public class ApplicationStats {
 	public void setTotalInAppPurchases(Long totalInAppPurchases) {
 		this.totalInAppPurchases = totalInAppPurchases;
 		setPurchasesPerPaidPlayer();
+		values.put("totalInAppPurchases", totalInAppPurchases);
 	}
 
 	public Long getSumOfInAppPurchases() {
@@ -111,6 +125,7 @@ public class ApplicationStats {
 		this.sumOfInAppPurchases = sumOfInAppPurchases;
 		setRevenuePerPayingPlayer();
 		setRevenuePerPlayer();
+		values.put("sumOfInAppPurchases", sumOfInAppPurchases);
 	}
 
 	public Long getCountNumberKiipRewardsRedeemed() {
@@ -159,6 +174,7 @@ public class ApplicationStats {
 
 	public void setConnectedPlayersCount(Integer connectedPlayersCount) {
 		this.connectedPlayersCount = connectedPlayersCount;
+		values.put("connectedPlayersCount", connectedPlayersCount);
 	}
 
 	public Integer getTotalPlayersCount() {
@@ -171,6 +187,7 @@ public class ApplicationStats {
 		setRevenuePerPlayer();
 		setRevenuePerPayingPlayer();
 		setPercentagePaidPlayers();
+		values.put("totalPlayersCount", totalPlayersCount);
 	}
 
 	public Double getRevenuePerUser() {

@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public abstract class EventController extends Wrap {
 
 	protected MetricRegistry registry;
 	
-	@Autowired
+	@Resource(name="metrics")
 	public void setRegistry(MetricRegistry registry) {
 		this.registry = registry;
 	}

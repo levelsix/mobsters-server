@@ -9,6 +9,8 @@
 
     <!-- Registry should be defined in only one context XML file -->
     <metrics:metric-registry id="metrics" />
+    
+    <metrics:metric-registry id="business_metrics" />
 
     <!-- annotation-driven must be included in all context files -->
     <metrics:annotation-driven metric-registry="metrics" />
@@ -25,11 +27,13 @@
     </metrics:register>
 
     <!-- Beans and other Spring config -->
-	<bean id="devopsMetricsReporter" class="com.lvl6.metrics.DevOpsMetricsReporter">
+	<bean id="devopsMetricsReporter" class="com.lvl6.metrics.MetricsReporter">
 		<property name="registry" ref="metrics"/>
+		<property name="business_registry" ref="business_metrics"/>
 		<property name="environment" value="${metrics.environment}"/>
 		<property name="influxdbAddress" value="${metrics.influxdbAddress}"/>
 		<property name="influxdbName" value="${metrics.influxdbName}"/>
+		<property name="influxdbBusinessName" value="${metrics.influxdbBusinessName}"/>
 		<property name="influxdbUser" value="${metrics.influxdbUser}"/>
 		<property name="influxdbPassword" value="${metrics.influxdbPassword}"/>
 	</bean>

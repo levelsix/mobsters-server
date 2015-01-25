@@ -158,6 +158,7 @@
 		<metrics.environment>dev</metrics.environment>
 		<metrics.influxdbAddress>influxdb1.ops.lvl6.com</metrics.influxdbAddress>
 		<metrics.influxdbName>mobsters_devops</metrics.influxdbName>
+		<metrics.influxdbBusinessName>mobsters_business</metrics.influxdbBusinessName>
 		<metrics.influxdbUser>lvl6user</metrics.influxdbUser>
 		<metrics.influxdbPassword>robashen123</metrics.influxdbPassword>
 		

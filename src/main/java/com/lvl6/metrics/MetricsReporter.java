@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import metrics_influxdb.Influxdb;
 import metrics_influxdb.InfluxdbReporter;
 
+import org.influxdb.InfluxDB;
+import org.influxdb.InfluxDBFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,20 +19,27 @@ import com.codahale.metrics.MetricRegistry;
 
 
 //@Component
-public class DevOpsMetricsReporter {
-	private static final Logger log = LoggerFactory.getLogger(DevOpsMetricsReporter.class);
+public class MetricsReporter {
+	private static final Logger log = LoggerFactory.getLogger(MetricsReporter.class);
 	
 	
 	protected MetricRegistry registry;
+	protected MetricRegistry business_registry;
+	
 	protected String environment;
 
 
 	protected String hostname;
 	protected String influxdbAddress;
 	protected String influxdbName;
+	protected String influxdbBusinessName;
 	protected String influxdbUser;
 	protected String influxdbPassword;
-
+	
+	protected  InfluxDB influxdbBusiness;
+	public InfluxDB getInfluxdbBusiness() {
+		return influxdbBusiness;
+	}
 	
 	@PostConstruct
 	public void setup()  {
@@ -39,9 +48,6 @@ public class DevOpsMetricsReporter {
 			Object[] args = {influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword};
 			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
 		    final Influxdb influxdb = new Influxdb(influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword); // http transport
-		    // = new InfluxDbUdp("127.0.0.1", 1234); // udp transport
-		    //influxdb.debugJson = true; // to print json on System.err
-		    //influxdb.jsonBuilder = new MyJsonBuildler(); // to use MyJsonBuilder to create json
 		    final InfluxdbReporter reporter = InfluxdbReporter
 		            .forRegistry(registry)
 		            .prefixedWith(environment+"."+hostname)
@@ -52,6 +58,21 @@ public class DevOpsMetricsReporter {
 		            .build(influxdb);
 		    reporter.start(10, TimeUnit.SECONDS);
 		    //return reporter;
+		}catch(Throwable e) {
+			log.error("Error creating InfluxDBReporter", e);
+		}
+		
+	}
+	
+	
+	@PostConstruct
+	public void setupBusiness()  {
+		try {
+			hostname = InetAddress.getLocalHost().getHostName();
+			Object[] args = {influxdbAddress, 8086, influxdbBusinessName, influxdbUser, influxdbPassword};
+			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
+		    final InfluxDB influxDB = InfluxDBFactory.connect(influxdbAddress+":"+8086, influxdbUser, influxdbPassword);//new Influxdb(influxdbAddress, 8086, influxdbBusinessName, influxdbUser, influxdbPassword); // http transport
+		    influxdbBusiness = influxDB;
 		}catch(Throwable e) {
 			log.error("Error creating InfluxDBReporter", e);
 		}
@@ -87,6 +108,56 @@ public class DevOpsMetricsReporter {
 	
 	public void setRegistry(MetricRegistry registry) {
 		this.registry = registry;
+	}
+
+
+	public void setBusiness_registry(MetricRegistry business_registry) {
+		this.business_registry = business_registry;
+	}
+
+
+	public void setInfluxdbBusinessName(String influxdbBusinessName) {
+		this.influxdbBusinessName = influxdbBusinessName;
+	}
+
+	public MetricRegistry getRegistry() {
+		return registry;
+	}
+
+	public MetricRegistry getBusiness_registry() {
+		return business_registry;
+	}
+
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public String getHostname() {
+		return hostname;
+	}
+
+	public String getInfluxdbAddress() {
+		return influxdbAddress;
+	}
+
+	public String getInfluxdbName() {
+		return influxdbName;
+	}
+
+	public String getInfluxdbBusinessName() {
+		return influxdbBusinessName;
+	}
+
+	public String getInfluxdbUser() {
+		return influxdbUser;
+	}
+
+	public String getInfluxdbPassword() {
+		return influxdbPassword;
+	}
+
+	public void setInfluxdbBusiness(InfluxDB influxdbBusiness) {
+		this.influxdbBusiness = influxdbBusiness;
 	}
 
 }
