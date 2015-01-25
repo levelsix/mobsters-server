@@ -142,7 +142,7 @@ public abstract class EventController extends Wrap {
 	
 			MiscMethods.purgeMDCProperties();
 		}finally {
-			context.close();
+			context.stop();
 		}
 	}
 
