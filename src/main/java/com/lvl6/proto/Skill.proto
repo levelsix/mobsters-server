@@ -73,6 +73,7 @@ enum SkillType {
 	COUNTER_STRIKE = 16;
 	FLAME_STRIKE = 17;
 	CONFUSION = 18;
+	STATIC_FIELD = 19;
 }
 
 enum SkillActivationType {
