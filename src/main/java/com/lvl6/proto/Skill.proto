@@ -74,6 +74,7 @@ enum SkillType {
 	FLAME_STRIKE = 17;
 	CONFUSION = 18;
 	STATIC_FIELD = 19;
+	BLINDING_LIGHT = 20;
 }
 
 enum SkillActivationType {
