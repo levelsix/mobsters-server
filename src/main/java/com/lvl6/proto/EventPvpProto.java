@@ -5495,16 +5495,69 @@ public final class EventPvpProto {
 
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     boolean hasBattleThatJustEnded();
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded();
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    boolean hasStatsBefore();
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsBefore();
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsBeforeOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    boolean hasStatsAfter();
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsAfter();
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsAfterOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleResponseProto}
@@ -5617,6 +5670,32 @@ public final class EventPvpProto {
                 battleThatJustEnded_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
+              break;
+            }
+            case 98: {
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = statsBefore_.toBuilder();
+              }
+              statsBefore_ = input.readMessage(com.lvl6.proto.UserProto.UserPvpLeagueProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(statsBefore_);
+                statsBefore_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            case 106: {
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = statsAfter_.toBuilder();
+              }
+              statsAfter_ = input.readMessage(com.lvl6.proto.UserProto.UserPvpLeagueProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(statsAfter_);
+                statsAfter_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
               break;
             }
           }
@@ -5920,21 +5999,90 @@ public final class EventPvpProto {
     private com.lvl6.proto.BattleProto.PvpHistoryProto battleThatJustEnded_;
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     public boolean hasBattleThatJustEnded() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     public com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded() {
       return battleThatJustEnded_;
     }
     /**
      * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     *
+     * <pre>
+     *set only if battle was against non-bot
+     * </pre>
      */
     public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder() {
       return battleThatJustEnded_;
+    }
+
+    public static final int STATSBEFORE_FIELD_NUMBER = 12;
+    private com.lvl6.proto.UserProto.UserPvpLeagueProto statsBefore_;
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    public boolean hasStatsBefore() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    public com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsBefore() {
+      return statsBefore_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+     *
+     * <pre>
+     *kind of redundant data, but no history should exist
+     *when facing bots, but still need attacker's prev stats
+     * </pre>
+     */
+    public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsBeforeOrBuilder() {
+      return statsBefore_;
+    }
+
+    public static final int STATSAFTER_FIELD_NUMBER = 13;
+    private com.lvl6.proto.UserProto.UserPvpLeagueProto statsAfter_;
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    public boolean hasStatsAfter() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    public com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsAfter() {
+      return statsAfter_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+     */
+    public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsAfterOrBuilder() {
+      return statsAfter_;
     }
 
     private void initFields() {
@@ -5945,6 +6093,8 @@ public final class EventPvpProto {
       status_ = com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
       battleThatJustEnded_ = com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance();
+      statsBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+      statsAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5979,6 +6129,12 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(11, battleThatJustEnded_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(12, statsBefore_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(13, statsAfter_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6016,6 +6172,14 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(11, battleThatJustEnded_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, statsBefore_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, statsAfter_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6129,6 +6293,8 @@ public final class EventPvpProto {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
           getBattleThatJustEndedFieldBuilder();
+          getStatsBeforeFieldBuilder();
+          getStatsAfterFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6163,6 +6329,18 @@ public final class EventPvpProto {
           battleThatJustEndedBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (statsBeforeBuilder_ == null) {
+          statsBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          statsBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (statsAfterBuilder_ == null) {
+          statsAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          statsAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -6232,6 +6410,22 @@ public final class EventPvpProto {
         } else {
           result.battleThatJustEnded_ = battleThatJustEndedBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (statsBeforeBuilder_ == null) {
+          result.statsBefore_ = statsBefore_;
+        } else {
+          result.statsBefore_ = statsBeforeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        if (statsAfterBuilder_ == null) {
+          result.statsAfter_ = statsAfter_;
+        } else {
+          result.statsAfter_ = statsAfterBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6293,6 +6487,12 @@ public final class EventPvpProto {
         }
         if (other.hasBattleThatJustEnded()) {
           mergeBattleThatJustEnded(other.getBattleThatJustEnded());
+        }
+        if (other.hasStatsBefore()) {
+          mergeStatsBefore(other.getStatsBefore());
+        }
+        if (other.hasStatsAfter()) {
+          mergeStatsAfter(other.getStatsAfter());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6929,12 +7129,20 @@ public final class EventPvpProto {
           com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> battleThatJustEndedBuilder_;
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public boolean hasBattleThatJustEnded() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded() {
         if (battleThatJustEndedBuilder_ == null) {
@@ -6945,6 +7153,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public Builder setBattleThatJustEnded(com.lvl6.proto.BattleProto.PvpHistoryProto value) {
         if (battleThatJustEndedBuilder_ == null) {
@@ -6961,6 +7173,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public Builder setBattleThatJustEnded(
           com.lvl6.proto.BattleProto.PvpHistoryProto.Builder builderForValue) {
@@ -6975,6 +7191,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public Builder mergeBattleThatJustEnded(com.lvl6.proto.BattleProto.PvpHistoryProto value) {
         if (battleThatJustEndedBuilder_ == null) {
@@ -6994,6 +7214,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public Builder clearBattleThatJustEnded() {
         if (battleThatJustEndedBuilder_ == null) {
@@ -7007,6 +7231,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpHistoryProto.Builder getBattleThatJustEndedBuilder() {
         bitField0_ |= 0x00000040;
@@ -7015,6 +7243,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder() {
         if (battleThatJustEndedBuilder_ != null) {
@@ -7025,6 +7257,10 @@ public final class EventPvpProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       *
+       * <pre>
+       *set only if battle was against non-bot
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
@@ -7038,6 +7274,283 @@ public final class EventPvpProto {
           battleThatJustEnded_ = null;
         }
         return battleThatJustEndedBuilder_;
+      }
+
+      private com.lvl6.proto.UserProto.UserPvpLeagueProto statsBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> statsBeforeBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public boolean hasStatsBefore() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsBefore() {
+        if (statsBeforeBuilder_ == null) {
+          return statsBefore_;
+        } else {
+          return statsBeforeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public Builder setStatsBefore(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
+        if (statsBeforeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          statsBefore_ = value;
+          onChanged();
+        } else {
+          statsBeforeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public Builder setStatsBefore(
+          com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (statsBeforeBuilder_ == null) {
+          statsBefore_ = builderForValue.build();
+          onChanged();
+        } else {
+          statsBeforeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public Builder mergeStatsBefore(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
+        if (statsBeforeBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+              statsBefore_ != com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance()) {
+            statsBefore_ =
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.newBuilder(statsBefore_).mergeFrom(value).buildPartial();
+          } else {
+            statsBefore_ = value;
+          }
+          onChanged();
+        } else {
+          statsBeforeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public Builder clearStatsBefore() {
+        if (statsBeforeBuilder_ == null) {
+          statsBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          statsBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder getStatsBeforeBuilder() {
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return getStatsBeforeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsBeforeOrBuilder() {
+        if (statsBeforeBuilder_ != null) {
+          return statsBeforeBuilder_.getMessageOrBuilder();
+        } else {
+          return statsBefore_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsBefore = 12;</code>
+       *
+       * <pre>
+       *kind of redundant data, but no history should exist
+       *when facing bots, but still need attacker's prev stats
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> 
+          getStatsBeforeFieldBuilder() {
+        if (statsBeforeBuilder_ == null) {
+          statsBeforeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
+                  getStatsBefore(),
+                  getParentForChildren(),
+                  isClean());
+          statsBefore_ = null;
+        }
+        return statsBeforeBuilder_;
+      }
+
+      private com.lvl6.proto.UserProto.UserPvpLeagueProto statsAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> statsAfterBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public boolean hasStatsAfter() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto getStatsAfter() {
+        if (statsAfterBuilder_ == null) {
+          return statsAfter_;
+        } else {
+          return statsAfterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public Builder setStatsAfter(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
+        if (statsAfterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          statsAfter_ = value;
+          onChanged();
+        } else {
+          statsAfterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public Builder setStatsAfter(
+          com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (statsAfterBuilder_ == null) {
+          statsAfter_ = builderForValue.build();
+          onChanged();
+        } else {
+          statsAfterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public Builder mergeStatsAfter(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
+        if (statsAfterBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100) &&
+              statsAfter_ != com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance()) {
+            statsAfter_ =
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.newBuilder(statsAfter_).mergeFrom(value).buildPartial();
+          } else {
+            statsAfter_ = value;
+          }
+          onChanged();
+        } else {
+          statsAfterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public Builder clearStatsAfter() {
+        if (statsAfterBuilder_ == null) {
+          statsAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          statsAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder getStatsAfterBuilder() {
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return getStatsAfterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getStatsAfterOrBuilder() {
+        if (statsAfterBuilder_ != null) {
+          return statsAfterBuilder_.getMessageOrBuilder();
+        } else {
+          return statsAfter_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserPvpLeagueProto statsAfter = 13;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> 
+          getStatsAfterFieldBuilder() {
+        if (statsAfterBuilder_ == null) {
+          statsAfterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
+                  getStatsAfter(),
+                  getParentForChildren(),
+                  isClean());
+          statsAfter_ = null;
+        }
+        return statsAfterBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndPvpBattleResponseProto)
@@ -8473,7 +8986,7 @@ public final class EventPvpProto {
       "\017\n\007userWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\t" +
       "oilChange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022n",
       "uPvpDmgMultiplier\030\010 \001(\002\022\026\n\016monsterDropId" +
-      "s\030\t \003(\005\"\274\003\n\031EndPvpBattleResponseProto\022@\n" +
+      "s\030\t \003(\005\"\255\004\n\031EndPvpBattleResponseProto\022@\n" +
       "\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumUs" +
       "erProtoWithMaxResources\022\024\n\014defenderUuid\030" +
       "\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attac" +
@@ -8482,17 +8995,20 @@ public final class EventPvpProto {
       "ttleStatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.l" +
       "vl6.proto.FullUserMonsterProto\022<\n\023battle" +
       "ThatJustEnded\030\013 \001(\0132\037.com.lvl6.proto.Pvp",
-      "HistoryProto\"P\n\022EndPvpBattleStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_T" +
-      "OOK_TOO_LONG\020\003\"\\\n\033SetDefendingMsgRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefe" +
-      "ndingMsgResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022R\n\006statu" +
-      "s\030\002 \001(\0162B.com.lvl6.proto.SetDefendingMsg" +
-      "ResponseProto.SetDefendingMsgStatus\"4\n\025S" +
-      "etDefendingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI",
-      "L_OTHER\020\002B\017B\rEventPvpProto"
+      "HistoryProto\0227\n\013statsBefore\030\014 \001(\0132\".com." +
+      "lvl6.proto.UserPvpLeagueProto\0226\n\nstatsAf" +
+      "ter\030\r \001(\0132\".com.lvl6.proto.UserPvpLeague" +
+      "Proto\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO" +
+      "_LONG\020\003\"\\\n\033SetDefendingMsgRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMs" +
+      "gResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022R\n\006status\030\002 \001(\016",
+      "2B.com.lvl6.proto.SetDefendingMsgRespons" +
+      "eProto.SetDefendingMsgStatus\"4\n\025SetDefen" +
+      "dingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8544,7 +9060,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", "UpdatedOrNew", "BattleThatJustEnded", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", "UpdatedOrNew", "BattleThatJustEnded", "StatsBefore", "StatsAfter", });
     internal_static_com_lvl6_proto_SetDefendingMsgRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_SetDefendingMsgRequestProto_fieldAccessorTable = new

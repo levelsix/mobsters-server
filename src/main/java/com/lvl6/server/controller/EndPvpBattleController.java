@@ -221,11 +221,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//it is possible that the defender has a shield, most likely via
     		//buying it, and less likely locks didn't work, regardless, the
     		//user can have a shield
+    		resBuilder.setStatsBefore(
+    			CreateInfoProtoUtils.createUserPvpLeagueProto(
+    				attackerId, attackerPlfu, null, false)
+    		);
+    		//attackerPlfu is modified
     		successful = writeChangesToDb(attacker, attackerId, attackerPlfu,
     				defender, defenderId, defenderPlfu, pvpBattleInfo,
     				oilStolen, cashStolen, curTime, curDate, attackerAttacked,
     				attackerWon, nuPvpDmgMultiplier, attackerMaxOil, attackerMaxCash,
     				changeMap, previousCurrencyMap, monsterDropIds, resBuilder);
+    		resBuilder.setStatsAfter(
+    			CreateInfoProtoUtils.createUserPvpLeagueProto(
+    				attackerId, attackerPlfu, null, false)
+    		);
     	}
 
     	
