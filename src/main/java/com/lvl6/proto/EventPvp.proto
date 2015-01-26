@@ -138,9 +138,13 @@ message EndPvpBattleResponseProto {
 	//repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 10; 
 	
-	
+	//set only if battle was against non-bot
 	optional PvpHistoryProto battleThatJustEnded = 11;
 	
+	//kind of redundant data, but no history should exist
+	//when facing bots, but still need attacker's prev stats
+	optional UserPvpLeagueProto statsBefore = 12;
+	optional UserPvpLeagueProto statsAfter = 13;
 	
 	enum EndPvpBattleStatus {
 		SUCCESS = 1;
