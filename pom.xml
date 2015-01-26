@@ -137,6 +137,8 @@
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
 		<ec2.region>us-west-2</ec2.region>
 		<ec2.configuration>mp-config-20150126</ec2.configuration>
+		<cname.prefix>ms</cname.prefix>
+		
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
@@ -242,8 +244,8 @@
 					<applicationName>${application.release.name}</applicationName>
 					<environmentName>mp-${maven.build.timestamp}</environmentName>
 					<defaultEnvironmentName>default</defaultEnvironmentName>
-					<cnamePrefix>mp-${maven.build.timestamp}</cnamePrefix>
-					<environmentRef>mp-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
+					<cnamePrefix>${cname.prefix}-${maven.build.timestamp}</cnamePrefix>
+					<environmentRef>${cname.prefix}-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
 					<timeoutMins>80</timeoutMins>
 					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
