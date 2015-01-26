@@ -92,7 +92,7 @@
 		<globals.iddictionOn>false</globals.iddictionOn>
 		<globals.kabamEnabled>true</globals.kabamEnabled>
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>
-		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/ageofchaos]]></globals.appStoreUrl>
+		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/toonsquadapuzzlerpgbattlegamefortango]]></globals.appStoreUrl>
 		<globals.appleBundleId>com.scopely.mobsquad</globals.appleBundleId>
 		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
@@ -136,7 +136,7 @@
 		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
 		<ec2.region>us-west-2</ec2.region>
-		<ec2.configuration>mobsters-prod-2014-10-21</ec2.configuration>
+		<ec2.configuration>mp-config-20150126</ec2.configuration>
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
