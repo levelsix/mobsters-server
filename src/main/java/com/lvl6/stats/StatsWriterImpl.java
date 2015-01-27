@@ -52,7 +52,7 @@ public class StatsWriterImpl implements StatsWriter {
 	
 	//distributed scheduler hack -- should probably fix at some point
 	protected void saveStats() {
-		log.info("Saving game stats");
+		//log.info("Saving game stats");
 		if(lastUpdate.get() < System.currentTimeMillis() + 10000l) {
 			String key = "businessstatsLock";
 			ILock lock = hazel.getLock(key);
