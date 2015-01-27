@@ -78,6 +78,7 @@ enum SkillType {
 	POISON_POWDER = 21;
 	SKEWER = 22;
 	KNOCKOUT = 23;
+	SHALLOW_GRAVE = 24;
 }
 
 enum SkillActivationType {
