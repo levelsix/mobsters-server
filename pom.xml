@@ -268,7 +268,7 @@
 				<artifactId>beanstalk-maven-plugin</artifactId>
 				<configuration>
 					<applicationName>${application.release.name}</applicationName>
-					<environmentName>mp-${maven.build.timestamp}</environmentName>
+					<environmentName>${cname.prefix}-${maven.build.timestamp}</environmentName>
 					<defaultEnvironmentName>default</defaultEnvironmentName>
 					<cnamePrefix>${cname.prefix}-${maven.build.timestamp}</cnamePrefix>
 					<environmentRef>${cname.prefix}-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
