@@ -232,9 +232,16 @@ message ClanHelpNoticeProto {
 message ClanInviteProto {
 	optional string inviteUuid = 1; 
 	optional string userUuid = 2; //prospective member id
-	optional string inviterUuid = 3;
-	optional string clanUuid = 4;
+	optional string inviterUuid = 3 [deprecated = true];
+	optional MinimumUserProto inviter = 6;
+	
+	optional string clanUuid = 4 [deprecated = true];
+	optional MinimumClanProto inviterClan = 7;
+	
 	optional int64 timeOfInvite = 5;
+	
+	//optional MinimumUserProto inviter = 6;
+	//optional MinimumClanProto inviterClan = 7;
 }
 
 //------------------------------------------------------------------------------------------

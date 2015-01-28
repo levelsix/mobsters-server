@@ -18112,32 +18112,58 @@ public final class ClanProto {
         getUserUuidBytes();
 
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    boolean hasInviterUuid();
+    @java.lang.Deprecated boolean hasInviterUuid();
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    java.lang.String getInviterUuid();
+    @java.lang.Deprecated java.lang.String getInviterUuid();
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getInviterUuidBytes();
 
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    boolean hasClanUuid();
+    boolean hasInviter();
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    java.lang.String getClanUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getInviter();
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    com.google.protobuf.ByteString
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder();
+
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated boolean hasClanUuid();
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated java.lang.String getClanUuid();
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getClanUuidBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    boolean hasInviterClan();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumClanProto getInviterClan();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder();
 
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
@@ -18220,13 +18246,39 @@ public final class ClanProto {
             }
             case 34: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               clanUuid_ = bs;
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000040;
               timeOfInvite_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = inviter_.toBuilder();
+              }
+              inviter_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inviter_);
+                inviter_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 58: {
+              com.lvl6.proto.UserProto.MinimumClanProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = inviterClan_.toBuilder();
+              }
+              inviterClan_ = input.readMessage(com.lvl6.proto.UserProto.MinimumClanProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inviterClan_);
+                inviterClan_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -18368,15 +18420,15 @@ public final class ClanProto {
     public static final int INVITERUUID_FIELD_NUMBER = 3;
     private java.lang.Object inviterUuid_;
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public boolean hasInviterUuid() {
+    @java.lang.Deprecated public boolean hasInviterUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public java.lang.String getInviterUuid() {
+    @java.lang.Deprecated public java.lang.String getInviterUuid() {
       java.lang.Object ref = inviterUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -18391,9 +18443,9 @@ public final class ClanProto {
       }
     }
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getInviterUuidBytes() {
       java.lang.Object ref = inviterUuid_;
       if (ref instanceof java.lang.String) {
@@ -18407,18 +18459,39 @@ public final class ClanProto {
       }
     }
 
-    public static final int CLANUUID_FIELD_NUMBER = 4;
-    private java.lang.Object clanUuid_;
+    public static final int INVITER_FIELD_NUMBER = 6;
+    private com.lvl6.proto.UserProto.MinimumUserProto inviter_;
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    public boolean hasClanUuid() {
+    public boolean hasInviter() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    public java.lang.String getClanUuid() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getInviter() {
+      return inviter_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder() {
+      return inviter_;
+    }
+
+    public static final int CLANUUID_FIELD_NUMBER = 4;
+    private java.lang.Object clanUuid_;
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated public boolean hasClanUuid() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated public java.lang.String getClanUuid() {
       java.lang.Object ref = clanUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -18433,9 +18506,9 @@ public final class ClanProto {
       }
     }
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getClanUuidBytes() {
       java.lang.Object ref = clanUuid_;
       if (ref instanceof java.lang.String) {
@@ -18449,13 +18522,34 @@ public final class ClanProto {
       }
     }
 
+    public static final int INVITERCLAN_FIELD_NUMBER = 7;
+    private com.lvl6.proto.UserProto.MinimumClanProto inviterClan_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public boolean hasInviterClan() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumClanProto getInviterClan() {
+      return inviterClan_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder() {
+      return inviterClan_;
+    }
+
     public static final int TIMEOFINVITE_FIELD_NUMBER = 5;
     private long timeOfInvite_;
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
      */
     public boolean hasTimeOfInvite() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
@@ -18468,7 +18562,9 @@ public final class ClanProto {
       inviteUuid_ = "";
       userUuid_ = "";
       inviterUuid_ = "";
+      inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanUuid_ = "";
+      inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       timeOfInvite_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -18493,11 +18589,17 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getInviterUuidBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(4, getClanUuidBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(5, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(6, inviter_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(7, inviterClan_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -18520,13 +18622,21 @@ public final class ClanProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getInviterUuidBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getClanUuidBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, inviter_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, inviterClan_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -18637,6 +18747,8 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getInviterFieldBuilder();
+          getInviterClanFieldBuilder();
         }
       }
       private static Builder create() {
@@ -18651,10 +18763,22 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         inviterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        clanUuid_ = "";
+        if (inviterBuilder_ == null) {
+          inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          inviterBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        timeOfInvite_ = 0L;
+        clanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+        } else {
+          inviterClanBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        timeOfInvite_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -18698,9 +18822,25 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.clanUuid_ = clanUuid_;
+        if (inviterBuilder_ == null) {
+          result.inviter_ = inviter_;
+        } else {
+          result.inviter_ = inviterBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.clanUuid_ = clanUuid_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (inviterClanBuilder_ == null) {
+          result.inviterClan_ = inviterClan_;
+        } else {
+          result.inviterClan_ = inviterClanBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.timeOfInvite_ = timeOfInvite_;
         result.bitField0_ = to_bitField0_;
@@ -18734,10 +18874,16 @@ public final class ClanProto {
           inviterUuid_ = other.inviterUuid_;
           onChanged();
         }
+        if (other.hasInviter()) {
+          mergeInviter(other.getInviter());
+        }
         if (other.hasClanUuid()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
           clanUuid_ = other.clanUuid_;
           onChanged();
+        }
+        if (other.hasInviterClan()) {
+          mergeInviterClan(other.getInviterClan());
         }
         if (other.hasTimeOfInvite()) {
           setTimeOfInvite(other.getTimeOfInvite());
@@ -18947,15 +19093,15 @@ public final class ClanProto {
 
       private java.lang.Object inviterUuid_ = "";
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public boolean hasInviterUuid() {
+      @java.lang.Deprecated public boolean hasInviterUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public java.lang.String getInviterUuid() {
+      @java.lang.Deprecated public java.lang.String getInviterUuid() {
         java.lang.Object ref = inviterUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -18970,9 +19116,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getInviterUuidBytes() {
         java.lang.Object ref = inviterUuid_;
         if (ref instanceof String) {
@@ -18986,9 +19132,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder setInviterUuid(
+      @java.lang.Deprecated public Builder setInviterUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
@@ -18999,18 +19145,18 @@ public final class ClanProto {
         return this;
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder clearInviterUuid() {
+      @java.lang.Deprecated public Builder clearInviterUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
         inviterUuid_ = getDefaultInstance().getInviterUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder setInviterUuidBytes(
+      @java.lang.Deprecated public Builder setInviterUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
@@ -19021,17 +19167,133 @@ public final class ClanProto {
         return this;
       }
 
-      private java.lang.Object clanUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> inviterBuilder_;
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
        */
-      public boolean hasClanUuid() {
+      public boolean hasInviter() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
        */
-      public java.lang.String getClanUuid() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getInviter() {
+        if (inviterBuilder_ == null) {
+          return inviter_;
+        } else {
+          return inviterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder setInviter(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (inviterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inviter_ = value;
+          onChanged();
+        } else {
+          inviterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder setInviter(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (inviterBuilder_ == null) {
+          inviter_ = builderForValue.build();
+          onChanged();
+        } else {
+          inviterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder mergeInviter(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (inviterBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              inviter_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            inviter_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(inviter_).mergeFrom(value).buildPartial();
+          } else {
+            inviter_ = value;
+          }
+          onChanged();
+        } else {
+          inviterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder clearInviter() {
+        if (inviterBuilder_ == null) {
+          inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          inviterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getInviterBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getInviterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder() {
+        if (inviterBuilder_ != null) {
+          return inviterBuilder_.getMessageOrBuilder();
+        } else {
+          return inviter_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getInviterFieldBuilder() {
+        if (inviterBuilder_ == null) {
+          inviterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getInviter(),
+                  getParentForChildren(),
+                  isClean());
+          inviter_ = null;
+        }
+        return inviterBuilder_;
+      }
+
+      private java.lang.Object clanUuid_ = "";
+      /**
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
+       */
+      @java.lang.Deprecated public boolean hasClanUuid() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
+       */
+      @java.lang.Deprecated public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -19046,9 +19308,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getClanUuidBytes() {
         java.lang.Object ref = clanUuid_;
         if (ref instanceof String) {
@@ -19062,39 +19324,155 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder setClanUuid(
+      @java.lang.Deprecated public Builder setClanUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         clanUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder clearClanUuid() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+      @java.lang.Deprecated public Builder clearClanUuid() {
+        bitField0_ = (bitField0_ & ~0x00000010);
         clanUuid_ = getDefaultInstance().getClanUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder setClanUuidBytes(
+      @java.lang.Deprecated public Builder setClanUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         clanUuid_ = value;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.UserProto.MinimumClanProto inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> inviterClanBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public boolean hasInviterClan() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProto getInviterClan() {
+        if (inviterClanBuilder_ == null) {
+          return inviterClan_;
+        } else {
+          return inviterClanBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder setInviterClan(com.lvl6.proto.UserProto.MinimumClanProto value) {
+        if (inviterClanBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inviterClan_ = value;
+          onChanged();
+        } else {
+          inviterClanBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder setInviterClan(
+          com.lvl6.proto.UserProto.MinimumClanProto.Builder builderForValue) {
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = builderForValue.build();
+          onChanged();
+        } else {
+          inviterClanBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder mergeInviterClan(com.lvl6.proto.UserProto.MinimumClanProto value) {
+        if (inviterClanBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              inviterClan_ != com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance()) {
+            inviterClan_ =
+              com.lvl6.proto.UserProto.MinimumClanProto.newBuilder(inviterClan_).mergeFrom(value).buildPartial();
+          } else {
+            inviterClan_ = value;
+          }
+          onChanged();
+        } else {
+          inviterClanBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder clearInviterClan() {
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+          onChanged();
+        } else {
+          inviterClanBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProto.Builder getInviterClanBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getInviterClanFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder() {
+        if (inviterClanBuilder_ != null) {
+          return inviterClanBuilder_.getMessageOrBuilder();
+        } else {
+          return inviterClan_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> 
+          getInviterClanFieldBuilder() {
+        if (inviterClanBuilder_ == null) {
+          inviterClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
+                  getInviterClan(),
+                  getParentForChildren(),
+                  isClean());
+          inviterClan_ = null;
+        }
+        return inviterClanBuilder_;
       }
 
       private long timeOfInvite_ ;
@@ -19102,7 +19480,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public boolean hasTimeOfInvite() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int64 timeOfInvite = 5;</code>
@@ -19114,7 +19492,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public Builder setTimeOfInvite(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         timeOfInvite_ = value;
         onChanged();
         return this;
@@ -19123,7 +19501,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public Builder clearTimeOfInvite() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         timeOfInvite_ = 0L;
         onChanged();
         return this;
@@ -20720,17 +21098,20 @@ public final class ClanProto {
       "(\005\"|\n\023ClanHelpNoticeProto\0229\n\010helpType\030\001 " +
       "\001(\0162\036.com.lvl6.proto.GameActionType:\007NO_" +
       "HELP\022\024\n\014userDataUuid\030\002 \001(\t\022\024\n\014staticData",
-      "Id\030\003 \001(\005\"t\n\017ClanInviteProto\022\022\n\ninviteUui" +
-      "d\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\023\n\013inviterUuid" +
-      "\030\003 \001(\t\022\020\n\010clanUuid\030\004 \001(\t\022\024\n\014timeOfInvite" +
-      "\030\005 \001(\003\"\271\001\n\rClanDataProto\0228\n\tclanChats\030\001 " +
-      "\003(\0132%.com.lvl6.proto.GroupChatMessagePro" +
-      "to\0223\n\014clanHelpings\030\002 \003(\0132\035.com.lvl6.prot" +
-      "o.ClanHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\"" +
-      ".com.lvl6.proto.PvpClanAvengeProto*X\n\016Us" +
-      "erClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADE" +
-      "R\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTI",
-      "NG\020\nB\013B\tClanProto"
+      "Id\030\003 \001(\005\"\346\001\n\017ClanInviteProto\022\022\n\ninviteUu" +
+      "id\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\027\n\013inviterUui" +
+      "d\030\003 \001(\tB\002\030\001\0221\n\007inviter\030\006 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\024\n\010clanUuid\030\004 \001(\t" +
+      "B\002\030\001\0225\n\013inviterClan\030\007 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumClanProto\022\024\n\014timeOfInvite\030\005 \001(" +
+      "\003\"\271\001\n\rClanDataProto\0228\n\tclanChats\030\001 \003(\0132%" +
+      ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
+      "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
+      "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
+      "lvl6.proto.PvpClanAvengeProto*X\n\016UserCla" +
+      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013" +
+      "\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB" +
+      "\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20857,7 +21238,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanInviteProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanInviteProto_descriptor,
-        new java.lang.String[] { "InviteUuid", "UserUuid", "InviterUuid", "ClanUuid", "TimeOfInvite", });
+        new java.lang.String[] { "InviteUuid", "UserUuid", "InviterUuid", "Inviter", "ClanUuid", "InviterClan", "TimeOfInvite", });
     internal_static_com_lvl6_proto_ClanDataProto_descriptor =
       getDescriptor().getMessageTypes().get(18);
     internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable = new
