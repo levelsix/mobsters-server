@@ -69,6 +69,7 @@ message LeaveClanResponseProto {
 message RequestJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string clanUuid = 2;
+	optional int64 clientTime = 3;
 }
 
 //since clanless user can directly join open clan,
@@ -86,6 +87,8 @@ message RequestJoinClanResponseProto {
 	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
 	optional UserCurrentMonsterTeamProto requesterMonsters = 9;
+	
+	optional int64 clientTime = 10;
 	
 	enum RequestJoinClanStatus {
 		SUCCESS_REQUEST = 1;

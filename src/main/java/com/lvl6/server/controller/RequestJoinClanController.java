@@ -127,17 +127,25 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     String clanId = reqProto.getClanUuid();
     String userId = senderProto.getUserUuid();
+    
+    Timestamp clientTime = null;
+    
+    if (reqProto.hasClientTime() && reqProto.getClientTime() > 0 ) {
+    	clientTime = new Timestamp(reqProto.getClientTime());
+    } else {
+    	clientTime = new Timestamp(new Date().getTime());
+    }
 
     RequestJoinClanResponseProto.Builder resBuilder = RequestJoinClanResponseProto.newBuilder();
     resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     resBuilder.setClanUuid(clanId);
+    resBuilder.setClientTime(clientTime.getTime());
 
-    UUID userUuid = null;
     UUID clanUuid = null;
     boolean invalidUuids = true;
     try {
-      userUuid = UUID.fromString(userId);
+      UUID.fromString(userId);
       clanUuid = UUID.fromString(clanId);
 
       invalidUuids = false;
@@ -194,7 +202,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     				  null);
     		  resBuilder.setRequester(mupfc);
     	  }
-        successful = writeChangesToDB(resBuilder, user, clan);
+        successful = writeChangesToDB(resBuilder, user, clan, clientTime);
       }
       
       // Only need to set clan data if it's a successful join.
@@ -357,7 +365,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  return clanSize;
   }
 
-  private boolean writeChangesToDB(Builder resBuilder, User user, Clan clan) {
+  private boolean writeChangesToDB(Builder resBuilder, User user,
+	  Clan clan, Timestamp clientTime)
+  {
     //clan can be open, or user needs to send a request to join the clan
     boolean requestToJoinRequired = clan.isRequestToJoinRequired();
     String userId = user.getId();
@@ -371,7 +381,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_JOIN);
     }
     
-    if (!InsertUtils.get().insertUserClan(userId, clanId, userClanStatus, new Timestamp(new Date().getTime()))) {
+    if (!InsertUtils.get().insertUserClan(userId, clanId, userClanStatus, clientTime)) {
       log.error(String.format(
     	  "problem inserting user clan data for user=%s, and clan id %s",
     	  user, clanId));
