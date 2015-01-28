@@ -23,6 +23,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
+import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
@@ -1800,33 +1801,57 @@ public class InsertUtils implements InsertUtil{
 			
 			return numUpdated;
 		}
-		
+
 		@Override
 		public int insertIntoUpdateClientTaskState(
 			List<TaskForUserClientState> tfucsList)
 		{
 			String tableName = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
+
 			for (TaskForUserClientState tfucs : tfucsList) {
-				
+
 				Map<String, Object> newRow = new HashMap<String, Object>();
 				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
 					tfucs.getUserId());
-				
+
 				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE,
 					tfucs.getClientState());
-					
-					
+
+
 				newRows.add(newRow);
 			}
-			
+
 			Set<String> replaceTheseColumns = Collections.singleton(
 				DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
-			
+
 			int numUpdated = DBConnection.get()
 				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
-			
+
 			return numUpdated;
+		}
+
+		@Override
+		public int insertIntoUpdateClanHelpCount(ClanHelpCountForUser chcfu)
+		{
+			String tableName = DBConstants.TABLE_CLAN_HELP_COUNT_FOR_USER;
+			int newSolicited = chcfu.getSolicited();
+			int newGiven = chcfu.getGiven();			
+			Map<String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID, chcfu.getUserId());
+			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID, chcfu.getClanId());
+			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE, chcfu.getDate());
+			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
+			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
+
+			Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+			relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
+			relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
+			
+			Map<String, Object> absoluteUpdates = null;//new HashMap<String, Object>();
+
+			int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+				insertParams, relativeUpdates, absoluteUpdates);
+			return numInserted;
 		}
 }

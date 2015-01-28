@@ -183,13 +183,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		  //clan raid contribution stuff
     		  MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
     			  .createMinimumUserProtoForClans(
-    				  user, null, UserClanStatus.REQUESTING, 0F, battlesWon);
+    				  user, null, UserClanStatus.REQUESTING, 0F, battlesWon,
+    				  null);
     		  resBuilder.setRequester(mupfc);
     	  } else {
     		  //clan raid contribution stuff
     		  MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
     			  .createMinimumUserProtoForClans(
-    				  user, clan, UserClanStatus.MEMBER, 0F, battlesWon);
+    				  user, clan, UserClanStatus.MEMBER, 0F, battlesWon,
+    				  null);
     		  resBuilder.setRequester(mupfc);
     	  }
         successful = writeChangesToDB(resBuilder, user, clan);

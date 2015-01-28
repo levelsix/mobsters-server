@@ -239,4 +239,10 @@ public class TimeUtils {
 	  
 	  return createdDate;
   }
+  
+  public Date createDateAtStartOfDay(Date curDate) {
+	  DateTime dt = new DateTime(curDate);
+	  return dt.withTimeAtStartOfDay().toDate();
+  }
+  
 }

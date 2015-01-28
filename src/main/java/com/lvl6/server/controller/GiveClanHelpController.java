@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,21 +13,22 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
-import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.info.ClanHelp;
+import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus;
-import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class GiveClanHelpController extends EventController {
@@ -42,6 +44,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
    
+  @Autowired
+  protected TimeUtils timeUtil;
 
   public GiveClanHelpController() {
     numAllocatedThreads = 4;
@@ -79,16 +83,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    UUID userUuid = null;
-    UUID clanUuid = null;
-    UUID clanHelpUuid = null;
     boolean invalidUuids = true;
     try {
-      userUuid = UUID.fromString(userId);
-      clanUuid = UUID.fromString(clanId);
+      UUID.fromString(userId);
+      UUID.fromString(clanId);
       
       for (String clanHelpId : clanHelpIds) {
-        clanHelpUuid = UUID.fromString(clanHelpId);
+        UUID.fromString(clanHelpId);
       }
 
       invalidUuids = false;
@@ -187,10 +188,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info(String.format(
     	"numUpdated=%s", numUpdated));
     
+    
     User user = getUserRetrieveUtils().getUserById(userId);
     boolean updated = user.updateClanHelps(clanHelpIds.size());
     log.info(String.format( "updated=%s", updated ));
     
+    int solicited = 0;
+    int given = clanHelpIds.size();
+    Date date = timeUtil.createDateAtStartOfDay(new Date());
+    ClanHelpCountForUser chcfu = new ClanHelpCountForUser(
+    	userId, clanId, date, solicited, given);
+
+    try {
+    	numUpdated = InsertUtils.get()
+    		.insertIntoUpdateClanHelpCount(chcfu);
+    	log.info("numUpdated ClanHelpCountForUser={}", numUpdated);
+    } catch(Exception e) {
+    	log.error(String.format(
+    		"Unable to increment ClanHelpCountForUser: %s",
+    		chcfu),
+    		e);
+    }
     
     return true;
   }

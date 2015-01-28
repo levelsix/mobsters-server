@@ -59,6 +59,9 @@ message MinimumUserProtoForClans {
 	optional UserClanStatus clanStatus = 2;
 	optional float raidContribution = 3;
 	optional int32 battlesWon = 4;
+	//clan helps
+	optional int32 numClanHelpsSolicited = 5;
+	optional int32 numClanHelpsGiven = 6; 
 }
 
 //------------------------------------------------------------------------------------------
