@@ -79,6 +79,7 @@ enum SkillType {
 	SKEWER = 22;
 	KNOCKOUT = 23;
 	SHALLOW_GRAVE = 24;
+	HAMMER_TIME = 25;
 }
 
 enum SkillActivationType {
