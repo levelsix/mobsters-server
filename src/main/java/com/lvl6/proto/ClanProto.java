@@ -21000,6 +21000,30 @@ public final class ClanProto {
      * <code>optional int64 timeOfSolicitation = 7;</code>
      */
     long getTimeOfSolicitation();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> 
+        getDonationsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    int getDonationsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+        getDonationsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonation}
@@ -21092,6 +21116,14 @@ public final class ClanProto {
               timeOfSolicitation_ = input.readInt64();
               break;
             }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              donations_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -21100,6 +21132,9 @@ public final class ClanProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          donations_ = java.util.Collections.unmodifiableList(donations_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -21345,6 +21380,41 @@ public final class ClanProto {
       return timeOfSolicitation_;
     }
 
+    public static final int DONATIONS_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
+      return donations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+        getDonationsOrBuilderList() {
+      return donations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public int getDonationsCount() {
+      return donations_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
+      return donations_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+        int index) {
+      return donations_.get(index);
+    }
+
     private void initFields() {
       donationUuid_ = "";
       userUuid_ = "";
@@ -21353,6 +21423,7 @@ public final class ClanProto {
       isComplete_ = false;
       msg_ = "";
       timeOfSolicitation_ = 0L;
+      donations_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -21387,6 +21458,9 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, timeOfSolicitation_);
+      }
+      for (int i = 0; i < donations_.size(); i++) {
+        output.writeMessage(8, donations_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -21424,6 +21498,10 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, timeOfSolicitation_);
+      }
+      for (int i = 0; i < donations_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, donations_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -21534,6 +21612,7 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDonationsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -21556,6 +21635,12 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         timeOfSolicitation_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (donationsBuilder_ == null) {
+          donations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          donationsBuilder_.clear();
+        }
         return this;
       }
 
@@ -21612,6 +21697,15 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000040;
         }
         result.timeOfSolicitation_ = timeOfSolicitation_;
+        if (donationsBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            donations_ = java.util.Collections.unmodifiableList(donations_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.donations_ = donations_;
+        } else {
+          result.donations_ = donationsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -21656,6 +21750,32 @@ public final class ClanProto {
         }
         if (other.hasTimeOfSolicitation()) {
           setTimeOfSolicitation(other.getTimeOfSolicitation());
+        }
+        if (donationsBuilder_ == null) {
+          if (!other.donations_.isEmpty()) {
+            if (donations_.isEmpty()) {
+              donations_ = other.donations_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureDonationsIsMutable();
+              donations_.addAll(other.donations_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.donations_.isEmpty()) {
+            if (donationsBuilder_.isEmpty()) {
+              donationsBuilder_.dispose();
+              donationsBuilder_ = null;
+              donations_ = other.donations_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              donationsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDonationsFieldBuilder() : null;
+            } else {
+              donationsBuilder_.addAllMessages(other.donations_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -22084,6 +22204,246 @@ public final class ClanProto {
         return this;
       }
 
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_ =
+        java.util.Collections.emptyList();
+      private void ensureDonationsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>(donations_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> donationsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
+        if (donationsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(donations_);
+        } else {
+          return donationsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public int getDonationsCount() {
+        if (donationsBuilder_ == null) {
+          return donations_.size();
+        } else {
+          return donationsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
+        if (donationsBuilder_ == null) {
+          return donations_.get(index);
+        } else {
+          return donationsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder setDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.set(index, value);
+          onChanged();
+        } else {
+          donationsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder setDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.add(value);
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.add(index, value);
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.add(builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addAllDonations(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> values) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, donations_);
+          onChanged();
+        } else {
+          donationsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder clearDonations() {
+        if (donationsBuilder_ == null) {
+          donations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          donationsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder removeDonations(int index) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.remove(index);
+          onChanged();
+        } else {
+          donationsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder getDonationsBuilder(
+          int index) {
+        return getDonationsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+          int index) {
+        if (donationsBuilder_ == null) {
+          return donations_.get(index);  } else {
+          return donationsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+           getDonationsOrBuilderList() {
+        if (donationsBuilder_ != null) {
+          return donationsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(donations_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder() {
+        return getDonationsFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder(
+          int index) {
+        return getDonationsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder> 
+           getDonationsBuilderList() {
+        return getDonationsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+          getDonationsFieldBuilder() {
+        if (donationsBuilder_ == null) {
+          donationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder>(
+                  donations_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          donations_ = null;
+        }
+        return donationsBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanMemberTeamDonation)
     }
 
@@ -22294,14 +22654,16 @@ public final class ClanProto {
       ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
       "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
-      "lvl6.proto.PvpClanAvengeProto\"\252\001\n\026ClanMe" +
+      "lvl6.proto.PvpClanAvengeProto\"\347\001\n\026ClanMe" +
       "mberTeamDonation\022\024\n\014donationUuid\030\001 \001(\t\022\020" +
       "\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
       "werAvailability\030\004 \001(\005\022\022\n\nisComplete\030\005 \001(" +
       "\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 \001" +
-      "(\003*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNI" +
-      "OR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\n" +
-      "REQUESTING\020\nB\013B\tClanProto"
+      "(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto.U" +
+      "serMonsterSnapshotProto*X\n\016UserClanStatu" +
+      "s\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPT" +
+      "AIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCla" +
+      "nProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22440,7 +22802,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor,
-        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsComplete", "Msg", "TimeOfSolicitation", });
+        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsComplete", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();

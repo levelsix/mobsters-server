@@ -262,4 +262,6 @@ message ClanMemberTeamDonation {
 	optional bool isComplete = 5;
 	optional string msg = 6;
 	optional int64 timeOfSolicitation = 7; 
+	
+	repeated UserMonsterSnapshotProto donations = 8;
 }
