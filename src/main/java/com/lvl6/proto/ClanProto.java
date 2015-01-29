@@ -20970,13 +20970,13 @@ public final class ClanProto {
     int getPowerAvailability();
 
     /**
-     * <code>optional bool isComplete = 5;</code>
+     * <code>optional bool isFulfilled = 5;</code>
      */
-    boolean hasIsComplete();
+    boolean hasIsFulfilled();
     /**
-     * <code>optional bool isComplete = 5;</code>
+     * <code>optional bool isFulfilled = 5;</code>
      */
-    boolean getIsComplete();
+    boolean getIsFulfilled();
 
     /**
      * <code>optional string msg = 6;</code>
@@ -21102,7 +21102,7 @@ public final class ClanProto {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              isComplete_ = input.readBool();
+              isFulfilled_ = input.readBool();
               break;
             }
             case 50: {
@@ -21308,19 +21308,19 @@ public final class ClanProto {
       return powerAvailability_;
     }
 
-    public static final int ISCOMPLETE_FIELD_NUMBER = 5;
-    private boolean isComplete_;
+    public static final int ISFULFILLED_FIELD_NUMBER = 5;
+    private boolean isFulfilled_;
     /**
-     * <code>optional bool isComplete = 5;</code>
+     * <code>optional bool isFulfilled = 5;</code>
      */
-    public boolean hasIsComplete() {
+    public boolean hasIsFulfilled() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional bool isComplete = 5;</code>
+     * <code>optional bool isFulfilled = 5;</code>
      */
-    public boolean getIsComplete() {
-      return isComplete_;
+    public boolean getIsFulfilled() {
+      return isFulfilled_;
     }
 
     public static final int MSG_FIELD_NUMBER = 6;
@@ -21420,7 +21420,7 @@ public final class ClanProto {
       userUuid_ = "";
       clanUuid_ = "";
       powerAvailability_ = 0;
-      isComplete_ = false;
+      isFulfilled_ = false;
       msg_ = "";
       timeOfSolicitation_ = 0L;
       donations_ = java.util.Collections.emptyList();
@@ -21451,7 +21451,7 @@ public final class ClanProto {
         output.writeInt32(4, powerAvailability_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, isComplete_);
+        output.writeBool(5, isFulfilled_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getMsgBytes());
@@ -21489,7 +21489,7 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isComplete_);
+          .computeBoolSize(5, isFulfilled_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -21629,7 +21629,7 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         powerAvailability_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        isComplete_ = false;
+        isFulfilled_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
         msg_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -21688,7 +21688,7 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.isComplete_ = isComplete_;
+        result.isFulfilled_ = isFulfilled_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -21740,8 +21740,8 @@ public final class ClanProto {
         if (other.hasPowerAvailability()) {
           setPowerAvailability(other.getPowerAvailability());
         }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
+        if (other.hasIsFulfilled()) {
+          setIsFulfilled(other.getIsFulfilled());
         }
         if (other.hasMsg()) {
           bitField0_ |= 0x00000020;
@@ -22064,34 +22064,34 @@ public final class ClanProto {
         return this;
       }
 
-      private boolean isComplete_ ;
+      private boolean isFulfilled_ ;
       /**
-       * <code>optional bool isComplete = 5;</code>
+       * <code>optional bool isFulfilled = 5;</code>
        */
-      public boolean hasIsComplete() {
+      public boolean hasIsFulfilled() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional bool isComplete = 5;</code>
+       * <code>optional bool isFulfilled = 5;</code>
        */
-      public boolean getIsComplete() {
-        return isComplete_;
+      public boolean getIsFulfilled() {
+        return isFulfilled_;
       }
       /**
-       * <code>optional bool isComplete = 5;</code>
+       * <code>optional bool isFulfilled = 5;</code>
        */
-      public Builder setIsComplete(boolean value) {
+      public Builder setIsFulfilled(boolean value) {
         bitField0_ |= 0x00000010;
-        isComplete_ = value;
+        isFulfilled_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool isComplete = 5;</code>
+       * <code>optional bool isFulfilled = 5;</code>
        */
-      public Builder clearIsComplete() {
+      public Builder clearIsFulfilled() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        isComplete_ = false;
+        isFulfilled_ = false;
         onChanged();
         return this;
       }
@@ -22654,16 +22654,16 @@ public final class ClanProto {
       ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
       "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
-      "lvl6.proto.PvpClanAvengeProto\"\347\001\n\026ClanMe" +
+      "lvl6.proto.PvpClanAvengeProto\"\350\001\n\026ClanMe" +
       "mberTeamDonation\022\024\n\014donationUuid\030\001 \001(\t\022\020" +
       "\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
-      "werAvailability\030\004 \001(\005\022\022\n\nisComplete\030\005 \001(" +
-      "\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 \001" +
-      "(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto.U" +
-      "serMonsterSnapshotProto*X\n\016UserClanStatu" +
-      "s\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPT" +
-      "AIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCla" +
-      "nProto"
+      "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001" +
+      "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
+      "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
+      "UserMonsterSnapshotProto*X\n\016UserClanStat" +
+      "us\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAP" +
+      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl" +
+      "anProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22802,7 +22802,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor,
-        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsComplete", "Msg", "TimeOfSolicitation", "Donations", });
+        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsFulfilled", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
