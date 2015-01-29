@@ -59,6 +59,9 @@ message MinimumUserProtoForClans {
 	optional UserClanStatus clanStatus = 2;
 	optional float raidContribution = 3;
 	optional int32 battlesWon = 4;
+	//clan helps
+	optional int32 numClanHelpsSolicited = 5;
+	optional int32 numClanHelpsGiven = 6; 
 }
 
 //------------------------------------------------------------------------------------------
@@ -229,9 +232,16 @@ message ClanHelpNoticeProto {
 message ClanInviteProto {
 	optional string inviteUuid = 1; 
 	optional string userUuid = 2; //prospective member id
-	optional string inviterUuid = 3;
-	optional string clanUuid = 4;
+	optional string inviterUuid = 3 [deprecated = true];
+	optional MinimumUserProto inviter = 6;
+	
+	optional string clanUuid = 4 [deprecated = true];
+	optional MinimumClanProto inviterClan = 7;
+	
 	optional int64 timeOfInvite = 5;
+	
+	//optional MinimumUserProto inviter = 6;
+	//optional MinimumClanProto inviterClan = 7;
 }
 
 //------------------------------------------------------------------------------------------
@@ -240,4 +250,18 @@ message ClanDataProto {
 	repeated GroupChatMessageProto clanChats = 1;
 	repeated ClanHelpProto clanHelpings = 2;
 	repeated PvpClanAvengeProto clanAvengings = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ClanMemberTeamDonation {
+	optional string donationUuid = 1;
+	optional string userUuid = 2;
+	optional string clanUuid = 3;
+	optional int32 powerAvailability = 4;
+	optional bool isFulfilled = 5;
+	optional string msg = 6;
+	optional int64 timeOfSolicitation = 7; 
+	
+	repeated UserMonsterSnapshotProto donations = 8;
 }

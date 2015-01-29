@@ -2779,6 +2779,32 @@ public final class ClanProto {
      * <code>optional int32 battlesWon = 4;</code>
      */
     int getBattlesWon();
+
+    /**
+     * <code>optional int32 numClanHelpsSolicited = 5;</code>
+     *
+     * <pre>
+     *clan helps
+     * </pre>
+     */
+    boolean hasNumClanHelpsSolicited();
+    /**
+     * <code>optional int32 numClanHelpsSolicited = 5;</code>
+     *
+     * <pre>
+     *clan helps
+     * </pre>
+     */
+    int getNumClanHelpsSolicited();
+
+    /**
+     * <code>optional int32 numClanHelpsGiven = 6;</code>
+     */
+    boolean hasNumClanHelpsGiven();
+    /**
+     * <code>optional int32 numClanHelpsGiven = 6;</code>
+     */
+    int getNumClanHelpsGiven();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserProtoForClans}
@@ -2864,6 +2890,16 @@ public final class ClanProto {
             case 32: {
               bitField0_ |= 0x00000008;
               battlesWon_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              numClanHelpsSolicited_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              numClanHelpsGiven_ = input.readInt32();
               break;
             }
           }
@@ -2972,11 +3008,51 @@ public final class ClanProto {
       return battlesWon_;
     }
 
+    public static final int NUMCLANHELPSSOLICITED_FIELD_NUMBER = 5;
+    private int numClanHelpsSolicited_;
+    /**
+     * <code>optional int32 numClanHelpsSolicited = 5;</code>
+     *
+     * <pre>
+     *clan helps
+     * </pre>
+     */
+    public boolean hasNumClanHelpsSolicited() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 numClanHelpsSolicited = 5;</code>
+     *
+     * <pre>
+     *clan helps
+     * </pre>
+     */
+    public int getNumClanHelpsSolicited() {
+      return numClanHelpsSolicited_;
+    }
+
+    public static final int NUMCLANHELPSGIVEN_FIELD_NUMBER = 6;
+    private int numClanHelpsGiven_;
+    /**
+     * <code>optional int32 numClanHelpsGiven = 6;</code>
+     */
+    public boolean hasNumClanHelpsGiven() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 numClanHelpsGiven = 6;</code>
+     */
+    public int getNumClanHelpsGiven() {
+      return numClanHelpsGiven_;
+    }
+
     private void initFields() {
       minUserProtoWithLevel_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       clanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.LEADER;
       raidContribution_ = 0F;
       battlesWon_ = 0;
+      numClanHelpsSolicited_ = 0;
+      numClanHelpsGiven_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3003,6 +3079,12 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, battlesWon_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, numClanHelpsSolicited_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, numClanHelpsGiven_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3027,6 +3109,14 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, battlesWon_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, numClanHelpsSolicited_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, numClanHelpsGiven_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3158,6 +3248,10 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         battlesWon_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        numClanHelpsSolicited_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        numClanHelpsGiven_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -3206,6 +3300,14 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000008;
         }
         result.battlesWon_ = battlesWon_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.numClanHelpsSolicited_ = numClanHelpsSolicited_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.numClanHelpsGiven_ = numClanHelpsGiven_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3233,6 +3335,12 @@ public final class ClanProto {
         }
         if (other.hasBattlesWon()) {
           setBattlesWon(other.getBattlesWon());
+        }
+        if (other.hasNumClanHelpsSolicited()) {
+          setNumClanHelpsSolicited(other.getNumClanHelpsSolicited());
+        }
+        if (other.hasNumClanHelpsGiven()) {
+          setNumClanHelpsGiven(other.getNumClanHelpsGiven());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3472,6 +3580,86 @@ public final class ClanProto {
       public Builder clearBattlesWon() {
         bitField0_ = (bitField0_ & ~0x00000008);
         battlesWon_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int numClanHelpsSolicited_ ;
+      /**
+       * <code>optional int32 numClanHelpsSolicited = 5;</code>
+       *
+       * <pre>
+       *clan helps
+       * </pre>
+       */
+      public boolean hasNumClanHelpsSolicited() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 numClanHelpsSolicited = 5;</code>
+       *
+       * <pre>
+       *clan helps
+       * </pre>
+       */
+      public int getNumClanHelpsSolicited() {
+        return numClanHelpsSolicited_;
+      }
+      /**
+       * <code>optional int32 numClanHelpsSolicited = 5;</code>
+       *
+       * <pre>
+       *clan helps
+       * </pre>
+       */
+      public Builder setNumClanHelpsSolicited(int value) {
+        bitField0_ |= 0x00000010;
+        numClanHelpsSolicited_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 numClanHelpsSolicited = 5;</code>
+       *
+       * <pre>
+       *clan helps
+       * </pre>
+       */
+      public Builder clearNumClanHelpsSolicited() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        numClanHelpsSolicited_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int numClanHelpsGiven_ ;
+      /**
+       * <code>optional int32 numClanHelpsGiven = 6;</code>
+       */
+      public boolean hasNumClanHelpsGiven() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 numClanHelpsGiven = 6;</code>
+       */
+      public int getNumClanHelpsGiven() {
+        return numClanHelpsGiven_;
+      }
+      /**
+       * <code>optional int32 numClanHelpsGiven = 6;</code>
+       */
+      public Builder setNumClanHelpsGiven(int value) {
+        bitField0_ |= 0x00000020;
+        numClanHelpsGiven_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 numClanHelpsGiven = 6;</code>
+       */
+      public Builder clearNumClanHelpsGiven() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        numClanHelpsGiven_ = 0;
         onChanged();
         return this;
       }
@@ -17924,32 +18112,58 @@ public final class ClanProto {
         getUserUuidBytes();
 
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    boolean hasInviterUuid();
+    @java.lang.Deprecated boolean hasInviterUuid();
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    java.lang.String getInviterUuid();
+    @java.lang.Deprecated java.lang.String getInviterUuid();
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getInviterUuidBytes();
 
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    boolean hasClanUuid();
+    boolean hasInviter();
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    java.lang.String getClanUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getInviter();
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    com.google.protobuf.ByteString
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder();
+
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated boolean hasClanUuid();
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated java.lang.String getClanUuid();
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getClanUuidBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    boolean hasInviterClan();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumClanProto getInviterClan();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder();
 
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
@@ -18032,13 +18246,39 @@ public final class ClanProto {
             }
             case 34: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               clanUuid_ = bs;
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000040;
               timeOfInvite_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = inviter_.toBuilder();
+              }
+              inviter_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inviter_);
+                inviter_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 58: {
+              com.lvl6.proto.UserProto.MinimumClanProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = inviterClan_.toBuilder();
+              }
+              inviterClan_ = input.readMessage(com.lvl6.proto.UserProto.MinimumClanProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inviterClan_);
+                inviterClan_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -18180,15 +18420,15 @@ public final class ClanProto {
     public static final int INVITERUUID_FIELD_NUMBER = 3;
     private java.lang.Object inviterUuid_;
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public boolean hasInviterUuid() {
+    @java.lang.Deprecated public boolean hasInviterUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public java.lang.String getInviterUuid() {
+    @java.lang.Deprecated public java.lang.String getInviterUuid() {
       java.lang.Object ref = inviterUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -18203,9 +18443,9 @@ public final class ClanProto {
       }
     }
     /**
-     * <code>optional string inviterUuid = 3;</code>
+     * <code>optional string inviterUuid = 3 [deprecated = true];</code>
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getInviterUuidBytes() {
       java.lang.Object ref = inviterUuid_;
       if (ref instanceof java.lang.String) {
@@ -18219,18 +18459,39 @@ public final class ClanProto {
       }
     }
 
-    public static final int CLANUUID_FIELD_NUMBER = 4;
-    private java.lang.Object clanUuid_;
+    public static final int INVITER_FIELD_NUMBER = 6;
+    private com.lvl6.proto.UserProto.MinimumUserProto inviter_;
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    public boolean hasClanUuid() {
+    public boolean hasInviter() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
      */
-    public java.lang.String getClanUuid() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getInviter() {
+      return inviter_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder() {
+      return inviter_;
+    }
+
+    public static final int CLANUUID_FIELD_NUMBER = 4;
+    private java.lang.Object clanUuid_;
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated public boolean hasClanUuid() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated public java.lang.String getClanUuid() {
       java.lang.Object ref = clanUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -18245,9 +18506,9 @@ public final class ClanProto {
       }
     }
     /**
-     * <code>optional string clanUuid = 4;</code>
+     * <code>optional string clanUuid = 4 [deprecated = true];</code>
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getClanUuidBytes() {
       java.lang.Object ref = clanUuid_;
       if (ref instanceof java.lang.String) {
@@ -18261,13 +18522,34 @@ public final class ClanProto {
       }
     }
 
+    public static final int INVITERCLAN_FIELD_NUMBER = 7;
+    private com.lvl6.proto.UserProto.MinimumClanProto inviterClan_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public boolean hasInviterClan() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumClanProto getInviterClan() {
+      return inviterClan_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder() {
+      return inviterClan_;
+    }
+
     public static final int TIMEOFINVITE_FIELD_NUMBER = 5;
     private long timeOfInvite_;
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
      */
     public boolean hasTimeOfInvite() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int64 timeOfInvite = 5;</code>
@@ -18280,7 +18562,9 @@ public final class ClanProto {
       inviteUuid_ = "";
       userUuid_ = "";
       inviterUuid_ = "";
+      inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanUuid_ = "";
+      inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       timeOfInvite_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -18305,11 +18589,17 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getInviterUuidBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(4, getClanUuidBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(5, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(6, inviter_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(7, inviterClan_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -18332,13 +18622,21 @@ public final class ClanProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getInviterUuidBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getClanUuidBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, inviter_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, inviterClan_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -18449,6 +18747,8 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getInviterFieldBuilder();
+          getInviterClanFieldBuilder();
         }
       }
       private static Builder create() {
@@ -18463,10 +18763,22 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         inviterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        clanUuid_ = "";
+        if (inviterBuilder_ == null) {
+          inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          inviterBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        timeOfInvite_ = 0L;
+        clanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+        } else {
+          inviterClanBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        timeOfInvite_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -18510,9 +18822,25 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.clanUuid_ = clanUuid_;
+        if (inviterBuilder_ == null) {
+          result.inviter_ = inviter_;
+        } else {
+          result.inviter_ = inviterBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.clanUuid_ = clanUuid_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (inviterClanBuilder_ == null) {
+          result.inviterClan_ = inviterClan_;
+        } else {
+          result.inviterClan_ = inviterClanBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.timeOfInvite_ = timeOfInvite_;
         result.bitField0_ = to_bitField0_;
@@ -18546,10 +18874,16 @@ public final class ClanProto {
           inviterUuid_ = other.inviterUuid_;
           onChanged();
         }
+        if (other.hasInviter()) {
+          mergeInviter(other.getInviter());
+        }
         if (other.hasClanUuid()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
           clanUuid_ = other.clanUuid_;
           onChanged();
+        }
+        if (other.hasInviterClan()) {
+          mergeInviterClan(other.getInviterClan());
         }
         if (other.hasTimeOfInvite()) {
           setTimeOfInvite(other.getTimeOfInvite());
@@ -18759,15 +19093,15 @@ public final class ClanProto {
 
       private java.lang.Object inviterUuid_ = "";
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public boolean hasInviterUuid() {
+      @java.lang.Deprecated public boolean hasInviterUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public java.lang.String getInviterUuid() {
+      @java.lang.Deprecated public java.lang.String getInviterUuid() {
         java.lang.Object ref = inviterUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -18782,9 +19116,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getInviterUuidBytes() {
         java.lang.Object ref = inviterUuid_;
         if (ref instanceof String) {
@@ -18798,9 +19132,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder setInviterUuid(
+      @java.lang.Deprecated public Builder setInviterUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
@@ -18811,18 +19145,18 @@ public final class ClanProto {
         return this;
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder clearInviterUuid() {
+      @java.lang.Deprecated public Builder clearInviterUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
         inviterUuid_ = getDefaultInstance().getInviterUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string inviterUuid = 3;</code>
+       * <code>optional string inviterUuid = 3 [deprecated = true];</code>
        */
-      public Builder setInviterUuidBytes(
+      @java.lang.Deprecated public Builder setInviterUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
@@ -18833,17 +19167,133 @@ public final class ClanProto {
         return this;
       }
 
-      private java.lang.Object clanUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> inviterBuilder_;
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
        */
-      public boolean hasClanUuid() {
+      public boolean hasInviter() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
        */
-      public java.lang.String getClanUuid() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getInviter() {
+        if (inviterBuilder_ == null) {
+          return inviter_;
+        } else {
+          return inviterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder setInviter(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (inviterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inviter_ = value;
+          onChanged();
+        } else {
+          inviterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder setInviter(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (inviterBuilder_ == null) {
+          inviter_ = builderForValue.build();
+          onChanged();
+        } else {
+          inviterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder mergeInviter(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (inviterBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              inviter_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            inviter_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(inviter_).mergeFrom(value).buildPartial();
+          } else {
+            inviter_ = value;
+          }
+          onChanged();
+        } else {
+          inviterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public Builder clearInviter() {
+        if (inviterBuilder_ == null) {
+          inviter_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          inviterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getInviterBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getInviterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getInviterOrBuilder() {
+        if (inviterBuilder_ != null) {
+          return inviterBuilder_.getMessageOrBuilder();
+        } else {
+          return inviter_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto inviter = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getInviterFieldBuilder() {
+        if (inviterBuilder_ == null) {
+          inviterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getInviter(),
+                  getParentForChildren(),
+                  isClean());
+          inviter_ = null;
+        }
+        return inviterBuilder_;
+      }
+
+      private java.lang.Object clanUuid_ = "";
+      /**
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
+       */
+      @java.lang.Deprecated public boolean hasClanUuid() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
+       */
+      @java.lang.Deprecated public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -18858,9 +19308,9 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getClanUuidBytes() {
         java.lang.Object ref = clanUuid_;
         if (ref instanceof String) {
@@ -18874,39 +19324,155 @@ public final class ClanProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder setClanUuid(
+      @java.lang.Deprecated public Builder setClanUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         clanUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder clearClanUuid() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+      @java.lang.Deprecated public Builder clearClanUuid() {
+        bitField0_ = (bitField0_ & ~0x00000010);
         clanUuid_ = getDefaultInstance().getClanUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 4;</code>
+       * <code>optional string clanUuid = 4 [deprecated = true];</code>
        */
-      public Builder setClanUuidBytes(
+      @java.lang.Deprecated public Builder setClanUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         clanUuid_ = value;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.UserProto.MinimumClanProto inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> inviterClanBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public boolean hasInviterClan() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProto getInviterClan() {
+        if (inviterClanBuilder_ == null) {
+          return inviterClan_;
+        } else {
+          return inviterClanBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder setInviterClan(com.lvl6.proto.UserProto.MinimumClanProto value) {
+        if (inviterClanBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inviterClan_ = value;
+          onChanged();
+        } else {
+          inviterClanBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder setInviterClan(
+          com.lvl6.proto.UserProto.MinimumClanProto.Builder builderForValue) {
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = builderForValue.build();
+          onChanged();
+        } else {
+          inviterClanBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder mergeInviterClan(com.lvl6.proto.UserProto.MinimumClanProto value) {
+        if (inviterClanBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              inviterClan_ != com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance()) {
+            inviterClan_ =
+              com.lvl6.proto.UserProto.MinimumClanProto.newBuilder(inviterClan_).mergeFrom(value).buildPartial();
+          } else {
+            inviterClan_ = value;
+          }
+          onChanged();
+        } else {
+          inviterClanBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public Builder clearInviterClan() {
+        if (inviterClanBuilder_ == null) {
+          inviterClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
+          onChanged();
+        } else {
+          inviterClanBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProto.Builder getInviterClanBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getInviterClanFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getInviterClanOrBuilder() {
+        if (inviterClanBuilder_ != null) {
+          return inviterClanBuilder_.getMessageOrBuilder();
+        } else {
+          return inviterClan_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumClanProto inviterClan = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> 
+          getInviterClanFieldBuilder() {
+        if (inviterClanBuilder_ == null) {
+          inviterClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
+                  getInviterClan(),
+                  getParentForChildren(),
+                  isClean());
+          inviterClan_ = null;
+        }
+        return inviterClanBuilder_;
       }
 
       private long timeOfInvite_ ;
@@ -18914,7 +19480,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public boolean hasTimeOfInvite() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int64 timeOfInvite = 5;</code>
@@ -18926,7 +19492,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public Builder setTimeOfInvite(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         timeOfInvite_ = value;
         onChanged();
         return this;
@@ -18935,7 +19501,7 @@ public final class ClanProto {
        * <code>optional int64 timeOfInvite = 5;</code>
        */
       public Builder clearTimeOfInvite() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         timeOfInvite_ = 0L;
         onChanged();
         return this;
@@ -20348,6 +20914,1547 @@ public final class ClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanDataProto)
   }
 
+  public interface ClanMemberTeamDonationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanMemberTeamDonation)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    boolean hasDonationUuid();
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    java.lang.String getDonationUuid();
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDonationUuidBytes();
+
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    boolean hasClanUuid();
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    java.lang.String getClanUuid();
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getClanUuidBytes();
+
+    /**
+     * <code>optional int32 powerAvailability = 4;</code>
+     */
+    boolean hasPowerAvailability();
+    /**
+     * <code>optional int32 powerAvailability = 4;</code>
+     */
+    int getPowerAvailability();
+
+    /**
+     * <code>optional bool isComplete = 5;</code>
+     */
+    boolean hasIsComplete();
+    /**
+     * <code>optional bool isComplete = 5;</code>
+     */
+    boolean getIsComplete();
+
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    boolean hasMsg();
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    java.lang.String getMsg();
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getMsgBytes();
+
+    /**
+     * <code>optional int64 timeOfSolicitation = 7;</code>
+     */
+    boolean hasTimeOfSolicitation();
+    /**
+     * <code>optional int64 timeOfSolicitation = 7;</code>
+     */
+    long getTimeOfSolicitation();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> 
+        getDonationsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    int getDonationsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+        getDonationsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonation}
+   */
+  public static final class ClanMemberTeamDonation extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanMemberTeamDonation)
+      ClanMemberTeamDonationOrBuilder {
+    // Use ClanMemberTeamDonation.newBuilder() to construct.
+    private ClanMemberTeamDonation(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ClanMemberTeamDonation(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ClanMemberTeamDonation defaultInstance;
+    public static ClanMemberTeamDonation getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ClanMemberTeamDonation getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ClanMemberTeamDonation(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              donationUuid_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              userUuid_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              clanUuid_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              powerAvailability_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              isComplete_ = input.readBool();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              msg_ = bs;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              timeOfSolicitation_ = input.readInt64();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              donations_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          donations_ = java.util.Collections.unmodifiableList(donations_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonation.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonation.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ClanMemberTeamDonation> PARSER =
+        new com.google.protobuf.AbstractParser<ClanMemberTeamDonation>() {
+      public ClanMemberTeamDonation parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ClanMemberTeamDonation(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ClanMemberTeamDonation> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int DONATIONUUID_FIELD_NUMBER = 1;
+    private java.lang.Object donationUuid_;
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    public boolean hasDonationUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    public java.lang.String getDonationUuid() {
+      java.lang.Object ref = donationUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          donationUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string donationUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDonationUuidBytes() {
+      java.lang.Object ref = donationUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        donationUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CLANUUID_FIELD_NUMBER = 3;
+    private java.lang.Object clanUuid_;
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    public boolean hasClanUuid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    public java.lang.String getClanUuid() {
+      java.lang.Object ref = clanUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          clanUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clanUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClanUuidBytes() {
+      java.lang.Object ref = clanUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clanUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int POWERAVAILABILITY_FIELD_NUMBER = 4;
+    private int powerAvailability_;
+    /**
+     * <code>optional int32 powerAvailability = 4;</code>
+     */
+    public boolean hasPowerAvailability() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 powerAvailability = 4;</code>
+     */
+    public int getPowerAvailability() {
+      return powerAvailability_;
+    }
+
+    public static final int ISCOMPLETE_FIELD_NUMBER = 5;
+    private boolean isComplete_;
+    /**
+     * <code>optional bool isComplete = 5;</code>
+     */
+    public boolean hasIsComplete() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bool isComplete = 5;</code>
+     */
+    public boolean getIsComplete() {
+      return isComplete_;
+    }
+
+    public static final int MSG_FIELD_NUMBER = 6;
+    private java.lang.Object msg_;
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    public boolean hasMsg() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          msg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msg = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMsgBytes() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIMEOFSOLICITATION_FIELD_NUMBER = 7;
+    private long timeOfSolicitation_;
+    /**
+     * <code>optional int64 timeOfSolicitation = 7;</code>
+     */
+    public boolean hasTimeOfSolicitation() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 timeOfSolicitation = 7;</code>
+     */
+    public long getTimeOfSolicitation() {
+      return timeOfSolicitation_;
+    }
+
+    public static final int DONATIONS_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
+      return donations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+        getDonationsOrBuilderList() {
+      return donations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public int getDonationsCount() {
+      return donations_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
+      return donations_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+        int index) {
+      return donations_.get(index);
+    }
+
+    private void initFields() {
+      donationUuid_ = "";
+      userUuid_ = "";
+      clanUuid_ = "";
+      powerAvailability_ = 0;
+      isComplete_ = false;
+      msg_ = "";
+      timeOfSolicitation_ = 0L;
+      donations_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getDonationUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getClanUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, powerAvailability_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, isComplete_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, timeOfSolicitation_);
+      }
+      for (int i = 0; i < donations_.size(); i++) {
+        output.writeMessage(8, donations_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getDonationUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getClanUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, powerAvailability_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, isComplete_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getMsgBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, timeOfSolicitation_);
+      }
+      for (int i = 0; i < donations_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, donations_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanMemberTeamDonation prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonation}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanMemberTeamDonation)
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ClanProto.ClanMemberTeamDonation.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonation.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ClanProto.ClanMemberTeamDonation.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDonationsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        donationUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clanUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        powerAvailability_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        isComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        msg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        timeOfSolicitation_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        if (donationsBuilder_ == null) {
+          donations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          donationsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+      }
+
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation getDefaultInstanceForType() {
+        return com.lvl6.proto.ClanProto.ClanMemberTeamDonation.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation build() {
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonation result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation buildPartial() {
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonation result = new com.lvl6.proto.ClanProto.ClanMemberTeamDonation(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.donationUuid_ = donationUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clanUuid_ = clanUuid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.powerAvailability_ = powerAvailability_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.msg_ = msg_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.timeOfSolicitation_ = timeOfSolicitation_;
+        if (donationsBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            donations_ = java.util.Collections.unmodifiableList(donations_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.donations_ = donations_;
+        } else {
+          result.donations_ = donationsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ClanProto.ClanMemberTeamDonation) {
+          return mergeFrom((com.lvl6.proto.ClanProto.ClanMemberTeamDonation)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanMemberTeamDonation other) {
+        if (other == com.lvl6.proto.ClanProto.ClanMemberTeamDonation.getDefaultInstance()) return this;
+        if (other.hasDonationUuid()) {
+          bitField0_ |= 0x00000001;
+          donationUuid_ = other.donationUuid_;
+          onChanged();
+        }
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasClanUuid()) {
+          bitField0_ |= 0x00000004;
+          clanUuid_ = other.clanUuid_;
+          onChanged();
+        }
+        if (other.hasPowerAvailability()) {
+          setPowerAvailability(other.getPowerAvailability());
+        }
+        if (other.hasIsComplete()) {
+          setIsComplete(other.getIsComplete());
+        }
+        if (other.hasMsg()) {
+          bitField0_ |= 0x00000020;
+          msg_ = other.msg_;
+          onChanged();
+        }
+        if (other.hasTimeOfSolicitation()) {
+          setTimeOfSolicitation(other.getTimeOfSolicitation());
+        }
+        if (donationsBuilder_ == null) {
+          if (!other.donations_.isEmpty()) {
+            if (donations_.isEmpty()) {
+              donations_ = other.donations_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureDonationsIsMutable();
+              donations_.addAll(other.donations_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.donations_.isEmpty()) {
+            if (donationsBuilder_.isEmpty()) {
+              donationsBuilder_.dispose();
+              donationsBuilder_ = null;
+              donations_ = other.donations_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              donationsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDonationsFieldBuilder() : null;
+            } else {
+              donationsBuilder_.addAllMessages(other.donations_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonation parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ClanProto.ClanMemberTeamDonation) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object donationUuid_ = "";
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public boolean hasDonationUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public java.lang.String getDonationUuid() {
+        java.lang.Object ref = donationUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            donationUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDonationUuidBytes() {
+        java.lang.Object ref = donationUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          donationUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public Builder setDonationUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        donationUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public Builder clearDonationUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        donationUuid_ = getDefaultInstance().getDonationUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string donationUuid = 1;</code>
+       */
+      public Builder setDonationUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        donationUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object clanUuid_ = "";
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public boolean hasClanUuid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public java.lang.String getClanUuid() {
+        java.lang.Object ref = clanUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clanUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClanUuidBytes() {
+        java.lang.Object ref = clanUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clanUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public Builder setClanUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        clanUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public Builder clearClanUuid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clanUuid_ = getDefaultInstance().getClanUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanUuid = 3;</code>
+       */
+      public Builder setClanUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        clanUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int powerAvailability_ ;
+      /**
+       * <code>optional int32 powerAvailability = 4;</code>
+       */
+      public boolean hasPowerAvailability() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 powerAvailability = 4;</code>
+       */
+      public int getPowerAvailability() {
+        return powerAvailability_;
+      }
+      /**
+       * <code>optional int32 powerAvailability = 4;</code>
+       */
+      public Builder setPowerAvailability(int value) {
+        bitField0_ |= 0x00000008;
+        powerAvailability_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 powerAvailability = 4;</code>
+       */
+      public Builder clearPowerAvailability() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        powerAvailability_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean isComplete_ ;
+      /**
+       * <code>optional bool isComplete = 5;</code>
+       */
+      public boolean hasIsComplete() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional bool isComplete = 5;</code>
+       */
+      public boolean getIsComplete() {
+        return isComplete_;
+      }
+      /**
+       * <code>optional bool isComplete = 5;</code>
+       */
+      public Builder setIsComplete(boolean value) {
+        bitField0_ |= 0x00000010;
+        isComplete_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isComplete = 5;</code>
+       */
+      public Builder clearIsComplete() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isComplete_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object msg_ = "";
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public boolean hasMsg() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            msg_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMsgBytes() {
+        java.lang.Object ref = msg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public Builder setMsg(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public Builder clearMsg() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        msg_ = getDefaultInstance().getMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 6;</code>
+       */
+      public Builder setMsgBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long timeOfSolicitation_ ;
+      /**
+       * <code>optional int64 timeOfSolicitation = 7;</code>
+       */
+      public boolean hasTimeOfSolicitation() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 timeOfSolicitation = 7;</code>
+       */
+      public long getTimeOfSolicitation() {
+        return timeOfSolicitation_;
+      }
+      /**
+       * <code>optional int64 timeOfSolicitation = 7;</code>
+       */
+      public Builder setTimeOfSolicitation(long value) {
+        bitField0_ |= 0x00000040;
+        timeOfSolicitation_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timeOfSolicitation = 7;</code>
+       */
+      public Builder clearTimeOfSolicitation() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        timeOfSolicitation_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_ =
+        java.util.Collections.emptyList();
+      private void ensureDonationsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>(donations_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> donationsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
+        if (donationsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(donations_);
+        } else {
+          return donationsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public int getDonationsCount() {
+        if (donationsBuilder_ == null) {
+          return donations_.size();
+        } else {
+          return donationsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
+        if (donationsBuilder_ == null) {
+          return donations_.get(index);
+        } else {
+          return donationsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder setDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.set(index, value);
+          onChanged();
+        } else {
+          donationsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder setDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.add(value);
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
+        if (donationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDonationsIsMutable();
+          donations_.add(index, value);
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.add(builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addDonations(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          donationsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder addAllDonations(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> values) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, donations_);
+          onChanged();
+        } else {
+          donationsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder clearDonations() {
+        if (donationsBuilder_ == null) {
+          donations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          donationsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public Builder removeDonations(int index) {
+        if (donationsBuilder_ == null) {
+          ensureDonationsIsMutable();
+          donations_.remove(index);
+          onChanged();
+        } else {
+          donationsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder getDonationsBuilder(
+          int index) {
+        return getDonationsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
+          int index) {
+        if (donationsBuilder_ == null) {
+          return donations_.get(index);  } else {
+          return donationsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+           getDonationsOrBuilderList() {
+        if (donationsBuilder_ != null) {
+          return donationsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(donations_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder() {
+        return getDonationsFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder(
+          int index) {
+        return getDonationsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder> 
+           getDonationsBuilderList() {
+        return getDonationsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
+          getDonationsFieldBuilder() {
+        if (donationsBuilder_ == null) {
+          donationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder>(
+                  donations_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          donations_ = null;
+        }
+        return donationsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanMemberTeamDonation)
+    }
+
+    static {
+      defaultInstance = new ClanMemberTeamDonation(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanMemberTeamDonation)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullClanProto_descriptor;
   private static
@@ -20443,6 +22550,11 @@ public final class ClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -20464,83 +22576,94 @@ public final class ClanProto {
       "m.lvl6.proto.UserClanStatus\022\023\n\013requestTi",
       "me\030\004 \001(\003\"Z\n\031FullClanProtoWithClanSize\022+\n" +
       "\004clan\030\001 \001(\0132\035.com.lvl6.proto.FullClanPro" +
-      "to\022\020\n\010clanSize\030\002 \001(\005\"\306\001\n\030MinimumUserProt" +
+      "to\022\020\n\010clanSize\030\002 \001(\005\"\200\002\n\030MinimumUserProt" +
       "oForClans\022H\n\025minUserProtoWithLevel\030\001 \001(\013" +
       "2).com.lvl6.proto.MinimumUserProtoWithLe" +
       "vel\0222\n\nclanStatus\030\002 \001(\0162\036.com.lvl6.proto" +
       ".UserClanStatus\022\030\n\020raidContribution\030\003 \001(" +
-      "\002\022\022\n\nbattlesWon\030\004 \001(\005\"\275\002\n\rClanRaidProto\022" +
-      "\022\n\nclanRaidId\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(" +
-      "\t\022\032\n\022activeTitleImgName\030\003 \001(\t\022\037\n\027activeB",
-      "ackgroundImgName\030\004 \001(\t\022\031\n\021activeDescript" +
-      "ion\030\005 \001(\t\022\036\n\026inactiveMonsterImgName\030\006 \001(" +
-      "\t\022\033\n\023inactiveDescription\030\007 \001(\t\022\024\n\014dialog" +
-      "ueText\030\010 \001(\t\022\037\n\027spotlightMonsterImgName\030" +
-      "\t \001(\t\0226\n\nraidStages\030\n \003(\0132\".com.lvl6.pro" +
-      "to.ClanRaidStageProto\"\372\001\n\022ClanRaidStageP" +
-      "roto\022\027\n\017clanRaidStageId\030\001 \001(\005\022\022\n\nclanRai" +
-      "dId\030\002 \001(\005\022\027\n\017durationMinutes\030\003 \001(\005\022\020\n\010st" +
-      "ageNum\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013" +
-      " \003(\0132).com.lvl6.proto.ClanRaidStageMonst",
-      "erProto\022A\n\017possibleRewards\030\014 \003(\0132(.com.l" +
-      "vl6.proto.ClanRaidStageRewardProto\"q\n\031Cl" +
-      "anRaidStageMonsterProto\022\016\n\006crsmId\030\001 \001(\005\022" +
-      "\021\n\tmonsterId\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n" +
-      "\006minDmg\030\005 \001(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRa" +
-      "idStageRewardProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014mi" +
-      "nOilReward\030\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025" +
-      "\n\rminCashReward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006" +
-      " \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252\001\n\030PersistentCl" +
-      "anEventProto\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tday",
-      "OfWeek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:" +
-      "\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurat" +
-      "ionMinutes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\275\001\n" +
-      " PersistentClanEventClanInfoProto\022\020\n\010cla" +
-      "nUuid\030\001 \001(\t\022\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclan" +
-      "RaidId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n" +
-      "\016stageStartTime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n" +
-      "\025stageMonsterStartTime\030\007 \001(\003\"\323\001\n Persist" +
-      "entClanEventUserInfoProto\022\020\n\010userUuid\030\001 " +
-      "\001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\014\n\004crId\030\003 \001(\005\022\021\n\tc",
-      "rDmgDone\030\004 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013cr" +
-      "smDmgDone\030\010 \001(\005\022A\n\014userMonsters\030\t \001(\0132+." +
-      "com.lvl6.proto.UserCurrentMonsterTeamPro" +
-      "to\"\326\001\n\"PersistentClanEventUserRewardProt" +
-      "o\022\022\n\nrewardUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022" +
-      "\022\n\ncrsEndTime\030\004 \001(\003\0228\n\014resourceType\030\005 \001(" +
-      "\0162\034.com.lvl6.proto.ResourceType:\004CASH\022\024\n" +
-      "\014staticDataId\030\006 \001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n" +
-      "\014timeRedeemed\030\t \001(\003\"\346\001\n(PersistentClanEv" +
-      "entRaidStageHistoryProto\022C\n\007rewards\030\001 \003(",
-      "\01322.com.lvl6.proto.PersistentClanEventUs" +
-      "erRewardProto\022\017\n\007eventId\030\002 \001(\005\022\022\n\nclanRa" +
-      "idId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\022\n\nc" +
-      "rsEndTime\030\005 \001(\003\022\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007s" +
-      "tageHp\030\007 \001(\005\"Y\n#PersistentClanEventRaidH" +
-      "istoryProto\022\020\n\010userUuid\030\001 \001(\t\022\r\n\005crDmg\030\002" +
-      " \001(\005\022\021\n\tclanCrDmg\030\003 \001(\005\"I\n\rClanIconProto" +
-      "\022\022\n\nclanIconId\030\001 \001(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n" +
-      "\013isAvailable\030\003 \001(\010\"\233\002\n\rClanHelpProto\022\024\n\014" +
-      "clanHelpUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022-\n\003",
-      "mup\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\024\n\014userDataUuid\030\004 \001(\t\0229\n\010helpType\030\005 " +
+      "\002\022\022\n\nbattlesWon\030\004 \001(\005\022\035\n\025numClanHelpsSol" +
+      "icited\030\005 \001(\005\022\031\n\021numClanHelpsGiven\030\006 \001(\005\"" +
+      "\275\002\n\rClanRaidProto\022\022\n\nclanRaidId\030\001 \001(\005\022\024\n",
+      "\014clanRaidName\030\002 \001(\t\022\032\n\022activeTitleImgNam" +
+      "e\030\003 \001(\t\022\037\n\027activeBackgroundImgName\030\004 \001(\t" +
+      "\022\031\n\021activeDescription\030\005 \001(\t\022\036\n\026inactiveM" +
+      "onsterImgName\030\006 \001(\t\022\033\n\023inactiveDescripti" +
+      "on\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001(\t\022\037\n\027spotli" +
+      "ghtMonsterImgName\030\t \001(\t\0226\n\nraidStages\030\n " +
+      "\003(\0132\".com.lvl6.proto.ClanRaidStageProto\"" +
+      "\372\001\n\022ClanRaidStageProto\022\027\n\017clanRaidStageI" +
+      "d\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022\027\n\017durationM" +
+      "inutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(\005\022\014\n\004name\030\005",
+      " \001(\t\022;\n\010monsters\030\013 \003(\0132).com.lvl6.proto." +
+      "ClanRaidStageMonsterProto\022A\n\017possibleRew" +
+      "ards\030\014 \003(\0132(.com.lvl6.proto.ClanRaidStag" +
+      "eRewardProto\"q\n\031ClanRaidStageMonsterProt" +
+      "o\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\t" +
+      "monsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 \001(\005\022\016\n\006maxDm" +
+      "g\030\006 \001(\005\"\227\001\n\030ClanRaidStageRewardProto\022\016\n\006" +
+      "crsrId\030\001 \001(\005\022\024\n\014minOilReward\030\003 \001(\005\022\024\n\014ma" +
+      "xOilReward\030\004 \001(\005\022\025\n\rminCashReward\030\005 \001(\005\022" +
+      "\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmonsterId\030\007 \001(",
+      "\005\"\252\001\n\030PersistentClanEventProto\022\023\n\013clanEv" +
+      "entId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl" +
+      "6.proto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003" +
+      " \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\022\n\ncl" +
+      "anRaidId\030\005 \001(\005\"\275\001\n PersistentClanEventCl" +
+      "anInfoProto\022\020\n\010clanUuid\030\001 \001(\t\022\023\n\013clanEve" +
+      "ntId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRa" +
+      "idStageId\030\004 \001(\005\022\026\n\016stageStartTime\030\005 \001(\003\022" +
+      "\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonsterStartTime" +
+      "\030\007 \001(\003\"\323\001\n PersistentClanEventUserInfoPr",
+      "oto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022" +
+      "\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\022\n\ncrsD" +
+      "mgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022A\n\014use" +
+      "rMonsters\030\t \001(\0132+.com.lvl6.proto.UserCur" +
+      "rentMonsterTeamProto\"\326\001\n\"PersistentClanE" +
+      "ventUserRewardProto\022\022\n\nrewardUuid\030\001 \001(\t\022" +
+      "\020\n\010userUuid\030\002 \001(\t\022\022\n\ncrsEndTime\030\004 \001(\003\0228\n" +
+      "\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Res" +
+      "ourceType:\004CASH\022\024\n\014staticDataId\030\006 \001(\005\022\020\n" +
+      "\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030\t \001(\003\"\346\001",
+      "\n(PersistentClanEventRaidStageHistoryPro" +
+      "to\022C\n\007rewards\030\001 \003(\01322.com.lvl6.proto.Per" +
+      "sistentClanEventUserRewardProto\022\017\n\007event" +
+      "Id\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRaid" +
+      "StageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(\003\022\022\n\ncrs" +
+      "DmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"Y\n#Persis" +
+      "tentClanEventRaidHistoryProto\022\020\n\010userUui" +
+      "d\030\001 \001(\t\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030\003 \001(" +
+      "\005\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001(\005\022\017" +
+      "\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010\"\233\002\n",
+      "\rClanHelpProto\022\024\n\014clanHelpUuid\030\001 \001(\t\022\020\n\010" +
+      "clanUuid\030\002 \001(\t\022-\n\003mup\030\003 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\024\n\014userDataUuid\030\004 " +
+      "\001(\t\0229\n\010helpType\030\005 \001(\0162\036.com.lvl6.proto.G" +
+      "ameActionType:\007NO_HELP\022\025\n\rtimeRequested\030" +
+      "\006 \001(\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\023\n\013helperUuids" +
+      "\030\010 \003(\t\022\014\n\004open\030\t \001(\010\022\024\n\014staticDataId\030\n \001" +
+      "(\005\"|\n\023ClanHelpNoticeProto\0229\n\010helpType\030\001 " +
       "\001(\0162\036.com.lvl6.proto.GameActionType:\007NO_" +
-      "HELP\022\025\n\rtimeRequested\030\006 \001(\003\022\022\n\nmaxHelper" +
-      "s\030\007 \001(\005\022\023\n\013helperUuids\030\010 \003(\t\022\014\n\004open\030\t \001" +
-      "(\010\022\024\n\014staticDataId\030\n \001(\005\"|\n\023ClanHelpNoti" +
-      "ceProto\0229\n\010helpType\030\001 \001(\0162\036.com.lvl6.pro" +
-      "to.GameActionType:\007NO_HELP\022\024\n\014userDataUu" +
-      "id\030\002 \001(\t\022\024\n\014staticDataId\030\003 \001(\005\"t\n\017ClanIn" +
-      "viteProto\022\022\n\ninviteUuid\030\001 \001(\t\022\020\n\010userUui",
-      "d\030\002 \001(\t\022\023\n\013inviterUuid\030\003 \001(\t\022\020\n\010clanUuid" +
-      "\030\004 \001(\t\022\024\n\014timeOfInvite\030\005 \001(\003\"\271\001\n\rClanDat" +
-      "aProto\0228\n\tclanChats\030\001 \003(\0132%.com.lvl6.pro" +
-      "to.GroupChatMessageProto\0223\n\014clanHelpings" +
-      "\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpProto\0229\n" +
-      "\rclanAvengings\030\003 \003(\0132\".com.lvl6.proto.Pv" +
-      "pClanAvengeProto*X\n\016UserClanStatus\022\n\n\006LE" +
-      "ADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n" +
-      "\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanProto"
+      "HELP\022\024\n\014userDataUuid\030\002 \001(\t\022\024\n\014staticData",
+      "Id\030\003 \001(\005\"\346\001\n\017ClanInviteProto\022\022\n\ninviteUu" +
+      "id\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\027\n\013inviterUui" +
+      "d\030\003 \001(\tB\002\030\001\0221\n\007inviter\030\006 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\024\n\010clanUuid\030\004 \001(\t" +
+      "B\002\030\001\0225\n\013inviterClan\030\007 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumClanProto\022\024\n\014timeOfInvite\030\005 \001(" +
+      "\003\"\271\001\n\rClanDataProto\0228\n\tclanChats\030\001 \003(\0132%" +
+      ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
+      "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
+      "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
+      "lvl6.proto.PvpClanAvengeProto\"\347\001\n\026ClanMe" +
+      "mberTeamDonation\022\024\n\014donationUuid\030\001 \001(\t\022\020" +
+      "\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
+      "werAvailability\030\004 \001(\005\022\022\n\nisComplete\030\005 \001(" +
+      "\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 \001" +
+      "(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto.U" +
+      "serMonsterSnapshotProto*X\n\016UserClanStatu" +
+      "s\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPT" +
+      "AIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCla" +
+      "nProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20583,7 +22706,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_MinimumUserProtoForClans_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserProtoForClans_descriptor,
-        new java.lang.String[] { "MinUserProtoWithLevel", "ClanStatus", "RaidContribution", "BattlesWon", });
+        new java.lang.String[] { "MinUserProtoWithLevel", "ClanStatus", "RaidContribution", "BattlesWon", "NumClanHelpsSolicited", "NumClanHelpsGiven", });
     internal_static_com_lvl6_proto_ClanRaidProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_ClanRaidProto_fieldAccessorTable = new
@@ -20667,13 +22790,19 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanInviteProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanInviteProto_descriptor,
-        new java.lang.String[] { "InviteUuid", "UserUuid", "InviterUuid", "ClanUuid", "TimeOfInvite", });
+        new java.lang.String[] { "InviteUuid", "UserUuid", "InviterUuid", "Inviter", "ClanUuid", "InviterClan", "TimeOfInvite", });
     internal_static_com_lvl6_proto_ClanDataProto_descriptor =
       getDescriptor().getMessageTypes().get(18);
     internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanDataProto_descriptor,
         new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", });
+    internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor,
+        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsComplete", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();

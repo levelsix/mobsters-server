@@ -14,6 +14,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
+import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
@@ -233,4 +234,7 @@ public interface InsertUtil {
 	public abstract int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList);
 	
 	public abstract int insertIntoUpdateClientTaskState(List<TaskForUserClientState> tfucsList);
+
+	public abstract int insertIntoUpdateClanHelpCount(ClanHelpCountForUser chcfu);
+	
 }

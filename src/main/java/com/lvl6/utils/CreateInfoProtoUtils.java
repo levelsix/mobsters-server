@@ -212,6 +212,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -1356,7 +1357,9 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-		Clan clan, String userClanStatus, float clanRaidContribution, int battlesWon) {
+		Clan clan, String userClanStatus, float clanRaidContribution, int battlesWon,
+		UserClanHelpCount uchc)
+	{
 		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, clan, null);
 
 		MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
@@ -1372,15 +1375,19 @@ public class CreateInfoProtoUtils {
 		}
 		mupfcb.setRaidContribution(clanRaidContribution);
 		mupfcb.setBattlesWon(battlesWon);
+		
+		if (null != uchc) {
+			mupfcb.setNumClanHelpsSolicited(uchc.getNumSolicited());
+			mupfcb.setNumClanHelpsGiven(uchc.getNumGiven());
+		}
+		
 		MinimumUserProtoForClans mupfc = mupfcb.build();
-
 		return mupfc;
 	}
 
 	public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
 		Clan clan, UserClanStatus userClanStatus, float clanRaidContribution,
-		int battlesWon
-		)
+		int battlesWon, UserClanHelpCount uchc )
 	{
 		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, clan, null);
 
@@ -1390,8 +1397,12 @@ public class CreateInfoProtoUtils {
 		mupfcb.setClanStatus(userClanStatus);
 		mupfcb.setRaidContribution(clanRaidContribution);
 		mupfcb.setBattlesWon(battlesWon);
+		if (null != uchc) {
+			mupfcb.setNumClanHelpsSolicited(uchc.getNumSolicited());
+			mupfcb.setNumClanHelpsGiven(uchc.getNumGiven());
+		}
+		
 		MinimumUserProtoForClans mupfc = mupfcb.build();
-
 		return mupfc;
 	}
 

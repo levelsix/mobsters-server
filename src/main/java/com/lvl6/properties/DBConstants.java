@@ -28,6 +28,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
 	public static final String TABLE_CLAN_HELP = "clan_help";
+	public static final String TABLE_CLAN_HELP_COUNT_FOR_USER = "clan_help_count_for_user";
 	public static final String TABLE_CLAN_ICON_CONFIG = "clan_icon_config";
 	public static final String TABLE_CLAN_INVITE = "clan_invite";
 	public static final String TABLE_CLAN_RAID_CONFIG = "clan_raid_config";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
@@ -265,7 +266,7 @@ public class DBConstants {
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__TIME_REDEEMED = "time_redeemed";
 
 	/*CLAN FOR USER*/
-	public static final String CLAN_FOR_USER__USER_ID = "user_id";
+	public static final String CLAN_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String CLAN_FOR_USER__CLAN_ID = "clan_id";
 	public static final String CLAN_FOR_USER__STATUS = "status";
 	public static final String CLAN_FOR_USER__REQUEST_TIME = "request_time";
@@ -282,6 +283,13 @@ public class DBConstants {
 	public static final String CLAN_HELP__OPEN = "open";
 	public static final String CLAN_HELP__STATIC_DATA_ID = "static_data_id";
 
+	/*CLAN HELP COUNT FOR USER*/
+	public static final String CLAN_HELP_COUNT_FOR_USER__USER_ID = GENERIC__USER_ID;
+	public static final String CLAN_HELP_COUNT_FOR_USER__CLAN_ID = "clan_id";
+	public static final String CLAN_HELP_COUNT_FOR_USER__DATE = "date";
+	public static final String CLAN_HELP_COUNT_FOR_USER__SOLICITED = "solicited";
+	public static final String CLAN_HELP_COUNT_FOR_USER__GIVEN = "given";
+	
 	/*CLAN INVITE*/
 	public static final String CLAN_INVITE__ID = GENERIC__ID;
 	public static final String CLAN_INVITE__USER_ID = GENERIC__USER_ID;

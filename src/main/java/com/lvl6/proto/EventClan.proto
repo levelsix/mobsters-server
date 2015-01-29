@@ -69,6 +69,7 @@ message LeaveClanResponseProto {
 message RequestJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string clanUuid = 2;
+	optional int64 clientTime = 3;
 }
 
 //since clanless user can directly join open clan,
@@ -86,6 +87,8 @@ message RequestJoinClanResponseProto {
 	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
 	optional UserCurrentMonsterTeamProto requesterMonsters = 9;
+	
+	optional int64 clientTime = 10;
 	
 	enum RequestJoinClanStatus {
 		SUCCESS_REQUEST = 1;
@@ -586,3 +589,62 @@ message AvengeClanMateResponseProto {
 	}
 	
 }
+
+//------------------------------------------------------------------------------------------
+
+message SolicitTeamDonationRequestProto {
+   optional MinimumUserProto sender = 1;
+   optional string msg = 2;
+   optional int32 powerLimit = 3;
+   optional int64 clientTime = 4;
+}
+
+message SolicitTeamDonationResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SolicitTeamDonationStatus status = 2;
+	
+	optional ClanMemberTeamDonation solicitation = 3;
+	
+	enum SolicitTeamDonationStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message FulfillTeamDonationSolicitationRequestProto {
+   optional MinimumUserProto sender = 1;
+   optional FullUserMonsterProto fump = 2;
+   optional int64 clientTime = 3;
+   //lock on the requester
+}
+
+message FulfillTeamDonationSolicitationResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional FulfillTeamDonationSolictationStatus status = 2;
+	optional ClanMemberTeamDonation solicitation = 3;
+   
+	enum FulfillTeamDonationSolictationStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message VoidTeamDonationSolicitationRequestProto {
+   optional MinimumUserProto sender = 1;
+   optional string clanTeamDonateUuid = 2;
+}
+
+message VoidTeamDonationSolicitationResponseProto {
+   optional MinimumUserProto sender = 1;
+   optional VoidTeamDonationSolicitationStatus status = 2;
+   
+   enum VoidTeamDonationSolicitationStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+

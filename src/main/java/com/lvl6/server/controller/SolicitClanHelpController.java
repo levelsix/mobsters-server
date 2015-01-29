@@ -16,6 +16,7 @@ import com.lvl6.events.request.SolicitClanHelpRequestEvent;
 import com.lvl6.events.response.SolicitClanHelpResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanHelp;
+import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanHelpNoticeProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
@@ -28,6 +29,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -43,7 +45,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
-
+  
+  @Autowired
+  protected TimeUtils timeUtil;
+  
   public SolicitClanHelpController() {
     numAllocatedThreads = 4;
   }
@@ -81,12 +86,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	clanId = senderProto.getClan().getClanUuid();
     }
 
-    UUID userUuid = null;
-    UUID clanUuid = null;
     boolean invalidUuids = true;
     try {
-      userUuid = UUID.fromString(userId);
-      clanUuid = UUID.fromString(clanId);
+    	UUID.fromString(userId);
+    	UUID.fromString(clanId);
 
       invalidUuids = false;
     } catch (Exception e) {
@@ -125,10 +128,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean legitLeave = checkLegitLeave(resBuilder, user, clanId);
       
       boolean success = false;
-      List<ClanHelp> clanHelpStore = new ArrayList<ClanHelp>();
+      List<ClanHelp> clanHelpContainer = new ArrayList<ClanHelp>();
       if (legitLeave) {
       	success = writeChangesToDB(userId, user, clanId, chnpList,
-      		clientDate, maxHelpers, clanHelpStore);
+      		clientDate, maxHelpers, clanHelpContainer);
       }
 
       SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(userId);
@@ -140,7 +143,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	
       } else {
     	  //only write to clan if success
-    	  for (ClanHelp ch : clanHelpStore) {
+    	  for (ClanHelp ch : clanHelpContainer) {
     		  ClanHelpProto chp = CreateInfoProtoUtils
     			  .createClanHelpProtoFromClanHelp(ch, user, null, senderProto);
     		  resBuilder.addHelpProto(chp);
@@ -207,7 +210,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private boolean writeChangesToDB(String userId, User user, String clanId,
 	  List<ClanHelpNoticeProto> chnpList, Date clientDate, int maxHelpers,
-	  List<ClanHelp> clanHelpStore)
+	  List<ClanHelp> clanHelpContainer)
   {
 	  List<ClanHelp> solicitations = new ArrayList<ClanHelp>();
 	  for (ClanHelpNoticeProto chnp : chnpList) {
@@ -236,11 +239,29 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  log.info(String.format("new clanHelps: %s", solicitations));
 
-	  if ( null != clanHelpIds && !clanHelpIds.isEmpty() ) {
-		  clanHelpStore.addAll(solicitations);
-		  return true;
+	  if ( null == clanHelpIds || clanHelpIds.isEmpty() ) {
+		  return false;
 	  }
-	  return false;
+	  
+	  int solicited = clanHelpIds.size();
+	  int given = 0;
+	  Date date = timeUtil.createDateAtStartOfDay(clientDate);
+	  ClanHelpCountForUser chcfu = new ClanHelpCountForUser(
+		  userId, clanId, date, solicited, given);
+	  
+	  try {
+		  int numUpdated = InsertUtils.get()
+			  .insertIntoUpdateClanHelpCount(chcfu);
+		  log.info("numUpdated ClanHelpCountForUser={}", numUpdated);
+	  } catch(Exception e) {
+		  log.error(String.format(
+				  "Unable to increment ClanHelpCountForUser: %s",
+				  chcfu),
+			  e);
+	  }
+	  
+	  clanHelpContainer.addAll(solicitations);
+	  return true;
   }
 
   /*
@@ -254,7 +275,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     aNote.setAsUserLeftClan(level, deserter);
     MiscMethods.writeClanApnsNotification(aNote, server, clanId);
   }*/
-  
+
   public Locker getLocker() {
 	  return locker;
   }
@@ -264,20 +285,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   public ClanRetrieveUtils2 getClanRetrieveUtil()
   {
-    return clanRetrieveUtil;
+	  return clanRetrieveUtil;
   }
 
   public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
   {
-    this.clanRetrieveUtil = clanRetrieveUtil;
+	  this.clanRetrieveUtil = clanRetrieveUtil;
   }
 
   public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
+	  return userRetrieveUtils;
   }
 
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
+	  this.userRetrieveUtils = userRetrieveUtils;
   }
-  
+
+  public TimeUtils getTimeUtil()
+  {
+	  return timeUtil;
+  }
+
+  public void setTimeUtil( TimeUtils timeUtil )
+  {
+	  this.timeUtil = timeUtil;
+  }
+
 }

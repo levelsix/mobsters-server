@@ -218,3 +218,31 @@ message MonsterBattleDialogueProto {
 		//NO_DIALOGUE = 2; defined above 
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message UserMonsterSnapshotProto {
+	optional string snapshotUuid = 1;
+	optional int64 timeOfCreation = 2;
+	
+	//(TEAM_DONATE, ENHANCE_DONATE), indicates a table
+	optional SnapshotType type = 3;
+	//id of the row in a table
+	optional string relevantTableUuid = 4;
+	
+	optional string monsterForUserUuid = 5;
+	optional string userUuid = 6;
+	optional int32 monsterId = 7;
+	optional int32 currentExp = 8;
+	optional int32 currentLvl = 9;
+	optional int32 currentHp = 10;
+	optional int32 teamSlotNum = 11;
+	optional int32 offensiveSkillId = 12;
+	optional int32 defensiveSkillId = 13;
+	
+	enum SnapshotType {
+		NO_DONATE_TYPE = 1;
+		TEAM_DONATE = 2;
+		ENHANCE_DONATE = 3;
+	}
+}
