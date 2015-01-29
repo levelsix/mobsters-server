@@ -44,8 +44,7 @@
 	<rabbit:direct-exchange name="${amqp.exchange}"
 		auto-delete="false" durable="true">
 		<rabbit:bindings>
-			<rabbit:binding queue="${amqp.client.messages.queue}"
-				key="${amqp.client.messages.routing.key}" />
+			${amqp.client.messages.bindings}
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 
