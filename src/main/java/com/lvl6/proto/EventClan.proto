@@ -593,10 +593,13 @@ message AvengeClanMateResponseProto {
 //------------------------------------------------------------------------------------------
 
 message SolicitTeamDonationRequestProto {
-   optional MinimumUserProto sender = 1;
-   optional string msg = 2;
-   optional int32 powerLimit = 3;
-   optional int64 clientTime = 4;
+	optional MinimumUserProto sender = 1;
+	optional string msg = 2;
+	optional int32 powerLimit = 3;
+	optional int64 clientTime = 4;
+   
+	//(positive number, server will convert it to negative)
+	optional int32 gemsSpent = 5; 
 }
 
 message SolicitTeamDonationResponseProto {
@@ -614,10 +617,10 @@ message SolicitTeamDonationResponseProto {
 //------------------------------------------------------------------------------------------
 
 message FulfillTeamDonationSolicitationRequestProto {
-   optional MinimumUserProto sender = 1;
-   optional FullUserMonsterProto fump = 2;
-   optional int64 clientTime = 3;
-   //lock on the requester
+	optional MinimumUserProto sender = 1;
+	optional FullUserMonsterProto fump = 2;
+	optional int64 clientTime = 3;
+	//lock on the requester
 }
 
 message FulfillTeamDonationSolicitationResponseProto {
@@ -634,15 +637,15 @@ message FulfillTeamDonationSolicitationResponseProto {
 //------------------------------------------------------------------------------------------
 
 message VoidTeamDonationSolicitationRequestProto {
-   optional MinimumUserProto sender = 1;
-   optional string clanTeamDonateUuid = 2;
+	optional MinimumUserProto sender = 1;
+	optional string clanTeamDonateUuid = 2;
 }
 
 message VoidTeamDonationSolicitationResponseProto {
-   optional MinimumUserProto sender = 1;
-   optional VoidTeamDonationSolicitationStatus status = 2;
+	optional MinimumUserProto sender = 1;
+	optional VoidTeamDonationSolicitationStatus status = 2;
    
-   enum VoidTeamDonationSolicitationStatus {
+	enum VoidTeamDonationSolicitationStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
