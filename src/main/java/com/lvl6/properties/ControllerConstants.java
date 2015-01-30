@@ -34,6 +34,7 @@ public class ControllerConstants {
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 5 : 100;
 	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
 	public static final int CLAN__TOP_N_CLANS = 50;
+	public static final int CLAN__MINS_TO_RESOLICIT_TEAM_DONATION = 20;
 
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;

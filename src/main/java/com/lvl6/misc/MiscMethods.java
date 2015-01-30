@@ -802,6 +802,7 @@ public class MiscMethods {
 		cb.setDisplayRarity(displayQuality);
 		
 		cb.setTaskIdOfFirstSkill(ControllerConstants.SKILL_FIRST_TASK_ID);
+		cb.setMinsToResolicitTeamDonation(ControllerConstants.CLAN__MINS_TO_RESOLICIT_TEAM_DONATION);
 		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
