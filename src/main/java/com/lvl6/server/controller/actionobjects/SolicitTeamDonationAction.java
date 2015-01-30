@@ -128,7 +128,7 @@ public class SolicitTeamDonationAction
 	private boolean verifySemantics(Builder resBuilder) {
 	  	
 		user = userRetrieveUtil.getUserById(userId);
-		if (null != user) {
+		if (null == user) {
 			log.error("no user for id {}", userId);
 			return false;
 		}
