@@ -3301,6 +3301,7 @@ public class CreateInfoProtoUtils {
 		ClanHouseProto.Builder chpb = ClanHouseProto.newBuilder();
 		chpb.setStructInfo(sip);
 		chpb.setMaxHelpersPerSolicitation(sch.getMaxHelpersPerSolicitation());
+		chpb.setTeamDonationPowerLimit(sch.getTeamDonationPowerLimit());
 
 		return chpb.build();
 	}

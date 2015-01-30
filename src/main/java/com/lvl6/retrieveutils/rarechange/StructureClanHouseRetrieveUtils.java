@@ -111,7 +111,9 @@ import com.lvl6.utils.DBConnection;
   private static StructureClanHouse convertRSRowToClanHouse(ResultSet rs) throws SQLException {
     int structId = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__STRUCT_ID);
     int maxHelpersPerSolicitation = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION);
+    int teamDonationPowerLimit = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__TEAM_DONATION_POWER_LIMIT);
     
-    return new StructureClanHouse(structId, maxHelpersPerSolicitation);
+    return new StructureClanHouse(structId, maxHelpersPerSolicitation,
+    	teamDonationPowerLimit);
   }
 }

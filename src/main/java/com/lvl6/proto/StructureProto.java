@@ -16551,6 +16551,15 @@ public final class StructureProto {
      * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
     int getMaxHelpersPerSolicitation();
+
+    /**
+     * <code>optional int32 teamDonationPowerLimit = 3;</code>
+     */
+    boolean hasTeamDonationPowerLimit();
+    /**
+     * <code>optional int32 teamDonationPowerLimit = 3;</code>
+     */
+    int getTeamDonationPowerLimit();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHouseProto}
@@ -16620,6 +16629,11 @@ public final class StructureProto {
             case 16: {
               bitField0_ |= 0x00000002;
               maxHelpersPerSolicitation_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              teamDonationPowerLimit_ = input.readInt32();
               break;
             }
           }
@@ -16698,9 +16712,25 @@ public final class StructureProto {
       return maxHelpersPerSolicitation_;
     }
 
+    public static final int TEAMDONATIONPOWERLIMIT_FIELD_NUMBER = 3;
+    private int teamDonationPowerLimit_;
+    /**
+     * <code>optional int32 teamDonationPowerLimit = 3;</code>
+     */
+    public boolean hasTeamDonationPowerLimit() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 teamDonationPowerLimit = 3;</code>
+     */
+    public int getTeamDonationPowerLimit() {
+      return teamDonationPowerLimit_;
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       maxHelpersPerSolicitation_ = 0;
+      teamDonationPowerLimit_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16721,6 +16751,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, maxHelpersPerSolicitation_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, teamDonationPowerLimit_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -16737,6 +16770,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, maxHelpersPerSolicitation_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, teamDonationPowerLimit_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16864,6 +16901,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         maxHelpersPerSolicitation_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        teamDonationPowerLimit_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -16904,6 +16943,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000002;
         }
         result.maxHelpersPerSolicitation_ = maxHelpersPerSolicitation_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.teamDonationPowerLimit_ = teamDonationPowerLimit_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16925,6 +16968,9 @@ public final class StructureProto {
         }
         if (other.hasMaxHelpersPerSolicitation()) {
           setMaxHelpersPerSolicitation(other.getMaxHelpersPerSolicitation());
+        }
+        if (other.hasTeamDonationPowerLimit()) {
+          setTeamDonationPowerLimit(other.getTeamDonationPowerLimit());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -17097,6 +17143,38 @@ public final class StructureProto {
       public Builder clearMaxHelpersPerSolicitation() {
         bitField0_ = (bitField0_ & ~0x00000002);
         maxHelpersPerSolicitation_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int teamDonationPowerLimit_ ;
+      /**
+       * <code>optional int32 teamDonationPowerLimit = 3;</code>
+       */
+      public boolean hasTeamDonationPowerLimit() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 teamDonationPowerLimit = 3;</code>
+       */
+      public int getTeamDonationPowerLimit() {
+        return teamDonationPowerLimit_;
+      }
+      /**
+       * <code>optional int32 teamDonationPowerLimit = 3;</code>
+       */
+      public Builder setTeamDonationPowerLimit(int value) {
+        bitField0_ |= 0x00000004;
+        teamDonationPowerLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 teamDonationPowerLimit = 3;</code>
+       */
+      public Builder clearTeamDonationPowerLimit() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        teamDonationPowerLimit_ = 0;
         onChanged();
         return this;
       }
@@ -17296,14 +17374,14 @@ public final class StructureProto {
       "MON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCent" +
       "erProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p" +
       "roto.StructureInfoProto\022\025\n\rteamCostLimit",
-      "\030\002 \001(\005\"k\n\016ClanHouseProto\0226\n\nstructInfo\030\001" +
-      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005*I\n\014R" +
-      "esourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007" +
-      "\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021Struct" +
-      "Orientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSIT" +
-      "ION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProt" +
-      "o"
+      "\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030" +
+      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
+      "o\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026" +
+      "teamDonationPowerLimit\030\003 \001(\005*I\n\014Resource" +
+      "Type\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002" +
+      "\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrienta" +
+      "tion\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001" +
+      "\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17419,7 +17497,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
-        new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", });
+        new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", "TeamDonationPowerLimit", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

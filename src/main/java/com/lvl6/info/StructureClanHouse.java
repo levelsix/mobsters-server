@@ -4,21 +4,26 @@ import java.io.Serializable;
 
 public class StructureClanHouse implements Serializable {
 
-	private static final long serialVersionUID = 9044869383817373202L;
+	private static final long serialVersionUID = -5323145807596864964L;
 	
 	private int structId;
 	private int maxHelpersPerSolicitation;
+	private int teamDonationPowerLimit;
 	
 	public StructureClanHouse()
 	{
 		super();
 	}
 
-	public StructureClanHouse( int structId, int maxHelpersPerSolicitation )
+	public StructureClanHouse(
+		int structId,
+		int maxHelpersPerSolicitation,
+		int teamDonationPowerLimit )
 	{
 		super();
 		this.structId = structId;
 		this.maxHelpersPerSolicitation = maxHelpersPerSolicitation;
+		this.teamDonationPowerLimit = teamDonationPowerLimit;
 	}
 
 	public int getStructId() {
@@ -39,6 +44,16 @@ public class StructureClanHouse implements Serializable {
 		this.maxHelpersPerSolicitation = maxHelpersPerSolicitation;
 	}
 
+	public int getTeamDonationPowerLimit()
+	{
+		return teamDonationPowerLimit;
+	}
+
+	public void setTeamDonationPowerLimit( int teamDonationPowerLimit )
+	{
+		this.teamDonationPowerLimit = teamDonationPowerLimit;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -46,6 +61,8 @@ public class StructureClanHouse implements Serializable {
 			+ structId
 			+ ", maxHelpersPerSolicitation="
 			+ maxHelpersPerSolicitation
+			+ ", teamDonationPowerLimit="
+			+ teamDonationPowerLimit
 			+ "]";
 	}
 
