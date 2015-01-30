@@ -598,6 +598,7 @@ message SolicitTeamDonationRequestProto {
 	optional int32 powerLimit = 3;
 	optional int64 clientTime = 4;
    
+	//within some time after soliciting clan, exists a fee to resolicit 
 	//(positive number, server will convert it to negative)
 	optional int32 gemsSpent = 5; 
 }
@@ -606,11 +607,13 @@ message SolicitTeamDonationResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional SolicitTeamDonationStatus status = 2;
 	
-	optional ClanMemberTeamDonation solicitation = 3;
+	optional ClanMemberTeamDonationProto solicitation = 3;
 	
 	enum SolicitTeamDonationStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_GEMS = 3;
+		FAIL_FULFILLED_REQUEST_EXISTS = 4;
 	}
 }
 
@@ -626,7 +629,7 @@ message FulfillTeamDonationSolicitationRequestProto {
 message FulfillTeamDonationSolicitationResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional FulfillTeamDonationSolictationStatus status = 2;
-	optional ClanMemberTeamDonation solicitation = 3;
+	optional ClanMemberTeamDonationProto solicitation = 3;
    
 	enum FulfillTeamDonationSolictationStatus {
 		SUCCESS = 1;

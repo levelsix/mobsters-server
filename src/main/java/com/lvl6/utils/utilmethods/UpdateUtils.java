@@ -17,6 +17,7 @@ import org.springframework.cache.annotation.CacheEvict;
 
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -1609,5 +1610,34 @@ public class UpdateUtils implements UpdateUtil {
 				tableName, insertParams, relativeParams, absoluteParams);
 			
 			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanMemberTeamDonation(ClanMemberTeamDonation cmtd) {
+			String tableName = DBConstants.TABLE_CLAN_MEMBER_TEAM_DONATION;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__ID,
+				cmtd.getId());
+			conditionParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID,
+				cmtd.getUserId());
+			conditionParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID,
+				cmtd.getClanId());
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT,
+				cmtd.getPowerLimit());
+			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED,
+				cmtd.isFulfilled());
+			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG,
+				cmtd.getMsg());
+			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION,
+				new Timestamp(cmtd.getTimeOfSolicitation().getTime()));
+			
+			Map<String, Object> relativeParams = null;//new HashMap<String, Object>();
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+				absoluteParams, conditionParams, "and");
+
+			return numUpdated;			
 		}
 }

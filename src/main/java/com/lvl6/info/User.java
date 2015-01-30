@@ -13,8 +13,6 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -143692604954767005L;
-	
 	private String id;
 	private String name;
 	private int level;
@@ -54,6 +52,7 @@ public class User implements Serializable {
 	private int clanHelps;
 	private Date lastSecretGiftCollectTime;
     private String pvpDefendingMessage;
+    private Date lastTeamDonateSolicitation;
 
 	public User()
 	{
@@ -73,7 +72,8 @@ public class User implements Serializable {
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
-			Date lastSecretGiftCollectTime, String pvpDefendingMessage) {
+			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
+			Date lastTeamDonateSolicitation) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -114,6 +114,7 @@ public class User implements Serializable {
 		this.clanHelps = clanHelps;
 		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
 		this.pvpDefendingMessage = pvpDefendingMessage;
+		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -949,6 +950,30 @@ public class User implements Serializable {
 		return false;
 	}
 	
+	public boolean updateGemsLastTeamDonateSolicitation(int gemsDelta,
+		Timestamp time)
+	{
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION,
+			time);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gems += gemsDelta;
+			this.lastTeamDonateSolicitation = new Date(time.getTime());
+			return true;
+		}
+		return false;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -1267,6 +1292,16 @@ public class User implements Serializable {
         this.pvpDefendingMessage = pvpDefendingMessage;
     }
 
+	public Date getLastTeamDonateSolicitation()
+	{
+		return lastTeamDonateSolicitation;
+	}
+
+	public void setLastTeamDonateSolicitation( Date lastTeamDonateSolicitation )
+	{
+		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -1346,6 +1381,8 @@ public class User implements Serializable {
 			+ lastSecretGiftCollectTime
 			+ ", pvpDefendingMessage="
 			+ pvpDefendingMessage
+			+ ", lastTeamDonateSolicitation="
+			+ lastTeamDonateSolicitation
 			+ "]";
 	}
 

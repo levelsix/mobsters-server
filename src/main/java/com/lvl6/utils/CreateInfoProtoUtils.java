@@ -36,6 +36,7 @@ import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanInvite;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
@@ -118,6 +119,7 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
+import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageProto;
@@ -1762,6 +1764,28 @@ public class CreateInfoProtoUtils {
 			invite.getTimeOfInvite().getTime());
 		
 		return cipb.build();
+	}
+	
+	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
+		ClanMemberTeamDonation cmtd)
+	{
+		ClanMemberTeamDonationProto.Builder cmtdpb =
+			ClanMemberTeamDonationProto.newBuilder();
+		
+		cmtdpb.setDonationUuid(cmtd.getId());
+		cmtdpb.setUserUuid(cmtd.getUserId());
+		cmtdpb.setClanUuid(cmtd.getClanId());
+		cmtdpb.setPowerAvailability(cmtd.getPowerLimit());
+		cmtdpb.setIsFulfilled(cmtd.isFulfilled());
+		
+		String msg = cmtd.getMsg();
+		if (null != msg && !msg.isEmpty()) {
+			cmtdpb.setMsg(msg);
+		}
+		
+		cmtdpb.setTimeOfSolicitation(cmtd.getTimeOfSolicitation().getTime());
+		
+		return cmtdpb.build();
 	}
 
 	/**InAppPurchase.proto********************************************/

@@ -254,7 +254,7 @@ message ClanDataProto {
 
 //------------------------------------------------------------------------------------------
 
-message ClanMemberTeamDonation {
+message ClanMemberTeamDonationProto {
 	optional string donationUuid = 1;
 	optional string userUuid = 2;
 	optional string clanUuid = 3;

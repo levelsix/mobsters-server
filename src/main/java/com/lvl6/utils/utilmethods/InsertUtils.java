@@ -24,6 +24,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
@@ -1853,5 +1854,33 @@ public class InsertUtils implements InsertUtil{
 			int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
 				insertParams, relativeUpdates, absoluteUpdates);
 			return numInserted;
+		}
+		
+		@Override
+		public String insertIntoClanMemberTeamDonateGetId(ClanMemberTeamDonation cmtd)
+		{
+			String tableName = DBConstants.TABLE_CLAN_MEMBER_TEAM_DONATION;
+			String id = randomUUID();
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			Map<String, Object> row = new HashMap<String, Object>();
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__ID, id);
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, cmtd.getUserId());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, cmtd.getClanId());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT, cmtd.getPowerLimit());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED, cmtd.isFulfilled());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG, cmtd.getMsg());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION, cmtd.getTimeOfSolicitation());
+			
+			newRows.add(row);
+			
+			int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
+				tableName, newRows);
+			
+			if (1 != numInserted) {
+				id = null;
+			}
+			
+			return id;
 		}
 }

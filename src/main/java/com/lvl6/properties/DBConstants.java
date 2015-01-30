@@ -31,6 +31,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_HELP_COUNT_FOR_USER = "clan_help_count_for_user";
 	public static final String TABLE_CLAN_ICON_CONFIG = "clan_icon_config";
 	public static final String TABLE_CLAN_INVITE = "clan_invite";
+	public static final String TABLE_CLAN_MEMBER_TEAM_DONATION = "clan_member_team_donation"; 
 	public static final String TABLE_CLAN_RAID_CONFIG = "clan_raid_config";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE_CONFIG = "clan_raid_stage_config";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG = "clan_raid_stage_monster_config";
@@ -64,6 +65,7 @@ public class DBConstants {
 	public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
 	public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
 	public static final String TABLE_MONSTER_LEVEL_INFO_CONFIG = "monster_level_info_config";
+	public static final String TABLE_MONSTER_SNAPSHOT_FOR_USER = "monster_snapshot_for_user";
 	public static final String TABLE_OBSTACLE_CONFIG = "obstacle_config";
 	public static final String TABLE_OBSTACLE_FOR_USER = "obstacle_for_user";
 	public static final String TABLE_PREREQUISITE_CONFIG = "prerequisite_config";
@@ -297,6 +299,15 @@ public class DBConstants {
 	public static final String CLAN_INVITE__CLAN_ID = "clan_id";
 	public static final String CLAN_INVITE__TIME_OF_INVITE = "time_of_invite";
 	
+	/*CLAN_MEMBER_TEAM_DONATION*/
+	public static final String CLAN_MEMBER_TEAM_DONATION__ID = GENERIC__ID;
+	public static final String CLAN_MEMBER_TEAM_DONATION__USER_ID = GENERIC__USER_ID;
+	public static final String CLAN_MEMBER_TEAM_DONATION__CLAN_ID = "clan_id";
+	public static final String CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT = "power_limit";
+	public static final String CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED = "fulfilled";
+	public static final String CLAN_MEMBER_TEAM_DONATION__MSG = "msg";
+	public static final String CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION = "time_of_solicitation";
+	
 	/*EVENT PERSISTENT FOR USER*/
 	public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
 	public static final String EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID = "event_persistent_id";
@@ -459,7 +470,6 @@ public class DBConstants {
 	public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
 	public static final String MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS = "elapsed_seconds";
 
-
 	/*MONSTER HEALING HISTORY*/
 	public static final String MONSTER_HEALING_HISTORY__USER_ID = "user_id";
 	public static final String MONSTER_HEALING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
@@ -467,6 +477,22 @@ public class DBConstants {
 	public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
 	public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
 
+	/*MONSTER SNAPSHOT FOR USER*/
+	public static final String MONSTER_SNAPSHOT_FOR_USER__ID = GENERIC__ID;
+	public static final String MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY = "time_of_entry";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__USER_ID = GENERIC__USER_ID;
+	public static final String MONSTER_SNAPSHOT_FOR_USER__TYPE = "type";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE = "id_in_table";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID = "monster_id";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP = "current_exp";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL = "current_lvl";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP = "current_hp";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID = "off_skill_id";
+	public static final String MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID = "def_skill_id";
+
+	
 	/*OBSTACLE FOR USER */
 	public static final String OBSTACLE_FOR_USER__ID = GENERIC__ID;
 	public static final String OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -710,6 +736,7 @@ public class DBConstants {
     public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
     public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
     //public static final String USER__BOUGHT_BOOSTER_PACK = "bought_booster_pack";
+    public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

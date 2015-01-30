@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -196,4 +197,7 @@ public interface UpdateUtil {
 		String historyDefenderId, Timestamp battleEndTime);
   
   public abstract int updateTaskForUserCompleted(UserTaskCompleted utc);
+
+  public abstract int updateClanMemberTeamDonation( ClanMemberTeamDonation cmtd );
+  
 }

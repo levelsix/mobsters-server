@@ -20914,8 +20914,8 @@ public final class ClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanDataProto)
   }
 
-  public interface ClanMemberTeamDonationOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanMemberTeamDonation)
+  public interface ClanMemberTeamDonationProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanMemberTeamDonationProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -21026,25 +21026,25 @@ public final class ClanProto {
         int index);
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonation}
+   * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonationProto}
    */
-  public static final class ClanMemberTeamDonation extends
+  public static final class ClanMemberTeamDonationProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanMemberTeamDonation)
-      ClanMemberTeamDonationOrBuilder {
-    // Use ClanMemberTeamDonation.newBuilder() to construct.
-    private ClanMemberTeamDonation(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanMemberTeamDonationProto)
+      ClanMemberTeamDonationProtoOrBuilder {
+    // Use ClanMemberTeamDonationProto.newBuilder() to construct.
+    private ClanMemberTeamDonationProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ClanMemberTeamDonation(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private ClanMemberTeamDonationProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ClanMemberTeamDonation defaultInstance;
-    public static ClanMemberTeamDonation getDefaultInstance() {
+    private static final ClanMemberTeamDonationProto defaultInstance;
+    public static ClanMemberTeamDonationProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public ClanMemberTeamDonation getDefaultInstanceForType() {
+    public ClanMemberTeamDonationProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -21054,7 +21054,7 @@ public final class ClanProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ClanMemberTeamDonation(
+    private ClanMemberTeamDonationProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -21141,28 +21141,28 @@ public final class ClanProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonation.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonation.Builder.class);
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ClanMemberTeamDonation> PARSER =
-        new com.google.protobuf.AbstractParser<ClanMemberTeamDonation>() {
-      public ClanMemberTeamDonation parsePartialFrom(
+    public static com.google.protobuf.Parser<ClanMemberTeamDonationProto> PARSER =
+        new com.google.protobuf.AbstractParser<ClanMemberTeamDonationProto>() {
+      public ClanMemberTeamDonationProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClanMemberTeamDonation(input, extensionRegistry);
+        return new ClanMemberTeamDonationProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ClanMemberTeamDonation> getParserForType() {
+    public com.google.protobuf.Parser<ClanMemberTeamDonationProto> getParserForType() {
       return PARSER;
     }
 
@@ -21515,53 +21515,53 @@ public final class ClanProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(byte[] data)
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseDelimitedFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonation parseFrom(
+    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -21570,7 +21570,7 @@ public final class ClanProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanMemberTeamDonation prototype) {
+    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -21582,25 +21582,25 @@ public final class ClanProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonation}
+     * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonationProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanMemberTeamDonation)
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonationOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanMemberTeamDonationProto)
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.ClanProto.ClanMemberTeamDonation.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonation.Builder.class);
+                com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.ClanProto.ClanMemberTeamDonation.newBuilder()
+      // Construct using com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -21650,23 +21650,23 @@ public final class ClanProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
       }
 
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation getDefaultInstanceForType() {
-        return com.lvl6.proto.ClanProto.ClanMemberTeamDonation.getDefaultInstance();
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation build() {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonation result = buildPartial();
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto build() {
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonation buildPartial() {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonation result = new com.lvl6.proto.ClanProto.ClanMemberTeamDonation(this);
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto buildPartial() {
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto result = new com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -21712,16 +21712,16 @@ public final class ClanProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.ClanProto.ClanMemberTeamDonation) {
-          return mergeFrom((com.lvl6.proto.ClanProto.ClanMemberTeamDonation)other);
+        if (other instanceof com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto) {
+          return mergeFrom((com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanMemberTeamDonation other) {
-        if (other == com.lvl6.proto.ClanProto.ClanMemberTeamDonation.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto other) {
+        if (other == com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) return this;
         if (other.hasDonationUuid()) {
           bitField0_ |= 0x00000001;
           donationUuid_ = other.donationUuid_;
@@ -21789,11 +21789,11 @@ public final class ClanProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonation parsedMessage = null;
+        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.ClanProto.ClanMemberTeamDonation) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -22444,15 +22444,15 @@ public final class ClanProto {
         return donationsBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanMemberTeamDonation)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanMemberTeamDonationProto)
     }
 
     static {
-      defaultInstance = new ClanMemberTeamDonation(true);
+      defaultInstance = new ClanMemberTeamDonationProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanMemberTeamDonation)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanMemberTeamDonationProto)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -22551,10 +22551,10 @@ public final class ClanProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor;
+    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable;
+      internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -22654,16 +22654,16 @@ public final class ClanProto {
       ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
       "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
-      "lvl6.proto.PvpClanAvengeProto\"\350\001\n\026ClanMe" +
-      "mberTeamDonation\022\024\n\014donationUuid\030\001 \001(\t\022\020" +
-      "\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
-      "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001" +
-      "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
-      "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
-      "UserMonsterSnapshotProto*X\n\016UserClanStat" +
-      "us\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAP" +
-      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl" +
-      "anProto"
+      "lvl6.proto.PvpClanAvengeProto\"\355\001\n\033ClanMe" +
+      "mberTeamDonationProto\022\024\n\014donationUuid\030\001 " +
+      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022" +
+      "\031\n\021powerAvailability\030\004 \001(\005\022\023\n\013isFulfille" +
+      "d\030\005 \001(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitati" +
+      "on\030\007 \001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.p" +
+      "roto.UserMonsterSnapshotProto*X\n\016UserCla" +
+      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013" +
+      "\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB" +
+      "\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22797,11 +22797,11 @@ public final class ClanProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanDataProto_descriptor,
         new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", });
-    internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor =
+    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor =
       getDescriptor().getMessageTypes().get(19);
-    internal_static_com_lvl6_proto_ClanMemberTeamDonation_fieldAccessorTable = new
+    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClanMemberTeamDonation_descriptor,
+        internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor,
         new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsFulfilled", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
