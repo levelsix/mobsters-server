@@ -125,6 +125,10 @@ public final class SkillsProto {
      * <code>BLOOD_RAGE = 26;</code>
      */
     BLOOD_RAGE(25, 26),
+    /**
+     * <code>TAKE_AIM = 27;</code>
+     */
+    TAKE_AIM(26, 27),
     ;
 
     /**
@@ -239,6 +243,10 @@ public final class SkillsProto {
      * <code>BLOOD_RAGE = 26;</code>
      */
     public static final int BLOOD_RAGE_VALUE = 26;
+    /**
+     * <code>TAKE_AIM = 27;</code>
+     */
+    public static final int TAKE_AIM_VALUE = 27;
 
 
     public final int getNumber() { return value; }
@@ -271,6 +279,7 @@ public final class SkillsProto {
         case 24: return SHALLOW_GRAVE;
         case 25: return HAMMER_TIME;
         case 26: return BLOOD_RAGE;
+        case 27: return TAKE_AIM;
         default: return null;
       }
     }
@@ -2974,7 +2983,7 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
       "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\231\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "\002*\247\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
       "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
       "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
       "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
@@ -2984,9 +2993,9 @@ public final class SkillsProto {
       "\n\014STATIC_FIELD\020\023\022\022\n\016BLINDING_LIGHT\020\024\022\021\n\r" +
       "POISON_POWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020" +
       "\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n",
-      "\nBLOOD_RAGE\020\032*J\n\023SkillActivationType\022\022\n\016" +
-      "USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007" +
-      "PASSIVE\020\003B\rB\013SkillsProto"
+      "\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033*J\n\023SkillActi" +
+      "vationType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_A" +
+      "CTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

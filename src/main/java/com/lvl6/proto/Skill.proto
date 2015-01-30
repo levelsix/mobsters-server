@@ -81,6 +81,7 @@ enum SkillType {
 	SHALLOW_GRAVE = 24;
 	HAMMER_TIME = 25;
 	BLOOD_RAGE = 26;
+	TAKE_AIM = 27;
 }
 
 enum SkillActivationType {
