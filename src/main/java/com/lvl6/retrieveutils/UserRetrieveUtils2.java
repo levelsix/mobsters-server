@@ -540,7 +540,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
                 columnsSelected.add(DBConstants.USER__CLAN_HELPS);
                 
                 columnsSelected.add(DBConstants.USER__PVP_DEFENDING_MESSAGE);
-				
+                columnsSelected.add(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION);
 				
 				
 			}

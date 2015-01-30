@@ -3982,10 +3982,19 @@ public class CreateInfoProtoUtils {
 
 		int numClanHelps = u.getClanHelps();
 		builder.setNumClanHelps(numClanHelps);
+		
+		Date lastTeamDonationSolicitation = u.getLastTeamDonateSolicitation();
+		if (null != lastTeamDonationSolicitation)
+		{
+			builder.setLastTeamDonationSolicitation(
+				lastTeamDonationSolicitation.getTime());
+		}
+			
 
 		if (u.isFake()) {
 
 		}
+		
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();

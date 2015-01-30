@@ -122,6 +122,7 @@ message FullUserProto {
 	optional int64 lastSecretGiftCollectTime = 54;
 	
 	optional string pvpDefendingMessage = 56;
+	optional int64 lastTeamDonationSolicitation = 57;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
