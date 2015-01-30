@@ -471,6 +471,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			} catch (Exception e) {
 				log.error("last_secret_gift_collect_time null...?", e);
 			}
+			
+			Date lastTeamDonateSolicitation = null;
+			try {
+				ts = rs.getTimestamp(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION);
+				if (!rs.wasNull()) {
+					lastTeamDonateSolicitation = new Date(ts.getTime());
+				}
+			} catch (Exception e) {
+				log.error("last_team_donate_solicitation null...?", e);
+			}
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 				tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -481,7 +491,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
 				gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
 				lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
-				numClanHelps, lastSecretGiftCollectTime, pvpDefendingMessage);
+				numClanHelps, lastSecretGiftCollectTime, pvpDefendingMessage,
+				lastTeamDonateSolicitation);
 			return user;
 		}        
 
