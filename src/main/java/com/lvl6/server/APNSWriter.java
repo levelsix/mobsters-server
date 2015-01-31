@@ -211,6 +211,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 			} else {
 				builder.withProductionDestination();
 			}
+			builder.withDelegate(new Lvl6ApnsDelegate());
 			service = builder.build();
 			service.start();
 		} catch (Exception e) {
