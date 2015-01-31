@@ -109,8 +109,9 @@ public class SolicitTeamDonationAction
 		}
 		
 		resBuilder.setStatus(SolicitTeamDonationStatus.SUCCESS);
+		//TODO: consider moving this out to controller
 		ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-			.createClanMemberTeamDonationProto(donation);
+			.createClanMemberTeamDonationProto(donation, null);
 		resBuilder.setSolicitation(cmtdp);
 		
 	}
@@ -139,7 +140,7 @@ public class SolicitTeamDonationAction
 		
 		//if user has a fulfilled request, he can't ask again 
 		donation = clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonationsForUserId(userId);
+			.getClanMemberTeamDonationForUserIdClanId(userId, clanId);
 		
 		if (null != donation && donation.isFulfilled()) {
 			log.error("fulflled solicitation exists {}", donation);

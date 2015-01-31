@@ -46566,20 +46566,37 @@ public final class EventClanProto {
 
     /**
      * <code>optional int64 clientTime = 3;</code>
-     *
-     * <pre>
-     *lock on the requester
-     * </pre>
      */
     boolean hasClientTime();
     /**
      * <code>optional int64 clientTime = 3;</code>
-     *
-     * <pre>
-     *lock on the requester
-     * </pre>
      */
     long getClientTime();
+
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    boolean hasSolicitation();
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation();
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto}
@@ -46662,6 +46679,19 @@ public final class EventClanProto {
             case 24: {
               bitField0_ |= 0x00000004;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = solicitation_.toBuilder();
+              }
+              solicitation_ = input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(solicitation_);
+                solicitation_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
               break;
             }
           }
@@ -46750,29 +46780,55 @@ public final class EventClanProto {
     private long clientTime_;
     /**
      * <code>optional int64 clientTime = 3;</code>
-     *
-     * <pre>
-     *lock on the requester
-     * </pre>
      */
     public boolean hasClientTime() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional int64 clientTime = 3;</code>
-     *
-     * <pre>
-     *lock on the requester
-     * </pre>
      */
     public long getClientTime() {
       return clientTime_;
+    }
+
+    public static final int SOLICITATION_FIELD_NUMBER = 4;
+    private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_;
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    public boolean hasSolicitation() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+      return solicitation_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+     *
+     * <pre>
+     *lock on the solicitor
+     * </pre>
+     */
+    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+      return solicitation_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       clientTime_ = 0L;
+      solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -46796,6 +46852,9 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, clientTime_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, solicitation_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -46816,6 +46875,10 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, clientTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, solicitation_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -46928,6 +46991,7 @@ public final class EventClanProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getFumpFieldBuilder();
+          getSolicitationFieldBuilder();
         }
       }
       private static Builder create() {
@@ -46950,6 +47014,12 @@ public final class EventClanProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (solicitationBuilder_ == null) {
+          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+        } else {
+          solicitationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -46998,6 +47068,14 @@ public final class EventClanProto {
           to_bitField0_ |= 0x00000004;
         }
         result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (solicitationBuilder_ == null) {
+          result.solicitation_ = solicitation_;
+        } else {
+          result.solicitation_ = solicitationBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -47022,6 +47100,9 @@ public final class EventClanProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (other.hasSolicitation()) {
+          mergeSolicitation(other.getSolicitation());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -47285,30 +47366,18 @@ public final class EventClanProto {
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
-       *
-       * <pre>
-       *lock on the requester
-       * </pre>
        */
       public boolean hasClientTime() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional int64 clientTime = 3;</code>
-       *
-       * <pre>
-       *lock on the requester
-       * </pre>
        */
       public long getClientTime() {
         return clientTime_;
       }
       /**
        * <code>optional int64 clientTime = 3;</code>
-       *
-       * <pre>
-       *lock on the requester
-       * </pre>
        */
       public Builder setClientTime(long value) {
         bitField0_ |= 0x00000004;
@@ -47318,16 +47387,164 @@ public final class EventClanProto {
       }
       /**
        * <code>optional int64 clientTime = 3;</code>
-       *
-       * <pre>
-       *lock on the requester
-       * </pre>
        */
       public Builder clearClientTime() {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public boolean hasSolicitation() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+        if (solicitationBuilder_ == null) {
+          return solicitation_;
+        } else {
+          return solicitationBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public Builder setSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+        if (solicitationBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          solicitation_ = value;
+          onChanged();
+        } else {
+          solicitationBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public Builder setSolicitation(
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (solicitationBuilder_ == null) {
+          solicitation_ = builderForValue.build();
+          onChanged();
+        } else {
+          solicitationBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public Builder mergeSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+        if (solicitationBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              solicitation_ != com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+            solicitation_ =
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
+          } else {
+            solicitation_ = value;
+          }
+          onChanged();
+        } else {
+          solicitationBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public Builder clearSolicitation() {
+        if (solicitationBuilder_ == null) {
+          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          onChanged();
+        } else {
+          solicitationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getSolicitationFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+        if (solicitationBuilder_ != null) {
+          return solicitationBuilder_.getMessageOrBuilder();
+        } else {
+          return solicitation_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
+       *
+       * <pre>
+       *lock on the solicitor
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          getSolicitationFieldBuilder() {
+        if (solicitationBuilder_ == null) {
+          solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+                  getSolicitation(),
+                  getParentForChildren(),
+                  isClean());
+          solicitation_ = null;
+        }
+        return solicitationBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto)
@@ -47359,13 +47576,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus getStatus();
+    com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
@@ -47447,7 +47664,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus value = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus.valueOf(rawValue);
+              com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus value = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -47509,9 +47726,9 @@ public final class EventClanProto {
     }
 
     /**
-     * Protobuf enum {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus}
+     * Protobuf enum {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus}
      */
-    public enum FulfillTeamDonationSolictationStatus
+    public enum FulfillTeamDonationSolicitationStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
        * <code>SUCCESS = 1;</code>
@@ -47521,6 +47738,14 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       FAIL_OTHER(1, 2),
+      /**
+       * <code>FAIL_NONEXISTENT_SOLICITATION = 3;</code>
+       */
+      FAIL_NONEXISTENT_SOLICITATION(2, 3),
+      /**
+       * <code>FAIL_ALREADY_FULFILLED = 4;</code>
+       */
+      FAIL_ALREADY_FULFILLED(3, 4),
       ;
 
       /**
@@ -47531,27 +47756,37 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       public static final int FAIL_OTHER_VALUE = 2;
+      /**
+       * <code>FAIL_NONEXISTENT_SOLICITATION = 3;</code>
+       */
+      public static final int FAIL_NONEXISTENT_SOLICITATION_VALUE = 3;
+      /**
+       * <code>FAIL_ALREADY_FULFILLED = 4;</code>
+       */
+      public static final int FAIL_ALREADY_FULFILLED_VALUE = 4;
 
 
       public final int getNumber() { return value; }
 
-      public static FulfillTeamDonationSolictationStatus valueOf(int value) {
+      public static FulfillTeamDonationSolicitationStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_NONEXISTENT_SOLICITATION;
+          case 4: return FAIL_ALREADY_FULFILLED;
           default: return null;
         }
       }
 
-      public static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolictationStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolictationStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolictationStatus>() {
-              public FulfillTeamDonationSolictationStatus findValueByNumber(int number) {
-                return FulfillTeamDonationSolictationStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>() {
+              public FulfillTeamDonationSolicitationStatus findValueByNumber(int number) {
+                return FulfillTeamDonationSolicitationStatus.valueOf(number);
               }
             };
 
@@ -47568,9 +47803,9 @@ public final class EventClanProto {
         return com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final FulfillTeamDonationSolictationStatus[] VALUES = values();
+      private static final FulfillTeamDonationSolicitationStatus[] VALUES = values();
 
-      public static FulfillTeamDonationSolictationStatus valueOf(
+      public static FulfillTeamDonationSolicitationStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -47582,12 +47817,12 @@ public final class EventClanProto {
       private final int index;
       private final int value;
 
-      private FulfillTeamDonationSolictationStatus(int index, int value) {
+      private FulfillTeamDonationSolicitationStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus)
     }
 
     private int bitField0_;
@@ -47613,17 +47848,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status_;
+    private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus getStatus() {
+    public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus() {
       return status_;
     }
 
@@ -47650,7 +47885,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
       solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -47821,7 +48056,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (solicitationBuilder_ == null) {
           solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
@@ -48045,23 +48280,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus.SUCCESS;
+      private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus getStatus() {
+      public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -48071,11 +48306,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolictationStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -50119,30 +50354,34 @@ public final class EventClanProto {
       "lanMemberTeamDonationProto\"w\n\031SolicitTea" +
       "mDonationStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH",
       "ER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022!\n\035FAIL" +
-      "_FULFILLED_REQUEST_EXISTS\020\004\"\247\001\n+FulfillT" +
+      "_FULFILLED_REQUEST_EXISTS\020\004\"\352\001\n+FulfillT" +
       "eamDonationSolicitationRequestProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
       "Proto\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.Ful" +
-      "lUserMonsterProto\022\022\n\nclientTime\030\003 \001(\003\"\333\002" +
-      "\n,FulfillTeamDonationSolicitationRespons" +
-      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022q\n\006status\030\002 \001(\0162a.com.l" +
-      "vl6.proto.FulfillTeamDonationSolicitatio",
-      "nResponseProto.FulfillTeamDonationSolict" +
-      "ationStatus\022A\n\014solicitation\030\003 \001(\0132+.com." +
-      "lvl6.proto.ClanMemberTeamDonationProto\"C" +
-      "\n$FulfillTeamDonationSolictationStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"x\n(VoidTeamD" +
-      "onationSolicitationRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\032\n\022clanTeamDonateUuid\030\002 \001(\t\"\216\002\n)VoidTe" +
-      "amDonationSolicitationResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
-      "Proto\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto.V" +
-      "oidTeamDonationSolicitationResponseProto" +
-      ".VoidTeamDonationSolicitationStatus\"A\n\"V" +
-      "oidTeamDonationSolicitationStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventClanProto"
+      "lUserMonsterProto\022\022\n\nclientTime\030\003 \001(\003\022A\n" +
+      "\014solicitation\030\004 \001(\0132+.com.lvl6.proto.Cla" +
+      "nMemberTeamDonationProto\"\235\003\n,FulfillTeam" +
+      "DonationSolicitationResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr",
+      "oto\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.Ful" +
+      "fillTeamDonationSolicitationResponseProt" +
+      "o.FulfillTeamDonationSolicitationStatus\022" +
+      "A\n\014solicitation\030\003 \001(\0132+.com.lvl6.proto.C" +
+      "lanMemberTeamDonationProto\"\203\001\n%FulfillTe" +
+      "amDonationSolicitationStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\016\n\nFAIL_OTHER\020\002\022!\n\035FAIL_NONEXISTENT_SO" +
+      "LICITATION\020\003\022\032\n\026FAIL_ALREADY_FULFILLED\020\004" +
+      "\"x\n(VoidTeamDonationSolicitationRequestP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi",
+      "nimumUserProto\022\032\n\022clanTeamDonateUuid\030\002 \001" +
+      "(\t\"\216\002\n)VoidTeamDonationSolicitationRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022l\n\006status\030\002 \001(\0162\\.com" +
+      ".lvl6.proto.VoidTeamDonationSolicitation" +
+      "ResponseProto.VoidTeamDonationSolicitati" +
+      "onStatus\"A\n\"VoidTeamDonationSolicitation" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016E" +
+      "ventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -50441,7 +50680,7 @@ public final class EventClanProto {
     internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Fump", "ClientTime", });
+        new java.lang.String[] { "Sender", "Fump", "ClientTime", "Solicitation", });
     internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(47);
     internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_fieldAccessorTable = new

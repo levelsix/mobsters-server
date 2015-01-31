@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class ClanMemberTeamDonation implements Serializable {
 	
-	private static final long serialVersionUID = 4532062443089803708L;
+	private static final long serialVersionUID = -8755436112635166487L;
 	
 	private String id;
 	private String userId;
 	private String clanId;
 	private int powerLimit; 
-	private boolean isFulfilled;
+	private boolean fulfilled;
 	private String msg;
 	private Date timeOfSolicitation;
 	
@@ -24,7 +24,7 @@ public class ClanMemberTeamDonation implements Serializable {
 		String userId,
 		String clanId,
 		int powerLimit,
-		boolean isFulfilled,
+		boolean fulfilled,
 		String msg,
 		Date timeOfSolicitation )
 	{
@@ -33,7 +33,7 @@ public class ClanMemberTeamDonation implements Serializable {
 		this.userId = userId;
 		this.clanId = clanId;
 		this.powerLimit = powerLimit;
-		this.isFulfilled = isFulfilled;
+		this.fulfilled = fulfilled;
 		this.msg = msg;
 		this.timeOfSolicitation = timeOfSolicitation;
 	}
@@ -80,12 +80,12 @@ public class ClanMemberTeamDonation implements Serializable {
 
 	public boolean isFulfilled()
 	{
-		return isFulfilled;
+		return fulfilled;
 	}
 
-	public void setFulfilled( boolean isFulfilled )
+	public void setFulfilled( boolean fulfilled )
 	{
-		this.isFulfilled = isFulfilled;
+		this.fulfilled = fulfilled;
 	}
 
 	public String getMsg()
@@ -119,8 +119,8 @@ public class ClanMemberTeamDonation implements Serializable {
 			+ clanId
 			+ ", powerLimit="
 			+ powerLimit
-			+ ", isFulfilled="
-			+ isFulfilled
+			+ ", fulfilled="
+			+ fulfilled
 			+ ", msg="
 			+ msg
 			+ ", timeOfSolicitation="

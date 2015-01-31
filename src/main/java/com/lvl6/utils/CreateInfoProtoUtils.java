@@ -60,6 +60,7 @@ import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.Obstacle;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.Prerequisite;
@@ -151,12 +152,14 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -1767,7 +1770,7 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
-		ClanMemberTeamDonation cmtd)
+		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu)
 	{
 		ClanMemberTeamDonationProto.Builder cmtdpb =
 			ClanMemberTeamDonationProto.newBuilder();
@@ -1785,6 +1788,11 @@ public class CreateInfoProtoUtils {
 		
 		cmtdpb.setTimeOfSolicitation(cmtd.getTimeOfSolicitation().getTime());
 		
+		if (null != msfu) {
+			UserMonsterSnapshotProto usmp = createUserMonsterSnapshotProto(msfu);
+			cmtdpb.addDonations(usmp);
+		}
+			
 		return cmtdpb.build();
 	}
 
@@ -2425,6 +2433,35 @@ public class CreateInfoProtoUtils {
 		umchpb.setCurrentHealth(mfu.getCurrentHealth());
 
 		return umchpb.build();
+	}
+	
+	public static UserMonsterSnapshotProto createUserMonsterSnapshotProto(
+		MonsterSnapshotForUser msfu)
+	{
+		UserMonsterSnapshotProto.Builder usmpb = UserMonsterSnapshotProto.newBuilder();
+		usmpb.setSnapshotUuid(msfu.getId());
+		usmpb.setTimeOfCreation(msfu.getTimeOfEntry().getTime());
+		
+		String str = msfu.getType();
+		try {
+			SnapshotType type = SnapshotType.valueOf(str);
+		} catch (Exception e) {
+			log.error(String.format(
+				"incorrect SnapshotType enum. MonsterSnapshotForUser=%s", msfu), e);
+		}
+		
+		usmpb.setRelevantTableUuid(msfu.getIdInTable());
+		usmpb.setMonsterForUserUuid(msfu.getMonsterForUserId());
+		usmpb.setUserUuid(msfu.getUserId());
+		usmpb.setMonsterId(msfu.getMonsterId());
+		usmpb.setCurrentExp(msfu.getCurrentExp());
+		usmpb.setCurrentLvl(msfu.getCurrentLvl());
+		usmpb.setCurrentHp(msfu.getCurrentHp());
+		usmpb.setTeamSlotNum(msfu.getTeamSlotNum());
+		usmpb.setOffensiveSkillId(msfu.getOffSkillId());
+		usmpb.setDefensiveSkillId(msfu.getDefSkillId());
+		
+		return usmpb.build();
 	}
 
 	/**Prerequisite.proto****************************************************/

@@ -1627,7 +1627,7 @@ public class UpdateUtils implements UpdateUtil {
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT,
 				cmtd.getPowerLimit());
-			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED,
+			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED,
 				cmtd.isFulfilled());
 			absoluteParams.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG,
 				cmtd.getMsg());

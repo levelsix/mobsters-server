@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
+import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.UserProto.FullUserProto;
@@ -141,6 +143,22 @@ public class ClanStuffUtils {
 	  }
 	  
 	  return cauList;
+  }
+  
+  public static ClanMemberTeamDonation javafyClanMemberTeamDonationProto(
+	  ClanMemberTeamDonationProto cmtdp)
+  {
+	  ClanMemberTeamDonation cmtd = new ClanMemberTeamDonation();
+	  
+	  cmtd.setId(cmtdp.getDonationUuid());
+	  cmtd.setUserId(cmtdp.getUserUuid());
+	  cmtd.setClanId(cmtdp.getClanUuid());
+	  cmtd.setPowerLimit(cmtdp.getPowerAvailability());
+	  cmtd.setFulfilled(cmtdp.getIsFulfilled());
+	  cmtd.setMsg(cmtdp.getMsg());
+	  cmtd.setTimeOfSolicitation(new Date(cmtdp.getTimeOfSolicitation()));
+	  
+	  return cmtd;
   }
   
 }

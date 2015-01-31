@@ -18,6 +18,7 @@ import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -772,6 +773,23 @@ public class MonsterStuffUtils {
 	  }
 	  
 	  return userMonsterIdToDroppedId;
+  }
+
+  public static MonsterSnapshotForUser javafyFullUserMonsterProto(
+	  FullUserMonsterProto fump)
+  {
+	  MonsterSnapshotForUser msfu = new MonsterSnapshotForUser();
+	  msfu.setUserId(fump.getUserUuid());
+	  msfu.setMonsterForUserId(fump.getUserMonsterUuid());
+	  msfu.setMonsterId(fump.getMonsterId());
+	  msfu.setCurrentExp(fump.getCurrentExp());
+	  msfu.setCurrentLvl(fump.getCurrentLvl());
+	  msfu.setCurrentHp(fump.getCurrentHealth());
+	  msfu.setTeamSlotNum(fump.getTeamSlotNum());
+	  msfu.setOffSkillId(fump.getOffensiveSkillId());
+	  msfu.setDefSkillId(fump.getDefensiveSkillId());
+	  
+	  return msfu;
   }
   
 }

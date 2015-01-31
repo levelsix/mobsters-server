@@ -30,6 +30,7 @@ import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
@@ -1868,9 +1869,57 @@ public class InsertUtils implements InsertUtil{
 			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, cmtd.getUserId());
 			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, cmtd.getClanId());
 			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT, cmtd.getPowerLimit());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED, cmtd.isFulfilled());
+			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED, cmtd.isFulfilled());
 			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG, cmtd.getMsg());
 			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION, cmtd.getTimeOfSolicitation());
+			
+			newRows.add(row);
+			
+			int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
+				tableName, newRows);
+			
+			if (1 != numInserted) {
+				id = null;
+			}
+			
+			return id;
+		}
+		
+		@Override
+		public String insertIntoMonsterSnapshotForUser(
+			MonsterSnapshotForUser msfu)
+		{
+			String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
+			String id = randomUUID();
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			Map<String, Object> row = new HashMap<String, Object>();
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID, id);
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY, 
+				new Timestamp(msfu.getTimeOfEntry().getTime()));
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
+				msfu.getUserId());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
+				msfu.getType());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE,
+				msfu.getIdInTable());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID,
+				msfu.getMonsterForUserId());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID,
+				msfu.getMonsterId());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP,
+				msfu.getCurrentExp());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL,
+				msfu.getCurrentLvl());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP,
+				msfu.getCurrentHp());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM,
+				msfu.getTeamSlotNum());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID,
+				msfu.getOffSkillId());
+			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID,
+				msfu.getDefSkillId());
+			
 			
 			newRows.add(row);
 			

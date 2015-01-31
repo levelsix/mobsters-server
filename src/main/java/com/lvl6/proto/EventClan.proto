@@ -623,17 +623,21 @@ message FulfillTeamDonationSolicitationRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional FullUserMonsterProto fump = 2;
 	optional int64 clientTime = 3;
-	//lock on the requester
+	
+	//lock on the solicitor
+	optional ClanMemberTeamDonationProto solicitation = 4; 
 }
 
 message FulfillTeamDonationSolicitationResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional FulfillTeamDonationSolictationStatus status = 2;
+	optional FulfillTeamDonationSolicitationStatus status = 2;
 	optional ClanMemberTeamDonationProto solicitation = 3;
    
-	enum FulfillTeamDonationSolictationStatus {
+	enum FulfillTeamDonationSolicitationStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_NONEXISTENT_SOLICITATION = 3;
+		FAIL_ALREADY_FULFILLED = 4;
 	}
 }
 

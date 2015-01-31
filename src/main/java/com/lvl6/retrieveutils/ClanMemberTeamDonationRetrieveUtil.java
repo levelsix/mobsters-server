@@ -44,7 +44,8 @@ public class ClanMemberTeamDonationRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public ClanMemberTeamDonation getClanMemberTeamDonationsForUserId(String userId)
+	public ClanMemberTeamDonation getClanMemberTeamDonationForUserIdClanId(
+		String userId, String clanId)
 	{
 		ClanMemberTeamDonation cmtd = null;
 		try {
@@ -53,21 +54,22 @@ public class ClanMemberTeamDonationRetrieveUtil {
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, userId);
+			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, clanId);
 			
 			String eqDelim = getQueryConstructionUtil().getOr();
 
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityConditions(
 							columnsToSelected, TABLE_NAME, equalityConditions,
 							eqDelim, values, preparedStatement);
-			log.info("getUserIdToClanMemberTeamDonationForClanId() query={}, value={}",
-				query, userId);
+			log.info("getUserIdToClanMemberTeamDonationForClanId() query={}, values={}",
+				query, values);
 			List<ClanMemberTeamDonation> clanMemberTeamDonations = this.jdbcTemplate
 					.query(query, rowMapper);
 			
@@ -78,60 +80,60 @@ public class ClanMemberTeamDonationRetrieveUtil {
 			}
 			
 		} catch (Exception e) {
-			log.error(String.format(
-				"could not retrieve clan invites for userId=%s", userId),
+			log.error(
+				String.format(
+					"could not retrieve clan invites for userId=%s, clanId=%s",
+					userId, clanId),
 				e);
 		}
 		
 		return cmtd;
 	}
 	
-//	public ClanMemberTeamDonation getClanMemberTeamDonation( String userId, String inviterId )
-//	{
-//		ClanMemberTeamDonation invite = null;
-//		try {
-//			List<String> columnsToSelected = ClanMemberTeamDonationForClientMapper
-//					.getColumnsSelected();
-//
-//			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-//			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, userId);
-//			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__INVITER_ID, inviterId);
-//			
-//			String eqDelim = getQueryConstructionUtil().getAnd();
-//
-//			//query db, "values" is not used 
-//			//(its purpose is to hold the values that were supposed to be put
-//			// into a prepared statement)
-//			List<Object> values = new ArrayList<Object>();
-//			boolean preparedStatement = true;
-//
-//			String query = getQueryConstructionUtil()
-//					.selectRowsQueryEqualityConditions(
-//							columnsToSelected, TABLE_NAME, equalityConditions,
-//							eqDelim, values, preparedStatement);
-//			log.info(String.format(
-//				"getClanMemberTeamDonation() query=%s", query));
-//			List<ClanMemberTeamDonation> invites = this.jdbcTemplate
-//					.query(query, values.toArray(), rowMapper);
-//			
-//			if (null != invites && !invites.isEmpty()) {
-//				invite = invites.get(0);
-//				if (invites.size() > 1) {
-//					log.error(String.format(
-//						"wtf, userId and inviterId s'posd 2b unique. invites=%s",
-//						invites));
-//				}
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			log.error(String.format(
-//				"could not retrieve clan invite for clanId=%s", inviterId),
-//				e);
-//		}
-//		
-//		return invite;
-//	}
+	public ClanMemberTeamDonation getClanMemberTeamDonation( String id, String userId )
+	{
+		ClanMemberTeamDonation invite = null;
+		try {
+			List<String> columnsToSelected = ClanMemberTeamDonationForClientMapper
+					.getColumnsSelected();
+
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__ID, id);
+			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, userId);
+			
+			String eqDelim = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
+
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryEqualityConditions(
+							columnsToSelected, TABLE_NAME, equalityConditions,
+							eqDelim, values, preparedStatement);
+			log.info(
+				"getClanMemberTeamDonation() query={}, values={}",
+				query, values);
+			List<ClanMemberTeamDonation> invites = this.jdbcTemplate
+					.query(query, values.toArray(), rowMapper);
+			
+			if (null != invites && !invites.isEmpty()) {
+				invite = invites.get(0);
+			}
+			
+			
+		} catch (Exception e) {
+			log.error(
+				String.format(
+					"could not retrieve ClanMemberTeamDonation for id=%s, userId=%s",
+					id, userId),
+				e);
+		}
+		
+		return invite;
+	}
 	
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
@@ -161,7 +163,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 			cmtd.setUserId(rs.getString(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID));
 			cmtd.setClanId(rs.getString(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID));
 			cmtd.setPowerLimit(rs.getInt(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT));
-			cmtd.setFulfilled(rs.getBoolean(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED));
+			cmtd.setFulfilled(rs.getBoolean(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED));
 			cmtd.setMsg(rs.getString(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG));
 			
 			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION);
@@ -177,7 +179,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID);
 				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID);
 				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT);
-				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED);
+				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED);
 				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG);
 				columnsSelected.add(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION);
 			}

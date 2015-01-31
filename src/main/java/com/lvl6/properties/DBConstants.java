@@ -304,7 +304,7 @@ public class DBConstants {
 	public static final String CLAN_MEMBER_TEAM_DONATION__USER_ID = GENERIC__USER_ID;
 	public static final String CLAN_MEMBER_TEAM_DONATION__CLAN_ID = "clan_id";
 	public static final String CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT = "power_limit";
-	public static final String CLAN_MEMBER_TEAM_DONATION__IS_FULFILLED = "fulfilled";
+	public static final String CLAN_MEMBER_TEAM_DONATION__FULFILLED = "fulfilled";
 	public static final String CLAN_MEMBER_TEAM_DONATION__MSG = "msg";
 	public static final String CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION = "time_of_solicitation";
 	
