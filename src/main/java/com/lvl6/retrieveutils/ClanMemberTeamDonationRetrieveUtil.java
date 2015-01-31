@@ -71,7 +71,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 			log.info("getUserIdToClanMemberTeamDonationForClanId() query={}, values={}",
 				query, values);
 			List<ClanMemberTeamDonation> clanMemberTeamDonations = this.jdbcTemplate
-					.query(query, rowMapper);
+					.query(query, values.toArray(), rowMapper);
 			
 			if (null != clanMemberTeamDonations &&
 				!clanMemberTeamDonations.isEmpty())
