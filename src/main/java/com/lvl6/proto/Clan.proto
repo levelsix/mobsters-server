@@ -256,7 +256,7 @@ message ClanDataProto {
 
 message ClanMemberTeamDonationProto {
 	optional string donationUuid = 1;
-	optional string userUuid = 2;
+	optional MinimumUserProto solicitor = 2;
 	optional string clanUuid = 3;
 	optional int32 powerAvailability = 4;
 	optional bool isFulfilled = 5;
