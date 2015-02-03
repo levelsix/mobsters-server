@@ -2,6 +2,8 @@ package com.lvl6.utils.utilmethods;
 
 import java.util.List;
 
+import com.lvl6.info.MonsterSnapshotForUser;
+
 
 public interface DeleteUtil {
 
@@ -67,5 +69,10 @@ public interface DeleteUtil {
   public abstract int deleteClanAvenge(String clanId, List<String> ids);
   
   public abstract int deleteClanAvengeUser(String clanId, List<String> ids);
+
+  public abstract int deleteClanMemberTeamDonationSolicitation(List<String> ids);
+  
+  public abstract int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots,
+	  String userId);
   
 }

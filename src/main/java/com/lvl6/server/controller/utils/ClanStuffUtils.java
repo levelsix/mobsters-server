@@ -161,8 +161,11 @@ public class ClanStuffUtils {
 	  cmtd.setPowerLimit(cmtdp.getPowerAvailability());
 	  cmtd.setFulfilled(cmtdp.getIsFulfilled());
 	  cmtd.setMsg(cmtdp.getMsg());
-	  cmtd.setTimeOfSolicitation(new Date(cmtdp.getTimeOfSolicitation()));
 	  
+	  if (cmtdp.hasTimeOfSolicitation() && cmtdp.getTimeOfSolicitation() > 0)
+	  {
+		  cmtd.setTimeOfSolicitation(new Date(cmtdp.getTimeOfSolicitation()));
+	  }
 	  return cmtd;
   }
   

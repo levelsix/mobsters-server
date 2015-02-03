@@ -26,6 +26,7 @@ import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -792,4 +793,29 @@ public class MonsterStuffUtils {
 	  return msfu;
   }
   
+  public static MonsterSnapshotForUser javafyUserMonsterSnapshotProto(
+	  UserMonsterSnapshotProto umsp)
+  {
+	  MonsterSnapshotForUser msfu = new MonsterSnapshotForUser();
+	  msfu.setId(umsp.getSnapshotUuid());
+	  
+	  Date timeOfEntry = null;
+	  if (umsp.hasTimeOfCreation() && umsp.getTimeOfCreation() > 0) {
+		  timeOfEntry = new Date(umsp.getTimeOfCreation());
+	  }
+	  msfu.setTimeOfEntry(timeOfEntry);
+	  msfu.setType(umsp.getType().name());
+	  msfu.setIdInTable(umsp.getRelevantTableUuid());
+	  msfu.setMonsterForUserId(umsp.getMonsterForUserUuid());
+	  msfu.setUserId(umsp.getUserUuid());
+	  msfu.setMonsterId(umsp.getMonsterId());
+	  msfu.setCurrentExp(umsp.getCurrentExp());
+	  msfu.setCurrentLvl(umsp.getCurrentLvl());
+	  msfu.setCurrentHp(umsp.getCurrentHp());
+	  msfu.setTeamSlotNum(umsp.getTeamSlotNum());
+	  msfu.setOffSkillId(umsp.getOffensiveSkillId());
+	  msfu.setDefSkillId(umsp.getDefensiveSkillId());
+	  
+	  return msfu;
+  }
 }

@@ -10,14 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
 public class DeleteUtils implements DeleteUtil {
 
-
-	
 	private static final Logger log = LoggerFactory.getLogger(DeleteUtils.class);
 	
   public static DeleteUtil get(){
@@ -441,6 +440,7 @@ public class DeleteUtils implements DeleteUtil {
 	    return numDeleted;
 	}
 
+	@Override
 	public int deleteItemSecretGifts(String userId, List<String> ids)
 	{
 		String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
@@ -463,6 +463,7 @@ public class DeleteUtils implements DeleteUtil {
 	    return numDeleted;
 	}
 	
+	@Override
 	public int deleteClanAvenge(String clanId, List<String> ids)
 	{
 		String tableName = DBConstants.TABLE_CLAN_AVENGE;
@@ -485,6 +486,7 @@ public class DeleteUtils implements DeleteUtil {
 		return numDeleted;
 	}
 	
+	@Override
 	public int deleteClanAvengeUser(String clanId, List<String> ids)
 	{
 		String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
@@ -506,5 +508,55 @@ public class DeleteUtils implements DeleteUtil {
 			.deleteDirectQueryNaive(query, values);
 		return numDeleted;
 	}
+
+	@Override
+	public int deleteClanMemberTeamDonationSolicitation(List<String> ids)
+	{
+		String tableName = DBConstants.TABLE_CLAN_MEMBER_TEAM_DONATION;
+
+		int size = ids.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format(
+			"DELETE FROM %s WHERE %s IN (%s)",
+			tableName, DBConstants.CLAN_MEMBER_TEAM_DONATION__ID, questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(ids);
+
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
 	
+	@Override
+	public int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots,
+		String userId)
+	{
+		String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
+
+		int size = snapshots.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format( "DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+			tableName,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID,
+			questionMarks,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
+
+		List<String> ids = new ArrayList<String>();
+		for (MonsterSnapshotForUser msfu : snapshots) {
+			ids.add(msfu.getId());
+		}
+		
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(ids);
+		values.add(userId);
+
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
 }
