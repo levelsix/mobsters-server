@@ -53,11 +53,13 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 		clanId = user.getClanId();
 		
 		if (null == clanId) {
+			log.info("clanId null.");
 			return;
 		}
 		
 		List<ClanMemberTeamDonation> clanMemberTeamDonations = clanMemberTeamDonationRetrieveUtil
 			.getClanMemberTeamDonationForClanId(clanId);
+		log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
 		
 		//log.info(String.format("clanMemberTeamDonations=%s", clanMemberTeamDonations));
 		if (null == clanMemberTeamDonations || clanMemberTeamDonations.isEmpty())
@@ -70,6 +72,8 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 			userIdToDonationSolicitations.put(solicitorId, cmtd);
 		}
 		
+		log.info("userIdToDonationSolicitations={}", userIdToDonationSolicitations);
+		
 		fillMe.addUserId(userIdToDonationSolicitations.keySet());
 	}
 
@@ -79,16 +83,19 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 		if (null == userIdToDonationSolicitations ||
 			userIdToDonationSolicitations.isEmpty())
 		{
+			log.info("userIdToDonationSolicitations={}", userIdToDonationSolicitations);
 			return;
 		}
 		Map<String, User> solicitors = useMe.getUserIdsToUsers(
 			userIdToDonationSolicitations.keySet());
 		
 		if (null == solicitors || solicitors.isEmpty()) {
+			log.info("solicitors={}", solicitors);
 			return;
 		}
 		
 		Clan c = useMe.getClan(clanId);
+		log.info("c={}", c);
 		
 		//convert all solicitors into MinimumUserProtos
 		Map<String, MinimumUserProto> mupSolicitors = new HashMap<String, MinimumUserProto>();
@@ -99,6 +106,8 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 				.createMinimumUserProtoFromUserAndClan(solicitor, c);
 			mupSolicitors.put(solicitorId, mup);
 		}
+		
+		log.info("mupSolicitors={}", mupSolicitors);
 
 		List<MonsterSnapshotForUser> msfuList = monsterSnapshotForUserRetrieveUtil.
 			getMonstersSnapshotsForUser(userId,
@@ -116,6 +125,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 			ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
 				.createClanMemberTeamDonationProto(solicitation, msfu, mup);
 
+			log.info("cmtdp={}", cmtdp);
 			cdpBuilder.addClanDonationSolicitations(cmtdp);
 		}
 	}
