@@ -28,19 +28,19 @@ public class MonsterSnapshotForUser implements Serializable {
 
 	public MonsterSnapshotForUser(MonsterSnapshotForUser msfu) {
 		super();
-		msfu.id = id;
-		msfu.timeOfEntry = timeOfEntry;
-		msfu.userId = userId;
-		msfu.type = type;
-		msfu.idInTable = idInTable;
-		msfu.monsterForUserId = monsterForUserId;
-		msfu.monsterId = monsterId;
-		msfu.currentExp = currentExp;
-		msfu.currentLvl = currentLvl;
-		msfu.currentHp = currentHp;
-		msfu.teamSlotNum = teamSlotNum;
-		msfu.offSkillId = offSkillId;
-		msfu.defSkillId = defSkillId;
+		this.id = msfu.id;
+		this.timeOfEntry = msfu.timeOfEntry;
+		this.userId = msfu.userId;
+		this.type = msfu.type;
+		this.idInTable = msfu.idInTable;
+		this.monsterForUserId = msfu.monsterForUserId;
+		this.monsterId = msfu.monsterId;
+		this.currentExp = msfu.currentExp;
+		this.currentLvl = msfu.currentLvl;
+		this.currentHp = msfu.currentHp;
+		this.teamSlotNum = msfu.teamSlotNum;
+		this.offSkillId = msfu.offSkillId;
+		this.defSkillId = msfu.defSkillId;
 	}
 	
 	public MonsterSnapshotForUser(
