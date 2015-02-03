@@ -64,6 +64,7 @@ public class FulfillTeamDonationSolicitationAction
 
 	//derived state
 	private String solicitationId;
+	private String solicitorId;
 	private ClanMemberTeamDonation solicitation;
 	private MonsterSnapshotForUser msfuNew;
 	
@@ -107,11 +108,12 @@ public class FulfillTeamDonationSolicitationAction
 	private boolean verifySemantics(Builder resBuilder) {
 
 		solicitationId = cmtd.getId();
+		solicitorId = cmtd.getUserId();
 		solicitation = clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonation(solicitationId, donatorId);
+			.getClanMemberTeamDonation(solicitationId, solicitorId);
 
 		if (null == solicitation) {
-			log.error("nonexistent solicitation. {}", solicitation);
+			log.error("nonexistent solicitation. origClientSolicitation={}", cmtd);
 			resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_NONEXISTENT_SOLICITATION);
 			return false;
 		}
