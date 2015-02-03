@@ -56,9 +56,10 @@ public class MonsterForUserTest extends TestCase {
 		MonsterForUser mfu = monsterIdToMfu.get(PIECE_DEFICIENT_MONSTER_ID);
 		int currentNumPieces = mfu.getNumPieces();
 		
+		Date now = new Date();
 		int numPuzzlePieces = monzter.getNumPuzzlePieces();
 		int numPiecesRemaining = MonsterStuffUtils.completePieceDeficientMonster(
-			mfu, numPuzzlePieces, monzter);
+			mfu, numPuzzlePieces, monzter, now);
 			
 		//The number of pieces left should still be the same amount the monster had
 		//pieces remaining = numPuzzlePieces - (numPuzzlePieces - currentNumPieces)
@@ -89,8 +90,9 @@ public class MonsterForUserTest extends TestCase {
 		//impossibility referring to that a piece sufficient monster
 		//would be sent in as an argument to 
 		// MonsterStuffUtils.completeMonstersFromQuantities()
+		Date now = new Date();
 		Map<Integer, Integer> newMonsterIdToQuantity = MonsterStuffUtils
-			.completeMonstersFromQuantities(monsterIdToMfu, monsterIdToQuantity);
+			.completeMonstersFromQuantities(monsterIdToMfu, monsterIdToQuantity, now);
 			
 		assertEquals(monsterIdToQuantity.get(PIECE_SUFFICIENT_MONSTER_ID),
 			newMonsterIdToQuantity.get(PIECE_SUFFICIENT_MONSTER_ID));

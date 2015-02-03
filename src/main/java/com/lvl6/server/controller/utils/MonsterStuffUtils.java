@@ -210,7 +210,7 @@ public class MonsterStuffUtils {
   //monsterIdToQuantity will not be modified
   public static Map<Integer, Integer> completeMonstersFromQuantities(
   		Map<Integer, MonsterForUser> monsterIdToIncompleteUserMonster,
-  		Map<Integer, Integer> monsterIdToQuantity) {
+  		Map<Integer, Integer> monsterIdToQuantity, Date combineTime) {
   	
   	Map<Integer, Integer> monsterIdToNewQuantity = new HashMap<Integer, Integer>();
   	//IF NO INCOMLETE MONSTERFORUSER EXISTS, THEN METHOD JUST
@@ -245,7 +245,7 @@ public class MonsterStuffUtils {
   			
   		} else {
   			newPiecesAvailable = completePieceDeficientMonster(
-  				mfu, numPiecesAvailable, monzter);
+  				mfu, numPiecesAvailable, monzter, combineTime);
   		}
   		
   		if (newPiecesAvailable > 0) {
@@ -272,7 +272,7 @@ public class MonsterStuffUtils {
   //returns the number of pieces remaining after using up the pieces
   //available in order to try completing the monster_for_user
   public static int completePieceDeficientMonster(MonsterForUser mfu,
-  		int numPiecesAvailable, Monster monzter) {
+  		int numPiecesAvailable, Monster monzter, Date combineTime) {
   	int numPiecesRemaining = 0;
   	
   	int numPiecesForCompletion = monzter.getNumPuzzlePieces();
@@ -487,25 +487,25 @@ public class MonsterStuffUtils {
   	Map<Integer, Integer> monsterIdToRemainingPieces =
   		new HashMap<Integer, Integer>();
   	awardPieces(userId, monsterIdToNumPieces, monsterIdsToIncompletes,
-  		monsterIdToRemainingPieces);
+  		monsterIdToRemainingPieces, combineStartDate);
   	
   	//UPDATE THESE INCOMPLETE MONSTERS, IF ANY. SINCE UPDATING, UPDATE THE
   	//combineStartTime
   	List<MonsterForUser> dirtyMonsterForUserList = 
   			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
   	if (!dirtyMonsterForUserList.isEmpty()) {
-  		log.info("the monsters that are updated: " + dirtyMonsterForUserList);
+  		log.info("the monsters that are updated: {}", dirtyMonsterForUserList);
   		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList,
   				sourceOfPieces, combineStartDate);
   	}
-  	log.info("the new monsters (in pieces) the user gets {}", monsterIdToRemainingPieces); 
+  	log.info("new monsters (in pieces) the user gets {}", monsterIdToRemainingPieces); 
   	
   	//monsterIdToRemainingPieces now contains all the new monsters
   	//the user will get. SET THE combineStartTime
   	List<MonsterForUser> newMonsters = createMonstersForUserFromQuantities(
   			userId, monsterIdToRemainingPieces, monsterIdToLvlToQuantity, combineStartDate);
   	if (!newMonsters.isEmpty()) {
-  		log.info("the monsters that are new: " + newMonsters);
+  		log.info("the monsters that are new: {}", newMonsters);
   		List<String> monsterForUserIds = InsertUtils.get().insertIntoMonsterForUserReturnIds(
   				userId, newMonsters, sourceOfPieces, combineStartDate);
   		
@@ -531,7 +531,8 @@ public class MonsterStuffUtils {
 	  String userId,
 	  Map<Integer, Integer> monsterIdToNumPieces,
 	  Map<Integer, MonsterForUser> monsterIdsToIncompletes,
-	  Map<Integer, Integer> monsterIdToRemainingPieces)
+	  Map<Integer, Integer> monsterIdToRemainingPieces,
+	  Date combineTime)
   {
 	  if (null == monsterIdToNumPieces || monsterIdToNumPieces.isEmpty()) {
 		  //no pieces to award;
@@ -551,7 +552,7 @@ public class MonsterStuffUtils {
 	  //monsterIdsToIncompletes will be modified
 	  monsterIdToRemainingPieces.putAll(
 		  completeMonstersFromQuantities(
-			  monsterIdsToIncompletes, monsterIdToNumPieces));
+			  monsterIdsToIncompletes, monsterIdToNumPieces, combineTime));
   }
   
   //returns user monster ids
