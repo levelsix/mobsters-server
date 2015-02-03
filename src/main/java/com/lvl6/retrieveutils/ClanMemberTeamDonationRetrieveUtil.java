@@ -44,6 +44,45 @@ public class ClanMemberTeamDonationRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
+	public List<ClanMemberTeamDonation> getClanMemberTeamDonationForClanId(
+		String clanId)
+	{
+		List<ClanMemberTeamDonation> clanMemberTeamDonations = null;
+		try {
+			List<String> columnsToSelected = ClanMemberTeamDonationForClientMapper
+				.getColumnsSelected();
+
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, clanId);
+			
+			String eqDelim = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
+
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryEqualityConditions(
+							columnsToSelected, TABLE_NAME, equalityConditions,
+							eqDelim, values, preparedStatement);
+			log.info("getUserIdToClanMemberTeamDonationForClanId() query={}, values={}",
+				query, values);
+			clanMemberTeamDonations = this.jdbcTemplate
+					.query(query, values.toArray(), rowMapper);
+			
+		} catch (Exception e) {
+			log.error(
+				String.format(
+					"could not retrieve clan invites for clanId=%s",
+					clanId),
+				e);
+		}
+		
+		return clanMemberTeamDonations;
+	}
+	
 	public ClanMemberTeamDonation getClanMemberTeamDonationForUserIdClanId(
 		String userId, String clanId)
 	{
@@ -56,7 +95,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, userId);
 			equalityConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, clanId);
 			
-			String eqDelim = getQueryConstructionUtil().getOr();
+			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put

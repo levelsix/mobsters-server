@@ -105,6 +105,7 @@ import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
+import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -118,6 +119,7 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
@@ -140,6 +142,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
@@ -293,7 +296,13 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	
+	@Autowired
+	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 
+	@Autowired
+	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	
 	@Autowired
 	protected InsertUtil insertUtil;
 	
@@ -661,6 +670,12 @@ public class StartupController extends EventController {
 			scra.setUp(fillMe);
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			
+			SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
+				cdpb, user, playerId, clanMemberTeamDonationRetrieveUtil,
+				monsterSnapshotForUserRetrieveUtil);
+			scmtda.setUp(fillMe);
+			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
+			
 			
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -680,6 +695,9 @@ public class StartupController extends EventController {
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 			scra.execute(fillMe);
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
+			scmtda.execute(fillMe);
+			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
+			
 			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
@@ -1421,7 +1439,7 @@ public class StartupController extends EventController {
 		}
 		
 	}
-
+	
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId, Timestamp now) {
 		Date nowDate = new Date(now.getTime());
 		String clanId = user.getClanId();
@@ -2379,6 +2397,26 @@ public class StartupController extends EventController {
 		ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
 	{
 		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+	}
+	
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
+	{
+		return clanMemberTeamDonationRetrieveUtil;
+	}
+	public void setClanMemberTeamDonationRetrieveUtil(
+		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil )
+	{
+		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
+	}
+	
+	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil()
+	{
+		return monsterSnapshotForUserRetrieveUtil;
+	}
+	public void setMonsterSnapshotForUserRetrieveUtil(
+		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil )
+	{
+		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 	}
 	
 	public InsertUtil getInsertUtil()

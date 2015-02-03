@@ -19593,6 +19593,30 @@ public final class ClanProto {
      */
     com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> 
+        getClanDonationSolicitationsList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    int getClanDonationSolicitationsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+        getClanDonationSolicitationsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanDataProto}
@@ -19670,6 +19694,14 @@ public final class ClanProto {
               clanAvengings_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpClanAvengeProto.PARSER, extensionRegistry));
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              clanDonationSolicitations_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -19686,6 +19718,9 @@ public final class ClanProto {
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           clanAvengings_ = java.util.Collections.unmodifiableList(clanAvengings_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          clanDonationSolicitations_ = java.util.Collections.unmodifiableList(clanDonationSolicitations_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -19823,10 +19858,46 @@ public final class ClanProto {
       return clanAvengings_.get(index);
     }
 
+    public static final int CLANDONATIONSOLICITATIONS_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> clanDonationSolicitations_;
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
+      return clanDonationSolicitations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+        getClanDonationSolicitationsOrBuilderList() {
+      return clanDonationSolicitations_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    public int getClanDonationSolicitationsCount() {
+      return clanDonationSolicitations_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
+      return clanDonationSolicitations_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+        int index) {
+      return clanDonationSolicitations_.get(index);
+    }
+
     private void initFields() {
       clanChats_ = java.util.Collections.emptyList();
       clanHelpings_ = java.util.Collections.emptyList();
       clanAvengings_ = java.util.Collections.emptyList();
+      clanDonationSolicitations_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -19850,6 +19921,9 @@ public final class ClanProto {
       for (int i = 0; i < clanAvengings_.size(); i++) {
         output.writeMessage(3, clanAvengings_.get(i));
       }
+      for (int i = 0; i < clanDonationSolicitations_.size(); i++) {
+        output.writeMessage(4, clanDonationSolicitations_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -19870,6 +19944,10 @@ public final class ClanProto {
       for (int i = 0; i < clanAvengings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, clanAvengings_.get(i));
+      }
+      for (int i = 0; i < clanDonationSolicitations_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, clanDonationSolicitations_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -19983,6 +20061,7 @@ public final class ClanProto {
           getClanChatsFieldBuilder();
           getClanHelpingsFieldBuilder();
           getClanAvengingsFieldBuilder();
+          getClanDonationSolicitationsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -20008,6 +20087,12 @@ public final class ClanProto {
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           clanAvengingsBuilder_.clear();
+        }
+        if (clanDonationSolicitationsBuilder_ == null) {
+          clanDonationSolicitations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          clanDonationSolicitationsBuilder_.clear();
         }
         return this;
       }
@@ -20062,6 +20147,15 @@ public final class ClanProto {
           result.clanAvengings_ = clanAvengings_;
         } else {
           result.clanAvengings_ = clanAvengingsBuilder_.build();
+        }
+        if (clanDonationSolicitationsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            clanDonationSolicitations_ = java.util.Collections.unmodifiableList(clanDonationSolicitations_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.clanDonationSolicitations_ = clanDonationSolicitations_;
+        } else {
+          result.clanDonationSolicitations_ = clanDonationSolicitationsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -20153,6 +20247,32 @@ public final class ClanProto {
                    getClanAvengingsFieldBuilder() : null;
             } else {
               clanAvengingsBuilder_.addAllMessages(other.clanAvengings_);
+            }
+          }
+        }
+        if (clanDonationSolicitationsBuilder_ == null) {
+          if (!other.clanDonationSolicitations_.isEmpty()) {
+            if (clanDonationSolicitations_.isEmpty()) {
+              clanDonationSolicitations_ = other.clanDonationSolicitations_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureClanDonationSolicitationsIsMutable();
+              clanDonationSolicitations_.addAll(other.clanDonationSolicitations_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clanDonationSolicitations_.isEmpty()) {
+            if (clanDonationSolicitationsBuilder_.isEmpty()) {
+              clanDonationSolicitationsBuilder_.dispose();
+              clanDonationSolicitationsBuilder_ = null;
+              clanDonationSolicitations_ = other.clanDonationSolicitations_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              clanDonationSolicitationsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getClanDonationSolicitationsFieldBuilder() : null;
+            } else {
+              clanDonationSolicitationsBuilder_.addAllMessages(other.clanDonationSolicitations_);
             }
           }
         }
@@ -20901,6 +21021,246 @@ public final class ClanProto {
           clanAvengings_ = null;
         }
         return clanAvengingsBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> clanDonationSolicitations_ =
+        java.util.Collections.emptyList();
+      private void ensureClanDonationSolicitationsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>(clanDonationSolicitations_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> clanDonationSolicitationsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clanDonationSolicitations_);
+        } else {
+          return clanDonationSolicitationsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public int getClanDonationSolicitationsCount() {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          return clanDonationSolicitations_.size();
+        } else {
+          return clanDonationSolicitationsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          return clanDonationSolicitations_.get(index);
+        } else {
+          return clanDonationSolicitationsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder setClanDonationSolicitations(
+          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.set(index, value);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder setClanDonationSolicitations(
+          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder addClanDonationSolicitations(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.add(value);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder addClanDonationSolicitations(
+          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.add(index, value);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder addClanDonationSolicitations(
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder addClanDonationSolicitations(
+          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder addAllClanDonationSolicitations(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> values) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          ensureClanDonationSolicitationsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, clanDonationSolicitations_);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder clearClanDonationSolicitations() {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          clanDonationSolicitations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public Builder removeClanDonationSolicitations(int index) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          ensureClanDonationSolicitationsIsMutable();
+          clanDonationSolicitations_.remove(index);
+          onChanged();
+        } else {
+          clanDonationSolicitationsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getClanDonationSolicitationsBuilder(
+          int index) {
+        return getClanDonationSolicitationsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+          int index) {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          return clanDonationSolicitations_.get(index);  } else {
+          return clanDonationSolicitationsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+           getClanDonationSolicitationsOrBuilderList() {
+        if (clanDonationSolicitationsBuilder_ != null) {
+          return clanDonationSolicitationsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clanDonationSolicitations_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder() {
+        return getClanDonationSolicitationsFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder(
+          int index) {
+        return getClanDonationSolicitationsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder> 
+           getClanDonationSolicitationsBuilderList() {
+        return getClanDonationSolicitationsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          getClanDonationSolicitationsFieldBuilder() {
+        if (clanDonationSolicitationsBuilder_ == null) {
+          clanDonationSolicitationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+                  clanDonationSolicitations_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          clanDonationSolicitations_ = null;
+        }
+        return clanDonationSolicitationsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanDataProto)
@@ -22682,20 +23042,22 @@ public final class ClanProto {
       "proto.MinimumUserProto\022\024\n\010clanUuid\030\004 \001(\t" +
       "B\002\030\001\0225\n\013inviterClan\030\007 \001(\0132 .com.lvl6.pro" +
       "to.MinimumClanProto\022\024\n\014timeOfInvite\030\005 \001(" +
-      "\003\"\271\001\n\rClanDataProto\0228\n\tclanChats\030\001 \003(\0132%" +
+      "\003\"\211\002\n\rClanDataProto\0228\n\tclanChats\030\001 \003(\0132%" +
       ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
       "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
-      "lvl6.proto.PvpClanAvengeProto\"\220\002\n\033ClanMe" +
+      "lvl6.proto.PvpClanAvengeProto\022N\n\031clanDon" +
+      "ationSolicitations\030\004 \003(\0132+.com.lvl6.prot" +
+      "o.ClanMemberTeamDonationProto\"\220\002\n\033ClanMe" +
       "mberTeamDonationProto\022\024\n\014donationUuid\030\001 " +
       "\001(\t\0223\n\tsolicitor\030\002 \001(\0132 .com.lvl6.proto." +
       "MinimumUserProto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
       "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001" +
       "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
       "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
-      "UserMonsterSnapshotProto*X\n\016UserClanStat" +
+      "UserMonsterSnapshotProto*X\n\016UserClanStat",
       "us\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAP" +
-      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl",
+      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl" +
       "anProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -22829,7 +23191,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanDataProto_descriptor,
-        new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", });
+        new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", "ClanDonationSolicitations", });
     internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor =
       getDescriptor().getMessageTypes().get(19);
     internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable = new

@@ -1770,13 +1770,16 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
-		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu)
+		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
+		User u, Clan c)
 	{
 		ClanMemberTeamDonationProto.Builder cmtdpb =
 			ClanMemberTeamDonationProto.newBuilder();
 		
 		cmtdpb.setDonationUuid(cmtd.getId());
-		cmtdpb.setUserUuid(cmtd.getUserId());
+		
+		MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u, c);
+		cmtdpb.setSolicitor(mup);
 		cmtdpb.setClanUuid(cmtd.getClanId());
 		cmtdpb.setPowerAvailability(cmtd.getPowerLimit());
 		cmtdpb.setIsFulfilled(cmtd.isFulfilled());
@@ -1796,6 +1799,35 @@ public class CreateInfoProtoUtils {
 		return cmtdpb.build();
 	}
 
+	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
+		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
+		MinimumUserProto mup)
+	{
+		ClanMemberTeamDonationProto.Builder cmtdpb =
+			ClanMemberTeamDonationProto.newBuilder();
+		
+		cmtdpb.setDonationUuid(cmtd.getId());
+		
+		cmtdpb.setSolicitor(mup);
+		cmtdpb.setClanUuid(cmtd.getClanId());
+		cmtdpb.setPowerAvailability(cmtd.getPowerLimit());
+		cmtdpb.setIsFulfilled(cmtd.isFulfilled());
+		
+		String msg = cmtd.getMsg();
+		if (null != msg && !msg.isEmpty()) {
+			cmtdpb.setMsg(msg);
+		}
+		
+		cmtdpb.setTimeOfSolicitation(cmtd.getTimeOfSolicitation().getTime());
+		
+		if (null != msfu) {
+			UserMonsterSnapshotProto usmp = createUserMonsterSnapshotProto(msfu);
+			cmtdpb.addDonations(usmp);
+		}
+			
+		return cmtdpb.build();
+	}
+	
 	/**InAppPurchase.proto********************************************/
 	public static GoldSaleProto createGoldSaleProtoFromGoldSale(GoldSale sale) {
 		GoldSaleProto.Builder b = GoldSaleProto.newBuilder().setSaleId(sale.getId()).setStartDate(sale.getStartDate().getTime()).setEndDate(sale.getEndDate().getTime());

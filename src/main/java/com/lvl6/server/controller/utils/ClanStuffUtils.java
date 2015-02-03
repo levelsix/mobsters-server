@@ -150,8 +150,13 @@ public class ClanStuffUtils {
   {
 	  ClanMemberTeamDonation cmtd = new ClanMemberTeamDonation();
 	  
+	  if (null == cmtdp) {
+		  log.info("null ClanMemberTeamDonationProto.");
+		  return cmtd;
+	  }
+	  
 	  cmtd.setId(cmtdp.getDonationUuid());
-	  cmtd.setUserId(cmtdp.getUserUuid());
+	  cmtd.setUserId(cmtdp.getSolicitor().getUserUuid());
 	  cmtd.setClanId(cmtdp.getClanUuid());
 	  cmtd.setPowerLimit(cmtdp.getPowerAvailability());
 	  cmtd.setFulfilled(cmtdp.getIsFulfilled());

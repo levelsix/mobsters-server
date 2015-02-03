@@ -62,7 +62,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		String userId = senderProto.getUserUuid();
+		String donatorId = senderProto.getUserUuid();
 		FullUserMonsterProto fump = reqProto.getFump();
 		Date clientTime = new Date(reqProto.getClientTime());
 		ClanMemberTeamDonationProto solicitationProto = reqProto
@@ -86,7 +86,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			UUID.fromString(donatorId);
 			UUID.fromString(clanId);
 			UUID.fromString(msfu.getId());
 			UUID.fromString(msfu.getUserId());
@@ -100,14 +100,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		} catch (Exception e) {
 			log.error(String.format(
 				"UUID error. incorrect userId=%s, clanId=%s, or solicitation=%s",
-				userId, clanId, cmtd), e);
+				donatorId, clanId, cmtd), e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
-			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(userId);
+			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(donatorId);
 			resEvent.setTag(event.getTag());
 			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -130,13 +130,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		try {
 			FulfillTeamDonationSolicitationAction ftdsa =
 				new FulfillTeamDonationSolicitationAction(
-					userId, clanId, msfu, cmtd, clientTime,
+					donatorId, clanId, msfu, cmtd, clientTime,
 					clanMemberTeamDonationRetrieveUtil,
 					UpdateUtils.get(), InsertUtils.get());
 
 			ftdsa.execute(resBuilder);
 
-			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(userId);
+			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(donatorId);
 			resEvent.setTag(event.getTag());
 			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder.build());
 
@@ -150,7 +150,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				ClanMemberTeamDonation solicitation = ftdsa.getSolicitation();
 				MonsterSnapshotForUser msfuNew = ftdsa.getMsfuNew();
 				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-					.createClanMemberTeamDonationProto(solicitation, msfuNew);
+					.createClanMemberTeamDonationProto(solicitation,
+						msfuNew, solicitationProto.getSolicitor());
 				resBuilder.setSolicitation(cmtdp);
 				
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder.build());
@@ -174,7 +175,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.error("exception in FulfillTeamDonationSolicitation processEvent", e);
 			try {
 				resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
-				FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(userId);
+				FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(donatorId);
 				resEvent.setTag(event.getTag());
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);

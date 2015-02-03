@@ -12,12 +12,10 @@ import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -77,7 +75,7 @@ public class SolicitTeamDonationAction
 
 	//derived state
 	private User user;
-	private ClanMemberTeamDonation donation;
+	private ClanMemberTeamDonation solicitation;
 	private boolean insert;
 
 	private Map<String, Integer> currencyDeltas;
@@ -110,9 +108,9 @@ public class SolicitTeamDonationAction
 		
 		resBuilder.setStatus(SolicitTeamDonationStatus.SUCCESS);
 		//TODO: consider moving this out to controller
-		ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-			.createClanMemberTeamDonationProto(donation, null);
-		resBuilder.setSolicitation(cmtdp);
+		//ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
+		//	.createClanMemberTeamDonationProto(donation, null);
+		//resBuilder.setSolicitation(cmtdp);
 		
 	}
 	
@@ -139,15 +137,15 @@ public class SolicitTeamDonationAction
 		}
 		
 		//if user has a fulfilled request, he can't ask again 
-		donation = clanMemberTeamDonationRetrieveUtil
+		solicitation = clanMemberTeamDonationRetrieveUtil
 			.getClanMemberTeamDonationForUserIdClanId(userId, clanId);
 		
-		if (null != donation && donation.isFulfilled()) {
-			log.error("fulflled solicitation exists {}", donation);
+		if (null != solicitation && solicitation.isFulfilled()) {
+			log.error("fulflled solicitation exists {}", solicitation);
 			return false;
 		}
 		
-		insert = (null == donation);
+		insert = (null == solicitation);
 		
 		return true;
 	}
@@ -183,21 +181,21 @@ public class SolicitTeamDonationAction
 		}
 		
 		if (insert) {
-			donation = new ClanMemberTeamDonation();
-			donation.setUserId(userId);
-			donation.setClanId(clanId);
-			donation.setFulfilled(false);
+			solicitation = new ClanMemberTeamDonation();
+			solicitation.setUserId(userId);
+			solicitation.setClanId(clanId);
+			solicitation.setFulfilled(false);
 		}
-		donation.setMsg(msg);
-		donation.setPowerLimit(powerLimit);
-		donation.setTimeOfSolicitation(clientTime);
+		solicitation.setMsg(msg);
+		solicitation.setPowerLimit(powerLimit);
+		solicitation.setTimeOfSolicitation(clientTime);
 		
 		if (insert) {
-			String id = insertUtil.insertIntoClanMemberTeamDonateGetId(donation);
-			donation.setId(id);
-			log.info("new donation: {}", donation);
+			String id = insertUtil.insertIntoClanMemberTeamDonateGetId(solicitation);
+			solicitation.setId(id);
+			log.info("new donation: {}", solicitation);
 		} else {
-			int numUpdated = updateUtil.updateClanMemberTeamDonation(donation);
+			int numUpdated = updateUtil.updateClanMemberTeamDonation(solicitation);
 			log.info("numUpdated donations: {}", numUpdated);
 		}
 		
@@ -227,6 +225,16 @@ public class SolicitTeamDonationAction
 	public User getUser()
 	{
 		return user;
+	}
+	
+	public ClanMemberTeamDonation getSolicitation()
+	{
+		return solicitation;
+	}
+
+	public void setSolicitation( ClanMemberTeamDonation solicitation )
+	{
+		this.solicitation = solicitation;
 	}
 
 	public Map<String, Integer> getCurrencyDeltas() {

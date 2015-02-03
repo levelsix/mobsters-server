@@ -14,8 +14,10 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitTeamDonationRequestEvent;
 import com.lvl6.events.response.SolicitTeamDonationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus;
@@ -24,6 +26,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.SolicitTeamDonationAction;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -130,7 +133,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			} else {
 				//only write to clan if success
-				resBuilder.setStatus(SolicitTeamDonationStatus.SUCCESS);
+				ClanMemberTeamDonation solicitation = stda.getSolicitation();
+				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
+					.createClanMemberTeamDonationProto(solicitation, null, senderProto);
+				resBuilder.setSolicitation(cmtdp);
+				
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 				server.writeClanEvent(resEvent, clanId);
 				//this works for other clan members, but not for the person 

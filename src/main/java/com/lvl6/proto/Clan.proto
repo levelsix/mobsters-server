@@ -250,6 +250,7 @@ message ClanDataProto {
 	repeated GroupChatMessageProto clanChats = 1;
 	repeated ClanHelpProto clanHelpings = 2;
 	repeated PvpClanAvengeProto clanAvengings = 3;
+	repeated ClanMemberTeamDonationProto clanDonationSolicitations = 4;
 }
 
 //------------------------------------------------------------------------------------------

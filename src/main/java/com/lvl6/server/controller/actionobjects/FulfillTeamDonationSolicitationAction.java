@@ -19,7 +19,7 @@ public class FulfillTeamDonationSolicitationAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private String userId;
+	private String donatorId;
 	private String clanId;
 	private MonsterSnapshotForUser msfu;
 	private ClanMemberTeamDonation cmtd;
@@ -29,7 +29,7 @@ public class FulfillTeamDonationSolicitationAction
 	private InsertUtil insertUtil;
 
 	public FulfillTeamDonationSolicitationAction(
-		String userId,
+		String donatorId,
 		String clanId,
 		MonsterSnapshotForUser msfu,
 		ClanMemberTeamDonation cmtd,
@@ -39,7 +39,7 @@ public class FulfillTeamDonationSolicitationAction
 		InsertUtil insertUtil )
 	{
 		super();
-		this.userId = userId;
+		this.donatorId = donatorId;
 		this.clanId = clanId;
 		this.msfu = msfu;
 		this.cmtd = cmtd;
@@ -108,7 +108,7 @@ public class FulfillTeamDonationSolicitationAction
 
 		solicitationId = cmtd.getId();
 		solicitation = clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonation(solicitationId, userId);
+			.getClanMemberTeamDonation(solicitationId, donatorId);
 
 		if (null == solicitation) {
 			log.error("nonexistent solicitation. {}", solicitation);

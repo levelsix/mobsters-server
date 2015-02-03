@@ -30,6 +30,7 @@ public class SetClanHelpingsAction implements StartUpAction
 		ClanDataProto.Builder cdpBuilder, User user,
 		String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil)
 	{
+		super();
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;

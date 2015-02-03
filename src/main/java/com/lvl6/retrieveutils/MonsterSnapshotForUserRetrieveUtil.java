@@ -4,12 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -21,7 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -30,7 +26,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	private final String TABLE_NAME = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
-	private static final UserMonsterForClientMapper rowMapper = new UserMonsterForClientMapper();
+	private static final UserMonsterSnapshotForClientMapper rowMapper = new UserMonsterSnapshotForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -41,26 +37,32 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
-	public List<MonsterForUser> getMonstersForUser(String userId) {
-		log.debug("retrieving user monsters for userId " + userId);
+	public List<MonsterSnapshotForUser> getMonstersSnapshotsForUser(
+		String userId, String type)
+	{
+		log.debug("retrieving user monsters for userId={}, type={}", userId, type);
 		
-		Object[] values = { userId };
+		String selectClause = UserMonsterSnapshotForClientMapper
+			.getColumnsSelectedStr();
+		Object[] values = { userId, type };
 		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.MONSTER_FOR_USER__USER_ID);
+			"select %s from %s where %s=? and %s=?",
+			selectClause, TABLE_NAME,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE);
 		
-		List<MonsterForUser> userMonsters = null;
+		List<MonsterSnapshotForUser> userMonstersSnapshots = null;
 		try {
-			userMonsters = this.jdbcTemplate
+			userMonstersSnapshots = this.jdbcTemplate
 				.query(query, values, rowMapper);
 		} catch (Exception e) {
-			log.error("monster for user retrieve db error.", e);
+			log.error("MonsterSnapshotForUser retrieve db error.", e);
 //		} finally {
 //			DBConnection.get().close(rs, null, conn);
 		}
-		return userMonsters;
+		return userMonstersSnapshots;
 	}
-
+/*
 	public Map<String, List<MonsterForUser>> getUserIdsToMonsterTeamForUserIds(
 		List<String> userIds) {
 
@@ -68,14 +70,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		sb.append("SELECT * FROM ");
 		sb.append(TABLE_NAME);
 		sb.append(" WHERE ");
-		sb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+		sb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
 		sb.append(" IN (");
 		int amount = userIds.size();
 		List<String> questions = Collections.nCopies(amount, "?");
 		String questionStr = StringUtils.csvList(questions);
 		sb.append(questionStr);
 		sb.append(") AND ");
-		sb.append(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
+		sb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM);
 		sb.append(" > ?;");
 
 		List<Object> values = new ArrayList<Object>();
@@ -94,7 +96,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 			
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				String userId = userMonster.getUserId();
 
 				//if just saw this user for first time, create the list for his team
@@ -118,7 +120,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	}
 
 	////@Cacheable(value="specificMonster", key="#userMonsterId")
-	public MonsterForUser getSpecificUserMonster(String userMonsterId)
+	public MonsterSnapshotForUser getSpecificUserMonster(String userMonsterId)
 	{
 		log.debug(String.format(
 			"retrieving user monster for userMonsterId=%s",
@@ -127,9 +129,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		Object[] values = { userMonsterId };
 		String query = String.format(
 			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.MONSTER_FOR_USER__ID);
+			TABLE_NAME, DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
 			
-		MonsterForUser userMonster = null;
+		MonsterSnapshotForUser userMonster = null;
 		try {
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values, rowMapper);
@@ -152,7 +154,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME); 
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
 		querySb.append(" IN (");
 
 		int amount = userMonsterIds.size();
@@ -174,7 +176,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 			
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				idsToUserMonsters.put(userMonster.getId(), userMonster);
 			}
 			
@@ -195,7 +197,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME); 
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
 		querySb.append("=?");
 		List <Object> values = new ArrayList<Object>();
 		values.add(userId);
@@ -204,7 +206,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
 			log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 			querySb.append(" AND ");
-			querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+			querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
 			querySb.append(" IN (");
 
 			int amount = userMonsterIds.size();
@@ -225,7 +227,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 			
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				idsToUserMonsters.put(userMonster.getId(), userMonster);
 			}
 
@@ -245,10 +247,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME); 
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
 		querySb.append("=?");
 		querySb.append(" AND ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__RESTRICTED);
 		querySb.append("=?");
 
 		List <Object> values = new ArrayList<Object>();
@@ -261,7 +263,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				"retrieving user monster for userMonsterIds=%s",
 				userMonsterIds));
 			querySb.append(" AND ");
-			querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+			querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
 			querySb.append(" IN (");
 
 			int amount = userMonsterIds.size();
@@ -282,7 +284,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 			
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				idsToUserMonsters.put(userMonster.getId(), userMonster);
 			}
 			
@@ -302,10 +304,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME); 
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
 		querySb.append("=?");
 		querySb.append(" AND ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__RESTRICTED);
 		querySb.append("=?");
 
 		List <Object> values = new ArrayList<Object>();
@@ -316,7 +318,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
 			log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 			querySb.append(" AND ");
-			querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+			querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
 			querySb.append(" IN (");
 
 			int amount = userMonsterIds.size();
@@ -337,7 +339,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 			
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				idsToUserMonsters.put(userMonster.getId(), userMonster);
 			}
 			
@@ -362,10 +364,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		String query = String.format(
 			"select * from %s where %s=? and %s in (%s) and %s=? and %s=?;",
-			TABLE_NAME, DBConstants.MONSTER_FOR_USER__USER_ID,
-			DBConstants.MONSTER_FOR_USER__MONSTER_ID, qStr,
-			DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES,
-			DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
+			TABLE_NAME, DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID, qStr,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__HAS_ALL_PIECES,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__IS_COMPLETE);
 
 		//creating a "column in (value1,value2,...,value)" condition, prefer this over
 		//chained "or"s  e.g. (column=value1 or column=value2 or...column=value);
@@ -381,7 +383,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 
-			for (MonsterForUser userMonster : mfuList) {
+			for (MonsterSnapshotForUser userMonster : mfuList) {
 				monsterIdsToMonsters.put(
 					userMonster.getMonsterId(), userMonster);
 			}
@@ -405,7 +407,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME);
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
 		querySb.append(" IN (");
 
 		int amount = userIds.size();
@@ -414,7 +416,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append(questionStr);
 		querySb.append(") AND ");
 
-		querySb.append(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
+		querySb.append(DBConstants.MONSTER_SNAPSHOT_FOR_USER__IS_COMPLETE);
 		querySb.append(" =?;");
 
 		List<Object> values = new ArrayList<Object>();
@@ -432,7 +434,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			List<MonsterForUser> mfuList = this.jdbcTemplate
 				.query(query, values.toArray(), rowMapper);
 
-			for (MonsterForUser mfu : mfuList) {
+			for (MonsterSnapshotForUser mfu : mfuList) {
 				String userId = mfu.getUserId();
 
 				//base case where have not seen user before
@@ -454,67 +456,73 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
 		return userIdsToMfuIdsToMonsters;
 	}
-
+*/
+	
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserMonsterForClientMapper implements RowMapper<MonsterForUser> {
+	private static final class UserMonsterSnapshotForClientMapper implements RowMapper<MonsterSnapshotForUser> {
 
 		private static List<String> columnsSelected;
+		private static String columnsSelectedStr;
 
-		public MonsterForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MonsterForUser mfu = new MonsterForUser();
-			mfu.setId(rs.getString(DBConstants.MONSTER_FOR_USER__ID));
-			mfu.setUserId(rs.getString(DBConstants.MONSTER_FOR_USER__USER_ID));
-			mfu.setMonsterId(rs.getInt(DBConstants.MONSTER_FOR_USER__MONSTER_ID));
-			mfu.setCurrentExp(rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE));
-			mfu.setCurrentLvl(rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL));
-			mfu.setCurrentHealth(rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH));
-			mfu.setNumPieces(rs.getInt(DBConstants.MONSTER_FOR_USER__NUM_PIECES));
-			mfu.setHasAllPieces(rs.getBoolean(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES));
-			mfu.setComplete(rs.getBoolean(DBConstants.MONSTER_FOR_USER__IS_COMPLETE));
-
+		public MonsterSnapshotForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+			MonsterSnapshotForUser msfu = new MonsterSnapshotForUser();
+			msfu.setId(rs.getString(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID));
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME);
+				Timestamp time = rs.getTimestamp(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY);
 				if (null != time && !rs.wasNull()) {
 					Date date = new Date(time.getTime());
-					mfu.setCombineStartTime(date);
+					msfu.setTimeOfEntry(date);
 				}
 			} catch (Exception e) {
 				log.error(String.format(
-					"maybe combineStartTime is invalid, mfu=%s", mfu), e);
+					"maybe timeOfEntry is invalid, msfu=%s", msfu), e);
 			}
-
-			mfu.setTeamSlotNum(rs.getInt(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM));
-			mfu.setSourceOfPieces(rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES));
-			mfu.setRestricted(rs.getBoolean(DBConstants.MONSTER_FOR_USER__RESTRICTED));
-			mfu.setOffensiveSkillId(rs.getInt(DBConstants.MONSTER_FOR_USER__OFFENSIVE_SKILL_ID));
-			mfu.setDefensiveSkillId(rs.getInt(DBConstants.MONSTER_FOR_USER__DEFENSIVE_SKILL_ID));
-
-			return mfu;
+			
+			msfu.setUserId(rs.getString(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID));
+			msfu.setType(rs.getString(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE));
+			msfu.setIdInTable(rs.getString(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE));
+			msfu.setMonsterForUserId(rs.getString(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID));
+			msfu.setMonsterId(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID));
+			msfu.setCurrentExp(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP));
+			msfu.setCurrentLvl(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL));
+			msfu.setCurrentHp(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP));
+			msfu.setTeamSlotNum(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM));
+			msfu.setOffSkillId(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID));
+			msfu.setDefSkillId(rs.getInt(DBConstants.MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID));
+			
+			return msfu;
 		}        
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__ID);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__USER_ID);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__MONSTER_ID);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__RESTRICTED);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__OFFENSIVE_SKILL_ID);
-				columnsSelected.add(DBConstants.MONSTER_FOR_USER__DEFENSIVE_SKILL_ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID);
+				columnsSelected.add(DBConstants.MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID);
 			}
 			return columnsSelected;
 		}
+		
+		public static String getColumnsSelectedStr() {
+			if (null == columnsSelectedStr && null != columnsSelected) {
+				columnsSelectedStr = StringUtils.csvList(columnsSelected);
+			}
+			
+			return columnsSelectedStr;
+		}
+		
 	} 	
 }

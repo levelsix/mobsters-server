@@ -127,6 +127,13 @@ public class StartUpResource
 		return iMap;
 	}
 
+	public Clan getClan(String clanId) {
+		if (null == clanIdsToClans || !clanIdsToClans.containsKey(clanId)) {
+			return null;
+		}
+		return clanIdsToClans.get(clanId);
+	}
+	
 	public Map<String, Clan> getClanIdsToClans(Collection<String> clanIds) {
 		if (null == clanIdsToClans) {
 			clanIdsToClans = new HashMap<String, Clan>();
