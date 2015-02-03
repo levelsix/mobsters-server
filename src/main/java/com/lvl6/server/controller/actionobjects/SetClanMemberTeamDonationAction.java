@@ -14,6 +14,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
@@ -24,6 +25,8 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+	private static String type = SnapshotType.TEAM_DONATE.name();
+	
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
 	private final String userId;
@@ -112,18 +115,46 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 		List<MonsterSnapshotForUser> msfuList = monsterSnapshotForUserRetrieveUtil.
 			getMonstersSnapshotsForUser(userId,
 				UserMonsterSnapshotProto.SnapshotType.TEAM_DONATE.name());
+		Map<String, Map<String, MonsterSnapshotForUser>> typeToIdInTableToMsfu =
+			new HashMap<String, Map<String, MonsterSnapshotForUser>>(); 
 			
+		//mapify for easier use
+		//not all TeamDonationSolicitations have MonsterSnapshotForUser,
 		for (MonsterSnapshotForUser msfu : msfuList) {
-			String solicitorId = msfu.getUserId();
-			ClanMemberTeamDonation solicitation = userIdToDonationSolicitations
-				.get(solicitorId);
-
-//			User solicitor = solicitors.get( solicitorId );
-			MinimumUserProto mup = mupSolicitors.get( solicitorId );
-
-			//null for clan since mup exists and mup has clan in it
+			String type = msfu.getType();
+			String idInTable = msfu.getIdInTable();
+			
+			if (!typeToIdInTableToMsfu.containsKey(type)) {
+				typeToIdInTableToMsfu.put(
+					type, new HashMap<String, MonsterSnapshotForUser>());
+			}
+			
+			Map<String, MonsterSnapshotForUser> typeInTableToMsfu =
+				typeToIdInTableToMsfu.get(type);
+			typeInTableToMsfu.put(idInTable, msfu);
+		}
+		
+		//create protos
+		for (String solicitationId : userIdToDonationSolicitations.keySet()) {
+			ClanMemberTeamDonation cmtd = 
+				userIdToDonationSolicitations.get(solicitationId);
+			
+			//if ClanMemberTeamDonation has MonsterSnapshotForUser, get it
+			MonsterSnapshotForUser msfu = null;
+			if (typeToIdInTableToMsfu.containsKey(type)) {
+				
+				Map<String, MonsterSnapshotForUser> typeInTableToMsfu =
+					typeToIdInTableToMsfu.get(type);
+				if (typeInTableToMsfu.containsKey(solicitationId)) {
+					msfu = typeInTableToMsfu.get(solicitationId);
+				}
+			}
+			
+			String userId = cmtd.getUserId();
+			MinimumUserProto solicitor = mupSolicitors.get(userId);
+			
 			ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-				.createClanMemberTeamDonationProto(solicitation, msfu, mup);
+				.createClanMemberTeamDonationProto(cmtd, msfu, solicitor);
 
 			log.info("cmtdp={}", cmtdp);
 			cdpBuilder.addClanDonationSolicitations(cmtdp);
