@@ -20933,18 +20933,17 @@ public final class ClanProto {
         getDonationUuidBytes();
 
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    boolean hasUserUuid();
+    boolean hasSolicitor();
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    java.lang.String getUserUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getSolicitor();
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getUserUuidBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder();
 
     /**
      * <code>optional string clanUuid = 3;</code>
@@ -21084,9 +21083,16 @@ public final class ClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = solicitor_.toBuilder();
+              }
+              solicitor_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(solicitor_);
+                solicitor_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              userUuid_ = bs;
               break;
             }
             case 26: {
@@ -21209,46 +21215,25 @@ public final class ClanProto {
       }
     }
 
-    public static final int USERUUID_FIELD_NUMBER = 2;
-    private java.lang.Object userUuid_;
+    public static final int SOLICITOR_FIELD_NUMBER = 2;
+    private com.lvl6.proto.UserProto.MinimumUserProto solicitor_;
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    public boolean hasUserUuid() {
+    public boolean hasSolicitor() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    public java.lang.String getUserUuid() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userUuid_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSolicitor() {
+      return solicitor_;
     }
     /**
-     * <code>optional string userUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getUserUuidBytes() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder() {
+      return solicitor_;
     }
 
     public static final int CLANUUID_FIELD_NUMBER = 3;
@@ -21417,7 +21402,7 @@ public final class ClanProto {
 
     private void initFields() {
       donationUuid_ = "";
-      userUuid_ = "";
+      solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanUuid_ = "";
       powerAvailability_ = 0;
       isFulfilled_ = false;
@@ -21442,7 +21427,7 @@ public final class ClanProto {
         output.writeBytes(1, getDonationUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getUserUuidBytes());
+        output.writeMessage(2, solicitor_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getClanUuidBytes());
@@ -21477,7 +21462,7 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getUserUuidBytes());
+          .computeMessageSize(2, solicitor_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -21612,6 +21597,7 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSolicitorFieldBuilder();
           getDonationsFieldBuilder();
         }
       }
@@ -21623,7 +21609,11 @@ public final class ClanProto {
         super.clear();
         donationUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userUuid_ = "";
+        if (solicitorBuilder_ == null) {
+          solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          solicitorBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
         clanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -21676,7 +21666,11 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userUuid_ = userUuid_;
+        if (solicitorBuilder_ == null) {
+          result.solicitor_ = solicitor_;
+        } else {
+          result.solicitor_ = solicitorBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -21727,10 +21721,8 @@ public final class ClanProto {
           donationUuid_ = other.donationUuid_;
           onChanged();
         }
-        if (other.hasUserUuid()) {
-          bitField0_ |= 0x00000002;
-          userUuid_ = other.userUuid_;
-          onChanged();
+        if (other.hasSolicitor()) {
+          mergeSolicitor(other.getSolicitor());
         }
         if (other.hasClanUuid()) {
           bitField0_ |= 0x00000004;
@@ -21880,80 +21872,120 @@ public final class ClanProto {
         return this;
       }
 
-      private java.lang.Object userUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> solicitorBuilder_;
       /**
-       * <code>optional string userUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
        */
-      public boolean hasUserUuid() {
+      public boolean hasSolicitor() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string userUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
        */
-      public java.lang.String getUserUuid() {
-        java.lang.Object ref = userUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProto getSolicitor() {
+        if (solicitorBuilder_ == null) {
+          return solicitor_;
+        } else {
+          return solicitorBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
+       */
+      public Builder setSolicitor(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (solicitorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          solicitor_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          solicitorBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserUuidBytes() {
-        java.lang.Object ref = userUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder setUserUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
-        onChanged();
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional string userUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
        */
-      public Builder clearUserUuid() {
+      public Builder setSolicitor(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (solicitorBuilder_ == null) {
+          solicitor_ = builderForValue.build();
+          onChanged();
+        } else {
+          solicitorBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
+       */
+      public Builder mergeSolicitor(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (solicitorBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              solicitor_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            solicitor_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(solicitor_).mergeFrom(value).buildPartial();
+          } else {
+            solicitor_ = value;
+          }
+          onChanged();
+        } else {
+          solicitorBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
+       */
+      public Builder clearSolicitor() {
+        if (solicitorBuilder_ == null) {
+          solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          solicitorBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        userUuid_ = getDefaultInstance().getUserUuid();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string userUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
        */
-      public Builder setUserUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSolicitorBuilder() {
+        bitField0_ |= 0x00000002;
         onChanged();
-        return this;
+        return getSolicitorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder() {
+        if (solicitorBuilder_ != null) {
+          return solicitorBuilder_.getMessageOrBuilder();
+        } else {
+          return solicitor_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSolicitorFieldBuilder() {
+        if (solicitorBuilder_ == null) {
+          solicitorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSolicitor(),
+                  getParentForChildren(),
+                  isClean());
+          solicitor_ = null;
+        }
+        return solicitorBuilder_;
       }
 
       private java.lang.Object clanUuid_ = "";
@@ -22654,16 +22686,17 @@ public final class ClanProto {
       ".com.lvl6.proto.GroupChatMessageProto\0223\n" +
       "\014clanHelpings\030\002 \003(\0132\035.com.lvl6.proto.Cla" +
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
-      "lvl6.proto.PvpClanAvengeProto\"\355\001\n\033ClanMe" +
+      "lvl6.proto.PvpClanAvengeProto\"\220\002\n\033ClanMe" +
       "mberTeamDonationProto\022\024\n\014donationUuid\030\001 " +
-      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010clanUuid\030\003 \001(\t\022" +
-      "\031\n\021powerAvailability\030\004 \001(\005\022\023\n\013isFulfille" +
-      "d\030\005 \001(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitati" +
-      "on\030\007 \001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.p" +
-      "roto.UserMonsterSnapshotProto*X\n\016UserCla" +
-      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013" +
-      "\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB" +
-      "\013B\tClanProto"
+      "\001(\t\0223\n\tsolicitor\030\002 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
+      "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001" +
+      "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
+      "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
+      "UserMonsterSnapshotProto*X\n\016UserClanStat" +
+      "us\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAP" +
+      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl",
+      "anProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22802,7 +22835,7 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor,
-        new java.lang.String[] { "DonationUuid", "UserUuid", "ClanUuid", "PowerAvailability", "IsFulfilled", "Msg", "TimeOfSolicitation", "Donations", });
+        new java.lang.String[] { "DonationUuid", "Solicitor", "ClanUuid", "PowerAvailability", "IsFulfilled", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();

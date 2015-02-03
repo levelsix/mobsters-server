@@ -83,6 +83,7 @@ enum SkillType {
 	BLOOD_RAGE = 26;
 	TAKE_AIM = 27;
 	HELL_FIRE = 28;
+	ENERGIZE = 29;
 }
 
 enum SkillActivationType {

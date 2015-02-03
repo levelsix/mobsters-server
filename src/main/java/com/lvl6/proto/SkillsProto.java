@@ -133,6 +133,10 @@ public final class SkillsProto {
      * <code>HELL_FIRE = 28;</code>
      */
     HELL_FIRE(27, 28),
+    /**
+     * <code>ENERGIZE = 29;</code>
+     */
+    ENERGIZE(28, 29),
     ;
 
     /**
@@ -255,6 +259,10 @@ public final class SkillsProto {
      * <code>HELL_FIRE = 28;</code>
      */
     public static final int HELL_FIRE_VALUE = 28;
+    /**
+     * <code>ENERGIZE = 29;</code>
+     */
+    public static final int ENERGIZE_VALUE = 29;
 
 
     public final int getNumber() { return value; }
@@ -289,6 +297,7 @@ public final class SkillsProto {
         case 26: return BLOOD_RAGE;
         case 27: return TAKE_AIM;
         case 28: return HELL_FIRE;
+        case 29: return ENERGIZE;
         default: return null;
       }
     }
@@ -2992,7 +3001,7 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
       "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\266\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "\002*\304\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
       "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
       "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
       "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
@@ -3003,9 +3012,9 @@ public final class SkillsProto {
       "POISON_POWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020" +
       "\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n",
       "\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE" +
-      "\020\034*J\n\023SkillActivationType\022\022\n\016USER_ACTIVA" +
-      "TED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\r" +
-      "B\013SkillsProto"
+      "\020\034\022\014\n\010ENERGIZE\020\035*J\n\023SkillActivationType\022" +
+      "\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022" +
+      "\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
