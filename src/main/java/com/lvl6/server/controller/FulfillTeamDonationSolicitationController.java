@@ -88,8 +88,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		try {
 			UUID.fromString(donatorId);
 			UUID.fromString(clanId);
-			UUID.fromString(msfu.getId());
 			UUID.fromString(msfu.getUserId());
+			UUID.fromString(msfu.getMonsterForUserId());
 			UUID.fromString(cmtd.getId());
 			UUID.fromString(cmtd.getUserId());
 			UUID.fromString(cmtd.getClanId());
