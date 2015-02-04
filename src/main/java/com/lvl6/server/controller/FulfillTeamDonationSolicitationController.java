@@ -151,7 +151,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				MonsterSnapshotForUser msfuNew = ftdsa.getMsfuNew();
 				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
 					.createClanMemberTeamDonationProto(solicitation,
-						msfuNew, solicitationProto.getSolicitor());
+						msfuNew, solicitationProto.getSolicitor(), senderProto);
 				resBuilder.setSolicitation(cmtdp);
 				
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder.build());

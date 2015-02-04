@@ -1771,15 +1771,14 @@ public class CreateInfoProtoUtils {
 	
 	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
 		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
-		User u, Clan c)
+		MinimumUserProto solicitor, MinimumUserProto donatorProto)
 	{
 		ClanMemberTeamDonationProto.Builder cmtdpb =
 			ClanMemberTeamDonationProto.newBuilder();
 		
 		cmtdpb.setDonationUuid(cmtd.getId());
 		
-		MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u, c);
-		cmtdpb.setSolicitor(mup);
+		cmtdpb.setSolicitor(solicitor);
 		cmtdpb.setClanUuid(cmtd.getClanId());
 		cmtdpb.setPowerAvailability(cmtd.getPowerLimit());
 		cmtdpb.setIsFulfilled(cmtd.isFulfilled());
@@ -1792,42 +1791,14 @@ public class CreateInfoProtoUtils {
 		cmtdpb.setTimeOfSolicitation(cmtd.getTimeOfSolicitation().getTime());
 		
 		if (null != msfu) {
-			UserMonsterSnapshotProto usmp = createUserMonsterSnapshotProto(msfu);
+			UserMonsterSnapshotProto usmp = createUserMonsterSnapshotProto(
+				msfu, donatorProto);
 			cmtdpb.addDonations(usmp);
 		}
 			
 		return cmtdpb.build();
 	}
 
-	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
-		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
-		MinimumUserProto mup)
-	{
-		ClanMemberTeamDonationProto.Builder cmtdpb =
-			ClanMemberTeamDonationProto.newBuilder();
-		
-		cmtdpb.setDonationUuid(cmtd.getId());
-		
-		cmtdpb.setSolicitor(mup);
-		cmtdpb.setClanUuid(cmtd.getClanId());
-		cmtdpb.setPowerAvailability(cmtd.getPowerLimit());
-		cmtdpb.setIsFulfilled(cmtd.isFulfilled());
-		
-		String msg = cmtd.getMsg();
-		if (null != msg && !msg.isEmpty()) {
-			cmtdpb.setMsg(msg);
-		}
-		
-		cmtdpb.setTimeOfSolicitation(cmtd.getTimeOfSolicitation().getTime());
-		
-		if (null != msfu) {
-			UserMonsterSnapshotProto usmp = createUserMonsterSnapshotProto(msfu);
-			cmtdpb.addDonations(usmp);
-		}
-			
-		return cmtdpb.build();
-	}
-	
 	/**InAppPurchase.proto********************************************/
 	public static GoldSaleProto createGoldSaleProtoFromGoldSale(GoldSale sale) {
 		GoldSaleProto.Builder b = GoldSaleProto.newBuilder().setSaleId(sale.getId()).setStartDate(sale.getStartDate().getTime()).setEndDate(sale.getEndDate().getTime());
@@ -2468,7 +2439,8 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static UserMonsterSnapshotProto createUserMonsterSnapshotProto(
-		MonsterSnapshotForUser msfu)
+		MonsterSnapshotForUser msfu,
+		MinimumUserProto ownerProto)
 	{
 		UserMonsterSnapshotProto.Builder usmpb = UserMonsterSnapshotProto.newBuilder();
 		usmpb.setSnapshotUuid(msfu.getId());
@@ -2477,6 +2449,7 @@ public class CreateInfoProtoUtils {
 		String str = msfu.getType();
 		try {
 			SnapshotType type = SnapshotType.valueOf(str);
+			usmpb.setType(type);
 		} catch (Exception e) {
 			log.error(String.format(
 				"incorrect SnapshotType enum. MonsterSnapshotForUser=%s", msfu), e);
@@ -2484,7 +2457,11 @@ public class CreateInfoProtoUtils {
 		
 		usmpb.setRelevantTableUuid(msfu.getIdInTable());
 		usmpb.setMonsterForUserUuid(msfu.getMonsterForUserId());
-		usmpb.setUserUuid(msfu.getUserId());
+		
+		if (null != ownerProto) {
+			usmpb.setUser(ownerProto);
+		}
+		
 		usmpb.setMonsterId(msfu.getMonsterId());
 		usmpb.setCurrentExp(msfu.getCurrentExp());
 		usmpb.setCurrentLvl(msfu.getCurrentLvl());

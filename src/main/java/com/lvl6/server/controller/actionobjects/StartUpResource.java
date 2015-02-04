@@ -92,6 +92,13 @@ public class StartUpResource
 			.build();
 		return iMap;
 	}
+	
+	public User getUser(String userId) {
+		if (null == userIdsToUsers || !userIdsToUsers.containsKey(userId)) {
+			return null;
+		}
+		return userIdsToUsers.get(userId);
+	}
 
 	public Map<String, User> getUserIdsToUsers(Collection<String> userIds) {
 		Map<String, User> userIdsToUsersTemp = new HashMap<String, User>();

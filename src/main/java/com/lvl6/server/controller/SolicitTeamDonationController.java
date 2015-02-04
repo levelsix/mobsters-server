@@ -135,7 +135,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				//only write to clan if success
 				ClanMemberTeamDonation solicitation = stda.getSolicitation();
 				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-					.createClanMemberTeamDonationProto(solicitation, null, senderProto);
+					.createClanMemberTeamDonationProto(solicitation, null, senderProto,
+						null);
 				resBuilder.setSolicitation(cmtdp);
 				
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());

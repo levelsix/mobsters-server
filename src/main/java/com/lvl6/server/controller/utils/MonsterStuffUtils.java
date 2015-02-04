@@ -808,7 +808,7 @@ public class MonsterStuffUtils {
 	  msfu.setType(umsp.getType().name());
 	  msfu.setIdInTable(umsp.getRelevantTableUuid());
 	  msfu.setMonsterForUserId(umsp.getMonsterForUserUuid());
-	  msfu.setUserId(umsp.getUserUuid());
+	  msfu.setUserId(umsp.getUser().getUserUuid());
 	  msfu.setMonsterId(umsp.getMonsterId());
 	  msfu.setCurrentExp(umsp.getCurrentExp());
 	  msfu.setCurrentLvl(umsp.getCurrentLvl());

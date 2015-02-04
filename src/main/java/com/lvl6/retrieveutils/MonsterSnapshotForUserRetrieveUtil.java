@@ -35,21 +35,24 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	
+	
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
-	public List<MonsterSnapshotForUser> getMonstersSnapshotsForUser(
-		String userId, String type)
+	public List<MonsterSnapshotForUser> getMonstersSnapshots(
+		String type, String idInTable)
 	{
-		log.debug("retrieving user monsters for userId={}, type={}", userId, type);
+		log.debug("retrieving user monsters for type={}, idInTable={}",
+			type, idInTable);
 		
 		String selectClause = UserMonsterSnapshotForClientMapper
 			.getColumnsSelectedStr();
-		Object[] values = { userId, type };
+		Object[] values = { type, idInTable };
 		String query = String.format(
 			"select %s from %s where %s=? and %s=?",
 			selectClause, TABLE_NAME,
-			DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
-			DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE);
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
+			DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE);
 		
 		List<MonsterSnapshotForUser> userMonstersSnapshots = null;
 		try {
