@@ -37,6 +37,8 @@ message PvpProto {
 	optional UserPvpLeagueProto pvpLeagueStats = 6; //defender info
 	
 	optional string defenderMsg = 7; 
+	
+	optional ClanMemberTeamDonationProto defenderExtraMonster = 8;
 }
 
 message PvpMonsterProto {
