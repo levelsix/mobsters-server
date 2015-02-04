@@ -1,6 +1,8 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class FulfillTeamDonationSolicitationAction
 {
@@ -132,6 +135,14 @@ public class FulfillTeamDonationSolicitationAction
 		solicitation.setFulfilled(true);
 		int numUpdated = updateUtil.updateClanMemberTeamDonation(solicitation);
 		log.info("numUpdated donations: {}", numUpdated);
+		
+		//reduce donated monster's health to 0
+		Map<String, Integer> userMonsterIdToExpectedHealth =
+			Collections.singletonMap(msfu.getMonsterForUserId(), 0);
+		numUpdated = UpdateUtils.get()
+			.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+		log.info(String.format(
+			"numUpdated=%s", numUpdated));
 		
 		//insert into monster_snapshot_for_user
 		msfuNew = new MonsterSnapshotForUser(msfu);
