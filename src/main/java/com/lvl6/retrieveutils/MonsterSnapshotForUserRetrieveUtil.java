@@ -517,8 +517,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
 		
 		public static String getColumnsSelectedStr() {
-			if (null == columnsSelectedStr && null != columnsSelected) {
-				columnsSelectedStr = StringUtils.csvList(getColumnsSelected());
+			if (null == columnsSelected) {
+				getColumnsSelected();
+			}
+			if (null != columnsSelected) {
+				columnsSelectedStr = StringUtils.csvList(columnsSelected);
 			}
 			
 			return columnsSelectedStr;
