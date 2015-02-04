@@ -253,16 +253,3 @@ message ClanDataProto {
 	repeated ClanMemberTeamDonationProto clanDonationSolicitations = 4;
 }
 
-//------------------------------------------------------------------------------------------
-
-message ClanMemberTeamDonationProto {
-	optional string donationUuid = 1;
-	optional MinimumUserProto solicitor = 2;
-	optional string clanUuid = 3;
-	optional int32 powerAvailability = 4;
-	optional bool isFulfilled = 5;
-	optional string msg = 6;
-	optional int64 timeOfSolicitation = 7; 
-	
-	repeated UserMonsterSnapshotProto donations = 8;
-}
