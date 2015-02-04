@@ -231,7 +231,7 @@ message UserMonsterSnapshotProto {
 	optional string relevantTableUuid = 4;
 	
 	optional string monsterForUserUuid = 5;
-	optional string userUuid = 6;
+	optional MinimumUserProto user = 6;
 	optional int32 monsterId = 7;
 	optional int32 currentExp = 8;
 	optional int32 currentLvl = 9;
