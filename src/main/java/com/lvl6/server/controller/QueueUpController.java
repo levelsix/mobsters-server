@@ -353,8 +353,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		if (null != queuedOpponents && !queuedOpponents.isEmpty()) {
 			log.info("there are people to attack!");
-			log.info(String.format(
-				"queuedOpponentIdsList=%s", queuedOpponentIdsList));
+			log.info(
+				"queuedOpponentIdsList={}", queuedOpponentIdsList);
 //			log.info(String.format(
 //				"queuedOpponents:%s", queuedOpponents));
 			
@@ -382,7 +382,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
 					queuedOpponents, userIdToClan, null, userIdToPvpUser,
 					userIdToUserMonsters, userIdToUserMonsterIdToDroppedId,
-					userIdToProspectiveCashReward, userIdToProspectiveOilReward);
+					userIdToProspectiveCashReward, userIdToProspectiveOilReward,
+					null, null, null);
+					//userIdToCmtd, userIdToMsfu, userIdToMsfuMonsterIdDropped);
 			
 			//user should see real people before fake ones
 			pvpProtoList.addAll(0, pvpProtoListTemp);
@@ -540,7 +542,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 						seenUserIds); 
 		
 		int numDefenders = prospectiveDefenders.size();
-		log.info("users returned from hazelcast pvp util. users=" + prospectiveDefenders);
+//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
 
 		//choose users either randomly or all of them
 		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
@@ -557,6 +559,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return selectedDefenders;
 	}
 	
+	//userIdList and userIdToPvpUser are the return values
 	private void selectUsers(int numNeeded, int numDefenders,
 			Set<PvpUser> prospectiveDefenders, List<String> userIdList,
 			Map<String, PvpUser> userIdToPvpUser) {
@@ -568,14 +571,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		for (PvpUser pvpUser : prospectiveDefenders) {
 			//when prospectiveDefenders is out, loop breaks,
 			//regardless of numNeededSoFar
-			log.info("pvp opponents, numNeeded=" + numNeededSoFar);
-			log.info("pvp opponents, numAvailable=" + numDefendersLeft);
+//			log.info("pvp opponents, numNeeded={}", numNeededSoFar);
+//			log.info("pvp opponents, numAvailable={}", numDefendersLeft);
 			
 			String userId = pvpUser.getUserId();
 			
 			if (userIdList.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
 				//don't want to send every eligible victim to user.
-				log.info("reached queue length of " + ControllerConstants.PVP__MAX_QUEUE_SIZE);
+				log.info("reached queue length of {}",
+					ControllerConstants.PVP__MAX_QUEUE_SIZE);
 				break;
 			}
 			
@@ -592,8 +596,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//randomly pick people
 			float randFloat = rand.nextFloat();
 			float probabilityToBeSelected = numNeededSoFar/numDefendersLeft;
-			log.info("randFloat=" + randFloat);
-			log.info("probabilityToBeSelected=" + probabilityToBeSelected);
+//			log.info("randFloat={}", randFloat);
+//			log.info("probabilityToBeSelected={}", probabilityToBeSelected);
 			if (randFloat < probabilityToBeSelected) {
 				//we have a winner!
 				userIdList.add(userId);

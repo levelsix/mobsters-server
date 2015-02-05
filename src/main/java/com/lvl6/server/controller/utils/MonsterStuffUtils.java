@@ -777,6 +777,58 @@ public class MonsterStuffUtils {
 	  return userMonsterIdToDroppedId;
   }
 
+  public static Map<String, Integer> calculateMsfuPvpDrops(
+	  Map<String, MonsterSnapshotForUser> userIdToUserMonsterSnapshot)
+  {
+	  Map<String, Integer> userIdToMsfuDroppedId =
+		  new HashMap<String, Integer>();
+
+	  for (String userId : userIdToUserMonsterSnapshot.keySet())
+	  {
+		  MonsterSnapshotForUser msfu = userIdToUserMonsterSnapshot.get(userId);
+		  int monsterDropId = MonsterStuffUtils
+			  .calculateMsfuPvpDropIds(msfu); 
+
+		  userIdToMsfuDroppedId.put(userId, monsterDropId);
+	  }
+
+	  return userIdToMsfuDroppedId;
+  }
+
+  /**
+   * 
+   * @param userMonsters
+   * @return monsterId or -1 if no drop
+   */
+  public static int calculateMsfuPvpDropIds(
+	  MonsterSnapshotForUser userMonsterSnapshot)
+  {
+
+	  int monsterId = userMonsterSnapshot.getMonsterId();
+	  int lvl = userMonsterSnapshot.getCurrentLvl();
+
+	  //calculate if dropped
+	  boolean dropped = MonsterLevelInfoRetrieveUtils
+		  .didPvpMonsterDrop(monsterId, lvl);
+
+	  //if dropped set monster
+	  Monster mon = null;
+	  if (dropped) {
+		  mon = MonsterRetrieveUtils
+			  .getMonsterForMonsterId(monsterId);
+	  }
+
+	  //get the pvpMonsterDropId if monster not null.
+	  int pvpMonsterDropId = ControllerConstants.NOT_SET;
+	  if (null != mon) {
+		  pvpMonsterDropId = mon.getPvpMonsterDropId();
+	  }
+	  //		  log.info("for mfu {}, set pvpMonsterDropId={}",
+	  //				userMonster, pvpMonsterDropId);
+
+	  return pvpMonsterDropId;
+  }
+  
   public static MonsterSnapshotForUser javafyFullUserMonsterProto(
 	  FullUserMonsterProto fump)
   {

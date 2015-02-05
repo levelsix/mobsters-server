@@ -12,7 +12,7 @@ import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanDataProto;
-import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
+import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;

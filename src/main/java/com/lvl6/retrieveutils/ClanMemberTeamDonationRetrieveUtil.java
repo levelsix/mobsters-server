@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,12 +72,53 @@ public class ClanMemberTeamDonationRetrieveUtil {
 				query, values);
 			clanMemberTeamDonations = this.jdbcTemplate
 					.query(query, values.toArray(), rowMapper);
+			log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
 			
 		} catch (Exception e) {
 			log.error(
 				String.format(
 					"could not retrieve clan invites for clanId=%s",
 					clanId),
+				e);
+			clanMemberTeamDonations = new ArrayList<ClanMemberTeamDonation>();
+		}
+		
+		return clanMemberTeamDonations;
+	}
+	
+	public List<ClanMemberTeamDonation> getClanMemberTeamDonationForClanIds(
+		Collection<String> clanIds)
+	{
+		List<ClanMemberTeamDonation> clanMemberTeamDonations = null;
+		try {
+			List<String> columnsToSelected = ClanMemberTeamDonationForClientMapper
+				.getColumnsSelected();
+
+			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
+			inConditions.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, clanIds);
+			
+			String conditionDelim = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
+
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryInConditions(
+						columnsToSelected, TABLE_NAME, inConditions,
+						conditionDelim, values, preparedStatement);
+			log.info("getUserIdToClanMemberTeamDonationForClanId() query={}, values={}",
+				query, values);
+			clanMemberTeamDonations = this.jdbcTemplate
+					.query(query, values.toArray(), rowMapper);
+			
+		} catch (Exception e) {
+			log.error(
+				String.format(
+					"could not retrieve clan invites for clanIds=%s",
+					clanIds),
 				e);
 		}
 		

@@ -120,7 +120,6 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
-import com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageProto;
@@ -145,6 +144,7 @@ import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
+import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
@@ -152,7 +152,6 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -160,6 +159,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -337,7 +337,10 @@ public class CreateInfoProtoUtils {
 		PvpLeagueForUser plfu, PvpUser pu,
 		Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
-		int prospectiveCashWinnings, int prospectiveOilWinnings) {
+		int prospectiveCashWinnings, int prospectiveOilWinnings,
+		String cmtdId, MonsterSnapshotForUser msfu,
+		int msfuMonsterIdDropped)
+	{
 
 		MinimumUserProtoWithLevel defenderProto =
 			createMinimumUserProtoWithLevel(defender, clan, null);
@@ -345,7 +348,8 @@ public class CreateInfoProtoUtils {
 		String msg = defender.getPvpDefendingMessage();
 		return createPvpProto(userId, plfu, pu, userMonsters,
 			userMonsterIdToDropped, prospectiveCashWinnings,
-			prospectiveOilWinnings, defenderProto, msg);
+			prospectiveOilWinnings, defenderProto, msg, cmtdId, msfu,
+			msfuMonsterIdDropped);
 	}
 
 	public static PvpProto createPvpProto(
@@ -357,7 +361,10 @@ public class CreateInfoProtoUtils {
 		int prospectiveCashWinnings,
 		int prospectiveOilWinnings,
 		MinimumUserProtoWithLevel defender,
-		String defenderMsg)
+		String defenderMsg,
+		String cmtdId,
+		MonsterSnapshotForUser msfu,
+		int msfuMonsterIdDropped)
 	{
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 		
@@ -377,6 +384,14 @@ public class CreateInfoProtoUtils {
 		if (null != defenderMsg)
 		{
 			ppb.setDefenderMsg(defenderMsg);
+		}
+		
+		//account for clan donated monster
+		if (null != cmtdId && null != msfu) {
+			ppb.setSolicitationUuid(cmtdId);
+			PvpMonsterProto pmp = createPvpMonsterProto(
+				msfu, msfuMonsterIdDropped);
+			ppb.setDefenderExtraMonster(pmp);
 		}
 		
 		return ppb.build();
@@ -450,6 +465,20 @@ public class CreateInfoProtoUtils {
 		return pmp;
 	}
 	
+	private static PvpMonsterProto createPvpMonsterProto(
+		MonsterSnapshotForUser msfu, int monsterIdDropped)
+	{
+		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
+		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(msfu);
+		pmpb.setDefenderMonster(mump);
+		if (monsterIdDropped > 0) {
+			pmpb.setMonsterIdDropped(monsterIdDropped);
+		}
+		PvpMonsterProto pmp = pmpb.build();
+		
+		return pmp;
+
+	}
 	
 	//this is used to create fake users for PvpProtos
 	public static PvpProto createFakePvpProto(String userId, String name,
@@ -496,8 +525,11 @@ public class CreateInfoProtoUtils {
 		Map<String, List<MonsterForUser>> userIdToUserMonsters,
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 		Map<String, Integer> userIdToCashReward,
-		Map<String, Integer> userIdToOilReward)
-		{
+		Map<String, Integer> userIdToOilReward,
+		Map<String, String> userIdToCmtdId,
+		Map<String, MonsterSnapshotForUser> userIdToMsfu,
+		Map<String, Integer> userIdToMsfuMonsterIdDropped)
+	{
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
 		for (User u : queuedOpponents) {
@@ -522,9 +554,27 @@ public class CreateInfoProtoUtils {
 
 			Map<String, Integer> userMonsterIdToDropped =
 				userIdToUserMonsterIdToDropped.get(userId);
+			
+			
+			String cmtdId = null;
+			if (null != userIdToCmtdId && userIdToCmtdId.containsKey(userId)) {
+				cmtdId = userIdToCmtdId.get(userId);
+			}
+			MonsterSnapshotForUser msfu = null;
+			if (null != userIdToMsfu && userIdToMsfu.containsKey(userId)) {
+				msfu = userIdToMsfu.get(userId);
+			}
+			int msfuMonsterIdDropped = 0;
+			if (null != userIdToMsfuMonsterIdDropped &&
+				userIdToMsfuMonsterIdDropped.containsKey(userId))
+			{
+				msfuMonsterIdDropped = userIdToMsfuMonsterIdDropped.get(userId);
+			}
+			
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 				userMonsterIdToDropped, prospectiveCashWinnings,
-				prospectiveOilWinnings);
+				prospectiveOilWinnings, cmtdId, msfu,
+				msfuMonsterIdDropped);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
@@ -2283,7 +2333,9 @@ public class CreateInfoProtoUtils {
 		return protos;
 	}
 
-	public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForUser mfu) {
+	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+		MonsterForUser mfu)
+	{
 		MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
 
 		mump.setMonsterId(mfu.getMonsterId());
@@ -2291,7 +2343,9 @@ public class CreateInfoProtoUtils {
 		return mump.build();
 	}
 
-	public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForPvp mfp) {
+	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+		MonsterForPvp mfp)
+	{
 		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
 
 		//int id = mfp.getId();
@@ -2302,6 +2356,16 @@ public class CreateInfoProtoUtils {
 		mumpb.setMonsterLvl(lvl);
 
 		return mumpb.build();
+	}
+	
+	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+		MonsterSnapshotForUser msfu)
+	{
+		MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+
+		mump.setMonsterId(msfu.getMonsterId());
+		mump.setMonsterLvl(msfu.getCurrentLvl());
+		return mump.build();
 	}
 
 	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(

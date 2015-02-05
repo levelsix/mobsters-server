@@ -15,15 +15,17 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AvengeClanMateRequestEvent;
 import com.lvl6.events.response.AvengeClanMateResponseEvent;
 import com.lvl6.info.ClanAvengeUser;
+import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus;
-import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -174,11 +176,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				int expectedOilLost = bcaa.getVictimProspectiveOilLoss();
 				String defendingMessage = defender.getPvpDefendingMessage();
 
+				//TODO: FIX THIS
+				String cmtdId = null;
+				MonsterSnapshotForUser msfu = null;
+				int msfuMonsterIdDropped = ControllerConstants.NOT_SET;
+				
 				//the clanAvenge.getAttacker() is now the victim
 				PvpProto pp = CreateInfoProtoUtils.createPvpProto(
 					defender.getId(), plfu, defenderPu, defenderMonsters,
 					userMonsterIdToDropped, expectedCashLost, expectedOilLost,
-					clanAvenge.getAttacker(), defendingMessage);
+					clanAvenge.getAttacker(), defendingMessage,
+					cmtdId, msfu, msfuMonsterIdDropped);
 				
 				resBuilder.setVictim(pp);
 				resEvent.setAvengeClanMateResponseProto(resBuilder.build());

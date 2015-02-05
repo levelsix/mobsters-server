@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Battle.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -494,6 +495,24 @@ message UnrestrictUserMonsterResponseProto {
 	optional UnrestrictUserMonsterStatus status = 2;
 	
 	enum UnrestrictUserMonsterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message RetrieveUserMonsterTeamRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string userUuids = 2;
+}
+
+message RetrieveUserMonsterTeamResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RetrieveUserMonsterTeamStatus status = 2;
+	repeated PvpProto userMonsterTeam = 3;
+	
+	enum RetrieveUserMonsterTeamStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}

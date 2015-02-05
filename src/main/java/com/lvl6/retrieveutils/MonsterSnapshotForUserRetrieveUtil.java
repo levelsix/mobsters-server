@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +37,43 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	
+	public List<MonsterSnapshotForUser> getMonstersSnapshots(
+		String type, Collection<String> idsInTable)
+	{
+		List<MonsterSnapshotForUser> userMonstersSnapshots = null;
+		log.debug("retrieving user monsters for type={}, idsInTable={}",
+			type, idsInTable);
+		
+		try {
+			int numQuestionMarks = idsInTable.size();
+			List<String> questionMarkList = Collections.nCopies(numQuestionMarks, "?");
+			String questionMarks = StringUtils.csvList(questionMarkList);
+
+			String selectClause = UserMonsterSnapshotForClientMapper
+				.getColumnsSelectedStr();
+
+			String query = String.format(
+				"select %s from %s where %s=? and %s in (%s)",
+				selectClause,
+				TABLE_NAME,
+				DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
+				DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE,
+				questionMarks);
+			
+			List<Object> valuesList = new ArrayList<Object>();
+			valuesList.add(type);
+			valuesList.addAll(idsInTable);
+
+			userMonstersSnapshots = this.jdbcTemplate
+				.query(query, valuesList.toArray(), rowMapper);
+		} catch (Exception e) {
+			log.error("MonsterSnapshotForUser retrieve db error.", e);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+			userMonstersSnapshots = new ArrayList<MonsterSnapshotForUser>();
+		}
+		return userMonstersSnapshots;
+	}
 	
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
