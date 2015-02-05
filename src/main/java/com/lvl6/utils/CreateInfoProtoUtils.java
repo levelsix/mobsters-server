@@ -392,13 +392,10 @@ public class CreateInfoProtoUtils {
 				ClanMemberTeamDonationProto.newBuilder();
 			cmtdpb.setDonationUuid(cmtdId);
 			
-			UserMonsterSnapshotProto.Builder usmspb =
-				UserMonsterSnapshotProto.newBuilder();
-			usmspb.setSnapshotUuid(msfu.getId());
-			usmspb.setMonsterId(msfu.getMonsterId());
-			usmspb.setCurrentLvl(msfu.getCurrentLvl());
+			UserMonsterSnapshotProto umsp = 
+				createUserMonsterSnapshotProto(msfu, null);
 			
-			cmtdpb.addDonations(usmspb.build());
+			cmtdpb.addDonations(umsp);
 			
 			if (msfuMonsterIdDropped > 0) {
 				ppb.setMonsterIdDropped(msfuMonsterIdDropped);

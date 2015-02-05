@@ -43,7 +43,7 @@ message PvpProto {
 	//optional string solicitationUuid = 9;
 	
 	//need ClanMemberTeamDonationProto.donationUuid, and
-	//ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+	//ClanMemberTeamDonationProto.donation
 	optional ClanMemberTeamDonationProto cmtd = 8;
 	optional int32 monsterIdDropped = 9;
 }

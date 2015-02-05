@@ -1,4 +1,4 @@
-package com.lvl6.server.controller.actionobjects;
+ package com.lvl6.server.controller.actionobjects;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -212,8 +212,12 @@ public class RetrieveUserMonsterTeamAction
 		
 		//make it easier to access (via userId) later on
 		List<MonsterSnapshotForUser> allClanDonations =
-			monsterSnapshotForUserRetrieveUtil.getMonstersSnapshots(
+			new ArrayList<MonsterSnapshotForUser>();
+		if (!cmtdIdToAllButRetrieverUserId.isEmpty()) {
+			allClanDonations =
+				monsterSnapshotForUserRetrieveUtil.getMonstersSnapshots(
 				typeDonation, cmtdIdToAllButRetrieverUserId.keySet());
+		}
 		allButRetrieverUserIdToMsfu = new HashMap<String, MonsterSnapshotForUser>();
 		for (MonsterSnapshotForUser msfu : allClanDonations) {
 			//the userId in msfu is the person who created msfu,
@@ -225,8 +229,12 @@ public class RetrieveUserMonsterTeamAction
 		}
 		
 		//need to calculate whether or not these donated monsters drop a piece
-		allButRetrieverUserIdToMsfuMonsterDropId = MonsterStuffUtils
-			.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu);
+		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
+			allButRetrieverUserIdToMsfuMonsterDropId = MonsterStuffUtils
+				.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu);
+		} else {
+			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
+		}
 	}
 
 	private void getPvpInfo()

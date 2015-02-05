@@ -222,7 +222,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     boolean hasCmtd();
@@ -231,7 +231,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd();
@@ -240,7 +240,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder();
@@ -605,7 +605,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     public boolean hasCmtd() {
@@ -616,7 +616,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd() {
@@ -627,7 +627,7 @@ public final class BattleProto {
      *
      * <pre>
      *need ClanMemberTeamDonationProto.donationUuid, and
-     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+     *ClanMemberTeamDonationProto.donation
      * </pre>
      */
     public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder() {
@@ -1787,7 +1787,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public boolean hasCmtd() {
@@ -1798,7 +1798,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd() {
@@ -1813,7 +1813,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public Builder setCmtd(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
@@ -1834,7 +1834,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public Builder setCmtd(
@@ -1853,7 +1853,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public Builder mergeCmtd(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
@@ -1877,7 +1877,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public Builder clearCmtd() {
@@ -1895,7 +1895,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getCmtdBuilder() {
@@ -1908,7 +1908,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder() {
@@ -1923,7 +1923,7 @@ public final class BattleProto {
        *
        * <pre>
        *need ClanMemberTeamDonationProto.donationUuid, and
-       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
+       *ClanMemberTeamDonationProto.donation
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
