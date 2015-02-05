@@ -251,6 +251,7 @@ message UserMonsterSnapshotProto {
 //------------------------------------------------------------------------------------------
 
 message ClanMemberTeamDonationProto {
+	//should really be solicitationUuid, not donationUuid
 	optional string donationUuid = 1;
 	optional MinimumUserProto solicitor = 2;
 	optional string clanUuid = 3;

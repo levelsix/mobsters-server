@@ -218,43 +218,41 @@ public final class BattleProto {
         getDefenderMsgBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    boolean hasDefenderExtraMonster();
+    boolean hasCmtd();
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    com.lvl6.proto.BattleProto.PvpMonsterProto getDefenderExtraMonster();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd();
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder getDefenderExtraMonsterOrBuilder();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder();
 
     /**
-     * <code>optional string solicitationUuid = 9;</code>
+     * <code>optional int32 monsterIdDropped = 9;</code>
      */
-    boolean hasSolicitationUuid();
+    boolean hasMonsterIdDropped();
     /**
-     * <code>optional string solicitationUuid = 9;</code>
+     * <code>optional int32 monsterIdDropped = 9;</code>
      */
-    java.lang.String getSolicitationUuid();
-    /**
-     * <code>optional string solicitationUuid = 9;</code>
-     */
-    com.google.protobuf.ByteString
-        getSolicitationUuidBytes();
+    int getMonsterIdDropped();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpProto}
@@ -359,22 +357,21 @@ public final class BattleProto {
               break;
             }
             case 66: {
-              com.lvl6.proto.BattleProto.PvpMonsterProto.Builder subBuilder = null;
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = defenderExtraMonster_.toBuilder();
+                subBuilder = cmtd_.toBuilder();
               }
-              defenderExtraMonster_ = input.readMessage(com.lvl6.proto.BattleProto.PvpMonsterProto.PARSER, extensionRegistry);
+              cmtd_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(defenderExtraMonster_);
-                defenderExtraMonster_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(cmtd_);
+                cmtd_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
               break;
             }
-            case 74: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 72: {
               bitField0_ |= 0x00000040;
-              solicitationUuid_ = bs;
+              monsterIdDropped_ = input.readInt32();
               break;
             }
           }
@@ -601,79 +598,55 @@ public final class BattleProto {
       }
     }
 
-    public static final int DEFENDEREXTRAMONSTER_FIELD_NUMBER = 8;
-    private com.lvl6.proto.BattleProto.PvpMonsterProto defenderExtraMonster_;
+    public static final int CMTD_FIELD_NUMBER = 8;
+    private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto cmtd_;
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    public boolean hasDefenderExtraMonster() {
+    public boolean hasCmtd() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    public com.lvl6.proto.BattleProto.PvpMonsterProto getDefenderExtraMonster() {
-      return defenderExtraMonster_;
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd() {
+      return cmtd_;
     }
     /**
-     * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
      *
      * <pre>
-     *the monster donated by defender's clan
+     *need ClanMemberTeamDonationProto.donationUuid, and
+     *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
      * </pre>
      */
-    public com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder getDefenderExtraMonsterOrBuilder() {
-      return defenderExtraMonster_;
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder() {
+      return cmtd_;
     }
 
-    public static final int SOLICITATIONUUID_FIELD_NUMBER = 9;
-    private java.lang.Object solicitationUuid_;
+    public static final int MONSTERIDDROPPED_FIELD_NUMBER = 9;
+    private int monsterIdDropped_;
     /**
-     * <code>optional string solicitationUuid = 9;</code>
+     * <code>optional int32 monsterIdDropped = 9;</code>
      */
-    public boolean hasSolicitationUuid() {
+    public boolean hasMonsterIdDropped() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional string solicitationUuid = 9;</code>
+     * <code>optional int32 monsterIdDropped = 9;</code>
      */
-    public java.lang.String getSolicitationUuid() {
-      java.lang.Object ref = solicitationUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          solicitationUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string solicitationUuid = 9;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSolicitationUuidBytes() {
-      java.lang.Object ref = solicitationUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        solicitationUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getMonsterIdDropped() {
+      return monsterIdDropped_;
     }
 
     private void initFields() {
@@ -683,8 +656,8 @@ public final class BattleProto {
       prospectiveOilWinnings_ = 0;
       pvpLeagueStats_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderMsg_ = "";
-      defenderExtraMonster_ = com.lvl6.proto.BattleProto.PvpMonsterProto.getDefaultInstance();
-      solicitationUuid_ = "";
+      cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      monsterIdDropped_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -718,10 +691,10 @@ public final class BattleProto {
         output.writeBytes(7, getDefenderMsgBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(8, defenderExtraMonster_);
+        output.writeMessage(8, cmtd_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(9, getSolicitationUuidBytes());
+        output.writeInt32(9, monsterIdDropped_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -758,11 +731,11 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, defenderExtraMonster_);
+          .computeMessageSize(8, cmtd_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getSolicitationUuidBytes());
+          .computeInt32Size(9, monsterIdDropped_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -876,7 +849,7 @@ public final class BattleProto {
           getDefenderFieldBuilder();
           getDefenderMonstersFieldBuilder();
           getPvpLeagueStatsFieldBuilder();
-          getDefenderExtraMonsterFieldBuilder();
+          getCmtdFieldBuilder();
         }
       }
       private static Builder create() {
@@ -909,13 +882,13 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         defenderMsg_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        if (defenderExtraMonsterBuilder_ == null) {
-          defenderExtraMonster_ = com.lvl6.proto.BattleProto.PvpMonsterProto.getDefaultInstance();
+        if (cmtdBuilder_ == null) {
+          cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
         } else {
-          defenderExtraMonsterBuilder_.clear();
+          cmtdBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
-        solicitationUuid_ = "";
+        monsterIdDropped_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -985,15 +958,15 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        if (defenderExtraMonsterBuilder_ == null) {
-          result.defenderExtraMonster_ = defenderExtraMonster_;
+        if (cmtdBuilder_ == null) {
+          result.cmtd_ = cmtd_;
         } else {
-          result.defenderExtraMonster_ = defenderExtraMonsterBuilder_.build();
+          result.cmtd_ = cmtdBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.solicitationUuid_ = solicitationUuid_;
+        result.monsterIdDropped_ = monsterIdDropped_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1053,13 +1026,11 @@ public final class BattleProto {
           defenderMsg_ = other.defenderMsg_;
           onChanged();
         }
-        if (other.hasDefenderExtraMonster()) {
-          mergeDefenderExtraMonster(other.getDefenderExtraMonster());
+        if (other.hasCmtd()) {
+          mergeCmtd(other.getCmtd());
         }
-        if (other.hasSolicitationUuid()) {
-          bitField0_ |= 0x00000080;
-          solicitationUuid_ = other.solicitationUuid_;
-          onChanged();
+        if (other.hasMonsterIdDropped()) {
+          setMonsterIdDropped(other.getMonsterIdDropped());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1808,230 +1779,195 @@ public final class BattleProto {
         return this;
       }
 
-      private com.lvl6.proto.BattleProto.PvpMonsterProto defenderExtraMonster_ = com.lvl6.proto.BattleProto.PvpMonsterProto.getDefaultInstance();
+      private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.PvpMonsterProto, com.lvl6.proto.BattleProto.PvpMonsterProto.Builder, com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder> defenderExtraMonsterBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> cmtdBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public boolean hasDefenderExtraMonster() {
+      public boolean hasCmtd() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public com.lvl6.proto.BattleProto.PvpMonsterProto getDefenderExtraMonster() {
-        if (defenderExtraMonsterBuilder_ == null) {
-          return defenderExtraMonster_;
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getCmtd() {
+        if (cmtdBuilder_ == null) {
+          return cmtd_;
         } else {
-          return defenderExtraMonsterBuilder_.getMessage();
+          return cmtdBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public Builder setDefenderExtraMonster(com.lvl6.proto.BattleProto.PvpMonsterProto value) {
-        if (defenderExtraMonsterBuilder_ == null) {
+      public Builder setCmtd(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
+        if (cmtdBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          defenderExtraMonster_ = value;
+          cmtd_ = value;
           onChanged();
         } else {
-          defenderExtraMonsterBuilder_.setMessage(value);
+          cmtdBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public Builder setDefenderExtraMonster(
-          com.lvl6.proto.BattleProto.PvpMonsterProto.Builder builderForValue) {
-        if (defenderExtraMonsterBuilder_ == null) {
-          defenderExtraMonster_ = builderForValue.build();
+      public Builder setCmtd(
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (cmtdBuilder_ == null) {
+          cmtd_ = builderForValue.build();
           onChanged();
         } else {
-          defenderExtraMonsterBuilder_.setMessage(builderForValue.build());
+          cmtdBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public Builder mergeDefenderExtraMonster(com.lvl6.proto.BattleProto.PvpMonsterProto value) {
-        if (defenderExtraMonsterBuilder_ == null) {
+      public Builder mergeCmtd(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
+        if (cmtdBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              defenderExtraMonster_ != com.lvl6.proto.BattleProto.PvpMonsterProto.getDefaultInstance()) {
-            defenderExtraMonster_ =
-              com.lvl6.proto.BattleProto.PvpMonsterProto.newBuilder(defenderExtraMonster_).mergeFrom(value).buildPartial();
+              cmtd_ != com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+            cmtd_ =
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.newBuilder(cmtd_).mergeFrom(value).buildPartial();
           } else {
-            defenderExtraMonster_ = value;
+            cmtd_ = value;
           }
           onChanged();
         } else {
-          defenderExtraMonsterBuilder_.mergeFrom(value);
+          cmtdBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public Builder clearDefenderExtraMonster() {
-        if (defenderExtraMonsterBuilder_ == null) {
-          defenderExtraMonster_ = com.lvl6.proto.BattleProto.PvpMonsterProto.getDefaultInstance();
+      public Builder clearCmtd() {
+        if (cmtdBuilder_ == null) {
+          cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
           onChanged();
         } else {
-          defenderExtraMonsterBuilder_.clear();
+          cmtdBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public com.lvl6.proto.BattleProto.PvpMonsterProto.Builder getDefenderExtraMonsterBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getCmtdBuilder() {
         bitField0_ |= 0x00000040;
         onChanged();
-        return getDefenderExtraMonsterFieldBuilder().getBuilder();
+        return getCmtdFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
-      public com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder getDefenderExtraMonsterOrBuilder() {
-        if (defenderExtraMonsterBuilder_ != null) {
-          return defenderExtraMonsterBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getCmtdOrBuilder() {
+        if (cmtdBuilder_ != null) {
+          return cmtdBuilder_.getMessageOrBuilder();
         } else {
-          return defenderExtraMonster_;
+          return cmtd_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.PvpMonsterProto defenderExtraMonster = 8;</code>
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto cmtd = 8;</code>
        *
        * <pre>
-       *the monster donated by defender's clan
+       *need ClanMemberTeamDonationProto.donationUuid, and
+       *ClanMemberTeamDonationProto.donations[0].{snapshotUuid, monsterId, lvl}
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.PvpMonsterProto, com.lvl6.proto.BattleProto.PvpMonsterProto.Builder, com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder> 
-          getDefenderExtraMonsterFieldBuilder() {
-        if (defenderExtraMonsterBuilder_ == null) {
-          defenderExtraMonsterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.BattleProto.PvpMonsterProto, com.lvl6.proto.BattleProto.PvpMonsterProto.Builder, com.lvl6.proto.BattleProto.PvpMonsterProtoOrBuilder>(
-                  getDefenderExtraMonster(),
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
+          getCmtdFieldBuilder() {
+        if (cmtdBuilder_ == null) {
+          cmtdBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
+                  getCmtd(),
                   getParentForChildren(),
                   isClean());
-          defenderExtraMonster_ = null;
+          cmtd_ = null;
         }
-        return defenderExtraMonsterBuilder_;
+        return cmtdBuilder_;
       }
 
-      private java.lang.Object solicitationUuid_ = "";
+      private int monsterIdDropped_ ;
       /**
-       * <code>optional string solicitationUuid = 9;</code>
+       * <code>optional int32 monsterIdDropped = 9;</code>
        */
-      public boolean hasSolicitationUuid() {
+      public boolean hasMonsterIdDropped() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional string solicitationUuid = 9;</code>
+       * <code>optional int32 monsterIdDropped = 9;</code>
        */
-      public java.lang.String getSolicitationUuid() {
-        java.lang.Object ref = solicitationUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            solicitationUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getMonsterIdDropped() {
+        return monsterIdDropped_;
       }
       /**
-       * <code>optional string solicitationUuid = 9;</code>
+       * <code>optional int32 monsterIdDropped = 9;</code>
        */
-      public com.google.protobuf.ByteString
-          getSolicitationUuidBytes() {
-        java.lang.Object ref = solicitationUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          solicitationUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string solicitationUuid = 9;</code>
-       */
-      public Builder setSolicitationUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        solicitationUuid_ = value;
+      public Builder setMonsterIdDropped(int value) {
+        bitField0_ |= 0x00000080;
+        monsterIdDropped_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string solicitationUuid = 9;</code>
+       * <code>optional int32 monsterIdDropped = 9;</code>
        */
-      public Builder clearSolicitationUuid() {
+      public Builder clearMonsterIdDropped() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        solicitationUuid_ = getDefaultInstance().getSolicitationUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string solicitationUuid = 9;</code>
-       */
-      public Builder setSolicitationUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        solicitationUuid_ = value;
+        monsterIdDropped_ = 0;
         onChanged();
         return this;
       }
@@ -9409,51 +9345,51 @@ public final class BattleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\nUser.proto\"\355\002\n\010PvpProto\022;\n\010d" +
+      "tuff.proto\032\nUser.proto\"\351\002\n\010PvpProto\022;\n\010d" +
       "efender\030\001 \001(\0132).com.lvl6.proto.MinimumUs" +
       "erProtoWithLevel\0229\n\020defenderMonsters\030\003 \003" +
       "(\0132\037.com.lvl6.proto.PvpMonsterProto\022\037\n\027p" +
       "rospectiveCashWinnings\030\004 \001(\005\022\036\n\026prospect" +
       "iveOilWinnings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006" +
       " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
-      "\022\023\n\013defenderMsg\030\007 \001(\t\022=\n\024defenderExtraMo" +
-      "nster\030\010 \001(\0132\037.com.lvl6.proto.PvpMonsterP",
-      "roto\022\030\n\020solicitationUuid\030\t \001(\t\"m\n\017PvpMon" +
-      "sterProto\022@\n\017defenderMonster\030\001 \001(\0132\'.com" +
-      ".lvl6.proto.MinimumUserMonsterProto\022\030\n\020m" +
-      "onsterIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProt" +
-      "o\022\025\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001" +
-      "(\0132\035.com.lvl6.proto.FullUserProto\022:\n\021att" +
-      "ackersMonsters\030\002 \003(\0132\037.com.lvl6.proto.Pv" +
-      "pMonsterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022de" +
-      "fenderCashChange\030\004 \001(\021\022\031\n\021defenderOilCha" +
-      "nge\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027pro",
-      "spectiveCashWinnings\030\007 \001(\005\022\036\n\026prospectiv" +
-      "eOilWinnings\030\010 \001(\005\022:\n\016attackerBefore\030\n \001" +
-      "(\0132\".com.lvl6.proto.UserPvpLeagueProto\0229" +
-      "\n\rattackerAfter\030\013 \001(\0132\".com.lvl6.proto.U" +
-      "serPvpLeagueProto\022:\n\016defenderBefore\030\014 \001(" +
-      "\0132\".com.lvl6.proto.UserPvpLeagueProto\0229\n" +
-      "\rdefenderAfter\030\r \001(\0132\".com.lvl6.proto.Us" +
-      "erPvpLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com" +
-      ".lvl6.proto.FullUserProto\022\032\n\022attackerCas" +
-      "hChange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005",
-      "\022\023\n\013clanAvenged\030\021 \001(\010\"^\n\016PvpLeagueProto\022" +
-      "\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n" +
-      "\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002" +
-      "\n\022PvpClanAvengeProto\022\026\n\016clanAvengeUuid\030\001" +
-      " \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lvl6.p" +
-      "roto.PvpUserClanAvengeProto\022;\n\010attacker\030" +
-      "\003 \001(\0132).com.lvl6.proto.MinimumUserProtoW" +
-      "ithLevel\0222\n\010defender\030\004 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\025\n\rbattleEndTime\030\005 " +
-      "\001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defend",
-      "erClanUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengePro" +
-      "to\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026" +
-      "\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001" +
-      "(\003*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014" +
-      "DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013Bat" +
-      "tleProto"
+      "\022\023\n\013defenderMsg\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.co" +
+      "m.lvl6.proto.ClanMemberTeamDonationProto",
+      "\022\030\n\020monsterIdDropped\030\t \001(\005\"m\n\017PvpMonster" +
+      "Proto\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl" +
+      "6.proto.MinimumUserMonsterProto\022\030\n\020monst" +
+      "erIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025\n" +
+      "\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035" +
+      ".com.lvl6.proto.FullUserProto\022:\n\021attacke" +
+      "rsMonsters\030\002 \003(\0132\037.com.lvl6.proto.PvpMon" +
+      "sterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defend" +
+      "erCashChange\030\004 \001(\021\022\031\n\021defenderOilChange\030" +
+      "\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027prospec",
+      "tiveCashWinnings\030\007 \001(\005\022\036\n\026prospectiveOil" +
+      "Winnings\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132\"" +
+      ".com.lvl6.proto.UserPvpLeagueProto\0229\n\rat" +
+      "tackerAfter\030\013 \001(\0132\".com.lvl6.proto.UserP" +
+      "vpLeagueProto\022:\n\016defenderBefore\030\014 \001(\0132\"." +
+      "com.lvl6.proto.UserPvpLeagueProto\0229\n\rdef" +
+      "enderAfter\030\r \001(\0132\".com.lvl6.proto.UserPv" +
+      "pLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl" +
+      "6.proto.FullUserProto\022\032\n\022attackerCashCha" +
+      "nge\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013",
+      "clanAvenged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010l" +
+      "eagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timg" +
+      "Prefix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022Pv" +
+      "pClanAvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t" +
+      "\022=\n\rusersAvenging\030\002 \003(\0132&.com.lvl6.proto" +
+      ".PvpUserClanAvengeProto\022;\n\010attacker\030\003 \001(" +
+      "\0132).com.lvl6.proto.MinimumUserProtoWithL" +
+      "evel\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022" +
+      "\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderCl",
+      "anUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020" +
+      "\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016cl" +
+      "anAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E" +
+      "\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFE" +
+      "NDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9474,7 +9410,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "DefenderExtraMonster", "SolicitationUuid", });
+        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", });
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new

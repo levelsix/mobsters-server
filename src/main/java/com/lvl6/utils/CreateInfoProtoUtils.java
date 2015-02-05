@@ -388,10 +388,21 @@ public class CreateInfoProtoUtils {
 		
 		//account for clan donated monster
 		if (null != cmtdId && null != msfu) {
-			ppb.setSolicitationUuid(cmtdId);
-			PvpMonsterProto pmp = createPvpMonsterProto(
-				msfu, msfuMonsterIdDropped);
-			ppb.setDefenderExtraMonster(pmp);
+			ClanMemberTeamDonationProto.Builder cmtdpb =
+				ClanMemberTeamDonationProto.newBuilder();
+			cmtdpb.setDonationUuid(cmtdId);
+			
+			UserMonsterSnapshotProto.Builder usmspb =
+				UserMonsterSnapshotProto.newBuilder();
+			usmspb.setSnapshotUuid(msfu.getId());
+			usmspb.setMonsterId(msfu.getMonsterId());
+			usmspb.setCurrentLvl(msfu.getCurrentLvl());
+			
+			cmtdpb.addDonations(usmspb.build());
+			
+			if (msfuMonsterIdDropped > 0) {
+				ppb.setMonsterIdDropped(msfuMonsterIdDropped);
+			}
 		}
 		
 		return ppb.build();

@@ -17974,14 +17974,26 @@ public final class MonsterStuffProto {
 
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     boolean hasDonationUuid();
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     java.lang.String getDonationUuid();
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     com.google.protobuf.ByteString
         getDonationUuidBytes();
@@ -18231,12 +18243,20 @@ public final class MonsterStuffProto {
     private java.lang.Object donationUuid_;
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     public boolean hasDonationUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     public java.lang.String getDonationUuid() {
       java.lang.Object ref = donationUuid_;
@@ -18254,6 +18274,10 @@ public final class MonsterStuffProto {
     }
     /**
      * <code>optional string donationUuid = 1;</code>
+     *
+     * <pre>
+     *should really be solicitationUuid, not donationUuid
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getDonationUuidBytes() {
@@ -18853,12 +18877,20 @@ public final class MonsterStuffProto {
       private java.lang.Object donationUuid_ = "";
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public boolean hasDonationUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public java.lang.String getDonationUuid() {
         java.lang.Object ref = donationUuid_;
@@ -18876,6 +18908,10 @@ public final class MonsterStuffProto {
       }
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getDonationUuidBytes() {
@@ -18892,6 +18928,10 @@ public final class MonsterStuffProto {
       }
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public Builder setDonationUuid(
           java.lang.String value) {
@@ -18905,6 +18945,10 @@ public final class MonsterStuffProto {
       }
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public Builder clearDonationUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -18914,6 +18958,10 @@ public final class MonsterStuffProto {
       }
       /**
        * <code>optional string donationUuid = 1;</code>
+       *
+       * <pre>
+       *should really be solicitationUuid, not donationUuid
+       * </pre>
        */
       public Builder setDonationUuidBytes(
           com.google.protobuf.ByteString value) {
