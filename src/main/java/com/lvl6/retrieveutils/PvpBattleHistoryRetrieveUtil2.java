@@ -89,7 +89,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
             history.setAttackerOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE));
 			history.setAttackerWon(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
-//			history.setClanAvenged(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
+			history.setClanAvenged(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
 			return history;
 		}
 
