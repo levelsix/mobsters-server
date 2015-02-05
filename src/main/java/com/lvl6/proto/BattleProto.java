@@ -216,6 +216,19 @@ public final class BattleProto {
      */
     com.google.protobuf.ByteString
         getDefenderMsgBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    boolean hasDefenderExtraMonster();
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getDefenderExtraMonster();
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getDefenderExtraMonsterOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpProto}
@@ -317,6 +330,19 @@ public final class BattleProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
               defenderMsg_ = bs;
+              break;
+            }
+            case 66: {
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = defenderExtraMonster_.toBuilder();
+              }
+              defenderExtraMonster_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(defenderExtraMonster_);
+                defenderExtraMonster_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -543,6 +569,27 @@ public final class BattleProto {
       }
     }
 
+    public static final int DEFENDEREXTRAMONSTER_FIELD_NUMBER = 8;
+    private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto defenderExtraMonster_;
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    public boolean hasDefenderExtraMonster() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getDefenderExtraMonster() {
+      return defenderExtraMonster_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getDefenderExtraMonsterOrBuilder() {
+      return defenderExtraMonster_;
+    }
+
     private void initFields() {
       defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       defenderMonsters_ = java.util.Collections.emptyList();
@@ -550,6 +597,7 @@ public final class BattleProto {
       prospectiveOilWinnings_ = 0;
       pvpLeagueStats_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderMsg_ = "";
+      defenderExtraMonster_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -581,6 +629,9 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(7, getDefenderMsgBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(8, defenderExtraMonster_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -614,6 +665,10 @@ public final class BattleProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getDefenderMsgBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, defenderExtraMonster_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -727,6 +782,7 @@ public final class BattleProto {
           getDefenderFieldBuilder();
           getDefenderMonstersFieldBuilder();
           getPvpLeagueStatsFieldBuilder();
+          getDefenderExtraMonsterFieldBuilder();
         }
       }
       private static Builder create() {
@@ -759,6 +815,12 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         defenderMsg_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        if (defenderExtraMonsterBuilder_ == null) {
+          defenderExtraMonster_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
+        } else {
+          defenderExtraMonsterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -824,6 +886,14 @@ public final class BattleProto {
           to_bitField0_ |= 0x00000010;
         }
         result.defenderMsg_ = defenderMsg_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (defenderExtraMonsterBuilder_ == null) {
+          result.defenderExtraMonster_ = defenderExtraMonster_;
+        } else {
+          result.defenderExtraMonster_ = defenderExtraMonsterBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -882,6 +952,9 @@ public final class BattleProto {
           bitField0_ |= 0x00000020;
           defenderMsg_ = other.defenderMsg_;
           onChanged();
+        }
+        if (other.hasDefenderExtraMonster()) {
+          mergeDefenderExtraMonster(other.getDefenderExtraMonster());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1628,6 +1701,122 @@ public final class BattleProto {
         defenderMsg_ = value;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto defenderExtraMonster_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> defenderExtraMonsterBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public boolean hasDefenderExtraMonster() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getDefenderExtraMonster() {
+        if (defenderExtraMonsterBuilder_ == null) {
+          return defenderExtraMonster_;
+        } else {
+          return defenderExtraMonsterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public Builder setDefenderExtraMonster(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
+        if (defenderExtraMonsterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defenderExtraMonster_ = value;
+          onChanged();
+        } else {
+          defenderExtraMonsterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public Builder setDefenderExtraMonster(
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+        if (defenderExtraMonsterBuilder_ == null) {
+          defenderExtraMonster_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderExtraMonsterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public Builder mergeDefenderExtraMonster(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
+        if (defenderExtraMonsterBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              defenderExtraMonster_ != com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+            defenderExtraMonster_ =
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.newBuilder(defenderExtraMonster_).mergeFrom(value).buildPartial();
+          } else {
+            defenderExtraMonster_ = value;
+          }
+          onChanged();
+        } else {
+          defenderExtraMonsterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public Builder clearDefenderExtraMonster() {
+        if (defenderExtraMonsterBuilder_ == null) {
+          defenderExtraMonster_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderExtraMonsterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getDefenderExtraMonsterBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getDefenderExtraMonsterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getDefenderExtraMonsterOrBuilder() {
+        if (defenderExtraMonsterBuilder_ != null) {
+          return defenderExtraMonsterBuilder_.getMessageOrBuilder();
+        } else {
+          return defenderExtraMonster_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto defenderExtraMonster = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
+          getDefenderExtraMonsterFieldBuilder() {
+        if (defenderExtraMonsterBuilder_ == null) {
+          defenderExtraMonsterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
+                  getDefenderExtraMonster(),
+                  getParentForChildren(),
+                  isClean());
+          defenderExtraMonster_ = null;
+        }
+        return defenderExtraMonsterBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpProto)
@@ -9003,48 +9192,50 @@ public final class BattleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\nUser.proto\"\224\002\n\010PvpProto\022;\n\010d" +
+      "tuff.proto\032\nUser.proto\"\337\002\n\010PvpProto\022;\n\010d" +
       "efender\030\001 \001(\0132).com.lvl6.proto.MinimumUs" +
       "erProtoWithLevel\0229\n\020defenderMonsters\030\003 \003" +
       "(\0132\037.com.lvl6.proto.PvpMonsterProto\022\037\n\027p" +
       "rospectiveCashWinnings\030\004 \001(\005\022\036\n\026prospect" +
       "iveOilWinnings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006" +
       " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
-      "\022\023\n\013defenderMsg\030\007 \001(\t\"m\n\017PvpMonsterProto" +
-      "\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl6.pro",
-      "to.MinimumUserMonsterProto\022\030\n\020monsterIdD" +
-      "ropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025\n\rbatt" +
-      "leEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com." +
-      "lvl6.proto.FullUserProto\022:\n\021attackersMon" +
-      "sters\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterP" +
-      "roto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defenderCas" +
-      "hChange\030\004 \001(\021\022\031\n\021defenderOilChange\030\005 \001(\021" +
-      "\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027prospectiveC" +
-      "ashWinnings\030\007 \001(\005\022\036\n\026prospectiveOilWinni" +
-      "ngs\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132\".com.",
-      "lvl6.proto.UserPvpLeagueProto\0229\n\rattacke" +
-      "rAfter\030\013 \001(\0132\".com.lvl6.proto.UserPvpLea" +
-      "gueProto\022:\n\016defenderBefore\030\014 \001(\0132\".com.l" +
-      "vl6.proto.UserPvpLeagueProto\0229\n\rdefender" +
-      "After\030\r \001(\0132\".com.lvl6.proto.UserPvpLeag" +
-      "ueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.pro" +
-      "to.FullUserProto\022\032\n\022attackerCashChange\030\017" +
-      " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanA" +
-      "venged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010league" +
-      "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi",
-      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022PvpClan" +
-      "AvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\ru" +
-      "sersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpU" +
-      "serClanAvengeProto\022;\n\010attacker\030\003 \001(\0132).c" +
-      "om.lvl6.proto.MinimumUserProtoWithLevel\022" +
-      "2\n\010defender\030\004 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021av" +
-      "engeRequestTime\030\006 \001(\003\022\030\n\020defenderClanUui" +
-      "d\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n\010use" +
-      "rUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clanAve",
-      "ngeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014Bat" +
-      "tleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_" +
-      "WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
+      "\022\023\n\013defenderMsg\030\007 \001(\t\022I\n\024defenderExtraMo" +
+      "nster\030\010 \001(\0132+.com.lvl6.proto.ClanMemberT",
+      "eamDonationProto\"m\n\017PvpMonsterProto\022@\n\017d" +
+      "efenderMonster\030\001 \001(\0132\'.com.lvl6.proto.Mi" +
+      "nimumUserMonsterProto\022\030\n\020monsterIdDroppe" +
+      "d\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025\n\rbattleEnd" +
+      "Time\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com.lvl6." +
+      "proto.FullUserProto\022:\n\021attackersMonsters" +
+      "\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterProto\022" +
+      "\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defenderCashChan" +
+      "ge\030\004 \001(\021\022\031\n\021defenderOilChange\030\005 \001(\021\022\026\n\016e" +
+      "xactedRevenge\030\006 \001(\010\022\037\n\027prospectiveCashWi",
+      "nnings\030\007 \001(\005\022\036\n\026prospectiveOilWinnings\030\010" +
+      " \001(\005\022:\n\016attackerBefore\030\n \001(\0132\".com.lvl6." +
+      "proto.UserPvpLeagueProto\0229\n\rattackerAfte" +
+      "r\030\013 \001(\0132\".com.lvl6.proto.UserPvpLeaguePr" +
+      "oto\022:\n\016defenderBefore\030\014 \001(\0132\".com.lvl6.p" +
+      "roto.UserPvpLeagueProto\0229\n\rdefenderAfter" +
+      "\030\r \001(\0132\".com.lvl6.proto.UserPvpLeaguePro" +
+      "to\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.proto.Fu" +
+      "llUserProto\022\032\n\022attackerCashChange\030\017 \001(\005\022" +
+      "\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanAvenge",
+      "d\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010leagueId\030\001 " +
+      "\001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001" +
+      "(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022PvpClanAveng" +
+      "eProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\rusersA" +
+      "venging\030\002 \003(\0132&.com.lvl6.proto.PvpUserCl" +
+      "anAvengeProto\022;\n\010attacker\030\003 \001(\0132).com.lv" +
+      "l6.proto.MinimumUserProtoWithLevel\0222\n\010de" +
+      "fender\030\004 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021avengeR" +
+      "equestTime\030\006 \001(\003\022\030\n\020defenderClanUuid\030\007 \001",
+      "(\t\"h\n\026PvpUserClanAvengeProto\022\020\n\010userUuid" +
+      "\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clanAvengeUu" +
+      "id\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014BattleRe" +
+      "sult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002" +
+      "\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9065,7 +9256,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", });
+        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "DefenderExtraMonster", });
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new

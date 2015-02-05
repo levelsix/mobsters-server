@@ -45683,11 +45683,11 @@ public final class EventClanProto {
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation();
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SolicitTeamDonationResponseProto}
@@ -45766,11 +45766,11 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = solicitation_.toBuilder();
               }
-              solicitation_ = input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
+              solicitation_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(solicitation_);
                 solicitation_ = subBuilder.buildPartial();
@@ -45955,7 +45955,7 @@ public final class EventClanProto {
     }
 
     public static final int SOLICITATION_FIELD_NUMBER = 3;
-    private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_;
+    private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
@@ -45965,20 +45965,20 @@ public final class EventClanProto {
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
       return solicitation_;
     }
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
       return solicitation_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
-      solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -46151,7 +46151,7 @@ public final class EventClanProto {
         status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
         } else {
           solicitationBuilder_.clear();
         }
@@ -46407,9 +46407,9 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
@@ -46419,7 +46419,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
         if (solicitationBuilder_ == null) {
           return solicitation_;
         } else {
@@ -46429,7 +46429,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public Builder setSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder setSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -46446,7 +46446,7 @@ public final class EventClanProto {
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
       public Builder setSolicitation(
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationBuilder_ == null) {
           solicitation_ = builderForValue.build();
           onChanged();
@@ -46459,12 +46459,12 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public Builder mergeSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder mergeSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              solicitation_ != com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+              solicitation_ != com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
             solicitation_ =
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
           } else {
             solicitation_ = value;
           }
@@ -46480,7 +46480,7 @@ public final class EventClanProto {
        */
       public Builder clearSolicitation() {
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
           onChanged();
         } else {
           solicitationBuilder_.clear();
@@ -46491,7 +46491,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getSolicitationFieldBuilder().getBuilder();
@@ -46499,7 +46499,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
         if (solicitationBuilder_ != null) {
           return solicitationBuilder_.getMessageOrBuilder();
         } else {
@@ -46510,11 +46510,11 @@ public final class EventClanProto {
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
           getSolicitationFieldBuilder() {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
                   getSolicitation(),
                   getParentForChildren(),
                   isClean());
@@ -46588,7 +46588,7 @@ public final class EventClanProto {
      *lock on the solicitor
      * </pre>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation();
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
      *
@@ -46596,7 +46596,7 @@ public final class EventClanProto {
      *lock on the solicitor
      * </pre>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto}
@@ -46682,11 +46682,11 @@ public final class EventClanProto {
               break;
             }
             case 34: {
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 subBuilder = solicitation_.toBuilder();
               }
-              solicitation_ = input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
+              solicitation_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(solicitation_);
                 solicitation_ = subBuilder.buildPartial();
@@ -46792,7 +46792,7 @@ public final class EventClanProto {
     }
 
     public static final int SOLICITATION_FIELD_NUMBER = 4;
-    private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_;
+    private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
      *
@@ -46810,7 +46810,7 @@ public final class EventClanProto {
      *lock on the solicitor
      * </pre>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
       return solicitation_;
     }
     /**
@@ -46820,7 +46820,7 @@ public final class EventClanProto {
      *lock on the solicitor
      * </pre>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
       return solicitation_;
     }
 
@@ -46828,7 +46828,7 @@ public final class EventClanProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       clientTime_ = 0L;
-      solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -47015,7 +47015,7 @@ public final class EventClanProto {
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
         } else {
           solicitationBuilder_.clear();
         }
@@ -47395,9 +47395,9 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
        *
@@ -47415,7 +47415,7 @@ public final class EventClanProto {
        *lock on the solicitor
        * </pre>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
         if (solicitationBuilder_ == null) {
           return solicitation_;
         } else {
@@ -47429,7 +47429,7 @@ public final class EventClanProto {
        *lock on the solicitor
        * </pre>
        */
-      public Builder setSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder setSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -47450,7 +47450,7 @@ public final class EventClanProto {
        * </pre>
        */
       public Builder setSolicitation(
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationBuilder_ == null) {
           solicitation_ = builderForValue.build();
           onChanged();
@@ -47467,12 +47467,12 @@ public final class EventClanProto {
        *lock on the solicitor
        * </pre>
        */
-      public Builder mergeSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder mergeSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              solicitation_ != com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+              solicitation_ != com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
             solicitation_ =
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
           } else {
             solicitation_ = value;
           }
@@ -47492,7 +47492,7 @@ public final class EventClanProto {
        */
       public Builder clearSolicitation() {
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
           onChanged();
         } else {
           solicitationBuilder_.clear();
@@ -47507,7 +47507,7 @@ public final class EventClanProto {
        *lock on the solicitor
        * </pre>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getSolicitationFieldBuilder().getBuilder();
@@ -47519,7 +47519,7 @@ public final class EventClanProto {
        *lock on the solicitor
        * </pre>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
         if (solicitationBuilder_ != null) {
           return solicitationBuilder_.getMessageOrBuilder();
         } else {
@@ -47534,11 +47534,11 @@ public final class EventClanProto {
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
           getSolicitationFieldBuilder() {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
                   getSolicitation(),
                   getParentForChildren(),
                   isClean());
@@ -47591,11 +47591,11 @@ public final class EventClanProto {
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation();
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto}
@@ -47674,11 +47674,11 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = solicitation_.toBuilder();
               }
-              solicitation_ = input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
+              solicitation_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(solicitation_);
                 solicitation_ = subBuilder.buildPartial();
@@ -47863,7 +47863,7 @@ public final class EventClanProto {
     }
 
     public static final int SOLICITATION_FIELD_NUMBER = 3;
-    private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_;
+    private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
@@ -47873,20 +47873,20 @@ public final class EventClanProto {
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
       return solicitation_;
     }
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
       return solicitation_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
-      solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -48059,7 +48059,7 @@ public final class EventClanProto {
         status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
         } else {
           solicitationBuilder_.clear();
         }
@@ -48315,9 +48315,9 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+      private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
@@ -48327,7 +48327,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitation() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitation() {
         if (solicitationBuilder_ == null) {
           return solicitation_;
         } else {
@@ -48337,7 +48337,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public Builder setSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder setSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -48354,7 +48354,7 @@ public final class EventClanProto {
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
       public Builder setSolicitation(
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationBuilder_ == null) {
           solicitation_ = builderForValue.build();
           onChanged();
@@ -48367,12 +48367,12 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public Builder mergeSolicitation(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder mergeSolicitation(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              solicitation_ != com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
+              solicitation_ != com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance()) {
             solicitation_ =
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.newBuilder(solicitation_).mergeFrom(value).buildPartial();
           } else {
             solicitation_ = value;
           }
@@ -48388,7 +48388,7 @@ public final class EventClanProto {
        */
       public Builder clearSolicitation() {
         if (solicitationBuilder_ == null) {
-          solicitation_ = com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
+          solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
           onChanged();
         } else {
           solicitationBuilder_.clear();
@@ -48399,7 +48399,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getSolicitationBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getSolicitationFieldBuilder().getBuilder();
@@ -48407,7 +48407,7 @@ public final class EventClanProto {
       /**
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationOrBuilder() {
         if (solicitationBuilder_ != null) {
           return solicitationBuilder_.getMessageOrBuilder();
         } else {
@@ -48418,11 +48418,11 @@ public final class EventClanProto {
        * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
           getSolicitationFieldBuilder() {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
                   getSolicitation(),
                   getParentForChildren(),
                   isClean());
@@ -48462,12 +48462,12 @@ public final class EventClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> 
+    java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> 
         getSolicitationsList();
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitations(int index);
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitations(int index);
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
@@ -48475,12 +48475,12 @@ public final class EventClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
         getSolicitationsOrBuilderList();
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
         int index);
   }
   /**
@@ -48550,10 +48550,10 @@ public final class EventClanProto {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                solicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>();
+                solicitations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              solicitations_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry));
+              solicitations_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -48621,17 +48621,17 @@ public final class EventClanProto {
     }
 
     public static final int SOLICITATIONS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> solicitations_;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> solicitations_;
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getSolicitationsList() {
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> getSolicitationsList() {
       return solicitations_;
     }
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
         getSolicitationsOrBuilderList() {
       return solicitations_;
     }
@@ -48644,13 +48644,13 @@ public final class EventClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitations(int index) {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitations(int index) {
       return solicitations_.get(index);
     }
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
         int index) {
       return solicitations_.get(index);
     }
@@ -49059,22 +49059,22 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> solicitations_ =
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> solicitations_ =
         java.util.Collections.emptyList();
       private void ensureSolicitationsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          solicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>(solicitations_);
+          solicitations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto>(solicitations_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> solicitationsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationsBuilder_;
 
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getSolicitationsList() {
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> getSolicitationsList() {
         if (solicitationsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(solicitations_);
         } else {
@@ -49094,7 +49094,7 @@ public final class EventClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getSolicitations(int index) {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getSolicitations(int index) {
         if (solicitationsBuilder_ == null) {
           return solicitations_.get(index);
         } else {
@@ -49105,7 +49105,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder setSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -49122,7 +49122,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder setSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationsBuilder_ == null) {
           ensureSolicitationsIsMutable();
           solicitations_.set(index, builderForValue.build());
@@ -49135,7 +49135,7 @@ public final class EventClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public Builder addSolicitations(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder addSolicitations(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -49152,7 +49152,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder addSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (solicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -49169,7 +49169,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder addSolicitations(
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationsBuilder_ == null) {
           ensureSolicitationsIsMutable();
           solicitations_.add(builderForValue.build());
@@ -49183,7 +49183,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder addSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (solicitationsBuilder_ == null) {
           ensureSolicitationsIsMutable();
           solicitations_.add(index, builderForValue.build());
@@ -49197,7 +49197,7 @@ public final class EventClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
       public Builder addAllSolicitations(
-          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> values) {
         if (solicitationsBuilder_ == null) {
           ensureSolicitationsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -49237,14 +49237,14 @@ public final class EventClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getSolicitationsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getSolicitationsBuilder(
           int index) {
         return getSolicitationsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getSolicitationsOrBuilder(
           int index) {
         if (solicitationsBuilder_ == null) {
           return solicitations_.get(index);  } else {
@@ -49254,7 +49254,7 @@ public final class EventClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
            getSolicitationsOrBuilderList() {
         if (solicitationsBuilder_ != null) {
           return solicitationsBuilder_.getMessageOrBuilderList();
@@ -49265,31 +49265,31 @@ public final class EventClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addSolicitationsBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder addSolicitationsBuilder() {
         return getSolicitationsFieldBuilder().addBuilder(
-            com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+            com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance());
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addSolicitationsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder addSolicitationsBuilder(
           int index) {
         return getSolicitationsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+            index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance());
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder> 
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder> 
            getSolicitationsBuilderList() {
         return getSolicitationsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
           getSolicitationsFieldBuilder() {
         if (solicitationsBuilder_ == null) {
           solicitationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
                   solicitations_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),

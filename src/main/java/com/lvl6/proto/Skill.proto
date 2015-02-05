@@ -88,6 +88,7 @@ enum SkillType {
 	CURSE = 31;
 	LEFT_HOOK = 32;
 	INSURANCE = 33;
+	FLAME_BREAK = 34;
 }
 
 enum SkillActivationType {

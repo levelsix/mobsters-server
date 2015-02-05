@@ -19597,12 +19597,12 @@ public final class ClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> 
+    java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> 
         getClanDonationSolicitationsList();
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index);
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index);
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
@@ -19610,12 +19610,12 @@ public final class ClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
         getClanDonationSolicitationsOrBuilderList();
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+    com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
         int index);
   }
   /**
@@ -19696,10 +19696,10 @@ public final class ClanProto {
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>();
+                clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              clanDonationSolicitations_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry));
+              clanDonationSolicitations_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -19859,17 +19859,17 @@ public final class ClanProto {
     }
 
     public static final int CLANDONATIONSOLICITATIONS_FIELD_NUMBER = 4;
-    private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> clanDonationSolicitations_;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> clanDonationSolicitations_;
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
       return clanDonationSolicitations_;
     }
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
         getClanDonationSolicitationsOrBuilderList() {
       return clanDonationSolicitations_;
     }
@@ -19882,13 +19882,13 @@ public final class ClanProto {
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
       return clanDonationSolicitations_.get(index);
     }
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
         int index) {
       return clanDonationSolicitations_.get(index);
     }
@@ -21023,22 +21023,22 @@ public final class ClanProto {
         return clanAvengingsBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> clanDonationSolicitations_ =
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> clanDonationSolicitations_ =
         java.util.Collections.emptyList();
       private void ensureClanDonationSolicitationsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto>(clanDonationSolicitations_);
+          clanDonationSolicitations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto>(clanDonationSolicitations_);
           bitField0_ |= 0x00000008;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> clanDonationSolicitationsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> clanDonationSolicitationsBuilder_;
 
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> getClanDonationSolicitationsList() {
         if (clanDonationSolicitationsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(clanDonationSolicitations_);
         } else {
@@ -21058,7 +21058,7 @@ public final class ClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto getClanDonationSolicitations(int index) {
         if (clanDonationSolicitationsBuilder_ == null) {
           return clanDonationSolicitations_.get(index);
         } else {
@@ -21069,7 +21069,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder setClanDonationSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (clanDonationSolicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -21086,7 +21086,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder setClanDonationSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (clanDonationSolicitationsBuilder_ == null) {
           ensureClanDonationSolicitationsIsMutable();
           clanDonationSolicitations_.set(index, builderForValue.build());
@@ -21099,7 +21099,7 @@ public final class ClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public Builder addClanDonationSolicitations(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+      public Builder addClanDonationSolicitations(com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (clanDonationSolicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -21116,7 +21116,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder addClanDonationSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto value) {
         if (clanDonationSolicitationsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -21133,7 +21133,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder addClanDonationSolicitations(
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (clanDonationSolicitationsBuilder_ == null) {
           ensureClanDonationSolicitationsIsMutable();
           clanDonationSolicitations_.add(builderForValue.build());
@@ -21147,7 +21147,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder addClanDonationSolicitations(
-          int index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder builderForValue) {
         if (clanDonationSolicitationsBuilder_ == null) {
           ensureClanDonationSolicitationsIsMutable();
           clanDonationSolicitations_.add(index, builderForValue.build());
@@ -21161,7 +21161,7 @@ public final class ClanProto {
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
       public Builder addAllClanDonationSolicitations(
-          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> values) {
         if (clanDonationSolicitationsBuilder_ == null) {
           ensureClanDonationSolicitationsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -21201,14 +21201,14 @@ public final class ClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder getClanDonationSolicitationsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder getClanDonationSolicitationsBuilder(
           int index) {
         return getClanDonationSolicitationsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder getClanDonationSolicitationsOrBuilder(
           int index) {
         if (clanDonationSolicitationsBuilder_ == null) {
           return clanDonationSolicitations_.get(index);  } else {
@@ -21218,7 +21218,7 @@ public final class ClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
            getClanDonationSolicitationsOrBuilderList() {
         if (clanDonationSolicitationsBuilder_ != null) {
           return clanDonationSolicitationsBuilder_.getMessageOrBuilderList();
@@ -21229,31 +21229,31 @@ public final class ClanProto {
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder() {
         return getClanDonationSolicitationsFieldBuilder().addBuilder(
-            com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+            com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance());
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder addClanDonationSolicitationsBuilder(
           int index) {
         return getClanDonationSolicitationsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance());
+            index, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance());
       }
       /**
        * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto clanDonationSolicitations = 4;</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder> 
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder> 
            getClanDonationSolicitationsBuilderList() {
         return getClanDonationSolicitationsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> 
           getClanDonationSolicitationsFieldBuilder() {
         if (clanDonationSolicitationsBuilder_ == null) {
           clanDonationSolicitationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
                   clanDonationSolicitations_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
@@ -21272,1579 +21272,6 @@ public final class ClanProto {
     }
 
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanDataProto)
-  }
-
-  public interface ClanMemberTeamDonationProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanMemberTeamDonationProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    boolean hasDonationUuid();
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    java.lang.String getDonationUuid();
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getDonationUuidBytes();
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    boolean hasSolicitor();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getSolicitor();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder();
-
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    boolean hasClanUuid();
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    java.lang.String getClanUuid();
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getClanUuidBytes();
-
-    /**
-     * <code>optional int32 powerAvailability = 4;</code>
-     */
-    boolean hasPowerAvailability();
-    /**
-     * <code>optional int32 powerAvailability = 4;</code>
-     */
-    int getPowerAvailability();
-
-    /**
-     * <code>optional bool isFulfilled = 5;</code>
-     */
-    boolean hasIsFulfilled();
-    /**
-     * <code>optional bool isFulfilled = 5;</code>
-     */
-    boolean getIsFulfilled();
-
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    boolean hasMsg();
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    java.lang.String getMsg();
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    com.google.protobuf.ByteString
-        getMsgBytes();
-
-    /**
-     * <code>optional int64 timeOfSolicitation = 7;</code>
-     */
-    boolean hasTimeOfSolicitation();
-    /**
-     * <code>optional int64 timeOfSolicitation = 7;</code>
-     */
-    long getTimeOfSolicitation();
-
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> 
-        getDonationsList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    int getDonationsCount();
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
-        getDonationsOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonationProto}
-   */
-  public static final class ClanMemberTeamDonationProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanMemberTeamDonationProto)
-      ClanMemberTeamDonationProtoOrBuilder {
-    // Use ClanMemberTeamDonationProto.newBuilder() to construct.
-    private ClanMemberTeamDonationProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private ClanMemberTeamDonationProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ClanMemberTeamDonationProto defaultInstance;
-    public static ClanMemberTeamDonationProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public ClanMemberTeamDonationProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ClanMemberTeamDonationProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              donationUuid_ = bs;
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = solicitor_.toBuilder();
-              }
-              solicitor_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(solicitor_);
-                solicitor_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              clanUuid_ = bs;
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              powerAvailability_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              isFulfilled_ = input.readBool();
-              break;
-            }
-            case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
-              msg_ = bs;
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              timeOfSolicitation_ = input.readInt64();
-              break;
-            }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              donations_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          donations_ = java.util.Collections.unmodifiableList(donations_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<ClanMemberTeamDonationProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClanMemberTeamDonationProto>() {
-      public ClanMemberTeamDonationProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClanMemberTeamDonationProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ClanMemberTeamDonationProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int DONATIONUUID_FIELD_NUMBER = 1;
-    private java.lang.Object donationUuid_;
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    public boolean hasDonationUuid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    public java.lang.String getDonationUuid() {
-      java.lang.Object ref = donationUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          donationUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string donationUuid = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDonationUuidBytes() {
-      java.lang.Object ref = donationUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        donationUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SOLICITOR_FIELD_NUMBER = 2;
-    private com.lvl6.proto.UserProto.MinimumUserProto solicitor_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    public boolean hasSolicitor() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSolicitor() {
-      return solicitor_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder() {
-      return solicitor_;
-    }
-
-    public static final int CLANUUID_FIELD_NUMBER = 3;
-    private java.lang.Object clanUuid_;
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    public boolean hasClanUuid() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    public java.lang.String getClanUuid() {
-      java.lang.Object ref = clanUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          clanUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string clanUuid = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getClanUuidBytes() {
-      java.lang.Object ref = clanUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        clanUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int POWERAVAILABILITY_FIELD_NUMBER = 4;
-    private int powerAvailability_;
-    /**
-     * <code>optional int32 powerAvailability = 4;</code>
-     */
-    public boolean hasPowerAvailability() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 powerAvailability = 4;</code>
-     */
-    public int getPowerAvailability() {
-      return powerAvailability_;
-    }
-
-    public static final int ISFULFILLED_FIELD_NUMBER = 5;
-    private boolean isFulfilled_;
-    /**
-     * <code>optional bool isFulfilled = 5;</code>
-     */
-    public boolean hasIsFulfilled() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bool isFulfilled = 5;</code>
-     */
-    public boolean getIsFulfilled() {
-      return isFulfilled_;
-    }
-
-    public static final int MSG_FIELD_NUMBER = 6;
-    private java.lang.Object msg_;
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    public boolean hasMsg() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    public java.lang.String getMsg() {
-      java.lang.Object ref = msg_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          msg_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string msg = 6;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMsgBytes() {
-      java.lang.Object ref = msg_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        msg_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TIMEOFSOLICITATION_FIELD_NUMBER = 7;
-    private long timeOfSolicitation_;
-    /**
-     * <code>optional int64 timeOfSolicitation = 7;</code>
-     */
-    public boolean hasTimeOfSolicitation() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int64 timeOfSolicitation = 7;</code>
-     */
-    public long getTimeOfSolicitation() {
-      return timeOfSolicitation_;
-    }
-
-    public static final int DONATIONS_FIELD_NUMBER = 8;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_;
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
-      return donations_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
-        getDonationsOrBuilderList() {
-      return donations_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    public int getDonationsCount() {
-      return donations_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
-      return donations_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-     */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
-        int index) {
-      return donations_.get(index);
-    }
-
-    private void initFields() {
-      donationUuid_ = "";
-      solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      clanUuid_ = "";
-      powerAvailability_ = 0;
-      isFulfilled_ = false;
-      msg_ = "";
-      timeOfSolicitation_ = 0L;
-      donations_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getDonationUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, solicitor_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getClanUuidBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, powerAvailability_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, isFulfilled_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, getMsgBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt64(7, timeOfSolicitation_);
-      }
-      for (int i = 0; i < donations_.size(); i++) {
-        output.writeMessage(8, donations_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getDonationUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, solicitor_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getClanUuidBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, powerAvailability_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isFulfilled_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getMsgBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, timeOfSolicitation_);
-      }
-      for (int i = 0; i < donations_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, donations_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.ClanMemberTeamDonationProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanMemberTeamDonationProto)
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.class, com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSolicitorFieldBuilder();
-          getDonationsFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        donationUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (solicitorBuilder_ == null) {
-          solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          solicitorBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        clanUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        powerAvailability_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        isFulfilled_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        msg_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
-        timeOfSolicitation_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        if (donationsBuilder_ == null) {
-          donations_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
-        } else {
-          donationsBuilder_.clear();
-        }
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
-      }
-
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto getDefaultInstanceForType() {
-        return com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto build() {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto buildPartial() {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto result = new com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.donationUuid_ = donationUuid_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (solicitorBuilder_ == null) {
-          result.solicitor_ = solicitor_;
-        } else {
-          result.solicitor_ = solicitorBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.clanUuid_ = clanUuid_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.powerAvailability_ = powerAvailability_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.isFulfilled_ = isFulfilled_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.msg_ = msg_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.timeOfSolicitation_ = timeOfSolicitation_;
-        if (donationsBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
-            donations_ = java.util.Collections.unmodifiableList(donations_);
-            bitField0_ = (bitField0_ & ~0x00000080);
-          }
-          result.donations_ = donations_;
-        } else {
-          result.donations_ = donationsBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto) {
-          return mergeFrom((com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto other) {
-        if (other == com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto.getDefaultInstance()) return this;
-        if (other.hasDonationUuid()) {
-          bitField0_ |= 0x00000001;
-          donationUuid_ = other.donationUuid_;
-          onChanged();
-        }
-        if (other.hasSolicitor()) {
-          mergeSolicitor(other.getSolicitor());
-        }
-        if (other.hasClanUuid()) {
-          bitField0_ |= 0x00000004;
-          clanUuid_ = other.clanUuid_;
-          onChanged();
-        }
-        if (other.hasPowerAvailability()) {
-          setPowerAvailability(other.getPowerAvailability());
-        }
-        if (other.hasIsFulfilled()) {
-          setIsFulfilled(other.getIsFulfilled());
-        }
-        if (other.hasMsg()) {
-          bitField0_ |= 0x00000020;
-          msg_ = other.msg_;
-          onChanged();
-        }
-        if (other.hasTimeOfSolicitation()) {
-          setTimeOfSolicitation(other.getTimeOfSolicitation());
-        }
-        if (donationsBuilder_ == null) {
-          if (!other.donations_.isEmpty()) {
-            if (donations_.isEmpty()) {
-              donations_ = other.donations_;
-              bitField0_ = (bitField0_ & ~0x00000080);
-            } else {
-              ensureDonationsIsMutable();
-              donations_.addAll(other.donations_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.donations_.isEmpty()) {
-            if (donationsBuilder_.isEmpty()) {
-              donationsBuilder_.dispose();
-              donationsBuilder_ = null;
-              donations_ = other.donations_;
-              bitField0_ = (bitField0_ & ~0x00000080);
-              donationsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDonationsFieldBuilder() : null;
-            } else {
-              donationsBuilder_.addAllMessages(other.donations_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.ClanProto.ClanMemberTeamDonationProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object donationUuid_ = "";
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public boolean hasDonationUuid() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public java.lang.String getDonationUuid() {
-        java.lang.Object ref = donationUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            donationUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDonationUuidBytes() {
-        java.lang.Object ref = donationUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          donationUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public Builder setDonationUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        donationUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public Builder clearDonationUuid() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        donationUuid_ = getDefaultInstance().getDonationUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string donationUuid = 1;</code>
-       */
-      public Builder setDonationUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        donationUuid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.UserProto.MinimumUserProto solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> solicitorBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public boolean hasSolicitor() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSolicitor() {
-        if (solicitorBuilder_ == null) {
-          return solicitor_;
-        } else {
-          return solicitorBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public Builder setSolicitor(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (solicitorBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          solicitor_ = value;
-          onChanged();
-        } else {
-          solicitorBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public Builder setSolicitor(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (solicitorBuilder_ == null) {
-          solicitor_ = builderForValue.build();
-          onChanged();
-        } else {
-          solicitorBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public Builder mergeSolicitor(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (solicitorBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              solicitor_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            solicitor_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(solicitor_).mergeFrom(value).buildPartial();
-          } else {
-            solicitor_ = value;
-          }
-          onChanged();
-        } else {
-          solicitorBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public Builder clearSolicitor() {
-        if (solicitorBuilder_ == null) {
-          solicitor_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          solicitorBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSolicitorBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getSolicitorFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSolicitorOrBuilder() {
-        if (solicitorBuilder_ != null) {
-          return solicitorBuilder_.getMessageOrBuilder();
-        } else {
-          return solicitor_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto solicitor = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSolicitorFieldBuilder() {
-        if (solicitorBuilder_ == null) {
-          solicitorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSolicitor(),
-                  getParentForChildren(),
-                  isClean());
-          solicitor_ = null;
-        }
-        return solicitorBuilder_;
-      }
-
-      private java.lang.Object clanUuid_ = "";
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public boolean hasClanUuid() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public java.lang.String getClanUuid() {
-        java.lang.Object ref = clanUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getClanUuidBytes() {
-        java.lang.Object ref = clanUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          clanUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public Builder setClanUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        clanUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public Builder clearClanUuid() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        clanUuid_ = getDefaultInstance().getClanUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string clanUuid = 3;</code>
-       */
-      public Builder setClanUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        clanUuid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int powerAvailability_ ;
-      /**
-       * <code>optional int32 powerAvailability = 4;</code>
-       */
-      public boolean hasPowerAvailability() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 powerAvailability = 4;</code>
-       */
-      public int getPowerAvailability() {
-        return powerAvailability_;
-      }
-      /**
-       * <code>optional int32 powerAvailability = 4;</code>
-       */
-      public Builder setPowerAvailability(int value) {
-        bitField0_ |= 0x00000008;
-        powerAvailability_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 powerAvailability = 4;</code>
-       */
-      public Builder clearPowerAvailability() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        powerAvailability_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private boolean isFulfilled_ ;
-      /**
-       * <code>optional bool isFulfilled = 5;</code>
-       */
-      public boolean hasIsFulfilled() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bool isFulfilled = 5;</code>
-       */
-      public boolean getIsFulfilled() {
-        return isFulfilled_;
-      }
-      /**
-       * <code>optional bool isFulfilled = 5;</code>
-       */
-      public Builder setIsFulfilled(boolean value) {
-        bitField0_ |= 0x00000010;
-        isFulfilled_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isFulfilled = 5;</code>
-       */
-      public Builder clearIsFulfilled() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        isFulfilled_ = false;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object msg_ = "";
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public boolean hasMsg() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public java.lang.String getMsg() {
-        java.lang.Object ref = msg_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            msg_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMsgBytes() {
-        java.lang.Object ref = msg_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          msg_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public Builder setMsg(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        msg_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public Builder clearMsg() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        msg_ = getDefaultInstance().getMsg();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string msg = 6;</code>
-       */
-      public Builder setMsgBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        msg_ = value;
-        onChanged();
-        return this;
-      }
-
-      private long timeOfSolicitation_ ;
-      /**
-       * <code>optional int64 timeOfSolicitation = 7;</code>
-       */
-      public boolean hasTimeOfSolicitation() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int64 timeOfSolicitation = 7;</code>
-       */
-      public long getTimeOfSolicitation() {
-        return timeOfSolicitation_;
-      }
-      /**
-       * <code>optional int64 timeOfSolicitation = 7;</code>
-       */
-      public Builder setTimeOfSolicitation(long value) {
-        bitField0_ |= 0x00000040;
-        timeOfSolicitation_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timeOfSolicitation = 7;</code>
-       */
-      public Builder clearTimeOfSolicitation() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        timeOfSolicitation_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> donations_ =
-        java.util.Collections.emptyList();
-      private void ensureDonationsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          donations_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto>(donations_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> donationsBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> getDonationsList() {
-        if (donationsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(donations_);
-        } else {
-          return donationsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public int getDonationsCount() {
-        if (donationsBuilder_ == null) {
-          return donations_.size();
-        } else {
-          return donationsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto getDonations(int index) {
-        if (donationsBuilder_ == null) {
-          return donations_.get(index);
-        } else {
-          return donationsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder setDonations(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
-        if (donationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDonationsIsMutable();
-          donations_.set(index, value);
-          onChanged();
-        } else {
-          donationsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder setDonations(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
-        if (donationsBuilder_ == null) {
-          ensureDonationsIsMutable();
-          donations_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          donationsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder addDonations(com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
-        if (donationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDonationsIsMutable();
-          donations_.add(value);
-          onChanged();
-        } else {
-          donationsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder addDonations(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto value) {
-        if (donationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDonationsIsMutable();
-          donations_.add(index, value);
-          onChanged();
-        } else {
-          donationsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder addDonations(
-          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
-        if (donationsBuilder_ == null) {
-          ensureDonationsIsMutable();
-          donations_.add(builderForValue.build());
-          onChanged();
-        } else {
-          donationsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder addDonations(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder builderForValue) {
-        if (donationsBuilder_ == null) {
-          ensureDonationsIsMutable();
-          donations_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          donationsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder addAllDonations(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto> values) {
-        if (donationsBuilder_ == null) {
-          ensureDonationsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, donations_);
-          onChanged();
-        } else {
-          donationsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder clearDonations() {
-        if (donationsBuilder_ == null) {
-          donations_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
-          onChanged();
-        } else {
-          donationsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public Builder removeDonations(int index) {
-        if (donationsBuilder_ == null) {
-          ensureDonationsIsMutable();
-          donations_.remove(index);
-          onChanged();
-        } else {
-          donationsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder getDonationsBuilder(
-          int index) {
-        return getDonationsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder getDonationsOrBuilder(
-          int index) {
-        if (donationsBuilder_ == null) {
-          return donations_.get(index);  } else {
-          return donationsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
-           getDonationsOrBuilderList() {
-        if (donationsBuilder_ != null) {
-          return donationsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(donations_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder() {
-        return getDonationsFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder addDonationsBuilder(
-          int index) {
-        return getDonationsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserMonsterSnapshotProto donations = 8;</code>
-       */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder> 
-           getDonationsBuilderList() {
-        return getDonationsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder> 
-          getDonationsFieldBuilder() {
-        if (donationsBuilder_ == null) {
-          donationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProtoOrBuilder>(
-                  donations_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
-                  getParentForChildren(),
-                  isClean());
-          donations_ = null;
-        }
-        return donationsBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanMemberTeamDonationProto)
-    }
-
-    static {
-      defaultInstance = new ClanMemberTeamDonationProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanMemberTeamDonationProto)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -22942,11 +21369,6 @@ public final class ClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -23048,17 +21470,10 @@ public final class ClanProto {
       "nHelpProto\0229\n\rclanAvengings\030\003 \003(\0132\".com.",
       "lvl6.proto.PvpClanAvengeProto\022N\n\031clanDon" +
       "ationSolicitations\030\004 \003(\0132+.com.lvl6.prot" +
-      "o.ClanMemberTeamDonationProto\"\220\002\n\033ClanMe" +
-      "mberTeamDonationProto\022\024\n\014donationUuid\030\001 " +
-      "\001(\t\0223\n\tsolicitor\030\002 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
-      "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001" +
-      "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
-      "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
-      "UserMonsterSnapshotProto*X\n\016UserClanStat",
-      "us\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAP" +
-      "TAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tCl" +
-      "anProto"
+      "o.ClanMemberTeamDonationProto*X\n\016UserCla" +
+      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013" +
+      "\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB" +
+      "\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -23192,12 +21607,6 @@ public final class ClanProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanDataProto_descriptor,
         new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", "ClanDonationSolicitations", });
-    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor =
-      getDescriptor().getMessageTypes().get(19);
-    internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClanMemberTeamDonationProto_descriptor,
-        new java.lang.String[] { "DonationUuid", "Solicitor", "ClanUuid", "PowerAvailability", "IsFulfilled", "Msg", "TimeOfSolicitation", "Donations", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
