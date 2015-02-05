@@ -43863,24 +43863,19 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    boolean hasVictim();
-    /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    com.lvl6.proto.BattleProto.PvpProto getVictim();
-    /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    com.lvl6.proto.BattleProto.PvpProtoOrBuilder getVictimOrBuilder();
-
-    /**
      * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     *
+     * <pre>
+     *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+     * </pre>
      */
     boolean hasStatus();
     /**
      * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     *
+     * <pre>
+     *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+     * </pre>
      */
     com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus();
   }
@@ -43949,26 +43944,13 @@ public final class EventClanProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 18: {
-              com.lvl6.proto.BattleProto.PvpProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = victim_.toBuilder();
-              }
-              victim_ = input.readMessage(com.lvl6.proto.BattleProto.PvpProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(victim_);
-                victim_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
             case 24: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus value = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000002;
                 status_ = value;
               }
               break;
@@ -44116,37 +44098,24 @@ public final class EventClanProto {
       return sender_;
     }
 
-    public static final int VICTIM_FIELD_NUMBER = 2;
-    private com.lvl6.proto.BattleProto.PvpProto victim_;
-    /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    public boolean hasVictim() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    public com.lvl6.proto.BattleProto.PvpProto getVictim() {
-      return victim_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-     */
-    public com.lvl6.proto.BattleProto.PvpProtoOrBuilder getVictimOrBuilder() {
-      return victim_;
-    }
-
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_;
     /**
      * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     *
+     * <pre>
+     *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+     * </pre>
      */
     public boolean hasStatus() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     *
+     * <pre>
+     *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+     * </pre>
      */
     public com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus() {
       return status_;
@@ -44154,7 +44123,6 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -44174,9 +44142,6 @@ public final class EventClanProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, victim_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
@@ -44193,10 +44158,6 @@ public final class EventClanProto {
           .computeMessageSize(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, victim_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, status_.getNumber());
       }
@@ -44310,7 +44271,6 @@ public final class EventClanProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getVictimFieldBuilder();
         }
       }
       private static Builder create() {
@@ -44325,14 +44285,8 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (victimBuilder_ == null) {
-          victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
-        } else {
-          victimBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -44372,14 +44326,6 @@ public final class EventClanProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (victimBuilder_ == null) {
-          result.victim_ = victim_;
-        } else {
-          result.victim_ = victimBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.status_ = status_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -44399,9 +44345,6 @@ public final class EventClanProto {
         if (other == com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
-        }
-        if (other.hasVictim()) {
-          mergeVictim(other.getVictim());
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
@@ -44549,152 +44492,52 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.BattleProto.PvpProto victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder> victimBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public boolean hasVictim() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public com.lvl6.proto.BattleProto.PvpProto getVictim() {
-        if (victimBuilder_ == null) {
-          return victim_;
-        } else {
-          return victimBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public Builder setVictim(com.lvl6.proto.BattleProto.PvpProto value) {
-        if (victimBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          victim_ = value;
-          onChanged();
-        } else {
-          victimBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public Builder setVictim(
-          com.lvl6.proto.BattleProto.PvpProto.Builder builderForValue) {
-        if (victimBuilder_ == null) {
-          victim_ = builderForValue.build();
-          onChanged();
-        } else {
-          victimBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public Builder mergeVictim(com.lvl6.proto.BattleProto.PvpProto value) {
-        if (victimBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              victim_ != com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance()) {
-            victim_ =
-              com.lvl6.proto.BattleProto.PvpProto.newBuilder(victim_).mergeFrom(value).buildPartial();
-          } else {
-            victim_ = value;
-          }
-          onChanged();
-        } else {
-          victimBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public Builder clearVictim() {
-        if (victimBuilder_ == null) {
-          victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
-          onChanged();
-        } else {
-          victimBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public com.lvl6.proto.BattleProto.PvpProto.Builder getVictimBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getVictimFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      public com.lvl6.proto.BattleProto.PvpProtoOrBuilder getVictimOrBuilder() {
-        if (victimBuilder_ != null) {
-          return victimBuilder_.getMessageOrBuilder();
-        } else {
-          return victim_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PvpProto victim = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder> 
-          getVictimFieldBuilder() {
-        if (victimBuilder_ == null) {
-          victimBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder>(
-                  getVictim(),
-                  getParentForChildren(),
-                  isClean());
-          victim_ = null;
-        }
-        return victimBuilder_;
-      }
-
       private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       *
+       * <pre>
+       *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+       * </pre>
        */
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       *
+       * <pre>
+       *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+       * </pre>
        */
       public com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus() {
         return status_;
       }
       /**
        * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       *
+       * <pre>
+       *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+       * </pre>
        */
       public Builder setStatus(com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         status_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       *
+       * <pre>
+       *optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
+       * </pre>
        */
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
         onChanged();
         return this;
@@ -50721,55 +50564,53 @@ public final class EventClanProto {
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs",
       "erProto\0226\n\nclanAvenge\030\002 \001(\0132\".com.lvl6.p" +
       "roto.PvpClanAvengeProto\022\022\n\nclientTime\030\003 " +
-      "\001(\003\"\200\002\n\033AvengeClanMateResponseProto\0220\n\006s" +
+      "\001(\003\"\326\001\n\033AvengeClanMateResponseProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022(\n\006victim\030\002 \001(\0132\030.com.lvl6.proto.P" +
-      "vpProto\022P\n\006status\030\003 \001(\0162@.com.lvl6.proto" +
-      ".AvengeClanMateResponseProto.AvengeClanM" +
-      "ateStatus\"3\n\024AvengeClanMateStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\233\001\n\037SolicitTeamDo" +
-      "nationRequestProto\0220\n\006sender\030\001 \001(\0132 .com",
-      ".lvl6.proto.MinimumUserProto\022\013\n\003msg\030\002 \001(" +
-      "\t\022\022\n\npowerLimit\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(" +
-      "\003\022\021\n\tgemsSpent\030\005 \001(\005\"\354\002\n SolicitTeamDona" +
-      "tionResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022Z\n\006status\030\002 " +
-      "\001(\0162J.com.lvl6.proto.SolicitTeamDonation" +
-      "ResponseProto.SolicitTeamDonationStatus\022" +
-      "A\n\014solicitation\030\003 \001(\0132+.com.lvl6.proto.C" +
-      "lanMemberTeamDonationProto\"w\n\031SolicitTea" +
-      "mDonationStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH",
-      "ER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022!\n\035FAIL" +
-      "_FULFILLED_REQUEST_EXISTS\020\004\"\352\001\n+FulfillT" +
-      "eamDonationSolicitationRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.Ful" +
-      "lUserMonsterProto\022\022\n\nclientTime\030\003 \001(\003\022A\n" +
-      "\014solicitation\030\004 \001(\0132+.com.lvl6.proto.Cla" +
-      "nMemberTeamDonationProto\"\235\003\n,FulfillTeam" +
-      "DonationSolicitationResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr",
-      "oto\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.Ful" +
-      "fillTeamDonationSolicitationResponseProt" +
-      "o.FulfillTeamDonationSolicitationStatus\022" +
-      "A\n\014solicitation\030\003 \001(\0132+.com.lvl6.proto.C" +
-      "lanMemberTeamDonationProto\"\203\001\n%FulfillTe" +
-      "amDonationSolicitationStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\022!\n\035FAIL_NONEXISTENT_SO" +
-      "LICITATION\020\003\022\032\n\026FAIL_ALREADY_FULFILLED\020\004" +
-      "\"\240\001\n(VoidTeamDonationSolicitationRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
-      "inimumUserProto\022B\n\rsolicitations\030\002 \003(\0132+" +
-      ".com.lvl6.proto.ClanMemberTeamDonationPr" +
-      "oto\"\252\002\n)VoidTeamDonationSolicitationResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022l\n\006status\030\002 \001(\0162\\.co" +
-      "m.lvl6.proto.VoidTeamDonationSolicitatio" +
-      "nResponseProto.VoidTeamDonationSolicitat" +
-      "ionStatus\022\032\n\022clanTeamDonateUuid\030\003 \003(\t\"A\n" +
-      "\"VoidTeamDonationSolicitationStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventClanPro",
-      "to"
+      "Proto\022P\n\006status\030\003 \001(\0162@.com.lvl6.proto.A" +
+      "vengeClanMateResponseProto.AvengeClanMat" +
+      "eStatus\"3\n\024AvengeClanMateStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\"\233\001\n\037SolicitTeamDona" +
+      "tionRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\022",
+      "\022\n\npowerLimit\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\022" +
+      "\021\n\tgemsSpent\030\005 \001(\005\"\354\002\n SolicitTeamDonati" +
+      "onResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022Z\n\006status\030\002 \001(" +
+      "\0162J.com.lvl6.proto.SolicitTeamDonationRe" +
+      "sponseProto.SolicitTeamDonationStatus\022A\n" +
+      "\014solicitation\030\003 \001(\0132+.com.lvl6.proto.Cla" +
+      "nMemberTeamDonationProto\"w\n\031SolicitTeamD" +
+      "onationStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022!\n\035FAIL_F",
+      "ULFILLED_REQUEST_EXISTS\020\004\"\352\001\n+FulfillTea" +
+      "mDonationSolicitationRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.FullU" +
+      "serMonsterProto\022\022\n\nclientTime\030\003 \001(\003\022A\n\014s" +
+      "olicitation\030\004 \001(\0132+.com.lvl6.proto.ClanM" +
+      "emberTeamDonationProto\"\235\003\n,FulfillTeamDo" +
+      "nationSolicitationResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.Fulfi",
+      "llTeamDonationSolicitationResponseProto." +
+      "FulfillTeamDonationSolicitationStatus\022A\n" +
+      "\014solicitation\030\003 \001(\0132+.com.lvl6.proto.Cla" +
+      "nMemberTeamDonationProto\"\203\001\n%FulfillTeam" +
+      "DonationSolicitationStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\016\n\nFAIL_OTHER\020\002\022!\n\035FAIL_NONEXISTENT_SOLI" +
+      "CITATION\020\003\022\032\n\026FAIL_ALREADY_FULFILLED\020\004\"\240" +
+      "\001\n(VoidTeamDonationSolicitationRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022B\n\rsolicitations\030\002 \003(\0132+.c",
+      "om.lvl6.proto.ClanMemberTeamDonationProt" +
+      "o\"\252\002\n)VoidTeamDonationSolicitationRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022l\n\006status\030\002 \001(\0162\\.com." +
+      "lvl6.proto.VoidTeamDonationSolicitationR" +
+      "esponseProto.VoidTeamDonationSolicitatio" +
+      "nStatus\022\032\n\022clanTeamDonateUuid\030\003 \003(\t\"A\n\"V" +
+      "oidTeamDonationSolicitationStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -51050,7 +50891,7 @@ public final class EventClanProto {
     internal_static_com_lvl6_proto_AvengeClanMateResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Victim", "Status", });
+        new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(44);
     internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_fieldAccessorTable = new

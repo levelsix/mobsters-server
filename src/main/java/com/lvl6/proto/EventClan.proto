@@ -580,7 +580,7 @@ message AvengeClanMateRequestProto {
 
 message AvengeClanMateResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional PvpProto victim = 2;
+	//optional PvpProto victim = 2; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
 	optional AvengeClanMateStatus status = 3;
 	
 	enum AvengeClanMateStatus {

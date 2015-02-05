@@ -157,6 +157,7 @@ public class AvengeClanMateAction
 	
 	private boolean writeChangesToDB(Builder resBuilder)
 	{
+		/*
 		//prepare PvpProto arguments
 		victimPu = hazelcastPvpUtil.getPvpUser(victimId);
 		PvpUser avengerPu = hazelcastPvpUtil.getPvpUser(avengerId);
@@ -215,7 +216,7 @@ public class AvengeClanMateAction
 		
 		expectedCashVictimLost = potentialResult.getUnsignedCashAttackerWins();
 		expectedOilVictimLost = potentialResult.getUnsignedOilAttackerWins();
-		
+		*/
 		
 		
 		//insert into the clan_avenge_user table
@@ -227,6 +228,7 @@ public class AvengeClanMateAction
 		return true;
 	}
 	
+	/*
 	//TODO: copy pasted from QueueUpController, figure another way to do this
 	private Map<String, List<MonsterForUser>> selectMonstersForUsers(
 		List<String> userIdList)
@@ -342,8 +344,8 @@ public class AvengeClanMateAction
 			}
 		}
 	}
-	
-	
+	*/
+	/*
 	public User getVictim()
 	{
 		return victim;
@@ -376,5 +378,6 @@ public class AvengeClanMateAction
 	{
 		return expectedOilVictimLost;
 	}
+	*/
 	
 }

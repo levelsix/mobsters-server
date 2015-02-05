@@ -152,12 +152,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			ClanAvengeUser cau = new ClanAvengeUser(clanId, clanAvengeId, userId, 
 				new Date(clientTime));
 				
-			AvengeClanMateAction bcaa =
+			AvengeClanMateAction acma =
 				new AvengeClanMateAction(userId, clanId, clanAvengeId,
 					cau, clanAvengeRetrieveUtil, userRetrieveUtil,
 					hazelcastPvpUtil, pvpLeagueForUserRetrieveUtil,
 					monsterForUserRetrieveUtil, InsertUtils.get());
-			bcaa.execute(resBuilder);
+			acma.execute(resBuilder);
 
 
 			AvengeClanMateResponseEvent resEvent =
@@ -167,28 +167,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 			if (resBuilder.getStatus().equals(AvengeClanMateStatus.SUCCESS))
 			{
-				User defender = bcaa.getVictim();
-				PvpLeagueForUser plfu = bcaa.getVictimPvpLeagueInfo();
-				PvpUser defenderPu = bcaa.getCachedVictimPvpLeaguenfo();
-				Collection<MonsterForUser> defenderMonsters = bcaa.getVictimMonsters();
-				Map<String, Integer> userMonsterIdToDropped = bcaa.getVictimMonsterDrops();
-				int expectedCashLost = bcaa.getVictimProspectiveCashLoss();
-				int expectedOilLost = bcaa.getVictimProspectiveOilLoss();
-				String defendingMessage = defender.getPvpDefendingMessage();
+//				User defender = acma.getVictim();
+//				PvpLeagueForUser plfu = acma.getVictimPvpLeagueInfo();
+//				PvpUser defenderPu = acma.getCachedVictimPvpLeaguenfo();
+//				Collection<MonsterForUser> defenderMonsters = acma.getVictimMonsters();
+//				Map<String, Integer> userMonsterIdToDropped = acma.getVictimMonsterDrops();
+//				int expectedCashLost = acma.getVictimProspectiveCashLoss();
+//				int expectedOilLost = acma.getVictimProspectiveOilLoss();
+//				String defendingMessage = defender.getPvpDefendingMessage();
 
-				//TODO: FIX THIS
-				String cmtdId = null;
-				MonsterSnapshotForUser msfu = null;
-				int msfuMonsterIdDropped = ControllerConstants.NOT_SET;
+//				//TODO: FIX THIS
+//				String cmtdId = null;
+//				MonsterSnapshotForUser msfu = null;
+//				int msfuMonsterIdDropped = ControllerConstants.NOT_SET;
 				
 				//the clanAvenge.getAttacker() is now the victim
-				PvpProto pp = CreateInfoProtoUtils.createPvpProto(
-					defender.getId(), plfu, defenderPu, defenderMonsters,
-					userMonsterIdToDropped, expectedCashLost, expectedOilLost,
-					clanAvenge.getAttacker(), defendingMessage,
-					cmtdId, msfu, msfuMonsterIdDropped);
+//				PvpProto pp = CreateInfoProtoUtils.createPvpProto(
+//					defender.getId(), plfu, defenderPu, defenderMonsters,
+//					userMonsterIdToDropped, expectedCashLost, expectedOilLost,
+//					clanAvenge.getAttacker(), defendingMessage,
+//					cmtdId, msfu, msfuMonsterIdDropped);
 				
-				resBuilder.setVictim(pp);
+//				resBuilder.setVictim(pp);
 				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
 				
 			}
