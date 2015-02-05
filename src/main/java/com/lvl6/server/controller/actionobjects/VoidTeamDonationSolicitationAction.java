@@ -105,9 +105,10 @@ public class VoidTeamDonationSolicitationAction
 			snapshots.addAll(snapshot);
 		}
 		
+		//TODO: maybe take into account donationIds (aka idInTable)
 		numDeleted = deleteUtil
-			.deleteMonsterSnapshotForUser(snapshots, userId);
-		log.info("numDeleted donationSolicitations: {}", numDeleted);
+			.deleteMonsterSnapshotForUser(snapshots);
+		log.info("numDeleted MonsterSnapshotForUser: {}", numDeleted);
 		
 		return true;
 	}

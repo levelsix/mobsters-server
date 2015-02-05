@@ -531,8 +531,7 @@ public class DeleteUtils implements DeleteUtil {
 	}
 	
 	@Override
-	public int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots,
-		String userId)
+	public int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots)
 	{
 		String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
 
@@ -540,11 +539,10 @@ public class DeleteUtils implements DeleteUtil {
 		List<String> questions = Collections.nCopies(size, "?");
 		String questionMarks = StringUtils.csvList(questions);
 
-		String query = String.format( "DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+		String query = String.format( "DELETE FROM %s WHERE %s IN (%s)",
 			tableName,
 			DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID,
-			questionMarks,
-			DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID);
+			questionMarks);
 
 		List<String> ids = new ArrayList<String>();
 		for (MonsterSnapshotForUser msfu : snapshots) {
@@ -553,7 +551,6 @@ public class DeleteUtils implements DeleteUtil {
 		
 		List<Object> values = new ArrayList<Object>();
 		values.addAll(ids);
-		values.add(userId);
 
 		int numDeleted = DBConnection.get()
 			.deleteDirectQueryNaive(query, values);

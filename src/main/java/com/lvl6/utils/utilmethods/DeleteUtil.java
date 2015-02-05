@@ -72,7 +72,6 @@ public interface DeleteUtil {
 
   public abstract int deleteClanMemberTeamDonationSolicitation(List<String> ids);
   
-  public abstract int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots,
-	  String userId);
+  public abstract int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots);
   
 }
