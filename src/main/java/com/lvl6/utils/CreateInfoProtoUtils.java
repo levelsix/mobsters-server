@@ -396,7 +396,7 @@ public class CreateInfoProtoUtils {
 				createUserMonsterSnapshotProto(msfu, null);
 			
 			cmtdpb.addDonations(umsp);
-			
+			ppb.setCmtd(cmtdpb.build());
 			if (msfuMonsterIdDropped > 0) {
 				ppb.setMonsterIdDropped(msfuMonsterIdDropped);
 			}
