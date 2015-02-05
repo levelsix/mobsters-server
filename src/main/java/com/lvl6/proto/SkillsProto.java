@@ -146,17 +146,13 @@ public final class SkillsProto {
      */
     CURSE(30, 31),
     /**
-     * <code>LEFT_HOOK = 32;</code>
+     * <code>INSURANCE = 32;</code>
      */
-    LEFT_HOOK(31, 32),
+    INSURANCE(31, 32),
     /**
-     * <code>INSURANCE = 33;</code>
+     * <code>FLAME_BREAK = 33;</code>
      */
-    INSURANCE(32, 33),
-    /**
-     * <code>FLAME_BREAK = 34;</code>
-     */
-    FLAME_BREAK(33, 34),
+    FLAME_BREAK(32, 33),
     ;
 
     /**
@@ -292,17 +288,13 @@ public final class SkillsProto {
      */
     public static final int CURSE_VALUE = 31;
     /**
-     * <code>LEFT_HOOK = 32;</code>
+     * <code>INSURANCE = 32;</code>
      */
-    public static final int LEFT_HOOK_VALUE = 32;
+    public static final int INSURANCE_VALUE = 32;
     /**
-     * <code>INSURANCE = 33;</code>
+     * <code>FLAME_BREAK = 33;</code>
      */
-    public static final int INSURANCE_VALUE = 33;
-    /**
-     * <code>FLAME_BREAK = 34;</code>
-     */
-    public static final int FLAME_BREAK_VALUE = 34;
+    public static final int FLAME_BREAK_VALUE = 33;
 
 
     public final int getNumber() { return value; }
@@ -340,9 +332,8 @@ public final class SkillsProto {
         case 29: return ENERGIZE;
         case 30: return RIGHT_HOOK;
         case 31: return CURSE;
-        case 32: return LEFT_HOOK;
-        case 33: return INSURANCE;
-        case 34: return FLAME_BREAK;
+        case 32: return INSURANCE;
+        case 33: return FLAME_BREAK;
         default: return null;
       }
     }
@@ -3046,7 +3037,7 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
       "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\216\004\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
+      "\002*\377\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
       "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
       "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
       "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
@@ -3058,10 +3049,10 @@ public final class SkillsProto {
       "\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n",
       "\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE" +
       "\020\034\022\014\n\010ENERGIZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n\005CURS" +
-      "E\020\037\022\r\n\tLEFT_HOOK\020 \022\r\n\tINSURANCE\020!\022\017\n\013FLA" +
-      "ME_BREAK\020\"*J\n\023SkillActivationType\022\022\n\016USE" +
-      "R_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PAS" +
-      "SIVE\020\003B\rB\013SkillsProto"
+      "E\020\037\022\r\n\tINSURANCE\020 \022\017\n\013FLAME_BREAK\020!*J\n\023S" +
+      "killActivationType\022\022\n\016USER_ACTIVATED\020\001\022\022" +
+      "\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Skill" +
+      "sProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
