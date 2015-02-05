@@ -123,6 +123,7 @@ public class FulfillTeamDonationSolicitationAction
 
 		if (solicitation.isFulfilled()) {
 			log.error("already fulfilled solicitation. {}", solicitation);
+			resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_ALREADY_FULFILLED);
 			return false;
 		}
 
