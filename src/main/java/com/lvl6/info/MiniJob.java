@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MiniJob implements Serializable {
 	
-	private static final long serialVersionUID = 1335570918378103423L;
+	private static final long serialVersionUID = 1798299379324772077L;
 	
 	private int id;
 	private int requiredStructId;
@@ -16,6 +16,8 @@ public class MiniJob implements Serializable {
     private int monsterIdReward;
     private int itemIdReward;
     private int itemRewardQuantity;
+    private int secondItemIdReward;
+    private int secondItemRewardQuantity;
 	private String quality;
 	private int maxNumMonstersAllowed;
 	private float chanceToAppear;
@@ -33,10 +35,13 @@ public class MiniJob implements Serializable {
 
     public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward,
-            int itemIdReward, int itemRewardQuantity, String quality,
-			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
-			int atkRequired, int minDmgDealt, int maxDmgDealt,
-			int durationMinMinutes, int durationMaxMinutes, int expReward) {
+            int itemIdReward, int itemRewardQuantity,
+            int secondtemIdReward, int secondItemRewardQuantity,
+            String quality, int maxNumMonstersAllowed,
+            float chanceToAppear, int hpRequired, int atkRequired,
+            int minDmgDealt, int maxDmgDealt, int durationMinMinutes,
+            int durationMaxMinutes, int expReward)
+    {
 		super();
 		this.id = id;
 		this.requiredStructId = requiredStructId;
@@ -259,6 +264,26 @@ public class MiniJob implements Serializable {
         this.itemRewardQuantity = itemRewardQuantity;
     }
 
+	public int getSecondItemIdReward()
+	{
+		return secondItemIdReward;
+	}
+
+	public void setSecondItemIdReward( int secondItemIdReward )
+	{
+		this.secondItemIdReward = secondItemIdReward;
+	}
+
+	public int getSecondItemRewardQuantity()
+	{
+		return secondItemRewardQuantity;
+	}
+
+	public void setSecondItemRewardQuantity( int secondItemRewardQuantity )
+	{
+		this.secondItemRewardQuantity = secondItemRewardQuantity;
+	}
+
 	public int getExpReward()
 	{
 		return expReward;
@@ -290,6 +315,10 @@ public class MiniJob implements Serializable {
 			+ itemIdReward
 			+ ", itemRewardQuantity="
 			+ itemRewardQuantity
+			+ ", secondItemIdReward="
+			+ secondItemIdReward
+			+ ", secondItemRewardQuantity="
+			+ secondItemRewardQuantity
 			+ ", quality="
 			+ quality
 			+ ", maxNumMonstersAllowed="

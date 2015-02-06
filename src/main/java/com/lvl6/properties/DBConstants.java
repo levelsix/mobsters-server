@@ -887,6 +887,8 @@ public class DBConstants {
     public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
     public static final String MINI_JOB__ITEM_ID_REWARD = "item_id_reward";
     public static final String MINI_JOB__ITEM_REWARD_QUANTITY = "item_reward_quantity";
+    public static final String MINI_JOB__SECOND_ITEM_ID_REWARD = "second_item_id_reward";
+    public static final String MINI_JOB__SECOND_ITEM_REWARD_QUANTITY = "second_item_reward_quantity";
 	public static final String MINI_JOB__QUALITY = "quality";
 	public static final String MINI_JOB__MAX_NUM_MONSTERS_ALLOWED = "max_num_monsters_allowed";
 	public static final String MINI_JOB__CHANCE_TO_APPEAR = "chance_to_appear";

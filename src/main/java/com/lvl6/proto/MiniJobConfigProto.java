@@ -99,6 +99,24 @@ public final class MiniJobConfigProto {
     int getItemRewardQuantity();
 
     /**
+     * <code>optional int32 secondItemIdReward = 19;</code>
+     */
+    boolean hasSecondItemIdReward();
+    /**
+     * <code>optional int32 secondItemIdReward = 19;</code>
+     */
+    int getSecondItemIdReward();
+
+    /**
+     * <code>optional int32 secondItemRewardQuantity = 20;</code>
+     */
+    boolean hasSecondItemRewardQuantity();
+    /**
+     * <code>optional int32 secondItemRewardQuantity = 20;</code>
+     */
+    int getSecondItemRewardQuantity();
+
+    /**
      * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
      */
     boolean hasQuality();
@@ -273,48 +291,48 @@ public final class MiniJobConfigProto {
               if (value == null) {
                 unknownFields.mergeVarintField(8, rawValue);
               } else {
-                bitField0_ |= 0x00000200;
+                bitField0_ |= 0x00000800;
                 quality_ = value;
               }
               break;
             }
             case 72: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00001000;
               maxNumMonstersAllowed_ = input.readInt32();
               break;
             }
             case 85: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00002000;
               chanceToAppear_ = input.readFloat();
               break;
             }
             case 88: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00004000;
               hpRequired_ = input.readInt32();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00008000;
               atkRequired_ = input.readInt32();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00010000;
               minDmgDealt_ = input.readInt32();
               break;
             }
             case 112: {
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00020000;
               maxDmgDealt_ = input.readInt32();
               break;
             }
             case 120: {
-              bitField0_ |= 0x00010000;
+              bitField0_ |= 0x00040000;
               durationMinMinutes_ = input.readInt32();
               break;
             }
             case 128: {
-              bitField0_ |= 0x00020000;
+              bitField0_ |= 0x00080000;
               durationMaxMinutes_ = input.readInt32();
               break;
             }
@@ -326,6 +344,16 @@ public final class MiniJobConfigProto {
             case 144: {
               bitField0_ |= 0x00000100;
               itemRewardQuantity_ = input.readInt32();
+              break;
+            }
+            case 152: {
+              bitField0_ |= 0x00000200;
+              secondItemIdReward_ = input.readInt32();
+              break;
+            }
+            case 160: {
+              bitField0_ |= 0x00000400;
+              secondItemRewardQuantity_ = input.readInt32();
               break;
             }
           }
@@ -530,13 +558,43 @@ public final class MiniJobConfigProto {
       return itemRewardQuantity_;
     }
 
+    public static final int SECONDITEMIDREWARD_FIELD_NUMBER = 19;
+    private int secondItemIdReward_;
+    /**
+     * <code>optional int32 secondItemIdReward = 19;</code>
+     */
+    public boolean hasSecondItemIdReward() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 secondItemIdReward = 19;</code>
+     */
+    public int getSecondItemIdReward() {
+      return secondItemIdReward_;
+    }
+
+    public static final int SECONDITEMREWARDQUANTITY_FIELD_NUMBER = 20;
+    private int secondItemRewardQuantity_;
+    /**
+     * <code>optional int32 secondItemRewardQuantity = 20;</code>
+     */
+    public boolean hasSecondItemRewardQuantity() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 secondItemRewardQuantity = 20;</code>
+     */
+    public int getSecondItemRewardQuantity() {
+      return secondItemRewardQuantity_;
+    }
+
     public static final int QUALITY_FIELD_NUMBER = 8;
     private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
      */
     public boolean hasQuality() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
@@ -551,7 +609,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 maxNumMonstersAllowed = 9;</code>
      */
     public boolean hasMaxNumMonstersAllowed() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
      * <code>optional int32 maxNumMonstersAllowed = 9;</code>
@@ -566,7 +624,7 @@ public final class MiniJobConfigProto {
      * <code>optional float chanceToAppear = 10;</code>
      */
     public boolean hasChanceToAppear() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     /**
      * <code>optional float chanceToAppear = 10;</code>
@@ -581,7 +639,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 hpRequired = 11;</code>
      */
     public boolean hasHpRequired() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
      * <code>optional int32 hpRequired = 11;</code>
@@ -596,7 +654,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 atkRequired = 12;</code>
      */
     public boolean hasAtkRequired() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     /**
      * <code>optional int32 atkRequired = 12;</code>
@@ -611,7 +669,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 minDmgDealt = 13;</code>
      */
     public boolean hasMinDmgDealt() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
      * <code>optional int32 minDmgDealt = 13;</code>
@@ -626,7 +684,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 maxDmgDealt = 14;</code>
      */
     public boolean hasMaxDmgDealt() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
      * <code>optional int32 maxDmgDealt = 14;</code>
@@ -641,7 +699,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 durationMinMinutes = 15;</code>
      */
     public boolean hasDurationMinMinutes() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     /**
      * <code>optional int32 durationMinMinutes = 15;</code>
@@ -656,7 +714,7 @@ public final class MiniJobConfigProto {
      * <code>optional int32 durationMaxMinutes = 16;</code>
      */
     public boolean hasDurationMaxMinutes() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00080000) == 0x00080000);
     }
     /**
      * <code>optional int32 durationMaxMinutes = 16;</code>
@@ -675,6 +733,8 @@ public final class MiniJobConfigProto {
       monsterIdReward_ = 0;
       itemIdReward_ = 0;
       itemRewardQuantity_ = 0;
+      secondItemIdReward_ = 0;
+      secondItemRewardQuantity_ = 0;
       quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       maxNumMonstersAllowed_ = 0;
       chanceToAppear_ = 0F;
@@ -719,31 +779,31 @@ public final class MiniJobConfigProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, monsterIdReward_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeEnum(8, quality_.getNumber());
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeInt32(9, maxNumMonstersAllowed_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeFloat(10, chanceToAppear_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt32(11, hpRequired_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeInt32(12, atkRequired_);
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeInt32(13, minDmgDealt_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         output.writeInt32(14, maxDmgDealt_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeInt32(15, durationMinMinutes_);
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
         output.writeInt32(16, durationMaxMinutes_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
@@ -751,6 +811,12 @@ public final class MiniJobConfigProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(18, itemRewardQuantity_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(19, secondItemIdReward_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(20, secondItemRewardQuantity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -789,39 +855,39 @@ public final class MiniJobConfigProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, monsterIdReward_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(8, quality_.getNumber());
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, maxNumMonstersAllowed_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(10, chanceToAppear_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(11, hpRequired_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, atkRequired_);
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(13, minDmgDealt_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(14, maxDmgDealt_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(15, durationMinMinutes_);
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(16, durationMaxMinutes_);
       }
@@ -832,6 +898,14 @@ public final class MiniJobConfigProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(18, itemRewardQuantity_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, secondItemIdReward_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(20, secondItemRewardQuantity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -968,24 +1042,28 @@ public final class MiniJobConfigProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         itemRewardQuantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        secondItemIdReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        maxNumMonstersAllowed_ = 0;
+        secondItemRewardQuantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        chanceToAppear_ = 0F;
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         bitField0_ = (bitField0_ & ~0x00000800);
-        hpRequired_ = 0;
+        maxNumMonstersAllowed_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
-        atkRequired_ = 0;
+        chanceToAppear_ = 0F;
         bitField0_ = (bitField0_ & ~0x00002000);
-        minDmgDealt_ = 0;
+        hpRequired_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
-        maxDmgDealt_ = 0;
+        atkRequired_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
-        durationMinMinutes_ = 0;
+        minDmgDealt_ = 0;
         bitField0_ = (bitField0_ & ~0x00010000);
-        durationMaxMinutes_ = 0;
+        maxDmgDealt_ = 0;
         bitField0_ = (bitField0_ & ~0x00020000);
+        durationMinMinutes_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        durationMaxMinutes_ = 0;
+        bitField0_ = (bitField0_ & ~0x00080000);
         return this;
       }
 
@@ -1053,37 +1131,45 @@ public final class MiniJobConfigProto {
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.quality_ = quality_;
+        result.secondItemIdReward_ = secondItemIdReward_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.maxNumMonstersAllowed_ = maxNumMonstersAllowed_;
+        result.secondItemRewardQuantity_ = secondItemRewardQuantity_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.chanceToAppear_ = chanceToAppear_;
+        result.quality_ = quality_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.hpRequired_ = hpRequired_;
+        result.maxNumMonstersAllowed_ = maxNumMonstersAllowed_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.atkRequired_ = atkRequired_;
+        result.chanceToAppear_ = chanceToAppear_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.minDmgDealt_ = minDmgDealt_;
+        result.hpRequired_ = hpRequired_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.maxDmgDealt_ = maxDmgDealt_;
+        result.atkRequired_ = atkRequired_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.durationMinMinutes_ = durationMinMinutes_;
+        result.minDmgDealt_ = minDmgDealt_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00020000;
+        }
+        result.maxDmgDealt_ = maxDmgDealt_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.durationMinMinutes_ = durationMinMinutes_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00080000;
         }
         result.durationMaxMinutes_ = durationMaxMinutes_;
         result.bitField0_ = to_bitField0_;
@@ -1130,6 +1216,12 @@ public final class MiniJobConfigProto {
         }
         if (other.hasItemRewardQuantity()) {
           setItemRewardQuantity(other.getItemRewardQuantity());
+        }
+        if (other.hasSecondItemIdReward()) {
+          setSecondItemIdReward(other.getSecondItemIdReward());
+        }
+        if (other.hasSecondItemRewardQuantity()) {
+          setSecondItemRewardQuantity(other.getSecondItemRewardQuantity());
         }
         if (other.hasQuality()) {
           setQuality(other.getQuality());
@@ -1517,12 +1609,76 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      private int secondItemIdReward_ ;
+      /**
+       * <code>optional int32 secondItemIdReward = 19;</code>
+       */
+      public boolean hasSecondItemIdReward() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 secondItemIdReward = 19;</code>
+       */
+      public int getSecondItemIdReward() {
+        return secondItemIdReward_;
+      }
+      /**
+       * <code>optional int32 secondItemIdReward = 19;</code>
+       */
+      public Builder setSecondItemIdReward(int value) {
+        bitField0_ |= 0x00000200;
+        secondItemIdReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 secondItemIdReward = 19;</code>
+       */
+      public Builder clearSecondItemIdReward() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        secondItemIdReward_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int secondItemRewardQuantity_ ;
+      /**
+       * <code>optional int32 secondItemRewardQuantity = 20;</code>
+       */
+      public boolean hasSecondItemRewardQuantity() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 secondItemRewardQuantity = 20;</code>
+       */
+      public int getSecondItemRewardQuantity() {
+        return secondItemRewardQuantity_;
+      }
+      /**
+       * <code>optional int32 secondItemRewardQuantity = 20;</code>
+       */
+      public Builder setSecondItemRewardQuantity(int value) {
+        bitField0_ |= 0x00000400;
+        secondItemRewardQuantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 secondItemRewardQuantity = 20;</code>
+       */
+      public Builder clearSecondItemRewardQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        secondItemRewardQuantity_ = 0;
+        onChanged();
+        return this;
+      }
+
       private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
        */
       public boolean hasQuality() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
@@ -1537,7 +1693,7 @@ public final class MiniJobConfigProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000800;
         quality_ = value;
         onChanged();
         return this;
@@ -1546,7 +1702,7 @@ public final class MiniJobConfigProto {
        * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
        */
       public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000800);
         quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
@@ -1557,7 +1713,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
        */
       public boolean hasMaxNumMonstersAllowed() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
@@ -1569,7 +1725,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
        */
       public Builder setMaxNumMonstersAllowed(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00001000;
         maxNumMonstersAllowed_ = value;
         onChanged();
         return this;
@@ -1578,7 +1734,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
        */
       public Builder clearMaxNumMonstersAllowed() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00001000);
         maxNumMonstersAllowed_ = 0;
         onChanged();
         return this;
@@ -1589,7 +1745,7 @@ public final class MiniJobConfigProto {
        * <code>optional float chanceToAppear = 10;</code>
        */
       public boolean hasChanceToAppear() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional float chanceToAppear = 10;</code>
@@ -1601,7 +1757,7 @@ public final class MiniJobConfigProto {
        * <code>optional float chanceToAppear = 10;</code>
        */
       public Builder setChanceToAppear(float value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00002000;
         chanceToAppear_ = value;
         onChanged();
         return this;
@@ -1610,7 +1766,7 @@ public final class MiniJobConfigProto {
        * <code>optional float chanceToAppear = 10;</code>
        */
       public Builder clearChanceToAppear() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00002000);
         chanceToAppear_ = 0F;
         onChanged();
         return this;
@@ -1621,7 +1777,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 hpRequired = 11;</code>
        */
       public boolean hasHpRequired() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
        * <code>optional int32 hpRequired = 11;</code>
@@ -1633,7 +1789,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 hpRequired = 11;</code>
        */
       public Builder setHpRequired(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00004000;
         hpRequired_ = value;
         onChanged();
         return this;
@@ -1642,7 +1798,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 hpRequired = 11;</code>
        */
       public Builder clearHpRequired() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         hpRequired_ = 0;
         onChanged();
         return this;
@@ -1653,7 +1809,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 atkRequired = 12;</code>
        */
       public boolean hasAtkRequired() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       /**
        * <code>optional int32 atkRequired = 12;</code>
@@ -1665,7 +1821,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 atkRequired = 12;</code>
        */
       public Builder setAtkRequired(int value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00008000;
         atkRequired_ = value;
         onChanged();
         return this;
@@ -1674,7 +1830,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 atkRequired = 12;</code>
        */
       public Builder clearAtkRequired() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         atkRequired_ = 0;
         onChanged();
         return this;
@@ -1685,7 +1841,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 minDmgDealt = 13;</code>
        */
       public boolean hasMinDmgDealt() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       /**
        * <code>optional int32 minDmgDealt = 13;</code>
@@ -1697,7 +1853,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 minDmgDealt = 13;</code>
        */
       public Builder setMinDmgDealt(int value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00010000;
         minDmgDealt_ = value;
         onChanged();
         return this;
@@ -1706,7 +1862,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 minDmgDealt = 13;</code>
        */
       public Builder clearMinDmgDealt() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         minDmgDealt_ = 0;
         onChanged();
         return this;
@@ -1717,7 +1873,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxDmgDealt = 14;</code>
        */
       public boolean hasMaxDmgDealt() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
        * <code>optional int32 maxDmgDealt = 14;</code>
@@ -1729,7 +1885,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxDmgDealt = 14;</code>
        */
       public Builder setMaxDmgDealt(int value) {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00020000;
         maxDmgDealt_ = value;
         onChanged();
         return this;
@@ -1738,7 +1894,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 maxDmgDealt = 14;</code>
        */
       public Builder clearMaxDmgDealt() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         maxDmgDealt_ = 0;
         onChanged();
         return this;
@@ -1749,7 +1905,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMinMinutes = 15;</code>
        */
       public boolean hasDurationMinMinutes() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
        * <code>optional int32 durationMinMinutes = 15;</code>
@@ -1761,7 +1917,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMinMinutes = 15;</code>
        */
       public Builder setDurationMinMinutes(int value) {
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00040000;
         durationMinMinutes_ = value;
         onChanged();
         return this;
@@ -1770,7 +1926,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMinMinutes = 15;</code>
        */
       public Builder clearDurationMinMinutes() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         durationMinMinutes_ = 0;
         onChanged();
         return this;
@@ -1781,7 +1937,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMaxMinutes = 16;</code>
        */
       public boolean hasDurationMaxMinutes() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       /**
        * <code>optional int32 durationMaxMinutes = 16;</code>
@@ -1793,7 +1949,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMaxMinutes = 16;</code>
        */
       public Builder setDurationMaxMinutes(int value) {
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00080000;
         durationMaxMinutes_ = value;
         onChanged();
         return this;
@@ -1802,7 +1958,7 @@ public final class MiniJobConfigProto {
        * <code>optional int32 durationMaxMinutes = 16;</code>
        */
       public Builder clearDurationMaxMinutes() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         durationMaxMinutes_ = 0;
         onChanged();
         return this;
@@ -3120,25 +3276,26 @@ public final class MiniJobConfigProto {
     java.lang.String[] descriptorData = {
       "\n\023MiniJobConfig.proto\022\016com.lvl6.proto\032\022M" +
       "onsterStuff.proto\032\026SharedEnumConfig.prot" +
-      "o\032\017Structure.proto\"\306\003\n\014MiniJobProto\022\021\n\tm" +
+      "o\032\017Structure.proto\"\204\004\n\014MiniJobProto\022\021\n\tm" +
       "iniJobId\030\001 \001(\005\022\030\n\020requiredStructId\030\002 \001(\005" +
       "\022\014\n\004name\030\003 \001(\t\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
       "lReward\030\005 \001(\005\022\021\n\tgemReward\030\006 \001(\005\022\027\n\017mons" +
       "terIdReward\030\007 \001(\005\022\024\n\014itemIdReward\030\021 \001(\005\022" +
-      "\032\n\022itemRewardQuantity\030\022 \001(\005\0224\n\007quality\030\010" +
-      " \001(\0162\027.com.lvl6.proto.Quality:\nNO_QUALIT" +
-      "Y\022\035\n\025maxNumMonstersAllowed\030\t \001(\005\022\026\n\016chan",
-      "ceToAppear\030\n \001(\002\022\022\n\nhpRequired\030\013 \001(\005\022\023\n\013" +
-      "atkRequired\030\014 \001(\005\022\023\n\013minDmgDealt\030\r \001(\005\022\023" +
-      "\n\013maxDmgDealt\030\016 \001(\005\022\032\n\022durationMinMinute" +
-      "s\030\017 \001(\005\022\032\n\022durationMaxMinutes\030\020 \001(\005\"\353\001\n\020" +
-      "UserMiniJobProto\022\027\n\017userMiniJobUuid\030\001 \001(" +
-      "\t\022\027\n\017baseDmgReceived\030\002 \001(\005\022\023\n\013timeStarte" +
-      "d\030\003 \001(\003\022\030\n\020userMonsterUuids\030\004 \003(\t\022\025\n\rtim" +
-      "eCompleted\030\005 \001(\003\022\027\n\017durationMinutes\030\007 \001(" +
-      "\005\022-\n\007miniJob\030\006 \001(\0132\034.com.lvl6.proto.Mini" +
-      "JobProto\022\027\n\017durationSeconds\030\010 \001(\005B\024B\022Min",
-      "iJobConfigProto"
+      "\032\n\022itemRewardQuantity\030\022 \001(\005\022\032\n\022secondIte" +
+      "mIdReward\030\023 \001(\005\022 \n\030secondItemRewardQuant" +
+      "ity\030\024 \001(\005\0224\n\007quality\030\010 \001(\0162\027.com.lvl6.pr",
+      "oto.Quality:\nNO_QUALITY\022\035\n\025maxNumMonster" +
+      "sAllowed\030\t \001(\005\022\026\n\016chanceToAppear\030\n \001(\002\022\022" +
+      "\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequired\030\014 \001(\005\022" +
+      "\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDealt\030\016 \001(" +
+      "\005\022\032\n\022durationMinMinutes\030\017 \001(\005\022\032\n\022duratio" +
+      "nMaxMinutes\030\020 \001(\005\"\353\001\n\020UserMiniJobProto\022\027" +
+      "\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmgReceiv" +
+      "ed\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020userMon" +
+      "sterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005 \001(\003\022\027" +
+      "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013",
+      "2\034.com.lvl6.proto.MiniJobProto\022\027\n\017durati" +
+      "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3160,7 +3317,7 @@ public final class MiniJobConfigProto {
     internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniJobProto_descriptor,
-        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
+        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
     internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new

@@ -2032,6 +2032,8 @@ public class CreateInfoProtoUtils {
         mjpb.setMonsterIdReward(mj.getMonsterIdReward());
         mjpb.setItemIdReward(mj.getItemIdReward());
         mjpb.setItemRewardQuantity(mj.getItemRewardQuantity());
+        mjpb.setSecondItemIdReward(mj.getSecondItemIdReward());
+        mjpb.setSecondItemRewardQuantity(mj.getSecondItemRewardQuantity());
 
 		str = mj.getQuality();
 		if (null != str) {

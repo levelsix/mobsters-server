@@ -20,6 +20,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniJobRequestEvent;
 import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
@@ -35,6 +36,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -43,7 +45,6 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @Component
@@ -63,6 +64,9 @@ public class RedeemMiniJobController extends EventController{
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
 
+  @Autowired
+  protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+  
   @Autowired
   protected UpdateUtil updateUtil;
   
@@ -280,9 +284,6 @@ public class RedeemMiniJobController extends EventController{
     int cashChange = mj.getCashReward();
     int oilChange = mj.getOilReward();
     int expChange = mj.getExpReward();
-    int monsterIdReward = mj.getMonsterIdReward();
-    int itemIdReward = mj.getItemIdReward();
-    int itemRewardQuantity = mj.getItemRewardQuantity();
 
     if (!updateUser(user, gemsChange, cashChange, maxCash,
     	oilChange, maxOil, expChange))
@@ -306,6 +307,7 @@ public class RedeemMiniJobController extends EventController{
       }
     }
 
+    int monsterIdReward = mj.getMonsterIdReward();
     //give the user the monster if he got one
     if (0 != monsterIdReward) {
       StringBuilder mfusopB = new StringBuilder();
@@ -317,9 +319,8 @@ public class RedeemMiniJobController extends EventController{
           new HashMap<Integer, Integer>();
       monsterIdToNumPieces.put(monsterIdReward, 1);
 
-      log.info(String.format(
-    	  "rewarding user with {monsterId->amount}: %s",
-    	  monsterIdToNumPieces));
+      log.info( "rewarding user with {monsterId->amount}: {}",
+    	  monsterIdToNumPieces );
       List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
           updateUserMonsters(userId, monsterIdToNumPieces, null,
               mfusop, now);
@@ -327,13 +328,10 @@ public class RedeemMiniJobController extends EventController{
       resBuilder.setFump(fump);
     }
     
-    if (0 != itemIdReward && 0 != itemRewardQuantity) {
-    	int numUpdated = updateUtil.updateItemForUser(
-    		userId, itemIdReward, itemRewardQuantity);
-    	String preface = "rewarding user with more items."; 
-    	log.info(String.format(
-    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
-    		preface, itemIdReward, itemRewardQuantity, numUpdated));
+    List<ItemForUser> ifuList = calculateItemRewards(userId, mj);
+    log.info("ifuList={}", ifuList);
+    if (null != ifuList && !ifuList.isEmpty()) {
+    	updateUtil.updateItemForUser(ifuList);
     }
 
     //delete the user mini job
@@ -357,6 +355,59 @@ public class RedeemMiniJobController extends EventController{
 
     return true;
   }
+
+
+private List<ItemForUser> calculateItemRewards( String userId,
+	MiniJob mj )
+{
+	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+	
+	int itemIdReward = mj.getItemIdReward();
+    int itemRewardQuantity = mj.getItemRewardQuantity();
+    int secondItemIdReward = mj.getSecondItemIdReward();
+    int secondItemRewardQuantity = mj.getSecondItemRewardQuantity();
+    if (itemIdReward > 0 && itemRewardQuantity > 0) {
+    	itemIdToQuantity.put(itemIdReward, itemRewardQuantity);
+    	
+//    	ItemForUser ifuOne = new ItemForUser(userId,
+//    		itemIdReward, itemRewardQuantity);
+//    	int numUpdated = updateUtil.updateItemForUser(
+//    		userId, itemIdReward, itemRewardQuantity);
+//    	
+//    	
+//    	String preface = "rewarding user with more items."; 
+//    	log.info( 
+//    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
+//    		new Object[] { preface, itemIdReward, itemRewardQuantity,
+//    			numUpdated});
+    }
+    
+    if (secondItemIdReward > 0 && secondItemRewardQuantity > 0) {
+    	if (itemIdToQuantity.containsKey(secondItemIdReward))
+    	{
+    		int newQuantity = secondItemRewardQuantity +
+    			itemIdToQuantity.get(secondItemIdReward);
+    		itemIdToQuantity.put(secondItemIdReward, newQuantity);
+    	}
+    }
+    
+    List<ItemForUser> ifuList = null;
+    if (!itemIdToQuantity.isEmpty()) {
+    	Map<Integer, ItemForUser> itemIdToIfu = 
+    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
+    			itemIdToQuantity.keySet());
+    	
+    	for (Integer itemId : itemIdToQuantity.keySet()) {
+    		ItemForUser ifu = itemIdToIfu.get(itemId);
+    		int newQuantity = itemIdToQuantity.get(itemId) +
+    			ifu.getQuantity();
+    		ifu.setQuantity(newQuantity);
+    	}
+    	
+    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+    }
+    return ifuList;
+}
 
 
   private boolean updateUser(User u, int gemsChange, int cashChange,
@@ -453,7 +504,19 @@ public class RedeemMiniJobController extends EventController{
   }
 
 
-  public UpdateUtil getUpdateUtil()
+  public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+  {
+	  return itemForUserRetrieveUtil;
+  }
+
+
+  public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+  {
+	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+  }
+
+
+public UpdateUtil getUpdateUtil()
   {
 	  return updateUtil;
   }
