@@ -91,8 +91,6 @@ public class RetrieveUserMonsterTeamAction
 	private Map<String, PvpUser> userIdToPvpUsers;
 	private Map<String, List<MonsterForUser>> allButRetrieverUserIdToUserMonsters;
 	private Map<String, Map<String, Integer>> allButRetrieverUserIdToUserMonsterIdToDroppedId;
-	private List<String> allUsersIdsExceptRetriever;
-	private List<User> allUsersExceptRetriever;
 	private Map<String, User> userIdToUser;
 	private Map<String, Clan> userIdToClan;
 	private Map<String, Integer> allButRetrieverUserIdToCashLost;
@@ -102,6 +100,9 @@ public class RetrieveUserMonsterTeamAction
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
 	private Map<String, Integer> allButRetrieverUserIdToMsfuMonsterDropId;
 
+	private List<String> allUsersIdsExceptRetriever;
+	private List<User> allUsersExceptRetriever;
+	
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
 		
@@ -408,6 +409,13 @@ public class RetrieveUserMonsterTeamAction
 				break;
 			}
 		}
+	}
+	
+	public User getRetriever() {
+		if (null != userIdToUser && userIdToUser.containsKey(retrieverUserId)) {
+			return userIdToUser.get(retrieverUserId);
+		}
+		return null;
 	}
 	
 	public List<String> getAllUsersIdsExceptRetriever() {
