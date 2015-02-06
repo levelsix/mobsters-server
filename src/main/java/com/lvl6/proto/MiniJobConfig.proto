@@ -20,6 +20,8 @@ message MiniJobProto {
      optional int32 monsterIdReward = 7;
      optional int32 itemIdReward = 17;
      optional int32 itemRewardQuantity = 18;
+     optional int32 secondItemIdReward = 19;
+     optional int32 secondItemRewardQuantity = 20;
      optional Quality quality = 8 [default = NO_QUALITY];
      optional int32 maxNumMonstersAllowed = 9;
      optional float chanceToAppear = 10;
@@ -30,8 +32,10 @@ message MiniJobProto {
      optional int32 durationMinMinutes = 15;
      optional int32 durationMaxMinutes = 16;
      
-     //optional int32 monsterIdReward = 17;
-     //optional int32 monsterIdReward = 18;
+     //optional int32 itemIdReward = 17;
+     //optional int32 itemRewardQuantity = 18;
+     //optional int32 secondItemIdReward = 19;
+     //optional int32 secondItemRewardQuantity = 20;
      
 }
 
