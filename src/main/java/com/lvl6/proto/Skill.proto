@@ -40,6 +40,7 @@ message SkillProto {
 	//optional string logoImgName = 11;
 	
 	optional string imgNamePrefix = 12;
+	optional int32 skillEffectDuration = 13;
 }
 
 message SkillPropertyProto {

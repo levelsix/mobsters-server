@@ -2986,6 +2986,11 @@ public class CreateInfoProtoUtils {
 		if (null != str) {
 			spb.setImgNamePrefix(str);
 		}
+		
+		int skillEffectDuration = s.getSkillEffectDuration();
+		if (skillEffectDuration > 0) {
+			spb.setSkillEffectDuration(skillEffectDuration);
+		}
 
 		return spb.build();
 	}

@@ -97,6 +97,7 @@ import com.lvl6.utils.DBConnection;
 		String imgNamePrefix = rs.getString(DBConstants.SKILL__IMG_NAME_PREFIX);
 //		String iconImgName = rs.getString(DBConstants.SKILL__ICON_IMG_NAME);
 //		String logoImgName = rs.getString(DBConstants.SKILL__LOGO_IMG_NAME);
+		int skillEffectDuration = rs.getInt(DBConstants.SKILL__SKILL_EFFECT_DURATION);
 		
 		int predecId = rs.getInt(DBConstants.SKILL__PREDEC_ID);
 		if (rs.wasNull()) {
@@ -129,7 +130,7 @@ import com.lvl6.utils.DBConnection;
 	    }
 		
 		Skill skill = new Skill(id, name, orbCost, type, activationType,
-			predecId, succId, desc, imgNamePrefix);//, logoImgName);
+			predecId, succId, desc, imgNamePrefix, skillEffectDuration);//, logoImgName);
 		return skill;
 	}
 	

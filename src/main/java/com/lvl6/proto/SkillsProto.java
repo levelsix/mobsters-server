@@ -649,6 +649,15 @@ public final class SkillsProto {
      */
     com.google.protobuf.ByteString
         getImgNamePrefixBytes();
+
+    /**
+     * <code>optional int32 skillEffectDuration = 13;</code>
+     */
+    boolean hasSkillEffectDuration();
+    /**
+     * <code>optional int32 skillEffectDuration = 13;</code>
+     */
+    int getSkillEffectDuration();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SkillProto}
@@ -768,6 +777,11 @@ public final class SkillsProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
               imgNamePrefix_ = bs;
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00000200;
+              skillEffectDuration_ = input.readInt32();
               break;
             }
           }
@@ -1106,6 +1120,21 @@ public final class SkillsProto {
       }
     }
 
+    public static final int SKILLEFFECTDURATION_FIELD_NUMBER = 13;
+    private int skillEffectDuration_;
+    /**
+     * <code>optional int32 skillEffectDuration = 13;</code>
+     */
+    public boolean hasSkillEffectDuration() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 skillEffectDuration = 13;</code>
+     */
+    public int getSkillEffectDuration() {
+      return skillEffectDuration_;
+    }
+
     private void initFields() {
       skillId_ = 0;
       name_ = "";
@@ -1117,6 +1146,7 @@ public final class SkillsProto {
       properties_ = java.util.Collections.emptyList();
       desc_ = "";
       imgNamePrefix_ = "";
+      skillEffectDuration_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1160,6 +1190,9 @@ public final class SkillsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(12, getImgNamePrefixBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(13, skillEffectDuration_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1209,6 +1242,10 @@ public final class SkillsProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(12, getImgNamePrefixBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, skillEffectDuration_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1352,6 +1389,8 @@ public final class SkillsProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         imgNamePrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
+        skillEffectDuration_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1425,6 +1464,10 @@ public final class SkillsProto {
           to_bitField0_ |= 0x00000100;
         }
         result.imgNamePrefix_ = imgNamePrefix_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.skillEffectDuration_ = skillEffectDuration_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1499,6 +1542,9 @@ public final class SkillsProto {
           bitField0_ |= 0x00000200;
           imgNamePrefix_ = other.imgNamePrefix_;
           onChanged();
+        }
+        if (other.hasSkillEffectDuration()) {
+          setSkillEffectDuration(other.getSkillEffectDuration());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2277,6 +2323,38 @@ public final class SkillsProto {
         return this;
       }
 
+      private int skillEffectDuration_ ;
+      /**
+       * <code>optional int32 skillEffectDuration = 13;</code>
+       */
+      public boolean hasSkillEffectDuration() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 skillEffectDuration = 13;</code>
+       */
+      public int getSkillEffectDuration() {
+        return skillEffectDuration_;
+      }
+      /**
+       * <code>optional int32 skillEffectDuration = 13;</code>
+       */
+      public Builder setSkillEffectDuration(int value) {
+        bitField0_ |= 0x00000400;
+        skillEffectDuration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 skillEffectDuration = 13;</code>
+       */
+      public Builder clearSkillEffectDuration() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        skillEffectDuration_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillProto)
     }
 
@@ -3027,7 +3105,7 @@ public final class SkillsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Skill.proto\022\016com.lvl6.proto\"\240\002\n\nSkillP" +
+      "\n\013Skill.proto\022\016com.lvl6.proto\"\275\002\n\nSkillP" +
       "roto\022\017\n\007skillId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007o" +
       "rbCost\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.pr" +
       "oto.SkillType\022;\n\016activationType\030\005 \001(\0162#." +
@@ -3035,24 +3113,24 @@ public final class SkillsProto {
       "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
       "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
       "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
-      "\"O\n\022SkillPropertyProto\022\027\n\017skillPropertyI" +
-      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(",
-      "\002*\377\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
-      "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
-      "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
-      "E\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRI" +
-      "T_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r" +
-      "\022\007\n\003MUD\020\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STR" +
-      "IKE\020\020\022\020\n\014FLAME_STRIKE\020\021\022\r\n\tCONFUSION\020\022\022\020" +
-      "\n\014STATIC_FIELD\020\023\022\022\n\016BLINDING_LIGHT\020\024\022\021\n\r" +
-      "POISON_POWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020" +
-      "\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n",
-      "\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE" +
-      "\020\034\022\014\n\010ENERGIZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n\005CURS" +
-      "E\020\037\022\r\n\tINSURANCE\020 \022\017\n\013FLAME_BREAK\020!*J\n\023S" +
-      "killActivationType\022\022\n\016USER_ACTIVATED\020\001\022\022" +
-      "\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Skill" +
-      "sProto"
+      "\022\033\n\023skillEffectDuration\030\r \001(\005\"O\n\022SkillPr" +
+      "opertyProto\022\027\n\017skillPropertyId\030\001 \001(\005\022\014\n\004",
+      "name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(\002*\377\003\n\tSkill" +
+      "Type\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JEL" +
+      "LY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHI" +
+      "ELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOME" +
+      "NTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRIT_AND_EVADE" +
+      "\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r\022\007\n\003MUD\020\016\022\016" +
+      "\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STRIKE\020\020\022\020\n\014FL" +
+      "AME_STRIKE\020\021\022\r\n\tCONFUSION\020\022\022\020\n\014STATIC_FI" +
+      "ELD\020\023\022\022\n\016BLINDING_LIGHT\020\024\022\021\n\rPOISON_POWD" +
+      "ER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020\027\022\021\n\rSHALLO",
+      "W_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n\nBLOOD_RAGE" +
+      "\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE\020\034\022\014\n\010ENERG" +
+      "IZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n\005CURSE\020\037\022\r\n\tINSU" +
+      "RANCE\020 \022\017\n\013FLAME_BREAK\020!*J\n\023SkillActivat" +
+      "ionType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTI" +
+      "VATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3071,7 +3149,7 @@ public final class SkillsProto {
     internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SkillProto_descriptor,
-        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", });
+        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", "SkillEffectDuration", });
     internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
