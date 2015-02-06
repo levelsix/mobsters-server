@@ -36,7 +36,7 @@ public class MiniJob implements Serializable {
     public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward,
             int itemIdReward, int itemRewardQuantity,
-            int secondtemIdReward, int secondItemRewardQuantity,
+            int secondItemIdReward, int secondItemRewardQuantity,
             String quality, int maxNumMonstersAllowed,
             float chanceToAppear, int hpRequired, int atkRequired,
             int minDmgDealt, int maxDmgDealt, int durationMinMinutes,
@@ -52,6 +52,8 @@ public class MiniJob implements Serializable {
 		this.monsterIdReward = monsterIdReward;
         this.itemIdReward = itemIdReward;
         this.itemRewardQuantity = itemRewardQuantity;
+        this.secondItemIdReward = secondItemIdReward;
+        this.secondItemRewardQuantity = secondItemRewardQuantity;
 		this.quality = quality;
 		this.maxNumMonstersAllowed = maxNumMonstersAllowed;
 		this.chanceToAppear = chanceToAppear;
