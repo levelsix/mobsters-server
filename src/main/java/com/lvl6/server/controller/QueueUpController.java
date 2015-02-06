@@ -166,7 +166,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		try {
-//			User attacker = getUserRetrieveUtils().getUserById(attackerId);
+			User attacker = userRetrieveUtil.getUserById(attackerId);
 			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 				.getUserPvpLeagueForId(attackerId);
 			
@@ -176,17 +176,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			boolean legitQueueUp = true; //checkLegitQueueUp(resBuilder, attacker, clientDate);
 			//gemsSpent, cashChange);
 
-			RetrieveUserMonsterTeamAction rumta = null;
-			User attacker = null;
 			boolean success = false;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			if (legitQueueUp) {
-				rumta = setProspectivePvpMatches(resBuilder, attackerId,
+//				RetrieveUserMonsterTeamAction rumta =
+				setProspectivePvpMatches(resBuilder, attackerId,
 					//attacker,
 					uniqSeenUserIds, clientDate, plfu.getElo());
 
 				try {
-					attacker = rumta.getRetriever();
 					//update the user, and his shield
 					success = writeChangesToDB(attackerId, attacker,
 						clientTime, plfu, currencyChange);
