@@ -109,11 +109,10 @@ public class RedeemMiniJobController extends EventController{
     resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
 
     UUID userUuid = null;
-    UUID userMiniJobUuid = null;
     boolean invalidUuids = true;
     try {
       userUuid = UUID.fromString(userId);
-      userMiniJobUuid = UUID.fromString(userMiniJobId);
+      UUID.fromString(userMiniJobId);
 
       invalidUuids = false;
     } catch (Exception e) {
@@ -383,12 +382,12 @@ private List<ItemForUser> calculateItemRewards( String userId,
     }
     
     if (secondItemIdReward > 0 && secondItemRewardQuantity > 0) {
+    	int newQuantity = secondItemRewardQuantity;
     	if (itemIdToQuantity.containsKey(secondItemIdReward))
     	{
-    		int newQuantity = secondItemRewardQuantity +
-    			itemIdToQuantity.get(secondItemIdReward);
-    		itemIdToQuantity.put(secondItemIdReward, newQuantity);
+    		newQuantity += itemIdToQuantity.get(secondItemIdReward);
     	}
+    	itemIdToQuantity.put(secondItemIdReward, newQuantity);
     }
     
     List<ItemForUser> ifuList = null;
