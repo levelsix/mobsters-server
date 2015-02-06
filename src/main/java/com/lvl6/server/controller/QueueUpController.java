@@ -311,7 +311,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
-		if (null == queuedOpponentIdsList || queuedOpponentIdsList.size() < numWanted) {
+		if ( null == queuedOpponentIdsList ) {
+			queuedOpponentIdsList = new ArrayList<String>();
+		}
+		
+		if ( queuedOpponentIdsList.size() < numWanted ) {
 			generateFakeDefenders(attackerId, attackerElo, minElo, maxElo,
 				queuedOpponentIdsList, numWanted, pvpProtoList);
 		} 
