@@ -27,6 +27,7 @@ message ItemProto {
 	optional int32 staticDataId = 5; //refers to id in a table, e.g. booster_pack, monster.
 	optional int32 amount = 6;
 	optional float secretGiftChance = 7;
+	optional float alwaysDisplayToUser = 8;
 }
 
 //------------------------------------------------------------------------------------------
