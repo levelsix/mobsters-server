@@ -210,9 +210,10 @@ import com.lvl6.utils.DBConnection;
     int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
     int amount = rs.getInt(DBConstants.ITEM__AMOUNT);
     float secretGiftChance = rs.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
+    boolean alwaysDisplayToUser = rs.getBoolean(DBConstants.ITEM__ALWAYS_DISPLAY_TO_USER);
     
     Item item = new Item(id, name, imgName, itemType, staticDataId,
-    	amount, secretGiftChance);
+    	amount, secretGiftChance, alwaysDisplayToUser);
     return item;
   }
 }

@@ -876,6 +876,7 @@ public class DBConstants {
 	public static final String ITEM__STATIC_DATA_ID = "static_data_id";
 	public static final String ITEM__AMOUNT = "amount";
 	public static final String ITEM__SECRET_GIFT_CHANCE = "secret_gift_chance";
+	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
 
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id"; 

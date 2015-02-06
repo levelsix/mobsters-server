@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = -2394650067399608283L;
+	private static final long serialVersionUID = -1293698119576984508L;
 	
 	private int id;
 	private String name;
@@ -13,6 +13,7 @@ public class Item implements Serializable {
 	private int staticDataId;
 	private int amount;
 	private float secretGiftChance;
+	private boolean alwaysDisplayToUser;
 
 	//variable to assist in randomly selecting this Item
 	private float normalizedSecretGiftProbability;
@@ -29,7 +30,8 @@ public class Item implements Serializable {
 		String itemType,
 		int staticDataId,
 		int amount,
-		float secretGiftChance )
+		float secretGiftChance,
+		boolean alwaysDisplayToUser )
 	{
 		super();
 		this.id = id;
@@ -39,9 +41,10 @@ public class Item implements Serializable {
 		this.staticDataId = staticDataId;
 		this.amount = amount;
 		this.secretGiftChance = secretGiftChance;
-		
-		this.normalizedSecretGiftProbability = 0F;
+		this.alwaysDisplayToUser = alwaysDisplayToUser;
+		this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
+
 
 	public int getId() {
 		return id;
@@ -118,6 +121,16 @@ public class Item implements Serializable {
 		this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
 
+	public boolean isAlwaysDisplayToUser()
+	{
+		return alwaysDisplayToUser;
+	}
+
+	public void setAlwaysDisplayToUser( boolean alwaysDisplayToUser )
+	{
+		this.alwaysDisplayToUser = alwaysDisplayToUser;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -135,6 +148,8 @@ public class Item implements Serializable {
 			+ amount
 			+ ", secretGiftChance="
 			+ secretGiftChance
+			+ ", alwaysDisplayToUser="
+			+ alwaysDisplayToUser
 			+ ", normalizedSecretGiftProbability="
 			+ normalizedSecretGiftProbability
 			+ "]";

@@ -1908,6 +1908,7 @@ public class CreateInfoProtoUtils {
 		ipb.setStaticDataId(item.getStaticDataId());
 		ipb.setAmount(item.getAmount());
 		ipb.setSecretGiftChance(item.getSecretGiftChance());
+		ipb.setAlwaysDisplayToUser(item.isAlwaysDisplayToUser());
 
 		return ipb.build();
 	}

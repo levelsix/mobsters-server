@@ -836,6 +836,15 @@ public final class ItemsProto {
      * <code>optional float secretGiftChance = 7;</code>
      */
     float getSecretGiftChance();
+
+    /**
+     * <code>optional bool alwaysDisplayToUser = 8;</code>
+     */
+    boolean hasAlwaysDisplayToUser();
+    /**
+     * <code>optional bool alwaysDisplayToUser = 8;</code>
+     */
+    boolean getAlwaysDisplayToUser();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemProto}
@@ -930,6 +939,11 @@ public final class ItemsProto {
             case 61: {
               bitField0_ |= 0x00000040;
               secretGiftChance_ = input.readFloat();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              alwaysDisplayToUser_ = input.readBool();
               break;
             }
           }
@@ -1139,6 +1153,21 @@ public final class ItemsProto {
       return secretGiftChance_;
     }
 
+    public static final int ALWAYSDISPLAYTOUSER_FIELD_NUMBER = 8;
+    private boolean alwaysDisplayToUser_;
+    /**
+     * <code>optional bool alwaysDisplayToUser = 8;</code>
+     */
+    public boolean hasAlwaysDisplayToUser() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bool alwaysDisplayToUser = 8;</code>
+     */
+    public boolean getAlwaysDisplayToUser() {
+      return alwaysDisplayToUser_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       name_ = "";
@@ -1147,6 +1176,7 @@ public final class ItemsProto {
       staticDataId_ = 0;
       amount_ = 0;
       secretGiftChance_ = 0F;
+      alwaysDisplayToUser_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1181,6 +1211,9 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeFloat(7, secretGiftChance_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBool(8, alwaysDisplayToUser_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1218,6 +1251,10 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(7, secretGiftChance_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, alwaysDisplayToUser_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1350,6 +1387,8 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         secretGiftChance_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000040);
+        alwaysDisplayToUser_ = false;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -1406,6 +1445,10 @@ public final class ItemsProto {
           to_bitField0_ |= 0x00000040;
         }
         result.secretGiftChance_ = secretGiftChance_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.alwaysDisplayToUser_ = alwaysDisplayToUser_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1446,6 +1489,9 @@ public final class ItemsProto {
         }
         if (other.hasSecretGiftChance()) {
           setSecretGiftChance(other.getSecretGiftChance());
+        }
+        if (other.hasAlwaysDisplayToUser()) {
+          setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1801,6 +1847,38 @@ public final class ItemsProto {
       public Builder clearSecretGiftChance() {
         bitField0_ = (bitField0_ & ~0x00000040);
         secretGiftChance_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private boolean alwaysDisplayToUser_ ;
+      /**
+       * <code>optional bool alwaysDisplayToUser = 8;</code>
+       */
+      public boolean hasAlwaysDisplayToUser() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional bool alwaysDisplayToUser = 8;</code>
+       */
+      public boolean getAlwaysDisplayToUser() {
+        return alwaysDisplayToUser_;
+      }
+      /**
+       * <code>optional bool alwaysDisplayToUser = 8;</code>
+       */
+      public Builder setAlwaysDisplayToUser(boolean value) {
+        bitField0_ |= 0x00000080;
+        alwaysDisplayToUser_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool alwaysDisplayToUser = 8;</code>
+       */
+      public Builder clearAlwaysDisplayToUser() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        alwaysDisplayToUser_ = false;
         onChanged();
         return this;
       }
@@ -3818,21 +3896,21 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-      "\005\"\246\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\005\"\303\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
-      "ance\030\007 \001(\002\"\261\001\n\022UserItemUsageProto\022\021\n\tusa" +
-      "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
-      "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
-      "uid\030\005 \001(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType:\007NO_HELP\"}\n\027UserIt" +
-      "emSecretGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010u" +
-      "serUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(" +
-      "\005\022\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n" +
-      "\010ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020" +
-      "\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsP" +
-      "roto"
+      "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\"" +
+      "\261\001\n\022UserItemUsageProto\022\021\n\tusageUuid\030\001 \001(" +
+      "\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013t",
+      "imeOfEntry\030\004 \001(\003\022\024\n\014userDataUuid\030\005 \001(\t\022;" +
+      "\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto.Game" +
+      "ActionType:\007NO_HELP\"}\n\027UserItemSecretGif" +
+      "tProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001" +
+      "(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006itemId" +
+      "\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType\022\020" +
+      "\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_C" +
+      "ASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3858,7 +3936,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", });
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
