@@ -338,7 +338,7 @@ public class CreateInfoProtoUtils {
 		Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings,
-		String cmtdId, MonsterSnapshotForUser msfu,
+		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 		int msfuMonsterIdDropped)
 	{
 
@@ -348,7 +348,7 @@ public class CreateInfoProtoUtils {
 		String msg = defender.getPvpDefendingMessage();
 		return createPvpProto(userId, plfu, pu, userMonsters,
 			userMonsterIdToDropped, prospectiveCashWinnings,
-			prospectiveOilWinnings, defenderProto, msg, cmtdId, msfu,
+			prospectiveOilWinnings, defenderProto, msg, cmtd, msfu,
 			msfuMonsterIdDropped);
 	}
 
@@ -362,7 +362,7 @@ public class CreateInfoProtoUtils {
 		int prospectiveOilWinnings,
 		MinimumUserProtoWithLevel defender,
 		String defenderMsg,
-		String cmtdId,
+		ClanMemberTeamDonation cmtd,
 		MonsterSnapshotForUser msfu,
 		int msfuMonsterIdDropped)
 	{
@@ -387,10 +387,11 @@ public class CreateInfoProtoUtils {
 		}
 		
 		//account for clan donated monster
-		if (null != cmtdId && null != msfu) {
+		if (null != cmtd && null != msfu) {
 			ClanMemberTeamDonationProto.Builder cmtdpb =
 				ClanMemberTeamDonationProto.newBuilder();
-			cmtdpb.setDonationUuid(cmtdId);
+			cmtdpb.setDonationUuid(cmtd.getId());
+			cmtdpb.setClanUuid(cmtd.getClanId());
 			
 			UserMonsterSnapshotProto umsp = 
 				createUserMonsterSnapshotProto(msfu, null);
@@ -473,20 +474,20 @@ public class CreateInfoProtoUtils {
 		return pmp;
 	}
 	
-	private static PvpMonsterProto createPvpMonsterProto(
-		MonsterSnapshotForUser msfu, int monsterIdDropped)
-	{
-		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
-		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(msfu);
-		pmpb.setDefenderMonster(mump);
-		if (monsterIdDropped > 0) {
-			pmpb.setMonsterIdDropped(monsterIdDropped);
-		}
-		PvpMonsterProto pmp = pmpb.build();
-		
-		return pmp;
-
-	}
+//	private static PvpMonsterProto createPvpMonsterProto(
+//		MonsterSnapshotForUser msfu, int monsterIdDropped)
+//	{
+//		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
+//		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(msfu);
+//		pmpb.setDefenderMonster(mump);
+//		if (monsterIdDropped > 0) {
+//			pmpb.setMonsterIdDropped(monsterIdDropped);
+//		}
+//		PvpMonsterProto pmp = pmpb.build();
+//		
+//		return pmp;
+//
+//	}
 	
 	//this is used to create fake users for PvpProtos
 	public static PvpProto createFakePvpProto(String userId, String name,
@@ -534,7 +535,7 @@ public class CreateInfoProtoUtils {
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 		Map<String, Integer> userIdToCashReward,
 		Map<String, Integer> userIdToOilReward,
-		Map<String, String> userIdToCmtdId,
+		Map<String, ClanMemberTeamDonation> userIdToCmtd,
 		Map<String, MonsterSnapshotForUser> userIdToMsfu,
 		Map<String, Integer> userIdToMsfuMonsterIdDropped)
 	{
@@ -564,9 +565,9 @@ public class CreateInfoProtoUtils {
 				userIdToUserMonsterIdToDropped.get(userId);
 			
 			
-			String cmtdId = null;
-			if (null != userIdToCmtdId && userIdToCmtdId.containsKey(userId)) {
-				cmtdId = userIdToCmtdId.get(userId);
+			ClanMemberTeamDonation cmtd = null;
+			if (null != userIdToCmtd && userIdToCmtd.containsKey(userId)) {
+				cmtd = userIdToCmtd.get(userId);
 			}
 			MonsterSnapshotForUser msfu = null;
 			if (null != userIdToMsfu && userIdToMsfu.containsKey(userId)) {
@@ -581,7 +582,7 @@ public class CreateInfoProtoUtils {
 			
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 				userMonsterIdToDropped, prospectiveCashWinnings,
-				prospectiveOilWinnings, cmtdId, msfu,
+				prospectiveOilWinnings, cmtd, msfu,
 				msfuMonsterIdDropped);
 			pvpProtoList.add(pp);
 		}

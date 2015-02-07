@@ -96,7 +96,7 @@ public class RetrieveUserMonsterTeamAction
 	private Map<String, Integer> allButRetrieverUserIdToCashLost;
 	private Map<String, Integer> allButRetrieverUserIdToOilLost;
 	
-	private Map<String, String> allButRetrieverUserIdToCmtdId;
+	private Map<String, ClanMemberTeamDonation> allButRetrieverUserIdToCmtd;
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
 	private Map<String, Integer> allButRetrieverUserIdToMsfuMonsterDropId;
 
@@ -196,8 +196,10 @@ public class RetrieveUserMonsterTeamAction
 		List<ClanMemberTeamDonation> allClansSolicitations =
 			clanMemberTeamDonationRetrieveUtil
 			.getClanMemberTeamDonationForClanIds(clanIds);
+		
+		//mapify those donation solicitations for easier access later on
 		Map<String, String> cmtdIdToAllButRetrieverUserId = new HashMap<String, String>();
-		allButRetrieverUserIdToCmtdId = new HashMap<String, String>();
+		allButRetrieverUserIdToCmtd = new HashMap<String, ClanMemberTeamDonation>();
 		for (ClanMemberTeamDonation cmtd : allClansSolicitations) {
 			String userId = cmtd.getUserId();
 			if (userId.equals(retrieverUserId)) {
@@ -207,7 +209,7 @@ public class RetrieveUserMonsterTeamAction
 			String cmtdId = cmtd.getId();
 			
 			cmtdIdToAllButRetrieverUserId.put(cmtdId, userId);
-			allButRetrieverUserIdToCmtdId.put(userId, cmtdId);
+			allButRetrieverUserIdToCmtd.put(userId, cmtd);
 			
 		}
 		
@@ -480,9 +482,9 @@ public class RetrieveUserMonsterTeamAction
 		return allButRetrieverUserIdToOilLost;
 	}
 
-	public Map<String, String> getAllButRetrieverUserIdToCmtdId()
+	public Map<String, ClanMemberTeamDonation> getAllButRetrieverUserIdToCmtd()
 	{
-		return allButRetrieverUserIdToCmtdId;
+		return allButRetrieverUserIdToCmtd;
 	}
 
 	public Map<String, MonsterSnapshotForUser> getAllButRetrieverUserIdToMsfu()

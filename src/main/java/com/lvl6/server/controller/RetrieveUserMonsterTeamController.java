@@ -143,7 +143,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 						rumta.getAllButRetrieverUserIdToUserMonsterIdToDroppedId(),
 						rumta.getAllButRetrieverUserIdToCashLost(),
 						rumta.getAllButRetrieverUserIdToOilLost(),
-						rumta.getAllButRetrieverUserIdToCmtdId(),
+						rumta.getAllButRetrieverUserIdToCmtd(),
 						rumta.getAllButRetrieverUserIdToMsfu(),
 						rumta.getAllButRetrieverUserIdToMsfuMonsterDropId());
 				
