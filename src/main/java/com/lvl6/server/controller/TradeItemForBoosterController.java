@@ -32,6 +32,7 @@ import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -44,6 +45,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class TradeItemForBoosterController extends EventController {
@@ -59,6 +61,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected UpdateUtil updateUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -284,7 +289,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		mfusop = String.format("%s=%s, %s",
 			ControllerConstants.MFUSOP__REDEEM_ITEM, itemId, mfusop);
 
-		log.info("!!!!!!!!!mfusop=" + mfusop);
+		log.info("!!!!!!!!!mfusop={}", mfusop);
 
 		//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
 		if (!completeUserMonsters.isEmpty()) {
@@ -320,10 +325,62 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//	      resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 		//	      return false;
 		//	    }
+		//item reward
+		List<ItemForUser> ifuList = calculateItemRewards(userId, itemsUserReceives);
+		log.info("ifuList={}", ifuList);
+		if (null != ifuList && !ifuList.isEmpty()) {
+			numUpdated = updateUtil.updateItemForUser(ifuList);
+			log.info("items numUpdated={}", numUpdated);
+			List<UserItemProto> uipList = CreateInfoProtoUtils
+				.createUserItemProtosFromUserItems(ifuList);
+			resBuilder.addAllUpdatedUserItems(uipList);
+		}
 
 		return true;
 	}
 
+	private List<ItemForUser> calculateItemRewards(
+		String userId,
+		List<BoosterItem> itemsUserReceives )
+	{
+		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+		
+		for (BoosterItem bi : itemsUserReceives) {
+			int itemId = bi.getItemId();
+			int itemQuantity = bi.getItemQuantity();
+			
+			if (itemId <= 0 || itemQuantity <= 0) {
+				continue;
+			}
+			
+			//user could have gotten multiple of the same BoosterItem
+			int newQuantity = itemQuantity;
+			if (itemIdToQuantity.containsKey(itemId))
+			{
+				newQuantity += itemIdToQuantity.get(itemId);
+			}
+			itemIdToQuantity.put(itemId, newQuantity);
+		}
+		
+		List<ItemForUser> ifuList = null;
+	    if (!itemIdToQuantity.isEmpty()) {
+	    	//aggregate rewarded items with user's current items
+	    	Map<Integer, ItemForUser> itemIdToIfu = 
+	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
+	    			itemIdToQuantity.keySet());
+	    	
+	    	for (Integer itemId : itemIdToQuantity.keySet()) {
+	    		ItemForUser ifu = itemIdToIfu.get(itemId);
+	    		int newQuantity = itemIdToQuantity.get(itemId) +
+	    			ifu.getQuantity();
+	    		ifu.setQuantity(newQuantity);
+	    	}
+	    	
+	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+	    }
+	    return ifuList;
+	}
+	
 	//TODO: Copy pasted from PurchaseBoosterPackController
 
 	private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
@@ -391,6 +448,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
 		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	{
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	{
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public UpdateUtil getUpdateUtil()
+	{
+		return updateUtil;
+	}
+
+	public void setUpdateUtil( UpdateUtil updateUtil )
+	{
+		this.updateUtil = updateUtil;
 	}
 
 }

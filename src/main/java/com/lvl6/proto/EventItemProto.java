@@ -801,6 +801,30 @@ public final class EventItemProto {
      * <code>optional .com.lvl6.proto.BoosterItemProto prize = 4;</code>
      */
     com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getPrizeOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> 
+        getUpdatedUserItemsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    int getUpdatedUserItemsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForBoosterResponseProto}
@@ -903,6 +927,14 @@ public final class EventItemProto {
               bitField0_ |= 0x00000004;
               break;
             }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              updatedUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -913,6 +945,9 @@ public final class EventItemProto {
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1164,11 +1199,47 @@ public final class EventItemProto {
       return prize_;
     }
 
+    public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 5;
+    private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    public int getUpdatedUserItemsCount() {
+      return updatedUserItems_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+      return updatedUserItems_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index) {
+      return updatedUserItems_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
       prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
+      updatedUserItems_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1195,6 +1266,9 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(4, prize_);
       }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        output.writeMessage(5, updatedUserItems_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1219,6 +1293,10 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, prize_);
+      }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, updatedUserItems_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1336,6 +1414,7 @@ public final class EventItemProto {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
           getPrizeFieldBuilder();
+          getUpdatedUserItemsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1364,6 +1443,12 @@ public final class EventItemProto {
           prizeBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
         return this;
       }
 
@@ -1421,6 +1506,15 @@ public final class EventItemProto {
         } else {
           result.prize_ = prizeBuilder_.build();
         }
+        if (updatedUserItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.updatedUserItems_ = updatedUserItems_;
+        } else {
+          result.updatedUserItems_ = updatedUserItemsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1471,6 +1565,32 @@ public final class EventItemProto {
         }
         if (other.hasPrize()) {
           mergePrize(other.getPrize());
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItems_.isEmpty()) {
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureUpdatedUserItemsIsMutable();
+              updatedUserItems_.addAll(other.updatedUserItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItemsBuilder_.isEmpty()) {
+              updatedUserItemsBuilder_.dispose();
+              updatedUserItemsBuilder_ = null;
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              updatedUserItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedUserItemsFieldBuilder() : null;
+            } else {
+              updatedUserItemsBuilder_.addAllMessages(other.updatedUserItems_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2130,6 +2250,246 @@ public final class EventItemProto {
           prize_ = null;
         }
         return prizeBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedUserItemsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>(updatedUserItems_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> updatedUserItemsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+        if (updatedUserItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        } else {
+          return updatedUserItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public int getUpdatedUserItemsCount() {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.size();
+        } else {
+          return updatedUserItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);
+        } else {
+          return updatedUserItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder addUpdatedUserItems(com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder addUpdatedUserItems(
+          com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder addAllUpdatedUserItems(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedUserItems_);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder clearUpdatedUserItems() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public Builder removeUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.remove(index);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder getUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+          int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);  } else {
+          return updatedUserItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+           getUpdatedUserItemsOrBuilderList() {
+        if (updatedUserItemsBuilder_ != null) {
+          return updatedUserItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder() {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto.Builder> 
+           getUpdatedUserItemsBuilderList() {
+        return getUpdatedUserItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+          getUpdatedUserItemsFieldBuilder() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
+                  updatedUserItems_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          updatedUserItems_ = null;
+        }
+        return updatedUserItemsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForBoosterResponseProto)
@@ -10207,60 +10567,61 @@ public final class EventItemProto {
       "uff.proto\032\nUser.proto\"w\n\037TradeItemForBoo" +
       "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001" +
-      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\363\002\n TradeItemForB" +
+      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\254\003\n TradeItemForB" +
       "oosterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
       "m.lvl6.proto.MinimumUserProto\022Z\n\006status\030" +
       "\002 \001(\0162J.com.lvl6.proto.TradeItemForBoost" +
       "erResponseProto.TradeItemForBoosterStatu",
       "s\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto" +
       ".FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 .c" +
-      "om.lvl6.proto.BoosterItemProto\"T\n\031TradeI" +
-      "temForBoosterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
-      "_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\277\001\n" +
-      " TradeItemForSpeedUpsRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto." +
-      "UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\0132" +
-      "\035.com.lvl6.proto.UserItemProto\"\245\002\n!Trade",
-      "ItemForSpeedUpsResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\\" +
-      "\n\006status\030\002 \001(\0162L.com.lvl6.proto.TradeIte" +
-      "mForSpeedUpsResponseProto.TradeItemForSp" +
-      "eedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lv" +
-      "l6.proto.UserItemUsageProto\"9\n\032TradeItem" +
-      "ForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\"l\n\036RemoveUserItemUsedRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001\n",
-      "\037RemoveUserItemUsedResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remo" +
-      "veUserItemUsedResponseProto.RemoveUserIt" +
-      "emUsedStatus\"7\n\030RemoveUserItemUsedStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!TradeI" +
-      "temForResourcesRequestProto\022@\n\006sender\030\001 " +
-      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
-      "hMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nu" +
-      "UserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIte",
-      "mProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeItem" +
-      "ForResourcesResponseProto\022@\n\006sender\030\001 \001(" +
-      "\01320.com.lvl6.proto.MinimumUserProtoWithM" +
-      "axResources\022^\n\006status\030\002 \001(\0162N.com.lvl6.p" +
-      "roto.TradeItemForResourcesResponseProto." +
-      "TradeItemForResourcesStatus\":\n\033TradeItem" +
-      "ForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"v\n\034RedeemSecretGiftRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUui",
-      "d\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponseProt" +
-      "o\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.pro" +
-      "to.UserItemSecretGiftProto\022T\n\006status\030\003 \001" +
-      "(\0162D.com.lvl6.proto.RedeemSecretGiftResp" +
-      "onseProto.RedeemSecretGiftStatus\"Q\n\026Rede" +
-      "emSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_" +
-      "ITEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016E" +
-      "ventItemProto"
+      "om.lvl6.proto.BoosterItemProto\0227\n\020update" +
+      "dUserItems\030\005 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\"T\n\031TradeItemForBoosterStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFF" +
+      "ICIENT_ITEM\020\003\"\277\001\n TradeItemForSpeedUpsRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132" +
+      "\".com.lvl6.proto.UserItemUsageProto\0222\n\013n",
+      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\"\245\002\n!TradeItemForSpeedUpsResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\\\n\006status\030\002 \001(\0162L.com.lv" +
+      "l6.proto.TradeItemForSpeedUpsResponsePro" +
+      "to.TradeItemForSpeedUpsStatus\0225\n\titemsUs" +
+      "ed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsageP" +
+      "roto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUserIte" +
+      "mUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .com.",
+      "lvl6.proto.MinimumUserProto\022\030\n\020userItemU" +
+      "sedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022X\n\006status\030\002 \001(\0162H.co" +
+      "m.lvl6.proto.RemoveUserItemUsedResponseP" +
+      "roto.RemoveUserItemUsedStatus\"7\n\030RemoveU" +
+      "serItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002\"\302\001\n!TradeItemForResourcesRequestP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
+      "nimumUserProtoWithMaxResources\022\023\n\013itemId",
+      "sUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.com.l" +
+      "vl6.proto.UserItemProto\022\022\n\nclientTime\030\004 " +
+      "\001(\003\"\202\002\n\"TradeItemForResourcesResponsePro" +
+      "to\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mini" +
+      "mumUserProtoWithMaxResources\022^\n\006status\030\002" +
+      " \001(\0162N.com.lvl6.proto.TradeItemForResour" +
+      "cesResponseProto.TradeItemForResourcesSt" +
+      "atus\":\n\033TradeItemForResourcesStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecret" +
+      "GiftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l",
+      "vl6.proto.MinimumUserProto\022\022\n\nclientTime" +
+      "\030\002 \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecre" +
+      "tGiftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003" +
+      "(\0132\'.com.lvl6.proto.UserItemSecretGiftPr" +
+      "oto\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Red" +
+      "eemSecretGiftResponseProto.RedeemSecretG" +
+      "iftStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003B\020B\016EventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10289,7 +10650,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", });
+        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", "UpdatedUserItems", });
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
