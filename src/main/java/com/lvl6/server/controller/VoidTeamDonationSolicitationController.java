@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -152,11 +151,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 				server.writeEvent(resEvent);
 
 			} else {
-				//only write to clan if success
 				resBuilder.addAllClanTeamDonateUuid(donationIdsToSnapshots.keySet());
+				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
 				
+				//write to the clans of the solicitations if success
 				for (String clanId : clanIds) {
-					resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder.build());
 					server.writeClanEvent(resEvent, clanId);
 				}
 				//this works for other clan members, but not for the person 
