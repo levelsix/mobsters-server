@@ -1,9 +1,12 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -64,22 +67,25 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		resBuilder.setStatus(VoidTeamDonationSolicitationStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
-		String clanId = null;
-
-		if (null != senderProto.getClan()) {
-			clanId = senderProto.getClan().getClanUuid();
-		}
+//		String clanId = null;
+//		if (null != senderProto.getClan()) {
+//			clanId = senderProto.getClan().getClanUuid();
+//		}
 
 		Map<String, List<MonsterSnapshotForUser>> donationIdsToSnapshots =
 			new HashMap<String, List<MonsterSnapshotForUser>>();
+		Set<String> clanIds = new HashSet<String>();
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);
 			
 			for (ClanMemberTeamDonationProto cmtdp : solicitationsProtoList) {
 				String donationUuid = cmtdp.getDonationUuid();
+				String clanUuid = cmtdp.getClanUuid();
 				//sanity check
 				UUID.fromString(donationUuid);
+				UUID.fromString(clanUuid);
+				clanIds.add(clanUuid);
 				
 				for (UserMonsterSnapshotProto umsp : cmtdp.getDonationsList()) {
 					//sanity check
@@ -149,8 +155,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 				//only write to clan if success
 				resBuilder.addAllClanTeamDonateUuid(donationIdsToSnapshots.keySet());
 				
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				for (String clanId : clanIds) {
+					resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder.build());
+					server.writeClanEvent(resEvent, clanId);
+				}
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
