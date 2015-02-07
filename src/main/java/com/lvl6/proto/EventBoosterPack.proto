@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "BoosterPackStuff.proto";
+import "Item.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -35,6 +36,7 @@ message PurchaseBoosterPackResponseProto {
 	repeated FullUserMonsterProto updatedOrNew = 3;
 	
 	optional BoosterItemProto prize = 4;
+	repeated UserItemProto updatedUserItems = 5;
 	
 	enum PurchaseBoosterPackStatus {
 		SUCCESS = 1;

@@ -3322,6 +3322,24 @@ public final class BoosterPackStuffProto {
      * <code>optional float chanceToAppear = 9;</code>
      */
     float getChanceToAppear();
+
+    /**
+     * <code>optional int32 itemId = 10;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>optional int32 itemId = 10;</code>
+     */
+    int getItemId();
+
+    /**
+     * <code>optional int32 itemQuantity = 11;</code>
+     */
+    boolean hasItemQuantity();
+    /**
+     * <code>optional int32 itemQuantity = 11;</code>
+     */
+    int getItemQuantity();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterItemProto}
@@ -3418,6 +3436,16 @@ public final class BoosterPackStuffProto {
             case 77: {
               bitField0_ |= 0x00000100;
               chanceToAppear_ = input.readFloat();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              itemId_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              itemQuantity_ = input.readInt32();
               break;
             }
           }
@@ -3603,6 +3631,36 @@ public final class BoosterPackStuffProto {
       return chanceToAppear_;
     }
 
+    public static final int ITEMID_FIELD_NUMBER = 10;
+    private int itemId_;
+    /**
+     * <code>optional int32 itemId = 10;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 itemId = 10;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    public static final int ITEMQUANTITY_FIELD_NUMBER = 11;
+    private int itemQuantity_;
+    /**
+     * <code>optional int32 itemQuantity = 11;</code>
+     */
+    public boolean hasItemQuantity() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 itemQuantity = 11;</code>
+     */
+    public int getItemQuantity() {
+      return itemQuantity_;
+    }
+
     private void initFields() {
       boosterItemId_ = 0;
       boosterPackId_ = 0;
@@ -3613,6 +3671,8 @@ public final class BoosterPackStuffProto {
       gemReward_ = 0;
       cashReward_ = 0;
       chanceToAppear_ = 0F;
+      itemId_ = 0;
+      itemQuantity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3653,6 +3713,12 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeFloat(9, chanceToAppear_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, itemId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, itemQuantity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3698,6 +3764,14 @@ public final class BoosterPackStuffProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(9, chanceToAppear_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, itemId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, itemQuantity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3834,6 +3908,10 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         chanceToAppear_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000100);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        itemQuantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -3898,6 +3976,14 @@ public final class BoosterPackStuffProto {
           to_bitField0_ |= 0x00000100;
         }
         result.chanceToAppear_ = chanceToAppear_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.itemQuantity_ = itemQuantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3940,6 +4026,12 @@ public final class BoosterPackStuffProto {
         }
         if (other.hasChanceToAppear()) {
           setChanceToAppear(other.getChanceToAppear());
+        }
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        if (other.hasItemQuantity()) {
+          setItemQuantity(other.getItemQuantity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4268,6 +4360,70 @@ public final class BoosterPackStuffProto {
       public Builder clearChanceToAppear() {
         bitField0_ = (bitField0_ & ~0x00000100);
         chanceToAppear_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private int itemId_ ;
+      /**
+       * <code>optional int32 itemId = 10;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 itemId = 10;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>optional int32 itemId = 10;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000200;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemId = 10;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int itemQuantity_ ;
+      /**
+       * <code>optional int32 itemQuantity = 11;</code>
+       */
+      public boolean hasItemQuantity() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 itemQuantity = 11;</code>
+       */
+      public int getItemQuantity() {
+        return itemQuantity_;
+      }
+      /**
+       * <code>optional int32 itemQuantity = 11;</code>
+       */
+      public Builder setItemQuantity(int value) {
+        bitField0_ |= 0x00000400;
+        itemQuantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemQuantity = 11;</code>
+       */
+      public Builder clearItemQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        itemQuantity_ = 0;
         onChanged();
         return this;
       }
@@ -5186,17 +5342,18 @@ public final class BoosterPackStuffProto {
       "\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitl" +
       "eImgName\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=" +
       "\n\014displayItems\030\n \003(\0132\'.com.lvl6.proto.Bo" +
-      "osterDisplayItemProto\"\314\001\n\020BoosterItemPro" +
+      "osterDisplayItemProto\"\362\001\n\020BoosterItemPro" +
       "to\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPack" +
       "Id\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces" +
       "\030\004 \001(\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030" +
       "\006 \001(\010\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010" +
-      " \001(\005\022\026\n\016chanceToAppear\030\t \001(\002\"\262\001\n\027Booster",
-      "DisplayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022" +
-      "\021\n\tisMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224" +
-      "\n\007quality\030\004 \001(\0162\027.com.lvl6.proto.Quality" +
-      ":\nNO_QUALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quant" +
-      "ity\030\006 \001(\005B\027B\025BoosterPackStuffProto"
+      " \001(\005\022\026\n\016chanceToAppear\030\t \001(\002\022\016\n\006itemId\030\n",
+      " \001(\005\022\024\n\014itemQuantity\030\013 \001(\005\"\262\001\n\027BoosterDi" +
+      "splayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n" +
+      "\tisMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224\n\007" +
+      "quality\030\004 \001(\0162\027.com.lvl6.proto.Quality:\n" +
+      "NO_QUALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quantit" +
+      "y\030\006 \001(\005B\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5229,7 +5386,7 @@ public final class BoosterPackStuffProto {
     internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoosterItemProto_descriptor,
-        new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", });
+        new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", "ItemId", "ItemQuantity", });
     internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable = new

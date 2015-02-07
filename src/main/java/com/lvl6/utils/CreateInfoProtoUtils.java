@@ -1122,6 +1122,9 @@ public class CreateInfoProtoUtils {
 		b.setGemReward(bi.getGemReward());
 		b.setCashReward(bi.getCashReward());
 		b.setChanceToAppear(bi.getChanceToAppear());
+		b.setItemId(bi.getItemId());
+		b.setItemQuantity(bi.getItemQuantity());
+		
 		return b.build();
 	}
 

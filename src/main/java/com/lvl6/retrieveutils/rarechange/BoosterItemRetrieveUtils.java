@@ -155,9 +155,13 @@ import com.lvl6.utils.DBConnection;
     int gemReward = rs.getInt(DBConstants.BOOSTER_ITEM__GEM_REWARD);
     int cashReward = rs.getInt(DBConstants.BOOSTER_ITEM__CASH_REWARD);
     float chanceToAppear = rs.getFloat(DBConstants.BOOSTER_ITEM__CHANCE_TO_APPEAR);
+    int itemId = rs.getInt(DBConstants.BOOSTER_ITEM__ITEM_ID);
+    int itemQuantity = rs.getInt(DBConstants.BOOSTER_ITEM__ITEM_QUANTITY);
     
-    BoosterItem boosterItem = new BoosterItem(id, boosterPackId, monsterId,
-    		numPieces, isComplete, isSpecial, gemReward, cashReward, chanceToAppear);
+    
+    BoosterItem boosterItem = new BoosterItem(id, boosterPackId,
+    	monsterId, numPieces, isComplete, isSpecial, gemReward,
+    	cashReward, chanceToAppear, itemId, itemQuantity);
     return boosterItem;
   }
 }
