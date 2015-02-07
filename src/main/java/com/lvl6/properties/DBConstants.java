@@ -828,6 +828,8 @@ public class DBConstants {
 	public static final String BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY = "monster_quality";
 	public static final String BOOSTER_DISPLAY_ITEM__GEM_REWARD = "gem_reward";
 	public static final String BOOSTER_DISPLAY_ITEM__QUANTITY = "quantity";
+	public static final String BOOSTER_DISPLAY_ITEM__ITEM_ID = "item_id";
+	public static final String BOOSTER_DISPLAY_ITEM__ITEM_QUANTITY = "item_quantity";
 
 	public static final String BOOSTER_ITEM__ID = GENERIC__ID;
 	public static final String BOOSTER_ITEM__BOOSTER_PACK_ID = "booster_pack_id";

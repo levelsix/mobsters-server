@@ -66,4 +66,6 @@ message BoosterDisplayItemProto {
 	optional Quality quality = 4 [default = NO_QUALITY];
 	optional int32 gemReward = 5;
 	optional int32 quantity = 6;
+	optional int32 itemId = 7;
+	optional int32 itemQuantity = 8;
 }

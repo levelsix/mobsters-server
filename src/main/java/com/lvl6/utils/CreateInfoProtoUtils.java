@@ -1129,7 +1129,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static BoosterDisplayItemProto createBoosterDisplayItemProto(
-		BoosterDisplayItem bdi) {
+		BoosterDisplayItem bdi)
+	{
 		BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto.newBuilder();
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
@@ -1150,7 +1151,9 @@ public class CreateInfoProtoUtils {
 
 		b.setGemReward(bdi.getGemReward());
 		b.setQuantity(bdi.getQuantity());
-
+		b.setItemId(bdi.getItemId());
+		b.setItemQuantity(bdi.getItemQuantity());
+		
 		return b.build();
 	}
 
