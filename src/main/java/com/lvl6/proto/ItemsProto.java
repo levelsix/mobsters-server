@@ -35,6 +35,14 @@ public final class ItemsProto {
      * <code>SPEED_UP = 4;</code>
      */
     SPEED_UP(3, 4),
+    /**
+     * <code>BUILDER = 5;</code>
+     *
+     * <pre>
+     *entity allowing user to build multiple structures
+     * </pre>
+     */
+    BUILDER(4, 5),
     ;
 
     /**
@@ -59,6 +67,14 @@ public final class ItemsProto {
      * <code>SPEED_UP = 4;</code>
      */
     public static final int SPEED_UP_VALUE = 4;
+    /**
+     * <code>BUILDER = 5;</code>
+     *
+     * <pre>
+     *entity allowing user to build multiple structures
+     * </pre>
+     */
+    public static final int BUILDER_VALUE = 5;
 
 
     public final int getNumber() { return value; }
@@ -69,6 +85,7 @@ public final class ItemsProto {
         case 2: return ITEM_OIL;
         case 3: return ITEM_CASH;
         case 4: return SPEED_UP;
+        case 5: return BUILDER;
         default: return null;
       }
     }
@@ -3908,9 +3925,10 @@ public final class ItemsProto {
       "ActionType:\007NO_HELP\"}\n\027UserItemSecretGif" +
       "tProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001" +
       "(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006itemId" +
-      "\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType\022\020" +
+      "\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*T\n\010ItemType\022\020" +
       "\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_C" +
-      "ASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
+      "ASH\020\003\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\nItem" +
+      "sProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
