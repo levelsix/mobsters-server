@@ -419,7 +419,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			//    int kabamNaid = rs.getInt(DBConstants.USER__KABAM_NAID);
 
 			boolean hasReceivedfbReward = rs.getBoolean(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
-			int numBeginnerSalesPurchased = rs.getInt(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
 			String facebookId = rs.getString(DBConstants.USER__FACEBOOK_ID);
 			boolean fbIdSetOnUserCreate = rs.getBoolean(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
 			String gameCenterId = rs.getString(DBConstants.USER__GAME_CENTER_ID);
@@ -488,7 +487,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				isAdmin, apsalarId, numCoinsRetrievedFromStructs,
 				numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
 				lastWallPostNotificationTime, hasReceivedfbReward,
-				numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
+				facebookId, fbIdSetOnUserCreate,
 				gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
 				lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
 				numClanHelps, lastSecretGiftCollectTime, pvpDefendingMessage,
@@ -527,7 +526,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				columnsSelected.add(DBConstants.USER__CLAN_ID);
 				columnsSelected.add(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME);
 				columnsSelected.add(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
-				columnsSelected.add(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
 				columnsSelected.add(DBConstants.USER__FACEBOOK_ID);
 				columnsSelected.add(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
 

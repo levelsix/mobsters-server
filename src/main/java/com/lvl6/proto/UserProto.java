@@ -5631,13 +5631,13 @@ public final class UserProto {
     boolean getHasReceivedfbReward();
 
     /**
-     * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+     * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
      */
-    boolean hasNumBeginnerSalesPurchased();
+    @java.lang.Deprecated boolean hasNumBeginnerSalesPurchased();
     /**
-     * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+     * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
      */
-    int getNumBeginnerSalesPurchased();
+    @java.lang.Deprecated int getNumBeginnerSalesPurchased();
 
     /**
      * <code>optional string facebookId = 40;</code>
@@ -6674,15 +6674,15 @@ public final class UserProto {
     public static final int NUMBEGINNERSALESPURCHASED_FIELD_NUMBER = 30;
     private int numBeginnerSalesPurchased_;
     /**
-     * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+     * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
      */
-    public boolean hasNumBeginnerSalesPurchased() {
+    @java.lang.Deprecated public boolean hasNumBeginnerSalesPurchased() {
       return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     /**
-     * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+     * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
      */
-    public int getNumBeginnerSalesPurchased() {
+    @java.lang.Deprecated public int getNumBeginnerSalesPurchased() {
       return numBeginnerSalesPurchased_;
     }
 
@@ -9137,30 +9137,30 @@ public final class UserProto {
 
       private int numBeginnerSalesPurchased_ ;
       /**
-       * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+       * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
        */
-      public boolean hasNumBeginnerSalesPurchased() {
+      @java.lang.Deprecated public boolean hasNumBeginnerSalesPurchased() {
         return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
-       * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+       * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
        */
-      public int getNumBeginnerSalesPurchased() {
+      @java.lang.Deprecated public int getNumBeginnerSalesPurchased() {
         return numBeginnerSalesPurchased_;
       }
       /**
-       * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+       * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
        */
-      public Builder setNumBeginnerSalesPurchased(int value) {
+      @java.lang.Deprecated public Builder setNumBeginnerSalesPurchased(int value) {
         bitField0_ |= 0x00040000;
         numBeginnerSalesPurchased_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
+       * <code>optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];</code>
        */
-      public Builder clearNumBeginnerSalesPurchased() {
+      @java.lang.Deprecated public Builder clearNumBeginnerSalesPurchased() {
         bitField0_ = (bitField0_ & ~0x00040000);
         numBeginnerSalesPurchased_ = 0;
         onChanged();
@@ -12033,7 +12033,7 @@ public final class UserProto {
       "bookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014t",
       "imeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022" +
       "\026\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007" +
-      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\257\010\n\rFullUserP" +
+      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\263\010\n\rFullUserP" +
       "roto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
       "level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022" +
       "\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016task" +
@@ -12044,30 +12044,30 @@ public final class UserProto {
       "dFromStructs\030\027 \001(\005\022\"\n\032numOilRetrievedFro" +
       "mStructs\030+ \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6." +
       "proto.MinimumClanProto\022\033\n\023hasReceivedfbR" +
-      "eward\030\034 \001(\010\022!\n\031numBeginnerSalesPurchased" +
-      "\030\036 \001(\005\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCenter" +
-      "Id\030- \001(\t\022\037\n\027lastObstacleSpawnedTime\030/ \001(" +
-      "\003\022\033\n\023numObstaclesRemoved\0301 \001(\005\022\027\n\017avatar" +
-      "MonsterId\0303 \001(\005\0229\n\rpvpLeagueInfo\0300 \001(\0132\"" +
-      ".com.lvl6.proto.UserPvpLeagueProto\022\036\n\026la" +
-      "stMiniJobSpawnedTime\0302 \001(\003\022\037\n\027lastFreeBo",
-      "osterPackTime\0304 \001(\003\022\024\n\014numClanHelps\0305 \001(" +
-      "\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003\022\033\n\023" +
-      "pvpDefendingMessage\0308 \001(\t\022$\n\034lastTeamDon" +
-      "ationSolicitation\0309 \001(\003\022\026\n\016udidForHistor" +
-      "y\030. \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\021\n\tnumBadge" +
-      "s\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId" +
-      "\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005" +
-      "\022$\n\034lastWallPostNotificationTime\030\032 \001(\003\022\021" +
-      "\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSetOnUserCreate" +
-      "\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030StaticUserLevelI",
-      "nfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExper" +
-      "ience\030\002 \001(\005\"\261\001\n\022UserPvpLeagueProto\022\020\n\010us" +
-      "erUuid\030\001 \001(\t\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003" +
-      " \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n" +
-      "\013battlesLost\030\006 \001(\005\022\025\n\rshieldEndTime\030\007 \001(" +
-      "\003\022\034\n\024monsterDmgMultiplier\030\010 \001(\002B\013B\tUserP" +
-      "roto"
+      "eward\030\034 \001(\010\022%\n\031numBeginnerSalesPurchased" +
+      "\030\036 \001(\005B\002\030\001\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCe" +
+      "nterId\030- \001(\t\022\037\n\027lastObstacleSpawnedTime\030" +
+      "/ \001(\003\022\033\n\023numObstaclesRemoved\0301 \001(\005\022\027\n\017av" +
+      "atarMonsterId\0303 \001(\005\0229\n\rpvpLeagueInfo\0300 \001" +
+      "(\0132\".com.lvl6.proto.UserPvpLeagueProto\022\036" +
+      "\n\026lastMiniJobSpawnedTime\0302 \001(\003\022\037\n\027lastFr",
+      "eeBoosterPackTime\0304 \001(\003\022\024\n\014numClanHelps\030" +
+      "5 \001(\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003" +
+      "\022\033\n\023pvpDefendingMessage\0308 \001(\t\022$\n\034lastTea" +
+      "mDonationSolicitation\0309 \001(\003\022\026\n\016udidForHi" +
+      "story\030. \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\021\n\tnumB" +
+      "adges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsal" +
+      "arId\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed\030\030" +
+      " \001(\005\022$\n\034lastWallPostNotificationTime\030\032 \001" +
+      "(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSetOnUserCr" +
+      "eate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030StaticUserLe",
+      "velInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredE" +
+      "xperience\030\002 \001(\005\"\261\001\n\022UserPvpLeagueProto\022\020" +
+      "\n\010userUuid\030\001 \001(\t\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004ra" +
+      "nk\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(" +
+      "\005\022\023\n\013battlesLost\030\006 \001(\005\022\025\n\rshieldEndTime\030" +
+      "\007 \001(\003\022\034\n\024monsterDmgMultiplier\030\010 \001(\002B\013B\tU" +
+      "serProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
