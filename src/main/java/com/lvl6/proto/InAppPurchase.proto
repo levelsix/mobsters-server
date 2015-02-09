@@ -10,6 +10,12 @@ message InAppPurchasePackageProto {
 	optional string iapPackageId = 1;
 	optional int32 currencyAmount = 2;
 	optional string imageName = 3;
+	
+	enum InAppPurchasePackageType {
+		GEMS = 1;
+		STARTER_PACK = 2;
+		MONEY_TREE = 3;
+	}
 }
 
 //------------------------------------------------------------------------------------------
