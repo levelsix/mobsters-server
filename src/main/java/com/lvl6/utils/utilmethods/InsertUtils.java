@@ -249,7 +249,7 @@ public class InsertUtils implements InsertUtil{
    */
   @Override
   public boolean insertIAPHistoryElem(JSONObject appleReceipt,
-      int diamondChange, int coinChange, User user, double cashCost) {
+      int gemChange, User user, double cashCost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     try {
       String id = randomUUID();
@@ -261,9 +261,7 @@ public class InsertUtils implements InsertUtil{
       insertParams.put(DBConstants.IAP_HISTORY__PURCHASE_DATE,
           new Timestamp(appleReceipt.getLong(IAPValues.PURCHASE_DATE_MS)));
       insertParams.put(DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED,
-          diamondChange);
-      insertParams.put(DBConstants.IAP_HISTORY__REGCUR_PURCHASED,
-          coinChange);
+          gemChange);
       insertParams.put(DBConstants.IAP_HISTORY__CASH_SPENT, cashCost);
       insertParams.put(DBConstants.IAP_HISTORY__UDID, user.getUdid());
       insertParams.put(DBConstants.IAP_HISTORY__FB_ID, user.getFacebookId());

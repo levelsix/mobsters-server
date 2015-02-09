@@ -51,19 +51,9 @@ import com.lvl6.utils.DBConnection;
       }
       if (boosterItemIdsToBoosterItemsForBoosterPackIds == null) {
         boosterItemIdsToBoosterItemsForBoosterPackIds = new HashMap<Integer, Map<Integer, BoosterItem>>();
+        setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds();
       }
-      List<BoosterItem> bis = new ArrayList<BoosterItem>(boosterItemIdsToBoosterItems.values());
-      for(BoosterItem bi : bis) {
-        int packId = bi.getBoosterPackId();
-        if(!boosterItemIdsToBoosterItemsForBoosterPackIds.containsKey(packId)) {
-          Map<Integer, BoosterItem> bItemIdToBItem = new HashMap<Integer, BoosterItem>();
-          boosterItemIdsToBoosterItemsForBoosterPackIds.put(packId, bItemIdToBItem);
-        }
-        //each itemId is unique (autoincrementing in the table)
-        Map<Integer, BoosterItem> itemIdToItem =
-            boosterItemIdsToBoosterItemsForBoosterPackIds.get(packId);
-        itemIdToItem.put(bi.getId(), bi);
-      }
+      
       return boosterItemIdsToBoosterItemsForBoosterPackIds.get(boosterPackId);
     } catch (Exception e) {
       log.error("error creating a map of booster item ids to booster items.", e);

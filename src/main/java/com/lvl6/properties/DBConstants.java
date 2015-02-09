@@ -327,7 +327,7 @@ public class DBConstants {
 	public static final String IAP_HISTORY__TRANSACTION_ID = "transaction_id";
 	public static final String IAP_HISTORY__PURCHASE_DATE = "purchase_date";
 	public static final String IAP_HISTORY__PREMIUMCUR_PURCHASED = "premiumcur_purchased";
-	public static final String IAP_HISTORY__REGCUR_PURCHASED = "regcur_purchased";
+//	public static final String IAP_HISTORY__REGCUR_PURCHASED = "regcur_purchased";
 	public static final String IAP_HISTORY__CASH_SPENT = "cash_spent";
 	public static final String IAP_HISTORY__UDID = "udid";
 	public static final String IAP_HISTORY__PRODUCT_ID = "product_id";
@@ -720,7 +720,7 @@ public class DBConstants {
 	public static final String USER__LAST_WALL_POST_NOTIFICATION_TIME = "last_wall_post_notification_time";
 	//  public static final String USER__KABAM_NAID = "kabam_naid";
 	public static final String USER__HAS_RECEIVED_FB_REWARD = "has_received_fb_reward";
-	public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
+//	public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
 	public static final String USER__FACEBOOK_ID = "facebook_id";
 	public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
 	public static final String USER__GAME_CENTER_ID = "game_center_id";  

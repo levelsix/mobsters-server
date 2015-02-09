@@ -339,9 +339,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			}
 		}
 
-		log.info(String.format(
-			"SPENT MONEY(?) ON BOOSTER PACK: free=%s, bPackId=%s, gemPrice=%s, gemReward=%s, itemsUserReceives=%s",
-			freeBoosterPack, bPackId, gemPrice, gemReward, itemsUserReceives));
+		String preface = "SPENT MONEY(?) ON BOOSTER PACK:";
+		log.info(
+			"{} free={}, bPackId={}, gemPrice={}, gemReward={}, itemsUserReceives={}",
+			new Object[] { freeBoosterPack, bPackId, gemPrice,
+				gemReward, itemsUserReceives });
 
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
@@ -359,8 +361,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				createFullUserMonsterProtos(
 					monsterForUserIds, completeUserMonsters);
 
-			String preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
-			log.info( "%s monster(s) newOrUpdated: %s \t bpackId=%s",
+			preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
+			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
 				new Object[] { preface, newOrUpdated, bPackId } );
 			//set the builder that will be sent to the client
 			resBuilder.addAllUpdatedOrNew(newOrUpdated);
@@ -373,7 +375,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				updateUserMonsters(userId, monsterIdToNumPieces, null,
 					mfusop, now);
 
-			String preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
+			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
 			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
 				new Object[] {preface, newOrUpdated, bPackId} );
 			//set the builder that will be sent to the client

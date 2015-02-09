@@ -1329,21 +1329,29 @@ public final class EventInAppPurchaseProto {
 
     /**
      * <code>optional int32 diamondsGained = 3;</code>
+     *
+     * <pre>
+     *should be renamed gemsGained
+     * </pre>
      */
     boolean hasDiamondsGained();
     /**
      * <code>optional int32 diamondsGained = 3;</code>
+     *
+     * <pre>
+     *should be renamed gemsGained
+     * </pre>
      */
     int getDiamondsGained();
 
     /**
-     * <code>optional int32 coinsGained = 4;</code>
+     * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
      */
-    boolean hasCoinsGained();
+    @java.lang.Deprecated boolean hasCoinsGained();
     /**
-     * <code>optional int32 coinsGained = 4;</code>
+     * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
      */
-    int getCoinsGained();
+    @java.lang.Deprecated int getCoinsGained();
 
     /**
      * <code>optional string packageName = 5;</code>
@@ -1381,6 +1389,89 @@ public final class EventInAppPurchaseProto {
      */
     com.google.protobuf.ByteString
         getReceiptBytes();
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
+        getUpdatedOrNewList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    int getUpdatedOrNewCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> 
+        getUpdatedUserItemsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    int getUpdatedUserItemsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseResponseProto}
@@ -1489,6 +1580,22 @@ public final class EventInAppPurchaseProto {
               receipt_ = bs;
               break;
             }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              updatedOrNew_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              updatedUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1497,6 +1604,12 @@ public final class EventInAppPurchaseProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1660,12 +1773,20 @@ public final class EventInAppPurchaseProto {
     private int diamondsGained_;
     /**
      * <code>optional int32 diamondsGained = 3;</code>
+     *
+     * <pre>
+     *should be renamed gemsGained
+     * </pre>
      */
     public boolean hasDiamondsGained() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional int32 diamondsGained = 3;</code>
+     *
+     * <pre>
+     *should be renamed gemsGained
+     * </pre>
      */
     public int getDiamondsGained() {
       return diamondsGained_;
@@ -1674,15 +1795,15 @@ public final class EventInAppPurchaseProto {
     public static final int COINSGAINED_FIELD_NUMBER = 4;
     private int coinsGained_;
     /**
-     * <code>optional int32 coinsGained = 4;</code>
+     * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
      */
-    public boolean hasCoinsGained() {
+    @java.lang.Deprecated public boolean hasCoinsGained() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 coinsGained = 4;</code>
+     * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
      */
-    public int getCoinsGained() {
+    @java.lang.Deprecated public int getCoinsGained() {
       return coinsGained_;
     }
 
@@ -1785,6 +1906,111 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    public static final int UPDATEDORNEW_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    public int getUpdatedOrNewCount() {
+      return updatedOrNew_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+      return updatedOrNew_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+     *
+     * <pre>
+     *if user received, say, two pieces of a monster
+     *and he needs one to complete an existing monster
+     *there would be one monster that would be completed
+     *and another that would be the remaining pieces of the monster
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index) {
+      return updatedOrNew_.get(index);
+    }
+
+    public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 9;
+    private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    public int getUpdatedUserItemsCount() {
+      return updatedUserItems_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+      return updatedUserItems_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index) {
+      return updatedUserItems_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
@@ -1793,6 +2019,8 @@ public final class EventInAppPurchaseProto {
       packageName_ = "";
       packagePrice_ = 0D;
       receipt_ = "";
+      updatedOrNew_ = java.util.Collections.emptyList();
+      updatedUserItems_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1827,6 +2055,12 @@ public final class EventInAppPurchaseProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(7, getReceiptBytes());
+      }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        output.writeMessage(8, updatedOrNew_.get(i));
+      }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        output.writeMessage(9, updatedUserItems_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1864,6 +2098,14 @@ public final class EventInAppPurchaseProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getReceiptBytes());
+      }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, updatedOrNew_.get(i));
+      }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, updatedUserItems_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1979,6 +2221,8 @@ public final class EventInAppPurchaseProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getUpdatedOrNewFieldBuilder();
+          getUpdatedUserItemsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2005,6 +2249,18 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         receipt_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
         return this;
       }
 
@@ -2065,6 +2321,24 @@ public final class EventInAppPurchaseProto {
           to_bitField0_ |= 0x00000040;
         }
         result.receipt_ = receipt_;
+        if (updatedOrNewBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.updatedOrNew_ = updatedOrNew_;
+        } else {
+          result.updatedOrNew_ = updatedOrNewBuilder_.build();
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.updatedUserItems_ = updatedUserItems_;
+        } else {
+          result.updatedUserItems_ = updatedUserItemsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2105,6 +2379,58 @@ public final class EventInAppPurchaseProto {
           bitField0_ |= 0x00000040;
           receipt_ = other.receipt_;
           onChanged();
+        }
+        if (updatedOrNewBuilder_ == null) {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNew_.isEmpty()) {
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureUpdatedOrNewIsMutable();
+              updatedOrNew_.addAll(other.updatedOrNew_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNewBuilder_.isEmpty()) {
+              updatedOrNewBuilder_.dispose();
+              updatedOrNewBuilder_ = null;
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              updatedOrNewBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedOrNewFieldBuilder() : null;
+            } else {
+              updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
+            }
+          }
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItems_.isEmpty()) {
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureUpdatedUserItemsIsMutable();
+              updatedUserItems_.addAll(other.updatedUserItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItemsBuilder_.isEmpty()) {
+              updatedUserItemsBuilder_.dispose();
+              updatedUserItemsBuilder_ = null;
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              updatedUserItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedUserItemsFieldBuilder() : null;
+            } else {
+              updatedUserItemsBuilder_.addAllMessages(other.updatedUserItems_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2287,18 +2613,30 @@ public final class EventInAppPurchaseProto {
       private int diamondsGained_ ;
       /**
        * <code>optional int32 diamondsGained = 3;</code>
+       *
+       * <pre>
+       *should be renamed gemsGained
+       * </pre>
        */
       public boolean hasDiamondsGained() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional int32 diamondsGained = 3;</code>
+       *
+       * <pre>
+       *should be renamed gemsGained
+       * </pre>
        */
       public int getDiamondsGained() {
         return diamondsGained_;
       }
       /**
        * <code>optional int32 diamondsGained = 3;</code>
+       *
+       * <pre>
+       *should be renamed gemsGained
+       * </pre>
        */
       public Builder setDiamondsGained(int value) {
         bitField0_ |= 0x00000004;
@@ -2308,6 +2646,10 @@ public final class EventInAppPurchaseProto {
       }
       /**
        * <code>optional int32 diamondsGained = 3;</code>
+       *
+       * <pre>
+       *should be renamed gemsGained
+       * </pre>
        */
       public Builder clearDiamondsGained() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2318,30 +2660,30 @@ public final class EventInAppPurchaseProto {
 
       private int coinsGained_ ;
       /**
-       * <code>optional int32 coinsGained = 4;</code>
+       * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
        */
-      public boolean hasCoinsGained() {
+      @java.lang.Deprecated public boolean hasCoinsGained() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 coinsGained = 4;</code>
+       * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
        */
-      public int getCoinsGained() {
+      @java.lang.Deprecated public int getCoinsGained() {
         return coinsGained_;
       }
       /**
-       * <code>optional int32 coinsGained = 4;</code>
+       * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
        */
-      public Builder setCoinsGained(int value) {
+      @java.lang.Deprecated public Builder setCoinsGained(int value) {
         bitField0_ |= 0x00000008;
         coinsGained_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 coinsGained = 4;</code>
+       * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
        */
-      public Builder clearCoinsGained() {
+      @java.lang.Deprecated public Builder clearCoinsGained() {
         bitField0_ = (bitField0_ & ~0x00000008);
         coinsGained_ = 0;
         onChanged();
@@ -2530,6 +2872,612 @@ public final class EventInAppPurchaseProto {
         receipt_ = value;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedOrNewIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNew_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+        if (updatedOrNewBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        } else {
+          return updatedOrNewBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public int getUpdatedOrNewCount() {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.size();
+        } else {
+          return updatedOrNewBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);
+        } else {
+          return updatedOrNewBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder addAllUpdatedOrNew(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedOrNew_);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder clearUpdatedOrNew() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public Builder removeUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.remove(index);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+          int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);  } else {
+          return updatedOrNewBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+           getUpdatedOrNewOrBuilderList() {
+        if (updatedOrNewBuilder_ != null) {
+          return updatedOrNewBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder() {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
+       *
+       * <pre>
+       *if user received, say, two pieces of a monster
+       *and he needs one to complete an existing monster
+       *there would be one monster that would be completed
+       *and another that would be the remaining pieces of the monster
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
+           getUpdatedOrNewBuilderList() {
+        return getUpdatedOrNewFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getUpdatedOrNewFieldBuilder() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  updatedOrNew_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          updatedOrNew_ = null;
+        }
+        return updatedOrNewBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedUserItemsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>(updatedUserItems_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> updatedUserItemsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+        if (updatedUserItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        } else {
+          return updatedUserItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public int getUpdatedUserItemsCount() {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.size();
+        } else {
+          return updatedUserItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);
+        } else {
+          return updatedUserItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder addUpdatedUserItems(com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder addUpdatedUserItems(
+          com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder addAllUpdatedUserItems(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedUserItems_);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder clearUpdatedUserItems() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public Builder removeUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.remove(index);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder getUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+          int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);  } else {
+          return updatedUserItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+           getUpdatedUserItemsOrBuilderList() {
+        if (updatedUserItemsBuilder_ != null) {
+          return updatedUserItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder() {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto.Builder> 
+           getUpdatedUserItemsBuilderList() {
+        return getUpdatedUserItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+          getUpdatedUserItemsFieldBuilder() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
+                  updatedUserItems_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          updatedUserItems_ = null;
+        }
+        return updatedUserItemsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseResponseProto)
@@ -5617,48 +6565,52 @@ public final class EventInAppPurchaseProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
-      "to\032\023InAppPurchase.proto\032\017Structure.proto" +
-      "\032\nUser.proto\"\251\001\n\031InAppPurchaseRequestPro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalce" +
-      "nts\030\003 \001(\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006loca" +
-      "le\030\005 \001(\t\022\016\n\006ipaddr\030\006 \001(\t\"\314\002\n\032InAppPurcha" +
-      "seResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022N\n\006status\030\002 \001(" +
-      "\0162>.com.lvl6.proto.InAppPurchaseResponse",
-      "Proto.InAppPurchaseStatus\022\026\n\016diamondsGai" +
-      "ned\030\003 \001(\005\022\023\n\013coinsGained\030\004 \001(\005\022\023\n\013packag" +
-      "eName\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007rec" +
-      "eipt\030\007 \001(\t\"C\n\023InAppPurchaseStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"" +
-      "\260\001\n\034EarnFreeDiamondsRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022J\n\020freeDiamondsType\030\002 \001(\0162$.com.lvl6." +
-      "proto.EarnFreeDiamondsType:\nFB_CONNECT\022\022" +
-      "\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsR",
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022T\n\006status\030\002 \001(\0162D" +
-      ".com.lvl6.proto.EarnFreeDiamondsResponse" +
-      "Proto.EarnFreeDiamondsStatus\022J\n\020freeDiam" +
-      "ondsType\030\003 \001(\0162$.com.lvl6.proto.EarnFree" +
-      "DiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDiam" +
-      "ondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_AP" +
-      "ART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUP" +
-      "PORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGem" +
-      "sForResourcesRequestProto\022@\n\006sender\030\001 \001(",
-      "\01320.com.lvl6.proto.MinimumUserProtoWithM" +
-      "axResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResou" +
-      "rces\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.l" +
-      "vl6.proto.ResourceType:\004CASH\022\022\n\nclientTi" +
-      "me\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourcesRes" +
-      "ponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
-      "oto.MinimumUserProtoWithMaxResources\022d\n\006" +
-      "status\030\002 \001(\0162T.com.lvl6.proto.ExchangeGe" +
-      "msForResourcesResponseProto.ExchangeGems" +
-      "ForResourcesStatus\"Y\n\036ExchangeGemsForRes",
-      "ourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
-      "\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027EventIn" +
-      "AppPurchaseProto"
+      "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
+      "sterStuff.proto\032\017Structure.proto\032\nUser.p" +
+      "roto\"\251\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
+      "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
+      "\022\016\n\006ipaddr\030\006 \001(\t\"\305\003\n\032InAppPurchaseRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
+      "lvl6.proto.InAppPurchaseResponseProto.In" +
+      "AppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001(" +
+      "\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNam" +
+      "e\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receipt" +
+      "\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6." +
+      "proto.FullUserMonsterProto\0227\n\020updatedUse" +
+      "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
+      "oto\"C\n\023InAppPurchaseStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034Ear" +
+      "nFreeDiamondsRequestProto\0220\n\006sender\030\001 \001(",
+      "\0132 .com.lvl6.proto.MinimumUserProto\022J\n\020f" +
+      "reeDiamondsType\030\002 \001(\0162$.com.lvl6.proto.E" +
+      "arnFreeDiamondsType:\nFB_CONNECT\022\022\n\nclien" +
+      "tTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022T\n\006status\030\002 \001(\0162D.com.lv" +
+      "l6.proto.EarnFreeDiamondsResponseProto.E" +
+      "arnFreeDiamondsStatus\022J\n\020freeDiamondsTyp" +
+      "e\030\003 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
+      "sType:\nFB_CONNECT\"v\n\026EarnFreeDiamondsSta",
+      "tus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APART_FRO" +
+      "M_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020" +
+      "\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGemsForRes" +
+      "ourcesRequestProto\022@\n\006sender\030\001 \001(\01320.com" +
+      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
+      "rces\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResources\030\003 " +
+      "\001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.lvl6.pro" +
+      "to.ResourceType:\004CASH\022\022\n\nclientTime\030\005 \001(" +
+      "\003\"\252\002\n%ExchangeGemsForResourcesResponsePr" +
+      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min",
+      "imumUserProtoWithMaxResources\022d\n\006status\030" +
+      "\002 \001(\0162T.com.lvl6.proto.ExchangeGemsForRe" +
+      "sourcesResponseProto.ExchangeGemsForReso" +
+      "urcesStatus\"Y\n\036ExchangeGemsForResourcesS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FA" +
+      "IL_INSUFFICIENT_GEMS\020\003B\031B\027EventInAppPurc" +
+      "haseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5672,6 +6624,8 @@ public final class EventInAppPurchaseProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
+          com.lvl6.proto.ItemsProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -5686,7 +6640,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", });
+        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", });
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new
@@ -5712,6 +6666,8 @@ public final class EventInAppPurchaseProto {
         internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.InAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

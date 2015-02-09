@@ -9,9 +9,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
 
 import org.json.JSONObject;
@@ -24,22 +21,22 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
-import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
-import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -55,14 +52,20 @@ public class InAppPurchaseController extends EventController {
   protected Locker locker;
 
   @Autowired
-  protected InsertUtil insertUtils;
+  protected InsertUtil insertUtil;
   
   @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
+  protected UpdateUtil updateUtil;
   
   @Autowired
-  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
+  protected UserRetrieveUtils2 userRetrieveUtil;
+  
+  @Autowired
+  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 
+  @Autowired
+  protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+  
   public InAppPurchaseController() {
     numAllocatedThreads = 2;
   }
@@ -119,18 +122,18 @@ public class InAppPurchaseController extends EventController {
     }
 
     // Lock this player's ID
-    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    locker.lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User user = getUserRetrieveUtils().getUserById(userId);
+      User user = userRetrieveUtil.getUserById(userId);
       
       JSONObject response;
       JSONObject jsonReceipt = new JSONObject();
       jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
-      log.info("Processing purchase: " + jsonReceipt.toString(4));
+      log.info("Processing purchase: {}", jsonReceipt.toString(4));
       // Send data
       URL url = new URL(PRODUCTION_URL);
 
-      log.info("Sending purchase request to: " + url.toString());
+      log.info("Sending purchase request to: {}", url.toString());
 
       URLConnection conn = url.openConnection();
       conn.setDoOutput(true);
@@ -146,7 +149,7 @@ public class InAppPurchaseController extends EventController {
       while ((line = rd.readLine()) != null) {
         responseString += line;
       }
-      log.info("Response: " + responseString);
+      log.info("Response: {}", responseString);
 
       response = new JSONObject(responseString);
 
@@ -170,57 +173,13 @@ public class InAppPurchaseController extends EventController {
       JSONObject receiptFromApple = null;
       if (response.getInt(IAPValues.STATUS) == 0) {
         receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-        if (!getIapHistoryRetrieveUtils().checkIfDuplicateTransaction(Long.parseLong(receiptFromApple
-            .getString(IAPValues.TRANSACTION_ID)))) {
-          try {
-            String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
-            int diamondChange = IAPValues.getDiamondsForPackageName(packageName);
-            int coinChange = IAPValues.getCoinsForPackageName(packageName);
-            double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
-            boolean isBeginnerSale = IAPValues.packageIsBeginnerSale(packageName);
-
-            Map<String, Integer> previousCurrency =
-            		new HashMap<String, Integer>();
-            Map<String, Integer> currencyChangeMap =
-            		new HashMap<String, Integer>();
-            if (diamondChange > 0) {
-            	previousCurrency.put(MiscMethods.gems, user.getGems());
-            	
-            	resBuilder.setDiamondsGained(diamondChange);
-            	user.updateRelativeDiamondsBeginnerSale(diamondChange, isBeginnerSale);
-            	currencyChangeMap.put(MiscMethods.gems, diamondChange);
-            } else {
-            	previousCurrency.put(MiscMethods.cash, user.getCash());
-            	
-            	resBuilder.setCoinsGained(coinChange);
-            	user.updateRelativeCoinsBeginnerSale(coinChange, isBeginnerSale);
-            	currencyChangeMap.put(MiscMethods.cash, coinChange);
-            }
-
-            if (!insertUtils.insertIAPHistoryElem(receiptFromApple,
-            		diamondChange, coinChange, user, realLifeCashCost)) {
-              log.error("problem with logging in-app purchase history for receipt:"
-                  + receiptFromApple.toString(4) + " and user " + user);
-            }
-            resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
-            resBuilder.setPackageName(receiptFromApple.getString(IAPValues.PRODUCT_ID));
-
-            resBuilder.setPackagePrice(realLifeCashCost);
-            log.info("successful in-app purchase from user " + user.getId() + " for package "
-                + receiptFromApple.getString(IAPValues.PRODUCT_ID));
-
-            Timestamp date = new Timestamp((new Date()).getTime());
-            writeToUserCurrencyHistory(user, packageName, date,
-            		currencyChangeMap, previousCurrency);
-          } catch (Exception e) {
-            log.error("problem with in app purchase flow", e);
-          }
-        } else {
-          resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
-          log.error("duplicate receipt from user " + user);
+        if (!iapHistoryRetrieveUtil.checkIfDuplicateTransaction(Long.parseLong(receiptFromApple
+            .getString(IAPValues.TRANSACTION_ID))))
+        {
+          writeChangesToDb(userId, resBuilder, user, receiptFromApple);
         }
       } else {
-        log.error("problem with in-app purchase that client sent, with receipt " + receipt);
+        log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
       }
 
       wr.close();
@@ -270,8 +229,39 @@ public class InAppPurchaseController extends EventController {
       }
     } finally {
       // Unlock this player
-      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+      locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
+  }
+
+  private void writeChangesToDb(
+	  String userId,
+	  InAppPurchaseResponseProto.Builder resBuilder,
+	  User user,
+	  JSONObject receiptFromApple )
+  {
+	  try {
+		  String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		  double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
+
+		  Date now = new Date();
+		  InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
+			  receiptFromApple, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
+
+		  iapa.execute(resBuilder);
+		  
+		  if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS))
+		  {
+			  resBuilder.setPackageName(packageName);
+			  resBuilder.setPackagePrice(realLifeCashCost);
+			  log.info("successful in-app purchase from user {} for package {}",
+				  userId, packageName);
+
+			  Timestamp date = new Timestamp(now.getTime());
+			  writeToUserCurrencyHistory(userId, date, iapa);
+		  }
+	  } catch (Exception e) {
+		  log.error("problem with in app purchase flow", e);
+	  }
   }
 
   /*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
@@ -354,28 +344,14 @@ public class InAppPurchaseController extends EventController {
     return sb.toString();
   }
 
-  private void writeToUserCurrencyHistory(User aUser, String packageName,
-		  Timestamp date, Map<String, Integer> currencyChangeMap,
-		  Map<String, Integer> previousCurrency) {
+  private void writeToUserCurrencyHistory(String userId, Timestamp date,
+	  InAppPurchaseAction iapa)
+  {
 	  
-	  String userId = aUser.getId();
-	  Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
-	  Map<String, String> changeReasonsMap = new HashMap<String, String>();
-	  Map<String, String> detailsMap = new HashMap<String, String>();
-	  String gems = MiscMethods.gems;
-	  String cash = MiscMethods.cash;
-	  String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
-	  
-	  currentCurrencyMap.put(gems, aUser.getGems());
-	  currentCurrencyMap.put(cash, aUser.getCash());
-	  changeReasonsMap.put(gems, reasonForChange);
-	  changeReasonsMap.put(cash, reasonForChange);
-	  detailsMap.put(gems, packageName);
-	  detailsMap.put(cash, packageName);
-	  
-	  MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChangeMap,
-			  previousCurrency, currentCurrencyMap, changeReasonsMap,
-			  detailsMap);
+	  MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		  iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
+		  iapa.getCurrentCurrencies(), iapa.getReasons(),
+		  iapa.getDetails());
   }
 
   public Locker getLocker() {
@@ -386,25 +362,55 @@ public class InAppPurchaseController extends EventController {
 	  this.locker = locker;
   }
 
-  public void setInsertUtils(InsertUtil insertUtils) {
-    this.insertUtils = insertUtils;
+  public InsertUtil getInsertUtil()
+  {
+	  return insertUtil;
   }
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
+  public void setInsertUtil( InsertUtil insertUtil )
+  {
+	  this.insertUtil = insertUtil;
   }
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
+  public UpdateUtil getUpdateUtil()
+  {
+	  return updateUtil;
   }
 
-  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
-    return iapHistoryRetrieveUtils;
+  public void setUpdateUtil( UpdateUtil updateUtil )
+  {
+	  this.updateUtil = updateUtil;
   }
 
-  public void setIapHistoryRetrieveUtils(
-      IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
-    this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
+  public UserRetrieveUtils2 getUserRetrieveUtil()
+  {
+	  return userRetrieveUtil;
   }
+
+  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+  {
+	  this.userRetrieveUtil = userRetrieveUtil;
+  }
+
+  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil()
+  {
+	  return iapHistoryRetrieveUtil;
+  }
+
+  public void setIapHistoryRetrieveUtil( IAPHistoryRetrieveUtils iapHistoryRetrieveUtil )
+  {
+	  this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+  }
+
+  public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+  {
+	  return itemForUserRetrieveUtil;
+  }
+
+  public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+  {
+	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+  }
+
   
 }

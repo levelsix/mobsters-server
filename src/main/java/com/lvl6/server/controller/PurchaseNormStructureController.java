@@ -64,8 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     PurchaseNormStructureRequestProto reqProto = ((PurchaseNormStructureRequestEvent)event).getPurchaseNormStructureRequestProto();
-    log.info(String.format(
-    	"reqProto=%s", reqProto));
+    log.info( "reqProto={}", reqProto );
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
@@ -111,7 +110,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     try {
       //get things from the db
       User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
-      log.info(String.format("user=%s", user));
+      log.info("user={}", user);
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
 
       //currency history purposes
@@ -177,16 +176,16 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       User user, Timestamp timeOfPurchase, int gemsSpent, int resourceChange,
       ResourceType resourceType) {
     if (user == null || prospective == null || timeOfPurchase == null) {
-      log.error(String.format(
-    	  "parameter passed in is null. user=%s\t struct=%s\t timeOfPurchase=%s",
-    	  user, prospective, timeOfPurchase));
+      log.error(
+    	  "parameter passed in is null. user={}\t struct={}\t timeOfPurchase={}",
+    	  new Object[] {user, prospective, timeOfPurchase} );
       return false;
     }
     ResourceType structResourceType = ResourceType.valueOf(prospective.getBuildResourceType());
     if (resourceType != structResourceType) {
-      log.error(String.format(
-    	  "unexpected resource type. actual=%s, expected=%s, structure=%s",
-    	  resourceType, structResourceType, prospective));
+      log.error(
+    	  "unexpected resource type. actual={}, expected={}, structure={}",
+    	  new Object[] { resourceType, structResourceType, prospective } );
       return false;
     }
 
@@ -196,9 +195,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (gemsSpent > 0) {
       if (userGems < gemsSpent) {
         //doesn't have enough gems
-        log.error(String.format(
-        	"user has %s gems; trying to spend %s and %s %s to buy structure=%s",
-        	userGems, gemsSpent, resourceChange, resourceType, prospective));
+        log.error(
+        	"user has {} gems; trying to spend {} and {} {} to buy structure={}",
+        	new Object[] { userGems, gemsSpent, resourceChange,
+        		resourceType, prospective } );
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
         return false;
       } else {
@@ -215,25 +215,25 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (resourceType == ResourceType.CASH) {
       int userResource = user.getCash();
       if (userResource < requiredResourceAmount) {
-        log.error(String.format(
-        	"not enough cash. cash=%s, cost=%s, structure=%s",
-        	userResource, requiredResourceAmount, prospective));
+        log.error(
+        	"not enough cash. cash={}, cost={}, structure={}",
+        	new Object[] { userResource, requiredResourceAmount, prospective } );
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
         return false;
       }
     } else if (resourceType == ResourceType.OIL) {
       int userResource = user.getOil();
       if (userResource < requiredResourceAmount) {
-        log.error(String.format(
-        	"not enough oil. oil=%s, cost=%s, structure=%s",
-        	userResource, requiredResourceAmount, prospective));
+        log.error(
+        	"not enough oil. oil={}, cost={}, structure={}",
+        	new Object[] { userResource, requiredResourceAmount, prospective } );
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
         return false;
       }
     } else {
-      log.error(String.format(
-    	  "unknown resource type: %s, structure=%s",
-    	  resourceType, prospective));
+      log.error(
+    	  "unknown resource type: {}, structure={}",
+    	  resourceType, prospective);
       return false;
     }
 

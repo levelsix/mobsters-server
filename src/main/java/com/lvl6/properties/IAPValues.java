@@ -23,6 +23,7 @@ public class IAPValues {
   public static final String PACKAGE3 = Globals.APPLE_BUNDLE_ID() + ".gem3";
   public static final String PACKAGE4 = Globals.APPLE_BUNDLE_ID() + ".gem4";
   public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".gem5";
+  public static final String STARTERPACK = Globals.APPLE_BUNDLE_ID() + ".starterpack";
 
   public static final String PACKAGE1SALE = Globals.APPLE_BUNDLE_ID() + ".package1sale";
   public static final String PACKAGE2SALE = Globals.APPLE_BUNDLE_ID() + ".package2sale";
@@ -145,25 +146,6 @@ public class IAPValues {
     }
     if (packageName.equals(PACKAGE5) || packageName.equals(PACKAGE5SALE) || packageName.equals(PACKAGE5BSALE)) {
       return PACKAGE_5_DIAMONDS;
-    }
-    return 0;
-  }
-
-  public static int getCoinsForPackageName(String packageName) {
-    if (packageName.equals(PACKAGES1) || packageName.equals(PACKAGES1SALE) || packageName.equals(PACKAGES1BSALE)) {
-      return PACKAGE_S1_COINS;
-    }
-    if (packageName.equals(PACKAGES2) || packageName.equals(PACKAGES2SALE) || packageName.equals(PACKAGES2BSALE)) {
-      return PACKAGE_S2_COINS;
-    }
-    if (packageName.equals(PACKAGES3) || packageName.equals(PACKAGES3SALE) || packageName.equals(PACKAGES3BSALE)) {
-      return PACKAGE_S3_COINS;
-    }
-    if (packageName.equals(PACKAGES4) || packageName.equals(PACKAGES4SALE) || packageName.equals(PACKAGES4BSALE)) {
-      return PACKAGE_S4_COINS;
-    }
-    if (packageName.equals(PACKAGES5) || packageName.equals(PACKAGES5SALE) || packageName.equals(PACKAGES5BSALE)) {
-      return PACKAGE_S5_COINS;
     }
     return 0;
   }
@@ -296,13 +278,20 @@ public class IAPValues {
     return 0;
   }
   
-  public static boolean packageIsBeginnerSale(String packageName) {
-    if (packageName.equals(PACKAGE1BSALE) || packageName.equals(PACKAGE2BSALE) || packageName.equals(PACKAGE3BSALE) || 
-        packageName.equals(PACKAGE4BSALE) || packageName.equals(PACKAGE5BSALE) || packageName.equals(PACKAGES1BSALE) || 
-        packageName.equals(PACKAGES2BSALE) || packageName.equals(PACKAGES3BSALE) || packageName.equals(PACKAGES4BSALE) || 
-        packageName.equals(PACKAGES5BSALE)) {
-      return true;
-    }
-    return false;
-  }
+//  public static boolean packageIsBeginnerSale(String packageName) {
+//    if (packageName.equals(PACKAGE1BSALE) || packageName.equals(PACKAGE2BSALE) || packageName.equals(PACKAGE3BSALE) || 
+//        packageName.equals(PACKAGE4BSALE) || packageName.equals(PACKAGE5BSALE) || packageName.equals(PACKAGES1BSALE) || 
+//        packageName.equals(PACKAGES2BSALE) || packageName.equals(PACKAGES3BSALE) || packageName.equals(PACKAGES4BSALE) || 
+//        packageName.equals(PACKAGES5BSALE)) {
+//      return true;
+//    }
+//    return false;
+//  }
+  
+  public static boolean packageIsStarterPack(String packageName) {
+	    if (packageName.equals(STARTERPACK)) {
+	      return true;
+	    }
+	    return false;
+	  }
 }

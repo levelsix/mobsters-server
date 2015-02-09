@@ -657,9 +657,9 @@ public class MiscMethods {
 			int diamondAmt = IAPValues.getDiamondsForPackageName(id);
 			if (diamondAmt > 0) {
 				iapb.setCurrencyAmount(diamondAmt);
-			} else {
-				int coinAmt = IAPValues.getCoinsForPackageName(id);
-				iapb.setCurrencyAmount(coinAmt);
+//			} else {
+//				int coinAmt = IAPValues.getCoinsForPackageName(id);
+//				iapb.setCurrencyAmount(coinAmt);
 			}
 			cb.addInAppPurchasePackages(iapb.build());
 		}

@@ -80,11 +80,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
 
     UUID userUuid = null;
-    UUID userStructUuid = null;
     boolean invalidUuids = true;
     try {
       userUuid = UUID.fromString(userId);
-      userStructUuid = UUID.fromString(userStructId);
+      UUID.fromString(userStructId);
       invalidUuids = false;
     } catch (Exception e) {
       log.error(String.format(
@@ -162,9 +161,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Structure currentStruct, Structure nextLevelStruct, int gemsSpent, int resourceChange, 
       ResourceType rt,Timestamp timeOfUpgrade) {
     if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
-      log.error(String.format(
-    	  "parameter passed in is null. user=%s, userStruct=%s, userStruct's lastRetrieveTime=%s",
-    	  user, userStruct, userStruct.getLastRetrieved()));
+      log.error(
+    	  "parameter passed in is null. user={}, userStruct={}, userStruct's lastRetrieveTime={}",
+    	  new Object[] {user, userStruct, userStruct.getLastRetrieved() } );
       return false;
     }
     if (!userStruct.isComplete()) {
@@ -174,36 +173,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     if (null == nextLevelStruct) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
-      log.error(String.format(
-    	  "user struct at max level already. struct is %s", currentStruct));
+      log.error( "user struct at max level already. struct is {}",
+    	  currentStruct);
       return false;
     }
     if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
-      log.error(String.format(
-    	  "the upgrade time %s is before the last time the building was retrieved:%s",
-    	  timeOfUpgrade, userStruct.getLastRetrieved()));
+      log.error(
+    	  "the upgrade time {} is before the last time the building was retrieved:{}",
+    	  timeOfUpgrade, userStruct.getLastRetrieved());
       return false;
     }
     //see if the user can upgrade it
     if (!user.getId().equals(userStruct.getUserId())) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
-      log.error(String.format(
-    	  "user struct belongs to someone else with id=%s",
-    	  userStruct.getUserId()));
+      log.error( "user struct belongs to someone else with id={}",
+    	  userStruct.getUserId());
       return false;
     }
 
     if (gemsSpent < 0) {
-      log.warn(String.format(
-    	  "gemsSpent is negative! gemsSpent=%s", gemsSpent));
+      log.warn( "gemsSpent is negative! gemsSpent={}", gemsSpent );
       gemsSpent = Math.abs(gemsSpent);
     }
     int userGems = user.getGems();
     if (gemsSpent > 0 && userGems < gemsSpent) {
-      log.error(String.format(
-    	  "user has %s gems; trying to spend %s and %s %s to upgrade to structure=%s",
-    	  userGems, gemsSpent, resourceChange, rt, nextLevelStruct));
+      log.error(
+    	  "user has {} gems; trying to spend {} and {} {} to upgrade to structure={}",
+    	  new Object[] { userGems, gemsSpent, resourceChange, rt, nextLevelStruct } );
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
       return false;
     }
@@ -215,17 +212,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (ResourceType.CASH.equals(rt)) {
       if (user.getCash() < resourceRequired) {
         resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-        log.error(String.format(
-        	"user doesn't have enough cash, has %s, needs %s",
-        	user.getCash(), resourceChange));
+        log.error( "user doesn't have enough cash, has {}, needs {}",
+        	user.getCash(), resourceChange );
         return false;
       }
     } else if (ResourceType.OIL.equals(rt)){
       if (user.getOil() < resourceRequired) {
         resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
-        log.error(String.format(
-        	"user doesn't have enough gems, has %s, needs %s",
-        	user.getGems(), resourceChange));
+        log.error( "user doesn't have enough gems, has , needs ",
+        	user.getGems(), resourceChange );
         return false;
       }
     }

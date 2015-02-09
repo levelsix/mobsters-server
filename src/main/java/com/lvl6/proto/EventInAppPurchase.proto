@@ -2,6 +2,8 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "InAppPurchase.proto";
+import "Item.proto";
+import "MonsterStuff.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -23,11 +25,20 @@ message InAppPurchaseRequestProto {
 message InAppPurchaseResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional InAppPurchaseStatus status = 2;
+	//should be renamed gemsGained
 	optional int32 diamondsGained = 3;
-	optional int32 coinsGained = 4;
+	optional int32 coinsGained = 4 [deprecated = true];
 	optional string packageName = 5;
 	optional double packagePrice = 6;
 	optional string receipt = 7;
+	
+	//if user received, say, two pieces of a monster
+	//and he needs one to complete an existing monster
+	//there would be one monster that would be completed
+	//and another that would be the remaining pieces of the monster
+	repeated FullUserMonsterProto updatedOrNew = 8;
+	
+	repeated UserItemProto updatedUserItems = 9;
 	
 	enum InAppPurchaseStatus {
 		SUCCESS = 1;

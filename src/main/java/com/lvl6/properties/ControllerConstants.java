@@ -66,6 +66,8 @@ public class ControllerConstants {
 	
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
+	
+	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 2;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
@@ -250,6 +252,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__EVOLVING = "evolving user monsters";
 	public static final String UCHRFC__EXPANSION_WAIT_COMPLETE = "expansion wait complete: ";
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
+	public static final String UCHRFC__IN_APP_PURCHASE = "in app purchase: ";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
 	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
@@ -494,7 +497,6 @@ public class ControllerConstants {
 	public static final String UCHRFC__PURCHASED_FROM_MARKETPLACE = "purchased from marketplace";
 	public static final String UCHRFC__SUBMIT_EQUIPS_TO_BLACKSMITH = "submit equips to blacksmith";
 	public static final String UCHRFC__FINISH_FORGE_ATTEMPT_WAIT_TIME = "finish forge attempt wait time";
-	public static final String UCHRFC__IN_APP_PURCHASE = "inapp purchase: ";
 	public static final String UCHRFC__ARMORY_TRANSACTION = "armory transaction";
 	public static final String UCHRFC__UPGRADE_CLAN_TIER_LEVEL = "upgraded clan tier level";
 	public static final String UCHRFC__EARN_FREE_DIAMONDS_KIIP = "kiip";
