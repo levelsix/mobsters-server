@@ -1380,35 +1380,6 @@ public class MiscMethods {
 		return Math.min(100, Math.max(1, pts));
 	}
 
-	public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
-		int id = 0;
-		Date startDate = user.getCreateTime();
-		Date endDate = new Date(startDate.getTime()+(long)(ControllerConstants.NUM_DAYS_FOR_NEW_USER_GOLD_SALE*24*60*60*1000));
-
-		if (endDate.getTime() < new Date().getTime()) {
-			return null;
-		}
-
-		String package1SaleIdentifier = IAPValues.PACKAGE1BSALE;
-		String package2SaleIdentifier = IAPValues.PACKAGE2BSALE;
-		String package3SaleIdentifier = IAPValues.PACKAGE3BSALE;
-		String package4SaleIdentifier = null;
-		String package5SaleIdentifier = null;
-		String packageS1SaleIdentifier = IAPValues.PACKAGES1BSALE;
-		String packageS2SaleIdentifier = IAPValues.PACKAGES2BSALE;
-		String packageS3SaleIdentifier = IAPValues.PACKAGES3BSALE;
-		String packageS4SaleIdentifier = null;
-		String packageS5SaleIdentifier = null;
-
-		String gemsShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
-		String gemsBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
-
-		GoldSale sale = new GoldSale(id, startDate, endDate, gemsShoppeImageName, gemsBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
-			packageS1SaleIdentifier, packageS2SaleIdentifier, packageS3SaleIdentifier, packageS4SaleIdentifier, packageS5SaleIdentifier, true);
-
-		return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
-	}
-
 	//  public static int dateDifferenceInDays(Date start, Date end) {
 	//    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
 	//    DateMidnight current = (new DateTime(end)).toDateMidnight();
