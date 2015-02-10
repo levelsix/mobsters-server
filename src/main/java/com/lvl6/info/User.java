@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -4195115310434121740L;
+	private static final long serialVersionUID = 6059311604567079884L;
 	
 	private String id;
 	private String name;
@@ -41,6 +41,7 @@ public class User implements Serializable {
 	private Date lastWallPostNotificationTime;
 //	private int kabamNaid;
 	private boolean hasReceivedfbReward;
+	private int numBeginnerSalesPurchased;
 	private String facebookId;
 	private boolean fbIdSetOnUserCreate;
 	private String gameCenterId;
@@ -68,7 +69,7 @@ public class User implements Serializable {
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
 			int numConsecutiveDaysPlayed, String clanId,
 			Date lastWallPostNotificationTime, /*int kabamNaid,*/
-			boolean hasReceivedfbReward,
+			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
@@ -102,7 +103,7 @@ public class User implements Serializable {
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 //		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
-//		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
+		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 		this.facebookId = facebookId;
 		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
 		this.gameCenterId = gameCenterId;
@@ -515,6 +516,30 @@ public class User implements Serializable {
 		return numUpdated;
 	}
 	
+	public boolean updateRelativeDiamondsBeginnerSale (int diamondChange, boolean isBeginnerSale) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+
+		if (diamondChange != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
+		}
+
+		if (isBeginnerSale) {
+			relativeParams.put(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED, 1);
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gems += diamondChange;
+			this.numBeginnerSalesPurchased += isBeginnerSale ? 1 : 0;
+			return true;
+		}
+		return false;
+	}
+
 	public boolean updateRelativeCoinsAbsoluteClan (int coinChange, String clanId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -1134,6 +1159,14 @@ public class User implements Serializable {
 		this.hasReceivedfbReward = hasReceivedfbReward;
 	}
 
+	public int getNumBeginnerSalesPurchased() {
+		return numBeginnerSalesPurchased;
+	}
+
+	public void setNumBeginnerSalesPurchased(int numBeginnerSalesPurchased) {
+		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
+	}
+
 	public String getFacebookId() {
 		return facebookId;
 	}
@@ -1299,6 +1332,8 @@ public class User implements Serializable {
 			+ lastWallPostNotificationTime
 			+ ", hasReceivedfbReward="
 			+ hasReceivedfbReward
+			+ ", numBeginnerSalesPurchased="
+			+ numBeginnerSalesPurchased
 			+ ", facebookId="
 			+ facebookId
 			+ ", fbIdSetOnUserCreate="

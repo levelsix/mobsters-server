@@ -67,7 +67,7 @@ public class ControllerConstants {
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
 	
-	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 2;
+	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;

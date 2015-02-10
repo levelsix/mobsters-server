@@ -148,6 +148,15 @@ public final class InAppPurchaseProto {
      */
     com.google.protobuf.ByteString
         getImageNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+     */
+    boolean hasIapPackageType();
+    /**
+     * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+     */
+    com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType getIapPackageType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchasePackageProto}
@@ -218,6 +227,17 @@ public final class InAppPurchaseProto {
               imageName_ = bs;
               break;
             }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType value = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                iapPackageType_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -255,6 +275,106 @@ public final class InAppPurchaseProto {
     @java.lang.Override
     public com.google.protobuf.Parser<InAppPurchasePackageProto> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType}
+     */
+    public enum InAppPurchasePackageType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;</code>
+       */
+      NO_IN_APP_PURCHASE_PACKAGE_TYPE(0, 4),
+      /**
+       * <code>GEMS = 1;</code>
+       */
+      GEMS(1, 1),
+      /**
+       * <code>STARTER_PACK = 2;</code>
+       */
+      STARTER_PACK(2, 2),
+      /**
+       * <code>MONEY_TREE = 3;</code>
+       */
+      MONEY_TREE(3, 3),
+      ;
+
+      /**
+       * <code>NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;</code>
+       */
+      public static final int NO_IN_APP_PURCHASE_PACKAGE_TYPE_VALUE = 4;
+      /**
+       * <code>GEMS = 1;</code>
+       */
+      public static final int GEMS_VALUE = 1;
+      /**
+       * <code>STARTER_PACK = 2;</code>
+       */
+      public static final int STARTER_PACK_VALUE = 2;
+      /**
+       * <code>MONEY_TREE = 3;</code>
+       */
+      public static final int MONEY_TREE_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static InAppPurchasePackageType valueOf(int value) {
+        switch (value) {
+          case 4: return NO_IN_APP_PURCHASE_PACKAGE_TYPE;
+          case 1: return GEMS;
+          case 2: return STARTER_PACK;
+          case 3: return MONEY_TREE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<InAppPurchasePackageType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<InAppPurchasePackageType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<InAppPurchasePackageType>() {
+              public InAppPurchasePackageType findValueByNumber(int number) {
+                return InAppPurchasePackageType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final InAppPurchasePackageType[] VALUES = values();
+
+      public static InAppPurchasePackageType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private InAppPurchasePackageType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType)
     }
 
     private int bitField0_;
@@ -357,10 +477,26 @@ public final class InAppPurchaseProto {
       }
     }
 
+    public static final int IAPPACKAGETYPE_FIELD_NUMBER = 4;
+    private com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType_;
+    /**
+     * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+     */
+    public boolean hasIapPackageType() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+     */
+    public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType getIapPackageType() {
+      return iapPackageType_;
+    }
+
     private void initFields() {
       iapPackageId_ = "";
       currencyAmount_ = 0;
       imageName_ = "";
+      iapPackageType_ = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -384,6 +520,9 @@ public final class InAppPurchaseProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getImageNameBytes());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, iapPackageType_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -404,6 +543,10 @@ public final class InAppPurchaseProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, iapPackageType_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -528,6 +671,8 @@ public final class InAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        iapPackageType_ = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -568,6 +713,10 @@ public final class InAppPurchaseProto {
           to_bitField0_ |= 0x00000004;
         }
         result.imageName_ = imageName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.iapPackageType_ = iapPackageType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -596,6 +745,9 @@ public final class InAppPurchaseProto {
           bitField0_ |= 0x00000004;
           imageName_ = other.imageName_;
           onChanged();
+        }
+        if (other.hasIapPackageType()) {
+          setIapPackageType(other.getIapPackageType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -804,6 +956,41 @@ public final class InAppPurchaseProto {
   }
   bitField0_ |= 0x00000004;
         imageName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType_ = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
+      /**
+       * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+       */
+      public boolean hasIapPackageType() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+       */
+      public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType getIapPackageType() {
+        return iapPackageType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+       */
+      public Builder setIapPackageType(com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        iapPackageType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
+       */
+      public Builder clearIapPackageType() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        iapPackageType_ = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
         onChanged();
         return this;
       }
@@ -3353,24 +3540,29 @@ public final class InAppPurchaseProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\\\n" +
-      "\031InAppPurchasePackageProto\022\024\n\014iapPackage" +
-      "Id\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\021\n\timag" +
-      "eName\030\003 \001(\t\"\327\003\n\rGoldSaleProto\022\016\n\006saleId\030" +
-      "\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDate\030\003 \001(" +
-      "\003\022\036\n\026package1SaleIdentifier\030\004 \001(\t\022\036\n\026pac" +
-      "kage2SaleIdentifier\030\005 \001(\t\022\036\n\026package3Sal" +
-      "eIdentifier\030\006 \001(\t\022\036\n\026package4SaleIdentif" +
-      "ier\030\007 \001(\t\022\036\n\026package5SaleIdentifier\030\010 \001(" +
-      "\t\022\033\n\023goldShoppeImageName\030\t \001(\t\022\030\n\020goldBa",
-      "rImageName\030\n \001(\t\022\037\n\027packageS1SaleIdentif" +
-      "ier\030\013 \001(\t\022\037\n\027packageS2SaleIdentifier\030\014 \001" +
-      "(\t\022\037\n\027packageS3SaleIdentifier\030\r \001(\t\022\037\n\027p" +
-      "ackageS4SaleIdentifier\030\016 \001(\t\022\037\n\027packageS" +
-      "5SaleIdentifier\030\017 \001(\t\022\026\n\016isBeginnerSale\030" +
-      "\020 \001(\010*Q\n\024EarnFreeDiamondsType\022\016\n\nFB_CONN" +
-      "ECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n\007T" +
-      "WITTER\020\004B\024B\022InAppPurchaseProto"
+      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\245\002" +
+      "\n\031InAppPurchasePackageProto\022\024\n\014iapPackag" +
+      "eId\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\021\n\tima" +
+      "geName\030\003 \001(\t\022Z\n\016iapPackageType\030\004 \001(\0162B.c" +
+      "om.lvl6.proto.InAppPurchasePackageProto." +
+      "InAppPurchasePackageType\"k\n\030InAppPurchas" +
+      "ePackageType\022#\n\037NO_IN_APP_PURCHASE_PACKA" +
+      "GE_TYPE\020\004\022\010\n\004GEMS\020\001\022\020\n\014STARTER_PACK\020\002\022\016\n" +
+      "\nMONEY_TREE\020\003\"\327\003\n\rGoldSaleProto\022\016\n\006saleI" +
+      "d\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDate\030\003 ",
+      "\001(\003\022\036\n\026package1SaleIdentifier\030\004 \001(\t\022\036\n\026p" +
+      "ackage2SaleIdentifier\030\005 \001(\t\022\036\n\026package3S" +
+      "aleIdentifier\030\006 \001(\t\022\036\n\026package4SaleIdent" +
+      "ifier\030\007 \001(\t\022\036\n\026package5SaleIdentifier\030\010 " +
+      "\001(\t\022\033\n\023goldShoppeImageName\030\t \001(\t\022\030\n\020gold" +
+      "BarImageName\030\n \001(\t\022\037\n\027packageS1SaleIdent" +
+      "ifier\030\013 \001(\t\022\037\n\027packageS2SaleIdentifier\030\014" +
+      " \001(\t\022\037\n\027packageS3SaleIdentifier\030\r \001(\t\022\037\n" +
+      "\027packageS4SaleIdentifier\030\016 \001(\t\022\037\n\027packag" +
+      "eS5SaleIdentifier\030\017 \001(\t\022\026\n\016isBeginnerSal",
+      "e\030\020 \001(\010*Q\n\024EarnFreeDiamondsType\022\016\n\nFB_CO" +
+      "NNECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n" +
+      "\007TWITTER\020\004B\024B\022InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3389,7 +3581,7 @@ public final class InAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchasePackageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor,
-        new java.lang.String[] { "IapPackageId", "CurrencyAmount", "ImageName", });
+        new java.lang.String[] { "IapPackageId", "CurrencyAmount", "ImageName", "IapPackageType", });
     internal_static_com_lvl6_proto_GoldSaleProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_GoldSaleProto_fieldAccessorTable = new

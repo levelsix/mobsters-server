@@ -3,6 +3,8 @@ package com.lvl6.properties;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType;
+
 public class IAPValues {
 
     /*APPLE'S VARIABLES*/
@@ -53,13 +55,15 @@ public class IAPValues {
     public static final double STARTER_PACK_PRICE = 4.99;
 
     public static final List<String> iapPackageNames = 
-            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
+            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5,
+            	STARTERPACK);
 
-    public static final List<String> packageNames = 
-            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
-    public static final List<Integer> packageGivenDiamonds = 
-            Arrays.asList(PACKAGE_1_DIAMONDS, PACKAGE_2_DIAMONDS, PACKAGE_3_DIAMONDS, 
-                    PACKAGE_4_DIAMONDS, PACKAGE_5_DIAMONDS);
+//    public static final List<String> packageNames = 
+//            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
+    
+//    public static final List<Integer> packageGivenDiamonds = 
+//            Arrays.asList(PACKAGE_1_DIAMONDS, PACKAGE_2_DIAMONDS, PACKAGE_3_DIAMONDS, 
+//                    PACKAGE_4_DIAMONDS, PACKAGE_5_DIAMONDS);
 
     public static int getDiamondsForPackageName(String packageName) {
         if (packageName.equals(PACKAGE1)) {
@@ -126,5 +130,28 @@ public class IAPValues {
             return true;
         }
         return false;
+    }
+    
+    public static InAppPurchasePackageType getPackageType(String packageName) {
+    	if (packageName.equals(PACKAGE1)) {
+            return InAppPurchasePackageType.GEMS;
+        }
+        if (packageName.equals(PACKAGE2)) {
+        	return InAppPurchasePackageType.GEMS;
+        }
+        if (packageName.equals(PACKAGE3)) {
+        	return InAppPurchasePackageType.GEMS;
+        }
+        if (packageName.equals(PACKAGE4)) {
+        	return InAppPurchasePackageType.GEMS;
+        }
+        if (packageName.equals(PACKAGE5)) {
+        	return InAppPurchasePackageType.GEMS;
+        }
+        if (packageName.equals(STARTERPACK)) {
+        	return InAppPurchasePackageType.STARTER_PACK;
+        }
+        
+        return InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
     }
 }

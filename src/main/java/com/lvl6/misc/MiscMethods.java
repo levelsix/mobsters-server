@@ -60,6 +60,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
+import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -657,11 +658,17 @@ public class MiscMethods {
 			int diamondAmt = IAPValues.getDiamondsForPackageName(id);
 			if (diamondAmt > 0) {
 				iapb.setCurrencyAmount(diamondAmt);
-//			} else {
-//				int coinAmt = IAPValues.getCoinsForPackageName(id);
-//				iapb.setCurrencyAmount(coinAmt);
+			}
+			
+			try {
+				InAppPurchasePackageType type = IAPValues.getPackageType(id);
+				iapb.setIapPackageType(type);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid IapPackageType. id=%s", id), e);
 			}
 			cb.addInAppPurchasePackages(iapb.build());
+			
 		}
 
 		cb.setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);

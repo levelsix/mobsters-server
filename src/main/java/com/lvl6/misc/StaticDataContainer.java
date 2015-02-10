@@ -45,6 +45,7 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoardProto.BoardLayoutProto;
@@ -244,6 +245,9 @@ public class StaticDataContainer
 		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
 			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 
+		int starterPackId = ControllerConstants
+			.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
+			
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
 			
@@ -258,6 +262,7 @@ public class StaticDataContainer
 				items = itemIdsToItems.values();
 			}
 
+			
 			//get the booster display items for this booster pack
 			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
 				packIdToDisplayIdsToDisplayItems.get(bpackId);
@@ -265,11 +270,19 @@ public class StaticDataContainer
 			if (null != displayIdsToDisplayItems) {
 				displayItems = displayIdsToDisplayItems.values();
 			}
+			
 
 			BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
 				bp, items, displayItems);
-			sdpb.addBoosterPacks(bpProto);
+			//do not put the starterPack into the BoosterPacks
+			if (bpackId == starterPackId) {
+				sdpb.setStarterPack(bpProto);	
+			} else {
+				sdpb.addBoosterPacks(bpProto);
+			}
+				
 		}
+		
 	}
 	private static void setStructures(Builder sdpb) {
 		//Structures

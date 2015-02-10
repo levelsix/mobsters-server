@@ -4063,6 +4063,7 @@ public class CreateInfoProtoUtils {
 			builder.setClan(createMinimumClanProtoFromClan(c));
 		}
 		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
+		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
 		builder.setAvatarMonsterId(u.getAvatarMonsterId());
 
 		String facebookId = u.getFacebookId();

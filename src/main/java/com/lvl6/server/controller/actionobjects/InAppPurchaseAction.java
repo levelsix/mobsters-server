@@ -79,6 +79,7 @@ public class InAppPurchaseAction
 
 
 	//derived state
+	boolean isStarterPack;
 	private String packageName;
 	private int gemChange;
 
@@ -132,6 +133,15 @@ public class InAppPurchaseAction
 				log.error("duplicate receipt from user {}", user);
 				success = false;
 			}
+			
+			isStarterPack = IAPValues.packageIsStarterPack(packageName);
+			if (success && isStarterPack &&
+				user.getNumBeginnerSalesPurchased() > 0)
+			{
+				log.error("user trying to buy the starter pack again! {}, {}",
+					packageName, user);
+				success = false;
+			}
 		} catch (Exception e) {
 			log.error(
 				String.format(
@@ -149,7 +159,7 @@ public class InAppPurchaseAction
 		try {
 			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
-			boolean isStarterPack = IAPValues.packageIsStarterPack(packageName);
+			
 			gemChange = IAPValues.getDiamondsForPackageName(packageName);
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple,
@@ -162,6 +172,7 @@ public class InAppPurchaseAction
 			}
 
 			if (isStarterPack) {
+				
 				processStarterPackPurchase(resBuilder);
 			} else {
 				processPurchase(resBuilder);
@@ -201,6 +212,9 @@ public class InAppPurchaseAction
 				boosterPackId));
 		}
 		gemChange = MiscMethods.determineGemReward(itemsUserReceives);
+		//booster packs can give out gems, so  reuse processPurchase logic
+		processPurchase(resBuilder);
+		
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
@@ -297,7 +311,7 @@ public class InAppPurchaseAction
 		if (gemChange > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
-        	user.updateRelativeGemsNaive(gemChange, 0);
+        	user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
 		}
 
 		prepCurrencyHistory();
