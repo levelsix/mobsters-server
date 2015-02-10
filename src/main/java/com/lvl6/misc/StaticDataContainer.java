@@ -251,10 +251,6 @@ public class StaticDataContainer
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
 			
-			if (!bp.isDisplayToUser()) {
-				continue;
-			}
-
 			//get the booster items associated with this booster pack
 			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
 			Collection<BoosterItem> items = null;
@@ -277,7 +273,8 @@ public class StaticDataContainer
 			//do not put the starterPack into the BoosterPacks
 			if (bpackId == starterPackId) {
 				sdpb.setStarterPack(bpProto);	
-			} else {
+				
+			} else if (bp.isDisplayToUser()) {
 				sdpb.addBoosterPacks(bpProto);
 			}
 				
