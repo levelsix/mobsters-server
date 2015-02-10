@@ -125,6 +125,7 @@ public class InAppPurchaseAction
 		try {
 			String transactionId = receiptFromApple
 				.getString(IAPValues.TRANSACTION_ID);
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 
 			long transactionIdLong = Long.parseLong(transactionId);
 			if (iapHistoryRetrieveUtil.checkIfDuplicateTransaction(transactionIdLong))
@@ -145,7 +146,7 @@ public class InAppPurchaseAction
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"error verifying InAppPurchase request. receiptFromApple={}",
+					"error verifying InAppPurchase request. receiptFromApple=%s",
 					receiptFromApple),
 					e);
 			success = false;
@@ -157,7 +158,7 @@ public class InAppPurchaseAction
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
 		try {
-			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+			
 			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 			
 			gemChange = IAPValues.getDiamondsForPackageName(packageName);
