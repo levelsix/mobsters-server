@@ -12,9 +12,13 @@ message InAppPurchasePackageProto {
 	optional string imageName = 3;
 	
 	enum InAppPurchasePackageType {
+		NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;
+		
 		GEMS = 1;
 		STARTER_PACK = 2;
 		MONEY_TREE = 3;
+		
+		//NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;
 	}
 }
 
