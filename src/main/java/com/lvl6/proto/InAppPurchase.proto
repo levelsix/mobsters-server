@@ -10,6 +10,7 @@ message InAppPurchasePackageProto {
 	optional string iapPackageId = 1;
 	optional int32 currencyAmount = 2;
 	optional string imageName = 3;
+	optional InAppPurchasePackageType iapPackageType = 4;
 	
 	enum InAppPurchasePackageType {
 		NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;
