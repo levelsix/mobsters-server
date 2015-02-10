@@ -183,7 +183,7 @@ public class InAppPurchaseAction
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"error verifying InAppPurchase request. receiptFromApple={}",
+					"error verifying InAppPurchase request. receiptFromApple=%s",
 					receiptFromApple),
 				e);
 			success = false;
@@ -207,7 +207,7 @@ public class InAppPurchaseAction
 		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 		itemsUserReceives.addAll(idToBoosterItem.values());
 		boolean legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
-		if (legit) {
+		if (!legit) {
 			throw new RuntimeException(String.format(
 				"illegal monster in starter pack for boosterPackId=%s",
 				boosterPackId));
