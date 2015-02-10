@@ -294,9 +294,18 @@ public class InAppPurchaseAction
 	    			itemIdToQuantity.keySet());
 	    	
 	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	    		ItemForUser ifu = itemIdToIfu.get(itemId);
-	    		int newQuantity = itemIdToQuantity.get(itemId) +
-	    			ifu.getQuantity();
+	    		int newQuantity = itemIdToQuantity.get(itemId);
+	    		
+	    		ItemForUser ifu = null;
+	    		if (itemIdToIfu.containsKey(itemId)){
+	    			ifu = itemIdToIfu.get(itemId);
+	    		} else {
+	    			//user might not have the item
+	    			ifu = new ItemForUser(userId, itemId, 0);
+	    			itemIdToIfu.put(itemId, ifu);
+	    		}
+	    		
+	    		newQuantity += ifu.getQuantity();
 	    		ifu.setQuantity(newQuantity);
 	    	}
 	    	
