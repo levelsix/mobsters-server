@@ -60,6 +60,7 @@ public class InAppPurchaseAction
 		this.receiptFromApple = receiptFromApple;
 		this.now = now;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
