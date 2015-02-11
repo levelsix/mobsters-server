@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Skill implements Serializable {
 	
-	private static final long serialVersionUID = -8181851310469342643L;
+	private static final long serialVersionUID = -6430843773448686806L;
 	
 	private int id;
 	private String name;
@@ -13,7 +13,8 @@ public class Skill implements Serializable {
 	private String activationType;
 	private int predecId;
 	private int successorId;
-	private String desc;
+	private String defensiveDesc;
+	private String offensiveDesc;
 	private String imgNamePrefix;
 	private int skillEffectDuration;
 	
@@ -25,7 +26,8 @@ public class Skill implements Serializable {
 		String activationType,
 		int predecId,
 		int successorId,
-		String desc,
+		String defensiveDesc,
+		String offensiveDesc,
 		String imgNamePrefix,
 		int skillEffectDuration )
 	{
@@ -37,7 +39,8 @@ public class Skill implements Serializable {
 		this.activationType = activationType;
 		this.predecId = predecId;
 		this.successorId = successorId;
-		this.desc = desc;
+		this.defensiveDesc = defensiveDesc;
+		this.offensiveDesc = offensiveDesc;
 		this.imgNamePrefix = imgNamePrefix;
 		this.skillEffectDuration = skillEffectDuration;
 	}
@@ -112,14 +115,24 @@ public class Skill implements Serializable {
 		this.successorId = successorId;
 	}
 
-	public String getDesc()
+	public String getDefensiveDesc()
 	{
-		return desc;
+		return defensiveDesc;
 	}
 
-	public void setDesc( String desc )
+	public void setDefensiveDesc( String defensiveDesc )
 	{
-		this.desc = desc;
+		this.defensiveDesc = defensiveDesc;
+	}
+
+	public String getOffensiveDesc()
+	{
+		return offensiveDesc;
+	}
+
+	public void setOffensiveDesc( String offensiveDesc )
+	{
+		this.offensiveDesc = offensiveDesc;
 	}
 
 	public String getImgNamePrefix()
@@ -159,8 +172,10 @@ public class Skill implements Serializable {
 			+ predecId
 			+ ", successorId="
 			+ successorId
-			+ ", desc="
-			+ desc
+			+ ", defensiveDesc="
+			+ defensiveDesc
+			+ ", offensiveDesc="
+			+ offensiveDesc
 			+ ", imgNamePrefix="
 			+ imgNamePrefix
 			+ ", skillEffectDuration="

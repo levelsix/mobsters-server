@@ -623,18 +623,44 @@ public final class SkillsProto {
         int index);
 
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
-    boolean hasDesc();
+    boolean hasDefDesc();
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
-    java.lang.String getDesc();
+    java.lang.String getDefDesc();
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
     com.google.protobuf.ByteString
-        getDescBytes();
+        getDefDescBytes();
+
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    boolean hasOffDesc();
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    java.lang.String getOffDesc();
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getOffDescBytes();
 
     /**
      * <code>optional string imgNamePrefix = 12;</code>
@@ -652,10 +678,18 @@ public final class SkillsProto {
 
     /**
      * <code>optional int32 skillEffectDuration = 13;</code>
+     *
+     * <pre>
+     *optional string offDesc = 14; defined above
+     * </pre>
      */
     boolean hasSkillEffectDuration();
     /**
      * <code>optional int32 skillEffectDuration = 13;</code>
+     *
+     * <pre>
+     *optional string offDesc = 14; defined above
+     * </pre>
      */
     int getSkillEffectDuration();
   }
@@ -770,18 +804,24 @@ public final class SkillsProto {
             case 74: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              desc_ = bs;
+              defDesc_ = bs;
               break;
             }
             case 98: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               imgNamePrefix_ = bs;
               break;
             }
             case 104: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               skillEffectDuration_ = input.readInt32();
+              break;
+            }
+            case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              offDesc_ = bs;
               break;
             }
           }
@@ -1036,19 +1076,27 @@ public final class SkillsProto {
       return properties_.get(index);
     }
 
-    public static final int DESC_FIELD_NUMBER = 9;
-    private java.lang.Object desc_;
+    public static final int DEFDESC_FIELD_NUMBER = 9;
+    private java.lang.Object defDesc_;
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
-    public boolean hasDesc() {
+    public boolean hasDefDesc() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
-    public java.lang.String getDesc() {
-      java.lang.Object ref = desc_;
+    public java.lang.String getDefDesc() {
+      java.lang.Object ref = defDesc_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -1056,22 +1104,68 @@ public final class SkillsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          desc_ = s;
+          defDesc_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string desc = 9;</code>
+     * <code>optional string defDesc = 9;</code>
+     *
+     * <pre>
+     *defensive description
+     * </pre>
      */
     public com.google.protobuf.ByteString
-        getDescBytes() {
-      java.lang.Object ref = desc_;
+        getDefDescBytes() {
+      java.lang.Object ref = defDesc_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        desc_ = b;
+        defDesc_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OFFDESC_FIELD_NUMBER = 14;
+    private java.lang.Object offDesc_;
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    public boolean hasOffDesc() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    public java.lang.String getOffDesc() {
+      java.lang.Object ref = offDesc_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          offDesc_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string offDesc = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOffDescBytes() {
+      java.lang.Object ref = offDesc_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        offDesc_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1084,7 +1178,7 @@ public final class SkillsProto {
      * <code>optional string imgNamePrefix = 12;</code>
      */
     public boolean hasImgNamePrefix() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string imgNamePrefix = 12;</code>
@@ -1124,12 +1218,20 @@ public final class SkillsProto {
     private int skillEffectDuration_;
     /**
      * <code>optional int32 skillEffectDuration = 13;</code>
+     *
+     * <pre>
+     *optional string offDesc = 14; defined above
+     * </pre>
      */
     public boolean hasSkillEffectDuration() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional int32 skillEffectDuration = 13;</code>
+     *
+     * <pre>
+     *optional string offDesc = 14; defined above
+     * </pre>
      */
     public int getSkillEffectDuration() {
       return skillEffectDuration_;
@@ -1144,7 +1246,8 @@ public final class SkillsProto {
       predecId_ = 0;
       sucId_ = 0;
       properties_ = java.util.Collections.emptyList();
-      desc_ = "";
+      defDesc_ = "";
+      offDesc_ = "";
       imgNamePrefix_ = "";
       skillEffectDuration_ = 0;
     }
@@ -1186,13 +1289,16 @@ public final class SkillsProto {
         output.writeMessage(8, properties_.get(i));
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(9, getDescBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(12, getImgNamePrefixBytes());
+        output.writeBytes(9, getDefDescBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(12, getImgNamePrefixBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(13, skillEffectDuration_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(14, getOffDescBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1237,15 +1343,19 @@ public final class SkillsProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getDescBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getImgNamePrefixBytes());
+          .computeBytesSize(9, getDefDescBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, getImgNamePrefixBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(13, skillEffectDuration_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(14, getOffDescBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1385,12 +1495,14 @@ public final class SkillsProto {
         } else {
           propertiesBuilder_.clear();
         }
-        desc_ = "";
+        defDesc_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        imgNamePrefix_ = "";
+        offDesc_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        skillEffectDuration_ = 0;
+        imgNamePrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
+        skillEffectDuration_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -1459,13 +1571,17 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.desc_ = desc_;
+        result.defDesc_ = defDesc_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.imgNamePrefix_ = imgNamePrefix_;
+        result.offDesc_ = offDesc_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000200;
+        }
+        result.imgNamePrefix_ = imgNamePrefix_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000400;
         }
         result.skillEffectDuration_ = skillEffectDuration_;
         result.bitField0_ = to_bitField0_;
@@ -1533,13 +1649,18 @@ public final class SkillsProto {
             }
           }
         }
-        if (other.hasDesc()) {
+        if (other.hasDefDesc()) {
           bitField0_ |= 0x00000100;
-          desc_ = other.desc_;
+          defDesc_ = other.defDesc_;
+          onChanged();
+        }
+        if (other.hasOffDesc()) {
+          bitField0_ |= 0x00000200;
+          offDesc_ = other.offDesc_;
           onChanged();
         }
         if (other.hasImgNamePrefix()) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
           imgNamePrefix_ = other.imgNamePrefix_;
           onChanged();
         }
@@ -2171,24 +2292,32 @@ public final class SkillsProto {
         return propertiesBuilder_;
       }
 
-      private java.lang.Object desc_ = "";
+      private java.lang.Object defDesc_ = "";
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
-      public boolean hasDesc() {
+      public boolean hasDefDesc() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
-      public java.lang.String getDesc() {
-        java.lang.Object ref = desc_;
+      public java.lang.String getDefDesc() {
+        java.lang.Object ref = defDesc_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            desc_ = s;
+            defDesc_ = s;
           }
           return s;
         } else {
@@ -2196,53 +2325,145 @@ public final class SkillsProto {
         }
       }
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
       public com.google.protobuf.ByteString
-          getDescBytes() {
-        java.lang.Object ref = desc_;
+          getDefDescBytes() {
+        java.lang.Object ref = defDesc_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          desc_ = b;
+          defDesc_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
-      public Builder setDesc(
+      public Builder setDefDesc(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000100;
-        desc_ = value;
+        defDesc_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
-      public Builder clearDesc() {
+      public Builder clearDefDesc() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        desc_ = getDefaultInstance().getDesc();
+        defDesc_ = getDefaultInstance().getDefDesc();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string desc = 9;</code>
+       * <code>optional string defDesc = 9;</code>
+       *
+       * <pre>
+       *defensive description
+       * </pre>
        */
-      public Builder setDescBytes(
+      public Builder setDefDescBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000100;
-        desc_ = value;
+        defDesc_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object offDesc_ = "";
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public boolean hasOffDesc() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public java.lang.String getOffDesc() {
+        java.lang.Object ref = offDesc_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            offDesc_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOffDescBytes() {
+        java.lang.Object ref = offDesc_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          offDesc_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public Builder setOffDesc(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        offDesc_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public Builder clearOffDesc() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        offDesc_ = getDefaultInstance().getOffDesc();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string offDesc = 14;</code>
+       */
+      public Builder setOffDescBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        offDesc_ = value;
         onChanged();
         return this;
       }
@@ -2252,7 +2473,7 @@ public final class SkillsProto {
        * <code>optional string imgNamePrefix = 12;</code>
        */
       public boolean hasImgNamePrefix() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional string imgNamePrefix = 12;</code>
@@ -2295,7 +2516,7 @@ public final class SkillsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         imgNamePrefix_ = value;
         onChanged();
         return this;
@@ -2304,7 +2525,7 @@ public final class SkillsProto {
        * <code>optional string imgNamePrefix = 12;</code>
        */
       public Builder clearImgNamePrefix() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         imgNamePrefix_ = getDefaultInstance().getImgNamePrefix();
         onChanged();
         return this;
@@ -2317,7 +2538,7 @@ public final class SkillsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         imgNamePrefix_ = value;
         onChanged();
         return this;
@@ -2326,30 +2547,46 @@ public final class SkillsProto {
       private int skillEffectDuration_ ;
       /**
        * <code>optional int32 skillEffectDuration = 13;</code>
+       *
+       * <pre>
+       *optional string offDesc = 14; defined above
+       * </pre>
        */
       public boolean hasSkillEffectDuration() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional int32 skillEffectDuration = 13;</code>
+       *
+       * <pre>
+       *optional string offDesc = 14; defined above
+       * </pre>
        */
       public int getSkillEffectDuration() {
         return skillEffectDuration_;
       }
       /**
        * <code>optional int32 skillEffectDuration = 13;</code>
+       *
+       * <pre>
+       *optional string offDesc = 14; defined above
+       * </pre>
        */
       public Builder setSkillEffectDuration(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         skillEffectDuration_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional int32 skillEffectDuration = 13;</code>
+       *
+       * <pre>
+       *optional string offDesc = 14; defined above
+       * </pre>
        */
       public Builder clearSkillEffectDuration() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         skillEffectDuration_ = 0;
         onChanged();
         return this;
@@ -3105,32 +3342,33 @@ public final class SkillsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Skill.proto\022\016com.lvl6.proto\"\275\002\n\nSkillP" +
+      "\n\013Skill.proto\022\016com.lvl6.proto\"\321\002\n\nSkillP" +
       "roto\022\017\n\007skillId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007o" +
       "rbCost\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.pr" +
       "oto.SkillType\022;\n\016activationType\030\005 \001(\0162#." +
       "com.lvl6.proto.SkillActivationType\022\020\n\010pr" +
       "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
       "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
-      "oto\022\014\n\004desc\030\t \001(\t\022\025\n\rimgNamePrefix\030\014 \001(\t" +
-      "\022\033\n\023skillEffectDuration\030\r \001(\005\"O\n\022SkillPr" +
-      "opertyProto\022\027\n\017skillPropertyId\030\001 \001(\005\022\014\n\004",
-      "name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(\002*\377\003\n\tSkill" +
-      "Type\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JEL" +
-      "LY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHI" +
-      "ELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOME" +
-      "NTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRIT_AND_EVADE" +
-      "\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r\022\007\n\003MUD\020\016\022\016" +
-      "\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STRIKE\020\020\022\020\n\014FL" +
-      "AME_STRIKE\020\021\022\r\n\tCONFUSION\020\022\022\020\n\014STATIC_FI" +
-      "ELD\020\023\022\022\n\016BLINDING_LIGHT\020\024\022\021\n\rPOISON_POWD" +
-      "ER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020\027\022\021\n\rSHALLO",
-      "W_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n\nBLOOD_RAGE" +
-      "\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE\020\034\022\014\n\010ENERG" +
-      "IZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n\005CURSE\020\037\022\r\n\tINSU" +
-      "RANCE\020 \022\017\n\013FLAME_BREAK\020!*J\n\023SkillActivat" +
-      "ionType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTI" +
-      "VATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "oto\022\017\n\007defDesc\030\t \001(\t\022\017\n\007offDesc\030\016 \001(\t\022\025\n" +
+      "\rimgNamePrefix\030\014 \001(\t\022\033\n\023skillEffectDurat" +
+      "ion\030\r \001(\005\"O\n\022SkillPropertyProto\022\027\n\017skill",
+      "PropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillV" +
+      "alue\030\003 \001(\002*\377\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r" +
+      "\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK" +
+      "\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n" +
+      "\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN" +
+      "\020\n\022\022\n\016CRIT_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010H" +
+      "EADSHOT\020\r\022\007\n\003MUD\020\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016CO" +
+      "UNTER_STRIKE\020\020\022\020\n\014FLAME_STRIKE\020\021\022\r\n\tCONF" +
+      "USION\020\022\022\020\n\014STATIC_FIELD\020\023\022\022\n\016BLINDING_LI" +
+      "GHT\020\024\022\021\n\rPOISON_POWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010",
+      "KNOCKOUT\020\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_" +
+      "TIME\020\031\022\016\n\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\t" +
+      "HELL_FIRE\020\034\022\014\n\010ENERGIZE\020\035\022\016\n\nRIGHT_HOOK\020" +
+      "\036\022\t\n\005CURSE\020\037\022\r\n\tINSURANCE\020 \022\017\n\013FLAME_BRE" +
+      "AK\020!*J\n\023SkillActivationType\022\022\n\016USER_ACTI" +
+      "VATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003" +
+      "B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3149,7 +3387,7 @@ public final class SkillsProto {
     internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SkillProto_descriptor,
-        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "ImgNamePrefix", "SkillEffectDuration", });
+        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "DefDesc", "OffDesc", "ImgNamePrefix", "SkillEffectDuration", });
     internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new

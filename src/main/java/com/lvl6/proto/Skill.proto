@@ -33,14 +33,17 @@ message SkillProto {
 	
 	repeated SkillPropertyProto properties = 8;
 	
-	optional string desc = 9;
+	//defensive description
+	optional string defDesc = 9;
+	optional string offDesc = 14;
 	
-	//optional string iconImgName = 10;
+	//optional string iconImgName = 10; defined above
 	//Animation shown when skill activates.
-	//optional string logoImgName = 11;
+	//optional string logoImgName = 11; defined above
 	
 	optional string imgNamePrefix = 12;
 	optional int32 skillEffectDuration = 13;
+	//optional string offDesc = 14; defined above
 }
 
 message SkillPropertyProto {

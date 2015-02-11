@@ -2987,9 +2987,14 @@ public class CreateInfoProtoUtils {
 			}
 		}
 
-		str = s.getDesc();
+		str = s.getDefensiveDesc();
 		if (null != str) {
-			spb.setDesc(str);
+			spb.setDefDesc(str);
+		}
+		
+		str = s.getOffensiveDesc();
+		if (null != str) {
+			spb.setOffDesc(str);
 		}
 		
 		str = s.getImgNamePrefix();
