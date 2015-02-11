@@ -157,6 +157,10 @@ public final class SkillsProto {
      * <code>POISON_SKEWER = 34;</code>
      */
     POISON_SKEWER(33, 34),
+    /**
+     * <code>POISON_FIRE = 35;</code>
+     */
+    POISON_FIRE(34, 35),
     ;
 
     /**
@@ -303,6 +307,10 @@ public final class SkillsProto {
      * <code>POISON_SKEWER = 34;</code>
      */
     public static final int POISON_SKEWER_VALUE = 34;
+    /**
+     * <code>POISON_FIRE = 35;</code>
+     */
+    public static final int POISON_FIRE_VALUE = 35;
 
 
     public final int getNumber() { return value; }
@@ -343,6 +351,7 @@ public final class SkillsProto {
         case 32: return INSURANCE;
         case 33: return FLAME_BREAK;
         case 34: return POISON_SKEWER;
+        case 35: return POISON_FIRE;
         default: return null;
       }
     }
@@ -3362,7 +3371,7 @@ public final class SkillsProto {
       "\rimgNamePrefix\030\014 \001(\t\022\033\n\023skillEffectDurat" +
       "ion\030\r \001(\005\"O\n\022SkillPropertyProto\022\027\n\017skill",
       "PropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillV" +
-      "alue\030\003 \001(\002*\222\004\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r" +
+      "alue\030\003 \001(\002*\243\004\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r" +
       "\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK" +
       "\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n" +
       "\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN" +
@@ -3375,9 +3384,10 @@ public final class SkillsProto {
       "TIME\020\031\022\016\n\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\t" +
       "HELL_FIRE\020\034\022\014\n\010ENERGIZE\020\035\022\016\n\nRIGHT_HOOK\020" +
       "\036\022\t\n\005CURSE\020\037\022\r\n\tINSURANCE\020 \022\017\n\013FLAME_BRE" +
-      "AK\020!\022\021\n\rPOISON_SKEWER\020\"*J\n\023SkillActivati" +
-      "onType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIV" +
-      "ATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "AK\020!\022\021\n\rPOISON_SKEWER\020\"\022\017\n\013POISON_FIRE\020#" +
+      "*J\n\023SkillActivationType\022\022\n\016USER_ACTIVATE" +
+      "D\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013" +
+      "SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
