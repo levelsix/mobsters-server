@@ -265,6 +265,7 @@ message StartupResponseProto {
 		message MiniTutorialConstants {
 			optional int32 miniTutorialTaskId = 1;
 			optional int32 guideMonsterId = 2;
+			optional int32 enhanceGuideMonsterId = 3;
 		}
 		message ClanHelpConstants {
 			optional GameActionType helpType = 1 [default = NO_HELP];

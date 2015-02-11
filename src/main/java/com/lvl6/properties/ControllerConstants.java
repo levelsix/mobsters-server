@@ -221,6 +221,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1100;
 	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 2001;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
+	public static final int TUTORIAL__ENHANCE_GUIDE_MONSTER_ID = 1750;
 
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     {200,  400,  600,  700,  825,  /*170,*/ 1000};

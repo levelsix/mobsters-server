@@ -947,6 +947,7 @@ public class MiscMethods {
 		MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
 		mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
 		mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+		mtcb.setEnhanceGuideMonsterId(ControllerConstants.TUTORIAL__ENHANCE_GUIDE_MONSTER_ID);
 
 		return mtcb.build();
 	}

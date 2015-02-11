@@ -11378,6 +11378,15 @@ public final class EventStartupProto {
          * <code>optional int32 guideMonsterId = 2;</code>
          */
         int getGuideMonsterId();
+
+        /**
+         * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+         */
+        boolean hasEnhanceGuideMonsterId();
+        /**
+         * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+         */
+        int getEnhanceGuideMonsterId();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants}
@@ -11439,6 +11448,11 @@ public final class EventStartupProto {
                 case 16: {
                   bitField0_ |= 0x00000002;
                   guideMonsterId_ = input.readInt32();
+                  break;
+                }
+                case 24: {
+                  bitField0_ |= 0x00000004;
+                  enhanceGuideMonsterId_ = input.readInt32();
                   break;
                 }
               }
@@ -11511,9 +11525,25 @@ public final class EventStartupProto {
           return guideMonsterId_;
         }
 
+        public static final int ENHANCEGUIDEMONSTERID_FIELD_NUMBER = 3;
+        private int enhanceGuideMonsterId_;
+        /**
+         * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+         */
+        public boolean hasEnhanceGuideMonsterId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+         */
+        public int getEnhanceGuideMonsterId() {
+          return enhanceGuideMonsterId_;
+        }
+
         private void initFields() {
           miniTutorialTaskId_ = 0;
           guideMonsterId_ = 0;
+          enhanceGuideMonsterId_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -11534,6 +11564,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeInt32(2, guideMonsterId_);
           }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeInt32(3, enhanceGuideMonsterId_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -11550,6 +11583,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(2, guideMonsterId_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(3, enhanceGuideMonsterId_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -11672,6 +11709,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000001);
             guideMonsterId_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
+            enhanceGuideMonsterId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000004);
             return this;
           }
 
@@ -11708,6 +11747,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000002;
             }
             result.guideMonsterId_ = guideMonsterId_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.enhanceGuideMonsterId_ = enhanceGuideMonsterId_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -11729,6 +11772,9 @@ public final class EventStartupProto {
             }
             if (other.hasGuideMonsterId()) {
               setGuideMonsterId(other.getGuideMonsterId());
+            }
+            if (other.hasEnhanceGuideMonsterId()) {
+              setEnhanceGuideMonsterId(other.getEnhanceGuideMonsterId());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -11817,6 +11863,38 @@ public final class EventStartupProto {
           public Builder clearGuideMonsterId() {
             bitField0_ = (bitField0_ & ~0x00000002);
             guideMonsterId_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int enhanceGuideMonsterId_ ;
+          /**
+           * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+           */
+          public boolean hasEnhanceGuideMonsterId() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          /**
+           * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+           */
+          public int getEnhanceGuideMonsterId() {
+            return enhanceGuideMonsterId_;
+          }
+          /**
+           * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+           */
+          public Builder setEnhanceGuideMonsterId(int value) {
+            bitField0_ |= 0x00000004;
+            enhanceGuideMonsterId_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 enhanceGuideMonsterId = 3;</code>
+           */
+          public Builder clearEnhanceGuideMonsterId() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            enhanceGuideMonsterId_ = 0;
             onChanged();
             return this;
           }
@@ -35181,7 +35259,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\3648\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\2239\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -35254,7 +35332,7 @@ public final class EventStartupProto {
       "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
       "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
-      "eferrer\030\003 \001(\005\032\327\034\n\020StartupConstants\022H\n\025in",
+      "eferrer\030\003 \001(\005\032\366\034\n\020StartupConstants\022H\n\025in",
       "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
       "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
       "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
@@ -35330,42 +35408,43 @@ public final class EventStartupProto {
       "tionImagePrefix\030\001 \001(\t\022\033\n\023mapNumberOfSect" +
       "ions\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002\022\025\n\r" +
       "mapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 " +
-      "\001(\002\032K\n\025MiniTutorialConstants\022\032\n\022miniTuto" +
+      "\001(\002\032j\n\025MiniTutorialConstants\022\032\n\022miniTuto" +
       "rialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005" +
-      "\032\213\001\n\021ClanHelpConstants\0229\n\010helpType\030\001 \001(\016" +
-      "2\036.com.lvl6.proto.GameActionType:\007NO_HEL" +
-      "P\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025perce",
-      "ntRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022" +
-      "\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgD" +
-      "elta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pv" +
-      "pRequiredMinLvl\030\004 \001(\005\022\035\n\025defendingMsgCha" +
-      "rLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeLimitMi" +
-      "ns\030\006 \001(\005\022(\n requestClanToAvengeTimeLimit" +
-      "Mins\030\007 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007se" +
-      "conds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037Resourc" +
-      "eConversionConstantProto\022?\n\014resourceType" +
-      "\030\001 \001(\0162\034.com.lvl6.proto.ResourceType:\013NO",
-      "_RESOURCE\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGem" +
-      "s\030\003 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021startin" +
-      "gMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005" +
-      "\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonster" +
-      "IdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022" +
-      "\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialStruc" +
-      "tures\030\003 \003(\0132#.com.lvl6.proto.TutorialStr" +
-      "uctProto\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005" +
-      "\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(" +
-      "\0132 .com.lvl6.proto.CityElementProto\022$\n\034c",
-      "ityElementIdForFirstDungeon\030\007 \001(\005\022%\n\035cit" +
-      "yElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010cash" +
-      "Init\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030" +
-      "\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.l" +
-      "vl6.proto.MinimumObstacleProto\"A\n\014Update" +
-      "Status\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022" +
-      "\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUS" +
-      "ER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER" +
-      "_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResponse" +
-      "Proto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid",
-      "\030\002 \001(\tB\023B\021EventStartupProto"
+      "\022\035\n\025enhanceGuideMonsterId\030\003 \001(\005\032\213\001\n\021Clan" +
+      "HelpConstants\0229\n\010helpType\030\001 \001(\0162\036.com.lv" +
+      "l6.proto.GameActionType:\007NO_HELP\022\034\n\024amou",
+      "ntRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemoved" +
+      "PerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pvpDmg" +
+      "sWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(" +
+      "\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequired" +
+      "MinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimit\030\005 " +
+      "\001(\005\022\"\n\032beginAvengingTimeLimitMins\030\006 \001(\005\022" +
+      "(\n requestClanToAvengeTimeLimitMins\030\007 \001(" +
+      "\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030\001 \001" +
+      "(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037ResourceConversi" +
+      "onConstantProto\022?\n\014resourceType\030\001 \001(\0162\034.",
+      "com.lvl6.proto.ResourceType:\013NO_RESOURCE" +
+      "\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234" +
+      "\004\n\021TutorialConstants\022\031\n\021startingMonsterI" +
+      "d\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enemy" +
+      "MonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001" +
+      "(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZM" +
+      "onsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003" +
+      "(\0132#.com.lvl6.proto.TutorialStructProto\022" +
+      "\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityI" +
+      "d\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.l",
+      "vl6.proto.CityElementProto\022$\n\034cityElemen" +
+      "tIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElementI" +
+      "dForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(" +
+      "\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021" +
+      "tutorialObstacles\030\016 \003(\0132$.com.lvl6.proto" +
+      ".MinimumObstacleProto\"A\n\014UpdateStatus\022\r\n" +
+      "\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_" +
+      "UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020" +
+      "\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINT" +
+      "ENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n\021",
+      "previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B" +
+      "\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -35478,7 +35557,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
-        new java.lang.String[] { "MiniTutorialTaskId", "GuideMonsterId", });
+        new java.lang.String[] { "MiniTutorialTaskId", "GuideMonsterId", "EnhanceGuideMonsterId", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(8);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable = new
