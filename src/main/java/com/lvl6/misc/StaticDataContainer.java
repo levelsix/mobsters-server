@@ -2,6 +2,7 @@ package com.lvl6.misc;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -264,7 +265,15 @@ public class StaticDataContainer
 				packIdToDisplayIdsToDisplayItems.get(bpackId);
 			Collection<BoosterDisplayItem> displayItems = null;
 			if (null != displayIdsToDisplayItems) {
-				displayItems = displayIdsToDisplayItems.values();
+				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+				Collections.sort(displayItemIds);
+
+                displayItems = new ArrayList<BoosterDisplayItem>();
+                
+                for (Integer displayItemId : displayItemIds) {
+                    displayItems.add(displayIdsToDisplayItems.get(displayItemId));
+                }
 			}
 			
 
