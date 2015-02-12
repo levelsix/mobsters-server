@@ -123,25 +123,24 @@ message SkillSideEffectProto {
 	optional int32 pfxPixelOffsetX = 13;
 	optional int32 pfxPixelOffsetY = 14;
 	optional SideEffectBlendMode blendMode = 15 [default = NORMAL_FULL_OPACITY];
-	 
 	
-	enum SideEffectType {
-		NO_SIDE_EFFECT = 1;
-		
-		POISON = 2;
-	}
-	enum SideEffectTraitType {
-		NO_TRAIT = 1;
-		
-		BUFF = 2;
-		NERF = 3;
-	}
-	enum SideEffectPositionType {
-		BELOW_CHARACTER = 1;
-		ABOVE_CHARACTER = 2;
-	}
-	enum SideEffectBlendMode {
-		NORMAL_FULL_OPACITY = 1;
-	}
+}
+
+enum SideEffectType {
+	NO_SIDE_EFFECT = 1;
 	
+	POISONED = 2;
+}
+enum SideEffectTraitType {
+	NO_TRAIT = 1;
+	
+	BUFF = 2;
+	NERF = 3;
+}
+enum SideEffectPositionType {
+	BELOW_CHARACTER = 1;
+	ABOVE_CHARACTER = 2;
+}
+enum SideEffectBlendMode {
+	NORMAL_FULL_OPACITY = 1;
 }
