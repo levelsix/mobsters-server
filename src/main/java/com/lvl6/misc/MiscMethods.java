@@ -819,21 +819,26 @@ public class MiscMethods {
 		
 		
 		Map<Integer, FileDownload> fileDownloadMap = FileDownloadRetrieveUtils.getIdsToFileDownloads();
-		List<FileDownload> fileDownloadList = new ArrayList<FileDownload>(fileDownloadMap.values());
 		
-		Collections.sort(fileDownloadList, new Comparator<FileDownload>() {
-			public int compare(FileDownload fd1, FileDownload fd2) {
-				return fd1.getPriority() - fd2.getPriority();
-			}
-		});
+		if(fileDownloadMap == null) {
+			log.error("no filedownloads");
+		} else {
+			List<FileDownload> fileDownloadList = new ArrayList<FileDownload>(fileDownloadMap.values());
 
-		List<String> fileNameList = new ArrayList<String>();
-		for(FileDownload fd : fileDownloadList) {
-			fileNameList.add(fd.getFileName());
+			Collections.sort(fileDownloadList, new Comparator<FileDownload>() {
+				public int compare(FileDownload fd1, FileDownload fd2) {
+					return fd1.getPriority() - fd2.getPriority();
+				}
+			});
+
+			for(FileDownload fd : fileDownloadList) {
+				cb.addFileDownloadProtoList(
+						CreateInfoProtoUtils
+						.createFileDownloadProtoFromFileDownload(fd));
+			}
+
+			
 		}
-		
-		cb.addAllFileNamesToDownload(fileNameList);
-		
 		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
