@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,6 +33,7 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.Dialogue;
+import com.lvl6.info.FileDownload;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -815,6 +817,24 @@ public class MiscMethods {
 		cb.setTaskIdOfFirstSkill(ControllerConstants.SKILL_FIRST_TASK_ID);
 		cb.setMinsToResolicitTeamDonation(ControllerConstants.CLAN__MINS_TO_RESOLICIT_TEAM_DONATION);
 		
+		
+		Map<Integer, FileDownload> fileDownloadMap = FileDownloadRetrieveUtils.getIdsToFileDownloads();
+		List<FileDownload> fileDownloadList = new ArrayList<FileDownload>(fileDownloadMap.values());
+		
+		Collections.sort(fileDownloadList, new Comparator<FileDownload>() {
+			public int compare(FileDownload fd1, FileDownload fd2) {
+				return fd1.getPriority() - fd2.getPriority();
+			}
+		});
+
+		List<String> fileNameList = new ArrayList<String>();
+		for(Integer i : fileDownloadMap.keySet()) {
+			fileNameList.add(fileDownloadMap.get(i).getFileName());
+		}
+		
+		cb.addAllFileNamesToDownload(fileNameList);
+		
+		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
 		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -952,6 +972,7 @@ public class MiscMethods {
 		return mtcb.build();
 	}
 
+	
 //	public static List<TournamentEventProto> currentTournamentEventProtos() {
 //		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
 //		long curTime = (new Date()).getTime();
