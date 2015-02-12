@@ -88,6 +88,7 @@ public class DBConstants {
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config"; 
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
+	public static final String TABLE_SKILL_SIDE_EFFECT_CONFIG = "skill_side_effect_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
 	public static final String TABLE_STRUCTURE_CONFIG = "structure_config";
 	public static final String TABLE_STRUCTURE_CLAN_HOUSE_CONFIG = "structure_clan_house_config";
@@ -1088,6 +1089,19 @@ public class DBConstants {
 	public static final String SKILL_PROPERTY__NAME = "name";
 	public static final String SKILL_PROPERTY__VALUE = "value";
 	public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
+	
+//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
+//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
+//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
+//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
+//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
+//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
+//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
+//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
+//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
+//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
+//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
+//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
 
 	public static final String STATIC_LEVEL_INFO__LEVEL_ID = "level_id";
 	public static final String STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE = "required_experience";

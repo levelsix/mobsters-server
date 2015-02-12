@@ -46,6 +46,8 @@ message SkillProto {
 	//optional string offDesc = 14; defined above
 }
 
+//------------------------------------------------------------------------------------------
+
 message SkillPropertyProto {
 	optional int32 skillPropertyId = 1;
 	optional string name = 2; //TODO: should be an enum later on
@@ -98,4 +100,41 @@ enum SkillActivationType {
 	USER_ACTIVATED = 1;
 	AUTO_ACTIVATED = 2;
 	PASSIVE = 3; //think this should be always active
+}
+
+//------------------------------------------------------------------------------------------
+
+	//Do not use the word 'value' 
+message SkillSideEffectProto {
+	optional int32 skillSideEffectId = 1;
+	optional string name = 2;
+	optional string desc = 3;
+	optional SideEffectType type = 4 [default = NO_SIDE_EFFECT];
+	optional SideEffectTraitType traitType = 5 [default = NO_TRAIT];
+	optional string imgName = 6;
+	optional int32 imgPixelOffsetX = 7;
+	optional int32 imgPixelOffsetY = 8;
+	optional string iconImgName = 9;
+	optional string pfxName = 10;
+	optional string pfxColor = 11;
+	optional SideEffectPositionType placementType = 12 [default = NO_POSITION];
+	optional int32 pfxPixelOffsetX = 13;
+	optional int32 pfxPixelOffsetY = 14;
+	 
+	 
+	
+	enum SideEffectType {
+		NO_SIDE_EFFECT = 1;
+	}
+	enum SideEffectTraitType {
+		NO_TRAIT = 1;
+		BUFF = 2;
+		AILMENT = 3;
+	}
+	enum SideEffectPositionType {
+		NO_POSITION = 1;
+		ABOVE_CHARACTER = 2;
+		BELOW_CHARACTER = 3;
+	}
+	
 }
