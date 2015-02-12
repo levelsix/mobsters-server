@@ -40,6 +40,7 @@ public class DBConstants {
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
 	public static final String TABLE_EXPANSION_COST_CONFIG = "expansion_cost_config";				//TODO: delete
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";	//TODO: delete
+	public static final String TABLE_FILE_DOWNLOAD_CONFIG = "file_download_config";
 	public static final String TABLE_GOLD_SALE_CONFIG = "gold_sale_config";							//TODO: delete
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM_CONFIG = "item_config";
@@ -322,6 +323,11 @@ public class DBConstants {
 	public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
 	public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
 
+	/*FILE DOWNLOAD CONFIG TABLE */
+	public static final String FILE_DOWNLOAD_CONFIG__ID = "id";
+	public static final String FILE_DOWNLOAD_CONGIG__FILENAME = "filename";
+	public static final String FILE_DOWNLOAD_CONGIG__PRIORITY = "priority";
+	
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
 	public static final String IAP_HISTORY__USER_ID = GENERIC__USER_ID;
