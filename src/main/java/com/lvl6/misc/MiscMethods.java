@@ -832,7 +832,7 @@ public class MiscMethods {
 			});
 
 			for(FileDownload fd : fileDownloadList) {
-				cb.addFileDownloadProtoList(
+				cb.addFileDownloadProto(
 						CreateInfoProtoUtils
 						.createFileDownloadProtoFromFileDownload(fd));
 			}

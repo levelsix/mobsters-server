@@ -6046,27 +6046,27 @@ public final class EventStartupProto {
       int getMinsToResolicitTeamDonation();
 
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
       java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> 
-          getFileDownloadProtoListList();
+          getFileDownloadProtoList();
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProtoList(int index);
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProto(int index);
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      int getFileDownloadProtoListCount();
+      int getFileDownloadProtoCount();
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
       java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> 
-          getFileDownloadProtoListOrBuilderList();
+          getFileDownloadProtoOrBuilderList();
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoListOrBuilder(
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoOrBuilder(
           int index);
     }
     /**
@@ -6407,10 +6407,10 @@ public final class EventStartupProto {
               }
               case 322: {
                 if (!((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
-                  fileDownloadProtoList_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto>();
+                  fileDownloadProto_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto>();
                   mutable_bitField1_ |= 0x00000080;
                 }
-                fileDownloadProtoList_.add(input.readMessage(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.PARSER, extensionRegistry));
+                fileDownloadProto_.add(input.readMessage(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.PARSER, extensionRegistry));
                 break;
               }
             }
@@ -6437,7 +6437,7 @@ public final class EventStartupProto {
             rccp_ = java.util.Collections.unmodifiableList(rccp_);
           }
           if (((mutable_bitField1_ & 0x00000080) == 0x00000080)) {
-            fileDownloadProtoList_ = java.util.Collections.unmodifiableList(fileDownloadProtoList_);
+            fileDownloadProto_ = java.util.Collections.unmodifiableList(fileDownloadProto_);
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -16195,39 +16195,39 @@ public final class EventStartupProto {
         return minsToResolicitTeamDonation_;
       }
 
-      public static final int FILEDOWNLOADPROTOLIST_FIELD_NUMBER = 40;
-      private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProtoList_;
+      public static final int FILEDOWNLOADPROTO_FIELD_NUMBER = 40;
+      private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProto_;
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> getFileDownloadProtoListList() {
-        return fileDownloadProtoList_;
+      public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> getFileDownloadProtoList() {
+        return fileDownloadProto_;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
       public java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> 
-          getFileDownloadProtoListOrBuilderList() {
-        return fileDownloadProtoList_;
+          getFileDownloadProtoOrBuilderList() {
+        return fileDownloadProto_;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      public int getFileDownloadProtoListCount() {
-        return fileDownloadProtoList_.size();
+      public int getFileDownloadProtoCount() {
+        return fileDownloadProto_.size();
       }
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProtoList(int index) {
-        return fileDownloadProtoList_.get(index);
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProto(int index) {
+        return fileDownloadProto_.get(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoListOrBuilder(
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoOrBuilder(
           int index) {
-        return fileDownloadProtoList_.get(index);
+        return fileDownloadProto_.get(index);
       }
 
       private void initFields() {
@@ -16270,7 +16270,7 @@ public final class EventStartupProto {
         displayRarity_ = false;
         taskIdOfFirstSkill_ = 0;
         minsToResolicitTeamDonation_ = 0;
-        fileDownloadProtoList_ = java.util.Collections.emptyList();
+        fileDownloadProto_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -16402,8 +16402,8 @@ public final class EventStartupProto {
         if (((bitField1_ & 0x00000002) == 0x00000002)) {
           output.writeInt32(39, minsToResolicitTeamDonation_);
         }
-        for (int i = 0; i < fileDownloadProtoList_.size(); i++) {
-          output.writeMessage(40, fileDownloadProtoList_.get(i));
+        for (int i = 0; i < fileDownloadProto_.size(); i++) {
+          output.writeMessage(40, fileDownloadProto_.get(i));
         }
         getUnknownFields().writeTo(output);
       }
@@ -16570,9 +16570,9 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(39, minsToResolicitTeamDonation_);
         }
-        for (int i = 0; i < fileDownloadProtoList_.size(); i++) {
+        for (int i = 0; i < fileDownloadProto_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(40, fileDownloadProtoList_.get(i));
+            .computeMessageSize(40, fileDownloadProto_.get(i));
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -16697,7 +16697,7 @@ public final class EventStartupProto {
             getPvpConstantFieldBuilder();
             getSucpFieldBuilder();
             getRccpFieldBuilder();
-            getFileDownloadProtoListFieldBuilder();
+            getFileDownloadProtoFieldBuilder();
           }
         }
         private static Builder create() {
@@ -16840,11 +16840,11 @@ public final class EventStartupProto {
           bitField1_ = (bitField1_ & ~0x00000020);
           minsToResolicitTeamDonation_ = 0;
           bitField1_ = (bitField1_ & ~0x00000040);
-          if (fileDownloadProtoListBuilder_ == null) {
-            fileDownloadProtoList_ = java.util.Collections.emptyList();
+          if (fileDownloadProtoBuilder_ == null) {
+            fileDownloadProto_ = java.util.Collections.emptyList();
             bitField1_ = (bitField1_ & ~0x00000080);
           } else {
-            fileDownloadProtoListBuilder_.clear();
+            fileDownloadProtoBuilder_.clear();
           }
           return this;
         }
@@ -17093,14 +17093,14 @@ public final class EventStartupProto {
             to_bitField1_ |= 0x00000002;
           }
           result.minsToResolicitTeamDonation_ = minsToResolicitTeamDonation_;
-          if (fileDownloadProtoListBuilder_ == null) {
+          if (fileDownloadProtoBuilder_ == null) {
             if (((bitField1_ & 0x00000080) == 0x00000080)) {
-              fileDownloadProtoList_ = java.util.Collections.unmodifiableList(fileDownloadProtoList_);
+              fileDownloadProto_ = java.util.Collections.unmodifiableList(fileDownloadProto_);
               bitField1_ = (bitField1_ & ~0x00000080);
             }
-            result.fileDownloadProtoList_ = fileDownloadProtoList_;
+            result.fileDownloadProto_ = fileDownloadProto_;
           } else {
-            result.fileDownloadProtoList_ = fileDownloadProtoListBuilder_.build();
+            result.fileDownloadProto_ = fileDownloadProtoBuilder_.build();
           }
           result.bitField0_ = to_bitField0_;
           result.bitField1_ = to_bitField1_;
@@ -17353,29 +17353,29 @@ public final class EventStartupProto {
           if (other.hasMinsToResolicitTeamDonation()) {
             setMinsToResolicitTeamDonation(other.getMinsToResolicitTeamDonation());
           }
-          if (fileDownloadProtoListBuilder_ == null) {
-            if (!other.fileDownloadProtoList_.isEmpty()) {
-              if (fileDownloadProtoList_.isEmpty()) {
-                fileDownloadProtoList_ = other.fileDownloadProtoList_;
+          if (fileDownloadProtoBuilder_ == null) {
+            if (!other.fileDownloadProto_.isEmpty()) {
+              if (fileDownloadProto_.isEmpty()) {
+                fileDownloadProto_ = other.fileDownloadProto_;
                 bitField1_ = (bitField1_ & ~0x00000080);
               } else {
-                ensureFileDownloadProtoListIsMutable();
-                fileDownloadProtoList_.addAll(other.fileDownloadProtoList_);
+                ensureFileDownloadProtoIsMutable();
+                fileDownloadProto_.addAll(other.fileDownloadProto_);
               }
               onChanged();
             }
           } else {
-            if (!other.fileDownloadProtoList_.isEmpty()) {
-              if (fileDownloadProtoListBuilder_.isEmpty()) {
-                fileDownloadProtoListBuilder_.dispose();
-                fileDownloadProtoListBuilder_ = null;
-                fileDownloadProtoList_ = other.fileDownloadProtoList_;
+            if (!other.fileDownloadProto_.isEmpty()) {
+              if (fileDownloadProtoBuilder_.isEmpty()) {
+                fileDownloadProtoBuilder_.dispose();
+                fileDownloadProtoBuilder_ = null;
+                fileDownloadProto_ = other.fileDownloadProto_;
                 bitField1_ = (bitField1_ & ~0x00000080);
-                fileDownloadProtoListBuilder_ = 
+                fileDownloadProtoBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                     getFileDownloadProtoListFieldBuilder() : null;
+                     getFileDownloadProtoFieldBuilder() : null;
               } else {
-                fileDownloadProtoListBuilder_.addAllMessages(other.fileDownloadProtoList_);
+                fileDownloadProtoBuilder_.addAllMessages(other.fileDownloadProto_);
               }
             }
           }
@@ -20631,244 +20631,244 @@ public final class EventStartupProto {
           return this;
         }
 
-        private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProtoList_ =
+        private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProto_ =
           java.util.Collections.emptyList();
-        private void ensureFileDownloadProtoListIsMutable() {
+        private void ensureFileDownloadProtoIsMutable() {
           if (!((bitField1_ & 0x00000080) == 0x00000080)) {
-            fileDownloadProtoList_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto>(fileDownloadProtoList_);
+            fileDownloadProto_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto>(fileDownloadProto_);
             bitField1_ |= 0x00000080;
            }
         }
 
         private com.google.protobuf.RepeatedFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> fileDownloadProtoListBuilder_;
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> fileDownloadProtoBuilder_;
 
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> getFileDownloadProtoListList() {
-          if (fileDownloadProtoListBuilder_ == null) {
-            return java.util.Collections.unmodifiableList(fileDownloadProtoList_);
+        public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> getFileDownloadProtoList() {
+          if (fileDownloadProtoBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(fileDownloadProto_);
           } else {
-            return fileDownloadProtoListBuilder_.getMessageList();
+            return fileDownloadProtoBuilder_.getMessageList();
           }
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public int getFileDownloadProtoListCount() {
-          if (fileDownloadProtoListBuilder_ == null) {
-            return fileDownloadProtoList_.size();
+        public int getFileDownloadProtoCount() {
+          if (fileDownloadProtoBuilder_ == null) {
+            return fileDownloadProto_.size();
           } else {
-            return fileDownloadProtoListBuilder_.getCount();
+            return fileDownloadProtoBuilder_.getCount();
           }
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProtoList(int index) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            return fileDownloadProtoList_.get(index);
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto getFileDownloadProto(int index) {
+          if (fileDownloadProtoBuilder_ == null) {
+            return fileDownloadProto_.get(index);
           } else {
-            return fileDownloadProtoListBuilder_.getMessage(index);
+            return fileDownloadProtoBuilder_.getMessage(index);
           }
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder setFileDownloadProtoList(
+        public Builder setFileDownloadProto(
             int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto value) {
-          if (fileDownloadProtoListBuilder_ == null) {
+          if (fileDownloadProtoBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.set(index, value);
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.set(index, value);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.setMessage(index, value);
+            fileDownloadProtoBuilder_.setMessage(index, value);
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder setFileDownloadProtoList(
+        public Builder setFileDownloadProto(
             int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder builderForValue) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.set(index, builderForValue.build());
+          if (fileDownloadProtoBuilder_ == null) {
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.set(index, builderForValue.build());
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.setMessage(index, builderForValue.build());
+            fileDownloadProtoBuilder_.setMessage(index, builderForValue.build());
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder addFileDownloadProtoList(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto value) {
-          if (fileDownloadProtoListBuilder_ == null) {
+        public Builder addFileDownloadProto(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto value) {
+          if (fileDownloadProtoBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.add(value);
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.add(value);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.addMessage(value);
+            fileDownloadProtoBuilder_.addMessage(value);
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder addFileDownloadProtoList(
+        public Builder addFileDownloadProto(
             int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto value) {
-          if (fileDownloadProtoListBuilder_ == null) {
+          if (fileDownloadProtoBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.add(index, value);
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.add(index, value);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.addMessage(index, value);
+            fileDownloadProtoBuilder_.addMessage(index, value);
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder addFileDownloadProtoList(
+        public Builder addFileDownloadProto(
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder builderForValue) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.add(builderForValue.build());
+          if (fileDownloadProtoBuilder_ == null) {
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.add(builderForValue.build());
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.addMessage(builderForValue.build());
+            fileDownloadProtoBuilder_.addMessage(builderForValue.build());
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder addFileDownloadProtoList(
+        public Builder addFileDownloadProto(
             int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder builderForValue) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.add(index, builderForValue.build());
+          if (fileDownloadProtoBuilder_ == null) {
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.add(index, builderForValue.build());
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.addMessage(index, builderForValue.build());
+            fileDownloadProtoBuilder_.addMessage(index, builderForValue.build());
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder addAllFileDownloadProtoList(
+        public Builder addAllFileDownloadProto(
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> values) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            ensureFileDownloadProtoListIsMutable();
+          if (fileDownloadProtoBuilder_ == null) {
+            ensureFileDownloadProtoIsMutable();
             com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, fileDownloadProtoList_);
+                values, fileDownloadProto_);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.addAllMessages(values);
+            fileDownloadProtoBuilder_.addAllMessages(values);
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder clearFileDownloadProtoList() {
-          if (fileDownloadProtoListBuilder_ == null) {
-            fileDownloadProtoList_ = java.util.Collections.emptyList();
+        public Builder clearFileDownloadProto() {
+          if (fileDownloadProtoBuilder_ == null) {
+            fileDownloadProto_ = java.util.Collections.emptyList();
             bitField1_ = (bitField1_ & ~0x00000080);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.clear();
+            fileDownloadProtoBuilder_.clear();
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public Builder removeFileDownloadProtoList(int index) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            ensureFileDownloadProtoListIsMutable();
-            fileDownloadProtoList_.remove(index);
+        public Builder removeFileDownloadProto(int index) {
+          if (fileDownloadProtoBuilder_ == null) {
+            ensureFileDownloadProtoIsMutable();
+            fileDownloadProto_.remove(index);
             onChanged();
           } else {
-            fileDownloadProtoListBuilder_.remove(index);
+            fileDownloadProtoBuilder_.remove(index);
           }
           return this;
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder getFileDownloadProtoListBuilder(
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder getFileDownloadProtoBuilder(
             int index) {
-          return getFileDownloadProtoListFieldBuilder().getBuilder(index);
+          return getFileDownloadProtoFieldBuilder().getBuilder(index);
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoListOrBuilder(
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoOrBuilder(
             int index) {
-          if (fileDownloadProtoListBuilder_ == null) {
-            return fileDownloadProtoList_.get(index);  } else {
-            return fileDownloadProtoListBuilder_.getMessageOrBuilder(index);
+          if (fileDownloadProtoBuilder_ == null) {
+            return fileDownloadProto_.get(index);  } else {
+            return fileDownloadProtoBuilder_.getMessageOrBuilder(index);
           }
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
         public java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> 
-             getFileDownloadProtoListOrBuilderList() {
-          if (fileDownloadProtoListBuilder_ != null) {
-            return fileDownloadProtoListBuilder_.getMessageOrBuilderList();
+             getFileDownloadProtoOrBuilderList() {
+          if (fileDownloadProtoBuilder_ != null) {
+            return fileDownloadProtoBuilder_.getMessageOrBuilderList();
           } else {
-            return java.util.Collections.unmodifiableList(fileDownloadProtoList_);
+            return java.util.Collections.unmodifiableList(fileDownloadProto_);
           }
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder addFileDownloadProtoListBuilder() {
-          return getFileDownloadProtoListFieldBuilder().addBuilder(
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder addFileDownloadProtoBuilder() {
+          return getFileDownloadProtoFieldBuilder().addBuilder(
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.getDefaultInstance());
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder addFileDownloadProtoListBuilder(
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder addFileDownloadProtoBuilder(
             int index) {
-          return getFileDownloadProtoListFieldBuilder().addBuilder(
+          return getFileDownloadProtoFieldBuilder().addBuilder(
               index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.getDefaultInstance());
         }
         /**
-         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProtoList = 40;</code>
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
          */
         public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder> 
-             getFileDownloadProtoListBuilderList() {
-          return getFileDownloadProtoListFieldBuilder().getBuilderList();
+             getFileDownloadProtoBuilderList() {
+          return getFileDownloadProtoFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder> 
-            getFileDownloadProtoListFieldBuilder() {
-          if (fileDownloadProtoListBuilder_ == null) {
-            fileDownloadProtoListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            getFileDownloadProtoFieldBuilder() {
+          if (fileDownloadProtoBuilder_ == null) {
+            fileDownloadProtoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder>(
-                    fileDownloadProtoList_,
+                    fileDownloadProto_,
                     ((bitField1_ & 0x00000080) == 0x00000080),
                     getParentForChildren(),
                     isClean());
-            fileDownloadProtoList_ = null;
+            fileDownloadProto_ = null;
           }
-          return fileDownloadProtoListBuilder_;
+          return fileDownloadProtoBuilder_;
         }
 
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -36334,7 +36334,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\372:\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\366:\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -36407,7 +36407,7 @@ public final class EventStartupProto {
       "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
       "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
-      "eferrer\030\003 \001(\005\032\335\036\n\020StartupConstants\022H\n\025in",
+      "eferrer\030\003 \001(\005\032\331\036\n\020StartupConstants\022H\n\025in",
       "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
       "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
       "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
@@ -36459,73 +36459,73 @@ public final class EventStartupProto {
       "oto.StartupConstants.ResourceConversionC" +
       "onstantProto\022\025\n\rdisplayRarity\030% \001(\010\022\032\n\022t",
       "askIdOfFirstSkill\030& \001(\005\022#\n\033minsToResolic" +
-      "itTeamDonation\030\' \001(\005\022n\n\025fileDownloadProt" +
-      "oList\030( \003(\0132O.com.lvl6.proto.StartupResp" +
-      "onseProto.StartupConstants.FileDownloadC" +
-      "onstantProto\032_\n\031AnimatedSpriteOffsetProt" +
-      "o\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.c" +
-      "om.lvl6.proto.CoordinateProto\032\325\001\n\rClanCo" +
-      "nstants\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 " +
-      "\n\030maxCharLengthForClanName\030\002 \001(\005\022\'\n\037maxC" +
-      "harLengthForClanDescription\030\003 \001(\005\022\037\n\027max",
-      "CharLengthForClanTag\030\004 \001(\005\022\023\n\013maxClanSiz" +
-      "e\030\005 \001(\005\022$\n\034achievementIdsForClanRewards\030" +
-      "\006 \003(\005\032c\n\030DownloadableNibConstants\022\022\n\nmap" +
-      "NibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022" +
-      "\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tournament" +
-      "Constants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesW" +
-      "eight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numH" +
-      "oursToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMon" +
-      "sterConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!" +
-      "\n\031initialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Mo",
-      "nsterConstants\022\032\n\022cashPerHealthPoint\030\001 \001" +
-      "(\002\022#\n\033secondsToHealPerHealthPoint\030\002 \001(\002\022" +
-      "\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021elementalW" +
-      "eakness\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(" +
-      "\002\032\227\001\n\020TaskMapConstants\022\035\n\025mapSectionImag" +
-      "ePrefix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001" +
-      "(\005\022\030\n\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotal" +
-      "Width\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032j\n\025M" +
-      "iniTutorialConstants\022\032\n\022miniTutorialTask" +
-      "Id\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\022\035\n\025enha",
-      "nceGuideMonsterId\030\003 \001(\005\032\213\001\n\021ClanHelpCons" +
-      "tants\0229\n\010helpType\030\001 \001(\0162\036.com.lvl6.proto" +
-      ".GameActionType:\007NO_HELP\022\034\n\024amountRemove" +
-      "dPerHelp\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030" +
-      "\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pvpDmgsWindowS" +
-      "ize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016max" +
-      "PvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004" +
-      " \001(\005\022\035\n\025defendingMsgCharLimit\030\005 \001(\005\022\"\n\032b" +
-      "eginAvengingTimeLimitMins\030\006 \001(\005\022(\n reque" +
-      "stClanToAvengeTimeLimitMins\030\007 \001(\005\0328\n\024Spe",
-      "edUpConstantProto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007nu" +
-      "mGems\030\002 \001(\005\032\210\001\n\037ResourceConversionConsta" +
-      "ntProto\022?\n\014resourceType\030\001 \001(\0162\034.com.lvl6" +
-      ".proto.ResourceType:\013NO_RESOURCE\022\023\n\013reso" +
-      "urceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032u\n\031FileDo" +
-      "wnloadConstantProto\022\026\n\016fileDownloadId\030\001 " +
-      "\001(\005\022\020\n\010fileName\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022" +
-      "\034\n\024downloadOnlyOverWifi\030\004 \001(\010\032\234\004\n\021Tutori" +
-      "alConstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026" +
-      "\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId",
-      "\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022ene" +
-      "myBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030" +
-      "\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com." +
-      "lvl6.proto.TutorialStructProto\022\036\n\026struct" +
-      "ureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229" +
-      "\n\017cityOneElements\030\006 \003(\0132 .com.lvl6.proto" +
-      ".CityElementProto\022$\n\034cityElementIdForFir" +
-      "stDungeon\030\007 \001(\005\022%\n\035cityElementIdForSecon" +
-      "dDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilI" +
-      "nit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialO",
-      "bstacles\030\016 \003(\0132$.com.lvl6.proto.MinimumO" +
-      "bstacleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDAT" +
-      "E\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"" +
-      "N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER" +
-      "_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"" +
-      "C\n\030ForceLogoutResponseProto\022\031\n\021previousL" +
-      "oginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventSta" +
-      "rtupProto"
+      "itTeamDonation\030\' \001(\005\022j\n\021fileDownloadProt" +
+      "o\030( \003(\0132O.com.lvl6.proto.StartupResponse" +
+      "Proto.StartupConstants.FileDownloadConst" +
+      "antProto\032_\n\031AnimatedSpriteOffsetProto\022\021\n" +
+      "\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.l" +
+      "vl6.proto.CoordinateProto\032\325\001\n\rClanConsta" +
+      "nts\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030ma" +
+      "xCharLengthForClanName\030\002 \001(\005\022\'\n\037maxCharL" +
+      "engthForClanDescription\030\003 \001(\005\022\037\n\027maxChar",
+      "LengthForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 " +
+      "\001(\005\022$\n\034achievementIdsForClanRewards\030\006 \003(" +
+      "\005\032c\n\030DownloadableNibConstants\022\022\n\nmapNibN" +
+      "ame\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021g" +
+      "oldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCons" +
+      "tants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeigh" +
+      "t\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHours" +
+      "ToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonster" +
+      "Constants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031in" +
+      "itialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Monste",
+      "rConstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#" +
+      "\n\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021e" +
+      "lementalStrength\030\003 \001(\002\022\031\n\021elementalWeakn" +
+      "ess\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001" +
+      "\n\020TaskMapConstants\022\035\n\025mapSectionImagePre" +
+      "fix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030" +
+      "\n\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidt" +
+      "h\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032j\n\025MiniT" +
+      "utorialConstants\022\032\n\022miniTutorialTaskId\030\001" +
+      " \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\022\035\n\025enhanceG",
+      "uideMonsterId\030\003 \001(\005\032\213\001\n\021ClanHelpConstant" +
+      "s\0229\n\010helpType\030\001 \001(\0162\036.com.lvl6.proto.Gam" +
+      "eActionType:\007NO_HELP\022\034\n\024amountRemovedPer" +
+      "Help\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(" +
+      "\002\032\341\001\n\014PvpConstants\022\031\n\021pvpDmgsWindowSize\030" +
+      "\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpD" +
+      "mgDelta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005" +
+      "\022\035\n\025defendingMsgCharLimit\030\005 \001(\005\022\"\n\032begin" +
+      "AvengingTimeLimitMins\030\006 \001(\005\022(\n requestCl" +
+      "anToAvengeTimeLimitMins\030\007 \001(\005\0328\n\024SpeedUp",
+      "ConstantProto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGem" +
+      "s\030\002 \001(\005\032\210\001\n\037ResourceConversionConstantPr" +
+      "oto\022?\n\014resourceType\030\001 \001(\0162\034.com.lvl6.pro" +
+      "to.ResourceType:\013NO_RESOURCE\022\023\n\013resource" +
+      "Amt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032u\n\031FileDownlo" +
+      "adConstantProto\022\026\n\016fileDownloadId\030\001 \001(\005\022" +
+      "\020\n\010fileName\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024d" +
+      "ownloadOnlyOverWifi\030\004 \001(\010\032\234\004\n\021TutorialCo" +
+      "nstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016gu" +
+      "ideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001",
+      "(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBo" +
+      "ssMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(" +
+      "\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6" +
+      ".proto.TutorialStructProto\022\036\n\026structureI" +
+      "dsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017ci" +
+      "tyOneElements\030\006 \003(\0132 .com.lvl6.proto.Cit" +
+      "yElementProto\022$\n\034cityElementIdForFirstDu" +
+      "ngeon\030\007 \001(\005\022%\n\035cityElementIdForSecondDun" +
+      "geon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030" +
+      "\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObsta",
+      "cles\030\016 \003(\0132$.com.lvl6.proto.MinimumObsta" +
+      "cleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022" +
+      "\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rS" +
+      "tartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT" +
+      "_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030F" +
+      "orceLogoutResponseProto\022\031\n\021previousLogin" +
+      "Time\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartup" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -36590,7 +36590,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", "TaskIdOfFirstSkill", "MinsToResolicitTeamDonation", "FileDownloadProtoList", });
+        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", "TaskIdOfFirstSkill", "MinsToResolicitTeamDonation", "FileDownloadProto", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
