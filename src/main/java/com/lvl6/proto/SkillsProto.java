@@ -515,6 +515,10 @@ public final class SkillsProto {
      * <code>POISONED = 2;</code>
      */
     POISONED(1, 2),
+    /**
+     * <code>CURSED = 3;</code>
+     */
+    CURSED(2, 3),
     ;
 
     /**
@@ -525,6 +529,10 @@ public final class SkillsProto {
      * <code>POISONED = 2;</code>
      */
     public static final int POISONED_VALUE = 2;
+    /**
+     * <code>CURSED = 3;</code>
+     */
+    public static final int CURSED_VALUE = 3;
 
 
     public final int getNumber() { return value; }
@@ -533,6 +541,7 @@ public final class SkillsProto {
       switch (value) {
         case 1: return NO_SIDE_EFFECT;
         case 2: return POISONED;
+        case 3: return CURSED;
         default: return null;
       }
     }
@@ -5740,13 +5749,13 @@ public final class SkillsProto {
       "CE\020 \022\017\n\013FLAME_BREAK\020!\022\021\n\rPOISON_SKEWER\020\"" +
       "\022\017\n\013POISON_FIRE\020#*J\n\023SkillActivationType" +
       "\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002",
-      "\022\013\n\007PASSIVE\020\003*2\n\016SideEffectType\022\022\n\016NO_SI" +
-      "DE_EFFECT\020\001\022\014\n\010POISONED\020\002*7\n\023SideEffectT" +
-      "raitType\022\014\n\010NO_TRAIT\020\001\022\010\n\004BUFF\020\002\022\010\n\004NERF" +
-      "\020\003*B\n\026SideEffectPositionType\022\023\n\017BELOW_CH" +
-      "ARACTER\020\001\022\023\n\017ABOVE_CHARACTER\020\002*.\n\023SideEf" +
-      "fectBlendMode\022\027\n\023NORMAL_FULL_OPACITY\020\001B\r" +
-      "B\013SkillsProto"
+      "\022\013\n\007PASSIVE\020\003*>\n\016SideEffectType\022\022\n\016NO_SI" +
+      "DE_EFFECT\020\001\022\014\n\010POISONED\020\002\022\n\n\006CURSED\020\003*7\n" +
+      "\023SideEffectTraitType\022\014\n\010NO_TRAIT\020\001\022\010\n\004BU" +
+      "FF\020\002\022\010\n\004NERF\020\003*B\n\026SideEffectPositionType" +
+      "\022\023\n\017BELOW_CHARACTER\020\001\022\023\n\017ABOVE_CHARACTER" +
+      "\020\002*.\n\023SideEffectBlendMode\022\027\n\023NORMAL_FULL" +
+      "_OPACITY\020\001B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

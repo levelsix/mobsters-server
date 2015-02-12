@@ -20,24 +20,23 @@ message StructureInfoProto {
 	optional ResourceType buildResourceType = 5; 
 	optional int32 buildCost = 6;
 	optional int32 minutesToBuild = 7;
-	optional int32 prerequisiteTownHallLvl = 8;
-	optional int32 width = 9;
-	optional int32 height = 10;
+	optional int32 width = 8;
+	optional int32 height = 9;
 	
-	optional int32 predecessorStructId = 12;
-	optional int32 successorStructId = 13;	
+	optional int32 predecessorStructId = 10;
+	optional int32 successorStructId = 11;	
 	
-	optional string imgName = 14;
-	optional float imgVerticalPixelOffset = 15;
-	optional float imgHorizontalPixelOffset = 18;
-	optional string description = 16; //text field in db 
-	optional string shortDescription = 17;  
+	optional string imgName = 12;
+	optional float imgVerticalPixelOffset = 13;
+	optional float imgHorizontalPixelOffset = 14;
+	optional string description = 15; //text field in db 
+	optional string shortDescription = 16;  
 	
-	//optional float imgHorizontalPixelOffset = 18; //defined above
-	optional string shadowImgName = 19;
-	optional float shadowVerticalOffset = 20;
-	optional float shadowHorizontalOfffset = 21;
-	optional float shadowScale = 22;
+	//optional float imgHorizontalPixelOffset = 17; //defined above
+	optional string shadowImgName = 18;
+	optional float shadowVerticalOffset = 19;
+	optional float shadowHorizontalOfffset = 20;
+	optional float shadowScale = 21;
 	
 	enum StructType {
 		NO_STRUCT = 8;

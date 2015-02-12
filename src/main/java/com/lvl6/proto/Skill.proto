@@ -130,6 +130,7 @@ enum SideEffectType {
 	NO_SIDE_EFFECT = 1;
 	
 	POISONED = 2;
+	CURSED = 3;
 }
 enum SideEffectTraitType {
 	NO_TRAIT = 1;
