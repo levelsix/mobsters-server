@@ -820,12 +820,16 @@ public class MiscMethods {
 		
 		Map<Integer, FileDownload> fileDownloadMap = FileDownloadRetrieveUtils.getIdsToFileDownloads();
 		List<FileDownload> fileDownloadList = new ArrayList<FileDownload>(fileDownloadMap.values());
+
+		log.info(""+fileDownloadList);
 		
 		Collections.sort(fileDownloadList, new Comparator<FileDownload>() {
 			public int compare(FileDownload fd1, FileDownload fd2) {
 				return fd1.getPriority() - fd2.getPriority();
 			}
 		});
+		
+		log.info(""+fileDownloadList);
 
 		List<String> fileNameList = new ArrayList<String>();
 		for(Integer i : fileDownloadMap.keySet()) {
