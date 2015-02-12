@@ -119,27 +119,29 @@ message SkillSideEffectProto {
 	optional string iconImgName = 9;
 	optional string pfxName = 10;
 	optional string pfxColor = 11;
-	optional SideEffectPositionType positionType = 12 [default = NO_POSITION];
+	optional SideEffectPositionType positionType = 12 [default = BELOW_CHARACTER];
 	optional int32 pfxPixelOffsetX = 13;
 	optional int32 pfxPixelOffsetY = 14;
-	optional SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];
+	optional SideEffectBlendMode blendMode = 15 [default = NORMAL_FULL_OPACITY];
 	 
 	
 	enum SideEffectType {
 		NO_SIDE_EFFECT = 1;
+		
+		POISON = 2;
 	}
 	enum SideEffectTraitType {
 		NO_TRAIT = 1;
+		
 		BUFF = 2;
-		AILMENT = 3;
+		NERF = 3;
 	}
 	enum SideEffectPositionType {
-		NO_POSITION = 1;
+		BELOW_CHARACTER = 1;
 		ABOVE_CHARACTER = 2;
-		BELOW_CHARACTER = 3;
 	}
 	enum SideEffectBlendMode {
-		NO_BLEND_MODE = 1;
+		NORMAL_FULL_OPACITY = 1;
 	}
 	
 }
