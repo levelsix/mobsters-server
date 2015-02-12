@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BoosterPack implements Serializable {
 	
-	private static final long serialVersionUID = 2173449531868242237L;
+	private static final long serialVersionUID = 1549953377153488834L;
 	
 	private int id;
 	private String name;
@@ -16,6 +16,8 @@ public class BoosterPack implements Serializable {
 	private String machineImgName;
 	private int expPerItem;
 	private boolean displayToUser;
+	private int riggedId; //if pack is/isn't rigged then this is/isn't set
+	private String type;
   
 	public BoosterPack(
 		int id,
@@ -27,7 +29,9 @@ public class BoosterPack implements Serializable {
 		String navTitleImgName,
 		String machineImgName,
 		int expPerItem,
-		boolean displayToUser )
+		boolean displayToUser,
+		int riggedId,
+		String type )
 	{
 		super();
 		this.id = id;
@@ -40,6 +44,8 @@ public class BoosterPack implements Serializable {
 		this.machineImgName = machineImgName;
 		this.expPerItem = expPerItem;
 		this.displayToUser = displayToUser;
+		this.riggedId = riggedId;
+		this.type = type;
 	}
 
 	public int getId() {
@@ -126,6 +132,26 @@ public class BoosterPack implements Serializable {
 		this.displayToUser = displayToUser;
 	}
 
+	public int getRiggedId()
+	{
+		return riggedId;
+	}
+
+	public void setRiggedId( int riggedId )
+	{
+		this.riggedId = riggedId;
+	}
+
+	public String getType()
+	{
+		return type;
+	}
+
+	public void setType( String type )
+	{
+		this.type = type;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -149,6 +175,10 @@ public class BoosterPack implements Serializable {
 			+ expPerItem
 			+ ", displayToUser="
 			+ displayToUser
+			+ ", riggedId="
+			+ riggedId
+			+ ", type="
+			+ type
 			+ "]";
 	}
 

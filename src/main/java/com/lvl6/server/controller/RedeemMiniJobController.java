@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -390,29 +391,8 @@ private List<ItemForUser> calculateItemRewards( String userId,
     	itemIdToQuantity.put(secondItemIdReward, newQuantity);
     }
     
-    List<ItemForUser> ifuList = null;
-    if (!itemIdToQuantity.isEmpty()) {
-    	Map<Integer, ItemForUser> itemIdToIfu = 
-    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-    			itemIdToQuantity.keySet());
-    	
-    	for (Integer itemId : itemIdToQuantity.keySet()) {
-    		int newQuantity = itemIdToQuantity.get(itemId);
-    		
-    		ItemForUser ifu = null;
-    		if (itemIdToIfu.containsKey(itemId)) {
-    			ifu = itemIdToIfu.get(itemId);
-    		} else {
-    			//user might not have the item
-    			ifu = new ItemForUser(userId, itemId, 0);
-    			itemIdToIfu.put(itemId, ifu);
-    		}
-    		newQuantity += ifu.getQuantity();
-    		ifu.setQuantity(newQuantity);
-    	}
-    	
-    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-    }
+    List<ItemForUser> ifuList = PurchaseBoosterPackAction
+    	.calculateItemRewards(userId, itemForUserRetrieveUtil, itemIdToQuantity);
     return ifuList;
 }
 
