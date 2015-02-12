@@ -83,6 +83,7 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -187,6 +188,7 @@ import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
+import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
@@ -3116,6 +3118,18 @@ public class CreateInfoProtoUtils {
 		rgpb.setCapacity(srg.getCapacity());
 
 		return rgpb.build();
+	}
+	
+	public static MoneyTreeProto createMoneyTreeProtoFromStructureMoneyTree(StructureMoneyTree smt) {
+		
+		MoneyTreeProto.Builder mtpb = MoneyTreeProto.newBuilder();
+
+		mtpb.setProductionRate(smt.getProductionRate());
+		mtpb.setCapacity(smt.getCapacity());
+		mtpb.setDaysOfDuration(smt.getDaysOfDuration());
+		mtpb.setDaysForRenewal(smt.getDaysForRenewal());
+			
+		return mtpb.build();
 	}
 
 	public static ResourceStorageProto createResourceStorageProto(Structure s,

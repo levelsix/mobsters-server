@@ -26,6 +26,7 @@ public class IAPValues {
     public static final String PACKAGE4 = Globals.APPLE_BUNDLE_ID() + ".gem4";
     public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".gem5";
     public static final String STARTERPACK = Globals.APPLE_BUNDLE_ID() + ".starterpack";
+    public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID() + ".moneytree";
 
     public static final String PACKAGE1IMG = "pilegems.png";
     public static final String PACKAGE2IMG = "baggems.png";
@@ -53,6 +54,7 @@ public class IAPValues {
     public static final double PACKAGE_4_PRICE = 49.99;
     public static final double PACKAGE_5_PRICE = 99.99;
     public static final double STARTER_PACK_PRICE = 4.99;
+    public static final double MONEY_TREE_PRICE = 4.99;
 
     public static final List<String> iapPackageNames = 
             Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5,
@@ -122,11 +124,21 @@ public class IAPValues {
         if (packageName.equals(STARTERPACK)) {
             return STARTER_PACK_PRICE;
         }
+        if(packageName.equals(MONEYTREE)) {
+        	return MONEY_TREE_PRICE;
+        }
         return 0;
     }
 
     public static boolean packageIsStarterPack(String packageName) {
         if (packageName.equals(STARTERPACK)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean packageIsMoneyTree(String packageName) {
+        if (packageName.equals(MONEYTREE)) {
             return true;
         }
         return false;

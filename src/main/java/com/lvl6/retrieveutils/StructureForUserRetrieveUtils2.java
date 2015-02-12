@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -42,25 +43,67 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	public List<StructureForUser> getUserStructsForUser(String userId) {
 		log.debug(String.format(
-			"retrieving user structs for userId %s", userId));
+				"retrieving user structs for userId %s", userId));
 
 		Object[] values = { userId };
 		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
+				"select * from %s where %s=?",
+				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
 
 		List<StructureForUser> userStructs = null;
 		try {
 			userStructs = this.jdbcTemplate
-				.query(query, values, rowMapper);
-			
+					.query(query, values, rowMapper);
+
 		} catch (Exception e) {
 			log.error("structure for user retrieve db error.", e);
 			userStructs = new ArrayList<StructureForUser>();
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userStructs;
+	}
+
+
+	public List<StructureForUser> getMoneyTreeForUser(String userId, String userStructId) {
+		log.debug(String.format(
+				"retrieving money tree for userId %s", userId));
+
+		if(userStructId == null) {
+			Object[] values = { userId, ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID };
+			String query1 = String.format(
+					"select * from %s where %s=?, %s=?, %s=?",
+					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
+					DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID);
+			List<StructureForUser> userStructs1 = null;
+			try {
+				userStructs1 = this.jdbcTemplate
+						.query(query1, values, rowMapper);
+
+			} catch (Exception e) {
+				log.error("structure for user retrieve db error.", e);
+				userStructs1 = new ArrayList<StructureForUser>();
+			}
+			return userStructs1;
+		}
+		else {
+			Object[] values2 = { userId, ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, userStructId };
+			String query2 = String.format(
+					"select * from %s where %s=?, %s=?, %s=?",
+					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
+					DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID, DBConstants.STRUCTURE_FOR_USER__ID);
+
+			List<StructureForUser> userStructs2 = null;
+			try {
+				userStructs2 = this.jdbcTemplate
+						.query(query2, values2, rowMapper);
+
+			} catch (Exception e) {
+				log.error("structure for user retrieve db error.", e);
+				userStructs2 = new ArrayList<StructureForUser>();
+			}
+			return userStructs2;
+		}
 	}
 
 
@@ -69,27 +112,27 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		log.debug("retrieving map of struct id to userstructs for userId " + userId);
 
 		Map<Integer, List<StructureForUser>> structIdToUserStructs =
-			new HashMap<Integer, List<StructureForUser>>();
+				new HashMap<Integer, List<StructureForUser>>();
 		try {
-			
+
 			List<StructureForUser> pbfuList = getUserStructsForUser(userId);
-			
+
 			for (StructureForUser sfu : pbfuList) {
 				int structId = sfu.getStructId();
 				if (!structIdToUserStructs.containsKey(structId)) {
 					structIdToUserStructs.put(structId, new ArrayList<StructureForUser>());
 				}
-				
+
 				List<StructureForUser> userStructsForStructId = structIdToUserStructs.get(structId);
 				userStructsForStructId.add(sfu);
 			}
-			
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"structure for user retrieve db error. userId=%s", userId), e);
-			
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+					"structure for user retrieve db error. userId=%s", userId), e);
+
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return structIdToUserStructs;
 	}
@@ -97,35 +140,35 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	////@Cacheable(value="specificUserStruct", key="#userStructId")
 	public StructureForUser getSpecificUserStruct(String userStructId) {
 		log.debug(String.format(
-			"retrieving user struct with id %s", userStructId));
+				"retrieving user struct with id %s", userStructId));
 
 		Object[] values = { userStructId };
 		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__ID);
+				"select * from %s where %s=?",
+				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__ID);
 
 		StructureForUser userStruct = null;
 		try {
 			List<StructureForUser> sfuList = this.jdbcTemplate
-				.query(query, values, rowMapper);
-			
+					.query(query, values, rowMapper);
+
 			if (null != sfuList && !sfuList.isEmpty()) {
 				userStruct = sfuList.get(0);
 			}
-			
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"structure for user retrieve db error. id=%s", userStructId), e);
-			
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+					"structure for user retrieve db error. id=%s", userStructId), e);
+
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userStruct;
 	}
 
 
 	public List<StructureForUser> getSpecificOrAllUserStructsForUser(String userId,
-		List<String> userStructIds) {
+			List<String> userStructIds) {
 
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
@@ -155,19 +198,19 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		String query = querySb.toString();
 		log.info(String.format(
-			"query=%s, values=%s",
-			query, values));
+				"query=%s, values=%s",
+				query, values));
 
 		List<StructureForUser> userStructs = null;
 		try {
 			userStructs = this.jdbcTemplate
-				.query(query, values.toArray(), rowMapper);
-			
+					.query(query, values.toArray(), rowMapper);
+
 		} catch (Exception e) {
 			log.error("structure for user retrieve db error.", e);
 			userStructs = new ArrayList<StructureForUser>();
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userStructs;
 	}
@@ -185,7 +228,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			sfu.setId(rs.getString(DBConstants.STRUCTURE_FOR_USER__ID));
 			sfu.setUserId(rs.getString(DBConstants.STRUCTURE_FOR_USER__USER_ID));
 			sfu.setStructId(rs.getInt(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID));
-			
+
 			try {
 				Timestamp time = rs.getTimestamp(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
 				if (null != time && !rs.wasNull()) {
@@ -194,12 +237,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				}
 			} catch (Exception e) {
 				log.error(String.format(
-					"maybe last retrieved time is invalid, sfu=%s", sfu), e);
+						"maybe last retrieved time is invalid, sfu=%s", sfu), e);
 			}
-			
+
 			CoordinatePair coordinates = new CoordinatePair(rs.getInt(DBConstants.STRUCTURE_FOR_USER__X_COORD), rs.getInt(DBConstants.STRUCTURE_FOR_USER__Y_COORD));
 			sfu.setCoordinates(coordinates);
-			
+
 			try {
 				Timestamp time = rs.getTimestamp(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME);
 				if (null != time && !rs.wasNull()) {
@@ -208,23 +251,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				}
 			} catch (Exception e) {
 				log.error(String.format(
-					"maybe last retrieved time is invalid, sfu=%s", sfu), e);
+						"maybe last retrieved time is invalid, sfu=%s", sfu), e);
 			}
-			
+
 			sfu.setComplete(rs.getBoolean(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE));
-			
+
 			String orientation = rs.getString(DBConstants.STRUCTURE_FOR_USER__ORIENTATION);
 			if (null != orientation) {
-		    	String newOrientation = orientation.trim().toUpperCase();
-		    	if (!orientation.equals(newOrientation)) {
-		    		log.error(String.format(
-		    			"orientation incorrect: %s, id=%s",
-		    			orientation, sfu.getId()));
-		    		orientation = newOrientation;
-		    	}
-		    }
+				String newOrientation = orientation.trim().toUpperCase();
+				if (!orientation.equals(newOrientation)) {
+					log.error(String.format(
+							"orientation incorrect: %s, id=%s",
+							orientation, sfu.getId()));
+					orientation = newOrientation;
+				}
+			}
 			sfu.setOrientation(orientation);
-			
+
 			sfu.setFbInviteStructLvl(rs.getInt(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL));
 
 			return sfu;

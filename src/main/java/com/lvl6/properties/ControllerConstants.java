@@ -203,6 +203,7 @@ public class ControllerConstants {
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
 	public static final int STRUCTURE_FOR_USER__OIL_STORAGE_ID = 60;
+	public static final int STRUCTURE_FOR_MONEY_TREE_ID = 10000;
 	public static final float STRUCTURE_FOR_USER__TOWN_HALL_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD = 13F;

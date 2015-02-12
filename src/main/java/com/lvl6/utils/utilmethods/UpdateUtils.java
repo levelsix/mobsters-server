@@ -296,6 +296,25 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
+	public boolean updatePurchaseTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+		
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
+		
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, newPurchaseTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
+				conditionParams, "or");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean updateUserStructsBuildingIsComplete(String userId, 
 			List<StructureForUser> userStructs, List<Timestamp> newRetrievedTimes) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
