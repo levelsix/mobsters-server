@@ -129,7 +129,7 @@ message StartupResponseProto {
 
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
-	
+		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
@@ -213,7 +213,7 @@ message StartupResponseProto {
 		optional int32 taskIdOfFirstSkill = 38;
 		optional int32 minsToResolicitTeamDonation = 39;
 	
-		repeated string fileNamesToDownload = 40;
+		repeated FileDownloadConstantProto fileDownloadProtoList = 40;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -314,6 +314,13 @@ message StartupResponseProto {
 			optional int32 resourceAmt = 2;
 			optional int32 numGems = 3;
 		}
+		
+		message FileDownloadConstantProto {
+			optional int32 fileDownloadId = 1;
+			optional string fileName = 2;
+			optional int32 priority = 3;
+			optional bool downloadOnlyOverWifi = 4;
+		}
 	}
 	
 	message TutorialConstants {
@@ -366,3 +373,10 @@ message ForceLogoutResponseProto {
 	//the device's udid (whoever sent startup event and triggered this)
 	optional string udid = 2; 
 }
+
+//------------------------------------------------------------------------------------------
+
+
+
+
+

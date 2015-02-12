@@ -45,6 +45,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.EventPersistentForUser;
+import com.lvl6.info.FileDownload;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
@@ -137,6 +138,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
@@ -3986,6 +3988,18 @@ public class CreateInfoProtoUtils {
 		return tmepb.build();
 	}
 
+	/**FileDownloadProto*********************************************/
+	
+	public static FileDownloadConstantProto createFileDownloadProtoFromFileDownload(FileDownload fd) {
+		FileDownloadConstantProto.Builder fdpb = FileDownloadConstantProto.newBuilder();
+		fdpb.setFileDownloadId(fd.getId());
+		fdpb.setFileName(fd.getFileName());
+		fdpb.setPriority(fd.getPriority());
+		fdpb.setDownloadOnlyOverWifi(fd.isDownloadOnlyOverWifi());
+		
+		return fdpb.build();
+	}
+	
 	/**TournamentStuff.proto******************************************/
 //	public static TournamentEventProto createTournamentEventProtoFromTournamentEvent(
 //		TournamentEvent e, List<TournamentEventReward> rList) {

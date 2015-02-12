@@ -88,11 +88,12 @@ import com.lvl6.utils.DBConnection;
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
 	private static FileDownload convertRSRowToFileDownload(ResultSet rs) throws SQLException {
-		int id = rs.getInt(DBConstants.FILE_DOWNLOAD_CONFIG__ID);
-		String filename = rs.getString(DBConstants.FILE_DOWNLOAD_CONGIG__FILENAME);
-		int priority = rs.getInt(DBConstants.FILE_DOWNLOAD_CONGIG__PRIORITY);
+		int id = rs.getInt(DBConstants.FILE_DOWNLOAD__ID);
+		String filename = rs.getString(DBConstants.FILE_DOWNLOAD__FILENAME);
+		int priority = rs.getInt(DBConstants.FILE_DOWNLOAD__PRIORITY);
+		boolean downloadOnlyOverWifi = rs.getBoolean(DBConstants.FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI);
 		
-		FileDownload fd = new FileDownload(id, filename, priority);
+		FileDownload fd = new FileDownload(id, filename, priority, downloadOnlyOverWifi);
 		return fd;
 	}
 	
