@@ -832,8 +832,8 @@ public class MiscMethods {
 		log.info(""+fileDownloadList);
 
 		List<String> fileNameList = new ArrayList<String>();
-		for(Integer i : fileDownloadMap.keySet()) {
-			fileNameList.add(fileDownloadMap.get(i).getFileName());
+		for(FileDownload fd : fileDownloadList) {
+			fileNameList.add(fd.getFileName());
 		}
 		
 		cb.addAllFileNamesToDownload(fileNameList);
