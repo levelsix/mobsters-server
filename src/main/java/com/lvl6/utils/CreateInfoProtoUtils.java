@@ -3159,7 +3159,6 @@ public class CreateInfoProtoUtils {
 
 		builder.setBuildCost(s.getBuildCost());
 		builder.setMinutesToBuild(s.getMinutesToBuild());
-		builder.setPrerequisiteTownHallLvl(s.getRequiredTownHallLvl());
 		builder.setWidth(s.getWidth());
 		builder.setHeight(s.getHeight());
 

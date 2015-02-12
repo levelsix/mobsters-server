@@ -289,84 +289,75 @@ public final class StructureProto {
     int getMinutesToBuild();
 
     /**
-     * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-     */
-    boolean hasPrerequisiteTownHallLvl();
-    /**
-     * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-     */
-    int getPrerequisiteTownHallLvl();
-
-    /**
-     * <code>optional int32 width = 9;</code>
+     * <code>optional int32 width = 8;</code>
      */
     boolean hasWidth();
     /**
-     * <code>optional int32 width = 9;</code>
+     * <code>optional int32 width = 8;</code>
      */
     int getWidth();
 
     /**
-     * <code>optional int32 height = 10;</code>
+     * <code>optional int32 height = 9;</code>
      */
     boolean hasHeight();
     /**
-     * <code>optional int32 height = 10;</code>
+     * <code>optional int32 height = 9;</code>
      */
     int getHeight();
 
     /**
-     * <code>optional int32 predecessorStructId = 12;</code>
+     * <code>optional int32 predecessorStructId = 10;</code>
      */
     boolean hasPredecessorStructId();
     /**
-     * <code>optional int32 predecessorStructId = 12;</code>
+     * <code>optional int32 predecessorStructId = 10;</code>
      */
     int getPredecessorStructId();
 
     /**
-     * <code>optional int32 successorStructId = 13;</code>
+     * <code>optional int32 successorStructId = 11;</code>
      */
     boolean hasSuccessorStructId();
     /**
-     * <code>optional int32 successorStructId = 13;</code>
+     * <code>optional int32 successorStructId = 11;</code>
      */
     int getSuccessorStructId();
 
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     boolean hasImgName();
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     java.lang.String getImgName();
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     com.google.protobuf.ByteString
         getImgNameBytes();
 
     /**
-     * <code>optional float imgVerticalPixelOffset = 15;</code>
+     * <code>optional float imgVerticalPixelOffset = 13;</code>
      */
     boolean hasImgVerticalPixelOffset();
     /**
-     * <code>optional float imgVerticalPixelOffset = 15;</code>
+     * <code>optional float imgVerticalPixelOffset = 13;</code>
      */
     float getImgVerticalPixelOffset();
 
     /**
-     * <code>optional float imgHorizontalPixelOffset = 18;</code>
+     * <code>optional float imgHorizontalPixelOffset = 14;</code>
      */
     boolean hasImgHorizontalPixelOffset();
     /**
-     * <code>optional float imgHorizontalPixelOffset = 18;</code>
+     * <code>optional float imgHorizontalPixelOffset = 14;</code>
      */
     float getImgHorizontalPixelOffset();
 
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
@@ -374,7 +365,7 @@ public final class StructureProto {
      */
     boolean hasDescription();
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
@@ -382,7 +373,7 @@ public final class StructureProto {
      */
     java.lang.String getDescription();
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
@@ -392,69 +383,69 @@ public final class StructureProto {
         getDescriptionBytes();
 
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     boolean hasShortDescription();
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     java.lang.String getShortDescription();
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     com.google.protobuf.ByteString
         getShortDescriptionBytes();
 
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     boolean hasShadowImgName();
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     java.lang.String getShadowImgName();
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     com.google.protobuf.ByteString
         getShadowImgNameBytes();
 
     /**
-     * <code>optional float shadowVerticalOffset = 20;</code>
+     * <code>optional float shadowVerticalOffset = 19;</code>
      */
     boolean hasShadowVerticalOffset();
     /**
-     * <code>optional float shadowVerticalOffset = 20;</code>
+     * <code>optional float shadowVerticalOffset = 19;</code>
      */
     float getShadowVerticalOffset();
 
     /**
-     * <code>optional float shadowHorizontalOfffset = 21;</code>
+     * <code>optional float shadowHorizontalOfffset = 20;</code>
      */
     boolean hasShadowHorizontalOfffset();
     /**
-     * <code>optional float shadowHorizontalOfffset = 21;</code>
+     * <code>optional float shadowHorizontalOfffset = 20;</code>
      */
     float getShadowHorizontalOfffset();
 
     /**
-     * <code>optional float shadowScale = 22;</code>
+     * <code>optional float shadowScale = 21;</code>
      */
     boolean hasShadowScale();
     /**
-     * <code>optional float shadowScale = 22;</code>
+     * <code>optional float shadowScale = 21;</code>
      */
     float getShadowScale();
   }
@@ -565,75 +556,70 @@ public final class StructureProto {
             }
             case 64: {
               bitField0_ |= 0x00000080;
-              prerequisiteTownHallLvl_ = input.readInt32();
+              width_ = input.readInt32();
               break;
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              width_ = input.readInt32();
+              height_ = input.readInt32();
               break;
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              height_ = input.readInt32();
-              break;
-            }
-            case 96: {
-              bitField0_ |= 0x00000400;
               predecessorStructId_ = input.readInt32();
               break;
             }
-            case 104: {
-              bitField0_ |= 0x00000800;
+            case 88: {
+              bitField0_ |= 0x00000400;
               successorStructId_ = input.readInt32();
               break;
             }
-            case 114: {
+            case 98: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00000800;
               imgName_ = bs;
               break;
             }
-            case 125: {
-              bitField0_ |= 0x00002000;
+            case 109: {
+              bitField0_ |= 0x00001000;
               imgVerticalPixelOffset_ = input.readFloat();
+              break;
+            }
+            case 117: {
+              bitField0_ |= 0x00002000;
+              imgHorizontalPixelOffset_ = input.readFloat();
+              break;
+            }
+            case 122: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00004000;
+              description_ = bs;
               break;
             }
             case 130: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00008000;
-              description_ = bs;
-              break;
-            }
-            case 138: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00010000;
               shortDescription_ = bs;
               break;
             }
-            case 149: {
-              bitField0_ |= 0x00004000;
-              imgHorizontalPixelOffset_ = input.readFloat();
+            case 146: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00010000;
+              shadowImgName_ = bs;
               break;
             }
-            case 154: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 157: {
               bitField0_ |= 0x00020000;
-              shadowImgName_ = bs;
+              shadowVerticalOffset_ = input.readFloat();
               break;
             }
             case 165: {
               bitField0_ |= 0x00040000;
-              shadowVerticalOffset_ = input.readFloat();
+              shadowHorizontalOfffset_ = input.readFloat();
               break;
             }
             case 173: {
               bitField0_ |= 0x00080000;
-              shadowHorizontalOfffset_ = input.readFloat();
-              break;
-            }
-            case 181: {
-              bitField0_ |= 0x00100000;
               shadowScale_ = input.readFloat();
               break;
             }
@@ -996,91 +982,76 @@ public final class StructureProto {
       return minutesToBuild_;
     }
 
-    public static final int PREREQUISITETOWNHALLLVL_FIELD_NUMBER = 8;
-    private int prerequisiteTownHallLvl_;
+    public static final int WIDTH_FIELD_NUMBER = 8;
+    private int width_;
     /**
-     * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
+     * <code>optional int32 width = 8;</code>
      */
-    public boolean hasPrerequisiteTownHallLvl() {
+    public boolean hasWidth() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-     */
-    public int getPrerequisiteTownHallLvl() {
-      return prerequisiteTownHallLvl_;
-    }
-
-    public static final int WIDTH_FIELD_NUMBER = 9;
-    private int width_;
-    /**
-     * <code>optional int32 width = 9;</code>
-     */
-    public boolean hasWidth() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional int32 width = 9;</code>
+     * <code>optional int32 width = 8;</code>
      */
     public int getWidth() {
       return width_;
     }
 
-    public static final int HEIGHT_FIELD_NUMBER = 10;
+    public static final int HEIGHT_FIELD_NUMBER = 9;
     private int height_;
     /**
-     * <code>optional int32 height = 10;</code>
+     * <code>optional int32 height = 9;</code>
      */
     public boolean hasHeight() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional int32 height = 10;</code>
+     * <code>optional int32 height = 9;</code>
      */
     public int getHeight() {
       return height_;
     }
 
-    public static final int PREDECESSORSTRUCTID_FIELD_NUMBER = 12;
+    public static final int PREDECESSORSTRUCTID_FIELD_NUMBER = 10;
     private int predecessorStructId_;
     /**
-     * <code>optional int32 predecessorStructId = 12;</code>
+     * <code>optional int32 predecessorStructId = 10;</code>
      */
     public boolean hasPredecessorStructId() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
-     * <code>optional int32 predecessorStructId = 12;</code>
+     * <code>optional int32 predecessorStructId = 10;</code>
      */
     public int getPredecessorStructId() {
       return predecessorStructId_;
     }
 
-    public static final int SUCCESSORSTRUCTID_FIELD_NUMBER = 13;
+    public static final int SUCCESSORSTRUCTID_FIELD_NUMBER = 11;
     private int successorStructId_;
     /**
-     * <code>optional int32 successorStructId = 13;</code>
+     * <code>optional int32 successorStructId = 11;</code>
      */
     public boolean hasSuccessorStructId() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>optional int32 successorStructId = 13;</code>
+     * <code>optional int32 successorStructId = 11;</code>
      */
     public int getSuccessorStructId() {
       return successorStructId_;
     }
 
-    public static final int IMGNAME_FIELD_NUMBER = 14;
+    public static final int IMGNAME_FIELD_NUMBER = 12;
     private java.lang.Object imgName_;
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     public boolean hasImgName() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     public java.lang.String getImgName() {
       java.lang.Object ref = imgName_;
@@ -1097,7 +1068,7 @@ public final class StructureProto {
       }
     }
     /**
-     * <code>optional string imgName = 14;</code>
+     * <code>optional string imgName = 12;</code>
      */
     public com.google.protobuf.ByteString
         getImgNameBytes() {
@@ -1113,50 +1084,50 @@ public final class StructureProto {
       }
     }
 
-    public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 15;
+    public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 13;
     private float imgVerticalPixelOffset_;
     /**
-     * <code>optional float imgVerticalPixelOffset = 15;</code>
+     * <code>optional float imgVerticalPixelOffset = 13;</code>
      */
     public boolean hasImgVerticalPixelOffset() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
-     * <code>optional float imgVerticalPixelOffset = 15;</code>
+     * <code>optional float imgVerticalPixelOffset = 13;</code>
      */
     public float getImgVerticalPixelOffset() {
       return imgVerticalPixelOffset_;
     }
 
-    public static final int IMGHORIZONTALPIXELOFFSET_FIELD_NUMBER = 18;
+    public static final int IMGHORIZONTALPIXELOFFSET_FIELD_NUMBER = 14;
     private float imgHorizontalPixelOffset_;
     /**
-     * <code>optional float imgHorizontalPixelOffset = 18;</code>
+     * <code>optional float imgHorizontalPixelOffset = 14;</code>
      */
     public boolean hasImgHorizontalPixelOffset() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     /**
-     * <code>optional float imgHorizontalPixelOffset = 18;</code>
+     * <code>optional float imgHorizontalPixelOffset = 14;</code>
      */
     public float getImgHorizontalPixelOffset() {
       return imgHorizontalPixelOffset_;
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 16;
+    public static final int DESCRIPTION_FIELD_NUMBER = 15;
     private java.lang.Object description_;
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
      * </pre>
      */
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
@@ -1177,7 +1148,7 @@ public final class StructureProto {
       }
     }
     /**
-     * <code>optional string description = 16;</code>
+     * <code>optional string description = 15;</code>
      *
      * <pre>
      *text field in db 
@@ -1197,16 +1168,16 @@ public final class StructureProto {
       }
     }
 
-    public static final int SHORTDESCRIPTION_FIELD_NUMBER = 17;
+    public static final int SHORTDESCRIPTION_FIELD_NUMBER = 16;
     private java.lang.Object shortDescription_;
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     public boolean hasShortDescription() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     public java.lang.String getShortDescription() {
       java.lang.Object ref = shortDescription_;
@@ -1223,7 +1194,7 @@ public final class StructureProto {
       }
     }
     /**
-     * <code>optional string shortDescription = 17;</code>
+     * <code>optional string shortDescription = 16;</code>
      */
     public com.google.protobuf.ByteString
         getShortDescriptionBytes() {
@@ -1239,23 +1210,23 @@ public final class StructureProto {
       }
     }
 
-    public static final int SHADOWIMGNAME_FIELD_NUMBER = 19;
+    public static final int SHADOWIMGNAME_FIELD_NUMBER = 18;
     private java.lang.Object shadowImgName_;
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     public boolean hasShadowImgName() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     public java.lang.String getShadowImgName() {
@@ -1273,10 +1244,10 @@ public final class StructureProto {
       }
     }
     /**
-     * <code>optional string shadowImgName = 19;</code>
+     * <code>optional string shadowImgName = 18;</code>
      *
      * <pre>
-     *optional float imgHorizontalPixelOffset = 18; //defined above
+     *optional float imgHorizontalPixelOffset = 17; //defined above
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -1293,46 +1264,46 @@ public final class StructureProto {
       }
     }
 
-    public static final int SHADOWVERTICALOFFSET_FIELD_NUMBER = 20;
+    public static final int SHADOWVERTICALOFFSET_FIELD_NUMBER = 19;
     private float shadowVerticalOffset_;
     /**
-     * <code>optional float shadowVerticalOffset = 20;</code>
+     * <code>optional float shadowVerticalOffset = 19;</code>
      */
     public boolean hasShadowVerticalOffset() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
-     * <code>optional float shadowVerticalOffset = 20;</code>
+     * <code>optional float shadowVerticalOffset = 19;</code>
      */
     public float getShadowVerticalOffset() {
       return shadowVerticalOffset_;
     }
 
-    public static final int SHADOWHORIZONTALOFFFSET_FIELD_NUMBER = 21;
+    public static final int SHADOWHORIZONTALOFFFSET_FIELD_NUMBER = 20;
     private float shadowHorizontalOfffset_;
     /**
-     * <code>optional float shadowHorizontalOfffset = 21;</code>
+     * <code>optional float shadowHorizontalOfffset = 20;</code>
      */
     public boolean hasShadowHorizontalOfffset() {
-      return ((bitField0_ & 0x00080000) == 0x00080000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     /**
-     * <code>optional float shadowHorizontalOfffset = 21;</code>
+     * <code>optional float shadowHorizontalOfffset = 20;</code>
      */
     public float getShadowHorizontalOfffset() {
       return shadowHorizontalOfffset_;
     }
 
-    public static final int SHADOWSCALE_FIELD_NUMBER = 22;
+    public static final int SHADOWSCALE_FIELD_NUMBER = 21;
     private float shadowScale_;
     /**
-     * <code>optional float shadowScale = 22;</code>
+     * <code>optional float shadowScale = 21;</code>
      */
     public boolean hasShadowScale() {
-      return ((bitField0_ & 0x00100000) == 0x00100000);
+      return ((bitField0_ & 0x00080000) == 0x00080000);
     }
     /**
-     * <code>optional float shadowScale = 22;</code>
+     * <code>optional float shadowScale = 21;</code>
      */
     public float getShadowScale() {
       return shadowScale_;
@@ -1346,7 +1317,6 @@ public final class StructureProto {
       buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       buildCost_ = 0;
       minutesToBuild_ = 0;
-      prerequisiteTownHallLvl_ = 0;
       width_ = 0;
       height_ = 0;
       predecessorStructId_ = 0;
@@ -1396,46 +1366,43 @@ public final class StructureProto {
         output.writeInt32(7, minutesToBuild_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, prerequisiteTownHallLvl_);
+        output.writeInt32(8, width_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, width_);
+        output.writeInt32(9, height_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, height_);
+        output.writeInt32(10, predecessorStructId_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(12, predecessorStructId_);
+        output.writeInt32(11, successorStructId_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(13, successorStructId_);
+        output.writeBytes(12, getImgNameBytes());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeBytes(14, getImgNameBytes());
+        output.writeFloat(13, imgVerticalPixelOffset_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeFloat(15, imgVerticalPixelOffset_);
-      }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeBytes(16, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeBytes(17, getShortDescriptionBytes());
+        output.writeFloat(14, imgHorizontalPixelOffset_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeFloat(18, imgHorizontalPixelOffset_);
+        output.writeBytes(15, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeBytes(16, getShortDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeBytes(18, getShadowImgNameBytes());
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeBytes(19, getShadowImgNameBytes());
+        output.writeFloat(19, shadowVerticalOffset_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        output.writeFloat(20, shadowVerticalOffset_);
+        output.writeFloat(20, shadowHorizontalOfffset_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        output.writeFloat(21, shadowHorizontalOfffset_);
-      }
-      if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        output.writeFloat(22, shadowScale_);
+        output.writeFloat(21, shadowScale_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1476,59 +1443,55 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, prerequisiteTownHallLvl_);
+          .computeInt32Size(8, width_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, width_);
+          .computeInt32Size(9, height_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, height_);
+          .computeInt32Size(10, predecessorStructId_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, predecessorStructId_);
+          .computeInt32Size(11, successorStructId_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, successorStructId_);
+          .computeBytesSize(12, getImgNameBytes());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(14, getImgNameBytes());
+          .computeFloatSize(13, imgVerticalPixelOffset_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(15, imgVerticalPixelOffset_);
-      }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(16, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(17, getShortDescriptionBytes());
+          .computeFloatSize(14, imgHorizontalPixelOffset_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(18, imgHorizontalPixelOffset_);
+          .computeBytesSize(15, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(16, getShortDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(18, getShadowImgNameBytes());
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(19, getShadowImgNameBytes());
+          .computeFloatSize(19, shadowVerticalOffset_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(20, shadowVerticalOffset_);
+          .computeFloatSize(20, shadowHorizontalOfffset_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(21, shadowHorizontalOfffset_);
-      }
-      if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(22, shadowScale_);
+          .computeFloatSize(21, shadowScale_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1666,34 +1629,32 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         minutesToBuild_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        prerequisiteTownHallLvl_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         width_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         height_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         predecessorStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         successorStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         imgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         imgVerticalPixelOffset_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         imgHorizontalPixelOffset_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         shortDescription_ = "";
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         shadowImgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         shadowVerticalOffset_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         shadowHorizontalOfffset_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         shadowScale_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         return this;
       }
 
@@ -1753,57 +1714,53 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.prerequisiteTownHallLvl_ = prerequisiteTownHallLvl_;
+        result.width_ = width_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.width_ = width_;
+        result.height_ = height_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.height_ = height_;
+        result.predecessorStructId_ = predecessorStructId_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.predecessorStructId_ = predecessorStructId_;
+        result.successorStructId_ = successorStructId_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.successorStructId_ = successorStructId_;
+        result.imgName_ = imgName_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.imgName_ = imgName_;
+        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
+        result.imgHorizontalPixelOffset_ = imgHorizontalPixelOffset_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.imgHorizontalPixelOffset_ = imgHorizontalPixelOffset_;
+        result.description_ = description_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.description_ = description_;
+        result.shortDescription_ = shortDescription_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.shortDescription_ = shortDescription_;
+        result.shadowImgName_ = shadowImgName_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.shadowImgName_ = shadowImgName_;
+        result.shadowVerticalOffset_ = shadowVerticalOffset_;
         if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
           to_bitField0_ |= 0x00040000;
         }
-        result.shadowVerticalOffset_ = shadowVerticalOffset_;
+        result.shadowHorizontalOfffset_ = shadowHorizontalOfffset_;
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00080000;
-        }
-        result.shadowHorizontalOfffset_ = shadowHorizontalOfffset_;
-        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
-          to_bitField0_ |= 0x00100000;
         }
         result.shadowScale_ = shadowScale_;
         result.bitField0_ = to_bitField0_;
@@ -1845,9 +1802,6 @@ public final class StructureProto {
         if (other.hasMinutesToBuild()) {
           setMinutesToBuild(other.getMinutesToBuild());
         }
-        if (other.hasPrerequisiteTownHallLvl()) {
-          setPrerequisiteTownHallLvl(other.getPrerequisiteTownHallLvl());
-        }
         if (other.hasWidth()) {
           setWidth(other.getWidth());
         }
@@ -1861,7 +1815,7 @@ public final class StructureProto {
           setSuccessorStructId(other.getSuccessorStructId());
         }
         if (other.hasImgName()) {
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
           imgName_ = other.imgName_;
           onChanged();
         }
@@ -1872,17 +1826,17 @@ public final class StructureProto {
           setImgHorizontalPixelOffset(other.getImgHorizontalPixelOffset());
         }
         if (other.hasDescription()) {
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
           description_ = other.description_;
           onChanged();
         }
         if (other.hasShortDescription()) {
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00008000;
           shortDescription_ = other.shortDescription_;
           onChanged();
         }
         if (other.hasShadowImgName()) {
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00010000;
           shadowImgName_ = other.shadowImgName_;
           onChanged();
         }
@@ -2212,65 +2166,33 @@ public final class StructureProto {
         return this;
       }
 
-      private int prerequisiteTownHallLvl_ ;
+      private int width_ ;
       /**
-       * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
+       * <code>optional int32 width = 8;</code>
        */
-      public boolean hasPrerequisiteTownHallLvl() {
+      public boolean hasWidth() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-       */
-      public int getPrerequisiteTownHallLvl() {
-        return prerequisiteTownHallLvl_;
-      }
-      /**
-       * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-       */
-      public Builder setPrerequisiteTownHallLvl(int value) {
-        bitField0_ |= 0x00000080;
-        prerequisiteTownHallLvl_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 prerequisiteTownHallLvl = 8;</code>
-       */
-      public Builder clearPrerequisiteTownHallLvl() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        prerequisiteTownHallLvl_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int width_ ;
-      /**
-       * <code>optional int32 width = 9;</code>
-       */
-      public boolean hasWidth() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional int32 width = 9;</code>
+       * <code>optional int32 width = 8;</code>
        */
       public int getWidth() {
         return width_;
       }
       /**
-       * <code>optional int32 width = 9;</code>
+       * <code>optional int32 width = 8;</code>
        */
       public Builder setWidth(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         width_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 width = 9;</code>
+       * <code>optional int32 width = 8;</code>
        */
       public Builder clearWidth() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         width_ = 0;
         onChanged();
         return this;
@@ -2278,31 +2200,31 @@ public final class StructureProto {
 
       private int height_ ;
       /**
-       * <code>optional int32 height = 10;</code>
+       * <code>optional int32 height = 9;</code>
        */
       public boolean hasHeight() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional int32 height = 10;</code>
+       * <code>optional int32 height = 9;</code>
        */
       public int getHeight() {
         return height_;
       }
       /**
-       * <code>optional int32 height = 10;</code>
+       * <code>optional int32 height = 9;</code>
        */
       public Builder setHeight(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         height_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 height = 10;</code>
+       * <code>optional int32 height = 9;</code>
        */
       public Builder clearHeight() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         height_ = 0;
         onChanged();
         return this;
@@ -2310,31 +2232,31 @@ public final class StructureProto {
 
       private int predecessorStructId_ ;
       /**
-       * <code>optional int32 predecessorStructId = 12;</code>
+       * <code>optional int32 predecessorStructId = 10;</code>
        */
       public boolean hasPredecessorStructId() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional int32 predecessorStructId = 12;</code>
+       * <code>optional int32 predecessorStructId = 10;</code>
        */
       public int getPredecessorStructId() {
         return predecessorStructId_;
       }
       /**
-       * <code>optional int32 predecessorStructId = 12;</code>
+       * <code>optional int32 predecessorStructId = 10;</code>
        */
       public Builder setPredecessorStructId(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000200;
         predecessorStructId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 predecessorStructId = 12;</code>
+       * <code>optional int32 predecessorStructId = 10;</code>
        */
       public Builder clearPredecessorStructId() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         predecessorStructId_ = 0;
         onChanged();
         return this;
@@ -2342,31 +2264,31 @@ public final class StructureProto {
 
       private int successorStructId_ ;
       /**
-       * <code>optional int32 successorStructId = 13;</code>
+       * <code>optional int32 successorStructId = 11;</code>
        */
       public boolean hasSuccessorStructId() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>optional int32 successorStructId = 13;</code>
+       * <code>optional int32 successorStructId = 11;</code>
        */
       public int getSuccessorStructId() {
         return successorStructId_;
       }
       /**
-       * <code>optional int32 successorStructId = 13;</code>
+       * <code>optional int32 successorStructId = 11;</code>
        */
       public Builder setSuccessorStructId(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000400;
         successorStructId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 successorStructId = 13;</code>
+       * <code>optional int32 successorStructId = 11;</code>
        */
       public Builder clearSuccessorStructId() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         successorStructId_ = 0;
         onChanged();
         return this;
@@ -2374,13 +2296,13 @@ public final class StructureProto {
 
       private java.lang.Object imgName_ = "";
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public boolean hasImgName() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public java.lang.String getImgName() {
         java.lang.Object ref = imgName_;
@@ -2397,7 +2319,7 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public com.google.protobuf.ByteString
           getImgNameBytes() {
@@ -2413,36 +2335,36 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public Builder setImgName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00001000;
+  bitField0_ |= 0x00000800;
         imgName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public Builder clearImgName() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         imgName_ = getDefaultInstance().getImgName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string imgName = 14;</code>
+       * <code>optional string imgName = 12;</code>
        */
       public Builder setImgNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00001000;
+  bitField0_ |= 0x00000800;
         imgName_ = value;
         onChanged();
         return this;
@@ -2450,31 +2372,31 @@ public final class StructureProto {
 
       private float imgVerticalPixelOffset_ ;
       /**
-       * <code>optional float imgVerticalPixelOffset = 15;</code>
+       * <code>optional float imgVerticalPixelOffset = 13;</code>
        */
       public boolean hasImgVerticalPixelOffset() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional float imgVerticalPixelOffset = 15;</code>
+       * <code>optional float imgVerticalPixelOffset = 13;</code>
        */
       public float getImgVerticalPixelOffset() {
         return imgVerticalPixelOffset_;
       }
       /**
-       * <code>optional float imgVerticalPixelOffset = 15;</code>
+       * <code>optional float imgVerticalPixelOffset = 13;</code>
        */
       public Builder setImgVerticalPixelOffset(float value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00001000;
         imgVerticalPixelOffset_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float imgVerticalPixelOffset = 15;</code>
+       * <code>optional float imgVerticalPixelOffset = 13;</code>
        */
       public Builder clearImgVerticalPixelOffset() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         imgVerticalPixelOffset_ = 0F;
         onChanged();
         return this;
@@ -2482,31 +2404,31 @@ public final class StructureProto {
 
       private float imgHorizontalPixelOffset_ ;
       /**
-       * <code>optional float imgHorizontalPixelOffset = 18;</code>
+       * <code>optional float imgHorizontalPixelOffset = 14;</code>
        */
       public boolean hasImgHorizontalPixelOffset() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
-       * <code>optional float imgHorizontalPixelOffset = 18;</code>
+       * <code>optional float imgHorizontalPixelOffset = 14;</code>
        */
       public float getImgHorizontalPixelOffset() {
         return imgHorizontalPixelOffset_;
       }
       /**
-       * <code>optional float imgHorizontalPixelOffset = 18;</code>
+       * <code>optional float imgHorizontalPixelOffset = 14;</code>
        */
       public Builder setImgHorizontalPixelOffset(float value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00002000;
         imgHorizontalPixelOffset_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float imgHorizontalPixelOffset = 18;</code>
+       * <code>optional float imgHorizontalPixelOffset = 14;</code>
        */
       public Builder clearImgHorizontalPixelOffset() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         imgHorizontalPixelOffset_ = 0F;
         onChanged();
         return this;
@@ -2514,17 +2436,17 @@ public final class StructureProto {
 
       private java.lang.Object description_ = "";
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
        * </pre>
        */
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
@@ -2545,7 +2467,7 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
@@ -2565,7 +2487,7 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
@@ -2576,26 +2498,26 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00008000;
+  bitField0_ |= 0x00004000;
         description_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
        * </pre>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 16;</code>
+       * <code>optional string description = 15;</code>
        *
        * <pre>
        *text field in db 
@@ -2606,7 +2528,7 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00008000;
+  bitField0_ |= 0x00004000;
         description_ = value;
         onChanged();
         return this;
@@ -2614,13 +2536,13 @@ public final class StructureProto {
 
       private java.lang.Object shortDescription_ = "";
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public boolean hasShortDescription() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public java.lang.String getShortDescription() {
         java.lang.Object ref = shortDescription_;
@@ -2637,7 +2559,7 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public com.google.protobuf.ByteString
           getShortDescriptionBytes() {
@@ -2653,36 +2575,36 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public Builder setShortDescription(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00010000;
+  bitField0_ |= 0x00008000;
         shortDescription_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public Builder clearShortDescription() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         shortDescription_ = getDefaultInstance().getShortDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string shortDescription = 17;</code>
+       * <code>optional string shortDescription = 16;</code>
        */
       public Builder setShortDescriptionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00010000;
+  bitField0_ |= 0x00008000;
         shortDescription_ = value;
         onChanged();
         return this;
@@ -2690,20 +2612,20 @@ public final class StructureProto {
 
       private java.lang.Object shadowImgName_ = "";
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public boolean hasShadowImgName() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public java.lang.String getShadowImgName() {
@@ -2721,10 +2643,10 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -2741,10 +2663,10 @@ public final class StructureProto {
         }
       }
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public Builder setShadowImgName(
@@ -2752,29 +2674,29 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00020000;
+  bitField0_ |= 0x00010000;
         shadowImgName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public Builder clearShadowImgName() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         shadowImgName_ = getDefaultInstance().getShadowImgName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string shadowImgName = 19;</code>
+       * <code>optional string shadowImgName = 18;</code>
        *
        * <pre>
-       *optional float imgHorizontalPixelOffset = 18; //defined above
+       *optional float imgHorizontalPixelOffset = 17; //defined above
        * </pre>
        */
       public Builder setShadowImgNameBytes(
@@ -2782,7 +2704,7 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00020000;
+  bitField0_ |= 0x00010000;
         shadowImgName_ = value;
         onChanged();
         return this;
@@ -2790,31 +2712,31 @@ public final class StructureProto {
 
       private float shadowVerticalOffset_ ;
       /**
-       * <code>optional float shadowVerticalOffset = 20;</code>
+       * <code>optional float shadowVerticalOffset = 19;</code>
        */
       public boolean hasShadowVerticalOffset() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
-       * <code>optional float shadowVerticalOffset = 20;</code>
+       * <code>optional float shadowVerticalOffset = 19;</code>
        */
       public float getShadowVerticalOffset() {
         return shadowVerticalOffset_;
       }
       /**
-       * <code>optional float shadowVerticalOffset = 20;</code>
+       * <code>optional float shadowVerticalOffset = 19;</code>
        */
       public Builder setShadowVerticalOffset(float value) {
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00020000;
         shadowVerticalOffset_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float shadowVerticalOffset = 20;</code>
+       * <code>optional float shadowVerticalOffset = 19;</code>
        */
       public Builder clearShadowVerticalOffset() {
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         shadowVerticalOffset_ = 0F;
         onChanged();
         return this;
@@ -2822,31 +2744,31 @@ public final class StructureProto {
 
       private float shadowHorizontalOfffset_ ;
       /**
-       * <code>optional float shadowHorizontalOfffset = 21;</code>
+       * <code>optional float shadowHorizontalOfffset = 20;</code>
        */
       public boolean hasShadowHorizontalOfffset() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
-       * <code>optional float shadowHorizontalOfffset = 21;</code>
+       * <code>optional float shadowHorizontalOfffset = 20;</code>
        */
       public float getShadowHorizontalOfffset() {
         return shadowHorizontalOfffset_;
       }
       /**
-       * <code>optional float shadowHorizontalOfffset = 21;</code>
+       * <code>optional float shadowHorizontalOfffset = 20;</code>
        */
       public Builder setShadowHorizontalOfffset(float value) {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00040000;
         shadowHorizontalOfffset_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float shadowHorizontalOfffset = 21;</code>
+       * <code>optional float shadowHorizontalOfffset = 20;</code>
        */
       public Builder clearShadowHorizontalOfffset() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         shadowHorizontalOfffset_ = 0F;
         onChanged();
         return this;
@@ -2854,31 +2776,31 @@ public final class StructureProto {
 
       private float shadowScale_ ;
       /**
-       * <code>optional float shadowScale = 22;</code>
+       * <code>optional float shadowScale = 21;</code>
        */
       public boolean hasShadowScale() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       /**
-       * <code>optional float shadowScale = 22;</code>
+       * <code>optional float shadowScale = 21;</code>
        */
       public float getShadowScale() {
         return shadowScale_;
       }
       /**
-       * <code>optional float shadowScale = 22;</code>
+       * <code>optional float shadowScale = 21;</code>
        */
       public Builder setShadowScale(float value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00080000;
         shadowScale_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float shadowScale = 22;</code>
+       * <code>optional float shadowScale = 21;</code>
        */
       public Builder clearShadowScale() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         shadowScale_ = 0F;
         onChanged();
         return this;
@@ -17285,103 +17207,103 @@ public final class StructureProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017Structure.proto\022\016com.lvl6.proto\032\026Share" +
-      "dEnumConfig.proto\"\202\006\n\022StructureInfoProto" +
+      "dEnumConfig.proto\"\341\005\n\022StructureInfoProto" +
       "\022\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005leve" +
       "l\030\003 \001(\005\022A\n\nstructType\030\004 \001(\0162-.com.lvl6.p" +
       "roto.StructureInfoProto.StructType\0227\n\021bu" +
       "ildResourceType\030\005 \001(\0162\034.com.lvl6.proto.R" +
       "esourceType\022\021\n\tbuildCost\030\006 \001(\005\022\026\n\016minute" +
-      "sToBuild\030\007 \001(\005\022\037\n\027prerequisiteTownHallLv" +
-      "l\030\010 \001(\005\022\r\n\005width\030\t \001(\005\022\016\n\006height\030\n \001(\005\022\033" +
-      "\n\023predecessorStructId\030\014 \001(\005\022\031\n\021successor",
-      "StructId\030\r \001(\005\022\017\n\007imgName\030\016 \001(\t\022\036\n\026imgVe" +
-      "rticalPixelOffset\030\017 \001(\002\022 \n\030imgHorizontal" +
-      "PixelOffset\030\022 \001(\002\022\023\n\013description\030\020 \001(\t\022\030" +
-      "\n\020shortDescription\030\021 \001(\t\022\025\n\rshadowImgNam" +
-      "e\030\023 \001(\t\022\034\n\024shadowVerticalOffset\030\024 \001(\002\022\037\n" +
-      "\027shadowHorizontalOfffset\030\025 \001(\002\022\023\n\013shadow" +
-      "Scale\030\026 \001(\002\"\260\001\n\nStructType\022\r\n\tNO_STRUCT\020" +
-      "\010\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_ST" +
-      "ORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\t" +
-      "TOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010MINI_JO",
-      "B\020\t\022\017\n\013TEAM_CENTER\020\n\022\010\n\004CLAN\020\013\"\256\001\n\026Resou" +
-      "rceGeneratorProto\0226\n\nstructInfo\030\001 \001(\0132\"." +
-      "com.lvl6.proto.StructureInfoProto\0222\n\014res" +
-      "ourceType\030\002 \001(\0162\034.com.lvl6.proto.Resourc" +
-      "eType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010capacit" +
-      "y\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstru" +
+      "sToBuild\030\007 \001(\005\022\r\n\005width\030\010 \001(\005\022\016\n\006height\030" +
+      "\t \001(\005\022\033\n\023predecessorStructId\030\n \001(\005\022\031\n\021su" +
+      "ccessorStructId\030\013 \001(\005\022\017\n\007imgName\030\014 \001(\t\022\036",
+      "\n\026imgVerticalPixelOffset\030\r \001(\002\022 \n\030imgHor" +
+      "izontalPixelOffset\030\016 \001(\002\022\023\n\013description\030" +
+      "\017 \001(\t\022\030\n\020shortDescription\030\020 \001(\t\022\025\n\rshado" +
+      "wImgName\030\022 \001(\t\022\034\n\024shadowVerticalOffset\030\023" +
+      " \001(\002\022\037\n\027shadowHorizontalOfffset\030\024 \001(\002\022\023\n" +
+      "\013shadowScale\030\025 \001(\002\"\260\001\n\nStructType\022\r\n\tNO_" +
+      "STRUCT\020\010\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESO" +
+      "URCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENC" +
+      "E\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010" +
+      "MINI_JOB\020\t\022\017\n\013TEAM_CENTER\020\n\022\010\n\004CLAN\020\013\"\256\001",
+      "\n\026ResourceGeneratorProto\0226\n\nstructInfo\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto." +
+      "ResourceType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010" +
+      "capacity\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\022" +
+      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
+      "uctureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034." +
+      "com.lvl6.proto.ResourceType\022\020\n\010capacity\030" +
+      "\003 \001(\005\"\232\001\n\rHospitalProto\0226\n\nstructInfo\030\001 " +
+      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022",
+      "\021\n\tqueueSize\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 " +
+      "\001(\002B\002\030\001\022!\n\031secsToFullyHealMultiplier\030\004 \001" +
+      "(\002\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
+      "m.lvl6.proto.StructureInfoProto\022\021\n\tqueue" +
+      "Size\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020p" +
+      "ointsMultiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto" +
+      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
+      "ructureInfoProto\022\027\n\017numMonsterSlots\030\002 \001(" +
+      "\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGe" +
+      "msRequired\030\004 \001(\005\022\034\n\024numAcceptedFbInvites",
+      "\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuf" +
+      "fix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstructInf" +
+      "o\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPr" +
+      "oto\022 \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n" +
+      "\026numResourceOneStorages\030\003 \001(\005\022 \n\030numReso" +
+      "urceTwoGenerators\030\004 \001(\005\022\036\n\026numResourceTw" +
+      "oStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n" +
+      "\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterSlots\030" +
+      "\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCo" +
+      "st\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016nu",
+      "mEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProt" +
+      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
+      "tructureInfoProto\022\031\n\021generatedJobLimit\030\002" +
+      " \001(\005\022!\n\031hoursBetweenJobGeneration\030\003 \001(\005\"" +
+      "\236\002\n\026FullUserStructureProto\022\026\n\016userStruct" +
+      "Uuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId" +
+      "\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchas" +
+      "eTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coord" +
+      "inates\030\007 \001(\0132\037.com.lvl6.proto.Coordinate" +
+      "Proto\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.pr",
+      "oto.StructOrientation\022\031\n\021fbInviteStructL" +
+      "vl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t" +
+      "\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010stru" +
+      "ctId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\"\342\002\n\rObstacleProt" +
+      "o\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017r" +
+      "emovalCostType\030\003 \001(\0162\034.com.lvl6.proto.Re" +
+      "sourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRem" +
+      "ove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005" +
+      "\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOff",
+      "set\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chance" +
+      "ToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n" +
+      "\024shadowVerticalOffset\030\r \001(\002\022\037\n\027shadowHor" +
+      "izontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstacle" +
+      "Proto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030" +
+      "\002 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\005 \001(\0162!.com.lvl6.proto.Str" +
+      "uctOrientation\"\333\001\n\021UserObstacleProto\022\030\n\020" +
+      "userObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t" +
+      "\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(",
+      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
+      "ientation\030\005 \001(\0162!.com.lvl6.proto.StructO" +
+      "rientation\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n" +
+      "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
+      "om.lvl6.proto.StructureInfoProto\0228\n\017qual" +
+      "ityUnlocked\030\002 \001(\0162\027.com.lvl6.proto.Quali" +
+      "ty:\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017T" +
+      "eamCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
+      ".lvl6.proto.StructureInfoProto\022\025\n\rteamCo" +
+      "stLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstru",
       "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
-      "nfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl" +
-      "6.proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"\232" +
-      "\001\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
-      "om.lvl6.proto.StructureInfoProto\022\021\n\tqueu" +
-      "eSize\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001" +
-      "\022!\n\031secsToFullyHealMultiplier\030\004 \001(\002\"\210\001\n\010" +
-      "LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
-      "proto.StructureInfoProto\022\021\n\tqueueSize\030\002 " +
-      "\001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020pointsMu" +
-      "ltiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstr" +
-      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
-      "InfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024nu" +
-      "mBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequi",
-      "red\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022" +
-      "\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001" +
-      "(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001(\013" +
-      "2\".com.lvl6.proto.StructureInfoProto\022 \n\030" +
-      "numResourceOneGenerators\030\002 \001(\005\022\036\n\026numRes" +
-      "ourceOneStorages\030\003 \001(\005\022 \n\030numResourceTwo" +
-      "Generators\030\004 \001(\005\022\036\n\026numResourceTwoStorag" +
-      "es\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumRes" +
-      "idences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017" +
-      "\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(",
-      "\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCha" +
-      "mbers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nst" +
-      "ructInfo\030\001 \001(\0132\".com.lvl6.proto.Structur" +
-      "eInfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n" +
-      "\031hoursBetweenJobGeneration\030\003 \001(\005\"\236\002\n\026Ful" +
-      "lUserStructureProto\022\026\n\016userStructUuid\030\001 " +
-      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022" +
-      "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005" +
-      " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030" +
-      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226",
-      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str" +
-      "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
-      "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
-      "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
-      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
-      ".CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nob" +
-      "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
-      "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT" +
-      "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001" +
-      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img",
-      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001" +
-      "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
-      "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
-      "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
-      "Offfset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022" +
-      "\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
-      ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
-      "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie" +
-      "ntation\"\333\001\n\021UserObstacleProto\022\030\n\020userObs" +
-      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs",
-      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com" +
-      ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
-      "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
-      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCha" +
-      "mberProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\0228\n\017qualityUnlo" +
-      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COM" +
-      "MON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCent" +
-      "erProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p" +
-      "roto.StructureInfoProto\022\025\n\rteamCostLimit",
-      "\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030" +
-      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
-      "o\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026" +
-      "teamDonationPowerLimit\030\003 \001(\005*I\n\014Resource" +
-      "Type\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002" +
-      "\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrienta" +
-      "tion\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001" +
-      "\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      "nfoProto\022!\n\031maxHelpersPerSolicitation\030\002 " +
+      "\001(\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005*I\n\014R" +
+      "esourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007" +
+      "\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021Struct" +
+      "Orientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSIT" +
+      "ION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17401,7 +17323,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
-        new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", "ShadowScale", });
+        new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", "ShadowScale", });
     internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_ResourceGeneratorProto_fieldAccessorTable = new
