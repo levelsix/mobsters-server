@@ -3457,13 +3457,13 @@ public final class SkillsProto {
         getPfxColorBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
      */
-    boolean hasPlacementType();
+    boolean hasPositionType();
     /**
-     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
      */
-    com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPlacementType();
+    com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPositionType();
 
     /**
      * <code>optional int32 pfxPixelOffsetX = 13;</code>
@@ -3482,6 +3482,15 @@ public final class SkillsProto {
      * <code>optional int32 pfxPixelOffsetY = 14;</code>
      */
     int getPfxPixelOffsetY();
+
+    /**
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+     */
+    boolean hasBlendMode();
+    /**
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+     */
+    com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode getBlendMode();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SkillSideEffectProto}
@@ -3619,7 +3628,7 @@ public final class SkillsProto {
                 unknownFields.mergeVarintField(12, rawValue);
               } else {
                 bitField0_ |= 0x00000800;
-                placementType_ = value;
+                positionType_ = value;
               }
               break;
             }
@@ -3631,6 +3640,17 @@ public final class SkillsProto {
             case 112: {
               bitField0_ |= 0x00002000;
               pfxPixelOffsetY_ = input.readInt32();
+              break;
+            }
+            case 120: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode value = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(15, rawValue);
+              } else {
+                bitField0_ |= 0x00004000;
+                blendMode_ = value;
+              }
               break;
             }
           }
@@ -3925,6 +3945,79 @@ public final class SkillsProto {
       }
 
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType)
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode}
+     */
+    public enum SideEffectBlendMode
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>NO_BLEND_MODE = 1;</code>
+       */
+      NO_BLEND_MODE(0, 1),
+      ;
+
+      /**
+       * <code>NO_BLEND_MODE = 1;</code>
+       */
+      public static final int NO_BLEND_MODE_VALUE = 1;
+
+
+      public final int getNumber() { return value; }
+
+      public static SideEffectBlendMode valueOf(int value) {
+        switch (value) {
+          case 1: return NO_BLEND_MODE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<SideEffectBlendMode>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<SideEffectBlendMode>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<SideEffectBlendMode>() {
+              public SideEffectBlendMode findValueByNumber(int number) {
+                return SideEffectBlendMode.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.SkillsProto.SkillSideEffectProto.getDescriptor().getEnumTypes().get(3);
+      }
+
+      private static final SideEffectBlendMode[] VALUES = values();
+
+      public static SideEffectBlendMode valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private SideEffectBlendMode(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode)
     }
 
     private int bitField0_;
@@ -4255,19 +4348,19 @@ public final class SkillsProto {
       }
     }
 
-    public static final int PLACEMENTTYPE_FIELD_NUMBER = 12;
-    private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType placementType_;
+    public static final int POSITIONTYPE_FIELD_NUMBER = 12;
+    private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType positionType_;
     /**
-     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
      */
-    public boolean hasPlacementType() {
+    public boolean hasPositionType() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
      */
-    public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPlacementType() {
-      return placementType_;
+    public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPositionType() {
+      return positionType_;
     }
 
     public static final int PFXPIXELOFFSETX_FIELD_NUMBER = 13;
@@ -4300,6 +4393,21 @@ public final class SkillsProto {
       return pfxPixelOffsetY_;
     }
 
+    public static final int BLENDMODE_FIELD_NUMBER = 15;
+    private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode blendMode_;
+    /**
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+     */
+    public boolean hasBlendMode() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+     */
+    public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode getBlendMode() {
+      return blendMode_;
+    }
+
     private void initFields() {
       skillSideEffectId_ = 0;
       name_ = "";
@@ -4312,9 +4420,10 @@ public final class SkillsProto {
       iconImgName_ = "";
       pfxName_ = "";
       pfxColor_ = "";
-      placementType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
+      positionType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
       pfxPixelOffsetX_ = 0;
       pfxPixelOffsetY_ = 0;
+      blendMode_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode.NO_BLEND_MODE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4363,13 +4472,16 @@ public final class SkillsProto {
         output.writeBytes(11, getPfxColorBytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeEnum(12, placementType_.getNumber());
+        output.writeEnum(12, positionType_.getNumber());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeInt32(13, pfxPixelOffsetX_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(14, pfxPixelOffsetY_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeEnum(15, blendMode_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4426,7 +4538,7 @@ public final class SkillsProto {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(12, placementType_.getNumber());
+          .computeEnumSize(12, positionType_.getNumber());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4435,6 +4547,10 @@ public final class SkillsProto {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(14, pfxPixelOffsetY_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(15, blendMode_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4579,12 +4695,14 @@ public final class SkillsProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         pfxColor_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
-        placementType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
+        positionType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
         bitField0_ = (bitField0_ & ~0x00000800);
         pfxPixelOffsetX_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
         pfxPixelOffsetY_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
+        blendMode_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode.NO_BLEND_MODE;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -4660,7 +4778,7 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.placementType_ = placementType_;
+        result.positionType_ = positionType_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
@@ -4669,6 +4787,10 @@ public final class SkillsProto {
           to_bitField0_ |= 0x00002000;
         }
         result.pfxPixelOffsetY_ = pfxPixelOffsetY_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.blendMode_ = blendMode_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4730,14 +4852,17 @@ public final class SkillsProto {
           pfxColor_ = other.pfxColor_;
           onChanged();
         }
-        if (other.hasPlacementType()) {
-          setPlacementType(other.getPlacementType());
+        if (other.hasPositionType()) {
+          setPositionType(other.getPositionType());
         }
         if (other.hasPfxPixelOffsetX()) {
           setPfxPixelOffsetX(other.getPfxPixelOffsetX());
         }
         if (other.hasPfxPixelOffsetY()) {
           setPfxPixelOffsetY(other.getPfxPixelOffsetY());
+        }
+        if (other.hasBlendMode()) {
+          setBlendMode(other.getBlendMode());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5388,37 +5513,37 @@ public final class SkillsProto {
         return this;
       }
 
-      private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType placementType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
+      private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType positionType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
       /**
-       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
        */
-      public boolean hasPlacementType() {
+      public boolean hasPositionType() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
        */
-      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPlacementType() {
-        return placementType_;
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType getPositionType() {
+        return positionType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
        */
-      public Builder setPlacementType(com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType value) {
+      public Builder setPositionType(com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000800;
-        placementType_ = value;
+        positionType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType placementType = 12 [default = NO_POSITION];</code>
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectPositionType positionType = 12 [default = NO_POSITION];</code>
        */
-      public Builder clearPlacementType() {
+      public Builder clearPositionType() {
         bitField0_ = (bitField0_ & ~0x00000800);
-        placementType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
+        positionType_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType.NO_POSITION;
         onChanged();
         return this;
       }
@@ -5487,6 +5612,41 @@ public final class SkillsProto {
         return this;
       }
 
+      private com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode blendMode_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode.NO_BLEND_MODE;
+      /**
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+       */
+      public boolean hasBlendMode() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode getBlendMode() {
+        return blendMode_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+       */
+      public Builder setBlendMode(com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00004000;
+        blendMode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SkillSideEffectProto.SideEffectBlendMode blendMode = 15 [default = NO_BLEND_MODE];</code>
+       */
+      public Builder clearBlendMode() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        blendMode_ = com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode.NO_BLEND_MODE;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillSideEffectProto)
     }
 
@@ -5533,7 +5693,7 @@ public final class SkillsProto {
       "\rimgNamePrefix\030\014 \001(\t\022\033\n\023skillEffectDurat" +
       "ion\030\r \001(\005\"O\n\022SkillPropertyProto\022\027\n\017skill",
       "PropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillV" +
-      "alue\030\003 \001(\002\"\274\005\n\024SkillSideEffectProto\022\031\n\021s" +
+      "alue\030\003 \001(\002\"\301\006\n\024SkillSideEffectProto\022\031\n\021s" +
       "killSideEffectId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004" +
       "desc\030\003 \001(\t\022Q\n\004type\030\004 \001(\01623.com.lvl6.prot" +
       "o.SkillSideEffectProto.SideEffectType:\016N" +
@@ -5542,30 +5702,34 @@ public final class SkillsProto {
       "tTraitType:\010NO_TRAIT\022\017\n\007imgName\030\006 \001(\t\022\027\n" +
       "\017imgPixelOffsetX\030\007 \001(\005\022\027\n\017imgPixelOffset" +
       "Y\030\010 \001(\005\022\023\n\013iconImgName\030\t \001(\t\022\017\n\007pfxName\030",
-      "\n \001(\t\022\020\n\010pfxColor\030\013 \001(\t\022_\n\rplacementType" +
-      "\030\014 \001(\0162;.com.lvl6.proto.SkillSideEffectP" +
-      "roto.SideEffectPositionType:\013NO_POSITION" +
-      "\022\027\n\017pfxPixelOffsetX\030\r \001(\005\022\027\n\017pfxPixelOff" +
-      "setY\030\016 \001(\005\"$\n\016SideEffectType\022\022\n\016NO_SIDE_" +
-      "EFFECT\020\001\":\n\023SideEffectTraitType\022\014\n\010NO_TR" +
-      "AIT\020\001\022\010\n\004BUFF\020\002\022\013\n\007AILMENT\020\003\"S\n\026SideEffe" +
-      "ctPositionType\022\017\n\013NO_POSITION\020\001\022\023\n\017ABOVE" +
-      "_CHARACTER\020\002\022\023\n\017BELOW_CHARACTER\020\003*\377\003\n\tSk" +
-      "illType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005",
-      "JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006" +
-      "SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010M" +
-      "OMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022\n\016CRIT_AND_EV" +
-      "ADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADSHOT\020\r\022\007\n\003MUD\020" +
-      "\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016COUNTER_STRIKE\020\020\022\020\n" +
-      "\014FLAME_STRIKE\020\021\022\r\n\tCONFUSION\020\022\022\020\n\014STATIC" +
-      "_FIELD\020\023\022\022\n\016BLINDING_LIGHT\020\024\022\021\n\rPOISON_P" +
-      "OWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOCKOUT\020\027\022\021\n\rSHA" +
-      "LLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME\020\031\022\016\n\nBLOOD_R" +
-      "AGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL_FIRE\020\034\022\014\n\010EN",
-      "ERGIZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n\005CURSE\020\037\022\r\n\tI" +
-      "NSURANCE\020 \022\017\n\013FLAME_BREAK\020!*J\n\023SkillActi" +
-      "vationType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_A" +
-      "CTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "\n \001(\t\022\020\n\010pfxColor\030\013 \001(\t\022^\n\014positionType\030" +
+      "\014 \001(\0162;.com.lvl6.proto.SkillSideEffectPr" +
+      "oto.SideEffectPositionType:\013NO_POSITION\022" +
+      "\027\n\017pfxPixelOffsetX\030\r \001(\005\022\027\n\017pfxPixelOffs" +
+      "etY\030\016 \001(\005\022Z\n\tblendMode\030\017 \001(\01628.com.lvl6." +
+      "proto.SkillSideEffectProto.SideEffectBle" +
+      "ndMode:\rNO_BLEND_MODE\"$\n\016SideEffectType\022" +
+      "\022\n\016NO_SIDE_EFFECT\020\001\":\n\023SideEffectTraitTy" +
+      "pe\022\014\n\010NO_TRAIT\020\001\022\010\n\004BUFF\020\002\022\013\n\007AILMENT\020\003\"" +
+      "S\n\026SideEffectPositionType\022\017\n\013NO_POSITION",
+      "\020\001\022\023\n\017ABOVE_CHARACTER\020\002\022\023\n\017BELOW_CHARACT" +
+      "ER\020\003\"(\n\023SideEffectBlendMode\022\021\n\rNO_BLEND_" +
+      "MODE\020\001*\377\003\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCA" +
+      "KE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t" +
+      "\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROI" +
+      "D_RAGE\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\nTHICK_SKIN\020\n\022\022" +
+      "\n\016CRIT_AND_EVADE\020\013\022\013\n\007SHUFFLE\020\014\022\014\n\010HEADS" +
+      "HOT\020\r\022\007\n\003MUD\020\016\022\016\n\nLIFE_STEAL\020\017\022\022\n\016COUNTE" +
+      "R_STRIKE\020\020\022\020\n\014FLAME_STRIKE\020\021\022\r\n\tCONFUSIO" +
+      "N\020\022\022\020\n\014STATIC_FIELD\020\023\022\022\n\016BLINDING_LIGHT\020",
+      "\024\022\021\n\rPOISON_POWDER\020\025\022\n\n\006SKEWER\020\026\022\014\n\010KNOC" +
+      "KOUT\020\027\022\021\n\rSHALLOW_GRAVE\020\030\022\017\n\013HAMMER_TIME" +
+      "\020\031\022\016\n\nBLOOD_RAGE\020\032\022\014\n\010TAKE_AIM\020\033\022\r\n\tHELL" +
+      "_FIRE\020\034\022\014\n\010ENERGIZE\020\035\022\016\n\nRIGHT_HOOK\020\036\022\t\n" +
+      "\005CURSE\020\037\022\r\n\tINSURANCE\020 \022\017\n\013FLAME_BREAK\020!" +
+      "*J\n\023SkillActivationType\022\022\n\016USER_ACTIVATE" +
+      "D\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013" +
+      "SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5596,7 +5760,7 @@ public final class SkillsProto {
     internal_static_com_lvl6_proto_SkillSideEffectProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SkillSideEffectProto_descriptor,
-        new java.lang.String[] { "SkillSideEffectId", "Name", "Desc", "Type", "TraitType", "ImgName", "ImgPixelOffsetX", "ImgPixelOffsetY", "IconImgName", "PfxName", "PfxColor", "PlacementType", "PfxPixelOffsetX", "PfxPixelOffsetY", });
+        new java.lang.String[] { "SkillSideEffectId", "Name", "Desc", "Type", "TraitType", "ImgName", "ImgPixelOffsetX", "ImgPixelOffsetY", "IconImgName", "PfxName", "PfxColor", "PositionType", "PfxPixelOffsetX", "PfxPixelOffsetY", "BlendMode", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

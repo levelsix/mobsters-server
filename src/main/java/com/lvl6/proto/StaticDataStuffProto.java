@@ -879,6 +879,30 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> 
+        getSideEffectsList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    com.lvl6.proto.SkillsProto.SkillSideEffectProto getSideEffects(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    int getSideEffectsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder> 
+        getSideEffectsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder getSideEffectsOrBuilder(
+        int index);
+
+    /**
      * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
      *
      * <pre>
@@ -1277,25 +1301,25 @@ public final class StaticDataStuffProto {
               break;
             }
             case 266: {
-              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
                 prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>();
-                mutable_bitField1_ |= 0x00000001;
+                mutable_bitField1_ |= 0x00000002;
               }
               prereqs_.add(input.readMessage(com.lvl6.proto.PrerequisiteProto.PrereqProto.PARSER, extensionRegistry));
               break;
             }
             case 274: {
-              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
                 boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>();
-                mutable_bitField1_ |= 0x00000002;
+                mutable_bitField1_ |= 0x00000004;
               }
               boards_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardLayoutProto.PARSER, extensionRegistry));
               break;
             }
             case 282: {
-              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
                 research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>();
-                mutable_bitField1_ |= 0x00000004;
+                mutable_bitField1_ |= 0x00000008;
               }
               research_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchProto.PARSER, extensionRegistry));
               break;
@@ -1311,6 +1335,14 @@ public final class StaticDataStuffProto {
                 starterPack_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000002;
+              break;
+            }
+            case 298: {
+              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+                sideEffects_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillSideEffectProto>();
+                mutable_bitField1_ |= 0x00000001;
+              }
+              sideEffects_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillSideEffectProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1411,14 +1443,17 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
           allClanHouses_ = java.util.Collections.unmodifiableList(allClanHouses_);
         }
-        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
           prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
         }
-        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
           boards_ = java.util.Collections.unmodifiableList(boards_);
         }
-        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
           research_ = java.util.Collections.unmodifiableList(research_);
+        }
+        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+          sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2664,6 +2699,41 @@ public final class StaticDataStuffProto {
       return skills_.get(index);
     }
 
+    public static final int SIDEEFFECTS_FIELD_NUMBER = 37;
+    private java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> sideEffects_;
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    public java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> getSideEffectsList() {
+      return sideEffects_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder> 
+        getSideEffectsOrBuilderList() {
+      return sideEffects_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    public int getSideEffectsCount() {
+      return sideEffects_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    public com.lvl6.proto.SkillsProto.SkillSideEffectProto getSideEffects(int index) {
+      return sideEffects_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+     */
+    public com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder getSideEffectsOrBuilder(
+        int index) {
+      return sideEffects_.get(index);
+    }
+
     public static final int PREREQS_FIELD_NUMBER = 33;
     private java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> prereqs_;
     /**
@@ -2822,6 +2892,7 @@ public final class StaticDataStuffProto {
       leagues_ = java.util.Collections.emptyList();
       achievements_ = java.util.Collections.emptyList();
       skills_ = java.util.Collections.emptyList();
+      sideEffects_ = java.util.Collections.emptyList();
       prereqs_ = java.util.Collections.emptyList();
       boards_ = java.util.Collections.emptyList();
       research_ = java.util.Collections.emptyList();
@@ -2943,6 +3014,9 @@ public final class StaticDataStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(36, starterPack_);
+      }
+      for (int i = 0; i < sideEffects_.size(); i++) {
+        output.writeMessage(37, sideEffects_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3093,6 +3167,10 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(36, starterPack_);
       }
+      for (int i = 0; i < sideEffects_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(37, sideEffects_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -3234,6 +3312,7 @@ public final class StaticDataStuffProto {
           getLeaguesFieldBuilder();
           getAchievementsFieldBuilder();
           getSkillsFieldBuilder();
+          getSideEffectsFieldBuilder();
           getPrereqsFieldBuilder();
           getBoardsFieldBuilder();
           getResearchFieldBuilder();
@@ -3437,21 +3516,27 @@ public final class StaticDataStuffProto {
         } else {
           skillsBuilder_.clear();
         }
+        if (sideEffectsBuilder_ == null) {
+          sideEffects_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000001);
+        } else {
+          sideEffectsBuilder_.clear();
+        }
         if (prereqsBuilder_ == null) {
           prereqs_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
         } else {
           prereqsBuilder_.clear();
         }
         if (boardsBuilder_ == null) {
           boards_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
         } else {
           boardsBuilder_.clear();
         }
         if (researchBuilder_ == null) {
           research_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
         } else {
           researchBuilder_.clear();
         }
@@ -3770,28 +3855,37 @@ public final class StaticDataStuffProto {
         } else {
           result.skills_ = skillsBuilder_.build();
         }
-        if (prereqsBuilder_ == null) {
+        if (sideEffectsBuilder_ == null) {
           if (((bitField1_ & 0x00000001) == 0x00000001)) {
-            prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+            sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
             bitField1_ = (bitField1_ & ~0x00000001);
+          }
+          result.sideEffects_ = sideEffects_;
+        } else {
+          result.sideEffects_ = sideEffectsBuilder_.build();
+        }
+        if (prereqsBuilder_ == null) {
+          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+            prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+            bitField1_ = (bitField1_ & ~0x00000002);
           }
           result.prereqs_ = prereqs_;
         } else {
           result.prereqs_ = prereqsBuilder_.build();
         }
         if (boardsBuilder_ == null) {
-          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+          if (((bitField1_ & 0x00000004) == 0x00000004)) {
             boards_ = java.util.Collections.unmodifiableList(boards_);
-            bitField1_ = (bitField1_ & ~0x00000002);
+            bitField1_ = (bitField1_ & ~0x00000004);
           }
           result.boards_ = boards_;
         } else {
           result.boards_ = boardsBuilder_.build();
         }
         if (researchBuilder_ == null) {
-          if (((bitField1_ & 0x00000004) == 0x00000004)) {
+          if (((bitField1_ & 0x00000008) == 0x00000008)) {
             research_ = java.util.Collections.unmodifiableList(research_);
-            bitField1_ = (bitField1_ & ~0x00000004);
+            bitField1_ = (bitField1_ & ~0x00000008);
           }
           result.research_ = research_;
         } else {
@@ -4599,11 +4693,37 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (sideEffectsBuilder_ == null) {
+          if (!other.sideEffects_.isEmpty()) {
+            if (sideEffects_.isEmpty()) {
+              sideEffects_ = other.sideEffects_;
+              bitField1_ = (bitField1_ & ~0x00000001);
+            } else {
+              ensureSideEffectsIsMutable();
+              sideEffects_.addAll(other.sideEffects_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.sideEffects_.isEmpty()) {
+            if (sideEffectsBuilder_.isEmpty()) {
+              sideEffectsBuilder_.dispose();
+              sideEffectsBuilder_ = null;
+              sideEffects_ = other.sideEffects_;
+              bitField1_ = (bitField1_ & ~0x00000001);
+              sideEffectsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getSideEffectsFieldBuilder() : null;
+            } else {
+              sideEffectsBuilder_.addAllMessages(other.sideEffects_);
+            }
+          }
+        }
         if (prereqsBuilder_ == null) {
           if (!other.prereqs_.isEmpty()) {
             if (prereqs_.isEmpty()) {
               prereqs_ = other.prereqs_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
             } else {
               ensurePrereqsIsMutable();
               prereqs_.addAll(other.prereqs_);
@@ -4616,7 +4736,7 @@ public final class StaticDataStuffProto {
               prereqsBuilder_.dispose();
               prereqsBuilder_ = null;
               prereqs_ = other.prereqs_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
               prereqsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPrereqsFieldBuilder() : null;
@@ -4629,7 +4749,7 @@ public final class StaticDataStuffProto {
           if (!other.boards_.isEmpty()) {
             if (boards_.isEmpty()) {
               boards_ = other.boards_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
             } else {
               ensureBoardsIsMutable();
               boards_.addAll(other.boards_);
@@ -4642,7 +4762,7 @@ public final class StaticDataStuffProto {
               boardsBuilder_.dispose();
               boardsBuilder_ = null;
               boards_ = other.boards_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
               boardsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBoardsFieldBuilder() : null;
@@ -4655,7 +4775,7 @@ public final class StaticDataStuffProto {
           if (!other.research_.isEmpty()) {
             if (research_.isEmpty()) {
               research_ = other.research_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
             } else {
               ensureResearchIsMutable();
               research_.addAll(other.research_);
@@ -4668,7 +4788,7 @@ public final class StaticDataStuffProto {
               researchBuilder_.dispose();
               researchBuilder_ = null;
               research_ = other.research_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
               researchBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getResearchFieldBuilder() : null;
@@ -12569,12 +12689,252 @@ public final class StaticDataStuffProto {
         return skillsBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> sideEffects_ =
+        java.util.Collections.emptyList();
+      private void ensureSideEffectsIsMutable() {
+        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+          sideEffects_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillSideEffectProto>(sideEffects_);
+          bitField1_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.SkillsProto.SkillSideEffectProto, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder, com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder> sideEffectsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> getSideEffectsList() {
+        if (sideEffectsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(sideEffects_);
+        } else {
+          return sideEffectsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public int getSideEffectsCount() {
+        if (sideEffectsBuilder_ == null) {
+          return sideEffects_.size();
+        } else {
+          return sideEffectsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto getSideEffects(int index) {
+        if (sideEffectsBuilder_ == null) {
+          return sideEffects_.get(index);
+        } else {
+          return sideEffectsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder setSideEffects(
+          int index, com.lvl6.proto.SkillsProto.SkillSideEffectProto value) {
+        if (sideEffectsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSideEffectsIsMutable();
+          sideEffects_.set(index, value);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder setSideEffects(
+          int index, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder builderForValue) {
+        if (sideEffectsBuilder_ == null) {
+          ensureSideEffectsIsMutable();
+          sideEffects_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          sideEffectsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder addSideEffects(com.lvl6.proto.SkillsProto.SkillSideEffectProto value) {
+        if (sideEffectsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSideEffectsIsMutable();
+          sideEffects_.add(value);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder addSideEffects(
+          int index, com.lvl6.proto.SkillsProto.SkillSideEffectProto value) {
+        if (sideEffectsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSideEffectsIsMutable();
+          sideEffects_.add(index, value);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder addSideEffects(
+          com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder builderForValue) {
+        if (sideEffectsBuilder_ == null) {
+          ensureSideEffectsIsMutable();
+          sideEffects_.add(builderForValue.build());
+          onChanged();
+        } else {
+          sideEffectsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder addSideEffects(
+          int index, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder builderForValue) {
+        if (sideEffectsBuilder_ == null) {
+          ensureSideEffectsIsMutable();
+          sideEffects_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          sideEffectsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder addAllSideEffects(
+          java.lang.Iterable<? extends com.lvl6.proto.SkillsProto.SkillSideEffectProto> values) {
+        if (sideEffectsBuilder_ == null) {
+          ensureSideEffectsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, sideEffects_);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder clearSideEffects() {
+        if (sideEffectsBuilder_ == null) {
+          sideEffects_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000001);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public Builder removeSideEffects(int index) {
+        if (sideEffectsBuilder_ == null) {
+          ensureSideEffectsIsMutable();
+          sideEffects_.remove(index);
+          onChanged();
+        } else {
+          sideEffectsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder getSideEffectsBuilder(
+          int index) {
+        return getSideEffectsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder getSideEffectsOrBuilder(
+          int index) {
+        if (sideEffectsBuilder_ == null) {
+          return sideEffects_.get(index);  } else {
+          return sideEffectsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder> 
+           getSideEffectsOrBuilderList() {
+        if (sideEffectsBuilder_ != null) {
+          return sideEffectsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(sideEffects_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder addSideEffectsBuilder() {
+        return getSideEffectsFieldBuilder().addBuilder(
+            com.lvl6.proto.SkillsProto.SkillSideEffectProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder addSideEffectsBuilder(
+          int index) {
+        return getSideEffectsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.SkillsProto.SkillSideEffectProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillSideEffectProto sideEffects = 37;</code>
+       */
+      public java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder> 
+           getSideEffectsBuilderList() {
+        return getSideEffectsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.SkillsProto.SkillSideEffectProto, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder, com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder> 
+          getSideEffectsFieldBuilder() {
+        if (sideEffectsBuilder_ == null) {
+          sideEffectsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.SkillsProto.SkillSideEffectProto, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder, com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder>(
+                  sideEffects_,
+                  ((bitField1_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          sideEffects_ = null;
+        }
+        return sideEffectsBuilder_;
+      }
+
       private java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> prereqs_ =
         java.util.Collections.emptyList();
       private void ensurePrereqsIsMutable() {
-        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
           prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>(prereqs_);
-          bitField1_ |= 0x00000001;
+          bitField1_ |= 0x00000002;
          }
       }
 
@@ -12768,7 +13128,7 @@ public final class StaticDataStuffProto {
       public Builder clearPrereqs() {
         if (prereqsBuilder_ == null) {
           prereqs_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
           onChanged();
         } else {
           prereqsBuilder_.clear();
@@ -12873,7 +13233,7 @@ public final class StaticDataStuffProto {
           prereqsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.PrerequisiteProto.PrereqProto, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder, com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder>(
                   prereqs_,
-                  ((bitField1_ & 0x00000001) == 0x00000001),
+                  ((bitField1_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           prereqs_ = null;
@@ -12884,9 +13244,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> boards_ =
         java.util.Collections.emptyList();
       private void ensureBoardsIsMutable() {
-        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
           boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>(boards_);
-          bitField1_ |= 0x00000002;
+          bitField1_ |= 0x00000004;
          }
       }
 
@@ -13036,7 +13396,7 @@ public final class StaticDataStuffProto {
       public Builder clearBoards() {
         if (boardsBuilder_ == null) {
           boards_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
           onChanged();
         } else {
           boardsBuilder_.clear();
@@ -13113,7 +13473,7 @@ public final class StaticDataStuffProto {
           boardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoardProto.BoardLayoutProto, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder, com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder>(
                   boards_,
-                  ((bitField1_ & 0x00000002) == 0x00000002),
+                  ((bitField1_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           boards_ = null;
@@ -13124,9 +13484,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> research_ =
         java.util.Collections.emptyList();
       private void ensureResearchIsMutable() {
-        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField1_ & 0x00000008) == 0x00000008)) {
           research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>(research_);
-          bitField1_ |= 0x00000004;
+          bitField1_ |= 0x00000008;
          }
       }
 
@@ -13276,7 +13636,7 @@ public final class StaticDataStuffProto {
       public Builder clearResearch() {
         if (researchBuilder_ == null) {
           research_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
           onChanged();
         } else {
           researchBuilder_.clear();
@@ -13353,7 +13713,7 @@ public final class StaticDataStuffProto {
           researchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder>(
                   research_,
-                  ((bitField1_ & 0x00000004) == 0x00000004),
+                  ((bitField1_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           research_ = null;
@@ -13392,7 +13752,7 @@ public final class StaticDataStuffProto {
       "o\032\nClan.proto\032\nItem.proto\032\022MonsterStuff." +
       "proto\032\022Prerequisite.proto\032\013Quest.proto\032\016" +
       "Research.proto\032\013Skill.proto\032\017Structure.p" +
-      "roto\032\nTask.proto\032\nUser.proto\"\200\017\n\017StaticD" +
+      "roto\032\nTask.proto\032\nUser.proto\"\273\017\n\017StaticD" +
       "ataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
       "o.MinimumUserProto\022>\n\016expansionCosts\030\002 \003" +
       "(\0132&.com.lvl6.proto.CityExpansionCostPro",
@@ -13437,11 +13797,12 @@ public final class StaticDataStuffProto {
       ".lvl6.proto.PvpLeagueProto\0226\n\014achievemen" +
       "ts\030\032 \003(\0132 .com.lvl6.proto.AchievementPro",
       "to\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.Skil" +
-      "lProto\022,\n\007prereqs\030! \003(\0132\033.com.lvl6.proto" +
-      ".PrereqProto\0220\n\006boards\030\" \003(\0132 .com.lvl6." +
-      "proto.BoardLayoutProto\022/\n\010research\030# \003(\013" +
-      "2\035.com.lvl6.proto.ResearchProtoB\026B\024Stati" +
-      "cDataStuffProto"
+      "lProto\0229\n\013sideEffects\030% \003(\0132$.com.lvl6.p" +
+      "roto.SkillSideEffectProto\022,\n\007prereqs\030! \003" +
+      "(\0132\033.com.lvl6.proto.PrereqProto\0220\n\006board" +
+      "s\030\" \003(\0132 .com.lvl6.proto.BoardLayoutProt" +
+      "o\022/\n\010research\030# \003(\0132\035.com.lvl6.proto.Res" +
+      "earchProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13475,7 +13836,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", "Research", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BoardProto.getDescriptor();

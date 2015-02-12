@@ -1090,18 +1090,21 @@ public class DBConstants {
 	public static final String SKILL_PROPERTY__VALUE = "value";
 	public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
 	
-//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
-//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
-//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
-//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
-//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
-//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
-//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
-//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
-//	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
-//	public static final String SKILL_SIDE_EFFECT__NAME = "name";
-//	public static final String SKILL_SIDE_EFFECT__VALUE = "value";
-//	public static final String SKILL_SIDE_EFFECT__SKILL_ID = "skill_id";
+	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
+	public static final String SKILL_SIDE_EFFECT__NAME = "name";
+	public static final String SKILL_SIDE_EFFECT__DESC = "desc";
+	public static final String SKILL_SIDE_EFFECT__TYPE = "type";
+	public static final String SKILL_SIDE_EFFECT__TRAIT_TYPE = "trait_type";
+	public static final String SKILL_SIDE_EFFECT__IMG_NAME = "img_name";
+	public static final String SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_X = "img_pixel_offset_x";
+	public static final String SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_Y = "img_pixel_offset_y";
+	public static final String SKILL_SIDE_EFFECT__ICON_IMG_NAME = "icon_img_name";
+	public static final String SKILL_SIDE_EFFECT__PFX_NAME = "pfx_name";
+	public static final String SKILL_SIDE_EFFECT__PFX_COLOR  = "pfx_color";
+	public static final String SKILL_SIDE_EFFECT__POSITION_TYPE = "position_type";
+	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_X = "pfx_pixel_offset_x";
+	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_Y = "pfx_pixel_offset_y";
+	public static final String SKILL_SIDE_EFFECT__BLEND_MODE = "blend_mode";
 
 	public static final String STATIC_LEVEL_INFO__LEVEL_ID = "level_id";
 	public static final String STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE = "required_experience";

@@ -76,6 +76,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
+import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
@@ -178,6 +179,11 @@ import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.SkillsProto.SkillActivationType;
 import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectBlendMode;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectPositionType;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectTraitType;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto.SideEffectType;
 import com.lvl6.proto.SkillsProto.SkillType;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
@@ -3025,6 +3031,99 @@ public class CreateInfoProtoUtils {
 		sppb.setSkillValue(property.getValue());
 
 		return sppb.build();
+	}
+	
+	public static SkillSideEffectProto createSkillSideEffectProto(
+		SkillSideEffect sse)
+	{
+		SkillSideEffectProto.Builder ssepb = SkillSideEffectProto.newBuilder();
+		ssepb.setSkillSideEffectId(sse.getId());
+		
+		String str = sse.getName();
+		if (null != str) {
+			ssepb.setName(str);
+		}
+		
+		str = sse.getDesc();
+		if (null != str) {
+			ssepb.setDesc(str);
+		}
+		
+		str = sse.getType();
+		if (null != str) {
+			try {
+				SideEffectType set = SideEffectType.valueOf(str);
+				ssepb.setType(set);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		str = sse.getTraitType();
+		if (null != str) {
+			try {
+				SideEffectTraitType sett = SideEffectTraitType.valueOf(str);
+				ssepb.setTraitType(sett);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectTraitType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		str = sse.getImgName();
+		if (null != str) {
+			ssepb.setImgName(str);
+		}
+		
+		ssepb.setImgPixelOffsetX(sse.getImgPixelOffsetX());
+		ssepb.setImgPixelOffsetY(sse.getImgPixelOffsetY());
+
+		str = sse.getIconImgName();
+		if (null != str) {
+			ssepb.setIconImgName(str);
+		}
+		
+		str = sse.getPfxName();
+		if (null != str) {
+			ssepb.setPfxName(str);
+		}
+		
+		str = sse.getPfxColor();
+		if (null != str) {
+			ssepb.setPfxColor(str);
+		}
+		
+		str = sse.getPositionType();
+		if (null != str) {
+			try {
+				SideEffectPositionType sept = SideEffectPositionType.valueOf(str);
+				ssepb.setPositionType(sept);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectPositionType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		ssepb.setImgPixelOffsetX(sse.getPfxPixelOffsetX());
+		ssepb.setImgPixelOffsetY(sse.getPfxPixelOffsetY());
+
+		str = sse.getBlendMode();
+		if (null != str) {
+			try {
+				SideEffectBlendMode sebm = SideEffectBlendMode.valueOf(str);
+				ssepb.setBlendMode(sebm);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectBlendMode. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		return ssepb.build();
 	}
 
 	/**Structure.proto************************************************/

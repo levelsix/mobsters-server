@@ -104,6 +104,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
@@ -1022,6 +1023,7 @@ public class MiscMethods {
 		ResearchPropertyRetrieveUtils.reload();
 		SkillRetrieveUtils.reload();
 		SkillPropertyRetrieveUtils.reload();
+		SkillSideEffectRetrieveUtils.reload();
 		StartupStuffRetrieveUtils.reload();
 		StaticUserLevelInfoRetrieveUtils.reload();
 		StructureClanHouseRetrieveUtils.reload();

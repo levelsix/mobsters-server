@@ -31,6 +31,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
+import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureClanHouse;
@@ -58,6 +59,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
@@ -97,6 +99,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
@@ -584,25 +587,40 @@ public class StaticDataContainer
 		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
 			SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
 
+		
 		if (null == skillz || skillz.isEmpty()) {
 			log.warn("setSkillStuff() no skillz");
-			return;
+		} else {
+			//get id and then manually get Skill
+			//could also get Skill, but then manually get id
+			for (Integer skillId : skillz.keySet())
+			{
+				Skill skil = skillz.get(skillId);
+				
+				//skill can have no properties
+				Map<Integer, SkillProperty> propertyz = null;
+				if (skillPropertyz.containsKey(skillId)) {
+					propertyz = skillPropertyz.get(skillId);
+				}
+				
+				SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
+				sdpb.addSkills(sp);
+			}
 		}
 
-		//get id and then manually get Skill
-		//could also get Skill, but then manually get id
-		for (Integer skillId : skillz.keySet())
-		{
-			Skill skil = skillz.get(skillId);
-
-			//skill can have no properties
-			Map<Integer, SkillProperty> propertyz = null;
-			if (skillPropertyz.containsKey(skillId)) {
-				propertyz = skillPropertyz.get(skillId);
+		Map<Integer, SkillSideEffect> skillSideEffects =
+			SkillSideEffectRetrieveUtils.getIdsToSkillSideEffects();
+		
+		if (null == skillSideEffects || skillSideEffects.isEmpty()) {
+			log.warn("setSkillStuff() no skillSideEffects");
+		} else {
+			for (Integer id : skillSideEffects.keySet())
+			{
+				SkillSideEffect sse = skillSideEffects.get(id);
+				SkillSideEffectProto ssep = CreateInfoProtoUtils
+					.createSkillSideEffectProto(sse);
+				sdpb.addSideEffects(ssep);
 			}
-
-			SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
-			sdpb.addSkills(sp);
 		}
 
 	}
