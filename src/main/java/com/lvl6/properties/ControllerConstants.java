@@ -30,6 +30,9 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_BASE_PERCENT = 0.5F;
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
+	//BOOSTER_PACK
+	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
+	
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 5 : 100;
 	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
@@ -181,7 +184,7 @@ public class ControllerConstants {
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
 	//TOGGLES
-	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
+//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
