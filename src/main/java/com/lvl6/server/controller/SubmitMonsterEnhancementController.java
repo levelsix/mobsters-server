@@ -100,13 +100,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Timestamp clientTime = new Timestamp((new Date()).getTime());
     int maxOil= senderResourcesProto.getMaxOil();
 
-    //		Map<Long, UserEnhancementItemProto> deleteMap = MonsterStuffUtils.
-    //				convertIntoUserMonsterIdToUeipProtoMap(ueipDelete);
-    //		Map<Long, UserEnhancementItemProto> updateMap = MonsterStuffUtils.
-    //				convertIntoUserMonsterIdToUeipProtoMap(ueipUpdated);
     Map<String, UserEnhancementItemProto> newMap = MonsterStuffUtils.
         convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
-
 
     //set some values to send to the client (the response proto)
     SubmitMonsterEnhancementResponseProto.Builder resBuilder = SubmitMonsterEnhancementResponseProto.newBuilder();
@@ -114,14 +109,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
 
     UUID userUuid = null;
-    UUID userMonsterUuid = null;
     boolean invalidUuids = true;
     try {
       userUuid = UUID.fromString(userId);
 
       if (ueipNew != null) {
         for (UserEnhancementItemProto ueip : ueipNew) {
-          userMonsterUuid = UUID.fromString(ueip.getUserMonsterUuid());
+          UUID.fromString(ueip.getUserMonsterUuid());
         }
       }
 
@@ -143,7 +137,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return;
     }
 
-    getLocker().lockPlayer(userUuid, getClass().getSimpleName());
+    locker.lockPlayer(userUuid, getClass().getSimpleName());
     try {
       int previousOil = 0;
       int previousGems = 0;
@@ -212,23 +206,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.error("exception2 in SubmitMonsterEnhancementController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
+      locker.unlockPlayer(userUuid, getClass().getSimpleName());   
     }
   }
 
   /*
    * Return true if user request is valid; false otherwise and set the
-   * 	builder status to the appropriate value. delete, update, new maps
-   * 	MIGHT BE MODIFIED.
+   * 	builder status to the appropriate value.
    * 
-   * For the most part, will always return success. Why?
-   * (Will return fail if user does not have enough funds.) 
-   * Answer: For the map(s)
-   * 
-   * delete (DEPRECATED) - The monsters to be removed from enhancing will/should
-   * 	only be the ones the user already has in enhancing.
-   * update (DEPRECATED) - The monsters to be updated in enhancing will/should already exist
-   * new - brand new monsters
+   * Will return fail if user does not have enough funds, or if any
+   * of the monsters are currently engaged in something else, such as
+   * healing, enhancing 
    * 
    * Note: If any of the monsters have "restricted" property set to true,
    * 	then said monster can only be the base monster. 
@@ -242,59 +230,49 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Map<String, MonsterForUser> existingUserMonsters,
       Map<String, MonsterEnhancingForUser> alreadyEnhancing,
       Map<String, MonsterHealingForUser> alreadyHealing,
-      //			Map<Long, UserEnhancementItemProto> deleteMap,
-      //			Map<Long, UserEnhancementItemProto> updateMap,
       Map<String, UserEnhancementItemProto> newMap, MonsterEvolvingForUser evolution,
       int gemsSpent, int oilChange) {
     if (null == u ) {
-      //			log.error(String.format(
-      //				"user is null. userId=%s, deleteMap=%s, updateMap=%s, newMap=%s",
-      //				userId, deleteMap, updateMap, newMap));
-      log.error(String.format(
-          "user is null. userId=%s, newMap=%s",
-          userId, newMap));
+      log.error( "user is null. userId={}, newMap={}",
+          userId, newMap );
       return false;
     }
 
     if ( null != alreadyEnhancing && !alreadyEnhancing.isEmpty() ) {
-      log.error(String.format(
-          "user already has monsters enhancing=%s, user=%s",
-          alreadyEnhancing, u));
+      log.error( "user already has monsters enhancing={}, user={}",
+          alreadyEnhancing, u );
+      resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_ENHANCING);
       return false;
     }
 
-    //retain only the userMonsters in deleteMap and updateMap that are in enhancing
-    boolean keepThingsInDomain = true;
-    boolean keepThingsNotInDomain = false;
-    //		Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
-    //		if (null != deleteMap && !deleteMap.isEmpty()) {
-    //			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, deleteMap,
-    //					keepThingsInDomain, keepThingsNotInDomain);
-    //		}
-    //
-    //		if (null != updateMap && !updateMap.isEmpty()) {
-    //			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, updateMap,
-    //					keepThingsInDomain, keepThingsNotInDomain);
-    //		}
-
     if (null != newMap && !newMap.isEmpty()) {
-      //retain only the userMonsters in newMap that are in the db
-      Set<String> existingIds = existingUserMonsters.keySet();
-      MonsterStuffUtils.retainValidMonsters(existingIds, newMap,
-          keepThingsInDomain, keepThingsNotInDomain);
+    	Set<String> newMapIds = newMap.keySet();
 
-      //retain only the userMonsters in newMap that are not in healing
-      keepThingsInDomain = false;
-      keepThingsNotInDomain = true;
-      Set<String> alreadyHealingIds = alreadyHealing.keySet();
-      MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, newMap,
-          keepThingsInDomain, keepThingsNotInDomain);
+    	Set<String> existingIds = existingUserMonsters.keySet();
+    	if (!existingIds.containsAll(newMapIds)) {
+    		log.error("some monsters not in the db. inDb={}, newMap={}",
+    			existingUserMonsters, newMap);
+    		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_NONEXISTENT);
+    		return false;
+    	}
 
-      //retain only the userMonsters in newMap that are not in evolutions
-      Set<String> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(
-          evolution, null);
-      MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
-          keepThingsInDomain, keepThingsNotInDomain);
+    	Set<String> alreadyHealingIds = alreadyHealing.keySet();
+    	if (!Collections.disjoint(newMapIds, alreadyHealingIds)) {
+    		log.error("some monsters are healing. healing={}, newMap={}",
+    			alreadyHealing, newMap);
+    		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_HEALING);
+    		return false;
+    	}
+
+    	//retain only the userMonsters in newMap that are not in evolutions
+    	Set<String> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(
+    		evolution, null);
+    	if (!Collections.disjoint(idsInEvolutions, newMapIds)) {
+    		log.error("some monsters are evolving. evolving={}, newMap={}",
+    			evolution, newMap);
+    		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_EVOLUTION);
+    		return false;
+    	}
 
     }
 
@@ -303,34 +281,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Set<String> restrictedUserMonsterIds = restrictedUserMonsters(existingUserMonsters);
     for (String restrictedUserMonsterId : restrictedUserMonsterIds) {
 
-      UserEnhancementItemProto ueip = null;
-      /*if (updateMap.containsKey(restrictedUserMonsterId)) {
-				ueip = updateMap.get(restrictedUserMonsterId);
+    	UserEnhancementItemProto ueip = null;
+    	if (newMap.containsKey(restrictedUserMonsterId)) {
+    		ueip = newMap.get(restrictedUserMonsterId);
+    	}
 
-			} else
-       */
-      if (newMap.containsKey(restrictedUserMonsterId)) {
-        ueip = newMap.get(restrictedUserMonsterId);
-      }
+    	if (null == ueip) {
+    		continue;
+    	}
 
-      if (null == ueip) {
-        continue;
-      }
-
-      //monster is restricted, better be a base monster
-      if (ueip.getEnhancingCost() > 0 || ueip.getExpectedStartTimeMillis() > 0) {
-        //				String msg = String.format(
-        //					"user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, updateMap=%s, newMap=%s",
-        //					ueip, existingUserMonsters, updateMap, newMap );
-        String msg = String.format(
-            "user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, newMap=%s",
-            ueip, existingUserMonsters, newMap );
-        log.error(msg);
-        return false;
-      }
+    	//monster is restricted, better be a base monster
+    	if (ueip.getEnhancingCost() > 0 || ueip.getExpectedStartTimeMillis() > 0) {
+    		String preface = "restricted not-base-monster in enhancing:"; 
+    		log.error("{} ueip={}. userMonsters= {}, newMap={}",
+    			new Object[] { preface, ueip, existingUserMonsters, newMap });
+    		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_RESTRICTED);
+    		return false;
+    	}
     }
-
-
 
     //CHECK MONEY
     //		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
