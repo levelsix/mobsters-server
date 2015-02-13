@@ -86,7 +86,7 @@ public class PurchaseBoosterPackAction
 	private User user;
 	private BoosterPack aPack;
 	private boolean riggedPack;
-	private int riggedBoosterPackId;
+	private int boosterPackIdPurchased;
 	private int gemPrice;
 	private Map<Integer, BoosterItem> boosterItemIdsToBoosterItems;
 	private int userGems;
@@ -145,7 +145,7 @@ public class PurchaseBoosterPackAction
 			return false;
 		}
 
-		riggedBoosterPackId = 0;
+		boosterPackIdPurchased = 0;
 		String type = aPack.getType();
 		
 		if (!user.isBoughtRiggedBoosterPack() &&
@@ -155,14 +155,15 @@ public class PurchaseBoosterPackAction
 			//bought a rigged booster pack, rig the purchase
 			log.info("rigging booster pack purchase. boosterPack={}, user={}",
 				aPack, user);
-			riggedBoosterPackId = aPack.getRiggedId();
+			boosterPackIdPurchased = aPack.getRiggedId();
 			riggedPack = true;
 		} else {
 			riggedPack = false;
+			boosterPackIdPurchased = boosterPackId;
 		}
 
-		if (riggedBoosterPackId > 0) {
-			legitPack = verifyBoosterPack(resBuilder, riggedBoosterPackId);
+		if (boosterPackIdPurchased > 0) {
+			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
 		}
 
 		if (!legitPack) {
@@ -171,7 +172,7 @@ public class PurchaseBoosterPackAction
 		
 		boosterItemIdsToBoosterItems =
 			BoosterItemRetrieveUtils
-			.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
+			.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackIdPurchased);
 
 		if (null == boosterItemIdsToBoosterItems || boosterItemIdsToBoosterItems.isEmpty() )
 		{
@@ -264,7 +265,7 @@ public class PurchaseBoosterPackAction
 		String preface = "SPENT MONEY(?) ON BOOSTER PACK:";
 		log.info(
 			"{} free={}, bPackId={}, gemPrice={}, gemReward={}, itemsUserReceives={}",
-			new Object[] { preface, freeBoosterPack, boosterPackId, gemPrice,
+			new Object[] { preface, freeBoosterPack, boosterPackIdPurchased, gemPrice,
 				gemReward, itemsUserReceives });
 		
 		//TODO: Many places have copies of this logic: Consolidate them
@@ -273,7 +274,7 @@ public class PurchaseBoosterPackAction
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
 		String mfusop = MiscMethods.createUpdateUserMonsterArguments(
-			userId, boosterPackId, itemsUserReceives,
+			userId, boosterPackIdPurchased, itemsUserReceives,
 			monsterIdToNumPieces, completeUserMonsters, now);
 
 		log.info( "!!!!!!!!!mfusop={}", mfusop );
@@ -289,7 +290,7 @@ public class PurchaseBoosterPackAction
 
 			preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
 			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
-				new Object[] { preface, newOrUpdated, boosterPackId } );
+				new Object[] { preface, newOrUpdated, boosterPackIdPurchased } );
 			//set the builder that will be sent to the client
 			resBuilder.addAllUpdatedOrNew(newOrUpdated);
 		}
@@ -303,7 +304,7 @@ public class PurchaseBoosterPackAction
 
 			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
 			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
-				new Object[] {preface, newOrUpdated, boosterPackId} );
+				new Object[] {preface, newOrUpdated, boosterPackIdPurchased} );
 			//set the builder that will be sent to the client
 			resBuilder.addAllUpdatedOrNew(newOrUpdated);
 		}
@@ -424,7 +425,7 @@ public class PurchaseBoosterPackAction
 			currencyDeltas.put(gems, gemChange);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
-				ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
+				ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK);
 			detailSb.append(" gemPrice=");
 			detailSb.append(gemPrice);
 			detailSb.append(" gemReward=");
