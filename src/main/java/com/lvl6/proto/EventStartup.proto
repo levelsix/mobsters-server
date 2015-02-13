@@ -320,6 +320,7 @@ message StartupResponseProto {
 			optional string fileName = 2;
 			optional int32 priority = 3;
 			optional bool downloadOnlyOverWifi = 4;
+			optional bool useIphone6Prefix = 5;
 		}
 	}
 	

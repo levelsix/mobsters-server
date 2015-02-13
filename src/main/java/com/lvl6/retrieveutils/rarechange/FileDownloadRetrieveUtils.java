@@ -92,8 +92,9 @@ import com.lvl6.utils.DBConnection;
 		String filename = rs.getString(DBConstants.FILE_DOWNLOAD__FILENAME);
 		int priority = rs.getInt(DBConstants.FILE_DOWNLOAD__PRIORITY);
 		boolean downloadOnlyOverWifi = rs.getBoolean(DBConstants.FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI);
+		boolean useIphone6Prefix = rs.getBoolean(DBConstants.FILE_DOWNLOAD__USE_IPHONE6_PREFIX);
 		
-		FileDownload fd = new FileDownload(id, filename, priority, downloadOnlyOverWifi);
+		FileDownload fd = new FileDownload(id, filename, priority, downloadOnlyOverWifi, useIphone6Prefix);
 		return fd;
 	}
 	
