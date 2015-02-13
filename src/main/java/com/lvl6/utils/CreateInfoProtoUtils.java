@@ -117,6 +117,7 @@ import com.lvl6.proto.BoardProto.BoardPropertyProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
@@ -1098,6 +1099,17 @@ public class CreateInfoProtoUtils {
 			b.setMachineImgName(str);
 		}
 
+		str = bp.getType();
+		if (null != str) {
+			try {
+				BoosterPackType bpt= BoosterPackType.valueOf(str);
+				b.setType(bpt);
+			} catch (Exception e){
+				log.error(String.format(
+					"invalid BoosterPackType. BoosterPack=%s", bp),
+					e);
+			}
+		}
 
 		if (biList != null) {
 			for(BoosterItem bi : biList) {
@@ -3159,7 +3171,6 @@ public class CreateInfoProtoUtils {
 
 		builder.setBuildCost(s.getBuildCost());
 		builder.setMinutesToBuild(s.getMinutesToBuild());
-		builder.setPrerequisiteTownHallLvl(s.getRequiredTownHallLvl());
 		builder.setWidth(s.getWidth());
 		builder.setHeight(s.getHeight());
 

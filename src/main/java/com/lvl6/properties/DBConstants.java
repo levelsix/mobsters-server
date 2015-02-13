@@ -738,8 +738,9 @@ public class DBConstants {
 	public static final String USER__CLAN_HELPS = "clan_helps";
     public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
     public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
-    //public static final String USER__BOUGHT_BOOSTER_PACK = "bought_booster_pack";
     public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
+    public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
+    
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -856,6 +857,8 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__MACHINE_IMG_NAME = "machine_img_name";
 	public static final String BOOSTER_PACK__EXP_PER_ITEM = "exp_per_item";
 	public static final String BOOSTER_PACK__DISPLAY_TO_USER = "display_to_user";
+	public static final String BOOSTER_PACK__RIGGED_ID = "rigged_id";
+	public static final String BOOSTER_PACK__TYPE = "type";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -880,6 +883,7 @@ public class DBConstants {
 	public static final String FILE_DOWNLOAD__FILENAME = "filename";
 	public static final String FILE_DOWNLOAD__PRIORITY = "priority";
 	public static final String FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI = "download_only_over_wifi";
+	public static final String FILE_DOWNLOAD__USE_IPHONE6_PREFIX = "use_iphone6_prefix";
 
 	public static final String ITEM__ID = GENERIC__ID;
 	public static final String ITEM__NAME = "name";

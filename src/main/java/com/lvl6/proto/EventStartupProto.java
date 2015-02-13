@@ -14693,6 +14693,15 @@ public final class EventStartupProto {
          * <code>optional bool downloadOnlyOverWifi = 4;</code>
          */
         boolean getDownloadOnlyOverWifi();
+
+        /**
+         * <code>optional bool useIphone6Prefix = 5;</code>
+         */
+        boolean hasUseIphone6Prefix();
+        /**
+         * <code>optional bool useIphone6Prefix = 5;</code>
+         */
+        boolean getUseIphone6Prefix();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto}
@@ -14765,6 +14774,11 @@ public final class EventStartupProto {
                 case 32: {
                   bitField0_ |= 0x00000008;
                   downloadOnlyOverWifi_ = input.readBool();
+                  break;
+                }
+                case 40: {
+                  bitField0_ |= 0x00000010;
+                  useIphone6Prefix_ = input.readBool();
                   break;
                 }
               }
@@ -14894,11 +14908,27 @@ public final class EventStartupProto {
           return downloadOnlyOverWifi_;
         }
 
+        public static final int USEIPHONE6PREFIX_FIELD_NUMBER = 5;
+        private boolean useIphone6Prefix_;
+        /**
+         * <code>optional bool useIphone6Prefix = 5;</code>
+         */
+        public boolean hasUseIphone6Prefix() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional bool useIphone6Prefix = 5;</code>
+         */
+        public boolean getUseIphone6Prefix() {
+          return useIphone6Prefix_;
+        }
+
         private void initFields() {
           fileDownloadId_ = 0;
           fileName_ = "";
           priority_ = 0;
           downloadOnlyOverWifi_ = false;
+          useIphone6Prefix_ = false;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -14925,6 +14955,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             output.writeBool(4, downloadOnlyOverWifi_);
           }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeBool(5, useIphone6Prefix_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -14949,6 +14982,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             size += com.google.protobuf.CodedOutputStream
               .computeBoolSize(4, downloadOnlyOverWifi_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBoolSize(5, useIphone6Prefix_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -15075,6 +15112,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000004);
             downloadOnlyOverWifi_ = false;
             bitField0_ = (bitField0_ & ~0x00000008);
+            useIphone6Prefix_ = false;
+            bitField0_ = (bitField0_ & ~0x00000010);
             return this;
           }
 
@@ -15119,6 +15158,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000008;
             }
             result.downloadOnlyOverWifi_ = downloadOnlyOverWifi_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.useIphone6Prefix_ = useIphone6Prefix_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -15148,6 +15191,9 @@ public final class EventStartupProto {
             }
             if (other.hasDownloadOnlyOverWifi()) {
               setDownloadOnlyOverWifi(other.getDownloadOnlyOverWifi());
+            }
+            if (other.hasUseIphone6Prefix()) {
+              setUseIphone6Prefix(other.getUseIphone6Prefix());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -15344,6 +15390,38 @@ public final class EventStartupProto {
           public Builder clearDownloadOnlyOverWifi() {
             bitField0_ = (bitField0_ & ~0x00000008);
             downloadOnlyOverWifi_ = false;
+            onChanged();
+            return this;
+          }
+
+          private boolean useIphone6Prefix_ ;
+          /**
+           * <code>optional bool useIphone6Prefix = 5;</code>
+           */
+          public boolean hasUseIphone6Prefix() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          /**
+           * <code>optional bool useIphone6Prefix = 5;</code>
+           */
+          public boolean getUseIphone6Prefix() {
+            return useIphone6Prefix_;
+          }
+          /**
+           * <code>optional bool useIphone6Prefix = 5;</code>
+           */
+          public Builder setUseIphone6Prefix(boolean value) {
+            bitField0_ |= 0x00000010;
+            useIphone6Prefix_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional bool useIphone6Prefix = 5;</code>
+           */
+          public Builder clearUseIphone6Prefix() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            useIphone6Prefix_ = false;
             onChanged();
             return this;
           }
@@ -36334,7 +36412,7 @@ public final class EventStartupProto {
       ".com.lvl6.proto.StartupRequestProto.Vers" +
       "ionNumberProto\032J\n\022VersionNumberProto\022\020\n\010" +
       "superNum\030\001 \001(\005\022\020\n\010majorNum\030\002 \001(\005\022\020\n\010mino" +
-      "rNum\030\003 \001(\005\"\366:\n\024StartupResponseProto\022\030\n\020s" +
+      "rNum\030\003 \001(\005\"\221;\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp",
@@ -36407,7 +36485,7 @@ public final class EventStartupProto {
       "\032\202\001\n\031ReferralNotificationProto\0222\n\010referr" +
       "ed\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToR" +
-      "eferrer\030\003 \001(\005\032\331\036\n\020StartupConstants\022H\n\025in",
+      "eferrer\030\003 \001(\005\032\364\036\n\020StartupConstants\022H\n\025in",
       "AppPurchasePackages\030\001 \003(\0132).com.lvl6.pro" +
       "to.InAppPurchasePackageProto\022\027\n\017maxLevel" +
       "ForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 " +
@@ -36502,30 +36580,30 @@ public final class EventStartupProto {
       "s\030\002 \001(\005\032\210\001\n\037ResourceConversionConstantPr" +
       "oto\022?\n\014resourceType\030\001 \001(\0162\034.com.lvl6.pro" +
       "to.ResourceType:\013NO_RESOURCE\022\023\n\013resource" +
-      "Amt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032u\n\031FileDownlo" +
-      "adConstantProto\022\026\n\016fileDownloadId\030\001 \001(\005\022" +
-      "\020\n\010fileName\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024d" +
-      "ownloadOnlyOverWifi\030\004 \001(\010\032\234\004\n\021TutorialCo" +
-      "nstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016gu" +
-      "ideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001",
-      "(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBo" +
-      "ssMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(" +
-      "\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6" +
-      ".proto.TutorialStructProto\022\036\n\026structureI" +
-      "dsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017ci" +
-      "tyOneElements\030\006 \003(\0132 .com.lvl6.proto.Cit" +
-      "yElementProto\022$\n\034cityElementIdForFirstDu" +
-      "ngeon\030\007 \001(\005\022%\n\035cityElementIdForSecondDun" +
-      "geon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030" +
-      "\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObsta",
-      "cles\030\016 \003(\0132$.com.lvl6.proto.MinimumObsta" +
-      "cleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022" +
-      "\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rS" +
-      "tartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT" +
-      "_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030F" +
-      "orceLogoutResponseProto\022\031\n\021previousLogin" +
-      "Time\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartup" +
-      "Proto"
+      "Amt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\217\001\n\031FileDownl" +
+      "oadConstantProto\022\026\n\016fileDownloadId\030\001 \001(\005" +
+      "\022\020\n\010fileName\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024" +
+      "downloadOnlyOverWifi\030\004 \001(\010\022\030\n\020useIphone6" +
+      "Prefix\030\005 \001(\010\032\234\004\n\021TutorialConstants\022\031\n\021st" +
+      "artingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030",
+      "\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMo" +
+      "nsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t" +
+      " \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorial" +
+      "Structures\030\003 \003(\0132#.com.lvl6.proto.Tutori" +
+      "alStructProto\022\036\n\026structureIdsToBeBuillt\030" +
+      "\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements" +
+      "\030\006 \003(\0132 .com.lvl6.proto.CityElementProto" +
+      "\022$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%" +
+      "\n\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n" +
+      "\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gems",
+      "Init\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$." +
+      "com.lvl6.proto.MinimumObstacleProto\"A\n\014U" +
+      "pdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDA" +
+      "TE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022" +
+      "\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025S" +
+      "ERVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutRes" +
+      "ponseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n" +
+      "\004udid\030\002 \001(\tB\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -36668,7 +36746,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor,
-        new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", });
+        new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", });
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
