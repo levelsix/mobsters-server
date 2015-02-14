@@ -822,39 +822,46 @@ public class StartupController extends EventController {
 
 	private void setUserMonsterStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<MonsterForUser> userMonsters= getMonsterForUserRetrieveUtils()
+		List<MonsterForUser> userMonsters = monsterForUserRetrieveUtils
 			.getMonstersForUser(userId);
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
 			for (MonsterForUser mfu : userMonsters) {
-				FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
+				FullUserMonsterProto fump = CreateInfoProtoUtils
+					.createFullUserMonsterProtoFromUserMonster(mfu);
 				resBuilder.addUsersMonsters(fump);
 			}
 		}
 
 		/*NOTE: DB CALL*/
 		//monsters in healing
-		Map<String, MonsterHealingForUser> userMonstersHealing = getMonsterHealingForUserRetrieveUtils()
+		Map<String, MonsterHealingForUser> userMonstersHealing =
+			monsterHealingForUserRetrieveUtils
 			.getMonstersForUser(userId);
 		if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
 
-			Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
+			Collection<MonsterHealingForUser> healingMonsters =
+				userMonstersHealing.values();
 			for (MonsterHealingForUser mhfu : healingMonsters) {
-				UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+				UserMonsterHealingProto umhp = CreateInfoProtoUtils
+					.createUserMonsterHealingProtoFromObj(mhfu);
 				resBuilder.addMonstersHealing(umhp);
 			}
 		}
 
 		/*NOTE: DB CALL*/
 		//enhancing monsters
-		Map<String, MonsterEnhancingForUser> userMonstersEnhancing = getMonsterEnhancingForUserRetrieveUtils()
+		Map<String, MonsterEnhancingForUser> userMonstersEnhancing = 
+			monsterEnhancingForUserRetrieveUtils
 			.getMonstersForUser(userId);
 		if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
 			//find the monster that is being enhanced
 			Collection<MonsterEnhancingForUser> enhancingMonsters = userMonstersEnhancing.values();
 			UserEnhancementItemProto baseMonster = null;
 
-			List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
+			List<String> feederUserMonsterIds = new ArrayList<String>();
+			List<UserEnhancementItemProto> feederProtos =
+				new ArrayList<UserEnhancementItemProto>();
 			for (MonsterEnhancingForUser mefu : enhancingMonsters) {
 				UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu);
 
@@ -870,14 +877,21 @@ public class StartupController extends EventController {
 					baseMonster = ueip;
 				} else {
 					//just a feeder, add him to the list
-					feeders.add(ueip);
+					feederProtos.add(ueip);
+					feederUserMonsterIds.add(mefu.getMonsterForUserId());
 				}
 			}
 
-			UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
-				userId, baseMonster, feeders);
+			if (null == baseMonster) {
+				log.error("no base monster enhancement. deleting inEnhancing={}",
+					enhancingMonsters);
+				deleteOrphanedEnhancements(userId, feederUserMonsterIds);
+			} else {
+				UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+					userId, baseMonster, feederProtos);
 
-			resBuilder.setEnhancements(uep);
+				resBuilder.setEnhancements(uep);
+			}
 		}
 
 		/*NOTE: DB CALL*/
@@ -894,6 +908,17 @@ public class StartupController extends EventController {
 				//CALL NEEDS TO CHANGE
 				resBuilder.setEvolution(uep);
 			}
+		}
+	}
+	private void deleteOrphanedEnhancements( String userId, List<String> feederUserMonsterIds )
+	{
+		try {
+			int numDeleted = DeleteUtils.get()
+				.deleteMonsterEnhancingForUser(
+				userId, feederUserMonsterIds);
+			log.info("numDeleted enhancements: {}", numDeleted);
+		} catch (Exception e) {
+			log.error("unable to delete orphaned enhancements", e);
 		}
 	}
 
