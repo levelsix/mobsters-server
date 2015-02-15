@@ -60,6 +60,7 @@ public class InAppPurchaseAction
 		this.receiptFromApple = receiptFromApple;
 		this.now = now;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -79,6 +80,7 @@ public class InAppPurchaseAction
 
 
 	//derived state
+	boolean isStarterPack;
 	private String packageName;
 	private int gemChange;
 
@@ -124,6 +126,7 @@ public class InAppPurchaseAction
 		try {
 			String transactionId = receiptFromApple
 				.getString(IAPValues.TRANSACTION_ID);
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 
 			long transactionIdLong = Long.parseLong(transactionId);
 			if (iapHistoryRetrieveUtil.checkIfDuplicateTransaction(transactionIdLong))
@@ -132,10 +135,19 @@ public class InAppPurchaseAction
 				log.error("duplicate receipt from user {}", user);
 				success = false;
 			}
+			
+			isStarterPack = IAPValues.packageIsStarterPack(packageName);
+			if (success && isStarterPack &&
+				user.getNumBeginnerSalesPurchased() > 0)
+			{
+				log.error("user trying to buy the starter pack again! {}, {}",
+					packageName, user);
+				success = false;
+			}
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"error verifying InAppPurchase request. receiptFromApple={}",
+					"error verifying InAppPurchase request. receiptFromApple=%s",
 					receiptFromApple),
 					e);
 			success = false;
@@ -147,9 +159,9 @@ public class InAppPurchaseAction
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
 		try {
-			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+			
 			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
-			boolean isStarterPack = IAPValues.packageIsStarterPack(packageName);
+			
 			gemChange = IAPValues.getDiamondsForPackageName(packageName);
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple,
@@ -162,6 +174,7 @@ public class InAppPurchaseAction
 			}
 
 			if (isStarterPack) {
+				
 				processStarterPackPurchase(resBuilder);
 			} else {
 				processPurchase(resBuilder);
@@ -171,7 +184,7 @@ public class InAppPurchaseAction
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"error verifying InAppPurchase request. receiptFromApple={}",
+					"error verifying InAppPurchase request. receiptFromApple=%s",
 					receiptFromApple),
 				e);
 			success = false;
@@ -195,12 +208,15 @@ public class InAppPurchaseAction
 		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 		itemsUserReceives.addAll(idToBoosterItem.values());
 		boolean legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
-		if (legit) {
+		if (!legit) {
 			throw new RuntimeException(String.format(
 				"illegal monster in starter pack for boosterPackId=%s",
 				boosterPackId));
 		}
 		gemChange = MiscMethods.determineGemReward(itemsUserReceives);
+		//booster packs can give out gems, so  reuse processPurchase logic
+		processPurchase(resBuilder);
+		
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
@@ -238,66 +254,24 @@ public class InAppPurchaseAction
 		}
 		
 		//item reward
-		List<ItemForUser> ifuList = calculateItemRewards(userId, itemsUserReceives);
-		log.info("ifuList={}", ifuList);
+		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+			.awardBoosterItemItemRewards(userId, itemsUserReceives,
+				itemForUserRetrieveUtil, updateUtil);
+//		log.info("ifuList={}", ifuList);
 		if (null != ifuList && !ifuList.isEmpty()) {
-			int numUpdated = updateUtil.updateItemForUser(ifuList);
-			log.info("items numUpdated={}", numUpdated);
 			List<UserItemProto> uipList = CreateInfoProtoUtils
 				.createUserItemProtosFromUserItems(ifuList);
 			resBuilder.addAllUpdatedUserItems(uipList);
 		}
 	}
 
-	private List<ItemForUser> calculateItemRewards(
-		String userId,
-		List<BoosterItem> itemsUserReceives )
-	{
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-		
-		for (BoosterItem bi : itemsUserReceives) {
-			int itemId = bi.getItemId();
-			int itemQuantity = bi.getItemQuantity();
-			
-			if (itemId <= 0 || itemQuantity <= 0) {
-				continue;
-			}
-			
-			//user could have gotten multiple of the same BoosterItem
-			int newQuantity = itemQuantity;
-			if (itemIdToQuantity.containsKey(itemId))
-			{
-				newQuantity += itemIdToQuantity.get(itemId);
-			}
-			itemIdToQuantity.put(itemId, newQuantity);
-		}
-		
-		List<ItemForUser> ifuList = null;
-	    if (!itemIdToQuantity.isEmpty()) {
-	    	//aggregate rewarded items with user's current items
-	    	Map<Integer, ItemForUser> itemIdToIfu = 
-	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	    			itemIdToQuantity.keySet());
-	    	
-	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	    		ItemForUser ifu = itemIdToIfu.get(itemId);
-	    		int newQuantity = itemIdToQuantity.get(itemId) +
-	    			ifu.getQuantity();
-	    		ifu.setQuantity(newQuantity);
-	    	}
-	    	
-	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	    }
-	    return ifuList;
-	}
-	
 	private void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (gemChange > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
-        	user.updateRelativeGemsNaive(gemChange, 0);
+        	user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
 		}
 
 		prepCurrencyHistory();

@@ -101,7 +101,7 @@ message FullUserProto {
 	//optional int64 lastWallPostNotificationTime lwpnt = 26;
 	//optional string kabamNaid = 27;
 	optional bool hasReceivedfbReward = 28;
-	optional int32 numBeginnerSalesPurchased = 30 [deprecated = true];
+	optional int32 numBeginnerSalesPurchased = 30;
 	optional string facebookId = 40;
 	//optional int32 oil = 42; //defined above
 	//optional int32 numOilRetrievedFromStructs = 43; //defined above

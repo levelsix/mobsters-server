@@ -45,6 +45,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.EventPersistentForUser;
+import com.lvl6.info.FileDownload;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
@@ -76,6 +77,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
+import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
@@ -115,6 +117,7 @@ import com.lvl6.proto.BoardProto.BoardPropertyProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
@@ -136,6 +139,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
@@ -175,9 +179,14 @@ import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SharedEnumConfigProto.GameType;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
+import com.lvl6.proto.SkillsProto.SideEffectBlendMode;
+import com.lvl6.proto.SkillsProto.SideEffectPositionType;
+import com.lvl6.proto.SkillsProto.SideEffectTraitType;
+import com.lvl6.proto.SkillsProto.SideEffectType;
 import com.lvl6.proto.SkillsProto.SkillActivationType;
 import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.SkillsProto.SkillType;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
@@ -1090,6 +1099,17 @@ public class CreateInfoProtoUtils {
 			b.setMachineImgName(str);
 		}
 
+		str = bp.getType();
+		if (null != str) {
+			try {
+				BoosterPackType bpt= BoosterPackType.valueOf(str);
+				b.setType(bpt);
+			} catch (Exception e){
+				log.error(String.format(
+					"invalid BoosterPackType. BoosterPack=%s", bp),
+					e);
+			}
+		}
 
 		if (biList != null) {
 			for(BoosterItem bi : biList) {
@@ -2987,9 +3007,14 @@ public class CreateInfoProtoUtils {
 			}
 		}
 
-		str = s.getDesc();
+		str = s.getDefensiveDesc();
 		if (null != str) {
-			spb.setDesc(str);
+			spb.setDefDesc(str);
+		}
+		
+		str = s.getOffensiveDesc();
+		if (null != str) {
+			spb.setOffDesc(str);
 		}
 		
 		str = s.getImgNamePrefix();
@@ -3020,6 +3045,99 @@ public class CreateInfoProtoUtils {
 		sppb.setSkillValue(property.getValue());
 
 		return sppb.build();
+	}
+	
+	public static SkillSideEffectProto createSkillSideEffectProto(
+		SkillSideEffect sse)
+	{
+		SkillSideEffectProto.Builder ssepb = SkillSideEffectProto.newBuilder();
+		ssepb.setSkillSideEffectId(sse.getId());
+		
+		String str = sse.getName();
+		if (null != str) {
+			ssepb.setName(str);
+		}
+		
+		str = sse.getDesc();
+		if (null != str) {
+			ssepb.setDesc(str);
+		}
+		
+		str = sse.getType();
+		if (null != str) {
+			try {
+				SideEffectType set = SideEffectType.valueOf(str);
+				ssepb.setType(set);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		str = sse.getTraitType();
+		if (null != str) {
+			try {
+				SideEffectTraitType sett = SideEffectTraitType.valueOf(str);
+				ssepb.setTraitType(sett);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectTraitType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		str = sse.getImgName();
+		if (null != str) {
+			ssepb.setImgName(str);
+		}
+		
+		ssepb.setImgPixelOffsetX(sse.getImgPixelOffsetX());
+		ssepb.setImgPixelOffsetY(sse.getImgPixelOffsetY());
+
+		str = sse.getIconImgName();
+		if (null != str) {
+			ssepb.setIconImgName(str);
+		}
+		
+		str = sse.getPfxName();
+		if (null != str) {
+			ssepb.setPfxName(str);
+		}
+		
+		str = sse.getPfxColor();
+		if (null != str) {
+			ssepb.setPfxColor(str);
+		}
+		
+		str = sse.getPositionType();
+		if (null != str) {
+			try {
+				SideEffectPositionType sept = SideEffectPositionType.valueOf(str);
+				ssepb.setPositionType(sept);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectPositionType. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		ssepb.setImgPixelOffsetX(sse.getPfxPixelOffsetX());
+		ssepb.setImgPixelOffsetY(sse.getPfxPixelOffsetY());
+
+		str = sse.getBlendMode();
+		if (null != str) {
+			try {
+				SideEffectBlendMode sebm = SideEffectBlendMode.valueOf(str);
+				ssepb.setBlendMode(sebm);
+			} catch (Exception e) {
+				log.error(String.format(
+					"incorrect enum SideEffectBlendMode. SkillSideEffect=%s", sse),
+					e);
+			}
+		}
+		
+		return ssepb.build();
 	}
 
 	/**Structure.proto************************************************/
@@ -3053,7 +3171,6 @@ public class CreateInfoProtoUtils {
 
 		builder.setBuildCost(s.getBuildCost());
 		builder.setMinutesToBuild(s.getMinutesToBuild());
-		builder.setPrerequisiteTownHallLvl(s.getRequiredTownHallLvl());
 		builder.setWidth(s.getWidth());
 		builder.setHeight(s.getHeight());
 
@@ -3882,6 +3999,18 @@ public class CreateInfoProtoUtils {
 		return tmepb.build();
 	}
 
+	/**FileDownloadProto*********************************************/
+	
+	public static FileDownloadConstantProto createFileDownloadProtoFromFileDownload(FileDownload fd) {
+		FileDownloadConstantProto.Builder fdpb = FileDownloadConstantProto.newBuilder();
+		fdpb.setFileDownloadId(fd.getId());
+		fdpb.setFileName(fd.getFileName());
+		fdpb.setPriority(fd.getPriority());
+		fdpb.setDownloadOnlyOverWifi(fd.isDownloadOnlyOverWifi());
+		
+		return fdpb.build();
+	}
+	
 	/**TournamentStuff.proto******************************************/
 //	public static TournamentEventProto createTournamentEventProtoFromTournamentEvent(
 //		TournamentEvent e, List<TournamentEventReward> rList) {
@@ -4063,6 +4192,7 @@ public class CreateInfoProtoUtils {
 			builder.setClan(createMinimumClanProtoFromClan(c));
 		}
 		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
+		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
 		builder.setAvatarMonsterId(u.getAvatarMonsterId());
 
 		String facebookId = u.getFacebookId();

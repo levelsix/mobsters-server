@@ -28,6 +28,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
@@ -41,6 +42,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -119,15 +121,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//TODO: Consider writing currency history and other history
 
 			List<ItemForUser> ifuContainer = new ArrayList<ItemForUser>();
+			List<Integer> boosterPackIdContainer =  new ArrayList<Integer>();
+			List<Boolean> riggedContainer = new ArrayList<Boolean>();
 
 			boolean legit = checkLegitTrade(resBuilder, aUser, userId,
-				itm, itemId, ifuContainer);
+				itm, itemId, ifuContainer, boosterPackIdContainer,
+				riggedContainer);
 
 			ItemForUser ifu = null;
 			List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 			int previousGems = 0;
-			int boosterPackId = itm.getStaticDataId();
+			int boosterPackId = 0;// itm.getStaticDataId();
 			if (legit) {
+				boosterPackId = boosterPackIdContainer.get(0);
+				
 				ifu = ifuContainer.get(0);
 				Map<Integer, BoosterItem> idsToBoosterItems = 
 					BoosterItemRetrieveUtils
@@ -146,10 +153,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int gemReward = 0;
 			boolean successful = false;
 			if (legit) {
+				boolean rigged = riggedContainer.get(0);
 				gemReward = MiscMethods.determineGemReward(itemsUserReceives);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu, itemId, 
-					boosterPackId, itemsUserReceives, now, gemReward);
+					boosterPackId, itemsUserReceives, now, gemReward, rigged);
 			}
 
 			if (successful) {
@@ -200,7 +208,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean checkLegitTrade(Builder resBuilder, User aUser,
-		String userId, Item itm, int itemId, List<ItemForUser> ifuContainer) {
+		String userId, Item itm, int itemId,
+		List<ItemForUser> ifuContainer,
+		List<Integer> boosterPackIdContainer,
+		List<Boolean> riggedContainer)
+	{
 
 		if (null == aUser || itemId <= 0) {
 			log.error(String.format(
@@ -218,15 +230,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		BoosterPack aPack = BoosterPackRetrieveUtils
 			.getBoosterPackForBoosterPackId(
 				boosterPackId); 
+		if ( null == aPack )
+		{
+			log.error( "no BoosterPack for id={}", boosterPackId );
+			return false;
+		}
+		
+		String type = aPack.getType();
+		
+		if (!aUser.isBoughtRiggedBoosterPack() &&
+			BoosterPackType.BASIC.name().equals(type))
+		{
+			//when user buys the lowest rated booster pack and hasn't
+			//bought a rigged booster pack, rig the purchase
+			log.info("rigging booster pack purchase. boosterPack={}, user={}",
+				aPack, aUser);
+			boosterPackId = aPack.getRiggedId();
+			riggedContainer.add(true);
+		} else {
+			riggedContainer.add(false);
+		}
+		
 		Map<Integer, BoosterItem> idsToBoosterItems = 
 			BoosterItemRetrieveUtils
 			.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
-		if (null == aPack || null == idsToBoosterItems ||
-			idsToBoosterItems.isEmpty()) {
-			log.error(String.format(
-				"no BoosterPack for id=%s, or no booster items=%s",
-				boosterPackId, idsToBoosterItems));
+		if ( null == idsToBoosterItems || idsToBoosterItems.isEmpty())
+		{
+			log.error( "no booster items={}", idsToBoosterItems);
 			return false;
 		}
 
@@ -250,6 +281,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		ifuContainer.add(ifu);
+		boosterPackIdContainer.add(boosterPackId);
 
 		return true;
 	}
@@ -258,7 +290,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	private boolean writeChangesToDB(Builder resBuilder, User user,
 		String userId, ItemForUser ifu, int itemId, int bPackId,
-		List<BoosterItem> itemsUserReceives, Date now, int gemReward) {
+		List<BoosterItem> itemsUserReceives, Date now, int gemReward,
+		boolean rigged)
+	{
 
 		//update user items, user, and user_monsters
 		//    int numUpdated = UpdateUtils.get().updateItemForUser(userId, itemId, -1);
@@ -275,11 +309,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			"num user items updated=%s", numUpdated));
 
 		//update user's money
-		if (gemReward > 0 && !user.updateRelativeGemsNaive(gemReward, 0)) {
-			log.error(String.format(
-				"could not change user's money. gemReward=%s", gemReward));
-			return false;
-		}
+//		if (gemReward > 0 && !user.updateRelativeGemsNaive(gemReward, 0)) {
+//			log.error(String.format(
+//				"could not change user's money. gemReward=%s", gemReward));
+//			return false;
+//		}
+		boolean updated = user.updateBoughtBoosterPack(
+			gemReward, now, false, rigged);
+		log.info("updated, user bought boosterPack? {}", updated);
+		
 
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
@@ -326,7 +364,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//	      return false;
 		//	    }
 		//item reward
-		List<ItemForUser> ifuList = calculateItemRewards(userId, itemsUserReceives);
+		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+			.calculateBoosterItemItemRewards(userId, itemsUserReceives,
+				itemForUserRetrieveUtil);
 		log.info("ifuList={}", ifuList);
 		if (null != ifuList && !ifuList.isEmpty()) {
 			numUpdated = updateUtil.updateItemForUser(ifuList);
@@ -337,48 +377,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		return true;
-	}
-
-	private List<ItemForUser> calculateItemRewards(
-		String userId,
-		List<BoosterItem> itemsUserReceives )
-	{
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-		
-		for (BoosterItem bi : itemsUserReceives) {
-			int itemId = bi.getItemId();
-			int itemQuantity = bi.getItemQuantity();
-			
-			if (itemId <= 0 || itemQuantity <= 0) {
-				continue;
-			}
-			
-			//user could have gotten multiple of the same BoosterItem
-			int newQuantity = itemQuantity;
-			if (itemIdToQuantity.containsKey(itemId))
-			{
-				newQuantity += itemIdToQuantity.get(itemId);
-			}
-			itemIdToQuantity.put(itemId, newQuantity);
-		}
-		
-		List<ItemForUser> ifuList = null;
-	    if (!itemIdToQuantity.isEmpty()) {
-	    	//aggregate rewarded items with user's current items
-	    	Map<Integer, ItemForUser> itemIdToIfu = 
-	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	    			itemIdToQuantity.keySet());
-	    	
-	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	    		ItemForUser ifu = itemIdToIfu.get(itemId);
-	    		int newQuantity = itemIdToQuantity.get(itemId) +
-	    			ifu.getQuantity();
-	    		ifu.setQuantity(newQuantity);
-	    	}
-	    	
-	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	    }
-	    return ifuList;
 	}
 	
 	//TODO: Copy pasted from PurchaseBoosterPackController

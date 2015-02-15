@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,7 +33,7 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.Dialogue;
-import com.lvl6.info.GoldSale;
+import com.lvl6.info.FileDownload;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -58,8 +59,8 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Ta
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
-import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
+import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -85,6 +86,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
@@ -103,6 +105,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
@@ -651,17 +654,27 @@ public class MiscMethods {
 
 		for (String id : IAPValues.iapPackageNames) {
 			InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
-			iapb.setImageName(IAPValues.getImageNameForPackageName(id));
+			
+			String imgName = IAPValues.getImageNameForPackageName(id);
+			if (null != imgName && !imgName.isEmpty()) {
+				iapb.setImageName(imgName);
+			}
 			iapb.setIapPackageId(id);
 
 			int diamondAmt = IAPValues.getDiamondsForPackageName(id);
 			if (diamondAmt > 0) {
 				iapb.setCurrencyAmount(diamondAmt);
-//			} else {
-//				int coinAmt = IAPValues.getCoinsForPackageName(id);
-//				iapb.setCurrencyAmount(coinAmt);
+			}
+			
+			try {
+				InAppPurchasePackageType type = IAPValues.getPackageType(id);
+				iapb.setIapPackageType(type);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid IapPackageType. id=%s", id), e);
 			}
 			cb.addInAppPurchasePackages(iapb.build());
+			
 		}
 
 		cb.setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
@@ -804,6 +817,29 @@ public class MiscMethods {
 		cb.setTaskIdOfFirstSkill(ControllerConstants.SKILL_FIRST_TASK_ID);
 		cb.setMinsToResolicitTeamDonation(ControllerConstants.CLAN__MINS_TO_RESOLICIT_TEAM_DONATION);
 		
+		
+		Map<Integer, FileDownload> fileDownloadMap = FileDownloadRetrieveUtils.getIdsToFileDownloads();
+		
+		if(fileDownloadMap == null) {
+			log.error("no filedownloads");
+		} else {
+			List<FileDownload> fileDownloadList = new ArrayList<FileDownload>(fileDownloadMap.values());
+
+			Collections.sort(fileDownloadList, new Comparator<FileDownload>() {
+				public int compare(FileDownload fd1, FileDownload fd2) {
+					return fd1.getPriority() - fd2.getPriority();
+				}
+			});
+
+			for(FileDownload fd : fileDownloadList) {
+				cb.addFileDownloadProto(
+						CreateInfoProtoUtils
+						.createFileDownloadProtoFromFileDownload(fd));
+			}
+
+			
+		}
+		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
 		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -936,10 +972,12 @@ public class MiscMethods {
 		MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
 		mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
 		mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+		mtcb.setEnhanceGuideMonsterId(ControllerConstants.TUTORIAL__ENHANCE_GUIDE_MONSTER_ID);
 
 		return mtcb.build();
 	}
 
+	
 //	public static List<TournamentEventProto> currentTournamentEventProtos() {
 //		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
 //		long curTime = (new Date()).getTime();
@@ -990,6 +1028,7 @@ public class MiscMethods {
 		ClanRaidStageMonsterRetrieveUtils.reload();
 		ClanRaidStageRewardRetrieveUtils.reload();
 		EventPersistentRetrieveUtils.reload();
+		FileDownloadRetrieveUtils.reload();
 //		ExpansionCostRetrieveUtils.reload();
 		GoldSaleRetrieveUtils.reload();
 		ItemRetrieveUtils.reload();
@@ -1010,6 +1049,7 @@ public class MiscMethods {
 		ResearchPropertyRetrieveUtils.reload();
 		SkillRetrieveUtils.reload();
 		SkillPropertyRetrieveUtils.reload();
+		SkillSideEffectRetrieveUtils.reload();
 		StartupStuffRetrieveUtils.reload();
 		StaticUserLevelInfoRetrieveUtils.reload();
 		StructureClanHouseRetrieveUtils.reload();
@@ -1371,35 +1411,6 @@ public class MiscMethods {
 			pts = (int)Math.round((-0.0997*Math.pow(d, 3)+1.4051*Math.pow(d, 2)-14.252*d+90.346)/10.);
 		}
 		return Math.min(100, Math.max(1, pts));
-	}
-
-	public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
-		int id = 0;
-		Date startDate = user.getCreateTime();
-		Date endDate = new Date(startDate.getTime()+(long)(ControllerConstants.NUM_DAYS_FOR_NEW_USER_GOLD_SALE*24*60*60*1000));
-
-		if (endDate.getTime() < new Date().getTime()) {
-			return null;
-		}
-
-		String package1SaleIdentifier = IAPValues.PACKAGE1BSALE;
-		String package2SaleIdentifier = IAPValues.PACKAGE2BSALE;
-		String package3SaleIdentifier = IAPValues.PACKAGE3BSALE;
-		String package4SaleIdentifier = null;
-		String package5SaleIdentifier = null;
-		String packageS1SaleIdentifier = IAPValues.PACKAGES1BSALE;
-		String packageS2SaleIdentifier = IAPValues.PACKAGES2BSALE;
-		String packageS3SaleIdentifier = IAPValues.PACKAGES3BSALE;
-		String packageS4SaleIdentifier = null;
-		String packageS5SaleIdentifier = null;
-
-		String gemsShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
-		String gemsBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
-
-		GoldSale sale = new GoldSale(id, startDate, endDate, gemsShoppeImageName, gemsBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
-			packageS1SaleIdentifier, packageS2SaleIdentifier, packageS3SaleIdentifier, packageS4SaleIdentifier, packageS5SaleIdentifier, true);
-
-		return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
 	}
 
 	//  public static int dateDifferenceInDays(Date start, Date end) {

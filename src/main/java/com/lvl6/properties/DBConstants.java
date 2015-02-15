@@ -40,6 +40,7 @@ public class DBConstants {
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
 	public static final String TABLE_EXPANSION_COST_CONFIG = "expansion_cost_config";				//TODO: delete
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";	//TODO: delete
+	public static final String TABLE_FILE_DOWNLOAD_CONFIG = "file_download_config";
 	public static final String TABLE_GOLD_SALE_CONFIG = "gold_sale_config";							//TODO: delete
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM_CONFIG = "item_config";
@@ -88,6 +89,7 @@ public class DBConstants {
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config"; 
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
+	public static final String TABLE_SKILL_SIDE_EFFECT_CONFIG = "skill_side_effect_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
 	public static final String TABLE_STRUCTURE_CONFIG = "structure_config";
 	public static final String TABLE_STRUCTURE_CLAN_HOUSE_CONFIG = "structure_clan_house_config";
@@ -321,6 +323,7 @@ public class DBConstants {
 	public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
 	public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
 
+	
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
 	public static final String IAP_HISTORY__USER_ID = GENERIC__USER_ID;
@@ -720,7 +723,7 @@ public class DBConstants {
 	public static final String USER__LAST_WALL_POST_NOTIFICATION_TIME = "last_wall_post_notification_time";
 	//  public static final String USER__KABAM_NAID = "kabam_naid";
 	public static final String USER__HAS_RECEIVED_FB_REWARD = "has_received_fb_reward";
-//	public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
+	public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
 	public static final String USER__FACEBOOK_ID = "facebook_id";
 	public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
 	public static final String USER__GAME_CENTER_ID = "game_center_id";  
@@ -735,8 +738,9 @@ public class DBConstants {
 	public static final String USER__CLAN_HELPS = "clan_helps";
     public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
     public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
-    //public static final String USER__BOUGHT_BOOSTER_PACK = "bought_booster_pack";
     public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
+    public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
+    
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -853,6 +857,8 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__MACHINE_IMG_NAME = "machine_img_name";
 	public static final String BOOSTER_PACK__EXP_PER_ITEM = "exp_per_item";
 	public static final String BOOSTER_PACK__DISPLAY_TO_USER = "display_to_user";
+	public static final String BOOSTER_PACK__RIGGED_ID = "rigged_id";
+	public static final String BOOSTER_PACK__TYPE = "type";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -872,6 +878,12 @@ public class DBConstants {
 	public static final String EVENT_PERSISTENT__COOLDOWN_MINUTES = "cooldown_minutes";
 	public static final String EVENT_PERSISTENT__EVENT_TYPE = "event_type";
 	public static final String EVENT_PERSISTENT__MONSTER_ELEMENT = "monster_element";
+	
+	public static final String FILE_DOWNLOAD__ID = "id";
+	public static final String FILE_DOWNLOAD__FILENAME = "filename";
+	public static final String FILE_DOWNLOAD__PRIORITY = "priority";
+	public static final String FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI = "download_only_over_wifi";
+	public static final String FILE_DOWNLOAD__USE_IPHONE6_PREFIX = "use_iphone6_prefix";
 
 	public static final String ITEM__ID = GENERIC__ID;
 	public static final String ITEM__NAME = "name";
@@ -1076,7 +1088,8 @@ public class DBConstants {
 	public static final String SKILL__ACTIVATION_TYPE = "activation_type";
 	public static final String SKILL__PREDEC_ID = "predec_id";
 	public static final String SKILL__SUCC_ID = "succ_id";
-	public static final String SKILL__DESC = "desc";
+	public static final String SKILL__DEFENSIVE_DESC = "defensive_desc";
+	public static final String SKILL__OFFENSIVE_DESC = "offensive_desc";
 	public static final String SKILL__IMG_NAME_PREFIX = "img_name_prefix";
 	public static final String SKILL__SKILL_EFFECT_DURATION = "skill_effect_duration";
 //	public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
@@ -1087,6 +1100,22 @@ public class DBConstants {
 	public static final String SKILL_PROPERTY__NAME = "name";
 	public static final String SKILL_PROPERTY__VALUE = "value";
 	public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
+	
+	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
+	public static final String SKILL_SIDE_EFFECT__NAME = "name";
+	public static final String SKILL_SIDE_EFFECT__DESC = "desc";
+	public static final String SKILL_SIDE_EFFECT__TYPE = "type";
+	public static final String SKILL_SIDE_EFFECT__TRAIT_TYPE = "trait_type";
+	public static final String SKILL_SIDE_EFFECT__IMG_NAME = "img_name";
+	public static final String SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_X = "img_pixel_offset_x";
+	public static final String SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_Y = "img_pixel_offset_y";
+	public static final String SKILL_SIDE_EFFECT__ICON_IMG_NAME = "icon_img_name";
+	public static final String SKILL_SIDE_EFFECT__PFX_NAME = "pfx_name";
+	public static final String SKILL_SIDE_EFFECT__PFX_COLOR  = "pfx_color";
+	public static final String SKILL_SIDE_EFFECT__POSITION_TYPE = "position_type";
+	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_X = "pfx_pixel_offset_x";
+	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_Y = "pfx_pixel_offset_y";
+	public static final String SKILL_SIDE_EFFECT__BLEND_MODE = "blend_mode";
 
 	public static final String STATIC_LEVEL_INFO__LEVEL_ID = "level_id";
 	public static final String STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE = "required_experience";

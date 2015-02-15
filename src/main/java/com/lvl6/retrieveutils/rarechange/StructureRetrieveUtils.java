@@ -141,7 +141,6 @@ import com.lvl6.utils.DBConnection;
     String buildResourceType = rs.getString(DBConstants.STRUCTURE__BUILD_RESOURCE_TYPE);
     int buildCost = rs.getInt(DBConstants.STRUCTURE__BUILD_COST);
     int minutesToBuild = rs.getInt(DBConstants.STRUCTURE__MINUTES_TO_BUILD);
-    int requiredTownHallLvl = rs.getInt(DBConstants.STRUCTURE__REQUIRED_TOWN_HALL_LVL);
     int width = rs.getInt(DBConstants.STRUCTURE__WIDTH);
     int height = rs.getInt(DBConstants.STRUCTURE__HEIGHT);
     int predecessorStructId = rs.getInt(DBConstants.STRUCTURE__PREDECESSOR_STRUCT_ID);
@@ -177,7 +176,7 @@ import com.lvl6.utils.DBConnection;
     }
     
     Structure s = new Structure(id, name, level, structType,
-    	buildResourceType, buildCost, minutesToBuild, requiredTownHallLvl,
+    	buildResourceType, buildCost, minutesToBuild,
     	width, height, predecessorStructId, successorStructId, imgName,
     	imgVerticalPixelOffset, imgHorizontalPixelOffset, description,
     	shortDescription, shadowImgName, shadowVerticalOffset,

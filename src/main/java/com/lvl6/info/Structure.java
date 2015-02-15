@@ -13,7 +13,6 @@ public class Structure implements Serializable {
 	private String buildResourceType;
 	private int buildCost;
 	private int minutesToBuild;
-	private int requiredTownHallLvl;
 	private int width;
 	private int height;
 	private int predecessorStructId;
@@ -31,7 +30,7 @@ public class Structure implements Serializable {
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
-			int requiredTownHallLvl, int width, int height,
+			int width, int height,
 			int predecessorStructId, int successorStructId, String imgName,
 			float imgVerticalPixelOffset, float imgHorizontalPixelOffset,
 			String description, String shortDescription, String shadowImgName,
@@ -45,7 +44,6 @@ public class Structure implements Serializable {
 		this.buildResourceType = buildResourceType;
 		this.buildCost = buildCost;
 		this.minutesToBuild = minutesToBuild;
-		this.requiredTownHallLvl = requiredTownHallLvl;
 		this.width = width;
 		this.height = height;
 		this.predecessorStructId = predecessorStructId;
@@ -116,14 +114,6 @@ public class Structure implements Serializable {
 
 	public void setMinutesToBuild(int minutesToBuild) {
 		this.minutesToBuild = minutesToBuild;
-	}
-
-	public int getRequiredTownHallLvl() {
-		return requiredTownHallLvl;
-	}
-
-	public void setRequiredTownHallLvl(int requiredTownHallLvl) {
-		this.requiredTownHallLvl = requiredTownHallLvl;
 	}
 
 	public int getWidth() {
@@ -241,53 +231,22 @@ public class Structure implements Serializable {
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Structure [id="
-			+ id
-			+ ", name="
-			+ name
-			+ ", level="
-			+ level
-			+ ", structType="
-			+ structType
-			+ ", buildResourceType="
-			+ buildResourceType
-			+ ", buildCost="
-			+ buildCost
-			+ ", minutesToBuild="
-			+ minutesToBuild
-			+ ", requiredTownHallLvl="
-			+ requiredTownHallLvl
-			+ ", width="
-			+ width
-			+ ", height="
-			+ height
-			+ ", predecessorStructId="
-			+ predecessorStructId
-			+ ", successorStructId="
-			+ successorStructId
-			+ ", imgName="
-			+ imgName
-			+ ", imgVerticalPixelOffset="
-			+ imgVerticalPixelOffset
-			+ ", imgHorizontalPixelOffset="
-			+ imgHorizontalPixelOffset
-			+ ", description="
-			+ description
-			+ ", shortDescription="
-			+ shortDescription
-			+ ", shadowImgName="
-			+ shadowImgName
-			+ ", shadowVerticalOffset="
-			+ shadowVerticalOffset
-			+ ", shadowHorizontalOffset="
-			+ shadowHorizontalOffset
-			+ ", shadowScale="
-			+ shadowScale
-			+ ", expReward="
-			+ expReward
-			+ "]";
+	public String toString() {
+		return "Structure [id=" + id + ", name=" + name + ", level=" + level
+				+ ", structType=" + structType + ", buildResourceType="
+				+ buildResourceType + ", buildCost=" + buildCost
+				+ ", minutesToBuild=" + minutesToBuild + ", width=" + width
+				+ ", height=" + height + ", predecessorStructId="
+				+ predecessorStructId + ", successorStructId="
+				+ successorStructId + ", imgName=" + imgName
+				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
+				+ ", imgHorizontalPixelOffset=" + imgHorizontalPixelOffset
+				+ ", description=" + description + ", shortDescription="
+				+ shortDescription + ", shadowImgName=" + shadowImgName
+				+ ", shadowVerticalOffset=" + shadowVerticalOffset
+				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset
+				+ ", shadowScale=" + shadowScale + ", expReward=" + expReward
+				+ "]";
 	}
 
 }

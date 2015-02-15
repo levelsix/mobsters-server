@@ -652,6 +652,10 @@ public final class SharedEnumConfigProto {
      * <code>SKILL = 4;</code>
      */
     SKILL(3, 4),
+    /**
+     * <code>TASK = 5;</code>
+     */
+    TASK(4, 5),
     ;
 
     /**
@@ -670,6 +674,10 @@ public final class SharedEnumConfigProto {
      * <code>SKILL = 4;</code>
      */
     public static final int SKILL_VALUE = 4;
+    /**
+     * <code>TASK = 5;</code>
+     */
+    public static final int TASK_VALUE = 5;
 
 
     public final int getNumber() { return value; }
@@ -680,6 +688,7 @@ public final class SharedEnumConfigProto {
         case 2: return STRUCTURE;
         case 3: return RESEARCH;
         case 4: return SKILL;
+        case 5: return TASK;
         default: return null;
       }
     }
@@ -754,9 +763,9 @@ public final class SharedEnumConfigProto {
       "NI_JOB\020\005\022\020\n\014ENHANCE_TIME\020\006\022\023\n\017REMOVE_OBS" +
       "TACLE\020\007\022\023\n\017COMBINE_MONSTER\020\010\022\032\n\026ENTER_PE" +
       "RSISTENT_EVENT\020\t\022\035\n\031GAME_ACTION_TYPE_RES" +
-      "EARCH\020\n*?\n\010GameType\022\013\n\007NO_TYPE\020\001\022\r\n\tSTRU" +
-      "CTURE\020\002\022\014\n\010RESEARCH\020\003\022\t\n\005SKILL\020\004B\027B\025Shar" +
-      "edEnumConfigProto"
+      "EARCH\020\n*I\n\010GameType\022\013\n\007NO_TYPE\020\001\022\r\n\tSTRU" +
+      "CTURE\020\002\022\014\n\010RESEARCH\020\003\022\t\n\005SKILL\020\004\022\010\n\004TASK" +
+      "\020\005B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

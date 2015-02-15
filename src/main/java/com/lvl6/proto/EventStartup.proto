@@ -129,7 +129,7 @@ message StartupResponseProto {
 
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
-	
+		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
@@ -212,6 +212,8 @@ message StartupResponseProto {
 		
 		optional int32 taskIdOfFirstSkill = 38;
 		optional int32 minsToResolicitTeamDonation = 39;
+	
+		repeated FileDownloadConstantProto fileDownloadProto = 40;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -265,6 +267,7 @@ message StartupResponseProto {
 		message MiniTutorialConstants {
 			optional int32 miniTutorialTaskId = 1;
 			optional int32 guideMonsterId = 2;
+			optional int32 enhanceGuideMonsterId = 3;
 		}
 		message ClanHelpConstants {
 			optional GameActionType helpType = 1 [default = NO_HELP];
@@ -310,6 +313,14 @@ message StartupResponseProto {
 			optional ResourceType resourceType = 1 [default = NO_RESOURCE];
 			optional int32 resourceAmt = 2;
 			optional int32 numGems = 3;
+		}
+		
+		message FileDownloadConstantProto {
+			optional int32 fileDownloadId = 1;
+			optional string fileName = 2;
+			optional int32 priority = 3;
+			optional bool downloadOnlyOverWifi = 4;
+			optional bool useIphone6Prefix = 5;
 		}
 	}
 	
@@ -363,3 +374,10 @@ message ForceLogoutResponseProto {
 	//the device's udid (whoever sent startup event and triggered this)
 	optional string udid = 2; 
 }
+
+//------------------------------------------------------------------------------------------
+
+
+
+
+

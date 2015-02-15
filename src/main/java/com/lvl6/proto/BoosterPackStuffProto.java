@@ -951,14 +951,26 @@ public final class BoosterPackStuffProto {
 
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     boolean hasListBackgroundImgName();
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     java.lang.String getListBackgroundImgName();
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     com.google.protobuf.ByteString
         getListBackgroundImgNameBytes();
@@ -1062,6 +1074,15 @@ public final class BoosterPackStuffProto {
      */
     com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder getDisplayItemsOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+     */
+    boolean hasType();
+    /**
+     * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+     */
+    com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType getType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterPackProto}
@@ -1177,6 +1198,17 @@ public final class BoosterPackStuffProto {
               displayItems_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.PARSER, extensionRegistry));
               break;
             }
+            case 88: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType value = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(11, rawValue);
+              } else {
+                bitField0_ |= 0x00000100;
+                type_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1220,6 +1252,115 @@ public final class BoosterPackStuffProto {
     @java.lang.Override
     public com.google.protobuf.Parser<BoosterPackProto> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.BoosterPackProto.BoosterPackType}
+     */
+    public enum BoosterPackType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>NO_TYPE = 1;</code>
+       */
+      NO_TYPE(0, 1),
+      /**
+       * <code>BASIC = 2;</code>
+       */
+      BASIC(1, 2),
+      /**
+       * <code>ULTIMATE = 3;</code>
+       */
+      ULTIMATE(2, 3),
+      /**
+       * <code>STARTER = 4;</code>
+       */
+      STARTER(3, 4),
+      /**
+       * <code>RIGGED = 5;</code>
+       */
+      RIGGED(4, 5),
+      ;
+
+      /**
+       * <code>NO_TYPE = 1;</code>
+       */
+      public static final int NO_TYPE_VALUE = 1;
+      /**
+       * <code>BASIC = 2;</code>
+       */
+      public static final int BASIC_VALUE = 2;
+      /**
+       * <code>ULTIMATE = 3;</code>
+       */
+      public static final int ULTIMATE_VALUE = 3;
+      /**
+       * <code>STARTER = 4;</code>
+       */
+      public static final int STARTER_VALUE = 4;
+      /**
+       * <code>RIGGED = 5;</code>
+       */
+      public static final int RIGGED_VALUE = 5;
+
+
+      public final int getNumber() { return value; }
+
+      public static BoosterPackType valueOf(int value) {
+        switch (value) {
+          case 1: return NO_TYPE;
+          case 2: return BASIC;
+          case 3: return ULTIMATE;
+          case 4: return STARTER;
+          case 5: return RIGGED;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<BoosterPackType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<BoosterPackType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<BoosterPackType>() {
+              public BoosterPackType findValueByNumber(int number) {
+                return BoosterPackType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final BoosterPackType[] VALUES = values();
+
+      public static BoosterPackType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private BoosterPackType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BoosterPackProto.BoosterPackType)
     }
 
     private int bitField0_;
@@ -1354,12 +1495,20 @@ public final class BoosterPackStuffProto {
     private java.lang.Object listBackgroundImgName_;
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     public boolean hasListBackgroundImgName() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     public java.lang.String getListBackgroundImgName() {
       java.lang.Object ref = listBackgroundImgName_;
@@ -1377,6 +1526,10 @@ public final class BoosterPackStuffProto {
     }
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
+     *
+     * <pre>
+     *in the ui
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getListBackgroundImgNameBytes() {
@@ -1615,6 +1768,21 @@ public final class BoosterPackStuffProto {
       return displayItems_.get(index);
     }
 
+    public static final int TYPE_FIELD_NUMBER = 11;
+    private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType type_;
+    /**
+     * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+     */
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType getType() {
+      return type_;
+    }
+
     private void initFields() {
       boosterPackId_ = 0;
       boosterPackName_ = "";
@@ -1626,6 +1794,7 @@ public final class BoosterPackStuffProto {
       navTitleImgName_ = "";
       machineImgName_ = "";
       displayItems_ = java.util.Collections.emptyList();
+      type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1669,6 +1838,9 @@ public final class BoosterPackStuffProto {
       }
       for (int i = 0; i < displayItems_.size(); i++) {
         output.writeMessage(10, displayItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeEnum(11, type_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1718,6 +1890,10 @@ public final class BoosterPackStuffProto {
       for (int i = 0; i < displayItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, displayItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(11, type_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1866,6 +2042,8 @@ public final class BoosterPackStuffProto {
         } else {
           displayItemsBuilder_.clear();
         }
+        type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1944,6 +2122,10 @@ public final class BoosterPackStuffProto {
         } else {
           result.displayItems_ = displayItemsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.type_ = type_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2047,6 +2229,9 @@ public final class BoosterPackStuffProto {
               displayItemsBuilder_.addAllMessages(other.displayItems_);
             }
           }
+        }
+        if (other.hasType()) {
+          setType(other.getType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2530,12 +2715,20 @@ public final class BoosterPackStuffProto {
       private java.lang.Object listBackgroundImgName_ = "";
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public boolean hasListBackgroundImgName() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public java.lang.String getListBackgroundImgName() {
         java.lang.Object ref = listBackgroundImgName_;
@@ -2553,6 +2746,10 @@ public final class BoosterPackStuffProto {
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getListBackgroundImgNameBytes() {
@@ -2569,6 +2766,10 @@ public final class BoosterPackStuffProto {
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public Builder setListBackgroundImgName(
           java.lang.String value) {
@@ -2582,6 +2783,10 @@ public final class BoosterPackStuffProto {
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public Builder clearListBackgroundImgName() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -2591,6 +2796,10 @@ public final class BoosterPackStuffProto {
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
+       *
+       * <pre>
+       *in the ui
+       * </pre>
        */
       public Builder setListBackgroundImgNameBytes(
           com.google.protobuf.ByteString value) {
@@ -3217,6 +3426,41 @@ public final class BoosterPackStuffProto {
           displayItems_ = null;
         }
         return displayItemsBuilder_;
+      }
+
+      private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
+      /**
+       * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+       */
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType getType() {
+        return type_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+       */
+      public Builder setType(com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000400;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterPackProto)
@@ -5490,7 +5734,7 @@ public final class BoosterPackStuffProto {
       " .com.lvl6.proto.MinimumUserProto\0221\n\007boo" +
       "ster\030\002 \001(\0132 .com.lvl6.proto.BoosterPackP" +
       "roto\022\026\n\016timeOfPurchase\030\003 \001(\004\022\021\n\tmonsterI" +
-      "d\030\004 \001(\005\"\313\002\n\020BoosterPackProto\022\025\n\rboosterP" +
+      "d\030\004 \001(\005\"\346\003\n\020BoosterPackProto\022\025\n\rboosterP" +
       "ackId\030\001 \001(\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010" +
       "gemPrice\030\003 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .c" +
       "om.lvl6.proto.BoosterItemProto\022\035\n\025listBa",
@@ -5498,19 +5742,23 @@ public final class BoosterPackStuffProto {
       "\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitl" +
       "eImgName\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=" +
       "\n\014displayItems\030\n \003(\0132\'.com.lvl6.proto.Bo" +
-      "osterDisplayItemProto\"\362\001\n\020BoosterItemPro" +
-      "to\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPack" +
-      "Id\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces" +
-      "\030\004 \001(\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030" +
-      "\006 \001(\010\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010" +
-      " \001(\005\022\026\n\016chanceToAppear\030\t \001(\002\022\016\n\006itemId\030\n",
-      " \001(\005\022\024\n\014itemQuantity\030\013 \001(\005\"\330\001\n\027BoosterDi" +
-      "splayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n" +
-      "\tisMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224\n\007" +
-      "quality\030\004 \001(\0162\027.com.lvl6.proto.Quality:\n" +
-      "NO_QUALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quantit" +
-      "y\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\022\024\n\014itemQuantity\030" +
-      "\010 \001(\005B\027B\025BoosterPackStuffProto"
+      "osterDisplayItemProto\022G\n\004type\030\013 \001(\01620.co" +
+      "m.lvl6.proto.BoosterPackProto.BoosterPac" +
+      "kType:\007NO_TYPE\"P\n\017BoosterPackType\022\013\n\007NO_" +
+      "TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIMATE\020\003\022\013\n\007START" +
+      "ER\020\004\022\n\n\006RIGGED\020\005\"\362\001\n\020BoosterItemProto\022\025\n" +
+      "\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002 ",
+      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(" +
+      "\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010" +
+      "\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005\022" +
+      "\026\n\016chanceToAppear\030\t \001(\002\022\016\n\006itemId\030\n \001(\005\022" +
+      "\024\n\014itemQuantity\030\013 \001(\005\"\330\001\n\027BoosterDisplay" +
+      "ItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\tisMo" +
+      "nster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224\n\007quali" +
+      "ty\030\004 \001(\0162\027.com.lvl6.proto.Quality:\nNO_QU" +
+      "ALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quantity\030\006 \001" +
+      "(\005\022\016\n\006itemId\030\007 \001(\005\022\024\n\014itemQuantity\030\010 \001(\005",
+      "B\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5537,7 +5785,7 @@ public final class BoosterPackStuffProto {
     internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
-        new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", });
+        new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", "Type", });
     internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new

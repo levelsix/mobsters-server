@@ -30,6 +30,9 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_BASE_PERCENT = 0.5F;
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
+	//BOOSTER_PACK
+	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
+	
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 5 : 100;
 	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
@@ -67,7 +70,7 @@ public class ControllerConstants {
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
 	
-	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 2;
+	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
@@ -82,7 +85,7 @@ public class ControllerConstants {
 		90, 150, 179, 265, 2280
 	};
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
-	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 5400;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 3599;
 	public static final int ITEM_SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = 
 		ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME -
 		ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
@@ -181,7 +184,7 @@ public class ControllerConstants {
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
 	//TOGGLES
-	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
+//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
@@ -221,6 +224,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1100;
 	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 2001;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
+	public static final int TUTORIAL__ENHANCE_GUIDE_MONSTER_ID = 1750;
 
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     {200,  400,  600,  700,  825,  /*170,*/ 1000};

@@ -109,10 +109,24 @@ import com.lvl6.utils.DBConnection;
 		log.error("most likely db does not have column EXP_PER_ITEM.", e);
 	}
     boolean displayToUser = rs.getBoolean(DBConstants.BOOSTER_PACK__DISPLAY_TO_USER);
+    int riggedId = rs.getInt(DBConstants.BOOSTER_PACK__RIGGED_ID);
+    
+    String boosterPackType = rs.getString(DBConstants.BOOSTER_PACK__TYPE);
+    
+    if (null != boosterPackType) {
+    	String newBoosterPackType = boosterPackType.trim().toUpperCase();
+    	if (!boosterPackType.equals(boosterPackType)) {
+    		log.error(String.format(
+    			"boosterPackType incorrect: %s, id=%s",
+    			boosterPackType, id));
+    		boosterPackType = newBoosterPackType;
+    	}
+    }
     
     BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
     		listBackgroundImgName, listDescription, navBarImgName,
-    		navTitleImgName, machineImgName, expPerItem, displayToUser);
+    		navTitleImgName, machineImgName, expPerItem, displayToUser,
+    		riggedId, boosterPackType);
     return boosterPack; 
   }
 }

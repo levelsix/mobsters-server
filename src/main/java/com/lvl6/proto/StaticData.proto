@@ -70,6 +70,7 @@ message StaticDataProto {
 	//repeated TeamCenterProto allTeamCenters = 30; defined above
 	
 	repeated SkillProto skills = 31;
+	repeated SkillSideEffectProto sideEffects = 37;
 	//repeated ClanHouseProto allClanHouses = 32; defined above
 	repeated PrereqProto prereqs = 33;
 	
@@ -78,5 +79,6 @@ message StaticDataProto {
 	repeated ResearchProto research = 35;
 	
 	//optional BoosterPackProto starterPack = 36; defined above 
+	//repeated SkillSideEffectProto sideEffects = 37; defined above
 }
 	

@@ -25,14 +25,21 @@ message BoosterPackProto {
 	optional int32 gemPrice = 3;
 	repeated BoosterItemProto specialItems = 4; //in the "featured mobsters section"
 												//in the ui
-	
-	
 	optional string listBackgroundImgName = 5;
 	optional string listDescription = 6;
 	optional string navBarImgName = 7;
 	optional string navTitleImgName = 8;
 	optional string machineImgName = 9;
 	repeated BoosterDisplayItemProto displayItems = 10; //these go on the bottom
+	optional BoosterPackType type = 11 [default = NO_TYPE];
+	
+	enum BoosterPackType {
+		NO_TYPE = 1;
+		BASIC = 2;
+		ULTIMATE = 3;
+		STARTER = 4;
+		RIGGED = 5;
+	}
 }
 
 //------------------------------------------------------------------------------------------

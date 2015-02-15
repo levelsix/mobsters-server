@@ -172,12 +172,8 @@ public class InAppPurchaseController extends EventController {
 
       JSONObject receiptFromApple = null;
       if (response.getInt(IAPValues.STATUS) == 0) {
-        receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-        if (!iapHistoryRetrieveUtil.checkIfDuplicateTransaction(Long.parseLong(receiptFromApple
-            .getString(IAPValues.TRANSACTION_ID))))
-        {
-          writeChangesToDb(userId, resBuilder, user, receiptFromApple);
-        }
+    	  receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
+    	  writeChangesToDb(userId, resBuilder, user, receiptFromApple);
       } else {
         log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
       }

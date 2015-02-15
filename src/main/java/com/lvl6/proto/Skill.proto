@@ -33,15 +33,20 @@ message SkillProto {
 	
 	repeated SkillPropertyProto properties = 8;
 	
-	optional string desc = 9;
+	//defensive description
+	optional string defDesc = 9;
+	optional string offDesc = 14;
 	
-	//optional string iconImgName = 10;
+	//optional string iconImgName = 10; defined above
 	//Animation shown when skill activates.
-	//optional string logoImgName = 11;
+	//optional string logoImgName = 11; defined above
 	
 	optional string imgNamePrefix = 12;
 	optional int32 skillEffectDuration = 13;
+	//optional string offDesc = 14; defined above
 }
+
+//------------------------------------------------------------------------------------------
 
 message SkillPropertyProto {
 	optional int32 skillPropertyId = 1;
@@ -89,10 +94,54 @@ enum SkillType {
 	CURSE = 31;
 	INSURANCE = 32;
 	FLAME_BREAK = 33;
+	POISON_SKEWER = 34;
+	POISON_FIRE = 35;
 }
 
 enum SkillActivationType {
 	USER_ACTIVATED = 1;
 	AUTO_ACTIVATED = 2;
 	PASSIVE = 3; //think this should be always active
+}
+
+//------------------------------------------------------------------------------------------
+
+	//Do not use the word 'value' 
+message SkillSideEffectProto {
+	optional int32 skillSideEffectId = 1;
+	optional string name = 2;
+	optional string desc = 3;
+	optional SideEffectType type = 4 [default = NO_SIDE_EFFECT];
+	optional SideEffectTraitType traitType = 5 [default = NO_TRAIT];
+	optional string imgName = 6;
+	optional int32 imgPixelOffsetX = 7;
+	optional int32 imgPixelOffsetY = 8;
+	optional string iconImgName = 9;
+	optional string pfxName = 10;
+	optional string pfxColor = 11;
+	optional SideEffectPositionType positionType = 12 [default = BELOW_CHARACTER];
+	optional int32 pfxPixelOffsetX = 13;
+	optional int32 pfxPixelOffsetY = 14;
+	optional SideEffectBlendMode blendMode = 15 [default = NORMAL_FULL_OPACITY];
+	
+}
+
+enum SideEffectType {
+	NO_SIDE_EFFECT = 1;
+	
+	POISONED = 2;
+	CURSED = 3;
+}
+enum SideEffectTraitType {
+	NO_TRAIT = 1;
+	
+	BUFF = 2;
+	NERF = 3;
+}
+enum SideEffectPositionType {
+	BELOW_CHARACTER = 1;
+	ABOVE_CHARACTER = 2;
+}
+enum SideEffectBlendMode {
+	NORMAL_FULL_OPACITY = 1;
 }

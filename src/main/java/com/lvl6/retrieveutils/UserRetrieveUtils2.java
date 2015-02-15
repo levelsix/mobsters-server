@@ -419,6 +419,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			//    int kabamNaid = rs.getInt(DBConstants.USER__KABAM_NAID);
 
 			boolean hasReceivedfbReward = rs.getBoolean(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
+			int numBeginnerSalesPurchased = rs.getInt(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
 			String facebookId = rs.getString(DBConstants.USER__FACEBOOK_ID);
 			boolean fbIdSetOnUserCreate = rs.getBoolean(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
 			String gameCenterId = rs.getString(DBConstants.USER__GAME_CENTER_ID);
@@ -481,17 +482,19 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				log.error("last_team_donate_solicitation null...?", e);
 			}
 
+			boolean boughtRiggedBoosterPack = rs.getBoolean(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
+			
 			User user = new User(id, name, level, gems, cash, oil, experience,
 				tasksCompleted, referralCode, numReferrals, udidForHistory,
 				lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
 				isAdmin, apsalarId, numCoinsRetrievedFromStructs,
 				numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
 				lastWallPostNotificationTime, hasReceivedfbReward,
-				facebookId, fbIdSetOnUserCreate,
+				numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
 				gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
 				lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
 				numClanHelps, lastSecretGiftCollectTime, pvpDefendingMessage,
-				lastTeamDonateSolicitation);
+				lastTeamDonateSolicitation, boughtRiggedBoosterPack);
 			return user;
 		}        
 
@@ -526,6 +529,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				columnsSelected.add(DBConstants.USER__CLAN_ID);
 				columnsSelected.add(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME);
 				columnsSelected.add(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
+				columnsSelected.add(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
 				columnsSelected.add(DBConstants.USER__FACEBOOK_ID);
 				columnsSelected.add(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
 
@@ -539,7 +543,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
                 
                 columnsSelected.add(DBConstants.USER__PVP_DEFENDING_MESSAGE);
                 columnsSelected.add(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION);
-				
+                columnsSelected.add(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
 				
 			}
 			return columnsSelected;

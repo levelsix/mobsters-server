@@ -44,6 +44,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -131,70 +132,58 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = getUserRetrieveUtils().getUserById(userId);
-			int previousGems = 0;
-			BoosterPack aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
-			int gemPrice = aPack.getGemPrice();
-			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
+			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
+				userId, boosterPackId, now, nowTimestamp,
+				freeBoosterPack, timeUtils, userRetrieveUtils,
+				itemForUserRetrieveUtil, updateUtil);
 
-			List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-			int gemReward = 0;
+			pbpa.execute(resBuilder);
 
-			boolean legit = checkLegitPurchase(resBuilder, user, userId, now,
-				aPack, boosterPackId, gemPrice, freeBoosterPack,
-				boosterItemIdsToBoosterItems);
-
-			boolean successful = false;
-			if (legit) {
-				previousGems = user.getGems();
-
-				int numBoosterItemsUserWants = 1;
-				log.info("determining the booster items the user receives.");
-				itemsUserReceives = MiscMethods.determineBoosterItemsUserReceives(
-					numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
-
-				legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
-			}
-
-			if (legit) {
-				gemReward = MiscMethods.determineGemReward(itemsUserReceives);
-				//set the FullUserMonsterProtos (in resBuilder) to send to the client
-				successful = writeChangesToDB(resBuilder, user, boosterPackId, aPack,
-					itemsUserReceives, gemPrice, now, gemReward, freeBoosterPack);
-			}
-
-			if (successful) {
+			if (PurchaseBoosterPackStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//assume user only purchases 1 item. NEED TO LET CLIENT KNOW THE PRIZE
+				List<BoosterItem> itemsUserReceives = pbpa.getItemsUserReceives();
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
 					BoosterItemProto bip = CreateInfoProtoUtils.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
+				//item reward
+				List<ItemForUser> ifuList = pbpa.getIfuList();
+				log.info("ifuList={}", ifuList);
+			    if (null != ifuList && !ifuList.isEmpty()) {
+			    	int numUpdated = updateUtil.updateItemForUser(ifuList);
+			    	log.info("items numUpdated={}", numUpdated);
+			    	List<UserItemProto> uipList = CreateInfoProtoUtils
+			    		.createUserItemProtosFromUserItems(ifuList);
+			    	resBuilder.addAllUpdatedUserItems(uipList);
+			    }
 			}
 
+			//check if setting the items the user won
 			PurchaseBoosterPackResponseProto resProto = resBuilder.build();
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseBoosterPackResponseProto(resProto);
 			server.writeEvent(resEvent);
 
-			if (successful) {
+			if (PurchaseBoosterPackStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+						pbpa.getUser(), null, null);
+				
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
-					gemPrice, previousGems, itemsUserReceives, gemReward, freeBoosterPack);
+				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
 				//just assume user can only buy one booster pack at a time
-				writeToBoosterPackPurchaseHistory(userId, boosterPackId, itemsUserReceives,
+				writeToBoosterPackPurchaseHistory(userId, boosterPackId,
+					pbpa.getItemsUserReceives(),
 					resBuilder.getUpdatedOrNewList(), nowTimestamp);
-				sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
+//				sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
 			}
 		} catch (Exception e) {
 			log.error("exception in PurchaseBoosterPackController processEvent", e);
@@ -209,7 +198,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName()); 
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName()); 
 		}
 	}
 
@@ -239,52 +228,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		//    }
 	}
 
-	private boolean checkLegitPurchase(Builder resBuilder, User aUser, String userId, 
-		Date now, BoosterPack aPack, int boosterPackId, int gemPrice,
-		boolean freeBoosterPack, Map<Integer, BoosterItem> idsToBoosterItems) {
-
-		if (null == aUser || null == aPack || null == idsToBoosterItems ||
-			idsToBoosterItems.isEmpty()) {
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-			log.error(String.format(
-				"no user for id=%s, or no BoosterPack for id=%s, or no booster items=%s",
-				userId, boosterPackId, idsToBoosterItems));
-			return false;
-		}
-
-		int userGems = aUser.getGems();
-		//check if user can afford to buy however many more user wants to buy
-		if (!freeBoosterPack) {
-			if (userGems < gemPrice) {
-				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GEMS);
-				return false; //resBuilder status set in called function 
-			}
-		} else {
-
-			Date lastFreeDate = aUser.getLastFreeBoosterPackTime();
-			if (null != lastFreeDate) {
-				if (!timeUtils.isFirstEarlierThanSecond(lastFreeDate, now)) {
-					// lastFreeDate is not earlier than now
-					log.error(String.format(
-						"client incorrectly says time now=%s is before lastFreeBoosterPackDate=%s",
-						now, lastFreeDate));
-					return false;
-
-				} else if ( Math.abs( timeUtils.numDaysDifference(lastFreeDate,now) ) == 0) {
-					// lastFreeDate is earlier than now but
-					// lastFreeDate is on same day as now 
-
-					log.error(String.format(
-						"client already received free booster pack today. lastFreeBoosterPackDate=%s, now=%s",
-						lastFreeDate, now));
-					return false;
-				}
-
-			}
-		}
-		resBuilder.setStatus(PurchaseBoosterPackStatus.SUCCESS);
-		return true;
-	}
 
 	//  private int getNumEquipsPurchasedToday(int userId, int boosterPackId, 
 	//      DateTime startOfDayInLA) {
@@ -299,199 +242,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	//    return numPurchased;
 	//  }
 
-	private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
-		BoosterPack aPack, List<BoosterItem> itemsUserReceives, int gemPrice,
-		Date now, int gemReward, boolean freeBoosterPack)
+	private void writeToUserCurrencyHistory(String userId, Timestamp date,
+		PurchaseBoosterPackAction pbpa)
 	{
-		//UPDATE exp
-		int expDelta = 0;
-
-		if (ServerToggleRetrieveUtils.getToggleValueForName(
-			ControllerConstants.SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP))
-		{
-			expDelta = aPack.getExpPerItem() * itemsUserReceives.size();
-		}
-
-		//update user, user_monsters
-		String userId = user.getId();
-		int currencyChange = -1 * gemPrice; //should be negative
-		if (freeBoosterPack) {
-			currencyChange = 0;
-		}
-		currencyChange += gemReward;
-
-		//update user's money
-		if (!freeBoosterPack) {
-			if (!user.updateRelativeGemsNaive(currencyChange, expDelta)) {
-				String preface = "didn't change user's exp; money.";
-				log.error(String.format(
-					"%s exp=%s \t gemPrice=%s \t gemReward=%s \t change=%s",
-					preface, expDelta, gemPrice, gemReward, currencyChange));
-				return false;
-			}
-		} else {
-			if (!user.updateFreeBoosterPack(currencyChange, now, expDelta)) {
-				String preface = "didn't change user's exp; money; freeBoosterPackTime.";
-				log.error(String.format(
-					"%s exp=%s \t gemPrice=%s \t gemReward=%s \t change=%s \t freeBoosterPackTime=%s",
-					preface, expDelta, gemPrice, gemReward, currencyChange, now));
-				return false;
-			}
-		}
-
-		String preface = "SPENT MONEY(?) ON BOOSTER PACK:";
-		log.info(
-			"{} free={}, bPackId={}, gemPrice={}, gemReward={}, itemsUserReceives={}",
-			new Object[] { freeBoosterPack, bPackId, gemPrice,
-				gemReward, itemsUserReceives });
-
-		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
-		//sop = source of pieces
-		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId, bPackId,
-			itemsUserReceives, monsterIdToNumPieces, completeUserMonsters, now);
-
-		log.info( "!!!!!!!!!mfusop={}", mfusop );
-
-		//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
-		if (!completeUserMonsters.isEmpty()) {
-			List<String> monsterForUserIds = InsertUtils.get()
-				.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = MiscMethods. 
-				createFullUserMonsterProtos(
-					monsterForUserIds, completeUserMonsters);
-
-			preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
-			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
-				new Object[] { preface, newOrUpdated, bPackId } );
-			//set the builder that will be sent to the client
-			resBuilder.addAllUpdatedOrNew(newOrUpdated);
-		}
-
-		//this is if the user did not buy a complete monster, UPDATE DB
-		if (!monsterIdToNumPieces.isEmpty()) {
-			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-				updateUserMonsters(userId, monsterIdToNumPieces, null,
-					mfusop, now);
-
-			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
-			log.info( "{} monster(s) newOrUpdated: {} \t bpackId={}",
-				new Object[] {preface, newOrUpdated, bPackId} );
-			//set the builder that will be sent to the client
-			resBuilder.addAllUpdatedOrNew(newOrUpdated);
-		}
-
-		//    if (monsterIdToNumPieces.isEmpty() && completeUserMonsters.isEmpty() &&
-		//    		gemReward <= 0) {
-		//    	log.warn("user didn't get any monsters or gems...boosterItemsUserReceives="
-		//    		+ itemsUserReceives);
-		//      resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-		//      return false;
-		//    }
-
-		//item reward
-		List<ItemForUser> ifuList = calculateItemRewards(userId, itemsUserReceives);
-		log.info("ifuList={}", ifuList);
-	    if (null != ifuList && !ifuList.isEmpty()) {
-	    	int numUpdated = updateUtil.updateItemForUser(ifuList);
-	    	log.info("items numUpdated={}", numUpdated);
-	    	List<UserItemProto> uipList = CreateInfoProtoUtils
-	    		.createUserItemProtosFromUserItems(ifuList);
-	    	resBuilder.addAllUpdatedUserItems(uipList);
-	    }
-	    
-		return true;
-	}
-
-	private List<ItemForUser> calculateItemRewards(
-		String userId,
-		List<BoosterItem> itemsUserReceives )
-	{
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-		
-		for (BoosterItem bi : itemsUserReceives) {
-			int itemId = bi.getItemId();
-			int itemQuantity = bi.getItemQuantity();
-			
-			if (itemId <= 0 || itemQuantity <= 0) {
-				continue;
-			}
-			
-			//user could have gotten multiple of the same BoosterItem
-			int newQuantity = itemQuantity;
-			if (itemIdToQuantity.containsKey(itemId))
-			{
-				newQuantity += itemIdToQuantity.get(itemId);
-			}
-			itemIdToQuantity.put(itemId, newQuantity);
-		}
-		
-		List<ItemForUser> ifuList = null;
-	    if (!itemIdToQuantity.isEmpty()) {
-	    	//aggregate rewarded items with user's current items
-	    	Map<Integer, ItemForUser> itemIdToIfu = 
-	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	    			itemIdToQuantity.keySet());
-	    	
-	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	    		ItemForUser ifu = itemIdToIfu.get(itemId);
-	    		int newQuantity = itemIdToQuantity.get(itemId) +
-	    			ifu.getQuantity();
-	    		ifu.setQuantity(newQuantity);
-	    	}
-	    	
-	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	    }
-	    return ifuList;
-	}
-
-	private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
-		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward,
-		boolean freeBoosterPack)
-	{
-
-		if (freeBoosterPack) {
-			return;
-		}
-		String userId = aUser.getId();
-		List<Integer> itemIds = new ArrayList<Integer>();
-		for (BoosterItem item : items) {
-			int id = item.getId();
-			itemIds.add(id);
-		}
-
-		StringBuilder detailSb = new StringBuilder();
-		if (null != items && !items.isEmpty()) {
-			detailSb.append(" bItemIds=");
-			String itemIdsCsv = StringUtils.csvList(itemIds);
-			detailSb.append(itemIdsCsv);
-		}
-		if (gemReward > 0) {
-			detailSb.append(" gemPrice=");
-			detailSb.append(gemPrice);
-			detailSb.append(" gemReward=");
-			detailSb.append(gemReward);
-		}
-		String gems = MiscMethods.gems;
-		String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
-
-		Map<String, Integer> money = new HashMap<String, Integer>();
-		Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
-		Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		Map<String, String> details = new HashMap<String, String>();
-
-		int change = (-1 * gemPrice) + gemReward;
-		money.put(gems, change);
-		previousCurrencies.put(gems, previousGems);
-		currentCurrencies.put(gems, aUser.getGems());
-		reasonsForChanges.put(gems, reasonForChange);
-		details.put(gems, detailSb.toString());
-
-		log.info( "DETAILS={}", detailSb.toString() );
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurrencies,
-			currentCurrencies, reasonsForChanges, details);
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+			pbpa.getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
+    		pbpa.getCurrentCurrencies(), pbpa.getReasons(),
+    		pbpa.getDetails());
 	}
 
 	private void writeToBoosterPackPurchaseHistory(String userId, int boosterPackId,

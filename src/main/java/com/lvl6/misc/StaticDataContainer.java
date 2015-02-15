@@ -2,6 +2,7 @@ package com.lvl6.misc;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
+import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureClanHouse;
@@ -45,6 +47,7 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoardProto.BoardLayoutProto;
@@ -57,6 +60,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
+import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
@@ -96,6 +100,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
@@ -244,13 +249,12 @@ public class StaticDataContainer
 		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
 			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 
+		int starterPackId = ControllerConstants
+			.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
+			
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
 			
-			if (!bp.isDisplayToUser()) {
-				continue;
-			}
-
 			//get the booster items associated with this booster pack
 			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
 			Collection<BoosterItem> items = null;
@@ -258,18 +262,36 @@ public class StaticDataContainer
 				items = itemIdsToItems.values();
 			}
 
+			
 			//get the booster display items for this booster pack
 			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
 				packIdToDisplayIdsToDisplayItems.get(bpackId);
 			Collection<BoosterDisplayItem> displayItems = null;
 			if (null != displayIdsToDisplayItems) {
-				displayItems = displayIdsToDisplayItems.values();
+				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+				Collections.sort(displayItemIds);
+
+                displayItems = new ArrayList<BoosterDisplayItem>();
+                
+                for (Integer displayItemId : displayItemIds) {
+                    displayItems.add(displayIdsToDisplayItems.get(displayItemId));
+                }
 			}
+			
 
 			BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
 				bp, items, displayItems);
-			sdpb.addBoosterPacks(bpProto);
+			//do not put the starterPack into the BoosterPacks
+			if (bpackId == starterPackId) {
+				sdpb.setStarterPack(bpProto);	
+				
+			} else if (bp.isDisplayToUser()) {
+				sdpb.addBoosterPacks(bpProto);
+			}
+				
 		}
+		
 	}
 	private static void setStructures(Builder sdpb) {
 		//Structures
@@ -574,25 +596,40 @@ public class StaticDataContainer
 		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
 			SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
 
+		
 		if (null == skillz || skillz.isEmpty()) {
 			log.warn("setSkillStuff() no skillz");
-			return;
+		} else {
+			//get id and then manually get Skill
+			//could also get Skill, but then manually get id
+			for (Integer skillId : skillz.keySet())
+			{
+				Skill skil = skillz.get(skillId);
+				
+				//skill can have no properties
+				Map<Integer, SkillProperty> propertyz = null;
+				if (skillPropertyz.containsKey(skillId)) {
+					propertyz = skillPropertyz.get(skillId);
+				}
+				
+				SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
+				sdpb.addSkills(sp);
+			}
 		}
 
-		//get id and then manually get Skill
-		//could also get Skill, but then manually get id
-		for (Integer skillId : skillz.keySet())
-		{
-			Skill skil = skillz.get(skillId);
-
-			//skill can have no properties
-			Map<Integer, SkillProperty> propertyz = null;
-			if (skillPropertyz.containsKey(skillId)) {
-				propertyz = skillPropertyz.get(skillId);
+		Map<Integer, SkillSideEffect> skillSideEffects =
+			SkillSideEffectRetrieveUtils.getIdsToSkillSideEffects();
+		
+		if (null == skillSideEffects || skillSideEffects.isEmpty()) {
+			log.warn("setSkillStuff() no skillSideEffects");
+		} else {
+			for (Integer id : skillSideEffects.keySet())
+			{
+				SkillSideEffect sse = skillSideEffects.get(id);
+				SkillSideEffectProto ssep = CreateInfoProtoUtils
+					.createSkillSideEffectProto(sse);
+				sdpb.addSideEffects(ssep);
 			}
-
-			SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
-			sdpb.addSkills(sp);
 		}
 
 	}
