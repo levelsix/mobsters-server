@@ -9,7 +9,7 @@
 	</appender>
 
 
-	<appender name="file"
+<!-- 	<appender name="file"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>DEBUG</level>
@@ -19,7 +19,7 @@
 		<Encoding>UTF-8</Encoding>
 		<ImmediateFlush>false</ImmediateFlush>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+			daily rollover
 			<fileNamePattern>${lvl6.server.log.location}.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
@@ -42,7 +42,7 @@
 		<Encoding>UTF-8</Encoding>
 		<ImmediateFlush>false</ImmediateFlush>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+			daily rollover
 			<fileNamePattern>${lvl6.server.log.location}_errors.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
@@ -57,14 +57,13 @@
 
 	<appender name="stash"
 		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-		<!-- remoteHost and port are optional (default values shown) -->
-		<remoteHost>logsinternal.lvl6.com</remoteHost>
+		remoteHost and port are optional (default values shown)
+		<remoteHost>logs.lvl6.com</remoteHost>
 		<port>4560</port>
 
-		<!-- encoder is required -->
+		encoder is required
 		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-		<keepAliveDuration>15 minutes</keepAliveDuration>
-	</appender>
+	</appender> -->
 
 	<!-- <logger name="com.lvl6.scheduledtasks" level="DEBUG" additivity="false"> 
 		<appender-ref ref="file" /> </logger> -->
@@ -72,8 +71,8 @@
 
 	<root level="info">
 		<appender-ref ref="console" />
-		<appender-ref ref="file" />
+		<!-- <appender-ref ref="file" />
 		<appender-ref ref="errorfile" />
-		<appender-ref ref="stash" />
+		<appender-ref ref="stash" /> -->
 	</root>
 </configuration>

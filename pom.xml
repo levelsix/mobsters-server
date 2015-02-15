@@ -140,8 +140,8 @@
 		<ec2.region>us-west-2</ec2.region>
 		<ec2.configuration>mp-config-20150126</ec2.configuration>
 		<cname.prefix>ms</cname.prefix>
-		
-		
+
+
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
@@ -168,9 +168,9 @@
 		<metrics.influxdbBusinessName>mobsters_business</metrics.influxdbBusinessName>
 		<metrics.influxdbUser>lvl6user</metrics.influxdbUser>
 		<metrics.influxdbPassword>robashen123</metrics.influxdbPassword>
-		
-		
-		
+
+
+
 		<!-- Amazon SNS -->
 		<apnsCertificate>
 		<![CDATA[-----BEGIN CERTIFICATE-----\nMIIFhzCCBG+gAwIBAgIIXInSCkIEGN0wDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNV\nBAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSwwKgYDVQQLDCNBcHBsZSBXb3Js\nZHdpZGUgRGV2ZWxvcGVyIFJlbGF0aW9uczFEMEIGA1UEAww7QXBwbGUgV29ybGR3\naWRlIERldmVsb3BlciBSZWxhdGlvbnMgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkw\nHhcNMTQxMjEwMjMzOTEwWhcNMTUxMjEwMjMzOTEwWjCBhjEhMB8GCgmSJomT8ixk\nAQEMEWNvbS5sdmw2Lm1vYnN0ZXJzMT8wPQYDVQQDDDZBcHBsZSBEZXZlbG9wbWVu\ndCBJT1MgUHVzaCBTZXJ2aWNlczogY29tLmx2bDYubW9ic3RlcnMxEzARBgNVBAsM\nCjVRVEs3QTk0NkoxCzAJBgNVBAYTAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A\nMIIBCgKCAQEAvmqvekDbl5VtbIakeInGmFpNfWK6HB+8cGbxOUYNXhXobbtSKBxg\nesRD5NXJgnuiyWYzHANnPmmrmQoJWOifhQQHqN1/2iixnlQ2w/5crCZIJoGNLr1s\ni+Sw9RHwjV5St/j6QvgQ+S0z4efBG6KTKVREa5jIg0HJV4ilTZ7oQJ9a0SymII6i\nSIcqoRyfZWMK5t02giTEFPiVVyoxMwshrr6rhqJAGI7agE0mIAnxjHQErmNqJKxJ\nEoK32wFa1KbB5rTC1U+bSPmtxSbtCQwSjaRarNZZodRyy9967aJsPELY0XTWdBMr\nuSXRzzqlWkhr/80rn42gJBaM3+UB8QDh/wIDAQABo4IB5TCCAeEwHQYDVR0OBBYE\nFHdofm7J07sIEswrVKQNvvePkheUMAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUiCcX\nCam2GGCL7Ou69kdZxVJUo7cwggEPBgNVHSAEggEGMIIBAjCB/wYJKoZIhvdjZAUB\nMIHxMIHDBggrBgEFBQcCAjCBtgyBs1JlbGlhbmNlIG9uIHRoaXMgY2VydGlmaWNh\ndGUgYnkgYW55IHBhcnR5IGFzc3VtZXMgYWNjZXB0YW5jZSBvZiB0aGUgdGhlbiBh\ncHBsaWNhYmxlIHN0YW5kYXJkIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHVzZSwg\nY2VydGlmaWNhdGUgcG9saWN5IGFuZCBjZXJ0aWZpY2F0aW9uIHByYWN0aWNlIHN0\nYXRlbWVudHMuMCkGCCsGAQUFBwIBFh1odHRwOi8vd3d3LmFwcGxlLmNvbS9hcHBs\nZWNhLzBNBgNVHR8ERjBEMEKgQKA+hjxodHRwOi8vZGV2ZWxvcGVyLmFwcGxlLmNv\nbS9jZXJ0aWZpY2F0aW9uYXV0aG9yaXR5L3d3ZHJjYS5jcmwwCwYDVR0PBAQDAgeA\nMBMGA1UdJQQMMAoGCCsGAQUFBwMCMBAGCiqGSIb3Y2QGAwEEAgUAMA0GCSqGSIb3\nDQEBBQUAA4IBAQAhX8O7Pp1Ut4Ai5EJfwLfxvd/7ZU15aZeRS/KL7fz8C6XQUHIc\nWD/0HCHDQbs0vIMJoulR+k9MERYthyZ67vKcjmwy5vA6eLJpUWtS9BWN2Y7fqL02\n25spd8m84+uVvGSFWyM3wBW0jeJcwKlIcEjJxnF97Ly5WqqcEm3YGN2eacuXKX5c\n5SbVhKsjFS42C4/eiFmx8QL9WzgvQLMhj3q7xKfQz5GYHHhbpkuEje0J/cUpOFBf\nBo7ll2r6XKc5Wy0YMDQbzAD7+cluO1vdZDYtljgWyIDn6GpBJ5deSDopr0J9dxg9\nv4zxUdGgeRoBMYj8MJfzaX6jXY7W+M4Z/ZOA\n-----END CERTIFICATE-----]]]>
@@ -523,6 +523,11 @@
 				<artifactId>logback-classic</artifactId>
 				<version>1.0.7</version>
 			</dependency>
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>4.0</version>
+			</dependency>
 			<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
 				<version>0.9.1.2</version> </dependency> -->
 			<dependency>
@@ -791,6 +796,11 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+		</dependency>
+
 		<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
 			</dependency> -->
 		<dependency>

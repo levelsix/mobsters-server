@@ -1,0 +1,7 @@
+How to change aws beanstalk config to use a specific SNS Topic ARN:
+
+http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/update-configuration-template.html
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
+
+aws elasticbeanstalk update-configuration-template --application-name mobsters-prod --template-name mp-config-20150126 \
+--option-settings Namespace="aws:elasticbeanstalk:sns:topics",OptionName="Notification Topic ARN",Value="arn:aws:sns:us-west-2:194330317589:mobsters-alerts";
