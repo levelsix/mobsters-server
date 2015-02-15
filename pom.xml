@@ -183,6 +183,9 @@
 		<gcmServerAPIKey></gcmServerAPIKey>
 		<gcmApplicationName></gcmApplicationName>
 		<gcmRegistrationId></gcmRegistrationId>
+		
+		<!-- Logstash -->
+		<logstash.environment>dev</logstash.environment>
 	</properties>
 
 	<profiles>

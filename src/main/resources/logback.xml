@@ -64,6 +64,7 @@
 		<!-- encoder is required -->
 		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
 		<keepAliveDuration>15 minutes</keepAliveDuration>
+		<customFields>{"environment":"${logstash.environment}"}</customFields>
 	</appender>
 
 	<!-- <logger name="com.lvl6.scheduledtasks" level="DEBUG" additivity="false"> 
