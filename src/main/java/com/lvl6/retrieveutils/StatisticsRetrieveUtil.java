@@ -48,7 +48,7 @@ public class StatisticsRetrieveUtil {
 	////
 	public int countLoginsSince(String formattedDate) {
 		String queryString = "select count(*) from "+DBConstants.TABLE_USER+" where "+DBConstants.USER__LAST_LOGIN+" > '"+formattedDate+"'";
-		log.info("Executing: {}", queryString);
+		log.trace("Executing: {}", queryString);
 		return jdbcTemplate.queryForInt(queryString);
 	}
 
