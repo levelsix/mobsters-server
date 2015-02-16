@@ -62,9 +62,10 @@
 		<port>4560</port>
 
 		<!-- encoder is required -->
-		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+			<customFields>{"environment":"${logstash.environment}"}</customFields>
+		</encoder>
 		<keepAliveDuration>15 minutes</keepAliveDuration>
-		<customFields>{"environment":"${logstash.environment}"}</customFields>
 	</appender>
 
 	<!-- <logger name="com.lvl6.scheduledtasks" level="DEBUG" additivity="false"> 
