@@ -431,20 +431,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  pvpLeagueId, rank, elo, shieldEndTime, shieldEndTime);
 	  log.info("numInsertedIntoPvp=" + numInsertedIntoPvp);
 
-	  //maybe should populate hazelcast with the pvp user now...
-	  /*
-	  PvpUser plfu = new PvpUser();
-	  plfu.setPvpLeagueId(pvpLeagueId);
-	  plfu.setRank(rank);
-	  plfu.setUserId(Integer.toString(userId));
-	  plfu.setElo(elo);
-	  plfu.setShieldEndTime(shieldEndDate);
-	  plfu.setInBattleEndTime(shieldEndDate);
-	  plfu.setAttacksWon(0);
-	  plfu.setDefensesWon(0);
-	  plfu.setAttacksLost(0);
-	  plfu.setDefensesLost(0);
-	  */
+	  //user put into hazelcast on server restart or he queue's up ppl
   }
 
   private void writeSecretGifts(String userId, Date createTime)

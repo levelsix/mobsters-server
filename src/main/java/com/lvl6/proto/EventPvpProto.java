@@ -80,13 +80,6 @@ public final class EventPvpProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.QueueUpRequestProto}
-   *
-   * <pre>
-   * A real or a fake player will be returned by this event.
-   * SOME BACKGROUND: 
-   * All people that can be attacked will be offline people. The opposite is not true though.
-   * All people that can be attacked will not have an active shield.
-   * </pre>
    */
   public static final class QueueUpRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -449,13 +442,6 @@ public final class EventPvpProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.QueueUpRequestProto}
-     *
-     * <pre>
-     * A real or a fake player will be returned by this event.
-     * SOME BACKGROUND: 
-     * All people that can be attacked will be offline people. The opposite is not true though.
-     * All people that can be attacked will not have an active shield.
-     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2108,6 +2094,10 @@ public final class EventPvpProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginPvpBattleRequestProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   * </pre>
    */
   public static final class BeginPvpBattleRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -2530,6 +2520,10 @@ public final class EventPvpProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.BeginPvpBattleRequestProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements

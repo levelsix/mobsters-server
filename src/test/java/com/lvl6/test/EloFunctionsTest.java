@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.pvp.PvpBattleOutcome;
+import com.lvl6.pvp.PvpUtil2;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,11 +37,11 @@ public class EloFunctionsTest extends TestCase {
 		//minElo = Math.min(95% final elo, DEFAULT_MIN_ELO)
 		//maxElo = 105% final elo
 		double randVar = 0.50D;
-		double expectedEloAddend = MiscMethods.ELO__MAX_RANGE
+		double expectedEloAddend = PvpUtil2.ELO__MAX_RANGE
 			* elo * -0.2D;
 		double expectedElo = elo + expectedEloAddend;
 
-		double generatedElo = MiscMethods.getProspectiveOpponentElo(randVar, elo);
+		double generatedElo = PvpUtil2.getProspectiveOpponentElo(randVar, elo);
 		
 		//bounded generatedElo between expectedElo because of potential rounding differences
 		//could have just chosen +/- 1 or any other number 

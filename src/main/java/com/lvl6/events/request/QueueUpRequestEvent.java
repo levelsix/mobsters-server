@@ -32,7 +32,12 @@ public class QueueUpRequestEvent extends RequestEvent{
     return queueUpRequestProto;
   }
 
-  @Override
+  public void setQueueUpRequestProto( QueueUpRequestProto queueUpRequestProto )
+  {
+	  this.queueUpRequestProto = queueUpRequestProto;
+  }
+
+@Override
   public String toString()
   {
 	  return "QueueUpRequestEvent [queueUpRequestProto="

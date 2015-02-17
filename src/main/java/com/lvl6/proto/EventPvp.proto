@@ -15,10 +15,6 @@ option java_outer_classname = "EventPvpProto";
 
 
 
-// A real or a fake player will be returned by this event.
-// SOME BACKGROUND: 
-// All people that can be attacked will be offline people. The opposite is not true though.
-// All people that can be attacked will not have an active shield.
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	optional int32 attackerElo = 2;
@@ -55,11 +51,6 @@ message QueueUpResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-// Whenever an offline user comes in (StartupRequest) this user will be removed from the
-//	potentialPvpUsers collection.	
-// Whenever someone logs out, the user will be placed into the collection if he qualifies
-//	to be attacked.
-
 message BeginPvpBattleRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 senderElo = 2;

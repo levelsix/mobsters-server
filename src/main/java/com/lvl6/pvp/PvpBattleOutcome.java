@@ -18,8 +18,8 @@ public class PvpBattleOutcome
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 	
-	public static final int CASH__MIN_REWARD = 350;
-	public static final int OIL__MIN_REWARD = 350;
+	public static final int CASH__MIN_REWARD = 200;
+	public static final int OIL__MIN_REWARD = 200;
 	
 	private String attackerId;
 	private double attackerElo;
