@@ -512,13 +512,73 @@ public final class SkillsProto {
      */
     NO_SIDE_EFFECT(0, 1),
     /**
-     * <code>POISONED = 2;</code>
+     * <code>NERF_POISON = 2;</code>
      */
-    POISONED(1, 2),
+    NERF_POISON(1, 2),
     /**
-     * <code>CURSED = 3;</code>
+     * <code>NERF_CURSE = 3;</code>
      */
-    CURSED(2, 3),
+    NERF_CURSE(2, 3),
+    /**
+     * <code>NERF_STUN = 4;</code>
+     */
+    NERF_STUN(3, 4),
+    /**
+     * <code>NERF_CONFUSION = 5;</code>
+     */
+    NERF_CONFUSION(4, 5),
+    /**
+     * <code>NERF_BLINDING_LIGHT = 6;</code>
+     */
+    NERF_BLINDING_LIGHT(5, 6),
+    /**
+     * <code>NERF_BLOOD_RAGE = 7;</code>
+     */
+    NERF_BLOOD_RAGE(6, 7),
+    /**
+     * <code>BUFF_MOMENTUM = 8;</code>
+     */
+    BUFF_MOMENTUM(7, 8),
+    /**
+     * <code>BUFF_THICK_SKIN = 9;</code>
+     */
+    BUFF_THICK_SKIN(8, 9),
+    /**
+     * <code>BUFF_DRUNKEN_BRAWL = 10;</code>
+     */
+    BUFF_DRUNKEN_BRAWL(9, 10),
+    /**
+     * <code>BUFF_CRITICAL_STRIKE = 11;</code>
+     */
+    BUFF_CRITICAL_STRIKE(10, 11),
+    /**
+     * <code>BUFF_EVADE = 12;</code>
+     */
+    BUFF_EVADE(11, 12),
+    /**
+     * <code>BUFF_STATIC_FIELD = 13;</code>
+     */
+    BUFF_STATIC_FIELD(12, 13),
+    /**
+     * <code>BUFF_COUNTER_STRIKE = 14;</code>
+     */
+    BUFF_COUNTER_STRIKE(13, 14),
+    /**
+     * <code>BUFF_ROID_RAGE = 15;</code>
+     */
+    BUFF_ROID_RAGE(14, 15),
+    /**
+     * <code>BUFF_SHALLOW_GRAVE = 16;</code>
+     */
+    BUFF_SHALLOW_GRAVE(15, 16),
+    /**
+     * <code>BUFF_ENERGIZE = 17;</code>
+     */
+    BUFF_ENERGIZE(16, 17),
+    /**
+     * <code>BUFF_INSURANCE = 18;</code>
+     */
+    BUFF_INSURANCE(17, 18),
     ;
 
     /**
@@ -526,13 +586,73 @@ public final class SkillsProto {
      */
     public static final int NO_SIDE_EFFECT_VALUE = 1;
     /**
-     * <code>POISONED = 2;</code>
+     * <code>NERF_POISON = 2;</code>
      */
-    public static final int POISONED_VALUE = 2;
+    public static final int NERF_POISON_VALUE = 2;
     /**
-     * <code>CURSED = 3;</code>
+     * <code>NERF_CURSE = 3;</code>
      */
-    public static final int CURSED_VALUE = 3;
+    public static final int NERF_CURSE_VALUE = 3;
+    /**
+     * <code>NERF_STUN = 4;</code>
+     */
+    public static final int NERF_STUN_VALUE = 4;
+    /**
+     * <code>NERF_CONFUSION = 5;</code>
+     */
+    public static final int NERF_CONFUSION_VALUE = 5;
+    /**
+     * <code>NERF_BLINDING_LIGHT = 6;</code>
+     */
+    public static final int NERF_BLINDING_LIGHT_VALUE = 6;
+    /**
+     * <code>NERF_BLOOD_RAGE = 7;</code>
+     */
+    public static final int NERF_BLOOD_RAGE_VALUE = 7;
+    /**
+     * <code>BUFF_MOMENTUM = 8;</code>
+     */
+    public static final int BUFF_MOMENTUM_VALUE = 8;
+    /**
+     * <code>BUFF_THICK_SKIN = 9;</code>
+     */
+    public static final int BUFF_THICK_SKIN_VALUE = 9;
+    /**
+     * <code>BUFF_DRUNKEN_BRAWL = 10;</code>
+     */
+    public static final int BUFF_DRUNKEN_BRAWL_VALUE = 10;
+    /**
+     * <code>BUFF_CRITICAL_STRIKE = 11;</code>
+     */
+    public static final int BUFF_CRITICAL_STRIKE_VALUE = 11;
+    /**
+     * <code>BUFF_EVADE = 12;</code>
+     */
+    public static final int BUFF_EVADE_VALUE = 12;
+    /**
+     * <code>BUFF_STATIC_FIELD = 13;</code>
+     */
+    public static final int BUFF_STATIC_FIELD_VALUE = 13;
+    /**
+     * <code>BUFF_COUNTER_STRIKE = 14;</code>
+     */
+    public static final int BUFF_COUNTER_STRIKE_VALUE = 14;
+    /**
+     * <code>BUFF_ROID_RAGE = 15;</code>
+     */
+    public static final int BUFF_ROID_RAGE_VALUE = 15;
+    /**
+     * <code>BUFF_SHALLOW_GRAVE = 16;</code>
+     */
+    public static final int BUFF_SHALLOW_GRAVE_VALUE = 16;
+    /**
+     * <code>BUFF_ENERGIZE = 17;</code>
+     */
+    public static final int BUFF_ENERGIZE_VALUE = 17;
+    /**
+     * <code>BUFF_INSURANCE = 18;</code>
+     */
+    public static final int BUFF_INSURANCE_VALUE = 18;
 
 
     public final int getNumber() { return value; }
@@ -540,8 +660,23 @@ public final class SkillsProto {
     public static SideEffectType valueOf(int value) {
       switch (value) {
         case 1: return NO_SIDE_EFFECT;
-        case 2: return POISONED;
-        case 3: return CURSED;
+        case 2: return NERF_POISON;
+        case 3: return NERF_CURSE;
+        case 4: return NERF_STUN;
+        case 5: return NERF_CONFUSION;
+        case 6: return NERF_BLINDING_LIGHT;
+        case 7: return NERF_BLOOD_RAGE;
+        case 8: return BUFF_MOMENTUM;
+        case 9: return BUFF_THICK_SKIN;
+        case 10: return BUFF_DRUNKEN_BRAWL;
+        case 11: return BUFF_CRITICAL_STRIKE;
+        case 12: return BUFF_EVADE;
+        case 13: return BUFF_STATIC_FIELD;
+        case 14: return BUFF_COUNTER_STRIKE;
+        case 15: return BUFF_ROID_RAGE;
+        case 16: return BUFF_SHALLOW_GRAVE;
+        case 17: return BUFF_ENERGIZE;
+        case 18: return BUFF_INSURANCE;
         default: return null;
       }
     }
@@ -5749,13 +5884,21 @@ public final class SkillsProto {
       "CE\020 \022\017\n\013FLAME_BREAK\020!\022\021\n\rPOISON_SKEWER\020\"" +
       "\022\017\n\013POISON_FIRE\020#*J\n\023SkillActivationType" +
       "\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002",
-      "\022\013\n\007PASSIVE\020\003*>\n\016SideEffectType\022\022\n\016NO_SI" +
-      "DE_EFFECT\020\001\022\014\n\010POISONED\020\002\022\n\n\006CURSED\020\003*7\n" +
-      "\023SideEffectTraitType\022\014\n\010NO_TRAIT\020\001\022\010\n\004BU" +
-      "FF\020\002\022\010\n\004NERF\020\003*B\n\026SideEffectPositionType" +
-      "\022\023\n\017BELOW_CHARACTER\020\001\022\023\n\017ABOVE_CHARACTER" +
-      "\020\002*.\n\023SideEffectBlendMode\022\027\n\023NORMAL_FULL" +
-      "_OPACITY\020\001B\rB\013SkillsProto"
+      "\022\013\n\007PASSIVE\020\003*\203\003\n\016SideEffectType\022\022\n\016NO_S" +
+      "IDE_EFFECT\020\001\022\017\n\013NERF_POISON\020\002\022\016\n\nNERF_CU" +
+      "RSE\020\003\022\r\n\tNERF_STUN\020\004\022\022\n\016NERF_CONFUSION\020\005" +
+      "\022\027\n\023NERF_BLINDING_LIGHT\020\006\022\023\n\017NERF_BLOOD_" +
+      "RAGE\020\007\022\021\n\rBUFF_MOMENTUM\020\010\022\023\n\017BUFF_THICK_" +
+      "SKIN\020\t\022\026\n\022BUFF_DRUNKEN_BRAWL\020\n\022\030\n\024BUFF_C" +
+      "RITICAL_STRIKE\020\013\022\016\n\nBUFF_EVADE\020\014\022\025\n\021BUFF" +
+      "_STATIC_FIELD\020\r\022\027\n\023BUFF_COUNTER_STRIKE\020\016" +
+      "\022\022\n\016BUFF_ROID_RAGE\020\017\022\026\n\022BUFF_SHALLOW_GRA" +
+      "VE\020\020\022\021\n\rBUFF_ENERGIZE\020\021\022\022\n\016BUFF_INSURANC",
+      "E\020\022*7\n\023SideEffectTraitType\022\014\n\010NO_TRAIT\020\001" +
+      "\022\010\n\004BUFF\020\002\022\010\n\004NERF\020\003*B\n\026SideEffectPositi" +
+      "onType\022\023\n\017BELOW_CHARACTER\020\001\022\023\n\017ABOVE_CHA" +
+      "RACTER\020\002*.\n\023SideEffectBlendMode\022\027\n\023NORMA" +
+      "L_FULL_OPACITY\020\001B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
