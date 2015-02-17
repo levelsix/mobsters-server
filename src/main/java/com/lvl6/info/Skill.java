@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Skill implements Serializable {
 	
-	private static final long serialVersionUID = -6430843773448686806L;
+	private static final long serialVersionUID = -6123159130339183801L;
 	
 	private int id;
 	private String name;
@@ -17,6 +17,8 @@ public class Skill implements Serializable {
 	private String offensiveDesc;
 	private String imgNamePrefix;
 	private int skillEffectDuration;
+	private String shortDefDesc;
+	private String shortOffDesc;
 	
 	public Skill(
 		int id,
@@ -29,7 +31,9 @@ public class Skill implements Serializable {
 		String defensiveDesc,
 		String offensiveDesc,
 		String imgNamePrefix,
-		int skillEffectDuration )
+		int skillEffectDuration,
+		String shortDefDesc,
+		String shortOffDesc )
 	{
 		super();
 		this.id = id;
@@ -43,6 +47,8 @@ public class Skill implements Serializable {
 		this.offensiveDesc = offensiveDesc;
 		this.imgNamePrefix = imgNamePrefix;
 		this.skillEffectDuration = skillEffectDuration;
+		this.shortDefDesc = shortDefDesc;
+		this.shortOffDesc = shortOffDesc;
 	}
 
 	public int getId()
@@ -155,6 +161,26 @@ public class Skill implements Serializable {
 		this.skillEffectDuration = skillEffectDuration;
 	}
 
+	public String getShortDefDesc()
+	{
+		return shortDefDesc;
+	}
+
+	public void setShortDefDesc( String shortDefDesc )
+	{
+		this.shortDefDesc = shortDefDesc;
+	}
+
+	public String getShortOffDesc()
+	{
+		return shortOffDesc;
+	}
+
+	public void setShortOffDesc( String shortOffDesc )
+	{
+		this.shortOffDesc = shortOffDesc;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -180,6 +206,10 @@ public class Skill implements Serializable {
 			+ imgNamePrefix
 			+ ", skillEffectDuration="
 			+ skillEffectDuration
+			+ ", shortDefDesc="
+			+ shortDefDesc
+			+ ", shortOffDesc="
+			+ shortOffDesc
 			+ "]";
 	}
 

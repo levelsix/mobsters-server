@@ -3026,6 +3026,9 @@ public class CreateInfoProtoUtils {
 		if (skillEffectDuration > 0) {
 			spb.setSkillEffectDuration(skillEffectDuration);
 		}
+		
+		str = s.getShortDefDesc();
+		str = s.getShortOffDesc();
 
 		return spb.build();
 	}

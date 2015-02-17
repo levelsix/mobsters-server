@@ -1092,6 +1092,8 @@ public class DBConstants {
 	public static final String SKILL__OFFENSIVE_DESC = "offensive_desc";
 	public static final String SKILL__IMG_NAME_PREFIX = "img_name_prefix";
 	public static final String SKILL__SKILL_EFFECT_DURATION = "skill_effect_duration";
+	public static final String SKILL__SHORT_DEF_DESC = "short_def_desc";
+	public static final String SKILL__SHORT_OFF_DESC = "short_off_desc";
 //	public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
 	//Animation shown when skill activates.
 //	public static final String SKILL__LOGO_IMG_NAME = "logo_img_name";

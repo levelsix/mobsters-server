@@ -36,6 +36,8 @@ message SkillProto {
 	//defensive description
 	optional string defDesc = 9;
 	optional string offDesc = 14;
+	optional string shortDefDesc = 15;
+	optional string shortOffDesc = 16;
 	
 	//optional string iconImgName = 10; defined above
 	//Animation shown when skill activates.
@@ -44,6 +46,9 @@ message SkillProto {
 	optional string imgNamePrefix = 12;
 	optional int32 skillEffectDuration = 13;
 	//optional string offDesc = 14; defined above
+	//optional string shortDefDesc = 15; defined above
+	//optional string shortOffDesc = 16; defined above
+	
 }
 
 //------------------------------------------------------------------------------------------
