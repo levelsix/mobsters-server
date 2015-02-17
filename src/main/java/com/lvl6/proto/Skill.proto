@@ -146,6 +146,7 @@ enum SideEffectType {
 	BUFF_SHALLOW_GRAVE = 16;
 	BUFF_ENERGIZE = 17;
 	BUFF_INSURANCE = 18;
+	BUFF_HAMMER_TIME = 19;
 	
 }
 enum SideEffectTraitType {
