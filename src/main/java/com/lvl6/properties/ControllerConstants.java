@@ -258,6 +258,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__IN_APP_PURCHASE = "in app purchase: ";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+	public static final String UCHRFC__PERFORMING_RESEARCH = "performing research";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
 	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
 	public static final String UCHRFC__PURCHASE_CITY_EXPANSION = "expanded city";

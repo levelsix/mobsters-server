@@ -3555,6 +3555,13 @@ public class CreateInfoProtoUtils {
 
 		return chpb.build();
 	}
+	
+	/**research.proto*******************************************/
+	
+	
+	
+	
+	
 
 	/**Task.proto*****************************************************/
 	/*
@@ -4080,7 +4087,10 @@ public class CreateInfoProtoUtils {
 
 	public static MinimumUserProto createMinimumUserProtoFromUserAndClan(User u, Clan c) {
 		MinimumUserProto.Builder builder = MinimumUserProto.newBuilder();
-		builder.setName(u.getName());
+		
+		
+		String name = u.getName();
+		builder.setName(name);
 		builder.setUserUuid(u.getId());
 
 		if (null != c) {

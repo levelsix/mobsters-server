@@ -21,21 +21,31 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
+import com.lvl6.events.request.PerformResearchRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.StaticDataContainer;
+import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
+import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.DevController;
+import com.lvl6.server.controller.FinishPerformingResearchController;
+import com.lvl6.server.controller.PerformResearchController;
 import com.lvl6.server.controller.RetrieveClanInfoController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
@@ -43,7 +53,11 @@ import com.lvl6.server.controller.UserCreateController;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -78,8 +92,23 @@ public class ControllerTest extends TestCase {
 	@Autowired
 	RetrieveClanInfoController retrieveClanInfoController;
 	
+	@Autowired
+	ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	
+	@Autowired
+	InsertUtil insertUtil;
+	
+	@Autowired
+	UpdateUtil updateUtil;
+	
 //	@Autowired
 //	InviteToClanController inviteToClanController;
+	
+	@Autowired
+	PerformResearchController performResearchController;
+	
+	@Autowired 
+	FinishPerformingResearchController finishPerformingResearchController;
 	
 	@Autowired
 	TimeUtils timeUtils;
@@ -109,7 +138,7 @@ public class ControllerTest extends TestCase {
 	@Resource(name = "playersPreDatabaseByUDID")
 	IMap<String, ConnectedPlayer> playersPreDatabaseByUDID;
 
-
+	
 //	public void createUser(String udid) {
 //		//need to add a new ConnectedPlayer
 //		ConnectedPlayer newp = new ConnectedPlayer();
@@ -702,6 +731,134 @@ public class ControllerTest extends TestCase {
 		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
 		assertNull(ci);*/
 	}
+	
+//	@Test
+//	public void testUserResearchInsert() {
+//		String userId = "abcd";
+//		Research research = ResearchRetrieveUtils.getResearchForId(10000);
+//		Date date = new Date();
+//		Timestamp timestamp = new Timestamp(date.getTime());
+//		String userResearchId = null; 
+//		userResearchId = insertUtil.insertUserResearch(userId, research, timestamp, false);
+//		
+//		assertNotNull(userResearchId);
+//
+//		
+//	}
+	
+//	@Test
+//	public void testUpdateUserResearchIsComplete() {
+//		//User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+//		updateUtil.updateUserResearchCompleteStatus("326acfa8-0b37-478d-84d6-5f99d481fdef");
+//		assertTrue(true);
+//	}
+	
+
+	@Test
+	public void testResearch() {
+		
+		//create test user
+//		Map<String, Object> userInsertParams = new HashMap<String, Object>();
+//		userInsertParams.put("id", "abcd");
+//		userInsertParams.put("name", "tester");
+//		userInsertParams.put("level", 1);
+//		userInsertParams.put("gems", 100);
+//		userInsertParams.put("cash", 100);
+//		userInsertParams.put("oil", 100);
+//		userInsertParams.put("experience", 1);
+//		userInsertParams.put("udid_for_history", "abcd");
+//		userInsertParams.put("last_login", "2014-12-02 03:59:27");
+//		userInsertParams.put("is_fake", 0);
+//		userInsertParams.put("is_admin", 0);
+//		userInsertParams.put("num_coins_retrieved_from_structs", 0);
+//		userInsertParams.put("num_oil_retrieved_from_structs", 0);
+//		userInsertParams.put("last_obstacle_spawned_time", "2014-12-02 03:59:27");
+//		
+//		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_USER, userInsertParams);
+		
+		//create test spell
+		Map<String, Object> researchInsertParams = new HashMap<String, Object>();
+		researchInsertParams.put("id", 10000);
+		researchInsertParams.put("name", "spell1");
+		researchInsertParams.put("cost_amt", 25);
+		researchInsertParams.put("cost_type", "GEMS");
+		
+		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
+		
+		
+		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		int userGems = user.getGems();
+		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
+		
+		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		prrpb.setResearchId(10000);
+		Date date = new Date();
+		prrpb.setClientTime(date.getTime());
+		prrpb.setGemsSpent(25);
+		
+		
+		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
+		prre.setTag(1);
+		prre.setPerformResearchRequestProto(prrpb.build());
+		performResearchController.handleEvent(prre);
+		
+		List<Integer> researchIdList = new ArrayList<Integer>();
+		researchIdList.add(10000);
+		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+		//assertNotNull(rfuList);
+		String userResearchUuid = null;
+		for(ResearchForUser rfu : rfuList) {
+			assertEquals(rfu.getUserId(), user.getId());
+			assertEquals(rfu.getResearchId(), 10000);
+			userResearchUuid = rfu.getId();
+		}
+		assertTrue(!rfuList.isEmpty());
+		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+
+		assertEquals(userGems-25, user2.getGems());
+		
+		
+		
+		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
+		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		fprrpb.setUserResearchUuid(userResearchUuid);
+		
+		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
+		fprre.setTag(1);
+		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
+		finishPerformingResearchController.handleEvent(fprre);
+		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+		boolean isComplete2 = false;
+		for(ResearchForUser rfu2 : rfuList2) {
+			isComplete2 = rfu2.isComplete();
+		}
+		assertTrue(isComplete2);
+		
+		
+		//create test spell
+		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
+		researchInsertParams.put("id", 10001);
+		researchInsertParams.put("name", "spell2");
+		researchInsertParams.put("cost_amt", 100);
+		researchInsertParams.put("cost_type", "CASH");
+		
+		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
+
+		
+
+		
+
+
+		
+		
+		
+	}
+		
+		
+//		inviteToClanController.handleEvent(icre);
+//		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+//		assertNotNull(ci);
+		
 	
 	@Test
 	public void testStaticDataContainer() {
