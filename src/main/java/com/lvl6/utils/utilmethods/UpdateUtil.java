@@ -199,5 +199,9 @@ public interface UpdateUtil {
   public abstract int updateTaskForUserCompleted(UserTaskCompleted utc);
 
   public abstract int updateClanMemberTeamDonation( ClanMemberTeamDonation cmtd );
+
+  public abstract boolean updateUserResearch(String userResearchUuid, int researchId);
+  
+  public abstract boolean updateUserResearchCompleteStatus(String userResearchUuid);
   
 }

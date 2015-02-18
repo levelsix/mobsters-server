@@ -1640,4 +1640,37 @@ public class UpdateUtils implements UpdateUtil {
 
 			return numUpdated;			
 		}
+
+		@Override
+		public boolean updateUserResearch(String userResearchUuid, int researchId) {
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.RESEARCH_FOR_USER__ID, userResearchUuid);
+
+			Map <String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__RESEARCH_ID, researchId);
+			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, false);
+
+			int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
+					conditionParams, "and");
+			if (numUpdated == 1) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public boolean updateUserResearchCompleteStatus(String userResearchUuid) {
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.RESEARCH_FOR_USER__ID, userResearchUuid);
+
+			Map <String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, true);
+
+			int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
+					conditionParams, "and");
+			if (numUpdated == 1) {
+				return true;
+			}
+			return false;
+		}
 }

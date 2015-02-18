@@ -32,6 +32,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -244,6 +245,29 @@ public class InsertUtils implements InsertUtil{
   	return numInserted;
   }
 
+  @Override
+  public String insertUserResearch(String userId, Research research,
+		  Timestamp timeOfPurchase, boolean isComplete) {
+	  String tablename = DBConstants.TABLE_RESEARCH_FOR_USER;
+	  String userResearchId = randomUUID();
+
+	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  insertParams.put(DBConstants.RESEARCH_FOR_USER__ID, userResearchId);
+	  insertParams.put(DBConstants.RESEARCH_FOR_USER__USER_ID, userId);
+	  insertParams.put(DBConstants.RESEARCH_FOR_USER__RESEARCH_ID, research.getId());
+	  insertParams.put(DBConstants.RESEARCH_FOR_USER__TIME_PURCHASED, timeOfPurchase);
+	  insertParams.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, isComplete);
+	  
+	  int numChanged = DBConnection.get().insertIntoTableBasic(
+			  tablename, insertParams);
+
+	  if (numChanged != 1) {
+		  userResearchId = null;
+	  }
+
+	  return userResearchId;
+  }
+  
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertIAPHistoryElem(org.json.JSONObject, int, com.lvl6.info.User, double)
    */
@@ -1930,4 +1954,5 @@ public class InsertUtils implements InsertUtil{
 			
 			return id;
 		}
+
 }
