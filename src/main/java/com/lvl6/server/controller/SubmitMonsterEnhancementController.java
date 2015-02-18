@@ -433,16 +433,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				"updated monster enhancing rows. numInserted=%s", num));
 		}
 
-		//for the new monsters, ensure that the monsters are "unequipped"
-		if (null != protoNewMap && !protoNewMap.isEmpty()) {
-			//for the new monsters, set the teamSlotNum to 0
-			int size = protoNewMap.size();
-			List<String> userMonsterIdList = new ArrayList<String>(protoNewMap.keySet());
-			List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
-			num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
-			log.info(String.format(
-				"updated user monster rows. numUpdated=%s", num));
-		}
+//		//for the new monsters, ensure that the monsters are "unequipped"
+//		if (null != protoNewMap && !protoNewMap.isEmpty()) {
+//			//for the new monsters, set the teamSlotNum to 0
+//			int size = protoNewMap.size();
+//			List<String> userMonsterIdList = new ArrayList<String>(protoNewMap.keySet());
+//			List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
+//			num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
+//			log.info(String.format(
+//				"updated user monster rows. numUpdated=%s", num));
+//		}
 
 		return true;
 	}
