@@ -46,7 +46,7 @@ public class MetricsReporter {
 		try {
 			hostname = InetAddress.getLocalHost().getHostName();
 			Object[] args = {influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword};
-			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
+//			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
 		    final Influxdb influxdb = new Influxdb(influxdbAddress, 8086, influxdbName, influxdbUser, influxdbPassword); // http transport
 		    final InfluxdbReporter reporter = InfluxdbReporter
 		            .forRegistry(registry)
@@ -70,7 +70,7 @@ public class MetricsReporter {
 		try {
 			hostname = InetAddress.getLocalHost().getHostName();
 			Object[] args = {influxdbAddress, 8086, influxdbBusinessName, influxdbUser, influxdbPassword};
-			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
+//			log.info("Setting up InfluxDB connection address:{} port:{} dbname: {} user: {} pass: {}", args);
 		    final InfluxDB influxDB = InfluxDBFactory.connect("http://"+influxdbAddress+":"+8086, influxdbUser, influxdbPassword);//new Influxdb(influxdbAddress, 8086, influxdbBusinessName, influxdbUser, influxdbPassword); // http transport
 		    influxdbBusiness = influxDB;
 		}catch(Throwable e) {
