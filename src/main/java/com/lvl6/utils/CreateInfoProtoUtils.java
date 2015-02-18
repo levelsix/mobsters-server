@@ -3028,7 +3028,14 @@ public class CreateInfoProtoUtils {
 		}
 		
 		str = s.getShortDefDesc();
+		if (null != str) {
+			spb.setShortDefDesc(str);
+		}
+		
 		str = s.getShortOffDesc();
+		if (null != str) {
+			spb.setShortOffDesc(str);
+		}
 
 		return spb.build();
 	}
