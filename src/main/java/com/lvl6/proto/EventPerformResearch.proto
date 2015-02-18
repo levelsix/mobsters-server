@@ -1,0 +1,100 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Research.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventPerformResearchProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//server will check money stuff, similar to enhancing
+//client will need to check that the user can build the structure:
+//meets town hall requirement, structure limit, can only build one thing
+
+message PerformResearchRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 researchId = 2;
+	optional string userResearchId = 3;
+	optional int32 gemsSpent = 4;
+	
+	//positive means refund, negative means charge user (will always be negative)
+	optional sint32 resourceChange = 5; 
+	optional ResourceType resourceType = 6 [default = CASH];
+}
+
+message PerformResearchResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional PerformResearchStatus status = 2;
+	optional string userStructUuid = 3;
+	
+	enum PurchaseNormStructureStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_CASH = 3;
+		FAIL_INSUFFICIENT_GEMS = 4;
+		FAIL_INSUFFICIENT_OIL = 5;
+	}
+}
+
+
+//------------------------------------------------------------------------------------------
+					//rename to speed up norm struct 
+message FinishNormStructWaittimeWithDiamondsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string userStructUuid = 2;
+	
+	//user's userstruct's lastRetrieved will start with this date
+	//if the structure is a generator, the uncollected resources will be lost when upgraded
+	optional int64 timeOfSpeedup = 3;			
+	
+	optional int32 gemCostToSpeedup = 4;
+}
+																						//DONE
+message FinishNormStructWaittimeWithDiamondsResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional FinishNormStructWaittimeStatus status = 2;
+     
+     enum FinishNormStructWaittimeStatus {
+     	SUCCESS = 1;
+     	FAIL_NOT_ENOUGH_GEMS = 2;
+     	FAIL_OTHER = 3;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+//this message sent to server after a player's homepage is loaded and client checks which structs 
+//have been built but not reflected in db yet (so when is_complete=0 but the purchase_time 
+//implies that it should be)
+//this message is also sent whenever the player is on the screen and the build completes
+//i would set last_retrieved manually to when it should have completed, and is_complete=1
+											
+																						//DONE
+//NOT VERY EFFICIENT..extra db call. and for every newly built building, new db call. but w/e for now.																						
+message NormStructWaitCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string userStructUuid = 2;
+	
+	//if the structure is a generator, the uncollected resources will be lost when upgraded
+	//server will compute last retrieved times
+	//this is just for history purposes
+	optional int64 curTime = 3;
+	
+}
+
+																						//DONE
+message NormStructWaitCompleteResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional NormStructWaitCompleteStatus status = 2;
+     repeated FullUserStructureProto userStruct = 3;
+     
+     enum NormStructWaitCompleteStatus {
+     	SUCCESS = 1;
+     	FAIL_NOT_DONE_YET = 2;
+     	FAIL_OTHER = 3;
+     }
+}
+
+
