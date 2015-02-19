@@ -8132,6 +8132,24 @@ public final class MonsterStuffProto {
      * <code>optional int32 monsterLvl = 2;</code>
      */
     int getMonsterLvl();
+
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    boolean hasOffensiveSkillId();
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    int getOffensiveSkillId();
+
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    boolean hasDefensiveSkillId();
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    int getDefensiveSkillId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserMonsterProto}
@@ -8193,6 +8211,16 @@ public final class MonsterStuffProto {
             case 16: {
               bitField0_ |= 0x00000002;
               monsterLvl_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              offensiveSkillId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              defensiveSkillId_ = input.readInt32();
               break;
             }
           }
@@ -8265,9 +8293,41 @@ public final class MonsterStuffProto {
       return monsterLvl_;
     }
 
+    public static final int OFFENSIVESKILLID_FIELD_NUMBER = 3;
+    private int offensiveSkillId_;
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    public boolean hasOffensiveSkillId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    public int getOffensiveSkillId() {
+      return offensiveSkillId_;
+    }
+
+    public static final int DEFENSIVESKILLID_FIELD_NUMBER = 4;
+    private int defensiveSkillId_;
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    public boolean hasDefensiveSkillId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    public int getDefensiveSkillId() {
+      return defensiveSkillId_;
+    }
+
     private void initFields() {
       monsterId_ = 0;
       monsterLvl_ = 0;
+      offensiveSkillId_ = 0;
+      defensiveSkillId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8288,6 +8348,12 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, monsterLvl_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, offensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, defensiveSkillId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8304,6 +8370,14 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, monsterLvl_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, offensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, defensiveSkillId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8426,6 +8500,10 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         monsterLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        offensiveSkillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        defensiveSkillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -8462,6 +8540,14 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000002;
         }
         result.monsterLvl_ = monsterLvl_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.offensiveSkillId_ = offensiveSkillId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.defensiveSkillId_ = defensiveSkillId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8483,6 +8569,12 @@ public final class MonsterStuffProto {
         }
         if (other.hasMonsterLvl()) {
           setMonsterLvl(other.getMonsterLvl());
+        }
+        if (other.hasOffensiveSkillId()) {
+          setOffensiveSkillId(other.getOffensiveSkillId());
+        }
+        if (other.hasDefensiveSkillId()) {
+          setDefensiveSkillId(other.getDefensiveSkillId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8571,6 +8663,70 @@ public final class MonsterStuffProto {
       public Builder clearMonsterLvl() {
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterLvl_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int offensiveSkillId_ ;
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public boolean hasOffensiveSkillId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public int getOffensiveSkillId() {
+        return offensiveSkillId_;
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public Builder setOffensiveSkillId(int value) {
+        bitField0_ |= 0x00000004;
+        offensiveSkillId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public Builder clearOffensiveSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        offensiveSkillId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int defensiveSkillId_ ;
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public boolean hasDefensiveSkillId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public int getDefensiveSkillId() {
+        return defensiveSkillId_;
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public Builder setDefensiveSkillId(int value) {
+        bitField0_ |= 0x00000008;
+        defensiveSkillId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public Builder clearDefensiveSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        defensiveSkillId_ = 0;
         onChanged();
         return this;
       }
@@ -19723,58 +19879,60 @@ public final class MonsterStuffProto {
       "\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineStartTime\030" +
       "\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\022\023\n\013isRestrict" +
       "d\030\014 \001(\010\022\030\n\020offensiveSkillId\030\r \001(\005\022\030\n\020def",
-      "ensiveSkillId\030\016 \001(\005\"@\n\027MinimumUserMonste" +
+      "ensiveSkillId\030\016 \001(\005\"t\n\027MinimumUserMonste" +
       "rProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030" +
-      "\002 \001(\005\"\300\001\n\027UserMonsterHealingProto\022\020\n\010use" +
-      "rUuid\030\001 \001(\t\022\027\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020" +
-      "queuedTimeMillis\030\003 \001(\003\022\036\n\026userHospitalSt" +
-      "ructUuid\030\004 \001(\t\022\026\n\016healthProgress\030\005 \001(\002\022\020" +
-      "\n\010priority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002" +
-      "\"O\n\035UserMonsterCurrentHealthProto\022\027\n\017use" +
-      "rMonsterUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(" +
-      "\005\"\242\001\n\024UserEnhancementProto\022\020\n\010userUuid\030\001",
-      " \001(\t\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.pro" +
-      "to.UserEnhancementItemProto\0229\n\007feeders\030\003" +
-      " \003(\0132(.com.lvl6.proto.UserEnhancementIte" +
-      "mProto\"\206\001\n\030UserEnhancementItemProto\022\027\n\017u" +
-      "serMonsterUuid\030\001 \001(\t\022\037\n\027expectedStartTim" +
-      "eMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021" +
-      "enhancingComplete\030\004 \001(\010\"|\n\032UserMonsterCu" +
-      "rrentExpProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032" +
-      "\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpectedLe" +
-      "vel\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033Minimum",
-      "UserMonsterSellProto\022\027\n\017userMonsterUuid\030" +
-      "\001 \001(\t\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCurrent" +
-      "MonsterTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013cu" +
-      "rrentTeam\030\002 \003(\0132$.com.lvl6.proto.FullUse" +
-      "rMonsterProto\"i\n\031UserMonsterEvolutionPro" +
-      "to\022\037\n\027catalystUserMonsterUuid\030\001 \001(\t\022\030\n\020u" +
-      "serMonsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003" +
-      "\"\337\001\n\032MonsterBattleDialogueProto\022\021\n\tmonst" +
-      "erId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.l" +
-      "vl6.proto.MonsterBattleDialogueProto.Dia",
-      "logueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabili" +
-      "tyUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DI" +
-      "ALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001\"\324\003\n\030UserMonst" +
-      "erSnapshotProto\022\024\n\014snapshotUuid\030\001 \001(\t\022\026\n" +
-      "\016timeOfCreation\030\002 \001(\003\022C\n\004type\030\003 \001(\01625.co" +
-      "m.lvl6.proto.UserMonsterSnapshotProto.Sn" +
-      "apshotType\022\031\n\021relevantTableUuid\030\004 \001(\t\022\032\n" +
-      "\022monsterForUserUuid\030\005 \001(\t\022.\n\004user\030\006 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\021\n\tmon" +
-      "sterId\030\007 \001(\005\022\022\n\ncurrentExp\030\010 \001(\005\022\022\n\ncurr",
-      "entLvl\030\t \001(\005\022\021\n\tcurrentHp\030\n \001(\005\022\023\n\013teamS" +
-      "lotNum\030\013 \001(\005\022\030\n\020offensiveSkillId\030\014 \001(\005\022\030" +
-      "\n\020defensiveSkillId\030\r \001(\005\"G\n\014SnapshotType" +
-      "\022\022\n\016NO_DONATE_TYPE\020\001\022\017\n\013TEAM_DONATE\020\002\022\022\n" +
-      "\016ENHANCE_DONATE\020\003\"\220\002\n\033ClanMemberTeamDona" +
-      "tionProto\022\024\n\014donationUuid\030\001 \001(\t\0223\n\tsolic" +
-      "itor\030\002 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021powerAvailabil" +
-      "ity\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001(\010\022\013\n\003msg\030\006 " +
-      "\001(\t\022\032\n\022timeOfSolicitation\030\007 \001(\003\022;\n\tdonat",
-      "ions\030\010 \003(\0132(.com.lvl6.proto.UserMonsterS" +
-      "napshotProtoB\023B\021MonsterStuffProto"
+      "\002 \001(\005\022\030\n\020offensiveSkillId\030\003 \001(\005\022\030\n\020defen" +
+      "siveSkillId\030\004 \001(\005\"\300\001\n\027UserMonsterHealing" +
+      "Proto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017userMonsterUu" +
+      "id\030\002 \001(\t\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\036\n\026us" +
+      "erHospitalStructUuid\030\004 \001(\t\022\026\n\016healthProg" +
+      "ress\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\022\026\n\016elapsedS" +
+      "econds\030\007 \001(\002\"O\n\035UserMonsterCurrentHealth" +
+      "Proto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\025\n\rcurren",
+      "tHealth\030\002 \001(\005\"\242\001\n\024UserEnhancementProto\022\020" +
+      "\n\010userUuid\030\001 \001(\t\022=\n\013baseMonster\030\002 \001(\0132(." +
+      "com.lvl6.proto.UserEnhancementItemProto\022" +
+      "9\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserEn" +
+      "hancementItemProto\"\206\001\n\030UserEnhancementIt" +
+      "emProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\037\n\027expe" +
+      "ctedStartTimeMillis\030\002 \001(\003\022\025\n\renhancingCo" +
+      "st\030\003 \001(\005\022\031\n\021enhancingComplete\030\004 \001(\010\"|\n\032U" +
+      "serMonsterCurrentExpProto\022\027\n\017userMonster" +
+      "Uuid\030\001 \001(\t\022\032\n\022expectedExperience\030\002 \001(\005\022\025",
+      "\n\rexpectedLevel\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(" +
+      "\005\"J\n\033MinimumUserMonsterSellProto\022\027\n\017user" +
+      "MonsterUuid\030\001 \001(\t\022\022\n\ncashAmount\030\002 \001(\005\"j\n" +
+      "\033UserCurrentMonsterTeamProto\022\020\n\010userUuid" +
+      "\030\001 \001(\t\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.p" +
+      "roto.FullUserMonsterProto\"i\n\031UserMonster" +
+      "EvolutionProto\022\037\n\027catalystUserMonsterUui" +
+      "d\030\001 \001(\t\022\030\n\020userMonsterUuids\030\002 \003(\t\022\021\n\tsta" +
+      "rtTime\030\003 \001(\003\"\337\001\n\032MonsterBattleDialoguePr" +
+      "oto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003",
+      " \001(\01627.com.lvl6.proto.MonsterBattleDialo" +
+      "gueProto.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022" +
+      "\032\n\022probabilityUttered\030\004 \001(\002\"1\n\014DialogueT" +
+      "ype\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001\"\324" +
+      "\003\n\030UserMonsterSnapshotProto\022\024\n\014snapshotU" +
+      "uid\030\001 \001(\t\022\026\n\016timeOfCreation\030\002 \001(\003\022C\n\004typ" +
+      "e\030\003 \001(\01625.com.lvl6.proto.UserMonsterSnap" +
+      "shotProto.SnapshotType\022\031\n\021relevantTableU" +
+      "uid\030\004 \001(\t\022\032\n\022monsterForUserUuid\030\005 \001(\t\022.\n" +
+      "\004user\030\006 \001(\0132 .com.lvl6.proto.MinimumUser",
+      "Proto\022\021\n\tmonsterId\030\007 \001(\005\022\022\n\ncurrentExp\030\010" +
+      " \001(\005\022\022\n\ncurrentLvl\030\t \001(\005\022\021\n\tcurrentHp\030\n " +
+      "\001(\005\022\023\n\013teamSlotNum\030\013 \001(\005\022\030\n\020offensiveSki" +
+      "llId\030\014 \001(\005\022\030\n\020defensiveSkillId\030\r \001(\005\"G\n\014" +
+      "SnapshotType\022\022\n\016NO_DONATE_TYPE\020\001\022\017\n\013TEAM" +
+      "_DONATE\020\002\022\022\n\016ENHANCE_DONATE\020\003\"\220\002\n\033ClanMe" +
+      "mberTeamDonationProto\022\024\n\014donationUuid\030\001 " +
+      "\001(\t\0223\n\tsolicitor\030\002 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021po" +
+      "werAvailability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001",
+      "(\010\022\013\n\003msg\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 " +
+      "\001(\003\022;\n\tdonations\030\010 \003(\0132(.com.lvl6.proto." +
+      "UserMonsterSnapshotProtoB\023B\021MonsterStuff" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -19813,7 +19971,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor,
-        new java.lang.String[] { "MonsterId", "MonsterLvl", });
+        new java.lang.String[] { "MonsterId", "MonsterLvl", "OffensiveSkillId", "DefensiveSkillId", });
     internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new

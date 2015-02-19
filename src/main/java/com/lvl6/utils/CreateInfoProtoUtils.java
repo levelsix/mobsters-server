@@ -101,7 +101,6 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
@@ -2328,10 +2327,8 @@ public class CreateInfoProtoUtils {
 		fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
 		fumpb.setIsRestrictd(mfu.isRestricted());
 
-		//TODO: For production, only have else case
 		int curOffensiveSkillId = mfu.getOffensiveSkillId();
 		int curDefensiveSkillId = mfu.getDefensiveSkillId();
-
 		if (curOffensiveSkillId > 0) {
 			fumpb.setOffensiveSkillId(curOffensiveSkillId);
 		}
@@ -2339,21 +2336,18 @@ public class CreateInfoProtoUtils {
 			fumpb.setDefensiveSkillId(curDefensiveSkillId);
 		}
 
-		if (Globals.IS_SANDBOX()) {
-			//for development, set userMonster skill (if absent) to monster skill
-
-			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
-			int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
-			if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
-				fumpb.setOffensiveSkillId(defaultOffensiveSkillId);
-			}
-
-			int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
-			if (curDefensiveSkillId <= 0 && defaultDefSkillId > 0) {
-				fumpb.setDefensiveSkillId(defaultDefSkillId);	
-			}
-
+		//set userMonster skill (if absent) to monster skill
+		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
+		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
+		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
+			fumpb.setOffensiveSkillId(defaultOffensiveSkillId);
 		}
+
+		int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
+		if (curDefensiveSkillId <= 0 && defaultDefSkillId > 0) {
+			fumpb.setDefensiveSkillId(defaultDefSkillId);	
+		}
+
 		return fumpb.build();
 	}
 
@@ -2374,11 +2368,33 @@ public class CreateInfoProtoUtils {
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
 		MonsterForUser mfu)
 	{
-		MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
 
-		mump.setMonsterId(mfu.getMonsterId());
-		mump.setMonsterLvl(mfu.getCurrentLvl());
-		return mump.build();
+		mumpb.setMonsterId(mfu.getMonsterId());
+		mumpb.setMonsterLvl(mfu.getCurrentLvl());
+		
+		int curOffensiveSkillId = mfu.getOffensiveSkillId();
+		int curDefensiveSkillId = mfu.getDefensiveSkillId();
+		if (curOffensiveSkillId > 0) {
+			mumpb.setOffensiveSkillId(curOffensiveSkillId);
+		}
+		if (curDefensiveSkillId > 0) {
+			mumpb.setDefensiveSkillId(curDefensiveSkillId);
+		}
+
+		//set userMonster skill (if absent) to monster skill
+		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
+		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
+		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
+			mumpb.setOffensiveSkillId(defaultOffensiveSkillId);
+		}
+
+		int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
+		if (curDefensiveSkillId <= 0 && defaultDefSkillId > 0) {
+			mumpb.setDefensiveSkillId(defaultDefSkillId);	
+		}
+		
+		return mumpb.build();
 	}
 
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
@@ -2393,17 +2409,53 @@ public class CreateInfoProtoUtils {
 		mumpb.setMonsterId(id);
 		mumpb.setMonsterLvl(lvl);
 
+		//set userMonster skill (if absent) to monster skill
+		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(id);
+		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
+		if (defaultOffensiveSkillId > 0) {
+			mumpb.setOffensiveSkillId(defaultOffensiveSkillId);
+		}
+
+		int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
+		if (defaultDefSkillId > 0) {
+			mumpb.setDefensiveSkillId(defaultDefSkillId);	
+		}
+		
 		return mumpb.build();
 	}
 	
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
 		MonsterSnapshotForUser msfu)
 	{
-		MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
 
-		mump.setMonsterId(msfu.getMonsterId());
-		mump.setMonsterLvl(msfu.getCurrentLvl());
-		return mump.build();
+		mumpb.setMonsterId(msfu.getMonsterId());
+		mumpb.setMonsterLvl(msfu.getCurrentLvl());
+		
+		
+		//set userMonster skill (if absent) to monster skill
+		int curOffensiveSkillId = msfu.getOffSkillId();
+		int curDefensiveSkillId = msfu.getDefSkillId();
+		if (curOffensiveSkillId > 0) {
+			mumpb.setOffensiveSkillId(curOffensiveSkillId);
+		}
+		if (curDefensiveSkillId > 0) {
+			mumpb.setDefensiveSkillId(curDefensiveSkillId);
+		}
+
+		//set userMonster skill (if absent) to monster skill
+		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(msfu.getMonsterId());
+		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
+		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
+			mumpb.setOffensiveSkillId(defaultOffensiveSkillId);
+		}
+
+		int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
+		if (curDefensiveSkillId <= 0 && defaultDefSkillId > 0) {
+			mumpb.setDefensiveSkillId(defaultDefSkillId);	
+		}
+		
+		return mumpb.build();
 	}
 
 	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(

@@ -121,6 +121,9 @@ message FullUserMonsterProto {
 message MinimumUserMonsterProto {
 	optional int32 monsterId = 1;
 	optional int32 monsterLvl = 2;
+	
+	optional int32 offensiveSkillId = 3;
+	optional int32 defensiveSkillId = 4;
 }
 
 //------------------------------------------------------------------------------------------
