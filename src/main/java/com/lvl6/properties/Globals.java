@@ -179,7 +179,7 @@ public class Globals {
 
     public static final boolean IS_SANDBOX(){return AppContext.getApplicationContext().getBean(Globals.class).getSandbox();};
 
-    public static final boolean ALLOW_CHEATS(){return AppContext.getApplicationContext().getBean(Globals.class).getAllowCheats();};
+    public static final boolean ALLOW_CHEATS(){return AppContext.getApplicationContext().getBean(Globals.class).isAllowCheats();};
     
     public static final boolean KABAM_ENABLED() {return AppContext.getApplicationContext().getBean(Globals.class).isKabamEnabled();};
     
