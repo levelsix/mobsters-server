@@ -89,6 +89,7 @@
 
 		<globals.addAllFbFriends>true</globals.addAllFbFriends>
 		<globals.isSandbox>true</globals.isSandbox>
+		<globals.allowCheats>true</globals.allowCheats>
 		<globals.iddictionOn>false</globals.iddictionOn>
 		<globals.kabamEnabled>true</globals.kabamEnabled>
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>

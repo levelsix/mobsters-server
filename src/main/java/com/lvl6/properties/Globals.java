@@ -14,7 +14,8 @@ public class Globals {
 	protected boolean offerChartEnabled = false;
 
 	protected boolean addAllFbFriends = false;
-	protected boolean sandbox = true;
+    protected boolean sandbox = true;
+    protected boolean allowCheats = false;
 	protected boolean iddictionOn = true;
 	
 	protected int healthCheckTimeoutSeconds = 6;
@@ -110,7 +111,15 @@ public class Globals {
 		this.sandbox = isSandbox;
 	}
 
-	public boolean isAddAllFbFriends() {
+	public boolean isAllowCheats() {
+        return allowCheats;
+    }
+
+    public void setAllowCheats(boolean allowCheats) {
+        this.allowCheats = allowCheats;
+    }
+
+    public boolean isAddAllFbFriends() {
 		return addAllFbFriends;
 	}
 
@@ -169,6 +178,8 @@ public class Globals {
     public static final int DEFAULT_CONTROLLER_WORKERS = 2;
 
     public static final boolean IS_SANDBOX(){return AppContext.getApplicationContext().getBean(Globals.class).getSandbox();};
+
+    public static final boolean ALLOW_CHEATS(){return AppContext.getApplicationContext().getBean(Globals.class).getAllowCheats();};
     
     public static final boolean KABAM_ENABLED() {return AppContext.getApplicationContext().getBean(Globals.class).isKabamEnabled();};
     
