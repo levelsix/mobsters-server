@@ -192,7 +192,7 @@ public class ControllerConstants {
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
 	
 	//SKILL
-	public static final int SKILL_FIRST_TASK_ID = 18;
+	public static final int SKILL_FIRST_TASK_ID = 12;
 	 
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = {
