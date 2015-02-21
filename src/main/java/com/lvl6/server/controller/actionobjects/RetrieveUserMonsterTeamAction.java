@@ -336,15 +336,16 @@ public class RetrieveUserMonsterTeamAction
 		//get all the monsters the user has on a team (at the moment, max is 3)
 		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
 
-		if (defenderMonsters.size() < 3) {
+//		if (defenderMonsters.size() < 3) {
+		if (defenderMonsters.isEmpty()) {
 			//need more monsters so select them randomly, fill up "defenderMonsters" list
-			getRandomMonsters(mfuIdsToMonsters, defenderMonsters);
+			defenderMonsters = getRandomMonsters(mfuIdsToMonsters);
 		}
 
-		if (defenderMonsters.size() > 3) {
-			//only get three monsters
-			defenderMonsters = defenderMonsters.subList(0, 3);
-		}
+//		if (defenderMonsters.size() > 3) {
+//			//only get three monsters
+//			defenderMonsters = defenderMonsters.subList(0, 3);
+//		}
 
 		return defenderMonsters;
 	}
@@ -364,53 +365,57 @@ public class RetrieveUserMonsterTeamAction
 		return equipped;
 	}
 
-	private void getRandomMonsters(Map<String, MonsterForUser> possibleMonsters,
-		List<MonsterForUser> defenderMonsters) {
+	private List<MonsterForUser> getRandomMonsters(
+			Map<String, MonsterForUser> possibleMonsters )
+	{
+		List<MonsterForUser> retVal = new ArrayList<MonsterForUser>();
 
 		Map<String, MonsterForUser> possibleMonstersTemp =
 			new HashMap<String, MonsterForUser>(possibleMonsters);
+//		//remove the defender monsters from possibleMonstersTemp, since defenderMonsters
+//		//were already selected from possibleMonsters
+//		for (MonsterForUser m : defenderMonsters) {
+//			String mfuId = m.getId();
+//
+//			possibleMonstersTemp.remove(mfuId);
+//		}
 
-		//remove the defender monsters from possibleMonstersTemp, since defenderMonsters
-		//were already selected from possibleMonsters
-		for (MonsterForUser m : defenderMonsters) {
-			String mfuId = m.getId();
-
-			possibleMonstersTemp.remove(mfuId);
-		}
+		int amountNeeded = 1;//3 - defenderMonsters.size();
 
 		int amountLeftOver = possibleMonstersTemp.size();
-		int amountNeeded = 3 - defenderMonsters.size();
-
-		if (amountLeftOver < amountNeeded) {
-			defenderMonsters.addAll(possibleMonstersTemp.values());
-			return;
+		if (amountLeftOver <= amountNeeded) {
+			retVal.addAll(possibleMonstersTemp.values());
+			return retVal;
 		}
 
-		//randomly select enough monsters to total 3
+		//randomly select one monster
 		List<MonsterForUser> mfuList = new ArrayList<MonsterForUser>(possibleMonstersTemp.values());
 		Random rand = ControllerConstants.RAND;
 
 		//for each monster gen rand float, and if it "drops" select it
 		for (int i = 0; i < mfuList.size(); i++) {
 
-			//eg. need 2, have 3. If first one is not picked, then need 2, have 2.
+			//IGNORE //eg. need 2, have 3. If first one is not picked, then need 2, have 2.
 			float probToBeChosen = amountNeeded / (amountLeftOver - i);
 			float randFloat = rand.nextFloat();
 
 			if (randFloat < probToBeChosen) {
 				//we have a winner! select this monster
 				MonsterForUser mfu = mfuList.get(i);
-				defenderMonsters.add(mfu);
+				retVal.add(mfu);
+				break;
 
 				//need to decrement amount needed
-				amountNeeded--;
+				//amountNeeded--;
 			}
 
 			//stop at three monsters, don't want to get more
-			if (defenderMonsters.size() >= 3) {
-				break;
-			}
+//			if (defenderMonsters.size() >= 3) {
+//				break;
+//			}
 		}
+		
+		return retVal;
 	}
 	
 	public User getRetriever() {
