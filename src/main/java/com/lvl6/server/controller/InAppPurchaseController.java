@@ -42,157 +42,157 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @DependsOn("gameServer")
 public class InAppPurchaseController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() {
-  }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
-  private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
+	private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
+	private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
 
-  @Autowired
-  protected Locker locker;
+	@Autowired
+	protected Locker locker;
 
-  @Autowired
-  protected InsertUtil insertUtil;
-  
-  @Autowired
-  protected UpdateUtil updateUtil;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtil;
-  
-  @Autowired
-  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
+	@Autowired
+	protected InsertUtil insertUtil;
 
-  @Autowired
-  protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-  
-  public InAppPurchaseController() {
-    numAllocatedThreads = 2;
-  }
+	@Autowired
+	protected UpdateUtil updateUtil;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new InAppPurchaseRequestEvent();
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_IN_APP_PURCHASE_EVENT;
-  }
+	@Autowired
+	protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 
-  /*
-   * db stuff done before sending event to eventwriter/client because the
-   * client's not waiting on it immediately anyways
-   */
-  // @SuppressWarnings("deprecation")
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
-        .getInAppPurchaseRequestProto();
+	@Autowired
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    String receipt = reqProto.getReceipt();
+	public InAppPurchaseController() {
+		numAllocatedThreads = 2;
+	}
 
-    InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
-    resBuilder.setReceipt(reqProto.getReceipt());
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new InAppPurchaseRequestEvent();
+	}
 
-    UUID userUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_IN_APP_PURCHASE_EVENT;
+	}
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s",
-          userId), e);
-      invalidUuids = true;
-    }
+	/*
+	 * db stuff done before sending event to eventwriter/client because the
+	 * client's not waiting on it immediately anyways
+	 */
+	// @SuppressWarnings("deprecation")
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
+				.getInAppPurchaseRequestProto();
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-      InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		String receipt = reqProto.getReceipt();
 
-    // Lock this player's ID
-    locker.lockPlayer(userUuid, this.getClass().getSimpleName());
-    try {
-      User user = userRetrieveUtil.getUserById(userId);
-      
-      JSONObject response;
-      JSONObject jsonReceipt = new JSONObject();
-      jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
-      log.info("Processing purchase: {}", jsonReceipt.toString(4));
-      // Send data
-      URL url = new URL(PRODUCTION_URL);
+		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto.newBuilder();
+		resBuilder.setSender(senderProto);
+		resBuilder.setReceipt(reqProto.getReceipt());
 
-      log.info("Sending purchase request to: {}", url.toString());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
 
-      URLConnection conn = url.openConnection();
-      conn.setDoOutput(true);
-      OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-      wr.write(jsonReceipt.toString());
-      wr.flush();
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s",
+					userId), e);
+			invalidUuids = true;
+		}
 
-      // Get the response
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-      String responseString = "";
-      String line;
-      while ((line = rd.readLine()) != null) {
-        responseString += line;
-      }
-      log.info("Response: {}", responseString);
+		// Lock this player's ID
+		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+			User user = userRetrieveUtil.getUserById(userId);
 
-      response = new JSONObject(responseString);
+			JSONObject response;
+			JSONObject jsonReceipt = new JSONObject();
+			jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
+			log.info("Processing purchase: {}", jsonReceipt.toString(4));
+			// Send data
+			URL url = new URL(PRODUCTION_URL);
 
-      if (response.getInt(IAPValues.STATUS) == 21007 || response.getInt(IAPValues.STATUS) == 21008) {
-        wr.close();
-        rd.close();
-        url = new URL(SANDBOX_URL);
-        conn = url.openConnection();
-        conn.setDoOutput(true);
-        wr = new OutputStreamWriter(conn.getOutputStream());
-        wr.write(jsonReceipt.toString());
-        wr.flush();
-        rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        responseString = "";
-        while ((line = rd.readLine()) != null) {
-          responseString += line;
-        }
-        response = new JSONObject(responseString);
-      }
+			log.info("Sending purchase request to: {}", url.toString());
 
-      JSONObject receiptFromApple = null;
-      if (response.getInt(IAPValues.STATUS) == 0) {
-    	  receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-    	  writeChangesToDb(userId, resBuilder, user, receiptFromApple);
-      } else {
-        log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
-      }
+			URLConnection conn = url.openConnection();
+			conn.setDoOutput(true);
+			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			wr.write(jsonReceipt.toString());
+			wr.flush();
 
-      wr.close();
-      rd.close();
+			// Get the response
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-      if (!resBuilder.hasStatus()) {
-        resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-      }
+			String responseString = "";
+			String line;
+			while ((line = rd.readLine()) != null) {
+				responseString += line;
+			}
+			log.info("Response: {}", responseString);
 
-      InAppPurchaseResponseProto resProto = resBuilder.build();
+			response = new JSONObject(responseString);
 
-      InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserUuid());
-      resEvent.setTag(event.getTag());
-      resEvent.setInAppPurchaseResponseProto(resProto);
-      server.writeEvent(resEvent);
+			if (response.getInt(IAPValues.STATUS) == 21007 || response.getInt(IAPValues.STATUS) == 21008) {
+				wr.close();
+				rd.close();
+				url = new URL(SANDBOX_URL);
+				conn = url.openConnection();
+				conn.setDoOutput(true);
+				wr = new OutputStreamWriter(conn.getOutputStream());
+				wr.write(jsonReceipt.toString());
+				wr.flush();
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				responseString = "";
+				while ((line = rd.readLine()) != null) {
+					responseString += line;
+				}
+				response = new JSONObject(responseString);
+			}
 
-      /*if (Globals.KABAM_ENABLED()) {
+			JSONObject receiptFromApple = null;
+			if (response.getInt(IAPValues.STATUS) == 0) {
+				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
+				writeChangesToDb(userId, resBuilder, user, receiptFromApple);
+			} else {
+				log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
+			}
+
+			wr.close();
+			rd.close();
+
+			if (!resBuilder.hasStatus()) {
+				resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+			}
+
+			InAppPurchaseResponseProto resProto = resBuilder.build();
+
+			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setInAppPurchaseResponseProto(resProto);
+			server.writeEvent(resEvent);
+
+			/*if (Globals.KABAM_ENABLED()) {
         if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
           JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
           List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
@@ -200,67 +200,67 @@ public class InAppPurchaseController extends EventController {
         }
       }*/
 
-      //null PvpLeagueFromUser means will pull from hazelcast instead
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+			//null PvpLeagueFromUser means will pull from hazelcast instead
+			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+			resEventUpdate.setTag(event.getTag());
+			server.writeEvent(resEventUpdate);
 
-      //      //in case user has a mentor, check if user completed mentor's quest
-      //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
-      //        MenteeQuestType type = MenteeQuestType.BOUGHT_A_PACKAGE;
-      //        MiscMethods.sendMenteeFinishedQuests(senderProto, type, server);
-      //      }
-    } catch (Exception e) {
-      log.error("exception in InAppPurchaseController processEvent", e);
-      //don't let the client hang
-      try {
-        resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-        InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
-        resEvent.setTag(event.getTag());
-        resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-        server.writeEvent(resEvent);
-      } catch (Exception e2) {
-        log.error("exception2 in InAppPurchaseController processEvent", e);
-      }
-    } finally {
-      // Unlock this player
-      locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
-    }
-  }
+			//      //in case user has a mentor, check if user completed mentor's quest
+			//      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
+			//        MenteeQuestType type = MenteeQuestType.BOUGHT_A_PACKAGE;
+			//        MiscMethods.sendMenteeFinishedQuests(senderProto, type, server);
+			//      }
+		} catch (Exception e) {
+			log.error("exception in InAppPurchaseController processEvent", e);
+			//don't let the client hang
+			try {
+				resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+				InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in InAppPurchaseController processEvent", e);
+			}
+		} finally {
+			// Unlock this player
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
 
-  private void writeChangesToDb(
-	  String userId,
-	  InAppPurchaseResponseProto.Builder resBuilder,
-	  User user,
-	  JSONObject receiptFromApple )
-  {
-	  try {
-		  String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
-		  double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
+	private void writeChangesToDb(
+			String userId,
+			InAppPurchaseResponseProto.Builder resBuilder,
+			User user,
+			JSONObject receiptFromApple )
+	{
+		try {
+			String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 
-		  Date now = new Date();
-		  InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
-			  receiptFromApple, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
+			Date now = new Date();
+			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
+					receiptFromApple, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
 
-		  iapa.execute(resBuilder);
-		  
-		  if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS))
-		  {
-			  resBuilder.setPackageName(packageName);
-			  resBuilder.setPackagePrice(realLifeCashCost);
-			  log.info("successful in-app purchase from user {} for package {}",
-				  userId, packageName);
+			iapa.execute(resBuilder);
 
-			  Timestamp date = new Timestamp(now.getTime());
-			  writeToUserCurrencyHistory(userId, date, iapa);
-		  }
-	  } catch (Exception e) {
-		  log.error("problem with in app purchase flow", e);
-	  }
-  }
+			if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS))
+			{
+				resBuilder.setPackageName(packageName);
+				resBuilder.setPackagePrice(realLifeCashCost);
+				log.info("successful in-app purchase from user {} for package {}",
+						userId, packageName);
 
-  /*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
+				Timestamp date = new Timestamp(now.getTime());
+				writeToUserCurrencyHistory(userId, date, iapa);
+			}
+		} catch (Exception e) {
+			log.error("problem with in app purchase flow", e);
+		}
+	}
+
+	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
     log.info("Posting to Kabam");
     String host = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_PAYMENT_URL : KabamProperties.PRODUCTION_PAYMENT_URL;
     HttpClient client = new DefaultHttpClient();
@@ -329,84 +329,84 @@ public class InAppPurchaseController extends EventController {
     return logJson;
   }*/
 
-  private static String sha1(String input) throws NoSuchAlgorithmException {
-    MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-    byte[] result = mDigest.digest(input.getBytes());
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < result.length; i++) {
-      sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-    }
+	private static String sha1(String input) throws NoSuchAlgorithmException {
+		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+		byte[] result = mDigest.digest(input.getBytes());
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < result.length; i++) {
+			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+		}
 
-    return sb.toString();
-  }
+		return sb.toString();
+	}
 
-  private void writeToUserCurrencyHistory(String userId, Timestamp date,
-	  InAppPurchaseAction iapa)
-  {
-	  
-	  MiscMethods.writeToUserCurrencyOneUser(userId, date,
-		  iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
-		  iapa.getCurrentCurrencies(), iapa.getReasons(),
-		  iapa.getDetails());
-  }
+	private void writeToUserCurrencyHistory(String userId, Timestamp date,
+			InAppPurchaseAction iapa)
+	{
 
-  public Locker getLocker() {
-	  return locker;
-  }
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
+				iapa.getCurrentCurrencies(), iapa.getReasons(),
+				iapa.getDetails());
+	}
 
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+	public Locker getLocker() {
+		return locker;
+	}
 
-  public InsertUtil getInsertUtil()
-  {
-	  return insertUtil;
-  }
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
-  public void setInsertUtil( InsertUtil insertUtil )
-  {
-	  this.insertUtil = insertUtil;
-  }
+	public InsertUtil getInsertUtil()
+	{
+		return insertUtil;
+	}
 
-  public UpdateUtil getUpdateUtil()
-  {
-	  return updateUtil;
-  }
+	public void setInsertUtil( InsertUtil insertUtil )
+	{
+		this.insertUtil = insertUtil;
+	}
 
-  public void setUpdateUtil( UpdateUtil updateUtil )
-  {
-	  this.updateUtil = updateUtil;
-  }
+	public UpdateUtil getUpdateUtil()
+	{
+		return updateUtil;
+	}
 
-  public UserRetrieveUtils2 getUserRetrieveUtil()
-  {
-	  return userRetrieveUtil;
-  }
+	public void setUpdateUtil( UpdateUtil updateUtil )
+	{
+		this.updateUtil = updateUtil;
+	}
 
-  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-  {
-	  this.userRetrieveUtil = userRetrieveUtil;
-  }
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
 
-  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil()
-  {
-	  return iapHistoryRetrieveUtil;
-  }
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
 
-  public void setIapHistoryRetrieveUtil( IAPHistoryRetrieveUtils iapHistoryRetrieveUtil )
-  {
-	  this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
-  }
+	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil()
+	{
+		return iapHistoryRetrieveUtil;
+	}
 
-  public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-  {
-	  return itemForUserRetrieveUtil;
-  }
+	public void setIapHistoryRetrieveUtil( IAPHistoryRetrieveUtils iapHistoryRetrieveUtil )
+	{
+		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+	}
 
-  public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-  {
-	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-  }
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	{
+		return itemForUserRetrieveUtil;
+	}
 
-  
+	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	{
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+
 }

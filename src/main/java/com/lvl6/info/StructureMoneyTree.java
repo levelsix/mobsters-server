@@ -1,0 +1,73 @@
+package com.lvl6.info;
+
+import java.io.Serializable;
+
+public class StructureMoneyTree implements Serializable {
+
+	private static final long serialVersionUID = -2371172975086740032L;
+	
+	private int structId;	
+	private float productionRate;
+	private int capacity;
+	private int daysOfDuration;
+	private int daysForRenewal;
+	
+	
+	public StructureMoneyTree() {
+		super();
+	}
+	
+	public StructureMoneyTree(int structId, float productionRate, int capacity,
+			int daysOfDuration, int daysForRenewal) {
+		super();
+		this.structId = structId;
+		this.productionRate = productionRate;
+		this.capacity = capacity;
+		this.daysOfDuration = daysOfDuration;
+		this.daysForRenewal = daysForRenewal;
+	}
+	
+	
+	public int getStructId() {
+		return structId;
+	}
+	public void setStructId(int structId) {
+		this.structId = structId;
+	}
+	public float getProductionRate() {
+		return productionRate;
+	}
+	public void setProductionRate(float productionRate) {
+		this.productionRate = productionRate;
+	}
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public int getDaysOfDuration() {
+		return daysOfDuration;
+	}
+	public void setDaysOfDuration(int daysOfDuration) {
+		this.daysOfDuration = daysOfDuration;
+	}
+	public int getDaysForRenewal() {
+		return daysForRenewal;
+	}
+	public void setDaysForRenewal(int daysForRenewal) {
+		this.daysForRenewal = daysForRenewal;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "StructureMoneyTree [structId=" + structId + ", productionRate="
+				+ productionRate + ", capacity=" + capacity
+				+ ", daysOfDuration=" + daysOfDuration + ", daysForRenewal="
+				+ daysForRenewal + "]";
+	}
+	
+
+	
+}

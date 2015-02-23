@@ -22,6 +22,7 @@ import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformRes
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
@@ -42,6 +43,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected ResearchForUserRetrieveUtils researchForUserRetrieveUtils;
 	
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
@@ -130,7 +134,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			User user = userRetrieveUtils.getUserById(userId);
 			Research research = ResearchRetrieveUtils.getResearchForId(researchId);
 			PerformResearchAction pra = new PerformResearchAction(userId, user, research, userResearchUuid, 
-					gemsSpent, resourceChange, resourceType, nowTimestamp, insertUtil, updateUtil);
+					gemsSpent, resourceChange, resourceType, nowTimestamp, insertUtil, updateUtil, 
+					researchForUserRetrieveUtils);
 
 			pra.execute(resBuilder);
 

@@ -34,6 +34,7 @@ import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -778,10 +779,10 @@ public class ControllerTest extends TestCase {
 		
 		//create test spell
 		Map<String, Object> researchInsertParams = new HashMap<String, Object>();
-		researchInsertParams.put("id", 10000);
-		researchInsertParams.put("name", "spell1");
-		researchInsertParams.put("cost_amt", 25);
-		researchInsertParams.put("cost_type", "GEMS");
+		researchInsertParams.put("id", 10002);
+		researchInsertParams.put("name", "spell3");
+		researchInsertParams.put("cost_amt", 100);
+		researchInsertParams.put("cost_type", "OIL");
 		
 		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
 		
@@ -791,10 +792,13 @@ public class ControllerTest extends TestCase {
 		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
 		
 		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-		prrpb.setResearchId(10000);
+		prrpb.setResearchId(10002);
 		Date date = new Date();
 		prrpb.setClientTime(date.getTime());
 		prrpb.setGemsSpent(25);
+		prrpb.setResourceChange(100);
+		ResourceType rt = ResourceType.OIL;
+		prrpb.setResourceType(rt);
 		
 		
 		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
@@ -802,26 +806,135 @@ public class ControllerTest extends TestCase {
 		prre.setPerformResearchRequestProto(prrpb.build());
 		performResearchController.handleEvent(prre);
 		
-		List<Integer> researchIdList = new ArrayList<Integer>();
-		researchIdList.add(10000);
+		int userGems3 = user.getGems();
+		int userOil = user.getOil();
 		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
 		//assertNotNull(rfuList);
 		String userResearchUuid = null;
 		for(ResearchForUser rfu : rfuList) {
-			assertEquals(rfu.getUserId(), user.getId());
-			assertEquals(rfu.getResearchId(), 10000);
-			userResearchUuid = rfu.getId();
+			if(rfu.getResearchId() == 10002) {
+				assertEquals(rfu.getUserId(), user.getId());
+				User rfuUser = userRetrieveUtil.getUserById(rfu.getUserId());
+				assertEquals(rfu.getResearchId(), 10002);
+				userResearchUuid = rfu.getId();
+				assertEquals(userOil-100, rfuUser.getOil());
+				assertEquals(userGems3-25, rfuUser.getGems());
+			}
+			
 		}
-		assertTrue(!rfuList.isEmpty());
-		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+//		assertTrue(!rfuList.isEmpty());
+//		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+//		
+//		
+//		
+//		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
+//		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+//		fprrpb.setUserResearchUuid(userResearchUuid);
+//		
+//		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
+//		fprre.setTag(1);
+//		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
+//		finishPerformingResearchController.handleEvent(fprre);
+//		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+//		boolean isComplete2 = false;
+//		for(ResearchForUser rfu2 : rfuList2) {
+//			isComplete2 = rfu2.isComplete();
+//		}
+//		assertTrue(isComplete2);
+//		
+//		
+//		//create test spell
+//		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
+//		researchInsertParams.put("id", 10001);
+//		researchInsertParams.put("name", "spell2");
+//		researchInsertParams.put("cost_amt", 100);
+//		researchInsertParams.put("cost_type", "CASH");
+//		
+//		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
+//
+//		int userCash = user.getCash();
+//		int userGems2 = user.getGems();
+//		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+//		prrpb.setResearchId(10001);
+//		prrpb.setClientTime(date.getTime());
+//		prrpb.setGemsSpent(25);
+//		prrpb.setUserResearchUuid(userResearchUuid);
+//		prrpb.setResourceChange(50);
+//		ResourceType rt = ResourceType.CASH;
+//		prrpb.setResourceType(rt);
+//		
+//		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
+//		prre2.setTag(1);
+//		prre2.setPerformResearchRequestProto(prrpb.build());
+//		performResearchController.handleEvent(prre2);
+//		
+//		List<ResearchForUser> rfuList3 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+//		for(ResearchForUser rfu: rfuList3) {
+//			assertEquals(rfu.getUserId(), user.getId());
+//			User currUser = userRetrieveUtil.getUserById(rfu.getUserId());
+//			assertFalse(rfu.isComplete());
+//			assertTrue(rfu.getResearchId() == 10001);
+//			assertEquals(userCash-50, currUser.getCash());
+//			assertEquals(userGems2-25, currUser.getGems());
+//		}
+//
+//		
+	}
 
-		assertEquals(userGems-25, user2.getGems());
-		
-		
+	@Test
+	public void testUpgradeResearch() {
+		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		Date date = new Date();
+		String userResearchUuid = "239c8623-c346-4472-87fa-6faecdcb2039";
+		//create test spell
+		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
+		researchInsertParams2.put("id", 10001);
+		researchInsertParams2.put("name", "spell2");
+		researchInsertParams2.put("cost_amt", 100);
+		researchInsertParams2.put("cost_type", "CASH");
+
+		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams2);
+
+		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
+
+		int userCash = user.getCash();
+		int userGems2 = user.getGems();
+		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		prrpb.setResearchId(10001);
+		prrpb.setClientTime(date.getTime());
+		prrpb.setGemsSpent(25);
+		prrpb.setUserResearchUuid(userResearchUuid);
+		prrpb.setResourceChange(50);
+		ResourceType rt = ResourceType.CASH;
+		prrpb.setResourceType(rt);
+
+		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
+		prre2.setTag(1);
+		prre2.setPerformResearchRequestProto(prrpb.build());
+		performResearchController.handleEvent(prre2);
+
+		List<ResearchForUser> rfuList3 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+		for(ResearchForUser rfu: rfuList3) {
+			assertEquals(rfu.getUserId(), user.getId());
+			User currUser = userRetrieveUtil.getUserById(rfu.getUserId());
+			assertFalse(rfu.isComplete());
+			assertTrue(rfu.getResearchId() == 10001);
+			assertEquals(userCash-50, currUser.getCash());
+			assertEquals(userGems2-25, currUser.getGems());
+		}
+
+	}
+	
+	@Test
+	public void testFinishResearch() {
+		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		Date date = new Date();
+		String userResearchUuid = "0185e5f9-622a-415b-8444-d3743cbf8442";
 		
 		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
 		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
 		fprrpb.setUserResearchUuid(userResearchUuid);
+		fprrpb.setGemsSpent(50);
 		
 		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
 		fprre.setTag(1);
@@ -830,32 +943,13 @@ public class ControllerTest extends TestCase {
 		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
 		boolean isComplete2 = false;
 		for(ResearchForUser rfu2 : rfuList2) {
-			isComplete2 = rfu2.isComplete();
+			assertFalse(rfu2.isComplete());
+			
 		}
-		assertTrue(isComplete2);
-		
-		
-		//create test spell
-		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
-		researchInsertParams.put("id", 10001);
-		researchInsertParams.put("name", "spell2");
-		researchInsertParams.put("cost_amt", 100);
-		researchInsertParams.put("cost_type", "CASH");
-		
-		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
-
-		
-
-		
-
-
-		
-		
-		
 	}
-		
-		
-//		inviteToClanController.handleEvent(icre);
+
+
+	//		inviteToClanController.handleEvent(icre);
 //		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
 //		assertNotNull(ci);
 		

@@ -579,6 +579,30 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> 
+        getAllMoneyTreesList();
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    int getAllMoneyTreesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
+        getAllMoneyTreesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
+        int index);
+
+    /**
      * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
      *
      * <pre>
@@ -1181,73 +1205,73 @@ public final class StaticDataStuffProto {
               break;
             }
             case 146: {
-              if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+              if (!((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
                 persistentEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.PersistentEventProto>();
-                mutable_bitField0_ |= 0x00400000;
+                mutable_bitField0_ |= 0x00800000;
               }
               persistentEvents_.add(input.readMessage(com.lvl6.proto.TaskProto.PersistentEventProto.PARSER, extensionRegistry));
               break;
             }
             case 154: {
-              if (!((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
                 mbds_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto>();
-                mutable_bitField0_ |= 0x00800000;
+                mutable_bitField0_ |= 0x01000000;
               }
               mbds_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.PARSER, extensionRegistry));
               break;
             }
             case 162: {
-              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
                 raids_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidProto>();
-                mutable_bitField0_ |= 0x01000000;
+                mutable_bitField0_ |= 0x02000000;
               }
               raids_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanRaidProto.PARSER, extensionRegistry));
               break;
             }
             case 170: {
-              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
                 persistentClanEvents_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventProto>();
-                mutable_bitField0_ |= 0x02000000;
+                mutable_bitField0_ |= 0x04000000;
               }
               persistentClanEvents_.add(input.readMessage(com.lvl6.proto.ClanProto.PersistentClanEventProto.PARSER, extensionRegistry));
               break;
             }
             case 178: {
-              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
                 items_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemProto>();
-                mutable_bitField0_ |= 0x04000000;
+                mutable_bitField0_ |= 0x08000000;
               }
               items_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemProto.PARSER, extensionRegistry));
               break;
             }
             case 186: {
-              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
                 obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ObstacleProto>();
-                mutable_bitField0_ |= 0x08000000;
+                mutable_bitField0_ |= 0x10000000;
               }
               obstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.ObstacleProto.PARSER, extensionRegistry));
               break;
             }
             case 194: {
-              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
                 clanIcons_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanIconProto>();
-                mutable_bitField0_ |= 0x10000000;
+                mutable_bitField0_ |= 0x20000000;
               }
               clanIcons_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanIconProto.PARSER, extensionRegistry));
               break;
             }
             case 202: {
-              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
                 leagues_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpLeagueProto>();
-                mutable_bitField0_ |= 0x20000000;
+                mutable_bitField0_ |= 0x40000000;
               }
               leagues_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpLeagueProto.PARSER, extensionRegistry));
               break;
             }
             case 210: {
-              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
                 achievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.AchievementProto>();
-                mutable_bitField0_ |= 0x40000000;
+                mutable_bitField0_ |= 0x80000000;
               }
               achievements_.add(input.readMessage(com.lvl6.proto.AchievementStuffProto.AchievementProto.PARSER, extensionRegistry));
               break;
@@ -1285,9 +1309,9 @@ public final class StaticDataStuffProto {
               break;
             }
             case 250: {
-              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
                 skills_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillProto>();
-                mutable_bitField0_ |= 0x80000000;
+                mutable_bitField1_ |= 0x00000001;
               }
               skills_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillProto.PARSER, extensionRegistry));
               break;
@@ -1338,11 +1362,19 @@ public final class StaticDataStuffProto {
               break;
             }
             case 298: {
+<<<<<<< HEAD
               if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
                 sideEffects_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillSideEffectProto>();
                 mutable_bitField1_ |= 0x00000001;
               }
               sideEffects_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillSideEffectProto.PARSER, extensionRegistry));
+=======
+              if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+                allMoneyTrees_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MoneyTreeProto>();
+                mutable_bitField0_ |= 0x00400000;
+              }
+              allMoneyTrees_.add(input.readMessage(com.lvl6.proto.StructureProto.MoneyTreeProto.PARSER, extensionRegistry));
+>>>>>>> origin/2015_02_09_money_tree2
               break;
             }
           }
@@ -1398,31 +1430,31 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
           allLabs_ = java.util.Collections.unmodifiableList(allLabs_);
         }
-        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+        if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
           persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
         }
-        if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
           mbds_ = java.util.Collections.unmodifiableList(mbds_);
         }
-        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
           raids_ = java.util.Collections.unmodifiableList(raids_);
         }
-        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
           persistentClanEvents_ = java.util.Collections.unmodifiableList(persistentClanEvents_);
         }
-        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
           items_ = java.util.Collections.unmodifiableList(items_);
         }
-        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
           obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
         }
-        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
           clanIcons_ = java.util.Collections.unmodifiableList(clanIcons_);
         }
-        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
           leagues_ = java.util.Collections.unmodifiableList(leagues_);
         }
-        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
           achievements_ = java.util.Collections.unmodifiableList(achievements_);
         }
         if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
@@ -1437,7 +1469,7 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
           allTeamCenters_ = java.util.Collections.unmodifiableList(allTeamCenters_);
         }
-        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
           skills_ = java.util.Collections.unmodifiableList(skills_);
         }
         if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
@@ -1452,8 +1484,13 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
           research_ = java.util.Collections.unmodifiableList(research_);
         }
+<<<<<<< HEAD
         if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
           sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
+=======
+        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+          allMoneyTrees_ = java.util.Collections.unmodifiableList(allMoneyTrees_);
+>>>>>>> origin/2015_02_09_money_tree2
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2289,6 +2326,41 @@ public final class StaticDataStuffProto {
       return allClanHouses_.get(index);
     }
 
+    public static final int ALLMONEYTREES_FIELD_NUMBER = 37;
+    private java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> allMoneyTrees_;
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> getAllMoneyTreesList() {
+      return allMoneyTrees_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
+        getAllMoneyTreesOrBuilderList() {
+      return allMoneyTrees_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    public int getAllMoneyTreesCount() {
+      return allMoneyTrees_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    public com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index) {
+      return allMoneyTrees_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     */
+    public com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
+        int index) {
+      return allMoneyTrees_.get(index);
+    }
+
     public static final int PERSISTENTEVENTS_FIELD_NUMBER = 18;
     private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_;
     /**
@@ -2882,6 +2954,7 @@ public final class StaticDataStuffProto {
       allEvoChambers_ = java.util.Collections.emptyList();
       allTeamCenters_ = java.util.Collections.emptyList();
       allClanHouses_ = java.util.Collections.emptyList();
+      allMoneyTrees_ = java.util.Collections.emptyList();
       persistentEvents_ = java.util.Collections.emptyList();
       mbds_ = java.util.Collections.emptyList();
       raids_ = java.util.Collections.emptyList();
@@ -3015,8 +3088,13 @@ public final class StaticDataStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(36, starterPack_);
       }
+<<<<<<< HEAD
       for (int i = 0; i < sideEffects_.size(); i++) {
         output.writeMessage(37, sideEffects_.get(i));
+=======
+      for (int i = 0; i < allMoneyTrees_.size(); i++) {
+        output.writeMessage(37, allMoneyTrees_.get(i));
+>>>>>>> origin/2015_02_09_money_tree2
       }
       getUnknownFields().writeTo(output);
     }
@@ -3167,9 +3245,15 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(36, starterPack_);
       }
+<<<<<<< HEAD
       for (int i = 0; i < sideEffects_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(37, sideEffects_.get(i));
+=======
+      for (int i = 0; i < allMoneyTrees_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(37, allMoneyTrees_.get(i));
+>>>>>>> origin/2015_02_09_money_tree2
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3302,6 +3386,7 @@ public final class StaticDataStuffProto {
           getAllEvoChambersFieldBuilder();
           getAllTeamCentersFieldBuilder();
           getAllClanHousesFieldBuilder();
+          getAllMoneyTreesFieldBuilder();
           getPersistentEventsFieldBuilder();
           getMbdsFieldBuilder();
           getRaidsFieldBuilder();
@@ -3456,63 +3541,69 @@ public final class StaticDataStuffProto {
         } else {
           allClanHousesBuilder_.clear();
         }
+        if (allMoneyTreesBuilder_ == null) {
+          allMoneyTrees_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00400000);
+        } else {
+          allMoneyTreesBuilder_.clear();
+        }
         if (persistentEventsBuilder_ == null) {
           persistentEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
         } else {
           persistentEventsBuilder_.clear();
         }
         if (mbdsBuilder_ == null) {
           mbds_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
         } else {
           mbdsBuilder_.clear();
         }
         if (raidsBuilder_ == null) {
           raids_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
         } else {
           raidsBuilder_.clear();
         }
         if (persistentClanEventsBuilder_ == null) {
           persistentClanEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
         } else {
           persistentClanEventsBuilder_.clear();
         }
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
         } else {
           itemsBuilder_.clear();
         }
         if (obstaclesBuilder_ == null) {
           obstacles_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
         } else {
           obstaclesBuilder_.clear();
         }
         if (clanIconsBuilder_ == null) {
           clanIcons_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x10000000);
+          bitField0_ = (bitField0_ & ~0x20000000);
         } else {
           clanIconsBuilder_.clear();
         }
         if (leaguesBuilder_ == null) {
           leagues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x20000000);
+          bitField0_ = (bitField0_ & ~0x40000000);
         } else {
           leaguesBuilder_.clear();
         }
         if (achievementsBuilder_ == null) {
           achievements_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x40000000);
+          bitField0_ = (bitField0_ & ~0x80000000);
         } else {
           achievementsBuilder_.clear();
         }
         if (skillsBuilder_ == null) {
           skills_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x80000000);
+          bitField1_ = (bitField1_ & ~0x00000001);
         } else {
           skillsBuilder_.clear();
         }
@@ -3765,100 +3856,116 @@ public final class StaticDataStuffProto {
         } else {
           result.allClanHouses_ = allClanHousesBuilder_.build();
         }
-        if (persistentEventsBuilder_ == null) {
+        if (allMoneyTreesBuilder_ == null) {
           if (((bitField0_ & 0x00400000) == 0x00400000)) {
-            persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
+            allMoneyTrees_ = java.util.Collections.unmodifiableList(allMoneyTrees_);
             bitField0_ = (bitField0_ & ~0x00400000);
+          }
+          result.allMoneyTrees_ = allMoneyTrees_;
+        } else {
+          result.allMoneyTrees_ = allMoneyTreesBuilder_.build();
+        }
+        if (persistentEventsBuilder_ == null) {
+          if (((bitField0_ & 0x00800000) == 0x00800000)) {
+            persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
+            bitField0_ = (bitField0_ & ~0x00800000);
           }
           result.persistentEvents_ = persistentEvents_;
         } else {
           result.persistentEvents_ = persistentEventsBuilder_.build();
         }
         if (mbdsBuilder_ == null) {
-          if (((bitField0_ & 0x00800000) == 0x00800000)) {
+          if (((bitField0_ & 0x01000000) == 0x01000000)) {
             mbds_ = java.util.Collections.unmodifiableList(mbds_);
-            bitField0_ = (bitField0_ & ~0x00800000);
+            bitField0_ = (bitField0_ & ~0x01000000);
           }
           result.mbds_ = mbds_;
         } else {
           result.mbds_ = mbdsBuilder_.build();
         }
         if (raidsBuilder_ == null) {
-          if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          if (((bitField0_ & 0x02000000) == 0x02000000)) {
             raids_ = java.util.Collections.unmodifiableList(raids_);
-            bitField0_ = (bitField0_ & ~0x01000000);
+            bitField0_ = (bitField0_ & ~0x02000000);
           }
           result.raids_ = raids_;
         } else {
           result.raids_ = raidsBuilder_.build();
         }
         if (persistentClanEventsBuilder_ == null) {
-          if (((bitField0_ & 0x02000000) == 0x02000000)) {
+          if (((bitField0_ & 0x04000000) == 0x04000000)) {
             persistentClanEvents_ = java.util.Collections.unmodifiableList(persistentClanEvents_);
-            bitField0_ = (bitField0_ & ~0x02000000);
+            bitField0_ = (bitField0_ & ~0x04000000);
           }
           result.persistentClanEvents_ = persistentClanEvents_;
         } else {
           result.persistentClanEvents_ = persistentClanEventsBuilder_.build();
         }
         if (itemsBuilder_ == null) {
-          if (((bitField0_ & 0x04000000) == 0x04000000)) {
+          if (((bitField0_ & 0x08000000) == 0x08000000)) {
             items_ = java.util.Collections.unmodifiableList(items_);
-            bitField0_ = (bitField0_ & ~0x04000000);
+            bitField0_ = (bitField0_ & ~0x08000000);
           }
           result.items_ = items_;
         } else {
           result.items_ = itemsBuilder_.build();
         }
         if (obstaclesBuilder_ == null) {
-          if (((bitField0_ & 0x08000000) == 0x08000000)) {
+          if (((bitField0_ & 0x10000000) == 0x10000000)) {
             obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
-            bitField0_ = (bitField0_ & ~0x08000000);
+            bitField0_ = (bitField0_ & ~0x10000000);
           }
           result.obstacles_ = obstacles_;
         } else {
           result.obstacles_ = obstaclesBuilder_.build();
         }
         if (clanIconsBuilder_ == null) {
-          if (((bitField0_ & 0x10000000) == 0x10000000)) {
+          if (((bitField0_ & 0x20000000) == 0x20000000)) {
             clanIcons_ = java.util.Collections.unmodifiableList(clanIcons_);
-            bitField0_ = (bitField0_ & ~0x10000000);
+            bitField0_ = (bitField0_ & ~0x20000000);
           }
           result.clanIcons_ = clanIcons_;
         } else {
           result.clanIcons_ = clanIconsBuilder_.build();
         }
         if (leaguesBuilder_ == null) {
-          if (((bitField0_ & 0x20000000) == 0x20000000)) {
+          if (((bitField0_ & 0x40000000) == 0x40000000)) {
             leagues_ = java.util.Collections.unmodifiableList(leagues_);
-            bitField0_ = (bitField0_ & ~0x20000000);
+            bitField0_ = (bitField0_ & ~0x40000000);
           }
           result.leagues_ = leagues_;
         } else {
           result.leagues_ = leaguesBuilder_.build();
         }
         if (achievementsBuilder_ == null) {
-          if (((bitField0_ & 0x40000000) == 0x40000000)) {
+          if (((bitField0_ & 0x80000000) == 0x80000000)) {
             achievements_ = java.util.Collections.unmodifiableList(achievements_);
-            bitField0_ = (bitField0_ & ~0x40000000);
+            bitField0_ = (bitField0_ & ~0x80000000);
           }
           result.achievements_ = achievements_;
         } else {
           result.achievements_ = achievementsBuilder_.build();
         }
         if (skillsBuilder_ == null) {
-          if (((bitField0_ & 0x80000000) == 0x80000000)) {
+          if (((bitField1_ & 0x00000001) == 0x00000001)) {
             skills_ = java.util.Collections.unmodifiableList(skills_);
-            bitField0_ = (bitField0_ & ~0x80000000);
+            bitField1_ = (bitField1_ & ~0x00000001);
           }
           result.skills_ = skills_;
         } else {
           result.skills_ = skillsBuilder_.build();
         }
+<<<<<<< HEAD
         if (sideEffectsBuilder_ == null) {
           if (((bitField1_ & 0x00000001) == 0x00000001)) {
             sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
             bitField1_ = (bitField1_ & ~0x00000001);
+=======
+        if (prereqsBuilder_ == null) {
+          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+            prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+            bitField1_ = (bitField1_ & ~0x00000002);
+>>>>>>> origin/2015_02_09_money_tree2
           }
           result.sideEffects_ = sideEffects_;
         } else {
@@ -4433,11 +4540,37 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (allMoneyTreesBuilder_ == null) {
+          if (!other.allMoneyTrees_.isEmpty()) {
+            if (allMoneyTrees_.isEmpty()) {
+              allMoneyTrees_ = other.allMoneyTrees_;
+              bitField0_ = (bitField0_ & ~0x00400000);
+            } else {
+              ensureAllMoneyTreesIsMutable();
+              allMoneyTrees_.addAll(other.allMoneyTrees_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.allMoneyTrees_.isEmpty()) {
+            if (allMoneyTreesBuilder_.isEmpty()) {
+              allMoneyTreesBuilder_.dispose();
+              allMoneyTreesBuilder_ = null;
+              allMoneyTrees_ = other.allMoneyTrees_;
+              bitField0_ = (bitField0_ & ~0x00400000);
+              allMoneyTreesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAllMoneyTreesFieldBuilder() : null;
+            } else {
+              allMoneyTreesBuilder_.addAllMessages(other.allMoneyTrees_);
+            }
+          }
+        }
         if (persistentEventsBuilder_ == null) {
           if (!other.persistentEvents_.isEmpty()) {
             if (persistentEvents_.isEmpty()) {
               persistentEvents_ = other.persistentEvents_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
             } else {
               ensurePersistentEventsIsMutable();
               persistentEvents_.addAll(other.persistentEvents_);
@@ -4450,7 +4583,7 @@ public final class StaticDataStuffProto {
               persistentEventsBuilder_.dispose();
               persistentEventsBuilder_ = null;
               persistentEvents_ = other.persistentEvents_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
               persistentEventsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPersistentEventsFieldBuilder() : null;
@@ -4463,7 +4596,7 @@ public final class StaticDataStuffProto {
           if (!other.mbds_.isEmpty()) {
             if (mbds_.isEmpty()) {
               mbds_ = other.mbds_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
             } else {
               ensureMbdsIsMutable();
               mbds_.addAll(other.mbds_);
@@ -4476,7 +4609,7 @@ public final class StaticDataStuffProto {
               mbdsBuilder_.dispose();
               mbdsBuilder_ = null;
               mbds_ = other.mbds_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
               mbdsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMbdsFieldBuilder() : null;
@@ -4489,7 +4622,7 @@ public final class StaticDataStuffProto {
           if (!other.raids_.isEmpty()) {
             if (raids_.isEmpty()) {
               raids_ = other.raids_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
             } else {
               ensureRaidsIsMutable();
               raids_.addAll(other.raids_);
@@ -4502,7 +4635,7 @@ public final class StaticDataStuffProto {
               raidsBuilder_.dispose();
               raidsBuilder_ = null;
               raids_ = other.raids_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
               raidsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRaidsFieldBuilder() : null;
@@ -4515,7 +4648,7 @@ public final class StaticDataStuffProto {
           if (!other.persistentClanEvents_.isEmpty()) {
             if (persistentClanEvents_.isEmpty()) {
               persistentClanEvents_ = other.persistentClanEvents_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
             } else {
               ensurePersistentClanEventsIsMutable();
               persistentClanEvents_.addAll(other.persistentClanEvents_);
@@ -4528,7 +4661,7 @@ public final class StaticDataStuffProto {
               persistentClanEventsBuilder_.dispose();
               persistentClanEventsBuilder_ = null;
               persistentClanEvents_ = other.persistentClanEvents_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
               persistentClanEventsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPersistentClanEventsFieldBuilder() : null;
@@ -4541,7 +4674,7 @@ public final class StaticDataStuffProto {
           if (!other.items_.isEmpty()) {
             if (items_.isEmpty()) {
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
             } else {
               ensureItemsIsMutable();
               items_.addAll(other.items_);
@@ -4554,7 +4687,7 @@ public final class StaticDataStuffProto {
               itemsBuilder_.dispose();
               itemsBuilder_ = null;
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
               itemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getItemsFieldBuilder() : null;
@@ -4567,7 +4700,7 @@ public final class StaticDataStuffProto {
           if (!other.obstacles_.isEmpty()) {
             if (obstacles_.isEmpty()) {
               obstacles_ = other.obstacles_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
             } else {
               ensureObstaclesIsMutable();
               obstacles_.addAll(other.obstacles_);
@@ -4580,7 +4713,7 @@ public final class StaticDataStuffProto {
               obstaclesBuilder_.dispose();
               obstaclesBuilder_ = null;
               obstacles_ = other.obstacles_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
               obstaclesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getObstaclesFieldBuilder() : null;
@@ -4593,7 +4726,7 @@ public final class StaticDataStuffProto {
           if (!other.clanIcons_.isEmpty()) {
             if (clanIcons_.isEmpty()) {
               clanIcons_ = other.clanIcons_;
-              bitField0_ = (bitField0_ & ~0x10000000);
+              bitField0_ = (bitField0_ & ~0x20000000);
             } else {
               ensureClanIconsIsMutable();
               clanIcons_.addAll(other.clanIcons_);
@@ -4606,7 +4739,7 @@ public final class StaticDataStuffProto {
               clanIconsBuilder_.dispose();
               clanIconsBuilder_ = null;
               clanIcons_ = other.clanIcons_;
-              bitField0_ = (bitField0_ & ~0x10000000);
+              bitField0_ = (bitField0_ & ~0x20000000);
               clanIconsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanIconsFieldBuilder() : null;
@@ -4619,7 +4752,7 @@ public final class StaticDataStuffProto {
           if (!other.leagues_.isEmpty()) {
             if (leagues_.isEmpty()) {
               leagues_ = other.leagues_;
-              bitField0_ = (bitField0_ & ~0x20000000);
+              bitField0_ = (bitField0_ & ~0x40000000);
             } else {
               ensureLeaguesIsMutable();
               leagues_.addAll(other.leagues_);
@@ -4632,7 +4765,7 @@ public final class StaticDataStuffProto {
               leaguesBuilder_.dispose();
               leaguesBuilder_ = null;
               leagues_ = other.leagues_;
-              bitField0_ = (bitField0_ & ~0x20000000);
+              bitField0_ = (bitField0_ & ~0x40000000);
               leaguesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLeaguesFieldBuilder() : null;
@@ -4645,7 +4778,7 @@ public final class StaticDataStuffProto {
           if (!other.achievements_.isEmpty()) {
             if (achievements_.isEmpty()) {
               achievements_ = other.achievements_;
-              bitField0_ = (bitField0_ & ~0x40000000);
+              bitField0_ = (bitField0_ & ~0x80000000);
             } else {
               ensureAchievementsIsMutable();
               achievements_.addAll(other.achievements_);
@@ -4658,7 +4791,7 @@ public final class StaticDataStuffProto {
               achievementsBuilder_.dispose();
               achievementsBuilder_ = null;
               achievements_ = other.achievements_;
-              bitField0_ = (bitField0_ & ~0x40000000);
+              bitField0_ = (bitField0_ & ~0x80000000);
               achievementsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAchievementsFieldBuilder() : null;
@@ -4671,7 +4804,7 @@ public final class StaticDataStuffProto {
           if (!other.skills_.isEmpty()) {
             if (skills_.isEmpty()) {
               skills_ = other.skills_;
-              bitField0_ = (bitField0_ & ~0x80000000);
+              bitField1_ = (bitField1_ & ~0x00000001);
             } else {
               ensureSkillsIsMutable();
               skills_.addAll(other.skills_);
@@ -4684,7 +4817,7 @@ public final class StaticDataStuffProto {
               skillsBuilder_.dispose();
               skillsBuilder_ = null;
               skills_ = other.skills_;
-              bitField0_ = (bitField0_ & ~0x80000000);
+              bitField1_ = (bitField1_ & ~0x00000001);
               skillsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSkillsFieldBuilder() : null;
@@ -10073,12 +10206,252 @@ public final class StaticDataStuffProto {
         return allClanHousesBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> allMoneyTrees_ =
+        java.util.Collections.emptyList();
+      private void ensureAllMoneyTreesIsMutable() {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+          allMoneyTrees_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MoneyTreeProto>(allMoneyTrees_);
+          bitField0_ |= 0x00400000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.MoneyTreeProto, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder, com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> allMoneyTreesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> getAllMoneyTreesList() {
+        if (allMoneyTreesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allMoneyTrees_);
+        } else {
+          return allMoneyTreesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public int getAllMoneyTreesCount() {
+        if (allMoneyTreesBuilder_ == null) {
+          return allMoneyTrees_.size();
+        } else {
+          return allMoneyTreesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index) {
+        if (allMoneyTreesBuilder_ == null) {
+          return allMoneyTrees_.get(index);
+        } else {
+          return allMoneyTreesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder setAllMoneyTrees(
+          int index, com.lvl6.proto.StructureProto.MoneyTreeProto value) {
+        if (allMoneyTreesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.set(index, value);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder setAllMoneyTrees(
+          int index, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
+        if (allMoneyTreesBuilder_ == null) {
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder addAllMoneyTrees(com.lvl6.proto.StructureProto.MoneyTreeProto value) {
+        if (allMoneyTreesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.add(value);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder addAllMoneyTrees(
+          int index, com.lvl6.proto.StructureProto.MoneyTreeProto value) {
+        if (allMoneyTreesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.add(index, value);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder addAllMoneyTrees(
+          com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
+        if (allMoneyTreesBuilder_ == null) {
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.add(builderForValue.build());
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder addAllMoneyTrees(
+          int index, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
+        if (allMoneyTreesBuilder_ == null) {
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder addAllAllMoneyTrees(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MoneyTreeProto> values) {
+        if (allMoneyTreesBuilder_ == null) {
+          ensureAllMoneyTreesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allMoneyTrees_);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder clearAllMoneyTrees() {
+        if (allMoneyTreesBuilder_ == null) {
+          allMoneyTrees_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00400000);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public Builder removeAllMoneyTrees(int index) {
+        if (allMoneyTreesBuilder_ == null) {
+          ensureAllMoneyTreesIsMutable();
+          allMoneyTrees_.remove(index);
+          onChanged();
+        } else {
+          allMoneyTreesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder getAllMoneyTreesBuilder(
+          int index) {
+        return getAllMoneyTreesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
+          int index) {
+        if (allMoneyTreesBuilder_ == null) {
+          return allMoneyTrees_.get(index);  } else {
+          return allMoneyTreesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
+           getAllMoneyTreesOrBuilderList() {
+        if (allMoneyTreesBuilder_ != null) {
+          return allMoneyTreesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(allMoneyTrees_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder addAllMoneyTreesBuilder() {
+        return getAllMoneyTreesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder addAllMoneyTreesBuilder(
+          int index) {
+        return getAllMoneyTreesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto.Builder> 
+           getAllMoneyTreesBuilderList() {
+        return getAllMoneyTreesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.MoneyTreeProto, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder, com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
+          getAllMoneyTreesFieldBuilder() {
+        if (allMoneyTreesBuilder_ == null) {
+          allMoneyTreesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.MoneyTreeProto, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder, com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder>(
+                  allMoneyTrees_,
+                  ((bitField0_ & 0x00400000) == 0x00400000),
+                  getParentForChildren(),
+                  isClean());
+          allMoneyTrees_ = null;
+        }
+        return allMoneyTreesBuilder_;
+      }
+
       private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentEventsIsMutable() {
-        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
           persistentEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.PersistentEventProto>(persistentEvents_);
-          bitField0_ |= 0x00400000;
+          bitField0_ |= 0x00800000;
          }
       }
 
@@ -10272,7 +10645,7 @@ public final class StaticDataStuffProto {
       public Builder clearPersistentEvents() {
         if (persistentEventsBuilder_ == null) {
           persistentEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
           onChanged();
         } else {
           persistentEventsBuilder_.clear();
@@ -10377,7 +10750,7 @@ public final class StaticDataStuffProto {
           persistentEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder>(
                   persistentEvents_,
-                  ((bitField0_ & 0x00400000) == 0x00400000),
+                  ((bitField0_ & 0x00800000) == 0x00800000),
                   getParentForChildren(),
                   isClean());
           persistentEvents_ = null;
@@ -10388,9 +10761,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_ =
         java.util.Collections.emptyList();
       private void ensureMbdsIsMutable() {
-        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
+        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
           mbds_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto>(mbds_);
-          bitField0_ |= 0x00800000;
+          bitField0_ |= 0x01000000;
          }
       }
 
@@ -10540,7 +10913,7 @@ public final class StaticDataStuffProto {
       public Builder clearMbds() {
         if (mbdsBuilder_ == null) {
           mbds_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
           onChanged();
         } else {
           mbdsBuilder_.clear();
@@ -10617,7 +10990,7 @@ public final class StaticDataStuffProto {
           mbdsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder>(
                   mbds_,
-                  ((bitField0_ & 0x00800000) == 0x00800000),
+                  ((bitField0_ & 0x01000000) == 0x01000000),
                   getParentForChildren(),
                   isClean());
           mbds_ = null;
@@ -10628,9 +11001,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> raids_ =
         java.util.Collections.emptyList();
       private void ensureRaidsIsMutable() {
-        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
           raids_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidProto>(raids_);
-          bitField0_ |= 0x01000000;
+          bitField0_ |= 0x02000000;
          }
       }
 
@@ -10824,7 +11197,7 @@ public final class StaticDataStuffProto {
       public Builder clearRaids() {
         if (raidsBuilder_ == null) {
           raids_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
           onChanged();
         } else {
           raidsBuilder_.clear();
@@ -10929,7 +11302,7 @@ public final class StaticDataStuffProto {
           raidsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanRaidProto, com.lvl6.proto.ClanProto.ClanRaidProto.Builder, com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder>(
                   raids_,
-                  ((bitField0_ & 0x01000000) == 0x01000000),
+                  ((bitField0_ & 0x02000000) == 0x02000000),
                   getParentForChildren(),
                   isClean());
           raids_ = null;
@@ -10940,9 +11313,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> persistentClanEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentClanEventsIsMutable() {
-        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
+        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
           persistentClanEvents_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventProto>(persistentClanEvents_);
-          bitField0_ |= 0x02000000;
+          bitField0_ |= 0x04000000;
          }
       }
 
@@ -11092,7 +11465,7 @@ public final class StaticDataStuffProto {
       public Builder clearPersistentClanEvents() {
         if (persistentClanEventsBuilder_ == null) {
           persistentClanEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
           onChanged();
         } else {
           persistentClanEventsBuilder_.clear();
@@ -11169,7 +11542,7 @@ public final class StaticDataStuffProto {
           persistentClanEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventProto, com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder>(
                   persistentClanEvents_,
-                  ((bitField0_ & 0x02000000) == 0x02000000),
+                  ((bitField0_ & 0x04000000) == 0x04000000),
                   getParentForChildren(),
                   isClean());
           persistentClanEvents_ = null;
@@ -11180,9 +11553,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ItemsProto.ItemProto> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
-        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
           items_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemProto>(items_);
-          bitField0_ |= 0x04000000;
+          bitField0_ |= 0x08000000;
          }
       }
 
@@ -11332,7 +11705,7 @@ public final class StaticDataStuffProto {
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
           onChanged();
         } else {
           itemsBuilder_.clear();
@@ -11409,7 +11782,7 @@ public final class StaticDataStuffProto {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.ItemProto, com.lvl6.proto.ItemsProto.ItemProto.Builder, com.lvl6.proto.ItemsProto.ItemProtoOrBuilder>(
                   items_,
-                  ((bitField0_ & 0x04000000) == 0x04000000),
+                  ((bitField0_ & 0x08000000) == 0x08000000),
                   getParentForChildren(),
                   isClean());
           items_ = null;
@@ -11420,9 +11793,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_ =
         java.util.Collections.emptyList();
       private void ensureObstaclesIsMutable() {
-        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
+        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
           obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ObstacleProto>(obstacles_);
-          bitField0_ |= 0x08000000;
+          bitField0_ |= 0x10000000;
          }
       }
 
@@ -11616,7 +11989,7 @@ public final class StaticDataStuffProto {
       public Builder clearObstacles() {
         if (obstaclesBuilder_ == null) {
           obstacles_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
           onChanged();
         } else {
           obstaclesBuilder_.clear();
@@ -11721,7 +12094,7 @@ public final class StaticDataStuffProto {
           obstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder>(
                   obstacles_,
-                  ((bitField0_ & 0x08000000) == 0x08000000),
+                  ((bitField0_ & 0x10000000) == 0x10000000),
                   getParentForChildren(),
                   isClean());
           obstacles_ = null;
@@ -11732,9 +12105,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_ =
         java.util.Collections.emptyList();
       private void ensureClanIconsIsMutable() {
-        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
+        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
           clanIcons_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanIconProto>(clanIcons_);
-          bitField0_ |= 0x10000000;
+          bitField0_ |= 0x20000000;
          }
       }
 
@@ -11884,7 +12257,7 @@ public final class StaticDataStuffProto {
       public Builder clearClanIcons() {
         if (clanIconsBuilder_ == null) {
           clanIcons_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x10000000);
+          bitField0_ = (bitField0_ & ~0x20000000);
           onChanged();
         } else {
           clanIconsBuilder_.clear();
@@ -11961,7 +12334,7 @@ public final class StaticDataStuffProto {
           clanIconsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder>(
                   clanIcons_,
-                  ((bitField0_ & 0x10000000) == 0x10000000),
+                  ((bitField0_ & 0x20000000) == 0x20000000),
                   getParentForChildren(),
                   isClean());
           clanIcons_ = null;
@@ -11972,9 +12345,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_ =
         java.util.Collections.emptyList();
       private void ensureLeaguesIsMutable() {
-        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
           leagues_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpLeagueProto>(leagues_);
-          bitField0_ |= 0x20000000;
+          bitField0_ |= 0x40000000;
          }
       }
 
@@ -12124,7 +12497,7 @@ public final class StaticDataStuffProto {
       public Builder clearLeagues() {
         if (leaguesBuilder_ == null) {
           leagues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x20000000);
+          bitField0_ = (bitField0_ & ~0x40000000);
           onChanged();
         } else {
           leaguesBuilder_.clear();
@@ -12201,7 +12574,7 @@ public final class StaticDataStuffProto {
           leaguesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder>(
                   leagues_,
-                  ((bitField0_ & 0x20000000) == 0x20000000),
+                  ((bitField0_ & 0x40000000) == 0x40000000),
                   getParentForChildren(),
                   isClean());
           leagues_ = null;
@@ -12212,9 +12585,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> achievements_ =
         java.util.Collections.emptyList();
       private void ensureAchievementsIsMutable() {
-        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
           achievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.AchievementProto>(achievements_);
-          bitField0_ |= 0x40000000;
+          bitField0_ |= 0x80000000;
          }
       }
 
@@ -12364,7 +12737,7 @@ public final class StaticDataStuffProto {
       public Builder clearAchievements() {
         if (achievementsBuilder_ == null) {
           achievements_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x40000000);
+          bitField0_ = (bitField0_ & ~0x80000000);
           onChanged();
         } else {
           achievementsBuilder_.clear();
@@ -12441,7 +12814,7 @@ public final class StaticDataStuffProto {
           achievementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.AchievementStuffProto.AchievementProto, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder>(
                   achievements_,
-                  ((bitField0_ & 0x40000000) == 0x40000000),
+                  ((bitField0_ & 0x80000000) == 0x80000000),
                   getParentForChildren(),
                   isClean());
           achievements_ = null;
@@ -12452,9 +12825,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.SkillsProto.SkillProto> skills_ =
         java.util.Collections.emptyList();
       private void ensureSkillsIsMutable() {
-        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
           skills_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillProto>(skills_);
-          bitField0_ |= 0x80000000;
+          bitField1_ |= 0x00000001;
          }
       }
 
@@ -12604,7 +12977,7 @@ public final class StaticDataStuffProto {
       public Builder clearSkills() {
         if (skillsBuilder_ == null) {
           skills_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x80000000);
+          bitField1_ = (bitField1_ & ~0x00000001);
           onChanged();
         } else {
           skillsBuilder_.clear();
@@ -12681,7 +13054,7 @@ public final class StaticDataStuffProto {
           skillsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.SkillsProto.SkillProto, com.lvl6.proto.SkillsProto.SkillProto.Builder, com.lvl6.proto.SkillsProto.SkillProtoOrBuilder>(
                   skills_,
-                  ((bitField0_ & 0x80000000) == 0x80000000),
+                  ((bitField1_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           skills_ = null;
@@ -13752,7 +14125,11 @@ public final class StaticDataStuffProto {
       "o\032\nClan.proto\032\nItem.proto\032\022MonsterStuff." +
       "proto\032\022Prerequisite.proto\032\013Quest.proto\032\016" +
       "Research.proto\032\013Skill.proto\032\017Structure.p" +
+<<<<<<< HEAD
       "roto\032\nTask.proto\032\nUser.proto\"\273\017\n\017StaticD" +
+=======
+      "roto\032\nTask.proto\032\nUser.proto\"\267\017\n\017StaticD" +
+>>>>>>> origin/2015_02_09_money_tree2
       "ataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
       "o.MinimumUserProto\022>\n\016expansionCosts\030\002 \003" +
       "(\0132&.com.lvl6.proto.CityExpansionCostPro",
@@ -13783,6 +14160,7 @@ public final class StaticDataStuffProto {
       "bers\030\035 \003(\0132\037.com.lvl6.proto.EvoChamberPr" +
       "oto\0227\n\016allTeamCenters\030\036 \003(\0132\037.com.lvl6.p" +
       "roto.TeamCenterProto\0225\n\rallClanHouses\030  " +
+<<<<<<< HEAD
       "\003(\0132\036.com.lvl6.proto.ClanHouseProto\022>\n\020p" +
       "ersistentEvents\030\022 \003(\0132$.com.lvl6.proto.P" +
       "ersistentEventProto\0228\n\004mbds\030\023 \003(\0132*.com.",
@@ -13803,6 +14181,28 @@ public final class StaticDataStuffProto {
       "s\030\" \003(\0132 .com.lvl6.proto.BoardLayoutProt" +
       "o\022/\n\010research\030# \003(\0132\035.com.lvl6.proto.Res" +
       "earchProtoB\026B\024StaticDataStuffProto"
+=======
+      "\003(\0132\036.com.lvl6.proto.ClanHouseProto\0225\n\ra" +
+      "llMoneyTrees\030% \003(\0132\036.com.lvl6.proto.Mone" +
+      "yTreeProto\022>\n\020persistentEvents\030\022 \003(\0132$.c",
+      "om.lvl6.proto.PersistentEventProto\0228\n\004mb" +
+      "ds\030\023 \003(\0132*.com.lvl6.proto.MonsterBattleD" +
+      "ialogueProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.p" +
+      "roto.ClanRaidProto\022F\n\024persistentClanEven" +
+      "ts\030\025 \003(\0132(.com.lvl6.proto.PersistentClan" +
+      "EventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pro" +
+      "to.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.lv" +
+      "l6.proto.ObstacleProto\0220\n\tclanIcons\030\030 \003(" +
+      "\0132\035.com.lvl6.proto.ClanIconProto\022/\n\007leag" +
+      "ues\030\031 \003(\0132\036.com.lvl6.proto.PvpLeagueProt",
+      "o\0226\n\014achievements\030\032 \003(\0132 .com.lvl6.proto" +
+      ".AchievementProto\022*\n\006skills\030\037 \003(\0132\032.com." +
+      "lvl6.proto.SkillProto\022,\n\007prereqs\030! \003(\0132\033" +
+      ".com.lvl6.proto.PrereqProto\0220\n\006boards\030\" " +
+      "\003(\0132 .com.lvl6.proto.BoardLayoutProto\022/\n" +
+      "\010research\030# \003(\0132\035.com.lvl6.proto.Researc" +
+      "hProtoB\026B\024StaticDataStuffProto"
+>>>>>>> origin/2015_02_09_money_tree2
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13836,7 +14236,11 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
+<<<<<<< HEAD
         new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", });
+=======
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", "Research", });
+>>>>>>> origin/2015_02_09_money_tree2
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BoardProto.getDescriptor();

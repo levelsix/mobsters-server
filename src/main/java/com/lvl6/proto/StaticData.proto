@@ -50,6 +50,7 @@ message StaticDataProto {
 	repeated EvoChamberProto allEvoChambers = 29;
 	repeated TeamCenterProto allTeamCenters = 30;
 	repeated ClanHouseProto allClanHouses = 32;
+	repeated MoneyTreeProto allMoneyTrees = 37;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -79,6 +80,12 @@ message StaticDataProto {
 	repeated ResearchProto research = 35;
 	
 	//optional BoosterPackProto starterPack = 36; defined above 
+<<<<<<< HEAD
 	//repeated SkillSideEffectProto sideEffects = 37; defined above
+=======
+	
+	//repeated MoneyTreeProto allMoneyTrees = 37;
+	
+>>>>>>> origin/2015_02_09_money_tree2
 }
 	

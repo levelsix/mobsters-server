@@ -49,7 +49,8 @@ public class PerformResearchAction
 		ResourceType resourceType,
 		Date now,
 		InsertUtil insertUtil,
-		UpdateUtil updateUtil
+		UpdateUtil updateUtil,
+		ResearchForUserRetrieveUtils researchForUserRetrieveUtil
 	 )
 	{
 		super();
@@ -63,6 +64,7 @@ public class PerformResearchAction
 		this.now = now;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 	}
 
 
@@ -130,7 +132,7 @@ public class PerformResearchAction
 	{
 		if (null == research) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
-			log.error( "no research for id={}", research.getId() );
+			log.error("no research for id");
 			return false;
 		}
 		return true;

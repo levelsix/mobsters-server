@@ -91,6 +91,16 @@ message ResourceStorageProto {
 
 //------------------------------------------------------------------------------------------
 
+message MoneyTreeProto {
+	optional StructureInfoProto structInfo = 1;	
+	optional float productionRate = 2;
+	optional int32 capacity = 3;
+	optional int32 daysOfDuration = 4;
+	optional int32 daysForRenewal = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
 message HospitalProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 queueSize = 2;
