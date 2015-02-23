@@ -33,6 +33,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class BeginPvpBattleController extends EventController {
@@ -51,6 +52,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
   
+  @Autowired
+  protected UpdateUtil updateUtil;
   
 
   public BeginPvpBattleController() {
@@ -69,8 +72,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent)event).getBeginPvpBattleRequestProto();
-    log.info(String.format("reqProto=%s", reqProto));
+    BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent)event)
+    		.getBeginPvpBattleRequestProto();
+    log.info("reqProto={}", reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -113,7 +117,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //lock the user that client is going to attack, in order to prevent others from
     //attacking same guy, only lock a real user
     if (null != enemyUserId && !enemyUserId.isEmpty()) {
-    	getLocker().lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
+    	locker.lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
     }
     try {
     	User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId); 
@@ -167,7 +171,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } finally {
     	if (null != enemyUserId && !enemyUserId.isEmpty()) {
     		//only unlock if real user
-    		getLocker().unlockPlayer(enemyUserUuid, this.getClass().getSimpleName());
+    		locker.unlockPlayer(enemyUserUuid, this.getClass().getSimpleName());
     	}
     }
   }
@@ -392,6 +396,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setPvpLeagueForUserRetrieveUtil(
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
 	}
 	
 }

@@ -76,7 +76,7 @@ public class QueueUpAction
 	private int minElo;
 	private int maxElo;
 	private List<String> queuedOpponentIdsList;
-	private Map<String, PvpUser> userIdToPvpUser;
+//	private Map<String, PvpUser> userIdToPvpUser;
 	private List<List<MonsterForPvp>> fakeUserMonsters;
 
 	public void execute(Builder resBuilder)
@@ -189,18 +189,19 @@ public class QueueUpAction
 		//choose users either randomly or all of them
 		queuedOpponentIdsList = new ArrayList<String>();
 		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
-			queuedOpponentIdsList, userIdToPvpUser);
+			queuedOpponentIdsList);//, userIdToPvpUser);
 
 		log.info("the lucky ids who get to be attacked! ids={}",
 			queuedOpponentIdsList);
 	}
 
-	//userIdList and userIdToPvpUser are the return values
+	//prospectiveUserIds and userIdToPvpUser are the return values
 	private void selectUsers(int numNeeded, int numDefenders,
-		Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds,
-		Map<String, PvpUser> userIdToPvpUser)
+		Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds)//,
+		//Map<String, PvpUser> userIdToPvpUser)
 	{
 		Random rand = ControllerConstants.RAND;
+		
 
 		float numNeededSoFar = numNeeded;
 		float numDefendersLeft = numDefenders;
@@ -222,7 +223,7 @@ public class QueueUpAction
 			//we want to select all of them
 			if (numNeededSoFar >= numDefendersLeft) {
 				prospectiveUserIds.add(userId);
-				userIdToPvpUser.put(userId, pvpUser);
+				//userIdToPvpUser.put(userId, pvpUser);
 				numNeededSoFar -= 1;
 				numDefendersLeft -= 1;
 				continue;
@@ -236,7 +237,7 @@ public class QueueUpAction
 			if (randFloat < probabilityToBeSelected) {
 				//we have a winner!
 				prospectiveUserIds.add(userId);
-				userIdToPvpUser.put(userId, pvpUser);
+				//userIdToPvpUser.put(userId, pvpUser);
 				numNeededSoFar -= 1;
 			}
 			numDefendersLeft -= 1;
