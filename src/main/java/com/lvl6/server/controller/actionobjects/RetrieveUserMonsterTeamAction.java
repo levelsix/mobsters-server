@@ -193,9 +193,13 @@ public class RetrieveUserMonsterTeamAction
 		
 		//get the team monster donation solicitations by all clans
 		Collection<String> clanIds = sup.getClanIdsToClans().keySet();
-		List<ClanMemberTeamDonation> allClansSolicitations =
-			clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonationForClanIds(clanIds);
+		List<ClanMemberTeamDonation> allClansSolicitations = null;
+		if (clanIds.isEmpty()) {
+			allClansSolicitations = new ArrayList<ClanMemberTeamDonation>();
+		} else {
+			allClansSolicitations = clanMemberTeamDonationRetrieveUtil
+					.getClanMemberTeamDonationForClanIds(clanIds);
+		}
 		
 		//mapify those donation solicitations for easier access later on
 		Map<String, String> cmtdIdToAllButRetrieverUserId = new HashMap<String, String>();

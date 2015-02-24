@@ -120,6 +120,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 					"could not retrieve clan invites for clanIds=%s",
 					clanIds),
 				e);
+			clanMemberTeamDonations = new ArrayList<ClanMemberTeamDonation>();	
 		}
 		
 		return clanMemberTeamDonations;
