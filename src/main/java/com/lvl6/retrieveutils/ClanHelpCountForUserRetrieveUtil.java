@@ -2,6 +2,7 @@ package com.lvl6.retrieveutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +55,7 @@ public class ClanHelpCountForUserRetrieveUtil {
 		Date sevenDaysAgo = timeUtils.createDateAddDays(now, -WEEK);
 		Date startOfDay = timeUtils.createDateAtStartOfDay(sevenDaysAgo);
 		try {
+			Timestamp time = new Timestamp((startOfDay).getTime());
 			String query = String.format(
 				"SELECT %s, %s, sum(%s) as %s, sum(%s) as %s FROM %s WHERE %s > ? and %s=? GROUP BY %s",
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID,
@@ -68,7 +70,7 @@ public class ClanHelpCountForUserRetrieveUtil {
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID);
 			
 			List<Object> values = new ArrayList<Object>();
-			values.add(startOfDay);
+			values.add(time);
 			values.add(clanId);
 			
 			log.info( "getUserIdToClanHelpCountForClan() query={}, values={}",
@@ -219,7 +221,7 @@ public class ClanHelpCountForUserRetrieveUtil {
 			uchc.setUserId(rs.getString(DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID));
 			uchc.setClanId(rs.getString(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID));
 			uchc.setNumSolicited(rs.getInt(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED));
-			uchc.setNumSolicited(rs.getInt(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN));
+			uchc.setNumGiven(rs.getInt(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN));
 			
 			return uchc;
 		}        
