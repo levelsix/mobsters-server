@@ -186,6 +186,7 @@ public class ControllerConstants {
 	//TOGGLES
 //	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
+	public static final String SERVER_TOGGLE__LOGGING_PVP_BATTLE_OUTCOME_DETAILS = "logging_pvp_battle_outcome_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
 	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
 	public static final String SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO = "pvp_bots_only_below_some_elo";

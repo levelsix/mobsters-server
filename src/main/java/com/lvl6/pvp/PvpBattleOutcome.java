@@ -4,6 +4,9 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.properties.ControllerConstants;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+
 public class PvpBattleOutcome
 {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -29,12 +32,6 @@ public class PvpBattleOutcome
 	private double defenderCash;
 	private double defenderOil;
 	
-	private NormalDistribution attackerWonCnd;
-	
-	private double meanForCnd;
-	private double standardDeviationForCnd;
-	private double lowerElo;
-	
 	public PvpBattleOutcome(
 		String attackerId,
 		int attackerElo,
@@ -50,8 +47,24 @@ public class PvpBattleOutcome
 		this.defenderElo = defenderElo;
 		this.defenderCash = defenderCash;
 		this.defenderOil = defenderOil;
+		
+		setLoggingBoolean();
 	}
+	
+	//derived data
+	private boolean loggingOn;
+	private NormalDistribution attackerWonCnd;
+	
+	private double meanForCnd;
+	private double standardDeviationForCnd;
+	private double lowerElo;
 
+	private void setLoggingBoolean() { 
+		loggingOn = ServerToggleRetrieveUtils
+				.getToggleValueForName(ControllerConstants
+						.SERVER_TOGGLE__LOGGING_PVP_BATTLE_OUTCOME_DETAILS);
+	}
+	
 	public NormalDistribution getAttackerWonCnd()
 	{
 		if (null == attackerWonCnd) {
@@ -70,9 +83,12 @@ public class PvpBattleOutcome
 				meanForCnd, standardDeviationForCnd);
 			
 		}
-		String msg = String.format( "meanForCnd=%f, standardDeviation=%f",
-			meanForCnd, standardDeviationForCnd );
-		log.info(msg);
+		
+		if (loggingOn)
+		{
+			log.info("meanForCnd={}, standardDeviation={}",
+					meanForCnd, standardDeviationForCnd );
+		}
 		
 		return attackerWonCnd;
 	}
@@ -95,79 +111,97 @@ public class PvpBattleOutcome
 	Offset = CND( Match Range, Mean, Standard Deviation)
 	*/
 	public int getUnsignedEloAttackerWins() {
-		log.info(String.format(
-			"getEloAttackerWins() attackerId=%s, defenderId=%s",
-			attackerId, defenderId));
+		if (loggingOn) {
+			log.info( "getEloAttackerWins() attackerId={}, defenderId={}",
+					attackerId, defenderId );
+		}
 		
 		double eloDiff = attackerElo - defenderElo;
-		log.info(String.format(
-			"getEloAttackerWins() attackerElo=%f,  defenderElo=%f, eloDiff=%f",
-			attackerElo, defenderElo, eloDiff));
+
+		if (loggingOn) {
+			log.info( "getEloAttackerWins() attackerElo={}, defenderElo={}, eloDiff={}",
+					new Object[] { attackerElo, defenderElo, eloDiff } );
+		}
 		
 		double winnerLoserCndVal = getAttackerWonCnd().cumulativeProbability(eloDiff);
-		log.info(String.format(
-			"getEloAttackerWins() winnerLoserCndVal=%f",
-			winnerLoserCndVal));
+		if (loggingOn) {
+			log.info( "getEloAttackerWins() winnerLoserCndVal={}",
+			winnerLoserCndVal );
+		}
 		
 		double matchRange = lowerElo * OFFSET__VALID_MATCH_RANGE;
 		double offset = getAttackerWonCnd().cumulativeProbability(matchRange);
-		log.info(String.format(
-			"getEloAttackerWins() matchRange (lowerElo * ELO_VALID_MATCH_RANGE)=%f, offset=%f",
-			matchRange, offset));
+		if (loggingOn) {
+			log.info(
+					"getEloAttackerWins() matchRange (lowerElo * ELO_VALID_MATCH_RANGE)={}, offset={}",
+					matchRange, offset);
+		}
 		
 		double scaleDividend = ELO_SCALE_DIVIDEND_MULTIPLE * lowerElo;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
-		log.info(String.format(
-			"getEloAttackerWins() scaleDividend=%f, scaleDivisor=%f, scale=%f",
-			scaleDividend, scaleDivisor, scale));
-		
+		if (loggingOn) {
+			log.info(
+					"getEloAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
+					new Object[] { scaleDividend, scaleDivisor, scale } );
+		}
+			
 		double retVal = (winnerLoserCndVal - offset) * scale;
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal); 
-		log.info(String.format(
-			"getEloAttackerWins() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d",
-			(winnerLoserCndVal - offset), retVal, intRetVal));
+		if (loggingOn) {
+			log.info(
+					"getEloAttackerWins() (winnerLoserCndVal - offset)={}, retVal={}, intRetVal={}",
+					new Object[] { (winnerLoserCndVal - offset), retVal, intRetVal} );
+		}
 		
 		return intRetVal;
 	}
 	
 	public int getUnsignedEloAttackerLoses() {
-		log.info(String.format(
-			"getEloAttackerLoses() attackerId=%s, defenderId=%s",
-			attackerId, defenderId));
+		if (loggingOn) {
+			log.info( "getEloAttackerLoses() attackerId={}, defenderId={}",
+					attackerId, defenderId );
+		}
 		
 		double eloDiff = defenderElo - attackerElo;
-		log.info(String.format(
-			"getEloAttackerLoses() attackerElo=%f,  defenderElo=%f, eloDiff=%f",
-			attackerElo, defenderElo, eloDiff));
+		if (loggingOn) {
+			log.info( "getEloAttackerLoses() attackerElo={},  defenderElo={}, eloDiff={}",
+					new Object[] { attackerElo, defenderElo, eloDiff });
+		}
 		
 		double winnerLoserCndVal = getAttackerWonCnd().cumulativeProbability(eloDiff);
-		log.info(String.format(
-			"getEloAttackerLoses() winnerLoserCndVal=%f",
-			winnerLoserCndVal));
+		if (loggingOn) {
+			log.info( "getEloAttackerLoses() winnerLoserCndVal={}",
+					winnerLoserCndVal);
+		}
 		
 		double matchRange = OFFSET__VALID_MATCH_RANGE* lowerElo;
 		double offset = getAttackerWonCnd().cumulativeProbability(matchRange);
-		log.info(String.format(
-			"getEloAttackerLoses() matchRange (lowerElo * OFFSET__VALID_MATCH_RANGE)=%f, offset=%f",
-			matchRange, offset));
+		if (loggingOn) {
+			log.info(
+					"getEloAttackerLoses() matchRange (lowerElo * OFFSET__VALID_MATCH_RANGE)={}, offset={}",
+					matchRange, offset);
+		}
 		
 		double scaleDividend = ELO_SCALE_DIVIDEND_MULTIPLE * lowerElo;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
-		log.info(String.format(
-			"getEloAttackerLoses() scaleDividend=%f, scaleDivisor=%f, scale=%f",
-			scaleDividend, scaleDivisor, scale));
+		if (loggingOn) {
+			log.info( "getEloAttackerLoses() scaleDividend={}, scaleDivisor={}, scale={}",
+					new Object[] { scaleDividend, scaleDivisor, scale } );
+		}
 		
 		double retVal = (winnerLoserCndVal - offset) * scale;
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal); 
-		log.info(String.format(
-			"getEloAttackerLoses() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d",
-			(winnerLoserCndVal - offset), retVal, intRetVal));
+		if (loggingOn) {
+			log.info(
+					"getEloAttackerLoses() (winnerLoserCndVal - offset)={}, retVal={}, intRetVal={}",
+					new Object[] { (winnerLoserCndVal - offset), retVal, intRetVal } );
+		}
 		
 		return intRetVal;
 	}
@@ -175,32 +209,37 @@ public class PvpBattleOutcome
 	//RESOURCE SECTION
 	public int getUnsignedCashAttackerWins() {
 		
-		log.info(String.format(
-			"attackerId=%s, defenderId=%s",
-			attackerId, defenderId));
+		if (loggingOn) {
+			log.info( "attackerId={}, defenderId={}",
+					attackerId, defenderId);
+		}
 		
 		double eloDiff = attackerElo - defenderElo;
-		log.info(String.format(
-			"cashAttackerWins() attackerElo=%f,  defenderElo=%f, eloDiff=%f",
-			attackerElo, defenderElo, eloDiff));
+		if (loggingOn) {
+			log.info( "cashAttackerWins() attackerElo={}, defenderElo={}, eloDiff={}",
+					new Object[] { attackerElo, defenderElo, eloDiff } );
+		}
 		
 		double winnerLoserCndVal = getAttackerWonCnd().cumulativeProbability(eloDiff);
-		log.info(String.format(
-			"cashAttackerWins() winnerLoserCndVal=%f",
-			winnerLoserCndVal));
+		if (loggingOn) {
+			log.info( "cashAttackerWins() winnerLoserCndVal={}",
+					winnerLoserCndVal );
+		}
 		
 		double matchRange = OFFSET__VALID_MATCH_RANGE * lowerElo;
 		double offset = getAttackerWonCnd().cumulativeProbability(matchRange);
-		log.info(String.format(
-			"cashAttackerWins() matchRange (defenderCash)=%f, offset=%f",
-			matchRange, offset));
+		if (loggingOn) {
+			log.info( "cashAttackerWins() matchRange (defenderCash)={}, offset={}",
+					matchRange, offset );
+		}
 
 		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * defenderCash;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
-		log.info(String.format(
-			"cashAttackerWins() scaleDividend=%f, scaleDivisor=%f, scale=%f",
-			scaleDividend, scaleDivisor, scale));
+		if (loggingOn) {
+			log.info( "cashAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
+					new Object[] { scaleDividend, scaleDivisor, scale } );
+		}
 
 		double retVal = (winnerLoserCndVal - offset) * scale;
 		//July 24, 2014. The amount shouldn't be greater than
@@ -208,9 +247,11 @@ public class PvpBattleOutcome
 		int intRetVal = (int) Math.round(retVal); 
 		intRetVal += CASH__MIN_REWARD;
 		
-		log.info(String.format(
-			"cashAttackerWins() (winnerLoserCndVal - offset)=%f, retVal=%f, intRetVal=%d, min=%s",
-			(winnerLoserCndVal - offset), retVal, intRetVal, CASH__MIN_REWARD));
+		if (loggingOn) {
+			log.info(
+					"cashAttackerWins() (winnerLoserCndVal - offset)={}, retVal={}, intRetVal={}, min={}",
+					new Object[] { (winnerLoserCndVal - offset), retVal, intRetVal, CASH__MIN_REWARD } );
+		}
 		
 		return intRetVal;
 	}
@@ -218,35 +259,41 @@ public class PvpBattleOutcome
 	//TODO: Consider storing some of these values into some private variables
 	public int getUnsignedOilAttackerWins() {
 
-		log.info(String.format(
-			"attackerId=%s, defenderId=%s",
-			attackerId, defenderId));
+		if (loggingOn) {
+			log.info( "attackerId={}, defenderId={}",
+					attackerId, defenderId );
+		}
 		
 		double eloDiff = attackerElo - defenderElo;
-		log.info(String.format(
-			"oilAttackerWins() attackerElo=%s,  defenderElo=%s, eloDiff=%s",
-			attackerElo, defenderElo, eloDiff));
+		if (loggingOn) {
+			log.info(
+					"oilAttackerWins() attackerElo={}, defenderElo={}, eloDiff={}",
+					new Object[] { attackerElo, defenderElo, eloDiff } );
+		}
 		
 		double winnerLoserCndVal = getAttackerWonCnd().cumulativeProbability(eloDiff);
-		log.info(String.format(
-			"oilAttackerWins() winnerLoserCndVal=%s",
-			winnerLoserCndVal));
+		if (loggingOn) {
+			log.info( "oilAttackerWins() winnerLoserCndVal={}",
+					winnerLoserCndVal );
+		}
 		
 		//double matchRange = defenderOil;
 		double matchRange = OFFSET__VALID_MATCH_RANGE * lowerElo;
 		double offset = getAttackerWonCnd().cumulativeProbability(matchRange);
-		log.info(String.format(
-			"oilAttackerWins() matchRange (defenderOil)=%s, offset=%s",
-			matchRange, offset));
+		if (loggingOn) {
+			log.info( "oilAttackerWins() matchRange (defenderOil)={}, offset={}",
+					matchRange, offset );
+		}
 		
 
 //		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * lowerElo;
 		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * defenderOil;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
-		log.info(String.format(
-			"oilAttackerWins() scaleDividend=%s, scaleDivisor=%s, scale=%s",
-			scaleDividend, scaleDivisor, scale));
+		if (loggingOn) {
+			log.info( "oilAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
+					new Object [] { scaleDividend, scaleDivisor, scale } );
+		}
 		
 		double retVal = (winnerLoserCndVal - offset) * scale;
 		//July 24, 2014. The amount shouldn't be greater than
@@ -254,9 +301,11 @@ public class PvpBattleOutcome
 		int intRetVal = (int) Math.round(retVal); 
 		intRetVal += OIL__MIN_REWARD;
 		
-		log.info(String.format(
-			"oilAttackerWins() (winnerLoserCndVal - offset)=%s, retVal=%s, intRetVal=%s, min=%s",
-			(winnerLoserCndVal - offset), retVal, intRetVal, OIL__MIN_REWARD));
+		if (loggingOn) {
+			log.info(
+					"oilAttackerWins() (winnerLoserCndVal - offset)={}, retVal={}, intRetVal={}, min={}",
+					new Object[] { (winnerLoserCndVal - offset), retVal, intRetVal, OIL__MIN_REWARD } );
+		}
 		
 		return intRetVal;
 	}
