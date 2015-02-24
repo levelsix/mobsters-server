@@ -265,6 +265,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			  clanHelpCountForUserRetrieveUtil.getUserIdToClanHelpCountForClan(
 				  clanId, new Date());
 
+		  log.info("userIdToClanHelps={}", userIdToClanHelps);
+		  
 		  for (UserClan uc : userClans) {
 		    String userId = uc.getUserId();
 			  User u = usersMap.get(userId);

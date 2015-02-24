@@ -55,7 +55,7 @@ public class ClanHelpCountForUserRetrieveUtil {
 		Date startOfDay = timeUtils.createDateAtStartOfDay(sevenDaysAgo);
 		try {
 			String query = String.format(
-				"SELECT %s, %s, sum(%s) as %s, sum(%s) as %s FROM %s WHERE %s > ? GROUP BY %s",
+				"SELECT %s, %s, sum(%s) as %s, sum(%s) as %s FROM %s WHERE %s > ? and %s=? GROUP BY %s",
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID,
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID,
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED,
@@ -64,13 +64,15 @@ public class ClanHelpCountForUserRetrieveUtil {
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN,
 				TABLE_NAME,
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE,
+				DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID,
 				DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID);
 			
 			List<Object> values = new ArrayList<Object>();
 			values.add(startOfDay);
+			values.add(clanId);
 			
-			log.info(String.format(
-				"getUserIdToClanHelpCountForClan() query=%s", query));
+			log.info( "getUserIdToClanHelpCountForClan() query={}, values={}",
+					query, values);
 			List<UserClanHelpCount> chList = this.jdbcTemplate
 					.query(query, values.toArray(), rowMapper);
 			
