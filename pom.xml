@@ -95,7 +95,7 @@
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>
 		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/toonsquadapuzzlerpgbattlegamefortango]]></globals.appStoreUrl>
 		<globals.appleBundleId>com.scopely.mobsquad</globals.appleBundleId>
-		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
+		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=931559502&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
 
 		<!-- deprecated -->
