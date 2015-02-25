@@ -32,7 +32,9 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -65,6 +67,10 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	
+	@Autowired
+	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
+	
 
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
@@ -241,7 +247,8 @@ public class InAppPurchaseController extends EventController {
 
 			Date now = new Date();
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
-					receiptFromApple, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
+					receiptFromApple, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, 
+					structureForUserRetrieveUtils2, insertUtil, updateUtil);
 
 			iapa.execute(resBuilder);
 

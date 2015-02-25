@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -58,6 +59,7 @@ public class InAppPurchaseAction
 		Date now,
 		IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 		ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+		StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
 		InsertUtil insertUtil,
 		UpdateUtil updateUtil )
 	{
@@ -68,6 +70,7 @@ public class InAppPurchaseAction
 		this.now = now;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.structureForUserRetrieveUtils2 = structureForUserRetrieveUtils2;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -130,19 +133,15 @@ public class InAppPurchaseAction
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
-		boolean success = false;
-		if(isStarterPack) {
-			success = verifyStarterPack(resBuilder);
-		}
-		else if(isMoneyTree) {
-			success = verifyMoneyTree(resBuilder);
-		}
-		
-		if (!success) {
+		boolean success1 = false;
+		boolean success2 = false;
+		success1 = verifyStarterPack(resBuilder);
+		success2 = verifyMoneyTree(resBuilder);
+
+		if (!success1 && !success2) {
 			return false;
 		}
-		
-		return success;
+		else return true;
 	}
 
 	private boolean verifyStarterPack(Builder resBuilder) {
@@ -212,12 +211,20 @@ public class InAppPurchaseAction
 	}
 	
 	private boolean userOwnsOneMoneyTreeMax() {
-		List<StructureForUser> listOfUsersMoneyTree = 
-				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
-		if(listOfUsersMoneyTree.size() < 2) { //can only have one money tree
-			return true;
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		List<StructureForUser> sfuList = structureForUserRetrieveUtils2.getUserStructsForUser(userId);
+		boolean hasMoneyTree = false;
+		
+		for(StructureForUser sfu : sfuList) {
+			int structId = sfu.getStructId();
+			for(Integer ids : structIdsToMoneyTreesMap.keySet()) {
+				if(structId == ids) {
+					hasMoneyTree = true;
+				}
+			}
 		}
-		else return false;
+		
+		return hasMoneyTree;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
@@ -365,6 +372,8 @@ public class InAppPurchaseAction
 					"failed to add money tree to table for user" + userId));
 		}
 		
+		processPurchase(resBuilder);
+		
 		StructureForUser sfu = null;
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
 		sfu = listOfUsersMoneyTree.get(0); //get only element of list
@@ -444,10 +453,11 @@ public class InAppPurchaseAction
 		String gems = MiscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
+
+
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemChange) {
-			currencyDeltas.put(gems, gemChange);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 				ControllerConstants.UCHRFC__IN_APP_PURCHASE);

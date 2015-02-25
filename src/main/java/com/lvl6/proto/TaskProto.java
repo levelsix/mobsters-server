@@ -8644,6 +8644,15 @@ public final class TaskProto {
      * <code>optional float charImgScaleFactor = 15;</code>
      */
     float getCharImgScaleFactor();
+
+    /**
+     * <code>optional bool isFake = 16;</code>
+     */
+    boolean hasIsFake();
+    /**
+     * <code>optional bool isFake = 16;</code>
+     */
+    boolean getIsFake();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TaskMapElementProto}
@@ -8779,6 +8788,11 @@ public final class TaskProto {
             case 125: {
               bitField0_ |= 0x00004000;
               charImgScaleFactor_ = input.readFloat();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00008000;
+              isFake_ = input.readBool();
               break;
             }
           }
@@ -9127,6 +9141,21 @@ public final class TaskProto {
       return charImgScaleFactor_;
     }
 
+    public static final int ISFAKE_FIELD_NUMBER = 16;
+    private boolean isFake_;
+    /**
+     * <code>optional bool isFake = 16;</code>
+     */
+    public boolean hasIsFake() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional bool isFake = 16;</code>
+     */
+    public boolean getIsFake() {
+      return isFake_;
+    }
+
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
@@ -9143,6 +9172,7 @@ public final class TaskProto {
       charImgVertPixelOffset_ = 0;
       charImgHorizPixelOffset_ = 0;
       charImgScaleFactor_ = 0F;
+      isFake_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9201,6 +9231,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeFloat(15, charImgScaleFactor_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeBool(16, isFake_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9270,6 +9303,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(15, charImgScaleFactor_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(16, isFake_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9418,6 +9455,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00002000);
         charImgScaleFactor_ = 0F;
         bitField0_ = (bitField0_ & ~0x00004000);
+        isFake_ = false;
+        bitField0_ = (bitField0_ & ~0x00008000);
         return this;
       }
 
@@ -9506,6 +9545,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00004000;
         }
         result.charImgScaleFactor_ = charImgScaleFactor_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.isFake_ = isFake_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9572,6 +9615,9 @@ public final class TaskProto {
         }
         if (other.hasCharImgScaleFactor()) {
           setCharImgScaleFactor(other.getCharImgScaleFactor());
+        }
+        if (other.hasIsFake()) {
+          setIsFake(other.getIsFake());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10215,6 +10261,38 @@ public final class TaskProto {
         return this;
       }
 
+      private boolean isFake_ ;
+      /**
+       * <code>optional bool isFake = 16;</code>
+       */
+      public boolean hasIsFake() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional bool isFake = 16;</code>
+       */
+      public boolean getIsFake() {
+        return isFake_;
+      }
+      /**
+       * <code>optional bool isFake = 16;</code>
+       */
+      public Builder setIsFake(boolean value) {
+        bitField0_ |= 0x00008000;
+        isFake_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isFake = 16;</code>
+       */
+      public Builder clearIsFake() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        isFake_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
 
@@ -10320,7 +10398,7 @@ public final class TaskProto {
       "\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
       "\tEVOLUTION\020\002\"X\n\030UserPersistentEventProto" +
       "\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\005\022\031\n\021c" +
-      "oolDownStartTime\030\003 \001(\003\"\367\002\n\023TaskMapElemen" +
+      "oolDownStartTime\030\003 \001(\003\"\207\003\n\023TaskMapElemen" +
       "tProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002" +
       " \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\0224\n\007elem" +
       "ent\030\005 \001(\0162\027.com.lvl6.proto.Element:\nNO_E" +
@@ -10330,7 +10408,7 @@ public final class TaskProto {
       "\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026charImgVe" +
       "rtPixelOffset\030\r \001(\005\022\037\n\027charImgHorizPixel" +
       "Offset\030\016 \001(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002" +
-      "B\013B\tTaskProto"
+      "\022\016\n\006isFake\030\020 \001(\010B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10394,7 +10472,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-        new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", });
+        new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", "IsFake", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();

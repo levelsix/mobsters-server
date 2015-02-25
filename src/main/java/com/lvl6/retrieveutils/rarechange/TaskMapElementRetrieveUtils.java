@@ -112,6 +112,7 @@ import com.lvl6.utils.DBConnection;
     int charImgVertPixelOffset = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET);
     int charImgHorizPixelOffset = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET);
     float charImgScaleFactor = rs.getFloat(DBConstants.TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR);
+    boolean isFake = rs.getBoolean(DBConstants.TASK_MAP_ELEMENT__IS_FAKE);
         
     if (null != element) {
     	String newElement = element.trim().toUpperCase();
@@ -126,7 +127,7 @@ import com.lvl6.utils.DBConnection;
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
     	element, boss, bossImgName, itemDropId, sectionName, cashReward,
     	oilReward, characterImgName, charImgVertPixelOffset,
-    	charImgHorizPixelOffset, charImgScaleFactor);
+    	charImgHorizPixelOffset, charImgScaleFactor, isFake);
         
     return taskMap;
   }
