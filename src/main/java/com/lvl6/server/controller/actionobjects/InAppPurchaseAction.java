@@ -347,9 +347,9 @@ public class InAppPurchaseAction
 			Timestamp lastRetrievedTime = null;
 			boolean isComplete = true;
 			
-			userStructId = insertUtil.insertUserStruct(userId, 
-					ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, cp, purchaseTime,
-			        lastRetrievedTime, isComplete);
+//			userStructId = insertUtil.insertUserStruct(userId, 
+//					ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, cp, purchaseTime,
+//			        lastRetrievedTime, isComplete);
 		}
 		else {
 			userStructId = listOfUsersMoneyTree.get(0).getId();

@@ -257,11 +257,6 @@ public class StaticDataContainer
 
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
-			
-
-			if (!bp.isDisplayToUser()) {
-				continue;
-			}
 
 			//get the booster items associated with this booster pack
 			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
