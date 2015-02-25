@@ -1472,6 +1472,30 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> 
+        getUpdatedMoneyTreeList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    com.lvl6.proto.StructureProto.FullUserStructureProto getUpdatedMoneyTree(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    int getUpdatedMoneyTreeCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder> 
+        getUpdatedMoneyTreeOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseResponseProto}
@@ -1596,6 +1620,14 @@ public final class EventInAppPurchaseProto {
               updatedUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
               break;
             }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                updatedMoneyTree_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullUserStructureProto>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              updatedMoneyTree_.add(input.readMessage(com.lvl6.proto.StructureProto.FullUserStructureProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1609,6 +1641,9 @@ public final class EventInAppPurchaseProto {
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          updatedMoneyTree_ = java.util.Collections.unmodifiableList(updatedMoneyTree_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2011,6 +2046,41 @@ public final class EventInAppPurchaseProto {
       return updatedUserItems_.get(index);
     }
 
+    public static final int UPDATEDMONEYTREE_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> updatedMoneyTree_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    public java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> getUpdatedMoneyTreeList() {
+      return updatedMoneyTree_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder> 
+        getUpdatedMoneyTreeOrBuilderList() {
+      return updatedMoneyTree_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    public int getUpdatedMoneyTreeCount() {
+      return updatedMoneyTree_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    public com.lvl6.proto.StructureProto.FullUserStructureProto getUpdatedMoneyTree(int index) {
+      return updatedMoneyTree_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+     */
+    public com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
+        int index) {
+      return updatedMoneyTree_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
@@ -2021,6 +2091,7 @@ public final class EventInAppPurchaseProto {
       receipt_ = "";
       updatedOrNew_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
+      updatedMoneyTree_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2061,6 +2132,9 @@ public final class EventInAppPurchaseProto {
       }
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         output.writeMessage(9, updatedUserItems_.get(i));
+      }
+      for (int i = 0; i < updatedMoneyTree_.size(); i++) {
+        output.writeMessage(10, updatedMoneyTree_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2106,6 +2180,10 @@ public final class EventInAppPurchaseProto {
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, updatedUserItems_.get(i));
+      }
+      for (int i = 0; i < updatedMoneyTree_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, updatedMoneyTree_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2223,6 +2301,7 @@ public final class EventInAppPurchaseProto {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
+          getUpdatedMoneyTreeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2260,6 +2339,12 @@ public final class EventInAppPurchaseProto {
           bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           updatedUserItemsBuilder_.clear();
+        }
+        if (updatedMoneyTreeBuilder_ == null) {
+          updatedMoneyTree_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          updatedMoneyTreeBuilder_.clear();
         }
         return this;
       }
@@ -2338,6 +2423,15 @@ public final class EventInAppPurchaseProto {
           result.updatedUserItems_ = updatedUserItems_;
         } else {
           result.updatedUserItems_ = updatedUserItemsBuilder_.build();
+        }
+        if (updatedMoneyTreeBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            updatedMoneyTree_ = java.util.Collections.unmodifiableList(updatedMoneyTree_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.updatedMoneyTree_ = updatedMoneyTree_;
+        } else {
+          result.updatedMoneyTree_ = updatedMoneyTreeBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2429,6 +2523,32 @@ public final class EventInAppPurchaseProto {
                    getUpdatedUserItemsFieldBuilder() : null;
             } else {
               updatedUserItemsBuilder_.addAllMessages(other.updatedUserItems_);
+            }
+          }
+        }
+        if (updatedMoneyTreeBuilder_ == null) {
+          if (!other.updatedMoneyTree_.isEmpty()) {
+            if (updatedMoneyTree_.isEmpty()) {
+              updatedMoneyTree_ = other.updatedMoneyTree_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureUpdatedMoneyTreeIsMutable();
+              updatedMoneyTree_.addAll(other.updatedMoneyTree_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedMoneyTree_.isEmpty()) {
+            if (updatedMoneyTreeBuilder_.isEmpty()) {
+              updatedMoneyTreeBuilder_.dispose();
+              updatedMoneyTreeBuilder_ = null;
+              updatedMoneyTree_ = other.updatedMoneyTree_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              updatedMoneyTreeBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedMoneyTreeFieldBuilder() : null;
+            } else {
+              updatedMoneyTreeBuilder_.addAllMessages(other.updatedMoneyTree_);
             }
           }
         }
@@ -3478,6 +3598,246 @@ public final class EventInAppPurchaseProto {
           updatedUserItems_ = null;
         }
         return updatedUserItemsBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> updatedMoneyTree_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedMoneyTreeIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          updatedMoneyTree_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullUserStructureProto>(updatedMoneyTree_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.FullUserStructureProto, com.lvl6.proto.StructureProto.FullUserStructureProto.Builder, com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder> updatedMoneyTreeBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> getUpdatedMoneyTreeList() {
+        if (updatedMoneyTreeBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedMoneyTree_);
+        } else {
+          return updatedMoneyTreeBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public int getUpdatedMoneyTreeCount() {
+        if (updatedMoneyTreeBuilder_ == null) {
+          return updatedMoneyTree_.size();
+        } else {
+          return updatedMoneyTreeBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public com.lvl6.proto.StructureProto.FullUserStructureProto getUpdatedMoneyTree(int index) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          return updatedMoneyTree_.get(index);
+        } else {
+          return updatedMoneyTreeBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder setUpdatedMoneyTree(
+          int index, com.lvl6.proto.StructureProto.FullUserStructureProto value) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.set(index, value);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder setUpdatedMoneyTree(
+          int index, com.lvl6.proto.StructureProto.FullUserStructureProto.Builder builderForValue) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder addUpdatedMoneyTree(com.lvl6.proto.StructureProto.FullUserStructureProto value) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.add(value);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder addUpdatedMoneyTree(
+          int index, com.lvl6.proto.StructureProto.FullUserStructureProto value) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.add(index, value);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder addUpdatedMoneyTree(
+          com.lvl6.proto.StructureProto.FullUserStructureProto.Builder builderForValue) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder addUpdatedMoneyTree(
+          int index, com.lvl6.proto.StructureProto.FullUserStructureProto.Builder builderForValue) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder addAllUpdatedMoneyTree(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullUserStructureProto> values) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          ensureUpdatedMoneyTreeIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedMoneyTree_);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder clearUpdatedMoneyTree() {
+        if (updatedMoneyTreeBuilder_ == null) {
+          updatedMoneyTree_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public Builder removeUpdatedMoneyTree(int index) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          ensureUpdatedMoneyTreeIsMutable();
+          updatedMoneyTree_.remove(index);
+          onChanged();
+        } else {
+          updatedMoneyTreeBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public com.lvl6.proto.StructureProto.FullUserStructureProto.Builder getUpdatedMoneyTreeBuilder(
+          int index) {
+        return getUpdatedMoneyTreeFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
+          int index) {
+        if (updatedMoneyTreeBuilder_ == null) {
+          return updatedMoneyTree_.get(index);  } else {
+          return updatedMoneyTreeBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder> 
+           getUpdatedMoneyTreeOrBuilderList() {
+        if (updatedMoneyTreeBuilder_ != null) {
+          return updatedMoneyTreeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedMoneyTree_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public com.lvl6.proto.StructureProto.FullUserStructureProto.Builder addUpdatedMoneyTreeBuilder() {
+        return getUpdatedMoneyTreeFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.FullUserStructureProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public com.lvl6.proto.StructureProto.FullUserStructureProto.Builder addUpdatedMoneyTreeBuilder(
+          int index) {
+        return getUpdatedMoneyTreeFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.FullUserStructureProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto.Builder> 
+           getUpdatedMoneyTreeBuilderList() {
+        return getUpdatedMoneyTreeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.FullUserStructureProto, com.lvl6.proto.StructureProto.FullUserStructureProto.Builder, com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder> 
+          getUpdatedMoneyTreeFieldBuilder() {
+        if (updatedMoneyTreeBuilder_ == null) {
+          updatedMoneyTreeBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.FullUserStructureProto, com.lvl6.proto.StructureProto.FullUserStructureProto.Builder, com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder>(
+                  updatedMoneyTree_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          updatedMoneyTree_ = null;
+        }
+        return updatedMoneyTreeBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseResponseProto)
@@ -6571,7 +6931,7 @@ public final class EventInAppPurchaseProto {
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
       "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\"\305\003\n\032InAppPurchaseRespon" +
+      "\022\016\n\006ipaddr\030\006 \001(\t\"\207\004\n\032InAppPurchaseRespon" +
       "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
       "lvl6.proto.InAppPurchaseResponseProto.In" +
@@ -6581,36 +6941,37 @@ public final class EventInAppPurchaseProto {
       "\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6." +
       "proto.FullUserMonsterProto\0227\n\020updatedUse" +
       "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
-      "oto\"C\n\023InAppPurchaseStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034Ear" +
-      "nFreeDiamondsRequestProto\0220\n\006sender\030\001 \001(",
-      "\0132 .com.lvl6.proto.MinimumUserProto\022J\n\020f" +
-      "reeDiamondsType\030\002 \001(\0162$.com.lvl6.proto.E" +
-      "arnFreeDiamondsType:\nFB_CONNECT\022\022\n\nclien" +
-      "tTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022T\n\006status\030\002 \001(\0162D.com.lv" +
-      "l6.proto.EarnFreeDiamondsResponseProto.E" +
-      "arnFreeDiamondsStatus\022J\n\020freeDiamondsTyp" +
-      "e\030\003 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\"v\n\026EarnFreeDiamondsSta",
-      "tus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APART_FRO" +
-      "M_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020" +
-      "\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGemsForRes" +
-      "ourcesRequestProto\022@\n\006sender\030\001 \001(\01320.com" +
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResources\030\003 " +
-      "\001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.lvl6.pro" +
-      "to.ResourceType:\004CASH\022\022\n\nclientTime\030\005 \001(" +
-      "\003\"\252\002\n%ExchangeGemsForResourcesResponsePr" +
-      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min",
-      "imumUserProtoWithMaxResources\022d\n\006status\030" +
-      "\002 \001(\0162T.com.lvl6.proto.ExchangeGemsForRe" +
-      "sourcesResponseProto.ExchangeGemsForReso" +
-      "urcesStatus\"Y\n\036ExchangeGemsForResourcesS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FA" +
-      "IL_INSUFFICIENT_GEMS\020\003B\031B\027EventInAppPurc" +
-      "haseProto"
+      "oto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl6" +
+      ".proto.FullUserStructureProto\"C\n\023InAppPu" +
+      "rchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021D",
+      "UPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamondsR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022J\n\020freeDiamondsTyp" +
+      "e\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
+      "sType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002" +
+      "\n\035EarnFreeDiamondsResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.EarnF" +
+      "reeDiamondsResponseProto.EarnFreeDiamond" +
+      "sStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$.com.",
+      "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
+      "ECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUCCESS" +
+      "\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020" +
+      "\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER_FAI" +
+      "L\020\004\"\335\001\n$ExchangeGemsForResourcesRequestP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
+      "nimumUserProtoWithMaxResources\022\017\n\007numGem" +
+      "s\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014resourc" +
+      "eType\030\004 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
+      "e:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\252\002\n%Exchange",
+      "GemsForResourcesResponseProto\022@\n\006sender\030" +
+      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
+      "ithMaxResources\022d\n\006status\030\002 \001(\0162T.com.lv" +
+      "l6.proto.ExchangeGemsForResourcesRespons" +
+      "eProto.ExchangeGemsForResourcesStatus\"Y\n" +
+      "\036ExchangeGemsForResourcesStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
+      "T_GEMS\020\003B\031B\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6640,7 +7001,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", });
+        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", });
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new

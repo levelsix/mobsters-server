@@ -40,6 +40,7 @@ import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -68,6 +69,7 @@ import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.MiniJobCenterProto;
+import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
@@ -107,6 +109,7 @@ import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -129,31 +132,31 @@ public class StaticDataContainer
 {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {}.getClass()
-		.getEnclosingClass());
+			.getEnclosingClass());
 
 	private static StaticDataProto.Builder staticDataBuilder = null;
-	
+
 	public static StaticDataProto getStaticData() {
 		if (null == staticDataBuilder) {
 			setStaticData();
 		}
-		
+
 		if (null == staticDataBuilder) {
 			log.error("CANNOT SET UP STATIC DATA!!!!");
 			return null;
 		}
 		return staticDataBuilder.build();
 	}
-	
+
 	public static void reload() {
 		setStaticData();
 	}
-	
+
 	private static void setStaticData()
 	{
 		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
-//		setPlayerCityExpansions(sdpb);
-//		setCities(sdpb);
+		//		setPlayerCityExpansions(sdpb);
+		//		setCities(sdpb);
 		setTasks(sdpb);
 		setMonsters(sdpb);
 		setUserLevelStuff(sdpb);
@@ -171,30 +174,30 @@ public class StaticDataContainer
 		setPrereqs(sdpb);
 		setBoards(sdpb);
 		setResearch(sdpb);
-		
+
 		staticDataBuilder = sdpb;
 	}
-	
 
-//	private static void setPlayerCityExpansions(Builder sdpb) {
-//		//Player city expansions
-//		Map<Integer, ExpansionCost> expansionCosts =
-//			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-//		for (ExpansionCost cec : expansionCosts.values()) {
-//			CityExpansionCostProto cecp = CreateInfoProtoUtils
-//				.createCityExpansionCostProtoFromCityExpansionCost(cec);
-//			sdpb.addExpansionCosts(cecp);
-//		}
-//	}
-//	private static void setCities(Builder sdpb) {
-//		//Cities
-//		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-//		for (Integer cityId : cities.keySet()) {
-//			City city = cities.get(cityId);
-//			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-//		}
-//	}
-	
+
+	//	private static void setPlayerCityExpansions(Builder sdpb) {
+	//		//Player city expansions
+	//		Map<Integer, ExpansionCost> expansionCosts =
+	//			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+	//		for (ExpansionCost cec : expansionCosts.values()) {
+	//			CityExpansionCostProto cecp = CreateInfoProtoUtils
+	//				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+	//			sdpb.addExpansionCosts(cecp);
+	//		}
+	//	}
+	//	private static void setCities(Builder sdpb) {
+	//		//Cities
+	//		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+	//		for (Integer cityId : cities.keySet()) {
+	//			City city = cities.get(cityId);
+	//			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+	//		}
+	//	}
+
 	private static void setTasks(Builder sdpb) {
 		//Tasks
 		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
@@ -220,7 +223,7 @@ public class StaticDataContainer
 			//get the level info for this monster
 			int monsterId = monster.getId();
 			Map<Integer, MonsterLevelInfo> monsterLvlInfo = MonsterLevelInfoRetrieveUtils
-				.getMonsterLevelInfoForMonsterId(monsterId);
+					.getMonsterLevelInfoForMonsterId(monsterId);
 
 			sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
 		}
@@ -228,7 +231,7 @@ public class StaticDataContainer
 	private static void setUserLevelStuff(Builder sdpb) {
 		//User level stuff
 		Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
-			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
+				StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
 		for (int lvl : levelToStaticUserLevelInfo.keySet())  {
 			StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
 			int exp = sli.getRequiredExp();
@@ -239,22 +242,27 @@ public class StaticDataContainer
 			sdpb.addSlip(slipb.build());
 		}
 	}
-	
+
 	private static void setBoosterPackStuff(Builder sdpb) {
 		//Booster pack stuff
 		Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
-			.getBoosterPackIdsToBoosterPacks();
+				.getBoosterPackIdsToBoosterPacks();
 		Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
-			BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+				BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
 		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
-			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
+				BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 
 		int starterPackId = ControllerConstants
-			.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
-			
+				.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
+
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
 			
+
+			if (!bp.isDisplayToUser()) {
+				continue;
+			}
+
 			//get the booster items associated with this booster pack
 			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
 			Collection<BoosterItem> items = null;
@@ -262,10 +270,10 @@ public class StaticDataContainer
 				items = itemIdsToItems.values();
 			}
 
-			
+
 			//get the booster display items for this booster pack
 			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
-				packIdToDisplayIdsToDisplayItems.get(bpackId);
+					packIdToDisplayIdsToDisplayItems.get(bpackId);
 			Collection<BoosterDisplayItem> displayItems = null;
 			if (null != displayIdsToDisplayItems) {
 				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
@@ -278,10 +286,10 @@ public class StaticDataContainer
                     displayItems.add(displayIdsToDisplayItems.get(displayItemId));
                 }
 			}
-			
+
 
 			BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
-				bp, items, displayItems);
+					bp, items, displayItems);
 			//do not put the starterPack into the BoosterPacks
 			if (bpackId == starterPackId) {
 				sdpb.setStarterPack(bpProto);	
@@ -289,9 +297,9 @@ public class StaticDataContainer
 			} else if (bp.isDisplayToUser()) {
 				sdpb.addBoosterPacks(bpProto);
 			}
-				
+
 		}
-		
+
 	}
 	private static void setStructures(Builder sdpb) {
 		//Structures
@@ -313,12 +321,15 @@ public class StaticDataContainer
 		setEvoChambers(sdpb, structs, structProtos);
 		setTeamCenters(sdpb, structs, structProtos);
 		setClanHouses(sdpb, structs, structProtos);
+		setMoneyTrees(sdpb, structs, structProtos);
 	}
+
+
 	//resource generator
 	private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureResourceGenerator> idsToGenerators = 
-			StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
+				StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
 		for (Integer structId : idsToGenerators.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -330,9 +341,9 @@ public class StaticDataContainer
 	}
 	//resource storage
 	private static void setStorages(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureResourceStorage> idsToStorages = 
-			StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
+				StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
 		for (Integer structId : idsToStorages.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -344,9 +355,9 @@ public class StaticDataContainer
 	}
 	//hospitals
 	private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureHospital> idsToHospitals = 
-			StructureHospitalRetrieveUtils.getStructIdsToHospitals();
+				StructureHospitalRetrieveUtils.getStructIdsToHospitals();
 		for (Integer structId : idsToHospitals.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -358,9 +369,9 @@ public class StaticDataContainer
 	}
 	//residences
 	private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureResidence> idsToResidences = 
-			StructureResidenceRetrieveUtils.getStructIdsToResidences();
+				StructureResidenceRetrieveUtils.getStructIdsToResidences();
 		for (Integer structId : idsToResidences.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -372,9 +383,9 @@ public class StaticDataContainer
 	}
 	//town hall
 	private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureTownHall> idsToTownHalls = 
-			StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
+				StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
 		for (Integer structId : idsToTownHalls.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -386,9 +397,9 @@ public class StaticDataContainer
 	}
 	//lab
 	private static void setLabs(Builder sdpb, Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureLab> idsToLabs = StructureLabRetrieveUtils
-			.getStructIdsToLabs();
+				.getStructIdsToLabs();
 		for (Integer structId : idsToLabs.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -400,27 +411,27 @@ public class StaticDataContainer
 	}
 	//mini job center
 	private static void setMiniJobCenters(Builder sdpb,
-		Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos) {
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureMiniJob> idsToMiniJobs =
-			StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
+				StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
 		for (Integer structId : idsToMiniJobs.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureMiniJob smj = idsToMiniJobs.get(structId);
 
 			MiniJobCenterProto mjcp = CreateInfoProtoUtils
-				.createMiniJobCenterProto(s, sip, smj);
+					.createMiniJobCenterProto(s, sip, smj);
 			sdpb.addAllMiniJobCenters(mjcp);
 		}
 	}
 
 	private static void setEvoChambers(Builder sdpb,
-		Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos)
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos)
 	{
 		Map<Integer, StructureEvoChamber> idsToEvoChambers =
-			StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
+				StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
 
 		for (Integer structId : idsToEvoChambers.keySet()) {
 			Structure s = structs.get(structId);
@@ -428,17 +439,17 @@ public class StaticDataContainer
 			StructureEvoChamber sec = idsToEvoChambers.get(structId);
 
 			EvoChamberProto ecp = CreateInfoProtoUtils
-				.createEvoChamberProto(s, sip, sec);
+					.createEvoChamberProto(s, sip, sec);
 			sdpb.addAllEvoChambers(ecp);
 		}
 	}
 
 	private static void setTeamCenters(Builder sdpb,
-		Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos)
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos)
 	{
 		Map<Integer, StructureTeamCenter> idsToTeamCenters =
-			StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
+				StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
 
 		for (Integer structId : idsToTeamCenters.keySet()) {
 			Structure s = structs.get(structId);
@@ -446,17 +457,17 @@ public class StaticDataContainer
 			StructureTeamCenter stc = idsToTeamCenters.get(structId);
 
 			TeamCenterProto tcp = CreateInfoProtoUtils
-				.createTeamCenterProto(s, sip, stc);
+					.createTeamCenterProto(s, sip, stc);
 			sdpb.addAllTeamCenters(tcp);
 		}
 	}
 
 	private static void setClanHouses(Builder sdpb,
-		Map<Integer, Structure> structs,
-		Map<Integer, StructureInfoProto> structProtos)
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos)
 	{
 		Map<Integer, StructureClanHouse> idsToClanHouses =
-			StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
+				StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
 
 		for (Integer structId : idsToClanHouses.keySet()) {
 			Structure s = structs.get(structId);
@@ -464,32 +475,48 @@ public class StaticDataContainer
 			StructureClanHouse stc = idsToClanHouses.get(structId);
 
 			ClanHouseProto tcp = CreateInfoProtoUtils
-				.createClanHouseProto(s, sip, stc);
+					.createClanHouseProto(s, sip, stc);
 			sdpb.addAllClanHouses(tcp);
+		}
+	}
+
+	private static void setMoneyTrees(Builder sdpb,
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos) {
+
+		Map<Integer, StructureMoneyTree> idsToMoneyTrees =
+				StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+
+		for (Integer structId : idsToMoneyTrees.keySet()) {
+			StructureMoneyTree smt = idsToMoneyTrees.get(structId);
+
+			MoneyTreeProto mtp = CreateInfoProtoUtils
+					.createMoneyTreeProtoFromStructureMoneyTree(smt);
+			sdpb.addAllMoneyTrees(mtp);
 		}
 	}
 
 	private static void setEvents(Builder sdpb) {
 		Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
-			.getAllEventIdsToEvents();
+				.getAllEventIdsToEvents();
 		for (Integer eventId: idsToEvents.keySet()) {
 			EventPersistent event  = idsToEvents.get(eventId);
 			PersistentEventProto eventProto = CreateInfoProtoUtils
-				.createPersistentEventProtoFromEvent(event);
+					.createPersistentEventProtoFromEvent(event);
 			sdpb.addPersistentEvents(eventProto);
 		}
 	}
 
 	private static void setMonsterDialogue(Builder sdpb) {
 		Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
-			MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
+				MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
 
 		List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
 		for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
 
 			for (MonsterBattleDialogue mbd : dialogue) {
 				MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
-					.createMonsterBattleDialogueProto(mbd);
+						.createMonsterBattleDialogueProto(mbd);
 				dialogueList.add(dialogueProto);
 			}
 		}
@@ -510,7 +537,7 @@ public class StaticDataContainer
 		//protofy clan events
 		List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
 		Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
-			ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+				ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
 		for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
 			PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
 			clanEventProtos.add(pcep);
@@ -535,7 +562,7 @@ public class StaticDataContainer
 
 	private static void setObstacleStuff(Builder sdpb) {
 		Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
-			.getObstacleIdsToObstacles();
+				.getObstacleIdsToObstacles();
 		if (null == idsToObstacles || idsToObstacles.isEmpty()) {
 			log.warn("no obstacles");
 			return;
@@ -563,7 +590,7 @@ public class StaticDataContainer
 
 	private static void setPvpLeagueStuff(Builder sdpb) {
 		Map<Integer, PvpLeague> idToPvpLeague = PvpLeagueRetrieveUtils
-			.getPvpLeagueIdsToPvpLeagues();
+				.getPvpLeagueIdsToPvpLeagues();
 
 		if (null == idToPvpLeague || idToPvpLeague.isEmpty()) {
 			log.warn("no pvp_leagues");
@@ -578,9 +605,9 @@ public class StaticDataContainer
 
 	private static void setAchievementStuff(Builder sdpb) {
 		Map<Integer, Achievement> achievementIdsToAchievements =
-			AchievementRetrieveUtils.getAchievementIdsToAchievements();
+				AchievementRetrieveUtils.getAchievementIdsToAchievements();
 		if (null == achievementIdsToAchievements ||
-			achievementIdsToAchievements.isEmpty()) {
+				achievementIdsToAchievements.isEmpty()) {
 			log.warn("setAchievementStuff() no achievements");
 			return;
 		}
@@ -592,9 +619,9 @@ public class StaticDataContainer
 
 	private static void setSkillStuff(Builder sdpb) {
 		Map<Integer, Skill> skillz =
-			SkillRetrieveUtils.getIdsToSkills();
+				SkillRetrieveUtils.getIdsToSkills();
 		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
-			SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
+				SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
 
 		
 		if (null == skillz || skillz.isEmpty()) {
@@ -636,7 +663,7 @@ public class StaticDataContainer
 
 	private static void setPrereqs(Builder sdpb) {
 		Map<Integer, Prerequisite> idsToPrereqs = 
-			PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
+				PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
 
 		if (null == idsToPrereqs || idsToPrereqs.isEmpty()) {
 			log.warn("setPrereqs() no prerequisites");
@@ -650,22 +677,22 @@ public class StaticDataContainer
 			sdpb.addPrereqs(pp);
 		}
 	}
-	
+
 	private static void setBoards(Builder sdpb) {
 		Map<Integer, Board> idsToBoards =
-			BoardRetrieveUtils.getIdsToBoards();
-		
+				BoardRetrieveUtils.getIdsToBoards();
+
 		if (null == idsToBoards || idsToBoards.isEmpty()) {
 			log.warn("setBoards() no boards");
 		}
-		
+
 		Map<Integer, Collection<BoardProperty>> boardIdsToProperties =
-			BoardPropertyRetrieveUtils.getBoardIdsToProperties();
-		
+				BoardPropertyRetrieveUtils.getBoardIdsToProperties();
+
 		for (Integer boardId : idsToBoards.keySet())
 		{
 			Board b = idsToBoards.get(boardId);
-			
+
 			//board can have no properties
 			Collection<BoardProperty> propertyz = null;
 			if (boardIdsToProperties.containsKey(boardId)) {
@@ -673,36 +700,36 @@ public class StaticDataContainer
 			}
 
 			BoardLayoutProto blp = CreateInfoProtoUtils
-				.createBoardLayoutProto(b, propertyz);
+					.createBoardLayoutProto(b, propertyz);
 			sdpb.addBoards(blp);
 		}
 	}
-	
+
 	private static void setResearch(Builder sdpb) {
 		Map<Integer, Research> idsToResearch =
-			ResearchRetrieveUtils.getIdsToResearch();
-		
+				ResearchRetrieveUtils.getIdsToResearch();
+
 		if (null == idsToResearch || idsToResearch.isEmpty()) {
 			log.warn("setResearch() no research");
 		}
-		
+
 		for (Integer researchId : idsToResearch.keySet())
 		{
 			Research r = idsToResearch.get(researchId);
-			
+
 			//research can have no properties
 			Map<Integer, ResearchProperty> properties =
-				ResearchPropertyRetrieveUtils.
-				getResearchPropertiesForResearchId(researchId);
-			
+					ResearchPropertyRetrieveUtils.
+					getResearchPropertiesForResearchId(researchId);
+
 			Collection<ResearchProperty> propertyz = null;
-			
+
 			if (null != properties) {
 				propertyz = properties.values();
 			}
 
 			ResearchProto rlp = CreateInfoProtoUtils
-				.createResearchProto(r, propertyz);
+					.createResearchProto(r, propertyz);
 			sdpb.addResearch(rlp);
 		}
 	}

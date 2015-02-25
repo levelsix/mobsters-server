@@ -103,6 +103,7 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG = "structure_resource_storage_config";
 	public static final String TABLE_STRUCTURE_TEAM_CENTER_CONFIG = "structure_team_center_config";
 	public static final String TABLE_STRUCTURE_TOWN_HALL_CONFIG = "structure_town_hall_config";
+	public static final String TABLE_STRUCTURE_MONEY_TREE_CONFIG = "structure_money_tree_config";
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
@@ -123,6 +124,7 @@ public class DBConstants {
 	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT = "user_facebook_invite_for_slot";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
 	public static final String TABLE_USER_SESSION = "user_session";
+	
 
 	/*COLUMNNAMES*/
 	public static final String GENERIC__USER_ID = "user_id";
@@ -1167,6 +1169,12 @@ public class DBConstants {
 	public static final String STRUCTURE_MINI_JOB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT = "generated_job_limit";
 	public static final String STRUCTURE_MINI_JOB__HOURS_BETWEEN_JOB_GENERATION = "hours_between_job_generation";
+
+	public static final String STRUCTURE_MONEY_TREE__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_MONEY_TREE__PRODUCTION_RATE = "production_rate";
+	public static final String STRUCTURE_MONEY_TREE__CAPACITY = "capacity";
+	public static final String STRUCTURE_MONEY_TREE__DAYS_OF_DURATION = "days_of_duration";
+	public static final String STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL = "days_for_renewal";
 
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";

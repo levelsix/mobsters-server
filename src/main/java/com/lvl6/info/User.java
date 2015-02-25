@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
+import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
@@ -1000,6 +1001,45 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateGemsandResourcesFromPerformingResearch(int gemsDelta, 
+			int resourceDelta, ResourceType resourceType) {
+
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		if(gemsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
+		}
+		
+		if(resourceDelta != 0) {
+			if(resourceType == ResourceType.CASH) {
+				relativeParams.put(DBConstants.USER__CASH, resourceDelta);
+			}
+			else if(resourceType == ResourceType.OIL) {
+				relativeParams.put(DBConstants.USER__OIL, resourceDelta);
+			}
+		}
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, 
+				relativeParams, null, conditionParams, "and");
+		
+		if(numUpdated ==1) {
+			this.gems += gemsDelta;
+			if(resourceDelta > 0) {
+				if(resourceType == ResourceType.CASH) {
+					this.cash += resourceDelta;
+				}
+				else if(resourceType == ResourceType.OIL) {
+					this.oil += resourceDelta;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public String getId() {
 		return id;

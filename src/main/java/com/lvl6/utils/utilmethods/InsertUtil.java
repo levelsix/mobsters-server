@@ -23,6 +23,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -64,6 +65,8 @@ public interface InsertUtil {
 	public abstract int insertUserStructs(List<String> userIdList, List<Integer> structIdList,
   		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
   		List<Timestamp> retrievedTimeList, List<Boolean> isComplete);
+	
+	public abstract String insertUserResearch(String userId, Research research, Timestamp timeOfPurchase, boolean isComplete);
 	
 	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
 			int gemChange, User user, double cashCost);

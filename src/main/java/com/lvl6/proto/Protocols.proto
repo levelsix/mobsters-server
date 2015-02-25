@@ -22,6 +22,7 @@ import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
 import "EventQuest.proto";
+import "EventResearch.proto";
 import "EventReferral.proto";
 import "EventStartup.proto";
 import "EventStaticData.proto";
@@ -166,11 +167,16 @@ enum EventProtocolRequest {
 	C_FULFILL_TEAM_DONATION_SOLICITATION_EVENT = 95;
 	C_VOID_TEAM_DONATION_SOLICITATION_EVENT = 96;
 	C_RETRIEVE_USER_MONSTER_TEAM_EVENT = 97;
+	C_DESTROY_MONEY_TREE_STRUCTURE_EVENT = 98;
+	
 	
 	//STOP AT 99, SKIP TO 200
 	C_LOGOUT_EVENT = 101;
 	
 	C_DEV_EVENT = 200;
+	C_PERFORM_RESEARCH_EVENT = 201;
+	C_FINISH_PERFORMING_RESEARCH_EVENT = 202;
+	
 }
 
 enum EventProtocolResponse {
@@ -291,6 +297,8 @@ enum EventProtocolResponse {
 	S_FULFILL_TEAM_DONATION_SOLICITATION_EVENT = 95;
 	S_VOID_TEAM_DONATION_SOLICITATION_EVENT = 96;
 	S_RETRIEVE_USER_MONSTER_TEAM_EVENT = 97;
+	S_DESTROY_MONEY_TREE_STRUCTURE_EVENT = 98;
+	
 			
 	//STOP AT 99, SKIP TO 200
 	S_UPDATE_CLIENT_USER_EVENT = 101;
@@ -304,5 +312,9 @@ enum EventProtocolResponse {
 	S_FORCE_LOGOUT_EVENT = 109;
 	S_RETRIEVE_CLAN_DATA_EVENT = 110;
 	
+	
 	S_DEV_EVENT = 200;
+	S_PERFORM_RESEARCH_EVENT = 201;
+	S_FINISH_PERFORMING_RESEARCH_EVENT = 202;
+	
 }

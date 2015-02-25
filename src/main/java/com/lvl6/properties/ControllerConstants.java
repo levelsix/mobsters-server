@@ -207,6 +207,7 @@ public class ControllerConstants {
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
 	public static final int STRUCTURE_FOR_USER__OIL_STORAGE_ID = 60;
+	public static final int STRUCTURE_FOR_MONEY_TREE_ID = 10000;
 	public static final float STRUCTURE_FOR_USER__TOWN_HALL_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD = 13F;
@@ -259,6 +260,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__IN_APP_PURCHASE = "in app purchase: ";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+	public static final String UCHRFC__PERFORMING_RESEARCH = "performing research";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
 	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
 	public static final String UCHRFC__PURCHASE_CITY_EXPANSION = "expanded city";

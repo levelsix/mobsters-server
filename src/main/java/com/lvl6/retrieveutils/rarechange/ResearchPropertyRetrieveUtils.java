@@ -66,8 +66,10 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
+						//<researchId, <researchPropertyId, researchProperty>>
 						Map<Integer, Map<Integer, ResearchProperty>> researchIdsToIdsToResearchPropertiesTemp =
 							new HashMap<Integer, Map<Integer, ResearchProperty>>();
+						//<researchPropertyId, researchProperty>
 						Map<Integer, ResearchProperty> researchPropertyIdsToResearchPropertiesTemp =
 							new HashMap<Integer, ResearchProperty>();
 						//loop through each row and convert it into a java object

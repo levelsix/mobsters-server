@@ -59,6 +59,8 @@ public interface UpdateUtil {
   public abstract boolean updateSpeedupUpgradingUserStruct(String userStructId,
   		Timestamp lastRetrievedTime);
   
+  public abstract boolean updatePurchaseTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime);
+  
   /*
    * used for updating last retrieved user struct times
    */
@@ -199,5 +201,9 @@ public interface UpdateUtil {
   public abstract int updateTaskForUserCompleted(UserTaskCompleted utc);
 
   public abstract int updateClanMemberTeamDonation( ClanMemberTeamDonation cmtd );
+
+  public abstract boolean updateUserResearch(String userResearchUuid, int researchId);
+  
+  public abstract boolean updateUserResearchCompleteStatus(String userResearchUuid);
   
 }

@@ -4337,6 +4337,826 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ResourceStorageProto)
   }
 
+  public interface MoneyTreeProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MoneyTreeProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    boolean hasStructInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional float productionRate = 2;</code>
+     */
+    boolean hasProductionRate();
+    /**
+     * <code>optional float productionRate = 2;</code>
+     */
+    float getProductionRate();
+
+    /**
+     * <code>optional int32 capacity = 3;</code>
+     */
+    boolean hasCapacity();
+    /**
+     * <code>optional int32 capacity = 3;</code>
+     */
+    int getCapacity();
+
+    /**
+     * <code>optional int32 daysOfDuration = 4;</code>
+     */
+    boolean hasDaysOfDuration();
+    /**
+     * <code>optional int32 daysOfDuration = 4;</code>
+     */
+    int getDaysOfDuration();
+
+    /**
+     * <code>optional int32 daysForRenewal = 5;</code>
+     */
+    boolean hasDaysForRenewal();
+    /**
+     * <code>optional int32 daysForRenewal = 5;</code>
+     */
+    int getDaysForRenewal();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.MoneyTreeProto}
+   */
+  public static final class MoneyTreeProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MoneyTreeProto)
+      MoneyTreeProtoOrBuilder {
+    // Use MoneyTreeProto.newBuilder() to construct.
+    private MoneyTreeProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private MoneyTreeProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final MoneyTreeProto defaultInstance;
+    public static MoneyTreeProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public MoneyTreeProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MoneyTreeProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = structInfo_.toBuilder();
+              }
+              structInfo_ = input.readMessage(com.lvl6.proto.StructureProto.StructureInfoProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(structInfo_);
+                structInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 21: {
+              bitField0_ |= 0x00000002;
+              productionRate_ = input.readFloat();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              capacity_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              daysOfDuration_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              daysForRenewal_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MoneyTreeProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MoneyTreeProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.StructureProto.MoneyTreeProto.class, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<MoneyTreeProto> PARSER =
+        new com.google.protobuf.AbstractParser<MoneyTreeProto>() {
+      public MoneyTreeProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MoneyTreeProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MoneyTreeProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int STRUCTINFO_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public boolean hasStructInfo() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+      return structInfo_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+      return structInfo_;
+    }
+
+    public static final int PRODUCTIONRATE_FIELD_NUMBER = 2;
+    private float productionRate_;
+    /**
+     * <code>optional float productionRate = 2;</code>
+     */
+    public boolean hasProductionRate() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional float productionRate = 2;</code>
+     */
+    public float getProductionRate() {
+      return productionRate_;
+    }
+
+    public static final int CAPACITY_FIELD_NUMBER = 3;
+    private int capacity_;
+    /**
+     * <code>optional int32 capacity = 3;</code>
+     */
+    public boolean hasCapacity() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 capacity = 3;</code>
+     */
+    public int getCapacity() {
+      return capacity_;
+    }
+
+    public static final int DAYSOFDURATION_FIELD_NUMBER = 4;
+    private int daysOfDuration_;
+    /**
+     * <code>optional int32 daysOfDuration = 4;</code>
+     */
+    public boolean hasDaysOfDuration() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 daysOfDuration = 4;</code>
+     */
+    public int getDaysOfDuration() {
+      return daysOfDuration_;
+    }
+
+    public static final int DAYSFORRENEWAL_FIELD_NUMBER = 5;
+    private int daysForRenewal_;
+    /**
+     * <code>optional int32 daysForRenewal = 5;</code>
+     */
+    public boolean hasDaysForRenewal() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 daysForRenewal = 5;</code>
+     */
+    public int getDaysForRenewal() {
+      return daysForRenewal_;
+    }
+
+    private void initFields() {
+      structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      productionRate_ = 0F;
+      capacity_ = 0;
+      daysOfDuration_ = 0;
+      daysForRenewal_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeFloat(2, productionRate_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, capacity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, daysOfDuration_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, daysForRenewal_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, productionRate_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, capacity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, daysOfDuration_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, daysForRenewal_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.MoneyTreeProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.MoneyTreeProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.MoneyTreeProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MoneyTreeProto)
+        com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MoneyTreeProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MoneyTreeProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.StructureProto.MoneyTreeProto.class, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.StructureProto.MoneyTreeProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        productionRate_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        capacity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        daysOfDuration_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        daysForRenewal_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MoneyTreeProto_descriptor;
+      }
+
+      public com.lvl6.proto.StructureProto.MoneyTreeProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.StructureProto.MoneyTreeProto build() {
+        com.lvl6.proto.StructureProto.MoneyTreeProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.StructureProto.MoneyTreeProto buildPartial() {
+        com.lvl6.proto.StructureProto.MoneyTreeProto result = new com.lvl6.proto.StructureProto.MoneyTreeProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (structInfoBuilder_ == null) {
+          result.structInfo_ = structInfo_;
+        } else {
+          result.structInfo_ = structInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.productionRate_ = productionRate_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.capacity_ = capacity_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.daysOfDuration_ = daysOfDuration_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.daysForRenewal_ = daysForRenewal_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.MoneyTreeProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.MoneyTreeProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.MoneyTreeProto other) {
+        if (other == com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance()) return this;
+        if (other.hasStructInfo()) {
+          mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasProductionRate()) {
+          setProductionRate(other.getProductionRate());
+        }
+        if (other.hasCapacity()) {
+          setCapacity(other.getCapacity());
+        }
+        if (other.hasDaysOfDuration()) {
+          setDaysOfDuration(other.getDaysOfDuration());
+        }
+        if (other.hasDaysForRenewal()) {
+          setDaysForRenewal(other.getDaysForRenewal());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.StructureProto.MoneyTreeProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.StructureProto.MoneyTreeProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public boolean hasStructInfo() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+        if (structInfoBuilder_ == null) {
+          return structInfo_;
+        } else {
+          return structInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder setStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structInfo_ = value;
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder setStructInfo(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder mergeStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structInfo_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structInfo_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structInfo_).mergeFrom(value).buildPartial();
+          } else {
+            structInfo_ = value;
+          }
+          onChanged();
+        } else {
+          structInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder clearStructInfo() {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructInfoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+        if (structInfoBuilder_ != null) {
+          return structInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return structInfo_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructInfoFieldBuilder() {
+        if (structInfoBuilder_ == null) {
+          structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  getStructInfo(),
+                  getParentForChildren(),
+                  isClean());
+          structInfo_ = null;
+        }
+        return structInfoBuilder_;
+      }
+
+      private float productionRate_ ;
+      /**
+       * <code>optional float productionRate = 2;</code>
+       */
+      public boolean hasProductionRate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional float productionRate = 2;</code>
+       */
+      public float getProductionRate() {
+        return productionRate_;
+      }
+      /**
+       * <code>optional float productionRate = 2;</code>
+       */
+      public Builder setProductionRate(float value) {
+        bitField0_ |= 0x00000002;
+        productionRate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float productionRate = 2;</code>
+       */
+      public Builder clearProductionRate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        productionRate_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private int capacity_ ;
+      /**
+       * <code>optional int32 capacity = 3;</code>
+       */
+      public boolean hasCapacity() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 capacity = 3;</code>
+       */
+      public int getCapacity() {
+        return capacity_;
+      }
+      /**
+       * <code>optional int32 capacity = 3;</code>
+       */
+      public Builder setCapacity(int value) {
+        bitField0_ |= 0x00000004;
+        capacity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 capacity = 3;</code>
+       */
+      public Builder clearCapacity() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        capacity_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int daysOfDuration_ ;
+      /**
+       * <code>optional int32 daysOfDuration = 4;</code>
+       */
+      public boolean hasDaysOfDuration() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 daysOfDuration = 4;</code>
+       */
+      public int getDaysOfDuration() {
+        return daysOfDuration_;
+      }
+      /**
+       * <code>optional int32 daysOfDuration = 4;</code>
+       */
+      public Builder setDaysOfDuration(int value) {
+        bitField0_ |= 0x00000008;
+        daysOfDuration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 daysOfDuration = 4;</code>
+       */
+      public Builder clearDaysOfDuration() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        daysOfDuration_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int daysForRenewal_ ;
+      /**
+       * <code>optional int32 daysForRenewal = 5;</code>
+       */
+      public boolean hasDaysForRenewal() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 daysForRenewal = 5;</code>
+       */
+      public int getDaysForRenewal() {
+        return daysForRenewal_;
+      }
+      /**
+       * <code>optional int32 daysForRenewal = 5;</code>
+       */
+      public Builder setDaysForRenewal(int value) {
+        bitField0_ |= 0x00000010;
+        daysForRenewal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 daysForRenewal = 5;</code>
+       */
+      public Builder clearDaysForRenewal() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        daysForRenewal_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MoneyTreeProto)
+    }
+
+    static {
+      defaultInstance = new MoneyTreeProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MoneyTreeProto)
+  }
+
   public interface HospitalProtoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.lvl6.proto.HospitalProto)
       com.google.protobuf.MessageOrBuilder {
@@ -17128,6 +17948,11 @@ public final class StructureProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ResourceStorageProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MoneyTreeProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MoneyTreeProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_HospitalProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -17234,76 +18059,80 @@ public final class StructureProto {
       "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
       "uctureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034." +
       "com.lvl6.proto.ResourceType\022\020\n\010capacity\030" +
-      "\003 \001(\005\"\232\001\n\rHospitalProto\0226\n\nstructInfo\030\001 " +
-      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022",
-      "\021\n\tqueueSize\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 " +
-      "\001(\002B\002\030\001\022!\n\031secsToFullyHealMultiplier\030\004 \001" +
-      "(\002\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
-      "m.lvl6.proto.StructureInfoProto\022\021\n\tqueue" +
-      "Size\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020p" +
-      "ointsMultiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto" +
-      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
-      "ructureInfoProto\022\027\n\017numMonsterSlots\030\002 \001(" +
-      "\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGe" +
-      "msRequired\030\004 \001(\005\022\034\n\024numAcceptedFbInvites",
-      "\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuf" +
-      "fix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstructInf" +
-      "o\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPr" +
-      "oto\022 \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n" +
-      "\026numResourceOneStorages\030\003 \001(\005\022 \n\030numReso" +
-      "urceTwoGenerators\030\004 \001(\005\022\036\n\026numResourceTw" +
-      "oStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n" +
-      "\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterSlots\030" +
-      "\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCo" +
-      "st\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016nu",
-      "mEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProt" +
-      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
-      "tructureInfoProto\022\031\n\021generatedJobLimit\030\002" +
-      " \001(\005\022!\n\031hoursBetweenJobGeneration\030\003 \001(\005\"" +
-      "\236\002\n\026FullUserStructureProto\022\026\n\016userStruct" +
-      "Uuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId" +
-      "\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchas" +
-      "eTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coord" +
-      "inates\030\007 \001(\0132\037.com.lvl6.proto.Coordinate" +
-      "Proto\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.pr",
-      "oto.StructOrientation\022\031\n\021fbInviteStructL" +
-      "vl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t" +
-      "\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010stru" +
-      "ctId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl" +
-      "6.proto.CoordinateProto\"\342\002\n\rObstacleProt" +
-      "o\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017r" +
-      "emovalCostType\030\003 \001(\0162\034.com.lvl6.proto.Re" +
-      "sourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRem" +
-      "ove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005" +
-      "\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOff",
-      "set\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chance" +
-      "ToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n" +
-      "\024shadowVerticalOffset\030\r \001(\002\022\037\n\027shadowHor" +
-      "izontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstacle" +
-      "Proto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030" +
-      "\002 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
-      "\n\013orientation\030\005 \001(\0162!.com.lvl6.proto.Str" +
-      "uctOrientation\"\333\001\n\021UserObstacleProto\022\030\n\020" +
-      "userObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t" +
-      "\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(",
-      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
-      "ientation\030\005 \001(\0162!.com.lvl6.proto.StructO" +
-      "rientation\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n" +
-      "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\0228\n\017qual" +
-      "ityUnlocked\030\002 \001(\0162\027.com.lvl6.proto.Quali" +
-      "ty:\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017T" +
-      "eamCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
-      ".lvl6.proto.StructureInfoProto\022\025\n\rteamCo" +
-      "stLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstru",
+      "\003 \001(\005\"\242\001\n\016MoneyTreeProto\0226\n\nstructInfo\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto",
+      "\022\026\n\016productionRate\030\002 \001(\002\022\020\n\010capacity\030\003 \001" +
+      "(\005\022\026\n\016daysOfDuration\030\004 \001(\005\022\026\n\016daysForRen" +
+      "ewal\030\005 \001(\005\"\232\001\n\rHospitalProto\0226\n\nstructIn" +
+      "fo\030\001 \001(\0132\".com.lvl6.proto.StructureInfoP" +
+      "roto\022\021\n\tqueueSize\030\002 \001(\005\022\033\n\017healthPerSeco" +
+      "nd\030\003 \001(\002B\002\030\001\022!\n\031secsToFullyHealMultiplie" +
+      "r\030\004 \001(\002\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001 \001(\013" +
+      "2\".com.lvl6.proto.StructureInfoProto\022\021\n\t" +
+      "queueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002" +
+      "\022\030\n\020pointsMultiplier\030\004 \001(\002\"\341\001\n\016Residence",
+      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
+      "to.StructureInfoProto\022\027\n\017numMonsterSlots" +
+      "\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017" +
+      "numGemsRequired\030\004 \001(\005\022\034\n\024numAcceptedFbIn" +
+      "vites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\ti" +
+      "mgSuffix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstru" +
       "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
-      "nfoProto\022!\n\031maxHelpersPerSolicitation\030\002 " +
-      "\001(\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005*I\n\014R" +
-      "esourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007" +
-      "\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021Struct" +
-      "Orientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSIT" +
-      "ION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProt" +
-      "o"
+      "nfoProto\022 \n\030numResourceOneGenerators\030\002 \001" +
+      "(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030nu" +
+      "mResourceTwoGenerators\030\004 \001(\005\022\036\n\026numResou",
+      "rceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001" +
+      "(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterS" +
+      "lots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueC" +
+      "ashCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022" +
+      "\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobCente" +
+      "rProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
+      "oto.StructureInfoProto\022\031\n\021generatedJobLi" +
+      "mit\030\002 \001(\005\022!\n\031hoursBetweenJobGeneration\030\003" +
+      " \001(\005\"\236\002\n\026FullUserStructureProto\022\026\n\016userS" +
+      "tructUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010str",
+      "uctId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014pu" +
+      "rchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013" +
+      "coordinates\030\007 \001(\0132\037.com.lvl6.proto.Coord" +
+      "inateProto\0226\n\013orientation\030\010 \001(\0162!.com.lv" +
+      "l6.proto.StructOrientation\022\031\n\021fbInviteSt" +
+      "ructLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 " +
+      "\001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n" +
+      "\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.co" +
+      "m.lvl6.proto.CoordinateProto\"\342\002\n\rObstacl" +
+      "eProto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t",
+      "\0225\n\017removalCostType\030\003 \001(\0162\034.com.lvl6.pro" +
+      "to.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017seconds" +
+      "ToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030" +
+      "\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPix" +
+      "elOffset\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016c" +
+      "hanceToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001" +
+      "(\t\022\034\n\024shadowVerticalOffset\030\r \001(\002\022\037\n\027shad" +
+      "owHorizontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObs" +
+      "tacleProto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordi" +
+      "nate\030\002 \001(\0132\037.com.lvl6.proto.CoordinatePr",
+      "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot" +
+      "o.StructOrientation\"\333\001\n\021UserObstacleProt" +
+      "o\022\030\n\020userObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030" +
+      "\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates" +
+      "\030\004 \001(\0132\037.com.lvl6.proto.CoordinateProto\022" +
+      "6\n\013orientation\030\005 \001(\0162!.com.lvl6.proto.St" +
+      "ructOrientation\022\030\n\020removalStartTime\030\006 \001(" +
+      "\003\"\234\001\n\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(" +
+      "\0132\".com.lvl6.proto.StructureInfoProto\0228\n" +
+      "\017qualityUnlocked\030\002 \001(\0162\027.com.lvl6.proto.",
+      "Quality:\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005" +
+      "\"`\n\017TeamCenterProto\0226\n\nstructInfo\030\001 \001(\0132" +
+      "\".com.lvl6.proto.StructureInfoProto\022\025\n\rt" +
+      "eamCostLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n" +
+      "\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Struc" +
+      "tureInfoProto\022!\n\031maxHelpersPerSolicitati" +
+      "on\030\002 \001(\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005" +
+      "*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CAS" +
+      "H\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021S" +
+      "tructOrientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\n",
+      "POSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016Structur" +
+      "eProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17336,86 +18165,92 @@ public final class StructureProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResourceStorageProto_descriptor,
         new java.lang.String[] { "StructInfo", "ResourceType", "Capacity", });
-    internal_static_com_lvl6_proto_HospitalProto_descriptor =
+    internal_static_com_lvl6_proto_MoneyTreeProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_MoneyTreeProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MoneyTreeProto_descriptor,
+        new java.lang.String[] { "StructInfo", "ProductionRate", "Capacity", "DaysOfDuration", "DaysForRenewal", });
+    internal_static_com_lvl6_proto_HospitalProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_HospitalProto_descriptor,
         new java.lang.String[] { "StructInfo", "QueueSize", "HealthPerSecond", "SecsToFullyHealMultiplier", });
     internal_static_com_lvl6_proto_LabProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_LabProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_LabProto_descriptor,
         new java.lang.String[] { "StructInfo", "QueueSize", "PointsPerSecond", "PointsMultiplier", });
     internal_static_com_lvl6_proto_ResidenceProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResidenceProto_descriptor,
         new java.lang.String[] { "StructInfo", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", "OccupationName", "ImgSuffix", });
     internal_static_com_lvl6_proto_TownHallProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TownHallProto_descriptor,
         new java.lang.String[] { "StructInfo", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", "NumLabs", "PvpQueueCashCost", "ResourceCapacity", "NumEvoChambers", });
     internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor,
         new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", });
     internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
         new java.lang.String[] { "UserStructUuid", "UserUuid", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", });
     internal_static_com_lvl6_proto_CoordinateProto_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CoordinateProto_descriptor,
         new java.lang.String[] { "X", "Y", });
     internal_static_com_lvl6_proto_TutorialStructProto_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_com_lvl6_proto_TutorialStructProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TutorialStructProto_descriptor,
         new java.lang.String[] { "StructId", "Coordinate", });
     internal_static_com_lvl6_proto_ObstacleProto_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ObstacleProto_descriptor,
         new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", });
     internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor,
         new java.lang.String[] { "ObstacleId", "Coordinate", "Orientation", });
     internal_static_com_lvl6_proto_UserObstacleProto_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserObstacleProto_descriptor,
         new java.lang.String[] { "UserObstacleUuid", "UserUuid", "ObstacleId", "Coordinates", "Orientation", "RemovalStartTime", });
     internal_static_com_lvl6_proto_EvoChamberProto_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EvoChamberProto_descriptor,
         new java.lang.String[] { "StructInfo", "QualityUnlocked", "EvoTierUnlocked", });
     internal_static_com_lvl6_proto_TeamCenterProto_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TeamCenterProto_descriptor,
         new java.lang.String[] { "StructInfo", "TeamCostLimit", });
     internal_static_com_lvl6_proto_ClanHouseProto_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
