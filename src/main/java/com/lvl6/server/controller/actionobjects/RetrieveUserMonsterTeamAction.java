@@ -384,9 +384,9 @@ public class RetrieveUserMonsterTeamAction
 //			possibleMonstersTemp.remove(mfuId);
 //		}
 
-		int amountNeeded = 1;//3 - defenderMonsters.size();
+		float amountNeeded = 1;//3 - defenderMonsters.size();
 
-		int amountLeftOver = possibleMonstersTemp.size();
+		float amountLeftOver = possibleMonstersTemp.size();
 		if (amountLeftOver <= amountNeeded) {
 			retVal.addAll(possibleMonstersTemp.values());
 			return retVal;
@@ -400,7 +400,8 @@ public class RetrieveUserMonsterTeamAction
 		for (int i = 0; i < mfuList.size(); i++) {
 
 			//IGNORE //eg. need 2, have 3. If first one is not picked, then need 2, have 2.
-			float probToBeChosen = amountNeeded / (amountLeftOver - i);
+			float denom = amountLeftOver - i;
+			float probToBeChosen = amountNeeded / denom;
 			float randFloat = rand.nextFloat();
 
 			if (randFloat < probToBeChosen) {
