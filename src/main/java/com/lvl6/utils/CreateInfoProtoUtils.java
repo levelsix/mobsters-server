@@ -3311,6 +3311,7 @@ public class CreateInfoProtoUtils {
 		mtpb.setCapacity(smt.getCapacity());
 		mtpb.setDaysOfDuration(smt.getDaysOfDuration());
 		mtpb.setDaysForRenewal(smt.getDaysForRenewal());
+		mtpb.setStructInfo(sip);
 			
 		return mtpb.build();
 	}
