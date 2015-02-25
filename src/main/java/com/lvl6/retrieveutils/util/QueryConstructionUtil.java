@@ -322,7 +322,7 @@ public class QueryConstructionUtil {
 
 	//generalized method to construct a query, the argument "values" is another return
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
-	//proper order. NOT USED ATM.
+	//proper order. NOT USED ATM (used in researchretrieve)
 	public String selectRowsQueryEqualityAndInConditions(List<String> columnsToSelect,
 			String tableName, Map<String, ?> equalityConditions, String eqDelim,
 			Map<String, Collection<?>> inConditions, String inDelim,

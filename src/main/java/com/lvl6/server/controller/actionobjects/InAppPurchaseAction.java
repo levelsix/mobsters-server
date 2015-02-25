@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,8 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -21,8 +25,10 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -41,6 +47,7 @@ public class InAppPurchaseAction
 	private Date now;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 
@@ -81,6 +88,7 @@ public class InAppPurchaseAction
 
 	//derived state
 	boolean isStarterPack;
+	boolean isMoneyTree;
 	private String packageName;
 	private int gemChange;
 
@@ -122,6 +130,22 @@ public class InAppPurchaseAction
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
+		boolean success = false;
+		if(isStarterPack) {
+			success = verifyStarterPack(resBuilder);
+		}
+		else if(isMoneyTree) {
+			success = verifyMoneyTree(resBuilder);
+		}
+		
+		if (!success) {
+			return false;
+		}
+		
+		return success;
+	}
+
+	private boolean verifyStarterPack(Builder resBuilder) {
 		boolean success = true;
 		try {
 			String transactionId = receiptFromApple
@@ -152,8 +176,48 @@ public class InAppPurchaseAction
 					e);
 			success = false;
 		}
-
 		return success;
+	}
+	
+	private boolean verifyMoneyTree(Builder resBuilder) {
+		boolean success = true;
+		try {
+			String transactionId = receiptFromApple
+				.getString(IAPValues.TRANSACTION_ID);
+
+			long transactionIdLong = Long.parseLong(transactionId);
+			if (iapHistoryRetrieveUtil.checkIfDuplicateTransaction(transactionIdLong))
+			{
+				resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
+				log.error("duplicate receipt from user {}", user);
+				success = false;
+			}
+			
+			isMoneyTree = IAPValues.packageIsMoneyTree(packageName);
+			if (success && isMoneyTree && userOwnsOneMoneyTreeMax())
+			{
+				log.error("user trying to buy the money tree again! {}, {}",
+					packageName, user);
+				success = false;
+			}
+		} catch (Exception e) {
+			log.error(
+				String.format(
+					"error verifying InAppPurchase request. receiptFromApple={}",
+					receiptFromApple),
+					e);
+			success = false;
+		}
+		return success;
+	}
+	
+	private boolean userOwnsOneMoneyTreeMax() {
+		List<StructureForUser> listOfUsersMoneyTree = 
+				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+		if(listOfUsersMoneyTree.size() < 2) { //can only have one money tree
+			return true;
+		}
+		else return false;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
@@ -176,7 +240,12 @@ public class InAppPurchaseAction
 			if (isStarterPack) {
 				
 				processStarterPackPurchase(resBuilder);
-			} else {
+			} 
+			else if (isMoneyTree) {
+				
+				processMoneyTreePurchase(resBuilder);
+			}
+			else {
 				processPurchase(resBuilder);
 			}
 
@@ -265,6 +334,99 @@ public class InAppPurchaseAction
 		}
 	}
 
+	private void processMoneyTreePurchase(Builder resBuilder) {
+		
+		//assumed to only contain one money tree max for now
+		List<StructureForUser> listOfUsersMoneyTree = 
+				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+		String userStructId = "";
+		Timestamp purchaseTime = new Timestamp(now.getTime());
+
+		if(listOfUsersMoneyTree.isEmpty()) {
+			CoordinatePair cp = new CoordinatePair(0,0);
+			Timestamp lastRetrievedTime = null;
+			boolean isComplete = true;
+			
+			userStructId = insertUtil.insertUserStruct(userId, 
+					ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, cp, purchaseTime,
+			        lastRetrievedTime, isComplete);
+		}
+		else {
+			userStructId = listOfUsersMoneyTree.get(0).getId();
+			boolean success = updateUtil.updatePurchaseTimeForMoneyTree(userStructId, 
+					purchaseTime);
+			if(!success) {
+				throw new RuntimeException(String.format(
+						"failed to update purchase time of money tree for user" + userId));
+			}
+		}
+		if(userStructId.equals("")) {
+			throw new RuntimeException(String.format(
+					"failed to add money tree to table for user" + userId));
+		}
+		
+		StructureForUser sfu = null;
+		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
+		sfu = listOfUsersMoneyTree.get(0); //get only element of list
+		if (null != sfu) {
+			FullUserStructureProto fusp = CreateInfoProtoUtils
+				.createFullUserStructureProtoFromUserstruct(sfu);
+			fuspList.add(fusp);
+			resBuilder.addAllUpdatedMoneyTree(fuspList);
+		}
+	}
+	
+	private List<ItemForUser> calculateItemRewards(
+		String userId,
+		List<BoosterItem> itemsUserReceives )
+	{
+		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+		
+		for (BoosterItem bi : itemsUserReceives) {
+			int itemId = bi.getItemId();
+			int itemQuantity = bi.getItemQuantity();
+			
+			if (itemId <= 0 || itemQuantity <= 0) {
+				continue;
+			}
+			
+			//user could have gotten multiple of the same BoosterItem
+			int newQuantity = itemQuantity;
+			if (itemIdToQuantity.containsKey(itemId))
+			{
+				newQuantity += itemIdToQuantity.get(itemId);
+			}
+			itemIdToQuantity.put(itemId, newQuantity);
+		}
+		
+		List<ItemForUser> ifuList = null;
+	    if (!itemIdToQuantity.isEmpty()) {
+	    	//aggregate rewarded items with user's current items
+	    	Map<Integer, ItemForUser> itemIdToIfu = 
+	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
+	    			itemIdToQuantity.keySet());
+	    	
+	    	for (Integer itemId : itemIdToQuantity.keySet()) {
+	    		int newQuantity = itemIdToQuantity.get(itemId);
+	    		
+	    		ItemForUser ifu = null;
+	    		if (itemIdToIfu.containsKey(itemId)){
+	    			ifu = itemIdToIfu.get(itemId);
+	    		} else {
+	    			//user might not have the item
+	    			ifu = new ItemForUser(userId, itemId, 0);
+	    			itemIdToIfu.put(itemId, ifu);
+	    		}
+	    		
+	    		newQuantity += ifu.getQuantity();
+	    		ifu.setQuantity(newQuantity);
+	    	}
+	    	
+	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+	    }
+	    return ifuList;
+	}
+	
 	private void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 
