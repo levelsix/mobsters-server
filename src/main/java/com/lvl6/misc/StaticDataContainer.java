@@ -483,10 +483,12 @@ public class StaticDataContainer
 				StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
 
 		for (Integer structId : idsToMoneyTrees.keySet()) {
+            Structure s = structs.get(structId);
+            StructureInfoProto sip = structProtos.get(structId);
 			StructureMoneyTree smt = idsToMoneyTrees.get(structId);
 
 			MoneyTreeProto mtp = CreateInfoProtoUtils
-					.createMoneyTreeProtoFromStructureMoneyTree(smt);
+					.createMoneyTreeProtoFromStructureMoneyTree(s, sip, smt);
 			sdpb.addAllMoneyTrees(mtp);
 		}
 	}
