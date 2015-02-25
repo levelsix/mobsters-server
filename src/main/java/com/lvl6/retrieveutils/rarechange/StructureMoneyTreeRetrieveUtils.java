@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.Structure;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
@@ -30,9 +31,10 @@ import com.lvl6.utils.DBConnection;
     }
     return structIdsToMoneyTrees;
   }
+  
 
   public static StructureMoneyTree getMoneyTreeForStructId(int structId) {
-    log.debug("retrieve money tree data for structId " + structId);
+    log.debug("retrieve struct data for structId " + structId);
     if (structIdsToMoneyTrees == null) {
       setStaticStructIdsToMoneyTrees();      
     }
@@ -40,9 +42,8 @@ import com.lvl6.utils.DBConnection;
   }
 
   private static void setStaticStructIdsToMoneyTrees() {
-    log.debug("setting static map of structIds to money trees");
+    log.debug("setting static map of structIds to structs");
 
-    HashMap<Integer, StructureMoneyTree> structIdsToMoneyTreesTemp = new HashMap<Integer, StructureMoneyTree>();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     try {
@@ -53,11 +54,13 @@ import com.lvl6.utils.DBConnection;
 			    try {
 			      rs.last();
 			      rs.beforeFirst();
+			      HashMap<Integer, StructureMoneyTree> structIdsToStructsTemp = new HashMap<Integer, StructureMoneyTree>();
 			      while(rs.next()) {
-			        StructureMoneyTree struct = convertRSRowToStructureMoneyTree(rs);
+			        StructureMoneyTree struct = convertRSRowToMoneyTree(rs);
 			        if (struct != null)
-			          structIdsToMoneyTreesTemp.put(struct.getStructId(), struct);
+			          structIdsToStructsTemp.put(struct.getStructId(), struct);
 			      }
+			      structIdsToMoneyTrees = structIdsToStructsTemp;
 			    } catch (SQLException e) {
 			      log.error("problem with database call.", e);
 			      
@@ -65,11 +68,10 @@ import com.lvl6.utils.DBConnection;
 			  }    
 			}
 		} catch (Exception e) {
-    	log.error("Money Tree retrieve db error.", e);
+    	log.error("resourceGenerator retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }
-    structIdsToMoneyTrees = structIdsToMoneyTreesTemp;
   }
 
   public static void reload() {
@@ -79,25 +81,18 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static StructureMoneyTree convertRSRowToStructureMoneyTree(ResultSet rs) throws SQLException {
-    int structId = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID);
-    float productionRate = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__PRODUCTION_RATE);
-    int capacity = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__CAPACITY);
-    int daysOfDuration = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_OF_DURATION);
-    int daysForRenewal = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL);
+  private static StructureMoneyTree convertRSRowToMoneyTree(ResultSet rs) throws SQLException {
+	int structId = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID);
+	float productionRate = rs.getFloat(DBConstants.STRUCTURE_MONEY_TREE__PRODUCTION_RATE);;
+	int capacity = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__CAPACITY);;
+	int daysOfDuration = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_OF_DURATION);;
+	int daysForRenewal = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL);;
+	String iapProductId = rs.getString(DBConstants.STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID);;  
+	     
+    StructureMoneyTree smt = new StructureMoneyTree(structId,
+    		productionRate, capacity, daysOfDuration, daysForRenewal, iapProductId);
     
-    if(structId < 10000) { //money tree ids should be 1000 or greater
-    	log.error(String.format(
-    			"structId incorrect, should be > 10000. structId = %s",
-    			structId));
-    }
     
-    if(productionRate < 0 || productionRate > capacity) {
-    	log.error(String.format(
-    			"something's prob fucked up with the "
-    			+ "production rate and capacity numbers"));
-    }
-    
-    return new StructureMoneyTree(structId, productionRate, capacity, daysOfDuration, daysForRenewal);
+    return smt;
   }
 }

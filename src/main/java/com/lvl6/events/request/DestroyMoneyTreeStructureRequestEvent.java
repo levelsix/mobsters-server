@@ -31,6 +31,10 @@ public class DestroyMoneyTreeStructureRequestEvent extends RequestEvent {
   public DestroyMoneyTreeStructureRequestProto getDestroyMoneyTreeStructureRequestProto() {
     return destroyMoneyTreeStructureRequestProto;
   }
+  
+  public void setDestroyMoneyTreeStructureRequestProto(DestroyMoneyTreeStructureRequestProto dmtsrp) {
+	  this.destroyMoneyTreeStructureRequestProto = dmtsrp;
+  }
 
   @Override
   public String toString()
