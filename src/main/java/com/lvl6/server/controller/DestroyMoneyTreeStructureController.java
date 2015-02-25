@@ -21,6 +21,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DestroyMoneyTreeStructureAction;
@@ -43,6 +44,9 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 
 
 	public DestroyMoneyTreeStructureController() {
@@ -135,7 +139,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		try {
 			Date now = new Date();
 			DestroyMoneyTreeStructureAction dmtsa = new DestroyMoneyTreeStructureAction(userId,
-					userStructIdsList, now, deleteUtil);
+					userStructIdsList, now, structureForUserRetrieveUtils2, deleteUtil);
 
 			dmtsa.execute(resBuilder);
 

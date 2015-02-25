@@ -334,8 +334,6 @@ public class InAppPurchaseAction
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	private void processMoneyTreePurchase(Builder resBuilder) {
 		
 		//assumed to only contain one money tree max for now
@@ -429,7 +427,6 @@ public class InAppPurchaseAction
 	    return ifuList;
 	}
 	
->>>>>>> origin/2015_02_09_money_tree2
 	private void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 

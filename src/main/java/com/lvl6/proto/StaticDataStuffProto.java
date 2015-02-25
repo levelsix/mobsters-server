@@ -579,25 +579,25 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> 
         getAllMoneyTreesList();
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index);
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     int getAllMoneyTreesCount();
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
         getAllMoneyTreesOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
         int index);
@@ -1325,25 +1325,25 @@ public final class StaticDataStuffProto {
               break;
             }
             case 266: {
-              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
                 prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>();
-                mutable_bitField1_ |= 0x00000002;
+                mutable_bitField1_ |= 0x00000004;
               }
               prereqs_.add(input.readMessage(com.lvl6.proto.PrerequisiteProto.PrereqProto.PARSER, extensionRegistry));
               break;
             }
             case 274: {
-              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
                 boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>();
-                mutable_bitField1_ |= 0x00000004;
+                mutable_bitField1_ |= 0x00000008;
               }
               boards_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardLayoutProto.PARSER, extensionRegistry));
               break;
             }
             case 282: {
-              if (!((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField1_ & 0x00000010) == 0x00000010)) {
                 research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>();
-                mutable_bitField1_ |= 0x00000008;
+                mutable_bitField1_ |= 0x00000010;
               }
               research_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchProto.PARSER, extensionRegistry));
               break;
@@ -1362,19 +1362,19 @@ public final class StaticDataStuffProto {
               break;
             }
             case 298: {
-<<<<<<< HEAD
-              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
                 sideEffects_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillSideEffectProto>();
-                mutable_bitField1_ |= 0x00000001;
+                mutable_bitField1_ |= 0x00000002;
               }
               sideEffects_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillSideEffectProto.PARSER, extensionRegistry));
-=======
+              break;
+            }
+            case 306: {
               if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
                 allMoneyTrees_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MoneyTreeProto>();
                 mutable_bitField0_ |= 0x00400000;
               }
               allMoneyTrees_.add(input.readMessage(com.lvl6.proto.StructureProto.MoneyTreeProto.PARSER, extensionRegistry));
->>>>>>> origin/2015_02_09_money_tree2
               break;
             }
           }
@@ -1475,22 +1475,20 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
           allClanHouses_ = java.util.Collections.unmodifiableList(allClanHouses_);
         }
-        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
           prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
         }
-        if (((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
           boards_ = java.util.Collections.unmodifiableList(boards_);
         }
-        if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField1_ & 0x00000010) == 0x00000010)) {
           research_ = java.util.Collections.unmodifiableList(research_);
         }
-<<<<<<< HEAD
-        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
           sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
-=======
+        }
         if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
           allMoneyTrees_ = java.util.Collections.unmodifiableList(allMoneyTrees_);
->>>>>>> origin/2015_02_09_money_tree2
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2326,35 +2324,35 @@ public final class StaticDataStuffProto {
       return allClanHouses_.get(index);
     }
 
-    public static final int ALLMONEYTREES_FIELD_NUMBER = 37;
+    public static final int ALLMONEYTREES_FIELD_NUMBER = 38;
     private java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> allMoneyTrees_;
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> getAllMoneyTreesList() {
       return allMoneyTrees_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     public java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
         getAllMoneyTreesOrBuilderList() {
       return allMoneyTrees_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     public int getAllMoneyTreesCount() {
       return allMoneyTrees_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     public com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index) {
       return allMoneyTrees_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+     * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
      */
     public com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
         int index) {
@@ -3088,13 +3086,11 @@ public final class StaticDataStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(36, starterPack_);
       }
-<<<<<<< HEAD
       for (int i = 0; i < sideEffects_.size(); i++) {
         output.writeMessage(37, sideEffects_.get(i));
-=======
+      }
       for (int i = 0; i < allMoneyTrees_.size(); i++) {
-        output.writeMessage(37, allMoneyTrees_.get(i));
->>>>>>> origin/2015_02_09_money_tree2
+        output.writeMessage(38, allMoneyTrees_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3245,15 +3241,13 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(36, starterPack_);
       }
-<<<<<<< HEAD
       for (int i = 0; i < sideEffects_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(37, sideEffects_.get(i));
-=======
+      }
       for (int i = 0; i < allMoneyTrees_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(37, allMoneyTrees_.get(i));
->>>>>>> origin/2015_02_09_money_tree2
+          .computeMessageSize(38, allMoneyTrees_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3609,25 +3603,25 @@ public final class StaticDataStuffProto {
         }
         if (sideEffectsBuilder_ == null) {
           sideEffects_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
         } else {
           sideEffectsBuilder_.clear();
         }
         if (prereqsBuilder_ == null) {
           prereqs_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
         } else {
           prereqsBuilder_.clear();
         }
         if (boardsBuilder_ == null) {
           boards_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
         } else {
           boardsBuilder_.clear();
         }
         if (researchBuilder_ == null) {
           research_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000008);
+          bitField1_ = (bitField1_ & ~0x00000010);
         } else {
           researchBuilder_.clear();
         }
@@ -3955,44 +3949,37 @@ public final class StaticDataStuffProto {
         } else {
           result.skills_ = skillsBuilder_.build();
         }
-<<<<<<< HEAD
         if (sideEffectsBuilder_ == null) {
-          if (((bitField1_ & 0x00000001) == 0x00000001)) {
-            sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
-            bitField1_ = (bitField1_ & ~0x00000001);
-=======
-        if (prereqsBuilder_ == null) {
           if (((bitField1_ & 0x00000002) == 0x00000002)) {
-            prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+            sideEffects_ = java.util.Collections.unmodifiableList(sideEffects_);
             bitField1_ = (bitField1_ & ~0x00000002);
->>>>>>> origin/2015_02_09_money_tree2
           }
           result.sideEffects_ = sideEffects_;
         } else {
           result.sideEffects_ = sideEffectsBuilder_.build();
         }
         if (prereqsBuilder_ == null) {
-          if (((bitField1_ & 0x00000002) == 0x00000002)) {
+          if (((bitField1_ & 0x00000004) == 0x00000004)) {
             prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
-            bitField1_ = (bitField1_ & ~0x00000002);
+            bitField1_ = (bitField1_ & ~0x00000004);
           }
           result.prereqs_ = prereqs_;
         } else {
           result.prereqs_ = prereqsBuilder_.build();
         }
         if (boardsBuilder_ == null) {
-          if (((bitField1_ & 0x00000004) == 0x00000004)) {
+          if (((bitField1_ & 0x00000008) == 0x00000008)) {
             boards_ = java.util.Collections.unmodifiableList(boards_);
-            bitField1_ = (bitField1_ & ~0x00000004);
+            bitField1_ = (bitField1_ & ~0x00000008);
           }
           result.boards_ = boards_;
         } else {
           result.boards_ = boardsBuilder_.build();
         }
         if (researchBuilder_ == null) {
-          if (((bitField1_ & 0x00000008) == 0x00000008)) {
+          if (((bitField1_ & 0x00000010) == 0x00000010)) {
             research_ = java.util.Collections.unmodifiableList(research_);
-            bitField1_ = (bitField1_ & ~0x00000008);
+            bitField1_ = (bitField1_ & ~0x00000010);
           }
           result.research_ = research_;
         } else {
@@ -4830,7 +4817,7 @@ public final class StaticDataStuffProto {
           if (!other.sideEffects_.isEmpty()) {
             if (sideEffects_.isEmpty()) {
               sideEffects_ = other.sideEffects_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
             } else {
               ensureSideEffectsIsMutable();
               sideEffects_.addAll(other.sideEffects_);
@@ -4843,7 +4830,7 @@ public final class StaticDataStuffProto {
               sideEffectsBuilder_.dispose();
               sideEffectsBuilder_ = null;
               sideEffects_ = other.sideEffects_;
-              bitField1_ = (bitField1_ & ~0x00000001);
+              bitField1_ = (bitField1_ & ~0x00000002);
               sideEffectsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSideEffectsFieldBuilder() : null;
@@ -4856,7 +4843,7 @@ public final class StaticDataStuffProto {
           if (!other.prereqs_.isEmpty()) {
             if (prereqs_.isEmpty()) {
               prereqs_ = other.prereqs_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
             } else {
               ensurePrereqsIsMutable();
               prereqs_.addAll(other.prereqs_);
@@ -4869,7 +4856,7 @@ public final class StaticDataStuffProto {
               prereqsBuilder_.dispose();
               prereqsBuilder_ = null;
               prereqs_ = other.prereqs_;
-              bitField1_ = (bitField1_ & ~0x00000002);
+              bitField1_ = (bitField1_ & ~0x00000004);
               prereqsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPrereqsFieldBuilder() : null;
@@ -4882,7 +4869,7 @@ public final class StaticDataStuffProto {
           if (!other.boards_.isEmpty()) {
             if (boards_.isEmpty()) {
               boards_ = other.boards_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
             } else {
               ensureBoardsIsMutable();
               boards_.addAll(other.boards_);
@@ -4895,7 +4882,7 @@ public final class StaticDataStuffProto {
               boardsBuilder_.dispose();
               boardsBuilder_ = null;
               boards_ = other.boards_;
-              bitField1_ = (bitField1_ & ~0x00000004);
+              bitField1_ = (bitField1_ & ~0x00000008);
               boardsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBoardsFieldBuilder() : null;
@@ -4908,7 +4895,7 @@ public final class StaticDataStuffProto {
           if (!other.research_.isEmpty()) {
             if (research_.isEmpty()) {
               research_ = other.research_;
-              bitField1_ = (bitField1_ & ~0x00000008);
+              bitField1_ = (bitField1_ & ~0x00000010);
             } else {
               ensureResearchIsMutable();
               research_.addAll(other.research_);
@@ -4921,7 +4908,7 @@ public final class StaticDataStuffProto {
               researchBuilder_.dispose();
               researchBuilder_ = null;
               research_ = other.research_;
-              bitField1_ = (bitField1_ & ~0x00000008);
+              bitField1_ = (bitField1_ & ~0x00000010);
               researchBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getResearchFieldBuilder() : null;
@@ -10219,7 +10206,7 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.StructureProto.MoneyTreeProto, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder, com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> allMoneyTreesBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto> getAllMoneyTreesList() {
         if (allMoneyTreesBuilder_ == null) {
@@ -10229,7 +10216,7 @@ public final class StaticDataStuffProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public int getAllMoneyTreesCount() {
         if (allMoneyTreesBuilder_ == null) {
@@ -10239,7 +10226,7 @@ public final class StaticDataStuffProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public com.lvl6.proto.StructureProto.MoneyTreeProto getAllMoneyTrees(int index) {
         if (allMoneyTreesBuilder_ == null) {
@@ -10249,7 +10236,7 @@ public final class StaticDataStuffProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder setAllMoneyTrees(
           int index, com.lvl6.proto.StructureProto.MoneyTreeProto value) {
@@ -10266,7 +10253,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder setAllMoneyTrees(
           int index, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
@@ -10280,7 +10267,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder addAllMoneyTrees(com.lvl6.proto.StructureProto.MoneyTreeProto value) {
         if (allMoneyTreesBuilder_ == null) {
@@ -10296,7 +10283,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder addAllMoneyTrees(
           int index, com.lvl6.proto.StructureProto.MoneyTreeProto value) {
@@ -10313,7 +10300,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder addAllMoneyTrees(
           com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
@@ -10327,7 +10314,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder addAllMoneyTrees(
           int index, com.lvl6.proto.StructureProto.MoneyTreeProto.Builder builderForValue) {
@@ -10341,7 +10328,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder addAllAllMoneyTrees(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MoneyTreeProto> values) {
@@ -10356,7 +10343,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder clearAllMoneyTrees() {
         if (allMoneyTreesBuilder_ == null) {
@@ -10369,7 +10356,7 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public Builder removeAllMoneyTrees(int index) {
         if (allMoneyTreesBuilder_ == null) {
@@ -10382,14 +10369,14 @@ public final class StaticDataStuffProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder getAllMoneyTreesBuilder(
           int index) {
         return getAllMoneyTreesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder getAllMoneyTreesOrBuilder(
           int index) {
@@ -10399,7 +10386,7 @@ public final class StaticDataStuffProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public java.util.List<? extends com.lvl6.proto.StructureProto.MoneyTreeProtoOrBuilder> 
            getAllMoneyTreesOrBuilderList() {
@@ -10410,14 +10397,14 @@ public final class StaticDataStuffProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder addAllMoneyTreesBuilder() {
         return getAllMoneyTreesFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public com.lvl6.proto.StructureProto.MoneyTreeProto.Builder addAllMoneyTreesBuilder(
           int index) {
@@ -10425,7 +10412,7 @@ public final class StaticDataStuffProto {
             index, com.lvl6.proto.StructureProto.MoneyTreeProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 37;</code>
+       * <code>repeated .com.lvl6.proto.MoneyTreeProto allMoneyTrees = 38;</code>
        */
       public java.util.List<com.lvl6.proto.StructureProto.MoneyTreeProto.Builder> 
            getAllMoneyTreesBuilderList() {
@@ -13065,9 +13052,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.SkillsProto.SkillSideEffectProto> sideEffects_ =
         java.util.Collections.emptyList();
       private void ensureSideEffectsIsMutable() {
-        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
           sideEffects_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillSideEffectProto>(sideEffects_);
-          bitField1_ |= 0x00000001;
+          bitField1_ |= 0x00000002;
          }
       }
 
@@ -13217,7 +13204,7 @@ public final class StaticDataStuffProto {
       public Builder clearSideEffects() {
         if (sideEffectsBuilder_ == null) {
           sideEffects_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000001);
+          bitField1_ = (bitField1_ & ~0x00000002);
           onChanged();
         } else {
           sideEffectsBuilder_.clear();
@@ -13294,7 +13281,7 @@ public final class StaticDataStuffProto {
           sideEffectsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.SkillsProto.SkillSideEffectProto, com.lvl6.proto.SkillsProto.SkillSideEffectProto.Builder, com.lvl6.proto.SkillsProto.SkillSideEffectProtoOrBuilder>(
                   sideEffects_,
-                  ((bitField1_ & 0x00000001) == 0x00000001),
+                  ((bitField1_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           sideEffects_ = null;
@@ -13305,9 +13292,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> prereqs_ =
         java.util.Collections.emptyList();
       private void ensurePrereqsIsMutable() {
-        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
           prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>(prereqs_);
-          bitField1_ |= 0x00000002;
+          bitField1_ |= 0x00000004;
          }
       }
 
@@ -13501,7 +13488,7 @@ public final class StaticDataStuffProto {
       public Builder clearPrereqs() {
         if (prereqsBuilder_ == null) {
           prereqs_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000002);
+          bitField1_ = (bitField1_ & ~0x00000004);
           onChanged();
         } else {
           prereqsBuilder_.clear();
@@ -13606,7 +13593,7 @@ public final class StaticDataStuffProto {
           prereqsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.PrerequisiteProto.PrereqProto, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder, com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder>(
                   prereqs_,
-                  ((bitField1_ & 0x00000002) == 0x00000002),
+                  ((bitField1_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           prereqs_ = null;
@@ -13617,9 +13604,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.BoardProto.BoardLayoutProto> boards_ =
         java.util.Collections.emptyList();
       private void ensureBoardsIsMutable() {
-        if (!((bitField1_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField1_ & 0x00000008) == 0x00000008)) {
           boards_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardLayoutProto>(boards_);
-          bitField1_ |= 0x00000004;
+          bitField1_ |= 0x00000008;
          }
       }
 
@@ -13769,7 +13756,7 @@ public final class StaticDataStuffProto {
       public Builder clearBoards() {
         if (boardsBuilder_ == null) {
           boards_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000004);
+          bitField1_ = (bitField1_ & ~0x00000008);
           onChanged();
         } else {
           boardsBuilder_.clear();
@@ -13846,7 +13833,7 @@ public final class StaticDataStuffProto {
           boardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoardProto.BoardLayoutProto, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder, com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder>(
                   boards_,
-                  ((bitField1_ & 0x00000004) == 0x00000004),
+                  ((bitField1_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           boards_ = null;
@@ -13857,9 +13844,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> research_ =
         java.util.Collections.emptyList();
       private void ensureResearchIsMutable() {
-        if (!((bitField1_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField1_ & 0x00000010) == 0x00000010)) {
           research_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>(research_);
-          bitField1_ |= 0x00000008;
+          bitField1_ |= 0x00000010;
          }
       }
 
@@ -14009,7 +13996,7 @@ public final class StaticDataStuffProto {
       public Builder clearResearch() {
         if (researchBuilder_ == null) {
           research_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000008);
+          bitField1_ = (bitField1_ & ~0x00000010);
           onChanged();
         } else {
           researchBuilder_.clear();
@@ -14086,7 +14073,7 @@ public final class StaticDataStuffProto {
           researchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder>(
                   research_,
-                  ((bitField1_ & 0x00000008) == 0x00000008),
+                  ((bitField1_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           research_ = null;
@@ -14125,11 +14112,7 @@ public final class StaticDataStuffProto {
       "o\032\nClan.proto\032\nItem.proto\032\022MonsterStuff." +
       "proto\032\022Prerequisite.proto\032\013Quest.proto\032\016" +
       "Research.proto\032\013Skill.proto\032\017Structure.p" +
-<<<<<<< HEAD
-      "roto\032\nTask.proto\032\nUser.proto\"\273\017\n\017StaticD" +
-=======
-      "roto\032\nTask.proto\032\nUser.proto\"\267\017\n\017StaticD" +
->>>>>>> origin/2015_02_09_money_tree2
+      "roto\032\nTask.proto\032\nUser.proto\"\362\017\n\017StaticD" +
       "ataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
       "o.MinimumUserProto\022>\n\016expansionCosts\030\002 \003" +
       "(\0132&.com.lvl6.proto.CityExpansionCostPro",
@@ -14160,30 +14143,8 @@ public final class StaticDataStuffProto {
       "bers\030\035 \003(\0132\037.com.lvl6.proto.EvoChamberPr" +
       "oto\0227\n\016allTeamCenters\030\036 \003(\0132\037.com.lvl6.p" +
       "roto.TeamCenterProto\0225\n\rallClanHouses\030  " +
-<<<<<<< HEAD
-      "\003(\0132\036.com.lvl6.proto.ClanHouseProto\022>\n\020p" +
-      "ersistentEvents\030\022 \003(\0132$.com.lvl6.proto.P" +
-      "ersistentEventProto\0228\n\004mbds\030\023 \003(\0132*.com.",
-      "lvl6.proto.MonsterBattleDialogueProto\022,\n" +
-      "\005raids\030\024 \003(\0132\035.com.lvl6.proto.ClanRaidPr" +
-      "oto\022F\n\024persistentClanEvents\030\025 \003(\0132(.com." +
-      "lvl6.proto.PersistentClanEventProto\022(\n\005i" +
-      "tems\030\026 \003(\0132\031.com.lvl6.proto.ItemProto\0220\n" +
-      "\tobstacles\030\027 \003(\0132\035.com.lvl6.proto.Obstac" +
-      "leProto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6.pr" +
-      "oto.ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036.com" +
-      ".lvl6.proto.PvpLeagueProto\0226\n\014achievemen" +
-      "ts\030\032 \003(\0132 .com.lvl6.proto.AchievementPro",
-      "to\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.Skil" +
-      "lProto\0229\n\013sideEffects\030% \003(\0132$.com.lvl6.p" +
-      "roto.SkillSideEffectProto\022,\n\007prereqs\030! \003" +
-      "(\0132\033.com.lvl6.proto.PrereqProto\0220\n\006board" +
-      "s\030\" \003(\0132 .com.lvl6.proto.BoardLayoutProt" +
-      "o\022/\n\010research\030# \003(\0132\035.com.lvl6.proto.Res" +
-      "earchProtoB\026B\024StaticDataStuffProto"
-=======
       "\003(\0132\036.com.lvl6.proto.ClanHouseProto\0225\n\ra" +
-      "llMoneyTrees\030% \003(\0132\036.com.lvl6.proto.Mone" +
+      "llMoneyTrees\030& \003(\0132\036.com.lvl6.proto.Mone" +
       "yTreeProto\022>\n\020persistentEvents\030\022 \003(\0132$.c",
       "om.lvl6.proto.PersistentEventProto\0228\n\004mb" +
       "ds\030\023 \003(\0132*.com.lvl6.proto.MonsterBattleD" +
@@ -14197,12 +14158,13 @@ public final class StaticDataStuffProto {
       "ues\030\031 \003(\0132\036.com.lvl6.proto.PvpLeagueProt",
       "o\0226\n\014achievements\030\032 \003(\0132 .com.lvl6.proto" +
       ".AchievementProto\022*\n\006skills\030\037 \003(\0132\032.com." +
-      "lvl6.proto.SkillProto\022,\n\007prereqs\030! \003(\0132\033" +
-      ".com.lvl6.proto.PrereqProto\0220\n\006boards\030\" " +
-      "\003(\0132 .com.lvl6.proto.BoardLayoutProto\022/\n" +
-      "\010research\030# \003(\0132\035.com.lvl6.proto.Researc" +
-      "hProtoB\026B\024StaticDataStuffProto"
->>>>>>> origin/2015_02_09_money_tree2
+      "lvl6.proto.SkillProto\0229\n\013sideEffects\030% \003" +
+      "(\0132$.com.lvl6.proto.SkillSideEffectProto" +
+      "\022,\n\007prereqs\030! \003(\0132\033.com.lvl6.proto.Prere" +
+      "qProto\0220\n\006boards\030\" \003(\0132 .com.lvl6.proto." +
+      "BoardLayoutProto\022/\n\010research\030# \003(\0132\035.com" +
+      ".lvl6.proto.ResearchProtoB\026B\024StaticDataS" +
+      "tuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14236,11 +14198,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-<<<<<<< HEAD
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", });
-=======
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", "Boards", "Research", });
->>>>>>> origin/2015_02_09_money_tree2
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BoardProto.getDescriptor();

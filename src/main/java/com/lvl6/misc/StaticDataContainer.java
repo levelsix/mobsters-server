@@ -257,15 +257,12 @@ public class StaticDataContainer
 
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
-<<<<<<< HEAD
 			
-=======
 
 			if (!bp.isDisplayToUser()) {
 				continue;
 			}
 
->>>>>>> origin/2015_02_09_money_tree2
 			//get the booster items associated with this booster pack
 			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
 			Collection<BoosterItem> items = null;

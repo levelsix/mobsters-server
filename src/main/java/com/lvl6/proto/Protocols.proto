@@ -174,12 +174,9 @@ enum EventProtocolRequest {
 	C_LOGOUT_EVENT = 101;
 	
 	C_DEV_EVENT = 200;
-<<<<<<< HEAD
 	C_PERFORM_RESEARCH_EVENT = 201;
 	C_FINISH_PERFORMING_RESEARCH_EVENT = 202;
-=======
 	
->>>>>>> origin/2015_02_09_money_tree2
 }
 
 enum EventProtocolResponse {
@@ -317,10 +314,7 @@ enum EventProtocolResponse {
 	
 	
 	S_DEV_EVENT = 200;
-<<<<<<< HEAD
 	S_PERFORM_RESEARCH_EVENT = 201;
 	S_FINISH_PERFORMING_RESEARCH_EVENT = 202;
-=======
 	
->>>>>>> origin/2015_02_09_money_tree2
 }

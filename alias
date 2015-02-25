@@ -1,0 +1,4 @@
+lias proto='cd /Users/byron/utopia-server; protoc -I=src/main/java/com/lvl6/proto/ --java_out=src/main/java/ src/main/java/com/lvl6/proto/*.proto'
+alias protoj2='cd /Users/byron/aoc2-server/aoc2-proto-buff; ./generateProtosToJava.sh; cd /Users/byron/aoc2-server;'
+alias protoj3='cd /Users/byron/mobsters-server; protoc -I=src/main/java/com/lvl6/proto/ --java_out=src/main/java/ src/main/java/com/lvl6/proto/*.proto':w
+
