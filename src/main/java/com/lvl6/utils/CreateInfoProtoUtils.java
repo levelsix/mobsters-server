@@ -3299,7 +3299,11 @@ public class CreateInfoProtoUtils {
 		return rgpb.build();
 	}
 	
-	public static MoneyTreeProto createMoneyTreeProtoFromStructureMoneyTree(StructureMoneyTree smt) {
+	public static MoneyTreeProto createMoneyTreeProtoFromStructureMoneyTree(Structure s,
+	        StructureInfoProto sip, StructureMoneyTree smt) {
+        if (null == sip) {
+            sip = createStructureInfoProtoFromStructure(s);
+        }
 		
 		MoneyTreeProto.Builder mtpb = MoneyTreeProto.newBuilder();
 
@@ -3307,6 +3311,7 @@ public class CreateInfoProtoUtils {
 		mtpb.setCapacity(smt.getCapacity());
 		mtpb.setDaysOfDuration(smt.getDaysOfDuration());
 		mtpb.setDaysForRenewal(smt.getDaysForRenewal());
+		mtpb.setStructInfo(sip);
 			
 		return mtpb.build();
 	}

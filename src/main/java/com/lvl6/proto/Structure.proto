@@ -52,6 +52,7 @@ message StructureInfoProto {
 		MINI_JOB = 9;
 		TEAM_CENTER = 10;
 		CLAN = 11;
+		MONEY_TREE = 12;
 	}
 }
 
