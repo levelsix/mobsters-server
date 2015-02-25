@@ -95,30 +95,27 @@ public class DestroyMoneyTreeStructureAction
 			int millisecondsConvertingToOneDayConstant = 1000*60*60*24;
 			Date purchaseTime = sfu.getPurchaseTime();
 			
-			int timeOfDuration = smt.getDaysOfDuration();
-//			int timeOfDuration = (int)( (now.getTime() - purchaseTime.getTime()) 
-//	                / (millisecondsConvertingToOneDayConstant * smt.getDaysOfDuration()) );
+			int timeOfDuration = (int)( (now.getTime() - purchaseTime.getTime()) 
+	                / (millisecondsConvertingToOneDayConstant * smt.getDaysOfDuration()) );
 			
 			if(!(timeOfDuration > 0)) {
 				log.error("not done collecting from money tree with userstructid {}", sfu.getId());
-				success = true;
+				success = false;
 			}
-			else success = false;
+			else success = true;
 			
 			Date lastRetrieved = sfu.getLastRetrieved();
-//			int timeForRenewal = (int)( (now.getTime() - lastRetrieved.getTime()) 
-//	                / (millisecondsConvertingToOneDayConstant * smt.getDaysForRenewal()) );
+			int timeForRenewal = (int)( (now.getTime() - lastRetrieved.getTime()) 
+	                / (millisecondsConvertingToOneDayConstant * smt.getDaysForRenewal()) );
 			
-			int timeForRenewal = smt.getDaysForRenewal();
 			
 			if(!(timeForRenewal > 0)) {
 				log.error("renewal period not over yet for money tree with userstructid {}", sfu.getId());
-				success = true;
+				success = false;
 			}
-			else success = false;
+			else success = true;
 		}
 		
-		log.info("successful verification");
 		return success;
 	}
 
@@ -128,10 +125,9 @@ public class DestroyMoneyTreeStructureAction
 		for(String userStructId : userStructIdsList) {
 			success = deleteUtil.deleteUserStruct(userStructId);
 			if(!success) {
-				log.error("failed to delete");
 				return success;
 			}
-			else log.info("deleted a userstruct");
+			
 		}
 		return success;
 	}

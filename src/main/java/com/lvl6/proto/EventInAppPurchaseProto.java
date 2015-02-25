@@ -94,6 +94,20 @@ public final class EventInAppPurchaseProto {
      */
     com.google.protobuf.ByteString
         getIpaddrBytes();
+
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    boolean hasIapProductId();
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    java.lang.String getIapProductId();
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getIapProductIdBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseRequestProto}
@@ -188,6 +202,12 @@ public final class EventInAppPurchaseProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               ipaddr_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              iapProductId_ = bs;
               break;
             }
           }
@@ -461,6 +481,48 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    public static final int IAPPRODUCTID_FIELD_NUMBER = 7;
+    private java.lang.Object iapProductId_;
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    public boolean hasIapProductId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    public java.lang.String getIapProductId() {
+      java.lang.Object ref = iapProductId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          iapProductId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string iapProductId = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIapProductIdBytes() {
+      java.lang.Object ref = iapProductId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        iapProductId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       receipt_ = "";
@@ -468,6 +530,7 @@ public final class EventInAppPurchaseProto {
       localcurrency_ = "";
       locale_ = "";
       ipaddr_ = "";
+      iapProductId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -499,6 +562,9 @@ public final class EventInAppPurchaseProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getIpaddrBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getIapProductIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -532,6 +598,10 @@ public final class EventInAppPurchaseProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getIpaddrBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getIapProductIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -667,6 +737,8 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         ipaddr_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        iapProductId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -723,6 +795,10 @@ public final class EventInAppPurchaseProto {
           to_bitField0_ |= 0x00000020;
         }
         result.ipaddr_ = ipaddr_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.iapProductId_ = iapProductId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -765,6 +841,11 @@ public final class EventInAppPurchaseProto {
         if (other.hasIpaddr()) {
           bitField0_ |= 0x00000020;
           ipaddr_ = other.ipaddr_;
+          onChanged();
+        }
+        if (other.hasIapProductId()) {
+          bitField0_ |= 0x00000040;
+          iapProductId_ = other.iapProductId_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -1286,6 +1367,82 @@ public final class EventInAppPurchaseProto {
   }
   bitField0_ |= 0x00000020;
         ipaddr_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object iapProductId_ = "";
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public boolean hasIapProductId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public java.lang.String getIapProductId() {
+        java.lang.Object ref = iapProductId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            iapProductId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIapProductIdBytes() {
+        java.lang.Object ref = iapProductId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          iapProductId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public Builder setIapProductId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        iapProductId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public Builder clearIapProductId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        iapProductId_ = getDefaultInstance().getIapProductId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string iapProductId = 7;</code>
+       */
+      public Builder setIapProductIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        iapProductId_ = value;
         onChanged();
         return this;
       }
@@ -6927,51 +7084,52 @@ public final class EventInAppPurchaseProto {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
       "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
       "sterStuff.proto\032\017Structure.proto\032\nUser.p" +
-      "roto\"\251\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
+      "roto\"\277\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
       "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\"\207\004\n\032InAppPurchaseRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
-      "lvl6.proto.InAppPurchaseResponseProto.In" +
-      "AppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001(" +
-      "\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNam" +
-      "e\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receipt" +
-      "\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6." +
-      "proto.FullUserMonsterProto\0227\n\020updatedUse" +
-      "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
-      "oto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl6" +
-      ".proto.FullUserStructureProto\"C\n\023InAppPu" +
-      "rchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021D",
-      "UPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamondsR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022J\n\020freeDiamondsTyp" +
-      "e\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002" +
-      "\n\035EarnFreeDiamondsResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.EarnF" +
-      "reeDiamondsResponseProto.EarnFreeDiamond" +
-      "sStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$.com.",
-      "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
-      "ECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUCCESS" +
-      "\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020" +
-      "\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER_FAI" +
-      "L\020\004\"\335\001\n$ExchangeGemsForResourcesRequestP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
-      "nimumUserProtoWithMaxResources\022\017\n\007numGem" +
-      "s\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014resourc" +
-      "eType\030\004 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
-      "e:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\252\002\n%Exchange",
-      "GemsForResourcesResponseProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022d\n\006status\030\002 \001(\0162T.com.lv" +
-      "l6.proto.ExchangeGemsForResourcesRespons" +
-      "eProto.ExchangeGemsForResourcesStatus\"Y\n" +
-      "\036ExchangeGemsForResourcesStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_GEMS\020\003B\031B\027EventInAppPurchaseProto"
+      "\022\016\n\006ipaddr\030\006 \001(\t\022\024\n\014iapProductId\030\007 \001(\t\"\207" +
+      "\004\n\032InAppPurchaseResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022",
+      "N\n\006status\030\002 \001(\0162>.com.lvl6.proto.InAppPu" +
+      "rchaseResponseProto.InAppPurchaseStatus\022" +
+      "\026\n\016diamondsGained\030\003 \001(\005\022\027\n\013coinsGained\030\004" +
+      " \001(\005B\002\030\001\022\023\n\013packageName\030\005 \001(\t\022\024\n\014package" +
+      "Price\030\006 \001(\001\022\017\n\007receipt\030\007 \001(\t\022:\n\014updatedO" +
+      "rNew\030\010 \003(\0132$.com.lvl6.proto.FullUserMons" +
+      "terProto\0227\n\020updatedUserItems\030\t \003(\0132\035.com" +
+      ".lvl6.proto.UserItemProto\022@\n\020updatedMone" +
+      "yTree\030\n \003(\0132&.com.lvl6.proto.FullUserStr" +
+      "uctureProto\"C\n\023InAppPurchaseStatus\022\013\n\007SU",
+      "CCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003" +
+      "\"\260\001\n\034EarnFreeDiamondsRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022J\n\020freeDiamondsType\030\002 \001(\0162$.com.lvl6" +
+      ".proto.EarnFreeDiamondsType:\nFB_CONNECT\022" +
+      "\022\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamonds" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022T\n\006status\030\002 \001(\0162" +
+      "D.com.lvl6.proto.EarnFreeDiamondsRespons" +
+      "eProto.EarnFreeDiamondsStatus\022J\n\020freeDia",
+      "mondsType\030\003 \001(\0162$.com.lvl6.proto.EarnFre" +
+      "eDiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDia" +
+      "mondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_A" +
+      "PART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SU" +
+      "PPORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGe" +
+      "msForResourcesRequestProto\022@\n\006sender\030\001 \001" +
+      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
+      "MaxResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numReso" +
+      "urces\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com." +
+      "lvl6.proto.ResourceType:\004CASH\022\022\n\nclientT",
+      "ime\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourcesRe" +
+      "sponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.p" +
+      "roto.MinimumUserProtoWithMaxResources\022d\n" +
+      "\006status\030\002 \001(\0162T.com.lvl6.proto.ExchangeG" +
+      "emsForResourcesResponseProto.ExchangeGem" +
+      "sForResourcesStatus\"Y\n\036ExchangeGemsForRe" +
+      "sourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027EventI" +
+      "nAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6995,7 +7153,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", });
+        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", "IapProductId", });
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new

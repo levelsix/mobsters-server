@@ -258,6 +258,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__EXPANSION_WAIT_COMPLETE = "expansion wait complete: ";
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__IN_APP_PURCHASE = "in app purchase: ";
+	public static final String UCHRFC__IN_APP_PURCHASE_MONEY_TREE = "in app purchase: money tree";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
 	public static final String UCHRFC__PERFORMING_RESEARCH = "performing research";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";

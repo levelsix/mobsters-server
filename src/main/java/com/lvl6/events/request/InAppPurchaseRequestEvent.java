@@ -31,6 +31,10 @@ public class InAppPurchaseRequestEvent extends RequestEvent {
   public InAppPurchaseRequestProto getInAppPurchaseRequestProto() {
     return inAppPurchaseRequestProto;
   }
+  
+  public void setInAppPurchaseRequestProto(InAppPurchaseRequestProto iaprp) {
+	  inAppPurchaseRequestProto = iaprp;
+  }
 
   @Override
   public String toString()

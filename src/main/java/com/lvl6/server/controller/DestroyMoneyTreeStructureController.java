@@ -75,7 +75,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<String> userStructUuIdList = reqProto.getUserStructUuidList();
+		List<String> userStructIdList = reqProto.getUserStructUuidList();
 
 		DestroyMoneyTreeStructureResponseProto.Builder resBuilder = DestroyMoneyTreeStructureResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -84,7 +84,6 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
-			StringUtils.convertToUUID(userStructUuIdList);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
@@ -108,7 +107,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		try {
 			
 
-			writeChangesToDb(userId, resBuilder, userStructUuIdList);
+			writeChangesToDb(userId, resBuilder, userStructIdList);
 
 			if (!resBuilder.hasStatus()) {
 				resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);

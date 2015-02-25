@@ -45,6 +45,7 @@ public class InAppPurchaseAction
 	private String userId;
 	private User user;
 	private JSONObject receiptFromApple;
+	private StructureMoneyTree smt;
 	private Date now;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -56,6 +57,7 @@ public class InAppPurchaseAction
 		String userId,
 		User user,
 		JSONObject receiptFromApple,
+		StructureMoneyTree smt,
 		Date now,
 		IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 		ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -67,6 +69,7 @@ public class InAppPurchaseAction
 		this.userId = userId;
 		this.user = user;
 		this.receiptFromApple = receiptFromApple;
+		this.smt = smt;
 		this.now = now;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
@@ -245,7 +248,7 @@ public class InAppPurchaseAction
 			}
 
 			if (isStarterPack) {
-				
+
 				processStarterPackPurchase(resBuilder);
 			} 
 			else if (isMoneyTree) {
@@ -354,9 +357,9 @@ public class InAppPurchaseAction
 			Timestamp lastRetrievedTime = null;
 			boolean isComplete = true;
 			
-//			userStructId = insertUtil.insertUserStruct(userId, 
-//					ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, cp, purchaseTime,
-//			        lastRetrievedTime, isComplete);
+			userStructId = insertUtil.insertUserStruct(userId, 
+					smt.getStructId(), cp, purchaseTime,
+			        lastRetrievedTime, isComplete);
 		}
 		else {
 			userStructId = listOfUsersMoneyTree.get(0).getId();
@@ -376,7 +379,11 @@ public class InAppPurchaseAction
 		
 		StructureForUser sfu = null;
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
-		sfu = listOfUsersMoneyTree.get(0); //get only element of list
+		List<StructureForUser> listOfUsersMoneyTree2 = 
+				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+		
+		sfu = listOfUsersMoneyTree2.get(0); //get only element of list
+		
 		if (null != sfu) {
 			FullUserStructureProto fusp = CreateInfoProtoUtils
 				.createFullUserStructureProtoFromUserstruct(sfu);
@@ -385,61 +392,61 @@ public class InAppPurchaseAction
 		}
 	}
 	
-	private List<ItemForUser> calculateItemRewards(
-		String userId,
-		List<BoosterItem> itemsUserReceives )
-	{
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-		
-		for (BoosterItem bi : itemsUserReceives) {
-			int itemId = bi.getItemId();
-			int itemQuantity = bi.getItemQuantity();
-			
-			if (itemId <= 0 || itemQuantity <= 0) {
-				continue;
-			}
-			
-			//user could have gotten multiple of the same BoosterItem
-			int newQuantity = itemQuantity;
-			if (itemIdToQuantity.containsKey(itemId))
-			{
-				newQuantity += itemIdToQuantity.get(itemId);
-			}
-			itemIdToQuantity.put(itemId, newQuantity);
-		}
-		
-		List<ItemForUser> ifuList = null;
-	    if (!itemIdToQuantity.isEmpty()) {
-	    	//aggregate rewarded items with user's current items
-	    	Map<Integer, ItemForUser> itemIdToIfu = 
-	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	    			itemIdToQuantity.keySet());
-	    	
-	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	    		int newQuantity = itemIdToQuantity.get(itemId);
-	    		
-	    		ItemForUser ifu = null;
-	    		if (itemIdToIfu.containsKey(itemId)){
-	    			ifu = itemIdToIfu.get(itemId);
-	    		} else {
-	    			//user might not have the item
-	    			ifu = new ItemForUser(userId, itemId, 0);
-	    			itemIdToIfu.put(itemId, ifu);
-	    		}
-	    		
-	    		newQuantity += ifu.getQuantity();
-	    		ifu.setQuantity(newQuantity);
-	    	}
-	    	
-	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	    }
-	    return ifuList;
-	}
+//	private List<ItemForUser> calculateItemRewards(
+//		String userId,
+//		List<BoosterItem> itemsUserReceives )
+//	{
+//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+//		
+//		for (BoosterItem bi : itemsUserReceives) {
+//			int itemId = bi.getItemId();
+//			int itemQuantity = bi.getItemQuantity();
+//			
+//			if (itemId <= 0 || itemQuantity <= 0) {
+//				continue;
+//			}
+//			
+//			//user could have gotten multiple of the same BoosterItem
+//			int newQuantity = itemQuantity;
+//			if (itemIdToQuantity.containsKey(itemId))
+//			{
+//				newQuantity += itemIdToQuantity.get(itemId);
+//			}
+//			itemIdToQuantity.put(itemId, newQuantity);
+//		}
+//		
+//		List<ItemForUser> ifuList = null;
+//	    if (!itemIdToQuantity.isEmpty()) {
+//	    	//aggregate rewarded items with user's current items
+//	    	Map<Integer, ItemForUser> itemIdToIfu = 
+//	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
+//	    			itemIdToQuantity.keySet());
+//	    	
+//	    	for (Integer itemId : itemIdToQuantity.keySet()) {
+//	    		int newQuantity = itemIdToQuantity.get(itemId);
+//	    		
+//	    		ItemForUser ifu = null;
+//	    		if (itemIdToIfu.containsKey(itemId)){
+//	    			ifu = itemIdToIfu.get(itemId);
+//	    		} else {
+//	    			//user might not have the item
+//	    			ifu = new ItemForUser(userId, itemId, 0);
+//	    			itemIdToIfu.put(itemId, ifu);
+//	    		}
+//	    		
+//	    		newQuantity += ifu.getQuantity();
+//	    		ifu.setQuantity(newQuantity);
+//	    	}
+//	    	
+//	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+//	    }
+//	    return ifuList;
+//	}
 	
 	private void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 
-		if (gemChange > 0) {
+		if (gemChange != 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
         	user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
@@ -453,14 +460,16 @@ public class InAppPurchaseAction
 		String gems = MiscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
-
-
 		curCurrencies = new HashMap<String, Integer>();
+		curCurrencies.put(gems, user.getGems());
+
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemChange) {
-			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 				ControllerConstants.UCHRFC__IN_APP_PURCHASE);
+		}
+		else {
+			reasonsForChanges.put(gems,  ControllerConstants.UCHRFC__IN_APP_PURCHASE_MONEY_TREE);
 		}
 		details = new HashMap<String, String>();
 		details.put(gems, packageName);

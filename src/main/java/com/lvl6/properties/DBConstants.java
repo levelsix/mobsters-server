@@ -1175,7 +1175,8 @@ public class DBConstants {
 	public static final String STRUCTURE_MONEY_TREE__CAPACITY = "capacity";
 	public static final String STRUCTURE_MONEY_TREE__DAYS_OF_DURATION = "days_of_duration";
 	public static final String STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL = "days_for_renewal";
-
+	public static final String STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID = "iap_product_id";
+	
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";
 	public static final String STRUCTURE_RESIDENCE__NUM_BONUS_MONSTER_SLOTS = "num_bonus_monster_slots";

@@ -22,8 +22,10 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class StructureForUserRetrieveUtils2 {
@@ -68,24 +70,40 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	public List<StructureForUser> getMoneyTreeForUser(String userId, String userStructId) {
 		log.debug(String.format(
 				"retrieving money tree for userId %s", userId));
-
-		Object[] values2 = { userId, userStructId };
-		String query2 = String.format(
-				"select * from %s where %s=? and %s=?",
-				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
-				DBConstants.STRUCTURE_FOR_USER__ID);
-
-		List<StructureForUser> userStructs2 = null;
-		try {
-			userStructs2 = this.jdbcTemplate
-					.query(query2, values2, rowMapper);
-
-		} catch (Exception e) {
-			log.error("structure for user retrieve db error.", e);
-			userStructs2 = new ArrayList<StructureForUser>();
+		
+		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		List<StructureForUser> userStructList = getUserStructsForUser(userId);
+		List<StructureForUser> returnList = new ArrayList<StructureForUser>();
+		
+		if(userStructId == null) {
+			for(StructureForUser sfu : userStructList) {
+				int structId = sfu.getStructId();
+				for(Integer id : moneyTreesMap.keySet()) {
+					if(id == structId) {
+						returnList.add(sfu);
+					}
+				}
+			}
+			return returnList;
 		}
-		return userStructs2;
+		else {
+			Object[] values2 = { userId, userStructId };
+			String query2 = String.format(
+					"select * from %s where %s=? and %s=?",
+					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
+					DBConstants.STRUCTURE_FOR_USER__ID);
 
+			List<StructureForUser> userStructs2 = null;
+			try {
+				userStructs2 = this.jdbcTemplate
+						.query(query2, values2, rowMapper);
+
+			} catch (Exception e) {
+				log.error("structure for user retrieve db error.", e);
+				userStructs2 = new ArrayList<StructureForUser>();
+			}
+			return userStructs2;
+		}
 	}
 
 

@@ -19,7 +19,7 @@ public class StructureMoneyTree implements Serializable {
 	}
 	
 	public StructureMoneyTree(int structId, float productionRate, int capacity,
-			int daysOfDuration, int daysForRenewal) {
+			int daysOfDuration, int daysForRenewal, String iapProductId) {
 		super();
 		this.structId = structId;
 		this.productionRate = productionRate;

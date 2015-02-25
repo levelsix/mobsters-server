@@ -98,6 +98,7 @@ message MoneyTreeProto {
 	optional int32 capacity = 3;
 	optional int32 daysOfDuration = 4;
 	optional int32 daysForRenewal = 5;
+	optional string iapProductId = 6;
 }
 
 //------------------------------------------------------------------------------------------
