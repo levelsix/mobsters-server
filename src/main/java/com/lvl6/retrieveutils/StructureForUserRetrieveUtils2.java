@@ -69,41 +69,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		log.debug(String.format(
 				"retrieving money tree for userId %s", userId));
 
-		if(userStructId == null) {
-			Object[] values = { userId, ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID };
-			String query1 = String.format(
-					"select * from %s where %s=?, %s=?, %s=?",
-					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
-					DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID);
-			List<StructureForUser> userStructs1 = null;
-			try {
-				userStructs1 = this.jdbcTemplate
-						.query(query1, values, rowMapper);
+		Object[] values2 = { userId, userStructId };
+		String query2 = String.format(
+				"select * from %s where %s=? and %s=?",
+				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
+				DBConstants.STRUCTURE_FOR_USER__ID);
 
-			} catch (Exception e) {
-				log.error("structure for user retrieve db error.", e);
-				userStructs1 = new ArrayList<StructureForUser>();
-			}
-			return userStructs1;
+		List<StructureForUser> userStructs2 = null;
+		try {
+			userStructs2 = this.jdbcTemplate
+					.query(query2, values2, rowMapper);
+
+		} catch (Exception e) {
+			log.error("structure for user retrieve db error.", e);
+			userStructs2 = new ArrayList<StructureForUser>();
 		}
-		else {
-			Object[] values2 = { userId, ControllerConstants.STRUCTURE_FOR_MONEY_TREE_ID, userStructId };
-			String query2 = String.format(
-					"select * from %s where %s=?, %s=?, %s=?",
-					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
-					DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID, DBConstants.STRUCTURE_FOR_USER__ID);
+		return userStructs2;
 
-			List<StructureForUser> userStructs2 = null;
-			try {
-				userStructs2 = this.jdbcTemplate
-						.query(query2, values2, rowMapper);
-
-			} catch (Exception e) {
-				log.error("structure for user retrieve db error.", e);
-				userStructs2 = new ArrayList<StructureForUser>();
-			}
-			return userStructs2;
-		}
 	}
 
 

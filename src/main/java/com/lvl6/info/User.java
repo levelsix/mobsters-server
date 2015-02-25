@@ -1027,7 +1027,7 @@ public class User implements Serializable {
 		
 		if(numUpdated ==1) {
 			this.gems += gemsDelta;
-			if(resourceDelta > 0) {
+			if(resourceDelta != 0) {
 				if(resourceType == ResourceType.CASH) {
 					this.cash += resourceDelta;
 				}
