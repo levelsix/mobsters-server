@@ -240,7 +240,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
 	  int playerExp = 10;
-	  int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
+	  int avatarMonsterId = ControllerConstants.TUTORIAL__USER_STARTING_MONSTER_ID;
 	  
 	  String userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
 	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
