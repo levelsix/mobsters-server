@@ -21,6 +21,7 @@ public class TaskMapElement implements Serializable {
 	private int charImgVertPixelOffset;
 	private int charImgHorizPixelOffset;
 	private float charImgScaleFactor;
+	private boolean isFake;
 
 	public TaskMapElement(
 		int id,
@@ -37,7 +38,8 @@ public class TaskMapElement implements Serializable {
 		String characterImgName,
 		int charImgVertPixelOffset,
 		int charImgHorizPixelOffset,
-		float charImgScaleFactor )
+		float charImgScaleFactor,
+		boolean isFake )
 	{
 		super();
 		this.id = id;
@@ -55,6 +57,7 @@ public class TaskMapElement implements Serializable {
 		this.charImgVertPixelOffset = charImgVertPixelOffset;
 		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
 		this.charImgScaleFactor = charImgScaleFactor;
+		this.isFake = isFake;
 	}
 
 	public int getId()
@@ -208,39 +211,25 @@ public class TaskMapElement implements Serializable {
 	}
 
 	@Override
-	public String toString()
-	{
-		return "TaskMapElement [id="
-			+ id
-			+ ", taskId="
-			+ taskId
-			+ ", xPos="
-			+ xPos
-			+ ", yPos="
-			+ yPos
-			+ ", element="
-			+ element
-			+ ", boss="
-			+ boss
-			+ ", bossImgName="
-			+ bossImgName
-			+ ", itemDropId="
-			+ itemDropId
-			+ ", sectionName="
-			+ sectionName
-			+ ", cashReward="
-			+ cashReward
-			+ ", oilReward="
-			+ oilReward
-			+ ", characterImgName="
-			+ characterImgName
-			+ ", charImgVertPixelOffset="
-			+ charImgVertPixelOffset
-			+ ", charImgHorizPixelOffset="
-			+ charImgHorizPixelOffset
-			+ ", charImgScaleFactor="
-			+ charImgScaleFactor
-			+ "]";
+	public String toString() {
+		return "TaskMapElement [id=" + id + ", taskId=" + taskId + ", xPos="
+				+ xPos + ", yPos=" + yPos + ", element=" + element + ", boss="
+				+ boss + ", bossImgName=" + bossImgName + ", itemDropId="
+				+ itemDropId + ", sectionName=" + sectionName + ", cashReward="
+				+ cashReward + ", oilReward=" + oilReward
+				+ ", characterImgName=" + characterImgName
+				+ ", charImgVertPixelOffset=" + charImgVertPixelOffset
+				+ ", charImgHorizPixelOffset=" + charImgHorizPixelOffset
+				+ ", charImgScaleFactor=" + charImgScaleFactor + ", isFake="
+				+ isFake + "]";
+	}
+
+	public boolean isFake() {
+		return isFake;
+	}
+
+	public void setFake(boolean isFake) {
+		this.isFake = isFake;
 	}
 	
 }
