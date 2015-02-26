@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Achievement;
 import com.lvl6.info.Board;
+import com.lvl6.info.BoardObstacle;
 import com.lvl6.info.BoardProperty;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
@@ -41,6 +42,7 @@ import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureMoneyTree;
+import com.lvl6.info.StructurePvpBoard;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -71,6 +73,8 @@ import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
+import com.lvl6.proto.StructureProto.PvpBoardHouseProto;
+import com.lvl6.proto.StructureProto.PvpBoardObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -82,6 +86,7 @@ import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoardPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
@@ -110,6 +115,7 @@ import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructurePvpBoardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -317,6 +323,8 @@ public class StaticDataContainer
 		setTeamCenters(sdpb, structs, structProtos);
 		setClanHouses(sdpb, structs, structProtos);
 		setMoneyTrees(sdpb, structs, structProtos);
+		setPvpBoardHouses(sdpb, structs, structProtos);
+		setPvpBoardObstacles(sdpb);
 	}
 
 
@@ -490,6 +498,36 @@ public class StaticDataContainer
 			MoneyTreeProto mtp = CreateInfoProtoUtils
 					.createMoneyTreeProtoFromStructureMoneyTree(s, sip, smt);
 			sdpb.addAllMoneyTrees(mtp);
+		}
+	}
+	
+	private static void setPvpBoardHouses(Builder sdpb,
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos)
+	{
+
+		Map<Integer, StructurePvpBoard> idsToPvpBoards =
+				StructurePvpBoardRetrieveUtils.getStructIdsToPvpBoards();
+
+		for (Integer structId : idsToPvpBoards.keySet()) {
+            Structure s = structs.get(structId);
+            StructureInfoProto sip = structProtos.get(structId);
+			StructurePvpBoard smt = idsToPvpBoards.get(structId);
+
+			PvpBoardHouseProto pbhp = CreateInfoProtoUtils
+					.createPvpBoardHouseProto(s, sip, smt);
+			sdpb.addAllPvpBoardHouses(pbhp);
+		}
+	}
+	
+	private static void setPvpBoardObstacles(Builder sdpb) {
+		Map<Integer, BoardObstacle> idToBoardObstacle =
+				BoardObstacleRetrieveUtils.getIdsToBoardObstacles();
+		
+		for (BoardObstacle bo : idToBoardObstacle.values()) {
+			PvpBoardObstacleProto pbop = CreateInfoProtoUtils
+					.createPvpBoardObstacleProto(bo);
+			sdpb.addPvpBoardObstacleProtos(pbop);
 		}
 	}
 

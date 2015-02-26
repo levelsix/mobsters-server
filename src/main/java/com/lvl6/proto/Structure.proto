@@ -53,6 +53,7 @@ message StructureInfoProto {
 		TEAM_CENTER = 10;
 		CLAN = 11;
 		MONEY_TREE = 12;
+		PVP_BOARD = 13;
 	}
 }
 
@@ -280,5 +281,37 @@ message ClanHouseProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 maxHelpersPerSolicitation = 2; 
 	optional int32 teamDonationPowerLimit = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message PvpBoardHouseProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 pvpBoardPowerLimit = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message PvpBoardObstacleProto {
+	optional int32 pvpBoardId = 1;
+	optional string name = 2;
+	optional BoardObstacleType obstacleType = 3;
+	optional int32 powerAmt = 4;
+	optional bool initAvailable = 5;
+	
+}
+enum BoardObstacleType {
+	CLOUD = 1;	
+}
+
+
+//------------------------------------------------------------------------------------------
+
+message UserPvpBoardObstacleProto {
+	optional string userPvpBoardObstacleUuid = 1;
+	optional string userUuid = 2;
+	optional int32 obstacleId = 3;
+	optional int32 posX = 4;
+	optional int32 posY = 5;
 }
 

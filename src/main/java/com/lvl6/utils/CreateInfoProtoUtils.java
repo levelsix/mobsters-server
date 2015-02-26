@@ -19,6 +19,7 @@ import com.lvl6.info.Achievement;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.Board;
+import com.lvl6.info.BoardObstacle;
 import com.lvl6.info.BoardProperty;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
@@ -67,6 +68,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
+import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
@@ -86,6 +88,7 @@ import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureMoneyTree;
+import com.lvl6.info.StructurePvpBoard;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -188,6 +191,7 @@ import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.SkillsProto.SkillType;
+import com.lvl6.proto.StructureProto.BoardObstacleType;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
@@ -198,12 +202,15 @@ import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
+import com.lvl6.proto.StructureProto.PvpBoardHouseProto;
+import com.lvl6.proto.StructureProto.PvpBoardObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
+import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TeamCenterProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
@@ -3636,14 +3643,58 @@ public class CreateInfoProtoUtils {
 
 		return chpb.build();
 	}
-	
-	/**research.proto*******************************************/
-	
-	
-	
-	
-	
 
+	public static PvpBoardHouseProto  createPvpBoardHouseProto (Structure s,
+		StructureInfoProto sip, StructurePvpBoard spb)
+	{
+		if (null == sip) {
+			sip = createStructureInfoProtoFromStructure(s);
+		}
+
+		PvpBoardHouseProto.Builder chpb = PvpBoardHouseProto.newBuilder();
+		chpb.setStructInfo(sip);
+		chpb.setPvpBoardPowerLimit(spb.getPowerLimit());
+
+		return chpb.build();
+	}
+	
+	public static PvpBoardObstacleProto createPvpBoardObstacleProto(BoardObstacle bo) {
+		PvpBoardObstacleProto.Builder pbopb = PvpBoardObstacleProto.newBuilder();
+		pbopb.setPvpBoardId(bo.getId());
+		
+		String str = bo.getName();
+		if (null != str) {
+			pbopb.setName(str);
+		}
+		
+		str = bo.getType();
+		if (null != str) {
+			try {
+				BoardObstacleType bot = BoardObstacleType.valueOf(str);
+				pbopb.setObstacleType(bot);
+			} catch (Exception e) {
+				log.error(
+					String.format(
+						"illegal BoardObstacleType type. BoardObstacle={}",
+						bo),
+					e);
+			}
+		}
+		return pbopb.build();
+	}
+
+	public static UserPvpBoardObstacleProto createUserPvpBoardObstacleProto(
+			PvpBoardObstacleForUser pbofu)
+	{
+		UserPvpBoardObstacleProto.Builder upopb = UserPvpBoardObstacleProto.newBuilder();
+		upopb.setUserPvpBoardObstacleUuid(pbofu.getId());
+		upopb.setUserUuid(pbofu.getUserId());
+		upopb.setObstacleId(pbofu.getObstacleId());
+		upopb.setPosX(pbofu.getPosX());
+		upopb.setPosY(pbofu.getPosY());
+		return upopb.build();
+	}
+	
 	/**Task.proto*****************************************************/
 	/*
   //individualCash should always be set, could be 0 or more

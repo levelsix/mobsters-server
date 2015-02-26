@@ -132,6 +132,8 @@ message StartupResponseProto {
 		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
+	repeated UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
+
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 

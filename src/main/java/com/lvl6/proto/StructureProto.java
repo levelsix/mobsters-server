@@ -208,6 +208,79 @@ public final class StructureProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.StructOrientation)
   }
 
+  /**
+   * Protobuf enum {@code com.lvl6.proto.BoardObstacleType}
+   */
+  public enum BoardObstacleType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CLOUD = 1;</code>
+     */
+    CLOUD(0, 1),
+    ;
+
+    /**
+     * <code>CLOUD = 1;</code>
+     */
+    public static final int CLOUD_VALUE = 1;
+
+
+    public final int getNumber() { return value; }
+
+    public static BoardObstacleType valueOf(int value) {
+      switch (value) {
+        case 1: return CLOUD;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<BoardObstacleType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<BoardObstacleType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<BoardObstacleType>() {
+            public BoardObstacleType findValueByNumber(int number) {
+              return BoardObstacleType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(2);
+    }
+
+    private static final BoardObstacleType[] VALUES = values();
+
+    public static BoardObstacleType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private BoardObstacleType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BoardObstacleType)
+  }
+
   public interface StructureInfoProtoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StructureInfoProto)
       com.google.protobuf.MessageOrBuilder {
@@ -723,6 +796,10 @@ public final class StructureProto {
        * <code>MONEY_TREE = 12;</code>
        */
       MONEY_TREE(11, 12),
+      /**
+       * <code>PVP_BOARD = 13;</code>
+       */
+      PVP_BOARD(12, 13),
       ;
 
       /**
@@ -781,6 +858,10 @@ public final class StructureProto {
        * <code>MONEY_TREE = 12;</code>
        */
       public static final int MONEY_TREE_VALUE = 12;
+      /**
+       * <code>PVP_BOARD = 13;</code>
+       */
+      public static final int PVP_BOARD_VALUE = 13;
 
 
       public final int getNumber() { return value; }
@@ -799,6 +880,7 @@ public final class StructureProto {
           case 10: return TEAM_CENTER;
           case 11: return CLAN;
           case 12: return MONEY_TREE;
+          case 13: return PVP_BOARD;
           default: return null;
         }
       }
@@ -18098,6 +18180,2256 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanHouseProto)
   }
 
+  public interface PvpBoardHouseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpBoardHouseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    boolean hasStructInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+     */
+    boolean hasPvpBoardPowerLimit();
+    /**
+     * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+     */
+    int getPvpBoardPowerLimit();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.PvpBoardHouseProto}
+   */
+  public static final class PvpBoardHouseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpBoardHouseProto)
+      PvpBoardHouseProtoOrBuilder {
+    // Use PvpBoardHouseProto.newBuilder() to construct.
+    private PvpBoardHouseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PvpBoardHouseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PvpBoardHouseProto defaultInstance;
+    public static PvpBoardHouseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PvpBoardHouseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PvpBoardHouseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = structInfo_.toBuilder();
+              }
+              structInfo_ = input.readMessage(com.lvl6.proto.StructureProto.StructureInfoProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(structInfo_);
+                structInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              pvpBoardPowerLimit_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardHouseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.StructureProto.PvpBoardHouseProto.class, com.lvl6.proto.StructureProto.PvpBoardHouseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PvpBoardHouseProto> PARSER =
+        new com.google.protobuf.AbstractParser<PvpBoardHouseProto>() {
+      public PvpBoardHouseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PvpBoardHouseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PvpBoardHouseProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int STRUCTINFO_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public boolean hasStructInfo() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+      return structInfo_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+     */
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+      return structInfo_;
+    }
+
+    public static final int PVPBOARDPOWERLIMIT_FIELD_NUMBER = 2;
+    private int pvpBoardPowerLimit_;
+    /**
+     * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+     */
+    public boolean hasPvpBoardPowerLimit() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+     */
+    public int getPvpBoardPowerLimit() {
+      return pvpBoardPowerLimit_;
+    }
+
+    private void initFields() {
+      structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      pvpBoardPowerLimit_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, pvpBoardPowerLimit_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, pvpBoardPowerLimit_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardHouseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.PvpBoardHouseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.PvpBoardHouseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpBoardHouseProto)
+        com.lvl6.proto.StructureProto.PvpBoardHouseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardHouseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.StructureProto.PvpBoardHouseProto.class, com.lvl6.proto.StructureProto.PvpBoardHouseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.StructureProto.PvpBoardHouseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pvpBoardPowerLimit_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor;
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardHouseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.PvpBoardHouseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardHouseProto build() {
+        com.lvl6.proto.StructureProto.PvpBoardHouseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardHouseProto buildPartial() {
+        com.lvl6.proto.StructureProto.PvpBoardHouseProto result = new com.lvl6.proto.StructureProto.PvpBoardHouseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (structInfoBuilder_ == null) {
+          result.structInfo_ = structInfo_;
+        } else {
+          result.structInfo_ = structInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.pvpBoardPowerLimit_ = pvpBoardPowerLimit_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.PvpBoardHouseProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.PvpBoardHouseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.PvpBoardHouseProto other) {
+        if (other == com.lvl6.proto.StructureProto.PvpBoardHouseProto.getDefaultInstance()) return this;
+        if (other.hasStructInfo()) {
+          mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasPvpBoardPowerLimit()) {
+          setPvpBoardPowerLimit(other.getPvpBoardPowerLimit());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.StructureProto.PvpBoardHouseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.StructureProto.PvpBoardHouseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public boolean hasStructInfo() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+        if (structInfoBuilder_ == null) {
+          return structInfo_;
+        } else {
+          return structInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder setStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structInfo_ = value;
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder setStructInfo(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder mergeStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structInfo_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structInfo_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structInfo_).mergeFrom(value).buildPartial();
+          } else {
+            structInfo_ = value;
+          }
+          onChanged();
+        } else {
+          structInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public Builder clearStructInfo() {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructInfoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+        if (structInfoBuilder_ != null) {
+          return structInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return structInfo_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructInfoFieldBuilder() {
+        if (structInfoBuilder_ == null) {
+          structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  getStructInfo(),
+                  getParentForChildren(),
+                  isClean());
+          structInfo_ = null;
+        }
+        return structInfoBuilder_;
+      }
+
+      private int pvpBoardPowerLimit_ ;
+      /**
+       * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+       */
+      public boolean hasPvpBoardPowerLimit() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+       */
+      public int getPvpBoardPowerLimit() {
+        return pvpBoardPowerLimit_;
+      }
+      /**
+       * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+       */
+      public Builder setPvpBoardPowerLimit(int value) {
+        bitField0_ |= 0x00000002;
+        pvpBoardPowerLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 pvpBoardPowerLimit = 2;</code>
+       */
+      public Builder clearPvpBoardPowerLimit() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        pvpBoardPowerLimit_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpBoardHouseProto)
+    }
+
+    static {
+      defaultInstance = new PvpBoardHouseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpBoardHouseProto)
+  }
+
+  public interface PvpBoardObstacleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpBoardObstacleProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 pvpBoardId = 1;</code>
+     */
+    boolean hasPvpBoardId();
+    /**
+     * <code>optional int32 pvpBoardId = 1;</code>
+     */
+    int getPvpBoardId();
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+     */
+    boolean hasObstacleType();
+    /**
+     * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+     */
+    com.lvl6.proto.StructureProto.BoardObstacleType getObstacleType();
+
+    /**
+     * <code>optional int32 powerAmt = 4;</code>
+     */
+    boolean hasPowerAmt();
+    /**
+     * <code>optional int32 powerAmt = 4;</code>
+     */
+    int getPowerAmt();
+
+    /**
+     * <code>optional bool initAvailable = 5;</code>
+     */
+    boolean hasInitAvailable();
+    /**
+     * <code>optional bool initAvailable = 5;</code>
+     */
+    boolean getInitAvailable();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.PvpBoardObstacleProto}
+   */
+  public static final class PvpBoardObstacleProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpBoardObstacleProto)
+      PvpBoardObstacleProtoOrBuilder {
+    // Use PvpBoardObstacleProto.newBuilder() to construct.
+    private PvpBoardObstacleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PvpBoardObstacleProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PvpBoardObstacleProto defaultInstance;
+    public static PvpBoardObstacleProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PvpBoardObstacleProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PvpBoardObstacleProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              pvpBoardId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.BoardObstacleType value = com.lvl6.proto.StructureProto.BoardObstacleType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                obstacleType_ = value;
+              }
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              powerAmt_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              initAvailable_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardObstacleProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.StructureProto.PvpBoardObstacleProto.class, com.lvl6.proto.StructureProto.PvpBoardObstacleProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PvpBoardObstacleProto> PARSER =
+        new com.google.protobuf.AbstractParser<PvpBoardObstacleProto>() {
+      public PvpBoardObstacleProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PvpBoardObstacleProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PvpBoardObstacleProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int PVPBOARDID_FIELD_NUMBER = 1;
+    private int pvpBoardId_;
+    /**
+     * <code>optional int32 pvpBoardId = 1;</code>
+     */
+    public boolean hasPvpBoardId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 pvpBoardId = 1;</code>
+     */
+    public int getPvpBoardId() {
+      return pvpBoardId_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OBSTACLETYPE_FIELD_NUMBER = 3;
+    private com.lvl6.proto.StructureProto.BoardObstacleType obstacleType_;
+    /**
+     * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+     */
+    public boolean hasObstacleType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+     */
+    public com.lvl6.proto.StructureProto.BoardObstacleType getObstacleType() {
+      return obstacleType_;
+    }
+
+    public static final int POWERAMT_FIELD_NUMBER = 4;
+    private int powerAmt_;
+    /**
+     * <code>optional int32 powerAmt = 4;</code>
+     */
+    public boolean hasPowerAmt() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 powerAmt = 4;</code>
+     */
+    public int getPowerAmt() {
+      return powerAmt_;
+    }
+
+    public static final int INITAVAILABLE_FIELD_NUMBER = 5;
+    private boolean initAvailable_;
+    /**
+     * <code>optional bool initAvailable = 5;</code>
+     */
+    public boolean hasInitAvailable() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bool initAvailable = 5;</code>
+     */
+    public boolean getInitAvailable() {
+      return initAvailable_;
+    }
+
+    private void initFields() {
+      pvpBoardId_ = 0;
+      name_ = "";
+      obstacleType_ = com.lvl6.proto.StructureProto.BoardObstacleType.CLOUD;
+      powerAmt_ = 0;
+      initAvailable_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, pvpBoardId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, obstacleType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, powerAmt_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, initAvailable_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, pvpBoardId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, obstacleType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, powerAmt_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, initAvailable_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.PvpBoardObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.PvpBoardObstacleProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.PvpBoardObstacleProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpBoardObstacleProto)
+        com.lvl6.proto.StructureProto.PvpBoardObstacleProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardObstacleProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.StructureProto.PvpBoardObstacleProto.class, com.lvl6.proto.StructureProto.PvpBoardObstacleProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.StructureProto.PvpBoardObstacleProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        pvpBoardId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        obstacleType_ = com.lvl6.proto.StructureProto.BoardObstacleType.CLOUD;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        powerAmt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        initAvailable_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor;
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardObstacleProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.PvpBoardObstacleProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardObstacleProto build() {
+        com.lvl6.proto.StructureProto.PvpBoardObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.StructureProto.PvpBoardObstacleProto buildPartial() {
+        com.lvl6.proto.StructureProto.PvpBoardObstacleProto result = new com.lvl6.proto.StructureProto.PvpBoardObstacleProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.pvpBoardId_ = pvpBoardId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.obstacleType_ = obstacleType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.powerAmt_ = powerAmt_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.initAvailable_ = initAvailable_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.PvpBoardObstacleProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.PvpBoardObstacleProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.PvpBoardObstacleProto other) {
+        if (other == com.lvl6.proto.StructureProto.PvpBoardObstacleProto.getDefaultInstance()) return this;
+        if (other.hasPvpBoardId()) {
+          setPvpBoardId(other.getPvpBoardId());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasObstacleType()) {
+          setObstacleType(other.getObstacleType());
+        }
+        if (other.hasPowerAmt()) {
+          setPowerAmt(other.getPowerAmt());
+        }
+        if (other.hasInitAvailable()) {
+          setInitAvailable(other.getInitAvailable());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.StructureProto.PvpBoardObstacleProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.StructureProto.PvpBoardObstacleProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int pvpBoardId_ ;
+      /**
+       * <code>optional int32 pvpBoardId = 1;</code>
+       */
+      public boolean hasPvpBoardId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 pvpBoardId = 1;</code>
+       */
+      public int getPvpBoardId() {
+        return pvpBoardId_;
+      }
+      /**
+       * <code>optional int32 pvpBoardId = 1;</code>
+       */
+      public Builder setPvpBoardId(int value) {
+        bitField0_ |= 0x00000001;
+        pvpBoardId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 pvpBoardId = 1;</code>
+       */
+      public Builder clearPvpBoardId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pvpBoardId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.StructureProto.BoardObstacleType obstacleType_ = com.lvl6.proto.StructureProto.BoardObstacleType.CLOUD;
+      /**
+       * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+       */
+      public boolean hasObstacleType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+       */
+      public com.lvl6.proto.StructureProto.BoardObstacleType getObstacleType() {
+        return obstacleType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+       */
+      public Builder setObstacleType(com.lvl6.proto.StructureProto.BoardObstacleType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        obstacleType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BoardObstacleType obstacleType = 3;</code>
+       */
+      public Builder clearObstacleType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        obstacleType_ = com.lvl6.proto.StructureProto.BoardObstacleType.CLOUD;
+        onChanged();
+        return this;
+      }
+
+      private int powerAmt_ ;
+      /**
+       * <code>optional int32 powerAmt = 4;</code>
+       */
+      public boolean hasPowerAmt() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 powerAmt = 4;</code>
+       */
+      public int getPowerAmt() {
+        return powerAmt_;
+      }
+      /**
+       * <code>optional int32 powerAmt = 4;</code>
+       */
+      public Builder setPowerAmt(int value) {
+        bitField0_ |= 0x00000008;
+        powerAmt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 powerAmt = 4;</code>
+       */
+      public Builder clearPowerAmt() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        powerAmt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean initAvailable_ ;
+      /**
+       * <code>optional bool initAvailable = 5;</code>
+       */
+      public boolean hasInitAvailable() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional bool initAvailable = 5;</code>
+       */
+      public boolean getInitAvailable() {
+        return initAvailable_;
+      }
+      /**
+       * <code>optional bool initAvailable = 5;</code>
+       */
+      public Builder setInitAvailable(boolean value) {
+        bitField0_ |= 0x00000010;
+        initAvailable_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool initAvailable = 5;</code>
+       */
+      public Builder clearInitAvailable() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        initAvailable_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpBoardObstacleProto)
+    }
+
+    static {
+      defaultInstance = new PvpBoardObstacleProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpBoardObstacleProto)
+  }
+
+  public interface UserPvpBoardObstacleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserPvpBoardObstacleProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    boolean hasUserPvpBoardObstacleUuid();
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    java.lang.String getUserPvpBoardObstacleUuid();
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserPvpBoardObstacleUuidBytes();
+
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 obstacleId = 3;</code>
+     */
+    boolean hasObstacleId();
+    /**
+     * <code>optional int32 obstacleId = 3;</code>
+     */
+    int getObstacleId();
+
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    boolean hasPosX();
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    int getPosX();
+
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    boolean hasPosY();
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    int getPosY();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserPvpBoardObstacleProto}
+   */
+  public static final class UserPvpBoardObstacleProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserPvpBoardObstacleProto)
+      UserPvpBoardObstacleProtoOrBuilder {
+    // Use UserPvpBoardObstacleProto.newBuilder() to construct.
+    private UserPvpBoardObstacleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserPvpBoardObstacleProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserPvpBoardObstacleProto defaultInstance;
+    public static UserPvpBoardObstacleProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserPvpBoardObstacleProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserPvpBoardObstacleProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userPvpBoardObstacleUuid_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              userUuid_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              obstacleId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              posX_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              posY_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.class, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserPvpBoardObstacleProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserPvpBoardObstacleProto>() {
+      public UserPvpBoardObstacleProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserPvpBoardObstacleProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserPvpBoardObstacleProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERPVPBOARDOBSTACLEUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userPvpBoardObstacleUuid_;
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    public boolean hasUserPvpBoardObstacleUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    public java.lang.String getUserPvpBoardObstacleUuid() {
+      java.lang.Object ref = userPvpBoardObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userPvpBoardObstacleUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserPvpBoardObstacleUuidBytes() {
+      java.lang.Object ref = userPvpBoardObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userPvpBoardObstacleUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OBSTACLEID_FIELD_NUMBER = 3;
+    private int obstacleId_;
+    /**
+     * <code>optional int32 obstacleId = 3;</code>
+     */
+    public boolean hasObstacleId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 obstacleId = 3;</code>
+     */
+    public int getObstacleId() {
+      return obstacleId_;
+    }
+
+    public static final int POSX_FIELD_NUMBER = 4;
+    private int posX_;
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    public boolean hasPosX() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    public int getPosX() {
+      return posX_;
+    }
+
+    public static final int POSY_FIELD_NUMBER = 5;
+    private int posY_;
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    public boolean hasPosY() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    public int getPosY() {
+      return posY_;
+    }
+
+    private void initFields() {
+      userPvpBoardObstacleUuid_ = "";
+      userUuid_ = "";
+      obstacleId_ = 0;
+      posX_ = 0;
+      posY_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserPvpBoardObstacleUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, posX_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, posY_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserPvpBoardObstacleUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, posX_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, posY_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserPvpBoardObstacleProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserPvpBoardObstacleProto)
+        com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.class, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userPvpBoardObstacleUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        obstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        posX_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        posY_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor;
+      }
+
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto build() {
+        com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto buildPartial() {
+        com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto result = new com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userPvpBoardObstacleUuid_ = userPvpBoardObstacleUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.obstacleId_ = obstacleId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.posX_ = posX_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.posY_ = posY_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto other) {
+        if (other == com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance()) return this;
+        if (other.hasUserPvpBoardObstacleUuid()) {
+          bitField0_ |= 0x00000001;
+          userPvpBoardObstacleUuid_ = other.userPvpBoardObstacleUuid_;
+          onChanged();
+        }
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasObstacleId()) {
+          setObstacleId(other.getObstacleId());
+        }
+        if (other.hasPosX()) {
+          setPosX(other.getPosX());
+        }
+        if (other.hasPosY()) {
+          setPosY(other.getPosY());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userPvpBoardObstacleUuid_ = "";
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public boolean hasUserPvpBoardObstacleUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public java.lang.String getUserPvpBoardObstacleUuid() {
+        java.lang.Object ref = userPvpBoardObstacleUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userPvpBoardObstacleUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserPvpBoardObstacleUuidBytes() {
+        java.lang.Object ref = userPvpBoardObstacleUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userPvpBoardObstacleUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public Builder setUserPvpBoardObstacleUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userPvpBoardObstacleUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public Builder clearUserPvpBoardObstacleUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userPvpBoardObstacleUuid_ = getDefaultInstance().getUserPvpBoardObstacleUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       */
+      public Builder setUserPvpBoardObstacleUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userPvpBoardObstacleUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int obstacleId_ ;
+      /**
+       * <code>optional int32 obstacleId = 3;</code>
+       */
+      public boolean hasObstacleId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 obstacleId = 3;</code>
+       */
+      public int getObstacleId() {
+        return obstacleId_;
+      }
+      /**
+       * <code>optional int32 obstacleId = 3;</code>
+       */
+      public Builder setObstacleId(int value) {
+        bitField0_ |= 0x00000004;
+        obstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 obstacleId = 3;</code>
+       */
+      public Builder clearObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        obstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int posX_ ;
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public boolean hasPosX() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public int getPosX() {
+        return posX_;
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public Builder setPosX(int value) {
+        bitField0_ |= 0x00000008;
+        posX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public Builder clearPosX() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        posX_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int posY_ ;
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public boolean hasPosY() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public int getPosY() {
+        return posY_;
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public Builder setPosY(int value) {
+        bitField0_ |= 0x00000010;
+        posY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public Builder clearPosY() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        posY_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserPvpBoardObstacleProto)
+    }
+
+    static {
+      defaultInstance = new UserPvpBoardObstacleProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserPvpBoardObstacleProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
   private static
@@ -18188,6 +20520,21 @@ public final class StructureProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpBoardHouseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpBoardObstacleProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -18198,7 +20545,7 @@ public final class StructureProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017Structure.proto\022\016com.lvl6.proto\032\026Share" +
-      "dEnumConfig.proto\"\361\005\n\022StructureInfoProto" +
+      "dEnumConfig.proto\"\200\006\n\022StructureInfoProto" +
       "\022\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005leve" +
       "l\030\003 \001(\005\022A\n\nstructType\030\004 \001(\0162-.com.lvl6.p" +
       "roto.StructureInfoProto.StructType\0227\n\021bu" +
@@ -18212,93 +20559,105 @@ public final class StructureProto {
       "\017 \001(\t\022\030\n\020shortDescription\030\020 \001(\t\022\025\n\rshado" +
       "wImgName\030\022 \001(\t\022\034\n\024shadowVerticalOffset\030\023" +
       " \001(\002\022\037\n\027shadowHorizontalOfffset\030\024 \001(\002\022\023\n" +
-      "\013shadowScale\030\025 \001(\002\"\300\001\n\nStructType\022\r\n\tNO_" +
+      "\013shadowScale\030\025 \001(\002\"\317\001\n\nStructType\022\r\n\tNO_" +
       "STRUCT\020\010\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESO" +
       "URCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENC" +
       "E\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010" +
       "MINI_JOB\020\t\022\017\n\013TEAM_CENTER\020\n\022\010\n\004CLAN\020\013\022\016\n",
-      "\nMONEY_TREE\020\014\"\256\001\n\026ResourceGeneratorProto" +
-      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
-      "ructureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034" +
-      ".com.lvl6.proto.ResourceType\022\026\n\016producti" +
-      "onRate\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024Resou" +
-      "rceStorageProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
+      "\nMONEY_TREE\020\014\022\r\n\tPVP_BOARD\020\r\"\256\001\n\026Resourc" +
+      "eGeneratorProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
       "m.lvl6.proto.StructureInfoProto\0222\n\014resou" +
       "rceType\030\002 \001(\0162\034.com.lvl6.proto.ResourceT" +
-      "ype\022\020\n\010capacity\030\003 \001(\005\"\242\001\n\016MoneyTreeProto" +
-      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St",
-      "ructureInfoProto\022\026\n\016productionRate\030\002 \001(\002" +
-      "\022\020\n\010capacity\030\003 \001(\005\022\026\n\016daysOfDuration\030\004 \001" +
-      "(\005\022\026\n\016daysForRenewal\030\005 \001(\005\"\232\001\n\rHospitalP" +
-      "roto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.prot" +
-      "o.StructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022" +
-      "\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secsToFu" +
-      "llyHealMultiplier\030\004 \001(\002\"\210\001\n\010LabProto\0226\n\n" +
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
-      "ureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017point" +
-      "sPerSecond\030\003 \001(\002\022\030\n\020pointsMultiplier\030\004 \001",
-      "(\002\"\341\001\n\016ResidenceProto\0226\n\nstructInfo\030\001 \001(" +
-      "\0132\".com.lvl6.proto.StructureInfoProto\022\027\n" +
-      "\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMonste" +
-      "rSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n" +
-      "\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupatio" +
-      "nName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownH" +
-      "allProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
-      "proto.StructureInfoProto\022 \n\030numResourceO" +
-      "neGenerators\030\002 \001(\005\022\036\n\026numResourceOneStor" +
-      "ages\030\003 \001(\005\022 \n\030numResourceTwoGenerators\030\004",
-      " \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(\005\022\024\n\014" +
-      "numHospitals\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(" +
-      "\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n\007numLabs\030\t " +
-      "\001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005\022\030\n\020resourc" +
-      "eCapacity\030\013 \001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"" +
-      "\212\001\n\022MiniJobCenterProto\0226\n\nstructInfo\030\001 \001" +
-      "(\0132\".com.lvl6.proto.StructureInfoProto\022\031" +
-      "\n\021generatedJobLimit\030\002 \001(\005\022!\n\031hoursBetwee" +
-      "nJobGeneration\030\003 \001(\005\"\236\002\n\026FullUserStructu" +
-      "reProto\022\026\n\016userStructUuid\030\001 \001(\t\022\020\n\010userU",
-      "uid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetri" +
-      "eved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisCo" +
-      "mplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com." +
-      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
-      "n\030\010 \001(\0162!.com.lvl6.proto.StructOrientati" +
-      "on\022\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017Coordin" +
-      "ateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023Tutori" +
-      "alStructProto\022\020\n\010structId\030\001 \001(\005\0223\n\ncoord" +
-      "inate\030\002 \001(\0132\037.com.lvl6.proto.CoordinateP" +
-      "roto\"\342\002\n\rObstacleProto\022\022\n\nobstacleId\030\001 \001",
-      "(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCostType\030\003 \001(" +
-      "\0162\034.com.lvl6.proto.ResourceType\022\014\n\004cost\030" +
-      "\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r\n\005width\030" +
-      "\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036" +
-      "\n\026imgVerticalPixelOffset\030\t \001(\002\022\023\n\013descri" +
-      "ption\030\n \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rs" +
-      "hadowImgName\030\014 \001(\t\022\034\n\024shadowVerticalOffs" +
-      "et\030\r \001(\002\022\037\n\027shadowHorizontalOfffset\030\016 \001(" +
-      "\002\"\227\001\n\024MinimumObstacleProto\022\022\n\nobstacleId" +
-      "\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.pr",
-      "oto.CoordinateProto\0226\n\013orientation\030\005 \001(\016" +
-      "2!.com.lvl6.proto.StructOrientation\"\333\001\n\021" +
-      "UserObstacleProto\022\030\n\020userObstacleUuid\030\001 " +
-      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(" +
-      "\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\0226\n\013orientation\030\005 \001(\0162!.c" +
-      "om.lvl6.proto.StructOrientation\022\030\n\020remov" +
-      "alStartTime\030\006 \001(\003\"\234\001\n\017EvoChamberProto\0226\n" +
-      "\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Struc" +
-      "tureInfoProto\0228\n\017qualityUnlocked\030\002 \001(\0162\027",
-      ".com.lvl6.proto.Quality:\006COMMON\022\027\n\017evoTi" +
-      "erUnlocked\030\003 \001(\005\"`\n\017TeamCenterProto\0226\n\ns" +
-      "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu" +
-      "reInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"\213\001\n\016C" +
-      "lanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
-      "lvl6.proto.StructureInfoProto\022!\n\031maxHelp" +
-      "ersPerSolicitation\030\002 \001(\005\022\036\n\026teamDonation" +
-      "PowerLimit\030\003 \001(\005*I\n\014ResourceType\022\017\n\013NO_R" +
-      "ESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013" +
-      "\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016NO_O",
-      "RIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION" +
-      "_2\020\002B\020B\016StructureProto"
+      "ype\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010capacity\030" +
+      "\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstruct" +
+      "Info\030\001 \001(\0132\".com.lvl6.proto.StructureInf" +
+      "oProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6." +
+      "proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"\270\001\n" +
+      "\016MoneyTreeProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
+      "m.lvl6.proto.StructureInfoProto\022\026\n\016produ" +
+      "ctionRate\030\002 \001(\002\022\020\n\010capacity\030\003 \001(\005\022\026\n\016day" +
+      "sOfDuration\030\004 \001(\005\022\026\n\016daysForRenewal\030\005 \001(" +
+      "\005\022\024\n\014iapProductId\030\006 \001(\t\"\232\001\n\rHospitalProt" +
+      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
+      "tructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\033\n\017" +
+      "healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secsToFully" +
+      "HealMultiplier\030\004 \001(\002\"\210\001\n\010LabProto\0226\n\nstr" +
+      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
+      "InfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPe",
+      "rSecond\030\003 \001(\002\022\030\n\020pointsMultiplier\030\004 \001(\002\"" +
+      "\341\001\n\016ResidenceProto\0226\n\nstructInfo\030\001 \001(\0132\"" +
+      ".com.lvl6.proto.StructureInfoProto\022\027\n\017nu" +
+      "mMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSl" +
+      "ots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024nu" +
+      "mAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupationNa" +
+      "me\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownHall" +
+      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
+      "to.StructureInfoProto\022 \n\030numResourceOneG" +
+      "enerators\030\002 \001(\005\022\036\n\026numResourceOneStorage",
+      "s\030\003 \001(\005\022 \n\030numResourceTwoGenerators\030\004 \001(" +
+      "\005\022\036\n\026numResourceTwoStorages\030\005 \001(\005\022\024\n\014num" +
+      "Hospitals\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027" +
+      "\n\017numMonsterSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005" +
+      "\022\030\n\020pvpQueueCashCost\030\n \001(\005\022\030\n\020resourceCa" +
+      "pacity\030\013 \001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n" +
+      "\022MiniJobCenterProto\0226\n\nstructInfo\030\001 \001(\0132" +
+      "\".com.lvl6.proto.StructureInfoProto\022\031\n\021g" +
+      "eneratedJobLimit\030\002 \001(\005\022!\n\031hoursBetweenJo" +
+      "bGeneration\030\003 \001(\005\"\236\002\n\026FullUserStructureP",
+      "roto\022\026\n\016userStructUuid\030\001 \001(\t\022\020\n\010userUuid" +
+      "\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieve" +
+      "d\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisCompl" +
+      "ete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\0226\n\013orientation\030\010" +
+      " \001(\0162!.com.lvl6.proto.StructOrientation\022" +
+      "\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017Coordinate" +
+      "Proto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialS" +
+      "tructProto\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordina" +
+      "te\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProt",
+      "o\"\342\002\n\rObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\022" +
+      "\014\n\004name\030\002 \001(\t\0225\n\017removalCostType\030\003 \001(\0162\034" +
+      ".com.lvl6.proto.ResourceType\022\014\n\004cost\030\004 \001" +
+      "(\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001" +
+      "(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026i" +
+      "mgVerticalPixelOffset\030\t \001(\002\022\023\n\013descripti" +
+      "on\030\n \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshad" +
+      "owImgName\030\014 \001(\t\022\034\n\024shadowVerticalOffset\030" +
+      "\r \001(\002\022\037\n\027shadowHorizontalOfffset\030\016 \001(\002\"\227" +
+      "\001\n\024MinimumObstacleProto\022\022\n\nobstacleId\030\001 ",
+      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
+      ".CoordinateProto\0226\n\013orientation\030\005 \001(\0162!." +
+      "com.lvl6.proto.StructOrientation\"\333\001\n\021Use" +
+      "rObstacleProto\022\030\n\020userObstacleUuid\030\001 \001(\t" +
+      "\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\0224" +
+      "\n\013coordinates\030\004 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\0226\n\013orientation\030\005 \001(\0162!.com." +
+      "lvl6.proto.StructOrientation\022\030\n\020removalS" +
+      "tartTime\030\006 \001(\003\"\234\001\n\017EvoChamberProto\0226\n\nst" +
+      "ructInfo\030\001 \001(\0132\".com.lvl6.proto.Structur",
+      "eInfoProto\0228\n\017qualityUnlocked\030\002 \001(\0162\027.co" +
+      "m.lvl6.proto.Quality:\006COMMON\022\027\n\017evoTierU" +
+      "nlocked\030\003 \001(\005\"`\n\017TeamCenterProto\0226\n\nstru" +
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"\213\001\n\016Clan" +
+      "HouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\022!\n\031maxHelpers" +
+      "PerSolicitation\030\002 \001(\005\022\036\n\026teamDonationPow" +
+      "erLimit\030\003 \001(\005\"h\n\022PvpBoardHouseProto\0226\n\ns" +
+      "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu",
+      "reInfoProto\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"" +
+      "\233\001\n\025PvpBoardObstacleProto\022\022\n\npvpBoardId\030" +
+      "\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(" +
+      "\0162!.com.lvl6.proto.BoardObstacleType\022\020\n\010" +
+      "powerAmt\030\004 \001(\005\022\025\n\rinitAvailable\030\005 \001(\010\"\177\n" +
+      "\031UserPvpBoardObstacleProto\022 \n\030userPvpBoa" +
+      "rdObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022" +
+      "\n\nobstacleId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY" +
+      "\030\005 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
+      "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020",
+      "\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION" +
+      "\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*\036\n\021Bo" +
+      "ardObstacleType\022\t\n\005CLOUD\020\001B\020B\016StructureP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -18421,6 +20780,24 @@ public final class StructureProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
         new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", "TeamDonationPowerLimit", });
+    internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_com_lvl6_proto_PvpBoardHouseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PvpBoardHouseProto_descriptor,
+        new java.lang.String[] { "StructInfo", "PvpBoardPowerLimit", });
+    internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_com_lvl6_proto_PvpBoardObstacleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor,
+        new java.lang.String[] { "PvpBoardId", "Name", "ObstacleType", "PowerAmt", "InitAvailable", });
+    internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor,
+        new java.lang.String[] { "UserPvpBoardObstacleUuid", "UserUuid", "ObstacleId", "PosX", "PosY", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

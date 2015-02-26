@@ -50,6 +50,7 @@ import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -89,6 +90,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
@@ -123,6 +125,7 @@ import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
@@ -261,6 +264,9 @@ public class StartupController extends EventController {
 	@Autowired
 	protected EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils;
 
+	@Autowired
+	protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+	
 	@Autowired
 	protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils;
 
@@ -606,6 +612,7 @@ public class StartupController extends EventController {
 			setEventStuff(resBuilder, playerId);
 			log.info("{}ms at eventStuff", stopWatch.getTime());
 			//if server sees that the user is in a pvp battle, decrement user's elo
+			setPvpBoardObstacles(resBuilder, playerId);
 			PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user,
 				playerId, freshRestart, now);
 			log.info("{}ms at pvpBattleStuff", stopWatch.getTime());
@@ -984,6 +991,18 @@ public class StartupController extends EventController {
 
 	}
 
+	private void setPvpBoardObstacles(Builder resBuilder, String userId)
+	{
+		List<PvpBoardObstacleForUser> boList = pvpBoardObstacleForUserRetrieveUtil
+				.getPvpBoardObstacleForUserId(userId);
+		for (PvpBoardObstacleForUser pbofu : boList)
+		{
+			UserPvpBoardObstacleProto upbop = CreateInfoProtoUtils
+					.createUserPvpBoardObstacleProto(pbofu);
+			resBuilder.addUserPvpBoardObstacles(upbop);
+		}
+	}
+	
 	private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, String userId,
 		boolean isFreshRestart, Timestamp battleEndTime) {
 
@@ -2319,6 +2338,13 @@ public class StartupController extends EventController {
 		this.taskStageForUserRetrieveUtils = taskStageForUserRetrieveUtils;
 	}
 	
+	public PvpBoardObstacleForUserRetrieveUtil getPvpBoardObstacleForUserRetrieveUtil() {
+		return pvpBoardObstacleForUserRetrieveUtil;
+	}
+	public void setPvpBoardObstacleForUserRetrieveUtil(
+			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
+		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
+	}
 	public EventPersistentForUserRetrieveUtils2 getEventPersistentForUserRetrieveUtils() {
 		return eventPersistentForUserRetrieveUtils;
 	}

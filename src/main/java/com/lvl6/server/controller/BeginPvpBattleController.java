@@ -328,6 +328,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  }
 	  if (null == prevBattleEndTime) {
 		  log.info("not exacting revenge, prevBattleEndTime is null");
+		  return;
 	  }
 	  log.info("exacting revenge");
 	  //need to switch the ids, because when exacting revenge roles are reversed

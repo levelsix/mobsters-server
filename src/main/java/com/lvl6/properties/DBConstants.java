@@ -7,6 +7,7 @@ public class DBConstants {
 	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
 	public static final String TABLE_BOARD_CONFIG = "board_config";
+	public static final String TABLE_BOARD_OBSTACLE_CONFIG = "board_obstacle_config";
 	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM_CONFIG = "booster_display_item_config";
 	public static final String TABLE_BOOSTER_ITEM_CONFIG = "booster_item_config";
@@ -73,6 +74,7 @@ public class DBConstants {
 	public static final String TABLE_PROFANITY_CONFIG = "profanity_config";
 	public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
 	public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
+	public static final String TABLE_PVP_BOARD_OBSTACLE_FOR_USER = "pvp_board_obstacle_for_user";
 	public static final String TABLE_PVP_LEAGUE_CONFIG = "pvp_league_config";
 	public static final String TABLE_PVP_LEAGUE_FOR_USER = "pvp_league_for_user";
 	public static final String TABLE_QUEST_CONFIG = "quest_config";
@@ -98,6 +100,7 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_HOSPITAL_CONFIG = "structure_hospital_config";
 	public static final String TABLE_STRUCTURE_LAB_CONFIG = "structure_lab_config";
 	public static final String TABLE_STRUCTURE_MINI_JOB_CONFIG = "structure_mini_job_config";
+	public static final String TABLE_STRUCTURE_PVP_BOARD_CONFIG = "structure_pvp_board_config";
 	public static final String TABLE_STRUCTURE_RESIDENCE_CONFIG = "structure_residence_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG = "structure_resource_generator_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG = "structure_resource_storage_config";
@@ -552,6 +555,14 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
 	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
+	
+	/*PVP_BOARD_OBSTACLE_FOR_USER*/
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__ID = GENERIC__ID;
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID = "obstacle_id";
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__POS_X = "pos_x";
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__POS_Y = "pos_y";
+	
 
 	/*PVP LEAGUE FOR USER*/
 	public static final String PVP_LEAGUE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -816,6 +827,13 @@ public class DBConstants {
 	public static final String BOARD__WIDTH = "width";
 	public static final String BOARD__HEIGHT = "height";
 	public static final String BOARD__ORB_ELEMENTS = "orb_elements";
+	
+	/*BOARD OBSTACLE*/
+	public static final String BOARD_OBSTACLE__ID = "id";
+	public static final String BOARD_OBSTACLE__NAME = "name";
+	public static final String BOARD_OBSTACLE__TYPE = "type";
+	public static final String BOARD_OBSTACLE__POWER_AMT = "power_amt";
+	public static final String BOARD_OBSTACLE__INIT_AVAILABLE = "init_available";
 	
 	/*BOARD PROPERTY*/
 	public static final String BOARD_PROPERTY__ID = GENERIC__ID;
@@ -1176,6 +1194,10 @@ public class DBConstants {
 	public static final String STRUCTURE_MONEY_TREE__DAYS_OF_DURATION = "days_of_duration";
 	public static final String STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL = "days_for_renewal";
 	public static final String STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID = "iap_product_id";
+	
+
+	public static final String STRUCTURE_PVP_BOARD__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_PVP_BOARD__POWER_LIMIT = "power_limit";
 	
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";

@@ -11,13 +11,12 @@ public class EventPersistentForUser implements Serializable {
 	private int eventPersistentId;
 	private Date timeOfEntry; // refers to time user started a daily event
 
-  public EventPersistentForUser()
+	public EventPersistentForUser()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-public EventPersistentForUser(String userId, int eventPersistentId,
+	public EventPersistentForUser(String userId, int eventPersistentId,
 			Date timeOfEntry) {
 		super();
 		this.userId = userId;
