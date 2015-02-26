@@ -323,7 +323,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String userId = user.getId();
     
     if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
-        || userStructIdsToGenerators.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { 
+        || (userStructIdsToGenerators.isEmpty() && userStructIdsToMoneyTrees.isEmpty()) || userStructIdsToTimesOfRetrieval.isEmpty()) { 
       log.error("user is null, or no struct ids, user structs, structures, or retrieval times . user=" +
         user + "\t userStructIds=" + userStructIds + "\t structIdsToUserStructs=" +
         userStructIdsToUserStructs + "\t userStructIdsToGenerators=" + userStructIdsToGenerators +
