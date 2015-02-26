@@ -387,4 +387,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		this.clanSearch = clanSearch;
 	}
 
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
+		return clanMemberTeamDonationRetrieveUtil;
+	}
+
+	public void setClanMemberTeamDonationRetrieveUtil(
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
+		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
+	}
+
+	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil() {
+		return monsterSnapshotForUserRetrieveUtil;
+	}
+
+	public void setMonsterSnapshotForUserRetrieveUtil(
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
+		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
+	}
+
 }
