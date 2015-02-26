@@ -517,6 +517,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__PURCHASED_ADDITIONAL_FORGE_SLOTS = "purchased additional forge slots";
 	//silver only reasons
 	public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT = "retrieve currency from normal structures";
+	public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_MONEY_TREE = "retrieve currency from money tree"; 
 	public static final String UCHRFC__TASK_ACTION = "performed task with id ";
 	public static final String UCHRFC__STARTUP_DAILY_BONUS = "startup daily bonus";
 	public static final String UCHRFC__USER_CREATE_REFERRED_A_USER = "referred a user";
