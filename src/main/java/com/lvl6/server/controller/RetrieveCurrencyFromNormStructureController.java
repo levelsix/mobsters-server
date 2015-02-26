@@ -346,12 +346,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
     
     for(String id : userStructIdsToUserStructs.keySet()) {
-    	for(String id2 : userStructIdsToMoneyTrees.keySet()) {
-    		if(id.equals(id2)) {
-    			userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
-    		}
-    	}
-    }
+		  if(userStructIdsToMoneyTrees.containsKey(id)) {
+			  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
+		  }
+	  }
         
     for (String id : userStructIds) {
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
@@ -475,10 +473,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
 
 	  for(String id : userStructIdsToUserStructs.keySet()) {
-		  for(String id2 : userStructIdsToMoneyTrees.keySet()) {
-			  if(id.equals(id2)) {
-				  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
-			  }
+		  if(userStructIdsToMoneyTrees.containsKey(id)) {
+			  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
 		  }
 	  }
 
