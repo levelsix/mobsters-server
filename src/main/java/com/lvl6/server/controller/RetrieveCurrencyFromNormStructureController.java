@@ -321,6 +321,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Map<String, Integer> resourcesGained) {
 
     String userId = user.getId();
+    log.info(""+userStructIdsToGenerators);
+    log.info(""+userStructIdsToMoneyTrees);
+    log.info(""+userStructIds);
+    log.info(""+userStructIdsToUserStructs);
+    log.info(""+userStructIdsToTimesOfRetrieval);
     
     if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
         || (userStructIdsToGenerators.isEmpty() && userStructIdsToMoneyTrees.isEmpty()) || userStructIdsToTimesOfRetrieval.isEmpty()) { 
