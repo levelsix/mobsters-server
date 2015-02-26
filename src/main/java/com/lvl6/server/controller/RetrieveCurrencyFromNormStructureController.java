@@ -20,6 +20,7 @@ import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -35,6 +36,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -88,6 +90,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
     
+    
     RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
     		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
     resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
@@ -128,22 +131,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       int previousCash = 0;
       int previousOil = 0;
+      int previousGems = 0;
       
       Map<String, StructureForUser> userStructIdsToUserStructs = 
       		getUserStructIdsToUserStructs(userId, userStructIds);
       Map<String, StructureResourceGenerator> userStructIdsToGenerators =
       		getUserStructIdsToResourceGenerators(userStructIdsToUserStructs.values());
+      Map<String, StructureMoneyTree> userStructIdsToMoneyTrees =
+        		getUserStructIdsToMoneyTrees(userStructIdsToUserStructs.values());
+      
       
       //this will contain the amount user collects
       Map<String, Integer> resourcesGained = new HashMap<String, Integer>();
       //userStructIdsToTimesOfRetrieval and userStructIdsToUserStructs will be
       //modified to contain only the valid user structs user can retrieve currency from
       boolean legitRetrieval = checkLegitRetrieval(resBuilder, user, userStructIds,
-      		userStructIdsToUserStructs, userStructIdsToGenerators, duplicates,
+      		userStructIdsToUserStructs, userStructIdsToGenerators, userStructIdsToMoneyTrees, duplicates,
       		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected, resourcesGained);
       
       int cashGain = 0;
       int oilGain = 0;
+      int gemsGain = 0;
       Map<String, Integer> currencyChange = new HashMap<String, Integer>();
       boolean successful = false;
       if (legitRetrieval) {
@@ -151,8 +159,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         previousCash = user.getCash();
         oilGain = resourcesGained.get(MiscMethods.oil);
         previousOil = user.getOil();
+        gemsGain = resourcesGained.get(MiscMethods.gems);
+        previousGems = user.getGems();
         
-        successful = writeChangesToDb(user, cashGain, oilGain,
+        successful = writeChangesToDb(user, cashGain, oilGain, gemsGain,
         		userStructIdsToUserStructs, userStructIdsToTimesOfRetrieval,
         		userStructIdsToAmountCollected, maxCash, maxOil,
         		currencyChange);
@@ -173,9 +183,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        writeToUserCurrencyHistory(user, previousCash, previousOil,
+        writeToUserCurrencyHistory(user, previousCash, previousOil, previousGems,
         		curTime, userStructIdsToUserStructs, userStructIdsToGenerators,
-        		userStructIdsToTimesOfRetrieval,
+        		userStructIdsToMoneyTrees, userStructIdsToTimesOfRetrieval,
         		userStructIdsToAmountCollected, currencyChange);
       }
     } catch (Exception e) {
@@ -271,19 +281,54 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return returnValue;
   }
   
+  //link up a user struct id with the structure object
+  private Map<String, StructureMoneyTree> getUserStructIdsToMoneyTrees(
+  		Collection<StructureForUser> userStructs) {
+    Map<String, StructureMoneyTree> returnValue =
+    		new HashMap<String, StructureMoneyTree>();
+    Map<Integer, StructureMoneyTree> structIdsToStructs = 
+    		StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+    
+    if(null == userStructs || userStructs.isEmpty()) {
+      log.error("There are no user structs.");
+    }
+    
+    for(StructureForUser us : userStructs) {
+      int structId = us.getStructId();
+      String userStructId = us.getId();
+      
+      StructureMoneyTree s = structIdsToStructs.get(structId);
+      if(null != s) {
+        returnValue.put(userStructId, s);
+      } else {
+        log.error(String.format(
+        	"structure with id %s does not exist, therefore UserStruct is invalid:%s",
+        	structId, us));
+      }
+    }
+    
+    return returnValue;
+  }
+  
   private boolean checkLegitRetrieval(Builder resBuilder, User user,
   		List<String> userStructIds, 
       Map<String, StructureForUser> userStructIdsToUserStructs,
       Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+      Map<String, StructureMoneyTree> userStructIdsToMoneyTrees,
       List<String> duplicates,
       Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
       Map<String, Integer> userStructIdsToAmountCollected,
       Map<String, Integer> resourcesGained) {
 
     String userId = user.getId();
+    log.info(""+userStructIdsToGenerators);
+    log.info(""+userStructIdsToMoneyTrees);
+    log.info(""+userStructIds);
+    log.info(""+userStructIdsToUserStructs);
+    log.info(""+userStructIdsToTimesOfRetrieval);
     
     if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
-        || userStructIdsToGenerators.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { 
+        || (userStructIdsToGenerators.isEmpty() && userStructIdsToMoneyTrees.isEmpty()) || userStructIdsToTimesOfRetrieval.isEmpty()) { 
       log.error("user is null, or no struct ids, user structs, structures, or retrieval times . user=" +
         user + "\t userStructIds=" + userStructIds + "\t structIdsToUserStructs=" +
         userStructIdsToUserStructs + "\t userStructIdsToGenerators=" + userStructIdsToGenerators +
@@ -300,9 +345,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //retrieved
     int cash = 0;
     int oil = 0;
+    int gems = 0;
+    
+    //get all user money trees
+    Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
+    
+    for(String id : userStructIdsToUserStructs.keySet()) {
+		  if(userStructIdsToMoneyTrees.containsKey(id)) {
+			  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
+		  }
+	  }
+        
     for (String id : userStructIds) {
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
-      StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
       
       if (null == userStruct || !userId.equals(userStruct.getUserId()) || !userStruct.isComplete()) {
         resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
@@ -314,29 +369,37 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         userStructIdsToAmountCollected.remove(id);
         continue;
       }
-      
-      String type = struct.getResourceTypeGenerated();
-      ResourceType rt = ResourceType.valueOf(type);
-      if (ResourceType.CASH.equals(rt)) {
-      	cash += userStructIdsToAmountCollected.get(id);
-      } else if (ResourceType.OIL.equals(rt)) {
-      	oil += userStructIdsToAmountCollected.get(id);
-      } else {
-      	log.error("(will continue processing) unknown resource type: " + rt);
-      	//remove invalid user structure
-        userStructIdsToUserStructs.remove(id);
-        userStructIdsToTimesOfRetrieval.remove(id);
-        userStructIdsToAmountCollected.remove(id);
+
+      if(userMoneyTreeMap.containsKey(id)) {
+    	  gems += userStructIdsToAmountCollected.get(id);
+      }
+      else {
+    	  StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
+
+    	  String type = struct.getResourceTypeGenerated();
+    	  ResourceType rt = ResourceType.valueOf(type);
+    	  if (ResourceType.CASH.equals(rt)) {
+    		  cash += userStructIdsToAmountCollected.get(id);
+    	  } else if (ResourceType.OIL.equals(rt)) {
+    		  oil += userStructIdsToAmountCollected.get(id);
+    	  } else {
+    		  log.error("(will continue processing) unknown resource type: " + rt);
+    		  //remove invalid user structure
+    		  userStructIdsToUserStructs.remove(id);
+    		  userStructIdsToTimesOfRetrieval.remove(id);
+    		  userStructIdsToAmountCollected.remove(id);
+    	  }
       }
     }
     //return to the caller the amount of money the user can collect 
     resourcesGained.put(MiscMethods.cash, cash);
     resourcesGained.put(MiscMethods.oil, oil);
+    resourcesGained.put(MiscMethods.gems, gems);
     
     return true;
   }
   
-  private boolean writeChangesToDb(User user, int cashGain, int oilGain,
+  private boolean writeChangesToDb(User user, int cashGain, int oilGain, int gemsGain,
   		Map<String, StructureForUser> userStructIdsToUserStructs,
   		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
   		Map<String, Integer> userStructIdsToAmountCollected, int maxCash,
@@ -350,15 +413,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int maxOilUserCanGain = maxOil - curOil;
   	oilGain = Math.min(maxOilUserCanGain, oilGain);
   	
-  	if (cashGain <= 0 && oilGain <= 0)
+  	if (cashGain <= 0 && oilGain <= 0 && gemsGain <= 0)
   	{
   		log.error(String.format(
-  			"cash and oil both invalid. cash=%s \t oil=%s",
-  			cashGain, oilGain) );
+  			"cash,oil, gems all invalid. cash=%s \t oil=%s \t gem=%s",
+  			cashGain, oilGain, gemsGain) );
   		return false;
   	}
 
-  	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain))
+  	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain, gemsGain))
   	{
   		log.error(String.format(
   			"can't update user stats after retrieving %s cash \t %s oil.",
@@ -372,6 +435,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		if (0 != cashGain) {
   			currencyChange.put(MiscMethods.cash, cashGain);
   		}
+  		if (0 != gemsGain) {
+  			currencyChange.put(MiscMethods.gems, gemsGain);
+  		}
   	}
   	
     if (!UpdateUtils.get().updateUserStructsLastRetrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
@@ -384,65 +450,97 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   public void writeToUserCurrencyHistory(User aUser, int previousCash,
-  		int previousOil, Timestamp curTime,
-  		Map<String, StructureForUser> userStructIdsToUserStructs,
-  		Map<String, StructureResourceGenerator> userStructIdsToGenerators,
-  		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<String, Integer> userStructIdsToAmountCollected,
-  		Map<String, Integer> currencyChange) {
+		  int previousOil, int previousGems, Timestamp curTime,
+		  Map<String, StructureForUser> userStructIdsToUserStructs,
+		  Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+		  Map<String, StructureMoneyTree> userStructIdsToMoneyTrees,
+		  Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
+		  Map<String, Integer> userStructIdsToAmountCollected,
+		  Map<String, Integer> currencyChange) {
 
-    String userId = aUser.getId();
-    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
-    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    Map<String, String> details = new HashMap<String, String>();
-    String cash = MiscMethods.cash;
-    String oil = MiscMethods.oil;
-    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
-    StringBuilder cashDetailSb = new StringBuilder();
-    cashDetailSb.append("(userStructId,time,amount)=");
-    StringBuilder oilDetailSb = new StringBuilder();
-    oilDetailSb.append("(userStructId,time,amount)=");
-    
-    //being descriptive, separating cash stuff from oil stuff
-    for(String id : userStructIdsToAmountCollected.keySet()) {
-      StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
-      Timestamp t = userStructIdsToTimesOfRetrieval.get(id);
-      int amount = userStructIdsToAmountCollected.get(id);
-      
-      String type = struct.getResourceTypeGenerated();
-      ResourceType rt = ResourceType.valueOf(type);
-      if (ResourceType.CASH.equals(rt)) {
-      	cashDetailSb.append("(");
-      	cashDetailSb.append(id);
-      	cashDetailSb.append(",");
-      	cashDetailSb.append(t);
-      	cashDetailSb.append(",");
-      	cashDetailSb.append(amount);
-      	cashDetailSb.append(")");
-      	
-      } else if (ResourceType.OIL.equals(rt)) {
-      	oilDetailSb.append("(");
-      	oilDetailSb.append(id);
-      	oilDetailSb.append(",");
-      	oilDetailSb.append(t);
-      	oilDetailSb.append(",");
-      	oilDetailSb.append(amount);
-      	oilDetailSb.append(")");
-      }
-    }
-    
-    previousCurrencies.put(cash, previousCash);
-    previousCurrencies.put(oil, previousOil);
-    currentCurrencies.put(cash, aUser.getCash());
-    currentCurrencies.put(oil, aUser.getOil());
-    reasonsForChanges.put(cash, reasonForChange);
-    reasonsForChanges.put(oil, reasonForChange);
-    details.put(cash, cashDetailSb.toString());
-    details.put(oil, oilDetailSb.toString());
-    
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
-    		previousCurrencies, currentCurrencies, reasonsForChanges, details);
+	  String userId = aUser.getId();
+	  Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+	  Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> details = new HashMap<String, String>();
+	  String cash = MiscMethods.cash;
+	  String oil = MiscMethods.oil;
+	  String gems = MiscMethods.gems;
+	  String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
+	  String reasonForGemChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_MONEY_TREE;
+	  StringBuilder cashDetailSb = new StringBuilder();
+	  cashDetailSb.append("(userStructId,time,amount)=");
+	  StringBuilder oilDetailSb = new StringBuilder();
+	  oilDetailSb.append("(userStructId,time,amount)=");
+	  StringBuilder gemsDetailSb = new StringBuilder();
+	  gemsDetailSb.append("(userStructId,time,amount)=");
+
+	  Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
+
+	  for(String id : userStructIdsToUserStructs.keySet()) {
+		  if(userStructIdsToMoneyTrees.containsKey(id)) {
+			  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
+		  }
+	  }
+
+	  //being descriptive, separating cash stuff from oil stuff
+	  for(String id : userStructIdsToAmountCollected.keySet()) {
+		  StructureForUser sfu = userStructIdsToUserStructs.get(id);
+		  Timestamp t = userStructIdsToTimesOfRetrieval.get(id);
+		  int amount = userStructIdsToAmountCollected.get(id);
+
+		  if(userMoneyTreeMap.containsKey(id)) {
+			  gemsDetailSb.append("(");
+			  gemsDetailSb.append(id);
+			  gemsDetailSb.append(",");
+			  gemsDetailSb.append(t);
+			  gemsDetailSb.append(",");
+			  gemsDetailSb.append(amount);
+			  gemsDetailSb.append(")");
+		  }
+		  else {
+
+			  StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
+
+
+			  String type = struct.getResourceTypeGenerated();
+			  ResourceType rt = ResourceType.valueOf(type);
+			  if (ResourceType.CASH.equals(rt)) {
+				  cashDetailSb.append("(");
+				  cashDetailSb.append(id);
+				  cashDetailSb.append(",");
+				  cashDetailSb.append(t);
+				  cashDetailSb.append(",");
+				  cashDetailSb.append(amount);
+				  cashDetailSb.append(")");
+
+			  } else if (ResourceType.OIL.equals(rt)) {
+				  oilDetailSb.append("(");
+				  oilDetailSb.append(id);
+				  oilDetailSb.append(",");
+				  oilDetailSb.append(t);
+				  oilDetailSb.append(",");
+				  oilDetailSb.append(amount);
+				  oilDetailSb.append(")");
+			  }
+		  }
+	  }
+
+	  previousCurrencies.put(cash, previousCash);
+	  previousCurrencies.put(oil, previousOil);
+	  previousCurrencies.put(gems,  previousGems);
+	  currentCurrencies.put(cash, aUser.getCash());
+	  currentCurrencies.put(oil, aUser.getOil());
+	  currentCurrencies.put(gems,  aUser.getGems());
+	  reasonsForChanges.put(cash, reasonForChange);
+	  reasonsForChanges.put(oil, reasonForChange);
+	  reasonsForChanges.put(gems, reasonForGemChange);
+	  details.put(cash, cashDetailSb.toString());
+	  details.put(oil, oilDetailSb.toString());
+	  details.put(gems, gemsDetailSb.toString());
+
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+			  previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
 
   public Locker getLocker() {
