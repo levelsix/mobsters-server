@@ -71,10 +71,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				"retrieving money tree for userId %s", userId));
 		
 		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
-		List<StructureForUser> userStructList = getUserStructsForUser(userId);
 		List<StructureForUser> returnList = new ArrayList<StructureForUser>();
 
 		if(userStructId == null) {
+			List<StructureForUser> userStructList = getUserStructsForUser(userId);
 			for(StructureForUser sfu : userStructList) {
 				int structId = sfu.getStructId();
 				for(Integer id : moneyTreesMap.keySet()) {
