@@ -47,15 +47,15 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
+import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
-import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
-import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
+import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -101,9 +101,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
-  
+
   @Autowired
   protected ClanSearch clanSearch;
+
+  @Autowired
+  protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+
+  @Autowired
+  protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+  
+  
+  
   
   public RequestJoinClanController() {
 	  numAllocatedThreads = 4;
@@ -212,7 +221,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         sendClanRaidStuff(resBuilder, clan, user);
         
         List<Date> lastChatTimeContainer = new ArrayList<Date>();
-        cdp = setClanData(clanId, clan, user, userId, lastChatTimeContainer);
+        
+        StartUpResource fillMe = new StartUpResource(
+				getUserRetrieveUtils(), getClanRetrieveUtils());
+        
+        SetClanDataProtoAction scdpa = new SetClanDataProtoAction(clanId, clan, user, userId, 
+        		lastChatTimeContainer, fillMe, clanHelpRetrieveUtil,
+        		clanAvengeRetrieveUtil, clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils, 
+        		clanMemberTeamDonationRetrieveUtil, monsterSnapshotForUserRetrieveUtil);
+        cdp = scdpa.execute();
         
         //update clan cache
         updateClanCache(clanId, clanSizeList, lastChatTimeContainer);
@@ -499,37 +516,37 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   }
   
-  private ClanDataProto setClanData( String clanId,
-	  Clan c, User u, String userId, List<Date> lastChatTimeContainer)
-  {
-	  log.info("setting clanData proto for clan {}", c);
-	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
-	  StartUpResource fillMe = new StartUpResource(
-		  userRetrieveUtil, clanRetrieveUtil );
-	  
-	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(
-		  cdpb, u, clanChatPostRetrieveUtils);
-	  sccma.setUp(fillMe);
-	  SetClanHelpingsAction scha = new SetClanHelpingsAction(
-		  cdpb, u, userId, clanHelpRetrieveUtil);
-	  scha.setUp(fillMe);
-	  SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
-		  cdpb, u, userId, clanAvengeRetrieveUtil,
-		  clanAvengeUserRetrieveUtil);
-	  scra.setUp(fillMe);
-
-
-	  fillMe.fetchUsersOnly();
-	  fillMe.addClan(clanId, c);
-
-	  sccma.execute(fillMe);
-	  scha.execute(fillMe);
-	  scra.execute(fillMe);
-	  
-	  lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
-	  
-	  return cdpb.build();
-  }
+//  private ClanDataProto setClanData( String clanId,
+//	  Clan c, User u, String userId, List<Date> lastChatTimeContainer)
+//  {
+//	  log.info("setting clanData proto for clan {}", c);
+//	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
+//	  StartUpResource fillMe = new StartUpResource(
+//		  userRetrieveUtil, clanRetrieveUtil );
+//	  
+//	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(
+//		  cdpb, u, clanChatPostRetrieveUtils);
+//	  sccma.setUp(fillMe);
+//	  SetClanHelpingsAction scha = new SetClanHelpingsAction(
+//		  cdpb, u, userId, clanHelpRetrieveUtil);
+//	  scha.setUp(fillMe);
+//	  SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
+//		  cdpb, u, userId, clanAvengeRetrieveUtil,
+//		  clanAvengeUserRetrieveUtil);
+//	  scra.setUp(fillMe);
+//
+//
+//	  fillMe.fetchUsersOnly();
+//	  fillMe.addClan(clanId, c);
+//
+//	  sccma.execute(fillMe);
+//	  scha.execute(fillMe);
+//	  scra.execute(fillMe);
+//	  
+//	  lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
+//	  
+//	  return cdpb.build();
+//  }
   
   private void updateClanCache(String clanId,
 	  List<Integer> clanSizeList,
