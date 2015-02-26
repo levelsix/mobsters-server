@@ -596,7 +596,7 @@ public class User implements Serializable {
 	}
 
 	public boolean updateRelativeCoinsOilRetrievedFromStructs (int coinChange,
-			int oilChange) {
+			int oilChange, int gemsChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -610,6 +610,9 @@ public class User implements Serializable {
 			relativeParams.put(DBConstants.USER__OIL, oilChange);
 			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, oilChange);
 		}
+		if (gemsChange != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemsChange);
+		}
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
@@ -618,6 +621,7 @@ public class User implements Serializable {
 			this.numCoinsRetrievedFromStructs += coinChange;
 			this.oil += oilChange;
 			this.numOilRetrievedFromStructs += oilChange;
+			this.gems += gemsChange;
 			return true;
 		}
 		return false;

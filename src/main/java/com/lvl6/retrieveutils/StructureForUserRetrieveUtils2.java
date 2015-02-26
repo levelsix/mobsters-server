@@ -66,21 +66,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return userStructs;
 	}
 
-
-	public List<StructureForUser> getMoneyTreeForUser(String userId, String userStructId) {
+	public List<StructureForUser> getMoneyTreeForUserList(String userId, String userStructId) {
 		log.debug(String.format(
 				"retrieving money tree for userId %s", userId));
 		
 		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
-		List<StructureForUser> userStructList = getUserStructsForUser(userId);
 		List<StructureForUser> returnList = new ArrayList<StructureForUser>();
-		
+
 		if(userStructId == null) {
+			List<StructureForUser> userStructList = getUserStructsForUser(userId);
 			for(StructureForUser sfu : userStructList) {
 				int structId = sfu.getStructId();
 				for(Integer id : moneyTreesMap.keySet()) {
 					if(id == structId) {
-						returnList.add(sfu);
+						returnList.add(sfu);				
 					}
 				}
 			}
@@ -104,6 +103,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			}
 			return userStructs2;
 		}
+	}
+	
+	public Map<String, StructureForUser> getMoneyTreeForUserMap(String userId, String userStructId) {
+		List<StructureForUser> moneyTreeList = getMoneyTreeForUserList(userId, userStructId);
+		Map<String, StructureForUser> moneyTreeMap = new HashMap<String, StructureForUser>();
+		for(StructureForUser sfu : moneyTreeList) {
+			moneyTreeMap.put(sfu.getId(), sfu);
+		}
+		return moneyTreeMap;
 	}
 
 

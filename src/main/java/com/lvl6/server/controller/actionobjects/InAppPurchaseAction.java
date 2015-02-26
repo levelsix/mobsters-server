@@ -348,12 +348,12 @@ public class InAppPurchaseAction
 		
 		//assumed to only contain one money tree max for now
 		List<StructureForUser> listOfUsersMoneyTree = 
-				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+				structureForUserRetrieveUtils2.getMoneyTreeForUserList(userId, null);
 		String userStructId = "";
 		Timestamp purchaseTime = new Timestamp(now.getTime());
+		CoordinatePair cp = new CoordinatePair(0,0);
 
 		if(listOfUsersMoneyTree.isEmpty()) {
-			CoordinatePair cp = new CoordinatePair(0,0);
 			Timestamp lastRetrievedTime = null;
 			boolean isComplete = true;
 			
@@ -377,12 +377,11 @@ public class InAppPurchaseAction
 		
 		processPurchase(resBuilder);
 		
-		StructureForUser sfu = null;
-		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
-		List<StructureForUser> listOfUsersMoneyTree2 = 
-				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+		StructureForUser sfu = new StructureForUser(userStructId, userId, smt.getStructId(),
+				null, cp, purchaseTime,
+				true, "POSITION_1", 0);
 		
-		sfu = listOfUsersMoneyTree2.get(0); //get only element of list
+		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
 		
 		if (null != sfu) {
 			FullUserStructureProto fusp = CreateInfoProtoUtils
