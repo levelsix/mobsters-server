@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				"select * from %s where %s=?",
 				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
 
-		List<StructureForUser> userStructs = null;
+		List<StructureForUser> userStructs = new ArrayList<StructureForUser>();
 		try {
 			userStructs = this.jdbcTemplate
 					.query(query, values, rowMapper);
