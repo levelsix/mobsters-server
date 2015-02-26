@@ -348,7 +348,7 @@ public class InAppPurchaseAction
 		
 		//assumed to only contain one money tree max for now
 		List<StructureForUser> listOfUsersMoneyTree = 
-				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+				structureForUserRetrieveUtils2.getMoneyTreeForUserList(userId, null);
 		String userStructId = "";
 		Timestamp purchaseTime = new Timestamp(now.getTime());
 
@@ -380,7 +380,7 @@ public class InAppPurchaseAction
 		StructureForUser sfu = null;
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
 		List<StructureForUser> listOfUsersMoneyTree2 = 
-				structureForUserRetrieveUtils2.getMoneyTreeForUser(userId, null);
+				structureForUserRetrieveUtils2.getMoneyTreeForUserList(userId, null);
 		
 		sfu = listOfUsersMoneyTree2.get(0); //get only element of list
 		

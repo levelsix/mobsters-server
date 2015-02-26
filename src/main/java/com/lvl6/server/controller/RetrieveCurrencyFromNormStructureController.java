@@ -307,7 +307,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int gems = 0;
     
     //get all user money trees
-    List<StructureForUser> userMoneyTreeList = userStructRetrieveUtils.getMoneyTreeForUser(userId, null);
+    Map<String, StructureForUser> userMoneyTreeMap = userStructRetrieveUtils.getMoneyTreeForUserMap(userId, null);
     
     for (String id : userStructIds) {
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
@@ -323,7 +323,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         continue;
       }
 
-      if(userMoneyTreeList.contains(userStruct)) {
+      if(userMoneyTreeMap.containsKey(id)) {
     	  gems += userStructIdsToAmountCollected.get(id);
       }
       else {
@@ -369,8 +369,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (cashGain <= 0 && oilGain <= 0 && gemsGain <= 0)
   	{
   		log.error(String.format(
-  			"cash and oil both invalid. cash=%s \t oil=%s",
-  			cashGain, oilGain) );
+  			"cash,oil, gems all invalid. cash=%s \t oil=%s \t gem=%s",
+  			cashGain, oilGain, gemsGain) );
   		return false;
   	}
 
@@ -427,7 +427,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  StringBuilder gemsDetailSb = new StringBuilder();
 	  gemsDetailSb.append("(userStructId,time,amount)=");
 
-	  List<StructureForUser> userMoneyTreeList = userStructRetrieveUtils.getMoneyTreeForUser(userId, null);
+	  Map<String, StructureForUser> userMoneyTreeMap = userStructRetrieveUtils.getMoneyTreeForUserMap(userId, null);
 
 	  //being descriptive, separating cash stuff from oil stuff
 	  for(String id : userStructIdsToAmountCollected.keySet()) {
@@ -435,14 +435,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Timestamp t = userStructIdsToTimesOfRetrieval.get(id);
 		  int amount = userStructIdsToAmountCollected.get(id);
 
-		  if(userMoneyTreeList.contains(sfu)) {
-			  cashDetailSb.append("(");
-			  cashDetailSb.append(id);
-			  cashDetailSb.append(",");
-			  cashDetailSb.append(t);
-			  cashDetailSb.append(",");
-			  cashDetailSb.append(amount);
-			  cashDetailSb.append(")");
+		  if(userMoneyTreeMap.containsKey(id)) {
+			  gemsDetailSb.append("(");
+			  gemsDetailSb.append(id);
+			  gemsDetailSb.append(",");
+			  gemsDetailSb.append(t);
+			  gemsDetailSb.append(",");
+			  gemsDetailSb.append(amount);
+			  gemsDetailSb.append(")");
 		  }
 		  else {
 

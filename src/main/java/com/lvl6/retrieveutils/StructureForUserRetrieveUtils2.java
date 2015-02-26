@@ -66,21 +66,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return userStructs;
 	}
 
-
-	public List<StructureForUser> getMoneyTreeForUser(String userId, String userStructId) {
+	public List<StructureForUser> getMoneyTreeForUserList(String userId, String userStructId) {
 		log.debug(String.format(
 				"retrieving money tree for userId %s", userId));
 		
 		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
 		List<StructureForUser> userStructList = getUserStructsForUser(userId);
 		List<StructureForUser> returnList = new ArrayList<StructureForUser>();
-		
+
 		if(userStructId == null) {
 			for(StructureForUser sfu : userStructList) {
 				int structId = sfu.getStructId();
 				for(Integer id : moneyTreesMap.keySet()) {
 					if(id == structId) {
-						returnList.add(sfu);
+						returnList.add(sfu);				
 					}
 				}
 			}
@@ -103,6 +102,50 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				userStructs2 = new ArrayList<StructureForUser>();
 			}
 			return userStructs2;
+		}
+	}
+	
+	public Map<String, StructureForUser> getMoneyTreeForUserMap(String userId, String userStructId) {
+		log.debug(String.format(
+				"retrieving money tree for userId %s", userId));
+		
+		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		List<StructureForUser> userStructList = getUserStructsForUser(userId);
+		Map<String, StructureForUser> returnMap = new HashMap<String, StructureForUser>();
+		
+		if(userStructId == null) {
+			for(StructureForUser sfu : userStructList) {
+				int structId = sfu.getStructId();
+				for(Integer id : moneyTreesMap.keySet()) {
+					if(id == structId) {
+						returnMap.put(sfu.getId(), sfu);
+					}
+				}
+			}
+			return returnMap;
+		}
+		else {
+			Object[] values2 = { userId, userStructId };
+			String query2 = String.format(
+					"select * from %s where %s=? and %s=?",
+					TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID, 
+					DBConstants.STRUCTURE_FOR_USER__ID);
+
+			List<StructureForUser> userStructs2 = null;
+			try {
+				userStructs2 = this.jdbcTemplate
+						.query(query2, values2, rowMapper);
+
+			} catch (Exception e) {
+				log.error("structure for user retrieve db error.", e);
+				userStructs2 = new ArrayList<StructureForUser>();
+			}
+			
+			for(StructureForUser sfu : userStructs2) {
+				returnMap.put(sfu.getId(), sfu);
+			}
+			
+			return returnMap;
 		}
 	}
 
