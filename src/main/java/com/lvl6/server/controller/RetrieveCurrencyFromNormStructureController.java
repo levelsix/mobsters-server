@@ -20,6 +20,7 @@ import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -35,6 +36,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -88,6 +90,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
     
+    
     RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
     		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
     resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
@@ -134,13 +137,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		getUserStructIdsToUserStructs(userId, userStructIds);
       Map<String, StructureResourceGenerator> userStructIdsToGenerators =
       		getUserStructIdsToResourceGenerators(userStructIdsToUserStructs.values());
+      Map<String, StructureMoneyTree> userStructIdsToMoneyTrees =
+        		getUserStructIdsToMoneyTrees(userStructIdsToUserStructs.values());
+      
       
       //this will contain the amount user collects
       Map<String, Integer> resourcesGained = new HashMap<String, Integer>();
       //userStructIdsToTimesOfRetrieval and userStructIdsToUserStructs will be
       //modified to contain only the valid user structs user can retrieve currency from
       boolean legitRetrieval = checkLegitRetrieval(resBuilder, user, userStructIds,
-      		userStructIdsToUserStructs, userStructIdsToGenerators, duplicates,
+      		userStructIdsToUserStructs, userStructIdsToGenerators, userStructIdsToMoneyTrees, duplicates,
       		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected, resourcesGained);
       
       int cashGain = 0;
@@ -179,7 +185,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         
         writeToUserCurrencyHistory(user, previousCash, previousOil, previousGems,
         		curTime, userStructIdsToUserStructs, userStructIdsToGenerators,
-        		userStructIdsToTimesOfRetrieval,
+        		userStructIdsToMoneyTrees, userStructIdsToTimesOfRetrieval,
         		userStructIdsToAmountCollected, currencyChange);
       }
     } catch (Exception e) {
@@ -275,10 +281,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return returnValue;
   }
   
+  //link up a user struct id with the structure object
+  private Map<String, StructureMoneyTree> getUserStructIdsToMoneyTrees(
+  		Collection<StructureForUser> userStructs) {
+    Map<String, StructureMoneyTree> returnValue =
+    		new HashMap<String, StructureMoneyTree>();
+    Map<Integer, StructureMoneyTree> structIdsToStructs = 
+    		StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+    
+    if(null == userStructs || userStructs.isEmpty()) {
+      log.error("There are no user structs.");
+    }
+    
+    for(StructureForUser us : userStructs) {
+      int structId = us.getStructId();
+      String userStructId = us.getId();
+      
+      StructureMoneyTree s = structIdsToStructs.get(structId);
+      if(null != s) {
+        returnValue.put(userStructId, s);
+      } else {
+        log.error(String.format(
+        	"structure with id %s does not exist, therefore UserStruct is invalid:%s",
+        	structId, us));
+      }
+    }
+    
+    return returnValue;
+  }
+  
   private boolean checkLegitRetrieval(Builder resBuilder, User user,
   		List<String> userStructIds, 
       Map<String, StructureForUser> userStructIdsToUserStructs,
       Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+      Map<String, StructureMoneyTree> userStructIdsToMoneyTrees,
       List<String> duplicates,
       Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
       Map<String, Integer> userStructIdsToAmountCollected,
@@ -307,8 +343,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int gems = 0;
     
     //get all user money trees
-    Map<String, StructureForUser> userMoneyTreeMap = userStructRetrieveUtils.getMoneyTreeForUserMap(userId, null);
+    Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
     
+    for(String id : userStructIdsToUserStructs.keySet()) {
+    	for(String id2 : userStructIdsToMoneyTrees.keySet()) {
+    		if(id.equals(id2)) {
+    			userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
+    		}
+    	}
+    }
+        
     for (String id : userStructIds) {
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
       
@@ -406,6 +450,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int previousOil, int previousGems, Timestamp curTime,
 		  Map<String, StructureForUser> userStructIdsToUserStructs,
 		  Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+		  Map<String, StructureMoneyTree> userStructIdsToMoneyTrees,
 		  Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
 		  Map<String, Integer> userStructIdsToAmountCollected,
 		  Map<String, Integer> currencyChange) {
@@ -427,7 +472,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  StringBuilder gemsDetailSb = new StringBuilder();
 	  gemsDetailSb.append("(userStructId,time,amount)=");
 
-	  Map<String, StructureForUser> userMoneyTreeMap = userStructRetrieveUtils.getMoneyTreeForUserMap(userId, null);
+	  Map<String, StructureForUser> userMoneyTreeMap = new HashMap<String, StructureForUser>();
+
+	  for(String id : userStructIdsToUserStructs.keySet()) {
+		  for(String id2 : userStructIdsToMoneyTrees.keySet()) {
+			  if(id.equals(id2)) {
+				  userMoneyTreeMap.put(id, userStructIdsToUserStructs.get(id));
+			  }
+		  }
+	  }
 
 	  //being descriptive, separating cash stuff from oil stuff
 	  for(String id : userStructIdsToAmountCollected.keySet()) {
