@@ -3,6 +3,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "Board.proto";
 import "BoosterPackStuff.proto";
 import "City.proto";
@@ -52,6 +53,7 @@ message StaticDataProto {
 	repeated ClanHouseProto allClanHouses = 32;
 	repeated MoneyTreeProto allMoneyTrees = 38;
 	repeated PvpBoardHouseProto allPvpBoardHouses = 39;
+	repeated BattleItemFactoryProto allBattleItemFactorys = 40;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -79,6 +81,10 @@ message StaticDataProto {
 	repeated BoardLayoutProto boards = 34;
 	
 	repeated ResearchProto research = 35;
+	
+	repeated BattleItemProto battleItem = 40;
+	
+	
 	
 	//optional BoosterPackProto starterPack = 36; defined above 
 	//repeated SkillSideEffectProto sideEffects = 37; defined above

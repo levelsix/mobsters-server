@@ -2,6 +2,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "Board.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";

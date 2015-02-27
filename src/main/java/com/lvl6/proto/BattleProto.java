@@ -9305,6 +9305,716 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpUserClanAvengeProto)
   }
 
+  public interface BattleItemQueueForUserProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemQueueForUserProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 battleItemId = 2;</code>
+     */
+    boolean hasBattleItemId();
+    /**
+     * <code>optional int32 battleItemId = 2;</code>
+     */
+    int getBattleItemId();
+
+    /**
+     * <code>optional int64 queueTime = 3;</code>
+     */
+    boolean hasQueueTime();
+    /**
+     * <code>optional int64 queueTime = 3;</code>
+     */
+    long getQueueTime();
+
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    boolean hasPriority();
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    int getPriority();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
+   */
+  public static final class BattleItemQueueForUserProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemQueueForUserProto)
+      BattleItemQueueForUserProtoOrBuilder {
+    // Use BattleItemQueueForUserProto.newBuilder() to construct.
+    private BattleItemQueueForUserProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BattleItemQueueForUserProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BattleItemQueueForUserProto defaultInstance;
+    public static BattleItemQueueForUserProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BattleItemQueueForUserProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BattleItemQueueForUserProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userUuid_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              battleItemId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              queueTime_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              priority_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.class, com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BattleItemQueueForUserProto> PARSER =
+        new com.google.protobuf.AbstractParser<BattleItemQueueForUserProto>() {
+      public BattleItemQueueForUserProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BattleItemQueueForUserProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BattleItemQueueForUserProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BATTLEITEMID_FIELD_NUMBER = 2;
+    private int battleItemId_;
+    /**
+     * <code>optional int32 battleItemId = 2;</code>
+     */
+    public boolean hasBattleItemId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 battleItemId = 2;</code>
+     */
+    public int getBattleItemId() {
+      return battleItemId_;
+    }
+
+    public static final int QUEUETIME_FIELD_NUMBER = 3;
+    private long queueTime_;
+    /**
+     * <code>optional int64 queueTime = 3;</code>
+     */
+    public boolean hasQueueTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 queueTime = 3;</code>
+     */
+    public long getQueueTime() {
+      return queueTime_;
+    }
+
+    public static final int PRIORITY_FIELD_NUMBER = 4;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
+    private void initFields() {
+      userUuid_ = "";
+      battleItemId_ = 0;
+      queueTime_ = 0L;
+      priority_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, battleItemId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, queueTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, priority_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, battleItemId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, queueTime_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, priority_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BattleProto.BattleItemQueueForUserProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemQueueForUserProto)
+        com.lvl6.proto.BattleProto.BattleItemQueueForUserProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.class, com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        battleItemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        queueTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        priority_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+      }
+
+      public com.lvl6.proto.BattleProto.BattleItemQueueForUserProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.BattleProto.BattleItemQueueForUserProto build() {
+        com.lvl6.proto.BattleProto.BattleItemQueueForUserProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.BattleProto.BattleItemQueueForUserProto buildPartial() {
+        com.lvl6.proto.BattleProto.BattleItemQueueForUserProto result = new com.lvl6.proto.BattleProto.BattleItemQueueForUserProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.battleItemId_ = battleItemId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.queueTime_ = queueTime_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.priority_ = priority_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BattleProto.BattleItemQueueForUserProto) {
+          return mergeFrom((com.lvl6.proto.BattleProto.BattleItemQueueForUserProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.BattleProto.BattleItemQueueForUserProto other) {
+        if (other == com.lvl6.proto.BattleProto.BattleItemQueueForUserProto.getDefaultInstance()) return this;
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasBattleItemId()) {
+          setBattleItemId(other.getBattleItemId());
+        }
+        if (other.hasQueueTime()) {
+          setQueueTime(other.getQueueTime());
+        }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.BattleProto.BattleItemQueueForUserProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.BattleProto.BattleItemQueueForUserProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int battleItemId_ ;
+      /**
+       * <code>optional int32 battleItemId = 2;</code>
+       */
+      public boolean hasBattleItemId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 battleItemId = 2;</code>
+       */
+      public int getBattleItemId() {
+        return battleItemId_;
+      }
+      /**
+       * <code>optional int32 battleItemId = 2;</code>
+       */
+      public Builder setBattleItemId(int value) {
+        bitField0_ |= 0x00000002;
+        battleItemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 battleItemId = 2;</code>
+       */
+      public Builder clearBattleItemId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        battleItemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long queueTime_ ;
+      /**
+       * <code>optional int64 queueTime = 3;</code>
+       */
+      public boolean hasQueueTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 queueTime = 3;</code>
+       */
+      public long getQueueTime() {
+        return queueTime_;
+      }
+      /**
+       * <code>optional int64 queueTime = 3;</code>
+       */
+      public Builder setQueueTime(long value) {
+        bitField0_ |= 0x00000004;
+        queueTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 queueTime = 3;</code>
+       */
+      public Builder clearQueueTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        queueTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public Builder setPriority(int value) {
+        bitField0_ |= 0x00000008;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        priority_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemQueueForUserProto)
+    }
+
+    static {
+      defaultInstance = new BattleItemQueueForUserProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemQueueForUserProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpProto_descriptor;
   private static
@@ -9335,6 +10045,11 @@ public final class BattleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9386,10 +10101,12 @@ public final class BattleProto {
       "\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderCl",
       "anUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020" +
       "\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016cl" +
-      "anAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E" +
-      "\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFE" +
-      "NDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleP" +
-      "roto"
+      "anAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003\"j" +
+      "\n\033BattleItemQueueForUserProto\022\020\n\010userUui" +
+      "d\030\001 \001(\t\022\024\n\014battleItemId\030\002 \001(\005\022\021\n\tqueueTi" +
+      "me\030\003 \001(\003\022\020\n\010priority\030\004 \001(\005*E\n\014BattleResu" +
+      "lt\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021" +
+      "\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9441,6 +10158,12 @@ public final class BattleProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
         new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
+    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
+        new java.lang.String[] { "UserUuid", "BattleItemId", "QueueTime", "Priority", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

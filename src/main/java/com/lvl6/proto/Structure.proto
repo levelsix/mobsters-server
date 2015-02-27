@@ -315,3 +315,11 @@ message UserPvpBoardObstacleProto {
 	optional int32 posY = 5;
 }
 
+//------------------------------------------------------------------------------------------
+
+message BattleItemFactoryProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 powerLimit = 2;
+
+}
+

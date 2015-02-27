@@ -134,3 +134,21 @@ message PvpUserClanAvengeProto {
 }
 
 ///atm, this file is used by EventPvp.proto
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemQueueForUserProto {
+	optional string userUuid = 1;
+	optional int32 battleItemId = 2;
+	optional int64 queueTime = 3;
+	optional int32 priority = 4;
+}
+
+	
+	
+
+
+
+
+
+

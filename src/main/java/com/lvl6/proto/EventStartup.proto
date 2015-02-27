@@ -3,6 +3,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
@@ -129,6 +130,9 @@ message StartupResponseProto {
 
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
+		
+	repeated BattleItemQueueForUserProto battleItemQueue = 47;
+	repeated UserBattleItemProto battleItem = 48;	
 		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
