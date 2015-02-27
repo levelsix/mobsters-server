@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureMoneyTree;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -176,7 +176,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 
 	public List<StructureForUser> getSpecificOrAllUserStructsForUser(String userId,
-			List<String> userStructIds) {
+			Collection<String> userStructIds) {
 
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
@@ -190,7 +190,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		//if user didn't give any userStructIds then get all the user's structs
 		//else get the specific ids
 		if (userStructIds != null && !userStructIds.isEmpty() ) {
-			log.debug(String.format("retrieving userStructs with ids %s", userStructIds));
+			log.debug("retrieving userStructs with ids {}", userStructIds);
 			querySb.append(" AND ");
 			querySb.append(DBConstants.STRUCTURE_FOR_USER__ID);
 			querySb.append(" IN (");
@@ -205,9 +205,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
 
 		String query = querySb.toString();
-		log.info(String.format(
-				"query=%s, values=%s",
-				query, values));
+		log.info( "query={}, values={}", query, values );
 
 		List<StructureForUser> userStructs = null;
 		try {
@@ -215,7 +213,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 					.query(query, values.toArray(), rowMapper);
 
 		} catch (Exception e) {
-			log.error("structure for user retrieve db error.", e);
+			log.error("StructureForUser retrieve db error.", e);
 			userStructs = new ArrayList<StructureForUser>();
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
