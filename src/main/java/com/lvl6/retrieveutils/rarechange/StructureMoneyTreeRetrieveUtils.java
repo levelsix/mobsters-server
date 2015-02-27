@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.properties.Globals;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class StructureMoneyTreeRetrieveUtils {
@@ -88,9 +89,10 @@ import com.lvl6.utils.DBConnection;
 	int daysOfDuration = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_OF_DURATION);;
 	int daysForRenewal = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL);;
 	String iapProductId = rs.getString(DBConstants.STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID);;  
-	     
+	String entireIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + iapProductId;     
+	
     StructureMoneyTree smt = new StructureMoneyTree(structId,
-    		productionRate, capacity, daysOfDuration, daysForRenewal, iapProductId);
+    		productionRate, capacity, daysOfDuration, daysForRenewal, entireIAPProductId);
     
     
     return smt;
