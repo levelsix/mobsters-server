@@ -164,3 +164,16 @@ message SetDefendingMsgResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message UseBattleItemRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+
+
+
+
+
+
+

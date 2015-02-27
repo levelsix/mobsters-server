@@ -272,6 +272,18 @@ public class InAppPurchaseController extends EventController {
 		}
 	}
 	
+	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(String iapProductId) {
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		log.info(structIdsToMoneyTrees.toString());
+		
+		for(Integer i : structIdsToMoneyTrees.keySet()) {
+			StructureMoneyTree smt = structIdsToMoneyTrees.get(i);
+			if(smt.getIapProductId().equals(iapProductId)) {
+				return smt;
+			}
+		}
+		return null;
+	}
 
 
 	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {

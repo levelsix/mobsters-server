@@ -54,3 +54,14 @@ enum Category {
 
 }
 
+//------------------------------------------------------------------------------------------
+
+message BattleItemQueueForUserProto {
+	optional string userUuid = 1;
+	optional int32 battleItemId = 2;
+	optional int64 queueTime = 3;
+	optional int32 priority = 4;
+}
+
+	
+
