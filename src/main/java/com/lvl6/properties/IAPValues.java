@@ -58,7 +58,7 @@ public class IAPValues {
 
     public static final List<String> iapPackageNames = 
             Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5,
-            	STARTERPACK);
+            	STARTERPACK, MONEYTREE);
 
 //    public static final List<String> packageNames = 
 //            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
