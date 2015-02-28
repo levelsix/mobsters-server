@@ -374,7 +374,7 @@ public class InAppPurchaseAction
 		CoordinatePair cp = new CoordinatePair(0,0);
 
 		if(listOfUsersMoneyTree.isEmpty()) {
-			Timestamp lastRetrievedTime = null;
+			Timestamp lastRetrievedTime = purchaseTime;
 			boolean isComplete = true;
 			
 			userStructId = insertUtil.insertUserStruct(userId, 
