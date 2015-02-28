@@ -1,0 +1,244 @@
+package com.lvl6.server.controller;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+
+import com.lvl6.events.RequestEvent;
+import com.lvl6.events.request.CreateBattleItemRequestEvent;
+import com.lvl6.events.response.CreateBattleItemResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.StructureRetrieval;
+import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
+import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.CreateBattleItemAction;
+import com.lvl6.utils.utilmethods.UpdateUtil;
+
+@Component @DependsOn("gameServer") public class CreateBattleItemController extends EventController{
+
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+	@Autowired
+	protected Locker locker;
+
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
+
+	@Autowired
+	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
+	
+	@Autowired
+	protected UpdateUtil updateUtil;
+
+	public CreateBattleItemController() {
+		numAllocatedThreads = 8;
+	}
+
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new CreateBattleItemRequestEvent();
+	}
+
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT;
+	}
+
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		CreateBattleItemRequestProto reqProto = ((CreateBattleItemRequestEvent)event).getCreateBattleItemRequestProto();
+		log.info("reqProto={}", reqProto);
+		//get stuff client sent
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
+		String userId = senderProto.getUserUuid();
+		List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
+		Timestamp curTime = new Timestamp((new Date()).getTime());
+		int maxCash = senderResourcesProto.getMaxCash();
+		int maxOil = senderResourcesProto.getMaxOil();
+
+//		Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
+//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
+		//create map from ids to times and check for duplicates
+//		getIdsAndTimes(structRetrievals, duplicates,
+//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
+
+//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
+
+		List<String> duplicates = new ArrayList<String>();
+		Map<String, StructureRetrieval> userStructIdsToStructRetrievals =
+				getStructureRetrievalMap(structRetrievals, duplicates);
+
+		CreateBattleItemResponseProto.Builder resBuilder =
+				CreateBattleItemResponseProto.newBuilder();
+		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+		resBuilder.setSender(senderResourcesProto);
+
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+
+			for (String userStructId : userStructIdsToStructRetrievals.keySet()) {
+				UUID.fromString(userStructId);
+			}
+
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s, userStructIds=%s",
+					userId, structRetrievals), e);
+			invalidUuids = true;
+		}
+
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setCreateBattleItemResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
+		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+					
+			CreateBattleItemAction rcfnsa =
+					new CreateBattleItemAction(
+							userId, maxCash, maxOil, duplicates,
+							userStructIdsToStructRetrievals,
+							userRetrieveUtil, userStructRetrieveUtil, updateUtil);
+			
+			rcfnsa.execute(resBuilder);
+
+			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setCreateBattleItemResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+
+			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				User user = rcfnsa.getUser();
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToCurrencyHistory(userId, curTime, rcfnsa);
+			}
+		} catch (Exception e) {
+			log.error("exception in CreateBattleItemController processEvent", e);
+			//don't let the client hang
+			try {
+				resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+				CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setCreateBattleItemResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in CreateBattleItemController processEvent", e);
+			}
+		} finally {
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
+		}
+	}
+
+	private Map<String, StructureRetrieval> getStructureRetrievalMap(
+			List<StructRetrieval> structRetrievalProtos, List<String> duplicates)
+	{
+		Map<String, StructureRetrieval> userStructIdToStructureRetrieval =
+				new HashMap<String, StructureRetrieval>();
+		if (null == structRetrievalProtos || structRetrievalProtos.isEmpty())
+		{
+			log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
+			return userStructIdToStructureRetrieval;
+		}
+
+		for (StructRetrieval srProto : structRetrievalProtos) {
+			StructureRetrieval sr = new StructureRetrieval();
+			String userStructId = srProto.getUserStructUuid();
+			
+			if(userStructIdToStructureRetrieval.containsKey(userStructId)) {
+				duplicates.add(userStructId);
+				continue;
+			}
+
+			sr.setUserStructId(userStructId);
+			Date timeOfRetrieval = null;
+			long retrievalTime = srProto.getTimeOfRetrieval();
+			if (retrievalTime > 0) {
+				timeOfRetrieval = new Date(retrievalTime);
+			}
+
+			sr.setTimeOfRetrieval(timeOfRetrieval);
+			sr.setAmountCollected(srProto.getAmountCollected());
+
+			userStructIdToStructureRetrieval.put(userStructId, sr);
+		}
+
+		return userStructIdToStructureRetrieval;
+	}
+	
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+			CreateBattleItemAction rcfnsa)
+		{
+			MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
+	    		rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
+	    		rcfnsa.getDetails());
+		}
+		
+
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public StructureForUserRetrieveUtils2 getUserStructRetrieveUtil() {
+		return userStructRetrieveUtil;
+	}
+
+	public void setUserStructRetrieveUtil(
+			StructureForUserRetrieveUtils2 userStructRetrieveUtil) {
+		this.userStructRetrieveUtil = userStructRetrieveUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+}
