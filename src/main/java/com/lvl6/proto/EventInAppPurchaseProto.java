@@ -1496,6 +1496,15 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 lastRetrieveTime = 11;</code>
+     */
+    boolean hasLastRetrieveTime();
+    /**
+     * <code>optional int64 lastRetrieveTime = 11;</code>
+     */
+    long getLastRetrieveTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseResponseProto}
@@ -1626,6 +1635,11 @@ public final class EventInAppPurchaseProto {
                 mutable_bitField0_ |= 0x00000200;
               }
               updatedMoneyTree_.add(input.readMessage(com.lvl6.proto.StructureProto.FullUserStructureProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000080;
+              lastRetrieveTime_ = input.readInt64();
               break;
             }
           }
@@ -2081,6 +2095,21 @@ public final class EventInAppPurchaseProto {
       return updatedMoneyTree_.get(index);
     }
 
+    public static final int LASTRETRIEVETIME_FIELD_NUMBER = 11;
+    private long lastRetrieveTime_;
+    /**
+     * <code>optional int64 lastRetrieveTime = 11;</code>
+     */
+    public boolean hasLastRetrieveTime() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int64 lastRetrieveTime = 11;</code>
+     */
+    public long getLastRetrieveTime() {
+      return lastRetrieveTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
@@ -2092,6 +2121,7 @@ public final class EventInAppPurchaseProto {
       updatedOrNew_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
       updatedMoneyTree_ = java.util.Collections.emptyList();
+      lastRetrieveTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2135,6 +2165,9 @@ public final class EventInAppPurchaseProto {
       }
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         output.writeMessage(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(11, lastRetrieveTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2184,6 +2217,10 @@ public final class EventInAppPurchaseProto {
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(11, lastRetrieveTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2346,6 +2383,8 @@ public final class EventInAppPurchaseProto {
         } else {
           updatedMoneyTreeBuilder_.clear();
         }
+        lastRetrieveTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -2433,6 +2472,10 @@ public final class EventInAppPurchaseProto {
         } else {
           result.updatedMoneyTree_ = updatedMoneyTreeBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.lastRetrieveTime_ = lastRetrieveTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2551,6 +2594,9 @@ public final class EventInAppPurchaseProto {
               updatedMoneyTreeBuilder_.addAllMessages(other.updatedMoneyTree_);
             }
           }
+        }
+        if (other.hasLastRetrieveTime()) {
+          setLastRetrieveTime(other.getLastRetrieveTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3838,6 +3884,38 @@ public final class EventInAppPurchaseProto {
           updatedMoneyTree_ = null;
         }
         return updatedMoneyTreeBuilder_;
+      }
+
+      private long lastRetrieveTime_ ;
+      /**
+       * <code>optional int64 lastRetrieveTime = 11;</code>
+       */
+      public boolean hasLastRetrieveTime() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int64 lastRetrieveTime = 11;</code>
+       */
+      public long getLastRetrieveTime() {
+        return lastRetrieveTime_;
+      }
+      /**
+       * <code>optional int64 lastRetrieveTime = 11;</code>
+       */
+      public Builder setLastRetrieveTime(long value) {
+        bitField0_ |= 0x00000400;
+        lastRetrieveTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 lastRetrieveTime = 11;</code>
+       */
+      public Builder clearLastRetrieveTime() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        lastRetrieveTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseResponseProto)
@@ -6931,7 +7009,7 @@ public final class EventInAppPurchaseProto {
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
       "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\"\207\004\n\032InAppPurchaseRespon" +
+      "\022\016\n\006ipaddr\030\006 \001(\t\"\241\004\n\032InAppPurchaseRespon" +
       "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
       "lvl6.proto.InAppPurchaseResponseProto.In" +
@@ -6942,36 +7020,37 @@ public final class EventInAppPurchaseProto {
       "proto.FullUserMonsterProto\0227\n\020updatedUse" +
       "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
       "oto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl6" +
-      ".proto.FullUserStructureProto\"C\n\023InAppPu" +
-      "rchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021D",
-      "UPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamondsR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022J\n\020freeDiamondsTyp" +
-      "e\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002" +
-      "\n\035EarnFreeDiamondsResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.EarnF" +
-      "reeDiamondsResponseProto.EarnFreeDiamond" +
-      "sStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$.com.",
+      ".proto.FullUserStructureProto\022\030\n\020lastRet" +
+      "rieveTime\030\013 \001(\003\"C\n\023InAppPurchaseStatus\022\013",
+      "\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEI" +
+      "PT\020\003\"\260\001\n\034EarnFreeDiamondsRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022J\n\020freeDiamondsType\030\002 \001(\0162$.com." +
       "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
-      "ECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUCCESS" +
-      "\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020" +
-      "\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER_FAI" +
-      "L\020\004\"\335\001\n$ExchangeGemsForResourcesRequestP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
-      "nimumUserProtoWithMaxResources\022\017\n\007numGem" +
-      "s\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014resourc" +
-      "eType\030\004 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
-      "e:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\252\002\n%Exchange",
-      "GemsForResourcesResponseProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022d\n\006status\030\002 \001(\0162T.com.lv" +
-      "l6.proto.ExchangeGemsForResourcesRespons" +
-      "eProto.ExchangeGemsForResourcesStatus\"Y\n" +
-      "\036ExchangeGemsForResourcesStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_GEMS\020\003B\031B\027EventInAppPurchaseProto"
+      "ECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiam" +
+      "ondsResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022T\n\006status\030\002 " +
+      "\001(\0162D.com.lvl6.proto.EarnFreeDiamondsRes" +
+      "ponseProto.EarnFreeDiamondsStatus\022J\n\020fre",
+      "eDiamondsType\030\003 \001(\0162$.com.lvl6.proto.Ear" +
+      "nFreeDiamondsType:\nFB_CONNECT\"v\n\026EarnFre" +
+      "eDiamondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_T" +
+      "OO_APART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NO" +
+      "T_SUPPORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$Exchan" +
+      "geGemsForResourcesRequestProto\022@\n\006sender" +
+      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
+      "WithMaxResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014num" +
+      "Resources\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034." +
+      "com.lvl6.proto.ResourceType:\004CASH\022\022\n\ncli",
+      "entTime\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourc" +
+      "esResponseProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
+      "l6.proto.MinimumUserProtoWithMaxResource" +
+      "s\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Excha" +
+      "ngeGemsForResourcesResponseProto.Exchang" +
+      "eGemsForResourcesStatus\"Y\n\036ExchangeGemsF" +
+      "orResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027Ev" +
+      "entInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7001,7 +7080,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", });
+        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", "LastRetrieveTime", });
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new

@@ -297,7 +297,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updatePurchaseTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime) {
+	public boolean updatePurchaseTimeRetrieveTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 		
@@ -305,6 +305,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
 		
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, newPurchaseTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, newPurchaseTime);
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
