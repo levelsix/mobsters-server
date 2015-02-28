@@ -17,6 +17,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -65,8 +66,8 @@ public interface UpdateUtil {
    * used for updating last retrieved user struct times
    */
   public abstract boolean updateUserStructsLastRetrieved(
-      Map<String, Timestamp> userStructIdsToLastRetrievedTime,
-      Map<String, StructureForUser> structIdsToUserStructs);
+		  Map<String, StructureRetrieval> userStructIdsToRetrievals,
+		  Map<String, StructureForUser> structIdsToUserStructs);
 
   /*
    * used for upgrading user struct's fb invite level

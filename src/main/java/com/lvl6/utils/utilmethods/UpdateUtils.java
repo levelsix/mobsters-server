@@ -25,6 +25,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -364,13 +365,18 @@ public class UpdateUtils implements UpdateUtil {
 	 */
 
 	@Override
-	public boolean updateUserStructsLastRetrieved(Map<String, Timestamp> userStructIdsToLastRetrievedTime,
-			Map<String, StructureForUser> structIdsToUserStructs) {
+	public boolean updateUserStructsLastRetrieved(
+			Map<String, StructureRetrieval> userStructIdsToRetrievals,
+			Map<String, StructureForUser> structIdsToUserStructs)
+	{
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-		for(String userStructId : userStructIdsToLastRetrievedTime.keySet()) {
-			Timestamp lastRetrievedTime = userStructIdsToLastRetrievedTime.get(userStructId);
+		for(String userStructId : userStructIdsToRetrievals.keySet()) {
+			StructureRetrieval sr = userStructIdsToRetrievals.get(userStructId);
+			Date d = sr.getTimeOfRetrieval();
+			Timestamp lastRetrievedTime = new Timestamp(
+					d.getTime()); 
 			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
 			Map<String, Object> aRow = new HashMap<String, Object>();
@@ -395,11 +401,11 @@ public class UpdateUtils implements UpdateUtil {
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
 				tableName, newRows, replaceTheseColumns);
 
-		log.info("num userStructs updated: " + numUpdated 
-				+ ". Number of userStructs: " + userStructIdsToLastRetrievedTime.size());
+		log.info("num userStructs updated: {}. Number of userStructs: {}",
+				numUpdated, userStructIdsToRetrievals.size());
 		
-		int maxNum = userStructIdsToLastRetrievedTime.size()*2;
-		int minNum = userStructIdsToLastRetrievedTime.size();
+		int maxNum = userStructIdsToRetrievals.size()*2;
+		int minNum = userStructIdsToRetrievals.size();
 		if (numUpdated >= minNum && numUpdated <= maxNum) {
 			return true;
 		}
