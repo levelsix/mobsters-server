@@ -41,9 +41,7 @@ message InAppPurchaseResponseProto {
 	repeated UserItemProto updatedUserItems = 9;
 	
 	repeated FullUserStructureProto updatedMoneyTree = 10;
-	
-	optional int64 lastRetrieveTime = 11;
-	
+		
 	enum InAppPurchaseStatus {
 		SUCCESS = 1;
 		FAIL = 2;

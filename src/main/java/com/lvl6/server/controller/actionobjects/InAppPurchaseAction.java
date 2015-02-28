@@ -98,7 +98,6 @@ public class InAppPurchaseAction
 	private String packageName;
 	private int gemChange;
 	private StructureMoneyTree smt;
-	private Timestamp lastRetrieveTime;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -400,13 +399,12 @@ public class InAppPurchaseAction
 		processPurchase(resBuilder);
 		
 		StructureForUser sfu = new StructureForUser(userStructId, userId, smt.getStructId(),
-				null, cp, purchaseTime,
+				purchaseTime, cp, purchaseTime,
 				true, "POSITION_1", 0);
 		
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
 		
 		if (null != sfu) {
-			lastRetrieveTime = purchaseTime;
 			FullUserStructureProto fusp = CreateInfoProtoUtils
 				.createFullUserStructureProtoFromUserstruct(sfu);
 			fuspList.add(fusp);
@@ -521,12 +519,6 @@ public class InAppPurchaseAction
 		return details;
 	}
 
-	public Timestamp getLastRetrieveTime() {
-		return lastRetrieveTime;
-	}
 
-	public void setLastRetrieveTime(Timestamp lastRetrieveTime) {
-		this.lastRetrieveTime = lastRetrieveTime;
-	}
 
 }

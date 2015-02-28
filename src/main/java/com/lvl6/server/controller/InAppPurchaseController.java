@@ -261,9 +261,7 @@ public class InAppPurchaseController extends EventController {
 			{
 				resBuilder.setPackageName(packageName);
 				resBuilder.setPackagePrice(realLifeCashCost);
-				
-				resBuilder.setLastRetrieveTime(iapa.getLastRetrieveTime().getTime());
-				
+								
 				log.info("successful in-app purchase from user {} for package {}",
 						userId, packageName);
 
