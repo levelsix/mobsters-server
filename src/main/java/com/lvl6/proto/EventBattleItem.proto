@@ -1,12 +1,12 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
-import "BattleItem.proto"
+import "BattleItem.proto";
 import "User.proto";
 
 package com.lvl6.proto;
 
-option java_outer_classname = "EventMonsterProto";
+option java_outer_classname = "EventBattleItemProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message CreateBattleItemRequestProto {
@@ -32,15 +32,15 @@ message CreateBattleItemRequestProto {
 	//positive amount if charging user, negative if refunding user
 	optional int32 gemCostForCreating = 7; 
 
-	optional bool isSpeedup = 7;
-	optional int32 gemsForSpeedup = 8; //pos amount if charging user
+	optional bool isSpeedup = 8;
+	optional int32 gemsForSpeedup = 9; //pos amount if charging user
 	
 }
 
 message CreateBattleItemResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserBattleItemProto userBattleItems
-	optional CreateBattleItemStatus status = 2;
+	repeated UserBattleItemProto userBattleItems = 2;
+	optional CreateBattleItemStatus status = 3;
 	
 	enum CreateBattleItemStatus {
 		SUCCESS = 1;
@@ -58,7 +58,7 @@ message DiscardBattleItemRequestProto {
 	
 	//user can choose to throw away existing battle items so he has the 
 	//"power" to create different ones
-	repeated BattleItemForUserProto discardedBattleItems = 2;
+	repeated UserBattleItemProto discardedBattleItems = 2;
 
 }
 

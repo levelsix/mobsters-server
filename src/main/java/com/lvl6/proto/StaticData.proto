@@ -53,7 +53,7 @@ message StaticDataProto {
 	repeated ClanHouseProto allClanHouses = 32;
 	repeated MoneyTreeProto allMoneyTrees = 38;
 	repeated PvpBoardHouseProto allPvpBoardHouses = 39;
-	repeated BattleItemFactoryProto allBattleItemFactorys = 40;
+	repeated BattleItemFactoryProto allBattleItemFactorys = 42;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -82,7 +82,7 @@ message StaticDataProto {
 	
 	repeated ResearchProto research = 35;
 	
-	repeated BattleItemProto battleItem = 40;
+	repeated BattleItemProto battleItem = 41;
 	
 	
 	

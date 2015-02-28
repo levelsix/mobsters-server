@@ -131,8 +131,8 @@ message StartupResponseProto {
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
 		
-	repeated BattleItemQueueForUserProto battleItemQueue = 47;
-	repeated UserBattleItemProto battleItem = 48;	
+	repeated BattleItemQueueForUserProto battleItemQueue = 48;
+	repeated UserBattleItemProto battleItem = 49;	
 		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 

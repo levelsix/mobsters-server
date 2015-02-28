@@ -167,8 +167,6 @@ message SetDefendingMsgResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message UseBattleItemRequestProto {
-	optional MinimumUserProto sender = 1;
 	
 
 
