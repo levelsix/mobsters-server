@@ -98,6 +98,8 @@ public class InAppPurchaseController extends EventController {
 		InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
 				.getInAppPurchaseRequestProto();
 
+		log.info("reqProto: {}", reqProto);
+		
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String receipt = reqProto.getReceipt();
@@ -275,6 +277,8 @@ public class InAppPurchaseController extends EventController {
 	
 	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(String iapProductId) {
 		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		log.info("structIdsToMoneyTrees: {}", structIdsToMoneyTrees);
+		
 		for(Integer i : structIdsToMoneyTrees.keySet()) {
 			StructureMoneyTree smt = structIdsToMoneyTrees.get(i);
 			if(smt.getIapProductId().equals(iapProductId)) {
