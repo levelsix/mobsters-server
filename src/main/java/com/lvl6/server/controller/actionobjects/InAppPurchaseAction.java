@@ -45,7 +45,7 @@ public class InAppPurchaseAction
 	private String userId;
 	private User user;
 	private JSONObject receiptFromApple;
-	private StructureMoneyTree smt;
+	private String iapProductId;
 	private Date now;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -57,7 +57,7 @@ public class InAppPurchaseAction
 		String userId,
 		User user,
 		JSONObject receiptFromApple,
-		StructureMoneyTree smt,
+		String iapProductId,
 		Date now,
 		IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 		ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -69,7 +69,7 @@ public class InAppPurchaseAction
 		this.userId = userId;
 		this.user = user;
 		this.receiptFromApple = receiptFromApple;
-		this.smt = smt;
+		this.iapProductId = iapProductId;
 		this.now = now;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
@@ -97,6 +97,7 @@ public class InAppPurchaseAction
 	boolean isMoneyTree;
 	private String packageName;
 	private int gemChange;
+	private StructureMoneyTree smt;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -196,6 +197,13 @@ public class InAppPurchaseAction
 			}
 			
 			isMoneyTree = IAPValues.packageIsMoneyTree(packageName);
+			
+			getStructureMoneyTreeForIAPProductId();
+			if(smt == null) {
+				log.error("smt is null: {}" , smt);
+					success = false;
+			}
+			
 			if (success && isMoneyTree && userOwnsOneMoneyTreeMax())
 			{
 				log.error("user trying to buy the money tree again! {}, {}",
@@ -211,6 +219,18 @@ public class InAppPurchaseAction
 			success = false;
 		}
 		return success;
+	}
+	
+	private void getStructureMoneyTreeForIAPProductId() {
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		log.info("structIdsToMoneyTrees: {}", structIdsToMoneyTrees);
+		
+		for(Integer i : structIdsToMoneyTrees.keySet()) {
+			StructureMoneyTree smt2 = structIdsToMoneyTrees.get(i);
+			if(smt2.getIapProductId().equals(iapProductId)) {
+				smt = smt2;
+			}
+		}
 	}
 	
 	private boolean userOwnsOneMoneyTreeMax() {

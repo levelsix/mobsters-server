@@ -19,7 +19,6 @@ message InAppPurchaseRequestProto {
 	optional string localcurrency = 4;
 	optional string locale = 5;
 	optional string ipaddr = 6;
-	optional string iapProductId = 7;
 }
 
 																						//DONE

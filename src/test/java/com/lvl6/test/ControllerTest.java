@@ -1014,7 +1014,6 @@ public class ControllerTest extends TestCase {
 				+ "R1cyIgPSAiMCI7Cn0=";
 		
 		iaprpb.setReceipt(receipt1);
-		iaprpb.setIapProductId("blah");
 		
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
@@ -1074,7 +1073,6 @@ public class ControllerTest extends TestCase {
 		iaprpb2.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user2, null));	
 		
 		iaprpb2.setReceipt(receipt2);
-		iaprpb2.setIapProductId("blah");
 		
 		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
 		iapre2.setTag(1);

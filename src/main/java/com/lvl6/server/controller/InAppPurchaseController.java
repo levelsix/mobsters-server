@@ -5,11 +5,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 import org.json.JSONObject;
@@ -23,7 +21,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.IAPValues;
@@ -73,6 +70,9 @@ public class InAppPurchaseController extends EventController {
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 	
+	@Autowired
+	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+	
 
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
@@ -103,7 +103,6 @@ public class InAppPurchaseController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String receipt = reqProto.getReceipt();
-		String iapProductId = reqProto.getIapProductId();
 
 		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -184,7 +183,7 @@ public class InAppPurchaseController extends EventController {
 			JSONObject receiptFromApple = null;
 			if (response.getInt(IAPValues.STATUS) == 0) {
 				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-				writeChangesToDb(userId, resBuilder, user, receiptFromApple, iapProductId);
+				writeChangesToDb(userId, resBuilder, user, receiptFromApple);
 			} else {
 				log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
 			}
@@ -244,18 +243,16 @@ public class InAppPurchaseController extends EventController {
 			String userId,
 			InAppPurchaseResponseProto.Builder resBuilder,
 			User user,
-			JSONObject receiptFromApple,
-			String iapProductId)
+			JSONObject receiptFromApple
+			)
 	{
 		try {
 			String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
-			
-			StructureMoneyTree smt = getStructureMoneyTreeForIAPProductId(iapProductId);
-			
+						
 			Date now = new Date();
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
-					receiptFromApple, smt, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, 
+					receiptFromApple, packageName, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, 
 					structureForUserRetrieveUtils2, insertUtil, updateUtil);
 
 			iapa.execute(resBuilder);
@@ -275,18 +272,7 @@ public class InAppPurchaseController extends EventController {
 		}
 	}
 	
-	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(String iapProductId) {
-		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
-		log.info("structIdsToMoneyTrees: {}", structIdsToMoneyTrees);
-		
-		for(Integer i : structIdsToMoneyTrees.keySet()) {
-			StructureMoneyTree smt = structIdsToMoneyTrees.get(i);
-			if(smt.getIapProductId().equals(iapProductId)) {
-				return smt;
-			}
-		}
-		return null;
-	}
+
 
 	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
     log.info("Posting to Kabam");
@@ -357,16 +343,16 @@ public class InAppPurchaseController extends EventController {
     return logJson;
   }*/
 
-	private static String sha1(String input) throws NoSuchAlgorithmException {
-		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-		byte[] result = mDigest.digest(input.getBytes());
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < result.length; i++) {
-			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-		}
-
-		return sb.toString();
-	}
+//	private static String sha1(String input) throws NoSuchAlgorithmException {
+//		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+//		byte[] result = mDigest.digest(input.getBytes());
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < result.length; i++) {
+//			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+//		}
+//
+//		return sb.toString();
+//	}
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			InAppPurchaseAction iapa)
