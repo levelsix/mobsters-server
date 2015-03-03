@@ -52,6 +52,7 @@ message StaticDataProto {
 	repeated ClanHouseProto allClanHouses = 32;
 	repeated MoneyTreeProto allMoneyTrees = 38;
 	repeated PvpBoardHouseProto allPvpBoardHouses = 39;
+	repeated ResearchHouseProto allResearchHouses = 41;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -87,5 +88,8 @@ message StaticDataProto {
 	
 	//repeated PvpBoardHouseProto allPvpBoardHouses = 39; defined above
 	repeated PvpBoardObstacleProto pvpBoardObstacleProtos = 40;
+	
+	//repeated ResearchHouseProto allResearchHouses = 41;
+	
 }
 	

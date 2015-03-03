@@ -54,6 +54,7 @@ message StructureInfoProto {
 		CLAN = 11;
 		MONEY_TREE = 12;
 		PVP_BOARD = 13;
+		RESEARCH_HOUSE = 14;
 	}
 }
 
@@ -100,6 +101,14 @@ message MoneyTreeProto {
 	optional int32 daysOfDuration = 4;
 	optional int32 daysForRenewal = 5;
 	optional string iapProductId = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ResearchHouseProto {	
+	optional int32 structId = 1;
+
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -313,5 +322,10 @@ message UserPvpBoardObstacleProto {
 	optional int32 obstacleId = 3;
 	optional int32 posX = 4;
 	optional int32 posY = 5;
+	
+
+
+
+	
 }
 

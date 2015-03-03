@@ -101,6 +101,7 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_LAB_CONFIG = "structure_lab_config";
 	public static final String TABLE_STRUCTURE_MINI_JOB_CONFIG = "structure_mini_job_config";
 	public static final String TABLE_STRUCTURE_PVP_BOARD_CONFIG = "structure_pvp_board_config";
+	public static final String TABLE_STRUCTURE_RESEARCH_HOUSE_CONFIG = "structure_research_house_config";
 	public static final String TABLE_STRUCTURE_RESIDENCE_CONFIG = "structure_residence_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG = "structure_resource_generator_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG = "structure_resource_storage_config";
@@ -1195,9 +1196,10 @@ public class DBConstants {
 	public static final String STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL = "days_for_renewal";
 	public static final String STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID = "iap_product_id";
 	
-
 	public static final String STRUCTURE_PVP_BOARD__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_PVP_BOARD__POWER_LIMIT = "power_limit";
+	
+	public static final String STRUCTURE_RESEARCH_HOUSE__STRUCT_ID = "struct_id";
 	
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";

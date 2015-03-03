@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -1954,5 +1955,8 @@ public class InsertUtils implements InsertUtil{
 			
 			return id;
 		}
+
+
+
 
 }

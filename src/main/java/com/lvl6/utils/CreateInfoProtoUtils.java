@@ -89,6 +89,7 @@ import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructurePvpBoard;
+import com.lvl6.info.StructureResearchHouse;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -204,18 +205,19 @@ import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.PvpBoardHouseProto;
 import com.lvl6.proto.StructureProto.PvpBoardObstacleProto;
+import com.lvl6.proto.StructureProto.ResearchHouseProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
-import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TeamCenterProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
+import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
@@ -3322,6 +3324,18 @@ public class CreateInfoProtoUtils {
 		mtpb.setIapProductId(smt.getIapProductId());
 			
 		return mtpb.build();
+	}
+	
+	public static ResearchHouseProto createResearchHouseProtoFromStructureResearchHouse(Structure s,
+	        StructureInfoProto sip, StructureResearchHouse srh) {
+        if (null == sip) {
+            sip = createStructureInfoProtoFromStructure(s);
+        }
+		
+		ResearchHouseProto.Builder rhpb = ResearchHouseProto.newBuilder();
+
+		rhpb.setStructId(srh.getStructId());
+		return rhpb.build();
 	}
 
 	public static ResourceStorageProto createResourceStorageProto(Structure s,
