@@ -3322,6 +3322,7 @@ public class CreateInfoProtoUtils {
 		mtpb.setDaysForRenewal(smt.getDaysForRenewal());
 		mtpb.setStructInfo(sip);
 		mtpb.setIapProductId(smt.getIapProductId());
+		mtpb.setFakeIAPProductId(smt.getFakeIAPProductId());
 			
 		return mtpb.build();
 	}

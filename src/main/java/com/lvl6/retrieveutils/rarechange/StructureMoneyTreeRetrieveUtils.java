@@ -88,11 +88,13 @@ import com.lvl6.utils.DBConnection;
 	int daysOfDuration = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_OF_DURATION);;
 	int daysForRenewal = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL);;
 	String iapProductId = rs.getString(DBConstants.STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID);;  
-	String entireIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + iapProductId;     
+	String entireIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + iapProductId;  
+	String fakeIAPProductId = rs.getString(DBConstants.STRUCTURE_MONEY_TREE__FAKE_IAP_PRODUCT_ID);;  
+	String entireFakeIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + fakeIAPProductId;
 	
     StructureMoneyTree smt = new StructureMoneyTree(structId,
-    		productionRate, capacity, daysOfDuration, daysForRenewal, entireIAPProductId);
-    
+    		productionRate, capacity, daysOfDuration, daysForRenewal, entireIAPProductId, 
+    		entireFakeIAPProductId);
     
     return smt;
   }

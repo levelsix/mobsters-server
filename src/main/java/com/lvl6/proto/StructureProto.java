@@ -4503,6 +4503,20 @@ public final class StructureProto {
      */
     com.google.protobuf.ByteString
         getIapProductIdBytes();
+
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    boolean hasFakeIAPProductId();
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    java.lang.String getFakeIAPProductId();
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getFakeIAPProductIdBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MoneyTreeProto}
@@ -4593,6 +4607,12 @@ public final class StructureProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               iapProductId_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              fakeIAPProductId_ = bs;
               break;
             }
           }
@@ -4758,6 +4778,48 @@ public final class StructureProto {
       }
     }
 
+    public static final int FAKEIAPPRODUCTID_FIELD_NUMBER = 7;
+    private java.lang.Object fakeIAPProductId_;
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    public boolean hasFakeIAPProductId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    public java.lang.String getFakeIAPProductId() {
+      java.lang.Object ref = fakeIAPProductId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          fakeIAPProductId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string fakeIAPProductId = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFakeIAPProductIdBytes() {
+      java.lang.Object ref = fakeIAPProductId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fakeIAPProductId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       productionRate_ = 0F;
@@ -4765,6 +4827,7 @@ public final class StructureProto {
       daysOfDuration_ = 0;
       daysForRenewal_ = 0;
       iapProductId_ = "";
+      fakeIAPProductId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4796,6 +4859,9 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getIapProductIdBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getFakeIAPProductIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4829,6 +4895,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getIapProductIdBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getFakeIAPProductIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4964,6 +5034,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         iapProductId_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        fakeIAPProductId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -5020,6 +5092,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000020;
         }
         result.iapProductId_ = iapProductId_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.fakeIAPProductId_ = fakeIAPProductId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5054,6 +5130,11 @@ public final class StructureProto {
         if (other.hasIapProductId()) {
           bitField0_ |= 0x00000020;
           iapProductId_ = other.iapProductId_;
+          onChanged();
+        }
+        if (other.hasFakeIAPProductId()) {
+          bitField0_ |= 0x00000040;
+          fakeIAPProductId_ = other.fakeIAPProductId_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -5399,6 +5480,82 @@ public final class StructureProto {
   }
   bitField0_ |= 0x00000020;
         iapProductId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fakeIAPProductId_ = "";
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public boolean hasFakeIAPProductId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public java.lang.String getFakeIAPProductId() {
+        java.lang.Object ref = fakeIAPProductId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            fakeIAPProductId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFakeIAPProductIdBytes() {
+        java.lang.Object ref = fakeIAPProductId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fakeIAPProductId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public Builder setFakeIAPProductId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        fakeIAPProductId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public Builder clearFakeIAPProductId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        fakeIAPProductId_ = getDefaultInstance().getFakeIAPProductId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string fakeIAPProductId = 7;</code>
+       */
+      public Builder setFakeIAPProductIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        fakeIAPProductId_ = value;
         onChanged();
         return this;
       }
@@ -20984,92 +21141,93 @@ public final class StructureProto {
       "orageProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
       "6.proto.StructureInfoProto\0222\n\014resourceTy" +
       "pe\030\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\020" +
-      "\n\010capacity\030\003 \001(\005\"\270\001\n\016MoneyTreeProto\0226\n\ns",
+      "\n\010capacity\030\003 \001(\005\"\322\001\n\016MoneyTreeProto\0226\n\ns",
       "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu" +
       "reInfoProto\022\026\n\016productionRate\030\002 \001(\002\022\020\n\010c" +
       "apacity\030\003 \001(\005\022\026\n\016daysOfDuration\030\004 \001(\005\022\026\n" +
       "\016daysForRenewal\030\005 \001(\005\022\024\n\014iapProductId\030\006 " +
-      "\001(\t\"&\n\022ResearchHouseProto\022\020\n\010structId\030\001 " +
-      "\001(\005\"\232\001\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(" +
-      "\0132\".com.lvl6.proto.StructureInfoProto\022\021\n" +
-      "\tqueueSize\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 \001(" +
-      "\002B\002\030\001\022!\n\031secsToFullyHealMultiplier\030\004 \001(\002" +
-      "\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com.",
-      "lvl6.proto.StructureInfoProto\022\021\n\tqueueSi" +
-      "ze\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020poi" +
-      "ntsMultiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226" +
-      "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
-      "ctureInfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022" +
-      "\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGems" +
-      "Required\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005" +
-      " \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffi" +
-      "x\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030" +
-      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt",
-      "o\022 \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n\026n" +
-      "umResourceOneStorages\030\003 \001(\005\022 \n\030numResour" +
-      "ceTwoGenerators\030\004 \001(\005\022\036\n\026numResourceTwoS" +
-      "torages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rn" +
-      "umResidences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 " +
-      "\001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost" +
-      "\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numE" +
-      "voChambers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\022" +
+      "\001(\t\022\030\n\020fakeIAPProductId\030\007 \001(\t\"&\n\022Researc" +
+      "hHouseProto\022\020\n\010structId\030\001 \001(\005\"\232\001\n\rHospit" +
+      "alProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p" +
+      "roto.StructureInfoProto\022\021\n\tqueueSize\030\002 \001" +
+      "(\005\022\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secsT" +
+      "oFullyHealMultiplier\030\004 \001(\002\"\210\001\n\010LabProto\022",
       "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022\031\n\021generatedJobLimit\030\002 \001",
-      "(\005\022!\n\031hoursBetweenJobGeneration\030\003 \001(\005\"\236\002" +
-      "\n\026FullUserStructureProto\022\026\n\016userStructUu" +
-      "id\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003" +
-      " \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseT" +
-      "ime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordin" +
-      "ates\030\007 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.prot" +
-      "o.StructOrientation\022\031\n\021fbInviteStructLvl" +
-      "\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001" +
-      "y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010struct",
-      "Id\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6." +
-      "proto.CoordinateProto\"\342\002\n\rObstacleProto\022" +
-      "\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017rem" +
-      "ovalCostType\030\003 \001(\0162\034.com.lvl6.proto.Reso" +
-      "urceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemov" +
-      "e\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017" +
-      "\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffse" +
-      "t\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceTo" +
-      "Appear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024s" +
-      "hadowVerticalOffset\030\r \001(\002\022\037\n\027shadowHoriz",
-      "ontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstaclePr" +
-      "oto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 " +
-      "\001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013" +
-      "orientation\030\005 \001(\0162!.com.lvl6.proto.Struc" +
-      "tOrientation\"\333\001\n\021UserObstacleProto\022\030\n\020us" +
-      "erObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022" +
-      "\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\0226\n\013orie" +
-      "ntation\030\005 \001(\0162!.com.lvl6.proto.StructOri" +
-      "entation\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017E",
-      "voChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
-      ".lvl6.proto.StructureInfoProto\0228\n\017qualit" +
-      "yUnlocked\030\002 \001(\0162\027.com.lvl6.proto.Quality" +
-      ":\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017Tea" +
-      "mCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.l" +
-      "vl6.proto.StructureInfoProto\022\025\n\rteamCost" +
-      "Limit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstruct" +
-      "Info\030\001 \001(\0132\".com.lvl6.proto.StructureInf" +
-      "oProto\022!\n\031maxHelpersPerSolicitation\030\002 \001(" +
-      "\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005\"h\n\022Pvp",
-      "BoardHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
-      "m.lvl6.proto.StructureInfoProto\022\032\n\022pvpBo" +
-      "ardPowerLimit\030\002 \001(\005\"\233\001\n\025PvpBoardObstacle" +
-      "Proto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022" +
-      "7\n\014obstacleType\030\003 \001(\0162!.com.lvl6.proto.B" +
-      "oardObstacleType\022\020\n\010powerAmt\030\004 \001(\005\022\025\n\rin" +
-      "itAvailable\030\005 \001(\010\"\177\n\031UserPvpBoardObstacl" +
-      "eProto\022 \n\030userPvpBoardObstacleUuid\030\001 \001(\t" +
-      "\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014" +
-      "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005*I\n\014ResourceTy",
-      "pe\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010" +
-      "\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientati" +
-      "on\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016" +
-      "\n\nPOSITION_2\020\002*\036\n\021BoardObstacleType\022\t\n\005C" +
-      "LOUD\020\001B\020B\016StructureProto"
+      "uctureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017po" +
+      "intsPerSecond\030\003 \001(\002\022\030\n\020pointsMultiplier\030" +
+      "\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstructInfo\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMon" +
+      "sterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005" +
+      "\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupa" +
+      "tionName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTo" +
+      "wnHallProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lv",
+      "l6.proto.StructureInfoProto\022 \n\030numResour" +
+      "ceOneGenerators\030\002 \001(\005\022\036\n\026numResourceOneS" +
+      "torages\030\003 \001(\005\022 \n\030numResourceTwoGenerator" +
+      "s\030\004 \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(\005\022" +
+      "\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResidences\030\007" +
+      " \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n\007numLabs" +
+      "\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005\022\030\n\020reso" +
+      "urceCapacity\030\013 \001(\005\022\026\n\016numEvoChambers\030\014 \001" +
+      "(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nstructInfo\030" +
+      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt",
+      "o\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n\031hoursBet" +
+      "weenJobGeneration\030\003 \001(\005\"\236\002\n\026FullUserStru" +
+      "ctureProto\022\026\n\016userStructUuid\030\001 \001(\t\022\020\n\010us" +
+      "erUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRe" +
+      "trieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\ni" +
+      "sComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.c" +
+      "om.lvl6.proto.CoordinateProto\0226\n\013orienta" +
+      "tion\030\010 \001(\0162!.com.lvl6.proto.StructOrient" +
+      "ation\022\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017Coor" +
+      "dinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023Tut",
+      "orialStructProto\022\020\n\010structId\030\001 \001(\005\0223\n\nco" +
+      "ordinate\030\002 \001(\0132\037.com.lvl6.proto.Coordina" +
+      "teProto\"\342\002\n\rObstacleProto\022\022\n\nobstacleId\030" +
+      "\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCostType\030\003" +
+      " \001(\0162\034.com.lvl6.proto.ResourceType\022\014\n\004co" +
+      "st\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r\n\005wid" +
+      "th\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(" +
+      "\t\022\036\n\026imgVerticalPixelOffset\030\t \001(\002\022\023\n\013des" +
+      "cription\030\n \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025" +
+      "\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowVerticalO",
+      "ffset\030\r \001(\002\022\037\n\027shadowHorizontalOfffset\030\016" +
+      " \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n\nobstacl" +
+      "eId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6" +
+      ".proto.CoordinateProto\0226\n\013orientation\030\005 " +
+      "\001(\0162!.com.lvl6.proto.StructOrientation\"\333" +
+      "\001\n\021UserObstacleProto\022\030\n\020userObstacleUuid" +
+      "\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003" +
+      " \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl6.pro" +
+      "to.CoordinateProto\0226\n\013orientation\030\005 \001(\0162" +
+      "!.com.lvl6.proto.StructOrientation\022\030\n\020re",
+      "movalStartTime\030\006 \001(\003\"\234\001\n\017EvoChamberProto" +
+      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
+      "ructureInfoProto\0228\n\017qualityUnlocked\030\002 \001(" +
+      "\0162\027.com.lvl6.proto.Quality:\006COMMON\022\027\n\017ev" +
+      "oTierUnlocked\030\003 \001(\005\"`\n\017TeamCenterProto\0226" +
+      "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
+      "ctureInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"\213\001" +
+      "\n\016ClanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
+      "om.lvl6.proto.StructureInfoProto\022!\n\031maxH" +
+      "elpersPerSolicitation\030\002 \001(\005\022\036\n\026teamDonat",
+      "ionPowerLimit\030\003 \001(\005\"h\n\022PvpBoardHouseProt" +
+      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
+      "tructureInfoProto\022\032\n\022pvpBoardPowerLimit\030" +
+      "\002 \001(\005\"\233\001\n\025PvpBoardObstacleProto\022\022\n\npvpBo" +
+      "ardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014obstacleTyp" +
+      "e\030\003 \001(\0162!.com.lvl6.proto.BoardObstacleTy" +
+      "pe\022\020\n\010powerAmt\030\004 \001(\005\022\025\n\rinitAvailable\030\005 " +
+      "\001(\010\"\177\n\031UserPvpBoardObstacleProto\022 \n\030user" +
+      "PvpBoardObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
+      " \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014",
+      "\n\004posY\030\005 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOU" +
+      "RCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MO" +
+      "NSTER\020\024*G\n\021StructOrientation\022\022\n\016NO_ORIEN" +
+      "TATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002" +
+      "*\036\n\021BoardObstacleType\022\t\n\005CLOUD\020\001B\020B\016Stru" +
+      "ctureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21107,7 +21265,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_MoneyTreeProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MoneyTreeProto_descriptor,
-        new java.lang.String[] { "StructInfo", "ProductionRate", "Capacity", "DaysOfDuration", "DaysForRenewal", "IapProductId", });
+        new java.lang.String[] { "StructInfo", "ProductionRate", "Capacity", "DaysOfDuration", "DaysForRenewal", "IapProductId", "FakeIAPProductId", });
     internal_static_com_lvl6_proto_ResearchHouseProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_ResearchHouseProto_fieldAccessorTable = new
