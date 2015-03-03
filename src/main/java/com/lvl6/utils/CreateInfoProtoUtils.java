@@ -993,7 +993,7 @@ public class CreateInfoProtoUtils {
 		BattleItemQueueForUserProto.Builder biqfupb = BattleItemQueueForUserProto.newBuilder();
 		biqfupb.setUserUuid(biqfu.getUserId());
 		biqfupb.setBattleItemId(biqfu.getBattleItemId());
-		biqfupb.setQueueTime(biqfu.getQueuedTime().getTime());
+		biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
 		biqfupb.setPriority(biqfu.getPriority());
 		
 		return biqfupb.build();

@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +17,15 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.response.CreateBattleItemResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.StructureRetrieval;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
+import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
+import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
@@ -58,53 +59,57 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT;
+		return EventProtocolRequest.C_CREATE_BATTLE_ITEM_EVENT;
 	}
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		CreateBattleItemRequestProto reqProto = ((CreateBattleItemRequestEvent)event).getCreateBattleItemRequestProto();
+		CreateBattleItemRequestProto reqProto = ((CreateBattleItemRequestEvent)event)
+				.getCreateBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
 		//get stuff client sent
-		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
-		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
+		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
-		Timestamp curTime = new Timestamp((new Date()).getTime());
-		int maxCash = senderResourcesProto.getMaxCash();
-		int maxOil = senderResourcesProto.getMaxOil();
+		//the new items added to queue, updated refers to those finished as well as 
+		//priorities changing, deleted refers to those removed from queue and completed
+		List<BattleItemQueueForUserProto> deletedBattleItemQueueList = reqProto.getUmhDeleteList();
+		List<BattleItemQueueForUserProto> removedBattleItemQueueList = reqProto.getUmhRemovedList();
+		List<BattleItemQueueForUserProto> updatedBattleItemQueueList = reqProto.getUmhUpdateList();
+		List<BattleItemQueueForUserProto> newBattleItemQueueList = reqProto.getUmhNewList();
 
-//		Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
-//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
-		//create map from ids to times and check for duplicates
-//		getIdsAndTimes(structRetrievals, duplicates,
-//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
-
-//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
-
-		List<String> duplicates = new ArrayList<String>();
-		Map<String, StructureRetrieval> userStructIdsToStructRetrievals =
-				getStructureRetrievalMap(structRetrievals, duplicates);
+		List<BattleItemQueueForUser> deletedMap = 
+				getIdsToBattleItemQueueForUserFromProto(deletedBattleItemQueueList, userId);
+		List<BattleItemQueueForUser> removedMap = 
+				getIdsToBattleItemQueueForUserFromProto(removedBattleItemQueueList, userId);
+		List<BattleItemQueueForUser> updatedMap = 
+				getIdsToBattleItemQueueForUserFromProto(updatedBattleItemQueueList, userId);
+		List<BattleItemQueueForUser> newMap = 
+				getIdsToBattleItemQueueForUserFromProto(newBattleItemQueueList, userId);
+		
+		int cashChange = reqProto.getCashChange();
+		int oilChange = reqProto.getOilChange();
+		int gemCostForCreating = reqProto.getGemCostForCreating();
+		boolean isSpeedup = reqProto.getIsSpeedup();
+		int gemsForSpeedUp = 0;
+		if(isSpeedup) {
+			gemsForSpeedUp = reqProto.getGemsForSpeedup();
+		}
 
 		CreateBattleItemResponseProto.Builder resBuilder =
 				CreateBattleItemResponseProto.newBuilder();
 		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
-		resBuilder.setSender(senderResourcesProto);
+		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
 
-			for (String userStructId : userStructIdsToStructRetrievals.keySet()) {
-				UUID.fromString(userStructId);
-			}
-
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-					"UUID error. incorrect userId=%s, userStructIds=%s",
-					userId, structRetrievals), e);
+					"UUID error. incorrect userId=%s, ",
+					userId));
 			invalidUuids = true;
 		}
 
@@ -117,19 +122,20 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			server.writeEvent(resEvent);
 			return;
 		}
-
+		
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-					
-			CreateBattleItemAction rcfnsa =
+			
+			CreateBattleItemAction cbia =
 					new CreateBattleItemAction(
 							userId, maxCash, maxOil, duplicates,
 							userStructIdsToStructRetrievals,
 							userRetrieveUtil, userStructRetrieveUtil, updateUtil);
 			
-			rcfnsa.execute(resBuilder);
+			cbia.execute(resBuilder);
 
-			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(senderProto.getUserUuid());
+			CreateBattleItemResponseEvent resEvent = new 
+					CreateBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateBattleItemResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -161,41 +167,39 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 	}
 
-	private Map<String, StructureRetrieval> getStructureRetrievalMap(
-			List<StructRetrieval> structRetrievalProtos, List<String> duplicates)
-	{
-		Map<String, StructureRetrieval> userStructIdToStructureRetrieval =
-				new HashMap<String, StructureRetrieval>();
-		if (null == structRetrievalProtos || structRetrievalProtos.isEmpty())
-		{
-			log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
-			return userStructIdToStructureRetrieval;
+	private List<BattleItemQueueForUser> getIdsToBattleItemQueueForUserFromProto
+	(List<BattleItemQueueForUserProto> protosList, String userId) {
+		List<BattleItemQueueForUser> idsToBattleItemQueueForUser = null;
+		if(protosList == null || protosList.isEmpty()) {
+			log.error("CreateBattleItem request did not send any battle item queue for user ids");
+			return idsToBattleItemQueueForUser;
 		}
-
-		for (StructRetrieval srProto : structRetrievalProtos) {
-			StructureRetrieval sr = new StructureRetrieval();
-			String userStructId = srProto.getUserStructUuid();
+		
+		idsToBattleItemQueueForUser = new ArrayList<BattleItemQueueForUser>();
+		
+		for(BattleItemQueueForUserProto biqfuProto : protosList) {
+			BattleItemQueueForUser biqfu = new BattleItemQueueForUser();
+			biqfu.setPriority(biqfuProto.getPriority());
 			
-			if(userStructIdToStructureRetrieval.containsKey(userStructId)) {
-				duplicates.add(userStructId);
-				continue;
+			String protoUserId = biqfuProto.getUserUuid();
+			if(protoUserId.equals(userId)) {
+				biqfu.setUserId(protoUserId);
 			}
-
-			sr.setUserStructId(userStructId);
-			Date timeOfRetrieval = null;
-			long retrievalTime = srProto.getTimeOfRetrieval();
-			if (retrievalTime > 0) {
-				timeOfRetrieval = new Date(retrievalTime);
+			else {
+				log.error("CreateBattleItem request sends conflicting battle item queue "
+						+ "for user's user id with user id sent");
+				return new ArrayList<BattleItemQueueForUser>();
 			}
-
-			sr.setTimeOfRetrieval(timeOfRetrieval);
-			sr.setAmountCollected(srProto.getAmountCollected());
-
-			userStructIdToStructureRetrieval.put(userStructId, sr);
+			biqfu.setBattleItemId(biqfuProto.getBattleItemId());
+			biqfu.setExpectedStartTime(biqfu.getExpectedStartTime());
+			biqfu.setPriority(biqfuProto.getPriority());
+			idsToBattleItemQueueForUser.add(biqfu);
 		}
-
-		return userStructIdToStructureRetrieval;
+		
+		return idsToBattleItemQueueForUser;
+		
 	}
+	
 	
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			CreateBattleItemAction rcfnsa)

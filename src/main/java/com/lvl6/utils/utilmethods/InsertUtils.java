@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -1954,5 +1956,57 @@ public class InsertUtils implements InsertUtil{
 			
 			return id;
 		}
+
+
+		@Override
+		public int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
+			String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+			for(BattleItemQueueForUser biqfu : biqfuList) {
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, biqfu.getBattleItemId());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME, biqfu.getExpectedStartTime());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
+
+				newRows.add(newRow);
+			}
+			
+			int numUpdated = DBConnection.get()
+					.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+
+			return numUpdated;
+		}
+
+		@Override
+		public int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList,
+				Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser) {
+			String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+			for(BattleItemQueueForUser biqfu : biqfuList) {
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, biqfu.getBattleItemId());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME, biqfu.getExpectedStartTime());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
+
+				newRows.add(newRow);
+			}
+			
+			int numUpdated = DBConnection.get()
+					.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+
+			return numUpdated;
+		}
+
+		
+		
+		
+		
+		
 
 }

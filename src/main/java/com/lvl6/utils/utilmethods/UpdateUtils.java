@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 
 import com.lvl6.info.AchievementForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
@@ -1698,4 +1699,27 @@ public class UpdateUtils implements UpdateUtil {
 			}
 			return false;
 		}
+		
+		@Override
+		public int updateBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
+			int totalUpdated = 0;
+			for(BattleItemQueueForUser biqfu : biqfuList) {
+				Map <String, Object> absoluteParams = new HashMap<String, Object>();
+				absoluteParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME, biqfu.getExpectedStartTime());
+				
+				Map <String, Object> conditionParams = new HashMap<String, Object>();
+				conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
+				conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
+
+				int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
+						conditionParams, "and");
+				totalUpdated += numUpdated;
+			}
+			return totalUpdated;
+		}
+		
+		
+		
+		
+		
 }

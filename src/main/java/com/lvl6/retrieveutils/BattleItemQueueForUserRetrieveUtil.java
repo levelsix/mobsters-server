@@ -69,7 +69,7 @@ import com.lvl6.properties.DBConstants;
 			biqfu.setPriority(rs.getInt(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY));
 			biqfu.setUserId(rs.getString(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID));
 			biqfu.setBattleItemId(rs.getInt(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID));
-			biqfu.setQueuedTime(rs.getTimestamp(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__QUEUED_TIME));
+			biqfu.setExpectedStartTime(rs.getTimestamp(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME));
 			
 			return biqfu;
 		}        
@@ -77,10 +77,10 @@ import com.lvl6.properties.DBConstants;
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__ID);
-				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID);
-				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID);
-				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY);
+				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY);
+				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID);
+				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
 			}
 			return columnsSelected;
 		}

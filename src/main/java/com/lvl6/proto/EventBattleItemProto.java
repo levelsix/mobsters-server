@@ -70,7 +70,31 @@ public final class EventBattleItemProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> 
+        getUmhRemovedList();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getUmhRemoved(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    int getUmhRemovedCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
+        getUmhRemovedOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getUmhRemovedOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -80,7 +104,7 @@ public final class EventBattleItemProto {
     java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> 
         getUmhUpdateList();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -89,7 +113,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getUmhUpdate(int index);
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -98,7 +122,7 @@ public final class EventBattleItemProto {
      */
     int getUmhUpdateCount();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -108,7 +132,7 @@ public final class EventBattleItemProto {
     java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
         getUmhUpdateOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -119,7 +143,7 @@ public final class EventBattleItemProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -128,7 +152,7 @@ public final class EventBattleItemProto {
     java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> 
         getUmhNewList();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -136,7 +160,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getUmhNew(int index);
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -144,7 +168,7 @@ public final class EventBattleItemProto {
      */
     int getUmhNewCount();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -153,7 +177,7 @@ public final class EventBattleItemProto {
     java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
         getUmhNewOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -163,7 +187,7 @@ public final class EventBattleItemProto {
         int index);
 
     /**
-     * <code>optional sint32 cashChange = 5;</code>
+     * <code>optional sint32 cashChange = 6;</code>
      *
      * <pre>
      *take away all cash/silver then take away gems
@@ -174,7 +198,7 @@ public final class EventBattleItemProto {
      */
     boolean hasCashChange();
     /**
-     * <code>optional sint32 cashChange = 5;</code>
+     * <code>optional sint32 cashChange = 6;</code>
      *
      * <pre>
      *take away all cash/silver then take away gems
@@ -186,16 +210,16 @@ public final class EventBattleItemProto {
     int getCashChange();
 
     /**
-     * <code>optional sint32 oilChange = 6;</code>
+     * <code>optional sint32 oilChange = 7;</code>
      */
     boolean hasOilChange();
     /**
-     * <code>optional sint32 oilChange = 6;</code>
+     * <code>optional sint32 oilChange = 7;</code>
      */
     int getOilChange();
 
     /**
-     * <code>optional int32 gemCostForCreating = 7;</code>
+     * <code>optional int32 gemCostForCreating = 8;</code>
      *
      * <pre>
      *positive amount if charging user, negative if refunding user
@@ -203,7 +227,7 @@ public final class EventBattleItemProto {
      */
     boolean hasGemCostForCreating();
     /**
-     * <code>optional int32 gemCostForCreating = 7;</code>
+     * <code>optional int32 gemCostForCreating = 8;</code>
      *
      * <pre>
      *positive amount if charging user, negative if refunding user
@@ -212,16 +236,16 @@ public final class EventBattleItemProto {
     int getGemCostForCreating();
 
     /**
-     * <code>optional bool isSpeedup = 8;</code>
+     * <code>optional bool isSpeedup = 9;</code>
      */
     boolean hasIsSpeedup();
     /**
-     * <code>optional bool isSpeedup = 8;</code>
+     * <code>optional bool isSpeedup = 9;</code>
      */
     boolean getIsSpeedup();
 
     /**
-     * <code>optional int32 gemsForSpeedup = 9;</code>
+     * <code>optional int32 gemsForSpeedup = 10;</code>
      *
      * <pre>
      *pos amount if charging user
@@ -229,7 +253,7 @@ public final class EventBattleItemProto {
      */
     boolean hasGemsForSpeedup();
     /**
-     * <code>optional int32 gemsForSpeedup = 9;</code>
+     * <code>optional int32 gemsForSpeedup = 10;</code>
      *
      * <pre>
      *pos amount if charging user
@@ -312,41 +336,49 @@ public final class EventBattleItemProto {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                umhUpdate_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>();
+                umhRemoved_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              umhUpdate_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.PARSER, extensionRegistry));
+              umhRemoved_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.PARSER, extensionRegistry));
               break;
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                umhNew_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>();
+                umhUpdate_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>();
                 mutable_bitField0_ |= 0x00000008;
+              }
+              umhUpdate_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                umhNew_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>();
+                mutable_bitField0_ |= 0x00000010;
               }
               umhNew_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.PARSER, extensionRegistry));
               break;
             }
-            case 40: {
+            case 48: {
               bitField0_ |= 0x00000002;
               cashChange_ = input.readSInt32();
               break;
             }
-            case 48: {
+            case 56: {
               bitField0_ |= 0x00000004;
               oilChange_ = input.readSInt32();
               break;
             }
-            case 56: {
+            case 64: {
               bitField0_ |= 0x00000008;
               gemCostForCreating_ = input.readInt32();
               break;
             }
-            case 64: {
+            case 72: {
               bitField0_ |= 0x00000010;
               isSpeedup_ = input.readBool();
               break;
             }
-            case 72: {
+            case 80: {
               bitField0_ |= 0x00000020;
               gemsForSpeedup_ = input.readInt32();
               break;
@@ -363,9 +395,12 @@ public final class EventBattleItemProto {
           umhDelete_ = java.util.Collections.unmodifiableList(umhDelete_);
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          umhUpdate_ = java.util.Collections.unmodifiableList(umhUpdate_);
+          umhRemoved_ = java.util.Collections.unmodifiableList(umhRemoved_);
         }
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          umhUpdate_ = java.util.Collections.unmodifiableList(umhUpdate_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           umhNew_ = java.util.Collections.unmodifiableList(umhNew_);
         }
         this.unknownFields = unknownFields.build();
@@ -476,10 +511,45 @@ public final class EventBattleItemProto {
       return umhDelete_.get(index);
     }
 
-    public static final int UMHUPDATE_FIELD_NUMBER = 3;
+    public static final int UMHREMOVED_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhRemoved_;
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> getUmhRemovedList() {
+      return umhRemoved_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
+        getUmhRemovedOrBuilderList() {
+      return umhRemoved_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    public int getUmhRemovedCount() {
+      return umhRemoved_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getUmhRemoved(int index) {
+      return umhRemoved_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+     */
+    public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getUmhRemovedOrBuilder(
+        int index) {
+      return umhRemoved_.get(index);
+    }
+
+    public static final int UMHUPDATE_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhUpdate_;
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -490,7 +560,7 @@ public final class EventBattleItemProto {
       return umhUpdate_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -502,7 +572,7 @@ public final class EventBattleItemProto {
       return umhUpdate_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -513,7 +583,7 @@ public final class EventBattleItemProto {
       return umhUpdate_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -524,7 +594,7 @@ public final class EventBattleItemProto {
       return umhUpdate_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
      *
      * <pre>
      *the ones the server already knows about
@@ -536,10 +606,10 @@ public final class EventBattleItemProto {
       return umhUpdate_.get(index);
     }
 
-    public static final int UMHNEW_FIELD_NUMBER = 4;
+    public static final int UMHNEW_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhNew_;
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -549,7 +619,7 @@ public final class EventBattleItemProto {
       return umhNew_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -560,7 +630,7 @@ public final class EventBattleItemProto {
       return umhNew_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -570,7 +640,7 @@ public final class EventBattleItemProto {
       return umhNew_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -580,7 +650,7 @@ public final class EventBattleItemProto {
       return umhNew_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+     * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
      *
      * <pre>
      *the ones the server doesn't know about
@@ -591,10 +661,10 @@ public final class EventBattleItemProto {
       return umhNew_.get(index);
     }
 
-    public static final int CASHCHANGE_FIELD_NUMBER = 5;
+    public static final int CASHCHANGE_FIELD_NUMBER = 6;
     private int cashChange_;
     /**
-     * <code>optional sint32 cashChange = 5;</code>
+     * <code>optional sint32 cashChange = 6;</code>
      *
      * <pre>
      *take away all cash/silver then take away gems
@@ -607,7 +677,7 @@ public final class EventBattleItemProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional sint32 cashChange = 5;</code>
+     * <code>optional sint32 cashChange = 6;</code>
      *
      * <pre>
      *take away all cash/silver then take away gems
@@ -620,25 +690,25 @@ public final class EventBattleItemProto {
       return cashChange_;
     }
 
-    public static final int OILCHANGE_FIELD_NUMBER = 6;
+    public static final int OILCHANGE_FIELD_NUMBER = 7;
     private int oilChange_;
     /**
-     * <code>optional sint32 oilChange = 6;</code>
+     * <code>optional sint32 oilChange = 7;</code>
      */
     public boolean hasOilChange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional sint32 oilChange = 6;</code>
+     * <code>optional sint32 oilChange = 7;</code>
      */
     public int getOilChange() {
       return oilChange_;
     }
 
-    public static final int GEMCOSTFORCREATING_FIELD_NUMBER = 7;
+    public static final int GEMCOSTFORCREATING_FIELD_NUMBER = 8;
     private int gemCostForCreating_;
     /**
-     * <code>optional int32 gemCostForCreating = 7;</code>
+     * <code>optional int32 gemCostForCreating = 8;</code>
      *
      * <pre>
      *positive amount if charging user, negative if refunding user
@@ -648,7 +718,7 @@ public final class EventBattleItemProto {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 gemCostForCreating = 7;</code>
+     * <code>optional int32 gemCostForCreating = 8;</code>
      *
      * <pre>
      *positive amount if charging user, negative if refunding user
@@ -658,25 +728,25 @@ public final class EventBattleItemProto {
       return gemCostForCreating_;
     }
 
-    public static final int ISSPEEDUP_FIELD_NUMBER = 8;
+    public static final int ISSPEEDUP_FIELD_NUMBER = 9;
     private boolean isSpeedup_;
     /**
-     * <code>optional bool isSpeedup = 8;</code>
+     * <code>optional bool isSpeedup = 9;</code>
      */
     public boolean hasIsSpeedup() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional bool isSpeedup = 8;</code>
+     * <code>optional bool isSpeedup = 9;</code>
      */
     public boolean getIsSpeedup() {
       return isSpeedup_;
     }
 
-    public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 9;
+    public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 10;
     private int gemsForSpeedup_;
     /**
-     * <code>optional int32 gemsForSpeedup = 9;</code>
+     * <code>optional int32 gemsForSpeedup = 10;</code>
      *
      * <pre>
      *pos amount if charging user
@@ -686,7 +756,7 @@ public final class EventBattleItemProto {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional int32 gemsForSpeedup = 9;</code>
+     * <code>optional int32 gemsForSpeedup = 10;</code>
      *
      * <pre>
      *pos amount if charging user
@@ -699,6 +769,7 @@ public final class EventBattleItemProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       umhDelete_ = java.util.Collections.emptyList();
+      umhRemoved_ = java.util.Collections.emptyList();
       umhUpdate_ = java.util.Collections.emptyList();
       umhNew_ = java.util.Collections.emptyList();
       cashChange_ = 0;
@@ -726,26 +797,29 @@ public final class EventBattleItemProto {
       for (int i = 0; i < umhDelete_.size(); i++) {
         output.writeMessage(2, umhDelete_.get(i));
       }
+      for (int i = 0; i < umhRemoved_.size(); i++) {
+        output.writeMessage(3, umhRemoved_.get(i));
+      }
       for (int i = 0; i < umhUpdate_.size(); i++) {
-        output.writeMessage(3, umhUpdate_.get(i));
+        output.writeMessage(4, umhUpdate_.get(i));
       }
       for (int i = 0; i < umhNew_.size(); i++) {
-        output.writeMessage(4, umhNew_.get(i));
+        output.writeMessage(5, umhNew_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeSInt32(5, cashChange_);
+        output.writeSInt32(6, cashChange_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeSInt32(6, oilChange_);
+        output.writeSInt32(7, oilChange_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(7, gemCostForCreating_);
+        output.writeInt32(8, gemCostForCreating_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(8, isSpeedup_);
+        output.writeBool(9, isSpeedup_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(9, gemsForSpeedup_);
+        output.writeInt32(10, gemsForSpeedup_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -764,33 +838,37 @@ public final class EventBattleItemProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, umhDelete_.get(i));
       }
+      for (int i = 0; i < umhRemoved_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, umhRemoved_.get(i));
+      }
       for (int i = 0; i < umhUpdate_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, umhUpdate_.get(i));
+          .computeMessageSize(4, umhUpdate_.get(i));
       }
       for (int i = 0; i < umhNew_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, umhNew_.get(i));
+          .computeMessageSize(5, umhNew_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(5, cashChange_);
+          .computeSInt32Size(6, cashChange_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(6, oilChange_);
+          .computeSInt32Size(7, oilChange_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, gemCostForCreating_);
+          .computeInt32Size(8, gemCostForCreating_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, isSpeedup_);
+          .computeBoolSize(9, isSpeedup_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, gemsForSpeedup_);
+          .computeInt32Size(10, gemsForSpeedup_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -903,6 +981,7 @@ public final class EventBattleItemProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getUmhDeleteFieldBuilder();
+          getUmhRemovedFieldBuilder();
           getUmhUpdateFieldBuilder();
           getUmhNewFieldBuilder();
         }
@@ -925,28 +1004,34 @@ public final class EventBattleItemProto {
         } else {
           umhDeleteBuilder_.clear();
         }
+        if (umhRemovedBuilder_ == null) {
+          umhRemoved_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          umhRemovedBuilder_.clear();
+        }
         if (umhUpdateBuilder_ == null) {
           umhUpdate_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           umhUpdateBuilder_.clear();
         }
         if (umhNewBuilder_ == null) {
           umhNew_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           umhNewBuilder_.clear();
         }
         cashChange_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        gemCostForCreating_ = 0;
+        oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        isSpeedup_ = false;
+        gemCostForCreating_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        gemsForSpeedup_ = 0;
+        isSpeedup_ = false;
         bitField0_ = (bitField0_ & ~0x00000100);
+        gemsForSpeedup_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -992,41 +1077,50 @@ public final class EventBattleItemProto {
         } else {
           result.umhDelete_ = umhDeleteBuilder_.build();
         }
-        if (umhUpdateBuilder_ == null) {
+        if (umhRemovedBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            umhUpdate_ = java.util.Collections.unmodifiableList(umhUpdate_);
+            umhRemoved_ = java.util.Collections.unmodifiableList(umhRemoved_);
             bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.umhRemoved_ = umhRemoved_;
+        } else {
+          result.umhRemoved_ = umhRemovedBuilder_.build();
+        }
+        if (umhUpdateBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            umhUpdate_ = java.util.Collections.unmodifiableList(umhUpdate_);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.umhUpdate_ = umhUpdate_;
         } else {
           result.umhUpdate_ = umhUpdateBuilder_.build();
         }
         if (umhNewBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             umhNew_ = java.util.Collections.unmodifiableList(umhNew_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.umhNew_ = umhNew_;
         } else {
           result.umhNew_ = umhNewBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000002;
         }
         result.cashChange_ = cashChange_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000004;
         }
         result.oilChange_ = oilChange_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000008;
         }
         result.gemCostForCreating_ = gemCostForCreating_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000010;
         }
         result.isSpeedup_ = isSpeedup_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000020;
         }
         result.gemsForSpeedup_ = gemsForSpeedup_;
@@ -1075,11 +1169,37 @@ public final class EventBattleItemProto {
             }
           }
         }
+        if (umhRemovedBuilder_ == null) {
+          if (!other.umhRemoved_.isEmpty()) {
+            if (umhRemoved_.isEmpty()) {
+              umhRemoved_ = other.umhRemoved_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureUmhRemovedIsMutable();
+              umhRemoved_.addAll(other.umhRemoved_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.umhRemoved_.isEmpty()) {
+            if (umhRemovedBuilder_.isEmpty()) {
+              umhRemovedBuilder_.dispose();
+              umhRemovedBuilder_ = null;
+              umhRemoved_ = other.umhRemoved_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              umhRemovedBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUmhRemovedFieldBuilder() : null;
+            } else {
+              umhRemovedBuilder_.addAllMessages(other.umhRemoved_);
+            }
+          }
+        }
         if (umhUpdateBuilder_ == null) {
           if (!other.umhUpdate_.isEmpty()) {
             if (umhUpdate_.isEmpty()) {
               umhUpdate_ = other.umhUpdate_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureUmhUpdateIsMutable();
               umhUpdate_.addAll(other.umhUpdate_);
@@ -1092,7 +1212,7 @@ public final class EventBattleItemProto {
               umhUpdateBuilder_.dispose();
               umhUpdateBuilder_ = null;
               umhUpdate_ = other.umhUpdate_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
               umhUpdateBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUmhUpdateFieldBuilder() : null;
@@ -1105,7 +1225,7 @@ public final class EventBattleItemProto {
           if (!other.umhNew_.isEmpty()) {
             if (umhNew_.isEmpty()) {
               umhNew_ = other.umhNew_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureUmhNewIsMutable();
               umhNew_.addAll(other.umhNew_);
@@ -1118,7 +1238,7 @@ public final class EventBattleItemProto {
               umhNewBuilder_.dispose();
               umhNewBuilder_ = null;
               umhNew_ = other.umhNew_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               umhNewBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUmhNewFieldBuilder() : null;
@@ -1597,12 +1717,252 @@ public final class EventBattleItemProto {
         return umhDeleteBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhRemoved_ =
+        java.util.Collections.emptyList();
+      private void ensureUmhRemovedIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          umhRemoved_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>(umhRemoved_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> umhRemovedBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> getUmhRemovedList() {
+        if (umhRemovedBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(umhRemoved_);
+        } else {
+          return umhRemovedBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public int getUmhRemovedCount() {
+        if (umhRemovedBuilder_ == null) {
+          return umhRemoved_.size();
+        } else {
+          return umhRemovedBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getUmhRemoved(int index) {
+        if (umhRemovedBuilder_ == null) {
+          return umhRemoved_.get(index);
+        } else {
+          return umhRemovedBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder setUmhRemoved(
+          int index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto value) {
+        if (umhRemovedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.set(index, value);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder setUmhRemoved(
+          int index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder builderForValue) {
+        if (umhRemovedBuilder_ == null) {
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          umhRemovedBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder addUmhRemoved(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto value) {
+        if (umhRemovedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.add(value);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder addUmhRemoved(
+          int index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto value) {
+        if (umhRemovedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.add(index, value);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder addUmhRemoved(
+          com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder builderForValue) {
+        if (umhRemovedBuilder_ == null) {
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.add(builderForValue.build());
+          onChanged();
+        } else {
+          umhRemovedBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder addUmhRemoved(
+          int index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder builderForValue) {
+        if (umhRemovedBuilder_ == null) {
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          umhRemovedBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder addAllUmhRemoved(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
+        if (umhRemovedBuilder_ == null) {
+          ensureUmhRemovedIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, umhRemoved_);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder clearUmhRemoved() {
+        if (umhRemovedBuilder_ == null) {
+          umhRemoved_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public Builder removeUmhRemoved(int index) {
+        if (umhRemovedBuilder_ == null) {
+          ensureUmhRemovedIsMutable();
+          umhRemoved_.remove(index);
+          onChanged();
+        } else {
+          umhRemovedBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder getUmhRemovedBuilder(
+          int index) {
+        return getUmhRemovedFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getUmhRemovedOrBuilder(
+          int index) {
+        if (umhRemovedBuilder_ == null) {
+          return umhRemoved_.get(index);  } else {
+          return umhRemovedBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
+           getUmhRemovedOrBuilderList() {
+        if (umhRemovedBuilder_ != null) {
+          return umhRemovedBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(umhRemoved_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder addUmhRemovedBuilder() {
+        return getUmhRemovedFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder addUmhRemovedBuilder(
+          int index) {
+        return getUmhRemovedFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhRemoved = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder> 
+           getUmhRemovedBuilderList() {
+        return getUmhRemovedFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> 
+          getUmhRemovedFieldBuilder() {
+        if (umhRemovedBuilder_ == null) {
+          umhRemovedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder>(
+                  umhRemoved_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          umhRemoved_ = null;
+        }
+        return umhRemovedBuilder_;
+      }
+
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhUpdate_ =
         java.util.Collections.emptyList();
       private void ensureUmhUpdateIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           umhUpdate_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>(umhUpdate_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -1610,7 +1970,7 @@ public final class EventBattleItemProto {
           com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> umhUpdateBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1625,7 +1985,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1640,7 +2000,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1655,7 +2015,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1677,7 +2037,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1696,7 +2056,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1717,7 +2077,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1739,7 +2099,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1758,7 +2118,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1777,7 +2137,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1797,7 +2157,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1807,7 +2167,7 @@ public final class EventBattleItemProto {
       public Builder clearUmhUpdate() {
         if (umhUpdateBuilder_ == null) {
           umhUpdate_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           umhUpdateBuilder_.clear();
@@ -1815,7 +2175,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1833,7 +2193,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1845,7 +2205,7 @@ public final class EventBattleItemProto {
         return getUmhUpdateFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1860,7 +2220,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1876,7 +2236,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1888,7 +2248,7 @@ public final class EventBattleItemProto {
             com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1901,7 +2261,7 @@ public final class EventBattleItemProto {
             index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhUpdate = 4;</code>
        *
        * <pre>
        *the ones the server already knows about
@@ -1919,7 +2279,7 @@ public final class EventBattleItemProto {
           umhUpdateBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder>(
                   umhUpdate_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           umhUpdate_ = null;
@@ -1930,9 +2290,9 @@ public final class EventBattleItemProto {
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> umhNew_ =
         java.util.Collections.emptyList();
       private void ensureUmhNewIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           umhNew_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto>(umhNew_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -1940,7 +2300,7 @@ public final class EventBattleItemProto {
           com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder> umhNewBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -1954,7 +2314,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -1968,7 +2328,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -1982,7 +2342,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2003,7 +2363,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2021,7 +2381,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2041,7 +2401,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2062,7 +2422,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2080,7 +2440,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2098,7 +2458,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2117,7 +2477,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2126,7 +2486,7 @@ public final class EventBattleItemProto {
       public Builder clearUmhNew() {
         if (umhNewBuilder_ == null) {
           umhNew_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           umhNewBuilder_.clear();
@@ -2134,7 +2494,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2151,7 +2511,7 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2162,7 +2522,7 @@ public final class EventBattleItemProto {
         return getUmhNewFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2176,7 +2536,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2191,7 +2551,7 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2202,7 +2562,7 @@ public final class EventBattleItemProto {
             com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2214,7 +2574,7 @@ public final class EventBattleItemProto {
             index, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 4;</code>
+       * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto umhNew = 5;</code>
        *
        * <pre>
        *the ones the server doesn't know about
@@ -2231,7 +2591,7 @@ public final class EventBattleItemProto {
           umhNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder>(
                   umhNew_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           umhNew_ = null;
@@ -2241,7 +2601,7 @@ public final class EventBattleItemProto {
 
       private int cashChange_ ;
       /**
-       * <code>optional sint32 cashChange = 5;</code>
+       * <code>optional sint32 cashChange = 6;</code>
        *
        * <pre>
        *take away all cash/silver then take away gems
@@ -2251,10 +2611,10 @@ public final class EventBattleItemProto {
        * </pre>
        */
       public boolean hasCashChange() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional sint32 cashChange = 5;</code>
+       * <code>optional sint32 cashChange = 6;</code>
        *
        * <pre>
        *take away all cash/silver then take away gems
@@ -2267,7 +2627,7 @@ public final class EventBattleItemProto {
         return cashChange_;
       }
       /**
-       * <code>optional sint32 cashChange = 5;</code>
+       * <code>optional sint32 cashChange = 6;</code>
        *
        * <pre>
        *take away all cash/silver then take away gems
@@ -2277,13 +2637,13 @@ public final class EventBattleItemProto {
        * </pre>
        */
       public Builder setCashChange(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         cashChange_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint32 cashChange = 5;</code>
+       * <code>optional sint32 cashChange = 6;</code>
        *
        * <pre>
        *take away all cash/silver then take away gems
@@ -2293,7 +2653,7 @@ public final class EventBattleItemProto {
        * </pre>
        */
       public Builder clearCashChange() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         cashChange_ = 0;
         onChanged();
         return this;
@@ -2301,31 +2661,31 @@ public final class EventBattleItemProto {
 
       private int oilChange_ ;
       /**
-       * <code>optional sint32 oilChange = 6;</code>
+       * <code>optional sint32 oilChange = 7;</code>
        */
       public boolean hasOilChange() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional sint32 oilChange = 6;</code>
+       * <code>optional sint32 oilChange = 7;</code>
        */
       public int getOilChange() {
         return oilChange_;
       }
       /**
-       * <code>optional sint32 oilChange = 6;</code>
+       * <code>optional sint32 oilChange = 7;</code>
        */
       public Builder setOilChange(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         oilChange_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint32 oilChange = 6;</code>
+       * <code>optional sint32 oilChange = 7;</code>
        */
       public Builder clearOilChange() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         oilChange_ = 0;
         onChanged();
         return this;
@@ -2333,17 +2693,17 @@ public final class EventBattleItemProto {
 
       private int gemCostForCreating_ ;
       /**
-       * <code>optional int32 gemCostForCreating = 7;</code>
+       * <code>optional int32 gemCostForCreating = 8;</code>
        *
        * <pre>
        *positive amount if charging user, negative if refunding user
        * </pre>
        */
       public boolean hasGemCostForCreating() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional int32 gemCostForCreating = 7;</code>
+       * <code>optional int32 gemCostForCreating = 8;</code>
        *
        * <pre>
        *positive amount if charging user, negative if refunding user
@@ -2353,27 +2713,27 @@ public final class EventBattleItemProto {
         return gemCostForCreating_;
       }
       /**
-       * <code>optional int32 gemCostForCreating = 7;</code>
+       * <code>optional int32 gemCostForCreating = 8;</code>
        *
        * <pre>
        *positive amount if charging user, negative if refunding user
        * </pre>
        */
       public Builder setGemCostForCreating(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         gemCostForCreating_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 gemCostForCreating = 7;</code>
+       * <code>optional int32 gemCostForCreating = 8;</code>
        *
        * <pre>
        *positive amount if charging user, negative if refunding user
        * </pre>
        */
       public Builder clearGemCostForCreating() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         gemCostForCreating_ = 0;
         onChanged();
         return this;
@@ -2381,31 +2741,31 @@ public final class EventBattleItemProto {
 
       private boolean isSpeedup_ ;
       /**
-       * <code>optional bool isSpeedup = 8;</code>
+       * <code>optional bool isSpeedup = 9;</code>
        */
       public boolean hasIsSpeedup() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional bool isSpeedup = 8;</code>
+       * <code>optional bool isSpeedup = 9;</code>
        */
       public boolean getIsSpeedup() {
         return isSpeedup_;
       }
       /**
-       * <code>optional bool isSpeedup = 8;</code>
+       * <code>optional bool isSpeedup = 9;</code>
        */
       public Builder setIsSpeedup(boolean value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         isSpeedup_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool isSpeedup = 8;</code>
+       * <code>optional bool isSpeedup = 9;</code>
        */
       public Builder clearIsSpeedup() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         isSpeedup_ = false;
         onChanged();
         return this;
@@ -2413,17 +2773,17 @@ public final class EventBattleItemProto {
 
       private int gemsForSpeedup_ ;
       /**
-       * <code>optional int32 gemsForSpeedup = 9;</code>
+       * <code>optional int32 gemsForSpeedup = 10;</code>
        *
        * <pre>
        *pos amount if charging user
        * </pre>
        */
       public boolean hasGemsForSpeedup() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional int32 gemsForSpeedup = 9;</code>
+       * <code>optional int32 gemsForSpeedup = 10;</code>
        *
        * <pre>
        *pos amount if charging user
@@ -2433,27 +2793,27 @@ public final class EventBattleItemProto {
         return gemsForSpeedup_;
       }
       /**
-       * <code>optional int32 gemsForSpeedup = 9;</code>
+       * <code>optional int32 gemsForSpeedup = 10;</code>
        *
        * <pre>
        *pos amount if charging user
        * </pre>
        */
       public Builder setGemsForSpeedup(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         gemsForSpeedup_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 gemsForSpeedup = 9;</code>
+       * <code>optional int32 gemsForSpeedup = 10;</code>
        *
        * <pre>
        *pos amount if charging user
        * </pre>
        */
       public Builder clearGemsForSpeedup() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         gemsForSpeedup_ = 0;
         onChanged();
         return this;
@@ -5267,38 +5627,40 @@ public final class EventBattleItemProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025EventBattleItem.proto\022\016com.lvl6.proto\032" +
-      "\020BattleItem.proto\032\nUser.proto\"\373\002\n\034Create" +
+      "\020BattleItem.proto\032\nUser.proto\"\274\003\n\034Create" +
       "BattleItemRequestProto\0220\n\006sender\030\001 \001(\0132 " +
       ".com.lvl6.proto.MinimumUserProto\022>\n\tumhD" +
       "elete\030\002 \003(\0132+.com.lvl6.proto.BattleItemQ" +
-      "ueueForUserProto\022>\n\tumhUpdate\030\003 \003(\0132+.co" +
-      "m.lvl6.proto.BattleItemQueueForUserProto" +
-      "\022;\n\006umhNew\030\004 \003(\0132+.com.lvl6.proto.Battle" +
-      "ItemQueueForUserProto\022\022\n\ncashChange\030\005 \001(" +
-      "\021\022\021\n\toilChange\030\006 \001(\021\022\032\n\022gemCostForCreati",
-      "ng\030\007 \001(\005\022\021\n\tisSpeedup\030\010 \001(\010\022\026\n\016gemsForSp" +
-      "eedup\030\t \001(\005\"\232\003\n\035CreateBattleItemResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022<\n\017userBattleItems\030\002 \003(\013" +
-      "2#.com.lvl6.proto.UserBattleItemProto\022T\n" +
-      "\006status\030\003 \001(\0162D.com.lvl6.proto.CreateBat" +
-      "tleItemResponseProto.CreateBattleItemSta" +
-      "tus\"\262\001\n\026CreateBattleItemStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_INSUFFICIENT" +
-      "_FUNDS\020\003\022\033\n\027FAIL_AT_MAX_POWER_LIMIT\020\004\022!\n",
-      "\035FAIL_ALL_MONSTERS_NONEXISTENT\020\005\022\036\n\032FAIL" +
-      "_CREATING_NOT_COMPLETE\020\006\"\224\001\n\035DiscardBatt" +
-      "leItemRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022A\n\024discarde" +
-      "dBattleItems\030\002 \003(\0132#.com.lvl6.proto.User" +
-      "BattleItemProto\"\204\002\n\036DiscardBattleItemRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022V\n\006status\030\002 \001(\0162F.c" +
-      "om.lvl6.proto.DiscardBattleItemResponseP" +
-      "roto.DiscardBattleItemStatus\"X\n\027DiscardB",
-      "attleItemStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002\022 \n\034FAIL_BATTLE_ITEMS_DONT_EXIST\020\003B\026" +
-      "B\024EventBattleItemProto"
+      "ueueForUserProto\022?\n\numhRemoved\030\003 \003(\0132+.c" +
+      "om.lvl6.proto.BattleItemQueueForUserProt" +
+      "o\022>\n\tumhUpdate\030\004 \003(\0132+.com.lvl6.proto.Ba" +
+      "ttleItemQueueForUserProto\022;\n\006umhNew\030\005 \003(" +
+      "\0132+.com.lvl6.proto.BattleItemQueueForUse",
+      "rProto\022\022\n\ncashChange\030\006 \001(\021\022\021\n\toilChange\030" +
+      "\007 \001(\021\022\032\n\022gemCostForCreating\030\010 \001(\005\022\021\n\tisS" +
+      "peedup\030\t \001(\010\022\026\n\016gemsForSpeedup\030\n \001(\005\"\232\003\n" +
+      "\035CreateBattleItemResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022<\n\017userBattleItems\030\002 \003(\0132#.com.lvl6.pro" +
+      "to.UserBattleItemProto\022T\n\006status\030\003 \001(\0162D" +
+      ".com.lvl6.proto.CreateBattleItemResponse" +
+      "Proto.CreateBattleItemStatus\"\262\001\n\026CreateB" +
+      "attleItemStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH",
+      "ER\020\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\033\n\027FAI" +
+      "L_AT_MAX_POWER_LIMIT\020\004\022!\n\035FAIL_ALL_MONST" +
+      "ERS_NONEXISTENT\020\005\022\036\n\032FAIL_CREATING_NOT_C" +
+      "OMPLETE\020\006\"\224\001\n\035DiscardBattleItemRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022A\n\024discardedBattleItems\030\002 " +
+      "\003(\0132#.com.lvl6.proto.UserBattleItemProto" +
+      "\"\204\002\n\036DiscardBattleItemResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022V\n\006status\030\002 \001(\0162F.com.lvl6.proto.D",
+      "iscardBattleItemResponseProto.DiscardBat" +
+      "tleItemStatus\"X\n\027DiscardBattleItemStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022 \n\034FAIL_BA" +
+      "TTLE_ITEMS_DONT_EXIST\020\003B\026B\024EventBattleIt" +
+      "emProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5319,7 +5681,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_CreateBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "OilChange", "GemCostForCreating", "IsSpeedup", "GemsForSpeedup", });
+        new java.lang.String[] { "Sender", "UmhDelete", "UmhRemoved", "UmhUpdate", "UmhNew", "CashChange", "OilChange", "GemCostForCreating", "IsSpeedup", "GemsForSpeedup", });
     internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_CreateBattleItemResponseProto_fieldAccessorTable = new
