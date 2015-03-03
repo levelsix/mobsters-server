@@ -165,20 +165,4 @@ message SetDefendingMsgResponseProto {
 	}
 }
 
-//------------------------------------------------------------------------------------------
-
-message UseBattleItemRequestProto {
-	optional MinimumUserProto sender = 1;
-	repeated UserBattleItemProto battleItemsUsedInBattle = 2;
-}
-
-message UseBattleItemResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional UseBattleItemStatus status = 2;
-	
-	enum UseBattleItemStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
-}
 

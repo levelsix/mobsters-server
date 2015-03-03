@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.properties.DBConstants;
@@ -574,6 +575,27 @@ public class DeleteUtils implements DeleteUtil {
 		
 		return totalDeleted;
 	}
+	
+	@Override
+	public int deleteUserBattleItems(List<BattleItemForUser> bifuList) {
+		 String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
+		    int size = bifuList.size();
+		    List<String> questions = Collections.nCopies(size, "?");
+		    String delimiter = ",";
+		    List<String> bifuIds = new ArrayList<String>();
+		    for(BattleItemForUser bifu : bifuList) {
+		    	bifuIds.add(bifu.getId());
+		    }
+
+		    String query = String.format(
+		    	" DELETE FROM %s WHERE %s IN(%s)",
+		    	tableName, DBConstants.BATTLE_ITEM_FOR_USER__ID,
+		    	StringUtils.getListInString(questions, delimiter));
+		    
+		    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, bifuIds);
+		    return numDeleted;
+	}
+
 	
 
 	

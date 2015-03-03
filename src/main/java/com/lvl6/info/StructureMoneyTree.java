@@ -12,14 +12,15 @@ public class StructureMoneyTree implements Serializable {
 	private int daysOfDuration;
 	private int daysForRenewal;
 	private String iapProductId;
-	
+	private String fakeIAPProductId;
 	
 	public StructureMoneyTree() {
 		super();
 	}
 	
 	public StructureMoneyTree(int structId, float productionRate, int capacity,
-			int daysOfDuration, int daysForRenewal, String iapProductId) {
+			int daysOfDuration, int daysForRenewal, String iapProductId, 
+			String fakeIAPProductId) {
 		super();
 		this.structId = structId;
 		this.productionRate = productionRate;
@@ -27,6 +28,7 @@ public class StructureMoneyTree implements Serializable {
 		this.daysOfDuration = daysOfDuration;
 		this.daysForRenewal = daysForRenewal;
 		this.iapProductId = iapProductId;
+		this.fakeIAPProductId = fakeIAPProductId;
 	}
 	
 	
@@ -73,7 +75,16 @@ public class StructureMoneyTree implements Serializable {
 		return "StructureMoneyTree [structId=" + structId + ", productionRate="
 				+ productionRate + ", capacity=" + capacity
 				+ ", daysOfDuration=" + daysOfDuration + ", daysForRenewal="
-				+ daysForRenewal + ", iapProductId=" + iapProductId + "]";
+				+ daysForRenewal + ", iapProductId=" + iapProductId
+				+ ", fakeIAPProductId=" + fakeIAPProductId + "]";
+	}
+
+	public String getFakeIAPProductId() {
+		return fakeIAPProductId;
+	}
+
+	public void setFakeIAPProductId(String fakeIAPProductId) {
+		this.fakeIAPProductId = fakeIAPProductId;
 	}
 	
 

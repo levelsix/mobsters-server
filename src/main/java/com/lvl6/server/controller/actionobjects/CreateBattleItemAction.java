@@ -1,7 +1,5 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,16 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.Research;
-import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.Builder;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
-import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -41,7 +35,6 @@ public class CreateBattleItemAction
 	private int gemCostForCreating;
 	private boolean isSpeedup;
 	private int gemsForSpeedup;
-	private Date now;
 	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
@@ -50,31 +43,40 @@ public class CreateBattleItemAction
 	public CreateBattleItemAction( 
 		String userId,
 		User user,
-		Research research,
-		String userResearchUuid,
-		int gemsSpent,
-		int resourceChange,
-		ResourceType resourceType,
-		Date now,
+		List<BattleItemQueueForUser> deletedList,//completed queue items
+		List<BattleItemQueueForUser> removedList, //user removed the queue items
+		List<BattleItemQueueForUser> updatedList, //only updates timestamp
+		List<BattleItemQueueForUser> newList,
+		int cashChange,
+		int oilChange,
+		int gemCostForCreating,
+		boolean isSpeedup,
+		int gemsForSpeedup,
+		BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
 		InsertUtil insertUtil,
 		UpdateUtil updateUtil,
-		ResearchForUserRetrieveUtils researchForUserRetrieveUtil
+		DeleteUtil deleteUtil
 	 )
 	{
 		super();
 		this.userId = userId;
 		this.user = user;
-		this.research = research;
-		this.userResearchUuid = userResearchUuid;
-		this.gemsSpent = gemsSpent;
-		this.resourceChange = resourceChange;
-		this.resourceType = resourceType;
-		this.now = now;
+		this.deletedList = deletedList;
+		this.removedList = removedList;
+		this.updatedList = updatedList;
+		this.newList = newList;
+		this.cashChange = cashChange;
+		this.oilChange = oilChange;
+		this.gemCostForCreating = gemCostForCreating;
+		this.isSpeedup = isSpeedup;
+		this.gemsForSpeedup = gemsForSpeedup;
+		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
-		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+		this.deleteUtil = deleteUtil;
 	}
 
+	private int gemsChange;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -125,7 +127,7 @@ public class CreateBattleItemAction
 			hasEnoughOil = verifyEnoughOil(resBuilder);
 		}
 		
-		if(hasEnoughGems && hasEnoughCash && hasEnoughOil) {
+		if(hasEnoughGems && hasEnoughCash && hasEnoughOil && verifyResourcesAreUsed(resBuilder)) {
 			return true;
 		}
 		else return false;
@@ -163,6 +165,13 @@ public class CreateBattleItemAction
 		int userOil = user.getOil();
 		if(userOil < oilChange) {
 			resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+			return false;
+		}
+		else return true;
+	}
+	
+	private boolean verifyResourcesAreUsed(Builder resBuilder) {
+		if(gemCostForCreating < 1 && cashChange < 1 && oilChange < 1) {
 			return false;
 		}
 		else return true;
@@ -208,32 +217,18 @@ public class CreateBattleItemAction
 			}
 		}
 		
-		if(gemCostForCreating > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
-			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
-			log.error("not being purchased with gems, cash, or oil, what is this voodoo shit");
-			return false;
-		}
-
-		int gemsChange = 0;
-		int cashChange = 0;
-		int oilChange = 0;
-		int expChange = 0;
-		
-		if(gemsSpent > 0) {
+		if(gemCostForCreating + gemsForSpeedup > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
-			gemsChange = -1*gemsSpent;
+			gemsChange = -1*(gemCostForCreating + gemsForSpeedup);
 		}
 
-		if (resourceType == ResourceType.CASH) {
+		if (cashChange != 0) {
 			prevCurrencies.put(MiscMethods.cash, user.getCash());
-			cashChange = -1*resourceChange;
-		}
-		else if (resourceType == ResourceType.OIL){
-			prevCurrencies.put(MiscMethods.oil, user.getOil());
-			oilChange = -1*resourceChange;
 		}
 		
-//		user.updateRelativeGemsCashOilExperienceNaive(gemsChange, cashChange, oilChange, expChange);
+		if(oilChange != 0) {
+			prevCurrencies.put(MiscMethods.oil, user.getOil());
+		}
 		
 		updateUserCurrency();
 		
@@ -243,12 +238,9 @@ public class CreateBattleItemAction
 	}
 
 	private void updateUserCurrency()
-	{
-		int gemsDelta = -1 * gemsSpent;
-		int resourceDelta = -1* resourceChange;
-		
-		boolean updated = user.updateGemsandResourcesFromPerformingResearch(gemsDelta, resourceDelta, resourceType);
-		log.info("updated, user paid for research {}", updated);
+	{		
+		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, cashChange, oilChange);
+		log.info("updated, user paid for battle items {}", updated);
 	}
 	
 	private void prepCurrencyHistory()
@@ -260,51 +252,49 @@ public class CreateBattleItemAction
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
-		StringBuilder detailSb = new StringBuilder();
+		StringBuilder detailSb1 = new StringBuilder();
 		StringBuilder detailSb2 = new StringBuilder();
+		StringBuilder detailSb3 = new StringBuilder();
 		details = new HashMap<String, String>();
 
-		if (0 != gemsSpent) {
-			currencyDeltas.put(gems, gemsSpent);
+		if (0 != gemsChange) {
+			currencyDeltas.put(gems, gemsChange);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
-				ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
-			detailSb.append(" gemsSpent=");
-			detailSb.append(gemsSpent);
-			details.put(gems, detailSb.toString());
+				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
+			detailSb1.append(" gems spent buying=");
+			detailSb1.append(gemCostForCreating);
+			if(isSpeedup) {
+				detailSb1.append(" gems spent speedingup=");
+				detailSb1.append(gemsForSpeedup);
+			}
+			details.put(gems, detailSb1.toString());
 		}
 		
-		if(resourceChange>0) {
-			if(resourceType == ResourceType.CASH) {
-				currencyDeltas.put(cash, resourceChange);
-				curCurrencies.put(cash, user.getCash());
-				reasonsForChanges.put(cash, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
-				detailSb2.append(" cash spent= ");
-				detailSb2.append(resourceChange);
-				details.put(cash, detailSb2.toString());
-
-			}
-			else if(resourceType == ResourceType.OIL) {
-				currencyDeltas.put(oil, resourceChange);
-				curCurrencies.put(oil, user.getOil());
-				reasonsForChanges.put(oil, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
-				detailSb2.append(" oil spent= ");
-				detailSb2.append(resourceChange);
-				details.put(oil, detailSb2.toString());
-			}
+		if (0 != cashChange) {
+			currencyDeltas.put(cash, cashChange);
+			curCurrencies.put(cash, user.getCash());
+			reasonsForChanges.put(cash,
+				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
+			detailSb2.append(" cash spent or refunded=");
+			detailSb2.append(cashChange);
+			details.put(cash, detailSb2.toString());
 		}
+		
+		if (0 != oilChange) {
+			currencyDeltas.put(oil, oilChange);
+			curCurrencies.put(oil, user.getOil());
+			reasonsForChanges.put(oil,
+				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
+			detailSb3.append(" oil spent or refunded=");
+			detailSb3.append(oilChange);
+			details.put(oil, detailSb3.toString());
+		}
+		
 	}
 
 	public User getUser() {
 		return user;
-	}
-	
-	public Research getResearch() {
-		return research;
-	}
-	
-	public String getUserResearchUuid() {
-		return userResearchUuid;
 	}
 
 	public Map<String, Integer> getCurrencyDeltas() {

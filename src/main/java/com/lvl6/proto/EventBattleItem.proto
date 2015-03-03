@@ -74,3 +74,5 @@ message DiscardBattleItemResponseProto {
 		FAIL_BATTLE_ITEMS_DONT_EXIST = 3;
 	}
 }	
+
+

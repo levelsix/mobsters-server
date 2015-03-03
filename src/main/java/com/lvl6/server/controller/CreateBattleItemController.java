@@ -2,9 +2,8 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -26,10 +25,12 @@ import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateBattleItemAction;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component @DependsOn("gameServer") public class CreateBattleItemController extends EventController{
@@ -43,10 +44,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
-	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
+	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
+	
+	@Autowired
+	protected InsertUtil insertUtil;
 	
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected DeleteUtil deleteUtil;
 
 	public CreateBattleItemController() {
 		numAllocatedThreads = 8;
@@ -77,22 +84,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		List<BattleItemQueueForUserProto> updatedBattleItemQueueList = reqProto.getUmhUpdateList();
 		List<BattleItemQueueForUserProto> newBattleItemQueueList = reqProto.getUmhNewList();
 
-		List<BattleItemQueueForUser> deletedMap = 
+		List<BattleItemQueueForUser> deletedList = 
 				getIdsToBattleItemQueueForUserFromProto(deletedBattleItemQueueList, userId);
-		List<BattleItemQueueForUser> removedMap = 
+		List<BattleItemQueueForUser> removedList = 
 				getIdsToBattleItemQueueForUserFromProto(removedBattleItemQueueList, userId);
-		List<BattleItemQueueForUser> updatedMap = 
+		List<BattleItemQueueForUser> updatedList = 
 				getIdsToBattleItemQueueForUserFromProto(updatedBattleItemQueueList, userId);
-		List<BattleItemQueueForUser> newMap = 
+		List<BattleItemQueueForUser> newList = 
 				getIdsToBattleItemQueueForUserFromProto(newBattleItemQueueList, userId);
 		
 		int cashChange = reqProto.getCashChange();
 		int oilChange = reqProto.getOilChange();
 		int gemCostForCreating = reqProto.getGemCostForCreating();
 		boolean isSpeedup = reqProto.getIsSpeedup();
-		int gemsForSpeedUp = 0;
+		int gemsForSpeedup = 0;
 		if(isSpeedup) {
-			gemsForSpeedUp = reqProto.getGemsForSpeedup();
+			gemsForSpeedup = reqProto.getGemsForSpeedup();
 		}
 
 		CreateBattleItemResponseProto.Builder resBuilder =
@@ -125,12 +132,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
+			User user = userRetrieveUtil.getUserById(userId);
 			
 			CreateBattleItemAction cbia =
-					new CreateBattleItemAction(
-							userId, maxCash, maxOil, duplicates,
-							userStructIdsToStructRetrievals,
-							userRetrieveUtil, userStructRetrieveUtil, updateUtil);
+					new CreateBattleItemAction(userId, user, deletedList, removedList, updatedList,
+							newList, cashChange, oilChange, gemCostForCreating, isSpeedup,
+							gemsForSpeedup, battleItemForUserRetrieveUtil, insertUtil, 
+							updateUtil, deleteUtil);
 			
 			cbia.execute(resBuilder);
 
@@ -141,14 +149,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			server.writeEvent(resEvent);
 
 			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				User user = rcfnsa.getUser();
+				User user2 = cbia.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToCurrencyHistory(userId, curTime, rcfnsa);
+				Date d = new Date();
+				Timestamp ts = new Timestamp(d.getTime());
+				writeToCurrencyHistory(userId, ts, cbia);
 			}
 		} catch (Exception e) {
 			log.error("exception in CreateBattleItemController processEvent", e);
@@ -202,12 +212,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	
 	
 	private void writeToCurrencyHistory(String userId, Timestamp date,
-			CreateBattleItemAction rcfnsa)
+			CreateBattleItemAction cbia)
 		{
 			MiscMethods.writeToUserCurrencyOneUser(userId, date,
-				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
-	    		rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
-	    		rcfnsa.getDetails());
+				cbia.getCurrencyDeltas(), cbia.getPreviousCurrencies(),
+	    		cbia.getCurrentCurrencies(), cbia.getReasons(),
+	    		cbia.getDetails());
 		}
 		
 
@@ -226,15 +236,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
-	}
-
-	public StructureForUserRetrieveUtils2 getUserStructRetrieveUtil() {
-		return userStructRetrieveUtil;
-	}
-
-	public void setUserStructRetrieveUtil(
-			StructureForUserRetrieveUtils2 userStructRetrieveUtil) {
-		this.userStructRetrieveUtil = userStructRetrieveUtil;
 	}
 
 	public UpdateUtil getUpdateUtil() {
