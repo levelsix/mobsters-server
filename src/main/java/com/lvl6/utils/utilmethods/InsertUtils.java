@@ -1961,7 +1961,6 @@ public class InsertUtils implements InsertUtil{
 		@Override
 		public int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
 			String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
-
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
 			for(BattleItemQueueForUser biqfu : biqfuList) {

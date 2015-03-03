@@ -108,10 +108,10 @@ public class CreateBattleItemAction
 			return false;
 		}
 		
-		boolean legitMaps = verifyNewUpdatedRemovedDeletedMaps(resBuilder);
-		if (!legitMaps) {
-			return false;
-		}
+//		boolean legitMaps = verifyNewUpdatedRemovedDeletedMaps(resBuilder);
+//		if (!legitMaps) {
+//			return false;
+//		}
 		
 		boolean hasEnoughGems = true;
 		boolean hasEnoughCash = true;
@@ -127,20 +127,12 @@ public class CreateBattleItemAction
 			hasEnoughOil = verifyEnoughOil(resBuilder);
 		}
 		
-		if(hasEnoughGems && hasEnoughCash && hasEnoughOil && verifyResourcesAreUsed(resBuilder)) {
+		if(hasEnoughGems && hasEnoughCash && hasEnoughOil) {
 			return true;
 		}
 		else return false;
 	}
-	
-	private boolean verifyNewUpdatedRemovedDeletedMaps(Builder resBuilder) {
-		if(newList == null || updatedList == null || removedList == null || deletedList == null) {
-			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
-			return false;
-		}
-		return true;
-	}
-	
+
 	private boolean verifyEnoughGems(Builder resBuilder) {
 		int userGems = user.getGems();
 
@@ -170,52 +162,62 @@ public class CreateBattleItemAction
 		else return true;
 	}
 	
-	private boolean verifyResourcesAreUsed(Builder resBuilder) {
-		if(gemCostForCreating < 1 && cashChange < 1 && oilChange < 1) {
-			return false;
-		}
-		else return true;
-	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
-		
-		if(!removedList.isEmpty()) {
-			int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(removedList);
-			if(numDeleted != removedList.size()) {
-				log.error("did not remove all the battle items in queue");
+
+		if(deletedList != null) {
+			log.info("new list not null");
+			if(!deletedList.isEmpty()) {
+				log.info("new list not empty");
+				//remove the elements from queue
+				int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(deletedList);
+				if(numDeleted != deletedList.size()) {
+					log.error("did not delete all the battle items in queue");
+				}
+				log.info("finish deleting");
+
+				
+				//add the elements to user's battle items			
+				Map<Integer, List<BattleItemForUser>> userBattleItemMap = 
+						battleItemForUserRetrieveUtil.getBattleItemIdsToUserBattleItemForUser(userId);
+				log.info("finish retrieving");
+				int totalInserts = insertUtil.insertIntoBattleItemForUser(deletedList, userId, userBattleItemMap);
+				if(totalInserts != deletedList.size()) {
+					log.error("did not add all the battle items to user battle items");
+				}
 			}
 		}
 		
-		if(!updatedList.isEmpty()) {
-			int numUpdated = updateUtil.updateBattleItemQueueForUser(updatedList);
-			if(numUpdated != updatedList.size()) {
-				log.error("did not update all battle items in queue");
+		if(removedList != null) {
+			if(!removedList.isEmpty()) {
+				int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(removedList);
+				if(numDeleted != removedList.size()) {
+					log.error("did not remove all the battle items in queue");
+				}
 			}
 		}
-		
-		if(!newList.isEmpty()) {
-			int numInserted = insertUtil.insertIntoBattleItemQueueForUser(newList);
-			if(numInserted != newList.size()) {
-				log.error("did not insert all battle items in queue");
+
+		if(updatedList != null) {
+			if(!updatedList.isEmpty()) {
+				int numUpdated = updateUtil.updateBattleItemQueueForUser(updatedList);
+				if(numUpdated != updatedList.size()) {
+					log.error("did not update all battle items in queue");
+				}
 			}
 		}
-		
-		if(!deletedList.isEmpty()) {
-			//remove the elements from queue
-			int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(deletedList);
-			if(numDeleted != deletedList.size()) {
-				log.error("did not delete all the battle items in queue");
-			}
-			
-			//add the elements to user's battle items			
-			Map<Integer, List<BattleItemForUser>> userBattleItemMap = 
-					battleItemForUserRetrieveUtil.getBattleItemIdsToUserBattleItemForUser(userId);
-			int totalInserts = insertUtil.insertIntoBattleItemForUser(deletedList, userId, userBattleItemMap);
-			if(totalInserts != deletedList.size()) {
-				log.error("did not add all the battle items to user battle items");
+
+		if(newList != null) {
+			log.info("new list not null");
+			if(!newList.isEmpty()) {
+				log.info("new list not empty");
+				int numInserted = insertUtil.insertIntoBattleItemQueueForUser(newList);
+				if(numInserted != newList.size()) {
+					log.error("did not insert all battle items in queue");
+				}
 			}
 		}
+
 		
 		if(gemCostForCreating + gemsForSpeedup > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
@@ -239,7 +241,7 @@ public class CreateBattleItemAction
 
 	private void updateUserCurrency()
 	{		
-		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, cashChange, oilChange);
+		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, -1*cashChange, -1*oilChange);
 		log.info("updated, user paid for battle items {}", updated);
 	}
 	

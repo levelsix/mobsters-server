@@ -18,7 +18,6 @@ public class BattleItemQueueForUser implements Serializable {
 	private static final long serialVersionUID = -1293698119576984508L;
 	
 	private int priority;
-	private String id;
 	private String userId;
 	private int battleItemId;
 	private Timestamp expectedStartTime;
@@ -27,14 +26,6 @@ public class BattleItemQueueForUser implements Serializable {
 	public BattleItemQueueForUser()
 	{
 		super();
-	}
-
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getUserId() {
@@ -71,8 +62,8 @@ public class BattleItemQueueForUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BattleItemQueueForUser [priority=" + priority + ", id=" + id
-				+ ", userId=" + userId + ", battleItemId=" + battleItemId
+		return "BattleItemQueueForUser [priority=" + priority + ", userId="
+				+ userId + ", battleItemId=" + battleItemId
 				+ ", expectedStartTime=" + expectedStartTime + "]";
 	}
 
