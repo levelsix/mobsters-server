@@ -23,6 +23,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
@@ -176,9 +177,11 @@ public interface InsertUtil {
 
 	public abstract int insertIntoUpdateEventPersistentForUser(String userId, int eventId, Timestamp now);
 	
-	public abstract int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
-			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
-			int defenderWinEloChange, Timestamp battleStartTime);
+//	public abstract int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
+//			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
+//			int defenderWinEloChange, Timestamp battleStartTime);
+	
+	public abstract int insertUpdatePvpBattleForUser(PvpBattleForUser pbfu);
 	
 	public abstract int insertIntoClanEventPersistentForClan(String clanId,
 			int clanEventPersistentId, int clanRaidId, int clanRaidStageId,

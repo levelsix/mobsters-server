@@ -59,7 +59,7 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
-			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+			String conditionDelimiter = queryConstructionUtil.getAnd();
 
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
@@ -67,11 +67,11 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			List<Object> values = new ArrayList<Object>();
 			boolean preparedStatement = true;
 
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+			String query = queryConstructionUtil.selectRowsQueryEqualityConditions(
 					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
 					values, preparedStatement);
 
-			log.info(String.format("query=%s", query, values));
+			log.info("query={}, values={}", query, values);
 
 //			List<PvpLeagueForUser> plfuList = this.jdbcTemplate.query(query, new UserPvpLeagueForClientMapper());
 //			if (null != plfuList && !plfuList.isEmpty()) {
@@ -95,7 +95,7 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			
 			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
 			inConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userIdList);
-			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+			String conditionDelimiter = queryConstructionUtil.getAnd();
 
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
@@ -103,11 +103,11 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			List<Object> values = new ArrayList<Object>();
 			boolean preparedStatement = true;
 
-			String query = getQueryConstructionUtil().selectRowsQueryInConditions(
+			String query = queryConstructionUtil.selectRowsQueryInConditions(
 					columnsToSelect, TABLE_NAME, inConditions, conditionDelimiter, values,
 					preparedStatement);
 
-			log.info(String.format("query=%s", query, values));
+			log.info("query={}, values={}", query, values);
 
 			List<PvpLeagueForUser> plfuList = this.jdbcTemplate
 					.query(query, values.toArray(), rowMapper);
@@ -131,7 +131,7 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
-			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+			String conditionDelimiter = queryConstructionUtil.getAnd();
 
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
@@ -139,7 +139,7 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			List<Object> values = new ArrayList<Object>();
 			boolean preparedStatement = true;
 
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+			String query = queryConstructionUtil.selectRowsQueryEqualityConditions(
 					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
 					values, preparedStatement);
 

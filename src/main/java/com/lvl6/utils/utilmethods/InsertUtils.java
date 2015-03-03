@@ -33,6 +33,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
@@ -1083,26 +1084,34 @@ public class InsertUtils implements InsertUtil{
 		
 	}
 	
-	public int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
-			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
-			int defenderWinEloChange, Timestamp battleStartTime) {
+	public int insertUpdatePvpBattleForUser(PvpBattleForUser pbfu) {
 		String tableName = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID, attackerId);
-		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID,
+				pbfu.getAttackerId());
+		String defenderId = pbfu.getDefenderId(); 
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID,
+				defenderId);
+		
 		//elo changes when attacker wins
+		int attackerWinEloChange = pbfu.getAttackerWinEloChange();
 		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
 				attackerWinEloChange);
+		int defenderLoseEloChange = pbfu.getDefenderLoseEloChange();
 		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE,
 				defenderLoseEloChange);
 		
 		//elo changes when attacker loses
+		int attackerLoseEloChange = pbfu.getAttackerLoseEloChange();
 		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE,
 				attackerLoseEloChange);
+		int defenderWinEloChange = pbfu.getDefenderWinEloChange();
 		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE,
 				defenderWinEloChange);
 				
+		Date battleStart = pbfu.getBattleStartTime(); 
+		Timestamp battleStartTime = new Timestamp(battleStart.getTime());
 		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME,
 				battleStartTime);
 		

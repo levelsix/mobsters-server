@@ -310,4 +310,15 @@ public class PvpBattleOutcome
 		return intRetVal;
 	}
 
+	@Override
+	public String toString() {
+		return "PvpBattleOutcome [attackerId=" + attackerId + ", attackerElo="
+				+ attackerElo + ", defenderId=" + defenderId + ", defenderElo="
+				+ defenderElo + ", defenderCash=" + defenderCash
+				+ ", defenderOil=" + defenderOil + ", meanForCnd=" + meanForCnd
+				+ ", standardDeviationForCnd=" + standardDeviationForCnd
+				+ ", lowerElo=" + lowerElo + "]";
+	}
+
+	
 }
