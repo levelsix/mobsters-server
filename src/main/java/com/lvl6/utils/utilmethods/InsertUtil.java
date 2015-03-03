@@ -250,7 +250,7 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
 	
-	public abstract int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, 
+	public abstract int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, String userId,
 			Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser);
 	
 }

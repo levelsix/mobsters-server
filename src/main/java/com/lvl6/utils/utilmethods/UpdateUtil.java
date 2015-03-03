@@ -61,7 +61,7 @@ public interface UpdateUtil {
   public abstract boolean updateSpeedupUpgradingUserStruct(String userStructId,
   		Timestamp lastRetrievedTime);
   
-  public abstract boolean updatePurchaseTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime);
+  public abstract boolean updatePurchaseTimeRetrieveTimeForMoneyTree(String userStructId, Timestamp newPurchaseTime);
   
   /*
    * used for updating last retrieved user struct times

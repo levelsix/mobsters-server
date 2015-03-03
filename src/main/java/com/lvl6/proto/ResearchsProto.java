@@ -17,12 +17,84 @@ public final class ResearchsProto {
      * <code>NO_RESEARCH = 1;</code>
      */
     NO_RESEARCH(0, 1),
+    /**
+     * <code>COST = 2;</code>
+     */
+    COST(1, 2),
+    /**
+     * <code>SPEED = 3;</code>
+     */
+    SPEED(2, 3),
+    /**
+     * <code>INCREASE_QUEUE_SIZE = 4;</code>
+     */
+    INCREASE_QUEUE_SIZE(3, 4),
+    /**
+     * <code>INCREASE_NUM_CAN_BUILD = 5;</code>
+     */
+    INCREASE_NUM_CAN_BUILD(4, 5),
+    /**
+     * <code>XP_BONUS = 6;</code>
+     */
+    XP_BONUS(5, 6),
+    /**
+     * <code>INCREASE_CASH_PRODUCTION = 7;</code>
+     */
+    INCREASE_CASH_PRODUCTION(6, 7),
+    /**
+     * <code>INCREASE_OIL_PRODUCTION = 8;</code>
+     */
+    INCREASE_OIL_PRODUCTION(7, 8),
+    /**
+     * <code>INCREASE_ATTACK = 9;</code>
+     */
+    INCREASE_ATTACK(8, 9),
+    /**
+     * <code>INCREASE_HP = 10;</code>
+     */
+    INCREASE_HP(9, 10),
     ;
 
     /**
      * <code>NO_RESEARCH = 1;</code>
      */
     public static final int NO_RESEARCH_VALUE = 1;
+    /**
+     * <code>COST = 2;</code>
+     */
+    public static final int COST_VALUE = 2;
+    /**
+     * <code>SPEED = 3;</code>
+     */
+    public static final int SPEED_VALUE = 3;
+    /**
+     * <code>INCREASE_QUEUE_SIZE = 4;</code>
+     */
+    public static final int INCREASE_QUEUE_SIZE_VALUE = 4;
+    /**
+     * <code>INCREASE_NUM_CAN_BUILD = 5;</code>
+     */
+    public static final int INCREASE_NUM_CAN_BUILD_VALUE = 5;
+    /**
+     * <code>XP_BONUS = 6;</code>
+     */
+    public static final int XP_BONUS_VALUE = 6;
+    /**
+     * <code>INCREASE_CASH_PRODUCTION = 7;</code>
+     */
+    public static final int INCREASE_CASH_PRODUCTION_VALUE = 7;
+    /**
+     * <code>INCREASE_OIL_PRODUCTION = 8;</code>
+     */
+    public static final int INCREASE_OIL_PRODUCTION_VALUE = 8;
+    /**
+     * <code>INCREASE_ATTACK = 9;</code>
+     */
+    public static final int INCREASE_ATTACK_VALUE = 9;
+    /**
+     * <code>INCREASE_HP = 10;</code>
+     */
+    public static final int INCREASE_HP_VALUE = 10;
 
 
     public final int getNumber() { return value; }
@@ -30,6 +102,15 @@ public final class ResearchsProto {
     public static ResearchType valueOf(int value) {
       switch (value) {
         case 1: return NO_RESEARCH;
+        case 2: return COST;
+        case 3: return SPEED;
+        case 4: return INCREASE_QUEUE_SIZE;
+        case 5: return INCREASE_NUM_CAN_BUILD;
+        case 6: return XP_BONUS;
+        case 7: return INCREASE_CASH_PRODUCTION;
+        case 8: return INCREASE_OIL_PRODUCTION;
+        case 9: return INCREASE_ATTACK;
+        case 10: return INCREASE_HP;
         default: return null;
       }
     }
@@ -90,12 +171,44 @@ public final class ResearchsProto {
      * <code>NO_DOMAIN = 1;</code>
      */
     NO_DOMAIN(0, 1),
+    /**
+     * <code>RESTORATIVE = 2;</code>
+     */
+    RESTORATIVE(1, 2),
+    /**
+     * <code>LEVELUP = 3;</code>
+     */
+    LEVELUP(2, 3),
+    /**
+     * <code>RESOURCES = 4;</code>
+     */
+    RESOURCES(3, 4),
+    /**
+     * <code>BATTLE = 5;</code>
+     */
+    BATTLE(4, 5),
     ;
 
     /**
      * <code>NO_DOMAIN = 1;</code>
      */
     public static final int NO_DOMAIN_VALUE = 1;
+    /**
+     * <code>RESTORATIVE = 2;</code>
+     */
+    public static final int RESTORATIVE_VALUE = 2;
+    /**
+     * <code>LEVELUP = 3;</code>
+     */
+    public static final int LEVELUP_VALUE = 3;
+    /**
+     * <code>RESOURCES = 4;</code>
+     */
+    public static final int RESOURCES_VALUE = 4;
+    /**
+     * <code>BATTLE = 5;</code>
+     */
+    public static final int BATTLE_VALUE = 5;
 
 
     public final int getNumber() { return value; }
@@ -103,6 +216,10 @@ public final class ResearchsProto {
     public static ResearchDomain valueOf(int value) {
       switch (value) {
         case 1: return NO_DOMAIN;
+        case 2: return RESTORATIVE;
+        case 3: return LEVELUP;
+        case 4: return RESOURCES;
+        case 5: return BATTLE;
         default: return null;
       }
     }
@@ -3123,9 +3240,15 @@ public final class ResearchsProto {
       "2%.com.lvl6.proto.ResearchPropertyProto\"" +
       "l\n\025ResearchPropertyProto\022\032\n\022researchProp",
       "ertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchVa" +
-      "lue\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005*\037\n\014Researc" +
-      "hType\022\017\n\013NO_RESEARCH\020\001*\037\n\016ResearchDomain" +
-      "\022\r\n\tNO_DOMAIN\020\001B\020B\016ResearchsProto"
+      "lue\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005*\330\001\n\014Resear" +
+      "chType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPE" +
+      "ED\020\003\022\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCREAS" +
+      "E_NUM_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030INCRE" +
+      "ASE_CASH_PRODUCTION\020\007\022\033\n\027INCREASE_OIL_PR" +
+      "ODUCTION\020\010\022\023\n\017INCREASE_ATTACK\020\t\022\017\n\013INCRE" +
+      "ASE_HP\020\n*X\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020" +
+      "\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOU" +
+      "RCES\020\004\022\n\n\006BATTLE\020\005B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

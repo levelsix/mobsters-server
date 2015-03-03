@@ -116,6 +116,7 @@ import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructurePvpBoardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResearchHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -949,6 +950,7 @@ public class MiscMethods {
 		StructureMiniJobRetrieveUtils.reload();
 		StructureMoneyTreeRetrieveUtils.reload();
 		StructurePvpBoardRetrieveUtils.reload();
+		StructureResearchHouseRetrieveUtils.reload();
 		StructureResidenceRetrieveUtils.reload();
 		StructureResourceGeneratorRetrieveUtils.reload();
 		StructureResourceStorageRetrieveUtils.reload();

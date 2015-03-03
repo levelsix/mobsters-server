@@ -1966,10 +1966,14 @@ public class InsertUtils implements InsertUtil{
 
 			for(BattleItemQueueForUser biqfu : biqfuList) {
 				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, biqfu.getBattleItemId());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME, biqfu.getExpectedStartTime());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, 
+						biqfu.getPriority());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, 
+						biqfu.getBattleItemId());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME,
+						biqfu.getExpectedStartTime());
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
+						biqfu.getUserId());
 
 				newRows.add(newRow);
 			}
@@ -1979,30 +1983,77 @@ public class InsertUtils implements InsertUtil{
 
 			return numUpdated;
 		}
+
 
 		@Override
-		public int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList,
-				Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser) {
+		public int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, 
+				String userId,
+				Map<Integer, List<BattleItemForUser>> battleItemIdsToUserBattleItemForUser) {
 			String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
-
+			int totalInserts = 0;
+			
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
+			Map<Integer, Integer> battleItemIdsToQuantity = new HashMap<Integer, Integer>();
 			for(BattleItemQueueForUser biqfu : biqfuList) {
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, biqfu.getBattleItemId());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME, biqfu.getExpectedStartTime());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
-
-				newRows.add(newRow);
+				int battleItemId = biqfu.getBattleItemId();
+				if(battleItemIdsToQuantity.containsKey(battleItemId)) {
+					battleItemIdsToQuantity.put(battleItemId, 
+							battleItemIdsToQuantity.get(battleItemId) + 1);
+				}
+				else battleItemIdsToQuantity.put(battleItemId, 1);
 			}
-			
-			int numUpdated = DBConnection.get()
-					.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
 
-			return numUpdated;
+			for(Integer battleItemId : battleItemIdsToQuantity.keySet()) {
+				int addedAmount = battleItemIdsToQuantity.get(battleItemId);
+
+				if(battleItemIdsToUserBattleItemForUser.containsKey(battleItemId)) {
+					List<BattleItemForUser> userBattleItemForUserList = 
+							battleItemIdsToUserBattleItemForUser.get(battleItemId);
+					int previousQuantity = userBattleItemForUserList.size();
+
+					Map <String, Object> absoluteParams = new HashMap<String, Object>();
+					absoluteParams.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, 
+							previousQuantity + addedAmount);
+
+					Map <String, Object> conditionParams = new HashMap<String, Object>();
+					conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
+					conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID,
+							battleItemId);
+
+					int numUpdated = DBConnection.get().updateTableRows(DBConstants.
+							TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
+							conditionParams, "and");
+					if(numUpdated != 1) {
+						log.error("either multiple rows or no rows are being updated "
+								+ "with regards to quantity");
+					}
+					totalInserts += numUpdated;
+				}
+				else {
+					Map<String, Object> newRow = new HashMap<String, Object>();
+
+					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__ID, randomUUID());
+					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID, battleItemId);
+					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, addedAmount);
+					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
+					newRows.add(newRow);
+					
+					int numUpdated = DBConnection.get()
+							.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+					if(numUpdated != 1) {
+						log.error("either too many rows or no rows are being added to"
+								+ "user battle items");
+					}
+					totalInserts += numUpdated;
+				}
+			}
+			return totalInserts;
 		}
 
+		
+		
+		
 		
 		
 		

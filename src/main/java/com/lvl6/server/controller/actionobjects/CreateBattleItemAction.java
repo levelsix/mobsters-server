@@ -9,6 +9,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchForUser;
@@ -18,6 +19,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.Builder;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
 import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -40,6 +42,7 @@ public class CreateBattleItemAction
 	private boolean isSpeedup;
 	private int gemsForSpeedup;
 	private Date now;
+	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	protected DeleteUtil deleteUtil;
@@ -167,7 +170,6 @@ public class CreateBattleItemAction
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
-		boolean successfulInsertOrUpdate = false;
 		
 		if(!removedList.isEmpty()) {
 			int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(removedList);
@@ -197,32 +199,16 @@ public class CreateBattleItemAction
 				log.error("did not delete all the battle items in queue");
 			}
 			
-			//add the elements to user's battle items
-			
-			
-			
-		}
-		
-		
-		
-		if(userResearchUuid != null) {
-			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId());
-		}
-		else {
-			Timestamp timeOfPurchase = new Timestamp(now.getTime());
-			boolean isComplete = false;
-			userResearchId = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
-			if(!userResearchId.equals("")) {
-				successfulInsertOrUpdate = true;
-				userResearchUuid = userResearchId;
+			//add the elements to user's battle items			
+			Map<Integer, List<BattleItemForUser>> userBattleItemMap = 
+					battleItemForUserRetrieveUtil.getBattleItemIdsToUserBattleItemForUser(userId);
+			int totalInserts = insertUtil.insertIntoBattleItemForUser(deletedList, userId, userBattleItemMap);
+			if(totalInserts != deletedList.size()) {
+				log.error("did not add all the battle items to user battle items");
 			}
 		}
 		
-		if(!successfulInsertOrUpdate) {
-			return false;
-		}
-		
-		if(!(gemsSpent > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
+		if(gemCostForCreating > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
 			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
 			log.error("not being purchased with gems, cash, or oil, what is this voodoo shit");
 			return false;

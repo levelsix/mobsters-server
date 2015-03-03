@@ -45,6 +45,7 @@ import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructurePvpBoard;
+import com.lvl6.info.StructureResearchHouse;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -79,6 +80,7 @@ import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.PvpBoardHouseProto;
 import com.lvl6.proto.StructureProto.PvpBoardObstacleProto;
+import com.lvl6.proto.StructureProto.ResearchHouseProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -122,6 +124,7 @@ import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructurePvpBoardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResearchHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -333,6 +336,7 @@ public class StaticDataContainer
 		setMoneyTrees(sdpb, structs, structProtos);
 		setPvpBoardHouses(sdpb, structs, structProtos);
 		setPvpBoardObstacles(sdpb);
+		setResearchHouses(sdpb, structs, structProtos);
 	}
 
 	//battle item factory
@@ -553,6 +557,25 @@ public class StaticDataContainer
 			sdpb.addPvpBoardObstacleProtos(pbop);
 		}
 	}
+	
+	private static void setResearchHouses(Builder sdpb,
+			Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos) {
+		
+		Map<Integer, StructureResearchHouse> idsToResearchHouse =
+				StructureResearchHouseRetrieveUtils.getStructIdsToResearchHouses();
+
+		for (Integer structId : idsToResearchHouse.keySet()) {
+            Structure s = structs.get(structId);
+            StructureInfoProto sip = structProtos.get(structId);
+			StructureResearchHouse srh = idsToResearchHouse.get(structId);
+
+			ResearchHouseProto rhp = CreateInfoProtoUtils
+					.createResearchHouseProtoFromStructureResearchHouse(s, sip, srh);
+			sdpb.addAllResearchHouses(rhp);
+		}
+	}
+
 
 	private static void setEvents(Builder sdpb) {
 		Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils

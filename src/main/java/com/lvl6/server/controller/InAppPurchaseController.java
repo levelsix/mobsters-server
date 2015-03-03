@@ -262,6 +262,7 @@ public class InAppPurchaseController extends EventController {
 			{
 				resBuilder.setPackageName(packageName);
 				resBuilder.setPackagePrice(realLifeCashCost);
+								
 				log.info("successful in-app purchase from user {} for package {}",
 						userId, packageName);
 

@@ -57,8 +57,22 @@ message ResearchPropertyProto {
 
 enum ResearchType {
 	NO_RESEARCH = 1;
+	COST = 2;
+	SPEED = 3;
+	INCREASE_QUEUE_SIZE = 4;
+	INCREASE_NUM_CAN_BUILD = 5;
+	XP_BONUS = 6;
+	INCREASE_CASH_PRODUCTION = 7;
+	INCREASE_OIL_PRODUCTION = 8;
+	INCREASE_ATTACK = 9;
+	INCREASE_HP = 10;
 }
 
 enum ResearchDomain {
 	NO_DOMAIN = 1;
+	RESTORATIVE = 2;
+	LEVELUP = 3;
+	RESOURCES = 4;
+	BATTLE = 5;
+	
 }

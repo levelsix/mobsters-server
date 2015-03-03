@@ -53,6 +53,7 @@ message StaticDataProto {
 	repeated ClanHouseProto allClanHouses = 32;
 	repeated MoneyTreeProto allMoneyTrees = 38;
 	repeated PvpBoardHouseProto allPvpBoardHouses = 39;
+	repeated ResearchHouseProto allResearchHouses = 41;
 	repeated BattleItemFactoryProto allBattleItemFactorys = 42;
 	
 	//the daily events where users can gain evolution and enhancement materials
@@ -82,16 +83,12 @@ message StaticDataProto {
 	
 	repeated ResearchProto research = 35;
 	
-	repeated BattleItemProto battleItem = 41;
-	
-	
-	
-	//optional BoosterPackProto starterPack = 36; defined above 
-	//repeated SkillSideEffectProto sideEffects = 37; defined above
-	
-	//repeated MoneyTreeProto allMoneyTrees = 38;
+	repeated BattleItemProto battleItem = 43;
 	
 	//repeated PvpBoardHouseProto allPvpBoardHouses = 39; defined above
 	repeated PvpBoardObstacleProto pvpBoardObstacleProtos = 40;
+	
+	//repeated ResearchHouseProto allResearchHouses = 41;
+	
 }
 	

@@ -380,10 +380,11 @@ public class InAppPurchaseAction
 			userStructId = insertUtil.insertUserStruct(userId, 
 					smt.getStructId(), cp, purchaseTime,
 			        lastRetrievedTime, isComplete);
+			
 		}
 		else {
 			userStructId = listOfUsersMoneyTree.get(0).getId();
-			boolean success = updateUtil.updatePurchaseTimeForMoneyTree(userStructId, 
+			boolean success = updateUtil.updatePurchaseTimeRetrieveTimeForMoneyTree(userStructId, 
 					purchaseTime);
 			if(!success) {
 				throw new RuntimeException(String.format(
@@ -398,7 +399,7 @@ public class InAppPurchaseAction
 		processPurchase(resBuilder);
 		
 		StructureForUser sfu = new StructureForUser(userStructId, userId, smt.getStructId(),
-				null, cp, purchaseTime,
+				purchaseTime, cp, purchaseTime,
 				true, "POSITION_1", 0);
 		
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
@@ -517,5 +518,7 @@ public class InAppPurchaseAction
 	public Map<String, String> getDetails() {
 		return details;
 	}
+
+
 
 }

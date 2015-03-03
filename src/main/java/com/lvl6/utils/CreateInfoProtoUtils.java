@@ -93,6 +93,7 @@ import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.StructurePvpBoard;
+import com.lvl6.info.StructureResearchHouse;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -212,6 +213,7 @@ import com.lvl6.proto.StructureProto.MoneyTreeProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.PvpBoardHouseProto;
 import com.lvl6.proto.StructureProto.PvpBoardObstacleProto;
+import com.lvl6.proto.StructureProto.ResearchHouseProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -3342,6 +3344,18 @@ public class CreateInfoProtoUtils {
 		mtpb.setIapProductId(smt.getIapProductId());
 			
 		return mtpb.build();
+	}
+	
+	public static ResearchHouseProto createResearchHouseProtoFromStructureResearchHouse(Structure s,
+	        StructureInfoProto sip, StructureResearchHouse srh) {
+        if (null == sip) {
+            sip = createStructureInfoProtoFromStructure(s);
+        }
+		
+		ResearchHouseProto.Builder rhpb = ResearchHouseProto.newBuilder();
+
+		rhpb.setStructId(srh.getStructId());
+		return rhpb.build();
 	}
 
 	public static ResourceStorageProto createResourceStorageProto(Structure s,
