@@ -27,6 +27,7 @@ public class IAPValues {
     public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".gem5";
     public static final String STARTERPACK = Globals.APPLE_BUNDLE_ID() + ".starterpack";
     public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID() + ".moneytree";
+    public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID() + ".moneytreenosale";
 
     public static final String PACKAGE1IMG = "pilegems.png";
     public static final String PACKAGE2IMG = "baggems.png";
@@ -58,7 +59,7 @@ public class IAPValues {
 
     public static final List<String> iapPackageNames = 
             Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5,
-            	STARTERPACK, MONEYTREE);
+            	STARTERPACK, MONEYTREE, MONEYTREENOSALE);
 
 //    public static final List<String> packageNames = 
 //            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
