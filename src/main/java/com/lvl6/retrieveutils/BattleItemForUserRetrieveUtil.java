@@ -45,7 +45,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		Object[] values = { userId };
 		String query = String.format(
 				"select * from %s where %s=?",
-				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
+				TABLE_NAME, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID);
 
 		List<BattleItemForUser> userBattleItems = null;
 		try {
@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME); 
 		querySb.append(" WHERE ");
-		querySb.append(DBConstants.STRUCTURE_FOR_USER__USER_ID);
+		querySb.append(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID);
 		querySb.append("=?");
 		List <Object> values = new ArrayList<Object>();
 		values.add(userId);
@@ -134,7 +134,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		if (userBattleItemIds != null && !userBattleItemIds.isEmpty() ) {
 			log.debug(String.format("retrieving userBattleItems with ids %s", userBattleItemIds));
 			querySb.append(" AND ");
-			querySb.append(DBConstants.STRUCTURE_FOR_USER__ID);
+			querySb.append(DBConstants.BATTLE_ITEM_FOR_USER__ID);
 			querySb.append(" IN (");
 
 			int amount = userBattleItemIds.size();

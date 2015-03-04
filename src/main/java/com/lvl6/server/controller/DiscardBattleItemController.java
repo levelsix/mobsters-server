@@ -111,13 +111,6 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
 
-			if (DiscardBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
-			}
 		} catch (Exception e) {
 			log.error("exception in DiscardBattleItemController processEvent", e);
 			//don't let the client hang

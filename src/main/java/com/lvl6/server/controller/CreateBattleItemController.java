@@ -146,7 +146,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					CreateBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateBattleItemResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
@@ -154,7 +154,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -168,7 +168,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateBattleItemResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateBattleItemController processEvent", e);
 			}
