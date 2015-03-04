@@ -155,12 +155,13 @@
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
 		<amqp.client.messages.queue>clientMessages1.2</amqp.client.messages.queue>
-		<!-- <amqp.client.messages.routing.key>messagesFromPlayers1.1</amqp.client.messages.routing.key> -->
 		<!-- <amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
 		]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
+		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers1.1" />
 		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers1.2" />
 		]]></amqp.client.messages.bindings>
 
