@@ -191,9 +191,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			//see if the user has the equips
 			if (userMonsters.size() != umchpList.size()) {
-				log.error("unexpected error: mismatch between user equips client sent and " +
-						"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
-						userMonsters + "\t continuing the processing");
+			    // commenting this out for 1.2 due to bug in client trying to send update for the clan monster.. don't push this to master. 
+//				log.error("unexpected error: mismatch between user equips client sent and " +
+//						"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
+//						userMonsters + "\t continuing the processing");
 			}
 		}
 
