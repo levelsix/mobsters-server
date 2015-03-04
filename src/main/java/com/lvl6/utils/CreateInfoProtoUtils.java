@@ -2931,33 +2931,30 @@ public class CreateInfoProtoUtils {
 		rpb.setResearchId(r.getId());
 		String rt = r.getResearchType();
 		if (null != rt) {
-//			try {
-//				Element elem = Element.valueOf(str);
-//				blpb.setOrbElements(elem);
-//			} catch (Exception e) {
-//				log.error(String.format(
-//					"invalid element. Board=%s", b),
-//					e);
-//			}
-			ResearchType researchType = ResearchType.valueOf(rt);
+			try {
+				ResearchType researchType = ResearchType.valueOf(rt);
 
-			rpb.setResearchType(researchType);
+				rpb.setResearchType(researchType);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid research type. Researchtype=%s", rt),
+					e);
+			}
+			
 		}
 		
 		String rd = r.getResearchDomain();
 
 		if (null != rd) {
-//			try {
-//				Element elem = Element.valueOf(str);
-//				blpb.setOrbElements(elem);
-//			} catch (Exception e) {
-//				log.error(String.format(
-//					"invalid element. Board=%s", b),
-//					e);
-//			}
-			ResearchDomain researchDomain = ResearchDomain.valueOf(rd);
+			try {
+				ResearchDomain researchDomain = ResearchDomain.valueOf(rd);
+				rpb.setResearchDomain(researchDomain);
+			} catch (Exception e) {
+				log.error(String.format(
+				"invalid research domain. Researchdomain=%s", rd),
+					e);
+			}
 
-			rpb.setResearchDomain(researchDomain);
 		}
 		
 		String str;
