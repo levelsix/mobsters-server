@@ -4219,7 +4219,7 @@ public class CreateInfoProtoUtils {
 		bipb.setName(bi.getName());
 		bipb.setImgName(bi.getImageName());
 		bipb.setBattleItemType(bi.getType());
-		bipb.setCategory(bi.getCategory());
+		bipb.setBattleItemCategory(bi.getBattleItemCategory());
 		bipb.setCreateResourceType(bi.getCreateResourceType());
 		bipb.setCreateCost(bi.getCreateCost());
 		bipb.setDescription(bi.getDescription());

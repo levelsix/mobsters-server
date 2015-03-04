@@ -91,49 +91,49 @@ public final class BattleItemsProto {
   }
 
   /**
-   * Protobuf enum {@code com.lvl6.proto.Category}
+   * Protobuf enum {@code com.lvl6.proto.BattleItemCategory}
    */
-  public enum Category
+  public enum BattleItemCategory
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>CATEGORY1 = 1;</code>
+     * <code>BATTLE_ITEM_CATEGORY1 = 1;</code>
      */
-    CATEGORY1(0, 1),
+    BATTLE_ITEM_CATEGORY1(0, 1),
     /**
-     * <code>CATEGORY2 = 2;</code>
+     * <code>BATTLE_ITEM_CATEGORY2 = 2;</code>
      */
-    CATEGORY2(1, 2),
+    BATTLE_ITEM_CATEGORY2(1, 2),
     ;
 
     /**
-     * <code>CATEGORY1 = 1;</code>
+     * <code>BATTLE_ITEM_CATEGORY1 = 1;</code>
      */
-    public static final int CATEGORY1_VALUE = 1;
+    public static final int BATTLE_ITEM_CATEGORY1_VALUE = 1;
     /**
-     * <code>CATEGORY2 = 2;</code>
+     * <code>BATTLE_ITEM_CATEGORY2 = 2;</code>
      */
-    public static final int CATEGORY2_VALUE = 2;
+    public static final int BATTLE_ITEM_CATEGORY2_VALUE = 2;
 
 
     public final int getNumber() { return value; }
 
-    public static Category valueOf(int value) {
+    public static BattleItemCategory valueOf(int value) {
       switch (value) {
-        case 1: return CATEGORY1;
-        case 2: return CATEGORY2;
+        case 1: return BATTLE_ITEM_CATEGORY1;
+        case 2: return BATTLE_ITEM_CATEGORY2;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<Category>
+    public static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<Category>
+    private static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>
         internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Category>() {
-            public Category findValueByNumber(int number) {
-              return Category.valueOf(number);
+          new com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>() {
+            public BattleItemCategory findValueByNumber(int number) {
+              return BattleItemCategory.valueOf(number);
             }
           };
 
@@ -150,9 +150,9 @@ public final class BattleItemsProto {
       return com.lvl6.proto.BattleItemsProto.getDescriptor().getEnumTypes().get(1);
     }
 
-    private static final Category[] VALUES = values();
+    private static final BattleItemCategory[] VALUES = values();
 
-    public static Category valueOf(
+    public static BattleItemCategory valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -164,12 +164,12 @@ public final class BattleItemsProto {
     private final int index;
     private final int value;
 
-    private Category(int index, int value) {
+    private BattleItemCategory(int index, int value) {
       this.index = index;
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.Category)
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemCategory)
   }
 
   public interface UserBattleItemProtoOrBuilder extends
@@ -1017,18 +1017,18 @@ public final class BattleItemsProto {
         getBattleItemTypeBytes();
 
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
-    boolean hasCategory();
+    boolean hasBattleItemCategory();
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
-    java.lang.String getCategory();
+    java.lang.String getBattleItemCategory();
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
     com.google.protobuf.ByteString
-        getCategoryBytes();
+        getBattleItemCategoryBytes();
 
     /**
      * <code>optional string createResourceType = 6;</code>
@@ -1154,7 +1154,7 @@ public final class BattleItemsProto {
             case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              category_ = bs;
+              battleItemCategory_ = bs;
               break;
             }
             case 50: {
@@ -1360,19 +1360,19 @@ public final class BattleItemsProto {
       }
     }
 
-    public static final int CATEGORY_FIELD_NUMBER = 5;
-    private java.lang.Object category_;
+    public static final int BATTLEITEMCATEGORY_FIELD_NUMBER = 5;
+    private java.lang.Object battleItemCategory_;
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
-    public boolean hasCategory() {
+    public boolean hasBattleItemCategory() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
-    public java.lang.String getCategory() {
-      java.lang.Object ref = category_;
+    public java.lang.String getBattleItemCategory() {
+      java.lang.Object ref = battleItemCategory_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -1380,22 +1380,22 @@ public final class BattleItemsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          category_ = s;
+          battleItemCategory_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string category = 5;</code>
+     * <code>optional string battleItemCategory = 5;</code>
      */
     public com.google.protobuf.ByteString
-        getCategoryBytes() {
-      java.lang.Object ref = category_;
+        getBattleItemCategoryBytes() {
+      java.lang.Object ref = battleItemCategory_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        category_ = b;
+        battleItemCategory_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1521,7 +1521,7 @@ public final class BattleItemsProto {
       name_ = "";
       imgName_ = "";
       battleItemType_ = "";
-      category_ = "";
+      battleItemCategory_ = "";
       createResourceType_ = "";
       createCost_ = 0;
       description_ = "";
@@ -1553,7 +1553,7 @@ public final class BattleItemsProto {
         output.writeBytes(4, getBattleItemTypeBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getCategoryBytes());
+        output.writeBytes(5, getBattleItemCategoryBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getCreateResourceTypeBytes());
@@ -1594,7 +1594,7 @@ public final class BattleItemsProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getCategoryBytes());
+          .computeBytesSize(5, getBattleItemCategoryBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1737,7 +1737,7 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         battleItemType_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        category_ = "";
+        battleItemCategory_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
         createResourceType_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -1794,7 +1794,7 @@ public final class BattleItemsProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.category_ = category_;
+        result.battleItemCategory_ = battleItemCategory_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -1845,9 +1845,9 @@ public final class BattleItemsProto {
           battleItemType_ = other.battleItemType_;
           onChanged();
         }
-        if (other.hasCategory()) {
+        if (other.hasBattleItemCategory()) {
           bitField0_ |= 0x00000010;
-          category_ = other.category_;
+          battleItemCategory_ = other.battleItemCategory_;
           onChanged();
         }
         if (other.hasCreateResourceType()) {
@@ -2153,24 +2153,24 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private java.lang.Object category_ = "";
+      private java.lang.Object battleItemCategory_ = "";
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
-      public boolean hasCategory() {
+      public boolean hasBattleItemCategory() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
-      public java.lang.String getCategory() {
-        java.lang.Object ref = category_;
+      public java.lang.String getBattleItemCategory() {
+        java.lang.Object ref = battleItemCategory_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            category_ = s;
+            battleItemCategory_ = s;
           }
           return s;
         } else {
@@ -2178,53 +2178,53 @@ public final class BattleItemsProto {
         }
       }
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
       public com.google.protobuf.ByteString
-          getCategoryBytes() {
-        java.lang.Object ref = category_;
+          getBattleItemCategoryBytes() {
+        java.lang.Object ref = battleItemCategory_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          category_ = b;
+          battleItemCategory_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
-      public Builder setCategory(
+      public Builder setBattleItemCategory(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000010;
-        category_ = value;
+        battleItemCategory_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
-      public Builder clearCategory() {
+      public Builder clearBattleItemCategory() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        category_ = getDefaultInstance().getCategory();
+        battleItemCategory_ = getDefaultInstance().getBattleItemCategory();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string category = 5;</code>
+       * <code>optional string battleItemCategory = 5;</code>
        */
-      public Builder setCategoryBytes(
+      public Builder setBattleItemCategoryBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000010;
-        category_ = value;
+        battleItemCategory_ = value;
         onChanged();
         return this;
       }
@@ -3194,17 +3194,18 @@ public final class BattleItemsProto {
       "edEnumConfig.proto\032\017Structure.proto\"[\n\023U" +
       "serBattleItemProto\022\n\n\002id\030\001 \001(\t\022\020\n\010userUu" +
       "id\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\020\n\010quanti" +
-      "ty\030\004 \001(\005\"\312\001\n\017BattleItemProto\022\024\n\014battleIt" +
+      "ty\030\004 \001(\005\"\324\001\n\017BattleItemProto\022\024\n\014battleIt" +
       "emId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(" +
-      "\t\022\026\n\016battleItemType\030\004 \001(\t\022\020\n\010category\030\005 " +
-      "\001(\t\022\032\n\022createResourceType\030\006 \001(\t\022\022\n\ncreat" +
-      "eCost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013powe" +
-      "rAmount\030\t \001(\005\"r\n\033BattleItemQueueForUserP",
-      "roto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t" +
-      "\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expectedStartT" +
-      "ime\030\004 \001(\003**\n\016BattleItemType\022\014\n\010ANTIDOTE\020" +
-      "\001\022\n\n\006HAMMER\020\002*(\n\010Category\022\r\n\tCATEGORY1\020\001" +
-      "\022\r\n\tCATEGORY2\020\002B\022B\020BattleItemsProto"
+      "\t\022\026\n\016battleItemType\030\004 \001(\t\022\032\n\022battleItemC" +
+      "ategory\030\005 \001(\t\022\032\n\022createResourceType\030\006 \001(" +
+      "\t\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013description\030\010 \001" +
+      "(\t\022\023\n\013powerAmount\030\t \001(\005\"r\n\033BattleItemQue",
+      "ueForUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010user" +
+      "Uuid\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expe" +
+      "ctedStartTime\030\004 \001(\003**\n\016BattleItemType\022\014\n" +
+      "\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*J\n\022BattleItemCat" +
+      "egory\022\031\n\025BATTLE_ITEM_CATEGORY1\020\001\022\031\n\025BATT" +
+      "LE_ITEM_CATEGORY2\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3231,7 +3232,7 @@ public final class BattleItemsProto {
     internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemProto_descriptor,
-        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "Category", "CreateResourceType", "CreateCost", "Description", "PowerAmount", });
+        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", });
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new

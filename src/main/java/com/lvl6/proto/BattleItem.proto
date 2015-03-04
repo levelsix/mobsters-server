@@ -26,7 +26,7 @@ message BattleItemProto {
 	optional string name = 2;
 	optional string imgName = 3;
 	optional string battleItemType = 4;
-	optional string category = 5;
+	optional string battleItemCategory = 5;
 	optional string createResourceType = 6;
 	optional int32 createCost = 7;
 	optional string description = 8;
@@ -45,9 +45,9 @@ enum BattleItemType {
 	
 }
 
-enum Category {
-	CATEGORY1 = 1;
-	CATEGORY2 = 2;
+enum BattleItemCategory {
+	BATTLE_ITEM_CATEGORY1 = 1;
+	BATTLE_ITEM_CATEGORY2 = 2;
 
 
 
