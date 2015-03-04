@@ -377,7 +377,7 @@ public class StartupController extends EventController {
 				//updateStatus = UpdateStatus.MAJOR_UPDATE;
 				//TODO: GET RID OF THIS.
 				//Only here because of bug with client's need to not force update
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
+				updateStatus = UpdateStatus.MINOR_UPDATE;
 				log.info("player has been notified of forced update");
 				
 			} else if (minorNum < serverMinorNum) {
