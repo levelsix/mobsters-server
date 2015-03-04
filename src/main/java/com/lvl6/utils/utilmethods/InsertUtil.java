@@ -260,4 +260,9 @@ public interface InsertUtil {
 			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
 			Timestamp timeOfEntry);
 	
+	public abstract boolean insertMonsterDeleteHistory(String monsterForUserId, String userId, 
+			int monsterId, int currExp, int currLvl, int currHealth, int numPieces, boolean isComplete, 
+			Timestamp combineStartTime, int teamSlotNumber, String sourceOfPieces, String deletedReason, 
+			String details, Timestamp deletedTime);
+	
 }
