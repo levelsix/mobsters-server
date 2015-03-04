@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class BattleItem implements Serializable {
 
-	public BattleItem(int id, String type, String category,
+	public BattleItem(int id, String type, String battleItemCategory,
 			String createResourceType, int createCost, String name,
 			String description, int powerAmount, String imageName) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.category = category;
+		this.battleItemCategory = battleItemCategory;
 		this.createResourceType = createResourceType;
 		this.createCost = createCost;
 		this.name = name;
@@ -25,7 +25,7 @@ public class BattleItem implements Serializable {
 	
 	private int id;
 	private String type;
-	private String category;
+	private String battleItemCategory;
 	private String createResourceType;
 	private int createCost;
 	private String name;
@@ -54,12 +54,12 @@ public class BattleItem implements Serializable {
 		this.type = type;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getBattleItemCategory() {
+		return battleItemCategory;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory(String battleItemCategory) {
+		this.battleItemCategory = battleItemCategory;
 	}
 
 	public String getCreateResourceType() {
@@ -112,13 +112,15 @@ public class BattleItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BattleItem [id=" + id + ", type=" + type + ", category="
-				+ category + ", createResourceType=" + createResourceType
+		return "BattleItem [id=" + id + ", type=" + type
+				+ ", battleItemCategory=" + battleItemCategory
+				+ ", createResourceType=" + createResourceType
 				+ ", createCost=" + createCost + ", name=" + name
 				+ ", description=" + description + ", powerAmount="
 				+ powerAmount + ", imageName=" + imageName + "]";
 	}
 
+	
 	
 	
 
