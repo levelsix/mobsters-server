@@ -285,7 +285,7 @@ public final class ResearchsProto {
     int getResearchId();
 
     /**
-     * <code>optional string researchType = 2;</code>
+     * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
      *
      * <pre>
      *reducing resource cost or speed
@@ -295,7 +295,7 @@ public final class ResearchsProto {
      */
     boolean hasResearchType();
     /**
-     * <code>optional string researchType = 2;</code>
+     * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
      *
      * <pre>
      *reducing resource cost or speed
@@ -303,21 +303,10 @@ public final class ResearchsProto {
      *optional ResearchType researchType = 2;
      * </pre>
      */
-    java.lang.String getResearchType();
-    /**
-     * <code>optional string researchType = 2;</code>
-     *
-     * <pre>
-     *reducing resource cost or speed
-     *TODO: turn into enum later on
-     *optional ResearchType researchType = 2;
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getResearchTypeBytes();
+    com.lvl6.proto.ResearchsProto.ResearchType getResearchType();
 
     /**
-     * <code>optional string researchDomain = 3;</code>
+     * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
      *
      * <pre>
      *battle, resources, restorative/healing
@@ -327,7 +316,7 @@ public final class ResearchsProto {
      */
     boolean hasResearchDomain();
     /**
-     * <code>optional string researchDomain = 3;</code>
+     * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
      *
      * <pre>
      *battle, resources, restorative/healing
@@ -335,18 +324,7 @@ public final class ResearchsProto {
      *optional ResearchDomain researchDomain = 3;
      * </pre>
      */
-    java.lang.String getResearchDomain();
-    /**
-     * <code>optional string researchDomain = 3;</code>
-     *
-     * <pre>
-     *battle, resources, restorative/healing
-     *TODO: turn into enum later on
-     *optional ResearchDomain researchDomain = 3;
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getResearchDomainBytes();
+    com.lvl6.proto.ResearchsProto.ResearchDomain getResearchDomain();
 
     /**
      * <code>optional string iconImgName = 4;</code>
@@ -532,16 +510,26 @@ public final class ResearchsProto {
               researchId_ = input.readInt32();
               break;
             }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              researchType_ = bs;
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.ResearchsProto.ResearchType value = com.lvl6.proto.ResearchsProto.ResearchType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                researchType_ = value;
+              }
               break;
             }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              researchDomain_ = bs;
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.ResearchsProto.ResearchDomain value = com.lvl6.proto.ResearchsProto.ResearchDomain.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                researchDomain_ = value;
+              }
               break;
             }
             case 34: {
@@ -660,9 +648,9 @@ public final class ResearchsProto {
     }
 
     public static final int RESEARCHTYPE_FIELD_NUMBER = 2;
-    private java.lang.Object researchType_;
+    private com.lvl6.proto.ResearchsProto.ResearchType researchType_;
     /**
-     * <code>optional string researchType = 2;</code>
+     * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
      *
      * <pre>
      *reducing resource cost or speed
@@ -674,7 +662,7 @@ public final class ResearchsProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string researchType = 2;</code>
+     * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
      *
      * <pre>
      *reducing resource cost or speed
@@ -682,47 +670,14 @@ public final class ResearchsProto {
      *optional ResearchType researchType = 2;
      * </pre>
      */
-    public java.lang.String getResearchType() {
-      java.lang.Object ref = researchType_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          researchType_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string researchType = 2;</code>
-     *
-     * <pre>
-     *reducing resource cost or speed
-     *TODO: turn into enum later on
-     *optional ResearchType researchType = 2;
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getResearchTypeBytes() {
-      java.lang.Object ref = researchType_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        researchType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.ResearchsProto.ResearchType getResearchType() {
+      return researchType_;
     }
 
     public static final int RESEARCHDOMAIN_FIELD_NUMBER = 3;
-    private java.lang.Object researchDomain_;
+    private com.lvl6.proto.ResearchsProto.ResearchDomain researchDomain_;
     /**
-     * <code>optional string researchDomain = 3;</code>
+     * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
      *
      * <pre>
      *battle, resources, restorative/healing
@@ -734,7 +689,7 @@ public final class ResearchsProto {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string researchDomain = 3;</code>
+     * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
      *
      * <pre>
      *battle, resources, restorative/healing
@@ -742,41 +697,8 @@ public final class ResearchsProto {
      *optional ResearchDomain researchDomain = 3;
      * </pre>
      */
-    public java.lang.String getResearchDomain() {
-      java.lang.Object ref = researchDomain_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          researchDomain_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string researchDomain = 3;</code>
-     *
-     * <pre>
-     *battle, resources, restorative/healing
-     *TODO: turn into enum later on
-     *optional ResearchDomain researchDomain = 3;
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getResearchDomainBytes() {
-      java.lang.Object ref = researchDomain_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        researchDomain_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.ResearchsProto.ResearchDomain getResearchDomain() {
+      return researchDomain_;
     }
 
     public static final int ICONIMGNAME_FIELD_NUMBER = 4;
@@ -1033,8 +955,8 @@ public final class ResearchsProto {
 
     private void initFields() {
       researchId_ = 0;
-      researchType_ = "";
-      researchDomain_ = "";
+      researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
+      researchDomain_ = com.lvl6.proto.ResearchsProto.ResearchDomain.NO_DOMAIN;
       iconImgName_ = "";
       name_ = "";
       predId_ = 0;
@@ -1062,10 +984,10 @@ public final class ResearchsProto {
         output.writeInt32(1, researchId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getResearchTypeBytes());
+        output.writeEnum(2, researchType_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getResearchDomainBytes());
+        output.writeEnum(3, researchDomain_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getIconImgNameBytes());
@@ -1109,11 +1031,11 @@ public final class ResearchsProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getResearchTypeBytes());
+          .computeEnumSize(2, researchType_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getResearchDomainBytes());
+          .computeEnumSize(3, researchDomain_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1271,9 +1193,9 @@ public final class ResearchsProto {
         super.clear();
         researchId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        researchType_ = "";
+        researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
         bitField0_ = (bitField0_ & ~0x00000002);
-        researchDomain_ = "";
+        researchDomain_ = com.lvl6.proto.ResearchsProto.ResearchDomain.NO_DOMAIN;
         bitField0_ = (bitField0_ & ~0x00000004);
         iconImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -1398,14 +1320,10 @@ public final class ResearchsProto {
           setResearchId(other.getResearchId());
         }
         if (other.hasResearchType()) {
-          bitField0_ |= 0x00000002;
-          researchType_ = other.researchType_;
-          onChanged();
+          setResearchType(other.getResearchType());
         }
         if (other.hasResearchDomain()) {
-          bitField0_ |= 0x00000004;
-          researchDomain_ = other.researchDomain_;
-          onChanged();
+          setResearchDomain(other.getResearchDomain());
         }
         if (other.hasIconImgName()) {
           bitField0_ |= 0x00000008;
@@ -1522,9 +1440,9 @@ public final class ResearchsProto {
         return this;
       }
 
-      private java.lang.Object researchType_ = "";
+      private com.lvl6.proto.ResearchsProto.ResearchType researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
       /**
-       * <code>optional string researchType = 2;</code>
+       * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
        *
        * <pre>
        *reducing resource cost or speed
@@ -1536,7 +1454,7 @@ public final class ResearchsProto {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string researchType = 2;</code>
+       * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
        *
        * <pre>
        *reducing resource cost or speed
@@ -1544,22 +1462,11 @@ public final class ResearchsProto {
        *optional ResearchType researchType = 2;
        * </pre>
        */
-      public java.lang.String getResearchType() {
-        java.lang.Object ref = researchType_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            researchType_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.ResearchsProto.ResearchType getResearchType() {
+        return researchType_;
       }
       /**
-       * <code>optional string researchType = 2;</code>
+       * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
        *
        * <pre>
        *reducing resource cost or speed
@@ -1567,40 +1474,17 @@ public final class ResearchsProto {
        *optional ResearchType researchType = 2;
        * </pre>
        */
-      public com.google.protobuf.ByteString
-          getResearchTypeBytes() {
-        java.lang.Object ref = researchType_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          researchType_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string researchType = 2;</code>
-       *
-       * <pre>
-       *reducing resource cost or speed
-       *TODO: turn into enum later on
-       *optional ResearchType researchType = 2;
-       * </pre>
-       */
-      public Builder setResearchType(
-          java.lang.String value) {
+      public Builder setResearchType(com.lvl6.proto.ResearchsProto.ResearchType value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         researchType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string researchType = 2;</code>
+       * <code>optional .com.lvl6.proto.ResearchType researchType = 2;</code>
        *
        * <pre>
        *reducing resource cost or speed
@@ -1610,33 +1494,14 @@ public final class ResearchsProto {
        */
       public Builder clearResearchType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        researchType_ = getDefaultInstance().getResearchType();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string researchType = 2;</code>
-       *
-       * <pre>
-       *reducing resource cost or speed
-       *TODO: turn into enum later on
-       *optional ResearchType researchType = 2;
-       * </pre>
-       */
-      public Builder setResearchTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        researchType_ = value;
+        researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
         onChanged();
         return this;
       }
 
-      private java.lang.Object researchDomain_ = "";
+      private com.lvl6.proto.ResearchsProto.ResearchDomain researchDomain_ = com.lvl6.proto.ResearchsProto.ResearchDomain.NO_DOMAIN;
       /**
-       * <code>optional string researchDomain = 3;</code>
+       * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
        *
        * <pre>
        *battle, resources, restorative/healing
@@ -1648,7 +1513,7 @@ public final class ResearchsProto {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string researchDomain = 3;</code>
+       * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
        *
        * <pre>
        *battle, resources, restorative/healing
@@ -1656,22 +1521,11 @@ public final class ResearchsProto {
        *optional ResearchDomain researchDomain = 3;
        * </pre>
        */
-      public java.lang.String getResearchDomain() {
-        java.lang.Object ref = researchDomain_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            researchDomain_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.ResearchsProto.ResearchDomain getResearchDomain() {
+        return researchDomain_;
       }
       /**
-       * <code>optional string researchDomain = 3;</code>
+       * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
        *
        * <pre>
        *battle, resources, restorative/healing
@@ -1679,40 +1533,17 @@ public final class ResearchsProto {
        *optional ResearchDomain researchDomain = 3;
        * </pre>
        */
-      public com.google.protobuf.ByteString
-          getResearchDomainBytes() {
-        java.lang.Object ref = researchDomain_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          researchDomain_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string researchDomain = 3;</code>
-       *
-       * <pre>
-       *battle, resources, restorative/healing
-       *TODO: turn into enum later on
-       *optional ResearchDomain researchDomain = 3;
-       * </pre>
-       */
-      public Builder setResearchDomain(
-          java.lang.String value) {
+      public Builder setResearchDomain(com.lvl6.proto.ResearchsProto.ResearchDomain value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         researchDomain_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string researchDomain = 3;</code>
+       * <code>optional .com.lvl6.proto.ResearchDomain researchDomain = 3;</code>
        *
        * <pre>
        *battle, resources, restorative/healing
@@ -1722,26 +1553,7 @@ public final class ResearchsProto {
        */
       public Builder clearResearchDomain() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        researchDomain_ = getDefaultInstance().getResearchDomain();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string researchDomain = 3;</code>
-       *
-       * <pre>
-       *battle, resources, restorative/healing
-       *TODO: turn into enum later on
-       *optional ResearchDomain researchDomain = 3;
-       * </pre>
-       */
-      public Builder setResearchDomainBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        researchDomain_ = value;
+        researchDomain_ = com.lvl6.proto.ResearchsProto.ResearchDomain.NO_DOMAIN;
         onChanged();
         return this;
       }
@@ -3230,25 +3042,27 @@ public final class ResearchsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Research.proto\022\016com.lvl6.proto\032\017Struct" +
-      "ure.proto\"\263\002\n\rResearchProto\022\022\n\nresearchI" +
-      "d\030\001 \001(\005\022\024\n\014researchType\030\002 \001(\t\022\026\n\016researc" +
-      "hDomain\030\003 \001(\t\022\023\n\013iconImgName\030\004 \001(\t\022\014\n\004na" +
-      "me\030\005 \001(\t\022\016\n\006predId\030\006 \001(\005\022\016\n\006succId\030\007 \001(\005" +
-      "\022\014\n\004desc\030\010 \001(\t\022\023\n\013durationMin\030\t \001(\005\022\017\n\007c" +
-      "ostAmt\030\n \001(\005\022.\n\010costType\030\013 \001(\0162\034.com.lvl" +
-      "6.proto.ResourceType\0229\n\nproperties\030\014 \003(\013" +
-      "2%.com.lvl6.proto.ResearchPropertyProto\"" +
-      "l\n\025ResearchPropertyProto\022\032\n\022researchProp",
-      "ertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchVa" +
-      "lue\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005*\330\001\n\014Resear" +
-      "chType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPE" +
-      "ED\020\003\022\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCREAS" +
-      "E_NUM_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030INCRE" +
-      "ASE_CASH_PRODUCTION\020\007\022\033\n\027INCREASE_OIL_PR" +
-      "ODUCTION\020\010\022\023\n\017INCREASE_ATTACK\020\t\022\017\n\013INCRE" +
-      "ASE_HP\020\n*X\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020" +
-      "\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOU" +
-      "RCES\020\004\022\n\n\006BATTLE\020\005B\020B\016ResearchsProto"
+      "ure.proto\"\361\002\n\rResearchProto\022\022\n\nresearchI" +
+      "d\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.com.lvl6" +
+      ".proto.ResearchType\0226\n\016researchDomain\030\003 " +
+      "\001(\0162\036.com.lvl6.proto.ResearchDomain\022\023\n\013i" +
+      "conImgName\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022\016\n\006predId" +
+      "\030\006 \001(\005\022\016\n\006succId\030\007 \001(\005\022\014\n\004desc\030\010 \001(\t\022\023\n\013" +
+      "durationMin\030\t \001(\005\022\017\n\007costAmt\030\n \001(\005\022.\n\010co" +
+      "stType\030\013 \001(\0162\034.com.lvl6.proto.ResourceTy" +
+      "pe\0229\n\nproperties\030\014 \003(\0132%.com.lvl6.proto.",
+      "ResearchPropertyProto\"l\n\025ResearchPropert" +
+      "yProto\022\032\n\022researchPropertyId\030\001 \001(\005\022\014\n\004na" +
+      "me\030\002 \001(\t\022\025\n\rresearchValue\030\003 \001(\002\022\022\n\nresea" +
+      "rchId\030\004 \001(\005*\330\001\n\014ResearchType\022\017\n\013NO_RESEA" +
+      "RCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCREASE_Q" +
+      "UEUE_SIZE\020\004\022\032\n\026INCREASE_NUM_CAN_BUILD\020\005\022" +
+      "\014\n\010XP_BONUS\020\006\022\034\n\030INCREASE_CASH_PRODUCTIO" +
+      "N\020\007\022\033\n\027INCREASE_OIL_PRODUCTION\020\010\022\023\n\017INCR" +
+      "EASE_ATTACK\020\t\022\017\n\013INCREASE_HP\020\n*X\n\016Resear" +
+      "chDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002",
+      "\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005" +
+      "B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

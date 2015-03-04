@@ -18,6 +18,9 @@ import com.google.protobuf.ByteString;
 import com.lvl6.info.Achievement;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.BattleItem;
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.Board;
 import com.lvl6.info.BoardObstacle;
 import com.lvl6.info.BoardProperty;
@@ -81,6 +84,7 @@ import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureBattleItemFactory;
 import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureForUser;
@@ -109,6 +113,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
@@ -176,8 +183,10 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.ResearchsProto.ResearchDomain;
 import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
+import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -192,6 +201,7 @@ import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.SkillsProto.SkillType;
+import com.lvl6.proto.StructureProto.BattleItemFactoryProto;
 import com.lvl6.proto.StructureProto.BoardObstacleType;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
@@ -981,6 +991,18 @@ public class CreateInfoProtoUtils {
 	
 		return pcapb.build();
 	}
+	
+	//battle item queue proto
+	public static BattleItemQueueForUserProto createBattleItemQueueForUserProto(BattleItemQueueForUser biqfu) {
+		BattleItemQueueForUserProto.Builder biqfupb = BattleItemQueueForUserProto.newBuilder();
+		biqfupb.setUserUuid(biqfu.getUserId());
+		biqfupb.setBattleItemId(biqfu.getBattleItemId());
+		biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
+		biqfupb.setPriority(biqfu.getPriority());
+		
+		return biqfupb.build();
+	}
+	
 
 	/**Board.proto****************************************/
 	public static BoardLayoutProto createBoardLayoutProto(Board b,
@@ -2907,8 +2929,8 @@ public class CreateInfoProtoUtils {
 		ResearchProto.Builder rpb = ResearchProto.newBuilder();
 		
 		rpb.setResearchId(r.getId());
-		String str = r.getResearchType();
-		if (null != str && !str.isEmpty()) {
+		String rt = r.getResearchType();
+		if (null != rt) {
 //			try {
 //				Element elem = Element.valueOf(str);
 //				blpb.setOrbElements(elem);
@@ -2917,11 +2939,14 @@ public class CreateInfoProtoUtils {
 //					"invalid element. Board=%s", b),
 //					e);
 //			}
-			rpb.setResearchType(str);
+			ResearchType researchType = ResearchType.valueOf(rt);
+
+			rpb.setResearchType(researchType);
 		}
 		
-		str = r.getResearchDomain();
-		if (null != str && !str.isEmpty()) {
+		String rd = r.getResearchDomain();
+
+		if (null != rd) {
 //			try {
 //				Element elem = Element.valueOf(str);
 //				blpb.setOrbElements(elem);
@@ -2930,9 +2955,12 @@ public class CreateInfoProtoUtils {
 //					"invalid element. Board=%s", b),
 //					e);
 //			}
-			rpb.setResearchDomain(str);
+			ResearchDomain researchDomain = ResearchDomain.valueOf(rd);
+
+			rpb.setResearchDomain(researchDomain);
 		}
 		
+		String str;
 		str = r.getIconImgName();
 		if (null != str && !str.isEmpty()) {
 			rpb.setIconImgName(str);
@@ -3710,6 +3738,21 @@ public class CreateInfoProtoUtils {
 		upopb.setPosY(pbofu.getPosY());
 		return upopb.build();
 	}
+	public static BattleItemFactoryProto createBattleItemFactoryProto(Structure s, 
+			StructureInfoProto sip, StructureBattleItemFactory sbif) {
+		if (null == sip) {
+			sip = createStructureInfoProtoFromStructure(s);
+		}
+		
+		BattleItemFactoryProto.Builder bifpb = BattleItemFactoryProto.newBuilder();
+		bifpb.setPowerLimit(sbif.getPowerLimit());
+		bifpb.setStructInfo(sip);
+		
+		return bifpb.build();
+	}
+	
+	
+	/**research.proto*******************************************/
 	
 	/**Task.proto*****************************************************/
 	/*
@@ -4166,6 +4209,45 @@ public class CreateInfoProtoUtils {
 		
 		return fdpb.build();
 	}
+	
+	
+	/**BattleItemProto*********************************************/
+	
+	public static BattleItemProto createBattleItemProtoFromBattleItem(BattleItem bi) {
+		BattleItemProto.Builder bipb = BattleItemProto.newBuilder();
+		bipb.setBattleItemId(bi.getId());
+		bipb.setName(bi.getName());
+		bipb.setImgName(bi.getImageName());
+		bipb.setBattleItemType(bi.getType());
+		bipb.setCategory(bi.getCategory());
+		bipb.setCreateResourceType(bi.getCreateResourceType());
+		bipb.setCreateCost(bi.getCreateCost());
+		bipb.setDescription(bi.getDescription());
+		bipb.setPowerAmount(bi.getPowerAmount());
+		
+		return bipb.build();
+	}
+	
+	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(BattleItemForUser bifu) {
+		UserBattleItemProto.Builder ubipb = UserBattleItemProto.newBuilder();
+		ubipb.setUserUuid(bifu.getUserId());
+		ubipb.setBattleItemId(bifu.getBattleItemId());
+		ubipb.setQuantity(bifu.getQuantity());
+		ubipb.setId(bifu.getId());
+		
+		return ubipb.build();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**TournamentStuff.proto******************************************/
 //	public static TournamentEventProto createTournamentEventProtoFromTournamentEvent(

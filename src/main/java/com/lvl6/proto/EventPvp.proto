@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "Battle.proto";
+import "BattleItem.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -12,7 +13,6 @@ option java_outer_classname = "EventPvpProto";
 
 
 ///atm, the necessary non event protos for pvp are in Battle.proto
-
 
 
 message QueueUpRequestProto {
@@ -164,3 +164,5 @@ message SetDefendingMsgResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+
