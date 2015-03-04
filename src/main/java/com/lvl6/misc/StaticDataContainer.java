@@ -821,8 +821,9 @@ public class StaticDataContainer
 
 		if (null == idsToBattleItem || idsToBattleItem.isEmpty()) {
 			log.warn("setBattleItem() no battle item");
+			return;
 		}
-
+		
 		for (Integer battleItemId : idsToBattleItem.keySet())
 		{
 			BattleItem bi = idsToBattleItem.get(battleItemId);
