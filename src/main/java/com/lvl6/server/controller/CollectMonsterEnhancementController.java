@@ -1,6 +1,8 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +35,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class CollectMonsterEnhancementController extends EventController {
@@ -266,10 +269,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds)
 	{
 
-		//TODO: keep track of the userMonsters that are deleted
-
-
 		//TODO: keep track of the monsters that were enhancing
+		for(String feederId : usedUpMfuIds) {
+			InsertUtils.get().insertMonsterEnhanceHistory(uId, String monsterForUserIdBeingEnhanced,
+					String feederMonsterForUserId, int currExp, int prevExp, Timestamp enhancingStartTime, 
+					Timestamp timeOfEntry, int enhancingCost)
+		}
 
 		//delete the selected monsters from  the enhancing table
 		int num = DeleteUtils.get().deleteMonsterEnhancingForUser(
@@ -285,8 +290,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info(String.format(
 			"deleted monster_for_user rows. numDeleted=%s, inEnhancing=%s, deletedIds=%s",
 			num, inEnhancing, usedUpMfuIds));
+		
+		writeToMonsterDeleteHistory(usedUpMfuIds);
+		log.info("added deleted monsters to monster delete table");
 
 	}
+	
+	private void writeToMonsterDeleteHistory(List<String> deletedMonsterForUserIds) {
+		String deletedReason = "enhancing";
+		String details = "feeder monsters";
+		Date now = new Date();
+		Timestamp deletedTime = new Timestamp(now.getTime());
+		for(String userMonsterId : deletedMonsterForUserIds) {
+			MonsterForUser mfu = monsterForUserRetrieveUtil.getSpecificUserMonster(userMonsterId);
+			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, null, deletedTime);
+		}
+	}
+	
+	
 
 	public Locker getLocker() {
 		return locker;
