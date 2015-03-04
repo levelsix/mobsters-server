@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,11 +25,9 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.Builder;
@@ -42,6 +41,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -54,6 +54,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected InsertUtil insertUtil;
 	
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
@@ -198,6 +201,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
 						catalystUserMonsterId, evolvingUserMonsterIds);
+				
+				String userMonsterId1 = evolvingUserMonsterIds.get(0);
+				String userMonsterId2 = evolvingUserMonsterIds.get(1);
+				Date now = new Date();
+				Timestamp currentTime = new Timestamp(now.getTime());
+				
+				insertUtil.insertMonsterEvolveHistory(userId, userMonsterId1, 
+						userMonsterId2, catalystUserMonsterId, clientTime, currentTime);
 			}
 
 		} catch (Exception e) {
@@ -394,46 +405,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 	}
-	
-	private String randomUUID() {
-		return UUID.randomUUID().toString();
-	}
-	
-	public void writeToUserMonsterEvolutionHistory(String userId, String userMonsterId1, 
-			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
-			Timestamp timeOfEntry) {
-		
-		String id = randomUUID();
-		
-		Object[] values = { id, userId, userMonsterId1, userMonsterId2, 
-				catalystMonsterId, startTime, timeOfEntry };
-		String query = String.format(
-				"INSERT INTO %s (?, ?, ?, ?, ?, ?, ?) VALUES(",
-				TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
-
-		List<StructureForUser> userStructs = null;
-		try {
-			userStructs = this.jdbcTemplate
-					.query(query, values, rowMapper);
-
-		} catch (Exception e) {
-			log.error("structure for user retrieve db error.", e);
-			userStructs = new ArrayList<StructureForUser>();
-			//		} finally {
-			//			DBConnection.get().close(rs, null, conn);
-		}
-		return userStructs;
-		
-		
-		
-		  
-		
-		
-		
-		
-	}
-
-
 	
 
 	public Locker getLocker() {

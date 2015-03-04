@@ -259,7 +259,7 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
 	
-	public abstract int insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+	public abstract boolean insertMonsterEvolveHistory(String userId, String userMonsterId1, 
 			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
 			Timestamp timeOfEntry);
 	
