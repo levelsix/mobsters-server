@@ -2,6 +2,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "Board.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
@@ -176,6 +177,9 @@ enum EventProtocolRequest {
 	C_DEV_EVENT = 200;
 	C_PERFORM_RESEARCH_EVENT = 201;
 	C_FINISH_PERFORMING_RESEARCH_EVENT = 202;
+	C_CREATE_BATTLE_ITEM_EVENT = 203;
+	C_DISCARD_BATTLE_ITEM_EVENT = 204;
+	
 	
 }
 
@@ -316,5 +320,8 @@ enum EventProtocolResponse {
 	S_DEV_EVENT = 200;
 	S_PERFORM_RESEARCH_EVENT = 201;
 	S_FINISH_PERFORMING_RESEARCH_EVENT = 202;
+	
+	S_CREATE_BATTLE_ITEM_EVENT = 203;
+	S_DISCARD_BATTLE_ITEM_EVENT = 204;
 	
 }

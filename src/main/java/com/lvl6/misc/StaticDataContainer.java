@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Achievement;
+import com.lvl6.info.BattleItem;
 import com.lvl6.info.Board;
 import com.lvl6.info.BoardObstacle;
 import com.lvl6.info.BoardProperty;
@@ -36,6 +37,7 @@ import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureBattleItemFactory;
 import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureHospital;
@@ -53,6 +55,7 @@ import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoardProto.BoardLayoutProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -67,6 +70,7 @@ import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.BattleItemFactoryProto;
 import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
@@ -88,6 +92,7 @@ import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BattleItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoardObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoardPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoardRetrieveUtils;
@@ -111,6 +116,7 @@ import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureBattleItemFactoryRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
@@ -183,6 +189,7 @@ public class StaticDataContainer
 		setPrereqs(sdpb);
 		setBoards(sdpb);
 		setResearch(sdpb);
+		setBattleItem(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -315,6 +322,7 @@ public class StaticDataContainer
 			structProtos.put(structId, sip);
 		}
 
+		setBattleItemFactories(sdpb, structs, structProtos);
 		setGenerators(sdpb, structs, structProtos);
 		setStorages(sdpb, structs, structProtos);
 		setHospitals(sdpb, structs, structProtos);
@@ -329,6 +337,21 @@ public class StaticDataContainer
 		setPvpBoardHouses(sdpb, structs, structProtos);
 		setPvpBoardObstacles(sdpb);
 		setResearchHouses(sdpb, structs, structProtos);
+	}
+
+	//battle item factory
+	private static void setBattleItemFactories(Builder sdpb, Map<Integer, Structure> structs,
+			Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureBattleItemFactory> idsToFactories = 
+				StructureBattleItemFactoryRetrieveUtils.getStructIdsToBattleItemFactorys();
+		for (Integer structId : idsToFactories.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureBattleItemFactory sbif = idsToFactories.get(structId);
+
+			BattleItemFactoryProto bifp = CreateInfoProtoUtils.createBattleItemFactoryProto(s, sip, sbif);
+			sdpb.addAllBattleItemFactorys(bifp);
+		}
 	}
 
 
@@ -791,5 +814,32 @@ public class StaticDataContainer
 			sdpb.addResearch(rlp);
 		}
 	}
+	
+	private static void setBattleItem(Builder sdpb) {
+		Map<Integer, BattleItem> idsToBattleItem =
+				BattleItemRetrieveUtils.getBattleItemIdsToBattleItems();
+
+		if (null == idsToBattleItem || idsToBattleItem.isEmpty()) {
+			log.warn("setBattleItem() no battle item");
+		}
+
+		for (Integer battleItemId : idsToBattleItem.keySet())
+		{
+			BattleItem bi = idsToBattleItem.get(battleItemId);
+
+			BattleItemProto bip = CreateInfoProtoUtils
+					.createBattleItemProtoFromBattleItem(bi);
+
+			sdpb.addBattleItem(bip);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

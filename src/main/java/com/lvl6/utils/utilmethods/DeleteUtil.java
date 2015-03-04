@@ -2,6 +2,8 @@ package com.lvl6.utils.utilmethods;
 
 import java.util.List;
 
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 
 
@@ -73,5 +75,10 @@ public interface DeleteUtil {
   public abstract int deleteClanMemberTeamDonationSolicitation(List<String> ids);
   
   public abstract int deleteMonsterSnapshotForUser(List<MonsterSnapshotForUser> snapshots);
+  
+  public abstract int deleteFromBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
+  
+  public abstract int deleteUserBattleItems(List<BattleItemForUser> bifuList);
+
   
 }

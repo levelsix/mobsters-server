@@ -195,7 +195,7 @@ public class Globals {
     
     public static final int NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING = 1;
     
-    public static final String APPLE_BUNDLE_ID(){return AppContext.getApplicationContext().getBean(Globals.class).getAppleBundleId();};// = "com.lvl6.kingdom";
+    public static final String APPLE_BUNDLE_ID(){return AppContext.getApplicationContext().getBean(Globals.class).getAppleBundleId();};
 
     public static final float VERSION_NUMBER(){return AppContext.getApplicationContext().getBean(Globals.class).getVersionNumber();};
 

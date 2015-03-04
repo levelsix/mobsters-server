@@ -1044,6 +1044,36 @@ public class User implements Serializable {
 		return false;
 	}
 	
+	public boolean updateGemsCashAndOilFromBattleItem(int gemsDelta, 
+			int cashDelta, int oilDelta) {
+
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		if(gemsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
+		}
+		if(cashDelta != 0) {
+			relativeParams.put(DBConstants.USER__CASH, cashDelta);
+		}
+		if(oilDelta != 0) {
+			relativeParams.put(DBConstants.USER__OIL, oilDelta);
+		}
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, 
+				relativeParams, null, conditionParams, "and");
+		
+		if(numUpdated ==1) {
+			this.gems += gemsDelta;
+			this.cash += cashDelta;
+			this.oil += oilDelta;
+			
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public String getId() {
 		return id;
