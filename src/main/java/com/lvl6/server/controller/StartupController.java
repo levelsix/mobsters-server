@@ -374,10 +374,7 @@ public class StartupController extends EventController {
 			if ( superNum < serverSuperNum ||
 				majorNum < serverMajorNum )
 			{
-				//updateStatus = UpdateStatus.MAJOR_UPDATE;
-				//TODO: GET RID OF THIS.
-				//Only here because of bug with client's need to not force update
-				updateStatus = UpdateStatus.MINOR_UPDATE;
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
 				log.info("player has been notified of forced update");
 				
 			} else if (minorNum < serverMinorNum) {
