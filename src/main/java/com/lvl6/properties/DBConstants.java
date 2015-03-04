@@ -843,7 +843,7 @@ public class DBConstants {
 	/*BATTLE ITEM*/
 	public static final String BATTLE_ITEM_CONFIG__ID = GENERIC__ID;
 	public static final String BATTLE_ITEM_CONFIG__TYPE = "type";
-	public static final String BATTLE_ITEM_CONFIG__CATEGORY = "category";
+	public static final String BATTLE_ITEM_CONFIG__CATEGORY = "battle_item_category";
 	public static final String BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE = "create_resource_type";
 	public static final String BATTLE_ITEM_CONFIG__CREATE_COST = "create_cost";
 	public static final String BATTLE_ITEM_CONFIG__NAME = "name";
