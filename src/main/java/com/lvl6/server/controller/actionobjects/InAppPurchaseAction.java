@@ -482,7 +482,8 @@ public class InAppPurchaseAction
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		curCurrencies.put(gems, user.getGems());
-
+		currencyDeltas.put(gems, gemChange);
+		
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemChange) {
 			reasonsForChanges.put(gems,
