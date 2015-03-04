@@ -278,6 +278,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		userMonsterIds.add(uMonsterIdOne);
 		String uMonsterIdTwo = mefu.getMonsterForUserIdTwo();
 		userMonsterIds.add(uMonsterIdTwo);
+		Timestamp combineStartTime = new Timestamp(mefu.getStartTime().getTime());
 		int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
 		log.info(String.format("num monsterForUser deleted: %s", num));
 		
@@ -285,6 +286,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		num = DeleteUtils.get().deleteMonsterEvolvingForUser(catalystUserMonsterId,
 				uMonsterIdOne, uMonsterIdTwo, uId);
 		log.info(String.format("num evolutions deleted: %s", num));
+		
+		writeToUserMonsterDeleteHistory(uMonsterIdOne, uMonsterIdTwo, catalystUserMonsterId, uId, combineStartTime, idsToUserMonsters);
+		
 		
 		//insert the COMPLETE evolved monster into monster for user
 		//get evolved version of monster
@@ -301,6 +305,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			String mfuId = evovlvedMfuId.get(0);
 			evolvedUserMonster.setId(mfuId);
 		}
+		
+
 		
 		log.info(String.format("evolvedUserMonster=%s", evolvedUserMonster));
 		log.info(String.format("userMonsters=%s", userMonsters));
@@ -381,6 +387,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange, previousCurrencyMap,
 				currentCurrencyMap, changeReasonsMap, detailsMap);
+	}
+	
+	public void writeToUserMonsterDeleteHistory(String uMonsterIdOne, String uMonsterIdTwo, 
+			String catalystUserMonsterId, String userId, Timestamp combineStartTime, 
+			Map<String, MonsterForUser> idsToUserMonsters) {
+		String deletedReason = "monster evolution";
+		Date d = new Date();
+		Timestamp deletedTime = new Timestamp(d.getTime());
+		
+		for(String id : idsToUserMonsters.keySet()) {
+			MonsterForUser mfu = idsToUserMonsters.get(id);
+			String details = "";
+			if(id.equals(uMonsterIdOne)) {
+				details = "monster one of evolution";
+			}
+			else if(id.equals(uMonsterIdTwo)) {
+				details = "monster two of evolution";
+			}
+			else if(id.equals(catalystUserMonsterId)) {
+				details = "catalystUserMonsterId";
+			}
+
+			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, combineStartTime, deletedTime);
+		}
+
 	}
 
 	public Locker getLocker() {

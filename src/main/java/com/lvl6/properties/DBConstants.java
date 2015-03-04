@@ -426,14 +426,12 @@ public class DBConstants {
 	/*MONSTER ENHANCING HISTORY*/
 	public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
 	public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
-	public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
-	public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
+	public static final String MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED = "mfu_id_being_enhanced";
+	public static final String MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID = "feeder_mfu_id";
 	public static final String MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE = "current_experience";
 	public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE = "previous_experience";
 	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME = "enhancing_start_time";
 	public static final String MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
-	public static final String MONSTER_ENHANCING_HISTORY__IS_FEEDER = "is_feeder";
-	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_CANCELLED = "enhancing_cancelled";
 	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_COST = "enhancing_cost";
 
 

@@ -2087,22 +2087,23 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public boolean insertMonsterDeleteHistory(String monsterForUserId, String userId, 
-			int monsterId, int currExp, int currLvl, int currHealth, int numPieces, boolean isComplete, 
-			Timestamp combineStartTime, int teamSlotNumber, String sourceOfPieces, String deletedReason, 
-			String details, Timestamp deletedTime) {
+	public boolean insertMonsterDeleteHistory(MonsterForUser mfu, String deletedReason, 
+			String details, Timestamp combineStartTime, Timestamp deletedTime) {
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 		
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, monsterForUserId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, monsterId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE, currExp);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_LEVEL, currLvl);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, currHealth);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, numPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, isComplete);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, teamSlotNumber);
-		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, sourceOfPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, mfu.getId());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, mfu.getUserId());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, mfu.getMonsterId());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE, mfu.getCurrentExp());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_LEVEL, mfu.getCurrentLvl());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, mfu.getCurrentHealth());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, mfu.getNumPieces());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, mfu.isComplete());
+		if(combineStartTime != null) {
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__COMBINE_START_TIME, combineStartTime);
+		}
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, mfu.getSourceOfPieces());
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_REASON, deletedReason);
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DETAILS, details);
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_TIME, deletedTime);
@@ -2115,7 +2116,31 @@ public class InsertUtils implements InsertUtil{
 		return false;
 	}
 		
+	@Override
+	public boolean insertMonsterEnhanceHistory(String userId, String monsterForUserIdBeingEnhanced,
+			String feederMonsterForUserId, int currExp, int prevExp, Timestamp enhancingStartTime, 
+			Timestamp timeOfEntry, int enhancingCost) {
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		String id = randomUUID();
 		
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ID, id);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userId);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED, monsterForUserIdBeingEnhanced);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID, feederMonsterForUserId);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE, currExp);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE, prevExp);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME, enhancingStartTime);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY, timeOfEntry);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_COST, enhancingCost);
+		
+		int numInserted = DBConnection.get().insertIntoTableBasic(
+				DBConstants.TABLE_MONSTER_ENHANCING_HISTORY, insertParams);
+		if (numInserted == 1) {
+			return true;
+		}
+		return false;
+		
+	}
 		
 		
 		
