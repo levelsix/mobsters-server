@@ -249,4 +249,8 @@ public interface InsertUtil {
 	
 	public abstract String insertIntoMonsterSnapshotForUser(MonsterSnapshotForUser msfu);
 	
+	public abstract boolean insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
+			Timestamp timeOfEntry);
+	
 }
