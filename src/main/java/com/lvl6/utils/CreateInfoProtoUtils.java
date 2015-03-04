@@ -176,8 +176,10 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.ResearchsProto.ResearchDomain;
 import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
+import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -2907,8 +2909,8 @@ public class CreateInfoProtoUtils {
 		ResearchProto.Builder rpb = ResearchProto.newBuilder();
 		
 		rpb.setResearchId(r.getId());
-		String str = r.getResearchType();
-		if (null != str && !str.isEmpty()) {
+		String rt = r.getResearchType();
+		if (null != rt) {
 //			try {
 //				Element elem = Element.valueOf(str);
 //				blpb.setOrbElements(elem);
@@ -2917,11 +2919,14 @@ public class CreateInfoProtoUtils {
 //					"invalid element. Board=%s", b),
 //					e);
 //			}
-			rpb.setResearchType(str);
+			ResearchType researchType = ResearchType.valueOf(rt);
+
+			rpb.setResearchType(researchType);
 		}
 		
-		str = r.getResearchDomain();
-		if (null != str && !str.isEmpty()) {
+		String rd = r.getResearchDomain();
+
+		if (null != rd) {
 //			try {
 //				Element elem = Element.valueOf(str);
 //				blpb.setOrbElements(elem);
@@ -2930,9 +2935,12 @@ public class CreateInfoProtoUtils {
 //					"invalid element. Board=%s", b),
 //					e);
 //			}
-			rpb.setResearchDomain(str);
+			ResearchDomain researchDomain = ResearchDomain.valueOf(rd);
+
+			rpb.setResearchDomain(researchDomain);
 		}
 		
+		String str;
 		str = r.getIconImgName();
 		if (null != str && !str.isEmpty()) {
 			rpb.setIconImgName(str);

@@ -17,12 +17,12 @@ message ResearchProto {
 	//reducing resource cost or speed
 	//TODO: turn into enum later on
 	//optional ResearchType researchType = 2;
-	optional string researchType = 2; 
+	optional ResearchType researchType = 2; 
 	
 	//battle, resources, restorative/healing
 	//TODO: turn into enum later on
 	//optional ResearchDomain researchDomain = 3;
-	optional string researchDomain = 3;
+	optional ResearchDomain researchDomain = 3;
 	
 	optional string iconImgName = 4;
 	optional string name = 5;

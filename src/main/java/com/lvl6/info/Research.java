@@ -2,6 +2,9 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
+import com.lvl6.proto.ResearchsProto.ResearchDomain;
+import com.lvl6.proto.ResearchsProto.ResearchType;
+
 public class Research implements Serializable {
 	
 	private static final long serialVersionUID = -7558436754504360378L;
@@ -58,25 +61,6 @@ public class Research implements Serializable {
 		this.id = id;
 	}
 
-	public String getResearchType()
-	{
-		return researchType;
-	}
-
-	public void setResearchType( String researchType )
-	{
-		this.researchType = researchType;
-	}
-
-	public String getResearchDomain()
-	{
-		return researchDomain;
-	}
-
-	public void setResearchDomain( String researchDomain )
-	{
-		this.researchDomain = researchDomain;
-	}
 
 	public String getIconImgName()
 	{
@@ -185,5 +169,24 @@ public class Research implements Serializable {
 			+ costType
 			+ "]";
 	}
-	
+
+	public String getResearchType() {
+		return researchType;
+	}
+
+	public void setResearchType(String researchType) {
+		this.researchType = researchType;
+	}
+
+	public String getResearchDomain() {
+		return researchDomain;
+	}
+
+	public void setResearchDomain(String researchDomain) {
+		this.researchDomain = researchDomain;
+	}
+
+
+
+
 }

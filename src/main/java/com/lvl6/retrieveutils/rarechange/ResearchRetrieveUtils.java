@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.ResearchsProto.ResearchDomain;
+import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class ResearchRetrieveUtils {
