@@ -6,6 +6,9 @@ public class DBConstants {
 	public static final String TABLE_ACHIEVEMENT_CONFIG = "achievement_config";
 	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
+	public static final String TABLE_BATTLE_ITEM_CONFIG = "battle_item_config";
+	public static final String TABLE_BATTLE_ITEM_FOR_USER = "battle_item_for_user";
+	public static final String TABLE_BATTLE_ITEM_QUEUE_FOR_USER = "battle_item_queue_for_user";
 	public static final String TABLE_BOARD_CONFIG = "board_config";
 	public static final String TABLE_BOARD_OBSTACLE_CONFIG = "board_obstacle_config";
 	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
@@ -93,6 +96,7 @@ public class DBConstants {
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
 	public static final String TABLE_SKILL_SIDE_EFFECT_CONFIG = "skill_side_effect_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
+	public static final String TABLE_STRUCTURE_BATTLE_ITEM_FACTORY_CONFIG = "structure_battle_item_factory_config";
 	public static final String TABLE_STRUCTURE_CONFIG = "structure_config";
 	public static final String TABLE_STRUCTURE_CLAN_HOUSE_CONFIG = "structure_clan_house_config";
 	public static final String TABLE_STRUCTURE_EVO_CHAMBER_CONFIG = "structure_evo_chamber_config";
@@ -146,6 +150,18 @@ public class DBConstants {
 	/*AVAILABLE REFERRAL CODES*/
 	public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
 	public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
+
+	/*BATTLE ITEM FOR USER*/
+	public static final String BATTLE_ITEM_FOR_USER__ID = GENERIC__ID;
+	public static final String BATTLE_ITEM_FOR_USER__USER_ID = "user_id";
+	public static final String BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
+	public static final String BATTLE_ITEM_FOR_USER__QUANTITY = "quantity";
+	
+	/*BATTLE ITEM QUEUE FOR USER*/
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY = "priority";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__USER_ID = "user_id";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 	
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
@@ -822,6 +838,18 @@ public class DBConstants {
 	public static final String ALERT_ON_STARTUP__IS_ACTIVE = "is_active";
 
 	public static final String BANNED_USER__USER_ID = GENERIC__USER_ID;
+	
+
+	/*BATTLE ITEM*/
+	public static final String BATTLE_ITEM_CONFIG__ID = GENERIC__ID;
+	public static final String BATTLE_ITEM_CONFIG__TYPE = "type";
+	public static final String BATTLE_ITEM_CONFIG__CATEGORY = "category";
+	public static final String BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE = "create_resource_type";
+	public static final String BATTLE_ITEM_CONFIG__CREATE_COST = "create_cost";
+	public static final String BATTLE_ITEM_CONFIG__NAME = "name";
+	public static final String BATTLE_ITEM_CONFIG__DESCRIPTION = "description";
+	public static final String BATTLE_ITEM_CONFIG__POWER_AMOUNT = "power_amount";
+	public static final String BATTLE_ITEM_CONFIG__IMAGE_NAME = "image_name";
 
 	/*BOARD*/
 	public static final String BOARD__ID = GENERIC__ID;
@@ -1166,6 +1194,9 @@ public class DBConstants {
 	public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
 	public static final String STRUCTURE__EXP_REWARD = "exp_reward";
 
+	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__POWER_LIMIT = "power_limit";
+	
 	public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
 	//clan helps
 	public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";

@@ -330,3 +330,11 @@ message UserPvpBoardObstacleProto {
 	
 }
 
+//------------------------------------------------------------------------------------------
+
+message BattleItemFactoryProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 powerLimit = 2;
+
+}
+
