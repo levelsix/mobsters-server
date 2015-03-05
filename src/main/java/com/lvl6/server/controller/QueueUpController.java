@@ -34,6 +34,7 @@ import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
+import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
@@ -77,6 +78,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	@Autowired
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 	
+	@Autowired
+	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 
 	//	@Autowired
 	//	protected PvpUtil pvpUtil;
@@ -260,7 +263,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 				clanRetrieveUtil, monsterForUserRetrieveUtil,
 				clanMemberTeamDonationRetrieveUtil,
 				monsterSnapshotForUserRetrieveUtil,
-				hazelcastPvpUtil, pvpLeagueForUserRetrieveUtil);
+				hazelcastPvpUtil, pvpLeagueForUserRetrieveUtil,
+				pvpBoardObstacleForUserRetrieveUtil);
 			
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder =
 				RetrieveUserMonsterTeamResponseProto.newBuilder();
@@ -279,7 +283,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 						rumta.getAllButRetrieverUserIdToOilLost(),
 						rumta.getAllButRetrieverUserIdToCmtd(),
 						rumta.getAllButRetrieverUserIdToMsfu(),
-						rumta.getAllButRetrieverUserIdToMsfuMonsterDropId());
+						rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
+						rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
 
 
 				//user should see real people before fake ones
@@ -669,6 +674,15 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil )
 	{
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
+	}
+
+	public PvpBoardObstacleForUserRetrieveUtil getPvpBoardObstacleForUserRetrieveUtil() {
+		return pvpBoardObstacleForUserRetrieveUtil;
+	}
+
+	public void setPvpBoardObstacleForUserRetrieveUtil(
+			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
+		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 	}
 
 }

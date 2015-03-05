@@ -253,6 +253,50 @@ public final class BattleProto {
      * <code>optional int32 monsterIdDropped = 9;</code>
      */
     int getMonsterIdDropped();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> 
+        getUserBoardObstaclesList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getUserBoardObstacles(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    int getUserBoardObstaclesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+        getUserBoardObstaclesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getUserBoardObstaclesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpProto}
@@ -374,6 +418,14 @@ public final class BattleProto {
               monsterIdDropped_ = input.readInt32();
               break;
             }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                userBoardObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              userBoardObstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -384,6 +436,9 @@ public final class BattleProto {
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           defenderMonsters_ = java.util.Collections.unmodifiableList(defenderMonsters_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          userBoardObstacles_ = java.util.Collections.unmodifiableList(userBoardObstacles_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -649,6 +704,61 @@ public final class BattleProto {
       return monsterIdDropped_;
     }
 
+    public static final int USERBOARDOBSTACLES_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> userBoardObstacles_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> getUserBoardObstaclesList() {
+      return userBoardObstacles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+        getUserBoardObstaclesOrBuilderList() {
+      return userBoardObstacles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    public int getUserBoardObstaclesCount() {
+      return userBoardObstacles_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getUserBoardObstacles(int index) {
+      return userBoardObstacles_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+     *
+     * <pre>
+     *will be empty/not-set if fake player
+     * </pre>
+     */
+    public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getUserBoardObstaclesOrBuilder(
+        int index) {
+      return userBoardObstacles_.get(index);
+    }
+
     private void initFields() {
       defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       defenderMonsters_ = java.util.Collections.emptyList();
@@ -658,6 +768,7 @@ public final class BattleProto {
       defenderMsg_ = "";
       cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       monsterIdDropped_ = 0;
+      userBoardObstacles_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -695,6 +806,9 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(9, monsterIdDropped_);
+      }
+      for (int i = 0; i < userBoardObstacles_.size(); i++) {
+        output.writeMessage(10, userBoardObstacles_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -736,6 +850,10 @@ public final class BattleProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, monsterIdDropped_);
+      }
+      for (int i = 0; i < userBoardObstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, userBoardObstacles_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -850,6 +968,7 @@ public final class BattleProto {
           getDefenderMonstersFieldBuilder();
           getPvpLeagueStatsFieldBuilder();
           getCmtdFieldBuilder();
+          getUserBoardObstaclesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -890,6 +1009,12 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         monsterIdDropped_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
+        if (userBoardObstaclesBuilder_ == null) {
+          userBoardObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          userBoardObstaclesBuilder_.clear();
+        }
         return this;
       }
 
@@ -967,6 +1092,15 @@ public final class BattleProto {
           to_bitField0_ |= 0x00000040;
         }
         result.monsterIdDropped_ = monsterIdDropped_;
+        if (userBoardObstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            userBoardObstacles_ = java.util.Collections.unmodifiableList(userBoardObstacles_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.userBoardObstacles_ = userBoardObstacles_;
+        } else {
+          result.userBoardObstacles_ = userBoardObstaclesBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1031,6 +1165,32 @@ public final class BattleProto {
         }
         if (other.hasMonsterIdDropped()) {
           setMonsterIdDropped(other.getMonsterIdDropped());
+        }
+        if (userBoardObstaclesBuilder_ == null) {
+          if (!other.userBoardObstacles_.isEmpty()) {
+            if (userBoardObstacles_.isEmpty()) {
+              userBoardObstacles_ = other.userBoardObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureUserBoardObstaclesIsMutable();
+              userBoardObstacles_.addAll(other.userBoardObstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userBoardObstacles_.isEmpty()) {
+            if (userBoardObstaclesBuilder_.isEmpty()) {
+              userBoardObstaclesBuilder_.dispose();
+              userBoardObstaclesBuilder_ = null;
+              userBoardObstacles_ = other.userBoardObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              userBoardObstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserBoardObstaclesFieldBuilder() : null;
+            } else {
+              userBoardObstaclesBuilder_.addAllMessages(other.userBoardObstacles_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1970,6 +2130,318 @@ public final class BattleProto {
         monsterIdDropped_ = 0;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> userBoardObstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureUserBoardObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          userBoardObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto>(userBoardObstacles_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> userBoardObstaclesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> getUserBoardObstaclesList() {
+        if (userBoardObstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userBoardObstacles_);
+        } else {
+          return userBoardObstaclesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public int getUserBoardObstaclesCount() {
+        if (userBoardObstaclesBuilder_ == null) {
+          return userBoardObstacles_.size();
+        } else {
+          return userBoardObstaclesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getUserBoardObstacles(int index) {
+        if (userBoardObstaclesBuilder_ == null) {
+          return userBoardObstacles_.get(index);
+        } else {
+          return userBoardObstaclesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder setUserBoardObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (userBoardObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.set(index, value);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder setUserBoardObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (userBoardObstaclesBuilder_ == null) {
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder addUserBoardObstacles(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (userBoardObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.add(value);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder addUserBoardObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (userBoardObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.add(index, value);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder addUserBoardObstacles(
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (userBoardObstaclesBuilder_ == null) {
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder addUserBoardObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (userBoardObstaclesBuilder_ == null) {
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder addAllUserBoardObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> values) {
+        if (userBoardObstaclesBuilder_ == null) {
+          ensureUserBoardObstaclesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userBoardObstacles_);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder clearUserBoardObstacles() {
+        if (userBoardObstaclesBuilder_ == null) {
+          userBoardObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public Builder removeUserBoardObstacles(int index) {
+        if (userBoardObstaclesBuilder_ == null) {
+          ensureUserBoardObstaclesIsMutable();
+          userBoardObstacles_.remove(index);
+          onChanged();
+        } else {
+          userBoardObstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder getUserBoardObstaclesBuilder(
+          int index) {
+        return getUserBoardObstaclesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getUserBoardObstaclesOrBuilder(
+          int index) {
+        if (userBoardObstaclesBuilder_ == null) {
+          return userBoardObstacles_.get(index);  } else {
+          return userBoardObstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+           getUserBoardObstaclesOrBuilderList() {
+        if (userBoardObstaclesBuilder_ != null) {
+          return userBoardObstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userBoardObstacles_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder addUserBoardObstaclesBuilder() {
+        return getUserBoardObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder addUserBoardObstaclesBuilder(
+          int index) {
+        return getUserBoardObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userBoardObstacles = 10;</code>
+       *
+       * <pre>
+       *will be empty/not-set if fake player
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder> 
+           getUserBoardObstaclesBuilderList() {
+        return getUserBoardObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+          getUserBoardObstaclesFieldBuilder() {
+        if (userBoardObstaclesBuilder_ == null) {
+          userBoardObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder>(
+                  userBoardObstacles_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          userBoardObstacles_ = null;
+        }
+        return userBoardObstaclesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpProto)
@@ -9345,51 +9817,53 @@ public final class BattleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\nUser.proto\"\351\002\n\010PvpProto\022;\n\010d" +
-      "efender\030\001 \001(\0132).com.lvl6.proto.MinimumUs" +
-      "erProtoWithLevel\0229\n\020defenderMonsters\030\003 \003" +
-      "(\0132\037.com.lvl6.proto.PvpMonsterProto\022\037\n\027p" +
-      "rospectiveCashWinnings\030\004 \001(\005\022\036\n\026prospect" +
-      "iveOilWinnings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006" +
-      " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
-      "\022\023\n\013defenderMsg\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.co" +
-      "m.lvl6.proto.ClanMemberTeamDonationProto",
-      "\022\030\n\020monsterIdDropped\030\t \001(\005\"m\n\017PvpMonster" +
-      "Proto\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl" +
-      "6.proto.MinimumUserMonsterProto\022\030\n\020monst" +
-      "erIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025\n" +
-      "\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035" +
-      ".com.lvl6.proto.FullUserProto\022:\n\021attacke" +
-      "rsMonsters\030\002 \003(\0132\037.com.lvl6.proto.PvpMon" +
-      "sterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defend" +
-      "erCashChange\030\004 \001(\021\022\031\n\021defenderOilChange\030" +
-      "\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027prospec",
-      "tiveCashWinnings\030\007 \001(\005\022\036\n\026prospectiveOil" +
-      "Winnings\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132\"" +
-      ".com.lvl6.proto.UserPvpLeagueProto\0229\n\rat" +
-      "tackerAfter\030\013 \001(\0132\".com.lvl6.proto.UserP" +
-      "vpLeagueProto\022:\n\016defenderBefore\030\014 \001(\0132\"." +
-      "com.lvl6.proto.UserPvpLeagueProto\0229\n\rdef" +
-      "enderAfter\030\r \001(\0132\".com.lvl6.proto.UserPv" +
-      "pLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl" +
-      "6.proto.FullUserProto\022\032\n\022attackerCashCha" +
-      "nge\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013",
-      "clanAvenged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010l" +
-      "eagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timg" +
-      "Prefix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022Pv" +
-      "pClanAvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t" +
-      "\022=\n\rusersAvenging\030\002 \003(\0132&.com.lvl6.proto" +
-      ".PvpUserClanAvengeProto\022;\n\010attacker\030\003 \001(" +
-      "\0132).com.lvl6.proto.MinimumUserProtoWithL" +
-      "evel\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022" +
-      "\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderCl",
-      "anUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020" +
-      "\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016cl" +
-      "anAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E" +
-      "\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFE" +
-      "NDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleP" +
-      "roto"
+      "tuff.proto\032\017Structure.proto\032\nUser.proto\"" +
+      "\260\003\n\010PvpProto\022;\n\010defender\030\001 \001(\0132).com.lvl" +
+      "6.proto.MinimumUserProtoWithLevel\0229\n\020def" +
+      "enderMonsters\030\003 \003(\0132\037.com.lvl6.proto.Pvp" +
+      "MonsterProto\022\037\n\027prospectiveCashWinnings\030" +
+      "\004 \001(\005\022\036\n\026prospectiveOilWinnings\030\005 \001(\005\022:\n" +
+      "\016pvpLeagueStats\030\006 \001(\0132\".com.lvl6.proto.U" +
+      "serPvpLeagueProto\022\023\n\013defenderMsg\030\007 \001(\t\0229" +
+      "\n\004cmtd\030\010 \001(\0132+.com.lvl6.proto.ClanMember",
+      "TeamDonationProto\022\030\n\020monsterIdDropped\030\t " +
+      "\001(\005\022E\n\022userBoardObstacles\030\n \003(\0132).com.lv" +
+      "l6.proto.UserPvpBoardObstacleProto\"m\n\017Pv" +
+      "pMonsterProto\022@\n\017defenderMonster\030\001 \001(\0132\'" +
+      ".com.lvl6.proto.MinimumUserMonsterProto\022" +
+      "\030\n\020monsterIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistory" +
+      "Proto\022\025\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker" +
+      "\030\001 \001(\0132\035.com.lvl6.proto.FullUserProto\022:\n" +
+      "\021attackersMonsters\030\002 \003(\0132\037.com.lvl6.prot" +
+      "o.PvpMonsterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032",
+      "\n\022defenderCashChange\030\004 \001(\021\022\031\n\021defenderOi" +
+      "lChange\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n" +
+      "\027prospectiveCashWinnings\030\007 \001(\005\022\036\n\026prospe" +
+      "ctiveOilWinnings\030\010 \001(\005\022:\n\016attackerBefore" +
+      "\030\n \001(\0132\".com.lvl6.proto.UserPvpLeaguePro" +
+      "to\0229\n\rattackerAfter\030\013 \001(\0132\".com.lvl6.pro" +
+      "to.UserPvpLeagueProto\022:\n\016defenderBefore\030" +
+      "\014 \001(\0132\".com.lvl6.proto.UserPvpLeagueProt" +
+      "o\0229\n\rdefenderAfter\030\r \001(\0132\".com.lvl6.prot" +
+      "o.UserPvpLeagueProto\022/\n\010defender\030\016 \001(\0132\035",
+      ".com.lvl6.proto.FullUserProto\022\032\n\022attacke" +
+      "rCashChange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020" +
+      " \001(\005\022\023\n\013clanAvenged\030\021 \001(\010\"^\n\016PvpLeaguePr" +
+      "oto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(" +
+      "\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(" +
+      "\t\"\250\002\n\022PvpClanAvengeProto\022\026\n\016clanAvengeUu" +
+      "id\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lv" +
+      "l6.proto.PvpUserClanAvengeProto\022;\n\010attac" +
+      "ker\030\003 \001(\0132).com.lvl6.proto.MinimumUserPr" +
+      "otoWithLevel\0222\n\010defender\030\004 \001(\0132 .com.lvl",
+      "6.proto.MinimumUserProto\022\025\n\rbattleEndTim" +
+      "e\030\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020de" +
+      "fenderClanUuid\030\007 \001(\t\"h\n\026PvpUserClanAveng" +
+      "eProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001" +
+      "(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime" +
+      "\030\004 \001(\003*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001" +
+      "\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB" +
+      "\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9403,6 +9877,7 @@ public final class BattleProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_PvpProto_descriptor =
@@ -9410,7 +9885,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", });
+        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", "UserBoardObstacles", });
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new
@@ -9442,6 +9917,7 @@ public final class BattleProto {
         internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
         new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

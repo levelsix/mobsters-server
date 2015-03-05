@@ -358,17 +358,18 @@ public class CreateInfoProtoUtils {
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings,
 		ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
-		int msfuMonsterIdDropped)
+		int msfuMonsterIdDropped, List<PvpBoardObstacleForUser> boardObstacles)
 	{
 
 		MinimumUserProtoWithLevel defenderProto =
 			createMinimumUserProtoWithLevel(defender, clan, null);
 		String userId = defender.getId();
 		String msg = defender.getPvpDefendingMessage();
+		
 		return createPvpProto(userId, plfu, pu, userMonsters,
 			userMonsterIdToDropped, prospectiveCashWinnings,
 			prospectiveOilWinnings, defenderProto, msg, cmtd, msfu,
-			msfuMonsterIdDropped);
+			msfuMonsterIdDropped, boardObstacles);
 	}
 
 	public static PvpProto createPvpProto(
@@ -383,7 +384,8 @@ public class CreateInfoProtoUtils {
 		String defenderMsg,
 		ClanMemberTeamDonation cmtd,
 		MonsterSnapshotForUser msfu,
-		int msfuMonsterIdDropped)
+		int msfuMonsterIdDropped,
+		List<PvpBoardObstacleForUser> boardObstacles)
 	{
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 		
@@ -420,6 +422,12 @@ public class CreateInfoProtoUtils {
 			if (msfuMonsterIdDropped > 0) {
 				ppb.setMonsterIdDropped(msfuMonsterIdDropped);
 			}
+		}
+		
+		if (null != boardObstacles && !boardObstacles.isEmpty()) {
+			List<UserPvpBoardObstacleProto> upbops =
+					createUserPvpBoardObstacleProto(boardObstacles);
+			ppb.addAllUserBoardObstacles(upbops);
 		}
 		
 		return ppb.build();
@@ -556,7 +564,8 @@ public class CreateInfoProtoUtils {
 		Map<String, Integer> userIdToOilReward,
 		Map<String, ClanMemberTeamDonation> userIdToCmtd,
 		Map<String, MonsterSnapshotForUser> userIdToMsfu,
-		Map<String, Integer> userIdToMsfuMonsterIdDropped)
+		Map<String, Integer> userIdToMsfuMonsterIdDropped,
+		Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles)
 	{
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
@@ -599,10 +608,15 @@ public class CreateInfoProtoUtils {
 				msfuMonsterIdDropped = userIdToMsfuMonsterIdDropped.get(userId);
 			}
 			
+			List<PvpBoardObstacleForUser> boardObstacles = null;
+			if (userIdToPvpBoardObstacles.containsKey(userId)) {
+				userIdToPvpBoardObstacles.get(userId);
+			}
+			
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 				userMonsterIdToDropped, prospectiveCashWinnings,
 				prospectiveOilWinnings, cmtd, msfu,
-				msfuMonsterIdDropped);
+				msfuMonsterIdDropped, boardObstacles);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
@@ -3699,6 +3713,18 @@ public class CreateInfoProtoUtils {
 		return pbopb.build();
 	}
 
+	public static List<UserPvpBoardObstacleProto> createUserPvpBoardObstacleProto(
+			List<PvpBoardObstacleForUser> boardObstacles)
+	{
+		List<UserPvpBoardObstacleProto> upbopList =
+				new ArrayList<UserPvpBoardObstacleProto>();
+		for (PvpBoardObstacleForUser pbofu : boardObstacles) {
+			UserPvpBoardObstacleProto upbop = createUserPvpBoardObstacleProto(pbofu);
+			upbopList.add(upbop);
+		}
+		return upbopList;
+	}
+	
 	public static UserPvpBoardObstacleProto createUserPvpBoardObstacleProto(
 			PvpBoardObstacleForUser pbofu)
 	{

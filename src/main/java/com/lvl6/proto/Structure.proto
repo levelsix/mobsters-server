@@ -324,9 +324,4 @@ message UserPvpBoardObstacleProto {
 	optional int32 posX = 4;
 	optional int32 posY = 5;
 	
-
-
-
-	
 }
-

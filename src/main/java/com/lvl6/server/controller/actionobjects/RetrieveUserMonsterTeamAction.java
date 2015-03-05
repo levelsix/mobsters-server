@@ -16,6 +16,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
+import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -29,6 +30,7 @@ import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
+import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -48,7 +50,7 @@ public class RetrieveUserMonsterTeamAction
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 	private HazelcastPvpUtil hazelcastPvpUtil;
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	
+	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 	
 	public RetrieveUserMonsterTeamAction(
 		String retrieverUserId,
@@ -59,7 +61,8 @@ public class RetrieveUserMonsterTeamAction
 		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
 		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
 		HazelcastPvpUtil hazelcastPvpUtil,
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
+		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
+		PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -71,6 +74,7 @@ public class RetrieveUserMonsterTeamAction
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 	}
 
 //	//encapsulates the return value from this Action Object
@@ -99,6 +103,7 @@ public class RetrieveUserMonsterTeamAction
 	private Map<String, ClanMemberTeamDonation> allButRetrieverUserIdToCmtd;
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
 	private Map<String, Integer> allButRetrieverUserIdToMsfuMonsterDropId;
+	private Map<String, List<PvpBoardObstacleForUser>> allButRetrieverUserIdToPvpBoardObstacles;
 
 	private List<String> allUsersIdsExceptRetriever;
 	private List<User> allUsersExceptRetriever;
@@ -242,6 +247,11 @@ public class RetrieveUserMonsterTeamAction
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
 		}
+		
+		//pvp board obstacles
+		allButRetrieverUserIdToPvpBoardObstacles = pvpBoardObstacleForUserRetrieveUtil
+				.getPvpBoardObstacleForUserIds(userIdsExceptRetriever);
+		
 	}
 
 	private void getPvpInfo()
@@ -505,6 +515,10 @@ public class RetrieveUserMonsterTeamAction
 	public Map<String, Integer> getAllButRetrieverUserIdToMsfuMonsterDropId()
 	{
 		return allButRetrieverUserIdToMsfuMonsterDropId;
+	}
+
+	public Map<String, List<PvpBoardObstacleForUser>> getAllButRetrieverUserIdToPvpBoardObstacles() {
+		return allButRetrieverUserIdToPvpBoardObstacles;
 	}
 
 }
