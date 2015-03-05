@@ -452,6 +452,15 @@ public final class ResearchsProto {
      */
     com.lvl6.proto.ResearchsProto.ResearchPropertyProtoOrBuilder getPropertiesOrBuilder(
         int index);
+
+    /**
+     * <code>optional int32 level = 13;</code>
+     */
+    boolean hasLevel();
+    /**
+     * <code>optional int32 level = 13;</code>
+     */
+    int getLevel();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ResearchProto}
@@ -587,6 +596,11 @@ public final class ResearchsProto {
                 mutable_bitField0_ |= 0x00000800;
               }
               properties_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchPropertyProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00000800;
+              level_ = input.readInt32();
               break;
             }
           }
@@ -953,6 +967,21 @@ public final class ResearchsProto {
       return properties_.get(index);
     }
 
+    public static final int LEVEL_FIELD_NUMBER = 13;
+    private int level_;
+    /**
+     * <code>optional int32 level = 13;</code>
+     */
+    public boolean hasLevel() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional int32 level = 13;</code>
+     */
+    public int getLevel() {
+      return level_;
+    }
+
     private void initFields() {
       researchId_ = 0;
       researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
@@ -966,6 +995,7 @@ public final class ResearchsProto {
       costAmt_ = 0;
       costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       properties_ = java.util.Collections.emptyList();
+      level_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1015,6 +1045,9 @@ public final class ResearchsProto {
       }
       for (int i = 0; i < properties_.size(); i++) {
         output.writeMessage(12, properties_.get(i));
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(13, level_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1072,6 +1105,10 @@ public final class ResearchsProto {
       for (int i = 0; i < properties_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, properties_.get(i));
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, level_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1219,6 +1256,8 @@ public final class ResearchsProto {
         } else {
           propertiesBuilder_.clear();
         }
+        level_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -1300,6 +1339,10 @@ public final class ResearchsProto {
         } else {
           result.properties_ = propertiesBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.level_ = level_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1380,6 +1423,9 @@ public final class ResearchsProto {
               propertiesBuilder_.addAllMessages(other.properties_);
             }
           }
+        }
+        if (other.hasLevel()) {
+          setLevel(other.getLevel());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2219,6 +2265,38 @@ public final class ResearchsProto {
           properties_ = null;
         }
         return propertiesBuilder_;
+      }
+
+      private int level_ ;
+      /**
+       * <code>optional int32 level = 13;</code>
+       */
+      public boolean hasLevel() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int32 level = 13;</code>
+       */
+      public int getLevel() {
+        return level_;
+      }
+      /**
+       * <code>optional int32 level = 13;</code>
+       */
+      public Builder setLevel(int value) {
+        bitField0_ |= 0x00001000;
+        level_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 level = 13;</code>
+       */
+      public Builder clearLevel() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        level_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ResearchProto)
@@ -3914,7 +3992,7 @@ public final class ResearchsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Research.proto\022\016com.lvl6.proto\032\017Struct" +
-      "ure.proto\"\361\002\n\rResearchProto\022\022\n\nresearchI" +
+      "ure.proto\"\200\003\n\rResearchProto\022\022\n\nresearchI" +
       "d\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.com.lvl6" +
       ".proto.ResearchType\0226\n\016researchDomain\030\003 " +
       "\001(\0162\036.com.lvl6.proto.ResearchDomain\022\023\n\013i" +
@@ -3923,21 +4001,21 @@ public final class ResearchsProto {
       "durationMin\030\t \001(\005\022\017\n\007costAmt\030\n \001(\005\022.\n\010co" +
       "stType\030\013 \001(\0162\034.com.lvl6.proto.ResourceTy" +
       "pe\0229\n\nproperties\030\014 \003(\0132%.com.lvl6.proto.",
-      "ResearchPropertyProto\"l\n\025ResearchPropert" +
-      "yProto\022\032\n\022researchPropertyId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\025\n\rresearchValue\030\003 \001(\002\022\022\n\nresea" +
-      "rchId\030\004 \001(\005\"|\n\021UserResearchProto\022\030\n\020user" +
-      "ResearchUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\n" +
-      "researchId\030\003 \001(\005\022\025\n\rtimePurchased\030\004 \001(\003\022" +
-      "\020\n\010complete\030\005 \001(\010*\330\001\n\014ResearchType\022\017\n\013NO" +
-      "_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCR" +
-      "EASE_QUEUE_SIZE\020\004\022\032\n\026INCREASE_NUM_CAN_BU" +
-      "ILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030INCREASE_CASH_PRO",
-      "DUCTION\020\007\022\033\n\027INCREASE_OIL_PRODUCTION\020\010\022\023" +
-      "\n\017INCREASE_ATTACK\020\t\022\017\n\013INCREASE_HP\020\n*X\n\016" +
-      "ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORA" +
-      "TIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BA" +
-      "TTLE\020\005B\020B\016ResearchsProto"
+      "ResearchPropertyProto\022\r\n\005level\030\r \001(\005\"l\n\025" +
+      "ResearchPropertyProto\022\032\n\022researchPropert" +
+      "yId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchValue" +
+      "\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005\"|\n\021UserResear" +
+      "chProto\022\030\n\020userResearchUuid\030\001 \001(\t\022\020\n\010use" +
+      "rUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(\005\022\025\n\rtimeP" +
+      "urchased\030\004 \001(\003\022\020\n\010complete\030\005 \001(\010*\330\001\n\014Res" +
+      "earchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005" +
+      "SPEED\020\003\022\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCR" +
+      "EASE_NUM_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030IN",
+      "CREASE_CASH_PRODUCTION\020\007\022\033\n\027INCREASE_OIL" +
+      "_PRODUCTION\020\010\022\023\n\017INCREASE_ATTACK\020\t\022\017\n\013IN" +
+      "CREASE_HP\020\n*X\n\016ResearchDomain\022\r\n\tNO_DOMA" +
+      "IN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRE" +
+      "SOURCES\020\004\022\n\n\006BATTLE\020\005B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3957,7 +4035,7 @@ public final class ResearchsProto {
     internal_static_com_lvl6_proto_ResearchProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResearchProto_descriptor,
-        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", });
+        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", "Level", });
     internal_static_com_lvl6_proto_ResearchPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_ResearchPropertyProto_fieldAccessorTable = new
