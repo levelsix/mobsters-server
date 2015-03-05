@@ -18,7 +18,7 @@ public class SnsService {
 	
 	protected AmazonSNSClient snsClient;
 	
-	protected String topicArn = "arn:aws:sns:us-west-2:194330317589:mobsters-alerts";
+	protected String topicArn = "arn:aws:sns:us-west-2:194330317589:mobsters-game-alerts";
 	
 	@PostConstruct
 	public void setup() {
