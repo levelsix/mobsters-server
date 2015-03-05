@@ -42,7 +42,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
 	public List<ResearchForUser> getAllResearchForUser(String userId) {
-		log.debug("retrieving user monsters for userId " + userId);
+		log.debug("retrieving researchForUser for userId {}", userId);
 		
 		Object[] values = { userId };
 		String query = String.format(
@@ -54,7 +54,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			userResearch = this.jdbcTemplate
 				.query(query, values, rowMapper);
 		} catch (Exception e) {
-			log.error("monster for user retrieve db error.", e);
+			log.error("ResearchForUser retrieve db error.", e);
+			userResearch = new ArrayList<ResearchForUser>();
 //		} finally {
 //			DBConnection.get().close(rs, null, conn);
 		}

@@ -3022,6 +3022,873 @@ public final class ResearchsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ResearchPropertyProto)
   }
 
+  public interface UserResearchProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserResearchProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    boolean hasUserResearchUuid();
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    java.lang.String getUserResearchUuid();
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserResearchUuidBytes();
+
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 researchId = 3;</code>
+     */
+    boolean hasResearchId();
+    /**
+     * <code>optional int32 researchId = 3;</code>
+     */
+    int getResearchId();
+
+    /**
+     * <code>optional int64 timePurchased = 4;</code>
+     */
+    boolean hasTimePurchased();
+    /**
+     * <code>optional int64 timePurchased = 4;</code>
+     */
+    long getTimePurchased();
+
+    /**
+     * <code>optional bool complete = 5;</code>
+     */
+    boolean hasComplete();
+    /**
+     * <code>optional bool complete = 5;</code>
+     */
+    boolean getComplete();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserResearchProto}
+   */
+  public static final class UserResearchProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserResearchProto)
+      UserResearchProtoOrBuilder {
+    // Use UserResearchProto.newBuilder() to construct.
+    private UserResearchProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserResearchProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserResearchProto defaultInstance;
+    public static UserResearchProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserResearchProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserResearchProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userResearchUuid_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              userUuid_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              researchId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              timePurchased_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              complete_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_UserResearchProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_UserResearchProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ResearchsProto.UserResearchProto.class, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserResearchProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserResearchProto>() {
+      public UserResearchProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserResearchProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserResearchProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERRESEARCHUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userResearchUuid_;
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    public boolean hasUserResearchUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    public java.lang.String getUserResearchUuid() {
+      java.lang.Object ref = userResearchUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userResearchUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userResearchUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserResearchUuidBytes() {
+      java.lang.Object ref = userResearchUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userResearchUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RESEARCHID_FIELD_NUMBER = 3;
+    private int researchId_;
+    /**
+     * <code>optional int32 researchId = 3;</code>
+     */
+    public boolean hasResearchId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 researchId = 3;</code>
+     */
+    public int getResearchId() {
+      return researchId_;
+    }
+
+    public static final int TIMEPURCHASED_FIELD_NUMBER = 4;
+    private long timePurchased_;
+    /**
+     * <code>optional int64 timePurchased = 4;</code>
+     */
+    public boolean hasTimePurchased() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 timePurchased = 4;</code>
+     */
+    public long getTimePurchased() {
+      return timePurchased_;
+    }
+
+    public static final int COMPLETE_FIELD_NUMBER = 5;
+    private boolean complete_;
+    /**
+     * <code>optional bool complete = 5;</code>
+     */
+    public boolean hasComplete() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bool complete = 5;</code>
+     */
+    public boolean getComplete() {
+      return complete_;
+    }
+
+    private void initFields() {
+      userResearchUuid_ = "";
+      userUuid_ = "";
+      researchId_ = 0;
+      timePurchased_ = 0L;
+      complete_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserResearchUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, researchId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, timePurchased_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, complete_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserResearchUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, researchId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, timePurchased_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, complete_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.UserResearchProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ResearchsProto.UserResearchProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserResearchProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserResearchProto)
+        com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_UserResearchProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_UserResearchProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ResearchsProto.UserResearchProto.class, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ResearchsProto.UserResearchProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userResearchUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        researchId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        timePurchased_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        complete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_UserResearchProto_descriptor;
+      }
+
+      public com.lvl6.proto.ResearchsProto.UserResearchProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ResearchsProto.UserResearchProto build() {
+        com.lvl6.proto.ResearchsProto.UserResearchProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ResearchsProto.UserResearchProto buildPartial() {
+        com.lvl6.proto.ResearchsProto.UserResearchProto result = new com.lvl6.proto.ResearchsProto.UserResearchProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userResearchUuid_ = userResearchUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.researchId_ = researchId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.timePurchased_ = timePurchased_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.complete_ = complete_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ResearchsProto.UserResearchProto) {
+          return mergeFrom((com.lvl6.proto.ResearchsProto.UserResearchProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ResearchsProto.UserResearchProto other) {
+        if (other == com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance()) return this;
+        if (other.hasUserResearchUuid()) {
+          bitField0_ |= 0x00000001;
+          userResearchUuid_ = other.userResearchUuid_;
+          onChanged();
+        }
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasResearchId()) {
+          setResearchId(other.getResearchId());
+        }
+        if (other.hasTimePurchased()) {
+          setTimePurchased(other.getTimePurchased());
+        }
+        if (other.hasComplete()) {
+          setComplete(other.getComplete());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ResearchsProto.UserResearchProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ResearchsProto.UserResearchProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userResearchUuid_ = "";
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public boolean hasUserResearchUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public java.lang.String getUserResearchUuid() {
+        java.lang.Object ref = userResearchUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userResearchUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserResearchUuidBytes() {
+        java.lang.Object ref = userResearchUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userResearchUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public Builder setUserResearchUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userResearchUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public Builder clearUserResearchUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userResearchUuid_ = getDefaultInstance().getUserResearchUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userResearchUuid = 1;</code>
+       */
+      public Builder setUserResearchUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userResearchUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int researchId_ ;
+      /**
+       * <code>optional int32 researchId = 3;</code>
+       */
+      public boolean hasResearchId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 researchId = 3;</code>
+       */
+      public int getResearchId() {
+        return researchId_;
+      }
+      /**
+       * <code>optional int32 researchId = 3;</code>
+       */
+      public Builder setResearchId(int value) {
+        bitField0_ |= 0x00000004;
+        researchId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 researchId = 3;</code>
+       */
+      public Builder clearResearchId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        researchId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long timePurchased_ ;
+      /**
+       * <code>optional int64 timePurchased = 4;</code>
+       */
+      public boolean hasTimePurchased() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 timePurchased = 4;</code>
+       */
+      public long getTimePurchased() {
+        return timePurchased_;
+      }
+      /**
+       * <code>optional int64 timePurchased = 4;</code>
+       */
+      public Builder setTimePurchased(long value) {
+        bitField0_ |= 0x00000008;
+        timePurchased_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timePurchased = 4;</code>
+       */
+      public Builder clearTimePurchased() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        timePurchased_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean complete_ ;
+      /**
+       * <code>optional bool complete = 5;</code>
+       */
+      public boolean hasComplete() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional bool complete = 5;</code>
+       */
+      public boolean getComplete() {
+        return complete_;
+      }
+      /**
+       * <code>optional bool complete = 5;</code>
+       */
+      public Builder setComplete(boolean value) {
+        bitField0_ |= 0x00000010;
+        complete_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool complete = 5;</code>
+       */
+      public Builder clearComplete() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        complete_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserResearchProto)
+    }
+
+    static {
+      defaultInstance = new UserResearchProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserResearchProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResearchProto_descriptor;
   private static
@@ -3032,6 +3899,11 @@ public final class ResearchsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ResearchPropertyProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserResearchProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserResearchProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3054,15 +3926,18 @@ public final class ResearchsProto {
       "ResearchPropertyProto\"l\n\025ResearchPropert" +
       "yProto\022\032\n\022researchPropertyId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\025\n\rresearchValue\030\003 \001(\002\022\022\n\nresea" +
-      "rchId\030\004 \001(\005*\330\001\n\014ResearchType\022\017\n\013NO_RESEA" +
-      "RCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCREASE_Q" +
-      "UEUE_SIZE\020\004\022\032\n\026INCREASE_NUM_CAN_BUILD\020\005\022" +
-      "\014\n\010XP_BONUS\020\006\022\034\n\030INCREASE_CASH_PRODUCTIO" +
-      "N\020\007\022\033\n\027INCREASE_OIL_PRODUCTION\020\010\022\023\n\017INCR" +
-      "EASE_ATTACK\020\t\022\017\n\013INCREASE_HP\020\n*X\n\016Resear" +
-      "chDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002",
-      "\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005" +
-      "B\020B\016ResearchsProto"
+      "rchId\030\004 \001(\005\"|\n\021UserResearchProto\022\030\n\020user" +
+      "ResearchUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\n" +
+      "researchId\030\003 \001(\005\022\025\n\rtimePurchased\030\004 \001(\003\022" +
+      "\020\n\010complete\030\005 \001(\010*\330\001\n\014ResearchType\022\017\n\013NO" +
+      "_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCR" +
+      "EASE_QUEUE_SIZE\020\004\022\032\n\026INCREASE_NUM_CAN_BU" +
+      "ILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030INCREASE_CASH_PRO",
+      "DUCTION\020\007\022\033\n\027INCREASE_OIL_PRODUCTION\020\010\022\023" +
+      "\n\017INCREASE_ATTACK\020\t\022\017\n\013INCREASE_HP\020\n*X\n\016" +
+      "ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORA" +
+      "TIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BA" +
+      "TTLE\020\005B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3089,6 +3964,12 @@ public final class ResearchsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResearchPropertyProto_descriptor,
         new java.lang.String[] { "ResearchPropertyId", "Name", "ResearchValue", "ResearchId", });
+    internal_static_com_lvl6_proto_UserResearchProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_UserResearchProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserResearchProto_descriptor,
+        new java.lang.String[] { "UserResearchUuid", "UserUuid", "ResearchId", "TimePurchased", "Complete", });
     com.lvl6.proto.StructureProto.getDescriptor();
   }
 
