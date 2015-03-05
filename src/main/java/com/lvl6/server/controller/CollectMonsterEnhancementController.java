@@ -117,6 +117,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				userMonsterIds.addAll(userMonsterIdsThatFinished);
 			}
 
+			MonsterForUser mfu = monsterForUserRetrieveUtil
+					.getSpecificUserMonster(umcep.getUserMonsterUuid());
+			
 			//get whatever we need from the database
 			Map<String, MonsterEnhancingForUser> inEnhancing =
 				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
@@ -128,7 +131,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			boolean successful = false;
 			if(legit) {
-				successful = writeChangesToDb( aUser, umcep );
+				successful = writeChangesToDb( aUser, umcep, mfu );
 			}
 			if (successful) {
 				resBuilder.setStatus(CollectMonsterEnhancementStatus.SUCCESS);
@@ -145,7 +148,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             server.writeEvent(resEventUpdate);
 
 			if (successful) {
-				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished);
+				int currExp = umcep.getExpectedExperience();
+				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished, mfu, currExp);
 			}
 		} catch (Exception e) {
 			log.error("exception in CollectMonsterEnhancementController processEvent", e);
@@ -219,7 +223,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean writeChangesToDb(User u,
-		UserMonsterCurrentExpProto umcep)
+		UserMonsterCurrentExpProto umcep, MonsterForUser mfu)
 	{
 
 		String userMonsterIdBeingEnhanced = umcep.getUserMonsterUuid();
@@ -228,7 +232,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int newHp = umcep.getExpectedHp();
 		
 		//reward the user with exp
-		awardUserExp(u, userMonsterIdBeingEnhanced, newExp);
+
+		awardUserExp(u, userMonsterIdBeingEnhanced, newExp, mfu);
 
 		//GIVE THE MONSTER EXP
 		int num = UpdateUtils.get().updateUserMonsterExpAndLvl(userMonsterIdBeingEnhanced,
@@ -240,13 +245,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private void awardUserExp( User u, String userMonsterIdBeingEnhanced, int newExp )
+	private void awardUserExp( User u, String userMonsterIdBeingEnhanced, int newExp, MonsterForUser mfu)
 	{
-		MonsterForUser mfu = null;
-		try {
-			mfu = monsterForUserRetrieveUtil
-				.getSpecificUserMonster(userMonsterIdBeingEnhanced);
-			
+		try {			
 			float expReward = (float)newExp - (float)mfu.getCurrentExp();
 			expReward *= ControllerConstants.MONSTER_ENHANCING__PLAYER_EXP_CONVERTER;
 			log.info(String.format(
@@ -266,14 +267,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private void writeChangesToHistory(String uId, List<String> allEnhancingMfuIds,
-		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds)
+		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds, MonsterForUser mfu, int currExp)
 	{
-
+		//get the monster being enhanced
+		MonsterEnhancingForUser monsterBeingEnhanced = null;
+		for(String id : inEnhancing.keySet()) {
+			monsterBeingEnhanced = inEnhancing.get(id);
+		}
+		
+		MonsterForUser enhancedMonster = monsterForUserRetrieveUtil.getSpecificUserMonster(monsterBeingEnhanced.getMonsterForUserId());
+		Date now = new Date();
+		Timestamp timeOfEntry = new Timestamp(now.getTime());
+		Timestamp enhanceStartTime = new Timestamp(monsterBeingEnhanced.getExpectedStartTime().getTime());
 		//TODO: keep track of the monsters that were enhancing
+		
 		for(String feederId : usedUpMfuIds) {
-			InsertUtils.get().insertMonsterEnhanceHistory(uId, String monsterForUserIdBeingEnhanced,
-					String feederMonsterForUserId, int currExp, int prevExp, Timestamp enhancingStartTime, 
-					Timestamp timeOfEntry, int enhancingCost)
+			InsertUtils.get().insertMonsterEnhanceHistory(uId, enhancedMonster.getId(),
+					feederId, currExp, mfu.getCurrentExp(), enhanceStartTime, 
+					timeOfEntry, monsterBeingEnhanced.getEnhancingCost());
+
 		}
 
 		//delete the selected monsters from  the enhancing table

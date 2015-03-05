@@ -26,12 +26,15 @@ import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.CompleteBattleItemRequestEvent;
 import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
+import com.lvl6.events.request.EvolutionFinishedRequestEvent;
+import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.StructureForUser;
@@ -42,10 +45,13 @@ import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -1337,122 +1343,95 @@ public class ControllerTest extends TestCase {
 	
 
 
-
 	private String randomUUID() {
 		return UUID.randomUUID().toString();
 	}
 
 
-//	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
-//			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
-//			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
-//		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-//		String id = randomUUID();
-//
-//		Map<String, Object> insertParams = new HashMap<String, Object>();
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
-//
-//
-//		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-//		
-//		return id;
-//	}
+	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
+			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
+			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		String id = randomUUID();
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
+
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+		
+		return id;
+	}
 	
-//	private int numberOfUserRowsInHistoryTable(String userId, String tableName) {
-//		Object[] values = { userId };
-//		String query = String.format(
-//				"select * from %s where %s=?",
-//				tableName, "user_id");
-//
-//		List<StructureForUser> userStructs = null;
-//		try {
-//			userStructs = this.jdbcTemplate
-//					.query(query, values, rowMapper);
-//
-//		} catch (Exception e) {
-//			log.error("structure for user retrieve db error.", e);
-//			userStructs = new ArrayList<StructureForUser>();
-//			//		} finally {
-//			//			DBConnection.get().close(rs, null, conn);
-//		}
-//		return userStructs;
-//		
-//		
-//		
-//		
-//		
-//		
-//	}
-	
-//	@Test
-//	public void testMonsterEvolutionFinishedAndHistoryTables() {
-//		////////////////////////EVOLVE REQUEST//////////////////////////////
-//		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-//		int userOil = user.getOil();
-//		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
-//		
-//		//give user the three necessary monsters used in evolving
-//		Date now = new Date();
-//		Timestamp nowTimestamp = new Timestamp(now.getTime());
-//		String userMonsterId1 = insertIntoUserMonsterTable(user.getId(), 1, 1000, 10, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
-//		String userMonsterId2 = insertIntoUserMonsterTable(user.getId(), 1, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
-//		String userCatalystMonsterId = insertIntoUserMonsterTable(user.getId(), 1750, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
-//		
-//		EvolveMonsterRequestProto.Builder emrpb = EvolveMonsterRequestProto.newBuilder();
-//		emrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-//		
-//		MonsterEvolvingForUser mefu = new MonsterEvolvingForUser(userCatalystMonsterId, userMonsterId1, userMonsterId2, user.getId(), nowTimestamp);
-//		UserMonsterEvolutionProto umep = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu);
-//		
-//		emrpb.setEvolution(umep);
-//		emrpb.setGemsSpent(0);
-//		emrpb.setOilChange(100);
-//		
-//		EvolveMonsterRequestEvent emre = new EvolveMonsterRequestEvent();
-//		emre.setTag(1);
-//		emre.setEvolveMonsterRequestProto(emrpb.build());
-//		evolveMonsterController.handleEvent(emre);
-//		
-//		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-//		List<MonsterForUser> updatedUserMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
-//
-//		assertEquals(user2.getOil(), userOil-100);
-//		assertEquals(userMonsterList.size() + 3, updatedUserMonsterList.size());
-//		
-//		////////////////////////EVOLVE FINISH REQUEST//////////////////////////////
-//		EvolutionFinishedRequestProto.Builder efrpb = EvolutionFinishedRequestProto.newBuilder();
-//		efrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-//		efrpb.setGemsSpent(0);
-//		
-//		EvolutionFinishedRequestEvent efre = new EvolutionFinishedRequestEvent();
-//		efre.setTag(1);
-//		efre.setEvolutionFinishedRequestProto(efrpb.build());
-//		evolutionFinishedController.handleEvent(efre);
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//	}
+	@Test
+	public void testMonsterEvolutionFinishedAndHistoryTables() {
+		////////////////////////EVOLVE REQUEST//////////////////////////////
+		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		int userOil = user.getOil();
+		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
+		
+		//give user the three necessary monsters used in evolving
+		Date now = new Date();
+		Timestamp nowTimestamp = new Timestamp(now.getTime());
+		String userMonsterId1 = insertIntoUserMonsterTable(user.getId(), 1, 1000, 10, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+		String userMonsterId2 = insertIntoUserMonsterTable(user.getId(), 1, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+		String userCatalystMonsterId = insertIntoUserMonsterTable(user.getId(), 1750, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+		
+		EvolveMonsterRequestProto.Builder emrpb = EvolveMonsterRequestProto.newBuilder();
+		emrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		
+		MonsterEvolvingForUser mefu = new MonsterEvolvingForUser(userCatalystMonsterId, userMonsterId1, userMonsterId2, user.getId(), nowTimestamp);
+		UserMonsterEvolutionProto umep = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu);
+		
+		emrpb.setEvolution(umep);
+		emrpb.setGemsSpent(0);
+		emrpb.setOilChange(100);
+		
+		EvolveMonsterRequestEvent emre = new EvolveMonsterRequestEvent();
+		emre.setTag(1);
+		emre.setEvolveMonsterRequestProto(emrpb.build());
+		evolveMonsterController.handleEvent(emre);
+		
+		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		List<MonsterForUser> updatedUserMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
+
+		assertEquals(user2.getOil(), userOil-100);
+		assertEquals(userMonsterList.size() + 3, updatedUserMonsterList.size());
+		
+		////////////////////////EVOLVE FINISH REQUEST//////////////////////////////
+		EvolutionFinishedRequestProto.Builder efrpb = EvolutionFinishedRequestProto.newBuilder();
+		efrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		efrpb.setGemsSpent(0);
+		
+		EvolutionFinishedRequestEvent efre = new EvolutionFinishedRequestEvent();
+		efre.setTag(1);
+		efre.setEvolutionFinishedRequestProto(efrpb.build());
+		evolveMonsterController.handleEvent(efre);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	@Test
 	public void testStaticDataContainer() {
