@@ -40,6 +40,8 @@ message ResearchProto {
 
 	repeated ResearchPropertyProto properties = 12;
 	
+	optional int32 level = 13;
+	
 }
 
 message ResearchPropertyProto {

@@ -2984,6 +2984,7 @@ public class CreateInfoProtoUtils {
 		
 		rpb.setDurationMin(r.getDurationMin());
 		rpb.setCostAmt(r.getCostAmt());
+		rpb.setLevel(r.getLevel());
 		
 		str = r.getCostType();
 		if (null != str && !str.isEmpty()) {
