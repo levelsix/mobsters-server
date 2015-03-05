@@ -55,6 +55,7 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
+import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
@@ -89,6 +90,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
+import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -129,6 +131,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
@@ -304,6 +307,9 @@ public class StartupController extends EventController {
 	protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
 	
 	@Autowired
+	protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	
+	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 
 	@Autowired
@@ -380,10 +386,7 @@ public class StartupController extends EventController {
 			if ( superNum < serverSuperNum ||
 				majorNum < serverMajorNum )
 			{
-				//updateStatus = UpdateStatus.MAJOR_UPDATE;
-				//TODO: GET RID OF THIS.
-				//Only here because of bug with client's need to not force update
-				updateStatus = UpdateStatus.MINOR_UPDATE;
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
 				log.info("player has been notified of forced update");
 				
 			} else if (minorNum < serverMinorNum) {
@@ -398,10 +401,7 @@ public class StartupController extends EventController {
 			double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
 			// Check version number
 			if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
-				//updateStatus = UpdateStatus.MAJOR_UPDATE;
-				//TODO: GET RID OF THIS.
-				//Only here because of bug with client's need to not force update
-				updateStatus = UpdateStatus.MINOR_UPDATE;
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
 				log.info("player has been notified of forced update");
 			} else if (tempClientVersionNum < tempLatestVersionNum) {
 				updateStatus = UpdateStatus.MINOR_UPDATE;
@@ -434,8 +434,7 @@ public class StartupController extends EventController {
 		try {
 			//TODO: GET RID OF "updateStatus != UpdateStatus.MINOR_UPDATE".
 			//Only here because of bug with client's need to not force update
-			if (updateStatus != UpdateStatus.MAJOR_UPDATE &&
-				updateStatus != UpdateStatus.MINOR_UPDATE)
+			if (updateStatus != UpdateStatus.MAJOR_UPDATE)
 			{
 				List<User> users = getUserRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
 				user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
@@ -626,6 +625,9 @@ public class StartupController extends EventController {
 			log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
 			setSecretGifts(resBuilder, playerId, now.getTime());
 			log.info("{}ms at setSecretGifts", stopWatch.getTime());
+			setResearch(resBuilder, playerId);
+			log.info("{}ms at setResearch", stopWatch.getTime());
+			
 			
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1482,6 +1484,18 @@ public class StartupController extends EventController {
 				giftList, ids));
 		}
 		
+	}
+	
+	private void setResearch(Builder resBuilder, String userId) {
+		List<ResearchForUser> userResearchs = researchForUserRetrieveUtil
+				.getAllResearchForUser(userId);
+		
+		if (null != userResearchs && !userResearchs.isEmpty()) {
+			Collection<UserResearchProto> urpList = CreateInfoProtoUtils
+					.createUserResearchProto(userResearchs);
+		
+			resBuilder.addAllUserResearchs(urpList);
+		}
 	}
 	
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId, Timestamp now) {
@@ -2450,6 +2464,13 @@ public class StartupController extends EventController {
 		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
 	}
 	
+	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
+		return researchForUserRetrieveUtil;
+	}
+	public void setResearchForUserRetrieveUtil(
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+	}
 	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
 	{
 		return clanMemberTeamDonationRetrieveUtil;

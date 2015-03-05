@@ -1,0 +1,66 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "SharedEnumConfig.proto";
+import "Structure.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "BattleItemsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//------------------------------------------------------------------------------------------
+
+message UserBattleItemProto {
+	optional string id = 1;
+	optional string userUuid = 2;
+	optional int32 battleItemId = 3;
+	optional int32 quantity = 4;
+}
+
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemProto {
+	optional int32 battleItemId = 1;
+	optional string name = 2;
+	optional string imgName = 3;
+	optional string battleItemType = 4;
+	optional string battleItemCategory = 5;
+	optional string createResourceType = 6;
+	optional int32 createCost = 7;
+	optional string description = 8;
+	optional int32 powerAmount = 9;	
+}
+
+
+//------------------------------------------------------------------------------------------
+
+enum BattleItemType {
+	ANTIDOTE = 1;
+	HAMMER = 2;
+	
+	
+	
+	
+}
+
+enum BattleItemCategory {
+	BATTLE_ITEM_CATEGORY1 = 1;
+	BATTLE_ITEM_CATEGORY2 = 2;
+
+
+
+}
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemQueueForUserProto {
+	optional int32 priority = 1;
+	optional string userUuid = 2;
+	optional int32 battleItemId = 3;
+	optional int64 expectedStartTime = 4;	
+}
+
+	
+

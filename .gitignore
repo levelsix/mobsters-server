@@ -12,6 +12,7 @@ src/main/resources/KingdomAPNSProdKey.p12
 .project
 .classpath
 .settings/
+.metadata
 
 target/
 */target/

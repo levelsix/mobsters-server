@@ -3,6 +3,7 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
@@ -12,6 +13,7 @@ import "Item.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "Research.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
@@ -130,9 +132,13 @@ message StartupResponseProto {
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
 		
+		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
 	repeated UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
+	repeated BattleItemQueueForUserProto battleItemQueue = 48;
+	repeated UserBattleItemProto battleItem = 49;	
+	repeated UserResearchProto userResearchs = 50;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

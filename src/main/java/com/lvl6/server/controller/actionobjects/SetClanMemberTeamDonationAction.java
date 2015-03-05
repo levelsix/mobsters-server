@@ -109,7 +109,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 					"fulfilled ClanMemberTeamDonation solicitation",
 					mySolicitation);
 				
-			} else if (donationsToMe.size() > 0) {
+			} else if (donationsToMe.size() > 1) {
 				String preface = "fulfilled ClanMemberTeamDonation solicitation";
 				log.error(
 					"{} {} has multiple donations: {}",

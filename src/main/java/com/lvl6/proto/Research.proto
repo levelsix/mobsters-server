@@ -10,19 +10,19 @@ option java_outer_classname = "ResearchsProto";
 
 
 //------------------------------------------------------------------------------------------
-
+ 
 message ResearchProto {
 	optional int32 researchId = 1;
 	
 	//reducing resource cost or speed
 	//TODO: turn into enum later on
 	//optional ResearchType researchType = 2;
-	optional string researchType = 2; 
+	optional ResearchType researchType = 2; 
 	
 	//battle, resources, restorative/healing
 	//TODO: turn into enum later on
 	//optional ResearchDomain researchDomain = 3;
-	optional string researchDomain = 3;
+	optional ResearchDomain researchDomain = 3;
 	
 	optional string iconImgName = 4;
 	optional string name = 5;
@@ -39,6 +39,8 @@ message ResearchProto {
 	optional ResourceType costType = 11;
 
 	repeated ResearchPropertyProto properties = 12;
+	
+	optional int32 level = 13;
 	
 }
 
@@ -75,4 +77,12 @@ enum ResearchDomain {
 	RESOURCES = 4;
 	BATTLE = 5;
 	
+}
+
+message UserResearchProto {
+	optional string userResearchUuid = 1;
+	optional string userUuid = 2;
+	optional int32 researchId = 3;
+	optional int64 timePurchased = 4;
+	optional bool complete = 5;
 }
