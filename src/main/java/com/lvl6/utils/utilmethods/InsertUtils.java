@@ -1047,7 +1047,6 @@ public class InsertUtils implements InsertUtil{
 		Collections.sort(userMonsterIds);
 		String userMonsterIdOne = userMonsterIds.get(0);
 		String userMOnsterIdTwo = userMonsterIds.get(1);
-		
 		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1063,6 +1062,7 @@ public class InsertUtils implements InsertUtil{
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 		
 		return numUpdated;
+
 	}
 	
 	@Override

@@ -31,6 +31,10 @@ public class EvolveMonsterRequestEvent extends RequestEvent {
   public EvolveMonsterRequestProto getEvolveMonsterRequestProto() {
     return evolveMonsterRequestProto;
   }
+  
+  public void setEvolveMonsterRequestProto(EvolveMonsterRequestProto emrp) {
+	  this.evolveMonsterRequestProto = emrp;
+  }
 
   @Override
   public String toString()

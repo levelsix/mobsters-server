@@ -37,6 +37,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -279,6 +280,14 @@ public class SellUserMonsterController extends EventController {
 			deleteReasons.add(delReason + amount);
 		}
 		//TODO: FIX THIS RECORDING MONSTERS DELETED
+		String deletedReason = "sell monster";
+		Timestamp deletedTime = new Timestamp(deleteDate.getTime());
+		for(String userMonsterId : idsToUserMonsters.keySet()) {
+			InsertUtils.get().insertMonsterDeleteHistory(idsToUserMonsters.get(userMonsterId), deletedReason, 
+					"sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId), null, deletedTime);
+		}
+		log.info("user monsters added to history table. userMonsterIds:" + userMonsterIds);
+		
 //
 //		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
 //				deleteReasons, userMonstersList, deleteDate);

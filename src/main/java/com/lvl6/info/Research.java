@@ -1,9 +1,7 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-
-import com.lvl6.proto.ResearchsProto.ResearchDomain;
-import com.lvl6.proto.ResearchsProto.ResearchType;
+import java.util.List;
 
 public class Research implements Serializable {
 	
@@ -82,25 +80,7 @@ public class Research implements Serializable {
 		this.name = name;
 	}
 
-	public int getPredId()
-	{
-		return predId;
-	}
 
-	public void setPredId( int predId )
-	{
-		this.predId = predId;
-	}
-
-	public int getSuccId()
-	{
-		return succId;
-	}
-
-	public void setSuccId( int succId )
-	{
-		this.succId = succId;
-	}
 
 	public String getDesc()
 	{
@@ -142,33 +122,7 @@ public class Research implements Serializable {
 		this.costType = costType;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "Research [id="
-			+ id
-			+ ", researchType="
-			+ researchType
-			+ ", researchDomain="
-			+ researchDomain
-			+ ", iconImgName="
-			+ iconImgName
-			+ ", name="
-			+ name
-			+ ", predId="
-			+ predId
-			+ ", succId="
-			+ succId
-			+ ", desc="
-			+ desc
-			+ ", durationMin="
-			+ durationMin
-			+ ", costAmt="
-			+ costAmt
-			+ ", costType="
-			+ costType
-			+ "]";
-	}
+
 
 	public String getResearchType() {
 		return researchType;
@@ -185,6 +139,33 @@ public class Research implements Serializable {
 	public void setResearchDomain(String researchDomain) {
 		this.researchDomain = researchDomain;
 	}
+
+	public int getPredId() {
+		return predId;
+	}
+
+	public void setPredId(int predId) {
+		this.predId = predId;
+	}
+
+	public int getSuccId() {
+		return succId;
+	}
+
+	public void setSuccId(int succId) {
+		this.succId = succId;
+	}
+
+	@Override
+	public String toString() {
+		return "Research [id=" + id + ", researchType=" + researchType
+				+ ", researchDomain=" + researchDomain + ", iconImgName="
+				+ iconImgName + ", name=" + name + ", predId=" + predId
+				+ ", succId=" + succId + ", desc=" + desc + ", durationMin="
+				+ durationMin + ", costAmt=" + costAmt + ", costType="
+				+ costType + "]";
+	}
+
 
 
 
