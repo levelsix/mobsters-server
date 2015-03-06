@@ -790,7 +790,7 @@ public class StaticDataContainer
 		Map<Integer, Research> idsToResearch =
 				ResearchRetrieveUtils.getIdsToResearch();
 
-		log.info("" + idsToResearch);
+		log.info("all research: {}", idsToResearch);
 		
 		if (null == idsToResearch || idsToResearch.isEmpty()) {
 			log.warn("setResearch() no research");
