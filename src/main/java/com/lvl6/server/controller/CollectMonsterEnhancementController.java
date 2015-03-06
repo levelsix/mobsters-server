@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 	    	return;
 	    }
 		
@@ -146,7 +146,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             UpdateClientUserResponseEvent resEventUpdate = MiscMethods
                 .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
             resEventUpdate.setTag(event.getTag());
-//            server.writeEvent(resEventUpdate);
+            server.writeEvent(resEventUpdate);
 
 			if (successful) {
 				int currExp = umcep.getExpectedExperience();
@@ -160,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CollectMonsterEnhancementController processEvent", e);
 			}
