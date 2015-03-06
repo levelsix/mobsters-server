@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -32,6 +33,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -48,16 +50,19 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
 public class InsertUtils implements InsertUtil{
-	
+
 	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
-  public static InsertUtil get() {
-    return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
-  }
-  
-  private String randomUUID() {
-    return UUID.randomUUID().toString();
-  }
+	public static InsertUtil get() {
+		return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
+	}
+
+	private JdbcTemplate jdbcTemplate;
+
+
+	private String randomUUID() {
+		return UUID.randomUUID().toString();
+	}
 
   //	@Autowired
   //	protected CacheManager cache;

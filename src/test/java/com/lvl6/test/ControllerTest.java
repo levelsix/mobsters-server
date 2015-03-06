@@ -36,6 +36,8 @@ import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEnhanceHistory;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
