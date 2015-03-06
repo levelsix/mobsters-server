@@ -121,7 +121,7 @@ public class SellUserMonsterController extends EventController {
           userId);
       resEvent.setTag(event.getTag());
       resEvent.setSellUserMonsterResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
+//      server.writeEvent(resEvent);
       return;
     }
 
@@ -153,7 +153,7 @@ public class SellUserMonsterController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSellUserMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 
 			if (successful) {
@@ -161,7 +161,7 @@ public class SellUserMonsterController extends EventController {
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 				
 				writeChangesToHistory(userId, userMonsterIds,
 						userMonsterIdsToCashAmounts, idsToUserMonsters, deleteDate);
@@ -179,7 +179,7 @@ public class SellUserMonsterController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSellUserMonsterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
