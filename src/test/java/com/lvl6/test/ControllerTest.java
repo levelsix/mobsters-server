@@ -34,6 +34,7 @@ import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
+import com.lvl6.events.request.SellUserMonsterRequestEvent;
 import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
@@ -53,10 +54,12 @@ import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
+import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
@@ -88,6 +91,7 @@ import com.lvl6.server.controller.FinishPerformingResearchController;
 import com.lvl6.server.controller.InAppPurchaseController;
 import com.lvl6.server.controller.PerformResearchController;
 import com.lvl6.server.controller.RetrieveClanInfoController;
+import com.lvl6.server.controller.SellUserMonsterController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.SubmitMonsterEnhancementController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
@@ -160,6 +164,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	CollectMonsterEnhancementController collectMonsterEnhancementController;
+	
+	@Autowired
+	SellUserMonsterController sellUserMonsterController;
 	
 	@Autowired
 	PerformResearchController performResearchController;
@@ -1640,6 +1647,48 @@ public class ControllerTest extends TestCase {
 		assertEquals(userMonsterList2.size() - 2, userMonsterList3.size());
 		assertEquals(monsterDeleteHistoryRows2 + 2, monsterDeleteHistoryRows3);
 		assertEquals(monsterEnhanceRows2 - 3, monsterEnhanceRows3);
+
+	}
+	
+	@Test
+	public void testSellingMonsterAndHistory() {
+		User user = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
+		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
+		int monsterDeleteHistoryRows = retrieveNumberOfMonsterDeleteHistoryRows(user.getId());
+		int userCash = user.getCash();
+
+		Date now = new Date();
+		Timestamp nowTimestamp = new Timestamp(now.getTime());
+		String userMonsterId = insertIntoUserMonsterTable(user.getId(), 1, 1000, 10, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+
+		MinimumUserProtoWithMaxResources.Builder mupWithMaxResources = MinimumUserProtoWithMaxResources.newBuilder();
+		mupWithMaxResources.setMinUserProto(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		mupWithMaxResources.setMaxCash(1000000);
+		mupWithMaxResources.setMaxOil(1000000);
+		
+		MinimumUserMonsterSellProto.Builder mumsp = MinimumUserMonsterSellProto.newBuilder();
+		mumsp.setUserMonsterUuid(userMonsterId);
+		mumsp.setCashAmount(100);
+		List<MinimumUserMonsterSellProto> sellList = new ArrayList<MinimumUserMonsterSellProto>();
+		sellList.add(mumsp.build());
+		
+		SellUserMonsterRequestProto.Builder sumrpb = SellUserMonsterRequestProto.newBuilder();
+		sumrpb.setSender(mupWithMaxResources);
+		sumrpb.addAllSales(sellList);
+		
+		SellUserMonsterRequestEvent sumre = new SellUserMonsterRequestEvent();
+		sumre.setTag(1);
+		sumre.setSellUserMonsterRequestProto(sumrpb.build());
+		sellUserMonsterController.handleEvent(sumre);
+		
+		User user2 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
+		List<MonsterForUser> userMonsterList2 = monsterForUserRetrieveUtils.getMonstersForUser(user2.getId());
+		int monsterDeleteHistoryRows2 = retrieveNumberOfMonsterDeleteHistoryRows(user2.getId());
+		
+		
+		assertEquals(userCash + 100, user2.getCash());
+		assertEquals(userMonsterList.size(), userMonsterList2.size());
+		assertEquals(monsterDeleteHistoryRows + 1, monsterDeleteHistoryRows2);
 
 	}
 	
