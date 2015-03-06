@@ -37,6 +37,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class CollectMonsterEnhancementController extends EventController {
@@ -93,11 +94,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		try {
 			userUuid = UUID.fromString(userId);
+			StringUtils.convertToUUID(userMonsterIdsThatFinished);
+			UUID.fromString(umcep.getUserMonsterUuid());
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+				"UUID error. incorrect userId=%s or userMonsterIdsThatFinished=%s "
+				+ "or usermonstercurrexpproto's usermonsterid",
+				userId, userMonsterIdsThatFinished, umcep.getUserMonsterUuid()), e);
 		}
 		
 		//UUID checks
@@ -126,9 +130,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
 
             User aUser = userRetrieveUtil.getUserById(userId);
+            
+    		MonsterEnhancingForUser mefu = inEnhancing.get(umcep.getUserMonsterUuid()); 
+
 
 			boolean legit = checkLegit(resBuilder, userId,
-				userMonsterIds, inEnhancing, umcep, userMonsterIdsThatFinished);
+				userMonsterIds, inEnhancing, umcep, userMonsterIdsThatFinished, mefu);
 
 			boolean successful = false;
 			if(legit) {
@@ -150,7 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			if (successful) {
 				int currExp = umcep.getExpectedExperience();
-				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished, mfu, currExp);
+				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished, mfu, currExp, mefu);
 			}
 		} catch (Exception e) {
 			log.error("exception in CollectMonsterEnhancementController processEvent", e);
@@ -188,7 +195,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private boolean checkLegit(Builder resBuilder, String userId,
 		List<String> userMonsterIds,
 		Map<String, MonsterEnhancingForUser> inEnhancing,
-		UserMonsterCurrentExpProto umcep, List<String> usedUpMonsterIds)
+		UserMonsterCurrentExpProto umcep, List<String> usedUpMonsterIds, 
+		MonsterEnhancingForUser mefu)
 	{
 
 		if ( null == umcep || usedUpMonsterIds.isEmpty()) {
@@ -213,7 +221,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		//check to make sure the base is complete
-		MonsterEnhancingForUser mefu = inEnhancing.get(umcep.getUserMonsterUuid()); 
 		if (!mefu.isEnhancingComplete()) {
 			log.error(String.format(
 				"base monster being enhanced is incomplete: %s", mefu));
@@ -268,20 +275,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private void writeChangesToHistory(String uId, List<String> allEnhancingMfuIds,
-		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds, MonsterForUser mfu, int currExp)
+		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds,
+		MonsterForUser mfu, int currExp, MonsterEnhancingForUser mefu)
 	{
 		//get the monster being enhanced
-		MonsterEnhancingForUser monsterBeingEnhanced = null;
-		for(String id : inEnhancing.keySet()) {
-			monsterBeingEnhanced = inEnhancing.get(id);
-		}
+		MonsterEnhancingForUser monsterBeingEnhanced = mefu;
 		
 		Date now = new Date();
 		Timestamp timeOfEntry = new Timestamp(now.getTime());
 		
 		for(String feederId : usedUpMfuIds) {
-			MonsterEnhancingForUser mefu = inEnhancing.get(feederId);
-			Timestamp enhanceStartTime = new Timestamp(mefu.getExpectedStartTime().getTime());
+			MonsterEnhancingForUser mefu2 = inEnhancing.get(feederId);
+			Timestamp enhanceStartTime = new Timestamp(mefu2.getExpectedStartTime().getTime());
 
 			InsertUtils.get().insertMonsterEnhanceHistory(uId, monsterBeingEnhanced.getMonsterForUserId(),
 					feederId, currExp, mfu.getCurrentExp(), enhanceStartTime, 
