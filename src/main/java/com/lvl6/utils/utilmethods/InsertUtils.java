@@ -2088,7 +2088,7 @@ public class InsertUtils implements InsertUtil{
 	
 	@Override
 	public boolean insertMonsterDeleteHistory(MonsterForUser mfu, String deletedReason, 
-			String details, Timestamp combineStartTime, Timestamp deletedTime) {
+			String details, Timestamp deletedTime) {
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 		
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, mfu.getId());
@@ -2099,8 +2099,8 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, mfu.getCurrentHealth());
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, mfu.getNumPieces());
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, mfu.isComplete());
-		if(combineStartTime != null) {
-			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__COMBINE_START_TIME, combineStartTime);
+		if(mfu.getCombineStartTime() != null) {
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__COMBINE_START_TIME, mfu.getCombineStartTime());
 		}
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, mfu.getSourceOfPieces());

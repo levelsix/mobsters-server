@@ -21,6 +21,7 @@ public class Research implements Serializable {
 	private int durationMin;
 	private int costAmt;
 	private String costType;
+	private int level;
 	
 	public Research(
 		int id,
@@ -33,7 +34,8 @@ public class Research implements Serializable {
 		String desc,
 		int durationMin,
 		int costAmt,
-		String costType )
+		String costType,
+		int level)
 	{
 		super();
 		this.id = id;
@@ -47,6 +49,7 @@ public class Research implements Serializable {
 		this.durationMin = durationMin;
 		this.costAmt = costAmt;
 		this.costType = costType;
+		this.level = level;
 	}
 
 	public int getId()
@@ -122,6 +125,15 @@ public class Research implements Serializable {
 		this.costType = costType;
 	}
 
+	@Override
+	public String toString() {
+		return "Research [id=" + id + ", researchType=" + researchType
+				+ ", researchDomain=" + researchDomain + ", iconImgName="
+				+ iconImgName + ", name=" + name + ", predId=" + predId
+				+ ", succId=" + succId + ", desc=" + desc + ", durationMin="
+				+ durationMin + ", costAmt=" + costAmt + ", costType="
+				+ costType + ", level=" + level + "]";
+	}
 
 
 	public String getResearchType() {
@@ -140,6 +152,18 @@ public class Research implements Serializable {
 		this.researchDomain = researchDomain;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getSuccId() {
+		return succId;
+	}
+
 	public int getPredId() {
 		return predId;
 	}
@@ -148,25 +172,9 @@ public class Research implements Serializable {
 		this.predId = predId;
 	}
 
-	public int getSuccId() {
-		return succId;
-	}
-
 	public void setSuccId(int succId) {
 		this.succId = succId;
 	}
-
-	@Override
-	public String toString() {
-		return "Research [id=" + id + ", researchType=" + researchType
-				+ ", researchDomain=" + researchDomain + ", iconImgName="
-				+ iconImgName + ", name=" + name + ", predId=" + predId
-				+ ", succId=" + succId + ", desc=" + desc + ", durationMin="
-				+ durationMin + ", costAmt=" + costAmt + ", costType="
-				+ costType + "]";
-	}
-
-
 
 
 

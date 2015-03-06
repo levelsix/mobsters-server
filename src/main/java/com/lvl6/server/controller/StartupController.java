@@ -395,10 +395,7 @@ public class StartupController extends EventController {
 			double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
 			// Check version number
 			if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
-				//updateStatus = UpdateStatus.MAJOR_UPDATE;
-				//TODO: GET RID OF THIS.
-				//Only here because of bug with client's need to not force update
-				updateStatus = UpdateStatus.MINOR_UPDATE;
+				updateStatus = UpdateStatus.MAJOR_UPDATE;
 				log.info("player has been notified of forced update");
 			} else if (tempClientVersionNum < tempLatestVersionNum) {
 				updateStatus = UpdateStatus.MINOR_UPDATE;
@@ -431,8 +428,7 @@ public class StartupController extends EventController {
 		try {
 			//TODO: GET RID OF "updateStatus != UpdateStatus.MINOR_UPDATE".
 			//Only here because of bug with client's need to not force update
-			if (updateStatus != UpdateStatus.MAJOR_UPDATE &&
-				updateStatus != UpdateStatus.MINOR_UPDATE)
+			if (updateStatus != UpdateStatus.MAJOR_UPDATE)
 			{
 				List<User> users = getUserRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
 				user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);

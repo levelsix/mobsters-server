@@ -152,14 +152,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, now, money, previousGems, evolution,
 						evolvedUserMonster);
@@ -171,7 +171,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}
@@ -398,6 +398,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		for(String id : idsToUserMonsters.keySet()) {
 			MonsterForUser mfu = idsToUserMonsters.get(id);
+			mfu.setCombineStartTime(combineStartTime);
 			String details = "";
 			if(id.equals(uMonsterIdOne)) {
 				details = "monster one of evolution";
@@ -409,7 +410,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				details = "catalystUserMonsterId";
 			}
 
-			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, combineStartTime, deletedTime);
+			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
 		}
 
 	}

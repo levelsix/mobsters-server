@@ -97,7 +97,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 	    	return;
 	    }
 		
@@ -136,7 +136,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (successful) {
 				//tell the client to update user because user's funds most likely changed
@@ -144,7 +144,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 //				writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
 //				writeToUserCurrencyHistory(aUser, curTime, umcep.getUserMonsterId(), money, previousGems);
@@ -158,7 +158,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EnhancementWaitTimeCompleteController processEvent", e);
 			}

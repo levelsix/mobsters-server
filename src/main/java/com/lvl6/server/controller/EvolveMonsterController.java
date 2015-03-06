@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(userId);
 	      	resEvent.setTag(event.getTag());
 	      	resEvent.setEvolveMonsterResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
+//	      	server.writeEvent(resEvent);
 	    	return;
 	    }
 		
@@ -190,14 +190,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolveMonsterResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
 						catalystUserMonsterId, evolvingUserMonsterIds);
@@ -217,7 +217,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(userId);
 	      	resEvent.setTag(event.getTag());
 	      	resEvent.setEvolveMonsterResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
+//	      	server.writeEvent(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}

@@ -2397,7 +2397,7 @@ public class CreateInfoProtoUtils {
 
 		return protos;
 	}
-
+	
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
 		MonsterForUser mfu)
 	{
@@ -2973,7 +2973,7 @@ public class CreateInfoProtoUtils {
 			rpb.setPredId(predId);
 		}
 		int succId = r.getSuccId();
-		if (predId > 0) {
+		if (succId > 0) {
 			rpb.setSuccId(succId);
 		}
 		
@@ -2984,6 +2984,7 @@ public class CreateInfoProtoUtils {
 		
 		rpb.setDurationMin(r.getDurationMin());
 		rpb.setCostAmt(r.getCostAmt());
+		rpb.setLevel(r.getLevel());
 		
 		str = r.getCostType();
 		if (null != str && !str.isEmpty()) {

@@ -284,7 +284,7 @@ public class SellUserMonsterController extends EventController {
 		Timestamp deletedTime = new Timestamp(deleteDate.getTime());
 		for(String userMonsterId : idsToUserMonsters.keySet()) {
 			InsertUtils.get().insertMonsterDeleteHistory(idsToUserMonsters.get(userMonsterId), deletedReason, 
-					"sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId), null, deletedTime);
+					"sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId), deletedTime);
 		}
 		log.info("user monsters added to history table. userMonsterIds:" + userMonsterIds);
 		

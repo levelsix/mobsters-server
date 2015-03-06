@@ -14,30 +14,34 @@ public class SubmitMonsterEnhancementRequestEvent extends RequestEvent {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private SubmitMonsterEnhancementRequestProto submitMonsterEnhancementRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      submitMonsterEnhancementRequestProto = SubmitMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = submitMonsterEnhancementRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SubmitMonsterEnhancementRequest exception", e);
-    }
-  }
+	private SubmitMonsterEnhancementRequestProto submitMonsterEnhancementRequestProto;
 
-  public SubmitMonsterEnhancementRequestProto getSubmitMonsterEnhancementRequestProto() {
-    return submitMonsterEnhancementRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	public void read(ByteBuffer buff) {
+		try {
+			submitMonsterEnhancementRequestProto = SubmitMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
+			playerId = submitMonsterEnhancementRequestProto.getSender().getMinUserProto().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SubmitMonsterEnhancementRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "SubmitMonsterEnhancementRequestEvent [submitMonsterEnhancementRequestProto="
-		  + submitMonsterEnhancementRequestProto
-		  + "]";
-  }
-  
+	public SubmitMonsterEnhancementRequestProto getSubmitMonsterEnhancementRequestProto() {
+		return submitMonsterEnhancementRequestProto;
+	}
+
+	public void setSubmitMonsterEnhancementRequestProto(SubmitMonsterEnhancementRequestProto smerp) {
+		this.submitMonsterEnhancementRequestProto = smerp;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "SubmitMonsterEnhancementRequestEvent [submitMonsterEnhancementRequestProto="
+				+ submitMonsterEnhancementRequestProto
+				+ "]";
+	}
+
 }

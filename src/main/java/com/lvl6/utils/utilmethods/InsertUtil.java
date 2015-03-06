@@ -261,7 +261,7 @@ public interface InsertUtil {
 			Timestamp timeOfEntry);
 	
 	public abstract boolean insertMonsterDeleteHistory(MonsterForUser mfu, String deletedReason, 
-			String details, Timestamp combineStartTime, Timestamp deletedTime);
+			String details, Timestamp deletedTime);
 	
 	public abstract boolean insertMonsterEnhanceHistory(String userId, String MonsterForUserIdBeingEnhanced,
 			String MonsterForUserId, int currExp, int prevExp, Timestamp enhancingStartTime, 

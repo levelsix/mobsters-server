@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -180,14 +180,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
 					//						deleteMap, updateMap,
@@ -201,7 +201,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SubmitMonsterEnhancementController processEvent", e);
 			}

@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -105,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 	    	return;
 	    }
 		
@@ -145,7 +146,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             UpdateClientUserResponseEvent resEventUpdate = MiscMethods
                 .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
             resEventUpdate.setTag(event.getTag());
-            server.writeEvent(resEventUpdate);
+//            server.writeEvent(resEventUpdate);
 
 			if (successful) {
 				int currExp = umcep.getExpectedExperience();
@@ -159,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CollectMonsterEnhancementController processEvent", e);
 			}
@@ -275,17 +276,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			monsterBeingEnhanced = inEnhancing.get(id);
 		}
 		
-		MonsterForUser enhancedMonster = monsterForUserRetrieveUtil.getSpecificUserMonster(monsterBeingEnhanced.getMonsterForUserId());
 		Date now = new Date();
 		Timestamp timeOfEntry = new Timestamp(now.getTime());
-		Timestamp enhanceStartTime = new Timestamp(monsterBeingEnhanced.getExpectedStartTime().getTime());
-		//TODO: keep track of the monsters that were enhancing
 		
 		for(String feederId : usedUpMfuIds) {
-			InsertUtils.get().insertMonsterEnhanceHistory(uId, enhancedMonster.getId(),
+			MonsterEnhancingForUser mefu = inEnhancing.get(feederId);
+			Timestamp enhanceStartTime = new Timestamp(mefu.getExpectedStartTime().getTime());
+
+			InsertUtils.get().insertMonsterEnhanceHistory(uId, monsterBeingEnhanced.getMonsterForUserId(),
 					feederId, currExp, mfu.getCurrentExp(), enhanceStartTime, 
 					timeOfEntry, monsterBeingEnhanced.getEnhancingCost());
 
+		}
+
+		Map<String, MonsterForUser> deletedMonsterForUsers = new HashMap<String, MonsterForUser>();
+		for(String id : usedUpMfuIds) {
+			MonsterForUser monsterForUser = monsterForUserRetrieveUtil.getSpecificUserMonster(id);
+			deletedMonsterForUsers.put(id, monsterForUser);
 		}
 
 		//delete the selected monsters from  the enhancing table
@@ -303,19 +310,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			"deleted monster_for_user rows. numDeleted=%s, inEnhancing=%s, deletedIds=%s",
 			num, inEnhancing, usedUpMfuIds));
 		
-		writeToMonsterDeleteHistory(usedUpMfuIds);
+		writeToMonsterDeleteHistory(deletedMonsterForUsers);
 		log.info("added deleted monsters to monster delete table");
 
 	}
 	
-	private void writeToMonsterDeleteHistory(List<String> deletedMonsterForUserIds) {
+	private void writeToMonsterDeleteHistory(Map<String, MonsterForUser> deletedMonsterForUsers) {
 		String deletedReason = "enhancing";
 		String details = "feeder monsters";
 		Date now = new Date();
 		Timestamp deletedTime = new Timestamp(now.getTime());
-		for(String userMonsterId : deletedMonsterForUserIds) {
-			MonsterForUser mfu = monsterForUserRetrieveUtil.getSpecificUserMonster(userMonsterId);
-			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, null, deletedTime);
+		for(String userMonsterId : deletedMonsterForUsers.keySet()) {
+			MonsterForUser mfu = deletedMonsterForUsers.get(userMonsterId);
+			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
 		}
 	}
 	
