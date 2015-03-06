@@ -3,7 +3,6 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +18,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
 import com.lvl6.events.response.CollectMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -156,8 +156,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             server.writeEvent(resEventUpdate);
 
 			if (successful) {
-				int currExp = umcep.getExpectedExperience();
-				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished, mfu, currExp, mefu);
+				writeChangesToHistory(userId, umcep, mfu, inEnhancing, mefu, userMonsterIdsThatFinished, userMonsterIds);
 			}
 		} catch (Exception e) {
 			log.error("exception in CollectMonsterEnhancementController processEvent", e);
@@ -274,47 +273,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 
-	private void writeChangesToHistory(String uId, List<String> allEnhancingMfuIds,
-		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds,
-		MonsterForUser mfu, int currExp, MonsterEnhancingForUser mefu)
+	private void writeChangesToHistory(String userId, UserMonsterCurrentExpProto umcep, 
+			MonsterForUser mfu, Map<String, MonsterEnhancingForUser> inEnhancing,
+			MonsterEnhancingForUser mefu, List<String> usedUpMfuIds, List<String> allEnhancingMfuIds)
 	{
-		//get the monster being enhanced
-		MonsterEnhancingForUser monsterBeingEnhanced = mefu;
-		
+		int expectedExp = umcep.getExpectedExperience();
+		int prevExp = mfu.getCurrentExp();
+		List<Timestamp> expectedStartTimes = new ArrayList<Timestamp>();
+		for(String id : inEnhancing.keySet()) {
+			expectedStartTimes.add(new Timestamp(inEnhancing.get(id).getExpectedStartTime().getTime()));
+		}
 		Date now = new Date();
 		Timestamp timeOfEntry = new Timestamp(now.getTime());
-		
-		for(String feederId : usedUpMfuIds) {
-			MonsterEnhancingForUser mefu2 = inEnhancing.get(feederId);
-			Timestamp enhanceStartTime = new Timestamp(mefu2.getExpectedStartTime().getTime());
 
-			InsertUtils.get().insertMonsterEnhanceHistory(uId, monsterBeingEnhanced.getMonsterForUserId(),
-					feederId, currExp, mfu.getCurrentExp(), enhanceStartTime, 
-					timeOfEntry, monsterBeingEnhanced.getEnhancingCost());
+		MonsterEnhanceHistory meh = new MonsterEnhanceHistory(userId, mefu.getMonsterForUserId(), 
+				usedUpMfuIds, expectedExp, prevExp, expectedStartTimes, timeOfEntry, mefu.getEnhancingCost());
 
-		}
 
-		Map<String, MonsterForUser> deletedMonsterForUsers = new HashMap<String, MonsterForUser>();
-		for(String id : usedUpMfuIds) {
-			MonsterForUser monsterForUser = monsterForUserRetrieveUtil.getSpecificUserMonster(id);
-			deletedMonsterForUsers.put(id, monsterForUser);
-		}
+		InsertUtils.get().insertMonsterEnhanceHistory(meh);
+
+		Map<String, MonsterForUser> deletedMonsterForUsers = monsterForUserRetrieveUtil.getSpecificUserMonsters(usedUpMfuIds);
 
 		//delete the selected monsters from  the enhancing table
 		int num = DeleteUtils.get().deleteMonsterEnhancingForUser(
-			uId, allEnhancingMfuIds);
+				userId, allEnhancingMfuIds);
 		log.info(String.format(
-			"deleted monster enhancing rows. numDeleted=%s, userMonsterIds=%s, inEnhancing=%s",
-			num, allEnhancingMfuIds, inEnhancing));
+				"deleted monster enhancing rows. numDeleted=%s, userMonsterIds=%s, inEnhancing=%s",
+				num, allEnhancingMfuIds, inEnhancing));
 
 
 		//delete the userMonsterIds from the monster_for_user table, but don't delete
 		//the monster user is enhancing
 		num = DeleteUtils.get().deleteMonstersForUser(usedUpMfuIds);
 		log.info(String.format(
-			"deleted monster_for_user rows. numDeleted=%s, inEnhancing=%s, deletedIds=%s",
-			num, inEnhancing, usedUpMfuIds));
-		
+				"deleted monster_for_user rows. numDeleted=%s, inEnhancing=%s, deletedIds=%s",
+				num, inEnhancing, usedUpMfuIds));
+
 		writeToMonsterDeleteHistory(deletedMonsterForUsers);
 		log.info("added deleted monsters to monster delete table");
 

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -31,6 +32,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -46,16 +48,19 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
 public class InsertUtils implements InsertUtil{
-	
+
 	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
-  public static InsertUtil get() {
-    return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
-  }
-  
-  private String randomUUID() {
-    return UUID.randomUUID().toString();
-  }
+	public static InsertUtil get() {
+		return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
+	}
+
+	private JdbcTemplate jdbcTemplate;
+
+
+	private String randomUUID() {
+		return UUID.randomUUID().toString();
+	}
 
   //	@Autowired
   //	protected CacheManager cache;
@@ -2117,29 +2122,56 @@ public class InsertUtils implements InsertUtil{
 	}
 		
 	@Override
-	public boolean insertMonsterEnhanceHistory(String userId, String monsterForUserIdBeingEnhanced,
-			String feederMonsterForUserId, int currExp, int prevExp, Timestamp enhancingStartTime, 
-			Timestamp timeOfEntry, int enhancingCost) {
-		Map<String, Object> insertParams = new HashMap<String, Object>();
+	public boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh) {
 		String id = randomUUID();
+		String id2 = randomUUID();
+
+//		+ "(id, user_id, mfu_id_being_enhanced, feeder_mfu_id, current_experience,"
+//		+ " previous_experience, enhancing_start_time, time_of_entry, enhancing_cost)
 		
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ID, id);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userId);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED, monsterForUserIdBeingEnhanced);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID, feederMonsterForUserId);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE, currExp);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE, prevExp);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME, enhancingStartTime);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY, timeOfEntry);
-		insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_COST, enhancingCost);
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into monster_enhancing_history VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 		
-		int numInserted = DBConnection.get().insertIntoTableBasic(
-				DBConstants.TABLE_MONSTER_ENHANCING_HISTORY, insertParams);
-		if (numInserted == 1) {
+		int numFeeders = meh.getFeederMonsterForUserId().size();		
+		for(int i=1; i<numFeeders; i++) {
+			sql.append(", (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+		}
+		
+		Object[] args = new Object[18];
+		args[0] = id;
+		args[1] = meh.getUserId();
+		args[2] = meh.getMonsterForUserIdBeingEnhanced();
+		args[3] = meh.getFeederMonsterForUserId().get(0);
+		args[4] = meh.getCurrExp();
+		args[5] = meh.getPrevExp();
+		args[6] = meh.getEnhancingStartTime();
+		args[7] = meh.getTimeOfEntry();
+		args[8] = meh.getEnhancingCost();
+		
+		if(numFeeders == 2) {
+			args[9] = id2;
+			args[10] = meh.getUserId();
+			args[11] = meh.getMonsterForUserIdBeingEnhanced();
+			args[12] = meh.getFeederMonsterForUserId().get(1);
+			args[13] = meh.getCurrExp();
+			args[14] = meh.getPrevExp();
+			args[15] = meh.getEnhancingStartTime();
+			args[16] = meh.getTimeOfEntry();
+			args[17] = meh.getEnhancingCost();
+		}
+
+		int numRows = 0;
+		try {
+			numRows = this.jdbcTemplate.update(sql.toString(), args);
+		} catch (Exception e) {
+			log.info("failed to insert into monster enhace history for meh: " + meh);
+			return false;
+		}
+		if(numRows == numFeeders) {
 			return true;
 		}
-		return false;
-		
+		else return false;
+
 	}
 		
 		
