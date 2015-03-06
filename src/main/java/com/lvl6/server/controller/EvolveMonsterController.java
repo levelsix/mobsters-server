@@ -125,6 +125,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			UUID.fromString(catalystUserMonsterId);
 			StringUtils.convertToUUID(evolvingUserMonsterIds);
 			
+			
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
