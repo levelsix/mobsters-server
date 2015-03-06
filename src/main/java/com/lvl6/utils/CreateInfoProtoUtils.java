@@ -2975,7 +2975,7 @@ public class CreateInfoProtoUtils {
 			rpb.setPredId(predId);
 		}
 		int succId = r.getSuccId();
-		if (predId > 0) {
+		if (succId > 0) {
 			rpb.setSuccId(succId);
 		}
 		
