@@ -79,6 +79,7 @@ import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJob;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.Research;
+import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
@@ -187,6 +188,7 @@ import com.lvl6.proto.ResearchsProto.ResearchDomain;
 import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
+import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -2973,7 +2975,7 @@ public class CreateInfoProtoUtils {
 			rpb.setPredId(predId);
 		}
 		int succId = r.getSuccId();
-		if (predId > 0) {
+		if (succId > 0) {
 			rpb.setSuccId(succId);
 		}
 		
@@ -3035,6 +3037,28 @@ public class CreateInfoProtoUtils {
 		rppb.setResearchId(rp.getId());
 		
 		return rppb.build();
+	}
+	
+	public static Collection<UserResearchProto> createUserResearchProto(
+			Collection<ResearchForUser> userResearchs)
+	{
+		List<UserResearchProto> urpList = new ArrayList<UserResearchProto>();
+		for (ResearchForUser rfu : userResearchs) {
+			UserResearchProto urp = createUserResearchProto(rfu);
+			urpList.add(urp);
+		}
+		return urpList;
+	}
+
+	public static UserResearchProto createUserResearchProto(ResearchForUser rfu) {
+		UserResearchProto.Builder urpb = UserResearchProto.newBuilder();
+		urpb.setUserResearchUuid(rfu.getId());
+		urpb.setUserUuid(rfu.getUserId());
+		Date timePurchased = rfu.getTimePurchased();
+		urpb.setTimePurchased(timePurchased.getTime());
+		urpb.setComplete(rfu.isComplete());
+		
+		return urpb.build();
 	}
 	
 	/**Skill.proto***************************************************/

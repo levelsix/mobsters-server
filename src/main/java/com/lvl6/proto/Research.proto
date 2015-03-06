@@ -10,7 +10,7 @@ option java_outer_classname = "ResearchsProto";
 
 
 //------------------------------------------------------------------------------------------
-
+ 
 message ResearchProto {
 	optional int32 researchId = 1;
 	
@@ -77,4 +77,12 @@ enum ResearchDomain {
 	RESOURCES = 4;
 	BATTLE = 5;
 	
+}
+
+message UserResearchProto {
+	optional string userResearchUuid = 1;
+	optional string userUuid = 2;
+	optional int32 researchId = 3;
+	optional int64 timePurchased = 4;
+	optional bool complete = 5;
 }
