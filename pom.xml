@@ -103,8 +103,8 @@
 		<!-- -->
 
 		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
-		<lvl6.application.version.majorNumber>2</lvl6.application.version.majorNumber>
-		<lvl6.application.version.minorNumber>15</lvl6.application.version.minorNumber>
+		<lvl6.application.version.majorNumber>3</lvl6.application.version.majorNumber>
+		<lvl6.application.version.minorNumber>0</lvl6.application.version.minorNumber>
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
@@ -154,15 +154,16 @@
 		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
-		<amqp.client.messages.queue>clientMessages1.2</amqp.client.messages.queue>
+		<amqp.client.messages.queue>clientMessages1.3</amqp.client.messages.queue>
 		<!-- <amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
 		]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
-		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers" />
-		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers1.1" />
-		<rabbit:binding queue="clientMessages1.2"	key="messagesFromPlayers1.2" />
+		<rabbit:binding queue="clientMessages1.3"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.3"	key="messagesFromPlayers1.1" />
+		<rabbit:binding queue="clientMessages1.3"	key="messagesFromPlayers1.2" />
+		<rabbit:binding queue="clientMessages1.3"	key="messagesFromPlayers1.3" />
 		]]></amqp.client.messages.bindings>
 
 
