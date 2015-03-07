@@ -287,7 +287,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int prevExp = mfu.getCurrentExp();
 		List<Timestamp> expectedStartTimes = new ArrayList<Timestamp>();
 		for(String id : inEnhancing.keySet()) {
-			expectedStartTimes.add(new Timestamp(inEnhancing.get(id).getExpectedStartTime().getTime()));
+			if(inEnhancing.get(id).getExpectedStartTime() != null) {
+				expectedStartTimes.add(new Timestamp(inEnhancing.get(id).getExpectedStartTime().getTime()));
+			}
 		}
 		Date now = new Date();
 		Timestamp timeOfEntry = new Timestamp(now.getTime());
