@@ -23,6 +23,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;

@@ -1,5 +1,6 @@
 package com.lvl6.utils.utilmethods;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
@@ -33,6 +35,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
@@ -48,6 +51,7 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
+
 
 public class InsertUtils implements InsertUtil{
 
