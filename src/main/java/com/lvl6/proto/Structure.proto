@@ -55,6 +55,7 @@ message StructureInfoProto {
 		MONEY_TREE = 12;
 		PVP_BOARD = 13;
 		RESEARCH_HOUSE = 14;
+		BATTLE_ITEM_FACTORY = 15;
 	}
 }
 
