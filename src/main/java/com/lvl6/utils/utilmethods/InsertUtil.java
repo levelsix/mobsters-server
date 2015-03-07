@@ -22,6 +22,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
@@ -261,8 +262,7 @@ public interface InsertUtil {
 			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
 			Timestamp timeOfEntry);
 	
-	public abstract boolean insertMonsterDeleteHistory(MonsterForUser mfu, String deletedReason, 
-			String details, Timestamp deletedTime);
+	public abstract boolean insertMonsterDeleteHistory(List<MonsterDeleteHistory> monsterDeleteHistoryList);
 	
 	public abstract boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh);
 	

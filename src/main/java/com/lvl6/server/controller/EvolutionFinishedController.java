@@ -21,6 +21,7 @@ import com.lvl6.events.request.EvolutionFinishedRequestEvent;
 import com.lvl6.events.response.EvolutionFinishedResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -109,42 +110,53 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 	    	return;
 	    }
 		
-		getLocker().lockPlayer(userUuid, getClass().getSimpleName());
-		try {
-			int previousGems = 0;
-			//get whatever we need from the database
-			User aUser = userRetrieveUtil.getUserById(userId);
-			MonsterEvolvingForUser evolution = monsterEvolvingForUserRetrieveUtil
-					.getEvolutionForUser(userId);
-			
-			//retrieve all the monsters used in evolution
-    	Map<String, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
-    			evolution);
-    	
-    	log.info(String.format("evolution=%s", evolution));
-    	log.info(String.format("existingUserMonsters=%s", existingUserMonsters));
+	    getLocker().lockPlayer(userUuid, getClass().getSimpleName());
+	    try {
+	    	int previousGems = 0;
+	    	//get whatever we need from the database
+	    	User aUser = userRetrieveUtil.getUserById(userId);
+	    	MonsterEvolvingForUser evolution = monsterEvolvingForUserRetrieveUtil
+	    			.getEvolutionForUser(userId);
 
-			boolean legitMonster = checkLegit(resBuilder, aUser, userId, evolution,
-					existingUserMonsters, gemsSpent);
+	    	String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
+	    	String uMonsterIdOne = evolution.getMonsterForUserIdOne();
+	    	String uMonsterIdTwo = evolution.getMonsterForUserIdTwo();
+			Timestamp combineStartTime = new Timestamp(evolution.getStartTime().getTime());
 
-			boolean successful = false;
-			Map<String, Integer> money = new HashMap<String, Integer>();
-			List<MonsterForUser> evolvedUserMonster = new ArrayList<MonsterForUser>();
-			if (legitMonster) {
-				previousGems = aUser.getGems();
-				successful = writeChangesToDB(aUser, userId, now, gemsSpent,
-						evolution, money, existingUserMonsters,
-						evolvedUserMonster);
-			}
-		
-			if (successful) {
-				MonsterForUser evolvedMfu = evolvedUserMonster.get(0);
-				FullUserMonsterProto fump = CreateInfoProtoUtils
-						.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
+	    	//retrieve all the monsters used in evolution
+	    	Map<String, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
+	    			evolution);
+
+	    	log.info(String.format("evolution=%s", evolution));
+	    	log.info(String.format("existingUserMonsters=%s", existingUserMonsters));
+
+	    	boolean legitMonster = checkLegit(resBuilder, aUser, userId, evolution,
+	    			existingUserMonsters, gemsSpent);
+
+	    	boolean successful = false;
+	    	Map<String, Integer> money = new HashMap<String, Integer>();
+	    	List<MonsterForUser> evolvedUserMonster = new ArrayList<MonsterForUser>();
+	    	if (legitMonster) {
+	    		previousGems = aUser.getGems();
+	    		successful = writeChangesToDB(aUser, userId, now, gemsSpent,
+	    				catalystUserMonsterId, uMonsterIdOne, uMonsterIdTwo, 
+	    				combineStartTime, money, existingUserMonsters,
+	    				evolvedUserMonster);
+	    	}
+
+	    	if (successful) {
+	    		writeToUserMonsterDeleteHistory(uMonsterIdOne, uMonsterIdTwo, 
+	    			 catalystUserMonsterId, userId, combineStartTime, 
+	    				existingUserMonsters);
+
+
+	    				MonsterForUser evolvedMfu = evolvedUserMonster.get(0);
+	    		FullUserMonsterProto fump = CreateInfoProtoUtils
+	    				.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
 				resBuilder.setEvolvedMonster(fump);
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
 			}
@@ -152,14 +164,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, now, money, previousGems, evolution,
 						evolvedUserMonster);
@@ -171,7 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}
@@ -247,7 +259,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	//List<MonsterForUser> userMonsters will be populated with the evolved monster
 	private boolean writeChangesToDB(User user, String uId, Date now, int gemsSpent,
-			MonsterEvolvingForUser mefu, Map<String, Integer> money,
+			String catalystUserMonsterId, String uMonsterIdOne, String uMonsterIdTwo, 
+			Timestamp combineStartTime, Map<String, Integer> money,
 			Map<String, MonsterForUser> idsToUserMonsters, List<MonsterForUser> userMonsters) {
 
 		//CHARGE THE USER IF HE SPED UP THE EVOLUTION
@@ -272,13 +285,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		}
 		//delete the monsters used in the evolution
 		List<String> userMonsterIds = new ArrayList<String>();
-		String catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
+		
 		userMonsterIds.add(catalystUserMonsterId);
-		String uMonsterIdOne = mefu.getMonsterForUserIdOne();
 		userMonsterIds.add(uMonsterIdOne);
-		String uMonsterIdTwo = mefu.getMonsterForUserIdTwo();
 		userMonsterIds.add(uMonsterIdTwo);
-		Timestamp combineStartTime = new Timestamp(mefu.getStartTime().getTime());
 		int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
 		log.info(String.format("num monsterForUser deleted: %s", num));
 		
@@ -395,6 +405,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		String deletedReason = "monster evolution";
 		Date d = new Date();
 		Timestamp deletedTime = new Timestamp(d.getTime());
+		List<MonsterDeleteHistory> monsterDeleteHistoryList = new ArrayList<MonsterDeleteHistory>();
 		
 		for(String id : idsToUserMonsters.keySet()) {
 			MonsterForUser mfu = idsToUserMonsters.get(id);
@@ -409,9 +420,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			else if(id.equals(catalystUserMonsterId)) {
 				details = "catalystUserMonsterId";
 			}
-
-			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+			MonsterDeleteHistory mdh = new MonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+			monsterDeleteHistoryList.add(mdh);
 		}
+		
+		InsertUtils.get().insertMonsterDeleteHistory(monsterDeleteHistoryList);
 
 	}
 

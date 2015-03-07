@@ -18,6 +18,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
 import com.lvl6.events.response.CollectMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -128,6 +129,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//get whatever we need from the database
 			Map<String, MonsterEnhancingForUser> inEnhancing =
 				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
+			
+			Map<String, MonsterForUser> deletedMonsterForUsers = monsterForUserRetrieveUtil.getSpecificUserMonsters(userMonsterIdsThatFinished);
 
             User aUser = userRetrieveUtil.getUserById(userId);
             
@@ -157,6 +160,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			if (successful) {
 				writeChangesToHistory(userId, umcep, mfu, inEnhancing, mefu, userMonsterIdsThatFinished, userMonsterIds);
+				
+				writeToMonsterDeleteHistory(deletedMonsterForUsers);
+				log.info("added deleted monsters to monster delete table");
 			}
 		} catch (Exception e) {
 			log.error("exception in CollectMonsterEnhancementController processEvent", e);
@@ -292,8 +298,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		InsertUtils.get().insertMonsterEnhanceHistory(meh);
 
-		Map<String, MonsterForUser> deletedMonsterForUsers = monsterForUserRetrieveUtil.getSpecificUserMonsters(usedUpMfuIds);
-
 		//delete the selected monsters from  the enhancing table
 		int num = DeleteUtils.get().deleteMonsterEnhancingForUser(
 				userId, allEnhancingMfuIds);
@@ -309,20 +313,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				"deleted monster_for_user rows. numDeleted=%s, inEnhancing=%s, deletedIds=%s",
 				num, inEnhancing, usedUpMfuIds));
 
-		writeToMonsterDeleteHistory(deletedMonsterForUsers);
-		log.info("added deleted monsters to monster delete table");
-
 	}
 	
 	private void writeToMonsterDeleteHistory(Map<String, MonsterForUser> deletedMonsterForUsers) {
 		String deletedReason = "enhancing";
-		String details = "feeder monsters";
 		Date now = new Date();
 		Timestamp deletedTime = new Timestamp(now.getTime());
-		for(String userMonsterId : deletedMonsterForUsers.keySet()) {
-			MonsterForUser mfu = deletedMonsterForUsers.get(userMonsterId);
-			InsertUtils.get().insertMonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+		List<MonsterDeleteHistory> deletedHistoryList = new ArrayList<MonsterDeleteHistory>(); 
+		
+		for(String id : deletedMonsterForUsers.keySet()) {
+			MonsterForUser mfu = deletedMonsterForUsers.get(id);
+			String details = "feeder monsters";
+			MonsterDeleteHistory mdh = new MonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+			deletedHistoryList.add(mdh);
+
 		}
+		
+		InsertUtils.get().insertMonsterDeleteHistory(deletedHistoryList);
 	}
 	
 	
