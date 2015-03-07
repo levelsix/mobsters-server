@@ -272,6 +272,8 @@ public class RetrieveUserMonsterTeamAction
 		PvpUser userPu = hazelcastPvpUtil.getPvpUser(retrieverUserId);
 		if ( null != userPu ) {
 			this.retrieverPu = userPu;
+		} else {
+			userIdsSansPvpUser.add(retrieverUserId);
 		}
 		
 		//get the PvpLeagueForUser for userIds who don't have PvpUser
@@ -288,9 +290,10 @@ public class RetrieveUserMonsterTeamAction
 			userIdsSansPvpUser);
 		List<String> userUuidStrs = new ArrayList<String>();
 		userUuidStrs.addAll(userIdsSansPvpUser);
-		if (null == this.retrieverPu) {
-			userUuidStrs.add(retrieverUserId);
-		}
+		//case if the retriever doesn't have a PvpUser, caller function already adds the id 
+//		if (null == this.retrieverPu) {
+//			userUuidStrs.add(retrieverUserId);
+//		}
 		
 		Map<String, PvpLeagueForUser> plfuMap = 
 			pvpLeagueForUserRetrieveUtil

@@ -3729,7 +3729,7 @@ public class CreateInfoProtoUtils {
 			PvpBoardObstacleForUser pbofu)
 	{
 		UserPvpBoardObstacleProto.Builder upopb = UserPvpBoardObstacleProto.newBuilder();
-		upopb.setUserPvpBoardObstacleUuid(pbofu.getId());
+		upopb.setUserPvpBoardObstacleId(pbofu.getId());
 		upopb.setUserUuid(pbofu.getUserId());
 		upopb.setObstacleId(pbofu.getObstacleId());
 		upopb.setPosX(pbofu.getPosX());

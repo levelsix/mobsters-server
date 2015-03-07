@@ -68,6 +68,8 @@ import com.lvl6.properties.DBConstants;
 			TABLE_NAME, DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID,
 			questionMarksStr);
 
+		log.info("query={}, values={}", query, values);
+		
 		Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles =
 				new HashMap<String, List<PvpBoardObstacleForUser>>();
 		try {
@@ -103,7 +105,7 @@ import com.lvl6.properties.DBConstants;
 
 		public PvpBoardObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpBoardObstacleForUser pbofu = new PvpBoardObstacleForUser();
-			pbofu.setId(rs.getString(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID));
+			pbofu.setId(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID));
 			pbofu.setUserId(rs.getString(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID));
 			pbofu.setObstacleId(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID));
 			pbofu.setPosX(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_X));

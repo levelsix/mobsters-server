@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
@@ -34,6 +34,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
@@ -1965,7 +1966,38 @@ public class InsertUtils implements InsertUtil{
 			return id;
 		}
 
+		@Override
+		public int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus)
+		{
+			String tableName = DBConstants.TABLE_PVP_BOARD_OBSTACLE_FOR_USER;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+			for (PvpBoardObstacleForUser pbofu : pbofus) {
+
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID,
+						pbofu.getId());
+				newRow.put(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID,
+					pbofu.getUserId());
+				newRow.put(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID,
+						pbofu.getObstacleId());
+				newRow.put(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_X,
+						pbofu.getPosX());
+				newRow.put(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_Y,
+						pbofu.getPosY());
 
 
+				newRows.add(newRow);
+			}
 
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID);
+			replaceTheseColumns.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_X);
+			replaceTheseColumns.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_Y);
+
+			int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
+
+			return numUpdated;
+		}
 }

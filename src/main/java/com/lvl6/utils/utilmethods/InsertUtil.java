@@ -1,6 +1,7 @@
 package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
@@ -249,4 +251,5 @@ public interface InsertUtil {
 	
 	public abstract String insertIntoMonsterSnapshotForUser(MonsterSnapshotForUser msfu);
 	
+	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
 }

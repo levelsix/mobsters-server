@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class PvpBoardObstacleForUser implements Serializable {
 	
-	private static final long serialVersionUID = 7449648738115213457L;
+	private static final long serialVersionUID = 7948431947926085118L;
 	
-	private String id;
+	private int id;
 	private String userId;
 	private int obstacleId;
 	private int posX;
@@ -17,7 +17,7 @@ public class PvpBoardObstacleForUser implements Serializable {
 		super();
 	}
 
-	public PvpBoardObstacleForUser(String id, String userId, int obstacleId,
+	public PvpBoardObstacleForUser(int id, String userId, int obstacleId,
 			int posX, int posY) {
 		super();
 		this.id = id;
@@ -27,11 +27,11 @@ public class PvpBoardObstacleForUser implements Serializable {
 		this.posY = posY;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
