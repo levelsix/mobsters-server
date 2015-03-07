@@ -283,10 +283,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			MonsterForUser mfu, Map<String, MonsterEnhancingForUser> inEnhancing,
 			MonsterEnhancingForUser mefu, List<String> usedUpMfuIds, List<String> allEnhancingMfuIds)
 	{
-		//get the monster being enhanced
-		MonsterEnhancingForUser monsterBeingEnhanced = mefu;
-		
-		MonsterForUser enhancedMonster = monsterForUserRetrieveUtil.getSpecificUserMonster(monsterBeingEnhanced.getMonsterForUserId());
+		int expectedExp = umcep.getExpectedExperience();
+		int prevExp = mfu.getCurrentExp();
+		List<Timestamp> expectedStartTimes = new ArrayList<Timestamp>();
+		for(String id : inEnhancing.keySet()) {
+			if(inEnhancing.get(id).getExpectedStartTime() != null) {
+				expectedStartTimes.add(new Timestamp(inEnhancing.get(id).getExpectedStartTime().getTime()));
+			}
+		}
 		Date now = new Date();
 		Timestamp timeOfEntry = new Timestamp(now.getTime());
 

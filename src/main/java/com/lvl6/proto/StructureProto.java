@@ -21754,6 +21754,7 @@ public final class StructureProto {
       "tation\030\002 \001(\005\022\036\n\026teamDonationPowerLimit\030\003" +
       " \001(\005\"h\n\022PvpBoardHouseProto\0226\n\nstructInfo" +
       "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
+<<<<<<< HEAD
       "to\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\240\001\n\025PvpBo" +
       "ardObstacleProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004" +
       "name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!.com.l" +
@@ -21770,6 +21771,24 @@ public final class StructureProto {
       "\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
       "SITION_2\020\002*2\n\021BoardObstacleType\022\t\n\005CLOUD" +
       "\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003B\020B\016StructureProto"
+=======
+      "to\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\233\001\n\025PvpBo" +
+      "ardObstacleProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004" +
+      "name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!.com.l" +
+      "vl6.proto.BoardObstacleType\022\020\n\010powerAmt\030" +
+      "\004 \001(\005\022\025\n\rinitAvailable\030\005 \001(\010\"\177\n\031UserPvpB" +
+      "oardObstacleProto\022 \n\030userPvpBoardObstacl" +
+      "eUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacl",
+      "eId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n" +
+      "\026BattleItemFactoryProto\0226\n\nstructInfo\030\001 " +
+      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
+      "\022\n\npowerLimit\030\002 \001(\005*I\n\014ResourceType\022\017\n\013N" +
+      "O_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020" +
+      "\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016N" +
+      "O_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSIT" +
+      "ION_2\020\002*\036\n\021BoardObstacleType\022\t\n\005CLOUD\020\001B" +
+      "\020B\016StructureProto"
+>>>>>>> fixed insertutils
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

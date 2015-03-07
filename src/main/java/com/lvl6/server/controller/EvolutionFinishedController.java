@@ -110,7 +110,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 	    	return;
 	    }
 		
@@ -164,14 +164,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, now, money, previousGems, evolution,
 						evolvedUserMonster);
@@ -183,7 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}
@@ -295,10 +295,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		//delete the evolution
 		num = DeleteUtils.get().deleteMonsterEvolvingForUser(catalystUserMonsterId,
 				uMonsterIdOne, uMonsterIdTwo, uId);
-		log.info(String.format("num evolutions deleted: %s", num));
-		
-		writeToUserMonsterDeleteHistory(uMonsterIdOne, uMonsterIdTwo, catalystUserMonsterId, uId, combineStartTime, idsToUserMonsters);
-		
+		log.info(String.format("num evolutions deleted: %s", num));		
 		
 		//insert the COMPLETE evolved monster into monster for user
 		//get evolved version of monster
