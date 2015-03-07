@@ -2399,7 +2399,7 @@ public class CreateInfoProtoUtils {
 
 		return protos;
 	}
-
+	
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
 		MonsterForUser mfu)
 	{

@@ -19,6 +19,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SellUserMonsterRequestEvent;
 import com.lvl6.events.response.SellUserMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -37,6 +38,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -264,6 +266,7 @@ public class SellUserMonsterController extends EventController {
 			Map<String, Integer> userMonsterIdsToCashAmounts,
 			Map<String, MonsterForUser> idsToUserMonsters, Date deleteDate) {
 
+		List<MonsterDeleteHistory> monsterDeleteHistoryList = new ArrayList<MonsterDeleteHistory>();
 		if (null == userMonsterIds || userMonsterIds.isEmpty()) {
 			return;
 		}
@@ -278,7 +281,21 @@ public class SellUserMonsterController extends EventController {
 			userMonstersList.add(mfu);
 			deleteReasons.add(delReason + amount);
 		}
-		//TODO: FIX THIS RECORDING MONSTERS DELETED
+
+		String deletedReason = "sell monster";
+		Timestamp deletedTime = new Timestamp(deleteDate.getTime());
+		for(String userMonsterId : idsToUserMonsters.keySet()) {
+			String details = "sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId);
+			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
+			MonsterDeleteHistory mdh = new MonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+			monsterDeleteHistoryList.add(mdh);
+		}
+		
+		InsertUtils.get().insertMonsterDeleteHistory(monsterDeleteHistoryList);
+		
+		
+		log.info("user monsters added to history table. userMonsterIds:" + userMonsterIds);
+		
 //
 //		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
 //				deleteReasons, userMonstersList, deleteDate);

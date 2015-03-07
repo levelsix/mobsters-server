@@ -32,6 +32,10 @@ public class EvolutionFinishedRequestEvent extends RequestEvent {
     return evolutionFinishedRequestProto;
   }
 
+  public void setEvolutionFinishedRequestProto(EvolutionFinishedRequestProto efrp) {
+	  this.evolutionFinishedRequestProto = efrp;
+  }
+  
   @Override
   public String toString()
   {

@@ -1,9 +1,7 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-
-import com.lvl6.proto.ResearchsProto.ResearchDomain;
-import com.lvl6.proto.ResearchsProto.ResearchType;
+import java.util.List;
 
 public class Research implements Serializable {
 	
@@ -85,25 +83,7 @@ public class Research implements Serializable {
 		this.name = name;
 	}
 
-	public int getPredId()
-	{
-		return predId;
-	}
 
-	public void setPredId( int predId )
-	{
-		this.predId = predId;
-	}
-
-	public int getSuccId()
-	{
-		return succId;
-	}
-
-	public void setSuccId( int succId )
-	{
-		this.succId = succId;
-	}
 
 	public String getDesc()
 	{
@@ -155,6 +135,7 @@ public class Research implements Serializable {
 				+ costType + ", level=" + level + "]";
 	}
 
+
 	public String getResearchType() {
 		return researchType;
 	}
@@ -179,6 +160,21 @@ public class Research implements Serializable {
 		this.level = level;
 	}
 
+	public int getSuccId() {
+		return succId;
+	}
+
+	public int getPredId() {
+		return predId;
+	}
+
+	public void setPredId(int predId) {
+		this.predId = predId;
+	}
+
+	public void setSuccId(int succId) {
+		this.succId = succId;
+	}
 
 
 

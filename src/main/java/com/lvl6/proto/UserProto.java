@@ -3424,7 +3424,7 @@ public final class UserProto {
    *
    * <pre>
    *------------------------------------------------------------------------------------------
-   *server does not create proto
+   *server does not create proto, except in tests
    * </pre>
    */
   public static final class MinimumUserProtoWithMaxResources extends
@@ -3721,7 +3721,7 @@ public final class UserProto {
      *
      * <pre>
      *------------------------------------------------------------------------------------------
-     *server does not create proto
+     *server does not create proto, except in tests
      * </pre>
      */
     public static final class Builder extends

@@ -1,5 +1,6 @@
 package com.lvl6.utils.utilmethods;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -31,6 +34,8 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterDeleteHistory;
+import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -45,17 +50,21 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskComplete
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
+
 public class InsertUtils implements InsertUtil{
-	
+
 	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
-  public static InsertUtil get() {
-    return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
-  }
-  
-  private String randomUUID() {
-    return UUID.randomUUID().toString();
-  }
+	public static InsertUtil get() {
+		return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
+	}
+
+	private JdbcTemplate jdbcTemplate;
+
+
+	private String randomUUID() {
+		return UUID.randomUUID().toString();
+	}
 
   //	@Autowired
   //	protected CacheManager cache;
@@ -1047,7 +1056,6 @@ public class InsertUtils implements InsertUtil{
 		Collections.sort(userMonsterIds);
 		String userMonsterIdOne = userMonsterIds.get(0);
 		String userMOnsterIdTwo = userMonsterIds.get(1);
-		
 		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1063,6 +1071,7 @@ public class InsertUtils implements InsertUtil{
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 		
 		return numUpdated;
+
 	}
 	
 	@Override
@@ -1135,7 +1144,7 @@ public class InsertUtils implements InsertUtil{
 		
 		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
     		insertParams, relativeUpdates, absoluteUpdates);
-    return numInserted;
+		return numInserted;
 	}
 	
 	@Override
@@ -1223,844 +1232,989 @@ public class InsertUtils implements InsertUtil{
 		return numUpdated;
 	}
 
-		//SAVE CLAN RAID USER HISTORY 
-		@Override
-		public int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
-				Map<String, ClanEventPersistentForUser> clanUserInfo) {
-			String tableName = DBConstants.TABLE_CEPFU_RAID_HISTORY;
-			
-			List<Object> userIdList = new ArrayList<Object>();
-			List<Object> timeOfEntryList = new ArrayList<Object>();
-			List<Object> clanIdList = new ArrayList<Object>();
-			List<Object> clanEventPersistentIdList = new ArrayList<Object>();
-			List<Object> crIdList = new ArrayList<Object>();
-			List<Object> crDmgDoneList = new ArrayList<Object>();
-			int clanCrDmg = 0;
-			List<Object> userMonsterIdOneList = new ArrayList<Object>();
-			List<Object> userMonsterIdTwoList = new ArrayList<Object>();
-			List<Object> userMonsterIdThreeList = new ArrayList<Object>();
-			for(String userId  : clanUserInfo.keySet()){
-				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
-				
-				userIdList.add(userId);
-				timeOfEntryList.add(now);
-				clanIdList.add(cepfu.getClanId());
-				clanEventPersistentIdList.add(clanEventId);
-				crIdList.add(cepfu.getCrId());
-				
-				int crDmgDone = cepfu.getCrDmgDone() + cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
-				crDmgDoneList.add(crDmgDone);
-				
-				clanCrDmg += crDmgDone;
-				
-				userMonsterIdOneList.add(cepfu.getUserMonsterIdOne());
-				userMonsterIdOneList.add(cepfu.getUserMonsterIdTwo());
-				userMonsterIdThreeList.add(cepfu.getUserMonsterIdThree());
-			}
-			
-			int size = clanUserInfo.size();
-			List<Integer> clanCrDmgIntList = Collections.nCopies(size, clanCrDmg);
-			List<Object> clanCrDmgList = new ArrayList<Object>(clanCrDmgIntList);
-			
-			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_ID, userIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__TIME_OF_ENTRY, timeOfEntryList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_ID, clanIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_EVENT_PERSISTENT_ID,
-					clanEventPersistentIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CR_ID, crIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CR_DMG_DONE, crDmgDoneList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_CR_DMG, clanCrDmgList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_ONE, userMonsterIdOneList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_TWO, userMonsterIdTwoList);
-			insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_THREE, userMonsterIdThreeList);
-			int numRows = clanUserInfo.size();
-			
-			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
-	        insertParams, numRows);
-	    
-	    return numInserted;
-		}
-		
-		@Override
-		public int insertIntoCepfuRaidStageHistory(Integer clanEventId,
-				Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,
-				Map<String, ClanEventPersistentForUser> clanUserInfo) {
-			String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_HISTORY;
-			
-			List<Object> userIdList = new ArrayList<Object>();
-			List<Object> crsStartTimeList = new ArrayList<Object>();
-			List<Object> clanIdList = new ArrayList<Object>();
-			List<Object> clanEventPersistentIdList = new ArrayList<Object>();
-			List<Object> crsIdList = new ArrayList<Object>();
-			List<Object> crsDmgDoneList = new ArrayList<Object>();
-			List<Object> stageHealthList = new ArrayList<Object>();
-			List<Object> crsEndTimeList = new ArrayList<Object>();
-			for(String userId  : clanUserInfo.keySet()){
-				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
-				
-				userIdList.add(userId);
-				crsStartTimeList.add(crsStartTime);
-				clanIdList.add(cepfu.getClanId());
-				clanEventPersistentIdList.add(clanEventId);
-				crsIdList.add(cepfu.getCrsId());
-				
-				int crsDmgDone = cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
-				crsDmgDoneList.add(crsDmgDone);
-				stageHealthList.add(stageHp);
-				crsEndTimeList.add(cepfu.getUserMonsterIdTwo());
-			}
-			
-			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__USER_ID, userIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_START_TIME,
-					crsStartTimeList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CLAN_ID, clanIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CLAN_EVENT_PERSISTENT_ID,
-					clanEventPersistentIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_ID, crsIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_DMG_DONE, crsDmgDoneList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__STAGE_HEALTH, stageHealthList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_END_TIME, crsEndTimeList);
-			int numRows = clanUserInfo.size();
-			
-			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
-	        insertParams, numRows);
-	    
-	    return numInserted;
-		}
-		
-		@Override
-		public int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
-				Map<String, ClanEventPersistentForUser> clanUserInfo,
-				ClanEventPersistentForClan cepfc) {
-			String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY;
-			int clanEventId = cepfc.getClanEventPersistentId();
-			
-			List<Object> userIdList = new ArrayList<Object>();
-			List<Object> crsmStartTimeList = new ArrayList<Object>();
-			List<Object> clanIdList = new ArrayList<Object>();
-			List<Object> clanEventPersistentIdList = new ArrayList<Object>();
-			List<Object> crsIdList = new ArrayList<Object>();
-			List<Object> crsmIdList = new ArrayList<Object>();
-			List<Object> crsmDmgDoneList = new ArrayList<Object>();
-			List<Object> crsmEndTimeList = new ArrayList<Object>();
-			
-			for(String userId  : clanUserInfo.keySet()){
-				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
-				
-				userIdList.add(userId);
-				Date crsmStartDate = cepfc.getStageMonsterStartTime();
-				crsmStartTimeList.add(new Timestamp(crsmStartDate.getTime()));
-				clanIdList.add(cepfu.getClanId());
-				clanEventPersistentIdList.add(clanEventId);
-				crsIdList.add(cepfu.getCrsId());
-				crsmIdList.add(cepfu.getCrsmId());
-				
-				int crsmDmgDone = cepfu.getCrsmDmgDone();
-				crsmDmgDoneList.add(crsmDmgDone);
-				crsmEndTimeList.add(crsmEndTime);
-			}
-			
-			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__USER_ID, userIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_START_TIME,
-					crsmStartTimeList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_ID, clanIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_EVENT_PERSISTENT_ID,
-					clanEventPersistentIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRS_ID, crsIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID, crsmIdList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_DMG_DONE,
-					crsmDmgDoneList);
-			insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_END_TIME,
-					crsmEndTimeList);
-			int numRows = clanUserInfo.size();
-			
-			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
-	        insertParams, numRows);
-	    
-	    return numInserted;
+	//SAVE CLAN RAID USER HISTORY 
+	@Override
+	public int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
+			Map<String, ClanEventPersistentForUser> clanUserInfo) {
+		String tableName = DBConstants.TABLE_CEPFU_RAID_HISTORY;
+
+		List<Object> userIdList = new ArrayList<Object>();
+		List<Object> timeOfEntryList = new ArrayList<Object>();
+		List<Object> clanIdList = new ArrayList<Object>();
+		List<Object> clanEventPersistentIdList = new ArrayList<Object>();
+		List<Object> crIdList = new ArrayList<Object>();
+		List<Object> crDmgDoneList = new ArrayList<Object>();
+		int clanCrDmg = 0;
+		List<Object> userMonsterIdOneList = new ArrayList<Object>();
+		List<Object> userMonsterIdTwoList = new ArrayList<Object>();
+		List<Object> userMonsterIdThreeList = new ArrayList<Object>();
+		for(String userId  : clanUserInfo.keySet()){
+			ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
+
+			userIdList.add(userId);
+			timeOfEntryList.add(now);
+			clanIdList.add(cepfu.getClanId());
+			clanEventPersistentIdList.add(clanEventId);
+			crIdList.add(cepfu.getCrId());
+
+			int crDmgDone = cepfu.getCrDmgDone() + cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
+			crDmgDoneList.add(crDmgDone);
+
+			clanCrDmg += crDmgDone;
+
+			userMonsterIdOneList.add(cepfu.getUserMonsterIdOne());
+			userMonsterIdOneList.add(cepfu.getUserMonsterIdTwo());
+			userMonsterIdThreeList.add(cepfu.getUserMonsterIdThree());
 		}
 
-//		@Override
-//		public int insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
-//				Timestamp crsEndTime, int clanEventId,
-//				List<ClanEventPersistentUserReward> userRewards) {
-//			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;
-//			
-//			List<Integer> userIdList = new ArrayList<Integer>();
-//			List<Timestamp> crsStartTimeList = new ArrayList<Timestamp>();
-//			List<Integer> crsIdList = new ArrayList<Integer>();
-//			List<Timestamp> crsEndTimeList = new ArrayList<Timestamp>();
-//			List<String> resourceTypeList = new ArrayList<String>();
-//			List<Integer> staticDataIdList = new ArrayList<Integer>();
-//			List<Integer> quantityList = new ArrayList<Integer>();
-//			List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
-//			
-//			for (ClanEventPersistentUserReward reward : userRewards) {
-//				int userId = reward.getUserId();
-//				String resourceType = reward.getResourceType();
-//				int staticDataId = reward.getStaticDataId();
-//				int quantity = reward.getQuantity();
-//				
-//				userIdList.add(userId);
-//				crsStartTimeList.add(crsStartTime);
-//				crsIdList.add(crsId);
-//				crsEndTimeList.add(crsEndTime);
-//				resourceTypeList.add(resourceType);
-//				staticDataIdList.add(staticDataId);
-//				quantityList.add(quantity);
-//				clanEventPersistentIdList.add(clanEventId);
-//			}
-//			
-//			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userIdList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,
-//					crsStartTimeList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_ID, crsIdList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_END_TIME,
-//					crsEndTimeList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE, 
-//					resourceTypeList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID,
-//					staticDataIdList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY,
-//					quantityList);
-//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID,
-//					clanEventPersistentIdList);
-//			
-//			int numRows = userRewards.size();
-//			
-//			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
-//	        insertParams, numRows);
-//	    
-//	    return numInserted;
-//		}
-		
-		@Override                                                                                  
-		public List<String> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,                      
-				Timestamp crsEndTime, int clanEventId,                                                 
-				List<ClanEventPersistentUserReward> userRewards) {                                     
-			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;                  
+		int size = clanUserInfo.size();
+		List<Integer> clanCrDmgIntList = Collections.nCopies(size, clanCrDmg);
+		List<Object> clanCrDmgList = new ArrayList<Object>(clanCrDmgIntList);
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
-			List<String> rewardIds = new ArrayList<String>();
-			for (ClanEventPersistentUserReward reward : userRewards) {                               
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				
-				String userId = reward.getUserId();                                                       
-				String resourceType = reward.getResourceType();                                        
-				int staticDataId = reward.getStaticDataId();                                           
-				int quantity = reward.getQuantity();   
-				String rewardId = randomUUID();
-				
-				rewardIds.add(rewardId);
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_ID, userIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__TIME_OF_ENTRY, timeOfEntryList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_ID, clanIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CR_ID, crIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CR_DMG_DONE, crDmgDoneList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__CLAN_CR_DMG, clanCrDmgList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_ONE, userMonsterIdOneList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_TWO, userMonsterIdTwoList);
+		insertParams.put(DBConstants.CEPFU_RAID_HISTORY__USER_MONSTER_ID_THREE, userMonsterIdThreeList);
+		int numRows = clanUserInfo.size();
 
-        newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__ID, rewardId);  
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userId);    
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,          
-						crsStartTime);                                                                   
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_ID, crsId);      
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_END_TIME, crsEndTime);                                                                     
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE,           
-						resourceType);                                                                   
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID,          
-						staticDataId);                                                                   
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY, quantity);                                                                       
-				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID,
-						clanEventId);                                                          
-				
-				newRows.add(newRow);
-			}                                                                                        
-			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);                        
-			if (numUpdated != userRewards.size()) {
-			  rewardIds = new ArrayList<String>();
-			}
-			
-			return rewardIds;                                                                      
-		}                                                                                          
-		
-		@Override
-		public int insertIntoPvpBattleHistory(String attackerId, String defenderId,
-				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
-				int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
-				int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
-				int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
-				int defenderPrevRank, int defenderCurRank, int attackerOilChange,
-				int defenderOilChange, int attackerCashChange, int defenderCashChange,
-				float nuPvpDmgMultiplier,  boolean attackerWon, boolean cancelled,
-				boolean gotRevenge, boolean displayToDefender) {
-			
-			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
-			
-			Map <String, Object> insertParams = new HashMap<String, Object>();
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, attackerId);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
-			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE,
-					attackerEloChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE,
-					attackerEloBefore);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER,
-					attackerEloBefore + attackerEloChange);
-			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE,
-					defenderEloChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE,
-					defenderEloBefore);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER,
-					defenderEloBefore + defenderEloChange);
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+				insertParams, numRows);
 
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE,
-					attackerPrevLeague);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE,
-					attackerCurLeague);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE,
-					defenderPrevLeague);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE,
-					defenderCurLeague);
-			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK,
-					attackerPrevRank);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK,
-					attackerCurRank);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK,
-					defenderPrevRank);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK,
-					defenderCurRank);
-			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);
-			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
+		return numInserted;
+	}
 
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER, nuPvpDmgMultiplier);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
-			//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+	@Override
+	public int insertIntoCepfuRaidStageHistory(Integer clanEventId,
+			Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,
+			Map<String, ClanEventPersistentForUser> clanUserInfo) {
+		String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_HISTORY;
 
-			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-			return numUpdated;
+		List<Object> userIdList = new ArrayList<Object>();
+		List<Object> crsStartTimeList = new ArrayList<Object>();
+		List<Object> clanIdList = new ArrayList<Object>();
+		List<Object> clanEventPersistentIdList = new ArrayList<Object>();
+		List<Object> crsIdList = new ArrayList<Object>();
+		List<Object> crsDmgDoneList = new ArrayList<Object>();
+		List<Object> stageHealthList = new ArrayList<Object>();
+		List<Object> crsEndTimeList = new ArrayList<Object>();
+		for(String userId  : clanUserInfo.keySet()){
+			ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
+
+			userIdList.add(userId);
+			crsStartTimeList.add(crsStartTime);
+			clanIdList.add(cepfu.getClanId());
+			clanEventPersistentIdList.add(clanEventId);
+			crsIdList.add(cepfu.getCrsId());
+
+			int crsDmgDone = cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
+			crsDmgDoneList.add(crsDmgDone);
+			stageHealthList.add(stageHp);
+			crsEndTimeList.add(cepfu.getUserMonsterIdTwo());
 		}
-		
-		@Override
-		public List<String> insertIntoObstaclesForUserGetIds(String userId,
-				List<ObstacleForUser> ofuList) {
-			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;                  
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
-			List<String> ofuIds = new ArrayList<String>();
-			for (ObstacleForUser ofu : ofuList) {                               
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				
-				int obstacleId = ofu.getObstacleId();                                           
-				int xcoord = ofu.getXcoord();
-				int ycoord = ofu.getYcoord();
-				String orientation = ofu.getOrientation();
-				String ofuId = randomUUID();
-				
-				ofuIds.add(ofuId);
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__USER_ID, userIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_START_TIME,
+				crsStartTimeList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CLAN_ID, clanIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_ID, crsIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_DMG_DONE, crsDmgDoneList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__STAGE_HEALTH, stageHealthList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_HISTORY__CRS_END_TIME, crsEndTimeList);
+		int numRows = clanUserInfo.size();
 
-        newRow.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);   
-				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
-				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   
-				newRow.put(DBConstants.OBSTACLE_FOR_USER__XCOORD, xcoord);      
-				newRow.put(DBConstants.OBSTACLE_FOR_USER__YCOORD, ycoord);                                                                     
-				newRow.put(DBConstants.OBSTACLE_FOR_USER__ORIENTATION, orientation);                                                                   
-				
-				newRows.add(newRow);
-			}                                                                                        
-			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName,
-					newRows);
-			if (numUpdated != ofuList.size()) {
-			  ofuIds = new ArrayList<String>();
-			}
-			
-			return ofuIds;            
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+				insertParams, numRows);
+
+		return numInserted;
+	}
+
+	@Override
+	public int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
+			Map<String, ClanEventPersistentForUser> clanUserInfo,
+			ClanEventPersistentForClan cepfc) {
+		String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY;
+		int clanEventId = cepfc.getClanEventPersistentId();
+
+		List<Object> userIdList = new ArrayList<Object>();
+		List<Object> crsmStartTimeList = new ArrayList<Object>();
+		List<Object> clanIdList = new ArrayList<Object>();
+		List<Object> clanEventPersistentIdList = new ArrayList<Object>();
+		List<Object> crsIdList = new ArrayList<Object>();
+		List<Object> crsmIdList = new ArrayList<Object>();
+		List<Object> crsmDmgDoneList = new ArrayList<Object>();
+		List<Object> crsmEndTimeList = new ArrayList<Object>();
+
+		for(String userId  : clanUserInfo.keySet()){
+			ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
+
+			userIdList.add(userId);
+			Date crsmStartDate = cepfc.getStageMonsterStartTime();
+			crsmStartTimeList.add(new Timestamp(crsmStartDate.getTime()));
+			clanIdList.add(cepfu.getClanId());
+			clanEventPersistentIdList.add(clanEventId);
+			crsIdList.add(cepfu.getCrsId());
+			crsmIdList.add(cepfu.getCrsmId());
+
+			int crsmDmgDone = cepfu.getCrsmDmgDone();
+			crsmDmgDoneList.add(crsmDmgDone);
+			crsmEndTimeList.add(crsmEndTime);
 		}
-		
-		@Override
-		public List<String> insertIntoMiniJobForUserGetIds(String userId,
-				List<MiniJobForUser> mjfuList) {
-			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__USER_ID, userIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_START_TIME,
+				crsmStartTimeList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_ID, clanIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRS_ID, crsIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID, crsmIdList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_DMG_DONE,
+				crsmDmgDoneList);
+		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_END_TIME,
+				crsmEndTimeList);
+		int numRows = clanUserInfo.size();
 
-			List<String> mjIds = new ArrayList<String>();
-			for (MiniJobForUser mjfu : mjfuList) {
-				Map<String, Object> newRow = new HashMap<String, Object>();
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+				insertParams, numRows);
 
-				String mjId = randomUUID();
-				mjIds.add(mjId);
+		return numInserted;
+	}
 
-        newRow.put(DBConstants.MINI_JOB_FOR_USER__ID, mjId);
-				newRow.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);    
-				newRow.put(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID,
-						mjfu.getMiniJobId());                                                                   
-				newRow.put(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED,
-						mjfu.getBaseDmgReceived());      
-				newRow.put(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS,
-						mjfu.getDurationSeconds());
+	//		@Override
+	//		public int insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
+			//				Timestamp crsEndTime, int clanEventId,
+			//				List<ClanEventPersistentUserReward> userRewards) {
+	//			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;
+	//			
+	//			List<Integer> userIdList = new ArrayList<Integer>();
+	//			List<Timestamp> crsStartTimeList = new ArrayList<Timestamp>();
+	//			List<Integer> crsIdList = new ArrayList<Integer>();
+	//			List<Timestamp> crsEndTimeList = new ArrayList<Timestamp>();
+	//			List<String> resourceTypeList = new ArrayList<String>();
+	//			List<Integer> staticDataIdList = new ArrayList<Integer>();
+	//			List<Integer> quantityList = new ArrayList<Integer>();
+	//			List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
+	//			
+	//			for (ClanEventPersistentUserReward reward : userRewards) {
+	//				int userId = reward.getUserId();
+	//				String resourceType = reward.getResourceType();
+	//				int staticDataId = reward.getStaticDataId();
+	//				int quantity = reward.getQuantity();
+	//				
+	//				userIdList.add(userId);
+	//				crsStartTimeList.add(crsStartTime);
+	//				crsIdList.add(crsId);
+	//				crsEndTimeList.add(crsEndTime);
+	//				resourceTypeList.add(resourceType);
+	//				staticDataIdList.add(staticDataId);
+	//				quantityList.add(quantity);
+	//				clanEventPersistentIdList.add(clanEventId);
+	//			}
+	//			
+	//			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userIdList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,
+	//					crsStartTimeList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_ID, crsIdList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_END_TIME,
+	//					crsEndTimeList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE, 
+	//					resourceTypeList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID,
+	//					staticDataIdList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY,
+	//					quantityList);
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID,
+	//					clanEventPersistentIdList);
+	//			
+	//			int numRows = userRewards.size();
+	//			
+	//			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+	//	        insertParams, numRows);
+	//	    
+	//	    return numInserted;
+	//		}
 
-				newRows.add(newRow);
-			}                                                                                        
-			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			if (numUpdated != mjfuList.size()) {
-			  mjIds = new ArrayList<String>();
-			}
-			
-			return mjIds;            
+	@Override                                                                                  
+	public List<String> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,                      
+			Timestamp crsEndTime, int clanEventId,                                                 
+			List<ClanEventPersistentUserReward> userRewards) {                                     
+		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;                  
 
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> rewardIds = new ArrayList<String>();
+		for (ClanEventPersistentUserReward reward : userRewards) {                               
+			Map<String, Object> newRow = new HashMap<String, Object>();
+
+			String userId = reward.getUserId();                                                       
+			String resourceType = reward.getResourceType();                                        
+			int staticDataId = reward.getStaticDataId();                                           
+			int quantity = reward.getQuantity();   
+			String rewardId = randomUUID();
+
+			rewardIds.add(rewardId);
+
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__ID, rewardId);  
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userId);    
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,          
+					crsStartTime);                                                                   
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_ID, crsId);      
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_END_TIME, crsEndTime);                                                                     
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE,           
+					resourceType);                                                                   
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID,          
+					staticDataId);                                                                   
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY, quantity);                                                                       
+			newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID,
+					clanEventId);                                                          
+
+			newRows.add(newRow);
+		}                                                                                        
+		int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);                        
+		if (numUpdated != userRewards.size()) {
+			rewardIds = new ArrayList<String>();
 		}
-		
-		@Override
-		public int insertIntoUpdateUserItem(String userId, int itemId, int delta) {
-			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
 
-			Map<String, Object> insertParams = new HashMap<String, Object>();
-			insertParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
-			insertParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
-			insertParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
+		return rewardIds;                                                                      
+	}                                                                                          
 
-			Map<String, Object> relativeUpdates = new HashMap<String, Object>();
-			relativeUpdates.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
-			
-			Map<String, Object> absoluteUpdates = null;
+	@Override
+	public int insertIntoPvpBattleHistory(String attackerId, String defenderId,
+			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
+			int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
+			int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
+			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+			int defenderPrevRank, int defenderCurRank, int attackerOilChange,
+			int defenderOilChange, int attackerCashChange, int defenderCashChange,
+			float nuPvpDmgMultiplier,  boolean attackerWon, boolean cancelled,
+			boolean gotRevenge, boolean displayToDefender) {
+
+		String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+
+		Map <String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, attackerId);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE,
+				attackerEloChange);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE,
+				attackerEloBefore);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER,
+				attackerEloBefore + attackerEloChange);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE,
+				defenderEloChange);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE,
+				defenderEloBefore);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER,
+				defenderEloBefore + defenderEloChange);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE,
+				attackerPrevLeague);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE,
+				attackerCurLeague);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE,
+				defenderPrevLeague);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE,
+				defenderCurLeague);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK,
+				attackerPrevRank);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK,
+				attackerCurRank);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK,
+				defenderPrevRank);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK,
+				defenderCurRank);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER, nuPvpDmgMultiplier);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
+		//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+		return numUpdated;
+	}
+
+	@Override
+	public List<String> insertIntoObstaclesForUserGetIds(String userId,
+			List<ObstacleForUser> ofuList) {
+		String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;                  
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> ofuIds = new ArrayList<String>();
+		for (ObstacleForUser ofu : ofuList) {                               
+			Map<String, Object> newRow = new HashMap<String, Object>();
+
+			int obstacleId = ofu.getObstacleId();                                           
+			int xcoord = ofu.getXcoord();
+			int ycoord = ofu.getYcoord();
+			String orientation = ofu.getOrientation();
+			String ofuId = randomUUID();
+
+			ofuIds.add(ofuId);
+
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);   
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__XCOORD, xcoord);      
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__YCOORD, ycoord);                                                                     
+			newRow.put(DBConstants.OBSTACLE_FOR_USER__ORIENTATION, orientation);                                                                   
+
+			newRows.add(newRow);
+		}                                                                                        
+		int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName,
+				newRows);
+		if (numUpdated != ofuList.size()) {
+			ofuIds = new ArrayList<String>();
+		}
+
+		return ofuIds;            
+	}
+
+	@Override
+	public List<String> insertIntoMiniJobForUserGetIds(String userId,
+			List<MiniJobForUser> mjfuList) {
+		String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> mjIds = new ArrayList<String>();
+		for (MiniJobForUser mjfu : mjfuList) {
+			Map<String, Object> newRow = new HashMap<String, Object>();
+
+			String mjId = randomUUID();
+			mjIds.add(mjId);
+
+			newRow.put(DBConstants.MINI_JOB_FOR_USER__ID, mjId);
+			newRow.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);    
+			newRow.put(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID,
+					mjfu.getMiniJobId());                                                                   
+			newRow.put(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED,
+					mjfu.getBaseDmgReceived());      
+			newRow.put(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS,
+					mjfu.getDurationSeconds());
+
+			newRows.add(newRow);
+		}                                                                                        
+		int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != mjfuList.size()) {
+			mjIds = new ArrayList<String>();
+		}
+
+		return mjIds;            
+
+	}
+
+	@Override
+	public int insertIntoUpdateUserItem(String userId, int itemId, int delta) {
+		String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
+		insertParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
+
+		Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+		relativeUpdates.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
+
+		Map<String, Object> absoluteUpdates = null;
 
 
-			int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
 				insertParams, relativeUpdates, absoluteUpdates);
-			return numInserted;
-		}
-		
-		@Override
-		public List<String> insertIntoClanHelpGetId( List<ClanHelp> solicitations )
-		{
-			String tableName = DBConstants.TABLE_CLAN_HELP;
+		return numInserted;
+	}
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+	@Override
+	public List<String> insertIntoClanHelpGetId( List<ClanHelp> solicitations )
+	{
+		String tableName = DBConstants.TABLE_CLAN_HELP;
 
-			List<String> chIds = new ArrayList<String>();
-			for (ClanHelp ch : solicitations) {
-			  String chId = randomUUID();
-			  chIds.add(chId);
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
-				Map<String, Object> newRow = new HashMap<String, Object>();
-        newRow.put(DBConstants.CLAN_HELP__ID, chId);
-				newRow.put(DBConstants.CLAN_HELP__CLAN_ID, ch.getClanId());    
-				newRow.put(DBConstants.CLAN_HELP__USER_ID, ch.getUserId());                                                                   
-				newRow.put(DBConstants.CLAN_HELP__USER_DATA_ID, ch.getUserDataId());      
-				newRow.put(DBConstants.CLAN_HELP__HELP_TYPE, ch.getHelpType());
-				newRow.put(DBConstants.CLAN_HELP__TIME_OF_ENTRY, 
-					new Timestamp(
-						ch.getTimeOfEntry()
-						.getTime()));
-				newRow.put(DBConstants.CLAN_HELP__MAX_HELPERS, ch.getMaxHelpers());
-				newRow.put(DBConstants.CLAN_HELP__OPEN, ch.isOpen());
-                newRow.put(DBConstants.CLAN_HELP__STATIC_DATA_ID, ch.getStaticDataId());
-                newRow.put(DBConstants.CLAN_HELP__HELPERS, "");
-
-				newRows.add(newRow);
-			}
-			
-			int numUpdated = DBConnection.get()
-				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			if (numUpdated != solicitations.size()) {
-			  chIds = new ArrayList<String>();
-			}
-			return chIds;
-		}
-		
-		@Override
-		public int insertIntoUpdateClanInvite(String userId,
-		    String inviterId, String clanId, Timestamp timeOfInvite)
-		{
-			String tableName = DBConstants.TABLE_CLAN_INVITE;
+		List<String> chIds = new ArrayList<String>();
+		for (ClanHelp ch : solicitations) {
+			String chId = randomUUID();
+			chIds.add(chId);
 
 			Map<String, Object> newRow = new HashMap<String, Object>();
-			newRow.put(DBConstants.CLAN_INVITE__USER_ID, userId);
-			newRow.put(DBConstants.CLAN_INVITE__INVITER_ID,
+			newRow.put(DBConstants.CLAN_HELP__ID, chId);
+			newRow.put(DBConstants.CLAN_HELP__CLAN_ID, ch.getClanId());    
+			newRow.put(DBConstants.CLAN_HELP__USER_ID, ch.getUserId());                                                                   
+			newRow.put(DBConstants.CLAN_HELP__USER_DATA_ID, ch.getUserDataId());      
+			newRow.put(DBConstants.CLAN_HELP__HELP_TYPE, ch.getHelpType());
+			newRow.put(DBConstants.CLAN_HELP__TIME_OF_ENTRY, 
+					new Timestamp(
+							ch.getTimeOfEntry()
+							.getTime()));
+			newRow.put(DBConstants.CLAN_HELP__MAX_HELPERS, ch.getMaxHelpers());
+			newRow.put(DBConstants.CLAN_HELP__OPEN, ch.isOpen());
+			newRow.put(DBConstants.CLAN_HELP__STATIC_DATA_ID, ch.getStaticDataId());
+			newRow.put(DBConstants.CLAN_HELP__HELPERS, "");
+
+			newRows.add(newRow);
+		}
+
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != solicitations.size()) {
+			chIds = new ArrayList<String>();
+		}
+		return chIds;
+	}
+
+	@Override
+	public int insertIntoUpdateClanInvite(String userId,
+			String inviterId, String clanId, Timestamp timeOfInvite)
+	{
+		String tableName = DBConstants.TABLE_CLAN_INVITE;
+
+		Map<String, Object> newRow = new HashMap<String, Object>();
+		newRow.put(DBConstants.CLAN_INVITE__USER_ID, userId);
+		newRow.put(DBConstants.CLAN_INVITE__INVITER_ID,
 				inviterId);
-			newRow.put(DBConstants.CLAN_INVITE__CLAN_ID,
+		newRow.put(DBConstants.CLAN_INVITE__CLAN_ID,
 				clanId);
-			newRow.put(DBConstants.CLAN_INVITE__TIME_OF_INVITE,
+		newRow.put(DBConstants.CLAN_INVITE__TIME_OF_INVITE,
 				timeOfInvite);
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			newRows.add(newRow);
-			
-			//determine which columns should be replaced
-			Set<String> replaceTheseColumns = new HashSet<String>();
-			replaceTheseColumns.add(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
-			
-			//just in case there are remnants of old invites
-			replaceTheseColumns.add(DBConstants.CLAN_INVITE__CLAN_ID);
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		newRows.add(newRow);
 
-			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
-					tableName, newRows, replaceTheseColumns);
-			
-			return numUpdated;
-		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
 
-		@Override
-		public List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed)
-		{
-			String tableName = DBConstants.TABLE_ITEM_FOR_USER_USAGE;
+		//just in case there are remnants of old invites
+		replaceTheseColumns.add(DBConstants.CLAN_INVITE__CLAN_ID);
 
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
 
-			List<String> ids = new ArrayList<String>();
-			for (ItemForUserUsage ifuu : itemsUsed) {
-			  String id = randomUUID();
-			  ids.add(id);
-			  
-				Map<String, Object> newRow = new HashMap<String, Object>();
-        newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ID, id); 
-				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, ifuu.getUserId());                                                                   
-				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID, ifuu.getItemId());    
-				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY, 
+		return numUpdated;
+	}
+
+	@Override
+	public List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed)
+	{
+		String tableName = DBConstants.TABLE_ITEM_FOR_USER_USAGE;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> ids = new ArrayList<String>();
+		for (ItemForUserUsage ifuu : itemsUsed) {
+			String id = randomUUID();
+			ids.add(id);
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ID, id); 
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, ifuu.getUserId());                                                                   
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID, ifuu.getItemId());    
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY, 
 					new Timestamp(
-						ifuu.getTimeOfEntry()
-						.getTime()));
-				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID, ifuu.getUserDataId());      
-				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE, ifuu.getActionType());
+							ifuu.getTimeOfEntry()
+							.getTime()));
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID, ifuu.getUserDataId());      
+			newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE, ifuu.getActionType());
 
-				newRows.add(newRow);
-			}
-			
-			int numUpdated = DBConnection.get()
-				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			if (numUpdated != itemsUsed.size()) {
-			  ids = new ArrayList<String>();
-			}
-			return ids;
+			newRows.add(newRow);
 		}
 
-		@Override
-		public List<String> insertIntoItemSecretGiftForUserGetId(
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != itemsUsed.size()) {
+			ids = new ArrayList<String>();
+		}
+		return ids;
+	}
+
+	@Override
+	public List<String> insertIntoItemSecretGiftForUserGetId(
 			List<ItemSecretGiftForUser> gifts)
-		{
-			String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
-			List<String> ids = new ArrayList<String>();
-			for (ItemSecretGiftForUser isgfu : gifts) {
-				String id = randomUUID();
-				ids.add(id);
-				
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, id);
-				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID,
+			{
+		String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> ids = new ArrayList<String>();
+		for (ItemSecretGiftForUser isgfu : gifts) {
+			String id = randomUUID();
+			ids.add(id);
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, id);
+			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID,
 					isgfu.getUserId());
-				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
+			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
 					isgfu.getItemId());
-				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION,
+			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION,
 					isgfu.getSecsTillCollection());
-				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME,
+			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME,
 					new Timestamp(isgfu.getCreateTime().getTime()));
-				
-				
-				newRows.add(newRow);
-			}
-			int numUpdated = DBConnection.get()
-				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			if (numUpdated != gifts.size()) {
-			  ids = new ArrayList<String>();
-			}
-			return ids;
-		}
 
-		@Override
-		public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList,
+
+			newRows.add(newRow);
+		}
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != gifts.size()) {
+			ids = new ArrayList<String>();
+		}
+		return ids;
+			}
+
+	@Override
+	public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList,
 			String clanId)
-		{
-			String tableName = DBConstants.TABLE_CLAN_AVENGE;
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
-			List<String> ids = new ArrayList<String>();
-			for (ClanAvenge ca : caList) {
-				String id = randomUUID();
-				ids.add(id);
-				
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.CLAN_AVENGE__ID, id);
-				newRow.put(DBConstants.CLAN_AVENGE__ATTACKER_ID,
+			{
+		String tableName = DBConstants.TABLE_CLAN_AVENGE;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		List<String> ids = new ArrayList<String>();
+		for (ClanAvenge ca : caList) {
+			String id = randomUUID();
+			ids.add(id);
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.CLAN_AVENGE__ID, id);
+			newRow.put(DBConstants.CLAN_AVENGE__ATTACKER_ID,
 					ca.getAttackerId());
-				newRow.put(DBConstants.CLAN_AVENGE__DEFENDER_ID,
+			newRow.put(DBConstants.CLAN_AVENGE__DEFENDER_ID,
 					ca.getDefenderId());
-				newRow.put(DBConstants.CLAN_AVENGE__BATTLE_END_TIME,
+			newRow.put(DBConstants.CLAN_AVENGE__BATTLE_END_TIME,
 					new Timestamp(ca.getBattleEndTime().getTime()));
-				newRow.put(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME,
+			newRow.put(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME,
 					new Timestamp(ca.getAvengeRequestTime().getTime()));
-				
-				newRow.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
-				newRows.add(newRow);
-			}
-			int numUpdated = DBConnection.get()
-				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			if (numUpdated != caList.size()) {
-			  ids = new ArrayList<String>();
-			}
-			return ids;
-		}
 
-		@Override
-		public int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList)
-		{
-			String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			
-			for (ClanAvengeUser cau : cauList) {
-				
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_ID,
+			newRow.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
+			newRows.add(newRow);
+		}
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != caList.size()) {
+			ids = new ArrayList<String>();
+		}
+		return ids;
+			}
+
+	@Override
+	public int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList)
+	{
+		String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		for (ClanAvengeUser cau : cauList) {
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_ID,
 					cau.getClanId());
-				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_AVENGE_ID,
+			newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_AVENGE_ID,
 					cau.getClanAvengeId());
-				newRow.put(DBConstants.CLAN_AVENGE_USER__USER_ID,
+			newRow.put(DBConstants.CLAN_AVENGE_USER__USER_ID,
 					cau.getUserId());
-				newRow.put(DBConstants.CLAN_AVENGE_USER__AVENGE_TIME,
+			newRow.put(DBConstants.CLAN_AVENGE_USER__AVENGE_TIME,
 					new Timestamp(cau.getAvengeTime().getTime()));
-				
-				newRows.add(newRow);
-			}
-			int numUpdated = DBConnection.get()
-				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-			
-			return numUpdated;
+
+			newRows.add(newRow);
 		}
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
 
-		@Override
-		public int insertIntoUpdateClientTaskState(
+		return numUpdated;
+	}
+
+	@Override
+	public int insertIntoUpdateClientTaskState(
 			List<TaskForUserClientState> tfucsList)
-		{
-			String tableName = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+	{
+		String tableName = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
-			for (TaskForUserClientState tfucs : tfucsList) {
+		for (TaskForUserClientState tfucs : tfucsList) {
 
-				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
 					tfucs.getUserId());
 
-				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE,
+			newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE,
 					tfucs.getClientState());
 
 
-				newRows.add(newRow);
-			}
+			newRows.add(newRow);
+		}
 
-			Set<String> replaceTheseColumns = Collections.singleton(
+		Set<String> replaceTheseColumns = Collections.singleton(
 				DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
 
-			int numUpdated = DBConnection.get()
+		int numUpdated = DBConnection.get()
 				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
 
-			return numUpdated;
-		}
+		return numUpdated;
+	}
 
-		@Override
-		public int insertIntoUpdateClanHelpCount(ClanHelpCountForUser chcfu)
-		{
-			String tableName = DBConstants.TABLE_CLAN_HELP_COUNT_FOR_USER;
-			int newSolicited = chcfu.getSolicited();
-			int newGiven = chcfu.getGiven();			
-			Map<String, Object> insertParams = new HashMap<String, Object>();
-			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID, chcfu.getUserId());
-			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID, chcfu.getClanId());
-			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE, chcfu.getDate());
-			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
-			insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
+	@Override
+	public int insertIntoUpdateClanHelpCount(ClanHelpCountForUser chcfu)
+	{
+		String tableName = DBConstants.TABLE_CLAN_HELP_COUNT_FOR_USER;
+		int newSolicited = chcfu.getSolicited();
+		int newGiven = chcfu.getGiven();			
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__USER_ID, chcfu.getUserId());
+		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID, chcfu.getClanId());
+		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE, chcfu.getDate());
+		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
+		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
 
-			Map<String, Object> relativeUpdates = new HashMap<String, Object>();
-			relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
-			relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
-			
-			Map<String, Object> absoluteUpdates = null;//new HashMap<String, Object>();
+		Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+		relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED, newSolicited);
+		relativeUpdates.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
 
-			int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+		Map<String, Object> absoluteUpdates = null;//new HashMap<String, Object>();
+
+		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
 				insertParams, relativeUpdates, absoluteUpdates);
-			return numInserted;
-		}
-		
-		@Override
-		public String insertIntoClanMemberTeamDonateGetId(ClanMemberTeamDonation cmtd)
-		{
-			String tableName = DBConstants.TABLE_CLAN_MEMBER_TEAM_DONATION;
-			String id = randomUUID();
-			
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			Map<String, Object> row = new HashMap<String, Object>();
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__ID, id);
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, cmtd.getUserId());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, cmtd.getClanId());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT, cmtd.getPowerLimit());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED, cmtd.isFulfilled());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG, cmtd.getMsg());
-			row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION, cmtd.getTimeOfSolicitation());
-			
-			newRows.add(row);
-			
-			int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
+		return numInserted;
+	}
+
+	@Override
+	public String insertIntoClanMemberTeamDonateGetId(ClanMemberTeamDonation cmtd)
+	{
+		String tableName = DBConstants.TABLE_CLAN_MEMBER_TEAM_DONATION;
+		String id = randomUUID();
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		Map<String, Object> row = new HashMap<String, Object>();
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__ID, id);
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, cmtd.getUserId());
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__CLAN_ID, cmtd.getClanId());
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__POWER_LIMIT, cmtd.getPowerLimit());
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__FULFILLED, cmtd.isFulfilled());
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__MSG, cmtd.getMsg());
+		row.put(DBConstants.CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION, cmtd.getTimeOfSolicitation());
+
+		newRows.add(row);
+
+		int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
 				tableName, newRows);
-			
-			if (1 != numInserted) {
-				id = null;
-			}
-			
-			return id;
+
+		if (1 != numInserted) {
+			id = null;
 		}
-		
-		@Override
-		public String insertIntoMonsterSnapshotForUser(
+
+		return id;
+	}
+
+	@Override
+	public String insertIntoMonsterSnapshotForUser(
 			MonsterSnapshotForUser msfu)
-		{
-			String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
-			String id = randomUUID();
-			
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			Map<String, Object> row = new HashMap<String, Object>();
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID, id);
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY, 
+	{
+		String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
+		String id = randomUUID();
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		Map<String, Object> row = new HashMap<String, Object>();
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID, id);
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TIME_OF_ENTRY, 
 				new Timestamp(msfu.getTimeOfEntry().getTime()));
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__USER_ID,
 				msfu.getUserId());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
 				msfu.getType());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE,
 				msfu.getIdInTable());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_FOR_USER_ID,
 				msfu.getMonsterForUserId());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__MONSTER_ID,
 				msfu.getMonsterId());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_EXP,
 				msfu.getCurrentExp());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_LVL,
 				msfu.getCurrentLvl());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__CURRENT_HP,
 				msfu.getCurrentHp());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__TEAM_SLOT_NUM,
 				msfu.getTeamSlotNum());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID,
 				msfu.getOffSkillId());
-			row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID,
+		row.put(DBConstants.MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID,
 				msfu.getDefSkillId());
-			
-			
-			newRows.add(row);
-			
-			int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
+
+
+		newRows.add(row);
+
+		int numInserted = DBConnection.get().insertIntoTableBasicReturnNumUpdated(
 				tableName, newRows);
-			
-			if (1 != numInserted) {
-				id = null;
-			}
-			
-			return id;
+
+		if (1 != numInserted) {
+			id = null;
 		}
 
+		return id;
+	}
+	
+	@Override
+	public int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
+		String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
-		@Override
-		public int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
-			String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for(BattleItemQueueForUser biqfu : biqfuList) {
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, 
+					biqfu.getPriority());
+			newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, 
+					biqfu.getBattleItemId());
+			newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME,
+					biqfu.getExpectedStartTime());
+			newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
+					biqfu.getUserId());
 
-			for(BattleItemQueueForUser biqfu : biqfuList) {
+			newRows.add(newRow);
+		}
+		
+		int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+
+		return numUpdated;
+	}
+
+
+	@Override
+	public int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, 
+			String userId,
+			Map<Integer, List<BattleItemForUser>> battleItemIdsToUserBattleItemForUser) {
+		String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
+		int totalInserts = 0;
+		
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		Map<Integer, Integer> battleItemIdsToQuantity = new HashMap<Integer, Integer>();
+		for(BattleItemQueueForUser biqfu : biqfuList) {
+			int battleItemId = biqfu.getBattleItemId();
+			if(battleItemIdsToQuantity.containsKey(battleItemId)) {
+				battleItemIdsToQuantity.put(battleItemId, 
+						battleItemIdsToQuantity.get(battleItemId) + 1);
+			}
+			else battleItemIdsToQuantity.put(battleItemId, 1);
+		}
+
+		for(Integer battleItemId : battleItemIdsToQuantity.keySet()) {
+			int addedAmount = battleItemIdsToQuantity.get(battleItemId);
+
+			if(battleItemIdsToUserBattleItemForUser.containsKey(battleItemId)) {
+				List<BattleItemForUser> userBattleItemForUserList = 
+						battleItemIdsToUserBattleItemForUser.get(battleItemId);
+				int previousQuantity = userBattleItemForUserList.size();
+
+				Map <String, Object> absoluteParams = new HashMap<String, Object>();
+				absoluteParams.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, 
+						previousQuantity + addedAmount);
+
+				Map <String, Object> conditionParams = new HashMap<String, Object>();
+				conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
+				conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID,
+						battleItemId);
+
+				int numUpdated = DBConnection.get().updateTableRows(DBConstants.
+						TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
+						conditionParams, "and");
+				if(numUpdated != 1) {
+					log.error("either multiple rows or no rows are being updated "
+							+ "with regards to quantity");
+				}
+				totalInserts += numUpdated;
+			}
+			else {
 				Map<String, Object> newRow = new HashMap<String, Object>();
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, 
-						biqfu.getPriority());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID, 
-						biqfu.getBattleItemId());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME,
-						biqfu.getExpectedStartTime());
-				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
-						biqfu.getUserId());
 
+				newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__ID, randomUUID());
+				newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID, battleItemId);
+				newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, addedAmount);
+				newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
 				newRows.add(newRow);
+				
+				int numUpdated = DBConnection.get()
+						.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+				if(numUpdated != 1) {
+					log.error("either too many rows or no rows are being added to"
+							+ "user battle items");
+				}
+				totalInserts += numUpdated;
 			}
-			
-			int numUpdated = DBConnection.get()
-					.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		}
+		return totalInserts;
+	}
 
-			return numUpdated;
+	@Override
+	public boolean insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
+			Timestamp timeOfEntry) {
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+
+		String id = randomUUID();
+		
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__ID, id);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_ID,
+				userId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE,
+				userMonsterId1);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO,
+				userMonsterId2);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID, 
+				catalystMonsterId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__START_TIME, startTime);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY, timeOfEntry);
+
+		int numInserted = DBConnection.get().insertIntoTableBasic(
+				DBConstants.TABLE_MONSTER_EVOLVING_HISTORY, insertParams);
+		if (numInserted == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean insertMonsterDeleteHistory(List<MonsterDeleteHistory> monsterDeleteHistoryList) {
+
+		if(monsterDeleteHistoryList == null) {
+			log.info("delete list passed in is null");
+			return false;
 		}
 
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
+		int size = monsterDeleteHistoryList.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 
-		@Override
-		public int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, 
-				String userId,
-				Map<Integer, List<BattleItemForUser>> battleItemIdsToUserBattleItemForUser) {
-			String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
-			int totalInserts = 0;
-			
-			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		List<String> idList = new ArrayList<String>();
+		List<String> userIdList = new ArrayList<String>();
+		List<Integer> monsterIdList = new ArrayList<Integer>();
+		List<Integer> currExpList = new ArrayList<Integer>();
+		List<Integer> currLvlList = new ArrayList<Integer>();
+		List<Integer> currHealthList = new ArrayList<Integer>();
+		List<Integer> numPiecesList = new ArrayList<Integer>();
+		List<Boolean> isCompleteList = new ArrayList<Boolean>();
+		List<Timestamp> combineStartTimeList = new ArrayList<Timestamp>();
+		List<Integer> teamSlotNumList = new ArrayList<Integer>();
+		List<String> sourceOfPiecesList = new ArrayList<String>();
+		List<String> deletedReasonList = new ArrayList<String>();
+		List<String> detailsList = new ArrayList<String>();
+		List<Timestamp> deletedTimeList = new ArrayList<Timestamp>();
 
-			Map<Integer, Integer> battleItemIdsToQuantity = new HashMap<Integer, Integer>();
-			for(BattleItemQueueForUser biqfu : biqfuList) {
-				int battleItemId = biqfu.getBattleItemId();
-				if(battleItemIdsToQuantity.containsKey(battleItemId)) {
-					battleItemIdsToQuantity.put(battleItemId, 
-							battleItemIdsToQuantity.get(battleItemId) + 1);
-				}
-				else battleItemIdsToQuantity.put(battleItemId, 1);
-			}
-
-			for(Integer battleItemId : battleItemIdsToQuantity.keySet()) {
-				int addedAmount = battleItemIdsToQuantity.get(battleItemId);
-
-				if(battleItemIdsToUserBattleItemForUser.containsKey(battleItemId)) {
-					List<BattleItemForUser> userBattleItemForUserList = 
-							battleItemIdsToUserBattleItemForUser.get(battleItemId);
-					int previousQuantity = userBattleItemForUserList.size();
-
-					Map <String, Object> absoluteParams = new HashMap<String, Object>();
-					absoluteParams.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, 
-							previousQuantity + addedAmount);
-
-					Map <String, Object> conditionParams = new HashMap<String, Object>();
-					conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
-					conditionParams.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID,
-							battleItemId);
-
-					int numUpdated = DBConnection.get().updateTableRows(DBConstants.
-							TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
-							conditionParams, "and");
-					if(numUpdated != 1) {
-						log.error("either multiple rows or no rows are being updated "
-								+ "with regards to quantity");
-					}
-					totalInserts += numUpdated;
-				}
-				else {
-					Map<String, Object> newRow = new HashMap<String, Object>();
-
-					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__ID, randomUUID());
-					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID, battleItemId);
-					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, addedAmount);
-					newRow.put(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, userId);
-					newRows.add(newRow);
-					
-					int numUpdated = DBConnection.get()
-							.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
-					if(numUpdated != 1) {
-						log.error("either too many rows or no rows are being added to"
-								+ "user battle items");
-					}
-					totalInserts += numUpdated;
-				}
-			}
-			return totalInserts;
+		for(MonsterDeleteHistory mdh : monsterDeleteHistoryList) {
+			MonsterForUser mfu = mdh.getMfu();
+			idList.add(randomUUID());
+			userIdList.add(mfu.getUserId());
+			monsterIdList.add(mfu.getMonsterId());
+			currExpList.add(mfu.getCurrentExp());
+			currLvlList.add(mfu.getCurrentLvl());
+			currHealthList.add(mfu.getCurrentHealth());
+			numPiecesList.add(mfu.getNumPieces());
+			isCompleteList.add(mfu.isComplete());
+			combineStartTimeList.add(new Timestamp(mfu.getCombineStartTime().getTime()));
+			teamSlotNumList.add(mfu.getTeamSlotNum());
+			sourceOfPiecesList.add(mfu.getSourceOfPieces());
+			deletedReasonList.add(mdh.getDeletedReason());
+			detailsList.add(mdh.getDetails());
+			deletedTimeList.add(mdh.getDeletedTime());
 		}
 
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, idList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIdList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, monsterIdList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE, currExpList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_LEVEL, currLvlList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, currHealthList );
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, numPiecesList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, isCompleteList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__COMBINE_START_TIME, combineStartTimeList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, teamSlotNumList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, sourceOfPiecesList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_REASON, deletedReasonList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DETAILS, detailsList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_TIME, deletedTimeList);		  
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if(numInserted == size) {
+			return true;
+		}
+		else return false;
+	}
 		
+	@Override
+	public boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh) {
+
+		if(meh == null) {
+			log.info("MonsterEnhanceHistory is null");
+			return false;
+		}
+
+		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+		int size = meh.getFeederMonsterForUserId().size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> userIdList = new ArrayList<String>();
+		List<String> monsterForUserIdList = new ArrayList<String>();
+		List<Timestamp> expectedStartTimeList = new ArrayList<Timestamp>();
+		List<Integer> enhancingCostList = new ArrayList<Integer>();
+		List<Boolean> enhancingCompleteList = new ArrayList<Boolean>();
 		
+		for(int i=0; i<size; i++) {
+			userIdList.add(meh.getUserId());		
+			monsterForUserIdList.add(meh.getFeederMonsterForUserId().get(i));
+			expectedStartTimeList.add(meh.getEnhancingStartTime().get(i));
+			enhancingCostList.add(meh.getEnhancingCost());
+			enhancingCompleteList.add(false);
+		}
+
+		insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userIdList);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, monsterForUserIdList);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, expectedStartTimeList);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, enhancingCostList);
+		insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, enhancingCompleteList );	  
+
+		//inserting the two feeder rows
+		int numInserted1 = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+		
+		Map<String, Object> insertParam = new HashMap<String, Object>();
+		//inserting the one being enhanced row bc expected start time is left null
+		insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, meh.getUserId());
+		insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, meh.getMonsterForUserIdBeingEnhanced());
+		insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, 0);
+		insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, false);	
+		
+		int numInserted2 = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER, insertParam);
+
+		if(numInserted1 + numInserted2 == size + 1) {
+			return true;
+		}
+		else return false;
+
+	}
 		
 		
 		

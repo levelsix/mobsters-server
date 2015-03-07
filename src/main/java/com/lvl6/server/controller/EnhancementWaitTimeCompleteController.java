@@ -84,11 +84,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		try {
 			userUuid = UUID.fromString(userId);
+			UUID.fromString(curEnhancingMfuId);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+				"UUID error. incorrect userId=%s or curEnhancingMfuId=%s",
+				userId, curEnhancingMfuId), e);
 		}
 		
 		//UUID checks
