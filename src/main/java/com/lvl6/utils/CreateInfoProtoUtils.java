@@ -3760,6 +3760,9 @@ public class CreateInfoProtoUtils {
 					e);
 			}
 		}
+		pbopb.setPowerAmt(bo.getPowerAmt());
+		pbopb.setInitiallyAvailable(bo.getInitAvailable());
+		
 		return pbopb.build();
 	}
 
