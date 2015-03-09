@@ -312,7 +312,9 @@ message PvpBoardObstacleProto {
 	
 }
 enum BoardObstacleType {
-	CLOUD = 1;	
+	CLOUD = 1;
+	LOCK = 2;
+	HOLE = 3;
 }
 
 
