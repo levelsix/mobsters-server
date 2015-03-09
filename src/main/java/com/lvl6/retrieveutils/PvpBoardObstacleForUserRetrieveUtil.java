@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class PvpBoardObstacleForUserRetrieveUtil {
 
@@ -62,7 +63,8 @@ import com.lvl6.properties.DBConstants;
 		Object[] values = userIds.toArray();
 		int amount = userIds.size();
 		List<String> questionMarks = Collections.nCopies(amount, "?");
-		String questionMarksStr = String.join(",", questionMarks);
+		String questionMarksStr = StringUtils.csvList(questionMarks);
+		
 		String query = String.format(
 			"select * from %s where %s in (%s)",
 			TABLE_NAME, DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID,
