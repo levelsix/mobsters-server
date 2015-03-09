@@ -217,12 +217,28 @@ public final class StructureProto {
      * <code>CLOUD = 1;</code>
      */
     CLOUD(0, 1),
+    /**
+     * <code>LOCK = 2;</code>
+     */
+    LOCK(1, 2),
+    /**
+     * <code>HOLE = 3;</code>
+     */
+    HOLE(2, 3),
     ;
 
     /**
      * <code>CLOUD = 1;</code>
      */
     public static final int CLOUD_VALUE = 1;
+    /**
+     * <code>LOCK = 2;</code>
+     */
+    public static final int LOCK_VALUE = 2;
+    /**
+     * <code>HOLE = 3;</code>
+     */
+    public static final int HOLE_VALUE = 3;
 
 
     public final int getNumber() { return value; }
@@ -230,6 +246,8 @@ public final class StructureProto {
     public static BoardObstacleType valueOf(int value) {
       switch (value) {
         case 1: return CLOUD;
+        case 2: return LOCK;
+        case 3: return HOLE;
         default: return null;
       }
     }
@@ -21829,8 +21847,8 @@ public final class StructureProto {
       "O_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020" +
       "\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016N" +
       "O_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSIT" +
-      "ION_2\020\002*\036\n\021BoardObstacleType\022\t\n\005CLOUD\020\001B" +
-      "\020B\016StructureProto"
+      "ION_2\020\002*2\n\021BoardObstacleType\022\t\n\005CLOUD\020\001\022" +
+      "\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
