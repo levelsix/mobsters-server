@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -250,6 +252,11 @@ public interface InsertUtil {
 	public abstract String insertIntoClanMemberTeamDonateGetId(ClanMemberTeamDonation cmtd); 
 	
 	public abstract String insertIntoMonsterSnapshotForUser(MonsterSnapshotForUser msfu);
+	
+	public abstract int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
+	
+	public abstract int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, String userId,
+			Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser);
 	
 	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
 }

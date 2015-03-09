@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.ResearchsProto.ResearchDomain;
+import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class ResearchRetrieveUtils {
@@ -97,6 +99,7 @@ import com.lvl6.utils.DBConnection;
 		int durationMin = rs.getInt(DBConstants.RESEARCH__DURATION_MIN);
 		int costAmt = rs.getInt(DBConstants.RESEARCH__COST_AMT);
 		String costType = rs.getString(DBConstants.RESEARCH__COST_TYPE);
+		int level = rs.getInt(DBConstants.RESEARCH__LEVEL);
 		
 		int predId = rs.getInt(DBConstants.RESEARCH__PRED_ID);
 		if (rs.wasNull()) {
@@ -129,7 +132,7 @@ import com.lvl6.utils.DBConnection;
 	    }
 		
 		Research research = new Research(id, type, domain, iconImgName,
-			name, predId, succId, desc, durationMin, costAmt, costType);
+			name, predId, succId, desc, durationMin, costAmt, costType, level);
 		return research;
 	}
 	

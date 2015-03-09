@@ -10660,71 +10660,71 @@ public final class EventPvpProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
-      ".proto\032\022MonsterStuff.proto\032\017Structure.pr" +
-      "oto\032\nUser.proto\"\211\001\n\023QueueUpRequestProto\022" +
-      "2\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\025\n\rseen" +
-      "UserUuids\030\005 \003(\t\022\022\n\nclientTime\030\006 \001(\003\"\244\002\n\024" +
-      "QueueUpResponseProto\0222\n\010attacker\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\0222\n\020defe" +
-      "nderInfoList\030\002 \003(\0132\030.com.lvl6.proto.PvpP" +
-      "roto\022B\n\006status\030\003 \001(\01622.com.lvl6.proto.Qu",
-      "eueUpResponseProto.QueueUpStatus\"`\n\rQueu" +
-      "eUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOUG" +
-      "H_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_ENO" +
-      "UGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017attack" +
-      "StartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com.lvl" +
-      "6.proto.PvpProto\022\027\n\017exactingRevenge\030\005 \001(" +
-      "\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033Beg" +
-      "inPvpBattleResponseProto\0220\n\006sender\030\001 \001(\013",
-      "2 .com.lvl6.proto.MinimumUserProto\022P\n\006st" +
-      "atus\030\002 \001(\0162@.com.lvl6.proto.BeginPvpBatt" +
-      "leResponseProto.BeginPvpBattleStatus\"O\n\024" +
-      "BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAI" +
-      "L_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\210\002" +
-      "\n\030EndPvpBattleRequestProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022\024\n\014defenderUuid\030\002 \001(\t\022\024\n\014us" +
-      "erAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\ncli" +
-      "entTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncash",
-      "Change\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 \001(\002" +
-      "\022\026\n\016monsterDropIds\030\t \003(\005\"\255\004\n\031EndPvpBattl" +
-      "eResponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl" +
-      "6.proto.MinimumUserProtoWithMaxResources" +
-      "\022\024\n\014defenderUuid\030\002 \001(\t\022\030\n\020attackerAttack" +
-      "ed\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001(\010\022L\n\006status\030" +
-      "\t \001(\0162<.com.lvl6.proto.EndPvpBattleRespo" +
-      "nseProto.EndPvpBattleStatus\022:\n\014updatedOr" +
-      "New\030\n \003(\0132$.com.lvl6.proto.FullUserMonst" +
-      "erProto\022<\n\023battleThatJustEnded\030\013 \001(\0132\037.c",
-      "om.lvl6.proto.PvpHistoryProto\0227\n\013statsBe" +
-      "fore\030\014 \001(\0132\".com.lvl6.proto.UserPvpLeagu" +
-      "eProto\0226\n\nstatsAfter\030\r \001(\0132\".com.lvl6.pr" +
-      "oto.UserPvpLeagueProto\"P\n\022EndPvpBattleSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAI" +
-      "L_BATTLE_TOOK_TOO_LONG\020\003\"\\\n\033SetDefending" +
-      "MsgRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\"\332" +
-      "\001\n\034SetDefendingMsgResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
-      "o\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.SetDe" +
-      "fendingMsgResponseProto.SetDefendingMsgS" +
-      "tatus\"4\n\025SetDefendingMsgStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001\n%CustomizePvpBoar" +
-      "dObstacleRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022G\n\024nuOrU" +
-      "pdatedObstacles\030\002 \003(\0132).com.lvl6.proto.U" +
-      "serPvpBoardObstacleProto\022\025\n\rremoveUpboId" +
-      "s\030\003 \003(\005\"\202\002\n&CustomizePvpBoardObstacleRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr",
-      "oto.MinimumUserProto\022f\n\006status\030\002 \001(\0162V.c" +
-      "om.lvl6.proto.CustomizePvpBoardObstacleR" +
-      "esponseProto.CustomizePvpBoardObstacleSt" +
-      "atus\">\n\037CustomizePvpBoardObstacleStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEventPvp" +
-      "Proto"
+      ".proto\032\020BattleItem.proto\032\022MonsterStuff.p" +
+      "roto\032\017Structure.proto\032\nUser.proto\"\211\001\n\023Qu" +
+      "eueUpRequestProto\0222\n\010attacker\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\023\n\013attacke" +
+      "rElo\030\002 \001(\005\022\025\n\rseenUserUuids\030\005 \003(\t\022\022\n\ncli" +
+      "entTime\030\006 \001(\003\"\244\002\n\024QueueUpResponseProto\0222" +
+      "\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\0222\n\020defenderInfoList\030\002 \003(\0132\030.c" +
+      "om.lvl6.proto.PvpProto\022B\n\006status\030\003 \001(\01622",
+      ".com.lvl6.proto.QueueUpResponseProto.Que" +
+      "ueUpStatus\"`\n\rQueueUpStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\004\"\333\001\n\032BeginPv" +
+      "pBattleRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\021\n\tsenderE" +
+      "lo\030\002 \001(\005\022\027\n\017attackStartTime\030\003 \001(\003\022\'\n\005ene" +
+      "my\030\004 \001(\0132\030.com.lvl6.proto.PvpProto\022\027\n\017ex" +
+      "actingRevenge\030\005 \001(\010\022\035\n\025previousBattleEnd" +
+      "Time\030\006 \001(\003\"\362\001\n\033BeginPvpBattleResponsePro",
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022P\n\006status\030\002 \001(\0162@.com.lvl6." +
+      "proto.BeginPvpBattleResponseProto.BeginP" +
+      "vpBattleStatus\"O\n\024BeginPvpBattleStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILABLE\020\002\022" +
+      "\016\n\nFAIL_OTHER\020\003\"\210\002\n\030EndPvpBattleRequestP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
+      "nimumUserProtoWithMaxResources\022\024\n\014defend" +
+      "erUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022\017\n\007us" +
+      "erWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\toilCh",
+      "ange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022nuPvpD" +
+      "mgMultiplier\030\010 \001(\002\022\026\n\016monsterDropIds\030\t \003" +
+      "(\005\"\255\004\n\031EndPvpBattleResponseProto\022@\n\006send" +
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
+      "toWithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t" +
+      "\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerWo" +
+      "n\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto" +
+      ".EndPvpBattleResponseProto.EndPvpBattleS" +
+      "tatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.lvl6.p" +
+      "roto.FullUserMonsterProto\022<\n\023battleThatJ",
+      "ustEnded\030\013 \001(\0132\037.com.lvl6.proto.PvpHisto" +
+      "ryProto\0227\n\013statsBefore\030\014 \001(\0132\".com.lvl6." +
+      "proto.UserPvpLeagueProto\0226\n\nstatsAfter\030\r" +
+      " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
+      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
+      "\020\003\"\\\n\033SetDefendingMsgRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMsgResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
+      "to.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.co" +
+      "m.lvl6.proto.SetDefendingMsgResponseProt" +
+      "o.SetDefendingMsgStatus\"4\n\025SetDefendingM" +
+      "sgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001" +
+      "\n%CustomizePvpBoardObstacleRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022G\n\024nuOrUpdatedObstacles\030\002 \003(\0132" +
+      ").com.lvl6.proto.UserPvpBoardObstaclePro" +
+      "to\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&CustomizeP" +
+      "vpBoardObstacleResponseProto\0220\n\006sender\030\001",
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f" +
+      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.Customiz" +
+      "ePvpBoardObstacleResponseProto.Customize" +
+      "PvpBoardObstacleStatus\">\n\037CustomizePvpBo" +
+      "ardObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10738,6 +10738,7 @@ public final class EventPvpProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleProto.getDescriptor(),
+          com.lvl6.proto.BattleItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
@@ -10803,6 +10804,7 @@ public final class EventPvpProto {
         internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BattleItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();

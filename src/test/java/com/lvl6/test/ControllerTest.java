@@ -1,11 +1,13 @@
 package com.lvl6.test;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -21,26 +23,38 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
+import com.lvl6.events.request.EvolutionFinishedRequestEvent;
+import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.StaticDataContainer;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
@@ -50,8 +64,11 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.controller.CreateBattleItemController;
 import com.lvl6.server.controller.DestroyMoneyTreeStructureController;
 import com.lvl6.server.controller.DevController;
+import com.lvl6.server.controller.EvolutionFinishedController;
+import com.lvl6.server.controller.EvolveMonsterController;
 import com.lvl6.server.controller.FinishPerformingResearchController;
 import com.lvl6.server.controller.InAppPurchaseController;
 import com.lvl6.server.controller.PerformResearchController;
@@ -114,6 +131,12 @@ public class ControllerTest extends TestCase {
 //	InviteToClanController inviteToClanController;
 	
 	@Autowired
+	EvolveMonsterController evolveMonsterController;
+	
+	@Autowired
+	EvolutionFinishedController evolutionFinishedController;
+	
+	@Autowired
 	PerformResearchController performResearchController;
 	
 	@Autowired
@@ -124,6 +147,15 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired 
 	FinishPerformingResearchController finishPerformingResearchController;
+	
+	@Autowired
+	CreateBattleItemController createBattleItemController;
+	
+	@Autowired
+	BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
+	
+	@Autowired
+	BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
 	
 	@Autowired
 	StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
@@ -1111,26 +1143,291 @@ public class ControllerTest extends TestCase {
 				
 			}
 		}
-		assertTrue(moneyTreeCounter2 == 0);
+		assertTrue(moneyTreeCounter2 == 0);	
+	}
+	
+	@Test
+	public void testBattleItems() {
+		User user1 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		int userCash1 = user1.getCash();
+		int userOil1 = user1.getOil();
+		int userGems1 = user1.getGems();
+		CreateBattleItemRequestProto.Builder cbirpb = CreateBattleItemRequestProto.newBuilder();
+		cbirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user1, null));	
+
+		//create list of battle items add to queue
+		List<BattleItemQueueForUserProto> newList = new ArrayList<BattleItemQueueForUserProto>();
+		BattleItemQueueForUser biqfu = new BattleItemQueueForUser();
+		biqfu.setBattleItemId(1);
+		biqfu.setPriority(1);
+		Date now = new Date();
+		biqfu.setExpectedStartTime(new Timestamp(now.getTime()));
+		biqfu.setUserId(user1.getId());
+		BattleItemQueueForUserProto biqfup = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu);
+		newList.add(biqfup);
+
+		cbirpb.addAllUmhNew(newList);
+		cbirpb.setCashChange(50);
+		cbirpb.setOilChange(0);
+		cbirpb.setGemCostForCreating(0);
+		cbirpb.setIsSpeedup(false);
 		
+		CreateBattleItemRequestEvent cbire = new CreateBattleItemRequestEvent();
+		cbire.setTag(1);
+		cbire.setCreateBattleItemRequestProto(cbirpb.build());
+		createBattleItemController.handleEvent(cbire);
 		
+		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+
+		List<BattleItemQueueForUser> bifuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
+		assertTrue(bifuList.size() == 1);
+		assertEquals(user2.getCash() + 50, userCash1);
 		
+		//////////////////second request event//////////////////////////////////////////////////////
+		int userCash2 = user2.getCash();
+		int userOil2 = user2.getOil();
+		int userGems2 = user2.getGems();
+		CreateBattleItemRequestProto.Builder cbirpb2 = CreateBattleItemRequestProto.newBuilder();
+		cbirpb2.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user2, null));	
+
+		//finished list
+		List<BattleItemQueueForUserProto> deletedList2 = new ArrayList<BattleItemQueueForUserProto>();
+		BattleItemQueueForUser biqfu2 = new BattleItemQueueForUser();
+		biqfu2.setBattleItemId(1);
+		biqfu2.setPriority(1);
+		Date now2 = new Date();
+		biqfu2.setExpectedStartTime(new Timestamp(now2.getTime()));
+		biqfu2.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup2 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu2);
+		deletedList2.add(biqfup2);
 		
+		//create list of battle items add to queue
+		List<BattleItemQueueForUserProto> newList2 = new ArrayList<BattleItemQueueForUserProto>();
+		BattleItemQueueForUser biqfu3 = new BattleItemQueueForUser();
+		biqfu3.setBattleItemId(1);
+		biqfu3.setPriority(1);
+		Date now3 = new Date();
+		biqfu3.setExpectedStartTime(new Timestamp(now3.getTime()+1000));
+		biqfu3.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup3 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu3);
+
+		BattleItemQueueForUser biqfu4 = new BattleItemQueueForUser();
+		biqfu4.setBattleItemId(2);
+		biqfu4.setPriority(2);
+		Date now4 = new Date();
+		biqfu4.setExpectedStartTime(new Timestamp(now4.getTime()+1000));
+		biqfu4.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup4 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu4);
 		
+		BattleItemQueueForUser biqfu5 = new BattleItemQueueForUser();
+		biqfu5.setBattleItemId(3);
+		biqfu5.setPriority(3);
+		Date now5 = new Date();
+		biqfu5.setExpectedStartTime(new Timestamp(now5.getTime()+1000));
+		biqfu5.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup5 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu5);
 		
+		newList2.add(biqfup3);
+		newList2.add(biqfup4);
+		newList2.add(biqfup5);
+
+		cbirpb2.addAllUmhNew(newList2);
+		cbirpb2.addAllUmhDelete(deletedList2);
+		cbirpb2.setCashChange(75);
+		cbirpb2.setOilChange(100);
+		cbirpb2.setGemCostForCreating(100);
+		cbirpb2.setIsSpeedup(false);
 		
+		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
+		cbire2.setTag(1);
+		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
+		createBattleItemController.handleEvent(cbire2);
 		
+		User user3 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+
+		List<BattleItemQueueForUser> bifuList2 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
+		assertTrue(bifuList2.size() == 3);
+		assertEquals(user3.getCash() + 75, userCash2);
+		assertEquals(user3.getOil() + 100, userOil2);
+		assertEquals(user3.getGems() + 100, userGems2);
+
 		
+		//////////////////third request event//////////////////////////////////////////////////////
+		int userCash3 = user3.getCash();
+		int userOil3 = user3.getOil();
+		int userGems3 = user3.getGems();
+		CreateBattleItemRequestProto.Builder cbirpb3 = CreateBattleItemRequestProto.newBuilder();
+		cbirpb3.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user3, null));	
+
+		//removed list
+		List<BattleItemQueueForUserProto> removedList3 = new ArrayList<BattleItemQueueForUserProto>();
+		BattleItemQueueForUser biqfu6 = new BattleItemQueueForUser();
+		biqfu6.setBattleItemId(1);
+		biqfu6.setPriority(1);
+		Date now6 = new Date();
+		biqfu6.setExpectedStartTime(new Timestamp(now6.getTime()));
+		biqfu6.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup6 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu6);
+		removedList3.add(biqfup6);
+		
+		//updated list
+		List<BattleItemQueueForUserProto> updatedList3 = new ArrayList<BattleItemQueueForUserProto>();
+		BattleItemQueueForUser biqfu7 = new BattleItemQueueForUser();
+		biqfu7.setBattleItemId(2);
+		biqfu7.setPriority(2);
+		Date now7 = new Date();
+		biqfu7.setExpectedStartTime(new Timestamp(now7.getTime()+2000));
+		biqfu7.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup7 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu7);
+
+		BattleItemQueueForUser biqfu8 = new BattleItemQueueForUser();
+		biqfu8.setBattleItemId(2);
+		biqfu8.setPriority(2);
+		Date now8 = new Date();
+		biqfu8.setExpectedStartTime(new Timestamp(now8.getTime()+2000));
+		biqfu8.setUserId(user2.getId());
+		BattleItemQueueForUserProto biqfup8 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu8);
+		updatedList3.add(biqfup7);
+		updatedList3.add(biqfup8);
+
+		cbirpb3.addAllUmhRemoved(removedList3);
+		cbirpb3.addAllUmhUpdate(updatedList3);
+		cbirpb3.setCashChange(-50);
+		cbirpb3.setOilChange(0);
+		cbirpb3.setGemCostForCreating(0);
+		cbirpb3.setIsSpeedup(false);
+		
+		CreateBattleItemRequestEvent cbire3 = new CreateBattleItemRequestEvent();
+		cbire3.setTag(1);
+		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
+		createBattleItemController.handleEvent(cbire3);
+		
+		User user4 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+
+		List<BattleItemQueueForUser> bifuList3 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user4.getId());
+		assertTrue(bifuList3.size() == 2);
+		assertEquals(user4.getCash() - 50, userCash3);
+		assertEquals(user4.getOil(), userOil3);
+		assertEquals(user4.getGems(), userGems3);
+
 	}
 
-	
-	
-	
 
-	//		inviteToClanController.handleEvent(icre);
-//		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
-//		assertNotNull(ci);
+	private String randomUUID() {
+		return UUID.randomUUID().toString();
+	}
+
+
+	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
+			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
+			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		String id = randomUUID();
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
+
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 		
+		return id;
+	}
+	
+//	private int numberOfUserRowsInHistoryTable(String userId, String tableName) {
+//		Object[] values = { userId };
+//		String query = String.format(
+//				"select * from %s where %s=?",
+//				tableName, "user_id");
+//
+//		List<StructureForUser> userStructs = null;
+//		try {
+//			userStructs = this.jdbcTemplate
+//					.query(query, values, rowMapper);
+//
+//		} catch (Exception e) {
+//			log.error("structure for user retrieve db error.", e);
+//			userStructs = new ArrayList<StructureForUser>();
+//			//		} finally {
+//			//			DBConnection.get().close(rs, null, conn);
+//		}
+//		return userStructs;
+//		
+//		
+//		
+//		
+//		
+//		
+//	}
+	
+//	@Test
+//	public void testMonsterEvolutionFinishedAndHistoryTables() {
+//		////////////////////////EVOLVE REQUEST//////////////////////////////
+//		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+//		int userOil = user.getOil();
+//		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
+//		
+//		//give user the three necessary monsters used in evolving
+//		Date now = new Date();
+//		Timestamp nowTimestamp = new Timestamp(now.getTime());
+//		String userMonsterId1 = insertIntoUserMonsterTable(user.getId(), 1, 1000, 10, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+//		String userMonsterId2 = insertIntoUserMonsterTable(user.getId(), 1, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+//		String userCatalystMonsterId = insertIntoUserMonsterTable(user.getId(), 1750, 0, 1, 10, 1, 1, nowTimestamp, 0, " cheater, cheater, pumpkin eater ", 1, 0);
+//		
+//		EvolveMonsterRequestProto.Builder emrpb = EvolveMonsterRequestProto.newBuilder();
+//		emrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+//		
+//		MonsterEvolvingForUser mefu = new MonsterEvolvingForUser(userCatalystMonsterId, userMonsterId1, userMonsterId2, user.getId(), nowTimestamp);
+//		UserMonsterEvolutionProto umep = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu);
+//		
+//		emrpb.setEvolution(umep);
+//		emrpb.setGemsSpent(0);
+//		emrpb.setOilChange(100);
+//		
+//		EvolveMonsterRequestEvent emre = new EvolveMonsterRequestEvent();
+//		emre.setTag(1);
+//		emre.setEvolveMonsterRequestProto(emrpb.build());
+//		evolveMonsterController.handleEvent(emre);
+//		
+//		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+//		List<MonsterForUser> updatedUserMonsterList = monsterForUserRetrieveUtils.getMonstersForUser(user.getId());
+//
+//		assertEquals(user2.getOil(), userOil-100);
+//		assertEquals(userMonsterList.size() + 3, updatedUserMonsterList.size());
+//		
+//		////////////////////////EVOLVE FINISH REQUEST//////////////////////////////
+//		EvolutionFinishedRequestProto.Builder efrpb = EvolutionFinishedRequestProto.newBuilder();
+//		efrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+//		efrpb.setGemsSpent(0);
+//		
+//		EvolutionFinishedRequestEvent efre = new EvolutionFinishedRequestEvent();
+//		efre.setTag(1);
+//		efre.setEvolutionFinishedRequestProto(efrpb.build());
+//		evolutionFinishedController.handleEvent(efre);
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//	}
 	
 	@Test
 	public void testStaticDataContainer() {

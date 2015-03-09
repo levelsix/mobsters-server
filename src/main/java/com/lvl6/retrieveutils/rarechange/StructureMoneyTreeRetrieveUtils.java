@@ -91,6 +91,7 @@ import com.lvl6.utils.DBConnection;
 	String entireIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + iapProductId;  
 	String fakeIAPProductId = rs.getString(DBConstants.STRUCTURE_MONEY_TREE__FAKE_IAP_PRODUCT_ID);;  
 	String entireFakeIAPProductId = Globals.APPLE_BUNDLE_ID() + "." + fakeIAPProductId;
+	log.info(entireIAPProductId);
 	
     StructureMoneyTree smt = new StructureMoneyTree(structId,
     		productionRate, capacity, daysOfDuration, daysForRenewal, entireIAPProductId, 
