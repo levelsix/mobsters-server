@@ -8900,6 +8900,1706 @@ public final class EventPvpProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SetDefendingMsgResponseProto)
   }
 
+  public interface CustomizePvpBoardObstacleRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CustomizePvpBoardObstacleRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> 
+        getNuOrUpdatedObstaclesList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getNuOrUpdatedObstacles(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    int getNuOrUpdatedObstaclesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+        getNuOrUpdatedObstaclesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getNuOrUpdatedObstaclesOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    java.util.List<java.lang.Integer> getRemoveUpboIdsList();
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    int getRemoveUpboIdsCount();
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    int getRemoveUpboIds(int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CustomizePvpBoardObstacleRequestProto}
+   */
+  public static final class CustomizePvpBoardObstacleRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CustomizePvpBoardObstacleRequestProto)
+      CustomizePvpBoardObstacleRequestProtoOrBuilder {
+    // Use CustomizePvpBoardObstacleRequestProto.newBuilder() to construct.
+    private CustomizePvpBoardObstacleRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CustomizePvpBoardObstacleRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CustomizePvpBoardObstacleRequestProto defaultInstance;
+    public static CustomizePvpBoardObstacleRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CustomizePvpBoardObstacleRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CustomizePvpBoardObstacleRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                nuOrUpdatedObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              nuOrUpdatedObstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                removeUpboIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              removeUpboIds_.add(input.readInt32());
+              break;
+            }
+            case 26: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+                removeUpboIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                removeUpboIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          nuOrUpdatedObstacles_ = java.util.Collections.unmodifiableList(nuOrUpdatedObstacles_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          removeUpboIds_ = java.util.Collections.unmodifiableList(removeUpboIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.class, com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CustomizePvpBoardObstacleRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<CustomizePvpBoardObstacleRequestProto>() {
+      public CustomizePvpBoardObstacleRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CustomizePvpBoardObstacleRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CustomizePvpBoardObstacleRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int NUORUPDATEDOBSTACLES_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> nuOrUpdatedObstacles_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> getNuOrUpdatedObstaclesList() {
+      return nuOrUpdatedObstacles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+        getNuOrUpdatedObstaclesOrBuilderList() {
+      return nuOrUpdatedObstacles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    public int getNuOrUpdatedObstaclesCount() {
+      return nuOrUpdatedObstacles_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getNuOrUpdatedObstacles(int index) {
+      return nuOrUpdatedObstacles_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+     */
+    public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getNuOrUpdatedObstaclesOrBuilder(
+        int index) {
+      return nuOrUpdatedObstacles_.get(index);
+    }
+
+    public static final int REMOVEUPBOIDS_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Integer> removeUpboIds_;
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getRemoveUpboIdsList() {
+      return removeUpboIds_;
+    }
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    public int getRemoveUpboIdsCount() {
+      return removeUpboIds_.size();
+    }
+    /**
+     * <code>repeated int32 removeUpboIds = 3;</code>
+     */
+    public int getRemoveUpboIds(int index) {
+      return removeUpboIds_.get(index);
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      nuOrUpdatedObstacles_ = java.util.Collections.emptyList();
+      removeUpboIds_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < nuOrUpdatedObstacles_.size(); i++) {
+        output.writeMessage(2, nuOrUpdatedObstacles_.get(i));
+      }
+      for (int i = 0; i < removeUpboIds_.size(); i++) {
+        output.writeInt32(3, removeUpboIds_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < nuOrUpdatedObstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, nuOrUpdatedObstacles_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < removeUpboIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(removeUpboIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getRemoveUpboIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CustomizePvpBoardObstacleRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CustomizePvpBoardObstacleRequestProto)
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.class, com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getNuOrUpdatedObstaclesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          nuOrUpdatedObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          nuOrUpdatedObstaclesBuilder_.clear();
+        }
+        removeUpboIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto build() {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto buildPartial() {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto result = new com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            nuOrUpdatedObstacles_ = java.util.Collections.unmodifiableList(nuOrUpdatedObstacles_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.nuOrUpdatedObstacles_ = nuOrUpdatedObstacles_;
+        } else {
+          result.nuOrUpdatedObstacles_ = nuOrUpdatedObstaclesBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          removeUpboIds_ = java.util.Collections.unmodifiableList(removeUpboIds_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.removeUpboIds_ = removeUpboIds_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto other) {
+        if (other == com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          if (!other.nuOrUpdatedObstacles_.isEmpty()) {
+            if (nuOrUpdatedObstacles_.isEmpty()) {
+              nuOrUpdatedObstacles_ = other.nuOrUpdatedObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureNuOrUpdatedObstaclesIsMutable();
+              nuOrUpdatedObstacles_.addAll(other.nuOrUpdatedObstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.nuOrUpdatedObstacles_.isEmpty()) {
+            if (nuOrUpdatedObstaclesBuilder_.isEmpty()) {
+              nuOrUpdatedObstaclesBuilder_.dispose();
+              nuOrUpdatedObstaclesBuilder_ = null;
+              nuOrUpdatedObstacles_ = other.nuOrUpdatedObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              nuOrUpdatedObstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNuOrUpdatedObstaclesFieldBuilder() : null;
+            } else {
+              nuOrUpdatedObstaclesBuilder_.addAllMessages(other.nuOrUpdatedObstacles_);
+            }
+          }
+        }
+        if (!other.removeUpboIds_.isEmpty()) {
+          if (removeUpboIds_.isEmpty()) {
+            removeUpboIds_ = other.removeUpboIds_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureRemoveUpboIdsIsMutable();
+            removeUpboIds_.addAll(other.removeUpboIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> nuOrUpdatedObstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureNuOrUpdatedObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          nuOrUpdatedObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto>(nuOrUpdatedObstacles_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> nuOrUpdatedObstaclesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> getNuOrUpdatedObstaclesList() {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(nuOrUpdatedObstacles_);
+        } else {
+          return nuOrUpdatedObstaclesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public int getNuOrUpdatedObstaclesCount() {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          return nuOrUpdatedObstacles_.size();
+        } else {
+          return nuOrUpdatedObstaclesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto getNuOrUpdatedObstacles(int index) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          return nuOrUpdatedObstacles_.get(index);
+        } else {
+          return nuOrUpdatedObstaclesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder setNuOrUpdatedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.set(index, value);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder setNuOrUpdatedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder addNuOrUpdatedObstacles(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.add(value);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder addNuOrUpdatedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto value) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.add(index, value);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder addNuOrUpdatedObstacles(
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder addNuOrUpdatedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder builderForValue) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder addAllNuOrUpdatedObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> values) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          ensureNuOrUpdatedObstaclesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, nuOrUpdatedObstacles_);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder clearNuOrUpdatedObstacles() {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          nuOrUpdatedObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public Builder removeNuOrUpdatedObstacles(int index) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          ensureNuOrUpdatedObstaclesIsMutable();
+          nuOrUpdatedObstacles_.remove(index);
+          onChanged();
+        } else {
+          nuOrUpdatedObstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder getNuOrUpdatedObstaclesBuilder(
+          int index) {
+        return getNuOrUpdatedObstaclesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getNuOrUpdatedObstaclesOrBuilder(
+          int index) {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          return nuOrUpdatedObstacles_.get(index);  } else {
+          return nuOrUpdatedObstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+           getNuOrUpdatedObstaclesOrBuilderList() {
+        if (nuOrUpdatedObstaclesBuilder_ != null) {
+          return nuOrUpdatedObstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(nuOrUpdatedObstacles_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder addNuOrUpdatedObstaclesBuilder() {
+        return getNuOrUpdatedObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder addNuOrUpdatedObstaclesBuilder(
+          int index) {
+        return getNuOrUpdatedObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder> 
+           getNuOrUpdatedObstaclesBuilderList() {
+        return getNuOrUpdatedObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder> 
+          getNuOrUpdatedObstaclesFieldBuilder() {
+        if (nuOrUpdatedObstaclesBuilder_ == null) {
+          nuOrUpdatedObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder>(
+                  nuOrUpdatedObstacles_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          nuOrUpdatedObstacles_ = null;
+        }
+        return nuOrUpdatedObstaclesBuilder_;
+      }
+
+      private java.util.List<java.lang.Integer> removeUpboIds_ = java.util.Collections.emptyList();
+      private void ensureRemoveUpboIdsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          removeUpboIds_ = new java.util.ArrayList<java.lang.Integer>(removeUpboIds_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getRemoveUpboIdsList() {
+        return java.util.Collections.unmodifiableList(removeUpboIds_);
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public int getRemoveUpboIdsCount() {
+        return removeUpboIds_.size();
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public int getRemoveUpboIds(int index) {
+        return removeUpboIds_.get(index);
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public Builder setRemoveUpboIds(
+          int index, int value) {
+        ensureRemoveUpboIdsIsMutable();
+        removeUpboIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public Builder addRemoveUpboIds(int value) {
+        ensureRemoveUpboIdsIsMutable();
+        removeUpboIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public Builder addAllRemoveUpboIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureRemoveUpboIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, removeUpboIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 removeUpboIds = 3;</code>
+       */
+      public Builder clearRemoveUpboIds() {
+        removeUpboIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CustomizePvpBoardObstacleRequestProto)
+    }
+
+    static {
+      defaultInstance = new CustomizePvpBoardObstacleRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.CustomizePvpBoardObstacleRequestProto)
+  }
+
+  public interface CustomizePvpBoardObstacleResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CustomizePvpBoardObstacleResponseProto}
+   */
+  public static final class CustomizePvpBoardObstacleResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
+      CustomizePvpBoardObstacleResponseProtoOrBuilder {
+    // Use CustomizePvpBoardObstacleResponseProto.newBuilder() to construct.
+    private CustomizePvpBoardObstacleResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CustomizePvpBoardObstacleResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CustomizePvpBoardObstacleResponseProto defaultInstance;
+    public static CustomizePvpBoardObstacleResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CustomizePvpBoardObstacleResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CustomizePvpBoardObstacleResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus value = com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.class, com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CustomizePvpBoardObstacleResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<CustomizePvpBoardObstacleResponseProto>() {
+      public CustomizePvpBoardObstacleResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CustomizePvpBoardObstacleResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CustomizePvpBoardObstacleResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus}
+     */
+    public enum CustomizePvpBoardObstacleStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static CustomizePvpBoardObstacleStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<CustomizePvpBoardObstacleStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<CustomizePvpBoardObstacleStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<CustomizePvpBoardObstacleStatus>() {
+              public CustomizePvpBoardObstacleStatus findValueByNumber(int number) {
+                return CustomizePvpBoardObstacleStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final CustomizePvpBoardObstacleStatus[] VALUES = values();
+
+      public static CustomizePvpBoardObstacleStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private CustomizePvpBoardObstacleStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CustomizePvpBoardObstacleResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.class, com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto build() {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto buildPartial() {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto result = new com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto other) {
+        if (other == com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status_ = com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
+    }
+
+    static {
+      defaultInstance = new CustomizePvpBoardObstacleResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor;
   private static
@@ -8940,6 +10640,16 @@ public final class EventPvpProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SetDefendingMsgResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8951,58 +10661,70 @@ public final class EventPvpProto {
     java.lang.String[] descriptorData = {
       "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
       ".proto\032\020BattleItem.proto\032\022MonsterStuff.p" +
-      "roto\032\nUser.proto\"\211\001\n\023QueueUpRequestProto" +
-      "\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\025\n\rsee" +
-      "nUserUuids\030\005 \003(\t\022\022\n\nclientTime\030\006 \001(\003\"\244\002\n" +
-      "\024QueueUpResponseProto\0222\n\010attacker\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0222\n\020def" +
-      "enderInfoList\030\002 \003(\0132\030.com.lvl6.proto.Pvp" +
-      "Proto\022B\n\006status\030\003 \001(\01622.com.lvl6.proto.Q",
-      "ueueUpResponseProto.QueueUpStatus\"`\n\rQue" +
-      "ueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOU" +
-      "GH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestPro" +
+      "roto\032\017Structure.proto\032\nUser.proto\"\211\001\n\023Qu" +
+      "eueUpRequestProto\0222\n\010attacker\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\023\n\013attacke" +
+      "rElo\030\002 \001(\005\022\025\n\rseenUserUuids\030\005 \003(\t\022\022\n\ncli" +
+      "entTime\030\006 \001(\003\"\244\002\n\024QueueUpResponseProto\0222" +
+      "\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\0222\n\020defenderInfoList\030\002 \003(\0132\030.c" +
+      "om.lvl6.proto.PvpProto\022B\n\006status\030\003 \001(\01622",
+      ".com.lvl6.proto.QueueUpResponseProto.Que" +
+      "ueUpStatus\"`\n\rQueueUpStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\004\"\333\001\n\032BeginPv" +
+      "pBattleRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\021\n\tsenderE" +
+      "lo\030\002 \001(\005\022\027\n\017attackStartTime\030\003 \001(\003\022\'\n\005ene" +
+      "my\030\004 \001(\0132\030.com.lvl6.proto.PvpProto\022\027\n\017ex" +
+      "actingRevenge\030\005 \001(\010\022\035\n\025previousBattleEnd" +
+      "Time\030\006 \001(\003\"\362\001\n\033BeginPvpBattleResponsePro",
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017attac" +
-      "kStartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com.lv" +
-      "l6.proto.PvpProto\022\027\n\017exactingRevenge\030\005 \001" +
-      "(\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033Be" +
-      "ginPvpBattleResponseProto\0220\n\006sender\030\001 \001(",
-      "\0132 .com.lvl6.proto.MinimumUserProto\022P\n\006s" +
-      "tatus\030\002 \001(\0162@.com.lvl6.proto.BeginPvpBat" +
-      "tleResponseProto.BeginPvpBattleStatus\"O\n" +
-      "\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
-      "IL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\210" +
-      "\002\n\030EndPvpBattleRequestProto\022@\n\006sender\030\001 " +
-      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
-      "hMaxResources\022\024\n\014defenderUuid\030\002 \001(\t\022\024\n\014u" +
-      "serAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\ncl" +
-      "ientTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncas",
-      "hChange\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 \001(" +
-      "\002\022\026\n\016monsterDropIds\030\t \003(\005\"\255\004\n\031EndPvpBatt" +
-      "leResponseProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
-      "l6.proto.MinimumUserProtoWithMaxResource" +
-      "s\022\024\n\014defenderUuid\030\002 \001(\t\022\030\n\020attackerAttac" +
-      "ked\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001(\010\022L\n\006status" +
-      "\030\t \001(\0162<.com.lvl6.proto.EndPvpBattleResp" +
-      "onseProto.EndPvpBattleStatus\022:\n\014updatedO" +
-      "rNew\030\n \003(\0132$.com.lvl6.proto.FullUserMons" +
-      "terProto\022<\n\023battleThatJustEnded\030\013 \001(\0132\037.",
-      "com.lvl6.proto.PvpHistoryProto\0227\n\013statsB" +
-      "efore\030\014 \001(\0132\".com.lvl6.proto.UserPvpLeag" +
-      "ueProto\0226\n\nstatsAfter\030\r \001(\0132\".com.lvl6.p" +
-      "roto.UserPvpLeagueProto\"P\n\022EndPvpBattleS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FA" +
-      "IL_BATTLE_TOOK_TOO_LONG\020\003\"\\\n\033SetDefendin" +
-      "gMsgRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\"" +
-      "\332\001\n\034SetDefendingMsgResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
-      "to\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.SetD" +
-      "efendingMsgResponseProto.SetDefendingMsg" +
-      "Status\"4\n\025SetDefendingMsgStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEventPvpProto"
+      "mumUserProto\022P\n\006status\030\002 \001(\0162@.com.lvl6." +
+      "proto.BeginPvpBattleResponseProto.BeginP" +
+      "vpBattleStatus\"O\n\024BeginPvpBattleStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILABLE\020\002\022" +
+      "\016\n\nFAIL_OTHER\020\003\"\210\002\n\030EndPvpBattleRequestP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
+      "nimumUserProtoWithMaxResources\022\024\n\014defend" +
+      "erUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022\017\n\007us" +
+      "erWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\toilCh",
+      "ange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022nuPvpD" +
+      "mgMultiplier\030\010 \001(\002\022\026\n\016monsterDropIds\030\t \003" +
+      "(\005\"\255\004\n\031EndPvpBattleResponseProto\022@\n\006send" +
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
+      "toWithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t" +
+      "\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerWo" +
+      "n\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto" +
+      ".EndPvpBattleResponseProto.EndPvpBattleS" +
+      "tatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.lvl6.p" +
+      "roto.FullUserMonsterProto\022<\n\023battleThatJ",
+      "ustEnded\030\013 \001(\0132\037.com.lvl6.proto.PvpHisto" +
+      "ryProto\0227\n\013statsBefore\030\014 \001(\0132\".com.lvl6." +
+      "proto.UserPvpLeagueProto\0226\n\nstatsAfter\030\r" +
+      " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
+      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
+      "\020\003\"\\\n\033SetDefendingMsgRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMsgResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
+      "to.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.co" +
+      "m.lvl6.proto.SetDefendingMsgResponseProt" +
+      "o.SetDefendingMsgStatus\"4\n\025SetDefendingM" +
+      "sgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001" +
+      "\n%CustomizePvpBoardObstacleRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022G\n\024nuOrUpdatedObstacles\030\002 \003(\0132" +
+      ").com.lvl6.proto.UserPvpBoardObstaclePro" +
+      "to\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&CustomizeP" +
+      "vpBoardObstacleResponseProto\0220\n\006sender\030\001",
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f" +
+      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.Customiz" +
+      "ePvpBoardObstacleResponseProto.Customize" +
+      "PvpBoardObstacleStatus\">\n\037CustomizePvpBo" +
+      "ardObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9018,6 +10740,7 @@ public final class EventPvpProto {
           com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.BattleItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor =
@@ -9068,9 +10791,22 @@ public final class EventPvpProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SetDefendingMsgResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CustomizePvpBoardObstacleRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "NuOrUpdatedObstacles", "RemoveUpboIds", });
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

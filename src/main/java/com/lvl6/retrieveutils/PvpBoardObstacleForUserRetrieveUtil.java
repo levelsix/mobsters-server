@@ -3,7 +3,11 @@ package com.lvl6.retrieveutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -52,6 +56,45 @@ import com.lvl6.properties.DBConstants;
 		return userPersistentEvents;
 	}
 
+	public Map<String, List<PvpBoardObstacleForUser>> getPvpBoardObstacleForUserIds(
+			Collection<String> userIds)
+	{
+		Object[] values = userIds.toArray();
+		int amount = userIds.size();
+		List<String> questionMarks = Collections.nCopies(amount, "?");
+		String questionMarksStr = String.join(",", questionMarks);
+		String query = String.format(
+			"select * from %s where %s in (%s)",
+			TABLE_NAME, DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID,
+			questionMarksStr);
+
+		log.info("query={}, values={}", query, values);
+		
+		Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles =
+				new HashMap<String, List<PvpBoardObstacleForUser>>();
+		try {
+			List<PvpBoardObstacleForUser> userPvpBoardObstacles = this.jdbcTemplate
+				.query(query, values, rowMapper);
+			
+			for (PvpBoardObstacleForUser pbofu : userPvpBoardObstacles)
+			{
+				String userId = pbofu.getUserId();
+				
+				//base case when initially populating for a user
+				if (!userIdToPvpBoardObstacles.containsKey(userId)) {
+					userIdToPvpBoardObstacles.put(userId,
+							new ArrayList<PvpBoardObstacleForUser>());
+				}
+				List<PvpBoardObstacleForUser> obstacles = userIdToPvpBoardObstacles
+						.get(userId);
+				obstacles.add(pbofu);
+			}
+		} catch (Exception e) {
+			log.error("PvpBoardObstacleForUser retrieve db error.", e);
+		}
+		return userIdToPvpBoardObstacles;
+	}
+	
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
@@ -62,7 +105,7 @@ import com.lvl6.properties.DBConstants;
 
 		public PvpBoardObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpBoardObstacleForUser pbofu = new PvpBoardObstacleForUser();
-			pbofu.setId(rs.getString(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID));
+			pbofu.setId(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID));
 			pbofu.setUserId(rs.getString(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID));
 			pbofu.setObstacleId(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID));
 			pbofu.setPosX(rs.getInt(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_X));

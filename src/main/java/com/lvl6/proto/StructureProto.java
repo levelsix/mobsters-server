@@ -19384,13 +19384,13 @@ public final class StructureProto {
     int getPowerAmt();
 
     /**
-     * <code>optional bool initAvailable = 5;</code>
+     * <code>optional bool initiallyAvailable = 5;</code>
      */
-    boolean hasInitAvailable();
+    boolean hasInitiallyAvailable();
     /**
-     * <code>optional bool initAvailable = 5;</code>
+     * <code>optional bool initiallyAvailable = 5;</code>
      */
-    boolean getInitAvailable();
+    boolean getInitiallyAvailable();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpBoardObstacleProto}
@@ -19473,7 +19473,7 @@ public final class StructureProto {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              initAvailable_ = input.readBool();
+              initiallyAvailable_ = input.readBool();
               break;
             }
           }
@@ -19603,19 +19603,19 @@ public final class StructureProto {
       return powerAmt_;
     }
 
-    public static final int INITAVAILABLE_FIELD_NUMBER = 5;
-    private boolean initAvailable_;
+    public static final int INITIALLYAVAILABLE_FIELD_NUMBER = 5;
+    private boolean initiallyAvailable_;
     /**
-     * <code>optional bool initAvailable = 5;</code>
+     * <code>optional bool initiallyAvailable = 5;</code>
      */
-    public boolean hasInitAvailable() {
+    public boolean hasInitiallyAvailable() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional bool initAvailable = 5;</code>
+     * <code>optional bool initiallyAvailable = 5;</code>
      */
-    public boolean getInitAvailable() {
-      return initAvailable_;
+    public boolean getInitiallyAvailable() {
+      return initiallyAvailable_;
     }
 
     private void initFields() {
@@ -19623,7 +19623,7 @@ public final class StructureProto {
       name_ = "";
       obstacleType_ = com.lvl6.proto.StructureProto.BoardObstacleType.CLOUD;
       powerAmt_ = 0;
-      initAvailable_ = false;
+      initiallyAvailable_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -19651,7 +19651,7 @@ public final class StructureProto {
         output.writeInt32(4, powerAmt_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, initAvailable_);
+        output.writeBool(5, initiallyAvailable_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -19680,7 +19680,7 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, initAvailable_);
+          .computeBoolSize(5, initiallyAvailable_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -19807,7 +19807,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         powerAmt_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        initAvailable_ = false;
+        initiallyAvailable_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -19856,7 +19856,7 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.initAvailable_ = initAvailable_;
+        result.initiallyAvailable_ = initiallyAvailable_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -19887,8 +19887,8 @@ public final class StructureProto {
         if (other.hasPowerAmt()) {
           setPowerAmt(other.getPowerAmt());
         }
-        if (other.hasInitAvailable()) {
-          setInitAvailable(other.getInitAvailable());
+        if (other.hasInitiallyAvailable()) {
+          setInitiallyAvailable(other.getInitiallyAvailable());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -20092,34 +20092,34 @@ public final class StructureProto {
         return this;
       }
 
-      private boolean initAvailable_ ;
+      private boolean initiallyAvailable_ ;
       /**
-       * <code>optional bool initAvailable = 5;</code>
+       * <code>optional bool initiallyAvailable = 5;</code>
        */
-      public boolean hasInitAvailable() {
+      public boolean hasInitiallyAvailable() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional bool initAvailable = 5;</code>
+       * <code>optional bool initiallyAvailable = 5;</code>
        */
-      public boolean getInitAvailable() {
-        return initAvailable_;
+      public boolean getInitiallyAvailable() {
+        return initiallyAvailable_;
       }
       /**
-       * <code>optional bool initAvailable = 5;</code>
+       * <code>optional bool initiallyAvailable = 5;</code>
        */
-      public Builder setInitAvailable(boolean value) {
+      public Builder setInitiallyAvailable(boolean value) {
         bitField0_ |= 0x00000010;
-        initAvailable_ = value;
+        initiallyAvailable_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool initAvailable = 5;</code>
+       * <code>optional bool initiallyAvailable = 5;</code>
        */
-      public Builder clearInitAvailable() {
+      public Builder clearInitiallyAvailable() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        initAvailable_ = false;
+        initiallyAvailable_ = false;
         onChanged();
         return this;
       }
@@ -20140,18 +20140,13 @@ public final class StructureProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     * <code>optional int32 userPvpBoardObstacleId = 1;</code>
      */
-    boolean hasUserPvpBoardObstacleUuid();
+    boolean hasUserPvpBoardObstacleId();
     /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     * <code>optional int32 userPvpBoardObstacleId = 1;</code>
      */
-    java.lang.String getUserPvpBoardObstacleUuid();
-    /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserPvpBoardObstacleUuidBytes();
+    int getUserPvpBoardObstacleId();
 
     /**
      * <code>optional string userUuid = 2;</code>
@@ -20246,10 +20241,9 @@ public final class StructureProto {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
-              userPvpBoardObstacleUuid_ = bs;
+              userPvpBoardObstacleId_ = input.readInt32();
               break;
             }
             case 18: {
@@ -20313,46 +20307,19 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    public static final int USERPVPBOARDOBSTACLEUUID_FIELD_NUMBER = 1;
-    private java.lang.Object userPvpBoardObstacleUuid_;
+    public static final int USERPVPBOARDOBSTACLEID_FIELD_NUMBER = 1;
+    private int userPvpBoardObstacleId_;
     /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     * <code>optional int32 userPvpBoardObstacleId = 1;</code>
      */
-    public boolean hasUserPvpBoardObstacleUuid() {
+    public boolean hasUserPvpBoardObstacleId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+     * <code>optional int32 userPvpBoardObstacleId = 1;</code>
      */
-    public java.lang.String getUserPvpBoardObstacleUuid() {
-      java.lang.Object ref = userPvpBoardObstacleUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userPvpBoardObstacleUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string userPvpBoardObstacleUuid = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserPvpBoardObstacleUuidBytes() {
-      java.lang.Object ref = userPvpBoardObstacleUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userPvpBoardObstacleUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getUserPvpBoardObstacleId() {
+      return userPvpBoardObstacleId_;
     }
 
     public static final int USERUUID_FIELD_NUMBER = 2;
@@ -20443,7 +20410,7 @@ public final class StructureProto {
     }
 
     private void initFields() {
-      userPvpBoardObstacleUuid_ = "";
+      userPvpBoardObstacleId_ = 0;
       userUuid_ = "";
       obstacleId_ = 0;
       posX_ = 0;
@@ -20463,7 +20430,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserPvpBoardObstacleUuidBytes());
+        output.writeInt32(1, userPvpBoardObstacleId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getUserUuidBytes());
@@ -20488,7 +20455,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserPvpBoardObstacleUuidBytes());
+          .computeInt32Size(1, userPvpBoardObstacleId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -20623,7 +20590,7 @@ public final class StructureProto {
 
       public Builder clear() {
         super.clear();
-        userPvpBoardObstacleUuid_ = "";
+        userPvpBoardObstacleId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -20664,7 +20631,7 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userPvpBoardObstacleUuid_ = userPvpBoardObstacleUuid_;
+        result.userPvpBoardObstacleId_ = userPvpBoardObstacleId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -20697,10 +20664,8 @@ public final class StructureProto {
 
       public Builder mergeFrom(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto other) {
         if (other == com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.getDefaultInstance()) return this;
-        if (other.hasUserPvpBoardObstacleUuid()) {
-          bitField0_ |= 0x00000001;
-          userPvpBoardObstacleUuid_ = other.userPvpBoardObstacleUuid_;
-          onChanged();
+        if (other.hasUserPvpBoardObstacleId()) {
+          setUserPvpBoardObstacleId(other.getUserPvpBoardObstacleId());
         }
         if (other.hasUserUuid()) {
           bitField0_ |= 0x00000002;
@@ -20743,78 +20708,34 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      private java.lang.Object userPvpBoardObstacleUuid_ = "";
+      private int userPvpBoardObstacleId_ ;
       /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       * <code>optional int32 userPvpBoardObstacleId = 1;</code>
        */
-      public boolean hasUserPvpBoardObstacleUuid() {
+      public boolean hasUserPvpBoardObstacleId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       * <code>optional int32 userPvpBoardObstacleId = 1;</code>
        */
-      public java.lang.String getUserPvpBoardObstacleUuid() {
-        java.lang.Object ref = userPvpBoardObstacleUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userPvpBoardObstacleUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getUserPvpBoardObstacleId() {
+        return userPvpBoardObstacleId_;
       }
       /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       * <code>optional int32 userPvpBoardObstacleId = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getUserPvpBoardObstacleUuidBytes() {
-        java.lang.Object ref = userPvpBoardObstacleUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userPvpBoardObstacleUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
-       */
-      public Builder setUserPvpBoardObstacleUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userPvpBoardObstacleUuid_ = value;
+      public Builder setUserPvpBoardObstacleId(int value) {
+        bitField0_ |= 0x00000001;
+        userPvpBoardObstacleId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
+       * <code>optional int32 userPvpBoardObstacleId = 1;</code>
        */
-      public Builder clearUserPvpBoardObstacleUuid() {
+      public Builder clearUserPvpBoardObstacleId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userPvpBoardObstacleUuid_ = getDefaultInstance().getUserPvpBoardObstacleUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userPvpBoardObstacleUuid = 1;</code>
-       */
-      public Builder setUserPvpBoardObstacleUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userPvpBoardObstacleUuid_ = value;
+        userPvpBoardObstacleId_ = 0;
         onChanged();
         return this;
       }
@@ -21815,22 +21736,22 @@ public final class StructureProto {
       "tation\030\002 \001(\005\022\036\n\026teamDonationPowerLimit\030\003" +
       " \001(\005\"h\n\022PvpBoardHouseProto\0226\n\nstructInfo" +
       "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
-      "to\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\233\001\n\025PvpBo" +
+      "to\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\240\001\n\025PvpBo" +
       "ardObstacleProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004" +
       "name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!.com.l" +
       "vl6.proto.BoardObstacleType\022\020\n\010powerAmt\030" +
-      "\004 \001(\005\022\025\n\rinitAvailable\030\005 \001(\010\"\177\n\031UserPvpB" +
-      "oardObstacleProto\022 \n\030userPvpBoardObstacl" +
-      "eUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacl",
-      "eId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n" +
-      "\026BattleItemFactoryProto\0226\n\nstructInfo\030\001 " +
-      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
-      "\022\n\npowerLimit\030\002 \001(\005*I\n\014ResourceType\022\017\n\013N" +
-      "O_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020" +
-      "\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016N" +
-      "O_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSIT" +
-      "ION_2\020\002*\036\n\021BoardObstacleType\022\t\n\005CLOUD\020\001B" +
-      "\020B\016StructureProto"
+      "\004 \001(\005\022\032\n\022initiallyAvailable\030\005 \001(\010\"}\n\031Use" +
+      "rPvpBoardObstacleProto\022\036\n\026userPvpBoardOb" +
+      "stacleId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobst",
+      "acleId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005" +
+      "\"d\n\026BattleItemFactoryProto\0226\n\nstructInfo" +
+      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
+      "to\022\022\n\npowerLimit\030\002 \001(\005*I\n\014ResourceType\022\017" +
+      "\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GE" +
+      "MS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022" +
+      "\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
+      "SITION_2\020\002*\036\n\021BoardObstacleType\022\t\n\005CLOUD" +
+      "\020\001B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21970,13 +21891,13 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_PvpBoardObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpBoardObstacleProto_descriptor,
-        new java.lang.String[] { "PvpBoardId", "Name", "ObstacleType", "PowerAmt", "InitAvailable", });
+        new java.lang.String[] { "PvpBoardId", "Name", "ObstacleType", "PowerAmt", "InitiallyAvailable", });
     internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor =
       getDescriptor().getMessageTypes().get(21);
     internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserPvpBoardObstacleProto_descriptor,
-        new java.lang.String[] { "UserPvpBoardObstacleUuid", "UserUuid", "ObstacleId", "PosX", "PosY", });
+        new java.lang.String[] { "UserPvpBoardObstacleId", "UserUuid", "ObstacleId", "PosX", "PosY", });
     internal_static_com_lvl6_proto_BattleItemFactoryProto_descriptor =
       getDescriptor().getMessageTypes().get(22);
     internal_static_com_lvl6_proto_BattleItemFactoryProto_fieldAccessorTable = new

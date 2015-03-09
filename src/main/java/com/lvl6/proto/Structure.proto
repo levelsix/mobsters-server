@@ -308,7 +308,7 @@ message PvpBoardObstacleProto {
 	optional string name = 2;
 	optional BoardObstacleType obstacleType = 3;
 	optional int32 powerAmt = 4;
-	optional bool initAvailable = 5;
+	optional bool initiallyAvailable = 5;
 	
 }
 enum BoardObstacleType {
@@ -319,15 +319,11 @@ enum BoardObstacleType {
 //------------------------------------------------------------------------------------------
 
 message UserPvpBoardObstacleProto {
-	optional string userPvpBoardObstacleUuid = 1;
+	optional int32 userPvpBoardObstacleId = 1;
 	optional string userUuid = 2;
 	optional int32 obstacleId = 3;
 	optional int32 posX = 4;
 	optional int32 posY = 5;
-	
-
-
-
 	
 }
 

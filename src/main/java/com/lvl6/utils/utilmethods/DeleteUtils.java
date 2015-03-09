@@ -1,6 +1,7 @@
 package com.lvl6.utils.utilmethods;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -602,4 +603,27 @@ public class DeleteUtils implements DeleteUtil {
 	
 	
 	
+	
+	@Override
+	public int deletePvpBoardObstacleForUser(Collection<Integer> ids, String userId)
+	{
+		String tableName = DBConstants.TABLE_PVP_BOARD_OBSTACLE_FOR_USER;
+		int size = ids.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format( "DELETE FROM %s WHERE %s=? and %s IN (%s)",
+			tableName,
+			DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__USER_ID,
+			DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__ID,
+			questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(userId);
+		values.addAll(ids);
+
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
 }

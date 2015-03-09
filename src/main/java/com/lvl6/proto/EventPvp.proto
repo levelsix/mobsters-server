@@ -4,6 +4,7 @@
 import "Battle.proto";
 import "BattleItem.proto";
 import "MonsterStuff.proto";
+import "Structure.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -165,4 +166,22 @@ message SetDefendingMsgResponseProto {
 	}
 }
 
+//------------------------------------------------------------------------------------------
+
+message CustomizePvpBoardObstacleRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;
+	repeated int32 removeUpboIds = 3;
+	
+}
+
+message CustomizePvpBoardObstacleResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional CustomizePvpBoardObstacleStatus status = 2;
+	
+	enum CustomizePvpBoardObstacleStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}  
+}
 
