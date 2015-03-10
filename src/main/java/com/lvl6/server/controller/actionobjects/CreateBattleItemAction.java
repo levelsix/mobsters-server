@@ -80,7 +80,7 @@ public class CreateBattleItemAction
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
-		
+				
 		boolean valid = verifySyntax(resBuilder);
 		
 		if (!valid) {
@@ -146,7 +146,7 @@ public class CreateBattleItemAction
 			return false;
 		}
 		
-		else return false;
+		return true;
 	}
 
 	private boolean hasEnoughGems(Builder resBuilder) {
@@ -154,6 +154,7 @@ public class CreateBattleItemAction
 			int userGems = user.getGems();
 			//check if user can afford to buy however many more user wants to buy
 			if (userGems < gemCostForCreating) {
+				log.error("user doesn't have enough gems");
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false; 
 			}
@@ -166,6 +167,7 @@ public class CreateBattleItemAction
 		if ( cashChange > 0 ) {
 			int userCash = user.getCash();
 			if(userCash < cashChange) {
+				log.error("user doesn't have enough cash");
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
@@ -178,6 +180,7 @@ public class CreateBattleItemAction
 		if (oilChange > 0) {
 			int userOil = user.getOil();
 			if(userOil < oilChange) {
+				log.error("user doesn't have enough oil");
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
@@ -204,13 +207,17 @@ public class CreateBattleItemAction
 		
 		updateUserCurrency();
 
+		int deletedListSize = 0;
+		int updatedListSize = 0;
+		int newListSize = 0;
 		
 		//update items in db
 		if(!emptyDeletedList) {
 			log.info("new list not empty");
 			//remove the elements from queue
+			deletedListSize = deletedList.size();
 			int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(userId, deletedList);
-			if(numDeleted != deletedList.size()) {
+			if(numDeleted != deletedListSize) {
 				log.error("did not delete all the battle items in queue");
 				return false;
 			}
@@ -221,15 +228,18 @@ public class CreateBattleItemAction
 				new ArrayList<BattleItemQueueForUser>();
 		if(!emptyUpdatedList) {
 			log.info("updated list not null");
+			updatedListSize = updatedList.size();
 			nuOrUpdatedList.addAll(updatedList);
 		}
 		if(!emptyNewList) {
 			log.info("new list not empty");
+			newListSize = newList.size();
 			nuOrUpdatedList.addAll(newList);
 		}
-
+		log.info("about to insert to queue");
+		
 		int numUpdated = insertUtil.insertIntoBattleItemQueueForUser(nuOrUpdatedList);
-		if(numUpdated != updatedList.size() + newList.size()) {
+		if(numUpdated != updatedListSize + newListSize) {
 			log.error("did not update all the battle items in queue");
 			return false;
 		}

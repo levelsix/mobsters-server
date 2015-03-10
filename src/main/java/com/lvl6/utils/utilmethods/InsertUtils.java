@@ -2016,12 +2016,15 @@ public class InsertUtils implements InsertUtil{
 						biqfu.getExpectedStartTime());
 				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY,
 						biqfu.getPriority());
-
+				newRow.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME,
+						biqfu.getElapsedTime());
+				
 				newRows.add(newRow);
 			}
 			Set<String> replaceTheseColumns = new HashSet<String>();
 			replaceTheseColumns.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
-
+			replaceTheseColumns.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME);
+			
 			int numUpdated = DBConnection.get()
 					.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
 

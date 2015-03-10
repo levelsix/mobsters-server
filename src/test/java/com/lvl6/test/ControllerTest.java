@@ -1176,7 +1176,7 @@ public class ControllerTest extends TestCase {
 		cbire.setCreateBattleItemRequestProto(cbirpb.build());
 		createBattleItemController.handleEvent(cbire);
 		
-		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		User user2 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
 
 		List<BattleItemQueueForUser> bifuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
 		assertTrue(bifuList.size() == 1);
@@ -1241,7 +1241,7 @@ public class ControllerTest extends TestCase {
 		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
 		createBattleItemController.handleEvent(cbire2);
 		
-		User user3 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		User user3 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
 
 		List<BattleItemQueueForUser> bifuList2 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
 		assertTrue(bifuList2.size() == 3);
@@ -1299,7 +1299,7 @@ public class ControllerTest extends TestCase {
 		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
 		createBattleItemController.handleEvent(cbire3);
 		
-		User user4 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		User user4 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
 
 		List<BattleItemQueueForUser> bifuList3 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user4.getId());
 		assertTrue(bifuList3.size() == 2);
