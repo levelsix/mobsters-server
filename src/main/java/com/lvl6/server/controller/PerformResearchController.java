@@ -74,6 +74,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		PerformResearchRequestProto reqProto = ((PerformResearchRequestEvent)event).getPerformResearchRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -111,6 +112,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			userUuid = UUID.fromString(userId);
 
+			if ( null != userResearchUuid && !userResearchUuid.isEmpty() ) {
+				UUID.fromString(userResearchUuid);
+			}
+			
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
@@ -125,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -148,9 +153,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resProto);
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
-			writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			}
 
 		} catch (Exception e) {
 			log.error("exception in PerformResearchController processEvent", e);
@@ -160,7 +167,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setPerformResearchResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}

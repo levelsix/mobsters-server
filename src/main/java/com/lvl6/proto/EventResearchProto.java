@@ -27,23 +27,43 @@ public final class EventResearchProto {
 
     /**
      * <code>optional int32 researchId = 2;</code>
+     *
+     * <pre>
+     *research to start researching
+     * </pre>
      */
     boolean hasResearchId();
     /**
      * <code>optional int32 researchId = 2;</code>
+     *
+     * <pre>
+     *research to start researching
+     * </pre>
      */
     int getResearchId();
 
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     boolean hasUserResearchUuid();
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     java.lang.String getUserResearchUuid();
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     com.google.protobuf.ByteString
         getUserResearchUuidBytes();
@@ -259,12 +279,20 @@ public final class EventResearchProto {
     private int researchId_;
     /**
      * <code>optional int32 researchId = 2;</code>
+     *
+     * <pre>
+     *research to start researching
+     * </pre>
      */
     public boolean hasResearchId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional int32 researchId = 2;</code>
+     *
+     * <pre>
+     *research to start researching
+     * </pre>
      */
     public int getResearchId() {
       return researchId_;
@@ -274,12 +302,20 @@ public final class EventResearchProto {
     private java.lang.Object userResearchUuid_;
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     public boolean hasUserResearchUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     public java.lang.String getUserResearchUuid() {
       java.lang.Object ref = userResearchUuid_;
@@ -297,6 +333,10 @@ public final class EventResearchProto {
     }
     /**
      * <code>optional string userResearchUuid = 3;</code>
+     *
+     * <pre>
+     *set if user upgrading existing research
+     * </pre>
      */
     public com.google.protobuf.ByteString
         getUserResearchUuidBytes() {
@@ -841,18 +881,30 @@ public final class EventResearchProto {
       private int researchId_ ;
       /**
        * <code>optional int32 researchId = 2;</code>
+       *
+       * <pre>
+       *research to start researching
+       * </pre>
        */
       public boolean hasResearchId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional int32 researchId = 2;</code>
+       *
+       * <pre>
+       *research to start researching
+       * </pre>
        */
       public int getResearchId() {
         return researchId_;
       }
       /**
        * <code>optional int32 researchId = 2;</code>
+       *
+       * <pre>
+       *research to start researching
+       * </pre>
        */
       public Builder setResearchId(int value) {
         bitField0_ |= 0x00000002;
@@ -862,6 +914,10 @@ public final class EventResearchProto {
       }
       /**
        * <code>optional int32 researchId = 2;</code>
+       *
+       * <pre>
+       *research to start researching
+       * </pre>
        */
       public Builder clearResearchId() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -873,12 +929,20 @@ public final class EventResearchProto {
       private java.lang.Object userResearchUuid_ = "";
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public boolean hasUserResearchUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public java.lang.String getUserResearchUuid() {
         java.lang.Object ref = userResearchUuid_;
@@ -896,6 +960,10 @@ public final class EventResearchProto {
       }
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public com.google.protobuf.ByteString
           getUserResearchUuidBytes() {
@@ -912,6 +980,10 @@ public final class EventResearchProto {
       }
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public Builder setUserResearchUuid(
           java.lang.String value) {
@@ -925,6 +997,10 @@ public final class EventResearchProto {
       }
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public Builder clearUserResearchUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -934,6 +1010,10 @@ public final class EventResearchProto {
       }
       /**
        * <code>optional string userResearchUuid = 3;</code>
+       *
+       * <pre>
+       *set if user upgrading existing research
+       * </pre>
        */
       public Builder setUserResearchUuidBytes(
           com.google.protobuf.ByteString value) {

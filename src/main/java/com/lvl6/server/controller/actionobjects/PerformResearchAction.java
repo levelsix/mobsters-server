@@ -177,6 +177,8 @@ public class PerformResearchAction
 			int userOil = user.getOil();
 			if(userOil < resourceChange) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_OIL);
+				log.error("user has less oil then amount spent in request, user oil= " + userOil);
+
 				return false;
 			}
 		}
@@ -200,6 +202,7 @@ public class PerformResearchAction
 		}
 		
 		if(!successfulInsertOrUpdate) {
+			log.error("failed to insert or updated user research");
 			return false;
 		}
 		

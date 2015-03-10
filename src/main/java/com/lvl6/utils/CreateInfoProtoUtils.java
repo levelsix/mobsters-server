@@ -3926,11 +3926,11 @@ public class CreateInfoProtoUtils {
 		for (int stageId : stageIds) {
 			
 			Set<Integer> stageMonsterIds = TaskStageMonsterRetrieveUtils.
-				getMonsterIdsForTaskStageId(stageId);
+				getDroppableMonsterIdsForTaskStageId(stageId);
 			monsterIdsForTask.addAll(stageMonsterIds);
 			
 			Set<String> stageQualities = TaskStageMonsterRetrieveUtils.
-				getQualitiesForTaskStageId(stageId);
+				getDroppableQualitiesForTaskStageId(stageId);
 			qualitiesStrForTask.addAll(stageQualities);
 		}
 		

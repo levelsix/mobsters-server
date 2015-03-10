@@ -3161,6 +3161,10 @@ public final class ResearchsProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserResearchProto}
+   *
+   * <pre>
+   *the research that is currently being researched and the research that are completed
+   * </pre>
    */
   public static final class UserResearchProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -3551,6 +3555,10 @@ public final class ResearchsProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.UserResearchProto}
+     *
+     * <pre>
+     *the research that is currently being researched and the research that are completed
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
