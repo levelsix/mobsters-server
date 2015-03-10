@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lvl6.info.AchievementForUser;
-import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
@@ -207,8 +206,5 @@ public interface UpdateUtil {
   public abstract boolean updateUserResearch(String userResearchUuid, int researchId);
   
   public abstract boolean updateUserResearchCompleteStatus(String userResearchUuid);
-  
-  public abstract int updateBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
-
   
 }

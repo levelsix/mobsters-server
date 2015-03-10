@@ -3,6 +3,13 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class BattleItemForUser implements Serializable {
+	
+	private static final long serialVersionUID = -2832799382867678845L;
+	
+	private String id;
+	private String userId;
+	private int battleItemId;
+	private int quantity;
 
 	public BattleItemForUser() {
 		super();
@@ -16,20 +23,7 @@ public class BattleItemForUser implements Serializable {
 		this.battleItemId = battleItemId;
 		this.quantity = quantity;
 	}
-	private static final long serialVersionUID = -1293698119576984508L;
 	
-	private String id;
-	private String userId;
-	private int battleItemId;
-	private int quantity;
-	public String getId() {
-		return id;
-	}
-	
-	
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getUserId() {
 		return userId;
 	}
@@ -48,14 +42,20 @@ public class BattleItemForUser implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "BattleItemForUser [id=" + id + ", userId=" + userId
 				+ ", battleItemId=" + battleItemId + ", quantity=" + quantity
 				+ "]";
 	}
-	
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 }

@@ -255,8 +255,7 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
 	
-	public abstract int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, String userId,
-			Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser);
+	public abstract int insertIntoBattleItemForUser(List<BattleItemForUser> biqfuList);
 	
 	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
 }

@@ -6,12 +6,13 @@ import java.sql.Timestamp;
 public class BattleItemQueueForUser implements Serializable {
 
 	public BattleItemQueueForUser(int priority, String userId, int battleItemId,
-			Timestamp expectedStartTime) {
+			Timestamp expectedStartTime, float elapsedTime) {
 		super();
 		this.priority = priority;
 		this.userId = userId;
 		this.battleItemId = battleItemId;
 		this.expectedStartTime = expectedStartTime;
+		this.elapsedTime = elapsedTime;
 	}
 
 
@@ -21,6 +22,7 @@ public class BattleItemQueueForUser implements Serializable {
 	private String userId;
 	private int battleItemId;
 	private Timestamp expectedStartTime;
+	private float elapsedTime;
 	
 	
 	public BattleItemQueueForUser()
@@ -60,11 +62,20 @@ public class BattleItemQueueForUser implements Serializable {
 		this.expectedStartTime = expectedStartTime;
 	}
 
+	public float getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void setElapsedTime(float elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "BattleItemQueueForUser [priority=" + priority + ", userId="
 				+ userId + ", battleItemId=" + battleItemId
-				+ ", expectedStartTime=" + expectedStartTime + "]";
+				+ ", expectedStartTime=" + expectedStartTime + ", elapsedTime="
+				+ elapsedTime + "]";
 	}
 
 

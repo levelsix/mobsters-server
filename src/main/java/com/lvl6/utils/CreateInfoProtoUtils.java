@@ -1015,6 +1015,7 @@ public class CreateInfoProtoUtils {
 		biqfupb.setBattleItemId(biqfu.getBattleItemId());
 		biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
 		biqfupb.setPriority(biqfu.getPriority());
+		biqfupb.setElapsedTime(biqfu.getElapsedTime());
 		
 		return biqfupb.build();
 	}
@@ -4284,7 +4285,6 @@ public class CreateInfoProtoUtils {
 		ubipb.setUserUuid(bifu.getUserId());
 		ubipb.setBattleItemId(bifu.getBattleItemId());
 		ubipb.setQuantity(bifu.getQuantity());
-		ubipb.setId(bifu.getId());
 		
 		return ubipb.build();
 	}

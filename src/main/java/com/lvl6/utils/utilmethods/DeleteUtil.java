@@ -79,9 +79,9 @@ public interface DeleteUtil {
 
   public abstract int deletePvpBoardObstacleForUser(Collection<Integer> ids, String userId);
   
-  public abstract int deleteFromBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
+  public abstract int deleteFromBattleItemQueueForUser(String userId, List<BattleItemQueueForUser> biqfuList);
   
-  public abstract int deleteUserBattleItems(List<BattleItemForUser> bifuList);
+  public abstract int deleteUserBattleItems(String userId, List<BattleItemForUser> bifuList);
 
   
 }

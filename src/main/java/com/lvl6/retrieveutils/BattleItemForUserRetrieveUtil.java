@@ -90,14 +90,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	}
 
 	////@Cacheable(value="specificUserStruct", key="#userStructId")
-	public BattleItemForUser getSpecificUserBattleItem(String userBattleItemId) {
-		log.debug(String.format(
-				"retrieving user battle item with id %s", userBattleItemId));
+	public BattleItemForUser getSpecificUserBattleItem(String userId, int battleItemId) {
+		log.debug( "retrieving user battle item with userId={}, battleItemId={}",
+				userId, battleItemId );
 
-		Object[] values = { userBattleItemId };
+		Object[] values = { userId, battleItemId };
 		String query = String.format(
-				"select * from %s where %s=?",
-				TABLE_NAME, DBConstants.BATTLE_ITEM_FOR_USER__ID);
+				"select * from %s where %s=? and %s=?",
+				TABLE_NAME, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID,
+				DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID);
 
 		BattleItemForUser userBattleItem = null;
 		try {
@@ -109,8 +110,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			}
 
 		} catch (Exception e) {
-			log.error(String.format(
-					"battle item for user retrieve db error. id=%s", userBattleItemId), e);
+			log.error(
+				String.format(
+					"battle item for user retrieve db error. userId=%s, battleItemId=%s",
+					userId, battleItemId),
+				e);
 		}
 
 		return userBattleItem;
@@ -118,7 +122,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 
 	public List<BattleItemForUser> getSpecificOrAllUserBattleItemsForUser(String userId,
-			List<String> userBattleItemIds) {
+			List<Integer> userBattleItemBattleItemIds) {
 
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
@@ -131,25 +135,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		//if user didn't give any userStructIds then get all the user's structs
 		//else get the specific ids
-		if (userBattleItemIds != null && !userBattleItemIds.isEmpty() ) {
-			log.debug(String.format("retrieving userBattleItems with ids %s", userBattleItemIds));
+		if (userBattleItemBattleItemIds != null && !userBattleItemBattleItemIds.isEmpty() ) {
+			log.debug("retrieving userBattleItems with battleItemIds {}",
+					userBattleItemBattleItemIds);
 			querySb.append(" AND ");
-			querySb.append(DBConstants.BATTLE_ITEM_FOR_USER__ID);
+			querySb.append(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID);
 			querySb.append(" IN (");
 
-			int amount = userBattleItemIds.size();
+			int amount = userBattleItemBattleItemIds.size();
 			List<String> questions = Collections.nCopies(amount, "?");
 			String questionMarkStr = StringUtils.csvList(questions);
 
 			querySb.append(questionMarkStr);
 			querySb.append(");");
-			values.addAll(userBattleItemIds);
+			values.addAll(userBattleItemBattleItemIds);
 		}
 
 		String query = querySb.toString();
-		log.info(String.format(
-				"query=%s, values=%s",
-				query, values));
+		log.info( "query={}, values={}",
+				query, values );
 
 		List<BattleItemForUser> userBattleItems = null;
 		try {
@@ -175,7 +179,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		public BattleItemForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			BattleItemForUser bifu = new BattleItemForUser();
-			bifu.setId(rs.getString(DBConstants.BATTLE_ITEM_FOR_USER__ID));
 			bifu.setUserId(rs.getString(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID));
 			bifu.setBattleItemId(rs.getInt(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID));
 			bifu.setQuantity(rs.getInt(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY));
@@ -186,7 +189,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY);

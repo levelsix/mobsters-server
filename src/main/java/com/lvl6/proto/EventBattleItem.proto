@@ -13,29 +13,24 @@ message CreateBattleItemRequestProto {
 	optional MinimumUserProto sender = 1;
 	
 	//what user deleted from the queue, the ones the server already knows about
-	repeated BattleItemQueueForUserProto umhDelete = 2; 
-	
-	repeated BattleItemQueueForUserProto umhRemoved = 3;
+	repeated BattleItemQueueForUserProto biqfuDelete = 2; 
 	
 	//the ones the server already knows about
 	//only set if the queue time or start time changes
-	repeated BattleItemQueueForUserProto umhUpdate = 4;
+	repeated BattleItemQueueForUserProto biqfuUpdate = 3;
 	
 	//the ones the server doesn't know about
-	repeated BattleItemQueueForUserProto umhNew = 5;
+	repeated BattleItemQueueForUserProto biqfuNew = 4;
 	
 	//take away all cash/silver then take away gems
 	//positive means refund, negative means charge user
 	//Refund in this case: user has two monsters healing but deletes one of them,
 	//The user should get refunded for the monster that was dequeued 
-	optional sint32 cashChange = 6; 
-	optional sint32 oilChange = 7;
+	optional sint32 cashChange = 5; 
+	optional sint32 oilChange = 6;
 	
 	//positive amount if charging user, negative if refunding user
-	optional int32 gemCostForCreating = 8; 
-
-	optional bool isSpeedup = 9;
-	optional int32 gemsForSpeedup = 10; //pos amount if charging user
+	optional int32 gemCostForCreating = 7; 
 	
 }
 
@@ -48,12 +43,36 @@ message CreateBattleItemResponseProto {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 		FAIL_INSUFFICIENT_FUNDS = 3;
-		FAIL_AT_MAX_POWER_LIMIT = 4;
-		FAIL_ALL_MONSTERS_NONEXISTENT = 5;
-		FAIL_CREATING_NOT_COMPLETE = 6;
 	}
 }
 
+//------------------------------------------------------------------------------------------
+
+message CompleteBattleItemRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional bool isSpeedup = 2;
+	optional int32 gemsForSpeedup = 3; //pos amount if charging user
+	
+	//the battle items that are completed
+	repeated BattleItemQueueForUserProto biqfuCompleted = 4;
+}
+
+message CompleteBattleItemResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional CompleteBattleItemStatus status = 2;
+	
+	//total battle items: total amount for the ones that finished
+	repeated UserBattleItemProto ubiUpdated = 3;
+	
+	enum CompleteBattleItemStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_INVALID_BATTLE_ITEMS = 3;
+		FAIL_INSUFFICIENT_FUNDS = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------
 
 message DiscardBattleItemRequestProto {
 	optional MinimumUserProto sender = 1;

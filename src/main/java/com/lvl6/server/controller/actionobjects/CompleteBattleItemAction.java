@@ -12,40 +12,32 @@ import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.Builder;
-import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
+import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.Builder;
+import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class CreateBattleItemAction
+public class CompleteBattleItemAction
 { 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	private String userId;
-	private List<BattleItemQueueForUser> deletedList; //completed queue items
-	private List<BattleItemQueueForUser> updatedList; //only updates timestamp
-	private List<BattleItemQueueForUser> newList;
-	private int cashChange;
-	private int oilChange;
-	private int gemCostForCreating;
+	private List<BattleItemQueueForUser> completedList; //completed queue items
+	private int gemsForSpeedUp;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	protected DeleteUtil deleteUtil;
 	
-	public CreateBattleItemAction( 
+	public CompleteBattleItemAction( 
 		String userId,
-		List<BattleItemQueueForUser> deletedList,//completed queue items
-		List<BattleItemQueueForUser> updatedList, //only updates timestamp
-		List<BattleItemQueueForUser> newList,
-		int cashChange,
-		int oilChange,
-		int gemCostForCreating,
+		List<BattleItemQueueForUser> completedList,//completed queue items
+		int gemsForSpeedUp,
 		UserRetrieveUtils2 userRetrieveUtil,
 		BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
 		InsertUtil insertUtil,
@@ -54,12 +46,8 @@ public class CreateBattleItemAction
 	{
 		super();
 		this.userId = userId;
-		this.deletedList = deletedList;
-		this.updatedList = updatedList;
-		this.newList = newList;
-		this.cashChange = cashChange;
-		this.oilChange = oilChange;
-		this.gemCostForCreating = gemCostForCreating;
+		this.completedList = completedList;
+		this.gemsForSpeedUp = gemsForSpeedUp;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
@@ -67,9 +55,6 @@ public class CreateBattleItemAction
 		this.deleteUtil = deleteUtil;
 	}
 
-	private boolean emptyDeletedList;
-	private boolean emptyUpdatedList;
-	private boolean emptyNewList;
 	private User user;
 	private int gemsChange;
 	private Map<String, Integer> currencyDeltas;
@@ -79,7 +64,7 @@ public class CreateBattleItemAction
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
 		
 		boolean valid = verifySyntax(resBuilder);
 		
@@ -98,19 +83,15 @@ public class CreateBattleItemAction
 			return;
 		}
 
-		resBuilder.setStatus(CreateBattleItemStatus.SUCCESS);
+		resBuilder.setStatus(CompleteBattleItemStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
 		
-		emptyDeletedList = (null == deletedList || deletedList.isEmpty());
-		emptyUpdatedList = (null == updatedList || updatedList.isEmpty());
-		emptyNewList = (null == newList || newList.isEmpty());
-		if ( emptyDeletedList && emptyUpdatedList && emptyNewList ) {
-			log.error("no BattleItems sent");
+		if(null == completedList || completedList.isEmpty()){
+			log.error("no BattleItems sent as completed");
 			return false;
 		}
-		
 		return true;
 	}
 	
@@ -119,121 +100,59 @@ public class CreateBattleItemAction
 		user = userRetrieveUtil.getUserById(userId);
 		
 		if (null == user) {
-			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
 			log.error( "no user with id={}", userId );
 			return false;
 		}
 		
-//		boolean legitMaps = verifyNewUpdatedRemovedDeletedMaps(resBuilder);
-//		if (!legitMaps) {
-//			return false;
-//		}
-		
 		if( !hasEnoughGems(resBuilder) ) {
 			log.error("insufficient gems: {}, user={}",
-					gemCostForCreating, user);
+					gemsForSpeedUp, user);
 			return false;
 		}
 		
-		if ( !hasEnoughCash(resBuilder) ) {
-			log.error("insufficient cash: {}, user={}",
-					cashChange, user);
-			return false;
-		}
-		if( !hasEnoughOil(resBuilder) ) {
-			log.error("insufficient oil: {}, user={}",
-					oilChange, user);
-			return false;
-		}
-		
-		else return false;
+		return true;
 	}
 
 	private boolean hasEnoughGems(Builder resBuilder) {
-		if ( gemCostForCreating > 0 ) {
+		if ( gemsForSpeedUp > 0 ) {
 			int userGems = user.getGems();
 			//check if user can afford to buy however many more user wants to buy
-			if (userGems < gemCostForCreating) {
-				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+			if (userGems < gemsForSpeedUp) {
+				resBuilder.setStatus(CompleteBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false; 
 			}
 		}
 		
 		return true;
 	}
-
-	private boolean hasEnoughCash(Builder resBuilder) {
-		if ( cashChange > 0 ) {
-			int userCash = user.getCash();
-			if(userCash < cashChange) {
-				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
-				return false;
-			}
-		}
-		
-		return true;
-	}
 	
-	private boolean hasEnoughOil(Builder resBuilder) {
-		if (oilChange > 0) {
-			int userOil = user.getOil();
-			if(userOil < oilChange) {
-				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 		
 		//update currency
-		if(gemCostForCreating > 0) {
+		if(gemsForSpeedUp > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
-			gemsChange = -1*(gemCostForCreating);
-		}
-		if (cashChange != 0) {
-			prevCurrencies.put(MiscMethods.cash, user.getCash());
-		}
-		if(oilChange != 0) {
-			prevCurrencies.put(MiscMethods.oil, user.getOil());
+			gemsChange = -1*(gemsForSpeedUp);
 		}
 		
 		updateUserCurrency();
 
 		
 		//update items in db
-		if(!emptyDeletedList) {
-			log.info("new list not empty");
-			//remove the elements from queue
-			int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(userId, deletedList);
-			if(numDeleted != deletedList.size()) {
-				log.error("did not delete all the battle items in queue");
-				return false;
-			}
-			log.info("finished deleting");
+		int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(userId, completedList);
+		if(numDeleted != completedList.size()) {
+			log.error("did not delete all the battle items in queue");
+			return false;
 		}
-		
-		List<BattleItemQueueForUser> nuOrUpdatedList =
-				new ArrayList<BattleItemQueueForUser>();
-		if(!emptyUpdatedList) {
-			log.info("updated list not null");
-			nuOrUpdatedList.addAll(updatedList);
-		}
-		if(!emptyNewList) {
-			log.info("new list not empty");
-			nuOrUpdatedList.addAll(newList);
-		}
+		log.info("finished deleting completed items from queue");
 
 		int numUpdated = insertUtil.insertIntoBattleItemQueueForUser(nuOrUpdatedList);
 		if(numUpdated != updatedList.size() + newList.size()) {
 			log.error("did not update all the battle items in queue");
 			return false;
 		}
-		
+
 		prepCurrencyHistory();
 
 		return true;
