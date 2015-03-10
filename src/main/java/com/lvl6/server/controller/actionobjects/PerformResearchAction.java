@@ -182,13 +182,12 @@ public class PerformResearchAction
 		prevCurrencies = new HashMap<String, Integer>();
 		boolean successfulInsertOrUpdate = false;
 		String userResearchId = "";
-
+		Timestamp timeOfPurchase = new Timestamp(now.getTime());
 		
 		if(userResearchUuid != null) {
-			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId());
+			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId(), timeOfPurchase);
 		}
 		else {
-			Timestamp timeOfPurchase = new Timestamp(now.getTime());
 			boolean isComplete = false;
 			userResearchId = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
 			if(!userResearchId.equals("")) {

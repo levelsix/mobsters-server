@@ -1669,13 +1669,14 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		@Override
-		public boolean updateUserResearch(String userResearchUuid, int researchId) {
+		public boolean updateUserResearch(String userResearchUuid, int researchId, Timestamp timeOfPurchase) {
 			Map <String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.RESEARCH_FOR_USER__ID, userResearchUuid);
 
 			Map <String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__RESEARCH_ID, researchId);
 			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, false);
+			absoluteParams.put(DBConstants.RESEARCH_FOR_USER__TIME_PURCHASED, timeOfPurchase);
 
 			int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_RESEARCH_FOR_USER, null, absoluteParams, 
 					conditionParams, "and");

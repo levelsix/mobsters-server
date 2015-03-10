@@ -1148,7 +1148,7 @@ public class ControllerTest extends TestCase {
 	
 	@Test
 	public void testBattleItems() {
-		User user1 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		User user1 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
 		int userCash1 = user1.getCash();
 		int userOil1 = user1.getOil();
 		int userGems1 = user1.getGems();
@@ -1166,11 +1166,10 @@ public class ControllerTest extends TestCase {
 		BattleItemQueueForUserProto biqfup = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu);
 		newList.add(biqfup);
 
-		cbirpb.addAllUmhNew(newList);
+		cbirpb.addAllBiqfuNew(newList);
 		cbirpb.setCashChange(50);
 		cbirpb.setOilChange(0);
 		cbirpb.setGemCostForCreating(0);
-		cbirpb.setIsSpeedup(false);
 		
 		CreateBattleItemRequestEvent cbire = new CreateBattleItemRequestEvent();
 		cbire.setTag(1);
@@ -1231,12 +1230,11 @@ public class ControllerTest extends TestCase {
 		newList2.add(biqfup4);
 		newList2.add(biqfup5);
 
-		cbirpb2.addAllUmhNew(newList2);
-		cbirpb2.addAllUmhDelete(deletedList2);
+		cbirpb2.addAllBiqfuNew(newList2);
+		cbirpb2.addAllBiqfuDelete(deletedList2);
 		cbirpb2.setCashChange(75);
 		cbirpb2.setOilChange(100);
 		cbirpb2.setGemCostForCreating(100);
-		cbirpb2.setIsSpeedup(false);
 		
 		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
 		cbire2.setTag(1);
@@ -1290,12 +1288,11 @@ public class ControllerTest extends TestCase {
 		updatedList3.add(biqfup7);
 		updatedList3.add(biqfup8);
 
-		cbirpb3.addAllUmhRemoved(removedList3);
-		cbirpb3.addAllUmhUpdate(updatedList3);
+		cbirpb3.addAllBiqfuDelete(removedList3);
+		cbirpb3.addAllBiqfuUpdate(updatedList3);
 		cbirpb3.setCashChange(-50);
 		cbirpb3.setOilChange(0);
 		cbirpb3.setGemCostForCreating(0);
-		cbirpb3.setIsSpeedup(false);
 		
 		CreateBattleItemRequestEvent cbire3 = new CreateBattleItemRequestEvent();
 		cbire3.setTag(1);
@@ -1311,6 +1308,8 @@ public class ControllerTest extends TestCase {
 		assertEquals(user4.getGems(), userGems3);
 
 	}
+	
+
 
 
 	private String randomUUID() {
@@ -1318,32 +1317,32 @@ public class ControllerTest extends TestCase {
 	}
 
 
-	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
-			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
-			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
-		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-		String id = randomUUID();
-
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
-
-
-		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-		
-		return id;
-	}
+//	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
+//			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
+//			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
+//		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+//		String id = randomUUID();
+//
+//		Map<String, Object> insertParams = new HashMap<String, Object>();
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
+//
+//
+//		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+//		
+//		return id;
+//	}
 	
 //	private int numberOfUserRowsInHistoryTable(String userId, String tableName) {
 //		Object[] values = { userId };
