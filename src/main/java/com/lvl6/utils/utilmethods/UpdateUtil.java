@@ -204,7 +204,7 @@ public interface UpdateUtil {
 
   public abstract int updateClanMemberTeamDonation( ClanMemberTeamDonation cmtd );
 
-  public abstract boolean updateUserResearch(String userResearchUuid, int researchId);
+  public abstract boolean updateUserResearch(String userResearchUuid, int researchId, Timestamp timeOfPurchase);
   
   public abstract boolean updateUserResearchCompleteStatus(String userResearchUuid);
   

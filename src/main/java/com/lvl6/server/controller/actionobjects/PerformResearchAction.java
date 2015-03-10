@@ -188,12 +188,13 @@ public class PerformResearchAction
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 		boolean successfulInsertOrUpdate = false;
+		Timestamp timeOfPurchase = new Timestamp(now.getTime());
+
 		
 		if(userResearchUuid != null && !userResearchUuid.equals("")) {
-			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId());
+			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId(), timeOfPurchase);
 		}
 		else {
-			Timestamp timeOfPurchase = new Timestamp(now.getTime());
 			boolean isComplete = false;
 			userResearchUuid = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
 			if(userResearchUuid != null) {
