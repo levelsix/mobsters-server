@@ -125,24 +125,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 			return;
 		}
 
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = userRetrieveUtils.getUserById(userId);
-			Research research = ResearchRetrieveUtils.getResearchForId(researchId);
-			PerformResearchAction pra = new PerformResearchAction(userId, user, research, userResearchUuid, 
+
+			PerformResearchAction pra = new PerformResearchAction(userId, userRetrieveUtils, researchId, userResearchUuid, 
 					gemsSpent, resourceChange, resourceType, nowTimestamp, insertUtil, updateUtil, 
 					researchForUserRetrieveUtils);
 
 			pra.execute(resBuilder);
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
-
 				userResearchUuid = pra.getUserResearchUuid();
-				if (!(userResearchUuid.equals("")) || null != userResearchUuid) {
+				if (null != userResearchUuid) {
 					resBuilder.setUserResearchUuid(userResearchUuid);
 				}
 			}
@@ -150,7 +148,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resProto);
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			writeToUserCurrencyHistory(userId, nowTimestamp, pra);
 
@@ -162,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setPerformResearchResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}

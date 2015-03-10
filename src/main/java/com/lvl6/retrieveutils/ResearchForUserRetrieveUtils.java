@@ -61,6 +61,27 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
 		return userResearch;
 	}
+	
+	public ResearchForUser getResearchForUser(String userResearchUuid) {
+		log.debug("retrieving researchForUser for userResearchUuid {}", userResearchUuid);
+		
+		Object[] values = { userResearchUuid };
+		String query = String.format(
+			"select * from %s where %s=?",
+			TABLE_NAME, DBConstants.RESEARCH_FOR_USER__ID);
+		
+		List<ResearchForUser> userResearch = null;
+		try {
+			userResearch = this.jdbcTemplate
+				.query(query, values, rowMapper);
+		} catch (Exception e) {
+			log.error("ResearchForUser retrieve db error.", e);
+			userResearch = new ArrayList<ResearchForUser>();
+//		} finally {
+//			DBConnection.get().close(rs, null, conn);
+		}
+		return userResearch.get(0);
+	}
 
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data

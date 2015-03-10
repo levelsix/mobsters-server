@@ -826,17 +826,8 @@ public class ControllerTest extends TestCase {
 //		
 //		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_USER, userInsertParams);
 		
-		//create test spell
-		Map<String, Object> researchInsertParams = new HashMap<String, Object>();
-		researchInsertParams.put("id", 10002);
-		researchInsertParams.put("name", "spell3");
-		researchInsertParams.put("cost_amt", 100);
-		researchInsertParams.put("cost_type", "OIL");
 		
-		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
-		
-		
-		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
+		User user = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
 		int userGems = user.getGems();
 		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
 		
@@ -848,7 +839,7 @@ public class ControllerTest extends TestCase {
 		prrpb.setResourceChange(100);
 		ResourceType rt = ResourceType.OIL;
 		prrpb.setResourceType(rt);
-		
+		prrpb.setUserResearchUuid("");
 		
 		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
 		prre.setTag(1);

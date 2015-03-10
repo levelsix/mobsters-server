@@ -18,6 +18,7 @@ import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.Builder;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -28,8 +29,8 @@ public class PerformResearchAction
 	}.getClass().getEnclosingClass());
 
 	private String userId;
-	private User user;
-	private Research research;
+	private UserRetrieveUtils2 userRetrieveUtils;
+	private int researchId;
 	private String userResearchUuid; //update the row when researchs are upgraded
 	private int gemsSpent;
 	private int resourceChange;
@@ -41,8 +42,8 @@ public class PerformResearchAction
 
 	public PerformResearchAction( 
 		String userId,
-		User user,
-		Research research,
+		UserRetrieveUtils2 userRetrieveUtils,
+		int researchId,
 		String userResearchUuid,
 		int gemsSpent,
 		int resourceChange,
@@ -55,8 +56,8 @@ public class PerformResearchAction
 	{
 		super();
 		this.userId = userId;
-		this.user = user;
-		this.research = research;
+		this.userRetrieveUtils = userRetrieveUtils;
+		this.researchId = researchId;
 		this.userResearchUuid = userResearchUuid;
 		this.gemsSpent = gemsSpent;
 		this.resourceChange = resourceChange;
@@ -67,7 +68,8 @@ public class PerformResearchAction
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 	}
 
-
+	private User user;
+	private Research research;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -93,6 +95,7 @@ public class PerformResearchAction
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
+		user = userRetrieveUtils.getUserById(userId);
 		if (null == user) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error( "no user with id={}", userId );
@@ -105,12 +108,12 @@ public class PerformResearchAction
 		}
 		
 		boolean userHasUserResearch = false;
-		if(userResearchUuid != null) {
-			userHasUserResearch = verifyUserResearch(resBuilder);
-			if(!userHasUserResearch) {
-				return false;
-			}
-		}
+//		if(userResearchUuid != null) {
+//			userHasUserResearch = verifyUserResearch(resBuilder);
+//			if(!userHasUserResearch) {
+//				return false;
+//			}
+//		}
 		
 		boolean hasEnoughGems = true;
 		boolean hasEnoughResource = true;
@@ -130,24 +133,23 @@ public class PerformResearchAction
 	
 	private boolean verifyResearch(Builder resBuilder)
 	{
+		research = ResearchRetrieveUtils.getResearchForId(researchId);
 		if (null == research) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
-			log.error("no research for id");
+			log.error("no research for id: " + researchId);
 			return false;
 		}
 		return true;
 	}
 	
-	private boolean verifyUserResearch(Builder resBuilder) {
-		List<ResearchForUser> userResearchList = researchForUserRetrieveUtil.getAllResearchForUser(userId);
-		boolean containsUserResearch = false;
-		for(ResearchForUser rfu : userResearchList) {
-			if(rfu.getId().equals(userResearchUuid)) {
-				containsUserResearch = true;
-			}
-		}
-		return containsUserResearch;
-	}
+//	private boolean verifyUserResearch(Builder resBuilder) {
+//		ResearchForUser userResearch = researchForUserRetrieveUtil.getResearchForUser(userResearchUuid);
+//		if(userResearch == null) {
+//			log.error("user research is null for userresearchid: " + userResearchUuid);
+//			return false;
+//		}
+//		else return true;
+//	}
 	
 	private boolean verifyEnoughGems(Builder resBuilder) {
 		int userGems = user.getGems();
@@ -155,6 +157,7 @@ public class PerformResearchAction
 		//check if user can afford to buy however many more user wants to buy
 		if (userGems < gemsSpent) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_GEMS);
+			log.error("user has less gems then amount spent in request, user gems= " + userGems);
 			return false; 
 		}
 		else return true;
@@ -165,6 +168,8 @@ public class PerformResearchAction
 			int userCash = user.getCash();
 			if(userCash < resourceChange) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_CASH);
+				log.error("user has less cash then amount spent in request, user gems= " + userCash);
+
 				return false;
 			}
 		}
@@ -181,19 +186,16 @@ public class PerformResearchAction
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 		boolean successfulInsertOrUpdate = false;
-		String userResearchId = "";
-
 		
-		if(userResearchUuid != null) {
+		if(userResearchUuid != null && !userResearchUuid.equals("")) {
 			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId());
 		}
 		else {
 			Timestamp timeOfPurchase = new Timestamp(now.getTime());
 			boolean isComplete = false;
-			userResearchId = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
-			if(!userResearchId.equals("")) {
+			userResearchUuid = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
+			if(userResearchUuid != null) {
 				successfulInsertOrUpdate = true;
-				userResearchUuid = userResearchId;
 			}
 		}
 		
@@ -290,10 +292,6 @@ public class PerformResearchAction
 
 	public User getUser() {
 		return user;
-	}
-	
-	public Research getResearch() {
-		return research;
 	}
 	
 	public String getUserResearchUuid() {
