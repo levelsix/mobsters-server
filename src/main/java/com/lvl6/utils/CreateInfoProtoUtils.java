@@ -4284,6 +4284,7 @@ public class CreateInfoProtoUtils {
 	
 	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(BattleItemForUser bifu) {
 		UserBattleItemProto.Builder ubipb = UserBattleItemProto.newBuilder();
+		ubipb.setUserBattleItemId(bifu.getId());
 		ubipb.setUserUuid(bifu.getUserId());
 		ubipb.setBattleItemId(bifu.getBattleItemId());
 		ubipb.setQuantity(bifu.getQuantity());

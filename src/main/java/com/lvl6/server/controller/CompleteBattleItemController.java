@@ -16,10 +16,12 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CompleteBattleItemRequestEvent;
 import com.lvl6.events.response.CompleteBattleItemResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus;
@@ -29,6 +31,7 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CompleteBattleItemAction;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -121,10 +124,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
-					userId, deletedList, updatedList,
-					newList, cashChange, oilChange, gemCostForCreating,
+					userId, completedList, gemsForSpeedUp,
 					userRetrieveUtil, battleItemForUserRetrieveUtil, insertUtil, 
-					updateUtil, deleteUtil);
+					deleteUtil);
 			
 			cbia.execute(resBuilder);
 
@@ -136,6 +138,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
+				List<BattleItemForUser> bifuCompletedList = cbia.getBifuCompletedList();
+				List<UserBattleItemProto> ubipCompletedList = 
+						convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
+				resBuilder.addAllUbiUpdated(ubipCompletedList);
+				
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
@@ -161,6 +168,19 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		} finally {
 			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
+	}
+	
+	private List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList
+		(List<BattleItemForUser> bifuCompletedList) {
+		
+		List<UserBattleItemProto> bifupCompletedList = new ArrayList<UserBattleItemProto>();
+
+		for(BattleItemForUser bifu : bifuCompletedList) {
+			UserBattleItemProto ubip = CreateInfoProtoUtils.createUserBattleItemProtoFromBattleItemForUser(bifu);
+			bifupCompletedList.add(ubip);
+		}
+		return bifupCompletedList;
+			
 	}
 
 	private List<BattleItemQueueForUser> getIdsToBattleItemQueueForUserFromProto(

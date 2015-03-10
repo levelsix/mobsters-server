@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -19,7 +20,6 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class CompleteBattleItemAction
 { 
@@ -32,7 +32,6 @@ public class CompleteBattleItemAction
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
 	protected DeleteUtil deleteUtil;
 	
 	public CompleteBattleItemAction( 
@@ -42,7 +41,6 @@ public class CompleteBattleItemAction
 		UserRetrieveUtils2 userRetrieveUtil,
 		BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
 		InsertUtil insertUtil,
-		UpdateUtil updateUtil,
 		DeleteUtil deleteUtil )
 	{
 		super();
@@ -52,12 +50,12 @@ public class CompleteBattleItemAction
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
-		this.updateUtil = updateUtil;
 		this.deleteUtil = deleteUtil;
 	}
 
 	private User user;
 	private int gemsChange;
+	private List<BattleItemForUser> bifuCompletedList;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -90,6 +88,7 @@ public class CompleteBattleItemAction
 	private boolean verifySyntax(Builder resBuilder) {
 		
 		if(null == completedList || completedList.isEmpty()){
+			resBuilder.setStatus(CompleteBattleItemStatus.FAIL_INVALID_BATTLE_ITEMS);
 			log.error("no BattleItems sent as completed");
 			return false;
 		}
@@ -147,16 +146,19 @@ public class CompleteBattleItemAction
 		}
 		log.info("finished deleting completed items from queue");
 
+		bifuCompletedList = new ArrayList<BattleItemForUser>();
 		Map<Integer, BattleItemForUser> userBattleItemIdsToBattleItemsForUser = battleItemForUserRetrieveUtil.getBattleItemIdsToUserBattleItemForUser(userId);
 		for(BattleItemQueueForUser biqfu : completedList) {
 			int battleItemId = biqfu.getBattleItemId();
 			if(userBattleItemIdsToBattleItemsForUser.containsKey(battleItemId)) {
 				BattleItemForUser bifu = userBattleItemIdsToBattleItemsForUser.get(battleItemId);
 				bifu.setQuantity(bifu.getQuantity()+1);
+				bifuCompletedList.add(bifu);
 			}
 			else {
 				BattleItemForUser bifu = new BattleItemForUser(randomUUID(), userId, battleItemId, 1);
 				userBattleItemIdsToBattleItemsForUser.put(battleItemId, bifu);
+				bifuCompletedList.add(bifu);
 			}
 		}
 		
@@ -182,45 +184,21 @@ public class CompleteBattleItemAction
 	private void prepCurrencyHistory()
 	{
 		String gems = MiscMethods.gems;
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
 		
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
 		StringBuilder detailSb1 = new StringBuilder();
-		StringBuilder detailSb2 = new StringBuilder();
-		StringBuilder detailSb3 = new StringBuilder();
 		details = new HashMap<String, String>();
 
 		if (0 != gemsChange) {
 			currencyDeltas.put(gems, gemsChange);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
-				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
-			detailSb1.append(" gems spent buying=");
-			detailSb1.append(gemCostForCreating);
+				ControllerConstants.UCHRFC__SPED_UP_COMPLETE_BATTLE_ITEMS);
+			detailSb1.append(" gems spent speedingup=");
+			detailSb1.append(gemsForSpeedUp);
 			details.put(gems, detailSb1.toString());
-		}
-		
-		if (0 != cashChange) {
-			currencyDeltas.put(cash, cashChange);
-			curCurrencies.put(cash, user.getCash());
-			reasonsForChanges.put(cash,
-				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
-			detailSb2.append(" cash spent or refunded=");
-			detailSb2.append(cashChange);
-			details.put(cash, detailSb2.toString());
-		}
-		
-		if (0 != oilChange) {
-			currencyDeltas.put(oil, oilChange);
-			curCurrencies.put(oil, user.getOil());
-			reasonsForChanges.put(oil,
-				ControllerConstants.UCHRFC__CREATING_BATTLE_ITEMS);
-			detailSb3.append(" oil spent or refunded=");
-			detailSb3.append(oilChange);
-			details.put(oil, detailSb3.toString());
 		}
 
 	}
@@ -233,6 +211,10 @@ public class CompleteBattleItemAction
 		return user;
 	}
 
+	public List<BattleItemForUser> getBifuCompletedList() {
+		return bifuCompletedList;
+	}
+	
 	public Map<String, Integer> getCurrencyDeltas() {
 		return currencyDeltas;
 	}

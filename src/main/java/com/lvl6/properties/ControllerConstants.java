@@ -272,6 +272,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SOLICIT_CLAN_MEMBER_TEAM_DONATION = "solicit clan member team donation";
 	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
+	public static final String UCHRFC__SPED_UP_COMPLETE_BATTLE_ITEMS = "sped up complete battle items";
 	public static final String UCHRFC__SPED_UP_COMPLETE_MINI_JOB = "sped up complete mini job";
 	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";

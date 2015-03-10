@@ -12,9 +12,10 @@ option java_outer_classname = "BattleItemsProto";
 //------------------------------------------------------------------------------------------
 
 message UserBattleItemProto {
-	optional string userUuid = 1;
-	optional int32 battleItemId = 2;
-	optional int32 quantity = 3;
+	optional string userBattleItemId = 1;
+	optional string userUuid = 2;
+	optional int32 battleItemId = 3;
+	optional int32 quantity = 4;
 }
 
 
@@ -45,8 +46,8 @@ enum BattleItemType {
 }
 
 enum BattleItemCategory {
-	BATTLE_ITEM_CATEGORY1 = 1;
-	BATTLE_ITEM_CATEGORY2 = 2;
+	POTION = 1;
+	PUZZLE = 2;
 
 
 
