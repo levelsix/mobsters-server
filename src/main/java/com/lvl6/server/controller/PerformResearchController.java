@@ -74,15 +74,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		PerformResearchRequestProto reqProto = ((PerformResearchRequestEvent)event).getPerformResearchRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		int researchId = reqProto.getResearchId();
 		
-		String userResearchUuid = null;
-		if(reqProto.hasUserResearchUuid()) {
-			 userResearchUuid= reqProto.getUserResearchUuid();
-		}
+		String userResearchUuid = reqProto.getUserResearchUuid();
 		
 		int gemsSpent = 0;
 		if(reqProto.hasGemsSpent()) {
@@ -110,6 +108,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
+			UUID.fromString(userResearchUuid);
 
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -152,7 +151,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			resEvent.setPerformResearchResponseProto(resProto);
 			server.writeEvent(resEvent);
 
-			writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			}
 
 		} catch (Exception e) {
 			log.error("exception in PerformResearchController processEvent", e);
