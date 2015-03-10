@@ -1075,6 +1075,15 @@ public final class BattleItemsProto {
      * <code>optional int32 powerAmount = 9;</code>
      */
     int getPowerAmount();
+
+    /**
+     * <code>optional int32 priority = 10;</code>
+     */
+    boolean hasPriority();
+    /**
+     * <code>optional int32 priority = 10;</code>
+     */
+    int getPriority();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BattleItemProto}
@@ -1177,6 +1186,11 @@ public final class BattleItemsProto {
             case 72: {
               bitField0_ |= 0x00000100;
               powerAmount_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              priority_ = input.readInt32();
               break;
             }
           }
@@ -1516,6 +1530,21 @@ public final class BattleItemsProto {
       return powerAmount_;
     }
 
+    public static final int PRIORITY_FIELD_NUMBER = 10;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 10;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 priority = 10;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
     private void initFields() {
       battleItemId_ = 0;
       name_ = "";
@@ -1526,6 +1555,7 @@ public final class BattleItemsProto {
       createCost_ = 0;
       description_ = "";
       powerAmount_ = 0;
+      priority_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1566,6 +1596,9 @@ public final class BattleItemsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(9, powerAmount_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, priority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1611,6 +1644,10 @@ public final class BattleItemsProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, powerAmount_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, priority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1747,6 +1784,8 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         powerAmount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        priority_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -1811,6 +1850,10 @@ public final class BattleItemsProto {
           to_bitField0_ |= 0x00000100;
         }
         result.powerAmount_ = powerAmount_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.priority_ = priority_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1865,6 +1908,9 @@ public final class BattleItemsProto {
         }
         if (other.hasPowerAmount()) {
           setPowerAmount(other.getPowerAmount());
+        }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2441,6 +2487,38 @@ public final class BattleItemsProto {
       public Builder clearPowerAmount() {
         bitField0_ = (bitField0_ & ~0x00000100);
         powerAmount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 10;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 priority = 10;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 10;</code>
+       */
+      public Builder setPriority(int value) {
+        bitField0_ |= 0x00000200;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 10;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        priority_ = 0;
         onChanged();
         return this;
       }
@@ -3194,18 +3272,19 @@ public final class BattleItemsProto {
       "edEnumConfig.proto\032\017Structure.proto\"[\n\023U" +
       "serBattleItemProto\022\n\n\002id\030\001 \001(\t\022\020\n\010userUu" +
       "id\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\020\n\010quanti" +
-      "ty\030\004 \001(\005\"\324\001\n\017BattleItemProto\022\024\n\014battleIt" +
+      "ty\030\004 \001(\005\"\346\001\n\017BattleItemProto\022\024\n\014battleIt" +
       "emId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(" +
       "\t\022\026\n\016battleItemType\030\004 \001(\t\022\032\n\022battleItemC" +
       "ategory\030\005 \001(\t\022\032\n\022createResourceType\030\006 \001(" +
       "\t\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013description\030\010 \001" +
-      "(\t\022\023\n\013powerAmount\030\t \001(\005\"r\n\033BattleItemQue",
-      "ueForUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010user" +
-      "Uuid\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expe" +
-      "ctedStartTime\030\004 \001(\003**\n\016BattleItemType\022\014\n" +
-      "\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*J\n\022BattleItemCat" +
-      "egory\022\031\n\025BATTLE_ITEM_CATEGORY1\020\001\022\031\n\025BATT" +
-      "LE_ITEM_CATEGORY2\020\002B\022B\020BattleItemsProto"
+      "(\t\022\023\n\013powerAmount\030\t \001(\005\022\020\n\010priority\030\n \001(",
+      "\005\"r\n\033BattleItemQueueForUserProto\022\020\n\010prio" +
+      "rity\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleIt" +
+      "emId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003**\n" +
+      "\016BattleItemType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020" +
+      "\002*J\n\022BattleItemCategory\022\031\n\025BATTLE_ITEM_C" +
+      "ATEGORY1\020\001\022\031\n\025BATTLE_ITEM_CATEGORY2\020\002B\022B" +
+      "\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3232,7 +3311,7 @@ public final class BattleItemsProto {
     internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemProto_descriptor,
-        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", });
+        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "Priority", });
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new

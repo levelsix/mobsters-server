@@ -106,9 +106,10 @@ import com.lvl6.utils.DBConnection;
     String description = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
     int powerAmount = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
     String imageName = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
+    int priority = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__PRIORITY);
     
     BattleItem bi = new BattleItem(id, type, category, createResourceType, 
-    		createCost, name, description, powerAmount, imageName);
+    		createCost, name, description, powerAmount, imageName, priority);
    
     return bi;
   }

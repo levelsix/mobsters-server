@@ -850,6 +850,7 @@ public class DBConstants {
 	public static final String BATTLE_ITEM_CONFIG__DESCRIPTION = "description";
 	public static final String BATTLE_ITEM_CONFIG__POWER_AMOUNT = "power_amount";
 	public static final String BATTLE_ITEM_CONFIG__IMAGE_NAME = "image_name";
+	public static final String BATTLE_ITEM_CONFIG__PRIORITY = "priority";
 
 	/*BOARD*/
 	public static final String BOARD__ID = GENERIC__ID;

@@ -6,7 +6,7 @@ public class BattleItem implements Serializable {
 
 	public BattleItem(int id, String type, String battleItemCategory,
 			String createResourceType, int createCost, String name,
-			String description, int powerAmount, String imageName) {
+			String description, int powerAmount, String imageName, int priority) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -17,6 +17,7 @@ public class BattleItem implements Serializable {
 		this.description = description;
 		this.powerAmount = powerAmount;
 		this.imageName = imageName;
+		this.priority = priority;
 	}
 
 
@@ -32,6 +33,7 @@ public class BattleItem implements Serializable {
 	private String description;
 	private int powerAmount;
 	private String imageName;
+	private int priority;
 	
 	public BattleItem()
 	{
@@ -110,6 +112,18 @@ public class BattleItem implements Serializable {
 		this.imageName = imageName;
 	}
 
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public void setBattleItemCategory(String battleItemCategory) {
+		this.battleItemCategory = battleItemCategory;
+	}
+
 	@Override
 	public String toString() {
 		return "BattleItem [id=" + id + ", type=" + type
@@ -117,7 +131,8 @@ public class BattleItem implements Serializable {
 				+ ", createResourceType=" + createResourceType
 				+ ", createCost=" + createCost + ", name=" + name
 				+ ", description=" + description + ", powerAmount="
-				+ powerAmount + ", imageName=" + imageName + "]";
+				+ powerAmount + ", imageName=" + imageName + ", priority="
+				+ priority + "]";
 	}
 
 	

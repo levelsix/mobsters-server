@@ -30,7 +30,8 @@ message BattleItemProto {
 	optional string createResourceType = 6;
 	optional int32 createCost = 7;
 	optional string description = 8;
-	optional int32 powerAmount = 9;	
+	optional int32 powerAmount = 9;
+	optional int32 priority = 10;	
 }
 
 
