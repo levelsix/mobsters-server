@@ -4299,7 +4299,16 @@ public class CreateInfoProtoUtils {
 					e);
 			}
 		}
-		bipb.setCreateResourceType(bi.getCreateResourceType());
+		String resourceType = bi.getCreateResourceType();
+		if (null != resourceType) {
+			try {
+				ResourceType rt = ResourceType.valueOf(resourceType);
+				bipb.setCreateResourceType(rt);
+			} catch(Exception e) {
+				log.error(String.format(
+					"invalid ResourceType. achievement=%s", resourceType), e);
+			}
+		}
 		bipb.setCreateCost(bi.getCreateCost());
 		if(bi.getDescription() != null) {
 			bipb.setDescription(bi.getDescription());

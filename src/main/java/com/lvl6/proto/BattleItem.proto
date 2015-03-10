@@ -27,7 +27,7 @@ message BattleItemProto {
 	optional string imgName = 3;
 	optional BattleItemType battleItemType = 4;
 	optional BattleItemCategory battleItemCategory = 5;
-	optional string createResourceType = 6;
+	optional ResourceType createResourceType = 6;
 	optional int32 createCost = 7;
 	optional string description = 8;
 	optional int32 powerAmount = 9;

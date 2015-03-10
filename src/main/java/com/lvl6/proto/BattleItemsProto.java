@@ -1021,18 +1021,13 @@ public final class BattleItemsProto {
     com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory();
 
     /**
-     * <code>optional string createResourceType = 6;</code>
+     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
     boolean hasCreateResourceType();
     /**
-     * <code>optional string createResourceType = 6;</code>
+     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
-    java.lang.String getCreateResourceType();
-    /**
-     * <code>optional string createResourceType = 6;</code>
-     */
-    com.google.protobuf.ByteString
-        getCreateResourceTypeBytes();
+    com.lvl6.proto.StructureProto.ResourceType getCreateResourceType();
 
     /**
      * <code>optional int32 createCost = 7;</code>
@@ -1184,10 +1179,15 @@ public final class BattleItemsProto {
               }
               break;
             }
-            case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
-              createResourceType_ = bs;
+            case 48: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                createResourceType_ = value;
+              }
               break;
             }
             case 56: {
@@ -1391,45 +1391,18 @@ public final class BattleItemsProto {
     }
 
     public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
-    private java.lang.Object createResourceType_;
+    private com.lvl6.proto.StructureProto.ResourceType createResourceType_;
     /**
-     * <code>optional string createResourceType = 6;</code>
+     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
     public boolean hasCreateResourceType() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional string createResourceType = 6;</code>
+     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
-    public java.lang.String getCreateResourceType() {
-      java.lang.Object ref = createResourceType_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          createResourceType_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string createResourceType = 6;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCreateResourceTypeBytes() {
-      java.lang.Object ref = createResourceType_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        createResourceType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+      return createResourceType_;
     }
 
     public static final int CREATECOST_FIELD_NUMBER = 7;
@@ -1555,7 +1528,7 @@ public final class BattleItemsProto {
       imgName_ = "";
       battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
       battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-      createResourceType_ = "";
+      createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       createCost_ = 0;
       description_ = "";
       powerAmount_ = 0;
@@ -1592,7 +1565,7 @@ public final class BattleItemsProto {
         output.writeEnum(5, battleItemCategory_.getNumber());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, getCreateResourceTypeBytes());
+        output.writeEnum(6, createResourceType_.getNumber());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, createCost_);
@@ -1643,7 +1616,7 @@ public final class BattleItemsProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getCreateResourceTypeBytes());
+          .computeEnumSize(6, createResourceType_.getNumber());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1796,7 +1769,7 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         bitField0_ = (bitField0_ & ~0x00000010);
-        createResourceType_ = "";
+        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000020);
         createCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -1922,9 +1895,7 @@ public final class BattleItemsProto {
           setBattleItemCategory(other.getBattleItemCategory());
         }
         if (other.hasCreateResourceType()) {
-          bitField0_ |= 0x00000020;
-          createResourceType_ = other.createResourceType_;
-          onChanged();
+          setCreateResourceType(other.getCreateResourceType());
         }
         if (other.hasCreateCost()) {
           setCreateCost(other.getCreateCost());
@@ -2227,78 +2198,37 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private java.lang.Object createResourceType_ = "";
+      private com.lvl6.proto.StructureProto.ResourceType createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
-       * <code>optional string createResourceType = 6;</code>
+       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
       public boolean hasCreateResourceType() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional string createResourceType = 6;</code>
+       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
-      public java.lang.String getCreateResourceType() {
-        java.lang.Object ref = createResourceType_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            createResourceType_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+        return createResourceType_;
       }
       /**
-       * <code>optional string createResourceType = 6;</code>
+       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
-      public com.google.protobuf.ByteString
-          getCreateResourceTypeBytes() {
-        java.lang.Object ref = createResourceType_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          createResourceType_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string createResourceType = 6;</code>
-       */
-      public Builder setCreateResourceType(
-          java.lang.String value) {
+      public Builder setCreateResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         createResourceType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string createResourceType = 6;</code>
+       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
       public Builder clearCreateResourceType() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        createResourceType_ = getDefaultInstance().getCreateResourceType();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string createResourceType = 6;</code>
-       */
-      public Builder setCreateResourceTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        createResourceType_ = value;
+        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -3366,22 +3296,22 @@ public final class BattleItemsProto {
       "edEnumConfig.proto\032\017Structure.proto\"[\n\023U" +
       "serBattleItemProto\022\n\n\002id\030\001 \001(\t\022\020\n\010userUu" +
       "id\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\020\n\010quanti" +
-      "ty\030\004 \001(\005\"\334\002\n\017BattleItemProto\022\024\n\014battleIt" +
+      "ty\030\004 \001(\005\"\372\002\n\017BattleItemProto\022\024\n\014battleIt" +
       "emId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(" +
       "\t\0226\n\016battleItemType\030\004 \001(\0162\036.com.lvl6.pro" +
       "to.BattleItemType\022>\n\022battleItemCategory\030" +
       "\005 \001(\0162\".com.lvl6.proto.BattleItemCategor" +
-      "y\022\032\n\022createResourceType\030\006 \001(\t\022\022\n\ncreateC",
-      "ost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013powerA" +
-      "mount\030\t \001(\005\022\020\n\010priority\030\n \001(\005\022\027\n\017minutes" +
-      "ToCreate\030\013 \001(\005\022\027\n\017inBattleGemCost\030\014 \001(\005\"" +
-      "\207\001\n\033BattleItemQueueForUserProto\022\020\n\010prior" +
-      "ity\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleIte" +
-      "mId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022\023\n\013" +
-      "elapsedTime\030\005 \001(\002**\n\016BattleItemType\022\014\n\010A" +
-      "NTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemCateg" +
-      "ory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020BattleIte" +
-      "msProto"
+      "y\0228\n\022createResourceType\030\006 \001(\0162\034.com.lvl6",
+      ".proto.ResourceType\022\022\n\ncreateCost\030\007 \001(\005\022" +
+      "\023\n\013description\030\010 \001(\t\022\023\n\013powerAmount\030\t \001(" +
+      "\005\022\020\n\010priority\030\n \001(\005\022\027\n\017minutesToCreate\030\013" +
+      " \001(\005\022\027\n\017inBattleGemCost\030\014 \001(\005\"\207\001\n\033Battle" +
+      "ItemQueueForUserProto\022\020\n\010priority\030\001 \001(\005\022" +
+      "\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022" +
+      "\031\n\021expectedStartTime\030\004 \001(\003\022\023\n\013elapsedTim" +
+      "e\030\005 \001(\002**\n\016BattleItemType\022\014\n\010ANTIDOTE\020\001\022" +
+      "\n\n\006HAMMER\020\002*,\n\022BattleItemCategory\022\n\n\006POT" +
+      "ION\020\001\022\n\n\006PUZZLE\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
