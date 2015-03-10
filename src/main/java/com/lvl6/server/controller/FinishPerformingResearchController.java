@@ -78,9 +78,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		String userResearchUuid= reqProto.getUserResearchUuid();
 
-		int gemsSpent = 0;
-		if(reqProto.hasGemsSpent()) {
-			 gemsSpent = reqProto.getGemsSpent();
+		int gemsCost = 0;
+		if(reqProto.hasGemsCost()) {
+			 gemsCost = reqProto.getGemsCost();
 		}
 		
 
@@ -117,7 +117,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			User user = userRetrieveUtils.getUserById(userId);
 			Date now = new Date();
 			FinishPerformingResearchAction fpra = new FinishPerformingResearchAction(userId, user, userResearchUuid, 
-					gemsSpent, now, updateUtil, researchForUserRetrieveUtil);
+					gemsCost, now, updateUtil, researchForUserRetrieveUtil);
 
 			fpra.execute(resBuilder);
 

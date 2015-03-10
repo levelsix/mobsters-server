@@ -78,30 +78,30 @@ public final class EventResearchProto {
     long getClientTime();
 
     /**
-     * <code>optional int32 gemsSpent = 5;</code>
+     * <code>optional int32 gemsCost = 5;</code>
      */
-    boolean hasGemsSpent();
+    boolean hasGemsCost();
     /**
-     * <code>optional int32 gemsSpent = 5;</code>
+     * <code>optional int32 gemsCost = 5;</code>
      */
-    int getGemsSpent();
+    int getGemsCost();
 
     /**
-     * <code>optional sint32 resourceChange = 6;</code>
+     * <code>optional sint32 resourceCost = 6;</code>
      *
      * <pre>
      *positive means refund, negative means charge user (will always be negative)
      * </pre>
      */
-    boolean hasResourceChange();
+    boolean hasResourceCost();
     /**
-     * <code>optional sint32 resourceChange = 6;</code>
+     * <code>optional sint32 resourceCost = 6;</code>
      *
      * <pre>
      *positive means refund, negative means charge user (will always be negative)
      * </pre>
      */
-    int getResourceChange();
+    int getResourceCost();
 
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
@@ -195,12 +195,12 @@ public final class EventResearchProto {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              gemsSpent_ = input.readInt32();
+              gemsCost_ = input.readInt32();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              resourceChange_ = input.readSInt32();
+              resourceCost_ = input.readSInt32();
               break;
             }
             case 56: {
@@ -367,42 +367,42 @@ public final class EventResearchProto {
       return clientTime_;
     }
 
-    public static final int GEMSSPENT_FIELD_NUMBER = 5;
-    private int gemsSpent_;
+    public static final int GEMSCOST_FIELD_NUMBER = 5;
+    private int gemsCost_;
     /**
-     * <code>optional int32 gemsSpent = 5;</code>
+     * <code>optional int32 gemsCost = 5;</code>
      */
-    public boolean hasGemsSpent() {
+    public boolean hasGemsCost() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 gemsSpent = 5;</code>
+     * <code>optional int32 gemsCost = 5;</code>
      */
-    public int getGemsSpent() {
-      return gemsSpent_;
+    public int getGemsCost() {
+      return gemsCost_;
     }
 
-    public static final int RESOURCECHANGE_FIELD_NUMBER = 6;
-    private int resourceChange_;
+    public static final int RESOURCECOST_FIELD_NUMBER = 6;
+    private int resourceCost_;
     /**
-     * <code>optional sint32 resourceChange = 6;</code>
+     * <code>optional sint32 resourceCost = 6;</code>
      *
      * <pre>
      *positive means refund, negative means charge user (will always be negative)
      * </pre>
      */
-    public boolean hasResourceChange() {
+    public boolean hasResourceCost() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional sint32 resourceChange = 6;</code>
+     * <code>optional sint32 resourceCost = 6;</code>
      *
      * <pre>
      *positive means refund, negative means charge user (will always be negative)
      * </pre>
      */
-    public int getResourceChange() {
-      return resourceChange_;
+    public int getResourceCost() {
+      return resourceCost_;
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
@@ -425,8 +425,8 @@ public final class EventResearchProto {
       researchId_ = 0;
       userResearchUuid_ = "";
       clientTime_ = 0L;
-      gemsSpent_ = 0;
-      resourceChange_ = 0;
+      gemsCost_ = 0;
+      resourceCost_ = 0;
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
     }
     private byte memoizedIsInitialized = -1;
@@ -455,10 +455,10 @@ public final class EventResearchProto {
         output.writeInt64(4, clientTime_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, gemsSpent_);
+        output.writeInt32(5, gemsCost_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeSInt32(6, resourceChange_);
+        output.writeSInt32(6, resourceCost_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeEnum(7, resourceType_.getNumber());
@@ -490,11 +490,11 @@ public final class EventResearchProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, gemsSpent_);
+          .computeInt32Size(5, gemsCost_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(6, resourceChange_);
+          .computeSInt32Size(6, resourceCost_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -630,9 +630,9 @@ public final class EventResearchProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        gemsSpent_ = 0;
+        gemsCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        resourceChange_ = 0;
+        resourceCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -687,11 +687,11 @@ public final class EventResearchProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.gemsSpent_ = gemsSpent_;
+        result.gemsCost_ = gemsCost_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.resourceChange_ = resourceChange_;
+        result.resourceCost_ = resourceCost_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
@@ -726,11 +726,11 @@ public final class EventResearchProto {
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
         }
-        if (other.hasGemsSpent()) {
-          setGemsSpent(other.getGemsSpent());
+        if (other.hasGemsCost()) {
+          setGemsCost(other.getGemsCost());
         }
-        if (other.hasResourceChange()) {
-          setResourceChange(other.getResourceChange());
+        if (other.hasResourceCost()) {
+          setResourceCost(other.getResourceCost());
         }
         if (other.hasResourceType()) {
           setResourceType(other.getResourceType());
@@ -1058,82 +1058,82 @@ public final class EventResearchProto {
         return this;
       }
 
-      private int gemsSpent_ ;
+      private int gemsCost_ ;
       /**
-       * <code>optional int32 gemsSpent = 5;</code>
+       * <code>optional int32 gemsCost = 5;</code>
        */
-      public boolean hasGemsSpent() {
+      public boolean hasGemsCost() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 gemsSpent = 5;</code>
+       * <code>optional int32 gemsCost = 5;</code>
        */
-      public int getGemsSpent() {
-        return gemsSpent_;
+      public int getGemsCost() {
+        return gemsCost_;
       }
       /**
-       * <code>optional int32 gemsSpent = 5;</code>
+       * <code>optional int32 gemsCost = 5;</code>
        */
-      public Builder setGemsSpent(int value) {
+      public Builder setGemsCost(int value) {
         bitField0_ |= 0x00000010;
-        gemsSpent_ = value;
+        gemsCost_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 gemsSpent = 5;</code>
+       * <code>optional int32 gemsCost = 5;</code>
        */
-      public Builder clearGemsSpent() {
+      public Builder clearGemsCost() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        gemsSpent_ = 0;
+        gemsCost_ = 0;
         onChanged();
         return this;
       }
 
-      private int resourceChange_ ;
+      private int resourceCost_ ;
       /**
-       * <code>optional sint32 resourceChange = 6;</code>
+       * <code>optional sint32 resourceCost = 6;</code>
        *
        * <pre>
        *positive means refund, negative means charge user (will always be negative)
        * </pre>
        */
-      public boolean hasResourceChange() {
+      public boolean hasResourceCost() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional sint32 resourceChange = 6;</code>
+       * <code>optional sint32 resourceCost = 6;</code>
        *
        * <pre>
        *positive means refund, negative means charge user (will always be negative)
        * </pre>
        */
-      public int getResourceChange() {
-        return resourceChange_;
+      public int getResourceCost() {
+        return resourceCost_;
       }
       /**
-       * <code>optional sint32 resourceChange = 6;</code>
+       * <code>optional sint32 resourceCost = 6;</code>
        *
        * <pre>
        *positive means refund, negative means charge user (will always be negative)
        * </pre>
        */
-      public Builder setResourceChange(int value) {
+      public Builder setResourceCost(int value) {
         bitField0_ |= 0x00000020;
-        resourceChange_ = value;
+        resourceCost_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint32 resourceChange = 6;</code>
+       * <code>optional sint32 resourceCost = 6;</code>
        *
        * <pre>
        *positive means refund, negative means charge user (will always be negative)
        * </pre>
        */
-      public Builder clearResourceChange() {
+      public Builder clearResourceCost() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceChange_ = 0;
+        resourceCost_ = 0;
         onChanged();
         return this;
       }
@@ -2077,13 +2077,13 @@ public final class EventResearchProto {
         getUserResearchUuidBytes();
 
     /**
-     * <code>optional int32 gemsSpent = 3;</code>
+     * <code>optional int32 gemsCost = 3;</code>
      */
-    boolean hasGemsSpent();
+    boolean hasGemsCost();
     /**
-     * <code>optional int32 gemsSpent = 3;</code>
+     * <code>optional int32 gemsCost = 3;</code>
      */
-    int getGemsSpent();
+    int getGemsCost();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FinishPerformingResearchRequestProto}
@@ -2158,7 +2158,7 @@ public final class EventResearchProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              gemsSpent_ = input.readInt32();
+              gemsCost_ = input.readInt32();
               break;
             }
           }
@@ -2264,25 +2264,25 @@ public final class EventResearchProto {
       }
     }
 
-    public static final int GEMSSPENT_FIELD_NUMBER = 3;
-    private int gemsSpent_;
+    public static final int GEMSCOST_FIELD_NUMBER = 3;
+    private int gemsCost_;
     /**
-     * <code>optional int32 gemsSpent = 3;</code>
+     * <code>optional int32 gemsCost = 3;</code>
      */
-    public boolean hasGemsSpent() {
+    public boolean hasGemsCost() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 gemsSpent = 3;</code>
+     * <code>optional int32 gemsCost = 3;</code>
      */
-    public int getGemsSpent() {
-      return gemsSpent_;
+    public int getGemsCost() {
+      return gemsCost_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userResearchUuid_ = "";
-      gemsSpent_ = 0;
+      gemsCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2304,7 +2304,7 @@ public final class EventResearchProto {
         output.writeBytes(2, getUserResearchUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, gemsSpent_);
+        output.writeInt32(3, gemsCost_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2325,7 +2325,7 @@ public final class EventResearchProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, gemsSpent_);
+          .computeInt32Size(3, gemsCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2453,7 +2453,7 @@ public final class EventResearchProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userResearchUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        gemsSpent_ = 0;
+        gemsCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -2498,7 +2498,7 @@ public final class EventResearchProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.gemsSpent_ = gemsSpent_;
+        result.gemsCost_ = gemsCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2523,8 +2523,8 @@ public final class EventResearchProto {
           userResearchUuid_ = other.userResearchUuid_;
           onChanged();
         }
-        if (other.hasGemsSpent()) {
-          setGemsSpent(other.getGemsSpent());
+        if (other.hasGemsCost()) {
+          setGemsCost(other.getGemsCost());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2745,34 +2745,34 @@ public final class EventResearchProto {
         return this;
       }
 
-      private int gemsSpent_ ;
+      private int gemsCost_ ;
       /**
-       * <code>optional int32 gemsSpent = 3;</code>
+       * <code>optional int32 gemsCost = 3;</code>
        */
-      public boolean hasGemsSpent() {
+      public boolean hasGemsCost() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 gemsSpent = 3;</code>
+       * <code>optional int32 gemsCost = 3;</code>
        */
-      public int getGemsSpent() {
-        return gemsSpent_;
+      public int getGemsCost() {
+        return gemsCost_;
       }
       /**
-       * <code>optional int32 gemsSpent = 3;</code>
+       * <code>optional int32 gemsCost = 3;</code>
        */
-      public Builder setGemsSpent(int value) {
+      public Builder setGemsCost(int value) {
         bitField0_ |= 0x00000004;
-        gemsSpent_ = value;
+        gemsCost_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 gemsSpent = 3;</code>
+       * <code>optional int32 gemsCost = 3;</code>
        */
-      public Builder clearGemsSpent() {
+      public Builder clearGemsCost() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        gemsSpent_ = 0;
+        gemsCost_ = 0;
         onChanged();
         return this;
       }
@@ -3512,33 +3512,33 @@ public final class EventResearchProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\023EventResearch.proto\022\016com.lvl6.proto\032\017S" +
-      "tructure.proto\032\nUser.proto\"\366\001\n\033PerformRe" +
+      "tructure.proto\032\nUser.proto\"\363\001\n\033PerformRe" +
       "searchRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
       ".lvl6.proto.MinimumUserProto\022\022\n\nresearch" +
       "Id\030\002 \001(\005\022\030\n\020userResearchUuid\030\003 \001(\t\022\022\n\ncl" +
-      "ientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\022\026\n\016res" +
-      "ourceChange\030\006 \001(\021\0228\n\014resourceType\030\007 \001(\0162" +
-      "\034.com.lvl6.proto.ResourceType:\004CASH\"\310\002\n\034" +
-      "PerformResearchResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022R",
-      "\n\006status\030\002 \001(\0162B.com.lvl6.proto.PerformR" +
-      "esearchResponseProto.PerformResearchStat" +
-      "us\022\030\n\020userResearchUuid\030\003 \001(\t\"\207\001\n\025Perform" +
-      "ResearchStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\032\n\026FAIL_" +
-      "INSUFFICIENT_GEMS\020\004\022\031\n\025FAIL_INSUFFICIENT" +
-      "_OIL\020\005\"\205\001\n$FinishPerformingResearchReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\030\n\020userResearchUuid\030\002 " +
-      "\001(\t\022\021\n\tgemsSpent\030\003 \001(\005\"\230\002\n%FinishPerform",
-      "ingResearchResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022d\n\006st" +
-      "atus\030\002 \001(\0162T.com.lvl6.proto.FinishPerfor" +
-      "mingResearchResponseProto.FinishPerformi" +
-      "ngResearchStatus\"W\n\036FinishPerformingRese" +
-      "archStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
-      "\030\n\024FAIL_NOT_ENOUGH_GEMS\020\003B\024B\022EventResear" +
-      "chProto"
+      "ientTime\030\004 \001(\003\022\020\n\010gemsCost\030\005 \001(\005\022\024\n\014reso" +
+      "urceCost\030\006 \001(\021\0228\n\014resourceType\030\007 \001(\0162\034.c" +
+      "om.lvl6.proto.ResourceType:\004CASH\"\310\002\n\034Per" +
+      "formResearchResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006s",
+      "tatus\030\002 \001(\0162B.com.lvl6.proto.PerformRese" +
+      "archResponseProto.PerformResearchStatus\022" +
+      "\030\n\020userResearchUuid\030\003 \001(\t\"\207\001\n\025PerformRes" +
+      "earchStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\032\n\026FAIL_INS" +
+      "UFFICIENT_GEMS\020\004\022\031\n\025FAIL_INSUFFICIENT_OI" +
+      "L\020\005\"\204\001\n$FinishPerformingResearchRequestP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022\030\n\020userResearchUuid\030\002 \001(\t" +
+      "\022\020\n\010gemsCost\030\003 \001(\005\"\230\002\n%FinishPerformingR",
+      "esearchResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022d\n\006status" +
+      "\030\002 \001(\0162T.com.lvl6.proto.FinishPerforming" +
+      "ResearchResponseProto.FinishPerformingRe" +
+      "searchStatus\"W\n\036FinishPerformingResearch" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024F" +
+      "AIL_NOT_ENOUGH_GEMS\020\003B\024B\022EventResearchPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3559,7 +3559,7 @@ public final class EventResearchProto {
     internal_static_com_lvl6_proto_PerformResearchRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ResearchId", "UserResearchUuid", "ClientTime", "GemsSpent", "ResourceChange", "ResourceType", });
+        new java.lang.String[] { "Sender", "ResearchId", "UserResearchUuid", "ClientTime", "GemsCost", "ResourceCost", "ResourceType", });
     internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PerformResearchResponseProto_fieldAccessorTable = new
@@ -3571,7 +3571,7 @@ public final class EventResearchProto {
     internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserResearchUuid", "GemsSpent", });
+        new java.lang.String[] { "Sender", "UserResearchUuid", "GemsCost", });
     internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_fieldAccessorTable = new

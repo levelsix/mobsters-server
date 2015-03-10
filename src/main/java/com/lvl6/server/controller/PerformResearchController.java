@@ -85,14 +85,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			 userResearchUuid= reqProto.getUserResearchUuid();
 		}
 		
-		int gemsSpent = 0;
-		if(reqProto.hasGemsSpent()) {
-			 gemsSpent = reqProto.getGemsSpent();
+		int gemsCost = 0;
+		if(reqProto.hasGemsCost()) {
+			 gemsCost = reqProto.getGemsCost();
 		}
 		
-		int resourceChange = 0;
-		if(reqProto.hasResourceChange()) {
-			resourceChange = reqProto.getResourceChange();
+		int resourceCost = 0;
+		if(reqProto.hasResourceCost()) {
+			resourceCost = reqProto.getResourceCost();
 		}
 		
 		ResourceType resourceType = null;
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 
 			PerformResearchAction pra = new PerformResearchAction(userId, userRetrieveUtils, researchId, userResearchUuid, 
-					gemsSpent, resourceChange, resourceType, nowTimestamp, insertUtil, updateUtil, 
+					gemsCost, resourceCost, resourceType, nowTimestamp, insertUtil, updateUtil, 
 					researchForUserRetrieveUtils);
 
 			pra.execute(resBuilder);

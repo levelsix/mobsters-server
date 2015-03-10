@@ -32,8 +32,8 @@ public class PerformResearchAction
 	private UserRetrieveUtils2 userRetrieveUtils;
 	private int researchId;
 	private String userResearchUuid; //update the row when researchs are upgraded
-	private int gemsSpent;
-	private int resourceChange;
+	private int gemsCost;
+	private int resourceCost;
 	private ResourceType resourceType;
 	private Date now;
 	protected InsertUtil insertUtil;
@@ -45,8 +45,8 @@ public class PerformResearchAction
 		UserRetrieveUtils2 userRetrieveUtils,
 		int researchId,
 		String userResearchUuid,
-		int gemsSpent,
-		int resourceChange,
+		int gemsCost,
+		int resourceCost,
 		ResourceType resourceType,
 		Date now,
 		InsertUtil insertUtil,
@@ -59,8 +59,8 @@ public class PerformResearchAction
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.researchId = researchId;
 		this.userResearchUuid = userResearchUuid;
-		this.gemsSpent = gemsSpent;
-		this.resourceChange = resourceChange;
+		this.gemsCost = gemsCost;
+		this.resourceCost = resourceCost;
 		this.resourceType = resourceType;
 		this.now = now;
 		this.insertUtil = insertUtil;
@@ -118,10 +118,10 @@ public class PerformResearchAction
 		boolean hasEnoughGems = true;
 		boolean hasEnoughResource = true;
 		
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			hasEnoughGems = verifyEnoughGems(resBuilder);
 		}
-		if(resourceChange > 0) {
+		if(resourceCost > 0) {
 			hasEnoughResource = verifyEnoughResource(resBuilder);
 		}
 		
@@ -155,7 +155,7 @@ public class PerformResearchAction
 		int userGems = user.getGems();
 
 		//check if user can afford to buy however many more user wants to buy
-		if (userGems < gemsSpent) {
+		if (userGems < gemsCost) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_GEMS);
 			log.error("user has less gems then amount spent in request, user gems= " + userGems);
 			return false; 
@@ -166,7 +166,7 @@ public class PerformResearchAction
 	private boolean verifyEnoughResource(Builder resBuilder) {
 		if(resourceType == ResourceType.CASH) {
 			int userCash = user.getCash();
-			if(userCash < resourceChange) {
+			if(userCash < resourceCost) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_CASH);
 				log.error("user has less cash then amount spent in request, user gems= " + userCash);
 
@@ -175,7 +175,7 @@ public class PerformResearchAction
 		}
 		else if(resourceType == ResourceType.OIL) {
 			int userOil = user.getOil();
-			if(userOil < resourceChange) {
+			if(userOil < resourceCost) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_OIL);
 				log.error("user has less oil then amount spent in request, user oil= " + userOil);
 
@@ -206,7 +206,7 @@ public class PerformResearchAction
 			return false;
 		}
 		
-		if(!(gemsSpent > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
+		if(!(gemsCost > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error("not being purchased with gems, cash, or oil, what is this voodoo shit");
 			return false;
@@ -217,18 +217,18 @@ public class PerformResearchAction
 		int oilChange = 0;
 		int expChange = 0;
 		
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
-			gemsChange = -1*gemsSpent;
+			gemsChange = -1*gemsCost;
 		}
 
 		if (resourceType == ResourceType.CASH) {
 			prevCurrencies.put(MiscMethods.cash, user.getCash());
-			cashChange = -1*resourceChange;
+			cashChange = -1*resourceCost;
 		}
 		else if (resourceType == ResourceType.OIL){
 			prevCurrencies.put(MiscMethods.oil, user.getOil());
-			oilChange = -1*resourceChange;
+			oilChange = -1*resourceCost;
 		}
 		
 //		user.updateRelativeGemsCashOilExperienceNaive(gemsChange, cashChange, oilChange, expChange);
@@ -242,8 +242,8 @@ public class PerformResearchAction
 
 	private void updateUserCurrency()
 	{
-		int gemsDelta = -1 * gemsSpent;
-		int resourceDelta = -1* resourceChange;
+		int gemsDelta = -1 * gemsCost;
+		int resourceDelta = -1* resourceCost;
 		
 		boolean updated = user.updateGemsandResourcesFromPerformingResearch(gemsDelta, resourceDelta, resourceType);
 		log.info("updated, user paid for research {}", updated);
@@ -262,32 +262,32 @@ public class PerformResearchAction
 		StringBuilder detailSb2 = new StringBuilder();
 		details = new HashMap<String, String>();
 
-		if (0 != gemsSpent) {
-			currencyDeltas.put(gems, gemsSpent);
+		if (0 != gemsCost) {
+			currencyDeltas.put(gems, gemsCost);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 				ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 			detailSb.append(" gemsSpent=");
-			detailSb.append(gemsSpent);
+			detailSb.append(gemsCost);
 			details.put(gems, detailSb.toString());
 		}
 		
-		if(resourceChange>0) {
+		if(resourceCost>0) {
 			if(resourceType == ResourceType.CASH) {
-				currencyDeltas.put(cash, resourceChange);
+				currencyDeltas.put(cash, resourceCost);
 				curCurrencies.put(cash, user.getCash());
 				reasonsForChanges.put(cash, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 				detailSb2.append(" cash spent= ");
-				detailSb2.append(resourceChange);
+				detailSb2.append(resourceCost);
 				details.put(cash, detailSb2.toString());
 
 			}
 			else if(resourceType == ResourceType.OIL) {
-				currencyDeltas.put(oil, resourceChange);
+				currencyDeltas.put(oil, resourceCost);
 				curCurrencies.put(oil, user.getOil());
 				reasonsForChanges.put(oil, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 				detailSb2.append(" oil spent= ");
-				detailSb2.append(resourceChange);
+				detailSb2.append(resourceCost);
 				details.put(oil, detailSb2.toString());
 			}
 		}
