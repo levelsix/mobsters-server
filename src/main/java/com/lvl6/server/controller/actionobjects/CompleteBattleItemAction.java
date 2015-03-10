@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -138,7 +139,6 @@ public class CompleteBattleItemAction
 		
 		updateUserCurrency();
 
-		
 		//update items in db
 		int numDeleted = deleteUtil.deleteFromBattleItemQueueForUser(userId, completedList);
 		if(numDeleted != completedList.size()) {
@@ -147,9 +147,24 @@ public class CompleteBattleItemAction
 		}
 		log.info("finished deleting completed items from queue");
 
-		int numUpdated = insertUtil.insertIntoBattleItemQueueForUser(nuOrUpdatedList);
-		if(numUpdated != updatedList.size() + newList.size()) {
-			log.error("did not update all the battle items in queue");
+		Map<Integer, BattleItemForUser> userBattleItemIdsToBattleItemsForUser = battleItemForUserRetrieveUtil.getBattleItemIdsToUserBattleItemForUser(userId);
+		for(BattleItemQueueForUser biqfu : completedList) {
+			int battleItemId = biqfu.getBattleItemId();
+			if(userBattleItemIdsToBattleItemsForUser.containsKey(battleItemId)) {
+				BattleItemForUser bifu = userBattleItemIdsToBattleItemsForUser.get(battleItemId);
+				bifu.setQuantity(bifu.getQuantity()+1);
+			}
+			else {
+				BattleItemForUser bifu = new BattleItemForUser(randomUUID(), userId, battleItemId, 1);
+				userBattleItemIdsToBattleItemsForUser.put(battleItemId, bifu);
+			}
+		}
+		
+		List<BattleItemForUser> battleItemList = new ArrayList<BattleItemForUser>(userBattleItemIdsToBattleItemsForUser.values());
+		int numInserted = insertUtil.insertIntoBattleItemForUser(battleItemList);
+		
+		if(numInserted != completedList.size()) {
+			log.error("did not insert or update all the battle items completed");
 			return false;
 		}
 
@@ -160,7 +175,7 @@ public class CompleteBattleItemAction
 
 	private void updateUserCurrency()
 	{		
-		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, -1*cashChange, -1*oilChange);
+		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, 0, 0);
 		log.info("updated, user paid for battle items {}", updated);
 	}
 	
@@ -207,7 +222,11 @@ public class CompleteBattleItemAction
 			detailSb3.append(oilChange);
 			details.put(oil, detailSb3.toString());
 		}
-		
+
+	}
+
+	private String randomUUID() {
+		return UUID.randomUUID().toString();
 	}
 
 	public User getUser() {

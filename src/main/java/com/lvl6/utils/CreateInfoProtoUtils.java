@@ -4262,6 +4262,8 @@ public class CreateInfoProtoUtils {
 		return fdpb.build();
 	}
 	
+
+	
 	
 	/**BattleItemProto*********************************************/
 	

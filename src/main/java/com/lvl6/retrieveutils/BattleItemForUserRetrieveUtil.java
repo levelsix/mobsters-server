@@ -62,23 +62,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	}
 
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
-	public Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser(String userId) {
+	public Map<Integer, BattleItemForUser> getBattleItemIdsToUserBattleItemForUser(String userId) {
 		log.debug("retrieving map of battle item id to userbattleitems for userId " + userId);
 
-		Map<Integer, List<BattleItemForUser>> battleItemIdToBattleItemForUser =
-				new HashMap<Integer, List<BattleItemForUser>>();
+		Map<Integer, BattleItemForUser> battleItemIdToBattleItemForUser =
+				new HashMap<Integer, BattleItemForUser>();
 		try {
 
 			List<BattleItemForUser> bifuList = getUserBattleItemsForUser(userId);
 
 			for (BattleItemForUser bifu : bifuList) {
 				int battleItemId = bifu.getBattleItemId();
-				if (!battleItemIdToBattleItemForUser.containsKey(battleItemId)) {
-					battleItemIdToBattleItemForUser.put(battleItemId, new ArrayList<BattleItemForUser>());
-				}
-
-				List<BattleItemForUser> userBattleItemsForBattleItemId = battleItemIdToBattleItemForUser.get(battleItemId);
-				userBattleItemsForBattleItemId.add(bifu);
+				battleItemIdToBattleItemForUser.put(battleItemId, bifu);
 			}
 
 		} catch (Exception e) {
