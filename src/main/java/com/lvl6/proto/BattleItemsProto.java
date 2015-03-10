@@ -1003,32 +1003,22 @@ public final class BattleItemsProto {
         getImgNameBytes();
 
     /**
-     * <code>optional string battleItemType = 4;</code>
+     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
      */
     boolean hasBattleItemType();
     /**
-     * <code>optional string battleItemType = 4;</code>
+     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
      */
-    java.lang.String getBattleItemType();
-    /**
-     * <code>optional string battleItemType = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getBattleItemTypeBytes();
+    com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType();
 
     /**
-     * <code>optional string battleItemCategory = 5;</code>
+     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
      */
     boolean hasBattleItemCategory();
     /**
-     * <code>optional string battleItemCategory = 5;</code>
+     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
      */
-    java.lang.String getBattleItemCategory();
-    /**
-     * <code>optional string battleItemCategory = 5;</code>
-     */
-    com.google.protobuf.ByteString
-        getBattleItemCategoryBytes();
+    com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory();
 
     /**
      * <code>optional string createResourceType = 6;</code>
@@ -1172,16 +1162,26 @@ public final class BattleItemsProto {
               imgName_ = bs;
               break;
             }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              battleItemType_ = bs;
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.BattleItemsProto.BattleItemType value = com.lvl6.proto.BattleItemsProto.BattleItemType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                battleItemType_ = value;
+              }
               break;
             }
-            case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
-              battleItemCategory_ = bs;
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.BattleItemsProto.BattleItemCategory value = com.lvl6.proto.BattleItemsProto.BattleItemCategory.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                battleItemCategory_ = value;
+              }
               break;
             }
             case 50: {
@@ -1361,87 +1361,33 @@ public final class BattleItemsProto {
     }
 
     public static final int BATTLEITEMTYPE_FIELD_NUMBER = 4;
-    private java.lang.Object battleItemType_;
+    private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_;
     /**
-     * <code>optional string battleItemType = 4;</code>
+     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
      */
     public boolean hasBattleItemType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string battleItemType = 4;</code>
+     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
      */
-    public java.lang.String getBattleItemType() {
-      java.lang.Object ref = battleItemType_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          battleItemType_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string battleItemType = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBattleItemTypeBytes() {
-      java.lang.Object ref = battleItemType_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        battleItemType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
+      return battleItemType_;
     }
 
     public static final int BATTLEITEMCATEGORY_FIELD_NUMBER = 5;
-    private java.lang.Object battleItemCategory_;
+    private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_;
     /**
-     * <code>optional string battleItemCategory = 5;</code>
+     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
      */
     public boolean hasBattleItemCategory() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional string battleItemCategory = 5;</code>
+     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
      */
-    public java.lang.String getBattleItemCategory() {
-      java.lang.Object ref = battleItemCategory_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          battleItemCategory_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string battleItemCategory = 5;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBattleItemCategoryBytes() {
-      java.lang.Object ref = battleItemCategory_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        battleItemCategory_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
+      return battleItemCategory_;
     }
 
     public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
@@ -1607,8 +1553,8 @@ public final class BattleItemsProto {
       battleItemId_ = 0;
       name_ = "";
       imgName_ = "";
-      battleItemType_ = "";
-      battleItemCategory_ = "";
+      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+      battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
       createResourceType_ = "";
       createCost_ = 0;
       description_ = "";
@@ -1640,10 +1586,10 @@ public final class BattleItemsProto {
         output.writeBytes(3, getImgNameBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getBattleItemTypeBytes());
+        output.writeEnum(4, battleItemType_.getNumber());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getBattleItemCategoryBytes());
+        output.writeEnum(5, battleItemCategory_.getNumber());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getCreateResourceTypeBytes());
@@ -1689,11 +1635,11 @@ public final class BattleItemsProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getBattleItemTypeBytes());
+          .computeEnumSize(4, battleItemType_.getNumber());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getBattleItemCategoryBytes());
+          .computeEnumSize(5, battleItemCategory_.getNumber());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1846,9 +1792,9 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemType_ = "";
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
         bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemCategory_ = "";
+        battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         bitField0_ = (bitField0_ & ~0x00000010);
         createResourceType_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -1970,14 +1916,10 @@ public final class BattleItemsProto {
           onChanged();
         }
         if (other.hasBattleItemType()) {
-          bitField0_ |= 0x00000008;
-          battleItemType_ = other.battleItemType_;
-          onChanged();
+          setBattleItemType(other.getBattleItemType());
         }
         if (other.hasBattleItemCategory()) {
-          bitField0_ |= 0x00000010;
-          battleItemCategory_ = other.battleItemCategory_;
-          onChanged();
+          setBattleItemCategory(other.getBattleItemCategory());
         }
         if (other.hasCreateResourceType()) {
           bitField0_ |= 0x00000020;
@@ -2215,154 +2157,72 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private java.lang.Object battleItemType_ = "";
+      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
       /**
-       * <code>optional string battleItemType = 4;</code>
+       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
       public boolean hasBattleItemType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string battleItemType = 4;</code>
+       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
-      public java.lang.String getBattleItemType() {
-        java.lang.Object ref = battleItemType_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            battleItemType_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
+        return battleItemType_;
       }
       /**
-       * <code>optional string battleItemType = 4;</code>
+       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
-      public com.google.protobuf.ByteString
-          getBattleItemTypeBytes() {
-        java.lang.Object ref = battleItemType_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          battleItemType_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string battleItemType = 4;</code>
-       */
-      public Builder setBattleItemType(
-          java.lang.String value) {
+      public Builder setBattleItemType(com.lvl6.proto.BattleItemsProto.BattleItemType value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         battleItemType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string battleItemType = 4;</code>
+       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
       public Builder clearBattleItemType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemType_ = getDefaultInstance().getBattleItemType();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string battleItemType = 4;</code>
-       */
-      public Builder setBattleItemTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        battleItemType_ = value;
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
         onChanged();
         return this;
       }
 
-      private java.lang.Object battleItemCategory_ = "";
+      private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
       /**
-       * <code>optional string battleItemCategory = 5;</code>
+       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
        */
       public boolean hasBattleItemCategory() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional string battleItemCategory = 5;</code>
+       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
        */
-      public java.lang.String getBattleItemCategory() {
-        java.lang.Object ref = battleItemCategory_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            battleItemCategory_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
+        return battleItemCategory_;
       }
       /**
-       * <code>optional string battleItemCategory = 5;</code>
+       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
        */
-      public com.google.protobuf.ByteString
-          getBattleItemCategoryBytes() {
-        java.lang.Object ref = battleItemCategory_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          battleItemCategory_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string battleItemCategory = 5;</code>
-       */
-      public Builder setBattleItemCategory(
-          java.lang.String value) {
+      public Builder setBattleItemCategory(com.lvl6.proto.BattleItemsProto.BattleItemCategory value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         battleItemCategory_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string battleItemCategory = 5;</code>
+       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
        */
       public Builder clearBattleItemCategory() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        battleItemCategory_ = getDefaultInstance().getBattleItemCategory();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string battleItemCategory = 5;</code>
-       */
-      public Builder setBattleItemCategoryBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        battleItemCategory_ = value;
+        battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         onChanged();
         return this;
       }
@@ -3506,20 +3366,22 @@ public final class BattleItemsProto {
       "edEnumConfig.proto\032\017Structure.proto\"[\n\023U" +
       "serBattleItemProto\022\n\n\002id\030\001 \001(\t\022\020\n\010userUu" +
       "id\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\020\n\010quanti" +
-      "ty\030\004 \001(\005\"\230\002\n\017BattleItemProto\022\024\n\014battleIt" +
+      "ty\030\004 \001(\005\"\334\002\n\017BattleItemProto\022\024\n\014battleIt" +
       "emId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(" +
-      "\t\022\026\n\016battleItemType\030\004 \001(\t\022\032\n\022battleItemC" +
-      "ategory\030\005 \001(\t\022\032\n\022createResourceType\030\006 \001(" +
-      "\t\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013description\030\010 \001" +
-      "(\t\022\023\n\013powerAmount\030\t \001(\005\022\020\n\010priority\030\n \001(",
-      "\005\022\027\n\017minutesToCreate\030\013 \001(\005\022\027\n\017inBattleGe" +
-      "mCost\030\014 \001(\005\"\207\001\n\033BattleItemQueueForUserPr" +
-      "oto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022" +
-      "\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expectedStartTi" +
-      "me\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleI" +
-      "temType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022Bat" +
-      "tleItemCategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B" +
-      "\022B\020BattleItemsProto"
+      "\t\0226\n\016battleItemType\030\004 \001(\0162\036.com.lvl6.pro" +
+      "to.BattleItemType\022>\n\022battleItemCategory\030" +
+      "\005 \001(\0162\".com.lvl6.proto.BattleItemCategor" +
+      "y\022\032\n\022createResourceType\030\006 \001(\t\022\022\n\ncreateC",
+      "ost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013powerA" +
+      "mount\030\t \001(\005\022\020\n\010priority\030\n \001(\005\022\027\n\017minutes" +
+      "ToCreate\030\013 \001(\005\022\027\n\017inBattleGemCost\030\014 \001(\005\"" +
+      "\207\001\n\033BattleItemQueueForUserProto\022\020\n\010prior" +
+      "ity\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleIte" +
+      "mId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022\023\n\013" +
+      "elapsedTime\030\005 \001(\002**\n\016BattleItemType\022\014\n\010A" +
+      "NTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemCateg" +
+      "ory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020BattleIte" +
+      "msProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

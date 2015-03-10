@@ -114,8 +114,10 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemCategory;
 import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemType;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
@@ -4270,11 +4272,37 @@ public class CreateInfoProtoUtils {
 		bipb.setBattleItemId(bi.getId());
 		bipb.setName(bi.getName());
 		bipb.setImgName(bi.getImageName());
-		bipb.setBattleItemType(bi.getType());
-		bipb.setBattleItemCategory(bi.getBattleItemCategory());
+		String type = bi.getType();
+		if(type != null) {
+			try {
+				BattleItemType battleItemType = BattleItemType.valueOf(type);
+
+				bipb.setBattleItemType(battleItemType);
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid battleitem type. battleitemtype=%s", type),
+					e);
+			}
+		}
+		
+		String category = bi.getBattleItemCategory();
+		if(category != null) {
+			try {
+				BattleItemCategory battleItemCategory = BattleItemCategory.valueOf(category);
+
+				bipb.setBattleItemCategory(battleItemCategory);
+
+			} catch (Exception e) {
+				log.error(String.format(
+					"invalid battleitem category. battleitemcateogry=%s", category),
+					e);
+			}
+		}
 		bipb.setCreateResourceType(bi.getCreateResourceType());
 		bipb.setCreateCost(bi.getCreateCost());
-		bipb.setDescription(bi.getDescription());
+		if(bi.getDescription() != null) {
+			bipb.setDescription(bi.getDescription());
+		}
 		bipb.setPowerAmount(bi.getPowerAmount());
 		bipb.setPriority(bi.getPriority());
 		bipb.setMinutesToCreate(bi.getMinutesToCreate());
@@ -4282,6 +4310,8 @@ public class CreateInfoProtoUtils {
 		
 		return bipb.build();
 	}
+	
+
 	
 	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(BattleItemForUser bifu) {
 		UserBattleItemProto.Builder ubipb = UserBattleItemProto.newBuilder();
