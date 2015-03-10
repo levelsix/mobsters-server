@@ -79,6 +79,7 @@ enum ResearchDomain {
 	
 }
 
+//the research that is currently being researched and the research that are completed
 message UserResearchProto {
 	optional string userResearchUuid = 1;
 	optional string userUuid = 2;

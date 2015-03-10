@@ -12,7 +12,7 @@ public class ResearchForUser implements Serializable {
 	private int researchId;
 	private Date timePurchased;
 	private boolean isComplete;
-	
+	 
 	public ResearchForUser() {
 		super();
 	}

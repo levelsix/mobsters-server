@@ -15,8 +15,8 @@ option java_outer_classname = "EventResearchProto";
 
 message PerformResearchRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 researchId = 2;
-	optional string userResearchUuid = 3;
+	optional int32 researchId = 2;  		//research to start researching
+	optional string userResearchUuid = 3; 	//set if user upgrading existing research
 	optional int64 clientTime = 4;
 	optional int32 gemsSpent = 5;
 	

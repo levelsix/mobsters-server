@@ -80,7 +80,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		String userId = senderProto.getUserUuid();
 		int researchId = reqProto.getResearchId();
 		
-		String userResearchUuid = reqProto.getUserResearchUuid();
+		String userResearchUuid = null;
+		if(reqProto.hasUserResearchUuid()) {
+			 userResearchUuid= reqProto.getUserResearchUuid();
+		}
 		
 		int gemsSpent = 0;
 		if(reqProto.hasGemsSpent()) {
@@ -108,8 +111,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
-			UUID.fromString(userResearchUuid);
 
+			if ( null != userResearchUuid && !userResearchUuid.isEmpty() ) {
+				UUID.fromString(userResearchUuid);
+			}
+			
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
@@ -140,9 +146,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
-				userResearchUuid = pra.getUserResearchUuid();
-				if (!(userResearchUuid.equals("")) || null != userResearchUuid) {
-					resBuilder.setUserResearchUuid(userResearchUuid);
+				String nuUserResearchUuid = pra.getUserResearchUuid();
+				if ( null != nuUserResearchUuid && !nuUserResearchUuid.isEmpty() ) {
+					resBuilder.setUserResearchUuid(nuUserResearchUuid);
 				}
 			}
 			PerformResearchResponseProto resProto = resBuilder.build();
