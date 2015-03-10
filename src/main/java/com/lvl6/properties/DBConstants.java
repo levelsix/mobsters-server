@@ -162,6 +162,8 @@ public class DBConstants {
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__USER_ID = "user_id";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME = "elapsed_time";
+
 	
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;

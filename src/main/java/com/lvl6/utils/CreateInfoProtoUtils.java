@@ -1015,6 +1015,7 @@ public class CreateInfoProtoUtils {
 		biqfupb.setBattleItemId(biqfu.getBattleItemId());
 		biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
 		biqfupb.setPriority(biqfu.getPriority());
+		biqfupb.setElapsedTime(biqfu.getElapsedTime());
 		
 		return biqfupb.build();
 	}

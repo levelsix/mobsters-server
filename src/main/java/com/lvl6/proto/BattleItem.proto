@@ -61,6 +61,7 @@ message BattleItemQueueForUserProto {
 	optional string userUuid = 2;
 	optional int32 battleItemId = 3;
 	optional int64 expectedStartTime = 4;	
+	optional float elapsedTime = 5;
 }
 
 	

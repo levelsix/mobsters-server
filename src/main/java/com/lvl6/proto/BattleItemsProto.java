@@ -2578,6 +2578,15 @@ public final class BattleItemsProto {
      * <code>optional int64 expectedStartTime = 4;</code>
      */
     long getExpectedStartTime();
+
+    /**
+     * <code>optional float elapsedTime = 5;</code>
+     */
+    boolean hasElapsedTime();
+    /**
+     * <code>optional float elapsedTime = 5;</code>
+     */
+    float getElapsedTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
@@ -2650,6 +2659,11 @@ public final class BattleItemsProto {
             case 32: {
               bitField0_ |= 0x00000008;
               expectedStartTime_ = input.readInt64();
+              break;
+            }
+            case 45: {
+              bitField0_ |= 0x00000010;
+              elapsedTime_ = input.readFloat();
               break;
             }
           }
@@ -2779,11 +2793,27 @@ public final class BattleItemsProto {
       return expectedStartTime_;
     }
 
+    public static final int ELAPSEDTIME_FIELD_NUMBER = 5;
+    private float elapsedTime_;
+    /**
+     * <code>optional float elapsedTime = 5;</code>
+     */
+    public boolean hasElapsedTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional float elapsedTime = 5;</code>
+     */
+    public float getElapsedTime() {
+      return elapsedTime_;
+    }
+
     private void initFields() {
       priority_ = 0;
       userUuid_ = "";
       battleItemId_ = 0;
       expectedStartTime_ = 0L;
+      elapsedTime_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2810,6 +2840,9 @@ public final class BattleItemsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, expectedStartTime_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeFloat(5, elapsedTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2834,6 +2867,10 @@ public final class BattleItemsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, expectedStartTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(5, elapsedTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2960,6 +2997,8 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         expectedStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        elapsedTime_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -3004,6 +3043,10 @@ public final class BattleItemsProto {
           to_bitField0_ |= 0x00000008;
         }
         result.expectedStartTime_ = expectedStartTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.elapsedTime_ = elapsedTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3033,6 +3076,9 @@ public final class BattleItemsProto {
         }
         if (other.hasExpectedStartTime()) {
           setExpectedStartTime(other.getExpectedStartTime());
+        }
+        if (other.hasElapsedTime()) {
+          setElapsedTime(other.getElapsedTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3233,6 +3279,38 @@ public final class BattleItemsProto {
         return this;
       }
 
+      private float elapsedTime_ ;
+      /**
+       * <code>optional float elapsedTime = 5;</code>
+       */
+      public boolean hasElapsedTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional float elapsedTime = 5;</code>
+       */
+      public float getElapsedTime() {
+        return elapsedTime_;
+      }
+      /**
+       * <code>optional float elapsedTime = 5;</code>
+       */
+      public Builder setElapsedTime(float value) {
+        bitField0_ |= 0x00000010;
+        elapsedTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float elapsedTime = 5;</code>
+       */
+      public Builder clearElapsedTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        elapsedTime_ = 0F;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemQueueForUserProto)
     }
 
@@ -3278,13 +3356,13 @@ public final class BattleItemsProto {
       "ategory\030\005 \001(\t\022\032\n\022createResourceType\030\006 \001(" +
       "\t\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013description\030\010 \001" +
       "(\t\022\023\n\013powerAmount\030\t \001(\005\022\020\n\010priority\030\n \001(",
-      "\005\"r\n\033BattleItemQueueForUserProto\022\020\n\010prio" +
-      "rity\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleIt" +
-      "emId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003**\n" +
-      "\016BattleItemType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020" +
-      "\002*J\n\022BattleItemCategory\022\031\n\025BATTLE_ITEM_C" +
-      "ATEGORY1\020\001\022\031\n\025BATTLE_ITEM_CATEGORY2\020\002B\022B" +
-      "\020BattleItemsProto"
+      "\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010pri" +
+      "ority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleI" +
+      "temId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022\023" +
+      "\n\013elapsedTime\030\005 \001(\002**\n\016BattleItemType\022\014\n" +
+      "\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*J\n\022BattleItemCat" +
+      "egory\022\031\n\025BATTLE_ITEM_CATEGORY1\020\001\022\031\n\025BATT" +
+      "LE_ITEM_CATEGORY2\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3317,7 +3395,7 @@ public final class BattleItemsProto {
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
-        new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", });
+        new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
   }
