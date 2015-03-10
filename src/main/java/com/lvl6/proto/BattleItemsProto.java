@@ -96,31 +96,31 @@ public final class BattleItemsProto {
   public enum BattleItemCategory
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>BATTLE_ITEM_CATEGORY1 = 1;</code>
+     * <code>POTION = 1;</code>
      */
-    BATTLE_ITEM_CATEGORY1(0, 1),
+    POTION(0, 1),
     /**
-     * <code>BATTLE_ITEM_CATEGORY2 = 2;</code>
+     * <code>PUZZLE = 2;</code>
      */
-    BATTLE_ITEM_CATEGORY2(1, 2),
+    PUZZLE(1, 2),
     ;
 
     /**
-     * <code>BATTLE_ITEM_CATEGORY1 = 1;</code>
+     * <code>POTION = 1;</code>
      */
-    public static final int BATTLE_ITEM_CATEGORY1_VALUE = 1;
+    public static final int POTION_VALUE = 1;
     /**
-     * <code>BATTLE_ITEM_CATEGORY2 = 2;</code>
+     * <code>PUZZLE = 2;</code>
      */
-    public static final int BATTLE_ITEM_CATEGORY2_VALUE = 2;
+    public static final int PUZZLE_VALUE = 2;
 
 
     public final int getNumber() { return value; }
 
     public static BattleItemCategory valueOf(int value) {
       switch (value) {
-        case 1: return BATTLE_ITEM_CATEGORY1;
-        case 2: return BATTLE_ITEM_CATEGORY2;
+        case 1: return POTION;
+        case 2: return PUZZLE;
         default: return null;
       }
     }
@@ -3517,10 +3517,9 @@ public final class BattleItemsProto {
       "oto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022" +
       "\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expectedStartTi" +
       "me\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleI" +
-      "temType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*J\n\022Bat" +
-      "tleItemCategory\022\031\n\025BATTLE_ITEM_CATEGORY1" +
-      "\020\001\022\031\n\025BATTLE_ITEM_CATEGORY2\020\002B\022B\020BattleI" +
-      "temsProto"
+      "temType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022Bat" +
+      "tleItemCategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B" +
+      "\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

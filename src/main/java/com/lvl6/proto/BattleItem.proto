@@ -49,8 +49,8 @@ enum BattleItemType {
 }
 
 enum BattleItemCategory {
-	BATTLE_ITEM_CATEGORY1 = 1;
-	BATTLE_ITEM_CATEGORY2 = 2;
+	POTION = 1;
+	PUZZLE = 2;
 
 
 
