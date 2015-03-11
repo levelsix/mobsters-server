@@ -162,8 +162,8 @@ public class CompleteBattleItemAction
 			}
 		}
 		
-		List<BattleItemForUser> battleItemList = new ArrayList<BattleItemForUser>(userBattleItemIdsToBattleItemsForUser.values());
-		int numInserted = insertUtil.insertIntoBattleItemForUser(battleItemList);
+//		List<BattleItemForUser> battleItemList = new ArrayList<BattleItemForUser>(bifuCompletedList);
+		int numInserted = insertUtil.insertIntoBattleItemForUser(bifuCompletedList);
 		
 		if(numInserted != completedList.size()) {
 			log.error("did not insert or update all the battle items completed");

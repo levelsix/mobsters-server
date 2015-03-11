@@ -174,6 +174,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		public BattleItemForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			BattleItemForUser bifu = new BattleItemForUser();
+			bifu.setId(rs.getString(DBConstants.BATTLE_ITEM_FOR_USER__ID));
 			bifu.setUserId(rs.getString(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID));
 			bifu.setBattleItemId(rs.getInt(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID));
 			bifu.setQuantity(rs.getInt(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY));

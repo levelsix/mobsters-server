@@ -23,17 +23,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.CompleteBattleItemRequestEvent;
 import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
-import com.lvl6.events.request.EvolutionFinishedRequestEvent;
-import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.StructureForUser;
@@ -41,15 +39,13 @@ import com.lvl6.info.User;
 import com.lvl6.misc.StaticDataContainer;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
-import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
-import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -64,6 +60,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.controller.CompleteBattleItemController;
 import com.lvl6.server.controller.CreateBattleItemController;
 import com.lvl6.server.controller.DestroyMoneyTreeStructureController;
 import com.lvl6.server.controller.DevController;
@@ -150,6 +147,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	CreateBattleItemController createBattleItemController;
+	
+	@Autowired
+	CompleteBattleItemController completeBattleItemController;
 	
 	@Autowired
 	BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
@@ -1307,6 +1307,32 @@ public class ControllerTest extends TestCase {
 		assertEquals(user4.getOil(), userOil3);
 		assertEquals(user4.getGems(), userGems3);
 
+		/////////////////////////COMPLETE BATTLE ITEM.//////////////////////////////////////
+		
+		CompleteBattleItemRequestProto.Builder cobirpb = CompleteBattleItemRequestProto.newBuilder();
+		cobirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user4, null));
+		cobirpb.setIsSpeedup(true);
+		cobirpb.setGemsForSpeedup(100);
+		List<BattleItemQueueForUserProto> completeList = new ArrayList<BattleItemQueueForUserProto>();
+		for(BattleItemQueueForUser var : bifuList3) {
+			completeList.add(CreateInfoProtoUtils.createBattleItemQueueForUserProto(var));
+
+		}
+		
+		cobirpb.addAllBiqfuCompleted(completeList);
+		
+		CompleteBattleItemRequestEvent cobire = new CompleteBattleItemRequestEvent();
+		cobire.setTag(1);
+		cobire.setCompleteBattleItemRequestProto(cobirpb.build());
+		completeBattleItemController.handleEvent(cobire);
+		
+		User user5 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
+		List<BattleItemQueueForUser> bifuList4 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user4.getId());
+
+		assertTrue(bifuList4.isEmpty());
+		assertEquals(user4.getGems() - 100, user5.getGems());
+		
+		
 	}
 	
 
