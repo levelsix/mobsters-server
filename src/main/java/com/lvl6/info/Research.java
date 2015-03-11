@@ -160,6 +160,22 @@ public class Research implements Serializable {
 		this.level = level;
 	}
 
+	public int getPredId() {
+		return predId;
+	}
+
+	public void setPredId(int predId) {
+		this.predId = predId;
+	}
+
+	public int getSuccId() {
+		return succId;
+	}
+
+	public void setSuccId(int succId) {
+		this.succId = succId;
+	}
+
 
 
 

@@ -448,7 +448,7 @@ public class DBConstants {
 	public static final String MONSTER_EVOLVING_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE = "user_monster_id_one";
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO = "user_monster_id_two";
-	public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
+	public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_monster_id";
 	public static final String MONSTER_EVOLVING_HISTORY__START_TIME = "start_time";
 	public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
 

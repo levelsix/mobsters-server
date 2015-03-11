@@ -2173,44 +2173,47 @@ public class InsertUtils implements InsertUtil{
 				return false;
 			}
 
-			String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+			String tableName = DBConstants.TABLE_MONSTER_ENHANCING_HISTORY;
 			int size = meh.getFeederMonsterForUserId().size();
 			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 
+			List<String> idList = new ArrayList<String>();
 			List<String> userIdList = new ArrayList<String>();
-			List<String> monsterForUserIdList = new ArrayList<String>();
+			List<String> mfuIdBeingEnhancedList = new ArrayList<String>();
+			List<String> feederList = new ArrayList<String>();
+			List<Integer> currentExpList = new ArrayList<Integer>();
+			List<Integer> prevExpList = new ArrayList<Integer>();
 			List<Timestamp> expectedStartTimeList = new ArrayList<Timestamp>();
+			List<Timestamp> timeOfEntryList = new ArrayList<Timestamp>();
 			List<Integer> enhancingCostList = new ArrayList<Integer>();
-			List<Boolean> enhancingCompleteList = new ArrayList<Boolean>();
 
 			for(int i=0; i<size; i++) {
-				userIdList.add(meh.getUserId());        
-				monsterForUserIdList.add(meh.getFeederMonsterForUserId().get(i));
+				idList.add(randomUUID());
+				userIdList.add(meh.getUserId());    
+				mfuIdBeingEnhancedList.add(meh.getMonsterForUserIdBeingEnhanced());
+				feederList.add(meh.getFeederMonsterForUserId().get(i));
+				currentExpList.add(meh.getCurrExp());
+				prevExpList.add(meh.getPrevExp());
 				expectedStartTimeList.add(meh.getEnhancingStartTime().get(i));
+				timeOfEntryList.add(meh.getTimeOfEntry());
 				enhancingCostList.add(meh.getEnhancingCost());
-				enhancingCompleteList.add(false);
 			}
 
-			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userIdList);
-			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, monsterForUserIdList);
-			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, expectedStartTimeList);
-			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, enhancingCostList);
-			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, enhancingCompleteList );     
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ID, idList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userIdList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED, mfuIdBeingEnhancedList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID, feederList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE, currentExpList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE, prevExpList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME, expectedStartTimeList);     
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY, timeOfEntryList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_COST, enhancingCostList);
 
-			//inserting the two feeder rows
-			int numInserted1 = DBConnection.get().insertIntoTableMultipleRows(
+			//inserting the two rows
+			int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 					tableName, insertParams, size);
 
-			Map<String, Object> insertParam = new HashMap<String, Object>();
-			//inserting the one being enhanced row bc expected start time is left null
-			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, meh.getUserId());
-			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, meh.getMonsterForUserIdBeingEnhanced());
-			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, 0);
-			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, false); 
-
-			int numInserted2 = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER, insertParam);
-
-			if(numInserted1 + numInserted2 == size + 1) {
+			if(numInserted == size) {
 				return true;
 			}
 			else return false;
