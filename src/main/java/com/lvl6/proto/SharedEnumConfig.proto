@@ -56,7 +56,7 @@ enum GameActionType {
 	REMOVE_OBSTACLE = 7;
 	COMBINE_MONSTER = 8;
 	ENTER_PERSISTENT_EVENT = 9;
-	RESEARCH = 10; //all enums not in "message" share namespace 
+	PERFORMING_RESEARCH = 10; //all enums not in "message" share namespace 
 	CREATE_BATTLE_ITEM = 11;
 }
 
