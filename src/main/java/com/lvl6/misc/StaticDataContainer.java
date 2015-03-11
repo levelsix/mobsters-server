@@ -789,8 +789,6 @@ public class StaticDataContainer
 	private static void setResearch(Builder sdpb) {
 		Map<Integer, Research> idsToResearch =
 				ResearchRetrieveUtils.getIdsToResearch();
-
-		log.info("" + idsToResearch);
 		
 		if (null == idsToResearch || idsToResearch.isEmpty()) {
 			log.warn("setResearch() no research");

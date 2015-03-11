@@ -152,7 +152,7 @@ public class DBConstants {
 	public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
 
 	/*BATTLE ITEM FOR USER*/
-	public static final String BATTLE_ITEM_FOR_USER__ID = "id";
+	public static final String BATTLE_ITEM_FOR_USER__ID = GENERIC__ID;
 	public static final String BATTLE_ITEM_FOR_USER__USER_ID = "user_id";
 	public static final String BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
 	public static final String BATTLE_ITEM_FOR_USER__QUANTITY = "quantity";
@@ -425,7 +425,7 @@ public class DBConstants {
 	public static final String MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE = "enhancing_complete";
 
 	/*MONSTER ENHANCING HISTORY*/
-	public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
+	public static final String MONSTER_ENHANCING_HISTORY__ID = GENERIC__ID;
 	public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED = "mfu_id_being_enhanced";
 	public static final String MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID = "feeder_mfu_id";
@@ -444,11 +444,11 @@ public class DBConstants {
 	public static final String MONSTER_EVOLVING_FOR_USER__START_TIME = "start_time";
 
 	/*MONSTER EVOLVING HISTORY TABLE*/
-	public static final String MONSTER_EVOLVING_HISTORY__ID = "id";
+	public static final String MONSTER_EVOLVING_HISTORY__ID = GENERIC__ID;
 	public static final String MONSTER_EVOLVING_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE = "user_monster_id_one";
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO = "user_monster_id_two";
-	public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_monster_id";
+	public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
 	public static final String MONSTER_EVOLVING_HISTORY__START_TIME = "start_time";
 	public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
 
