@@ -185,6 +185,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__USER_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY);
