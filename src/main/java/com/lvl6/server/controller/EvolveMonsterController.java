@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +41,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -52,6 +54,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected InsertUtil insertUtil;
 	
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
@@ -119,6 +124,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			//just seeing if ids are valid
 			UUID.fromString(catalystUserMonsterId);
 			StringUtils.convertToUUID(evolvingUserMonsterIds);
+			
 			
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -196,6 +202,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
 						catalystUserMonsterId, evolvingUserMonsterIds);
+				
+				String userMonsterId1 = evolvingUserMonsterIds.get(0);
+				String userMonsterId2 = evolvingUserMonsterIds.get(1);
+				Date now = new Date();
+				Timestamp currentTime = new Timestamp(now.getTime());
+				
+				insertUtil.insertMonsterEvolveHistory(userId, userMonsterId1, 
+						userMonsterId2, catalystUserMonsterId, clientTime, currentTime);
 			}
 
 		} catch (Exception e) {
@@ -392,6 +406,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 	}
+	
 
 	public Locker getLocker() {
 		return locker;

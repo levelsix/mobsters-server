@@ -13,30 +13,34 @@ import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 public class CollectMonsterEnhancementRequestEvent extends RequestEvent {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private CollectMonsterEnhancementRequestProto collectMonsterEnhancementRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-    	collectMonsterEnhancementRequestProto = CollectMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = collectMonsterEnhancementRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("CollectMonsterEnhancementRequest exception", e);
-    }
-  }
 
-  public CollectMonsterEnhancementRequestProto getCollectMonsterEnhancementRequestProto() {
-    return collectMonsterEnhancementRequestProto;
-  }
+	private CollectMonsterEnhancementRequestProto collectMonsterEnhancementRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "CollectMonsterEnhancementRequestEvent [collectMonsterEnhancementRequestProto="
-		  + collectMonsterEnhancementRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	public void read(ByteBuffer buff) {
+		try {
+			collectMonsterEnhancementRequestProto = CollectMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
+			playerId = collectMonsterEnhancementRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("CollectMonsterEnhancementRequest exception", e);
+		}
+	}
+
+	public CollectMonsterEnhancementRequestProto getCollectMonsterEnhancementRequestProto() {
+		return collectMonsterEnhancementRequestProto;
+	}
+
+	public void setCollectMonsterEnhancementRequestProto(CollectMonsterEnhancementRequestProto cmerp) {
+		this.collectMonsterEnhancementRequestProto = cmerp;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "CollectMonsterEnhancementRequestEvent [collectMonsterEnhancementRequestProto="
+				+ collectMonsterEnhancementRequestProto
+				+ "]";
+	}
 }

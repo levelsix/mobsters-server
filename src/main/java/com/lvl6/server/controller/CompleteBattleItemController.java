@@ -48,13 +48,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Autowired
 	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
 
@@ -87,11 +87,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		boolean isSpeedUp = reqProto.getIsSpeedup();
 		int gemsForSpeedUp = 0;
-		
+
 		if(isSpeedUp) {
 			gemsForSpeedUp = reqProto.getGemsForSpeedup();
 		}
-		
+
 		CompleteBattleItemResponseProto.Builder resBuilder =
 				CompleteBattleItemResponseProto.newBuilder();
 		resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
@@ -116,25 +116,25 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
-		
+
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			
+
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
 					userId, completedList, gemsForSpeedUp,
 					userRetrieveUtil, battleItemForUserRetrieveUtil, insertUtil, 
 					deleteUtil);
-			
+
 			cbia.execute(resBuilder);
 
 			CompleteBattleItemResponseEvent resEvent = new 
 					CompleteBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
@@ -142,12 +142,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				List<UserBattleItemProto> ubipCompletedList = 
 						convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
 				resBuilder.addAllUbiUpdated(ubipCompletedList);
-				
+
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -161,7 +161,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CompleteBattleItemController processEvent", e);
 			}
@@ -169,10 +169,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
 	}
-	
+
 	private List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList
-		(List<BattleItemForUser> bifuCompletedList) {
-		
+	(List<BattleItemForUser> bifuCompletedList) {
+
 		List<UserBattleItemProto> bifupCompletedList = new ArrayList<UserBattleItemProto>();
 
 		for(BattleItemForUser bifu : bifuCompletedList) {
@@ -180,26 +180,26 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			bifupCompletedList.add(ubip);
 		}
 		return bifupCompletedList;
-			
+
 	}
 
 	private List<BattleItemQueueForUser> getIdsToBattleItemQueueForUserFromProto(
 			List<BattleItemQueueForUserProto> protosList, String userId)
-	{
+			{
 		List<BattleItemQueueForUser> idsToBattleItemQueueForUser = null;
 		if(protosList == null || protosList.isEmpty()) {
 			//not an error
-//			log.error("CompleteBattleItem request did not send any battle item queue for user ids");
+			//			log.error("CompleteBattleItem request did not send any battle item queue for user ids");
 			return idsToBattleItemQueueForUser;
 		}
-		
+
 		idsToBattleItemQueueForUser = new ArrayList<BattleItemQueueForUser>();
-		
+
 		for(BattleItemQueueForUserProto biqfuProto : protosList)
 		{
 			BattleItemQueueForUser biqfu = new BattleItemQueueForUser();
 			biqfu.setPriority(biqfuProto.getPriority());
-			
+
 			String protoUserId = biqfuProto.getUserUuid();
 			if(protoUserId.equals(userId)) {
 				biqfu.setUserId(protoUserId);
@@ -215,12 +215,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			biqfu.setPriority(biqfuProto.getPriority());
 			idsToBattleItemQueueForUser.add(biqfu);
 		}
-		
+
 		return idsToBattleItemQueueForUser;
-		
-	}
-	
-	
+
+			}
+
+
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			CompleteBattleItemAction cbia)
 	{
@@ -278,5 +278,5 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
 	}
-		
+
 }
