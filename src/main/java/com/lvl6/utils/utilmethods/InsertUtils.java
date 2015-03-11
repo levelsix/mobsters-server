@@ -2024,16 +2024,16 @@ public class InsertUtils implements InsertUtil{
 			Set<String> replaceTheseColumns = new HashSet<String>();
 			replaceTheseColumns.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
 			replaceTheseColumns.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME);
-			
+
 			int numUpdated = DBConnection.get()
 					.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
 
 			return numUpdated;
 		}
-		
+
 		@Override
 		public int insertIntoBattleItemForUser(List<BattleItemForUser> biqfuList) {
-			
+
 			String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
@@ -2057,6 +2057,155 @@ public class InsertUtils implements InsertUtil{
 					.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
 
 			return numUpdated;
+		}
+
+		@Override
+		public boolean insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+				String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
+				Timestamp timeOfEntry) {
+			Map<String, Object> insertParams = new HashMap<String, Object>();
+
+			String id = randomUUID();
+
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__ID, id);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_ID,
+					userId);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE,
+					userMonsterId1);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO,
+					userMonsterId2);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID, 
+					catalystMonsterId);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__START_TIME, startTime);
+			insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY, timeOfEntry);
+
+			int numInserted = DBConnection.get().insertIntoTableBasic(
+					DBConstants.TABLE_MONSTER_EVOLVING_HISTORY, insertParams);
+			if (numInserted == 1) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public boolean insertMonsterDeleteHistory(List<MonsterDeleteHistory> monsterDeleteHistoryList) {
+
+			if(monsterDeleteHistoryList == null) {
+				log.info("delete list passed in is null");
+				return false;
+			}
+
+			String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
+			int size = monsterDeleteHistoryList.size();
+			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+			List<String> idList = new ArrayList<String>();
+			List<String> userIdList = new ArrayList<String>();
+			List<Integer> monsterIdList = new ArrayList<Integer>();
+			List<Integer> currExpList = new ArrayList<Integer>();
+			List<Integer> currLvlList = new ArrayList<Integer>();
+			List<Integer> currHealthList = new ArrayList<Integer>();
+			List<Integer> numPiecesList = new ArrayList<Integer>();
+			List<Boolean> isCompleteList = new ArrayList<Boolean>();
+			List<Timestamp> combineStartTimeList = new ArrayList<Timestamp>();
+			List<Integer> teamSlotNumList = new ArrayList<Integer>();
+			List<String> sourceOfPiecesList = new ArrayList<String>();
+			List<String> deletedReasonList = new ArrayList<String>();
+			List<String> detailsList = new ArrayList<String>();
+			List<Timestamp> deletedTimeList = new ArrayList<Timestamp>();
+
+			for(MonsterDeleteHistory mdh : monsterDeleteHistoryList) {
+				MonsterForUser mfu = mdh.getMfu();
+				idList.add(randomUUID());
+				userIdList.add(mfu.getUserId());
+				monsterIdList.add(mfu.getMonsterId());
+				currExpList.add(mfu.getCurrentExp());
+				currLvlList.add(mfu.getCurrentLvl());
+				currHealthList.add(mfu.getCurrentHealth());
+				numPiecesList.add(mfu.getNumPieces());
+				isCompleteList.add(mfu.isComplete());
+				combineStartTimeList.add(new Timestamp(mfu.getCombineStartTime().getTime()));
+				teamSlotNumList.add(mfu.getTeamSlotNum());
+				sourceOfPiecesList.add(mfu.getSourceOfPieces());
+				deletedReasonList.add(mdh.getDeletedReason());
+				detailsList.add(mdh.getDetails());
+				deletedTimeList.add(mdh.getDeletedTime());
+			}
+
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, idList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIdList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, monsterIdList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE, currExpList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_LEVEL, currLvlList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, currHealthList );
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, numPiecesList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, isCompleteList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__COMBINE_START_TIME, combineStartTimeList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, teamSlotNumList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, sourceOfPiecesList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_REASON, deletedReasonList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DETAILS, detailsList);
+			insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_TIME, deletedTimeList);        
+
+			int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+					tableName, insertParams, size);
+
+			if(numInserted == size) {
+				return true;
+			}
+			else return false;
+		}
+
+		@Override
+		public boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh) {
+
+			if(meh == null) {
+				log.info("MonsterEnhanceHistory is null");
+				return false;
+			}
+
+			String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+			int size = meh.getFeederMonsterForUserId().size();
+			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+			List<String> userIdList = new ArrayList<String>();
+			List<String> monsterForUserIdList = new ArrayList<String>();
+			List<Timestamp> expectedStartTimeList = new ArrayList<Timestamp>();
+			List<Integer> enhancingCostList = new ArrayList<Integer>();
+			List<Boolean> enhancingCompleteList = new ArrayList<Boolean>();
+
+			for(int i=0; i<size; i++) {
+				userIdList.add(meh.getUserId());        
+				monsterForUserIdList.add(meh.getFeederMonsterForUserId().get(i));
+				expectedStartTimeList.add(meh.getEnhancingStartTime().get(i));
+				enhancingCostList.add(meh.getEnhancingCost());
+				enhancingCompleteList.add(false);
+			}
+
+			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userIdList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, monsterForUserIdList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, expectedStartTimeList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, enhancingCostList);
+			insertParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, enhancingCompleteList );     
+
+			//inserting the two feeder rows
+			int numInserted1 = DBConnection.get().insertIntoTableMultipleRows(
+					tableName, insertParams, size);
+
+			Map<String, Object> insertParam = new HashMap<String, Object>();
+			//inserting the one being enhanced row bc expected start time is left null
+			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, meh.getUserId());
+			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, meh.getMonsterForUserIdBeingEnhanced());
+			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, 0);
+			insertParam.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, false); 
+
+			int numInserted2 = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER, insertParam);
+
+			if(numInserted1 + numInserted2 == size + 1) {
+				return true;
+			}
+			else return false;
+
 		}
 
 }

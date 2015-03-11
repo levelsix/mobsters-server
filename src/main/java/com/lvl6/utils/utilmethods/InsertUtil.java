@@ -258,4 +258,12 @@ public interface InsertUtil {
 	public abstract int insertIntoBattleItemForUser(List<BattleItemForUser> biqfuList);
 	
 	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
+	
+	public abstract int insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
+			Timestamp timeOfEntry);
+	
+	public abstract boolean insertMonsterDeleteHistory(List<MonsterDeleteHistory> monsterDeleteHistoryList);
+	
+	public abstract boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh);
 }
