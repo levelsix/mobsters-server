@@ -27,9 +27,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
-import com.lvl6.events.request.CompleteBattleItemRequestEvent;
 import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
+import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
+import com.lvl6.events.request.EvolutionFinishedRequestEvent;
+import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
@@ -38,6 +40,8 @@ import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.StructureForUser;
@@ -48,11 +52,20 @@ import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
+import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
+import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
+import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
+import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -812,221 +825,7 @@ public class ControllerTest extends TestCase {
 		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
 		assertNull(ci);*/
 	}
-	
-//	@Test
-//	public void testUserResearchInsert() {
-//		String userId = "abcd";
-//		Research research = ResearchRetrieveUtils.getResearchForId(10000);
-//		Date date = new Date();
-//		Timestamp timestamp = new Timestamp(date.getTime());
-//		String userResearchId = null; 
-//		userResearchId = insertUtil.insertUserResearch(userId, research, timestamp, false);
-//		
-//		assertNotNull(userResearchId);
-//
-//		
-//	}
-	
-//	@Test
-//	public void testUpdateUserResearchIsComplete() {
-//		//User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-//		updateUtil.updateUserResearchCompleteStatus("326acfa8-0b37-478d-84d6-5f99d481fdef");
-//		assertTrue(true);
-//	}
-	
 
-	@Test
-	public void testResearch() {
-		
-		//create test user
-//		Map<String, Object> userInsertParams = new HashMap<String, Object>();
-//		userInsertParams.put("id", "abcd");
-//		userInsertParams.put("name", "tester");
-//		userInsertParams.put("level", 1);
-//		userInsertParams.put("gems", 100);
-//		userInsertParams.put("cash", 100);
-//		userInsertParams.put("oil", 100);
-//		userInsertParams.put("experience", 1);
-//		userInsertParams.put("udid_for_history", "abcd");
-//		userInsertParams.put("last_login", "2014-12-02 03:59:27");
-//		userInsertParams.put("is_fake", 0);
-//		userInsertParams.put("is_admin", 0);
-//		userInsertParams.put("num_coins_retrieved_from_structs", 0);
-//		userInsertParams.put("num_oil_retrieved_from_structs", 0);
-//		userInsertParams.put("last_obstacle_spawned_time", "2014-12-02 03:59:27");
-//		
-//		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_USER, userInsertParams);
-		
-		//create test spell
-		Map<String, Object> researchInsertParams = new HashMap<String, Object>();
-		researchInsertParams.put("id", 10002);
-		researchInsertParams.put("name", "spell3");
-		researchInsertParams.put("cost_amt", 100);
-		researchInsertParams.put("cost_type", "OIL");
-		
-		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
-		
-		
-		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-		int userGems = user.getGems();
-		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
-		
-		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-		prrpb.setResearchId(10002);
-		Date date = new Date();
-		prrpb.setClientTime(date.getTime());
-		prrpb.setGemsSpent(25);
-		prrpb.setResourceChange(100);
-		ResourceType rt = ResourceType.OIL;
-		prrpb.setResourceType(rt);
-		
-		
-		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
-		prre.setTag(1);
-		prre.setPerformResearchRequestProto(prrpb.build());
-		performResearchController.handleEvent(prre);
-		
-		int userGems3 = user.getGems();
-		int userOil = user.getOil();
-		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-		//assertNotNull(rfuList);
-		String userResearchUuid = null;
-		for(ResearchForUser rfu : rfuList) {
-			if(rfu.getResearchId() == 10002) {
-				assertEquals(rfu.getUserId(), user.getId());
-				User rfuUser = userRetrieveUtil.getUserById(rfu.getUserId());
-				assertEquals(rfu.getResearchId(), 10002);
-				userResearchUuid = rfu.getId();
-				assertEquals(userOil-100, rfuUser.getOil());
-				assertEquals(userGems3-25, rfuUser.getGems());
-			}
-			
-		}
-//		assertTrue(!rfuList.isEmpty());
-//		User user2 = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-//		
-//		
-//		
-//		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
-//		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-//		fprrpb.setUserResearchUuid(userResearchUuid);
-//		
-//		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
-//		fprre.setTag(1);
-//		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
-//		finishPerformingResearchController.handleEvent(fprre);
-//		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-//		boolean isComplete2 = false;
-//		for(ResearchForUser rfu2 : rfuList2) {
-//			isComplete2 = rfu2.isComplete();
-//		}
-//		assertTrue(isComplete2);
-//		
-//		
-//		//create test spell
-//		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
-//		researchInsertParams.put("id", 10001);
-//		researchInsertParams.put("name", "spell2");
-//		researchInsertParams.put("cost_amt", 100);
-//		researchInsertParams.put("cost_type", "CASH");
-//		
-//		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams);
-//
-//		int userCash = user.getCash();
-//		int userGems2 = user.getGems();
-//		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-//		prrpb.setResearchId(10001);
-//		prrpb.setClientTime(date.getTime());
-//		prrpb.setGemsSpent(25);
-//		prrpb.setUserResearchUuid(userResearchUuid);
-//		prrpb.setResourceChange(50);
-//		ResourceType rt = ResourceType.CASH;
-//		prrpb.setResourceType(rt);
-//		
-//		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
-//		prre2.setTag(1);
-//		prre2.setPerformResearchRequestProto(prrpb.build());
-//		performResearchController.handleEvent(prre2);
-//		
-//		List<ResearchForUser> rfuList3 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-//		for(ResearchForUser rfu: rfuList3) {
-//			assertEquals(rfu.getUserId(), user.getId());
-//			User currUser = userRetrieveUtil.getUserById(rfu.getUserId());
-//			assertFalse(rfu.isComplete());
-//			assertTrue(rfu.getResearchId() == 10001);
-//			assertEquals(userCash-50, currUser.getCash());
-//			assertEquals(userGems2-25, currUser.getGems());
-//		}
-//
-//		
-	}
-
-	@Test
-	public void testUpgradeResearch() {
-		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-		Date date = new Date();
-		String userResearchUuid = "239c8623-c346-4472-87fa-6faecdcb2039";
-		//create test spell
-		Map<String, Object> researchInsertParams2 = new HashMap<String, Object>();
-		researchInsertParams2.put("id", 10001);
-		researchInsertParams2.put("name", "spell2");
-		researchInsertParams2.put("cost_amt", 100);
-		researchInsertParams2.put("cost_type", "CASH");
-
-		DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_RESEARCH_CONFIG, researchInsertParams2);
-
-		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
-
-		int userCash = user.getCash();
-		int userGems2 = user.getGems();
-		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-		prrpb.setResearchId(10001);
-		prrpb.setClientTime(date.getTime());
-		prrpb.setGemsSpent(25);
-		prrpb.setUserResearchUuid(userResearchUuid);
-		prrpb.setResourceChange(50);
-		ResourceType rt = ResourceType.CASH;
-		prrpb.setResourceType(rt);
-
-		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
-		prre2.setTag(1);
-		prre2.setPerformResearchRequestProto(prrpb.build());
-		performResearchController.handleEvent(prre2);
-
-		List<ResearchForUser> rfuList3 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-		for(ResearchForUser rfu: rfuList3) {
-			assertEquals(rfu.getUserId(), user.getId());
-			User currUser = userRetrieveUtil.getUserById(rfu.getUserId());
-			assertFalse(rfu.isComplete());
-			assertTrue(rfu.getResearchId() == 10001);
-			assertEquals(userCash-50, currUser.getCash());
-			assertEquals(userGems2-25, currUser.getGems());
-		}
-
-	}
-	
-	@Test
-	public void testFinishResearch() {
-		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
-		Date date = new Date();
-		String userResearchUuid = "0185e5f9-622a-415b-8444-d3743cbf8442";
-		
-		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
-		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
-		fprrpb.setUserResearchUuid(userResearchUuid);
-		fprrpb.setGemsSpent(50);
-		
-		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
-		fprre.setTag(1);
-		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
-		finishPerformingResearchController.handleEvent(fprre);
-		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-		boolean isComplete2 = false;
-		for(ResearchForUser rfu2 : rfuList2) {
-			assertFalse(rfu2.isComplete());
-			
-		}
-	}
 	
 	//buy money tree twice, then destroy it
 	@Test
@@ -1177,187 +976,7 @@ public class ControllerTest extends TestCase {
 		assertTrue(moneyTreeCounter2 == 0);	
 	}
 	
-	@Test
-	public void testBattleItems() {
-		User user1 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		int userCash1 = user1.getCash();
-		int userOil1 = user1.getOil();
-		int userGems1 = user1.getGems();
-		CreateBattleItemRequestProto.Builder cbirpb = CreateBattleItemRequestProto.newBuilder();
-		cbirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user1, null));	
-
-		//create list of battle items add to queue
-		List<BattleItemQueueForUserProto> newList = new ArrayList<BattleItemQueueForUserProto>();
-		BattleItemQueueForUser biqfu = new BattleItemQueueForUser();
-		biqfu.setBattleItemId(1);
-		biqfu.setPriority(1);
-		Date now = new Date();
-		biqfu.setExpectedStartTime(new Timestamp(now.getTime()));
-		biqfu.setUserId(user1.getId());
-		BattleItemQueueForUserProto biqfup = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu);
-		newList.add(biqfup);
-
-		cbirpb.addAllBiqfuNew(newList);
-		cbirpb.setCashChange(50);
-		cbirpb.setOilChange(0);
-		cbirpb.setGemCostForCreating(0);
-		
-		CreateBattleItemRequestEvent cbire = new CreateBattleItemRequestEvent();
-		cbire.setTag(1);
-		cbire.setCreateBattleItemRequestProto(cbirpb.build());
-		createBattleItemController.handleEvent(cbire);
-		
-		User user2 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-
-		List<BattleItemQueueForUser> bifuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
-		assertTrue(bifuList.size() == 1);
-		assertEquals(user2.getCash() + 50, userCash1);
-		
-		//////////////////second request event//////////////////////////////////////////////////////
-		int userCash2 = user2.getCash();
-		int userOil2 = user2.getOil();
-		int userGems2 = user2.getGems();
-		CreateBattleItemRequestProto.Builder cbirpb2 = CreateBattleItemRequestProto.newBuilder();
-		cbirpb2.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user2, null));	
-
-		//finished list
-		List<BattleItemQueueForUserProto> deletedList2 = new ArrayList<BattleItemQueueForUserProto>();
-		BattleItemQueueForUser biqfu2 = new BattleItemQueueForUser();
-		biqfu2.setBattleItemId(1);
-		biqfu2.setPriority(1);
-		Date now2 = new Date();
-		biqfu2.setExpectedStartTime(new Timestamp(now2.getTime()));
-		biqfu2.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup2 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu2);
-		deletedList2.add(biqfup2);
-		
-		//create list of battle items add to queue
-		List<BattleItemQueueForUserProto> newList2 = new ArrayList<BattleItemQueueForUserProto>();
-		BattleItemQueueForUser biqfu3 = new BattleItemQueueForUser();
-		biqfu3.setBattleItemId(1);
-		biqfu3.setPriority(1);
-		Date now3 = new Date();
-		biqfu3.setExpectedStartTime(new Timestamp(now3.getTime()+1000));
-		biqfu3.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup3 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu3);
-
-		BattleItemQueueForUser biqfu4 = new BattleItemQueueForUser();
-		biqfu4.setBattleItemId(2);
-		biqfu4.setPriority(2);
-		Date now4 = new Date();
-		biqfu4.setExpectedStartTime(new Timestamp(now4.getTime()+1000));
-		biqfu4.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup4 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu4);
-		
-		BattleItemQueueForUser biqfu5 = new BattleItemQueueForUser();
-		biqfu5.setBattleItemId(3);
-		biqfu5.setPriority(3);
-		Date now5 = new Date();
-		biqfu5.setExpectedStartTime(new Timestamp(now5.getTime()+1000));
-		biqfu5.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup5 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu5);
-		
-		newList2.add(biqfup3);
-		newList2.add(biqfup4);
-		newList2.add(biqfup5);
-
-		cbirpb2.addAllBiqfuNew(newList2);
-		cbirpb2.addAllBiqfuDelete(deletedList2);
-		cbirpb2.setCashChange(75);
-		cbirpb2.setOilChange(100);
-		cbirpb2.setGemCostForCreating(100);
-		
-		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
-		cbire2.setTag(1);
-		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
-		createBattleItemController.handleEvent(cbire2);
-		
-		User user3 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-
-		List<BattleItemQueueForUser> bifuList2 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user1.getId());
-		assertTrue(bifuList2.size() == 3);
-		assertEquals(user3.getCash() + 75, userCash2);
-		assertEquals(user3.getOil() + 100, userOil2);
-		assertEquals(user3.getGems() + 100, userGems2);
-
-		
-		//////////////////third request event//////////////////////////////////////////////////////
-		int userCash3 = user3.getCash();
-		int userOil3 = user3.getOil();
-		int userGems3 = user3.getGems();
-		CreateBattleItemRequestProto.Builder cbirpb3 = CreateBattleItemRequestProto.newBuilder();
-		cbirpb3.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user3, null));	
-
-		//removed list
-		List<BattleItemQueueForUserProto> removedList3 = new ArrayList<BattleItemQueueForUserProto>();
-		BattleItemQueueForUser biqfu6 = new BattleItemQueueForUser();
-		biqfu6.setBattleItemId(1);
-		biqfu6.setPriority(1);
-		Date now6 = new Date();
-		biqfu6.setExpectedStartTime(new Timestamp(now6.getTime()));
-		biqfu6.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup6 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu6);
-		removedList3.add(biqfup6);
-		
-		//updated list
-		List<BattleItemQueueForUserProto> updatedList3 = new ArrayList<BattleItemQueueForUserProto>();
-		BattleItemQueueForUser biqfu7 = new BattleItemQueueForUser();
-		biqfu7.setBattleItemId(2);
-		biqfu7.setPriority(2);
-		Date now7 = new Date();
-		biqfu7.setExpectedStartTime(new Timestamp(now7.getTime()+2000));
-		biqfu7.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup7 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu7);
-
-		BattleItemQueueForUser biqfu8 = new BattleItemQueueForUser();
-		biqfu8.setBattleItemId(2);
-		biqfu8.setPriority(2);
-		Date now8 = new Date();
-		biqfu8.setExpectedStartTime(new Timestamp(now8.getTime()+2000));
-		biqfu8.setUserId(user2.getId());
-		BattleItemQueueForUserProto biqfup8 = CreateInfoProtoUtils.createBattleItemQueueForUserProto(biqfu8);
-		updatedList3.add(biqfup7);
-		updatedList3.add(biqfup8);
-
-		cbirpb3.addAllBiqfuDelete(removedList3);
-		cbirpb3.addAllBiqfuUpdate(updatedList3);
-		cbirpb3.setCashChange(-50);
-		cbirpb3.setOilChange(0);
-		cbirpb3.setGemCostForCreating(0);
-		
-		CreateBattleItemRequestEvent cbire3 = new CreateBattleItemRequestEvent();
-		cbire3.setTag(1);
-		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
-		createBattleItemController.handleEvent(cbire3);
-		
-		User user4 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-
-		List<BattleItemQueueForUser> bifuList3 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user4.getId());
-		assertTrue(bifuList3.size() == 2);
-		assertEquals(user4.getCash() - 50, userCash3);
-		assertEquals(user4.getOil(), userOil3);
-		assertEquals(user4.getGems(), userGems3);
-
-		/////////////////////////COMPLETE RESEARCH/////////////////////////////////////////////
-		Date date = new Date();
-		
-		CompleteBattleItemRequestProto.Builder cbirpb = CompleteBattleItemRequestProto.newBuilder();
-		cbirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user4, null));
-		cbirpb.setGemsSpent(50);
-		
-		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
-		fprre.setTag(1);
-		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
-		finishPerformingResearchController.handleEvent(fprre);
-		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
-		boolean isComplete2 = false;
-		for(ResearchForUser rfu2 : rfuList2) {
-			assertFalse(rfu2.isComplete());
-			
-		}
-		
-		
-	}
+	
 	
 
 
@@ -1367,32 +986,32 @@ public class ControllerTest extends TestCase {
 	}
 
 
-//	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
-//			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
-//			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
-//		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-//		String id = randomUUID();
-//
-//		Map<String, Object> insertParams = new HashMap<String, Object>();
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
-//		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
-//
-//
-//		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-//		
-//		return id;
-//	}
+	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
+			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
+			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		String id = randomUUID();
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
+
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+		
+		return id;
+	}
 	
 	@Test
 	public void testMonsterEnhancingAndHistoryTables() {

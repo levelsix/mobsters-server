@@ -190,6 +190,28 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return user;
 	}
 
+	public User getUserByName(String name) {
+		log.debug(String.format(
+			"retrieving user with name %s", name));
+
+		Object[] values = { name };
+		String query = String.format(
+			"select * from %s where %s=?",
+			TABLE_NAME, DBConstants.USER__NAME);
+
+		User user = null;
+		try {
+			user = this.jdbcTemplate.queryForObject(query, values, rowMapper);
+		} catch (Exception e) {
+			log.error(String.format(
+				"getUserByNameuser retrieve db error. userName=%s",
+				name), e);
+//		} finally {
+//			DBConnection.get().close(rs, null, conn);
+		}
+		return user;
+	}
+	
 	public Map<String, User> getUsersByIds(Collection<String> userIds) {
 		log.debug("retrieving users with userIds " + userIds);
 

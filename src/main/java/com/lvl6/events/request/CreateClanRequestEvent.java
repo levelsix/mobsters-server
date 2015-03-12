@@ -13,31 +13,35 @@ import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 public class CreateClanRequestEvent extends RequestEvent {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private CreateClanRequestProto createClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      createClanRequestProto = CreateClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = createClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("CreateClanRequest exception", e);
-    }
-  }
 
-  public CreateClanRequestProto getCreateClanRequestProto() {
-    return createClanRequestProto;
-  }
+	private CreateClanRequestProto createClanRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "CreateClanRequestEvent [createClanRequestProto="
-		  + createClanRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	public void read(ByteBuffer buff) {
+		try {
+			createClanRequestProto = CreateClanRequestProto.parseFrom(ByteString.copyFrom(buff));
+			playerId = createClanRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("CreateClanRequest exception", e);
+		}
+	}
+
+	public CreateClanRequestProto getCreateClanRequestProto() {
+		return createClanRequestProto;
+	}
+
+	public void setCreateClanRequestProto(CreateClanRequestProto ccrp) {
+		this.createClanRequestProto = ccrp;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "CreateClanRequestEvent [createClanRequestProto="
+				+ createClanRequestProto
+				+ "]";
+	}
 
 }
