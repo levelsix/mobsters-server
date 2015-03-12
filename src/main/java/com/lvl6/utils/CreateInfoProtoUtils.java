@@ -1018,8 +1018,22 @@ public class CreateInfoProtoUtils {
 		biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
 		biqfupb.setPriority(biqfu.getPriority());
 		biqfupb.setElapsedTime(biqfu.getElapsedTime());
-		
+
 		return biqfupb.build();
+	}
+
+	public static List<BattleItemQueueForUserProto> createBattleItemQueueForUserProtoList(List<BattleItemQueueForUser> biqfuList) {
+		List<BattleItemQueueForUserProto> biqfupList = new ArrayList<BattleItemQueueForUserProto>();
+		for(BattleItemQueueForUser biqfu : biqfuList) {
+			BattleItemQueueForUserProto.Builder biqfupb = BattleItemQueueForUserProto.newBuilder();
+			biqfupb.setUserUuid(biqfu.getUserId());
+			biqfupb.setBattleItemId(biqfu.getBattleItemId());
+			biqfupb.setExpectedStartTime(biqfu.getExpectedStartTime().getTime());
+			biqfupb.setPriority(biqfu.getPriority());
+			biqfupb.setElapsedTime(biqfu.getElapsedTime());
+			biqfupList.add(biqfupb.build());
+		}
+		return biqfupList;
 	}
 	
 

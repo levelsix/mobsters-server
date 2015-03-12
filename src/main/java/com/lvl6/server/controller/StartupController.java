@@ -34,6 +34,8 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.ForceLogoutResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.AchievementForUser;
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
@@ -65,6 +67,8 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
+import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
@@ -101,6 +105,8 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
@@ -239,6 +245,12 @@ public class StartupController extends EventController {
 	
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	
+	@Autowired
+	protected BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
+	
+	@Autowired
+	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
@@ -627,6 +639,11 @@ public class StartupController extends EventController {
 			log.info("{}ms at setSecretGifts", stopWatch.getTime());
 			setResearch(resBuilder, playerId);
 			log.info("{}ms at setResearch", stopWatch.getTime());
+			setBattleItemForUser(resBuilder, playerId);
+			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
+			setBattleItemQueueForUser(resBuilder, playerId);
+			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+
 			
 			
 			//db request for user monsters
@@ -1495,6 +1512,26 @@ public class StartupController extends EventController {
 					.createUserResearchProto(userResearchs);
 		
 			resBuilder.addAllUserResearchs(urpList);
+		}
+	}
+	
+	private void setBattleItemQueueForUser(Builder resBuilder, String userId) {
+		List<BattleItemQueueForUser> biqfuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(userId);
+		if(null != biqfuList && !biqfuList.isEmpty()) {
+			Collection<BattleItemQueueForUserProto> biqfupList = CreateInfoProtoUtils
+					.createBattleItemQueueForUserProtoList(biqfuList);
+		
+			resBuilder.addAllBattleItemQueue(biqfupList);
+		}
+	}
+	
+	private void setBattleItemForUser(Builder resBuilder, String userId) {
+		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
+		if(null != bifuList && !bifuList.isEmpty()) {
+			Collection<UserBattleItemProto> biqfupList = CreateInfoProtoUtils
+					.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
+		
+			resBuilder.addAllBattleItem(biqfupList);
 		}
 	}
 	
