@@ -270,19 +270,8 @@ public class SellUserMonsterController extends EventController {
 		if (null == userMonsterIds || userMonsterIds.isEmpty()) {
 			return;
 		}
-		String delReason = ControllerConstants.MFUDR__SELL;
-		List<String> deleteReasons = new ArrayList<String>();
-		List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>();
 
-		for (int i = 0; i < userMonsterIds.size(); i++) {
-			String userMonsterId = userMonsterIds.get(i);
-			int amount = userMonsterIdsToCashAmounts.get(userMonsterId);
-			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
-			userMonstersList.add(mfu);
-			deleteReasons.add(delReason + amount);
-		}
-
-		String deletedReason = "sell monster";
+		String deletedReason = ControllerConstants.MFUDR__SELL;
 		Timestamp deletedTime = new Timestamp(deleteDate.getTime());
 		for(String userMonsterId : idsToUserMonsters.keySet()) {
 			String details = "sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId);
@@ -296,13 +285,7 @@ public class SellUserMonsterController extends EventController {
 
 		log.info("user monsters added to history table. userMonsterIds:" + userMonsterIds);
 
-		//
-		//		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
-		//				deleteReasons, userMonstersList, deleteDate);
-		//
-		//		log.info("user monsters that were deleted. userMonsterIds="
-		//				+ userMonsterIds + "\t idsToCashAmounts=" + userMonsterIdsToCashAmounts
-		//				+ "\t idsToUserMonsters=" + idsToUserMonsters + "\t numDeleted=" + num);
+
 	}
 
 	// FOR CURRENCY HISTORY PURPOSES

@@ -849,6 +849,10 @@ public class DBConstants {
 	public static final String BATTLE_ITEM_CONFIG__DESCRIPTION = "description";
 	public static final String BATTLE_ITEM_CONFIG__POWER_AMOUNT = "power_amount";
 	public static final String BATTLE_ITEM_CONFIG__IMAGE_NAME = "image_name";
+	public static final String BATTLE_ITEM_CONFIG__PRIORITY = "priority";
+	public static final String BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE = "minutes_to_create";
+	public static final String BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST = "in_battle_gem_cost";
+
 
 	/*BOARD*/
 	public static final String BOARD__ID = GENERIC__ID;
