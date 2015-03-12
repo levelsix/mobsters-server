@@ -834,7 +834,7 @@ public class ControllerTest extends TestCase {
 //		assertTrue(true);
 //	}
 	
-
+/*
 	@Test
 	public void testResearch() {
 		
@@ -960,7 +960,6 @@ public class ControllerTest extends TestCase {
 //
 //		
 	}
-
 	@Test
 	public void testUpgradeResearch() {
 		User user = userRetrieveUtil.getUserById("0185e5f9-622a-415b-8444-d3743cbf8442");
@@ -1027,6 +1026,7 @@ public class ControllerTest extends TestCase {
 			
 		}
 	}
+ */
 	
 	//buy money tree twice, then destroy it
 	@Test
@@ -1176,7 +1176,7 @@ public class ControllerTest extends TestCase {
 		}
 		assertTrue(moneyTreeCounter2 == 0);	
 	}
-	
+	/*
 	@Test
 	public void testBattleItems() {
 		User user1 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
@@ -1358,7 +1358,7 @@ public class ControllerTest extends TestCase {
 		
 		
 	}
-	
+	*/
 
 
 
@@ -1394,6 +1394,7 @@ public class ControllerTest extends TestCase {
 //		return id;
 //	}
 	
+	/*
 	@Test
 	public void testMonsterEnhancingAndHistoryTables() {
 		////////////////////////ENHANCE REQUEST//////////////////////////////
@@ -1638,7 +1639,6 @@ public class ControllerTest extends TestCase {
 		}
 		return size;
 	}
-
 	
 	@Test
 	public void testSellingMonsterAndHistory() {
@@ -1681,6 +1681,7 @@ public class ControllerTest extends TestCase {
 		assertEquals(monsterDeleteHistoryRows + 1, monsterDeleteHistoryRows2);
 
 	}
+	 */
 	
 	
 	@Test
