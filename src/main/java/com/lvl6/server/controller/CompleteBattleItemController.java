@@ -133,16 +133,20 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			CompleteBattleItemResponseEvent resEvent = new 
 					CompleteBattleItemResponseEvent(senderProto.getUserUuid());
 
+			User user2 = cbia.getUser();
+
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				User user2 = cbia.getUser();
 				List<BattleItemForUser> bifuCompletedList = cbia.getBifuCompletedList();
 				List<UserBattleItemProto> ubipCompletedList = 
 						CreateInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
 				resBuilder.addAllUbiUpdated(ubipCompletedList);
-				resEvent.setTag(event.getTag());
-				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
-				server.writeEvent(resEvent);
-
+			}
+			
+			resEvent.setTag(event.getTag());
+			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+			
+			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
