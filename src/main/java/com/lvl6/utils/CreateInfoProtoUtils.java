@@ -4273,6 +4273,7 @@ public class CreateInfoProtoUtils {
 		bipb.setBattleItemId(bi.getId());
 		bipb.setName(bi.getName());
 		bipb.setImgName(bi.getImageName());
+
 		String type = bi.getType();
 		if(type != null) {
 			try {
@@ -4299,6 +4300,7 @@ public class CreateInfoProtoUtils {
 					e);
 			}
 		}
+		
 		String resourceType = bi.getCreateResourceType();
 		if (null != resourceType) {
 			try {
@@ -4306,7 +4308,7 @@ public class CreateInfoProtoUtils {
 				bipb.setCreateResourceType(rt);
 			} catch(Exception e) {
 				log.error(String.format(
-					"invalid ResourceType. achievement=%s", resourceType), e);
+					"invalid ResourceType. resource type=%s", resourceType), e);
 			}
 		}
 		bipb.setCreateCost(bi.getCreateCost());

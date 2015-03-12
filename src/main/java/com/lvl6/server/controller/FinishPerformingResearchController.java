@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_PERFORM_RESEARCH_EVENT;
+		return EventProtocolRequest.C_FINISH_PERFORMING_RESEARCH_EVENT;
 	}
 
 	@Override
