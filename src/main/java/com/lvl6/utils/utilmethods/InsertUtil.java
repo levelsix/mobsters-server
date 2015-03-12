@@ -23,6 +23,8 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterDeleteHistory;
+import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -255,8 +257,16 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList);
 	
-	public abstract int insertIntoBattleItemForUser(List<BattleItemQueueForUser> biqfuList, String userId,
-			Map<Integer, List<BattleItemForUser>> getBattleItemIdsToUserBattleItemForUser);
+	public abstract int insertIntoBattleItemForUser(List<BattleItemForUser> biqfuList);
 	
 	public abstract int insertIntoUpdatePvpBoardObstacleForUser(Collection<PvpBoardObstacleForUser> pbofus);
+	
+	public abstract boolean insertMonsterEvolveHistory(String userId, String userMonsterId1, 
+			String userMonsterId2, String catalystMonsterId, Timestamp startTime, 
+			Timestamp timeOfEntry);
+	
+	public abstract boolean insertMonsterDeleteHistory(List<MonsterDeleteHistory> monsterDeleteHistoryList);
+	
+	public abstract boolean insertMonsterEnhanceHistory(MonsterEnhanceHistory meh);
+	
 }

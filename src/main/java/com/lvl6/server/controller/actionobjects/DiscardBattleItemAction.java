@@ -70,7 +70,7 @@ public class DiscardBattleItemAction
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		int numDeleted = deleteUtil.deleteUserBattleItems(discardedBattleItemList);
+		int numDeleted = deleteUtil.deleteUserBattleItems(userId, discardedBattleItemList);
 		if(numDeleted != discardedBattleItemList.size()) {
 	    	log.error("did not properly delete all user battle items");
 	    	return false;

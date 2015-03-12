@@ -4265,6 +4265,8 @@ public class CreateInfoProtoUtils {
 		return fdpb.build();
 	}
 	
+
+	
 	
 	/**BattleItemProto*********************************************/
 	
@@ -4323,27 +4325,27 @@ public class CreateInfoProtoUtils {
 		return bipb.build();
 	}
 	
+	public static List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList(List<BattleItemForUser> bifuList) {
+		List<UserBattleItemProto> returnList = new ArrayList<UserBattleItemProto>();
+		for(BattleItemForUser bifu : bifuList) {
+			UserBattleItemProto ubip = createUserBattleItemProtoFromBattleItemForUser(bifu);
+			returnList.add(ubip);
+		}
+		return returnList;
+	}
+	
 
 	
 	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(BattleItemForUser bifu) {
 		UserBattleItemProto.Builder ubipb = UserBattleItemProto.newBuilder();
+		ubipb.setUserBattleItemId(bifu.getId());
 		ubipb.setUserUuid(bifu.getUserId());
 		ubipb.setBattleItemId(bifu.getBattleItemId());
 		ubipb.setQuantity(bifu.getQuantity());
-		ubipb.setId(bifu.getId());
 		
 		return ubipb.build();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**TournamentStuff.proto******************************************/

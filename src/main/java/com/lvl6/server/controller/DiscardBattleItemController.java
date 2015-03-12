@@ -13,10 +13,8 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DiscardBattleItemRequestEvent;
 import com.lvl6.events.response.DiscardBattleItemResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
@@ -140,7 +138,6 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 		
 		for(UserBattleItemProto ubiProto : protosList) {
 			BattleItemForUser bifu = new BattleItemForUser();
-			bifu.setId(ubiProto.getId());
 			bifu.setBattleItemId(ubiProto.getBattleItemId());
 			bifu.setUserId(ubiProto.getUserUuid());
 			bifu.setQuantity(ubiProto.getQuantity());

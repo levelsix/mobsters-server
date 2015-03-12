@@ -789,7 +789,7 @@ public class StaticDataContainer
 	private static void setResearch(Builder sdpb) {
 		Map<Integer, Research> idsToResearch =
 				ResearchRetrieveUtils.getIdsToResearch();
-
+		
 		if (null == idsToResearch || idsToResearch.isEmpty()) {
 			log.warn("setResearch() no research");
 		}
@@ -821,8 +821,9 @@ public class StaticDataContainer
 
 		if (null == idsToBattleItem || idsToBattleItem.isEmpty()) {
 			log.warn("setBattleItem() no battle item");
+			return;
 		}
-
+		
 		for (Integer battleItemId : idsToBattleItem.keySet())
 		{
 			BattleItem bi = idsToBattleItem.get(battleItemId);

@@ -12,7 +12,7 @@ option java_outer_classname = "BattleItemsProto";
 //------------------------------------------------------------------------------------------
 
 message UserBattleItemProto {
-	optional string id = 1;
+	optional string userBattleItemId = 1;
 	optional string userUuid = 2;
 	optional int32 battleItemId = 3;
 	optional int32 quantity = 4;
@@ -30,10 +30,11 @@ message BattleItemProto {
 	optional ResourceType createResourceType = 6;
 	optional int32 createCost = 7;
 	optional string description = 8;
-	optional int32 powerAmount = 9;
-	optional int32 priority = 10;	
-	optional int32 minutesToCreate = 11;
-	optional int32 inBattleGemCost = 12;
+	optional int32 powerAmount = 9;	
+	optional string imageName = 10;
+	optional int32 priority = 11;
+	optional int32 minutesToCreate = 12;
+	optional int32 inBattleGemCost = 13;
 }
 
 
@@ -62,8 +63,8 @@ message BattleItemQueueForUserProto {
 	optional int32 priority = 1;
 	optional string userUuid = 2;
 	optional int32 battleItemId = 3;
-	optional int64 expectedStartTime = 4;	
-	optional float elapsedTime = 5;
+	optional int64 expectedStartTime = 4;
+	optional float elapsedTime = 5;	
 }
 
 	

@@ -561,39 +561,50 @@ public class DeleteUtils implements DeleteUtil {
 	}
 	
 	@Override
-	public int deleteFromBattleItemQueueForUser(List<BattleItemQueueForUser> biqfuList) {
+	public int deleteFromBattleItemQueueForUser(String userId,
+			List<BattleItemQueueForUser> biqfuList)
+	{
 		String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
-	    String condDelim = "and";
-	    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	    int totalDeleted = 0;
+		
+		int size = biqfuList.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+		
+		String query = String.format( "DELETE FROM %s WHERE %s=? AND %s IN (%s)",
+				tableName,
+				DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
+				DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY,
+				questionMarks);
 	    
+		List<Object> values = new ArrayList<Object>();
+		values.add(userId);
 		for (BattleItemQueueForUser biqfu : biqfuList) {
-			conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, biqfu.getUserId());
-			conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY, biqfu.getPriority());
-			int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-			totalDeleted += numDeleted;
+			values.add(biqfu.getPriority());
 		}
 		
-		return totalDeleted;
+		int numDeleted = DBConnection.get()
+				.deleteDirectQueryNaive(query, values);
+		return numDeleted;
 	}
 	
 	@Override
-	public int deleteUserBattleItems(List<BattleItemForUser> bifuList) {
+	public int deleteUserBattleItems(String userId, List<BattleItemForUser> bifuList) {
 		 String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
 		    int size = bifuList.size();
 		    List<String> questions = Collections.nCopies(size, "?");
-		    String delimiter = ",";
-		    List<String> bifuIds = new ArrayList<String>();
+		    List<Object> values = new ArrayList<Object>();
+		    values.add(userId);
 		    for(BattleItemForUser bifu : bifuList) {
-		    	bifuIds.add(bifu.getId());
+		    	values.add(bifu.getBattleItemId());
 		    }
-
-		    String query = String.format(
-		    	" DELETE FROM %s WHERE %s IN(%s)",
-		    	tableName, DBConstants.BATTLE_ITEM_FOR_USER__ID,
-		    	StringUtils.getListInString(questions, delimiter));
 		    
-		    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, bifuIds);
+		    String query = String.format(
+		    	" DELETE FROM %s WHERE %s=? and %s IN (%s)",
+		    	tableName, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID,
+		    	DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID,
+		    	StringUtils.csvList(questions));
+		    
+		    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
 		    return numDeleted;
 	}
 

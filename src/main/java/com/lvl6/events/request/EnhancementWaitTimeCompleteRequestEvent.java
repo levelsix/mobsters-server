@@ -31,6 +31,10 @@ public class EnhancementWaitTimeCompleteRequestEvent extends RequestEvent {
   public EnhancementWaitTimeCompleteRequestProto getEnhancementWaitTimeCompleteRequestProto() {
     return enhancementWaitTimeCompleteRequestProto;
   }
+  
+  public void setEnhancementWaitTimeCompleteRequestProto(EnhancementWaitTimeCompleteRequestProto ewtcrq) {
+	    this.enhancementWaitTimeCompleteRequestProto = ewtcrq;
+	  }
 
   @Override
   public String toString()

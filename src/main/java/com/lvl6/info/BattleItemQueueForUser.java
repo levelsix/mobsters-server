@@ -62,6 +62,14 @@ public class BattleItemQueueForUser implements Serializable {
 		this.expectedStartTime = expectedStartTime;
 	}
 
+	public float getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void setElapsedTime(float elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "BattleItemQueueForUser [priority=" + priority + ", userId="
@@ -70,13 +78,7 @@ public class BattleItemQueueForUser implements Serializable {
 				+ elapsedTime + "]";
 	}
 
-	public float getElapsedTime() {
-		return elapsedTime;
-	}
 
-	public void setElapsedTime(float elapsedTime) {
-		this.elapsedTime = elapsedTime;
-	}
 
 
 	

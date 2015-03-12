@@ -82,6 +82,7 @@ import com.lvl6.properties.DBConstants;
 				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID);
 				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
+				columnsSelected.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME);
 			}
 			return columnsSelected;
 		}
