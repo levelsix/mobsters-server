@@ -74,6 +74,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		PerformResearchRequestProto reqProto = ((PerformResearchRequestEvent)event).getPerformResearchRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -84,14 +85,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			 userResearchUuid= reqProto.getUserResearchUuid();
 		}
 		
-		int gemsSpent = 0;
-		if(reqProto.hasGemsSpent()) {
-			 gemsSpent = reqProto.getGemsSpent();
+		int gemsCost = 0;
+		if(reqProto.hasGemsCost()) {
+			 gemsCost = reqProto.getGemsCost();
 		}
 		
-		int resourceChange = 0;
-		if(reqProto.hasResourceChange()) {
-			resourceChange = reqProto.getResourceChange();
+		int resourceCost = 0;
+		if(reqProto.hasResourceCost()) {
+			resourceCost = reqProto.getResourceCost();
 		}
 		
 		ResourceType resourceType = null;
@@ -111,6 +112,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			userUuid = UUID.fromString(userId);
 
+			if ( null != userResearchUuid && !userResearchUuid.isEmpty() ) {
+				UUID.fromString(userResearchUuid);
+			}
+			
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
@@ -131,18 +136,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = userRetrieveUtils.getUserById(userId);
-			Research research = ResearchRetrieveUtils.getResearchForId(researchId);
-			PerformResearchAction pra = new PerformResearchAction(userId, user, research, userResearchUuid, 
-					gemsSpent, resourceChange, resourceType, nowTimestamp, insertUtil, updateUtil, 
+
+			PerformResearchAction pra = new PerformResearchAction(userId, userRetrieveUtils, researchId, userResearchUuid, 
+					gemsCost, resourceCost, resourceType, nowTimestamp, insertUtil, updateUtil, 
 					researchForUserRetrieveUtils);
 
 			pra.execute(resBuilder);
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
-
 				userResearchUuid = pra.getUserResearchUuid();
-				if (!(userResearchUuid.equals("")) || null != userResearchUuid) {
+				if (null != userResearchUuid) {
 					resBuilder.setUserResearchUuid(userResearchUuid);
 				}
 			}
@@ -152,7 +155,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			resEvent.setPerformResearchResponseProto(resProto);
 			server.writeEvent(resEvent);
 
-			writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
+			}
 
 		} catch (Exception e) {
 			log.error("exception in PerformResearchController processEvent", e);

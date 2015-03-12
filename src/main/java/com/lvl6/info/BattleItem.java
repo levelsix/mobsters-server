@@ -117,6 +117,18 @@ public class BattleItem implements Serializable {
 		this.imageName = imageName;
 	}
 
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public void setBattleItemCategory(String battleItemCategory) {
+		this.battleItemCategory = battleItemCategory;
+	}
+
 	@Override
 	public String toString() {
 		return "BattleItem [id=" + id + ", type=" + type
@@ -129,13 +141,6 @@ public class BattleItem implements Serializable {
 				+ ", inBattleGemCost=" + inBattleGemCost + "]";
 	}
 
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
 
 	public int getMinutesToCreate() {
 		return minutesToCreate;
@@ -153,9 +158,6 @@ public class BattleItem implements Serializable {
 		this.inBattleGemCost = inBattleGemCost;
 	}
 
-	public void setBattleItemCategory(String battleItemCategory) {
-		this.battleItemCategory = battleItemCategory;
-	}
 
 	
 	

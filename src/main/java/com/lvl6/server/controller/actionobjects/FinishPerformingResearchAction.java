@@ -29,7 +29,7 @@ public class FinishPerformingResearchAction
 	private String userId;
 	private User user;
 	private String userResearchUuid; //update the row when researchs are upgraded
-	private int gemsSpent;
+	private int gemsCost;
 	private Date now;
 	protected UpdateUtil updateUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
@@ -39,7 +39,7 @@ public class FinishPerformingResearchAction
 		String userId,
 		User user,
 		String userResearchUuid,
-		int gemsSpent,
+		int gemsCost,
 		Date now,
 		UpdateUtil updateUtil,
 		ResearchForUserRetrieveUtils researchForUserRetrieveUtil)
@@ -48,7 +48,7 @@ public class FinishPerformingResearchAction
 		this.userId = userId;
 		this.user = user;
 		this.userResearchUuid = userResearchUuid;
-		this.gemsSpent = gemsSpent;
+		this.gemsCost = gemsCost;
 		this.now = now;
 		this.updateUtil = updateUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
@@ -98,7 +98,7 @@ public class FinishPerformingResearchAction
 		
 		boolean hasEnoughGems = true;
 		
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			hasEnoughGems = verifyEnoughGems(resBuilder);
 		}
 
@@ -123,7 +123,7 @@ public class FinishPerformingResearchAction
 		int userGems = user.getGems();
 
 		//check if user can afford to buy however many more user wants to buy
-		if (userGems < gemsSpent) {
+		if (userGems < gemsCost) {
 			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_NOT_ENOUGH_GEMS);
 			return false; 
 		}
@@ -140,7 +140,7 @@ public class FinishPerformingResearchAction
 			return false;
 		}
 
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			updateUserCurrency();
 			prepCurrencyHistory();
@@ -150,7 +150,7 @@ public class FinishPerformingResearchAction
 
 	private void updateUserCurrency()
 	{
-		int gemsDelta = -1 * gemsSpent;
+		int gemsDelta = -1 * gemsCost;
 		int resourceDelta = 0; //cant use resources only gems
 		ResourceType resourceType = null;
 		
@@ -168,13 +168,13 @@ public class FinishPerformingResearchAction
 		StringBuilder detailSb = new StringBuilder();
 		details = new HashMap<String, String>();
 
-		if (0 != gemsSpent) {
-			currencyDeltas.put(gems, gemsSpent);
+		if (0 != gemsCost) {
+			currencyDeltas.put(gems, gemsCost);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 					ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
-			detailSb.append(" gemsSpent=");
-			detailSb.append(gemsSpent);
+			detailSb.append(" gemsCost=");
+			detailSb.append(gemsCost);
 			details.put(gems, detailSb.toString());
 		}
 	}

@@ -30,9 +30,6 @@ import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
 import com.lvl6.events.request.CompleteBattleItemRequestEvent;
 import com.lvl6.events.request.CreateBattleItemRequestEvent;
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
-import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
-import com.lvl6.events.request.EvolutionFinishedRequestEvent;
-import com.lvl6.events.request.EvolveMonsterRequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
@@ -41,8 +38,6 @@ import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterEnhancingForUser;
-import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.StructureForUser;
@@ -53,20 +48,11 @@ import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
-import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
-import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
-import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
-import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
-import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
-import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
-import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -1352,34 +1338,28 @@ public class ControllerTest extends TestCase {
 		assertEquals(user4.getOil(), userOil3);
 		assertEquals(user4.getGems(), userGems3);
 
-		/////////////////////////COMPLETE BATTLE ITEM.//////////////////////////////////////
+		/////////////////////////COMPLETE RESEARCH/////////////////////////////////////////////
+		Date date = new Date();
 		
-		CompleteBattleItemRequestProto.Builder cobirpb = CompleteBattleItemRequestProto.newBuilder();
-		cobirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user4, null));
-		cobirpb.setIsSpeedup(true);
-		cobirpb.setGemsForSpeedup(100);
-		List<BattleItemQueueForUserProto> completeList = new ArrayList<BattleItemQueueForUserProto>();
-		for(BattleItemQueueForUser var : bifuList3) {
-			completeList.add(CreateInfoProtoUtils.createBattleItemQueueForUserProto(var));
-
+		CompleteBattleItemRequestProto.Builder cbirpb = CompleteBattleItemRequestProto.newBuilder();
+		cbirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user4, null));
+		cbirpb.setGemsSpent(50);
+		
+		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
+		fprre.setTag(1);
+		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
+		finishPerformingResearchController.handleEvent(fprre);
+		List<ResearchForUser> rfuList2 = researchForUserRetrieveUtil.getAllResearchForUser(user.getId());
+		boolean isComplete2 = false;
+		for(ResearchForUser rfu2 : rfuList2) {
+			assertFalse(rfu2.isComplete());
+			
 		}
-		
-		cobirpb.addAllBiqfuCompleted(completeList);
-		
-		CompleteBattleItemRequestEvent cobire = new CompleteBattleItemRequestEvent();
-		cobire.setTag(1);
-		cobire.setCompleteBattleItemRequestProto(cobirpb.build());
-		completeBattleItemController.handleEvent(cobire);
-		
-		User user5 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		List<BattleItemQueueForUser> bifuList4 = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(user4.getId());
-
-		assertTrue(bifuList4.isEmpty());
-		assertEquals(user4.getGems() - 100, user5.getGems());
 		
 		
 	}
 	
+
 
 
 	private String randomUUID() {
@@ -1387,32 +1367,32 @@ public class ControllerTest extends TestCase {
 	}
 
 
-	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
-			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
-			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
-		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-		String id = randomUUID();
-
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
-		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
-
-
-		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-		
-		return id;
-	}
+//	private String insertIntoUserMonsterTable(String userId, int monsterId, int currExp, int currLvl,
+//			int currHealth, int numPieces, int isComplete, Timestamp combineStartTime, 
+//			int teamSlotNum, String sourceOfPieces, int hasAllPieces, int restricted) {
+//		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+//		String id = randomUUID();
+//
+//		Map<String, Object> insertParams = new HashMap<String, Object>();
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__ID, id);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID,	userId);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currExp);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currLvl);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currHealth);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
+//		insertParams.put(DBConstants.MONSTER_FOR_USER__RESTRICTED, restricted);
+//
+//
+//		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+//		
+//		return id;
+//	}
 	
 	@Test
 	public void testMonsterEnhancingAndHistoryTables() {

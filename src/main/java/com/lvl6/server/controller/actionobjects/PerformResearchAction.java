@@ -18,6 +18,7 @@ import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.Builder;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -28,11 +29,11 @@ public class PerformResearchAction
 	}.getClass().getEnclosingClass());
 
 	private String userId;
-	private User user;
-	private Research research;
+	private UserRetrieveUtils2 userRetrieveUtils;
+	private int researchId;
 	private String userResearchUuid; //update the row when researchs are upgraded
-	private int gemsSpent;
-	private int resourceChange;
+	private int gemsCost;
+	private int resourceCost;
 	private ResourceType resourceType;
 	private Date now;
 	protected InsertUtil insertUtil;
@@ -41,11 +42,11 @@ public class PerformResearchAction
 
 	public PerformResearchAction( 
 		String userId,
-		User user,
-		Research research,
+		UserRetrieveUtils2 userRetrieveUtils,
+		int researchId,
 		String userResearchUuid,
-		int gemsSpent,
-		int resourceChange,
+		int gemsCost,
+		int resourceCost,
 		ResourceType resourceType,
 		Date now,
 		InsertUtil insertUtil,
@@ -55,11 +56,11 @@ public class PerformResearchAction
 	{
 		super();
 		this.userId = userId;
-		this.user = user;
-		this.research = research;
+		this.userRetrieveUtils = userRetrieveUtils;
+		this.researchId = researchId;
 		this.userResearchUuid = userResearchUuid;
-		this.gemsSpent = gemsSpent;
-		this.resourceChange = resourceChange;
+		this.gemsCost = gemsCost;
+		this.resourceCost = resourceCost;
 		this.resourceType = resourceType;
 		this.now = now;
 		this.insertUtil = insertUtil;
@@ -67,7 +68,8 @@ public class PerformResearchAction
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 	}
 
-
+	private User user;
+	private Research research;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -93,6 +95,7 @@ public class PerformResearchAction
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
+		user = userRetrieveUtils.getUserById(userId);
 		if (null == user) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error( "no user with id={}", userId );
@@ -105,20 +108,20 @@ public class PerformResearchAction
 		}
 		
 		boolean userHasUserResearch = false;
-		if(userResearchUuid != null) {
-			userHasUserResearch = verifyUserResearch(resBuilder);
-			if(!userHasUserResearch) {
-				return false;
-			}
-		}
+//		if(userResearchUuid != null) {
+//			userHasUserResearch = verifyUserResearch(resBuilder);
+//			if(!userHasUserResearch) {
+//				return false;
+//			}
+//		}
 		
 		boolean hasEnoughGems = true;
 		boolean hasEnoughResource = true;
 		
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			hasEnoughGems = verifyEnoughGems(resBuilder);
 		}
-		if(resourceChange > 0) {
+		if(resourceCost > 0) {
 			hasEnoughResource = verifyEnoughResource(resBuilder);
 		}
 		
@@ -130,31 +133,31 @@ public class PerformResearchAction
 	
 	private boolean verifyResearch(Builder resBuilder)
 	{
+		research = ResearchRetrieveUtils.getResearchForId(researchId);
 		if (null == research) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
-			log.error("no research for id");
+			log.error("no research for id: " + researchId);
 			return false;
 		}
 		return true;
 	}
 	
-	private boolean verifyUserResearch(Builder resBuilder) {
-		List<ResearchForUser> userResearchList = researchForUserRetrieveUtil.getAllResearchForUser(userId);
-		boolean containsUserResearch = false;
-		for(ResearchForUser rfu : userResearchList) {
-			if(rfu.getId().equals(userResearchUuid)) {
-				containsUserResearch = true;
-			}
-		}
-		return containsUserResearch;
-	}
+//	private boolean verifyUserResearch(Builder resBuilder) {
+//		ResearchForUser userResearch = researchForUserRetrieveUtil.getResearchForUser(userResearchUuid);
+//		if(userResearch == null) {
+//			log.error("user research is null for userresearchid: " + userResearchUuid);
+//			return false;
+//		}
+//		else return true;
+//	}
 	
 	private boolean verifyEnoughGems(Builder resBuilder) {
 		int userGems = user.getGems();
 
 		//check if user can afford to buy however many more user wants to buy
-		if (userGems < gemsSpent) {
+		if (userGems < gemsCost) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_GEMS);
+			log.error("user has less gems then amount spent in request, user gems= " + userGems);
 			return false; 
 		}
 		else return true;
@@ -163,15 +166,19 @@ public class PerformResearchAction
 	private boolean verifyEnoughResource(Builder resBuilder) {
 		if(resourceType == ResourceType.CASH) {
 			int userCash = user.getCash();
-			if(userCash < resourceChange) {
+			if(userCash < resourceCost) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_CASH);
+				log.error("user has less cash then amount spent in request, user gems= " + userCash);
+
 				return false;
 			}
 		}
 		else if(resourceType == ResourceType.OIL) {
 			int userOil = user.getOil();
-			if(userOil < resourceChange) {
+			if(userOil < resourceCost) {
 				resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_OIL);
+				log.error("user has less oil then amount spent in request, user oil= " + userOil);
+
 				return false;
 			}
 		}
@@ -181,26 +188,26 @@ public class PerformResearchAction
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 		boolean successfulInsertOrUpdate = false;
-		String userResearchId = "";
 		Timestamp timeOfPurchase = new Timestamp(now.getTime());
+
 		
-		if(userResearchUuid != null) {
+		if(userResearchUuid != null && !userResearchUuid.equals("")) {
 			successfulInsertOrUpdate = updateUtil.updateUserResearch(userResearchUuid, research.getId(), timeOfPurchase);
 		}
 		else {
 			boolean isComplete = false;
-			userResearchId = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
-			if(!userResearchId.equals("")) {
+			userResearchUuid = insertUtil.insertUserResearch(userId, research, timeOfPurchase, isComplete);
+			if(userResearchUuid != null) {
 				successfulInsertOrUpdate = true;
-				userResearchUuid = userResearchId;
 			}
 		}
 		
 		if(!successfulInsertOrUpdate) {
+			log.error("failed to insert or updated user research");
 			return false;
 		}
 		
-		if(!(gemsSpent > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
+		if(!(gemsCost > 0) && (resourceType != ResourceType.CASH) && (resourceType != ResourceType.OIL)) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error("not being purchased with gems, cash, or oil, what is this voodoo shit");
 			return false;
@@ -211,18 +218,18 @@ public class PerformResearchAction
 		int oilChange = 0;
 		int expChange = 0;
 		
-		if(gemsSpent > 0) {
+		if(gemsCost > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
-			gemsChange = -1*gemsSpent;
+			gemsChange = -1*gemsCost;
 		}
 
 		if (resourceType == ResourceType.CASH) {
 			prevCurrencies.put(MiscMethods.cash, user.getCash());
-			cashChange = -1*resourceChange;
+			cashChange = -1*resourceCost;
 		}
 		else if (resourceType == ResourceType.OIL){
 			prevCurrencies.put(MiscMethods.oil, user.getOil());
-			oilChange = -1*resourceChange;
+			oilChange = -1*resourceCost;
 		}
 		
 //		user.updateRelativeGemsCashOilExperienceNaive(gemsChange, cashChange, oilChange, expChange);
@@ -236,8 +243,8 @@ public class PerformResearchAction
 
 	private void updateUserCurrency()
 	{
-		int gemsDelta = -1 * gemsSpent;
-		int resourceDelta = -1* resourceChange;
+		int gemsDelta = -1 * gemsCost;
+		int resourceDelta = -1* resourceCost;
 		
 		boolean updated = user.updateGemsandResourcesFromPerformingResearch(gemsDelta, resourceDelta, resourceType);
 		log.info("updated, user paid for research {}", updated);
@@ -256,32 +263,32 @@ public class PerformResearchAction
 		StringBuilder detailSb2 = new StringBuilder();
 		details = new HashMap<String, String>();
 
-		if (0 != gemsSpent) {
-			currencyDeltas.put(gems, gemsSpent);
+		if (0 != gemsCost) {
+			currencyDeltas.put(gems, gemsCost);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 				ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 			detailSb.append(" gemsSpent=");
-			detailSb.append(gemsSpent);
+			detailSb.append(gemsCost);
 			details.put(gems, detailSb.toString());
 		}
 		
-		if(resourceChange>0) {
+		if(resourceCost>0) {
 			if(resourceType == ResourceType.CASH) {
-				currencyDeltas.put(cash, resourceChange);
+				currencyDeltas.put(cash, resourceCost);
 				curCurrencies.put(cash, user.getCash());
 				reasonsForChanges.put(cash, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 				detailSb2.append(" cash spent= ");
-				detailSb2.append(resourceChange);
+				detailSb2.append(resourceCost);
 				details.put(cash, detailSb2.toString());
 
 			}
 			else if(resourceType == ResourceType.OIL) {
-				currencyDeltas.put(oil, resourceChange);
+				currencyDeltas.put(oil, resourceCost);
 				curCurrencies.put(oil, user.getOil());
 				reasonsForChanges.put(oil, ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
 				detailSb2.append(" oil spent= ");
-				detailSb2.append(resourceChange);
+				detailSb2.append(resourceCost);
 				details.put(oil, detailSb2.toString());
 			}
 		}
@@ -289,10 +296,6 @@ public class PerformResearchAction
 
 	public User getUser() {
 		return user;
-	}
-	
-	public Research getResearch() {
-		return research;
 	}
 	
 	public String getUserResearchUuid() {

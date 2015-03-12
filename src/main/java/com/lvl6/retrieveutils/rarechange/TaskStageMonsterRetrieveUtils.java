@@ -30,8 +30,8 @@ public class TaskStageMonsterRetrieveUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
-	private static Map<Integer, Set<Integer>> taskStageIdsToMonsterIds;
-	private static Map<Integer, Set<String>> taskStageIdsToRarities;
+	private static Map<Integer, Set<Integer>> taskStageIdsToDroppableMonsterIds;
+	private static Map<Integer, Set<String>> taskStageIdsToDroppableRarities;
 	private static Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonsters;
 
 	private static boolean reassignedSkills = false;
@@ -66,38 +66,38 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageMonsterIdsToTaskStageMonsters.get(tsmId);
 	}
 
-	public static Set<Integer> getMonsterIdsForTaskStageId(int taskStageId) {
+	public static Set<Integer> getDroppableMonsterIdsForTaskStageId(int taskStageId) {
 		log.debug("retrieve stage monster data for stage {}", taskStageId);
-		if (null == taskStageIdsToMonsterIds) {
+		if (null == taskStageIdsToDroppableMonsterIds) {
 			setStaticTaskStageIdsToTaskStageMonster();      
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
 		}
 
-		if (!taskStageIdsToMonsterIds.containsKey(taskStageId)) {
-			log.error("no monster ids for task stage id={}", taskStageId);
+		if (!taskStageIdsToDroppableMonsterIds.containsKey(taskStageId)) {
+//			log.error("no monster ids for task stage id={}", taskStageId);
 			return new HashSet<Integer>();
 		}
 
-		return taskStageIdsToMonsterIds.get(taskStageId);
+		return taskStageIdsToDroppableMonsterIds.get(taskStageId);
 	}
 	
-	public static Set<String> getQualitiesForTaskStageId(int taskStageId) {
+	public static Set<String> getDroppableQualitiesForTaskStageId(int taskStageId) {
 		log.debug("retrieve stage monster quality data for stage {}", taskStageId);
-		if (null == taskStageIdsToRarities) {
+		if (null == taskStageIdsToDroppableRarities) {
 			setStaticTaskStageIdsToTaskStageMonster();      
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
 		}
 
-		if (!taskStageIdsToRarities.containsKey(taskStageId)) {
-			log.error("no monster qualities for task stage id={}", taskStageId);
+		if (!taskStageIdsToDroppableRarities.containsKey(taskStageId)) {
+//			log.error("no monster qualities for task stage id={}", taskStageId);
 			return new HashSet<String>();
 		}
 
-		return taskStageIdsToRarities.get(taskStageId);
+		return taskStageIdsToDroppableRarities.get(taskStageId);
 	}	
 
 	public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
@@ -163,6 +163,8 @@ public class TaskStageMonsterRetrieveUtils {
 
 			if (null == monzter) {
 				resetAllSkills = false;
+				log.error("no monster for id={}, tsm={}",
+						monsterId, tsm);
 				continue;
 			}
 
@@ -172,9 +174,10 @@ public class TaskStageMonsterRetrieveUtils {
 				tsm.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
 			}
 			
-			//incorporating nonskill logic
+			//incorporating nonskill logic, calculating the monsters that can drop
 			if (tsm.getPuzzlePieceDropRate() <= 0F) {
 				//only care about the ones that can drop
+				log.info("tsm drops no monster. {}", tsm);
 				continue;
 			}
 			
@@ -198,8 +201,8 @@ public class TaskStageMonsterRetrieveUtils {
 		}
 
 		reassignedSkills = resetAllSkills;
-		taskStageIdsToMonsterIds = taskStageIdsToMonsterIdsTemp;
-		taskStageIdsToRarities = taskStageIdsToRaritiesTemp;
+		taskStageIdsToDroppableMonsterIds = taskStageIdsToMonsterIdsTemp;
+		taskStageIdsToDroppableRarities = taskStageIdsToRaritiesTemp;
 	}
 
 	private static void setStaticTaskStageIdsToTaskStageMonster() {

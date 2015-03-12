@@ -3070,6 +3070,7 @@ public class CreateInfoProtoUtils {
 	public static UserResearchProto createUserResearchProto(ResearchForUser rfu) {
 		UserResearchProto.Builder urpb = UserResearchProto.newBuilder();
 		urpb.setUserResearchUuid(rfu.getId());
+		urpb.setResearchId(rfu.getResearchId());
 		urpb.setUserUuid(rfu.getUserId());
 		Date timePurchased = rfu.getTimePurchased();
 		urpb.setTimePurchased(timePurchased.getTime());
@@ -3929,11 +3930,11 @@ public class CreateInfoProtoUtils {
 		for (int stageId : stageIds) {
 			
 			Set<Integer> stageMonsterIds = TaskStageMonsterRetrieveUtils.
-				getMonsterIdsForTaskStageId(stageId);
+				getDroppableMonsterIdsForTaskStageId(stageId);
 			monsterIdsForTask.addAll(stageMonsterIds);
 			
 			Set<String> stageQualities = TaskStageMonsterRetrieveUtils.
-				getQualitiesForTaskStageId(stageId);
+				getDroppableQualitiesForTaskStageId(stageId);
 			qualitiesStrForTask.addAll(stageQualities);
 		}
 		
@@ -4324,18 +4325,15 @@ public class CreateInfoProtoUtils {
 		return bipb.build();
 	}
 	
-	public static List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList
-	(List<BattleItemForUser> bifuCompletedList) {
-
-		List<UserBattleItemProto> bifupCompletedList = new ArrayList<UserBattleItemProto>();
-
-		for(BattleItemForUser bifu : bifuCompletedList) {
+	public static List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList(List<BattleItemForUser> bifuList) {
+		List<UserBattleItemProto> returnList = new ArrayList<UserBattleItemProto>();
+		for(BattleItemForUser bifu : bifuList) {
 			UserBattleItemProto ubip = createUserBattleItemProtoFromBattleItemForUser(bifu);
-			bifupCompletedList.add(ubip);
+			returnList.add(ubip);
 		}
-		return bifupCompletedList;
-
+		return returnList;
 	}
+	
 
 	
 	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(BattleItemForUser bifu) {
@@ -4347,16 +4345,7 @@ public class CreateInfoProtoUtils {
 		
 		return ubipb.build();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**TournamentStuff.proto******************************************/

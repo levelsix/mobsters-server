@@ -18,102 +18,103 @@ import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class BattleItemRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
-  private static Map<Integer, BattleItem> idsToBattleItems;
-  private static final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_CONFIG;
-  
-  
-  public static Map<Integer, BattleItem> getBattleItemIdsToBattleItems() {
-  	if (null == idsToBattleItems) {
-  		setStaticIdsToBattleItems();
-  	}
-  	return idsToBattleItems;
-  }
-  
-  public static BattleItem getBattleItemForId(int id) {
-	  if (null == idsToBattleItems) {
-		  setStaticIdsToBattleItems();
-	  }
-	  
-	  if (!idsToBattleItems.containsKey(id)) {
-		  log.error("no battle item for id=" + id);
-		  return null;
-	  }
-	  return idsToBattleItems.get(id);
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  public static Map<Integer, BattleItem> getBattleItemsForIds(Collection<Integer> ids) {
-  	if (null == idsToBattleItems) {
-  		setStaticIdsToBattleItems();
-  	}
-  	Map<Integer, BattleItem> returnMap = new HashMap<Integer, BattleItem>();
-  	
-  	for (int id : ids) {
-  		BattleItem bi = getBattleItemForId(id);
-  		returnMap.put(id, bi);
-  	}
-  	return returnMap;
-  }
-  
-  private static void setStaticIdsToBattleItems() {
-	    log.debug("setting static map of ids to battle items");
+	private static Map<Integer, BattleItem> idsToBattleItems;
+	private static final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_CONFIG;
 
-	    Connection conn = DBConnection.get().getConnection();
-	    ResultSet rs = null;
-	    try {
-				if (conn != null) {
-				  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-				  if (rs != null) {
-				    try {
-				      rs.last();
-				      rs.beforeFirst();
-				      HashMap<Integer, BattleItem> idsToBattleItemTemp = new HashMap<Integer, BattleItem>();
-				      while(rs.next()) {
-				        BattleItem bi = convertRSRowToBattleItem(rs);
-				        if (bi != null)
-				          idsToBattleItemTemp.put(bi.getId(), bi);
-				      }
-				      idsToBattleItems = idsToBattleItemTemp;
-				    } catch (SQLException e) {
-				      log.error("problem with database call.", e);
-				      
-				    }
-				  }    
-				}
-			} catch (Exception e) {
-	    	log.error("BattleItem retrieve db error.", e);
-	    } finally {
-	    	DBConnection.get().close(rs, null, conn);
-	    }
-	  }
+	public static Map<Integer, BattleItem> getBattleItemIdsToBattleItems() {
+		if (null == idsToBattleItems) {
+			setStaticIdsToBattleItems();
+		}
+		return idsToBattleItems;
+	}
 
-	  public static void reload() {
-		  setStaticIdsToBattleItems();
-	  }
+	public static BattleItem getBattleItemForId(int id) {
+		if (null == idsToBattleItems) {
+			setStaticIdsToBattleItems();
+		}
 
-  /*
-   * assumes the resultset is apprpriately set up. traverses the row it's on.
-   */
-  private static BattleItem convertRSRowToBattleItem(ResultSet rs) throws SQLException {
-    int id = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__ID);
-    String type = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__TYPE);
-    String category = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CATEGORY);
-    String createResourceType = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE);
-    int createCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__CREATE_COST);
-    String name = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__NAME);
-    String description = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
-    int powerAmount = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
-    String imageName = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
-    int priority = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__PRIORITY);
-    int minutesToCreate = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE);
-    int inBattleGemCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST);
+		if (!idsToBattleItems.containsKey(id)) {
+			log.error("no battle item for id=" + id);
+			return null;
+		}
+		return idsToBattleItems.get(id);
+	}
 
-    
-    BattleItem bi = new BattleItem(id, type, category, createResourceType, 
-    		createCost, name, description, powerAmount, imageName, priority, minutesToCreate, inBattleGemCost);
-   
-    return bi;
-  }
+	public static Map<Integer, BattleItem> getBattleItemsForIds(Collection<Integer> ids) {
+		if (null == idsToBattleItems) {
+			setStaticIdsToBattleItems();
+		}
+		Map<Integer, BattleItem> returnMap = new HashMap<Integer, BattleItem>();
+
+		for (int id : ids) {
+			BattleItem bi = getBattleItemForId(id);
+			returnMap.put(id, bi);
+		}
+		return returnMap;
+	}
+
+	private static void setStaticIdsToBattleItems() {
+		log.debug("setting static map of ids to battle items");
+
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
+			if (conn != null) {
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						HashMap<Integer, BattleItem> idsToBattleItemTemp = new HashMap<Integer, BattleItem>();
+						while(rs.next()) {
+							BattleItem bi = convertRSRowToBattleItem(rs);
+							if (bi != null)
+								idsToBattleItemTemp.put(bi.getId(), bi);
+						}
+						idsToBattleItems = idsToBattleItemTemp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}    
+			}
+		} catch (Exception e) {
+			log.error("BattleItem retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
+
+	public static void reload() {
+		setStaticIdsToBattleItems();
+	}
+
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private static BattleItem convertRSRowToBattleItem(ResultSet rs) throws SQLException {
+		int id = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__ID);
+		String type = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__TYPE);
+		String category = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CATEGORY);
+		String createResourceType = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE);
+		int createCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__CREATE_COST);
+		String name = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__NAME);
+		String description = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
+		int powerAmount = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
+		String imageName = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
+		int priority = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__PRIORITY);
+		int minutesToCreate = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE);
+		int inBattleGemCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST);
+
+
+		BattleItem bi = new BattleItem(id, type, category, createResourceType, 
+				createCost, name, description, powerAmount, imageName, priority, 
+				minutesToCreate, inBattleGemCost);
+
+		return bi;
+	}
 }

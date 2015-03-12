@@ -353,13 +353,16 @@ public class RetrieveCurrencyFromNormStructureAction
 					ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT);
 		}
 
-		String reason = "(userStructId,time,amount)=";
+		String reason = "(userStructId,time,%s.amount)=";
 		StringBuilder cashDetailSb = new StringBuilder();
-		cashDetailSb.append(reason);
+		cashDetailSb.append(
+				String.format(reason, cash));
 		StringBuilder oilDetailSb = new StringBuilder();
-		oilDetailSb.append(reason);
+		oilDetailSb.append(
+				String.format(reason, oil));
 		StringBuilder gemsDetailSb = new StringBuilder();
-		gemsDetailSb.append(reason);
+		gemsDetailSb.append(
+				String.format(reason, gems));
 		details = new HashMap<String, String>();
 
 		//being descriptive, separating cash stuff from oil stuff
@@ -387,6 +390,10 @@ public class RetrieveCurrencyFromNormStructureAction
 				}
 			}
 		}
+		
+		details.put(gems, gemsDetailSb.toString());
+		details.put(cash, cashDetailSb.toString());
+		details.put(oil, oilDetailSb.toString());
 	}
 
 	public User getUser() {

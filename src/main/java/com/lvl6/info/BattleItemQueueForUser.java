@@ -79,6 +79,8 @@ public class BattleItemQueueForUser implements Serializable {
 	}
 
 
+
+
 	
 	
 
