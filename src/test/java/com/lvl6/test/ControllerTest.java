@@ -1299,7 +1299,7 @@ public class ControllerTest extends TestCase {
 		assertEquals(monsterDeleteHistoryRows + 1, monsterDeleteHistoryRows2);
 
 	}
-	 */
+	 
 	
 	
 	@Test

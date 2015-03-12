@@ -165,7 +165,7 @@ public class CompleteBattleItemAction
 //		List<BattleItemForUser> battleItemList = new ArrayList<BattleItemForUser>(bifuCompletedList);
 		int numInserted = insertUtil.insertIntoBattleItemForUser(bifuCompletedList);
 		
-		if(numInserted != completedList.size()) {
+		if(numInserted != bifuCompletedList.size()) {
 			log.error("did not insert or update all the battle items completed");
 			return false;
 		}
