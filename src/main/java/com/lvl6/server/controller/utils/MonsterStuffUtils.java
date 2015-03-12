@@ -300,6 +300,8 @@ public class MonsterStuffUtils {
   	//it should be marked as complete
   	int mfuNewNumPieces = mfu.getNumPieces();
   	int numMinutesForCompletion = monzter.getMinutesToCombinePieces();
+  	mfu.setCombineStartTime(combineTime);
+  	
   	if (mfuNewNumPieces >= numPiecesForCompletion) { //shouldn't really be >= but == seems not safe enough
   		mfu.setHasAllPieces(true);
   		
