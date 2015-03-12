@@ -22,7 +22,7 @@ public class CreateBattleItemRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       createBattleItemRequestProto = CreateBattleItemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = createBattleItemRequestProto.getSender().getUserUuid();
+      playerId = createBattleItemRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("CreateBattleItemRequest exception", e);
     }

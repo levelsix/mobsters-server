@@ -1061,6 +1061,10 @@ public class User implements Serializable {
 			relativeParams.put(DBConstants.USER__OIL, oilDelta);
 		}
 		
+		if (relativeParams.isEmpty()) {
+			return true;
+		}
+		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, 
 				relativeParams, null, conditionParams, "and");
 		
