@@ -108,7 +108,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setFinishPerformingResearchResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -125,7 +125,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setFinishPerformingResearchResponseProto(resProto);
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
 			writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setFinishPerformingResearchResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
