@@ -123,14 +123,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				userMonsterIds.addAll(userMonsterIdsThatFinished);
 			}
 
-			MonsterForUser mfu = monsterForUserRetrieveUtil
-					.getSpecificUserMonster(umcep.getUserMonsterUuid());
+			Map<String, MonsterForUser> enhancedAndDeletedMonsterForUsers = monsterForUserRetrieveUtil.getSpecificUserMonsters(userMonsterIds);
+			
+			MonsterForUser mfu = enhancedAndDeletedMonsterForUsers.get(umcep.getUserMonsterUuid());
+			enhancedAndDeletedMonsterForUsers.remove(umcep.getUserMonsterUuid());
 
 			//get whatever we need from the database
 			Map<String, MonsterEnhancingForUser> inEnhancing =
 					monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
-
-			Map<String, MonsterForUser> deletedMonsterForUsers = monsterForUserRetrieveUtil.getSpecificUserMonsters(userMonsterIdsThatFinished);
 
 			User aUser = userRetrieveUtil.getUserById(userId);
 
@@ -161,7 +161,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			if (successful) {
 				writeChangesToHistory(userId, umcep, mfu, inEnhancing, mefu, userMonsterIdsThatFinished, userMonsterIds);
 
-				writeToMonsterDeleteHistory(deletedMonsterForUsers);
+				writeToMonsterDeleteHistory(enhancedAndDeletedMonsterForUsers);
 				log.info("added deleted monsters to monster delete table");
 			}
 		} catch (Exception e) {
