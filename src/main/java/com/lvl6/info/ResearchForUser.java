@@ -1,6 +1,7 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ResearchForUser implements Serializable {
@@ -10,7 +11,7 @@ public class ResearchForUser implements Serializable {
 	private String id;
 	private String userId;
 	private int researchId;
-	private Date timePurchased;
+	private Timestamp timePurchased;
 	private boolean isComplete;
 	 
 	public ResearchForUser() {
@@ -21,7 +22,7 @@ public class ResearchForUser implements Serializable {
 		String id,
 		String userId,
 		int researchId,
-		Date timePurchased,
+		Timestamp timePurchased,
 		boolean isComplete )
 	{
 		super();
@@ -62,15 +63,6 @@ public class ResearchForUser implements Serializable {
 		this.researchId = researchId;
 	}
 
-	public Date getTimePurchased()
-	{
-		return timePurchased;
-	}
-
-	public void setTimePurchased( Date timePurchased )
-	{
-		this.timePurchased = timePurchased;
-	}
 
 	public boolean isComplete()
 	{
@@ -83,19 +75,18 @@ public class ResearchForUser implements Serializable {
 	}
 
 	@Override
-	public String toString()
-	{
-		return "ResearchForUser [id="
-			+ id
-			+ ", userId="
-			+ userId
-			+ ", researchId="
-			+ researchId
-			+ ", timePurchased="
-			+ timePurchased
-			+ ", isComplete="
-			+ isComplete
-			+ "]";
+	public String toString() {
+		return "ResearchForUser [id=" + id + ", userId=" + userId
+				+ ", researchId=" + researchId + ", timePurchased="
+				+ timePurchased + ", isComplete=" + isComplete + "]";
+	}
+
+	public Timestamp getTimePurchased() {
+		return timePurchased;
+	}
+
+	public void setTimePurchased(Timestamp timePurchased) {
+		this.timePurchased = timePurchased;
 	}
 	
 }

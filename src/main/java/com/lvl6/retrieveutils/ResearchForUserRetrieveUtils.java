@@ -98,7 +98,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			rfu.setId(rs.getString(DBConstants.RESEARCH_FOR_USER__ID));
 			rfu.setUserId(rs.getString(DBConstants.RESEARCH_FOR_USER__USER_ID));
 			rfu.setResearchId(rs.getInt(DBConstants.RESEARCH_FOR_USER__RESEARCH_ID));
-			rfu.setTimePurchased(rs.getTime(DBConstants.RESEARCH_FOR_USER__TIME_PURCHASED));
+			rfu.setTimePurchased(rs.getTimestamp(DBConstants.RESEARCH_FOR_USER__TIME_PURCHASED));
 			rfu.setComplete(rs.getBoolean(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE));
 			
 			return rfu;

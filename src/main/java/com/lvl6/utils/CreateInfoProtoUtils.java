@@ -3072,8 +3072,7 @@ public class CreateInfoProtoUtils {
 		urpb.setUserResearchUuid(rfu.getId());
 		urpb.setResearchId(rfu.getResearchId());
 		urpb.setUserUuid(rfu.getUserId());
-		Date timePurchased = rfu.getTimePurchased();
-		urpb.setTimePurchased(timePurchased.getTime());
+		urpb.setTimePurchased(rfu.getTimePurchased().getTime());
 		urpb.setComplete(rfu.isComplete());
 		
 		return urpb.build();
