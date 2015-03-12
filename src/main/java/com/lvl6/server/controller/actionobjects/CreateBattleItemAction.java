@@ -250,8 +250,8 @@ public class CreateBattleItemAction
 		log.info("about to insert to queue");
 		
 		int numUpdated = insertUtil.insertIntoBattleItemQueueForUser(nuOrUpdatedList);
-		if(numUpdated != updatedListSize + newListSize) {
-			log.error("did not update all the battle items in queue");
+		if(numUpdated < updatedListSize + newListSize || numUpdated > (updatedListSize + newListSize)*2) {
+			log.error("did not update all the battle items in queue, numUpdated = ", numUpdated );
 			return false;
 		}
 		
