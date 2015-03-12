@@ -47,7 +47,7 @@ message MinimumUserProtoWithFacebookId {
 }
 
 //------------------------------------------------------------------------------------------
-//server does not create proto
+//server does not create proto, except for testing!
 message MinimumUserProtoWithMaxResources {
 	optional MinimumUserProto minUserProto = 1;
 	optional int32 maxCash = 2;

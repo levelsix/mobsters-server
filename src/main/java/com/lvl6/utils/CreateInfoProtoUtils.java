@@ -247,6 +247,7 @@ import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
@@ -513,6 +514,19 @@ public class CreateInfoProtoUtils {
 		PvpMonsterProto pmp = pmpb.build();
 		
 		return pmp;
+	}
+	
+	public static MinimumUserProtoWithMaxResources 
+		createMinimumUserProtoWithMaxResources(MinimumUserProto mup, 
+				int maxCash, int maxOil) {
+		MinimumUserProtoWithMaxResources.Builder mupwmrb = 
+				MinimumUserProtoWithMaxResources.newBuilder();
+		mupwmrb.setMinUserProto(mup);
+		mupwmrb.setMaxCash(maxCash);
+		mupwmrb.setMaxOil(maxOil);
+		MinimumUserProtoWithMaxResources mupwmr = mupwmrb.build();
+		
+		return mupwmr;
 	}
 	
 //	private static PvpMonsterProto createPvpMonsterProto(
