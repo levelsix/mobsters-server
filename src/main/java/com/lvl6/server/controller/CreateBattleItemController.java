@@ -205,6 +205,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			biqfu.setBattleItemId(biqfuProto.getBattleItemId());
 			biqfu.setExpectedStartTime(new Timestamp(biqfuProto.getExpectedStartTime()));
 			biqfu.setPriority(biqfuProto.getPriority());
+			biqfu.setElapsedTime(biqfuProto.getElapsedTime());
 			idsToBattleItemQueueForUser.add(biqfu);
 		}
 		
