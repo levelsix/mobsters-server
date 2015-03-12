@@ -6,7 +6,8 @@ public class BattleItem implements Serializable {
 
 	public BattleItem(int id, String type, String battleItemCategory,
 			String createResourceType, int createCost, String name,
-			String description, int powerAmount, String imageName) {
+			String description, int powerAmount, String imageName,
+			int priority, int minutesToCreate, int inBattleGemCost) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -17,9 +18,10 @@ public class BattleItem implements Serializable {
 		this.description = description;
 		this.powerAmount = powerAmount;
 		this.imageName = imageName;
+		this.priority = priority;
+		this.minutesToCreate = minutesToCreate;
+		this.inBattleGemCost = inBattleGemCost;
 	}
-
-
 
 	private static final long serialVersionUID = -1293698119576984508L;
 	
@@ -32,6 +34,11 @@ public class BattleItem implements Serializable {
 	private String description;
 	private int powerAmount;
 	private String imageName;
+	private int priority;
+	private int minutesToCreate;
+	private int inBattleGemCost;
+	
+
 	
 	public BattleItem()
 	{
@@ -117,7 +124,37 @@ public class BattleItem implements Serializable {
 				+ ", createResourceType=" + createResourceType
 				+ ", createCost=" + createCost + ", name=" + name
 				+ ", description=" + description + ", powerAmount="
-				+ powerAmount + ", imageName=" + imageName + "]";
+				+ powerAmount + ", imageName=" + imageName + ", priority="
+				+ priority + ", minutesToCreate=" + minutesToCreate
+				+ ", inBattleGemCost=" + inBattleGemCost + "]";
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public int getMinutesToCreate() {
+		return minutesToCreate;
+	}
+
+	public void setMinutesToCreate(int minutesToCreate) {
+		this.minutesToCreate = minutesToCreate;
+	}
+
+	public int getInBattleGemCost() {
+		return inBattleGemCost;
+	}
+
+	public void setInBattleGemCost(int inBattleGemCost) {
+		this.inBattleGemCost = inBattleGemCost;
+	}
+
+	public void setBattleItemCategory(String battleItemCategory) {
+		this.battleItemCategory = battleItemCategory;
 	}
 
 	

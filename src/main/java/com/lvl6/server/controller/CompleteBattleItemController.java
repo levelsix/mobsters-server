@@ -132,16 +132,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			CompleteBattleItemResponseEvent resEvent = new 
 					CompleteBattleItemResponseEvent(senderProto.getUserUuid());
-			resEvent.setTag(event.getTag());
-			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
 				List<BattleItemForUser> bifuCompletedList = cbia.getBifuCompletedList();
 				List<UserBattleItemProto> ubipCompletedList = 
-						convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
+						CreateInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
 				resBuilder.addAllUbiUpdated(ubipCompletedList);
+				resEvent.setTag(event.getTag());
+				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
+				server.writeEvent(resEvent);
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -170,18 +170,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 	}
 
-	private List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList
-	(List<BattleItemForUser> bifuCompletedList) {
-
-		List<UserBattleItemProto> bifupCompletedList = new ArrayList<UserBattleItemProto>();
-
-		for(BattleItemForUser bifu : bifuCompletedList) {
-			UserBattleItemProto ubip = CreateInfoProtoUtils.createUserBattleItemProtoFromBattleItemForUser(bifu);
-			bifupCompletedList.add(ubip);
-		}
-		return bifupCompletedList;
-
-	}
 
 	private List<BattleItemQueueForUser> getIdsToBattleItemQueueForUserFromProto(
 			List<BattleItemQueueForUserProto> protosList, String userId)
