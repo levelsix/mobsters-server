@@ -287,6 +287,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 						rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
 
 
+				log.info("ppList={}", ppList);
 				//user should see real people before fake ones
 				pvpProtoList.addAll(0, ppList);
 			} else {

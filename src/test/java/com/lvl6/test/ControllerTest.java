@@ -1257,7 +1257,6 @@ public class ControllerTest extends TestCase {
 		}
 		return size;
 	}
-
 	
 	@Test
 	public void testSellingMonsterAndHistory() {
@@ -1300,6 +1299,7 @@ public class ControllerTest extends TestCase {
 		assertEquals(monsterDeleteHistoryRows + 1, monsterDeleteHistoryRows2);
 
 	}
+	 */
 	
 	
 	@Test

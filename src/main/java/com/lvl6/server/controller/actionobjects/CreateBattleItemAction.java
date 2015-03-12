@@ -30,7 +30,9 @@ public class CreateBattleItemAction
 	private List<BattleItemQueueForUser> updatedList; //only updates timestamp
 	private List<BattleItemQueueForUser> newList;
 	private int cashChange;
+	private int maxCash;
 	private int oilChange;
+	private int maxOil;
 	private int gemCostForCreating;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
@@ -44,7 +46,9 @@ public class CreateBattleItemAction
 		List<BattleItemQueueForUser> updatedList, //only updates timestamp
 		List<BattleItemQueueForUser> newList,
 		int cashChange,
+		int maxCash,
 		int oilChange,
+		int maxOil,
 		int gemCostForCreating,
 		UserRetrieveUtils2 userRetrieveUtil,
 		BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
@@ -58,7 +62,9 @@ public class CreateBattleItemAction
 		this.updatedList = updatedList;
 		this.newList = newList;
 		this.cashChange = cashChange;
+		this.maxCash = maxCash;
 		this.oilChange = oilChange;
+		this.maxOil = maxOil;
 		this.gemCostForCreating = gemCostForCreating;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
@@ -154,7 +160,6 @@ public class CreateBattleItemAction
 			int userGems = user.getGems();
 			//check if user can afford to buy however many more user wants to buy
 			if (userGems < gemCostForCreating) {
-				log.error("user doesn't have enough gems");
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false; 
 			}
@@ -164,10 +169,13 @@ public class CreateBattleItemAction
 	}
 
 	private boolean hasEnoughCash(Builder resBuilder) {
-		if ( cashChange > 0 ) {
+		 //since negative cashChange means charge, then negative of that is
+	    //the cost. If cashChange is positive, meaning refund, user will always
+	    //have more than a negative amount
+	    int cashCost = -1 * cashChange;
+		if ( cashCost > 0 ) {
 			int userCash = user.getCash();
-			if(userCash < cashChange) {
-				log.error("user doesn't have enough cash");
+			if(userCash < cashCost) {
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
@@ -177,10 +185,13 @@ public class CreateBattleItemAction
 	}
 	
 	private boolean hasEnoughOil(Builder resBuilder) {
-		if (oilChange > 0) {
+		 //since negative oilChange means charge, then negative of that is
+	    //the cost. If oilChange is positive, meaning refund, user will always
+	    //have more than a negative amount
+	    int oilCost = -1 * oilChange;
+		if (oilCost > 0) {
 			int userOil = user.getOil();
-			if(userOil < oilChange) {
-				log.error("user doesn't have enough oil");
+			if(userOil < oilCost) {
 				resBuilder.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
@@ -251,7 +262,25 @@ public class CreateBattleItemAction
 
 	private void updateUserCurrency()
 	{		
-		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, -1*cashChange, -1*oilChange);
+		if (cashChange > 0) {
+			//for refunds
+	  		int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash.
+	  		log.info("curCash={}", curCash);
+	  		int maxCashUserCanGain = maxCash - curCash;
+	  		log.info("maxCashUserCanGain={}", maxCashUserCanGain);
+	  		cashChange = Math.min(cashChange, maxCashUserCanGain);
+	  	}
+		
+		if (oilChange > 0) {
+			//for refunds
+	  		int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
+	  		log.info("curOil={}", curOil);
+	  		int maxOilUserCanGain = maxOil - curOil;
+	  		log.info("maxOilUserCanGain={}", maxOilUserCanGain);
+	  		oilChange = Math.min(oilChange, maxOilUserCanGain);
+	  	}
+		
+		boolean updated = user.updateGemsCashAndOilFromBattleItem(gemsChange, cashChange, oilChange);
 		log.info("updated, user paid for battle items {}", updated);
 	}
 	

@@ -251,7 +251,7 @@ public class RetrieveUserMonsterTeamAction
 		//pvp board obstacles
 		allButRetrieverUserIdToPvpBoardObstacles = pvpBoardObstacleForUserRetrieveUtil
 				.getPvpBoardObstacleForUserIds(userIdsExceptRetriever);
-		
+		log.info("allButRetrieverUserIdToPvpBoardObstacles={}", allButRetrieverUserIdToPvpBoardObstacles);
 	}
 
 	private void getPvpInfo()

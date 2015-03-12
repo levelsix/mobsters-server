@@ -624,7 +624,7 @@ public class CreateInfoProtoUtils {
 			
 			List<PvpBoardObstacleForUser> boardObstacles = null;
 			if (userIdToPvpBoardObstacles.containsKey(userId)) {
-				userIdToPvpBoardObstacles.get(userId);
+				boardObstacles = userIdToPvpBoardObstacles.get(userId);
 			}
 			
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,

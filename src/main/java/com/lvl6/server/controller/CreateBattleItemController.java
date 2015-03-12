@@ -25,6 +25,7 @@ import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
@@ -75,8 +76,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				.getCreateBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
 		//get stuff client sent
-		MinimumUserProto senderProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderMaxResourcesProto = reqProto.getSender();
+		MinimumUserProto senderProto = senderMaxResourcesProto.getMinUserProto();
 		String userId = senderProto.getUserUuid();
+		
+		int maxCash = senderMaxResourcesProto.getMaxCash();
+		int maxOil = senderMaxResourcesProto.getMaxOil();
+				
 		//the new items added to queue, updated refers to those finished as well as 
 		//priorities changing, deleted refers to those removed from queue and completed
 		
@@ -127,8 +133,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			
 			CreateBattleItemAction cbia = new CreateBattleItemAction(
-					userId, deletedList, updatedList,
-					newList, cashChange, oilChange, gemCostForCreating,
+					userId, deletedList, updatedList, newList,
+					cashChange, maxCash, oilChange, maxOil, gemCostForCreating,
 					userRetrieveUtil, battleItemForUserRetrieveUtil, insertUtil, 
 					updateUtil, deleteUtil);
 			

@@ -13,17 +13,17 @@ public final class EventBattleItemProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuDelete = 2;</code>
@@ -264,11 +264,11 @@ public final class EventBattleItemProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = sender_.toBuilder();
               }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(sender_);
                 sender_ = subBuilder.buildPartial();
@@ -365,23 +365,23 @@ public final class EventBattleItemProto {
 
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -623,7 +623,7 @@ public final class EventBattleItemProto {
     }
 
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       biqfuDelete_ = java.util.Collections.emptyList();
       biqfuUpdate_ = java.util.Collections.emptyList();
       biqfuNew_ = java.util.Collections.emptyList();
@@ -824,7 +824,7 @@ public final class EventBattleItemProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -1061,19 +1061,19 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -1081,9 +1081,9 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1097,10 +1097,10 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -1111,14 +1111,14 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -1130,11 +1130,11 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -1143,17 +1143,17 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -1161,14 +1161,14 @@ public final class EventBattleItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   getSender(),
                   getParentForChildren(),
                   isClean());
@@ -7397,48 +7397,49 @@ public final class EventBattleItemProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025EventBattleItem.proto\022\016com.lvl6.proto\032" +
-      "\020BattleItem.proto\032\nUser.proto\"\326\002\n\034Create" +
-      "BattleItemRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022@\n\013biqf" +
-      "uDelete\030\002 \003(\0132+.com.lvl6.proto.BattleIte" +
-      "mQueueForUserProto\022@\n\013biqfuUpdate\030\003 \003(\0132" +
-      "+.com.lvl6.proto.BattleItemQueueForUserP" +
-      "roto\022=\n\010biqfuNew\030\004 \003(\0132+.com.lvl6.proto." +
-      "BattleItemQueueForUserProto\022\022\n\ncashChang" +
-      "e\030\005 \001(\021\022\021\n\toilChange\030\006 \001(\021\022\032\n\022gemCostFor",
-      "Creating\030\007 \001(\005\"\271\002\n\035CreateBattleItemRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022<\n\017userBattleItems\030\002 " +
-      "\003(\0132#.com.lvl6.proto.UserBattleItemProto" +
-      "\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Create" +
-      "BattleItemResponseProto.CreateBattleItem" +
-      "Status\"R\n\026CreateBattleItemStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_INSUFFICIE" +
-      "NT_FUNDS\020\003\"\302\001\n\036CompleteBattleItemRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
-      "inimumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016ge" +
-      "msForSpeedup\030\003 \001(\005\022C\n\016biqfuCompleted\030\004 \003" +
-      "(\0132+.com.lvl6.proto.BattleItemQueueForUs" +
-      "erProto\"\333\002\n\037CompleteBattleItemResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022X\n\006status\030\002 \001(\0162H.com.lvl6" +
-      ".proto.CompleteBattleItemResponseProto.C" +
-      "ompleteBattleItemStatus\0227\n\nubiUpdated\030\003 " +
-      "\003(\0132#.com.lvl6.proto.UserBattleItemProto" +
-      "\"s\n\030CompleteBattleItemStatus\022\013\n\007SUCCESS\020",
-      "\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_INVALID_BATTLE" +
-      "_ITEMS\020\003\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\004\"\224\001" +
-      "\n\035DiscardBattleItemRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022A\n\024discardedBattleItems\030\002 \003(\0132#.com.lv" +
-      "l6.proto.UserBattleItemProto\"\204\002\n\036Discard" +
-      "BattleItemResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022V\n\006sta" +
-      "tus\030\002 \001(\0162F.com.lvl6.proto.DiscardBattle" +
-      "ItemResponseProto.DiscardBattleItemStatu",
-      "s\"X\n\027DiscardBattleItemStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\022 \n\034FAIL_BATTLE_ITEMS_D" +
-      "ONT_EXIST\020\003B\026B\024EventBattleItemProto"
+      "\020BattleItem.proto\032\nUser.proto\"\346\002\n\034Create" +
+      "BattleItemRequestProto\022@\n\006sender\030\001 \001(\01320" +
+      ".com.lvl6.proto.MinimumUserProtoWithMaxR" +
+      "esources\022@\n\013biqfuDelete\030\002 \003(\0132+.com.lvl6" +
+      ".proto.BattleItemQueueForUserProto\022@\n\013bi" +
+      "qfuUpdate\030\003 \003(\0132+.com.lvl6.proto.BattleI" +
+      "temQueueForUserProto\022=\n\010biqfuNew\030\004 \003(\0132+" +
+      ".com.lvl6.proto.BattleItemQueueForUserPr" +
+      "oto\022\022\n\ncashChange\030\005 \001(\021\022\021\n\toilChange\030\006 \001",
+      "(\021\022\032\n\022gemCostForCreating\030\007 \001(\005\"\271\002\n\035Creat" +
+      "eBattleItemResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022<\n\017us" +
+      "erBattleItems\030\002 \003(\0132#.com.lvl6.proto.Use" +
+      "rBattleItemProto\022T\n\006status\030\003 \001(\0162D.com.l" +
+      "vl6.proto.CreateBattleItemResponseProto." +
+      "CreateBattleItemStatus\"R\n\026CreateBattleIt" +
+      "emStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n" +
+      "\027FAIL_INSUFFICIENT_FUNDS\020\003\"\302\001\n\036CompleteB" +
+      "attleItemRequestProto\0220\n\006sender\030\001 \001(\0132 .",
+      "com.lvl6.proto.MinimumUserProto\022\021\n\tisSpe" +
+      "edup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022C\n\016bi" +
+      "qfuCompleted\030\004 \003(\0132+.com.lvl6.proto.Batt" +
+      "leItemQueueForUserProto\"\333\002\n\037CompleteBatt" +
+      "leItemResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022X\n\006status\030" +
+      "\002 \001(\0162H.com.lvl6.proto.CompleteBattleIte" +
+      "mResponseProto.CompleteBattleItemStatus\022" +
+      "7\n\nubiUpdated\030\003 \003(\0132#.com.lvl6.proto.Use" +
+      "rBattleItemProto\"s\n\030CompleteBattleItemSt",
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAI" +
+      "L_INVALID_BATTLE_ITEMS\020\003\022\033\n\027FAIL_INSUFFI" +
+      "CIENT_FUNDS\020\004\"\224\001\n\035DiscardBattleItemReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022A\n\024discardedBattleItem" +
+      "s\030\002 \003(\0132#.com.lvl6.proto.UserBattleItemP" +
+      "roto\"\204\002\n\036DiscardBattleItemResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022V\n\006status\030\002 \001(\0162F.com.lvl6.pro" +
+      "to.DiscardBattleItemResponseProto.Discar",
+      "dBattleItemStatus\"X\n\027DiscardBattleItemSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022 \n\034FAI" +
+      "L_BATTLE_ITEMS_DONT_EXIST\020\003B\026B\024EventBatt" +
+      "leItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

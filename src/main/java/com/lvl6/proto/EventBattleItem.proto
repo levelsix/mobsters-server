@@ -10,7 +10,7 @@ option java_outer_classname = "EventBattleItemProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message CreateBattleItemRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	
 	//what user deleted from the queue, the ones the server already knows about
 	repeated BattleItemQueueForUserProto biqfuDelete = 2; 
