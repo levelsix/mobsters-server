@@ -153,16 +153,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
-			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
-			resEventUpdate.setTag(event.getTag());
-			server.writeEvent(resEventUpdate);
-
 			if (successful) {
 				writeChangesToHistory(userId, umcep, mfu, inEnhancing, mefu, userMonsterIdsThatFinished, userMonsterIds);
 
 				writeToMonsterDeleteHistory(enhancedAndDeletedMonsterForUsers);
 				log.info("added deleted monsters to monster delete table");
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
 			}
 		} catch (Exception e) {
 			log.error("exception in CollectMonsterEnhancementController processEvent", e);
