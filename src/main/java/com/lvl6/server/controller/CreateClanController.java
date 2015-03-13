@@ -96,8 +96,8 @@ public class CreateClanController extends EventController {
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+					"UUID error. incorrect userId=%s",
+					userId), e);
 		}
 
 		//UUID checks
@@ -115,11 +115,19 @@ public class CreateClanController extends EventController {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			Timestamp createTime = new Timestamp(new Date().getTime());
 
-			CreateClanAction cca = new CreateClanAction(userId, )
-			
-			
+			boolean legitCreate = checkLegitCreate(resBuilder, user, clanName, tag, gemsSpent,
+					cashChange);
 
-			
+			boolean success = false;
+			Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
+			Clan createdClan = new Clan();
+			if (legitCreate) {
+				previousCurrency.put(MiscMethods.gems, user.getGems());
+				previousCurrency.put(MiscMethods.cash, user.getCash());
+				success = writeChangesToDB(user, clanName, tag, requestToJoinRequired, description,
+						clanIconId, createTime, createdClan, gemsSpent, cashChange, currencyChange);
+			}
 
 			if (success) {
 				resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(createdClan));
@@ -135,14 +143,14 @@ public class CreateClanController extends EventController {
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
 				sendGeneralNotification(user.getName(), clanName);
 
 				writeToUserCurrencyHistory(user, createdClan, createTime,
-					currencyChange, previousCurrency);
+						currencyChange, previousCurrency);
 			}
 		} catch (Exception e) {
 			log.error("exception in CreateClan processEvent", e);
@@ -300,6 +308,71 @@ public class CreateClanController extends EventController {
 				reasonsForChanges, detailsMap);
 
 	}
+
+	private boolean checkLegitCreate(Builder resBuilder, User user, String clanName,
+			String tag, int gemsSpent, int cashChange) {
+		if (user == null || clanName == null || clanName.isEmpty() ||
+				tag == null || tag.isEmpty()) {
+			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+			log.error("user is null");
+			return false;      
+		}
+		//    if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
+		//      resBuilder.setStatus(CreateClanStatus.FAIL_NOT_ENOUGH_CASH);
+		//      log.error("user only has " + user.getCash() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
+		//      return false;
+		//    }
+		if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
+			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+			log.error(String.format(
+					"clan name %s is more than %s characters",
+					clanName, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME));
+			return false;
+		}
+
+		if (tag.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG) {
+			resBuilder.setStatus(CreateClanStatus.FAIL_INVALID_TAG_LENGTH);
+			log.error(String.format(
+					"clan tag %s is more than %s characters.",
+					tag, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG));
+			return false;
+		}
+
+		if (null != user.getClanId() && !user.getClanId().isEmpty()) {
+			resBuilder.setStatus(CreateClanStatus.FAIL_ALREADY_IN_CLAN);
+			log.error(String.format(
+					"user already in clan with id %s", user.getClanId()));
+			return false;
+		}
+		Clan clan = clanRetrieveUtil.getClanWithNameOrTag(clanName, tag);
+		if (clan != null) {
+			if (clan.getName().equalsIgnoreCase(clanName)) {
+				resBuilder.setStatus(CreateClanStatus.FAIL_NAME_TAKEN);
+				log.error("clan name already taken with name " + clanName);
+				return false;
+			}
+			if (clan.getTag().equalsIgnoreCase(tag)) {
+				resBuilder.setStatus(CreateClanStatus.FAIL_TAG_TAKEN);
+				log.error("clan tag already taken with tag " + tag);
+				return false;
+			}
+		}
+
+		//CHECK MONEY
+		if (0 == gemsSpent) {
+			if (!hasEnoughCash(resBuilder, user, cashChange)) {
+				return false;
+			}
+		}
+
+		if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
+			return false;
+		}
+
+		resBuilder.setStatus(CreateClanStatus.SUCCESS);
+		return true;
+	}
+
 
 	public Locker getLocker() {
 		return locker;
