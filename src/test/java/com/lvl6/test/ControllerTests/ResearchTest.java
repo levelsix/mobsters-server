@@ -8,8 +8,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -17,11 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
@@ -42,14 +41,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
-@TestExecutionListeners({ BeforeClassSetUp.class})
 public class ResearchTest {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private static JdbcTemplate jdbcTemplate;
-
+	private JdbcTemplate jdbcTemplate;
+	private static boolean endOfTesting;
 	private static User user;
 
 	private static MinimumUserProto mup;
@@ -71,48 +69,88 @@ public class ResearchTest {
 	@Autowired
 	FinishPerformingResearchController finishPerformingResearchController;
 
-//	@BeforeClass
-//	public static void setUp() {
-//		log.info("setUp");
-//		Timestamp createTime = new Timestamp((new Date()).getTime());
-//
-//		String name = "bobUnitTest";
-//		String udid = "bobUdid";
-//		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
-//		int playerExp = 10;
-//		int cash = 10000;
-//		int oil = 10000;
-//		int gems = 10000;
-//		String deviceToken = "bobToken";
-//		String facebookId = null;
-//		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
-//		String email = null;
-//		String fbData = null;
-//
-//		userId = insertUtil.insertUser(name, udid, lvl,  playerExp, cash, oil,
-//				gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
-//				email, fbData);
-//
-//		user = userRetrieveUtil.getUserById(userId);
-//
-//		if (null == user) {
-//			throw new RuntimeException("no user was created!");
-//		}
-//
-//		mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null);
-//
-//	}
+	@Resource
+	public void setDataSource(DataSource dataSource) {
+		log.info("Setting datasource and creating jdbcTemplate");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	@Before
+	public void setUp() {
+
+		if (userId == null) {
+			endOfTesting = false;
+			log.info("setUp");
+			Timestamp createTime = new Timestamp((new Date()).getTime());
+
+			String name = "bobUnitTest";
+			String udid = "bobUdid";
+			int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
+			int playerExp = 10;
+			int cash = 10000;
+			int oil = 10000;
+			int gems = 10000;
+			String deviceToken = "bobToken";
+			String facebookId = null;
+			int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
+			String email = null;
+			String fbData = null;
+
+			userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
+					oil, gems, false, deviceToken, createTime, facebookId,
+					avatarMonsterId, email, fbData);
+
+			//		if (null == userId) {
+			//			throw new RuntimeException("no user was created!");
+			//		}
+
+			user = userRetrieveUtil.getUserById(userId);
+		}
+	}
+
+	@After
+	public void tearDown() {
+		if (endOfTesting) {
+			if (null == user) {
+				log.info("no user to delete");
+				return;
+			}
+
+			String query1 = String.format("DELETE FROM %s where %s=?",
+					DBConstants.TABLE_RESEARCH_FOR_USER,
+					DBConstants.RESEARCH_FOR_USER__ID);
+			Object[] values1 = new Object[] { userResearchUuid };
+
+			int numDeleted = jdbcTemplate.update(query1, values1);
+			if (numDeleted != 1) {
+				log.error("did not delete test research for user when cleaning up");
+			}
+
+			String query2 = String.format("DELETE FROM %s where %s=?",
+					DBConstants.TABLE_USER, DBConstants.USER__ID);
+			Object[] values2 = new Object[] { user.getId() };
+			int[] types2 = new int[] { java.sql.Types.VARCHAR };
+
+			int numDeleted2 = jdbcTemplate.update(query2, values2, types2);
+			if (numDeleted2 != 1) {
+				log.error("did not delete test user when cleaning up");
+			}
+
+		}
+
+	}
 
 	@Test
 	public void testResearch() {
-		user = userRetrieveUtil.getUserByUDID("bobUdid");
-		
+
 		User user1 = userRetrieveUtil.getUserById(user.getId());
 		int userGems1 = user1.getGems();
 		int userOil1 = user1.getOil();
-		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
+		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto
+				.newBuilder();
 
-		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user1, null));
+		prrpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user1, null));
 		prrpb.setResearchId(1);
 		Date date = new Date();
 		prrpb.setClientTime(date.getTime());
@@ -121,24 +159,24 @@ public class ResearchTest {
 		ResourceType rt = ResourceType.OIL;
 		prrpb.setResourceType(rt);
 
-
 		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
 		prre.setTag(1);
 		prre.setPerformResearchRequestProto(prrpb.build());
 		performResearchController.handleEvent(prre);
 
-		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user1.getId());
+		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
+				.getAllResearchForUser(user1.getId());
 		//assertNotNull(rfuList);
-		userResearchUuid = rfuList.get(0).getId();
 
 		assertTrue(rfuList.size() == 1);
 		User user2 = userRetrieveUtil.getUserById(user.getId());
-		assertEquals(user2.getOil(), userOil1-100);
-		assertEquals(user2.getGems(), userGems1-25);
-		
-		for(ResearchForUser rfu: rfuList) {
+		assertEquals(user2.getOil(), userOil1 - 100);
+		assertEquals(user2.getGems(), userGems1 - 25);
+
+		for (ResearchForUser rfu : rfuList) {
 			assertEquals(rfu.getUserId(), user1.getId());
-			assertFalse(rfu.isComplete());			
+			assertFalse(rfu.isComplete());
+			userResearchUuid = rfu.getId();
 		}
 
 	}
@@ -150,8 +188,10 @@ public class ResearchTest {
 		int userCash = user1.getCash();
 		int userGems2 = user1.getGems();
 
-		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto.newBuilder();
-		prrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user1, null));
+		PerformResearchRequestProto.Builder prrpb = PerformResearchRequestProto
+				.newBuilder();
+		prrpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user1, null));
 		prrpb.setResearchId(2);
 		prrpb.setClientTime(date.getTime());
 		prrpb.setGemsCost(25);
@@ -165,16 +205,17 @@ public class ResearchTest {
 		prre2.setPerformResearchRequestProto(prrpb.build());
 		performResearchController.handleEvent(prre2);
 
-		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user1.getId());
+		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
+				.getAllResearchForUser(user1.getId());
 		User currUser = userRetrieveUtil.getUserById(user.getId());
 
 		assertTrue(rfuList.size() == 1);
-		assertEquals(userCash-50, currUser.getCash());
-		assertEquals(userGems2-25, currUser.getGems());
-		
-		for(ResearchForUser rfu: rfuList) {
+		assertEquals(userCash - 50, currUser.getCash());
+		assertEquals(userGems2 - 25, currUser.getGems());
+
+		for (ResearchForUser rfu : rfuList) {
 			assertEquals(rfu.getUserId(), user1.getId());
-			assertFalse(rfu.isComplete());			
+			assertFalse(rfu.isComplete());
 		}
 
 	}
@@ -184,8 +225,10 @@ public class ResearchTest {
 		User user1 = userRetrieveUtil.getUserById(user.getId());
 		int userGems = user1.getGems();
 
-		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto.newBuilder();
-		fprrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user1, null));
+		FinishPerformingResearchRequestProto.Builder fprrpb = FinishPerformingResearchRequestProto
+				.newBuilder();
+		fprrpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user1, null));
 		fprrpb.setUserResearchUuid(userResearchUuid);
 		fprrpb.setGemsCost(50);
 
@@ -193,59 +236,17 @@ public class ResearchTest {
 		fprre.setTag(1);
 		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
 		finishPerformingResearchController.handleEvent(fprre);
-		
-		List<ResearchForUser> rfuList = researchForUserRetrieveUtil.getAllResearchForUser(user1.getId());
+
+		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
+				.getAllResearchForUser(user1.getId());
 		User currUser = userRetrieveUtil.getUserById(user.getId());
 
-		assertEquals(userGems - 25, currUser.getGems());
-		
-		for(ResearchForUser rfu : rfuList) {
+		assertEquals(userGems - 50, currUser.getGems());
+
+		for (ResearchForUser rfu : rfuList) {
 			assertTrue(rfu.isComplete());
 		}
+		endOfTesting = true;
 	}
 
-	@AfterClass
-	public static void tearDown() {
-		if (null == user) {
-			log.info("no user to delete");
-			return;
-		}
-
-		String query1 = String.format(
-				"DELETE FROM %s where %s=?",
-				DBConstants.TABLE_RESEARCH_FOR_USER,
-				DBConstants.RESEARCH_FOR_USER__USER_ID);
-		Object[] values1 = new Object[] {
-				user.getId()
-		};
-		int[] types1 = new int[] {
-				java.sql.Types.VARCHAR
-		};
-
-		int numDeleted = jdbcTemplate.update( query1, values1, types1 );
-		if(numDeleted != 1) {
-			log.error("did not delete test research for user when cleaning up");
-		}
-		
-		
-		String query2 = String.format(
-				"DELETE FROM %s where %s=?",
-				DBConstants.TABLE_USER,
-				DBConstants.USER__ID);
-		Object[] values2 = new Object[] {
-				user.getId()
-		};
-		int[] types2 = new int[] {
-				java.sql.Types.VARCHAR
-		};
-
-		int numDeleted2 = jdbcTemplate.update( query2, values2, types2 );
-		if(numDeleted2 != 1) {
-			log.error("did not delete test user when cleaning up");
-		}
-
-	}
-
-	
-	
 }

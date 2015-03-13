@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class InviteToClanResponseEvent extends NormalResponseEvent {
 
-  private InviteToClanResponseProto inviteToClanResponseProto;
-  
-  public InviteToClanResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_INVITE_TO_CLAN_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = inviteToClanResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private InviteToClanResponseProto inviteToClanResponseProto;
 
-  public void setInviteToClanResponseProto(InviteToClanResponseProto inviteToClanResponseProto) {
-    this.inviteToClanResponseProto = inviteToClanResponseProto;
-  }
+	public InviteToClanResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_INVITE_TO_CLAN_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = inviteToClanResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setInviteToClanResponseProto(
+			InviteToClanResponseProto inviteToClanResponseProto) {
+		this.inviteToClanResponseProto = inviteToClanResponseProto;
+	}
 
 }

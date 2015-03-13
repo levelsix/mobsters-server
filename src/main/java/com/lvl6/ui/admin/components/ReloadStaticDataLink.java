@@ -8,10 +8,9 @@ import com.lvl6.server.ServerAdmin;
 import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.pages.AdminPage;
 
-public class ReloadStaticDataLink extends Link<String>{
-	
+public class ReloadStaticDataLink extends Link<String> {
+
 	Logger log = LoggerFactory.getLogger(getClass());
-	
 
 	public ReloadStaticDataLink(String id) {
 		super(id);
@@ -19,14 +18,13 @@ public class ReloadStaticDataLink extends Link<String>{
 
 	private static final long serialVersionUID = -161974445690777238L;
 
-
 	@Override
 	public void onClick() {
 		log.info("An Admin requested a purge of all static data");
-		ServerAdmin sa = AppContext.getApplicationContext().getBean(ServerAdmin.class);
+		ServerAdmin sa = AppContext.getApplicationContext().getBean(
+				ServerAdmin.class);
 		sa.reloadAllStaticData();
-		setResponsePage(AdminPage.class);		
+		setResponsePage(AdminPage.class);
 	}
-
 
 }

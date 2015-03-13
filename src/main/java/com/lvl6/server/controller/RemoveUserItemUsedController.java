@@ -22,9 +22,12 @@ import com.lvl6.server.controller.actionobjects.RemoveUserItemUsedAction;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component @DependsOn("gameServer") public class RemoveUserItemUsedController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class RemoveUserItemUsedController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public RemoveUserItemUsedController() {
 		numAllocatedThreads = 1;
@@ -45,7 +48,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent)event).getRemoveUserItemUsedRequestProto();
+		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent) event)
+				.getRemoveUserItemUsedRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -53,7 +57,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		String userId = senderProto.getUserUuid();
 		List<String> userItemUsedIdList = reqProto.getUserItemUsedUuidList();
 
-		RemoveUserItemUsedResponseProto.Builder resBuilder = RemoveUserItemUsedResponseProto.newBuilder();
+		RemoveUserItemUsedResponseProto.Builder resBuilder = RemoveUserItemUsedResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
 
@@ -62,53 +67,61 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		try {
 			userUuid = UUID.fromString(userId);
 			StringUtils.convertToUUID(userItemUsedIdList);
-			
+
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, userItemUsedIdList=%s",
-				userId, userItemUsedIdList), e);
+					"UUID error. incorrect userId=%s, userItemUsedIdList=%s",
+					userId, userItemUsedIdList), e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
-			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(userId);
+			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+				.getSimpleName());
 		try {
 
 			RemoveUserItemUsedAction tifsua = new RemoveUserItemUsedAction(
-				userId, userItemUsedIdList, DeleteUtils.get());
+					userId, userItemUsedIdList, DeleteUtils.get());
 
 			tifsua.execute(resBuilder);
 
 			RemoveUserItemUsedResponseProto resProto = resBuilder.build();
-			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(senderProto.getUserUuid());
+			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveUserItemUsedResponseProto(resProto);
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in RemoveUserItemUsedController processEvent", e);
+			log.error("exception in RemoveUserItemUsedController processEvent",
+					e);
 			try {
 				resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
-				RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(userId);
+				RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in RemoveUserItemUsedController processEvent", e);
+				log.error(
+						"exception2 in RemoveUserItemUsedController processEvent",
+						e);
 			}
 
 		} finally {
-			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 		}
 	}
 

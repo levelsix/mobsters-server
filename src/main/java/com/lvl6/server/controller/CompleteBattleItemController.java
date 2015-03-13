@@ -36,9 +36,12 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class CompleteBattleItemController extends EventController{
+@Component
+@DependsOn("gameServer")
+public class CompleteBattleItemController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -74,26 +77,27 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent)event)
+		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent) event)
 				.getCompleteBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
 		//get stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<BattleItemQueueForUserProto> completedprotoList = reqProto.getBiqfuCompletedList();
+		List<BattleItemQueueForUserProto> completedprotoList = reqProto
+				.getBiqfuCompletedList();
 
-		List<BattleItemQueueForUser> completedList = 
-				getIdsToBattleItemQueueForUserFromProto(completedprotoList, userId);
+		List<BattleItemQueueForUser> completedList = getIdsToBattleItemQueueForUserFromProto(
+				completedprotoList, userId);
 
 		boolean isSpeedUp = reqProto.getIsSpeedup();
 		int gemsForSpeedUp = 0;
 
-		if(isSpeedUp) {
+		if (isSpeedUp) {
 			gemsForSpeedUp = reqProto.getGemsForSpeedup();
 		}
 
-		CompleteBattleItemResponseProto.Builder resBuilder =
-				CompleteBattleItemResponseProto.newBuilder();
+		CompleteBattleItemResponseProto.Builder resBuilder = CompleteBattleItemResponseProto
+				.newBuilder();
 		resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
@@ -104,16 +108,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s, ",
-					userId));
+			log.error(String
+					.format("UUID error. incorrect userId=%s, ", userId));
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
-			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(userId);
+			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -124,32 +128,33 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
-					userId, completedList, gemsForSpeedUp,
-					userRetrieveUtil, battleItemForUserRetrieveUtil, insertUtil, 
-					deleteUtil);
+					userId, completedList, gemsForSpeedUp, userRetrieveUtil,
+					battleItemForUserRetrieveUtil, insertUtil, deleteUtil);
 
 			cbia.execute(resBuilder);
 
-			CompleteBattleItemResponseEvent resEvent = new 
-					CompleteBattleItemResponseEvent(senderProto.getUserUuid());
+			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
+					senderProto.getUserUuid());
 
 			User user2 = cbia.getUser();
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				List<BattleItemForUser> bifuCompletedList = cbia.getBifuCompletedList();
-				List<UserBattleItemProto> ubipCompletedList = 
-						CreateInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
+				List<BattleItemForUser> bifuCompletedList = cbia
+						.getBifuCompletedList();
+				List<UserBattleItemProto> ubipCompletedList = CreateInfoProtoUtils
+						.convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
 				resBuilder.addAllUbiUpdated(ubipCompletedList);
 			}
-			
+
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());  
+			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-			
+
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user2, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -158,28 +163,30 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				writeToCurrencyHistory(userId, ts, cbia);
 			}
 		} catch (Exception e) {
-			log.error("exception in CompleteBattleItemController processEvent", e);
+			log.error("exception in CompleteBattleItemController processEvent",
+					e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
-				CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(userId);
+				CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in CompleteBattleItemController processEvent", e);
+				log.error(
+						"exception2 in CompleteBattleItemController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
-
 	private List<BattleItemQueueForUser> getIdsToBattleItemQueueForUserFromProto(
-			List<BattleItemQueueForUserProto> protosList, String userId)
-			{
+			List<BattleItemQueueForUserProto> protosList, String userId) {
 		List<BattleItemQueueForUser> idsToBattleItemQueueForUser = null;
-		if(protosList == null || protosList.isEmpty()) {
+		if (protosList == null || protosList.isEmpty()) {
 			//not an error
 			//			log.error("CompleteBattleItem request did not send any battle item queue for user ids");
 			return idsToBattleItemQueueForUser;
@@ -187,16 +194,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		idsToBattleItemQueueForUser = new ArrayList<BattleItemQueueForUser>();
 
-		for(BattleItemQueueForUserProto biqfuProto : protosList)
-		{
+		for (BattleItemQueueForUserProto biqfuProto : protosList) {
 			BattleItemQueueForUser biqfu = new BattleItemQueueForUser();
 			biqfu.setPriority(biqfuProto.getPriority());
 
 			String protoUserId = biqfuProto.getUserUuid();
-			if(protoUserId.equals(userId)) {
+			if (protoUserId.equals(userId)) {
 				biqfu.setUserId(protoUserId);
-			}
-			else {
+			} else {
 				log.error(
 						"CompleteBattleItemRequest inconsistent userIds. expected={}, actual={}",
 						userId, biqfuProto);
@@ -210,12 +215,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		return idsToBattleItemQueueForUser;
 
-			}
-
+	}
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
-			CompleteBattleItemAction cbia)
-	{
+			CompleteBattleItemAction cbia) {
 		MiscMethods.writeToUserCurrencyOneUser(userId, date,
 				cbia.getCurrencyDeltas(), cbia.getPreviousCurrencies(),
 				cbia.getCurrentCurrencies(), cbia.getReasons(),

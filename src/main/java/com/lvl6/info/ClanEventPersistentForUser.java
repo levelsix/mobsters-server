@@ -6,9 +6,9 @@ import java.util.List;
 
 //user can have multiple of these (different clanIds)
 public class ClanEventPersistentForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = -2682088060406725220L;
-	
+
 	private String userId;
 	private String clanId;
 	private int crId;
@@ -20,25 +20,15 @@ public class ClanEventPersistentForUser implements Serializable {
 	private String userMonsterIdOne;
 	private String userMonsterIdTwo;
 	private String userMonsterIdThree;
-	
-	public ClanEventPersistentForUser()
-	{
+
+	public ClanEventPersistentForUser() {
 		super();
 	}
 
-	public ClanEventPersistentForUser(
-		String userId,
-		String clanId,
-		int crId,
-		int crDmgDone,
-		int crsId,
-		int crsDmgDone,
-		int crsmId,
-		int crsmDmgDone,
-		String userMonsterIdOne,
-		String userMonsterIdTwo,
-		String userMonsterIdThree )
-	{
+	public ClanEventPersistentForUser(String userId, String clanId, int crId,
+			int crDmgDone, int crsId, int crsDmgDone, int crsmId,
+			int crsmDmgDone, String userMonsterIdOne, String userMonsterIdTwo,
+			String userMonsterIdThree) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -56,7 +46,7 @@ public class ClanEventPersistentForUser implements Serializable {
 	//convenience methods
 	public List<String> getUserMonsterIds() {
 		List<String> userMonsterIds = new ArrayList<String>();
-		
+
 		if (null != userMonsterIdOne && !userMonsterIdOne.isEmpty()) {
 			userMonsterIds.add(userMonsterIdOne);
 		}
@@ -66,129 +56,109 @@ public class ClanEventPersistentForUser implements Serializable {
 		if (null != userMonsterIdThree && !userMonsterIdThree.isEmpty()) {
 			userMonsterIds.add(userMonsterIdThree);
 		}
-		
+
 		return userMonsterIds;
 	}
+
 	//---------------------------
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getClanId()
-	{
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId( String clanId )
-	{
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 
-	public int getCrId()
-	{
+	public int getCrId() {
 		return crId;
 	}
 
-	public void setCrId( int crId )
-	{
+	public void setCrId(int crId) {
 		this.crId = crId;
 	}
 
-	public int getCrDmgDone()
-	{
+	public int getCrDmgDone() {
 		return crDmgDone;
 	}
 
-	public void setCrDmgDone( int crDmgDone )
-	{
+	public void setCrDmgDone(int crDmgDone) {
 		this.crDmgDone = crDmgDone;
 	}
 
-	public int getCrsId()
-	{
+	public int getCrsId() {
 		return crsId;
 	}
 
-	public void setCrsId( int crsId )
-	{
+	public void setCrsId(int crsId) {
 		this.crsId = crsId;
 	}
 
-	public int getCrsDmgDone()
-	{
+	public int getCrsDmgDone() {
 		return crsDmgDone;
 	}
 
-	public void setCrsDmgDone( int crsDmgDone )
-	{
+	public void setCrsDmgDone(int crsDmgDone) {
 		this.crsDmgDone = crsDmgDone;
 	}
 
-	public int getCrsmId()
-	{
+	public int getCrsmId() {
 		return crsmId;
 	}
 
-	public void setCrsmId( int crsmId )
-	{
+	public void setCrsmId(int crsmId) {
 		this.crsmId = crsmId;
 	}
 
-	public int getCrsmDmgDone()
-	{
+	public int getCrsmDmgDone() {
 		return crsmDmgDone;
 	}
 
-	public void setCrsmDmgDone( int crsmDmgDone )
-	{
+	public void setCrsmDmgDone(int crsmDmgDone) {
 		this.crsmDmgDone = crsmDmgDone;
 	}
 
-	public String getUserMonsterIdOne()
-	{
+	public String getUserMonsterIdOne() {
 		return userMonsterIdOne;
 	}
 
-	public void setUserMonsterIdOne( String userMonsterIdOne )
-	{
+	public void setUserMonsterIdOne(String userMonsterIdOne) {
 		this.userMonsterIdOne = userMonsterIdOne;
 	}
 
-	public String getUserMonsterIdTwo()
-	{
+	public String getUserMonsterIdTwo() {
 		return userMonsterIdTwo;
 	}
 
-	public void setUserMonsterIdTwo( String userMonsterIdTwo )
-	{
+	public void setUserMonsterIdTwo(String userMonsterIdTwo) {
 		this.userMonsterIdTwo = userMonsterIdTwo;
 	}
 
-	public String getUserMonsterIdThree()
-	{
+	public String getUserMonsterIdThree() {
 		return userMonsterIdThree;
 	}
 
-	public void setUserMonsterIdThree( String userMonsterIdThree )
-	{
+	public void setUserMonsterIdThree(String userMonsterIdThree) {
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
 
 	@Override
 	public String toString() {
 		return "ClanEventPersistentForUser [userId=" + userId + ", clanId="
-				+ clanId + ", crId=" + crId + ", crDmgDone=" + crDmgDone + ", crsId="
-				+ crsId + ", crsDmgDone=" + crsDmgDone + ", crsmId=" + crsmId
-				+ ", crsmDmgDone=" + crsmDmgDone + ", userMonsterIdOne="
-				+ userMonsterIdOne + ", userMonsterIdTwo=" + userMonsterIdTwo
+				+ clanId + ", crId=" + crId + ", crDmgDone=" + crDmgDone
+				+ ", crsId=" + crsId + ", crsDmgDone=" + crsDmgDone
+				+ ", crsmId=" + crsmId + ", crsmDmgDone=" + crsmDmgDone
+				+ ", userMonsterIdOne=" + userMonsterIdOne
+				+ ", userMonsterIdTwo=" + userMonsterIdTwo
 				+ ", userMonsterIdThree=" + userMonsterIdThree + "]";
 	}
-  
+
 }

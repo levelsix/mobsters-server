@@ -39,329 +39,335 @@ import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class ChangeClanSettingsController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class ChangeClanSettingsController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtil;
-  
-  @Autowired
-  protected ClanRetrieveUtils2 clanRetrieveUtil;
-  
-  @Autowired
-  protected UserClanRetrieveUtils2 userClanRetrieveUtil;
-  
-  @Autowired
-  protected ClanIconRetrieveUtils clanIconRetrieveUtils;
-  
-  @Autowired
-  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
-  
-  @Autowired
-  protected ClanSearch clanSearch;
-	
-  public ChangeClanSettingsController() {
-	  numAllocatedThreads = 4;
-  }
+	@Autowired
+	protected Locker locker;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new ChangeClanSettingsRequestEvent();
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_CHANGE_CLAN_SETTINGS_EVENT;
-  }
+	@Autowired
+	protected ClanRetrieveUtils2 clanRetrieveUtil;
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    ChangeClanSettingsRequestProto reqProto = ((ChangeClanSettingsRequestEvent)event).getChangeClanSettingsRequestProto();
+	@Autowired
+	protected UserClanRetrieveUtils2 userClanRetrieveUtil;
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    boolean isChangeDescription = reqProto.getIsChangeDescription();
-    String description = reqProto.getDescriptionNow();
-    boolean isChangeJoinType = reqProto.getIsChangeJoinType();
-    boolean requestToJoinRequired = reqProto.getRequestToJoinRequired();
-    boolean isChangeIcon = reqProto.getIsChangeIcon();
-    int iconId = reqProto.getIconId();
+	@Autowired
+	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
 
-    ChangeClanSettingsResponseProto.Builder resBuilder = ChangeClanSettingsResponseProto.newBuilder();
-    resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-    resBuilder.setSender(senderProto);
+	@Autowired
+	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
-    String clanId = "";
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanUuid();
-    }
-    
-	UUID userUuid = null;
-    UUID clanUuid = null;
-    
-    boolean invalidUuids = true;
-    if (!clanId.isEmpty()) {
-    	try {
-    		userUuid = UUID.fromString(userId);
-			clanUuid = UUID.fromString(clanId);
-			invalidUuids = false;
+	@Autowired
+	protected ClanSearch clanSearch;
+
+	public ChangeClanSettingsController() {
+		numAllocatedThreads = 4;
+	}
+
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new ChangeClanSettingsRequestEvent();
+	}
+
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_CHANGE_CLAN_SETTINGS_EVENT;
+	}
+
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		ChangeClanSettingsRequestProto reqProto = ((ChangeClanSettingsRequestEvent) event)
+				.getChangeClanSettingsRequestProto();
+
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		boolean isChangeDescription = reqProto.getIsChangeDescription();
+		String description = reqProto.getDescriptionNow();
+		boolean isChangeJoinType = reqProto.getIsChangeJoinType();
+		boolean requestToJoinRequired = reqProto.getRequestToJoinRequired();
+		boolean isChangeIcon = reqProto.getIsChangeIcon();
+		int iconId = reqProto.getIconId();
+
+		ChangeClanSettingsResponseProto.Builder resBuilder = ChangeClanSettingsResponseProto
+				.newBuilder();
+		resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+		resBuilder.setSender(senderProto);
+
+		String clanId = "";
+		if (senderProto.hasClan() && null != senderProto.getClan()) {
+			clanId = senderProto.getClan().getClanUuid();
+		}
+
+		UUID userUuid = null;
+		UUID clanUuid = null;
+
+		boolean invalidUuids = true;
+		if (!clanId.isEmpty()) {
+			try {
+				userUuid = UUID.fromString(userId);
+				clanUuid = UUID.fromString(clanId);
+				invalidUuids = false;
+			} catch (Exception e) {
+				log.error(String.format(
+						"UUID error. incorrect userId=%s, clanId=%s", userId,
+						clanId), e);
+			}
+		}
+
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+		boolean lockedClan = getLocker().lockClan(clanUuid);
+
+		try {
+			User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
+			Clan clan = clanRetrieveUtil.getClanWithId(user.getClanId());
+
+			boolean legitChange = checkLegitChange(resBuilder, lockedClan,
+					userId, user, clanId, clan);
+
+			List<Integer> clanSizeContainer = new ArrayList<Integer>();
+			if (legitChange) {
+				//clan will be modified
+				writeChangesToDB(resBuilder, clanId, clan, isChangeDescription,
+						description, isChangeJoinType, requestToJoinRequired,
+						isChangeIcon, iconId);
+				setResponseBuilderStuff(resBuilder, clanId, clan,
+						clanSizeContainer);
+			}
+
+			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+
+			//if not successful only write to user
+			if (!ChangeClanSettingsStatus.SUCCESS
+					.equals(resBuilder.getStatus())) {
+				server.writeEvent(resEvent);
+
+			} else {
+				//only write to clan if successful 
+				server.writeClanEvent(resEvent, clan.getId());
+
+				updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
+						requestToJoinRequired);
+			}
+
 		} catch (Exception e) {
+			log.error("exception in ChangeClanSettings processEvent", e);
+			try {
+				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in ChangeClanSettings processEvent", e);
+			}
+		} finally {
+			if (null != clanUuid && lockedClan) {
+				getLocker().unlockClan(clanUuid);
+			}
+		}
+	}
+
+	private boolean checkLegitChange(Builder resBuilder, boolean lockedClan,
+			String userId, User user, String clanId, Clan clan) {
+
+		if (!lockedClan) {
+			log.error("couldn't obtain clan lock");
+			return false;
+		}
+		if (user == null || clan == null) {
+			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, clanId=%s",
-				userId, clanId), e);
+					"userId is %s, user is %s, clanId is %s, clan is %s",
+					userId, user, clanId, clan));
+			return false;
 		}
-    }
-    
-    //UUID checks
-    if (invalidUuids) {
-    	resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-    	ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(userId);
-    	resEvent.setTag(event.getTag());
-    	resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
-    	server.writeEvent(resEvent);
-    	return;
-    }
-	boolean lockedClan = getLocker().lockClan(clanUuid);
-	
-    try {
-      User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
-      Clan clan = clanRetrieveUtil.getClanWithId(user.getClanId());
-      
-      boolean legitChange = checkLegitChange(resBuilder, lockedClan, userId, user,
-      		clanId, clan);
-
-      List<Integer> clanSizeContainer = new ArrayList<Integer>();
-      if (legitChange) {
-      	//clan will be modified
-        writeChangesToDB(resBuilder, clanId, clan, isChangeDescription, description,
-        		isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId);
-        setResponseBuilderStuff(resBuilder, clanId, clan, clanSizeContainer);
-      }
-      
-      ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserUuid());
-      resEvent.setTag(event.getTag());
-      resEvent.setChangeClanSettingsResponseProto(resBuilder.build());  
-      
-      //if not successful only write to user
-      if (!ChangeClanSettingsStatus.SUCCESS.equals(resBuilder.getStatus())) {
-      	server.writeEvent(resEvent);
-      	
-      } else {
-      	//only write to clan if successful 
-      	server.writeClanEvent(resEvent, clan.getId());
-      	
-      	updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
-      		requestToJoinRequired);
-      }
-
-    } catch (Exception e) {
-      log.error("exception in ChangeClanSettings processEvent", e);
-      try {
-    	  resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-    	  ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in ChangeClanSettings processEvent", e);
-    	}
-    } finally {
-    	if (null != clanUuid && lockedClan) {
-			getLocker().unlockClan(clanUuid);
+		String clanIdUser = user.getClanId();
+		if (null == clanIdUser || clanIdUser.isEmpty()) {
+			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_IN_CLAN);
+			log.error("user not in clan");
+			return false;
 		}
-    }
-  }
-  
-  private boolean checkLegitChange(Builder resBuilder, boolean lockedClan, String userId,
-  		User user, String clanId, Clan clan) {
 
-  	if (!lockedClan) {
-  		log.error("couldn't obtain clan lock");
-  		return false;
-  	}
-    if (user == null || clan == null) {
-      resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-      log.error(String.format(
-    	  "userId is %s, user is %s, clanId is %s, clan is %s",
-    	  userId, user, clanId, clan));
-      return false;      
-    }
-    String clanIdUser = user.getClanId();
-    if (null == clanIdUser || clanIdUser.isEmpty()) {
-      resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_IN_CLAN);
-      log.error("user not in clan");
-      return false;      
-    }
-    
-    List<String> statuses = new ArrayList<String>();
-    statuses.add(UserClanStatus.LEADER.name());
-    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-    List<String> userIds = userClanRetrieveUtil
-    		.getUserIdsWithStatuses(clanId, statuses);
-    
-    Set<String> uniqUserIds = new HashSet<String>(); 
-    if (null != userIds && !userIds.isEmpty()) {
-    	uniqUserIds.addAll(userIds);
-    }
-    
-    if (!uniqUserIds.contains(userId)) {
-      resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_AUTHORIZED);
-      log.error(String.format(
-    	  "clan member can't change clan description member=%s", user));
-      return false;      
-    }
-    resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
-    return true;
-  }
+		List<String> statuses = new ArrayList<String>();
+		statuses.add(UserClanStatus.LEADER.name());
+		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+		List<String> userIds = userClanRetrieveUtil.getUserIdsWithStatuses(
+				clanId, statuses);
 
-  private void writeChangesToDB(Builder resBuilder, String clanId, Clan clan, 
-  		boolean isChangeDescription, String description, boolean isChangeJoinType,
-  		boolean requestToJoinRequired, boolean isChangeIcon, int iconId) {
-  	
-  	if (isChangeDescription) {
-  		if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
-  			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-  			log.warn(String.format(
-  				"description is %s, and length of that is %s, max size is %s",
-  				description, description.length(), 
-  				ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION));
-  		} else {
-  			clan.setDescription(description);
-  		}
-  	}
-  	
-  	if (isChangeJoinType) {
-  		clan.setRequestToJoinRequired(requestToJoinRequired);
-  	}
+		Set<String> uniqUserIds = new HashSet<String>();
+		if (null != userIds && !userIds.isEmpty()) {
+			uniqUserIds.addAll(userIds);
+		}
 
-  	if (isChangeIcon) {
-  		ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
-  		if (null == ci) {
-  			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-  			log.warn(String.format(
-  				"no clan icon with id=%s", iconId));
-  		} else {
-  			clan.setClanIconId(iconId);
-  		}
-  	}
-  	
-  	int numUpdated = UpdateUtils.get().updateClan(clanId, isChangeDescription, description,
-  			isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId);
-  	
-  	log.info(String.format(
-  		"numUpdated (should be 1)=%s", numUpdated));
-  }
-  
-  private void setResponseBuilderStuff(Builder resBuilder,
-	  String clanId, Clan clan, List<Integer> clanSizeContainer)
-  {
-	  List<String> clanIdList = Collections.singletonList(clanId);
+		if (!uniqUserIds.contains(userId)) {
+			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_AUTHORIZED);
+			log.error(String
+					.format("clan member can't change clan description member=%s",
+							user));
+			return false;
+		}
+		resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
+		return true;
+	}
 
-	  List<String> statuses = new ArrayList<String>();
-	  statuses.add(UserClanStatus.LEADER.name());
-	  statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-	  statuses.add(UserClanStatus.CAPTAIN.name());
-	  statuses.add(UserClanStatus.MEMBER.name());
-	  Map<String, Integer> clanIdToSize = userClanRetrieveUtil
-		  .getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+	private void writeChangesToDB(Builder resBuilder, String clanId, Clan clan,
+			boolean isChangeDescription, String description,
+			boolean isChangeJoinType, boolean requestToJoinRequired,
+			boolean isChangeIcon, int iconId) {
 
-	  resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+		if (isChangeDescription) {
+			if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
+				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				log.warn(String
+						.format("description is %s, and length of that is %s, max size is %s",
+								description,
+								description.length(),
+								ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION));
+			} else {
+				clan.setDescription(description);
+			}
+		}
 
-	  int size = clanIdToSize.get(clanId);
-	  resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
-	  
-	  clanSizeContainer.add(size);
-  }
-  
-  private void updateClanCache(String clanId,
-	  List<Integer> clanSizeContainer, boolean isChangeJoinType,
-	  boolean requestToJoinRequired)
-  {
-	  if (!isChangeJoinType) {
-		  return;
-	  }
-	  
-	  Date lastChatTime = null; 
-	  int clanSize = clanSizeContainer.get(0);
-	  if (requestToJoinRequired)
-	  {
-		  //since people can't join freely, this clan has a low rank 
-		  lastChatTime = ControllerConstants.INCEPTION_DATE;
-		  clanSize = ClanSearch.penalizedClanSize;
-	  } else {
-		  lastChatTime = clanChatPostRetrieveUtil
-			  .getLastChatPost(clanId);
-	  }
-	  
-	  clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
-  }
-  
-  public Locker getLocker() {
-	  return locker;
-  }
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+		if (isChangeJoinType) {
+			clan.setRequestToJoinRequired(requestToJoinRequired);
+		}
 
-  public UserRetrieveUtils2 getUserRetrieveUtil()
-  {
-	  return userRetrieveUtil;
-  }
+		if (isChangeIcon) {
+			ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
+			if (null == ci) {
+				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				log.warn(String.format("no clan icon with id=%s", iconId));
+			} else {
+				clan.setClanIconId(iconId);
+			}
+		}
 
-  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-  {
-	  this.userRetrieveUtil = userRetrieveUtil;
-  }
+		int numUpdated = UpdateUtils.get().updateClan(clanId,
+				isChangeDescription, description, isChangeJoinType,
+				requestToJoinRequired, isChangeIcon, iconId);
 
-  public ClanRetrieveUtils2 getClanRetrieveUtil()
-  {
-	  return clanRetrieveUtil;
-  }
+		log.info(String.format("numUpdated (should be 1)=%s", numUpdated));
+	}
 
-  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
-  {
-	  this.clanRetrieveUtil = clanRetrieveUtil;
-  }
+	private void setResponseBuilderStuff(Builder resBuilder, String clanId,
+			Clan clan, List<Integer> clanSizeContainer) {
+		List<String> clanIdList = Collections.singletonList(clanId);
 
-  public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
-  {
-	  return userClanRetrieveUtil;
-  }
+		List<String> statuses = new ArrayList<String>();
+		statuses.add(UserClanStatus.LEADER.name());
+		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+		statuses.add(UserClanStatus.CAPTAIN.name());
+		statuses.add(UserClanStatus.MEMBER.name());
+		Map<String, Integer> clanIdToSize = userClanRetrieveUtil
+				.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 
-  public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
-  {
-	  this.userClanRetrieveUtil = userClanRetrieveUtil;
-  }
+		resBuilder.setMinClan(CreateInfoProtoUtils
+				.createMinimumClanProtoFromClan(clan));
 
-  public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
-	  return clanIconRetrieveUtils;
-  }
-  public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {
-	  this.clanIconRetrieveUtils = clanIconRetrieveUtils;
-  }
+		int size = clanIdToSize.get(clanId);
+		resBuilder.setFullClan(CreateInfoProtoUtils
+				.createFullClanProtoWithClanSize(clan, size));
 
-  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil()
-  {
-	  return clanChatPostRetrieveUtil;
-  }
+		clanSizeContainer.add(size);
+	}
 
-  public void setClanChatPostRetrieveUtil( ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil )
-  {
-	  this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
-  }
+	private void updateClanCache(String clanId,
+			List<Integer> clanSizeContainer, boolean isChangeJoinType,
+			boolean requestToJoinRequired) {
+		if (!isChangeJoinType) {
+			return;
+		}
 
-  public ClanSearch getClanSearch()
-  {
-	  return clanSearch;
-  }
+		Date lastChatTime = null;
+		int clanSize = clanSizeContainer.get(0);
+		if (requestToJoinRequired) {
+			//since people can't join freely, this clan has a low rank 
+			lastChatTime = ControllerConstants.INCEPTION_DATE;
+			clanSize = ClanSearch.penalizedClanSize;
+		} else {
+			lastChatTime = clanChatPostRetrieveUtil.getLastChatPost(clanId);
+		}
 
-  public void setClanSearch( ClanSearch clanSearch )
-  {
-	  this.clanSearch = clanSearch;
-  }
+		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public ClanRetrieveUtils2 getClanRetrieveUtil() {
+		return clanRetrieveUtil;
+	}
+
+	public void setClanRetrieveUtil(ClanRetrieveUtils2 clanRetrieveUtil) {
+		this.clanRetrieveUtil = clanRetrieveUtil;
+	}
+
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtil() {
+		return userClanRetrieveUtil;
+	}
+
+	public void setUserClanRetrieveUtil(
+			UserClanRetrieveUtils2 userClanRetrieveUtil) {
+		this.userClanRetrieveUtil = userClanRetrieveUtil;
+	}
+
+	public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
+		return clanIconRetrieveUtils;
+	}
+
+	public void setClanIconRetrieveUtils(
+			ClanIconRetrieveUtils clanIconRetrieveUtils) {
+		this.clanIconRetrieveUtils = clanIconRetrieveUtils;
+	}
+
+	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil() {
+		return clanChatPostRetrieveUtil;
+	}
+
+	public void setClanChatPostRetrieveUtil(
+			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil) {
+		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
+	}
+
+	public ClanSearch getClanSearch() {
+		return clanSearch;
+	}
+
+	public void setClanSearch(ClanSearch clanSearch) {
+		this.clanSearch = clanSearch;
+	}
 
 }

@@ -31,31 +31,34 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-@Component @DependsOn("gameServer") public class RetrieveUserMonsterTeamController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class RetrieveUserMonsterTeamController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	@Autowired
 	private UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	private ClanRetrieveUtils2 clanRetrieveUtil;
-	
+
 	@Autowired
 	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
 	private HazelcastPvpUtil hazelcastPvpUtil;
-	
+
 	@Autowired
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	
+
 	@Autowired
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 
@@ -75,7 +78,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent)event).getRetrieveUserMonsterTeamRequestProto();
+		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
+				.getRetrieveUserMonsterTeamRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -83,174 +87,167 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		String userId = senderProto.getUserUuid();
 		List<String> userUuidsList = reqProto.getUserUuidsList();
 
-		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto.newBuilder();
+		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
 
 		Set<String> userUuidsSet = new HashSet<String>();
-		
+
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);
-			
+
 			//process only the valid ids
 			for (String requestedUserUuid : userUuidsList) {
 				try {
 					UUID.fromString(requestedUserUuid);
 					userUuidsSet.add(requestedUserUuid);
 				} catch (Exception e) {
-					log.error(
-						String.format(
-							"invalid UUID: %s", requestedUserUuid),
-						e);
+					log.error(String.format("invalid UUID: %s",
+							requestedUserUuid), e);
 				}
 			}
-			
+
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
-			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(userId);
+			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
-//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 
 			RetrieveUserMonsterTeamAction rumta = new RetrieveUserMonsterTeamAction(
-				userId, userUuidsList, userRetrieveUtil,
-				clanRetrieveUtil, monsterForUserRetrieveUtil,
-				clanMemberTeamDonationRetrieveUtil,
-				monsterSnapshotForUserRetrieveUtil,
-				hazelcastPvpUtil, pvpLeagueForUserRetrieveUtil,
-				pvpBoardObstacleForUserRetrieveUtil);
+					userId, userUuidsList, userRetrieveUtil, clanRetrieveUtil,
+					monsterForUserRetrieveUtil,
+					clanMemberTeamDonationRetrieveUtil,
+					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
+					pvpLeagueForUserRetrieveUtil,
+					pvpBoardObstacleForUserRetrieveUtil);
 
 			rumta.execute(resBuilder);
-			if (resBuilder.getStatus().equals(RetrieveUserMonsterTeamStatus.SUCCESS))
-			{
+			if (resBuilder.getStatus().equals(
+					RetrieveUserMonsterTeamStatus.SUCCESS)) {
 				//TODO: replace QueueUp and Avenge controller logic with this
 				List<PvpProto> ppList = CreateInfoProtoUtils
-					.createPvpProtos( rumta.getAllUsersExceptRetriever(),
-						rumta.getUserIdToClan(), null,
-						rumta.getUserIdToPvpUsers(),
-						rumta.getAllButRetrieverUserIdToUserMonsters(),
-						rumta.getAllButRetrieverUserIdToUserMonsterIdToDroppedId(),
-						rumta.getAllButRetrieverUserIdToCashLost(),
-						rumta.getAllButRetrieverUserIdToOilLost(),
-						rumta.getAllButRetrieverUserIdToCmtd(),
-						rumta.getAllButRetrieverUserIdToMsfu(),
-						rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
-						rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
-				
+						.createPvpProtos(
+								rumta.getAllUsersExceptRetriever(),
+								rumta.getUserIdToClan(),
+								null,
+								rumta.getUserIdToPvpUsers(),
+								rumta.getAllButRetrieverUserIdToUserMonsters(),
+								rumta.getAllButRetrieverUserIdToUserMonsterIdToDroppedId(),
+								rumta.getAllButRetrieverUserIdToCashLost(),
+								rumta.getAllButRetrieverUserIdToOilLost(),
+								rumta.getAllButRetrieverUserIdToCmtd(),
+								rumta.getAllButRetrieverUserIdToMsfu(),
+								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
+								rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
+
 				log.info("ppList={}", ppList);
 				resBuilder.addAllUserMonsterTeam(ppList);
 			}
-			
 
 			RetrieveUserMonsterTeamResponseProto resProto = resBuilder.build();
-			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(senderProto.getUserUuid());
+			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveUserMonsterTeamResponseProto(resProto);
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in RetrieveUserMonsterTeamController processEvent", e);
+			log.error(
+					"exception in RetrieveUserMonsterTeamController processEvent",
+					e);
 			try {
 				resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
-				RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(userId);
+				RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder.build());
+				resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in RetrieveUserMonsterTeamController processEvent", e);
+				log.error(
+						"exception2 in RetrieveUserMonsterTeamController processEvent",
+						e);
 			}
 
-//		} finally {
-//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//		} finally {
+			//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public ClanRetrieveUtils2 getClanRetrieveUtil()
-	{
+	public ClanRetrieveUtils2 getClanRetrieveUtil() {
 		return clanRetrieveUtil;
 	}
 
-	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
-	{
+	public void setClanRetrieveUtil(ClanRetrieveUtils2 clanRetrieveUtil) {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
-	{
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil() {
 		return monsterForUserRetrieveUtil;
 	}
 
 	public void setMonsterForUserRetrieveUtil(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
-	{
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
-	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
-	{
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;
 	}
 
 	public void setClanMemberTeamDonationRetrieveUtil(
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil )
-	{
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 	}
 
-	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil()
-	{
+	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil() {
 		return monsterSnapshotForUserRetrieveUtil;
 	}
 
 	public void setMonsterSnapshotForUserRetrieveUtil(
-		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil )
-	{
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 	}
 
-	public HazelcastPvpUtil getHazelcastPvpUtil()
-	{
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
 
-	public void setHazelcastPvpUtil( HazelcastPvpUtil hazelcastPvpUtil )
-	{
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 
-	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil()
-	{
+	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
 		return pvpLeagueForUserRetrieveUtil;
 	}
 
 	public void setPvpLeagueForUserRetrieveUtil(
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
-	{
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
 

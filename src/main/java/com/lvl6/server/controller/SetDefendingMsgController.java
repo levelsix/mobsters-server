@@ -21,9 +21,12 @@ import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 
-@Component @DependsOn("gameServer") public class SetDefendingMsgController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class SetDefendingMsgController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public SetDefendingMsgController() {
 		numAllocatedThreads = 1;
@@ -34,7 +37,7 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -50,7 +53,8 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent)event).getSetDefendingMsgRequestProto();
+		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
+				.getSetDefendingMsgRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -58,7 +62,8 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 		String userId = senderProto.getUserUuid();
 		String msg = reqProto.getMsg();
 
-		SetDefendingMsgResponseProto.Builder resBuilder = SetDefendingMsgResponseProto.newBuilder();
+		SetDefendingMsgResponseProto.Builder resBuilder = SetDefendingMsgResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
 
@@ -68,9 +73,8 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
@@ -78,23 +82,26 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
 			resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
-			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(userId);
+			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+				.getSimpleName());
 		try {
-//
-			SetDefendingMsgAction rsga = new SetDefendingMsgAction(
-				userId, msg, userRetrieveUtil);
+			//
+			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
+					userRetrieveUtil);
 
 			rsga.execute(resBuilder);
 
 			SetDefendingMsgResponseProto resProto = resBuilder.build();
-			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(senderProto.getUserUuid());
+			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSetDefendingMsgResponseProto(resProto);
 			server.writeEvent(resEvent);
@@ -103,27 +110,29 @@ import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 			log.error("exception in SetDefendingMsgController processEvent", e);
 			try {
 				resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
-				SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(userId);
+				SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in SetDefendingMsgController processEvent", e);
+				log.error(
+						"exception2 in SetDefendingMsgController processEvent",
+						e);
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 		}
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
-	
+
 }

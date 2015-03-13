@@ -15,7 +15,7 @@ public class ClanRaid implements Serializable {
 	private String inactiveDescription;
 	private String dialogueText;
 	private String spotlightMonsterImgName;
-	
+
 	public ClanRaid(int id, String clanRaidName, String activeTitleImgName,
 			String activeBackgroundImgName, String activeDescription,
 			String inactiveMonsterImgName, String inactiveDescription,
@@ -111,9 +111,9 @@ public class ClanRaid implements Serializable {
 				+ ", activeBackgroundImgName=" + activeBackgroundImgName
 				+ ", activeDescription=" + activeDescription
 				+ ", inactiveMonsterImgName=" + inactiveMonsterImgName
-				+ ", inactiveDescription=" + inactiveDescription + ", dialogueText="
-				+ dialogueText + ", spotlightMonsterImgName=" + spotlightMonsterImgName
-				+ "]";
+				+ ", inactiveDescription=" + inactiveDescription
+				+ ", dialogueText=" + dialogueText
+				+ ", spotlightMonsterImgName=" + spotlightMonsterImgName + "]";
 	}
-	
+
 }

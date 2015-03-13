@@ -15,46 +15,50 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
 /*NO UserTask needed because you can just return a map- only two non-user fields*/
-@Component @DependsOn("gameServer") public class LoginHistoryRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class LoginHistoryRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
-  private static final String TABLE_NAME = DBConstants.TABLE_LOGIN_HISTORY;
-  
-  public static boolean userLoggedInByUDID(String UDID) { 
-    log.debug("login check for user with udid " + UDID);
-    Map <String, Object> paramsToVals = new HashMap<String, Object>();
-    paramsToVals.put(DBConstants.USER__UDID, UDID);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-    Connection conn = null;
+	private static final String TABLE_NAME = DBConstants.TABLE_LOGIN_HISTORY;
+
+	public static boolean userLoggedInByUDID(String UDID) {
+		log.debug("login check for user with udid " + UDID);
+		Map<String, Object> paramsToVals = new HashMap<String, Object>();
+		paramsToVals.put(DBConstants.USER__UDID, UDID);
+
+		Connection conn = null;
 		ResultSet rs = null;
 		boolean loggedIn = false;
 		try {
 			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals,
+					TABLE_NAME);
 			loggedIn = convertRSToBoolean(rs);
 		} catch (Exception e) {
-    	log.error("login history retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-    return loggedIn;
-  }
-  
-  private static boolean convertRSToBoolean(ResultSet rs) {
-    if (rs != null) {
-      try {
-        rs.last();
-        rs.beforeFirst();
-        if(rs.next()) {  //user logged in
-          return true;
-        }
-        return false;
-      } catch (SQLException e) {
-        log.error("problem with database call.", e);
-      }
-    }
-    return false;
-  }
-  
+			log.error("login history retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+		return loggedIn;
+	}
+
+	private static boolean convertRSToBoolean(ResultSet rs) {
+		if (rs != null) {
+			try {
+				rs.last();
+				rs.beforeFirst();
+				if (rs.next()) {  //user logged in
+					return true;
+				}
+				return false;
+			} catch (SQLException e) {
+				log.error("problem with database call.", e);
+			}
+		}
+		return false;
+	}
+
 }

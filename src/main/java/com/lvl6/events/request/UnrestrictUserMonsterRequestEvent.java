@@ -10,35 +10,36 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterRequestProto;
 
-
 public class UnrestrictUserMonsterRequestEvent extends RequestEvent {
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private UnrestrictUserMonsterRequestProto unrestrictUserMonsterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      unrestrictUserMonsterRequestProto = UnrestrictUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = unrestrictUserMonsterRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("UnrestrictUserMonsterRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public UnrestrictUserMonsterRequestProto getUnrestrictUserMonsterRequestProto() {
-    return unrestrictUserMonsterRequestProto;
-  }
+	private UnrestrictUserMonsterRequestProto unrestrictUserMonsterRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "UnrestrictUserMonsterRequestEvent [unrestrictUserMonsterRequestProto="
-		  + unrestrictUserMonsterRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			unrestrictUserMonsterRequestProto = UnrestrictUserMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = unrestrictUserMonsterRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("UnrestrictUserMonsterRequest exception", e);
+		}
+	}
+
+	public UnrestrictUserMonsterRequestProto getUnrestrictUserMonsterRequestProto() {
+		return unrestrictUserMonsterRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "UnrestrictUserMonsterRequestEvent [unrestrictUserMonsterRequestProto="
+				+ unrestrictUserMonsterRequestProto + "]";
+	}
+
 }

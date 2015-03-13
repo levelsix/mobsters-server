@@ -5,24 +5,24 @@ import java.io.Serializable;
 public class QuestJob implements Serializable {
 
 	private static final long serialVersionUID = 4809910755711898087L;
-	
+
 	private int id;
 	private int questId;
 	private String questJobType;
 	private String description;
 	private int staticDataId;
 	private int quantity;
-	
+
 	//how this quest job is ordered among other quest jobs
 	//with the same quest id
 	private int priority;
-	
+
 	//could be 0
 	private int cityId;
-	
+
 	//could be 0
 	private int cityAssetNum;
-	
+
 	public QuestJob(int id, int questId, String questJobType,
 			String description, int staticDataId, int quantity, int priority,
 			int cityId, int cityAssetNum) {
@@ -118,5 +118,5 @@ public class QuestJob implements Serializable {
 				+ ", quantity=" + quantity + ", priority=" + priority
 				+ ", cityId=" + cityId + ", cityAssetNum=" + cityAssetNum + "]";
 	}
-	
+
 }

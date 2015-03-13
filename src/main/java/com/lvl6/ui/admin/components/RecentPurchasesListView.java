@@ -25,9 +25,11 @@ public class RecentPurchasesListView extends ListView<InAppPurchase> {
 	protected void populateItem(ListItem<InAppPurchase> item) {
 		InAppPurchase spend = item.getModelObject();
 		item.add(new Label("spender", spend.getUserId().toString()));
-    item.add(new Label("name", spend.getName()));
-		item.add(new Label("amountSpent", "$"+spend.getCashSpent().longValue()));
-		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+		item.add(new Label("name", spend.getName()));
+		item.add(new Label("amountSpent", "$"
+				+ spend.getCashSpent().longValue()));
+		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+				DateFormat.SHORT, Locale.US);
 		df.setTimeZone(TimeZone.getTimeZone("GMT-8:00"));
 		item.add(new Label("purchaseDate", df.format(spend.getPurchasedDate())));
 

@@ -35,9 +35,12 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
-@Component @DependsOn("gameServer") public class DevController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class DevController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public DevController() {
 		numAllocatedThreads = 1;
@@ -45,7 +48,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new DevRequestEvent();
@@ -58,7 +61,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		DevRequestProto reqProto = ((DevRequestEvent)event).getDevRequestProto();
+		DevRequestProto reqProto = ((DevRequestEvent) event)
+				.getDevRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -73,57 +77,55 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
-		
+
 		try {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(DevStatus.FAIL_OTHER);
+		if (invalidUuids) {
+			resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			DevResponseEvent resEvent = new DevResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDevResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+			return;
+		}
+
 		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(
+					senderProto.getUserUuid());
 			//TODO: Consider writing currency history and other history
-			
-			log.info(String.format(
-				"CHEATER DETECTED!!!! %s", aUser));
-			
+
+			log.info(String.format("CHEATER DETECTED!!!! %s", aUser));
+
 			if (DevRequest.RESET_ACCOUNT.equals(request)) {
-				log.info(String.format(
-					"resetting user=%s", aUser));
+				log.info(String.format("resetting user=%s", aUser));
 				aUser.updateResetAccount();
 			} else if (Globals.ALLOW_CHEATS()) {
-				cheat(userId, request, staticDataId, quantity,
-					resBuilder, aUser);
+				cheat(userId, request, staticDataId, quantity, resBuilder,
+						aUser);
 			} else {
-				log.error(String.format(
-					"azzhole tried cheating: user=%s",
-					aUser));
+				log.error(String.format("azzhole tried cheating: user=%s",
+						aUser));
 				resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			}
 
-
 			DevResponseProto resProto = resBuilder.build();
-			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserUuid());
+			DevResponseEvent resEvent = new DevResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setDevResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-				.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+							aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
 			server.writeEvent(resEventUpdate);
 
@@ -144,99 +146,83 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		}
 	}
 
-	private void cheat(
-		String userId,
-		DevRequest request,
-		int staticDataId,
-		int quantity,
-		DevResponseProto.Builder resBuilder,
-		User aUser )
-	{
+	private void cheat(String userId, DevRequest request, int staticDataId,
+			int quantity, DevResponseProto.Builder resBuilder, User aUser) {
 		switch (request) {
-			case RESET_ACCOUNT:
-//				log.info(String.format(
-//					"resetting user=%s", aUser));
-//				aUser.updateResetAccount();
-				break;
+		case RESET_ACCOUNT:
+			//				log.info(String.format(
+			//					"resetting user=%s", aUser));
+			//				aUser.updateResetAccount();
+			break;
 
-			case GET_MONZTER:
-				log.info(String.format(
-					"giving user=%s monsterId=%d, quantity=%s", 
+		case GET_MONZTER:
+			log.info(String.format("giving user=%s monsterId=%d, quantity=%s",
 					aUser, staticDataId, quantity));
-//				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
-//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-//				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
+			//				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
+			//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+			//				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
 
-				Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity =
-					new HashMap<Integer, Map<Integer, Integer>>();
-					monsterIdToLvlToQuantity.put(
-						staticDataId,
-						Collections.singletonMap(1, quantity));
-					
-				
-				String mfusop = "cheater, cheater, pumpkin eater";
-				List<FullUserMonsterProto> reward = MonsterStuffUtils
-					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity, mfusop, new Date());
-				resBuilder.addAllFump(reward);
-				break;
+			Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity = new HashMap<Integer, Map<Integer, Integer>>();
+			monsterIdToLvlToQuantity.put(staticDataId,
+					Collections.singletonMap(1, quantity));
 
-			case F_B_GET_CASH:
-				log.info(String.format(
-					"giving user=%s cash=%d", 
-					aUser, staticDataId));
-				aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0);
-				break;
+			String mfusop = "cheater, cheater, pumpkin eater";
+			List<FullUserMonsterProto> reward = MonsterStuffUtils
+					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity,
+							mfusop, new Date());
+			resBuilder.addAllFump(reward);
+			break;
 
-			case F_B_GET_OIL:
-				log.info(String.format(
-					"giving user=%s oil=%d", 
-					aUser, staticDataId));
-				aUser.updateRelativeCashAndOilAndGems(0, quantity, 0);
-				break;
+		case F_B_GET_CASH:
+			log.info(String.format("giving user=%s cash=%d", aUser,
+					staticDataId));
+			aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0);
+			break;
 
-			case F_B_GET_GEMS:
-				log.info(String.format(
-					"giving user=%s gems=%d", 
-					aUser, staticDataId));
-				aUser.updateRelativeCashAndOilAndGems(0, 0, quantity);
-				break;
+		case F_B_GET_OIL:
+			log.info(String
+					.format("giving user=%s oil=%d", aUser, staticDataId));
+			aUser.updateRelativeCashAndOilAndGems(0, quantity, 0);
+			break;
 
-			case F_B_GET_CASH_OIL_GEMS:
-				log.info(String.format(
-					"giving user=%s cash, gems, oil=%d", 
-					aUser, staticDataId));
-				aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity);
-				break;
-			case GET_ITEM :
-				log.info(String.format(
-					"giving user=%s, itemId=%s, quantity=%s",
+		case F_B_GET_GEMS:
+			log.info(String.format("giving user=%s gems=%d", aUser,
+					staticDataId));
+			aUser.updateRelativeCashAndOilAndGems(0, 0, quantity);
+			break;
+
+		case F_B_GET_CASH_OIL_GEMS:
+			log.info(String.format("giving user=%s cash, gems, oil=%d", aUser,
+					staticDataId));
+			aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity);
+			break;
+		case GET_ITEM:
+			log.info(String.format("giving user=%s, itemId=%s, quantity=%s",
 					aUser, staticDataId, quantity));
-				
-				int numInserted = InsertUtils.get()
-					.insertIntoUpdateUserItem(userId, staticDataId, quantity);
-				log.info(String.format(
-					"num rows inserted/updated, %s",
-					numInserted));
-				
-				ItemForUser ifu = (itemForUserRetrieveUtil
-					.getSpecificOrAllItemForUser(
-						userId,
-						Collections.singleton(staticDataId))).get(0);
-				UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
-				resBuilder.setUip(uip);
-				break;
-			default :
-				break;
+
+			int numInserted = InsertUtils.get().insertIntoUpdateUserItem(
+					userId, staticDataId, quantity);
+			log.info(String
+					.format("num rows inserted/updated, %s", numInserted));
+
+			ItemForUser ifu = (itemForUserRetrieveUtil
+					.getSpecificOrAllItemForUser(userId,
+							Collections.singleton(staticDataId))).get(0);
+			UserItemProto uip = CreateInfoProtoUtils
+					.createUserItemProtoFromUserItem(ifu);
+			resBuilder.setUip(uip);
+			break;
+		default:
+			break;
 		}
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 

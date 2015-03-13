@@ -12,36 +12,39 @@ import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 
 public class DiscardBattleItemRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private DiscardBattleItemRequestProto discardBattleItemRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      discardBattleItemRequestProto = DiscardBattleItemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = discardBattleItemRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("DiscardBattleItemRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public DiscardBattleItemRequestProto getDiscardBattleItemRequestProto() {
-    return discardBattleItemRequestProto;
-  }
-  //added for testing purposes
-  public void setDiscardBattleItemRequestProto(DiscardBattleItemRequestProto sorp) {
-	  this.discardBattleItemRequestProto = sorp;
-  }
+	private DiscardBattleItemRequestProto discardBattleItemRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "DiscardBattleItemRequestEvent [discardBattleItemRequestProto="
-		  + discardBattleItemRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			discardBattleItemRequestProto = DiscardBattleItemRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = discardBattleItemRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("DiscardBattleItemRequest exception", e);
+		}
+	}
+
+	public DiscardBattleItemRequestProto getDiscardBattleItemRequestProto() {
+		return discardBattleItemRequestProto;
+	}
+
+	//added for testing purposes
+	public void setDiscardBattleItemRequestProto(
+			DiscardBattleItemRequestProto sorp) {
+		this.discardBattleItemRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "DiscardBattleItemRequestEvent [discardBattleItemRequestProto="
+				+ discardBattleItemRequestProto + "]";
+	}
+
 }

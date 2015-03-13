@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CompleteBattleItemResponseEvent extends NormalResponseEvent {
 
-  private CompleteBattleItemResponseProto completeBattleItemResponseProto;
-  
-  public CompleteBattleItemResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_COMPLETE_BATTLE_ITEM_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = completeBattleItemResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private CompleteBattleItemResponseProto completeBattleItemResponseProto;
 
-  public void setCompleteBattleItemResponseProto(CompleteBattleItemResponseProto completeBattleItemResponseProto) {
-    this.completeBattleItemResponseProto = completeBattleItemResponseProto;
-  }
+	public CompleteBattleItemResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_COMPLETE_BATTLE_ITEM_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = completeBattleItemResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setCompleteBattleItemResponseProto(
+			CompleteBattleItemResponseProto completeBattleItemResponseProto) {
+		this.completeBattleItemResponseProto = completeBattleItemResponseProto;
+	}
 
 }

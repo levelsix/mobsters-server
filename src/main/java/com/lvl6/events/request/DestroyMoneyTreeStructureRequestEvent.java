@@ -12,36 +12,39 @@ import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 
 public class DestroyMoneyTreeStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private DestroyMoneyTreeStructureRequestProto destroyMoneyTreeStructureRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-    	destroyMoneyTreeStructureRequestProto = DestroyMoneyTreeStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = destroyMoneyTreeStructureRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("DestroyMoneyTree exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public DestroyMoneyTreeStructureRequestProto getDestroyMoneyTreeStructureRequestProto() {
-    return destroyMoneyTreeStructureRequestProto;
-  }
-  
-  public void setDestroyMoneyTreeStructureRequestProto(DestroyMoneyTreeStructureRequestProto dmtsrp) {
-	  this.destroyMoneyTreeStructureRequestProto = dmtsrp;
-  }
+	private DestroyMoneyTreeStructureRequestProto destroyMoneyTreeStructureRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "DestroyUserStructRequestEvent [destroyUserStructRequestProto="
-		  + destroyMoneyTreeStructureRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			destroyMoneyTreeStructureRequestProto = DestroyMoneyTreeStructureRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = destroyMoneyTreeStructureRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("DestroyMoneyTree exception", e);
+		}
+	}
+
+	public DestroyMoneyTreeStructureRequestProto getDestroyMoneyTreeStructureRequestProto() {
+		return destroyMoneyTreeStructureRequestProto;
+	}
+
+	public void setDestroyMoneyTreeStructureRequestProto(
+			DestroyMoneyTreeStructureRequestProto dmtsrp) {
+		this.destroyMoneyTreeStructureRequestProto = dmtsrp;
+	}
+
+	@Override
+	public String toString() {
+		return "DestroyUserStructRequestEvent [destroyUserStructRequestProto="
+				+ destroyMoneyTreeStructureRequestProto + "]";
+	}
 
 }

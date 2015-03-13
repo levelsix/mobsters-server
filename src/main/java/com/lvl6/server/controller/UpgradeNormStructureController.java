@@ -33,328 +33,352 @@ import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class UpgradeNormStructureController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class UpgradeNormStructureController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected Locker locker;
+	@Autowired
+	protected Locker locker;
 
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
-  @Autowired
-  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
+	@Autowired
+	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
-  public UpgradeNormStructureController() {
-    numAllocatedThreads = 4;
-  }
+	public UpgradeNormStructureController() {
+		numAllocatedThreads = 4;
+	}
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new UpgradeNormStructureRequestEvent();
-  }
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new UpgradeNormStructureRequestEvent();
+	}
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_UPGRADE_NORM_STRUCTURE_EVENT;
-  }
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_UPGRADE_NORM_STRUCTURE_EVENT;
+	}
 
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
+				.getUpgradeNormStructureRequestProto();
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent)event).getUpgradeNormStructureRequestProto();
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		String userStructId = reqProto.getUserStructUuid();
+		Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
+		int gemsSpent = reqProto.getGemsSpent();
+		//positive means refund, negative means charge user
+		int resourceChange = reqProto.getResourceChange();
+		ResourceType rt = reqProto.getResourceType();
 
+		UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto
+				.newBuilder();
+		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    String userStructId = reqProto.getUserStructUuid();
-    Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
-    int gemsSpent = reqProto.getGemsSpent();
-    //positive means refund, negative means charge user
-    int resourceChange = reqProto.getResourceChange();
-    ResourceType rt = reqProto.getResourceType();
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			UUID.fromString(userStructId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s or userStructId=%s",
+					userId, userStructId), e);
+			invalidUuids = true;
+		}
 
-    UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
-    resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-    UUID userUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
-      UUID.fromString(userStructId);
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s or userStructId=%s",
-          userId, userStructId), e);
-      invalidUuids = true;
-    }
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+			User user = getUserRetrieveUtils().getUserById(userId);
+			Structure currentStruct = null;
+			Structure nextLevelStruct = null;
+			StructureForUser userStruct = getUserStructRetrieveUtils()
+					.getSpecificUserStruct(userStructId);
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
-      UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
-      server.writeEvent(resEvent);
-      return;
-    }
+			if (userStruct != null) {
+				currentStruct = StructureRetrieveUtils
+						.getStructForStructId(userStruct.getStructId());
+				nextLevelStruct = StructureRetrieveUtils
+						.getUpgradedStructForStructId(userStruct.getStructId());
+			}
+			int previousCash = 0;
+			int previousOil = 0;
+			int previousGems = 0;
 
-    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
-    try {
-      User user = getUserRetrieveUtils().getUserById(userId);
-      Structure currentStruct = null;
-      Structure nextLevelStruct = null;
-      StructureForUser userStruct = getUserStructRetrieveUtils().getSpecificUserStruct(userStructId);
+			boolean legitUpgrade = checkLegitUpgrade(resBuilder, user,
+					userStruct, currentStruct, nextLevelStruct, gemsSpent,
+					resourceChange, rt, timeOfUpgrade);
+			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
-      if (userStruct != null) {
-        currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
-        nextLevelStruct = StructureRetrieveUtils.getUpgradedStructForStructId(userStruct.getStructId());
-      }
-      int previousCash = 0;
-      int previousOil = 0;
-      int previousGems = 0;
+			if (legitUpgrade) {
+				previousCash = user.getCash();
+				previousOil = user.getOil();
+				previousGems = user.getGems();
 
-      boolean legitUpgrade = checkLegitUpgrade(resBuilder, user, userStruct, currentStruct,
-          nextLevelStruct, gemsSpent, resourceChange, rt, timeOfUpgrade);
-      UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
-      server.writeEvent(resEvent);
+				Map<String, Integer> money = new HashMap<String, Integer>();
+				writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent,
+						resourceChange, rt, timeOfUpgrade, money);
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
 
-      if (legitUpgrade) {
-        previousCash = user.getCash();
-        previousOil = user.getOil();
-        previousGems = user.getGems();
+				writeToUserCurrencyHistory(user, userStruct, currentStruct,
+						nextLevelStruct, timeOfUpgrade, money, previousCash,
+						previousOil, previousGems);
+			}
+		} catch (Exception e) {
+			log.error("exception in UpgradeNormStructure processEvent", e);
+			try {
+				resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+				UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setUpgradeNormStructureResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in UpgradeNormStructure processEvent", e2);
+			}
+		} finally {
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
 
-        Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent, resourceChange, rt,
-            timeOfUpgrade, money);
-        //null PvpLeagueFromUser means will pull from hazelcast instead
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
+	private boolean checkLegitUpgrade(Builder resBuilder, User user,
+			StructureForUser userStruct, Structure currentStruct,
+			Structure nextLevelStruct, int gemsSpent, int resourceChange,
+			ResourceType rt, Timestamp timeOfUpgrade) {
+		if (user == null || userStruct == null
+				|| userStruct.getLastRetrieved() == null) {
+			log.error(
+					"parameter passed in is null. user={}, userStruct={}, userStruct's lastRetrieveTime={}",
+					new Object[] { user, userStruct,
+							userStruct.getLastRetrieved() });
+			return false;
+		}
+		if (!userStruct.isComplete()) {
+			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
+			log.error("user struct is not complete yet");
+			return false;
+		}
+		if (null == nextLevelStruct) {
+			resBuilder
+					.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
+			log.error("user struct at max level already. struct is {}",
+					currentStruct);
+			return false;
+		}
+		if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
+			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
+			log.error(
+					"the upgrade time {} is before the last time the building was retrieved:{}",
+					timeOfUpgrade, userStruct.getLastRetrieved());
+			return false;
+		}
+		//see if the user can upgrade it
+		if (!user.getId().equals(userStruct.getUserId())) {
+			resBuilder
+					.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
+			log.error("user struct belongs to someone else with id={}",
+					userStruct.getUserId());
+			return false;
+		}
 
-        writeToUserCurrencyHistory(user, userStruct, currentStruct, nextLevelStruct,
-            timeOfUpgrade, money, previousCash, previousOil, previousGems);
-      }
-    } catch (Exception e) {
-      log.error("exception in UpgradeNormStructure processEvent", e);
-      try {
-        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
-        UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
-        resEvent.setTag(event.getTag());
-        resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
-        server.writeEvent(resEvent);
-      } catch (Exception e2) {
-        log.error("exception2 in UpgradeNormStructure processEvent", e2);
-      }
-    } finally {
-      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
-    }
-  }
+		if (gemsSpent < 0) {
+			log.warn("gemsSpent is negative! gemsSpent={}", gemsSpent);
+			gemsSpent = Math.abs(gemsSpent);
+		}
+		int userGems = user.getGems();
+		if (gemsSpent > 0 && userGems < gemsSpent) {
+			log.error(
+					"user has {} gems; trying to spend {} and {} {} to upgrade to structure={}",
+					new Object[] { userGems, gemsSpent, resourceChange, rt,
+							nextLevelStruct });
+			resBuilder
+					.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+			return false;
+		}
 
-  private boolean checkLegitUpgrade(Builder resBuilder, User user, StructureForUser userStruct,
-      Structure currentStruct, Structure nextLevelStruct, int gemsSpent, int resourceChange, 
-      ResourceType rt,Timestamp timeOfUpgrade) {
-    if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
-      log.error(
-    	  "parameter passed in is null. user={}, userStruct={}, userStruct's lastRetrieveTime={}",
-    	  new Object[] {user, userStruct, userStruct.getLastRetrieved() } );
-      return false;
-    }
-    if (!userStruct.isComplete()) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
-      log.error("user struct is not complete yet");
-      return false;
-    }
-    if (null == nextLevelStruct) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
-      log.error( "user struct at max level already. struct is {}",
-    	  currentStruct);
-      return false;
-    }
-    if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
-      log.error(
-    	  "the upgrade time {} is before the last time the building was retrieved:{}",
-    	  timeOfUpgrade, userStruct.getLastRetrieved());
-      return false;
-    }
-    //see if the user can upgrade it
-    if (!user.getId().equals(userStruct.getUserId())) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
-      log.error( "user struct belongs to someone else with id={}",
-    	  userStruct.getUserId());
-      return false;
-    }
+		//since negative resourceChange means charge, then negative of that is
+		//the cost. If resourceChange is positive, meaning refund, user will always
+		//have more than a negative amount
+		int resourceRequired = -1 * resourceChange;
+		if (ResourceType.CASH.equals(rt)) {
+			if (user.getCash() < resourceRequired) {
+				resBuilder
+						.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+				log.error("user doesn't have enough cash, has {}, needs {}",
+						user.getCash(), resourceChange);
+				return false;
+			}
+		} else if (ResourceType.OIL.equals(rt)) {
+			if (user.getOil() < resourceRequired) {
+				resBuilder
+						.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
+				log.error("user doesn't have enough gems, has , needs ",
+						user.getGems(), resourceChange);
+				return false;
+			}
+		}
 
-    if (gemsSpent < 0) {
-      log.warn( "gemsSpent is negative! gemsSpent={}", gemsSpent );
-      gemsSpent = Math.abs(gemsSpent);
-    }
-    int userGems = user.getGems();
-    if (gemsSpent > 0 && userGems < gemsSpent) {
-      log.error(
-    	  "user has {} gems; trying to spend {} and {} {} to upgrade to structure={}",
-    	  new Object[] { userGems, gemsSpent, resourceChange, rt, nextLevelStruct } );
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
-      return false;
-    }
+		/*//TODO: only make one user struct retrieve call 
+		List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
+		if (userStructs != null) {
+		  for (StructureForUser us : userStructs) {
+		    if (!us.isComplete() && us.getUpgradeStartTime() != null) {
+		      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_UPGRADING);
+		      log.error("another struct is still upgrading: user struct=" + us);
+		      return false;
+		    }
+		  }
+		}*/
 
-    //since negative resourceChange means charge, then negative of that is
-    //the cost. If resourceChange is positive, meaning refund, user will always
-    //have more than a negative amount
-    int resourceRequired = -1 * resourceChange;
-    if (ResourceType.CASH.equals(rt)) {
-      if (user.getCash() < resourceRequired) {
-        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-        log.error( "user doesn't have enough cash, has {}, needs {}",
-        	user.getCash(), resourceChange );
-        return false;
-      }
-    } else if (ResourceType.OIL.equals(rt)){
-      if (user.getOil() < resourceRequired) {
-        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
-        log.error( "user doesn't have enough gems, has , needs ",
-        	user.getGems(), resourceChange );
-        return false;
-      }
-    }
+		resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
+		return true;
+	}
 
-    /*//TODO: only make one user struct retrieve call 
-    List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
-    if (userStructs != null) {
-      for (StructureForUser us : userStructs) {
-        if (!us.isComplete() && us.getUpgradeStartTime() != null) {
-          resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_UPGRADING);
-          log.error("another struct is still upgrading: user struct=" + us);
-          return false;
-        }
-      }
-    }*/
+	private void writeChangesToDB(User user, StructureForUser userStruct,
+			Structure upgradedStruct, int gemsSpent, int resourceChange,
+			ResourceType rt, Timestamp timeOfUpgrade, Map<String, Integer> money) {
 
-    resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
-    return true;
-  }
+		int newStructId = upgradedStruct.getId();
+		//upgrade the user's struct
+		if (!UpdateUtils.get().updateBeginUpgradingUserStruct(
+				userStruct.getId(), newStructId, timeOfUpgrade)) {
+			log.error(String
+					.format("problem with changing time of upgrade to %s and marking as incomplete, userStruct=%",
+							timeOfUpgrade, userStruct));
+		}
 
-  private void writeChangesToDB(User user, StructureForUser userStruct, Structure upgradedStruct,
-      int gemsSpent, int resourceChange, ResourceType rt, Timestamp timeOfUpgrade,
-      Map<String, Integer> money) {
+		//charge the user  	
+		int cashChange = 0;
+		int oilChange = 0;
+		int gemChange = -1 * Math.abs(gemsSpent);
 
-    int newStructId = upgradedStruct.getId();
-    //upgrade the user's struct
-    if (!UpdateUtils.get().updateBeginUpgradingUserStruct(userStruct.getId(),
-        newStructId, timeOfUpgrade)) {
-      log.error(String.format(
-    	  "problem with changing time of upgrade to %s and marking as incomplete, userStruct=%",
-    	  timeOfUpgrade, userStruct));
-    }
+		if (ResourceType.CASH.equals(rt)) {
+			cashChange = resourceChange;
+		} else if (ResourceType.OIL.equals(rt)) {
+			oilChange = resourceChange;
+		}
 
-    //charge the user  	
-    int cashChange = 0;
-    int oilChange = 0;
-    int gemChange = -1 * Math.abs(gemsSpent);
+		int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange,
+				gemChange);
+		if (1 != num) {
+			log.error(String
+					.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
+							gemChange, cashChange, oilChange, num));
+		} else {//things went ok
+			if (0 != gemChange) {
+				money.put(MiscMethods.gems, gemChange);
+			}
+			if (0 != cashChange) {
+				money.put(MiscMethods.cash, cashChange);
+			}
+			if (0 != oilChange) {
+				money.put(MiscMethods.oil, oilChange);
+			}
+		}
 
-    if (ResourceType.CASH.equals(rt)) {
-      cashChange = resourceChange;
-    } else if (ResourceType.OIL.equals(rt)) {
-      oilChange = resourceChange;
-    }
+	}
 
-    int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
-    if (1 != num) {
-      log.error(String.format(
-    	  "problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
-    	  gemChange, cashChange, oilChange, num));
-    } else {//things went ok
-      if (0 != gemChange) {
-        money.put(MiscMethods.gems, gemChange);
-      }
-      if (0 != cashChange) {
-        money.put(MiscMethods.cash, cashChange);
-      }
-      if (0 != oilChange) {
-        money.put(MiscMethods.oil, oilChange);
-      }
-    }
+	private void writeToUserCurrencyHistory(User aUser,
+			StructureForUser userStruct, Structure curStruct,
+			Structure upgradedStruct, Timestamp timeOfUpgrade,
+			Map<String, Integer> money, int previousCash, int previousOil,
+			int previousGems) {
 
-  }
+		String userId = aUser.getId();
+		String userStructId = userStruct.getId();
+		int prevStructId = curStruct.getId();
+		int prevLevel = curStruct.getLevel();
+		StringBuilder structDetailsSb = new StringBuilder();
+		structDetailsSb.append("uStructId:");
+		structDetailsSb.append(userStructId);
+		structDetailsSb.append(" preStructId:");
+		structDetailsSb.append(prevStructId);
+		structDetailsSb.append(" prevLevel:");
+		structDetailsSb.append(prevLevel);
+		String structDetails = structDetailsSb.toString();
 
-  private void writeToUserCurrencyHistory(User aUser,
-      StructureForUser userStruct, Structure curStruct,
-      Structure upgradedStruct, Timestamp timeOfUpgrade,
-      Map<String, Integer> money, int previousCash, int previousOil,
-      int previousGems) {
+		Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
+		String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
+		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+		Map<String, String> details = new HashMap<String, String>();
+		String gems = MiscMethods.gems;
+		String oil = MiscMethods.oil;
+		String cash = MiscMethods.cash;
 
-    String userId = aUser.getId();
-    String userStructId = userStruct.getId();
-    int prevStructId = curStruct.getId();
-    int prevLevel = curStruct.getLevel();
-    StringBuilder structDetailsSb = new StringBuilder();
-    structDetailsSb.append("uStructId:");
-    structDetailsSb.append(userStructId);
-    structDetailsSb.append(" preStructId:");
-    structDetailsSb.append(prevStructId);
-    structDetailsSb.append(" prevLevel:");
-    structDetailsSb.append(prevLevel);
-    String structDetails = structDetailsSb.toString();
+		previousCurrencies.put(cash, previousCash);
+		previousCurrencies.put(oil, previousOil);
+		previousCurrencies.put(gems, previousGems);
 
-    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
-    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-    String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    Map<String, String> details = new HashMap<String, String>();
-    String gems = MiscMethods.gems;
-    String oil = MiscMethods.oil;
-    String cash = MiscMethods.cash;
+		currentCurrencies.put(cash, aUser.getCash());
+		currentCurrencies.put(oil, aUser.getOil());
+		currentCurrencies.put(gems, aUser.getGems());
 
-    previousCurrencies.put(cash, previousCash);
-    previousCurrencies.put(oil, previousOil);
-    previousCurrencies.put(gems, previousGems);
+		reasonsForChanges.put(cash, reasonForChange);
+		reasonsForChanges.put(oil, reasonForChange);
+		reasonsForChanges.put(gems, reasonForChange);
 
-    currentCurrencies.put(cash, aUser.getCash());
-    currentCurrencies.put(oil, aUser.getOil());
-    currentCurrencies.put(gems, aUser.getGems());
+		details.put(cash, structDetails);
+		details.put(oil, structDetails);
+		details.put(gems, structDetails);
 
-    reasonsForChanges.put(cash,  reasonForChange);
-    reasonsForChanges.put(oil, reasonForChange);
-    reasonsForChanges.put(gems, reasonForChange);
+		MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
+				previousCurrencies, currentCurrencies, reasonsForChanges,
+				details);
+	}
 
-    details.put(cash, structDetails);
-    details.put(oil, structDetails);
-    details.put(gems, structDetails);
+	public Locker getLocker() {
+		return locker;
+	}
 
-    MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
-        previousCurrencies, currentCurrencies, reasonsForChanges, details);
-  }
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
-  public Locker getLocker() {
-    return locker;
-  }
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
 
-  public void setLocker(Locker locker) {
-    this.locker = locker;
-  }
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+	public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+		return userStructRetrieveUtils;
+	}
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
-
-  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
-    return userStructRetrieveUtils;
-  }
-
-  public void setUserStructRetrieveUtils(
-      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
-    this.userStructRetrieveUtils = userStructRetrieveUtils;
-  }
+	public void setUserStructRetrieveUtils(
+			StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+		this.userStructRetrieveUtils = userStructRetrieveUtils;
+	}
 
 }

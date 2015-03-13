@@ -33,21 +33,21 @@ import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-
 @Component
-public class CompleteMiniJobController extends EventController{
+public class CompleteMiniJobController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
 
@@ -55,7 +55,6 @@ public class CompleteMiniJobController extends EventController{
 		numAllocatedThreads = 4;
 	}
 
-	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new CompleteMiniJobRequestEvent();
@@ -68,25 +67,27 @@ public class CompleteMiniJobController extends EventController{
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent)event).getCompleteMiniJobRequestProto();
+		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent) event)
+				.getCompleteMiniJobRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
-		
+
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		String userMiniJobId = reqProto.getUserMiniJobUuid();
-		
+
 		boolean isSpeedUp = reqProto.getIsSpeedUp();
 		int gemCost = reqProto.getGemCost();
-		
-		CompleteMiniJobResponseProto.Builder resBuilder = CompleteMiniJobResponseProto.newBuilder();
+
+		CompleteMiniJobResponseProto.Builder resBuilder = CompleteMiniJobResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		UUID userMiniJobUuid = null;
-		
+
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
@@ -94,47 +95,49 @@ public class CompleteMiniJobController extends EventController{
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, userMiniJobId=%s",
-				userId, userMiniJobId), e);
+					"UUID error. incorrect userId=%s, userMiniJobId=%s",
+					userId, userMiniJobId), e);
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
-	      	CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(userId);
-	      	resEvent.setTag(event.getTag());
-	      	resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+		if (invalidUuids) {
+			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
-			User user = RetrieveUtils.userRetrieveUtils()
-					.getUserById(senderProto.getUserUuid());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(
+					senderProto.getUserUuid());
 			int previousGems = 0;
-			
-			boolean legit = checkLegit(resBuilder, userId, user,
-					userMiniJobId, isSpeedUp, gemCost);
-			
+
+			boolean legit = checkLegit(resBuilder, userId, user, userMiniJobId,
+					isSpeedUp, gemCost);
+
 			boolean success = false;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
-			
+
 			if (legit) {
 				previousGems = user.getGems();
 				success = writeChangesToDB(userId, user, userMiniJobId,
 						isSpeedUp, gemCost, clientTime, currencyChange);
 			}
-			
+
 			if (success) {
 				resBuilder.setStatus(CompleteMiniJobStatus.SUCCESS);
 			}
-			
-			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(senderProto.getUserUuid());
+
+			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());  
+			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
 			if (success) {
@@ -145,100 +148,101 @@ public class CompleteMiniJobController extends EventController{
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(user, userMiniJobId,
-						currencyChange, clientTime, previousGems);
+				writeToUserCurrencyHistory(user, userMiniJobId, currencyChange,
+						clientTime, previousGems);
 			}
-			
+
 		} catch (Exception e) {
 			log.error("exception in CompleteMiniJobController processEvent", e);
 			//don't let the client hang
-      try {
-      	resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
-      	CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(userId);
-      	resEvent.setTag(event.getTag());
-      	resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
-      	server.writeEvent(resEvent);
-      } catch (Exception e2) {
-      	log.error("exception2 in CompleteMiniJobController processEvent", e);
-      }
+			try {
+				resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+				CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in CompleteMiniJobController processEvent",
+						e);
+			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
 	private boolean checkLegit(Builder resBuilder, String userId, User user,
-		String userMiniJobId, boolean isSpeedUp, int gemCost) {
-		
+			String userMiniJobId, boolean isSpeedUp, int gemCost) {
+
 		//sanity check
 		if (null == userMiniJobId || userMiniJobId.isEmpty()) {
-			log.error(String.format(
-				"invalid userMiniJobId. userMiniJobId=%s", userMiniJobId));
+			log.error(String.format("invalid userMiniJobId. userMiniJobId=%s",
+					userMiniJobId));
 			return false;
 		}
-		
-		Collection<String> userMiniJobIds = Collections.singleton(userMiniJobId);
-		Map<String, MiniJobForUser> idToUserMiniJob =
-				miniJobForUserRetrieveUtil
-				.getSpecificOrAllIdToMiniJobForUser(
-						userId, userMiniJobIds);
-	
+
+		Collection<String> userMiniJobIds = Collections
+				.singleton(userMiniJobId);
+		Map<String, MiniJobForUser> idToUserMiniJob = miniJobForUserRetrieveUtil
+				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
+
 		if (idToUserMiniJob.isEmpty()) {
-			log.error(String.format("no UserMiniJob exists with id=%s", userMiniJobId));
+			log.error(String.format("no UserMiniJob exists with id=%s",
+					userMiniJobId));
 			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
 			return false;
 		}
-		
+
 		if (isSpeedUp && !hasEnoughGems(resBuilder, user, gemCost)) {
 			return false;
-	    }
-		
+		}
+
 		return true;
 	}
-	
+
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent) {
-	  	int userGems = u.getGems();
-	  	//if user's aggregate gems is < cost, don't allow transaction
-	  	if (userGems < Math.abs(gemsSpent)) {
-	  		log.error(String.format("user does not have enough gems. userGems=%s, gemsSpent=%s",
-	  			userGems, gemsSpent));
-	  		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_INSUFFICIENT_GEMS);
-	  		return false;
-	  	}
-	  	
-	  	return true;
-	  }
-	
+		int userGems = u.getGems();
+		//if user's aggregate gems is < cost, don't allow transaction
+		if (userGems < Math.abs(gemsSpent)) {
+			log.error(String
+					.format("user does not have enough gems. userGems=%s, gemsSpent=%s",
+							userGems, gemsSpent));
+			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_INSUFFICIENT_GEMS);
+			return false;
+		}
+
+		return true;
+	}
+
 	private boolean writeChangesToDB(String userId, User user,
 			String userMiniJobId, boolean isSpeedUp, int gemCost,
 			Timestamp clientTime, Map<String, Integer> currencyChange) {
-		
+
 		//update user currency
 		int gemsChange = -1 * Math.abs(gemCost);
 		int cashChange = 0;
 		int oilChange = 0;
 
-		if (isSpeedUp &&
-				!updateUser(user, gemsChange, cashChange, oilChange)) {
-			log.error(String.format(
-				"could not decrement user gems by %s, cash by %s, and oil by %s",
-				gemsChange, cashChange, oilChange));
+		if (isSpeedUp && !updateUser(user, gemsChange, cashChange, oilChange)) {
+			log.error(String
+					.format("could not decrement user gems by %s, cash by %s, and oil by %s",
+							gemsChange, cashChange, oilChange));
 			return false;
 		} else {
 			if (0 != gemsChange) {
 				currencyChange.put(MiscMethods.gems, gemsChange);
 			}
 		}
-		
+
 		//update complete time for MiniJobForUser
 		int numUpdated = UpdateUtils.get().updateMiniJobForUserCompleteTime(
-			userId, userMiniJobId, clientTime);
-		
-		log.info(String.format(
-			"writeChangesToDB() numUpdated=%s", numUpdated));
-		
+				userId, userMiniJobId, clientTime);
+
+		log.info(String.format("writeChangesToDB() numUpdated=%s", numUpdated));
+
 		return true;
 	}
-	
 
 	private boolean updateUser(User u, int gemsChange, int cashChange,
 			int oilChange) {
@@ -246,14 +250,13 @@ public class CompleteMiniJobController extends EventController{
 				oilChange, gemsChange);
 
 		if (numChange <= 0) {
-			log.error(String.format(
-				"problem with updating resources. gemChange=%s, cash=%s, oil=%s, user=%s",
-				gemsChange, cashChange, oilChange, u));
+			log.error(String
+					.format("problem with updating resources. gemChange=%s, cash=%s, oil=%s, user=%s",
+							gemsChange, cashChange, oilChange, u));
 			return false;
 		}
 		return true;
 	}
-	
 
 	private void writeToUserCurrencyHistory(User aUser, String userMiniJobId,
 			Map<String, Integer> currencyChange, Timestamp curTime,
@@ -263,7 +266,7 @@ public class CompleteMiniJobController extends EventController{
 		StringBuilder detailsSb = new StringBuilder();
 		detailsSb.append("userMiniJobId=");
 		detailsSb.append(userMiniJobId);
-		
+
 		Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -275,41 +278,37 @@ public class CompleteMiniJobController extends EventController{
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
-				previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 
 	}
-	
+
 	public Locker getLocker() {
 		return locker;
 	}
+
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	
-	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils()
-	{
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
 		return monsterForUserRetrieveUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils )
-	{
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 
-	
 	public MiniJobForUserRetrieveUtil getMiniJobForUserRetrieveUtil() {
 		return miniJobForUserRetrieveUtil;
 	}
@@ -318,5 +317,5 @@ public class CompleteMiniJobController extends EventController{
 			MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil) {
 		this.miniJobForUserRetrieveUtil = miniJobForUserRetrieveUtil;
 	}
-  
+
 }

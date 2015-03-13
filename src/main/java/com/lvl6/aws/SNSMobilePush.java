@@ -1,6 +1,5 @@
 package com.lvl6.aws;
 
-
 public class SNSMobilePush implements SNSService {
 
 	/*private static final Logger		log					= LoggerFactory.getLogger(SNSMobilePush.class);

@@ -12,36 +12,39 @@ import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 
 public class CompleteBattleItemRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private CompleteBattleItemRequestProto completeBattleItemRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      completeBattleItemRequestProto = CompleteBattleItemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = completeBattleItemRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("CompleteBattleItemRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public CompleteBattleItemRequestProto getCompleteBattleItemRequestProto() {
-    return completeBattleItemRequestProto;
-  }
-  //added for testing purposes
-  public void setCompleteBattleItemRequestProto(CompleteBattleItemRequestProto sorp) {
-	  this.completeBattleItemRequestProto = sorp;
-  }
+	private CompleteBattleItemRequestProto completeBattleItemRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "CompleteBattleItemRequestEvent [completeBattleItemRequestProto="
-		  + completeBattleItemRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			completeBattleItemRequestProto = CompleteBattleItemRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = completeBattleItemRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("CompleteBattleItemRequest exception", e);
+		}
+	}
+
+	public CompleteBattleItemRequestProto getCompleteBattleItemRequestProto() {
+		return completeBattleItemRequestProto;
+	}
+
+	//added for testing purposes
+	public void setCompleteBattleItemRequestProto(
+			CompleteBattleItemRequestProto sorp) {
+		this.completeBattleItemRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "CompleteBattleItemRequestEvent [completeBattleItemRequestProto="
+				+ completeBattleItemRequestProto + "]";
+	}
+
 }

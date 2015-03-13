@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PvpLeague implements Serializable {
 
 	private static final long serialVersionUID = -4851584695578561184L;
-	
+
 	private int id;
 	private String leagueName;
 	private String imgPrefix;
@@ -16,19 +16,10 @@ public class PvpLeague implements Serializable {
 	private int maxRank;
 	private int predecessorLeagueId;
 	private int successorLeagueId;
-	
-	public PvpLeague(
-		int id,
-		String leagueName,
-		String imgPrefix,
-		String description,
-		int minElo,
-		int maxElo,
-		int minRank,
-		int maxRank,
-		int predecessorLeagueId,
-		int successorLeagueId )
-	{
+
+	public PvpLeague(int id, String leagueName, String imgPrefix,
+			String description, int minElo, int maxElo, int minRank,
+			int maxRank, int predecessorLeagueId, int successorLeagueId) {
 		super();
 		this.id = id;
 		this.leagueName = leagueName;
@@ -90,70 +81,46 @@ public class PvpLeague implements Serializable {
 		this.maxElo = maxElo;
 	}
 
-	public int getMinRank()
-	{
+	public int getMinRank() {
 		return minRank;
 	}
 
-	public void setMinRank( int minRank )
-	{
+	public void setMinRank(int minRank) {
 		this.minRank = minRank;
 	}
 
-	public int getMaxRank()
-	{
+	public int getMaxRank() {
 		return maxRank;
 	}
 
-	public void setMaxRank( int maxRank )
-	{
+	public void setMaxRank(int maxRank) {
 		this.maxRank = maxRank;
 	}
 
-	public int getPredecessorLeagueId()
-	{
+	public int getPredecessorLeagueId() {
 		return predecessorLeagueId;
 	}
 
-	public void setPredecessorLeagueId( int predecessorLeagueId )
-	{
+	public void setPredecessorLeagueId(int predecessorLeagueId) {
 		this.predecessorLeagueId = predecessorLeagueId;
 	}
 
-	public int getSuccessorLeagueId()
-	{
+	public int getSuccessorLeagueId() {
 		return successorLeagueId;
 	}
 
-	public void setSuccessorLeagueId( int successorLeagueId )
-	{
+	public void setSuccessorLeagueId(int successorLeagueId) {
 		this.successorLeagueId = successorLeagueId;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "PvpLeague [id="
-			+ id
-			+ ", leagueName="
-			+ leagueName
-			+ ", imgPrefix="
-			+ imgPrefix
-			+ ", description="
-			+ description
-			+ ", minElo="
-			+ minElo
-			+ ", maxElo="
-			+ maxElo
-			+ ", minRank="
-			+ minRank
-			+ ", maxRank="
-			+ maxRank
-			+ ", predecessorLeagueId="
-			+ predecessorLeagueId
-			+ ", successorLeagueId="
-			+ successorLeagueId
-			+ "]";
+	public String toString() {
+		return "PvpLeague [id=" + id + ", leagueName=" + leagueName
+				+ ", imgPrefix=" + imgPrefix + ", description=" + description
+				+ ", minElo=" + minElo + ", maxElo=" + maxElo + ", minRank="
+				+ minRank + ", maxRank=" + maxRank + ", predecessorLeagueId="
+				+ predecessorLeagueId + ", successorLeagueId="
+				+ successorLeagueId + "]";
 	}
 
 }

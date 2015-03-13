@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RedeemMiniJobResponseEvent extends NormalResponseEvent {
 
-  private RedeemMiniJobResponseProto redeemMiniJobResponseProto;
-  
-  public RedeemMiniJobResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_REDEEM_MINI_JOB_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = redeemMiniJobResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private RedeemMiniJobResponseProto redeemMiniJobResponseProto;
 
-  public void setRedeemMiniJobResponseProto(RedeemMiniJobResponseProto redeemMiniJobResponseProto) {
-    this.redeemMiniJobResponseProto = redeemMiniJobResponseProto;
-  }
+	public RedeemMiniJobResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_REDEEM_MINI_JOB_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = redeemMiniJobResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setRedeemMiniJobResponseProto(
+			RedeemMiniJobResponseProto redeemMiniJobResponseProto) {
+		this.redeemMiniJobResponseProto = redeemMiniJobResponseProto;
+	}
 
 }

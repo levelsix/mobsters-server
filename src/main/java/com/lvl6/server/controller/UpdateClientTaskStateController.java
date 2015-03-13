@@ -23,16 +23,19 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-@Component @DependsOn("gameServer") public class UpdateClientTaskStateController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class UpdateClientTaskStateController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	public UpdateClientTaskStateController() {
 		numAllocatedThreads = 4;
 	}
@@ -49,7 +52,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent)event).getUpdateClientTaskStateRequestProto();
+		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent) event)
+				.getUpdateClientTaskStateRequestProto();
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -57,23 +61,24 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		ByteString bs = reqProto.getTaskState();
 
 		//set some values to send to the client (the response proto)
-		UpdateClientTaskStateResponseProto.Builder resBuilder = UpdateClientTaskStateResponseProto.newBuilder();
+		UpdateClientTaskStateResponseProto.Builder resBuilder = UpdateClientTaskStateResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setTaskState(bs);
 		resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER); //default
 
-		UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(userId);
+		UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(
+				userId);
 		resEvent.setTag(event.getTag());
-		
+
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
@@ -87,37 +92,43 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-//		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		//		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			TaskForUserClientState tfucs = new TaskForUserClientState();
 			tfucs.setUserId(userId);
 			tfucs.setClientState(bs.toByteArray());
 
-			List<TaskForUserClientState> tfucsList = Collections.singletonList(tfucs);
-			int numUpdated = insertUtil.insertIntoUpdateClientTaskState(tfucsList);
+			List<TaskForUserClientState> tfucsList = Collections
+					.singletonList(tfucs);
+			int numUpdated = insertUtil
+					.insertIntoUpdateClientTaskState(tfucsList);
 			log.info("numInserted TaskForUserClientState: {}", numUpdated);
-			
+
 			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
 			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-			
+
 		} catch (Exception e) {
-			log.error("exception in UpdateClientTaskStateController processEvent", e);
+			log.error(
+					"exception in UpdateClientTaskStateController processEvent",
+					e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
 				resEvent = new UpdateClientTaskStateResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
+				resEvent.setUpdateClientTaskStateResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in UpdateClientTaskStateController processEvent", e);
+				log.error(
+						"exception2 in UpdateClientTaskStateController processEvent",
+						e);
 			}
 		} finally {
-//			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			//			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
-
 
 	public Locker getLocker() {
 		return locker;
@@ -127,13 +138,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		this.locker = locker;
 	}
 
-	public InsertUtil getInsertUtil()
-	{
+	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
-	public void setInsertUtil( InsertUtil insertUtil )
-	{
+	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
 	}
 

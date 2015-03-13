@@ -26,16 +26,19 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DiscardBattleItemAction;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-@Component @DependsOn("gameServer") public class DiscardBattleItemController extends EventController{
+@Component
+@DependsOn("gameServer")
+public class DiscardBattleItemController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
 
@@ -55,7 +58,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		DiscardBattleItemRequestProto reqProto = ((DiscardBattleItemRequestEvent)event)
+		DiscardBattleItemRequestProto reqProto = ((DiscardBattleItemRequestEvent) event)
 				.getDiscardBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
 		//get stuff client sent
@@ -63,11 +66,12 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 		String userId = senderProto.getUserUuid();
 		//the new items added to queue, updated refers to those finished as well as 
 		//priorities changing, deleted refers to those removed from queue and completed
-		List<UserBattleItemProto> discardedBattleItemList = reqProto.getDiscardedBattleItemsList();
+		List<UserBattleItemProto> discardedBattleItemList = reqProto
+				.getDiscardedBattleItemsList();
 		List<BattleItemForUser> bifuList = getBattleItemForUserListFromProtos(discardedBattleItemList);
 
-		DiscardBattleItemResponseProto.Builder resBuilder =
-				DiscardBattleItemResponseProto.newBuilder();
+		DiscardBattleItemResponseProto.Builder resBuilder = DiscardBattleItemResponseProto
+				.newBuilder();
 		resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
@@ -78,75 +82,78 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s, ",
-					userId));
+			log.error(String
+					.format("UUID error. incorrect userId=%s, ", userId));
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
-			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(userId);
+			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
-		
+
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			User user = userRetrieveUtil.getUserById(userId);
-			
-			DiscardBattleItemAction dbia =
-					new DiscardBattleItemAction(userId, user, bifuList, deleteUtil);
-			
+
+			DiscardBattleItemAction dbia = new DiscardBattleItemAction(userId,
+					user, bifuList, deleteUtil);
+
 			dbia.execute(resBuilder);
 
-			DiscardBattleItemResponseEvent resEvent = new 
-					DiscardBattleItemResponseEvent(senderProto.getUserUuid());
+			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());  
+			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in DiscardBattleItemController processEvent", e);
+			log.error("exception in DiscardBattleItemController processEvent",
+					e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
-				DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(userId);
+				DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in DiscardBattleItemController processEvent", e);
+				log.error(
+						"exception2 in DiscardBattleItemController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
-	private List<BattleItemForUser> getBattleItemForUserListFromProtos
-	(List<UserBattleItemProto> protosList) {
+	private List<BattleItemForUser> getBattleItemForUserListFromProtos(
+			List<UserBattleItemProto> protosList) {
 		List<BattleItemForUser> battleItemForUserList = null;
-		if(protosList == null || protosList.isEmpty()) {
+		if (protosList == null || protosList.isEmpty()) {
 			log.error("DiscardBattleItem request did not send any battle items for user ids");
 			return battleItemForUserList;
 		}
-		
+
 		battleItemForUserList = new ArrayList<BattleItemForUser>();
-		
-		for(UserBattleItemProto ubiProto : protosList) {
+
+		for (UserBattleItemProto ubiProto : protosList) {
 			BattleItemForUser bifu = new BattleItemForUser();
 			bifu.setBattleItemId(ubiProto.getBattleItemId());
 			bifu.setUserId(ubiProto.getUserUuid());
 			bifu.setQuantity(ubiProto.getQuantity());
 			battleItemForUserList.add(bifu);
 		}
-		
+
 		return battleItemForUserList;
 	}
-
 
 	public Locker getLocker() {
 		return locker;
@@ -163,6 +170,5 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
-
 
 }

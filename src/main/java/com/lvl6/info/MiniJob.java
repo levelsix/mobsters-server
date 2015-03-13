@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class MiniJob implements Serializable {
-	
+
 	private static final long serialVersionUID = 1798299379324772077L;
-	
+
 	private int id;
 	private int requiredStructId;
 	private String name;
 	private int cashReward;
 	private int oilReward;
 	private int gemReward;
-    private int monsterIdReward;
-    private int itemIdReward;
-    private int itemRewardQuantity;
-    private int secondItemIdReward;
-    private int secondItemRewardQuantity;
+	private int monsterIdReward;
+	private int itemIdReward;
+	private int itemRewardQuantity;
+	private int secondItemIdReward;
+	private int secondItemRewardQuantity;
 	private String quality;
 	private int maxNumMonstersAllowed;
 	private float chanceToAppear;
@@ -28,20 +28,18 @@ public class MiniJob implements Serializable {
 	private int durationMinMinutes;
 	private int durationMaxMinutes;
 	private int expReward;
-	
+
 	private Random rand;
 	private int durationMinSeconds;
 	private int durationMaxSeconds;
 
-    public MiniJob(int id, int requiredStructId, String name, int cashReward,
+	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward,
-            int itemIdReward, int itemRewardQuantity,
-            int secondItemIdReward, int secondItemRewardQuantity,
-            String quality, int maxNumMonstersAllowed,
-            float chanceToAppear, int hpRequired, int atkRequired,
-            int minDmgDealt, int maxDmgDealt, int durationMinMinutes,
-            int durationMaxMinutes, int expReward)
-    {
+			int itemIdReward, int itemRewardQuantity, int secondItemIdReward,
+			int secondItemRewardQuantity, String quality,
+			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
+			int atkRequired, int minDmgDealt, int maxDmgDealt,
+			int durationMinMinutes, int durationMaxMinutes, int expReward) {
 		super();
 		this.id = id;
 		this.requiredStructId = requiredStructId;
@@ -50,10 +48,10 @@ public class MiniJob implements Serializable {
 		this.oilReward = oilReward;
 		this.gemReward = gemReward;
 		this.monsterIdReward = monsterIdReward;
-        this.itemIdReward = itemIdReward;
-        this.itemRewardQuantity = itemRewardQuantity;
-        this.secondItemIdReward = secondItemIdReward;
-        this.secondItemRewardQuantity = secondItemRewardQuantity;
+		this.itemIdReward = itemIdReward;
+		this.itemRewardQuantity = itemRewardQuantity;
+		this.secondItemIdReward = secondItemIdReward;
+		this.secondItemRewardQuantity = secondItemRewardQuantity;
 		this.quality = quality;
 		this.maxNumMonstersAllowed = maxNumMonstersAllowed;
 		this.chanceToAppear = chanceToAppear;
@@ -63,10 +61,10 @@ public class MiniJob implements Serializable {
 		this.maxDmgDealt = maxDmgDealt;
 		this.durationMinMinutes = durationMinMinutes;
 		this.durationMaxMinutes = durationMaxMinutes;
-		
+
 		this.durationMinSeconds = durationMinMinutes * 60;
 		this.durationMaxSeconds = durationMaxMinutes * 60;
-		
+
 		this.expReward = expReward;
 	}
 
@@ -88,38 +86,38 @@ public class MiniJob implements Serializable {
 		if (minMaxDiff <= 0) {
 			return Math.max(minDmgDealt, maxDmgDealt);
 		}
-		
-		int randDmg = rand.nextInt(minMaxDiff + 1); 
+
+		int randDmg = rand.nextInt(minMaxDiff + 1);
 
 		//number generated in [0, max-min] range, but need to transform
 		//back to original range [min, max]. so add min. [0+min, max-min+min]
 		return randDmg + getMinDmgDealt();
 	}
-	
-//	public int getDurationMinutes() {
-//		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
-//		
-//		if (minMaxDiff <= 0) {
-//			return Math.max(durationMinMinutes, durationMaxMinutes);
-//		}
-//		
-//		int randMinutes = rand.nextInt(minMaxDiff + 1);
-//		
-//		return randMinutes + getDurationMinMinutes();
-//	}
-	
+
+	//	public int getDurationMinutes() {
+	//		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
+	//		
+	//		if (minMaxDiff <= 0) {
+	//			return Math.max(durationMinMinutes, durationMaxMinutes);
+	//		}
+	//		
+	//		int randMinutes = rand.nextInt(minMaxDiff + 1);
+	//		
+	//		return randMinutes + getDurationMinMinutes();
+	//	}
+
 	public int getDurationSeconds() {
 		int minMaxDiff = durationMaxSeconds - durationMinSeconds;
-		
+
 		if (minMaxDiff <= 0) {
 			return Math.max(durationMinSeconds, durationMaxSeconds);
 		}
-		
+
 		int randSeconds = rand.nextInt(minMaxDiff + 1);
-		
+
 		return randSeconds + durationMinSeconds;
 	}
-	
+
 	//end covenience methods--------------------------------------------------------
 
 	public int getId() {
@@ -250,98 +248,62 @@ public class MiniJob implements Serializable {
 		this.durationMaxMinutes = durationMaxMinutes;
 	}
 
-    public int getItemIdReward() {
-        return itemIdReward;
-    }
+	public int getItemIdReward() {
+		return itemIdReward;
+	}
 
-    public void setItemIdReward(int itemIdReward) {
-        this.itemIdReward = itemIdReward;
-    }
+	public void setItemIdReward(int itemIdReward) {
+		this.itemIdReward = itemIdReward;
+	}
 
-    public int getItemRewardQuantity() {
-        return itemRewardQuantity;
-    }
+	public int getItemRewardQuantity() {
+		return itemRewardQuantity;
+	}
 
-    public void setItemRewardQuantity(int itemRewardQuantity) {
-        this.itemRewardQuantity = itemRewardQuantity;
-    }
+	public void setItemRewardQuantity(int itemRewardQuantity) {
+		this.itemRewardQuantity = itemRewardQuantity;
+	}
 
-	public int getSecondItemIdReward()
-	{
+	public int getSecondItemIdReward() {
 		return secondItemIdReward;
 	}
 
-	public void setSecondItemIdReward( int secondItemIdReward )
-	{
+	public void setSecondItemIdReward(int secondItemIdReward) {
 		this.secondItemIdReward = secondItemIdReward;
 	}
 
-	public int getSecondItemRewardQuantity()
-	{
+	public int getSecondItemRewardQuantity() {
 		return secondItemRewardQuantity;
 	}
 
-	public void setSecondItemRewardQuantity( int secondItemRewardQuantity )
-	{
+	public void setSecondItemRewardQuantity(int secondItemRewardQuantity) {
 		this.secondItemRewardQuantity = secondItemRewardQuantity;
 	}
 
-	public int getExpReward()
-	{
+	public int getExpReward() {
 		return expReward;
 	}
 
-	public void setExpReward( int expReward )
-	{
+	public void setExpReward(int expReward) {
 		this.expReward = expReward;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "MiniJob [id="
-			+ id
-			+ ", requiredStructId="
-			+ requiredStructId
-			+ ", name="
-			+ name
-			+ ", cashReward="
-			+ cashReward
-			+ ", oilReward="
-			+ oilReward
-			+ ", gemReward="
-			+ gemReward
-			+ ", monsterIdReward="
-			+ monsterIdReward
-			+ ", itemIdReward="
-			+ itemIdReward
-			+ ", itemRewardQuantity="
-			+ itemRewardQuantity
-			+ ", secondItemIdReward="
-			+ secondItemIdReward
-			+ ", secondItemRewardQuantity="
-			+ secondItemRewardQuantity
-			+ ", quality="
-			+ quality
-			+ ", maxNumMonstersAllowed="
-			+ maxNumMonstersAllowed
-			+ ", chanceToAppear="
-			+ chanceToAppear
-			+ ", hpRequired="
-			+ hpRequired
-			+ ", atkRequired="
-			+ atkRequired
-			+ ", minDmgDealt="
-			+ minDmgDealt
-			+ ", maxDmgDealt="
-			+ maxDmgDealt
-			+ ", durationMinMinutes="
-			+ durationMinMinutes
-			+ ", durationMaxMinutes="
-			+ durationMaxMinutes
-			+ ", expReward="
-			+ expReward
-			+ "]";
+	public String toString() {
+		return "MiniJob [id=" + id + ", requiredStructId=" + requiredStructId
+				+ ", name=" + name + ", cashReward=" + cashReward
+				+ ", oilReward=" + oilReward + ", gemReward=" + gemReward
+				+ ", monsterIdReward=" + monsterIdReward + ", itemIdReward="
+				+ itemIdReward + ", itemRewardQuantity=" + itemRewardQuantity
+				+ ", secondItemIdReward=" + secondItemIdReward
+				+ ", secondItemRewardQuantity=" + secondItemRewardQuantity
+				+ ", quality=" + quality + ", maxNumMonstersAllowed="
+				+ maxNumMonstersAllowed + ", chanceToAppear=" + chanceToAppear
+				+ ", hpRequired=" + hpRequired + ", atkRequired=" + atkRequired
+				+ ", minDmgDealt=" + minDmgDealt + ", maxDmgDealt="
+				+ maxDmgDealt + ", durationMinMinutes=" + durationMinMinutes
+				+ ", durationMaxMinutes=" + durationMaxMinutes + ", expReward="
+				+ expReward + "]";
 	}
 
 }

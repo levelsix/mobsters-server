@@ -12,37 +12,40 @@ import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 
 public class BeginObstacleRemovalRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      beginObstacleRemovalRequestProto = BeginObstacleRemovalRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = beginObstacleRemovalRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("BeginObstacleRemovalRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public BeginObstacleRemovalRequestProto getBeginObstacleRemovalRequestProto() {
-    return beginObstacleRemovalRequestProto;
-  }
-  //added for testing purposes
-  public void setBeginObstacleRemovalRequestProto(
-		  BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto) {
-	  this.beginObstacleRemovalRequestProto = beginObstacleRemovalRequestProto;
-  }
+	private BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "BeginObstacleRemovalRequestEvent [beginObstacleRemovalRequestProto="
-		  + beginObstacleRemovalRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			beginObstacleRemovalRequestProto = BeginObstacleRemovalRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = beginObstacleRemovalRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("BeginObstacleRemovalRequest exception", e);
+		}
+	}
+
+	public BeginObstacleRemovalRequestProto getBeginObstacleRemovalRequestProto() {
+		return beginObstacleRemovalRequestProto;
+	}
+
+	//added for testing purposes
+	public void setBeginObstacleRemovalRequestProto(
+			BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto) {
+		this.beginObstacleRemovalRequestProto = beginObstacleRemovalRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "BeginObstacleRemovalRequestEvent [beginObstacleRemovalRequestProto="
+				+ beginObstacleRemovalRequestProto + "]";
+	}
 
 }

@@ -16,22 +16,19 @@ import com.lvl6.utils.StringUtils;
 
 public class StatsPanelDynamic extends Panel {
 
-	
-	
-	private static final Logger log = LoggerFactory.getLogger(StatsPanelDynamic.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(StatsPanelDynamic.class);
+
 	public static String STATS_FIELD_NAME = "statsField";
-	
+
 	public StatsPanelDynamic(String id) {
 		super(id);
 		addStats();
 
 	}
 
-	
 	protected StatsModel statsModel = new StatsModel();
-	
-	
+
 	protected void addStats() {
 		Class<ApplicationStats> stats = ApplicationStats.class;
 		RepeatingView rv = new RepeatingView("statsTable");
@@ -40,17 +37,19 @@ public class StatsPanelDynamic extends Panel {
 			PageParameters params = new PageParameters();
 			params.set(STATS_FIELD_NAME, field.getName());
 			//log.info("Adding field {}", field.getName());
-			BookmarkablePageLink<StatsGraphsPage> bookmarkablePageLink = new BookmarkablePageLink<StatsGraphsPage>("statGraphLink", StatsGraphsPage.class, params);
+			BookmarkablePageLink<StatsGraphsPage> bookmarkablePageLink = new BookmarkablePageLink<StatsGraphsPage>(
+					"statGraphLink", StatsGraphsPage.class, params);
 			//bookmarkablePageLink.setOutputMarkupId(true);
 			itm.add(bookmarkablePageLink);
-			Label displayNameLabel = new Label("statDisplayName", StringUtils.displayName(field.getName()));
+			Label displayNameLabel = new Label("statDisplayName",
+					StringUtils.displayName(field.getName()));
 			bookmarkablePageLink.add(displayNameLabel);
 			try {
 				Object statValue = field.get(statsModel.getObject());
 				String formatted = "";
-				if(statValue instanceof Double) {
+				if (statValue instanceof Double) {
 					formatted = String.format("%.2f", (Double) statValue);
-				}else {
+				} else {
 					formatted = statValue.toString();
 				}
 				Label label = new Label("statValue", formatted);
@@ -67,5 +66,4 @@ public class StatsPanelDynamic extends Panel {
 
 	private static final long serialVersionUID = -2625835646085053890L;
 
-	
 }

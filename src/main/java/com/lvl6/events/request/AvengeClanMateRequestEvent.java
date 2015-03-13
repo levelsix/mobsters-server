@@ -12,32 +12,33 @@ import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 
 public class AvengeClanMateRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private AvengeClanMateRequestProto avengeClanMateRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      avengeClanMateRequestProto = AvengeClanMateRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = avengeClanMateRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("AvengeClanMateRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public AvengeClanMateRequestProto getAvengeClanMateRequestProto() {
-    return avengeClanMateRequestProto;
-  }
+	private AvengeClanMateRequestProto avengeClanMateRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "AvengeClanMateRequestEvent [avengeClanMateRequestProto="
-		  + avengeClanMateRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			avengeClanMateRequestProto = AvengeClanMateRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = avengeClanMateRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("AvengeClanMateRequest exception", e);
+		}
+	}
+
+	public AvengeClanMateRequestProto getAvengeClanMateRequestProto() {
+		return avengeClanMateRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "AvengeClanMateRequestEvent [avengeClanMateRequestProto="
+				+ avengeClanMateRequestProto + "]";
+	}
 
 }

@@ -12,32 +12,34 @@ import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
 
 public class AcceptOrRejectClanInviteRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private AcceptOrRejectClanInviteRequestProto acceptOrRejectClanInviteRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      acceptOrRejectClanInviteRequestProto = AcceptOrRejectClanInviteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = acceptOrRejectClanInviteRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("AcceptOrRejectClanInviteRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public AcceptOrRejectClanInviteRequestProto getAcceptOrRejectClanInviteRequestProto() {
-    return acceptOrRejectClanInviteRequestProto;
-  }
+	private AcceptOrRejectClanInviteRequestProto acceptOrRejectClanInviteRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "AcceptOrRejectClanInviteRequestEvent [acceptOrRejectClanInviteRequestProto="
-		  + acceptOrRejectClanInviteRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			acceptOrRejectClanInviteRequestProto = AcceptOrRejectClanInviteRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = acceptOrRejectClanInviteRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("AcceptOrRejectClanInviteRequest exception", e);
+		}
+	}
+
+	public AcceptOrRejectClanInviteRequestProto getAcceptOrRejectClanInviteRequestProto() {
+		return acceptOrRejectClanInviteRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "AcceptOrRejectClanInviteRequestEvent [acceptOrRejectClanInviteRequestProto="
+				+ acceptOrRejectClanInviteRequestProto + "]";
+	}
 
 }

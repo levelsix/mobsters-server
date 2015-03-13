@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Obstacle implements Serializable {
 
 	private static final long serialVersionUID = 4770303583975177808L;
-	
+
 	private int id;
 	private String name;
 	private String removalCostType;
@@ -17,15 +17,15 @@ public class Obstacle implements Serializable {
 	private float imgVerticalPixelOffset;
 	private String description;
 	private float chanceToAppear;
-  String shadowImgName;
-  float shadowVerticalOffset;
-  float shadowHorizontalOffset;
-  
+	String shadowImgName;
+	float shadowVerticalOffset;
+	float shadowHorizontalOffset;
+
 	public Obstacle(int id, String name, String removalCostType, int cost,
 			int secondsToRemove, int width, int height, String imgName,
-			float imgVerticalPixelOffset, String description, float chanceToAppear,
-			String shadowImgName, float shadowVerticalOffset,
-			float shadowHorizontalOffset) {
+			float imgVerticalPixelOffset, String description,
+			float chanceToAppear, String shadowImgName,
+			float shadowVerticalOffset, float shadowHorizontalOffset) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -163,8 +163,9 @@ public class Obstacle implements Serializable {
 				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
 				+ imgVerticalPixelOffset + ", description=" + description
 				+ ", chanceToAppear=" + chanceToAppear + ", shadowImgName="
-				+ shadowImgName + ", shadowVerticalOffset=" + shadowVerticalOffset
-				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset + "]";
+				+ shadowImgName + ", shadowVerticalOffset="
+				+ shadowVerticalOffset + ", shadowHorizontalOffset="
+				+ shadowHorizontalOffset + "]";
 	}
-	
+
 }

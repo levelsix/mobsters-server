@@ -4,3330 +4,3785 @@
 package com.lvl6.proto;
 
 public final class MiniJobConfigProto {
-  private MiniJobConfigProto() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-  }
-  public interface MiniJobProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniJobProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 miniJobId = 1;</code>
-     */
-    boolean hasMiniJobId();
-    /**
-     * <code>optional int32 miniJobId = 1;</code>
-     */
-    int getMiniJobId();
-
-    /**
-     * <code>optional int32 requiredStructId = 2;</code>
-     */
-    boolean hasRequiredStructId();
-    /**
-     * <code>optional int32 requiredStructId = 2;</code>
-     */
-    int getRequiredStructId();
-
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>optional int32 cashReward = 4;</code>
-     */
-    boolean hasCashReward();
-    /**
-     * <code>optional int32 cashReward = 4;</code>
-     */
-    int getCashReward();
-
-    /**
-     * <code>optional int32 oilReward = 5;</code>
-     */
-    boolean hasOilReward();
-    /**
-     * <code>optional int32 oilReward = 5;</code>
-     */
-    int getOilReward();
-
-    /**
-     * <code>optional int32 gemReward = 6;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 6;</code>
-     */
-    int getGemReward();
-
-    /**
-     * <code>optional int32 monsterIdReward = 7;</code>
-     */
-    boolean hasMonsterIdReward();
-    /**
-     * <code>optional int32 monsterIdReward = 7;</code>
-     */
-    int getMonsterIdReward();
-
-    /**
-     * <code>optional int32 itemIdReward = 17;</code>
-     */
-    boolean hasItemIdReward();
-    /**
-     * <code>optional int32 itemIdReward = 17;</code>
-     */
-    int getItemIdReward();
-
-    /**
-     * <code>optional int32 itemRewardQuantity = 18;</code>
-     */
-    boolean hasItemRewardQuantity();
-    /**
-     * <code>optional int32 itemRewardQuantity = 18;</code>
-     */
-    int getItemRewardQuantity();
-
-    /**
-     * <code>optional int32 secondItemIdReward = 19;</code>
-     */
-    boolean hasSecondItemIdReward();
-    /**
-     * <code>optional int32 secondItemIdReward = 19;</code>
-     */
-    int getSecondItemIdReward();
-
-    /**
-     * <code>optional int32 secondItemRewardQuantity = 20;</code>
-     */
-    boolean hasSecondItemRewardQuantity();
-    /**
-     * <code>optional int32 secondItemRewardQuantity = 20;</code>
-     */
-    int getSecondItemRewardQuantity();
-
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-     */
-    boolean hasQuality();
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-     */
-    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
-
-    /**
-     * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-     */
-    boolean hasMaxNumMonstersAllowed();
-    /**
-     * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-     */
-    int getMaxNumMonstersAllowed();
-
-    /**
-     * <code>optional float chanceToAppear = 10;</code>
-     */
-    boolean hasChanceToAppear();
-    /**
-     * <code>optional float chanceToAppear = 10;</code>
-     */
-    float getChanceToAppear();
-
-    /**
-     * <code>optional int32 hpRequired = 11;</code>
-     */
-    boolean hasHpRequired();
-    /**
-     * <code>optional int32 hpRequired = 11;</code>
-     */
-    int getHpRequired();
-
-    /**
-     * <code>optional int32 atkRequired = 12;</code>
-     */
-    boolean hasAtkRequired();
-    /**
-     * <code>optional int32 atkRequired = 12;</code>
-     */
-    int getAtkRequired();
-
-    /**
-     * <code>optional int32 minDmgDealt = 13;</code>
-     */
-    boolean hasMinDmgDealt();
-    /**
-     * <code>optional int32 minDmgDealt = 13;</code>
-     */
-    int getMinDmgDealt();
-
-    /**
-     * <code>optional int32 maxDmgDealt = 14;</code>
-     */
-    boolean hasMaxDmgDealt();
-    /**
-     * <code>optional int32 maxDmgDealt = 14;</code>
-     */
-    int getMaxDmgDealt();
-
-    /**
-     * <code>optional int32 durationMinMinutes = 15;</code>
-     */
-    boolean hasDurationMinMinutes();
-    /**
-     * <code>optional int32 durationMinMinutes = 15;</code>
-     */
-    int getDurationMinMinutes();
-
-    /**
-     * <code>optional int32 durationMaxMinutes = 16;</code>
-     */
-    boolean hasDurationMaxMinutes();
-    /**
-     * <code>optional int32 durationMaxMinutes = 16;</code>
-     */
-    int getDurationMaxMinutes();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.MiniJobProto}
-   */
-  public static final class MiniJobProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniJobProto)
-      MiniJobProtoOrBuilder {
-    // Use MiniJobProto.newBuilder() to construct.
-    private MiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private MiniJobProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final MiniJobProto defaultInstance;
-    public static MiniJobProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public MiniJobProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private MiniJobProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              miniJobId_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              requiredStructId_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              name_ = bs;
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              cashReward_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              oilReward_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              monsterIdReward_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(8, rawValue);
-              } else {
-                bitField0_ |= 0x00000800;
-                quality_ = value;
-              }
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00001000;
-              maxNumMonstersAllowed_ = input.readInt32();
-              break;
-            }
-            case 85: {
-              bitField0_ |= 0x00002000;
-              chanceToAppear_ = input.readFloat();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00004000;
-              hpRequired_ = input.readInt32();
-              break;
-            }
-            case 96: {
-              bitField0_ |= 0x00008000;
-              atkRequired_ = input.readInt32();
-              break;
-            }
-            case 104: {
-              bitField0_ |= 0x00010000;
-              minDmgDealt_ = input.readInt32();
-              break;
-            }
-            case 112: {
-              bitField0_ |= 0x00020000;
-              maxDmgDealt_ = input.readInt32();
-              break;
-            }
-            case 120: {
-              bitField0_ |= 0x00040000;
-              durationMinMinutes_ = input.readInt32();
-              break;
-            }
-            case 128: {
-              bitField0_ |= 0x00080000;
-              durationMaxMinutes_ = input.readInt32();
-              break;
-            }
-            case 136: {
-              bitField0_ |= 0x00000080;
-              itemIdReward_ = input.readInt32();
-              break;
-            }
-            case 144: {
-              bitField0_ |= 0x00000100;
-              itemRewardQuantity_ = input.readInt32();
-              break;
-            }
-            case 152: {
-              bitField0_ |= 0x00000200;
-              secondItemIdReward_ = input.readInt32();
-              break;
-            }
-            case 160: {
-              bitField0_ |= 0x00000400;
-              secondItemRewardQuantity_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.MiniJobConfigProto.MiniJobProto.class, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<MiniJobProto> PARSER =
-        new com.google.protobuf.AbstractParser<MiniJobProto>() {
-      public MiniJobProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MiniJobProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MiniJobProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int MINIJOBID_FIELD_NUMBER = 1;
-    private int miniJobId_;
-    /**
-     * <code>optional int32 miniJobId = 1;</code>
-     */
-    public boolean hasMiniJobId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 miniJobId = 1;</code>
-     */
-    public int getMiniJobId() {
-      return miniJobId_;
-    }
-
-    public static final int REQUIREDSTRUCTID_FIELD_NUMBER = 2;
-    private int requiredStructId_;
-    /**
-     * <code>optional int32 requiredStructId = 2;</code>
-     */
-    public boolean hasRequiredStructId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 requiredStructId = 2;</code>
-     */
-    public int getRequiredStructId() {
-      return requiredStructId_;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 3;
-    private java.lang.Object name_;
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CASHREWARD_FIELD_NUMBER = 4;
-    private int cashReward_;
-    /**
-     * <code>optional int32 cashReward = 4;</code>
-     */
-    public boolean hasCashReward() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 cashReward = 4;</code>
-     */
-    public int getCashReward() {
-      return cashReward_;
-    }
-
-    public static final int OILREWARD_FIELD_NUMBER = 5;
-    private int oilReward_;
-    /**
-     * <code>optional int32 oilReward = 5;</code>
-     */
-    public boolean hasOilReward() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 oilReward = 5;</code>
-     */
-    public int getOilReward() {
-      return oilReward_;
-    }
-
-    public static final int GEMREWARD_FIELD_NUMBER = 6;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 6;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 gemReward = 6;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    public static final int MONSTERIDREWARD_FIELD_NUMBER = 7;
-    private int monsterIdReward_;
-    /**
-     * <code>optional int32 monsterIdReward = 7;</code>
-     */
-    public boolean hasMonsterIdReward() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 monsterIdReward = 7;</code>
-     */
-    public int getMonsterIdReward() {
-      return monsterIdReward_;
-    }
-
-    public static final int ITEMIDREWARD_FIELD_NUMBER = 17;
-    private int itemIdReward_;
-    /**
-     * <code>optional int32 itemIdReward = 17;</code>
-     */
-    public boolean hasItemIdReward() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 itemIdReward = 17;</code>
-     */
-    public int getItemIdReward() {
-      return itemIdReward_;
-    }
-
-    public static final int ITEMREWARDQUANTITY_FIELD_NUMBER = 18;
-    private int itemRewardQuantity_;
-    /**
-     * <code>optional int32 itemRewardQuantity = 18;</code>
-     */
-    public boolean hasItemRewardQuantity() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional int32 itemRewardQuantity = 18;</code>
-     */
-    public int getItemRewardQuantity() {
-      return itemRewardQuantity_;
-    }
-
-    public static final int SECONDITEMIDREWARD_FIELD_NUMBER = 19;
-    private int secondItemIdReward_;
-    /**
-     * <code>optional int32 secondItemIdReward = 19;</code>
-     */
-    public boolean hasSecondItemIdReward() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional int32 secondItemIdReward = 19;</code>
-     */
-    public int getSecondItemIdReward() {
-      return secondItemIdReward_;
-    }
-
-    public static final int SECONDITEMREWARDQUANTITY_FIELD_NUMBER = 20;
-    private int secondItemRewardQuantity_;
-    /**
-     * <code>optional int32 secondItemRewardQuantity = 20;</code>
-     */
-    public boolean hasSecondItemRewardQuantity() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional int32 secondItemRewardQuantity = 20;</code>
-     */
-    public int getSecondItemRewardQuantity() {
-      return secondItemRewardQuantity_;
-    }
-
-    public static final int QUALITY_FIELD_NUMBER = 8;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-     */
-    public boolean hasQuality() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-     */
-    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-      return quality_;
-    }
-
-    public static final int MAXNUMMONSTERSALLOWED_FIELD_NUMBER = 9;
-    private int maxNumMonstersAllowed_;
-    /**
-     * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-     */
-    public boolean hasMaxNumMonstersAllowed() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
-    }
-    /**
-     * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-     */
-    public int getMaxNumMonstersAllowed() {
-      return maxNumMonstersAllowed_;
-    }
-
-    public static final int CHANCETOAPPEAR_FIELD_NUMBER = 10;
-    private float chanceToAppear_;
-    /**
-     * <code>optional float chanceToAppear = 10;</code>
-     */
-    public boolean hasChanceToAppear() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
-    }
-    /**
-     * <code>optional float chanceToAppear = 10;</code>
-     */
-    public float getChanceToAppear() {
-      return chanceToAppear_;
-    }
-
-    public static final int HPREQUIRED_FIELD_NUMBER = 11;
-    private int hpRequired_;
-    /**
-     * <code>optional int32 hpRequired = 11;</code>
-     */
-    public boolean hasHpRequired() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
-    }
-    /**
-     * <code>optional int32 hpRequired = 11;</code>
-     */
-    public int getHpRequired() {
-      return hpRequired_;
-    }
-
-    public static final int ATKREQUIRED_FIELD_NUMBER = 12;
-    private int atkRequired_;
-    /**
-     * <code>optional int32 atkRequired = 12;</code>
-     */
-    public boolean hasAtkRequired() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
-    }
-    /**
-     * <code>optional int32 atkRequired = 12;</code>
-     */
-    public int getAtkRequired() {
-      return atkRequired_;
-    }
-
-    public static final int MINDMGDEALT_FIELD_NUMBER = 13;
-    private int minDmgDealt_;
-    /**
-     * <code>optional int32 minDmgDealt = 13;</code>
-     */
-    public boolean hasMinDmgDealt() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
-    }
-    /**
-     * <code>optional int32 minDmgDealt = 13;</code>
-     */
-    public int getMinDmgDealt() {
-      return minDmgDealt_;
-    }
-
-    public static final int MAXDMGDEALT_FIELD_NUMBER = 14;
-    private int maxDmgDealt_;
-    /**
-     * <code>optional int32 maxDmgDealt = 14;</code>
-     */
-    public boolean hasMaxDmgDealt() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
-    }
-    /**
-     * <code>optional int32 maxDmgDealt = 14;</code>
-     */
-    public int getMaxDmgDealt() {
-      return maxDmgDealt_;
-    }
-
-    public static final int DURATIONMINMINUTES_FIELD_NUMBER = 15;
-    private int durationMinMinutes_;
-    /**
-     * <code>optional int32 durationMinMinutes = 15;</code>
-     */
-    public boolean hasDurationMinMinutes() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
-    }
-    /**
-     * <code>optional int32 durationMinMinutes = 15;</code>
-     */
-    public int getDurationMinMinutes() {
-      return durationMinMinutes_;
-    }
-
-    public static final int DURATIONMAXMINUTES_FIELD_NUMBER = 16;
-    private int durationMaxMinutes_;
-    /**
-     * <code>optional int32 durationMaxMinutes = 16;</code>
-     */
-    public boolean hasDurationMaxMinutes() {
-      return ((bitField0_ & 0x00080000) == 0x00080000);
-    }
-    /**
-     * <code>optional int32 durationMaxMinutes = 16;</code>
-     */
-    public int getDurationMaxMinutes() {
-      return durationMaxMinutes_;
-    }
-
-    private void initFields() {
-      miniJobId_ = 0;
-      requiredStructId_ = 0;
-      name_ = "";
-      cashReward_ = 0;
-      oilReward_ = 0;
-      gemReward_ = 0;
-      monsterIdReward_ = 0;
-      itemIdReward_ = 0;
-      itemRewardQuantity_ = 0;
-      secondItemIdReward_ = 0;
-      secondItemRewardQuantity_ = 0;
-      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      maxNumMonstersAllowed_ = 0;
-      chanceToAppear_ = 0F;
-      hpRequired_ = 0;
-      atkRequired_ = 0;
-      minDmgDealt_ = 0;
-      maxDmgDealt_ = 0;
-      durationMinMinutes_ = 0;
-      durationMaxMinutes_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, miniJobId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, requiredStructId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, cashReward_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, oilReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, gemReward_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, monsterIdReward_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeEnum(8, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(9, maxNumMonstersAllowed_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeFloat(10, chanceToAppear_);
-      }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeInt32(11, hpRequired_);
-      }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeInt32(12, atkRequired_);
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(13, minDmgDealt_);
-      }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeInt32(14, maxDmgDealt_);
-      }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        output.writeInt32(15, durationMinMinutes_);
-      }
-      if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        output.writeInt32(16, durationMaxMinutes_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(17, itemIdReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(18, itemRewardQuantity_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(19, secondItemIdReward_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(20, secondItemRewardQuantity_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, miniJobId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, requiredStructId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, cashReward_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, oilReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, gemReward_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, monsterIdReward_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, maxNumMonstersAllowed_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(10, chanceToAppear_);
-      }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, hpRequired_);
-      }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, atkRequired_);
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, minDmgDealt_);
-      }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, maxDmgDealt_);
-      }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(15, durationMinMinutes_);
-      }
-      if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(16, durationMaxMinutes_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(17, itemIdReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(18, itemRewardQuantity_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(19, secondItemIdReward_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(20, secondItemRewardQuantity_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.MiniJobConfigProto.MiniJobProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.MiniJobProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniJobProto)
-        com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.MiniJobConfigProto.MiniJobProto.class, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.MiniJobConfigProto.MiniJobProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        miniJobId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        requiredStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        cashReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        oilReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        monsterIdReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        itemIdReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        itemRewardQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        secondItemIdReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        secondItemRewardQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        bitField0_ = (bitField0_ & ~0x00000800);
-        maxNumMonstersAllowed_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
-        chanceToAppear_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00002000);
-        hpRequired_ = 0;
-        bitField0_ = (bitField0_ & ~0x00004000);
-        atkRequired_ = 0;
-        bitField0_ = (bitField0_ & ~0x00008000);
-        minDmgDealt_ = 0;
-        bitField0_ = (bitField0_ & ~0x00010000);
-        maxDmgDealt_ = 0;
-        bitField0_ = (bitField0_ & ~0x00020000);
-        durationMinMinutes_ = 0;
-        bitField0_ = (bitField0_ & ~0x00040000);
-        durationMaxMinutes_ = 0;
-        bitField0_ = (bitField0_ & ~0x00080000);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getDefaultInstanceForType() {
-        return com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto build() {
-        com.lvl6.proto.MiniJobConfigProto.MiniJobProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto buildPartial() {
-        com.lvl6.proto.MiniJobConfigProto.MiniJobProto result = new com.lvl6.proto.MiniJobConfigProto.MiniJobProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.miniJobId_ = miniJobId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.requiredStructId_ = requiredStructId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.name_ = name_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.cashReward_ = cashReward_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.oilReward_ = oilReward_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.monsterIdReward_ = monsterIdReward_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.itemIdReward_ = itemIdReward_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.itemRewardQuantity_ = itemRewardQuantity_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.secondItemIdReward_ = secondItemIdReward_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.secondItemRewardQuantity_ = secondItemRewardQuantity_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
-        }
-        result.quality_ = quality_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00001000;
-        }
-        result.maxNumMonstersAllowed_ = maxNumMonstersAllowed_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
-          to_bitField0_ |= 0x00002000;
-        }
-        result.chanceToAppear_ = chanceToAppear_;
-        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
-          to_bitField0_ |= 0x00004000;
-        }
-        result.hpRequired_ = hpRequired_;
-        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
-          to_bitField0_ |= 0x00008000;
-        }
-        result.atkRequired_ = atkRequired_;
-        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
-          to_bitField0_ |= 0x00010000;
-        }
-        result.minDmgDealt_ = minDmgDealt_;
-        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
-          to_bitField0_ |= 0x00020000;
-        }
-        result.maxDmgDealt_ = maxDmgDealt_;
-        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
-          to_bitField0_ |= 0x00040000;
-        }
-        result.durationMinMinutes_ = durationMinMinutes_;
-        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
-          to_bitField0_ |= 0x00080000;
-        }
-        result.durationMaxMinutes_ = durationMaxMinutes_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.MiniJobConfigProto.MiniJobProto) {
-          return mergeFrom((com.lvl6.proto.MiniJobConfigProto.MiniJobProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.MiniJobConfigProto.MiniJobProto other) {
-        if (other == com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance()) return this;
-        if (other.hasMiniJobId()) {
-          setMiniJobId(other.getMiniJobId());
-        }
-        if (other.hasRequiredStructId()) {
-          setRequiredStructId(other.getRequiredStructId());
-        }
-        if (other.hasName()) {
-          bitField0_ |= 0x00000004;
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.hasCashReward()) {
-          setCashReward(other.getCashReward());
-        }
-        if (other.hasOilReward()) {
-          setOilReward(other.getOilReward());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasMonsterIdReward()) {
-          setMonsterIdReward(other.getMonsterIdReward());
-        }
-        if (other.hasItemIdReward()) {
-          setItemIdReward(other.getItemIdReward());
-        }
-        if (other.hasItemRewardQuantity()) {
-          setItemRewardQuantity(other.getItemRewardQuantity());
-        }
-        if (other.hasSecondItemIdReward()) {
-          setSecondItemIdReward(other.getSecondItemIdReward());
-        }
-        if (other.hasSecondItemRewardQuantity()) {
-          setSecondItemRewardQuantity(other.getSecondItemRewardQuantity());
-        }
-        if (other.hasQuality()) {
-          setQuality(other.getQuality());
-        }
-        if (other.hasMaxNumMonstersAllowed()) {
-          setMaxNumMonstersAllowed(other.getMaxNumMonstersAllowed());
-        }
-        if (other.hasChanceToAppear()) {
-          setChanceToAppear(other.getChanceToAppear());
-        }
-        if (other.hasHpRequired()) {
-          setHpRequired(other.getHpRequired());
-        }
-        if (other.hasAtkRequired()) {
-          setAtkRequired(other.getAtkRequired());
-        }
-        if (other.hasMinDmgDealt()) {
-          setMinDmgDealt(other.getMinDmgDealt());
-        }
-        if (other.hasMaxDmgDealt()) {
-          setMaxDmgDealt(other.getMaxDmgDealt());
-        }
-        if (other.hasDurationMinMinutes()) {
-          setDurationMinMinutes(other.getDurationMinMinutes());
-        }
-        if (other.hasDurationMaxMinutes()) {
-          setDurationMaxMinutes(other.getDurationMaxMinutes());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.MiniJobConfigProto.MiniJobProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.MiniJobConfigProto.MiniJobProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int miniJobId_ ;
-      /**
-       * <code>optional int32 miniJobId = 1;</code>
-       */
-      public boolean hasMiniJobId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 miniJobId = 1;</code>
-       */
-      public int getMiniJobId() {
-        return miniJobId_;
-      }
-      /**
-       * <code>optional int32 miniJobId = 1;</code>
-       */
-      public Builder setMiniJobId(int value) {
-        bitField0_ |= 0x00000001;
-        miniJobId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 miniJobId = 1;</code>
-       */
-      public Builder clearMiniJobId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        miniJobId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int requiredStructId_ ;
-      /**
-       * <code>optional int32 requiredStructId = 2;</code>
-       */
-      public boolean hasRequiredStructId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 requiredStructId = 2;</code>
-       */
-      public int getRequiredStructId() {
-        return requiredStructId_;
-      }
-      /**
-       * <code>optional int32 requiredStructId = 2;</code>
-       */
-      public Builder setRequiredStructId(int value) {
-        bitField0_ |= 0x00000002;
-        requiredStructId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 requiredStructId = 2;</code>
-       */
-      public Builder clearRequiredStructId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        requiredStructId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 3;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int cashReward_ ;
-      /**
-       * <code>optional int32 cashReward = 4;</code>
-       */
-      public boolean hasCashReward() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 cashReward = 4;</code>
-       */
-      public int getCashReward() {
-        return cashReward_;
-      }
-      /**
-       * <code>optional int32 cashReward = 4;</code>
-       */
-      public Builder setCashReward(int value) {
-        bitField0_ |= 0x00000008;
-        cashReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 cashReward = 4;</code>
-       */
-      public Builder clearCashReward() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        cashReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int oilReward_ ;
-      /**
-       * <code>optional int32 oilReward = 5;</code>
-       */
-      public boolean hasOilReward() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 oilReward = 5;</code>
-       */
-      public int getOilReward() {
-        return oilReward_;
-      }
-      /**
-       * <code>optional int32 oilReward = 5;</code>
-       */
-      public Builder setOilReward(int value) {
-        bitField0_ |= 0x00000010;
-        oilReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 oilReward = 5;</code>
-       */
-      public Builder clearOilReward() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        oilReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 6;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 gemReward = 6;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 6;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000020;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemReward = 6;</code>
-       */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int monsterIdReward_ ;
-      /**
-       * <code>optional int32 monsterIdReward = 7;</code>
-       */
-      public boolean hasMonsterIdReward() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 monsterIdReward = 7;</code>
-       */
-      public int getMonsterIdReward() {
-        return monsterIdReward_;
-      }
-      /**
-       * <code>optional int32 monsterIdReward = 7;</code>
-       */
-      public Builder setMonsterIdReward(int value) {
-        bitField0_ |= 0x00000040;
-        monsterIdReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 monsterIdReward = 7;</code>
-       */
-      public Builder clearMonsterIdReward() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        monsterIdReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemIdReward_ ;
-      /**
-       * <code>optional int32 itemIdReward = 17;</code>
-       */
-      public boolean hasItemIdReward() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 itemIdReward = 17;</code>
-       */
-      public int getItemIdReward() {
-        return itemIdReward_;
-      }
-      /**
-       * <code>optional int32 itemIdReward = 17;</code>
-       */
-      public Builder setItemIdReward(int value) {
-        bitField0_ |= 0x00000080;
-        itemIdReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemIdReward = 17;</code>
-       */
-      public Builder clearItemIdReward() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        itemIdReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemRewardQuantity_ ;
-      /**
-       * <code>optional int32 itemRewardQuantity = 18;</code>
-       */
-      public boolean hasItemRewardQuantity() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional int32 itemRewardQuantity = 18;</code>
-       */
-      public int getItemRewardQuantity() {
-        return itemRewardQuantity_;
-      }
-      /**
-       * <code>optional int32 itemRewardQuantity = 18;</code>
-       */
-      public Builder setItemRewardQuantity(int value) {
-        bitField0_ |= 0x00000100;
-        itemRewardQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemRewardQuantity = 18;</code>
-       */
-      public Builder clearItemRewardQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        itemRewardQuantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int secondItemIdReward_ ;
-      /**
-       * <code>optional int32 secondItemIdReward = 19;</code>
-       */
-      public boolean hasSecondItemIdReward() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional int32 secondItemIdReward = 19;</code>
-       */
-      public int getSecondItemIdReward() {
-        return secondItemIdReward_;
-      }
-      /**
-       * <code>optional int32 secondItemIdReward = 19;</code>
-       */
-      public Builder setSecondItemIdReward(int value) {
-        bitField0_ |= 0x00000200;
-        secondItemIdReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 secondItemIdReward = 19;</code>
-       */
-      public Builder clearSecondItemIdReward() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        secondItemIdReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int secondItemRewardQuantity_ ;
-      /**
-       * <code>optional int32 secondItemRewardQuantity = 20;</code>
-       */
-      public boolean hasSecondItemRewardQuantity() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional int32 secondItemRewardQuantity = 20;</code>
-       */
-      public int getSecondItemRewardQuantity() {
-        return secondItemRewardQuantity_;
-      }
-      /**
-       * <code>optional int32 secondItemRewardQuantity = 20;</code>
-       */
-      public Builder setSecondItemRewardQuantity(int value) {
-        bitField0_ |= 0x00000400;
-        secondItemRewardQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 secondItemRewardQuantity = 20;</code>
-       */
-      public Builder clearSecondItemRewardQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        secondItemRewardQuantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-       */
-      public boolean hasQuality() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-       */
-      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-        return quality_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-       */
-      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000800;
-        quality_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
-       */
-      public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        onChanged();
-        return this;
-      }
-
-      private int maxNumMonstersAllowed_ ;
-      /**
-       * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-       */
-      public boolean hasMaxNumMonstersAllowed() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
-      }
-      /**
-       * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-       */
-      public int getMaxNumMonstersAllowed() {
-        return maxNumMonstersAllowed_;
-      }
-      /**
-       * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-       */
-      public Builder setMaxNumMonstersAllowed(int value) {
-        bitField0_ |= 0x00001000;
-        maxNumMonstersAllowed_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 maxNumMonstersAllowed = 9;</code>
-       */
-      public Builder clearMaxNumMonstersAllowed() {
-        bitField0_ = (bitField0_ & ~0x00001000);
-        maxNumMonstersAllowed_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private float chanceToAppear_ ;
-      /**
-       * <code>optional float chanceToAppear = 10;</code>
-       */
-      public boolean hasChanceToAppear() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
-      }
-      /**
-       * <code>optional float chanceToAppear = 10;</code>
-       */
-      public float getChanceToAppear() {
-        return chanceToAppear_;
-      }
-      /**
-       * <code>optional float chanceToAppear = 10;</code>
-       */
-      public Builder setChanceToAppear(float value) {
-        bitField0_ |= 0x00002000;
-        chanceToAppear_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float chanceToAppear = 10;</code>
-       */
-      public Builder clearChanceToAppear() {
-        bitField0_ = (bitField0_ & ~0x00002000);
-        chanceToAppear_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private int hpRequired_ ;
-      /**
-       * <code>optional int32 hpRequired = 11;</code>
-       */
-      public boolean hasHpRequired() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
-      }
-      /**
-       * <code>optional int32 hpRequired = 11;</code>
-       */
-      public int getHpRequired() {
-        return hpRequired_;
-      }
-      /**
-       * <code>optional int32 hpRequired = 11;</code>
-       */
-      public Builder setHpRequired(int value) {
-        bitField0_ |= 0x00004000;
-        hpRequired_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hpRequired = 11;</code>
-       */
-      public Builder clearHpRequired() {
-        bitField0_ = (bitField0_ & ~0x00004000);
-        hpRequired_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int atkRequired_ ;
-      /**
-       * <code>optional int32 atkRequired = 12;</code>
-       */
-      public boolean hasAtkRequired() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
-      }
-      /**
-       * <code>optional int32 atkRequired = 12;</code>
-       */
-      public int getAtkRequired() {
-        return atkRequired_;
-      }
-      /**
-       * <code>optional int32 atkRequired = 12;</code>
-       */
-      public Builder setAtkRequired(int value) {
-        bitField0_ |= 0x00008000;
-        atkRequired_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 atkRequired = 12;</code>
-       */
-      public Builder clearAtkRequired() {
-        bitField0_ = (bitField0_ & ~0x00008000);
-        atkRequired_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int minDmgDealt_ ;
-      /**
-       * <code>optional int32 minDmgDealt = 13;</code>
-       */
-      public boolean hasMinDmgDealt() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
-      }
-      /**
-       * <code>optional int32 minDmgDealt = 13;</code>
-       */
-      public int getMinDmgDealt() {
-        return minDmgDealt_;
-      }
-      /**
-       * <code>optional int32 minDmgDealt = 13;</code>
-       */
-      public Builder setMinDmgDealt(int value) {
-        bitField0_ |= 0x00010000;
-        minDmgDealt_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 minDmgDealt = 13;</code>
-       */
-      public Builder clearMinDmgDealt() {
-        bitField0_ = (bitField0_ & ~0x00010000);
-        minDmgDealt_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int maxDmgDealt_ ;
-      /**
-       * <code>optional int32 maxDmgDealt = 14;</code>
-       */
-      public boolean hasMaxDmgDealt() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
-      }
-      /**
-       * <code>optional int32 maxDmgDealt = 14;</code>
-       */
-      public int getMaxDmgDealt() {
-        return maxDmgDealt_;
-      }
-      /**
-       * <code>optional int32 maxDmgDealt = 14;</code>
-       */
-      public Builder setMaxDmgDealt(int value) {
-        bitField0_ |= 0x00020000;
-        maxDmgDealt_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 maxDmgDealt = 14;</code>
-       */
-      public Builder clearMaxDmgDealt() {
-        bitField0_ = (bitField0_ & ~0x00020000);
-        maxDmgDealt_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int durationMinMinutes_ ;
-      /**
-       * <code>optional int32 durationMinMinutes = 15;</code>
-       */
-      public boolean hasDurationMinMinutes() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
-      }
-      /**
-       * <code>optional int32 durationMinMinutes = 15;</code>
-       */
-      public int getDurationMinMinutes() {
-        return durationMinMinutes_;
-      }
-      /**
-       * <code>optional int32 durationMinMinutes = 15;</code>
-       */
-      public Builder setDurationMinMinutes(int value) {
-        bitField0_ |= 0x00040000;
-        durationMinMinutes_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 durationMinMinutes = 15;</code>
-       */
-      public Builder clearDurationMinMinutes() {
-        bitField0_ = (bitField0_ & ~0x00040000);
-        durationMinMinutes_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int durationMaxMinutes_ ;
-      /**
-       * <code>optional int32 durationMaxMinutes = 16;</code>
-       */
-      public boolean hasDurationMaxMinutes() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
-      }
-      /**
-       * <code>optional int32 durationMaxMinutes = 16;</code>
-       */
-      public int getDurationMaxMinutes() {
-        return durationMaxMinutes_;
-      }
-      /**
-       * <code>optional int32 durationMaxMinutes = 16;</code>
-       */
-      public Builder setDurationMaxMinutes(int value) {
-        bitField0_ |= 0x00080000;
-        durationMaxMinutes_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 durationMaxMinutes = 16;</code>
-       */
-      public Builder clearDurationMaxMinutes() {
-        bitField0_ = (bitField0_ & ~0x00080000);
-        durationMaxMinutes_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobProto)
-    }
-
-    static {
-      defaultInstance = new MiniJobProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniJobProto)
-  }
-
-  public interface UserMiniJobProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniJobProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    boolean hasUserMiniJobUuid();
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    java.lang.String getUserMiniJobUuid();
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserMiniJobUuidBytes();
-
-    /**
-     * <code>optional int32 baseDmgReceived = 2;</code>
-     */
-    boolean hasBaseDmgReceived();
-    /**
-     * <code>optional int32 baseDmgReceived = 2;</code>
-     */
-    int getBaseDmgReceived();
-
-    /**
-     * <code>optional int64 timeStarted = 3;</code>
-     */
-    boolean hasTimeStarted();
-    /**
-     * <code>optional int64 timeStarted = 3;</code>
-     */
-    long getTimeStarted();
-
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    com.google.protobuf.ProtocolStringList
-        getUserMonsterUuidsList();
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    int getUserMonsterUuidsCount();
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    java.lang.String getUserMonsterUuids(int index);
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserMonsterUuidsBytes(int index);
-
-    /**
-     * <code>optional int64 timeCompleted = 5;</code>
-     */
-    boolean hasTimeCompleted();
-    /**
-     * <code>optional int64 timeCompleted = 5;</code>
-     */
-    long getTimeCompleted();
-
-    /**
-     * <code>optional int32 durationMinutes = 7;</code>
-     */
-    boolean hasDurationMinutes();
-    /**
-     * <code>optional int32 durationMinutes = 7;</code>
-     */
-    int getDurationMinutes();
-
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    boolean hasMiniJob();
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob();
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
-
-    /**
-     * <code>optional int32 durationSeconds = 8;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
-     */
-    boolean hasDurationSeconds();
-    /**
-     * <code>optional int32 durationSeconds = 8;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
-     */
-    int getDurationSeconds();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.UserMiniJobProto}
-   *
-   * <pre>
-   *------------------------------------------------------------------------------------------
-   *user can have duplicate mini jobs
-   * </pre>
-   */
-  public static final class UserMiniJobProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniJobProto)
-      UserMiniJobProtoOrBuilder {
-    // Use UserMiniJobProto.newBuilder() to construct.
-    private UserMiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private UserMiniJobProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final UserMiniJobProto defaultInstance;
-    public static UserMiniJobProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public UserMiniJobProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserMiniJobProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              userMiniJobUuid_ = bs;
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              baseDmgReceived_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              timeStarted_ = input.readInt64();
-              break;
-            }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              userMonsterUuids_.add(bs);
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000008;
-              timeCompleted_ = input.readInt64();
-              break;
-            }
-            case 50: {
-              com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = miniJob_.toBuilder();
-              }
-              miniJob_ = input.readMessage(com.lvl6.proto.MiniJobConfigProto.MiniJobProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(miniJob_);
-                miniJob_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000020;
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000010;
-              durationMinutes_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000040;
-              durationSeconds_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.class, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<UserMiniJobProto> PARSER =
-        new com.google.protobuf.AbstractParser<UserMiniJobProto>() {
-      public UserMiniJobProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserMiniJobProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserMiniJobProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int USERMINIJOBUUID_FIELD_NUMBER = 1;
-    private java.lang.Object userMiniJobUuid_;
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    public boolean hasUserMiniJobUuid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    public java.lang.String getUserMiniJobUuid() {
-      java.lang.Object ref = userMiniJobUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userMiniJobUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string userMiniJobUuid = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserMiniJobUuidBytes() {
-      java.lang.Object ref = userMiniJobUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userMiniJobUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BASEDMGRECEIVED_FIELD_NUMBER = 2;
-    private int baseDmgReceived_;
-    /**
-     * <code>optional int32 baseDmgReceived = 2;</code>
-     */
-    public boolean hasBaseDmgReceived() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 baseDmgReceived = 2;</code>
-     */
-    public int getBaseDmgReceived() {
-      return baseDmgReceived_;
-    }
-
-    public static final int TIMESTARTED_FIELD_NUMBER = 3;
-    private long timeStarted_;
-    /**
-     * <code>optional int64 timeStarted = 3;</code>
-     */
-    public boolean hasTimeStarted() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int64 timeStarted = 3;</code>
-     */
-    public long getTimeStarted() {
-      return timeStarted_;
-    }
-
-    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList userMonsterUuids_;
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getUserMonsterUuidsList() {
-      return userMonsterUuids_;
-    }
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    public int getUserMonsterUuidsCount() {
-      return userMonsterUuids_.size();
-    }
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    public java.lang.String getUserMonsterUuids(int index) {
-      return userMonsterUuids_.get(index);
-    }
-    /**
-     * <code>repeated string userMonsterUuids = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserMonsterUuidsBytes(int index) {
-      return userMonsterUuids_.getByteString(index);
-    }
-
-    public static final int TIMECOMPLETED_FIELD_NUMBER = 5;
-    private long timeCompleted_;
-    /**
-     * <code>optional int64 timeCompleted = 5;</code>
-     */
-    public boolean hasTimeCompleted() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int64 timeCompleted = 5;</code>
-     */
-    public long getTimeCompleted() {
-      return timeCompleted_;
-    }
-
-    public static final int DURATIONMINUTES_FIELD_NUMBER = 7;
-    private int durationMinutes_;
-    /**
-     * <code>optional int32 durationMinutes = 7;</code>
-     */
-    public boolean hasDurationMinutes() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 durationMinutes = 7;</code>
-     */
-    public int getDurationMinutes() {
-      return durationMinutes_;
-    }
-
-    public static final int MINIJOB_FIELD_NUMBER = 6;
-    private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    public boolean hasMiniJob() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
-      return miniJob_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     */
-    public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
-      return miniJob_;
-    }
-
-    public static final int DURATIONSECONDS_FIELD_NUMBER = 8;
-    private int durationSeconds_;
-    /**
-     * <code>optional int32 durationSeconds = 8;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
-     */
-    public boolean hasDurationSeconds() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 durationSeconds = 8;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
-     */
-    public int getDurationSeconds() {
-      return durationSeconds_;
-    }
-
-    private void initFields() {
-      userMiniJobUuid_ = "";
-      baseDmgReceived_ = 0;
-      timeStarted_ = 0L;
-      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      timeCompleted_ = 0L;
-      durationMinutes_ = 0;
-      miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
-      durationSeconds_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserMiniJobUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, baseDmgReceived_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, timeStarted_);
-      }
-      for (int i = 0; i < userMonsterUuids_.size(); i++) {
-        output.writeBytes(4, userMonsterUuids_.getByteString(i));
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(5, timeCompleted_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(6, miniJob_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, durationMinutes_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(8, durationSeconds_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserMiniJobUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, baseDmgReceived_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, timeStarted_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < userMonsterUuids_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getUserMonsterUuidsList().size();
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, timeCompleted_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, miniJob_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, durationMinutes_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, durationSeconds_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.UserMiniJobProto}
-     *
-     * <pre>
-     *------------------------------------------------------------------------------------------
-     *user can have duplicate mini jobs
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniJobProto)
-        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.class, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMiniJobFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        userMiniJobUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        baseDmgReceived_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        timeStarted_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        timeCompleted_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        durationMinutes_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        if (miniJobBuilder_ == null) {
-          miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
-        } else {
-          miniJobBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        durationSeconds_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto getDefaultInstanceForType() {
-        return com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto build() {
-        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto buildPartial() {
-        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto result = new com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userMiniJobUuid_ = userMiniJobUuid_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.baseDmgReceived_ = baseDmgReceived_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.timeStarted_ = timeStarted_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.userMonsterUuids_ = userMonsterUuids_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.timeCompleted_ = timeCompleted_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.durationMinutes_ = durationMinutes_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        if (miniJobBuilder_ == null) {
-          result.miniJob_ = miniJob_;
-        } else {
-          result.miniJob_ = miniJobBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.durationSeconds_ = durationSeconds_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto) {
-          return mergeFrom((com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto other) {
-        if (other == com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.getDefaultInstance()) return this;
-        if (other.hasUserMiniJobUuid()) {
-          bitField0_ |= 0x00000001;
-          userMiniJobUuid_ = other.userMiniJobUuid_;
-          onChanged();
-        }
-        if (other.hasBaseDmgReceived()) {
-          setBaseDmgReceived(other.getBaseDmgReceived());
-        }
-        if (other.hasTimeStarted()) {
-          setTimeStarted(other.getTimeStarted());
-        }
-        if (!other.userMonsterUuids_.isEmpty()) {
-          if (userMonsterUuids_.isEmpty()) {
-            userMonsterUuids_ = other.userMonsterUuids_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureUserMonsterUuidsIsMutable();
-            userMonsterUuids_.addAll(other.userMonsterUuids_);
-          }
-          onChanged();
-        }
-        if (other.hasTimeCompleted()) {
-          setTimeCompleted(other.getTimeCompleted());
-        }
-        if (other.hasDurationMinutes()) {
-          setDurationMinutes(other.getDurationMinutes());
-        }
-        if (other.hasMiniJob()) {
-          mergeMiniJob(other.getMiniJob());
-        }
-        if (other.hasDurationSeconds()) {
-          setDurationSeconds(other.getDurationSeconds());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object userMiniJobUuid_ = "";
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public boolean hasUserMiniJobUuid() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public java.lang.String getUserMiniJobUuid() {
-        java.lang.Object ref = userMiniJobUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userMiniJobUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserMiniJobUuidBytes() {
-        java.lang.Object ref = userMiniJobUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userMiniJobUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public Builder setUserMiniJobUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userMiniJobUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public Builder clearUserMiniJobUuid() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userMiniJobUuid_ = getDefaultInstance().getUserMiniJobUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userMiniJobUuid = 1;</code>
-       */
-      public Builder setUserMiniJobUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userMiniJobUuid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int baseDmgReceived_ ;
-      /**
-       * <code>optional int32 baseDmgReceived = 2;</code>
-       */
-      public boolean hasBaseDmgReceived() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 baseDmgReceived = 2;</code>
-       */
-      public int getBaseDmgReceived() {
-        return baseDmgReceived_;
-      }
-      /**
-       * <code>optional int32 baseDmgReceived = 2;</code>
-       */
-      public Builder setBaseDmgReceived(int value) {
-        bitField0_ |= 0x00000002;
-        baseDmgReceived_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 baseDmgReceived = 2;</code>
-       */
-      public Builder clearBaseDmgReceived() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        baseDmgReceived_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long timeStarted_ ;
-      /**
-       * <code>optional int64 timeStarted = 3;</code>
-       */
-      public boolean hasTimeStarted() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int64 timeStarted = 3;</code>
-       */
-      public long getTimeStarted() {
-        return timeStarted_;
-      }
-      /**
-       * <code>optional int64 timeStarted = 3;</code>
-       */
-      public Builder setTimeStarted(long value) {
-        bitField0_ |= 0x00000004;
-        timeStarted_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timeStarted = 3;</code>
-       */
-      public Builder clearTimeStarted() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        timeStarted_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureUserMonsterUuidsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getUserMonsterUuidsList() {
-        return userMonsterUuids_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public int getUserMonsterUuidsCount() {
-        return userMonsterUuids_.size();
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public java.lang.String getUserMonsterUuids(int index) {
-        return userMonsterUuids_.get(index);
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserMonsterUuidsBytes(int index) {
-        return userMonsterUuids_.getByteString(index);
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public Builder setUserMonsterUuids(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUserMonsterUuidsIsMutable();
-        userMonsterUuids_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public Builder addUserMonsterUuids(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUserMonsterUuidsIsMutable();
-        userMonsterUuids_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public Builder addAllUserMonsterUuids(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureUserMonsterUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterUuids_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public Builder clearUserMonsterUuids() {
-        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string userMonsterUuids = 4;</code>
-       */
-      public Builder addUserMonsterUuidsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUserMonsterUuidsIsMutable();
-        userMonsterUuids_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private long timeCompleted_ ;
-      /**
-       * <code>optional int64 timeCompleted = 5;</code>
-       */
-      public boolean hasTimeCompleted() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int64 timeCompleted = 5;</code>
-       */
-      public long getTimeCompleted() {
-        return timeCompleted_;
-      }
-      /**
-       * <code>optional int64 timeCompleted = 5;</code>
-       */
-      public Builder setTimeCompleted(long value) {
-        bitField0_ |= 0x00000010;
-        timeCompleted_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timeCompleted = 5;</code>
-       */
-      public Builder clearTimeCompleted() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        timeCompleted_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private int durationMinutes_ ;
-      /**
-       * <code>optional int32 durationMinutes = 7;</code>
-       */
-      public boolean hasDurationMinutes() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 durationMinutes = 7;</code>
-       */
-      public int getDurationMinutes() {
-        return durationMinutes_;
-      }
-      /**
-       * <code>optional int32 durationMinutes = 7;</code>
-       */
-      public Builder setDurationMinutes(int value) {
-        bitField0_ |= 0x00000020;
-        durationMinutes_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 durationMinutes = 7;</code>
-       */
-      public Builder clearDurationMinutes() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        durationMinutes_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public boolean hasMiniJob() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
-        if (miniJobBuilder_ == null) {
-          return miniJob_;
-        } else {
-          return miniJobBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public Builder setMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
-        if (miniJobBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          miniJob_ = value;
-          onChanged();
-        } else {
-          miniJobBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public Builder setMiniJob(
-          com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder builderForValue) {
-        if (miniJobBuilder_ == null) {
-          miniJob_ = builderForValue.build();
-          onChanged();
-        } else {
-          miniJobBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public Builder mergeMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
-        if (miniJobBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              miniJob_ != com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance()) {
-            miniJob_ =
-              com.lvl6.proto.MiniJobConfigProto.MiniJobProto.newBuilder(miniJob_).mergeFrom(value).buildPartial();
-          } else {
-            miniJob_ = value;
-          }
-          onChanged();
-        } else {
-          miniJobBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public Builder clearMiniJob() {
-        if (miniJobBuilder_ == null) {
-          miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
-          onChanged();
-        } else {
-          miniJobBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder getMiniJobBuilder() {
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return getMiniJobFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
-        if (miniJobBuilder_ != null) {
-          return miniJobBuilder_.getMessageOrBuilder();
-        } else {
-          return miniJob_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> 
-          getMiniJobFieldBuilder() {
-        if (miniJobBuilder_ == null) {
-          miniJobBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder>(
-                  getMiniJob(),
-                  getParentForChildren(),
-                  isClean());
-          miniJob_ = null;
-        }
-        return miniJobBuilder_;
-      }
-
-      private int durationSeconds_ ;
-      /**
-       * <code>optional int32 durationSeconds = 8;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
-       */
-      public boolean hasDurationSeconds() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 durationSeconds = 8;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
-       */
-      public int getDurationSeconds() {
-        return durationSeconds_;
-      }
-      /**
-       * <code>optional int32 durationSeconds = 8;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
-       */
-      public Builder setDurationSeconds(int value) {
-        bitField0_ |= 0x00000080;
-        durationSeconds_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 durationSeconds = 8;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
-       */
-      public Builder clearDurationSeconds() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        durationSeconds_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniJobProto)
-    }
-
-    static {
-      defaultInstance = new UserMiniJobProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniJobProto)
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_MiniJobProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable;
-
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\023MiniJobConfig.proto\022\016com.lvl6.proto\032\022M" +
-      "onsterStuff.proto\032\026SharedEnumConfig.prot" +
-      "o\032\017Structure.proto\"\204\004\n\014MiniJobProto\022\021\n\tm" +
-      "iniJobId\030\001 \001(\005\022\030\n\020requiredStructId\030\002 \001(\005" +
-      "\022\014\n\004name\030\003 \001(\t\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
-      "lReward\030\005 \001(\005\022\021\n\tgemReward\030\006 \001(\005\022\027\n\017mons" +
-      "terIdReward\030\007 \001(\005\022\024\n\014itemIdReward\030\021 \001(\005\022" +
-      "\032\n\022itemRewardQuantity\030\022 \001(\005\022\032\n\022secondIte" +
-      "mIdReward\030\023 \001(\005\022 \n\030secondItemRewardQuant" +
-      "ity\030\024 \001(\005\0224\n\007quality\030\010 \001(\0162\027.com.lvl6.pr",
-      "oto.Quality:\nNO_QUALITY\022\035\n\025maxNumMonster" +
-      "sAllowed\030\t \001(\005\022\026\n\016chanceToAppear\030\n \001(\002\022\022" +
-      "\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequired\030\014 \001(\005\022" +
-      "\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDealt\030\016 \001(" +
-      "\005\022\032\n\022durationMinMinutes\030\017 \001(\005\022\032\n\022duratio" +
-      "nMaxMinutes\030\020 \001(\005\"\353\001\n\020UserMiniJobProto\022\027" +
-      "\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmgReceiv" +
-      "ed\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020userMon" +
-      "sterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005 \001(\003\022\027" +
-      "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013",
-      "2\034.com.lvl6.proto.MiniJobProto\022\027\n\017durati" +
-      "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
-          com.lvl6.proto.StructureProto.getDescriptor(),
-        }, assigner);
-    internal_static_com_lvl6_proto_MiniJobProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniJobProto_descriptor,
-        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
-    internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
-        new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived", "TimeStarted", "UserMonsterUuids", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
-  }
-
-  // @@protoc_insertion_point(outer_class_scope)
+	private MiniJobConfigProto() {
+	}
+
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistry registry) {
+	}
+
+	public interface MiniJobProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniJobProto)
+			com.google.protobuf.MessageOrBuilder {
+
+		/**
+		 * <code>optional int32 miniJobId = 1;</code>
+		 */
+		boolean hasMiniJobId();
+
+		/**
+		 * <code>optional int32 miniJobId = 1;</code>
+		 */
+		int getMiniJobId();
+
+		/**
+		 * <code>optional int32 requiredStructId = 2;</code>
+		 */
+		boolean hasRequiredStructId();
+
+		/**
+		 * <code>optional int32 requiredStructId = 2;</code>
+		 */
+		int getRequiredStructId();
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		boolean hasName();
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		java.lang.String getName();
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		com.google.protobuf.ByteString getNameBytes();
+
+		/**
+		 * <code>optional int32 cashReward = 4;</code>
+		 */
+		boolean hasCashReward();
+
+		/**
+		 * <code>optional int32 cashReward = 4;</code>
+		 */
+		int getCashReward();
+
+		/**
+		 * <code>optional int32 oilReward = 5;</code>
+		 */
+		boolean hasOilReward();
+
+		/**
+		 * <code>optional int32 oilReward = 5;</code>
+		 */
+		int getOilReward();
+
+		/**
+		 * <code>optional int32 gemReward = 6;</code>
+		 */
+		boolean hasGemReward();
+
+		/**
+		 * <code>optional int32 gemReward = 6;</code>
+		 */
+		int getGemReward();
+
+		/**
+		 * <code>optional int32 monsterIdReward = 7;</code>
+		 */
+		boolean hasMonsterIdReward();
+
+		/**
+		 * <code>optional int32 monsterIdReward = 7;</code>
+		 */
+		int getMonsterIdReward();
+
+		/**
+		 * <code>optional int32 itemIdReward = 17;</code>
+		 */
+		boolean hasItemIdReward();
+
+		/**
+		 * <code>optional int32 itemIdReward = 17;</code>
+		 */
+		int getItemIdReward();
+
+		/**
+		 * <code>optional int32 itemRewardQuantity = 18;</code>
+		 */
+		boolean hasItemRewardQuantity();
+
+		/**
+		 * <code>optional int32 itemRewardQuantity = 18;</code>
+		 */
+		int getItemRewardQuantity();
+
+		/**
+		 * <code>optional int32 secondItemIdReward = 19;</code>
+		 */
+		boolean hasSecondItemIdReward();
+
+		/**
+		 * <code>optional int32 secondItemIdReward = 19;</code>
+		 */
+		int getSecondItemIdReward();
+
+		/**
+		 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+		 */
+		boolean hasSecondItemRewardQuantity();
+
+		/**
+		 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+		 */
+		int getSecondItemRewardQuantity();
+
+		/**
+		 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+		 */
+		boolean hasQuality();
+
+		/**
+		 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+		 */
+		com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
+
+		/**
+		 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+		 */
+		boolean hasMaxNumMonstersAllowed();
+
+		/**
+		 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+		 */
+		int getMaxNumMonstersAllowed();
+
+		/**
+		 * <code>optional float chanceToAppear = 10;</code>
+		 */
+		boolean hasChanceToAppear();
+
+		/**
+		 * <code>optional float chanceToAppear = 10;</code>
+		 */
+		float getChanceToAppear();
+
+		/**
+		 * <code>optional int32 hpRequired = 11;</code>
+		 */
+		boolean hasHpRequired();
+
+		/**
+		 * <code>optional int32 hpRequired = 11;</code>
+		 */
+		int getHpRequired();
+
+		/**
+		 * <code>optional int32 atkRequired = 12;</code>
+		 */
+		boolean hasAtkRequired();
+
+		/**
+		 * <code>optional int32 atkRequired = 12;</code>
+		 */
+		int getAtkRequired();
+
+		/**
+		 * <code>optional int32 minDmgDealt = 13;</code>
+		 */
+		boolean hasMinDmgDealt();
+
+		/**
+		 * <code>optional int32 minDmgDealt = 13;</code>
+		 */
+		int getMinDmgDealt();
+
+		/**
+		 * <code>optional int32 maxDmgDealt = 14;</code>
+		 */
+		boolean hasMaxDmgDealt();
+
+		/**
+		 * <code>optional int32 maxDmgDealt = 14;</code>
+		 */
+		int getMaxDmgDealt();
+
+		/**
+		 * <code>optional int32 durationMinMinutes = 15;</code>
+		 */
+		boolean hasDurationMinMinutes();
+
+		/**
+		 * <code>optional int32 durationMinMinutes = 15;</code>
+		 */
+		int getDurationMinMinutes();
+
+		/**
+		 * <code>optional int32 durationMaxMinutes = 16;</code>
+		 */
+		boolean hasDurationMaxMinutes();
+
+		/**
+		 * <code>optional int32 durationMaxMinutes = 16;</code>
+		 */
+		int getDurationMaxMinutes();
+	}
+
+	/**
+	 * Protobuf type {@code com.lvl6.proto.MiniJobProto}
+	 */
+	public static final class MiniJobProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniJobProto)
+			MiniJobProtoOrBuilder {
+		// Use MiniJobProto.newBuilder() to construct.
+		private MiniJobProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
+
+		private MiniJobProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
+
+		private static final MiniJobProto defaultInstance;
+
+		public static MiniJobProto getDefaultInstance() {
+			return defaultInstance;
+		}
+
+		@Override
+		public MiniJobProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
+
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
+
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		private MiniJobProto(com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 8: {
+						bitField0_ |= 0x00000001;
+						miniJobId_ = input.readInt32();
+						break;
+					}
+					case 16: {
+						bitField0_ |= 0x00000002;
+						requiredStructId_ = input.readInt32();
+						break;
+					}
+					case 26: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000004;
+						name_ = bs;
+						break;
+					}
+					case 32: {
+						bitField0_ |= 0x00000008;
+						cashReward_ = input.readInt32();
+						break;
+					}
+					case 40: {
+						bitField0_ |= 0x00000010;
+						oilReward_ = input.readInt32();
+						break;
+					}
+					case 48: {
+						bitField0_ |= 0x00000020;
+						gemReward_ = input.readInt32();
+						break;
+					}
+					case 56: {
+						bitField0_ |= 0x00000040;
+						monsterIdReward_ = input.readInt32();
+						break;
+					}
+					case 64: {
+						int rawValue = input.readEnum();
+						com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality
+								.valueOf(rawValue);
+						if (value == null) {
+							unknownFields.mergeVarintField(8, rawValue);
+						} else {
+							bitField0_ |= 0x00000800;
+							quality_ = value;
+						}
+						break;
+					}
+					case 72: {
+						bitField0_ |= 0x00001000;
+						maxNumMonstersAllowed_ = input.readInt32();
+						break;
+					}
+					case 85: {
+						bitField0_ |= 0x00002000;
+						chanceToAppear_ = input.readFloat();
+						break;
+					}
+					case 88: {
+						bitField0_ |= 0x00004000;
+						hpRequired_ = input.readInt32();
+						break;
+					}
+					case 96: {
+						bitField0_ |= 0x00008000;
+						atkRequired_ = input.readInt32();
+						break;
+					}
+					case 104: {
+						bitField0_ |= 0x00010000;
+						minDmgDealt_ = input.readInt32();
+						break;
+					}
+					case 112: {
+						bitField0_ |= 0x00020000;
+						maxDmgDealt_ = input.readInt32();
+						break;
+					}
+					case 120: {
+						bitField0_ |= 0x00040000;
+						durationMinMinutes_ = input.readInt32();
+						break;
+					}
+					case 128: {
+						bitField0_ |= 0x00080000;
+						durationMaxMinutes_ = input.readInt32();
+						break;
+					}
+					case 136: {
+						bitField0_ |= 0x00000080;
+						itemIdReward_ = input.readInt32();
+						break;
+					}
+					case 144: {
+						bitField0_ |= 0x00000100;
+						itemRewardQuantity_ = input.readInt32();
+						break;
+					}
+					case 152: {
+						bitField0_ |= 0x00000200;
+						secondItemIdReward_ = input.readInt32();
+						break;
+					}
+					case 160: {
+						bitField0_ |= 0x00000400;
+						secondItemRewardQuantity_ = input.readInt32();
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
+
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
+		}
+
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.MiniJobConfigProto.MiniJobProto.class,
+							com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder.class);
+		}
+
+		public static com.google.protobuf.Parser<MiniJobProto> PARSER = new com.google.protobuf.AbstractParser<MiniJobProto>() {
+			@Override
+			public MiniJobProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new MiniJobProto(input, extensionRegistry);
+			}
+		};
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<MiniJobProto> getParserForType() {
+			return PARSER;
+		}
+
+		private int bitField0_;
+		public static final int MINIJOBID_FIELD_NUMBER = 1;
+		private int miniJobId_;
+
+		/**
+		 * <code>optional int32 miniJobId = 1;</code>
+		 */
+		@Override
+		public boolean hasMiniJobId() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>optional int32 miniJobId = 1;</code>
+		 */
+		@Override
+		public int getMiniJobId() {
+			return miniJobId_;
+		}
+
+		public static final int REQUIREDSTRUCTID_FIELD_NUMBER = 2;
+		private int requiredStructId_;
+
+		/**
+		 * <code>optional int32 requiredStructId = 2;</code>
+		 */
+		@Override
+		public boolean hasRequiredStructId() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>optional int32 requiredStructId = 2;</code>
+		 */
+		@Override
+		public int getRequiredStructId() {
+			return requiredStructId_;
+		}
+
+		public static final int NAME_FIELD_NUMBER = 3;
+		private java.lang.Object name_;
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		@Override
+		public boolean hasName() {
+			return ((bitField0_ & 0x00000004) == 0x00000004);
+		}
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		@Override
+		public java.lang.String getName() {
+			java.lang.Object ref = name_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					name_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string name = 3;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getNameBytes() {
+			java.lang.Object ref = name_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				name_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int CASHREWARD_FIELD_NUMBER = 4;
+		private int cashReward_;
+
+		/**
+		 * <code>optional int32 cashReward = 4;</code>
+		 */
+		@Override
+		public boolean hasCashReward() {
+			return ((bitField0_ & 0x00000008) == 0x00000008);
+		}
+
+		/**
+		 * <code>optional int32 cashReward = 4;</code>
+		 */
+		@Override
+		public int getCashReward() {
+			return cashReward_;
+		}
+
+		public static final int OILREWARD_FIELD_NUMBER = 5;
+		private int oilReward_;
+
+		/**
+		 * <code>optional int32 oilReward = 5;</code>
+		 */
+		@Override
+		public boolean hasOilReward() {
+			return ((bitField0_ & 0x00000010) == 0x00000010);
+		}
+
+		/**
+		 * <code>optional int32 oilReward = 5;</code>
+		 */
+		@Override
+		public int getOilReward() {
+			return oilReward_;
+		}
+
+		public static final int GEMREWARD_FIELD_NUMBER = 6;
+		private int gemReward_;
+
+		/**
+		 * <code>optional int32 gemReward = 6;</code>
+		 */
+		@Override
+		public boolean hasGemReward() {
+			return ((bitField0_ & 0x00000020) == 0x00000020);
+		}
+
+		/**
+		 * <code>optional int32 gemReward = 6;</code>
+		 */
+		@Override
+		public int getGemReward() {
+			return gemReward_;
+		}
+
+		public static final int MONSTERIDREWARD_FIELD_NUMBER = 7;
+		private int monsterIdReward_;
+
+		/**
+		 * <code>optional int32 monsterIdReward = 7;</code>
+		 */
+		@Override
+		public boolean hasMonsterIdReward() {
+			return ((bitField0_ & 0x00000040) == 0x00000040);
+		}
+
+		/**
+		 * <code>optional int32 monsterIdReward = 7;</code>
+		 */
+		@Override
+		public int getMonsterIdReward() {
+			return monsterIdReward_;
+		}
+
+		public static final int ITEMIDREWARD_FIELD_NUMBER = 17;
+		private int itemIdReward_;
+
+		/**
+		 * <code>optional int32 itemIdReward = 17;</code>
+		 */
+		@Override
+		public boolean hasItemIdReward() {
+			return ((bitField0_ & 0x00000080) == 0x00000080);
+		}
+
+		/**
+		 * <code>optional int32 itemIdReward = 17;</code>
+		 */
+		@Override
+		public int getItemIdReward() {
+			return itemIdReward_;
+		}
+
+		public static final int ITEMREWARDQUANTITY_FIELD_NUMBER = 18;
+		private int itemRewardQuantity_;
+
+		/**
+		 * <code>optional int32 itemRewardQuantity = 18;</code>
+		 */
+		@Override
+		public boolean hasItemRewardQuantity() {
+			return ((bitField0_ & 0x00000100) == 0x00000100);
+		}
+
+		/**
+		 * <code>optional int32 itemRewardQuantity = 18;</code>
+		 */
+		@Override
+		public int getItemRewardQuantity() {
+			return itemRewardQuantity_;
+		}
+
+		public static final int SECONDITEMIDREWARD_FIELD_NUMBER = 19;
+		private int secondItemIdReward_;
+
+		/**
+		 * <code>optional int32 secondItemIdReward = 19;</code>
+		 */
+		@Override
+		public boolean hasSecondItemIdReward() {
+			return ((bitField0_ & 0x00000200) == 0x00000200);
+		}
+
+		/**
+		 * <code>optional int32 secondItemIdReward = 19;</code>
+		 */
+		@Override
+		public int getSecondItemIdReward() {
+			return secondItemIdReward_;
+		}
+
+		public static final int SECONDITEMREWARDQUANTITY_FIELD_NUMBER = 20;
+		private int secondItemRewardQuantity_;
+
+		/**
+		 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+		 */
+		@Override
+		public boolean hasSecondItemRewardQuantity() {
+			return ((bitField0_ & 0x00000400) == 0x00000400);
+		}
+
+		/**
+		 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+		 */
+		@Override
+		public int getSecondItemRewardQuantity() {
+			return secondItemRewardQuantity_;
+		}
+
+		public static final int QUALITY_FIELD_NUMBER = 8;
+		private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
+
+		/**
+		 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+		 */
+		@Override
+		public boolean hasQuality() {
+			return ((bitField0_ & 0x00000800) == 0x00000800);
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+		 */
+		@Override
+		public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+			return quality_;
+		}
+
+		public static final int MAXNUMMONSTERSALLOWED_FIELD_NUMBER = 9;
+		private int maxNumMonstersAllowed_;
+
+		/**
+		 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+		 */
+		@Override
+		public boolean hasMaxNumMonstersAllowed() {
+			return ((bitField0_ & 0x00001000) == 0x00001000);
+		}
+
+		/**
+		 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+		 */
+		@Override
+		public int getMaxNumMonstersAllowed() {
+			return maxNumMonstersAllowed_;
+		}
+
+		public static final int CHANCETOAPPEAR_FIELD_NUMBER = 10;
+		private float chanceToAppear_;
+
+		/**
+		 * <code>optional float chanceToAppear = 10;</code>
+		 */
+		@Override
+		public boolean hasChanceToAppear() {
+			return ((bitField0_ & 0x00002000) == 0x00002000);
+		}
+
+		/**
+		 * <code>optional float chanceToAppear = 10;</code>
+		 */
+		@Override
+		public float getChanceToAppear() {
+			return chanceToAppear_;
+		}
+
+		public static final int HPREQUIRED_FIELD_NUMBER = 11;
+		private int hpRequired_;
+
+		/**
+		 * <code>optional int32 hpRequired = 11;</code>
+		 */
+		@Override
+		public boolean hasHpRequired() {
+			return ((bitField0_ & 0x00004000) == 0x00004000);
+		}
+
+		/**
+		 * <code>optional int32 hpRequired = 11;</code>
+		 */
+		@Override
+		public int getHpRequired() {
+			return hpRequired_;
+		}
+
+		public static final int ATKREQUIRED_FIELD_NUMBER = 12;
+		private int atkRequired_;
+
+		/**
+		 * <code>optional int32 atkRequired = 12;</code>
+		 */
+		@Override
+		public boolean hasAtkRequired() {
+			return ((bitField0_ & 0x00008000) == 0x00008000);
+		}
+
+		/**
+		 * <code>optional int32 atkRequired = 12;</code>
+		 */
+		@Override
+		public int getAtkRequired() {
+			return atkRequired_;
+		}
+
+		public static final int MINDMGDEALT_FIELD_NUMBER = 13;
+		private int minDmgDealt_;
+
+		/**
+		 * <code>optional int32 minDmgDealt = 13;</code>
+		 */
+		@Override
+		public boolean hasMinDmgDealt() {
+			return ((bitField0_ & 0x00010000) == 0x00010000);
+		}
+
+		/**
+		 * <code>optional int32 minDmgDealt = 13;</code>
+		 */
+		@Override
+		public int getMinDmgDealt() {
+			return minDmgDealt_;
+		}
+
+		public static final int MAXDMGDEALT_FIELD_NUMBER = 14;
+		private int maxDmgDealt_;
+
+		/**
+		 * <code>optional int32 maxDmgDealt = 14;</code>
+		 */
+		@Override
+		public boolean hasMaxDmgDealt() {
+			return ((bitField0_ & 0x00020000) == 0x00020000);
+		}
+
+		/**
+		 * <code>optional int32 maxDmgDealt = 14;</code>
+		 */
+		@Override
+		public int getMaxDmgDealt() {
+			return maxDmgDealt_;
+		}
+
+		public static final int DURATIONMINMINUTES_FIELD_NUMBER = 15;
+		private int durationMinMinutes_;
+
+		/**
+		 * <code>optional int32 durationMinMinutes = 15;</code>
+		 */
+		@Override
+		public boolean hasDurationMinMinutes() {
+			return ((bitField0_ & 0x00040000) == 0x00040000);
+		}
+
+		/**
+		 * <code>optional int32 durationMinMinutes = 15;</code>
+		 */
+		@Override
+		public int getDurationMinMinutes() {
+			return durationMinMinutes_;
+		}
+
+		public static final int DURATIONMAXMINUTES_FIELD_NUMBER = 16;
+		private int durationMaxMinutes_;
+
+		/**
+		 * <code>optional int32 durationMaxMinutes = 16;</code>
+		 */
+		@Override
+		public boolean hasDurationMaxMinutes() {
+			return ((bitField0_ & 0x00080000) == 0x00080000);
+		}
+
+		/**
+		 * <code>optional int32 durationMaxMinutes = 16;</code>
+		 */
+		@Override
+		public int getDurationMaxMinutes() {
+			return durationMaxMinutes_;
+		}
+
+		private void initFields() {
+			miniJobId_ = 0;
+			requiredStructId_ = 0;
+			name_ = "";
+			cashReward_ = 0;
+			oilReward_ = 0;
+			gemReward_ = 0;
+			monsterIdReward_ = 0;
+			itemIdReward_ = 0;
+			itemRewardQuantity_ = 0;
+			secondItemIdReward_ = 0;
+			secondItemRewardQuantity_ = 0;
+			quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+			maxNumMonstersAllowed_ = 0;
+			chanceToAppear_ = 0F;
+			hpRequired_ = 0;
+			atkRequired_ = 0;
+			minDmgDealt_ = 0;
+			maxDmgDealt_ = 0;
+			durationMinMinutes_ = 0;
+			durationMaxMinutes_ = 0;
+		}
+
+		private byte memoizedIsInitialized = -1;
+
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
+
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeInt32(1, miniJobId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeInt32(2, requiredStructId_);
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				output.writeBytes(3, getNameBytes());
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				output.writeInt32(4, cashReward_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				output.writeInt32(5, oilReward_);
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				output.writeInt32(6, gemReward_);
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				output.writeInt32(7, monsterIdReward_);
+			}
+			if (((bitField0_ & 0x00000800) == 0x00000800)) {
+				output.writeEnum(8, quality_.getNumber());
+			}
+			if (((bitField0_ & 0x00001000) == 0x00001000)) {
+				output.writeInt32(9, maxNumMonstersAllowed_);
+			}
+			if (((bitField0_ & 0x00002000) == 0x00002000)) {
+				output.writeFloat(10, chanceToAppear_);
+			}
+			if (((bitField0_ & 0x00004000) == 0x00004000)) {
+				output.writeInt32(11, hpRequired_);
+			}
+			if (((bitField0_ & 0x00008000) == 0x00008000)) {
+				output.writeInt32(12, atkRequired_);
+			}
+			if (((bitField0_ & 0x00010000) == 0x00010000)) {
+				output.writeInt32(13, minDmgDealt_);
+			}
+			if (((bitField0_ & 0x00020000) == 0x00020000)) {
+				output.writeInt32(14, maxDmgDealt_);
+			}
+			if (((bitField0_ & 0x00040000) == 0x00040000)) {
+				output.writeInt32(15, durationMinMinutes_);
+			}
+			if (((bitField0_ & 0x00080000) == 0x00080000)) {
+				output.writeInt32(16, durationMaxMinutes_);
+			}
+			if (((bitField0_ & 0x00000080) == 0x00000080)) {
+				output.writeInt32(17, itemIdReward_);
+			}
+			if (((bitField0_ & 0x00000100) == 0x00000100)) {
+				output.writeInt32(18, itemRewardQuantity_);
+			}
+			if (((bitField0_ & 0x00000200) == 0x00000200)) {
+				output.writeInt32(19, secondItemIdReward_);
+			}
+			if (((bitField0_ & 0x00000400) == 0x00000400)) {
+				output.writeInt32(20, secondItemRewardQuantity_);
+			}
+			getUnknownFields().writeTo(output);
+		}
+
+		private int memoizedSerializedSize = -1;
+
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						1, miniJobId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						2, requiredStructId_);
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						3, getNameBytes());
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						4, cashReward_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						5, oilReward_);
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						6, gemReward_);
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						7, monsterIdReward_);
+			}
+			if (((bitField0_ & 0x00000800) == 0x00000800)) {
+				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
+						8, quality_.getNumber());
+			}
+			if (((bitField0_ & 0x00001000) == 0x00001000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						9, maxNumMonstersAllowed_);
+			}
+			if (((bitField0_ & 0x00002000) == 0x00002000)) {
+				size += com.google.protobuf.CodedOutputStream.computeFloatSize(
+						10, chanceToAppear_);
+			}
+			if (((bitField0_ & 0x00004000) == 0x00004000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						11, hpRequired_);
+			}
+			if (((bitField0_ & 0x00008000) == 0x00008000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						12, atkRequired_);
+			}
+			if (((bitField0_ & 0x00010000) == 0x00010000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						13, minDmgDealt_);
+			}
+			if (((bitField0_ & 0x00020000) == 0x00020000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						14, maxDmgDealt_);
+			}
+			if (((bitField0_ & 0x00040000) == 0x00040000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						15, durationMinMinutes_);
+			}
+			if (((bitField0_ & 0x00080000) == 0x00080000)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						16, durationMaxMinutes_);
+			}
+			if (((bitField0_ & 0x00000080) == 0x00000080)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						17, itemIdReward_);
+			}
+			if (((bitField0_ & 0x00000100) == 0x00000100)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						18, itemRewardQuantity_);
+			}
+			if (((bitField0_ & 0x00000200) == 0x00000200)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						19, secondItemIdReward_);
+			}
+			if (((bitField0_ & 0x00000400) == 0x00000400)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						20, secondItemRewardQuantity_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
+
+		private static final long serialVersionUID = 0L;
+
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.MiniJobProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.MiniJobConfigProto.MiniJobProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type {@code com.lvl6.proto.MiniJobProto}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniJobProto)
+				com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.MiniJobConfigProto.MiniJobProto.class,
+								com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.MiniJobConfigProto.MiniJobProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				miniJobId_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000001);
+				requiredStructId_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000002);
+				name_ = "";
+				bitField0_ = (bitField0_ & ~0x00000004);
+				cashReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				oilReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000010);
+				gemReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000020);
+				monsterIdReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000040);
+				itemIdReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000080);
+				itemRewardQuantity_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000100);
+				secondItemIdReward_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000200);
+				secondItemRewardQuantity_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000400);
+				quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+				bitField0_ = (bitField0_ & ~0x00000800);
+				maxNumMonstersAllowed_ = 0;
+				bitField0_ = (bitField0_ & ~0x00001000);
+				chanceToAppear_ = 0F;
+				bitField0_ = (bitField0_ & ~0x00002000);
+				hpRequired_ = 0;
+				bitField0_ = (bitField0_ & ~0x00004000);
+				atkRequired_ = 0;
+				bitField0_ = (bitField0_ & ~0x00008000);
+				minDmgDealt_ = 0;
+				bitField0_ = (bitField0_ & ~0x00010000);
+				maxDmgDealt_ = 0;
+				bitField0_ = (bitField0_ & ~0x00020000);
+				durationMinMinutes_ = 0;
+				bitField0_ = (bitField0_ & ~0x00040000);
+				durationMaxMinutes_ = 0;
+				bitField0_ = (bitField0_ & ~0x00080000);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getDefaultInstanceForType() {
+				return com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProto build() {
+				com.lvl6.proto.MiniJobConfigProto.MiniJobProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProto buildPartial() {
+				com.lvl6.proto.MiniJobConfigProto.MiniJobProto result = new com.lvl6.proto.MiniJobConfigProto.MiniJobProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.miniJobId_ = miniJobId_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.requiredStructId_ = requiredStructId_;
+				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+					to_bitField0_ |= 0x00000004;
+				}
+				result.name_ = name_;
+				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+					to_bitField0_ |= 0x00000008;
+				}
+				result.cashReward_ = cashReward_;
+				if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+					to_bitField0_ |= 0x00000010;
+				}
+				result.oilReward_ = oilReward_;
+				if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+					to_bitField0_ |= 0x00000020;
+				}
+				result.gemReward_ = gemReward_;
+				if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+					to_bitField0_ |= 0x00000040;
+				}
+				result.monsterIdReward_ = monsterIdReward_;
+				if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+					to_bitField0_ |= 0x00000080;
+				}
+				result.itemIdReward_ = itemIdReward_;
+				if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+					to_bitField0_ |= 0x00000100;
+				}
+				result.itemRewardQuantity_ = itemRewardQuantity_;
+				if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+					to_bitField0_ |= 0x00000200;
+				}
+				result.secondItemIdReward_ = secondItemIdReward_;
+				if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+					to_bitField0_ |= 0x00000400;
+				}
+				result.secondItemRewardQuantity_ = secondItemRewardQuantity_;
+				if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+					to_bitField0_ |= 0x00000800;
+				}
+				result.quality_ = quality_;
+				if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+					to_bitField0_ |= 0x00001000;
+				}
+				result.maxNumMonstersAllowed_ = maxNumMonstersAllowed_;
+				if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+					to_bitField0_ |= 0x00002000;
+				}
+				result.chanceToAppear_ = chanceToAppear_;
+				if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+					to_bitField0_ |= 0x00004000;
+				}
+				result.hpRequired_ = hpRequired_;
+				if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+					to_bitField0_ |= 0x00008000;
+				}
+				result.atkRequired_ = atkRequired_;
+				if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+					to_bitField0_ |= 0x00010000;
+				}
+				result.minDmgDealt_ = minDmgDealt_;
+				if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+					to_bitField0_ |= 0x00020000;
+				}
+				result.maxDmgDealt_ = maxDmgDealt_;
+				if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+					to_bitField0_ |= 0x00040000;
+				}
+				result.durationMinMinutes_ = durationMinMinutes_;
+				if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+					to_bitField0_ |= 0x00080000;
+				}
+				result.durationMaxMinutes_ = durationMaxMinutes_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.MiniJobConfigProto.MiniJobProto) {
+					return mergeFrom((com.lvl6.proto.MiniJobConfigProto.MiniJobProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.MiniJobConfigProto.MiniJobProto other) {
+				if (other == com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasMiniJobId()) {
+					setMiniJobId(other.getMiniJobId());
+				}
+				if (other.hasRequiredStructId()) {
+					setRequiredStructId(other.getRequiredStructId());
+				}
+				if (other.hasName()) {
+					bitField0_ |= 0x00000004;
+					name_ = other.name_;
+					onChanged();
+				}
+				if (other.hasCashReward()) {
+					setCashReward(other.getCashReward());
+				}
+				if (other.hasOilReward()) {
+					setOilReward(other.getOilReward());
+				}
+				if (other.hasGemReward()) {
+					setGemReward(other.getGemReward());
+				}
+				if (other.hasMonsterIdReward()) {
+					setMonsterIdReward(other.getMonsterIdReward());
+				}
+				if (other.hasItemIdReward()) {
+					setItemIdReward(other.getItemIdReward());
+				}
+				if (other.hasItemRewardQuantity()) {
+					setItemRewardQuantity(other.getItemRewardQuantity());
+				}
+				if (other.hasSecondItemIdReward()) {
+					setSecondItemIdReward(other.getSecondItemIdReward());
+				}
+				if (other.hasSecondItemRewardQuantity()) {
+					setSecondItemRewardQuantity(other
+							.getSecondItemRewardQuantity());
+				}
+				if (other.hasQuality()) {
+					setQuality(other.getQuality());
+				}
+				if (other.hasMaxNumMonstersAllowed()) {
+					setMaxNumMonstersAllowed(other.getMaxNumMonstersAllowed());
+				}
+				if (other.hasChanceToAppear()) {
+					setChanceToAppear(other.getChanceToAppear());
+				}
+				if (other.hasHpRequired()) {
+					setHpRequired(other.getHpRequired());
+				}
+				if (other.hasAtkRequired()) {
+					setAtkRequired(other.getAtkRequired());
+				}
+				if (other.hasMinDmgDealt()) {
+					setMinDmgDealt(other.getMinDmgDealt());
+				}
+				if (other.hasMaxDmgDealt()) {
+					setMaxDmgDealt(other.getMaxDmgDealt());
+				}
+				if (other.hasDurationMinMinutes()) {
+					setDurationMinMinutes(other.getDurationMinMinutes());
+				}
+				if (other.hasDurationMaxMinutes()) {
+					setDurationMaxMinutes(other.getDurationMaxMinutes());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.MiniJobConfigProto.MiniJobProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.MiniJobConfigProto.MiniJobProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private int miniJobId_;
+
+			/**
+			 * <code>optional int32 miniJobId = 1;</code>
+			 */
+			@Override
+			public boolean hasMiniJobId() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional int32 miniJobId = 1;</code>
+			 */
+			@Override
+			public int getMiniJobId() {
+				return miniJobId_;
+			}
+
+			/**
+			 * <code>optional int32 miniJobId = 1;</code>
+			 */
+			public Builder setMiniJobId(int value) {
+				bitField0_ |= 0x00000001;
+				miniJobId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 miniJobId = 1;</code>
+			 */
+			public Builder clearMiniJobId() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				miniJobId_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int requiredStructId_;
+
+			/**
+			 * <code>optional int32 requiredStructId = 2;</code>
+			 */
+			@Override
+			public boolean hasRequiredStructId() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional int32 requiredStructId = 2;</code>
+			 */
+			@Override
+			public int getRequiredStructId() {
+				return requiredStructId_;
+			}
+
+			/**
+			 * <code>optional int32 requiredStructId = 2;</code>
+			 */
+			public Builder setRequiredStructId(int value) {
+				bitField0_ |= 0x00000002;
+				requiredStructId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 requiredStructId = 2;</code>
+			 */
+			public Builder clearRequiredStructId() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				requiredStructId_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object name_ = "";
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			@Override
+			public boolean hasName() {
+				return ((bitField0_ & 0x00000004) == 0x00000004);
+			}
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			@Override
+			public java.lang.String getName() {
+				java.lang.Object ref = name_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						name_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getNameBytes() {
+				java.lang.Object ref = name_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					name_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			public Builder setName(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000004;
+				name_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			public Builder clearName() {
+				bitField0_ = (bitField0_ & ~0x00000004);
+				name_ = getDefaultInstance().getName();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string name = 3;</code>
+			 */
+			public Builder setNameBytes(com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000004;
+				name_ = value;
+				onChanged();
+				return this;
+			}
+
+			private int cashReward_;
+
+			/**
+			 * <code>optional int32 cashReward = 4;</code>
+			 */
+			@Override
+			public boolean hasCashReward() {
+				return ((bitField0_ & 0x00000008) == 0x00000008);
+			}
+
+			/**
+			 * <code>optional int32 cashReward = 4;</code>
+			 */
+			@Override
+			public int getCashReward() {
+				return cashReward_;
+			}
+
+			/**
+			 * <code>optional int32 cashReward = 4;</code>
+			 */
+			public Builder setCashReward(int value) {
+				bitField0_ |= 0x00000008;
+				cashReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 cashReward = 4;</code>
+			 */
+			public Builder clearCashReward() {
+				bitField0_ = (bitField0_ & ~0x00000008);
+				cashReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int oilReward_;
+
+			/**
+			 * <code>optional int32 oilReward = 5;</code>
+			 */
+			@Override
+			public boolean hasOilReward() {
+				return ((bitField0_ & 0x00000010) == 0x00000010);
+			}
+
+			/**
+			 * <code>optional int32 oilReward = 5;</code>
+			 */
+			@Override
+			public int getOilReward() {
+				return oilReward_;
+			}
+
+			/**
+			 * <code>optional int32 oilReward = 5;</code>
+			 */
+			public Builder setOilReward(int value) {
+				bitField0_ |= 0x00000010;
+				oilReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 oilReward = 5;</code>
+			 */
+			public Builder clearOilReward() {
+				bitField0_ = (bitField0_ & ~0x00000010);
+				oilReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int gemReward_;
+
+			/**
+			 * <code>optional int32 gemReward = 6;</code>
+			 */
+			@Override
+			public boolean hasGemReward() {
+				return ((bitField0_ & 0x00000020) == 0x00000020);
+			}
+
+			/**
+			 * <code>optional int32 gemReward = 6;</code>
+			 */
+			@Override
+			public int getGemReward() {
+				return gemReward_;
+			}
+
+			/**
+			 * <code>optional int32 gemReward = 6;</code>
+			 */
+			public Builder setGemReward(int value) {
+				bitField0_ |= 0x00000020;
+				gemReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 gemReward = 6;</code>
+			 */
+			public Builder clearGemReward() {
+				bitField0_ = (bitField0_ & ~0x00000020);
+				gemReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int monsterIdReward_;
+
+			/**
+			 * <code>optional int32 monsterIdReward = 7;</code>
+			 */
+			@Override
+			public boolean hasMonsterIdReward() {
+				return ((bitField0_ & 0x00000040) == 0x00000040);
+			}
+
+			/**
+			 * <code>optional int32 monsterIdReward = 7;</code>
+			 */
+			@Override
+			public int getMonsterIdReward() {
+				return monsterIdReward_;
+			}
+
+			/**
+			 * <code>optional int32 monsterIdReward = 7;</code>
+			 */
+			public Builder setMonsterIdReward(int value) {
+				bitField0_ |= 0x00000040;
+				monsterIdReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 monsterIdReward = 7;</code>
+			 */
+			public Builder clearMonsterIdReward() {
+				bitField0_ = (bitField0_ & ~0x00000040);
+				monsterIdReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int itemIdReward_;
+
+			/**
+			 * <code>optional int32 itemIdReward = 17;</code>
+			 */
+			@Override
+			public boolean hasItemIdReward() {
+				return ((bitField0_ & 0x00000080) == 0x00000080);
+			}
+
+			/**
+			 * <code>optional int32 itemIdReward = 17;</code>
+			 */
+			@Override
+			public int getItemIdReward() {
+				return itemIdReward_;
+			}
+
+			/**
+			 * <code>optional int32 itemIdReward = 17;</code>
+			 */
+			public Builder setItemIdReward(int value) {
+				bitField0_ |= 0x00000080;
+				itemIdReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 itemIdReward = 17;</code>
+			 */
+			public Builder clearItemIdReward() {
+				bitField0_ = (bitField0_ & ~0x00000080);
+				itemIdReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int itemRewardQuantity_;
+
+			/**
+			 * <code>optional int32 itemRewardQuantity = 18;</code>
+			 */
+			@Override
+			public boolean hasItemRewardQuantity() {
+				return ((bitField0_ & 0x00000100) == 0x00000100);
+			}
+
+			/**
+			 * <code>optional int32 itemRewardQuantity = 18;</code>
+			 */
+			@Override
+			public int getItemRewardQuantity() {
+				return itemRewardQuantity_;
+			}
+
+			/**
+			 * <code>optional int32 itemRewardQuantity = 18;</code>
+			 */
+			public Builder setItemRewardQuantity(int value) {
+				bitField0_ |= 0x00000100;
+				itemRewardQuantity_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 itemRewardQuantity = 18;</code>
+			 */
+			public Builder clearItemRewardQuantity() {
+				bitField0_ = (bitField0_ & ~0x00000100);
+				itemRewardQuantity_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int secondItemIdReward_;
+
+			/**
+			 * <code>optional int32 secondItemIdReward = 19;</code>
+			 */
+			@Override
+			public boolean hasSecondItemIdReward() {
+				return ((bitField0_ & 0x00000200) == 0x00000200);
+			}
+
+			/**
+			 * <code>optional int32 secondItemIdReward = 19;</code>
+			 */
+			@Override
+			public int getSecondItemIdReward() {
+				return secondItemIdReward_;
+			}
+
+			/**
+			 * <code>optional int32 secondItemIdReward = 19;</code>
+			 */
+			public Builder setSecondItemIdReward(int value) {
+				bitField0_ |= 0x00000200;
+				secondItemIdReward_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 secondItemIdReward = 19;</code>
+			 */
+			public Builder clearSecondItemIdReward() {
+				bitField0_ = (bitField0_ & ~0x00000200);
+				secondItemIdReward_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int secondItemRewardQuantity_;
+
+			/**
+			 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+			 */
+			@Override
+			public boolean hasSecondItemRewardQuantity() {
+				return ((bitField0_ & 0x00000400) == 0x00000400);
+			}
+
+			/**
+			 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+			 */
+			@Override
+			public int getSecondItemRewardQuantity() {
+				return secondItemRewardQuantity_;
+			}
+
+			/**
+			 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+			 */
+			public Builder setSecondItemRewardQuantity(int value) {
+				bitField0_ |= 0x00000400;
+				secondItemRewardQuantity_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 secondItemRewardQuantity = 20;</code>
+			 */
+			public Builder clearSecondItemRewardQuantity() {
+				bitField0_ = (bitField0_ & ~0x00000400);
+				secondItemRewardQuantity_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+
+			/**
+			 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+			 */
+			@Override
+			public boolean hasQuality() {
+				return ((bitField0_ & 0x00000800) == 0x00000800);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+			 */
+			@Override
+			public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+				return quality_;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+			 */
+			public Builder setQuality(
+					com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000800;
+				quality_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
+			 */
+			public Builder clearQuality() {
+				bitField0_ = (bitField0_ & ~0x00000800);
+				quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+				onChanged();
+				return this;
+			}
+
+			private int maxNumMonstersAllowed_;
+
+			/**
+			 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+			 */
+			@Override
+			public boolean hasMaxNumMonstersAllowed() {
+				return ((bitField0_ & 0x00001000) == 0x00001000);
+			}
+
+			/**
+			 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+			 */
+			@Override
+			public int getMaxNumMonstersAllowed() {
+				return maxNumMonstersAllowed_;
+			}
+
+			/**
+			 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+			 */
+			public Builder setMaxNumMonstersAllowed(int value) {
+				bitField0_ |= 0x00001000;
+				maxNumMonstersAllowed_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 maxNumMonstersAllowed = 9;</code>
+			 */
+			public Builder clearMaxNumMonstersAllowed() {
+				bitField0_ = (bitField0_ & ~0x00001000);
+				maxNumMonstersAllowed_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private float chanceToAppear_;
+
+			/**
+			 * <code>optional float chanceToAppear = 10;</code>
+			 */
+			@Override
+			public boolean hasChanceToAppear() {
+				return ((bitField0_ & 0x00002000) == 0x00002000);
+			}
+
+			/**
+			 * <code>optional float chanceToAppear = 10;</code>
+			 */
+			@Override
+			public float getChanceToAppear() {
+				return chanceToAppear_;
+			}
+
+			/**
+			 * <code>optional float chanceToAppear = 10;</code>
+			 */
+			public Builder setChanceToAppear(float value) {
+				bitField0_ |= 0x00002000;
+				chanceToAppear_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional float chanceToAppear = 10;</code>
+			 */
+			public Builder clearChanceToAppear() {
+				bitField0_ = (bitField0_ & ~0x00002000);
+				chanceToAppear_ = 0F;
+				onChanged();
+				return this;
+			}
+
+			private int hpRequired_;
+
+			/**
+			 * <code>optional int32 hpRequired = 11;</code>
+			 */
+			@Override
+			public boolean hasHpRequired() {
+				return ((bitField0_ & 0x00004000) == 0x00004000);
+			}
+
+			/**
+			 * <code>optional int32 hpRequired = 11;</code>
+			 */
+			@Override
+			public int getHpRequired() {
+				return hpRequired_;
+			}
+
+			/**
+			 * <code>optional int32 hpRequired = 11;</code>
+			 */
+			public Builder setHpRequired(int value) {
+				bitField0_ |= 0x00004000;
+				hpRequired_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 hpRequired = 11;</code>
+			 */
+			public Builder clearHpRequired() {
+				bitField0_ = (bitField0_ & ~0x00004000);
+				hpRequired_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int atkRequired_;
+
+			/**
+			 * <code>optional int32 atkRequired = 12;</code>
+			 */
+			@Override
+			public boolean hasAtkRequired() {
+				return ((bitField0_ & 0x00008000) == 0x00008000);
+			}
+
+			/**
+			 * <code>optional int32 atkRequired = 12;</code>
+			 */
+			@Override
+			public int getAtkRequired() {
+				return atkRequired_;
+			}
+
+			/**
+			 * <code>optional int32 atkRequired = 12;</code>
+			 */
+			public Builder setAtkRequired(int value) {
+				bitField0_ |= 0x00008000;
+				atkRequired_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 atkRequired = 12;</code>
+			 */
+			public Builder clearAtkRequired() {
+				bitField0_ = (bitField0_ & ~0x00008000);
+				atkRequired_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int minDmgDealt_;
+
+			/**
+			 * <code>optional int32 minDmgDealt = 13;</code>
+			 */
+			@Override
+			public boolean hasMinDmgDealt() {
+				return ((bitField0_ & 0x00010000) == 0x00010000);
+			}
+
+			/**
+			 * <code>optional int32 minDmgDealt = 13;</code>
+			 */
+			@Override
+			public int getMinDmgDealt() {
+				return minDmgDealt_;
+			}
+
+			/**
+			 * <code>optional int32 minDmgDealt = 13;</code>
+			 */
+			public Builder setMinDmgDealt(int value) {
+				bitField0_ |= 0x00010000;
+				minDmgDealt_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 minDmgDealt = 13;</code>
+			 */
+			public Builder clearMinDmgDealt() {
+				bitField0_ = (bitField0_ & ~0x00010000);
+				minDmgDealt_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int maxDmgDealt_;
+
+			/**
+			 * <code>optional int32 maxDmgDealt = 14;</code>
+			 */
+			@Override
+			public boolean hasMaxDmgDealt() {
+				return ((bitField0_ & 0x00020000) == 0x00020000);
+			}
+
+			/**
+			 * <code>optional int32 maxDmgDealt = 14;</code>
+			 */
+			@Override
+			public int getMaxDmgDealt() {
+				return maxDmgDealt_;
+			}
+
+			/**
+			 * <code>optional int32 maxDmgDealt = 14;</code>
+			 */
+			public Builder setMaxDmgDealt(int value) {
+				bitField0_ |= 0x00020000;
+				maxDmgDealt_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 maxDmgDealt = 14;</code>
+			 */
+			public Builder clearMaxDmgDealt() {
+				bitField0_ = (bitField0_ & ~0x00020000);
+				maxDmgDealt_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int durationMinMinutes_;
+
+			/**
+			 * <code>optional int32 durationMinMinutes = 15;</code>
+			 */
+			@Override
+			public boolean hasDurationMinMinutes() {
+				return ((bitField0_ & 0x00040000) == 0x00040000);
+			}
+
+			/**
+			 * <code>optional int32 durationMinMinutes = 15;</code>
+			 */
+			@Override
+			public int getDurationMinMinutes() {
+				return durationMinMinutes_;
+			}
+
+			/**
+			 * <code>optional int32 durationMinMinutes = 15;</code>
+			 */
+			public Builder setDurationMinMinutes(int value) {
+				bitField0_ |= 0x00040000;
+				durationMinMinutes_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 durationMinMinutes = 15;</code>
+			 */
+			public Builder clearDurationMinMinutes() {
+				bitField0_ = (bitField0_ & ~0x00040000);
+				durationMinMinutes_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int durationMaxMinutes_;
+
+			/**
+			 * <code>optional int32 durationMaxMinutes = 16;</code>
+			 */
+			@Override
+			public boolean hasDurationMaxMinutes() {
+				return ((bitField0_ & 0x00080000) == 0x00080000);
+			}
+
+			/**
+			 * <code>optional int32 durationMaxMinutes = 16;</code>
+			 */
+			@Override
+			public int getDurationMaxMinutes() {
+				return durationMaxMinutes_;
+			}
+
+			/**
+			 * <code>optional int32 durationMaxMinutes = 16;</code>
+			 */
+			public Builder setDurationMaxMinutes(int value) {
+				bitField0_ |= 0x00080000;
+				durationMaxMinutes_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 durationMaxMinutes = 16;</code>
+			 */
+			public Builder clearDurationMaxMinutes() {
+				bitField0_ = (bitField0_ & ~0x00080000);
+				durationMaxMinutes_ = 0;
+				onChanged();
+				return this;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobProto)
+		}
+
+		static {
+			defaultInstance = new MiniJobProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniJobProto)
+	}
+
+	public interface UserMiniJobProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniJobProto)
+			com.google.protobuf.MessageOrBuilder {
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		boolean hasUserMiniJobUuid();
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		java.lang.String getUserMiniJobUuid();
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		com.google.protobuf.ByteString getUserMiniJobUuidBytes();
+
+		/**
+		 * <code>optional int32 baseDmgReceived = 2;</code>
+		 */
+		boolean hasBaseDmgReceived();
+
+		/**
+		 * <code>optional int32 baseDmgReceived = 2;</code>
+		 */
+		int getBaseDmgReceived();
+
+		/**
+		 * <code>optional int64 timeStarted = 3;</code>
+		 */
+		boolean hasTimeStarted();
+
+		/**
+		 * <code>optional int64 timeStarted = 3;</code>
+		 */
+		long getTimeStarted();
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		com.google.protobuf.ProtocolStringList getUserMonsterUuidsList();
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		int getUserMonsterUuidsCount();
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		java.lang.String getUserMonsterUuids(int index);
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		com.google.protobuf.ByteString getUserMonsterUuidsBytes(int index);
+
+		/**
+		 * <code>optional int64 timeCompleted = 5;</code>
+		 */
+		boolean hasTimeCompleted();
+
+		/**
+		 * <code>optional int64 timeCompleted = 5;</code>
+		 */
+		long getTimeCompleted();
+
+		/**
+		 * <code>optional int32 durationMinutes = 7;</code>
+		 */
+		boolean hasDurationMinutes();
+
+		/**
+		 * <code>optional int32 durationMinutes = 7;</code>
+		 */
+		int getDurationMinutes();
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		boolean hasMiniJob();
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob();
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
+
+		/**
+		 * <code>optional int32 durationSeconds = 8;</code>
+		 *
+		 * <pre>
+		 * optional int32 durationMinutes = 7; defined above
+		 * </pre>
+		 */
+		boolean hasDurationSeconds();
+
+		/**
+		 * <code>optional int32 durationSeconds = 8;</code>
+		 *
+		 * <pre>
+		 * optional int32 durationMinutes = 7; defined above
+		 * </pre>
+		 */
+		int getDurationSeconds();
+	}
+
+	/**
+	 * Protobuf type {@code com.lvl6.proto.UserMiniJobProto}
+	 *
+	 * <pre>
+	 * ------------------------------------------------------------------------------------------
+	 * user can have duplicate mini jobs
+	 * </pre>
+	 */
+	public static final class UserMiniJobProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniJobProto)
+			UserMiniJobProtoOrBuilder {
+		// Use UserMiniJobProto.newBuilder() to construct.
+		private UserMiniJobProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
+
+		private UserMiniJobProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
+
+		private static final UserMiniJobProto defaultInstance;
+
+		public static UserMiniJobProto getDefaultInstance() {
+			return defaultInstance;
+		}
+
+		@Override
+		public UserMiniJobProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
+
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
+
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		private UserMiniJobProto(com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 10: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000001;
+						userMiniJobUuid_ = bs;
+						break;
+					}
+					case 16: {
+						bitField0_ |= 0x00000002;
+						baseDmgReceived_ = input.readInt32();
+						break;
+					}
+					case 24: {
+						bitField0_ |= 0x00000004;
+						timeStarted_ = input.readInt64();
+						break;
+					}
+					case 34: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+							userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
+							mutable_bitField0_ |= 0x00000008;
+						}
+						userMonsterUuids_.add(bs);
+						break;
+					}
+					case 40: {
+						bitField0_ |= 0x00000008;
+						timeCompleted_ = input.readInt64();
+						break;
+					}
+					case 50: {
+						com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder subBuilder = null;
+						if (((bitField0_ & 0x00000020) == 0x00000020)) {
+							subBuilder = miniJob_.toBuilder();
+						}
+						miniJob_ = input
+								.readMessage(
+										com.lvl6.proto.MiniJobConfigProto.MiniJobProto.PARSER,
+										extensionRegistry);
+						if (subBuilder != null) {
+							subBuilder.mergeFrom(miniJob_);
+							miniJob_ = subBuilder.buildPartial();
+						}
+						bitField0_ |= 0x00000020;
+						break;
+					}
+					case 56: {
+						bitField0_ |= 0x00000010;
+						durationMinutes_ = input.readInt32();
+						break;
+					}
+					case 64: {
+						bitField0_ |= 0x00000040;
+						durationSeconds_ = input.readInt32();
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+					userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
+				}
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
+
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
+		}
+
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.class,
+							com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder.class);
+		}
+
+		public static com.google.protobuf.Parser<UserMiniJobProto> PARSER = new com.google.protobuf.AbstractParser<UserMiniJobProto>() {
+			@Override
+			public UserMiniJobProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new UserMiniJobProto(input, extensionRegistry);
+			}
+		};
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<UserMiniJobProto> getParserForType() {
+			return PARSER;
+		}
+
+		private int bitField0_;
+		public static final int USERMINIJOBUUID_FIELD_NUMBER = 1;
+		private java.lang.Object userMiniJobUuid_;
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		@Override
+		public boolean hasUserMiniJobUuid() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		@Override
+		public java.lang.String getUserMiniJobUuid() {
+			java.lang.Object ref = userMiniJobUuid_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					userMiniJobUuid_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string userMiniJobUuid = 1;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getUserMiniJobUuidBytes() {
+			java.lang.Object ref = userMiniJobUuid_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				userMiniJobUuid_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int BASEDMGRECEIVED_FIELD_NUMBER = 2;
+		private int baseDmgReceived_;
+
+		/**
+		 * <code>optional int32 baseDmgReceived = 2;</code>
+		 */
+		@Override
+		public boolean hasBaseDmgReceived() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>optional int32 baseDmgReceived = 2;</code>
+		 */
+		@Override
+		public int getBaseDmgReceived() {
+			return baseDmgReceived_;
+		}
+
+		public static final int TIMESTARTED_FIELD_NUMBER = 3;
+		private long timeStarted_;
+
+		/**
+		 * <code>optional int64 timeStarted = 3;</code>
+		 */
+		@Override
+		public boolean hasTimeStarted() {
+			return ((bitField0_ & 0x00000004) == 0x00000004);
+		}
+
+		/**
+		 * <code>optional int64 timeStarted = 3;</code>
+		 */
+		@Override
+		public long getTimeStarted() {
+			return timeStarted_;
+		}
+
+		public static final int USERMONSTERUUIDS_FIELD_NUMBER = 4;
+		private com.google.protobuf.LazyStringList userMonsterUuids_;
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		@Override
+		public com.google.protobuf.ProtocolStringList getUserMonsterUuidsList() {
+			return userMonsterUuids_;
+		}
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		@Override
+		public int getUserMonsterUuidsCount() {
+			return userMonsterUuids_.size();
+		}
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		@Override
+		public java.lang.String getUserMonsterUuids(int index) {
+			return userMonsterUuids_.get(index);
+		}
+
+		/**
+		 * <code>repeated string userMonsterUuids = 4;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getUserMonsterUuidsBytes(int index) {
+			return userMonsterUuids_.getByteString(index);
+		}
+
+		public static final int TIMECOMPLETED_FIELD_NUMBER = 5;
+		private long timeCompleted_;
+
+		/**
+		 * <code>optional int64 timeCompleted = 5;</code>
+		 */
+		@Override
+		public boolean hasTimeCompleted() {
+			return ((bitField0_ & 0x00000008) == 0x00000008);
+		}
+
+		/**
+		 * <code>optional int64 timeCompleted = 5;</code>
+		 */
+		@Override
+		public long getTimeCompleted() {
+			return timeCompleted_;
+		}
+
+		public static final int DURATIONMINUTES_FIELD_NUMBER = 7;
+		private int durationMinutes_;
+
+		/**
+		 * <code>optional int32 durationMinutes = 7;</code>
+		 */
+		@Override
+		public boolean hasDurationMinutes() {
+			return ((bitField0_ & 0x00000010) == 0x00000010);
+		}
+
+		/**
+		 * <code>optional int32 durationMinutes = 7;</code>
+		 */
+		@Override
+		public int getDurationMinutes() {
+			return durationMinutes_;
+		}
+
+		public static final int MINIJOB_FIELD_NUMBER = 6;
+		private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		@Override
+		public boolean hasMiniJob() {
+			return ((bitField0_ & 0x00000020) == 0x00000020);
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		@Override
+		public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
+			return miniJob_;
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+		 */
+		@Override
+		public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
+			return miniJob_;
+		}
+
+		public static final int DURATIONSECONDS_FIELD_NUMBER = 8;
+		private int durationSeconds_;
+
+		/**
+		 * <code>optional int32 durationSeconds = 8;</code>
+		 *
+		 * <pre>
+		 * optional int32 durationMinutes = 7; defined above
+		 * </pre>
+		 */
+		@Override
+		public boolean hasDurationSeconds() {
+			return ((bitField0_ & 0x00000040) == 0x00000040);
+		}
+
+		/**
+		 * <code>optional int32 durationSeconds = 8;</code>
+		 *
+		 * <pre>
+		 * optional int32 durationMinutes = 7; defined above
+		 * </pre>
+		 */
+		@Override
+		public int getDurationSeconds() {
+			return durationSeconds_;
+		}
+
+		private void initFields() {
+			userMiniJobUuid_ = "";
+			baseDmgReceived_ = 0;
+			timeStarted_ = 0L;
+			userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+			timeCompleted_ = 0L;
+			durationMinutes_ = 0;
+			miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+					.getDefaultInstance();
+			durationSeconds_ = 0;
+		}
+
+		private byte memoizedIsInitialized = -1;
+
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
+
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeBytes(1, getUserMiniJobUuidBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeInt32(2, baseDmgReceived_);
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				output.writeInt64(3, timeStarted_);
+			}
+			for (int i = 0; i < userMonsterUuids_.size(); i++) {
+				output.writeBytes(4, userMonsterUuids_.getByteString(i));
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				output.writeInt64(5, timeCompleted_);
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				output.writeMessage(6, miniJob_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				output.writeInt32(7, durationMinutes_);
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				output.writeInt32(8, durationSeconds_);
+			}
+			getUnknownFields().writeTo(output);
+		}
+
+		private int memoizedSerializedSize = -1;
+
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						1, getUserMiniJobUuidBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						2, baseDmgReceived_);
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt64Size(
+						3, timeStarted_);
+			}
+			{
+				int dataSize = 0;
+				for (int i = 0; i < userMonsterUuids_.size(); i++) {
+					dataSize += com.google.protobuf.CodedOutputStream
+							.computeBytesSizeNoTag(userMonsterUuids_
+									.getByteString(i));
+				}
+				size += dataSize;
+				size += 1 * getUserMonsterUuidsList().size();
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt64Size(
+						5, timeCompleted_);
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				size += com.google.protobuf.CodedOutputStream
+						.computeMessageSize(6, miniJob_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						7, durationMinutes_);
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						8, durationSeconds_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
+
+		private static final long serialVersionUID = 0L;
+
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type {@code com.lvl6.proto.UserMiniJobProto}
+		 *
+		 * <pre>
+		 * ------------------------------------------------------------------------------------------
+		 * user can have duplicate mini jobs
+		 * </pre>
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniJobProto)
+				com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.class,
+								com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+					getMiniJobFieldBuilder();
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				userMiniJobUuid_ = "";
+				bitField0_ = (bitField0_ & ~0x00000001);
+				baseDmgReceived_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000002);
+				timeStarted_ = 0L;
+				bitField0_ = (bitField0_ & ~0x00000004);
+				userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				timeCompleted_ = 0L;
+				bitField0_ = (bitField0_ & ~0x00000010);
+				durationMinutes_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000020);
+				if (miniJobBuilder_ == null) {
+					miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+							.getDefaultInstance();
+				} else {
+					miniJobBuilder_.clear();
+				}
+				bitField0_ = (bitField0_ & ~0x00000040);
+				durationSeconds_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000080);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto getDefaultInstanceForType() {
+				return com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto build() {
+				com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto buildPartial() {
+				com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto result = new com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.userMiniJobUuid_ = userMiniJobUuid_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.baseDmgReceived_ = baseDmgReceived_;
+				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+					to_bitField0_ |= 0x00000004;
+				}
+				result.timeStarted_ = timeStarted_;
+				if (((bitField0_ & 0x00000008) == 0x00000008)) {
+					userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
+					bitField0_ = (bitField0_ & ~0x00000008);
+				}
+				result.userMonsterUuids_ = userMonsterUuids_;
+				if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+					to_bitField0_ |= 0x00000008;
+				}
+				result.timeCompleted_ = timeCompleted_;
+				if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+					to_bitField0_ |= 0x00000010;
+				}
+				result.durationMinutes_ = durationMinutes_;
+				if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+					to_bitField0_ |= 0x00000020;
+				}
+				if (miniJobBuilder_ == null) {
+					result.miniJob_ = miniJob_;
+				} else {
+					result.miniJob_ = miniJobBuilder_.build();
+				}
+				if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+					to_bitField0_ |= 0x00000040;
+				}
+				result.durationSeconds_ = durationSeconds_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto) {
+					return mergeFrom((com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto other) {
+				if (other == com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasUserMiniJobUuid()) {
+					bitField0_ |= 0x00000001;
+					userMiniJobUuid_ = other.userMiniJobUuid_;
+					onChanged();
+				}
+				if (other.hasBaseDmgReceived()) {
+					setBaseDmgReceived(other.getBaseDmgReceived());
+				}
+				if (other.hasTimeStarted()) {
+					setTimeStarted(other.getTimeStarted());
+				}
+				if (!other.userMonsterUuids_.isEmpty()) {
+					if (userMonsterUuids_.isEmpty()) {
+						userMonsterUuids_ = other.userMonsterUuids_;
+						bitField0_ = (bitField0_ & ~0x00000008);
+					} else {
+						ensureUserMonsterUuidsIsMutable();
+						userMonsterUuids_.addAll(other.userMonsterUuids_);
+					}
+					onChanged();
+				}
+				if (other.hasTimeCompleted()) {
+					setTimeCompleted(other.getTimeCompleted());
+				}
+				if (other.hasDurationMinutes()) {
+					setDurationMinutes(other.getDurationMinutes());
+				}
+				if (other.hasMiniJob()) {
+					mergeMiniJob(other.getMiniJob());
+				}
+				if (other.hasDurationSeconds()) {
+					setDurationSeconds(other.getDurationSeconds());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private java.lang.Object userMiniJobUuid_ = "";
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			@Override
+			public boolean hasUserMiniJobUuid() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			@Override
+			public java.lang.String getUserMiniJobUuid() {
+				java.lang.Object ref = userMiniJobUuid_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						userMiniJobUuid_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getUserMiniJobUuidBytes() {
+				java.lang.Object ref = userMiniJobUuid_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					userMiniJobUuid_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			public Builder setUserMiniJobUuid(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				userMiniJobUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			public Builder clearUserMiniJobUuid() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				userMiniJobUuid_ = getDefaultInstance().getUserMiniJobUuid();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userMiniJobUuid = 1;</code>
+			 */
+			public Builder setUserMiniJobUuidBytes(
+					com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				userMiniJobUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			private int baseDmgReceived_;
+
+			/**
+			 * <code>optional int32 baseDmgReceived = 2;</code>
+			 */
+			@Override
+			public boolean hasBaseDmgReceived() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional int32 baseDmgReceived = 2;</code>
+			 */
+			@Override
+			public int getBaseDmgReceived() {
+				return baseDmgReceived_;
+			}
+
+			/**
+			 * <code>optional int32 baseDmgReceived = 2;</code>
+			 */
+			public Builder setBaseDmgReceived(int value) {
+				bitField0_ |= 0x00000002;
+				baseDmgReceived_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 baseDmgReceived = 2;</code>
+			 */
+			public Builder clearBaseDmgReceived() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				baseDmgReceived_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private long timeStarted_;
+
+			/**
+			 * <code>optional int64 timeStarted = 3;</code>
+			 */
+			@Override
+			public boolean hasTimeStarted() {
+				return ((bitField0_ & 0x00000004) == 0x00000004);
+			}
+
+			/**
+			 * <code>optional int64 timeStarted = 3;</code>
+			 */
+			@Override
+			public long getTimeStarted() {
+				return timeStarted_;
+			}
+
+			/**
+			 * <code>optional int64 timeStarted = 3;</code>
+			 */
+			public Builder setTimeStarted(long value) {
+				bitField0_ |= 0x00000004;
+				timeStarted_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int64 timeStarted = 3;</code>
+			 */
+			public Builder clearTimeStarted() {
+				bitField0_ = (bitField0_ & ~0x00000004);
+				timeStarted_ = 0L;
+				onChanged();
+				return this;
+			}
+
+			private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+
+			private void ensureUserMonsterUuidsIsMutable() {
+				if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+					userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(
+							userMonsterUuids_);
+					bitField0_ |= 0x00000008;
+				}
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			@Override
+			public com.google.protobuf.ProtocolStringList getUserMonsterUuidsList() {
+				return userMonsterUuids_.getUnmodifiableView();
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			@Override
+			public int getUserMonsterUuidsCount() {
+				return userMonsterUuids_.size();
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			@Override
+			public java.lang.String getUserMonsterUuids(int index) {
+				return userMonsterUuids_.get(index);
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getUserMonsterUuidsBytes(
+					int index) {
+				return userMonsterUuids_.getByteString(index);
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			public Builder setUserMonsterUuids(int index, java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				ensureUserMonsterUuidsIsMutable();
+				userMonsterUuids_.set(index, value);
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			public Builder addUserMonsterUuids(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				ensureUserMonsterUuidsIsMutable();
+				userMonsterUuids_.add(value);
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			public Builder addAllUserMonsterUuids(
+					java.lang.Iterable<java.lang.String> values) {
+				ensureUserMonsterUuidsIsMutable();
+				com.google.protobuf.AbstractMessageLite.Builder.addAll(values,
+						userMonsterUuids_);
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			public Builder clearUserMonsterUuids() {
+				userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>repeated string userMonsterUuids = 4;</code>
+			 */
+			public Builder addUserMonsterUuidsBytes(
+					com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				ensureUserMonsterUuidsIsMutable();
+				userMonsterUuids_.add(value);
+				onChanged();
+				return this;
+			}
+
+			private long timeCompleted_;
+
+			/**
+			 * <code>optional int64 timeCompleted = 5;</code>
+			 */
+			@Override
+			public boolean hasTimeCompleted() {
+				return ((bitField0_ & 0x00000010) == 0x00000010);
+			}
+
+			/**
+			 * <code>optional int64 timeCompleted = 5;</code>
+			 */
+			@Override
+			public long getTimeCompleted() {
+				return timeCompleted_;
+			}
+
+			/**
+			 * <code>optional int64 timeCompleted = 5;</code>
+			 */
+			public Builder setTimeCompleted(long value) {
+				bitField0_ |= 0x00000010;
+				timeCompleted_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int64 timeCompleted = 5;</code>
+			 */
+			public Builder clearTimeCompleted() {
+				bitField0_ = (bitField0_ & ~0x00000010);
+				timeCompleted_ = 0L;
+				onChanged();
+				return this;
+			}
+
+			private int durationMinutes_;
+
+			/**
+			 * <code>optional int32 durationMinutes = 7;</code>
+			 */
+			@Override
+			public boolean hasDurationMinutes() {
+				return ((bitField0_ & 0x00000020) == 0x00000020);
+			}
+
+			/**
+			 * <code>optional int32 durationMinutes = 7;</code>
+			 */
+			@Override
+			public int getDurationMinutes() {
+				return durationMinutes_;
+			}
+
+			/**
+			 * <code>optional int32 durationMinutes = 7;</code>
+			 */
+			public Builder setDurationMinutes(int value) {
+				bitField0_ |= 0x00000020;
+				durationMinutes_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 durationMinutes = 7;</code>
+			 */
+			public Builder clearDurationMinutes() {
+				bitField0_ = (bitField0_ & ~0x00000020);
+				durationMinutes_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+					.getDefaultInstance();
+			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			@Override
+			public boolean hasMiniJob() {
+				return ((bitField0_ & 0x00000040) == 0x00000040);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
+				if (miniJobBuilder_ == null) {
+					return miniJob_;
+				} else {
+					return miniJobBuilder_.getMessage();
+				}
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			public Builder setMiniJob(
+					com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
+				if (miniJobBuilder_ == null) {
+					if (value == null) {
+						throw new NullPointerException();
+					}
+					miniJob_ = value;
+					onChanged();
+				} else {
+					miniJobBuilder_.setMessage(value);
+				}
+				bitField0_ |= 0x00000040;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			public Builder setMiniJob(
+					com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder builderForValue) {
+				if (miniJobBuilder_ == null) {
+					miniJob_ = builderForValue.build();
+					onChanged();
+				} else {
+					miniJobBuilder_.setMessage(builderForValue.build());
+				}
+				bitField0_ |= 0x00000040;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			public Builder mergeMiniJob(
+					com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
+				if (miniJobBuilder_ == null) {
+					if (((bitField0_ & 0x00000040) == 0x00000040)
+							&& miniJob_ != com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+									.getDefaultInstance()) {
+						miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+								.newBuilder(miniJob_).mergeFrom(value)
+								.buildPartial();
+					} else {
+						miniJob_ = value;
+					}
+					onChanged();
+				} else {
+					miniJobBuilder_.mergeFrom(value);
+				}
+				bitField0_ |= 0x00000040;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			public Builder clearMiniJob() {
+				if (miniJobBuilder_ == null) {
+					miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto
+							.getDefaultInstance();
+					onChanged();
+				} else {
+					miniJobBuilder_.clear();
+				}
+				bitField0_ = (bitField0_ & ~0x00000040);
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder getMiniJobBuilder() {
+				bitField0_ |= 0x00000040;
+				onChanged();
+				return getMiniJobFieldBuilder().getBuilder();
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			@Override
+			public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
+				if (miniJobBuilder_ != null) {
+					return miniJobBuilder_.getMessageOrBuilder();
+				} else {
+					return miniJob_;
+				}
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+			 */
+			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> getMiniJobFieldBuilder() {
+				if (miniJobBuilder_ == null) {
+					miniJobBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder>(
+							getMiniJob(), getParentForChildren(), isClean());
+					miniJob_ = null;
+				}
+				return miniJobBuilder_;
+			}
+
+			private int durationSeconds_;
+
+			/**
+			 * <code>optional int32 durationSeconds = 8;</code>
+			 *
+			 * <pre>
+			 * optional int32 durationMinutes = 7; defined above
+			 * </pre>
+			 */
+			@Override
+			public boolean hasDurationSeconds() {
+				return ((bitField0_ & 0x00000080) == 0x00000080);
+			}
+
+			/**
+			 * <code>optional int32 durationSeconds = 8;</code>
+			 *
+			 * <pre>
+			 * optional int32 durationMinutes = 7; defined above
+			 * </pre>
+			 */
+			@Override
+			public int getDurationSeconds() {
+				return durationSeconds_;
+			}
+
+			/**
+			 * <code>optional int32 durationSeconds = 8;</code>
+			 *
+			 * <pre>
+			 * optional int32 durationMinutes = 7; defined above
+			 * </pre>
+			 */
+			public Builder setDurationSeconds(int value) {
+				bitField0_ |= 0x00000080;
+				durationSeconds_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 durationSeconds = 8;</code>
+			 *
+			 * <pre>
+			 * optional int32 durationMinutes = 7; defined above
+			 * </pre>
+			 */
+			public Builder clearDurationSeconds() {
+				bitField0_ = (bitField0_ & ~0x00000080);
+				durationSeconds_ = 0;
+				onChanged();
+				return this;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniJobProto)
+		}
+
+		static {
+			defaultInstance = new UserMiniJobProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniJobProto)
+	}
+
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_MiniJobProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable;
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable;
+
+	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
+	static {
+		java.lang.String[] descriptorData = {
+				"\n\023MiniJobConfig.proto\022\016com.lvl6.proto\032\022M"
+						+ "onsterStuff.proto\032\026SharedEnumConfig.prot"
+						+ "o\032\017Structure.proto\"\204\004\n\014MiniJobProto\022\021\n\tm"
+						+ "iniJobId\030\001 \001(\005\022\030\n\020requiredStructId\030\002 \001(\005"
+						+ "\022\014\n\004name\030\003 \001(\t\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi"
+						+ "lReward\030\005 \001(\005\022\021\n\tgemReward\030\006 \001(\005\022\027\n\017mons"
+						+ "terIdReward\030\007 \001(\005\022\024\n\014itemIdReward\030\021 \001(\005\022"
+						+ "\032\n\022itemRewardQuantity\030\022 \001(\005\022\032\n\022secondIte"
+						+ "mIdReward\030\023 \001(\005\022 \n\030secondItemRewardQuant"
+						+ "ity\030\024 \001(\005\0224\n\007quality\030\010 \001(\0162\027.com.lvl6.pr",
+				"oto.Quality:\nNO_QUALITY\022\035\n\025maxNumMonster"
+						+ "sAllowed\030\t \001(\005\022\026\n\016chanceToAppear\030\n \001(\002\022\022"
+						+ "\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequired\030\014 \001(\005\022"
+						+ "\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDealt\030\016 \001("
+						+ "\005\022\032\n\022durationMinMinutes\030\017 \001(\005\022\032\n\022duratio"
+						+ "nMaxMinutes\030\020 \001(\005\"\353\001\n\020UserMiniJobProto\022\027"
+						+ "\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmgReceiv"
+						+ "ed\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020userMon"
+						+ "sterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005 \001(\003\022\027"
+						+ "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013",
+				"2\034.com.lvl6.proto.MiniJobProto\022\027\n\017durati"
+						+ "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto" };
+		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+			@Override
+			public com.google.protobuf.ExtensionRegistry assignDescriptors(
+					com.google.protobuf.Descriptors.FileDescriptor root) {
+				descriptor = root;
+				return null;
+			}
+		};
+		com.google.protobuf.Descriptors.FileDescriptor
+				.internalBuildGeneratedFileFrom(
+						descriptorData,
+						new com.google.protobuf.Descriptors.FileDescriptor[] {
+								com.lvl6.proto.MonsterStuffProto
+										.getDescriptor(),
+								com.lvl6.proto.SharedEnumConfigProto
+										.getDescriptor(),
+								com.lvl6.proto.StructureProto.getDescriptor(), },
+						assigner);
+		internal_static_com_lvl6_proto_MiniJobProto_descriptor = getDescriptor()
+				.getMessageTypes().get(0);
+		internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_MiniJobProto_descriptor,
+				new java.lang.String[] { "MiniJobId", "RequiredStructId",
+						"Name", "CashReward", "OilReward", "GemReward",
+						"MonsterIdReward", "ItemIdReward",
+						"ItemRewardQuantity", "SecondItemIdReward",
+						"SecondItemRewardQuantity", "Quality",
+						"MaxNumMonstersAllowed", "ChanceToAppear",
+						"HpRequired", "AtkRequired", "MinDmgDealt",
+						"MaxDmgDealt", "DurationMinMinutes",
+						"DurationMaxMinutes", });
+		internal_static_com_lvl6_proto_UserMiniJobProto_descriptor = getDescriptor()
+				.getMessageTypes().get(1);
+		internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
+				new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived",
+						"TimeStarted", "UserMonsterUuids", "TimeCompleted",
+						"DurationMinutes", "MiniJob", "DurationSeconds", });
+		com.lvl6.proto.MonsterStuffProto.getDescriptor();
+		com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+		com.lvl6.proto.StructureProto.getDescriptor();
+	}
+
+	// @@protoc_insertion_point(outer_class_scope)
 }

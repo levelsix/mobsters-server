@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class PrivateChatPost implements Serializable {
-	
+
 	private static final long serialVersionUID = 10600088114205561L;
-	
+
 	protected String id;
 	protected String posterId;
 	protected String recipientId;
 	protected Date timeOfPost;
 	protected String content;
 
-	public PrivateChatPost()
-	{
+	public PrivateChatPost() {
 		super();
 	}
 
@@ -28,53 +27,43 @@ public class PrivateChatPost implements Serializable {
 		this.content = content;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getPosterId()
-	{
+	public String getPosterId() {
 		return posterId;
 	}
 
-	public void setPosterId( String posterId )
-	{
+	public void setPosterId(String posterId) {
 		this.posterId = posterId;
 	}
 
-	public String getRecipientId()
-	{
+	public String getRecipientId() {
 		return recipientId;
 	}
 
-	public void setRecipientId( String recipientId )
-	{
+	public void setRecipientId(String recipientId) {
 		this.recipientId = recipientId;
 	}
 
-	public Date getTimeOfPost()
-	{
+	public Date getTimeOfPost() {
 		return timeOfPost;
 	}
 
-	public void setTimeOfPost( Date timeOfPost )
-	{
+	public void setTimeOfPost(Date timeOfPost) {
 		this.timeOfPost = timeOfPost;
 	}
 
-	public String getContent()
-	{
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent( String content )
-	{
+	public void setContent(String content) {
 		this.content = content;
 	}
 

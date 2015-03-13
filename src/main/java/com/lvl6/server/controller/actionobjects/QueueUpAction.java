@@ -25,8 +25,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class QueueUpAction
-{
+public class QueueUpAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -38,15 +37,12 @@ public class QueueUpAction
 	private MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
 	private TimeUtils timeUtil;
 
-	public QueueUpAction(
-		String attackerId,
-		Set<String> userIdBlackList,
-		Date clientDate,
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
-		HazelcastPvpUtil hazelcastPvpUtil,
-		MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil,
-		TimeUtils timeUtil)
-	{
+	public QueueUpAction(String attackerId, Set<String> userIdBlackList,
+			Date clientDate,
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
+			HazelcastPvpUtil hazelcastPvpUtil,
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil,
+			TimeUtils timeUtil) {
 		super();
 		this.attackerId = attackerId;
 		this.userIdBlackList = userIdBlackList;
@@ -76,11 +72,10 @@ public class QueueUpAction
 	private int minElo;
 	private int maxElo;
 	private List<String> queuedOpponentIdsList;
-//	private Map<String, PvpUser> userIdToPvpUser;
+	//	private Map<String, PvpUser> userIdToPvpUser;
 	private List<List<MonsterForPvp>> fakeUserMonsters;
 
-	public void execute(Builder resBuilder)
-	{
+	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -105,16 +100,14 @@ public class QueueUpAction
 
 	}
 
-	private boolean verifySyntax(Builder resBuilder)
-	{
+	private boolean verifySyntax(Builder resBuilder) {
 
 		return true;
 	}
 
-	private boolean verifySemantics(Builder resBuilder)
-	{
+	private boolean verifySemantics(Builder resBuilder) {
 		attackerPlfu = pvpLeagueForUserRetrieveUtil
-			.getUserPvpLeagueForId(attackerId); 
+				.getUserPvpLeagueForId(attackerId);
 
 		if (null == attackerPlfu) {
 			log.error("no PvpLeagueForUser with id={}", attackerId);
@@ -124,50 +117,47 @@ public class QueueUpAction
 		return true;
 	}
 
-	private boolean writeChangesToDB(Builder resBuilder)
-	{
+	private boolean writeChangesToDB(Builder resBuilder) {
 		selectRealUsers();
 		selectFakeDefenders();
-		
+
 		//TODO: this is the same logic in BeginPvpBattleController 
 		//turn off user's shield if he has one active
 		Date curShieldEndTime = attackerPlfu.getShieldEndTime();
 		if (timeUtil.isFirstEarlierThanSecond(clientDate, curShieldEndTime)) {
 			log.info("shield end time is now being reset since he's attacking with a shield");
-			log.info( "1)cur pvpuser={}",
-				hazelcastPvpUtil.getPvpUser(attackerId) );
-//			Date login = attacker.getLastLogin();
-//			Timestamp loginTime = new Timestamp(login.getTime());
+			log.info("1)cur pvpuser={}",
+					hazelcastPvpUtil.getPvpUser(attackerId));
+			//			Date login = attacker.getLastLogin();
+			//			Timestamp loginTime = new Timestamp(login.getTime());
 			Timestamp queueTime = new Timestamp(clientDate.getTime());
 			UpdateUtils.get().updatePvpLeagueForUserShields(attackerId,
-				queueTime, queueTime);
+					queueTime, queueTime);
 
 			PvpUser attackerOpu = new PvpUser(attackerPlfu);
 			attackerOpu.setShieldEndTime(clientDate);
-			attackerOpu.setInBattleEndTime(clientDate);               
+			attackerOpu.setInBattleEndTime(clientDate);
 			hazelcastPvpUtil.replacePvpUser(attackerOpu, attackerId);
-			log.info( "2)cur pvpuser={}",
-				hazelcastPvpUtil.getPvpUser(attackerId) );
+			log.info("2)cur pvpuser={}",
+					hazelcastPvpUtil.getPvpUser(attackerId));
 			log.info(" (should be same as 2cur pvpUser) 3cur pvpuser={}",
-				attackerOpu);
+					attackerOpu);
 		}
-		
+
 		return true;
 	}
-	
-	private void selectRealUsers()
-	{
+
+	private void selectRealUsers() {
 		attackerElo = attackerPlfu.getElo();
-		
+
 		Map.Entry<Integer, Integer> minAndMaxElo = PvpUtil2
-			.getMinAndMaxElo(attackerElo);
+				.getMinAndMaxElo(attackerElo);
 		minElo = minAndMaxElo.getKey();
 		maxElo = minAndMaxElo.getValue();
 
-		boolean attackerBelowSomeElo = attackerElo < 
-			ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
-		boolean showBotsBelowSomeElo = ServerToggleRetrieveUtils.getToggleValueForName(
-			ControllerConstants.SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO);
+		boolean attackerBelowSomeElo = attackerElo < ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
+		boolean showBotsBelowSomeElo = ServerToggleRetrieveUtils
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO);
 		boolean pvpBotsOnly = showBotsBelowSomeElo && attackerBelowSomeElo;
 
 		if (!pvpBotsOnly) {
@@ -176,12 +166,10 @@ public class QueueUpAction
 		}
 	}
 
-	private void getQueuedOpponentIds()
-	{
+	private void getQueuedOpponentIds() {
 		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
-		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil
-			.retrievePvpUsers(minElo, maxElo, clientDate, numNeeded,
-				userIdBlackList); 
+		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
+				minElo, maxElo, clientDate, numNeeded, userIdBlackList);
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
@@ -189,19 +177,18 @@ public class QueueUpAction
 		//choose users either randomly or all of them
 		queuedOpponentIdsList = new ArrayList<String>();
 		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
-			queuedOpponentIdsList);//, userIdToPvpUser);
+				queuedOpponentIdsList);//, userIdToPvpUser);
 
 		log.info("the lucky ids who get to be attacked! ids={}",
-			queuedOpponentIdsList);
+				queuedOpponentIdsList);
 	}
 
 	//prospectiveUserIds and userIdToPvpUser are the return values
 	private void selectUsers(int numNeeded, int numDefenders,
-		Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds)//,
-		//Map<String, PvpUser> userIdToPvpUser)
+			Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds)//,
+	//Map<String, PvpUser> userIdToPvpUser)
 	{
 		Random rand = ControllerConstants.RAND;
-		
 
 		float numNeededSoFar = numNeeded;
 		float numDefendersLeft = numDefenders;
@@ -214,7 +201,7 @@ public class QueueUpAction
 			if (prospectiveUserIds.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
 				//don't want to send every eligible victim to user.
 				log.info("reached queue length of {}",
-					ControllerConstants.PVP__MAX_QUEUE_SIZE);
+						ControllerConstants.PVP__MAX_QUEUE_SIZE);
 				break;
 			}
 
@@ -231,7 +218,7 @@ public class QueueUpAction
 
 			//randomly pick people
 			float randFloat = rand.nextFloat();
-			float probabilityToBeSelected = numNeededSoFar/numDefendersLeft;
+			float probabilityToBeSelected = numNeededSoFar / numDefendersLeft;
 			//			log.info("randFloat={}", randFloat);
 			//			log.info("probabilityToBeSelected={}", probabilityToBeSelected);
 			if (randFloat < probabilityToBeSelected) {
@@ -244,29 +231,26 @@ public class QueueUpAction
 		}
 	}
 
-
-	private void selectFakeDefenders()
-	{
+	private void selectFakeDefenders() {
 		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
-		
-		if ( null == queuedOpponentIdsList ) {
+
+		if (null == queuedOpponentIdsList) {
 			queuedOpponentIdsList = new ArrayList<String>();
 		}
 
-		if ( queuedOpponentIdsList.size() >= numWanted ) {
+		if (queuedOpponentIdsList.size() >= numWanted) {
 			return;
 		}
 		numWanted = numWanted - queuedOpponentIdsList.size();
-		generateFakeDefenders( numWanted );
+		generateFakeDefenders(numWanted);
 	}
-	
-	private void generateFakeDefenders( int numWanted )
-	{
+
+	private void generateFakeDefenders(int numWanted) {
 		//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
 		log.info("no valid users for attacker={}", attackerId);
 		log.info("generating fake users.");
-		Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil.
-			retrievePvpMonsters(minElo, maxElo);
+		Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil
+				.retrievePvpMonsters(minElo, maxElo);
 
 		try {
 			//group monsters off
@@ -275,31 +259,28 @@ public class QueueUpAction
 			//25% of the time three monsters
 			//limit the number of groups of 3
 			//NOTE: this is assuming there are more than enough monsters...
-			fakeUserMonsters = createFakeUserMonsters(fakeMonsters,numWanted);
+			fakeUserMonsters = createFakeUserMonsters(fakeMonsters, numWanted);
 
-			if (!fakeUserMonsters.isEmpty())
-			{
-//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
-//					fakeUserMonsters, attackerElo);
+			if (!fakeUserMonsters.isEmpty()) {
+				//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
+				//					fakeUserMonsters, attackerElo);
 			} else {
-				log.error("no fake users generated. minElo={} \t maxElo={}", minElo, maxElo);
+				log.error("no fake users generated. minElo={} \t maxElo={}",
+						minElo, maxElo);
 			}
 		} catch (Exception e) {
-			log.error(String.format(
-				"creating fake user exceptioned out. fakeMonsters=%s, numWanted=%s",
-				fakeMonsters, numWanted),
-				e);
+			log.error(
+					String.format(
+							"creating fake user exceptioned out. fakeMonsters=%s, numWanted=%s",
+							fakeMonsters, numWanted), e);
 		}
 	}
 
 	private List<List<MonsterForPvp>> createFakeUserMonsters(
-		Set<MonsterForPvp> fakeMonsters,
-		int numGroupsWanted)
-	{
+			Set<MonsterForPvp> fakeMonsters, int numGroupsWanted) {
 		List<List<MonsterForPvp>> retVal = new ArrayList<List<MonsterForPvp>>();
 
-		if (null == fakeMonsters || fakeMonsters.isEmpty())
-		{
+		if (null == fakeMonsters || fakeMonsters.isEmpty()) {
 			return retVal;
 		}
 
@@ -310,9 +291,9 @@ public class QueueUpAction
 		//25% of the time one monster
 		//50% of the time two monsters
 		//25% of the time three monsters
-		List<MonsterForPvp> monstersAvailable = new ArrayList<MonsterForPvp>(fakeMonsters);
-		for (int i = 0; i < numGroupsWanted; i++)
-		{
+		List<MonsterForPvp> monstersAvailable = new ArrayList<MonsterForPvp>(
+				fakeMonsters);
+		for (int i = 0; i < numGroupsWanted; i++) {
 			//a hack to simulate the probability listed
 			int numMonstersWanted = rand.nextInt(4) + 1;
 			if (numMonstersWanted % 2 == 0) {
@@ -320,26 +301,21 @@ public class QueueUpAction
 				numMonstersWanted = 2;
 			}
 
-			List<MonsterForPvp> grouping = createFakeUserMonstersGrouping(
-				rand, numAvailableMonsters, monstersAvailable, numMonstersWanted);
+			List<MonsterForPvp> grouping = createFakeUserMonstersGrouping(rand,
+					numAvailableMonsters, monstersAvailable, numMonstersWanted);
 
 			retVal.add(grouping);
 		}
 
 		return retVal;
 	}
-	
 
-	private List<MonsterForPvp> createFakeUserMonstersGrouping(
-		Random rand,
-		int numAvailableMonsters,
-		List<MonsterForPvp> fakeMonstersList,
-		int numMonsters )
-	{
+	private List<MonsterForPvp> createFakeUserMonstersGrouping(Random rand,
+			int numAvailableMonsters, List<MonsterForPvp> fakeMonstersList,
+			int numMonsters) {
 		List<MonsterForPvp> grouping = new ArrayList<MonsterForPvp>(numMonsters);
 
-		for (int index = 0; index < numMonsters; index++)
-		{
+		for (int index = 0; index < numMonsters; index++) {
 			int monsterIndex = rand.nextInt(numAvailableMonsters);
 			MonsterForPvp mfp = fakeMonstersList.get(monsterIndex);
 			grouping.add(mfp);
@@ -348,19 +324,16 @@ public class QueueUpAction
 		return grouping;
 	}
 
-	public List<String> getQueuedOpponentIdsList()
-	{
+	public List<String> getQueuedOpponentIdsList() {
 		return queuedOpponentIdsList;
 	}
 
-	public List<List<MonsterForPvp>> getFakeUserMonsters()
-	{
+	public List<List<MonsterForPvp>> getFakeUserMonsters() {
 		return fakeUserMonsters;
 	}
 
-	public int getAttackerElo()
-	{
+	public int getAttackerElo() {
 		return attackerElo;
 	}
-	
+
 }

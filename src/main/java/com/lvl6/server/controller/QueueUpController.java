@@ -46,10 +46,12 @@ import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
+@Component
+@DependsOn("gameServer")
+public class QueueUpController extends EventController {
 
-@Component @DependsOn("gameServer") public class QueueUpController extends EventController {
-
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
@@ -71,13 +73,13 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 
@@ -109,9 +111,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
-			.getQueueUpRequestProto();
+				.getQueueUpRequestProto();
 
-		log.info("reqProto={}", reqProto); 
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
 		String attackerId = attackerProto.getUserUuid();
@@ -124,7 +126,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		Date clientDate = new Date(reqProto.getClientTime());
 
 		//set some values to send to the client
-		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
+		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto
+				.newBuilder();
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 
@@ -141,8 +144,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, seenUserIds=%s",
-				attackerId, uniqSeenUserIds), e);
+					"UUID error. incorrect userId=%s, seenUserIds=%s",
+					attackerId, uniqSeenUserIds), e);
 			invalidUuids = true;
 		}
 
@@ -150,20 +153,20 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());  
+			resEvent.setQueueUpResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
 		try {
-//			User attacker = userRetrieveUtil.getUserById(attackerId);
-//			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
-//				.getUserPvpLeagueForId(attackerId);
-			
-			QueueUpAction qua = new QueueUpAction(attackerId,
-				uniqSeenUserIds, clientDate, pvpLeagueForUserRetrieveUtil,
-				hazelcastPvpUtil, monsterForPvpRetrieveUtil, timeUtil);
-			
+			//			User attacker = userRetrieveUtil.getUserById(attackerId);
+			//			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
+			//				.getUserPvpLeagueForId(attackerId);
+
+			QueueUpAction qua = new QueueUpAction(attackerId, uniqSeenUserIds,
+					clientDate, pvpLeagueForUserRetrieveUtil, hazelcastPvpUtil,
+					monsterForPvpRetrieveUtil, timeUtil);
+
 			//update the user, and his shield
 			qua.execute(resBuilder);
 			setProspectivePvpMatches(resBuilder, attackerId, qua);
@@ -171,19 +174,18 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			//write event to the client
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());  
+			resEvent.setQueueUpResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
-			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus()))
-			{
+			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//no need to update client since no currency or elo update
 				//UPDATE CLIENT 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-//				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-//					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-//						attacker, plfu, null);
-//				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				//				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				//					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+				//						attacker, plfu, null);
+				//				resEventUpdate.setTag(event.getTag());
+				//				server.writeEvent(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -191,9 +193,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());  
+			resEvent.setQueueUpResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-		} 
+		}
 	}
 
 	/*
@@ -249,9 +251,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	//		return true;
 	//	}
 
-	private void setProspectivePvpMatches(
-		Builder resBuilder, String attackerId, QueueUpAction qua )
-	{
+	private void setProspectivePvpMatches(Builder resBuilder,
+			String attackerId, QueueUpAction qua) {
 
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 		List<String> queuedOpponentIdsList = qua.getQueuedOpponentIdsList();
@@ -259,60 +260,58 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			log.info("there are people to attack!");
 
 			RetrieveUserMonsterTeamAction rumta = new RetrieveUserMonsterTeamAction(
-				attackerId, queuedOpponentIdsList, userRetrieveUtil,
-				clanRetrieveUtil, monsterForUserRetrieveUtil,
-				clanMemberTeamDonationRetrieveUtil,
-				monsterSnapshotForUserRetrieveUtil,
-				hazelcastPvpUtil, pvpLeagueForUserRetrieveUtil,
-				pvpBoardObstacleForUserRetrieveUtil);
-			
-			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder =
-				RetrieveUserMonsterTeamResponseProto.newBuilder();
-			rumta.execute(tempResBuilder);
-			
-			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(
-				tempResBuilder.getStatus()))
-			{
-				List<PvpProto> ppList = CreateInfoProtoUtils
-					.createPvpProtos( rumta.getAllUsersExceptRetriever(),
-						rumta.getUserIdToClan(), null,
-						rumta.getUserIdToPvpUsers(),
-						rumta.getAllButRetrieverUserIdToUserMonsters(),
-						rumta.getAllButRetrieverUserIdToUserMonsterIdToDroppedId(),
-						rumta.getAllButRetrieverUserIdToCashLost(),
-						rumta.getAllButRetrieverUserIdToOilLost(),
-						rumta.getAllButRetrieverUserIdToCmtd(),
-						rumta.getAllButRetrieverUserIdToMsfu(),
-						rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
-						rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
+					attackerId, queuedOpponentIdsList, userRetrieveUtil,
+					clanRetrieveUtil, monsterForUserRetrieveUtil,
+					clanMemberTeamDonationRetrieveUtil,
+					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
+					pvpLeagueForUserRetrieveUtil,
+					pvpBoardObstacleForUserRetrieveUtil);
 
+			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
+					.newBuilder();
+			rumta.execute(tempResBuilder);
+
+			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
+					.getStatus())) {
+				List<PvpProto> ppList = CreateInfoProtoUtils
+						.createPvpProtos(
+								rumta.getAllUsersExceptRetriever(),
+								rumta.getUserIdToClan(),
+								null,
+								rumta.getUserIdToPvpUsers(),
+								rumta.getAllButRetrieverUserIdToUserMonsters(),
+								rumta.getAllButRetrieverUserIdToUserMonsterIdToDroppedId(),
+								rumta.getAllButRetrieverUserIdToCashLost(),
+								rumta.getAllButRetrieverUserIdToOilLost(),
+								rumta.getAllButRetrieverUserIdToCmtd(),
+								rumta.getAllButRetrieverUserIdToMsfu(),
+								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
+								rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
 
 				log.info("ppList={}", ppList);
 				//user should see real people before fake ones
 				pvpProtoList.addAll(0, ppList);
 			} else {
 				log.error("unable to get monsters for users: {}",
-					queuedOpponentIdsList);
+						queuedOpponentIdsList);
 			}
-			
+
 		}
-		
-		List<List<MonsterForPvp>> fakeUserMonsters = qua
-			.getFakeUserMonsters();
-		if (null != fakeUserMonsters && !fakeUserMonsters.isEmpty())
-		{
+
+		List<List<MonsterForPvp>> fakeUserMonsters = qua.getFakeUserMonsters();
+		if (null != fakeUserMonsters && !fakeUserMonsters.isEmpty()) {
 			int attackerElo = qua.getAttackerElo();
 			List<PvpProto> ppList = createPvpProtosFromFakeUser(
-				fakeUserMonsters, attackerElo);
+					fakeUserMonsters, attackerElo);
 			pvpProtoList.addAll(ppList);
 		}
-		
+
 		if (pvpProtoList.isEmpty()) {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			log.error("no real nor fake players to fight");
 			return;
 		}
-		
+
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
 		//log.info("pvpProtoList={}", pvpProtoList);
 	}
@@ -456,7 +455,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		return selectedDefenders;
 	} */
 
-
 	/*
 	private void calculateCashOilRewards(String attackerId, int attackerElo,
 		List<User> queuedOpponents, Map<String, PvpUser> userIdToPvpUser,
@@ -481,35 +479,35 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	}*/
 
 	private List<PvpProto> createPvpProtosFromFakeUser(
-		List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo)
-		{
+			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
 		boolean setElo = ServerToggleRetrieveUtils
-			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
 		boolean displayBotElo = ServerToggleRetrieveUtils
-			.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
-			PvpProto user = createFakeUser(mons, setElo, displayBotElo, attackerElo);
+			PvpProto user = createFakeUser(mons, setElo, displayBotElo,
+					attackerElo);
 			ppList.add(user);
 		}
 
 		log.info("num fake users created: {}", ppList.size());
 		return ppList;
-		}
+	}
 
 	//CREATES ONE FAKE USER FOR PVP
 	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
-		boolean setElo, boolean displayBotElo, int attackerElo)
-	{
+			boolean setElo, boolean displayBotElo, int attackerElo) {
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
 		//for cur elo avg out the monsters elos
 
 		List<Integer> cashWinnings = new ArrayList<Integer>();
 		List<Integer> oilWinnings = new ArrayList<Integer>();
-		int avgElo = determineAvgEloAndCashOilReward(mfpList, cashWinnings, oilWinnings);
+		int avgElo = determineAvgEloAndCashOilReward(mfpList, cashWinnings,
+				oilWinnings);
 
 		String userId = null;
 		String randomName = hazelcastPvpUtil.getRandomName();
@@ -530,14 +528,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		//it's important that monsterIdsDropped be in the same order
 		//as mfpList
 		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId,
-			randomName, lvl, avgElo, prospectiveCashWinnings,
-			prospectiveOilWinnings, mfpList, monsterIdsDropped, setElo);
+				randomName, lvl, avgElo, prospectiveCashWinnings,
+				prospectiveOilWinnings, mfpList, monsterIdsDropped, setElo);
 		return fakeUser;
 	}
 
 	//assumes the List<MonsterForPvp> mons is not empty
 	private int determineAvgEloAndCashOilReward(List<MonsterForPvp> mons,
-		List<Integer> cashWinnings, List<Integer> oilWinnings) {
+			List<Integer> cashWinnings, List<Integer> oilWinnings) {
 		int avgElo = 0;
 		int prospectiveCashWinnings = PvpBattleOutcome.CASH__MIN_REWARD;//0;
 		int prospectiveOilWinnings = PvpBattleOutcome.OIL__MIN_REWARD;//0;
@@ -556,8 +554,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		return avgElo;
 	}
 
-	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList)
-	{
+	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList) {
 		List<Integer> monsterDropIds = new ArrayList<Integer>();
 
 		for (MonsterForPvp mfp : mfpList) {
@@ -565,115 +562,98 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 			int monserLvl = mfp.getMonsterLvl();
 
 			boolean monsterDropped = MonsterLevelInfoRetrieveUtils
-				.didPvpMonsterDrop(monsterId, monserLvl);
+					.didPvpMonsterDrop(monsterId, monserLvl);
 
 			int monsterDropId = ControllerConstants.NOT_SET;
 
 			Monster mon = MonsterRetrieveUtils
-				.getMonsterForMonsterId(monsterId); 
+					.getMonsterForMonsterId(monsterId);
 			if (monsterDropped) {
 				monsterDropId = mon.getPvpMonsterDropId();
 			}
 
-			log.info("for fake monster {}, set pvpMonsterDropId={}",
-				mfp, monsterDropId);
+			log.info("for fake monster {}, set pvpMonsterDropId={}", mfp,
+					monsterDropId);
 			monsterDropIds.add(monsterDropId);
 		}
 
 		return monsterDropIds;
 	}
 
-	public HazelcastPvpUtil getHazelcastPvpUtil()
-	{
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
 
-	public void setHazelcastPvpUtil( HazelcastPvpUtil hazelcastPvpUtil )
-	{
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 
-	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtil()
-	{
+	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtil() {
 		return monsterForPvpRetrieveUtil;
 	}
 
-	public void setMonsterForPvpRetrieveUtil( MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil )
-	{
+	public void setMonsterForPvpRetrieveUtil(
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil) {
 		this.monsterForPvpRetrieveUtil = monsterForPvpRetrieveUtil;
 	}
 
-	public TimeUtils getTimeUtil()
-	{
+	public TimeUtils getTimeUtil() {
 		return timeUtil;
 	}
 
-	public void setTimeUtil( TimeUtils timeUtil )
-	{
+	public void setTimeUtil(TimeUtils timeUtil) {
 		this.timeUtil = timeUtil;
 	}
 
-	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil()
-	{
+	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
 		return pvpLeagueForUserRetrieveUtil;
 	}
 
 	public void setPvpLeagueForUserRetrieveUtil(
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
-	{
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
 
-	public ClanRetrieveUtils2 getClanRetrieveUtil()
-	{
+	public ClanRetrieveUtils2 getClanRetrieveUtil() {
 		return clanRetrieveUtil;
 	}
 
-	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
-	{
+	public void setClanRetrieveUtil(ClanRetrieveUtils2 clanRetrieveUtil) {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
-	{
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil() {
 		return monsterForUserRetrieveUtil;
 	}
 
 	public void setMonsterForUserRetrieveUtil(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
-	{
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
-	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
-	{
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;
 	}
 
 	public void setClanMemberTeamDonationRetrieveUtil(
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil )
-	{
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 	}
 
-	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil()
-	{
+	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil() {
 		return monsterSnapshotForUserRetrieveUtil;
 	}
 
 	public void setMonsterSnapshotForUserRetrieveUtil(
-		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil )
-	{
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 	}
 

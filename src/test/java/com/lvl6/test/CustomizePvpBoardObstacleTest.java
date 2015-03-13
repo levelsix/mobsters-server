@@ -33,7 +33,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
 public class CustomizePvpBoardObstacleTest extends TestCase {
@@ -52,7 +51,7 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 
 	@Autowired
 	private CustomizePvpBoardObstacleController customizePvpBoardObstacleController;
-	
+
 	private JdbcTemplate jdbcTemplate;
 
 	private User user;
@@ -64,6 +63,7 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	@Override
 	@Before
 	public void setUp() {
 		log.info("setUp");
@@ -82,9 +82,9 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 		String email = null;
 		String fbData = null;
 
-		String userId = insertUtil.insertUser(name, udid, lvl,  playerExp, cash, oil,
-				gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
-				email, fbData);
+		String userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
+				oil, gems, false, deviceToken, createTime, facebookId,
+				avatarMonsterId, email, fbData);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -92,10 +92,12 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 			throw new RuntimeException("no user was created!");
 		}
 
-		mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null);
-		
+		mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user,
+				null);
+
 	}
 
+	@Override
 	@After
 	public void tearDown() {
 		if (null == user) {
@@ -103,18 +105,12 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 			return;
 		}
 
-		String query = String.format(
-				"DELETE FROM %s where %s=?",
-				DBConstants.TABLE_USER,
-				DBConstants.USER__ID);
-		Object[] values = new Object[] {
-				user.getId()
-		};
-		int[] types = new int[] {
-				java.sql.Types.VARCHAR
-		};
+		String query = String.format("DELETE FROM %s where %s=?",
+				DBConstants.TABLE_USER, DBConstants.USER__ID);
+		Object[] values = new Object[] { user.getId() };
+		int[] types = new int[] { java.sql.Types.VARCHAR };
 
-		int numDeleted = jdbcTemplate.update( query, values, types );
+		int numDeleted = jdbcTemplate.update(query, values, types);
 
 	}
 
@@ -122,40 +118,37 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 	//	@Rollback(true) //doesn't roll back transaction >:C
 	//	@Transactional //just manually undo...
 	public void testCreateDestroyBoardObstacle() {
-		String userId = user.getId(); 
+		String userId = user.getId();
 		PvpBoardObstacleForUser pbofu = createPvpBoardObstacle(userId);
 		UserPvpBoardObstacleProto upbop = CreateInfoProtoUtils
 				.createUserPvpBoardObstacleProto(pbofu);
 
 		//construct the request proto
-		CustomizePvpBoardObstacleRequestProto.Builder cpborpb =
-				CustomizePvpBoardObstacleRequestProto.newBuilder();
+		CustomizePvpBoardObstacleRequestProto.Builder cpborpb = CustomizePvpBoardObstacleRequestProto
+				.newBuilder();
 		cpborpb.setSender(mup);
 		cpborpb.addNuOrUpdatedObstacles(upbop);
-		
+
 		//construct the request event to create obstacle
-		CustomizePvpBoardObstacleRequestEvent cpbore =
-				new CustomizePvpBoardObstacleRequestEvent();
+		CustomizePvpBoardObstacleRequestEvent cpbore = new CustomizePvpBoardObstacleRequestEvent();
 		cpbore.setCustomizePvpBoardObstacleRequestProto(cpborpb.build());
 		cpbore.setTag(1);
-		
+
 		//process the request event
 		customizePvpBoardObstacleController.handleEvent(cpbore);
-		
-		
-		
+
 		//construct the request proto
 		cpborpb = CustomizePvpBoardObstacleRequestProto.newBuilder();
 		cpborpb.setSender(mup);
 		cpborpb.addRemoveUpboIds(pbofu.getId());
-		
+
 		//construct the request event to delete obstacle
 		cpbore.setCustomizePvpBoardObstacleRequestProto(cpborpb.build());
 		cpbore.setTag(2); //just so it's different, not necessary I think
-		
+
 		//process the request event
 		customizePvpBoardObstacleController.handleEvent(cpbore);
-		
+
 	}
 
 	private PvpBoardObstacleForUser createPvpBoardObstacle(String userId) {
@@ -169,24 +162,19 @@ public class CustomizePvpBoardObstacleTest extends TestCase {
 		return pbofu;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public InsertUtil getInsertUtil()
-	{
+	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
-	public void setInsertUtil( InsertUtil insertUtil )
-	{
+	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
 	}
 

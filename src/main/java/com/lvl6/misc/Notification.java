@@ -14,362 +14,391 @@ import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 
 public class Notification {
 
+	private static final Logger log = LoggerFactory
+			.getLogger(Notification.class);
 
-	private static final Logger log = LoggerFactory.getLogger(Notification.class);
+	private Map<String, Object> keysAndValues;
+	private ColorProto.Builder rgb;
 
-  private Map<String, Object> keysAndValues;
-  private ColorProto.Builder rgb;
+	//should really move these into notification constants....
+	public static final String ATTACKER_CONCEDED = "attacker conceded";
+	public static final String OWNER_CONCEDED = "owner conceded";
+	public static final String ATTACKER_NOT_ENOUGH_MEMBERS = "attacker does not have enough members";
+	public static final String OWNER_NOT_ENOUGH_MEMBERS = "owner does not have enough members";
+	public static final String CLAN_TOWER_WAR_ENDED = "battle ended";
+	public static final String CLAN_TOWER_CLAIMED = "tower claimed";
+	public static final String CLAN_TOWER_WAR_BEGAN = "battle began";
+	public static final String FOUND_AN_EPIC = "found an epic";
 
-  //should really move these into notification constants....
-  public static final String ATTACKER_CONCEDED = "attacker conceded";
-  public static final String OWNER_CONCEDED = "owner conceded";
-  public static final String ATTACKER_NOT_ENOUGH_MEMBERS = "attacker does not have enough members";
-  public static final String OWNER_NOT_ENOUGH_MEMBERS = "owner does not have enough members";
-  public static final String CLAN_TOWER_WAR_ENDED = "battle ended";
-  public static final String CLAN_TOWER_CLAIMED = "tower claimed";
-  public static final String CLAN_TOWER_WAR_BEGAN = "battle began";
-  public static final String FOUND_AN_EPIC = "found an epic";
-  
-  public Notification () {
-    this.keysAndValues = new HashMap<String, Object>();
-    this.rgb = ColorProto.newBuilder();
-  }
+	public Notification() {
+		this.keysAndValues = new HashMap<String, Object>();
+		this.rgb = ColorProto.newBuilder();
+	}
 
-  public GeneralNotificationResponseProto.Builder generateNotificationBuilder() {
-    final GeneralNotificationResponseProto.Builder notificationProto = 
-        GeneralNotificationResponseProto.newBuilder();
-    try {
-      notificationProto.setTitle((String)keysAndValues.get("title"));
-      notificationProto.setSubtitle((String)keysAndValues.get("subtitle"));
-      notificationProto.setRgb((ColorProto)keysAndValues.get("rgb"));
-    } catch (Exception e) {
-      log.error("Error sending notification");
-      log.error(""+e);
-    }
+	public GeneralNotificationResponseProto.Builder generateNotificationBuilder() {
+		final GeneralNotificationResponseProto.Builder notificationProto = GeneralNotificationResponseProto
+				.newBuilder();
+		try {
+			notificationProto.setTitle((String) keysAndValues.get("title"));
+			notificationProto.setSubtitle((String) keysAndValues
+					.get("subtitle"));
+			notificationProto.setRgb((ColorProto) keysAndValues.get("rgb"));
+		} catch (Exception e) {
+			log.error("Error sending notification");
+			log.error("" + e);
+		}
 
-    return notificationProto;
-  }
+		return notificationProto;
+	}
 
-  public void setAsClanTowerWarClanConceded (String losingClan, String winningClan, String towerName) {
-    MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_CONCEDED__TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_CONCEDED__SUBTITLE);
-    
-    if (winningClan == null) {
-      winningClan = "";
-      formatTitle = new MessageFormat(NotificationConstants.CLAN_CONCEDED__TITLE_NO_OWNER);
-      formatSubtitle = new MessageFormat(NotificationConstants.CLAN_CONCEDED__SUBTITLE_NO_OWNER);
-    }
+	public void setAsClanTowerWarClanConceded(String losingClan,
+			String winningClan, String towerName) {
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.CLAN_CONCEDED__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.CLAN_CONCEDED__SUBTITLE);
 
-    Object[] arguments = { losingClan, winningClan, towerName };
+		if (winningClan == null) {
+			winningClan = "";
+			formatTitle = new MessageFormat(
+					NotificationConstants.CLAN_CONCEDED__TITLE_NO_OWNER);
+			formatSubtitle = new MessageFormat(
+					NotificationConstants.CLAN_CONCEDED__SUBTITLE_NO_OWNER);
+		}
 
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-    rgb.setBlue(NotificationConstants.CLAN_CONCEDED__BLUE);
-    rgb.setGreen(NotificationConstants.CLAN_CONCEDED__GREEN);
-    rgb.setRed(NotificationConstants.CLAN_CONCEDED__RED);
+		Object[] arguments = { losingClan, winningClan, towerName };
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+		rgb.setBlue(NotificationConstants.CLAN_CONCEDED__BLUE);
+		rgb.setGreen(NotificationConstants.CLAN_CONCEDED__GREEN);
+		rgb.setRed(NotificationConstants.CLAN_CONCEDED__RED);
 
-    log.info("some clan conceded." + title + " " + subtitle);
-  }
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
 
-  public void setAsClanTowerWarClanWon (String clanTowerAttackerName, String clanTowerOwnerName, 
-      String towerName, boolean attackerWon) {
-    MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_WON__TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_WON__SUBTITLE);
+		log.info("some clan conceded." + title + " " + subtitle);
+	}
 
-    Object[] arguments;
-    if(attackerWon) {
-      arguments = new Object[]{ clanTowerAttackerName, clanTowerOwnerName, towerName};
-    } else {
-      arguments = new Object[]{ clanTowerOwnerName, clanTowerAttackerName, towerName};
-    }
+	public void setAsClanTowerWarClanWon(String clanTowerAttackerName,
+			String clanTowerOwnerName, String towerName, boolean attackerWon) {
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.CLAN_WON__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.CLAN_WON__SUBTITLE);
 
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-    rgb.setBlue(NotificationConstants.CLAN_WON__BLUE);
-    rgb.setGreen(NotificationConstants.CLAN_WON__GREEN);
-    rgb.setRed(NotificationConstants.CLAN_WON__RED);
+		Object[] arguments;
+		if (attackerWon) {
+			arguments = new Object[] { clanTowerAttackerName,
+					clanTowerOwnerName, towerName };
+		} else {
+			arguments = new Object[] { clanTowerOwnerName,
+					clanTowerAttackerName, towerName };
+		}
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+		rgb.setBlue(NotificationConstants.CLAN_WON__BLUE);
+		rgb.setGreen(NotificationConstants.CLAN_WON__GREEN);
+		rgb.setRed(NotificationConstants.CLAN_WON__RED);
 
-    log.info("some clan won. " + title + " " + subtitle);
-  }
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
 
-  public void setAsClanTowerWarAttackerOwnerDetermined (String attacker, String owner, String towerName, boolean ownerDetermined) {
-    if(ownerDetermined) {
-      Object[] arguments = { owner, towerName };
+		log.info("some clan won. " + title + " " + subtitle);
+	}
 
-      MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_TOWER_OWNER_DETERMINED__TITLE);
-      MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_TOWER_OWNER_DETERMINED__SUBTITLE);
-      String title = formatTitle.format(arguments);
-      String subtitle = formatSubtitle.format(arguments);
+	public void setAsClanTowerWarAttackerOwnerDetermined(String attacker,
+			String owner, String towerName, boolean ownerDetermined) {
+		if (ownerDetermined) {
+			Object[] arguments = { owner, towerName };
 
-      keysAndValues.put("title", title);
-      keysAndValues.put("subtitle", subtitle);
+			MessageFormat formatTitle = new MessageFormat(
+					NotificationConstants.CLAN_TOWER_OWNER_DETERMINED__TITLE);
+			MessageFormat formatSubtitle = new MessageFormat(
+					NotificationConstants.CLAN_TOWER_OWNER_DETERMINED__SUBTITLE);
+			String title = formatTitle.format(arguments);
+			String subtitle = formatSubtitle.format(arguments);
 
-      log.info("owner for tower determined. " + title + " " + subtitle);
-    }  else {
-      Object[] arguments = { attacker, owner, towerName };
+			keysAndValues.put("title", title);
+			keysAndValues.put("subtitle", subtitle);
 
-      MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_TOWER_ATTACKER_DETERMINED__TITLE);
-      MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_TOWER_ATTACKER_DETERMINED__SUBTITLE);
-      String title = formatTitle.format(arguments);
-      String subtitle = formatSubtitle.format(arguments);
+			log.info("owner for tower determined. " + title + " " + subtitle);
+		} else {
+			Object[] arguments = { attacker, owner, towerName };
 
-      keysAndValues.put("title", title);
-      keysAndValues.put("subtitle", subtitle);
+			MessageFormat formatTitle = new MessageFormat(
+					NotificationConstants.CLAN_TOWER_ATTACKER_DETERMINED__TITLE);
+			MessageFormat formatSubtitle = new MessageFormat(
+					NotificationConstants.CLAN_TOWER_ATTACKER_DETERMINED__SUBTITLE);
+			String title = formatTitle.format(arguments);
+			String subtitle = formatSubtitle.format(arguments);
 
-      log.info("attacker for tower determined. " + title + " ");
-    }
+			keysAndValues.put("title", title);
+			keysAndValues.put("subtitle", subtitle);
 
-    rgb.setBlue(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__BLUE);
-    rgb.setGreen(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__GREEN);
-    rgb.setRed(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__RED);
+			log.info("attacker for tower determined. " + title + " ");
+		}
 
-    keysAndValues.put("rgb", rgb.build());
+		rgb.setBlue(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__BLUE);
+		rgb.setGreen(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__GREEN);
+		rgb.setRed(NotificationConstants.CLAN_TOWER_ATTACKER_OWNER_DETERMINED__RED);
 
-  }
+		keysAndValues.put("rgb", rgb.build());
 
-  public void setAsClanTowerAttackerDeterminedAPNS(String attacker, String owner, 
-      String towerName, boolean msgForAttacker) {
-    
-    if (msgForAttacker) {
-      Object[] arguments = { owner, towerName };
+	}
 
-      MessageFormat formatTitle = new MessageFormat(NotificationConstants.ATTACKING_CLAN__TITLE_APNS);
-      Random rand = new Random();
-      String[] choices = NotificationConstants.ATTACKING_CLAN__SUBTITLE_APNS; 
-      int size = choices.length;
-      int randInt = rand.nextInt(size);
-      MessageFormat formatSubtitle = new MessageFormat(choices[randInt]);
-      String title = formatTitle.format(arguments);
-      String subtitle = formatSubtitle.format(arguments);
-      
-      keysAndValues.put("title", title);
-      keysAndValues.put("subtitle", subtitle);
-      log.info("sending apns to attacking clan " + attacker 
-          + "in clan tower war. title=" + title);
-    } else {
-      Object[] arguments = { attacker, towerName };
+	public void setAsClanTowerAttackerDeterminedAPNS(String attacker,
+			String owner, String towerName, boolean msgForAttacker) {
 
-      MessageFormat formatTitle = new MessageFormat(NotificationConstants.DEFENDING_CLAN__TITLE_APNS);
-      Random rand = new Random();
-      String[] choices = NotificationConstants.DEFENDING_CLAN__SUBTITLE_APNS; 
-      int size = choices.length;
-      int randInt = rand.nextInt(size);
-      MessageFormat formatSubtitle = new MessageFormat(choices[randInt]);
-      String title = formatTitle.format(arguments);
-      String subtitle = formatSubtitle.format(arguments);
-      
-      keysAndValues.put("title", title);
-      keysAndValues.put("subtitle", subtitle);
-      log.info("sending apns to defending clan " + owner 
-          + "in clan tower war. title=" + title);
-    }
-    
-    rgb.setRed(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__RED);
-    rgb.setGreen(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__GREEN);
-    rgb.setBlue(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__BLUE);
-    
-    keysAndValues.put("rgb", rgb.build());
-  }
-  
-  public void setAsClanTowerWarDistributeRewards(String towerName, int silverReward, int goldReward, int numHours) {
-    String silver = "";
-    String conjunction = "";
-    String gold = "";
+		if (msgForAttacker) {
+			Object[] arguments = { owner, towerName };
 
-    if (0 < silverReward) {
-      silver = silverReward + " silver";
-      conjunction = " and ";
-    } if (0 < goldReward) {
-      gold += goldReward + " gold";
-    } else {
-      conjunction = "";
-    }
-    
-    String rewards = silver + conjunction + gold;
-    String numHoursStr = numHours + "";
+			MessageFormat formatTitle = new MessageFormat(
+					NotificationConstants.ATTACKING_CLAN__TITLE_APNS);
+			Random rand = new Random();
+			String[] choices = NotificationConstants.ATTACKING_CLAN__SUBTITLE_APNS;
+			int size = choices.length;
+			int randInt = rand.nextInt(size);
+			MessageFormat formatSubtitle = new MessageFormat(choices[randInt]);
+			String title = formatTitle.format(arguments);
+			String subtitle = formatSubtitle.format(arguments);
 
-    Object[] arguments = { towerName, numHoursStr, rewards };
-    MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__SUBTITLE);
+			keysAndValues.put("title", title);
+			keysAndValues.put("subtitle", subtitle);
+			log.info("sending apns to attacking clan " + attacker
+					+ "in clan tower war. title=" + title);
+		} else {
+			Object[] arguments = { attacker, towerName };
 
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-    rgb.setBlue(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__BLUE);
-    rgb.setGreen(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__GREEN);
-    rgb.setRed(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__RED);
+			MessageFormat formatTitle = new MessageFormat(
+					NotificationConstants.DEFENDING_CLAN__TITLE_APNS);
+			Random rand = new Random();
+			String[] choices = NotificationConstants.DEFENDING_CLAN__SUBTITLE_APNS;
+			int size = choices.length;
+			int randInt = rand.nextInt(size);
+			MessageFormat formatSubtitle = new MessageFormat(choices[randInt]);
+			String title = formatTitle.format(arguments);
+			String subtitle = formatSubtitle.format(arguments);
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
+			keysAndValues.put("title", title);
+			keysAndValues.put("subtitle", subtitle);
+			log.info("sending apns to defending clan " + owner
+					+ "in clan tower war. title=" + title);
+		}
 
-    log.info("rewards sent. " + title + " " + subtitle);
-  }
+		rgb.setRed(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__RED);
+		rgb.setGreen(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__GREEN);
+		rgb.setBlue(NotificationConstants.ATTACKING_CLAN_DETERMINED_APNS__BLUE);
 
-  public void setAsClanCreated (String clanOwnerName, String clanName) {
-    Object[] arguments = { clanOwnerName, clanName };
+		keysAndValues.put("rgb", rgb.build());
+	}
 
-    MessageFormat formatTitle = new MessageFormat(NotificationConstants.CLAN_CREATED__TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.CLAN_CREATED__SUBTITLE);
+	public void setAsClanTowerWarDistributeRewards(String towerName,
+			int silverReward, int goldReward, int numHours) {
+		String silver = "";
+		String conjunction = "";
+		String gold = "";
 
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
+		if (0 < silverReward) {
+			silver = silverReward + " silver";
+			conjunction = " and ";
+		}
+		if (0 < goldReward) {
+			gold += goldReward + " gold";
+		} else {
+			conjunction = "";
+		}
 
-    rgb.setBlue(NotificationConstants.CLAN_CREATED__BLUE);
-    rgb.setGreen(NotificationConstants.CLAN_CREATED__GREEN);
-    rgb.setRed(NotificationConstants.CLAN_CREATED__RED);
+		String rewards = silver + conjunction + gold;
+		String numHoursStr = numHours + "";
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
+		Object[] arguments = { towerName, numHoursStr, rewards };
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__SUBTITLE);
 
-    log.info("new clan created. " + title + " " + subtitle);
-  }
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+		rgb.setBlue(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__BLUE);
+		rgb.setGreen(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__GREEN);
+		rgb.setRed(NotificationConstants.CLAN_TOWER_DISTRIBUTE_REWARDS__RED);
 
-  public void setAsEpicWeaponDropped (
-      String userName, String equipName, String townName) {
-    Object[] arguments = { userName, equipName, townName };
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
 
-    MessageFormat formatTitle = new MessageFormat(NotificationConstants.EPIC_WEAPON_DROPPED__TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(NotificationConstants.EPIC_WEAPON_DROPPED__SUBTITLE);
+		log.info("rewards sent. " + title + " " + subtitle);
+	}
 
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
+	public void setAsClanCreated(String clanOwnerName, String clanName) {
+		Object[] arguments = { clanOwnerName, clanName };
 
-    rgb.setBlue(NotificationConstants.EPIC_WEAPON_DROPPED__BLUE);
-    rgb.setGreen(NotificationConstants.EPIC_WEAPON_DROPPED__GREEN);
-    rgb.setRed(NotificationConstants.EPIC_WEAPON_DROPPED__RED);
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.CLAN_CREATED__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.CLAN_CREATED__SUBTITLE);
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
 
-    log.info("epic weapon dropped. " + title + " " + subtitle);
-  }
-  
-  //announces the first place winner
-  public void setAsLeaderboardEventEndedGlobal(String firstPlaceWinnerName, int gold) {
-    Object[] arguments = { firstPlaceWinnerName, gold };
-    
-    MessageFormat formatTitle = new MessageFormat(
-        NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL_TITLE);
-    MessageFormat formatSubtitle = new MessageFormat(
-        NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL_SUBTITLE);
-    
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-    
-    rgb.setBlue(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__BLUE);
-    rgb.setGreen(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__GREEN);
-    rgb.setRed(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__RED);
-    
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
-    
-    log.info("global notification for tournament/leaderboard event ending. " 
-        + title + " " + subtitle);
-  }
-  
-  public void setAsLeaderboardEventEndedIndividual(boolean playerOnline, 
-      int rank, int gold) {
-    Object[] arguments = { rank+"", gold };
-    
-    MessageFormat formatTitle;
-    MessageFormat formatSubtitle;
-    if(playerOnline) {
-      formatTitle = new MessageFormat(
-          NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_ONLINE_TITLE);
-      formatSubtitle = new MessageFormat(
-          NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_ONLINE_SUBTITLE);
-    } else {
-      formatTitle = new MessageFormat(
-          NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_OFFLINE_TITLE);
-      formatSubtitle = new MessageFormat(
-          NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_OFFLINE_SUBTITLE);
-    }
-    
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-   
-    //color does not matter in apns notification, just set it anyways
-    //TODO: FIX THESE NUMBERS IN NOTIFICATION CONSTANTS . JAVA
-    rgb.setBlue(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__BLUE);
-    rgb.setGreen(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__GREEN);
-    rgb.setRed(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__RED);
+		rgb.setBlue(NotificationConstants.CLAN_CREATED__BLUE);
+		rgb.setGreen(NotificationConstants.CLAN_CREATED__GREEN);
+		rgb.setRed(NotificationConstants.CLAN_CREATED__RED);
 
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
-    
-    log.info("notification for player. player online=" + playerOnline 
-        + " title=" + title + " subtitle=" + subtitle);
-  }
-  
-  public void setAsUserRequestedToJoinClan (int level, String requester) {
-    Object[] arguments = { level, requester };
-    MessageFormat formatTitle = 
-        new MessageFormat(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__TITLE);
-    MessageFormat formatSubtitle = 
-        new MessageFormat(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__SUBTITLE);
-    String title = formatTitle.format(arguments);
-    String subtitle = formatSubtitle.format(arguments);
-    
-    rgb.setBlue(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__BLUE);
-    rgb.setGreen(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__GREEN);
-    rgb.setRed(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__RED);
-    
-    keysAndValues.put("title", title);
-    keysAndValues.put("subtitle", subtitle);
-    keysAndValues.put("rgb", rgb.build());
-    
-    log.info("sending join clan request for level " + level + " " + requester);
-  }
-  
-  public void setAsUserJoinedClan(int level, String newMember) {
-    Object[] arguments = { level, newMember };
-    String title = NotificationConstants.USER_JOINED_A_CLAN__TITLE;
-    String subtitle = NotificationConstants.USER_JOINED_A_CLAN__SUBTITLE;
-    int blue = NotificationConstants.USER_JOINED_A_CLAN__BLUE;
-    int green = NotificationConstants.USER_JOINED_A_CLAN__GREEN;
-    int red = NotificationConstants.USER_JOINED_A_CLAN__RED;
-    
-    setUpNotification(arguments, title, subtitle, blue, green, red);
-    log.info("created joined clan notification for level" + level + " " + newMember);
-  }
-  
-  public void setAsUserLeftClan(int level, String deserter) {
-    Object[] arguments = { level, deserter };
-    String title = NotificationConstants.USER_LEFT_A_CLAN__TITLE;
-    String subtitle = NotificationConstants.USER_LEFT_A_CLAN__SUBTITLE;
-    int blue = NotificationConstants.USER_LEFT_A_CLAN__BLUE;
-    int green = NotificationConstants.USER_LEFT_A_CLAN__GREEN;
-    int red = NotificationConstants.USER_LEFT_A_CLAN__RED;
-    
-    setUpNotification(arguments, title, subtitle, blue, green, red);
-    log.info("created left clan notification for level" + level + " " + deserter);
-  }
-  
-  private void setUpNotification(Object[] argumentsToMsgFormat, String title, String subtitle,
-      int blue, int green, int red) {
-    MessageFormat formatTitle = new MessageFormat(title);
-    MessageFormat formatSubtitle = new MessageFormat(subtitle);
-    String apnsTitle = formatTitle.format(argumentsToMsgFormat);
-    String apnsSubtitle = formatSubtitle.format(argumentsToMsgFormat);
-    
-    rgb.setBlue(blue);
-    rgb.setGreen(green);
-    rgb.setRed(red);
-    
-    keysAndValues.put("title", apnsTitle);
-    keysAndValues.put("subtitle", apnsSubtitle);
-    keysAndValues.put("rgb", rgb.build());
-  }
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
+
+		log.info("new clan created. " + title + " " + subtitle);
+	}
+
+	public void setAsEpicWeaponDropped(String userName, String equipName,
+			String townName) {
+		Object[] arguments = { userName, equipName, townName };
+
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.EPIC_WEAPON_DROPPED__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.EPIC_WEAPON_DROPPED__SUBTITLE);
+
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+
+		rgb.setBlue(NotificationConstants.EPIC_WEAPON_DROPPED__BLUE);
+		rgb.setGreen(NotificationConstants.EPIC_WEAPON_DROPPED__GREEN);
+		rgb.setRed(NotificationConstants.EPIC_WEAPON_DROPPED__RED);
+
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
+
+		log.info("epic weapon dropped. " + title + " " + subtitle);
+	}
+
+	//announces the first place winner
+	public void setAsLeaderboardEventEndedGlobal(String firstPlaceWinnerName,
+			int gold) {
+		Object[] arguments = { firstPlaceWinnerName, gold };
+
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL_TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL_SUBTITLE);
+
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+
+		rgb.setBlue(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__BLUE);
+		rgb.setGreen(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__GREEN);
+		rgb.setRed(NotificationConstants.LEADERBOARD_EVENT_ENDED_GLOBAL__RED);
+
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
+
+		log.info("global notification for tournament/leaderboard event ending. "
+				+ title + " " + subtitle);
+	}
+
+	public void setAsLeaderboardEventEndedIndividual(boolean playerOnline,
+			int rank, int gold) {
+		Object[] arguments = { rank + "", gold };
+
+		MessageFormat formatTitle;
+		MessageFormat formatSubtitle;
+		if (playerOnline) {
+			formatTitle = new MessageFormat(
+					NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_ONLINE_TITLE);
+			formatSubtitle = new MessageFormat(
+					NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_ONLINE_SUBTITLE);
+		} else {
+			formatTitle = new MessageFormat(
+					NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_OFFLINE_TITLE);
+			formatSubtitle = new MessageFormat(
+					NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL_OFFLINE_SUBTITLE);
+		}
+
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+
+		//color does not matter in apns notification, just set it anyways
+		//TODO: FIX THESE NUMBERS IN NOTIFICATION CONSTANTS . JAVA
+		rgb.setBlue(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__BLUE);
+		rgb.setGreen(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__GREEN);
+		rgb.setRed(NotificationConstants.LEADERBOARD_EVENT_ENDED_INDIVIDUAL__RED);
+
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
+
+		log.info("notification for player. player online=" + playerOnline
+				+ " title=" + title + " subtitle=" + subtitle);
+	}
+
+	public void setAsUserRequestedToJoinClan(int level, String requester) {
+		Object[] arguments = { level, requester };
+		MessageFormat formatTitle = new MessageFormat(
+				NotificationConstants.REQUEST_TO_JOIN_A_CLAN__TITLE);
+		MessageFormat formatSubtitle = new MessageFormat(
+				NotificationConstants.REQUEST_TO_JOIN_A_CLAN__SUBTITLE);
+		String title = formatTitle.format(arguments);
+		String subtitle = formatSubtitle.format(arguments);
+
+		rgb.setBlue(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__BLUE);
+		rgb.setGreen(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__GREEN);
+		rgb.setRed(NotificationConstants.REQUEST_TO_JOIN_A_CLAN__RED);
+
+		keysAndValues.put("title", title);
+		keysAndValues.put("subtitle", subtitle);
+		keysAndValues.put("rgb", rgb.build());
+
+		log.info("sending join clan request for level " + level + " "
+				+ requester);
+	}
+
+	public void setAsUserJoinedClan(int level, String newMember) {
+		Object[] arguments = { level, newMember };
+		String title = NotificationConstants.USER_JOINED_A_CLAN__TITLE;
+		String subtitle = NotificationConstants.USER_JOINED_A_CLAN__SUBTITLE;
+		int blue = NotificationConstants.USER_JOINED_A_CLAN__BLUE;
+		int green = NotificationConstants.USER_JOINED_A_CLAN__GREEN;
+		int red = NotificationConstants.USER_JOINED_A_CLAN__RED;
+
+		setUpNotification(arguments, title, subtitle, blue, green, red);
+		log.info("created joined clan notification for level" + level + " "
+				+ newMember);
+	}
+
+	public void setAsUserLeftClan(int level, String deserter) {
+		Object[] arguments = { level, deserter };
+		String title = NotificationConstants.USER_LEFT_A_CLAN__TITLE;
+		String subtitle = NotificationConstants.USER_LEFT_A_CLAN__SUBTITLE;
+		int blue = NotificationConstants.USER_LEFT_A_CLAN__BLUE;
+		int green = NotificationConstants.USER_LEFT_A_CLAN__GREEN;
+		int red = NotificationConstants.USER_LEFT_A_CLAN__RED;
+
+		setUpNotification(arguments, title, subtitle, blue, green, red);
+		log.info("created left clan notification for level" + level + " "
+				+ deserter);
+	}
+
+	private void setUpNotification(Object[] argumentsToMsgFormat, String title,
+			String subtitle, int blue, int green, int red) {
+		MessageFormat formatTitle = new MessageFormat(title);
+		MessageFormat formatSubtitle = new MessageFormat(subtitle);
+		String apnsTitle = formatTitle.format(argumentsToMsgFormat);
+		String apnsSubtitle = formatSubtitle.format(argumentsToMsgFormat);
+
+		rgb.setBlue(blue);
+		rgb.setGreen(green);
+		rgb.setRed(red);
+
+		keysAndValues.put("title", apnsTitle);
+		keysAndValues.put("subtitle", apnsSubtitle);
+		keysAndValues.put("rgb", rgb.build());
+	}
 }

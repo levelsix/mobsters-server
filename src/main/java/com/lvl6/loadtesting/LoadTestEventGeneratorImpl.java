@@ -15,9 +15,11 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 
 	@Override
 	public Message<byte[]> userCreate(String udid) {
-		UserCreateRequestProto.Builder builder = UserCreateRequestProto.newBuilder();
+		UserCreateRequestProto.Builder builder = UserCreateRequestProto
+				.newBuilder();
 		builder.setUdid(udid);
-		return convertToMessage(builder.build().toByteArray(), EventProtocolRequest.C_USER_CREATE_EVENT_VALUE);
+		return convertToMessage(builder.build().toByteArray(),
+				EventProtocolRequest.C_USER_CREATE_EVENT_VALUE);
 	}
 
 	@Override
@@ -26,11 +28,12 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 		builder.setUdid(udid);
 		builder.setVersionNum(1.0f);
 		StartupRequestProto startupRequestEvent = builder.build();
-		return convertToMessage(startupRequestEvent.toByteArray(), EventProtocolRequest.C_STARTUP_EVENT_VALUE);
+		return convertToMessage(startupRequestEvent.toByteArray(),
+				EventProtocolRequest.C_STARTUP_EVENT_VALUE);
 	}
 
 	private Message<byte[]> convertToMessage(byte[] bytes, int type) {
-		ByteBuffer bb = ByteBuffer.allocate(bytes.length+12);
+		ByteBuffer bb = ByteBuffer.allocate(bytes.length + 12);
 		bb.putInt(type);
 		bb.putInt(99);
 		bb.putInt(bytes.length);
@@ -38,12 +41,12 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 		return new GenericMessage<byte[]>(bb.array());
 	}
 
-//	@Override
-//	public Message<byte[]> userQuestDetails(MinimumUserProto.Builder user) {
-//		UserQuestDetailsRequestProto.Builder build = UserQuestDetailsRequestProto.newBuilder();
-//		build.setSender(user);
-//		return convertToMessage(build.build().toByteArray(), EventProtocolRequest.C_USER_QUEST_DETAILS_EVENT_VALUE);
-//	}
+	//	@Override
+	//	public Message<byte[]> userQuestDetails(MinimumUserProto.Builder user) {
+	//		UserQuestDetailsRequestProto.Builder build = UserQuestDetailsRequestProto.newBuilder();
+	//		build.setSender(user);
+	//		return convertToMessage(build.build().toByteArray(), EventProtocolRequest.C_USER_QUEST_DETAILS_EVENT_VALUE);
+	//	}
 
 	@Override
 	public MinimumUserProto.Builder minimumUserProto(String userId) {

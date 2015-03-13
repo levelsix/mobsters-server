@@ -12,32 +12,33 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 
 public class PrivateChatPostRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	private PrivateChatPostRequestProto privateChatPostRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      privateChatPostRequestProto = PrivateChatPostRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = privateChatPostRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("PrivateChatPostRequest exception", e);
-    }
-  }
 
-  public PrivateChatPostRequestProto getPrivateChatPostRequestProto() {
-    return privateChatPostRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			privateChatPostRequestProto = PrivateChatPostRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = privateChatPostRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("PrivateChatPostRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "PrivateChatPostRequestEvent [privateChatPostRequestProto="
-		  + privateChatPostRequestProto
-		  + "]";
-  }
-  
+	public PrivateChatPostRequestProto getPrivateChatPostRequestProto() {
+		return privateChatPostRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "PrivateChatPostRequestEvent [privateChatPostRequestProto="
+				+ privateChatPostRequestProto + "]";
+	}
+
 }

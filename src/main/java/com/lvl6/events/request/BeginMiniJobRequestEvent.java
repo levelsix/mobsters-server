@@ -12,36 +12,38 @@ import com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProto;
 
 public class BeginMiniJobRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private BeginMiniJobRequestProto beginMiniJobRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      beginMiniJobRequestProto = BeginMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = beginMiniJobRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("BeginMiniJobRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public BeginMiniJobRequestProto getBeginMiniJobRequestProto() {
-    return beginMiniJobRequestProto;
-  }
-  //added for testing purposes
-  public void setBeginMiniJobRequestProto(BeginMiniJobRequestProto sorp) {
-	  this.beginMiniJobRequestProto = sorp;
-  }
+	private BeginMiniJobRequestProto beginMiniJobRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "BeginMiniJobRequestEvent [beginMiniJobRequestProto="
-		  + beginMiniJobRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			beginMiniJobRequestProto = BeginMiniJobRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = beginMiniJobRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("BeginMiniJobRequest exception", e);
+		}
+	}
+
+	public BeginMiniJobRequestProto getBeginMiniJobRequestProto() {
+		return beginMiniJobRequestProto;
+	}
+
+	//added for testing purposes
+	public void setBeginMiniJobRequestProto(BeginMiniJobRequestProto sorp) {
+		this.beginMiniJobRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "BeginMiniJobRequestEvent [beginMiniJobRequestProto="
+				+ beginMiniJobRequestProto + "]";
+	}
 
 }

@@ -7,24 +7,26 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBoosterPackProto.ReceivedRareBoosterPurchaseResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReceivedRareBoosterPurchaseResponseEvent extends NormalResponseEvent {
+public class ReceivedRareBoosterPurchaseResponseEvent extends
+		NormalResponseEvent {
 
-  private ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto;
-  
-  public ReceivedRareBoosterPurchaseResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = receivedRareBoosterPurchaseResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto;
 
-  public void setReceivedRareBoosterPurchaseResponseProto(ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto) {
-    this.receivedRareBoosterPurchaseResponseProto = receivedRareBoosterPurchaseResponseProto;
-  }
+	public ReceivedRareBoosterPurchaseResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = receivedRareBoosterPurchaseResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setReceivedRareBoosterPurchaseResponseProto(
+			ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto) {
+		this.receivedRareBoosterPurchaseResponseProto = receivedRareBoosterPurchaseResponseProto;
+	}
 
 }

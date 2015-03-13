@@ -12,32 +12,33 @@ import com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProto;
 
 public class SolicitClanHelpRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private SolicitClanHelpRequestProto solicitClanHelpRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      solicitClanHelpRequestProto = SolicitClanHelpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = solicitClanHelpRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SolicitClanHelpRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public SolicitClanHelpRequestProto getSolicitClanHelpRequestProto() {
-    return solicitClanHelpRequestProto;
-  }
+	private SolicitClanHelpRequestProto solicitClanHelpRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "SolicitClanHelpRequestEvent [solicitClanHelpRequestProto="
-		  + solicitClanHelpRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			solicitClanHelpRequestProto = SolicitClanHelpRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = solicitClanHelpRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SolicitClanHelpRequest exception", e);
+		}
+	}
+
+	public SolicitClanHelpRequestProto getSolicitClanHelpRequestProto() {
+		return solicitClanHelpRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "SolicitClanHelpRequestEvent [solicitClanHelpRequestProto="
+				+ solicitClanHelpRequestProto + "]";
+	}
+
 }

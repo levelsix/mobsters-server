@@ -12,32 +12,33 @@ import com.lvl6.proto.EventApnsProto.EnableAPNSRequestProto;
 
 public class EnableAPNSRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private EnableAPNSRequestProto enableAPNSRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      enableAPNSRequestProto = EnableAPNSRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = enableAPNSRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EnableAPNSRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EnableAPNSRequestProto getEnableAPNSRequestProto() {
-    return enableAPNSRequestProto;
-  }
+	private EnableAPNSRequestProto enableAPNSRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "EnableAPNSRequestEvent [enableAPNSRequestProto="
-		  + enableAPNSRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			enableAPNSRequestProto = EnableAPNSRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = enableAPNSRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EnableAPNSRequest exception", e);
+		}
+	}
+
+	public EnableAPNSRequestProto getEnableAPNSRequestProto() {
+		return enableAPNSRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "EnableAPNSRequestEvent [enableAPNSRequestProto="
+				+ enableAPNSRequestProto + "]";
+	}
 
 }

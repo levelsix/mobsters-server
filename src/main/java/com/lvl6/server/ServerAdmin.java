@@ -25,7 +25,6 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
@@ -33,22 +32,25 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	Logger log = LoggerFactory.getLogger(getClass());
 
 	protected JdbcTemplate jdbc;
-	
-	
-	@Resource(name="serverMessagesTemplate")
+
+	@Resource(name = "serverMessagesTemplate")
 	protected RabbitTemplate serverMessagesTemplate;
+
 	public RabbitTemplate getServerMessagesTemplate() {
 		return serverMessagesTemplate;
 	}
+
 	public void setServerMessagesTemplate(RabbitTemplate serverMessagesTemplate) {
 		this.serverMessagesTemplate = serverMessagesTemplate;
 	}
 
 	@Resource
 	protected ApplicationMode appMode;
+
 	public ApplicationMode getAppMode() {
 		return appMode;
 	}
+
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
 	}
@@ -69,8 +71,6 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	public void setExecutor(TaskExecutor executor) {
 		this.executor = executor;
 	}
-
-
 
 	@Resource(name = "playersByPlayerId")
 	Map<String, ConnectedPlayer> players;
@@ -99,7 +99,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		return staticDataReloadDone;
 	}
 
-	public void setStaticDataReloadDone(ITopic<ServerMessage> staticDataReloadDone) {
+	public void setStaticDataReloadDone(
+			ITopic<ServerMessage> staticDataReloadDone) {
 		this.staticDataReloadDone = staticDataReloadDone;
 	}
 
@@ -129,7 +130,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 
 	@Autowired
 	protected QuestForUserRetrieveUtils2 qfuRetrieveUtils;
-	
+
 	protected Integer instanceCountForDataReload = 0;
 	protected Integer instancesDoneReloadingCount = 0;
 	protected ILock instancesReloadingLock;
@@ -137,17 +138,21 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 
 	public void reloadAllStaticData() {
 		instancesDoneReloadingCount = 0;
-		instanceCountForDataReload = getHazel().getCluster().getMembers().size();
-		log.info("Reloading all static data for cluster instances: " + instanceCountForDataReload);
+		instanceCountForDataReload = getHazel().getCluster().getMembers()
+				.size();
+		log.info("Reloading all static data for cluster instances: "
+				+ instanceCountForDataReload);
 		//providing data type Object worked in hazelcast 2.6
-//		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA);
+		//		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA);
 		//need to provide string now since using hazelcast 3.2
-		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA.name());
+		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA
+				.name());
 		try {
 			instancesReloadingLock.tryLock(20, TimeUnit.SECONDS);
 			//adding message listener creates an id to reger to the listener just added
 			//so saving this so as to refer to it later
-			this.registrationId = getStaticDataReloadDone().addMessageListener(this);
+			this.registrationId = getStaticDataReloadDone().addMessageListener(
+					this);
 			serverEvents.publish(ServerMessage.RELOAD_STATIC_DATA);
 		} catch (InterruptedException e) {
 			log.error("Could not obtain lock for reloading instances", e);
@@ -185,30 +190,34 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			}
 		});*/
 	}
-		
-	
-	public void setApplicationMode(Boolean maintenanceMode, String messageForUsers) {
-		log.info("Setting application maintenance mode: {} message: {}", maintenanceMode, messageForUsers);
+
+	public void setApplicationMode(Boolean maintenanceMode,
+			String messageForUsers) {
+		log.info("Setting application maintenance mode: {} message: {}",
+				maintenanceMode, messageForUsers);
 		appMode.setMaintenanceMode(maintenanceMode);
 		appMode.setMessageForUsers(messageForUsers);
 		serverMessagesTemplate.convertAndSend(appMode);
 	}
-	
 
 	protected void sendPurgeStaticDataNotificationToAllClients() {
 		Set<String> keySet = players.keySet();
 		if (keySet != null) {
 			Iterator<String> playas = keySet.iterator();
-			log.info("Sending purge static data notification to clients: " + keySet.size());
+			log.info("Sending purge static data notification to clients: "
+					+ keySet.size());
 			while (playas.hasNext()) {
 				String playa = playas.next();
-				
-				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true, qfuRetrieveUtils);
-				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(playa);
-				PurgeClientStaticDataResponseProto.Builder purgeProto = PurgeClientStaticDataResponseProto.newBuilder();
+
+				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true,
+						qfuRetrieveUtils);
+				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(
+						playa);
+				PurgeClientStaticDataResponseProto.Builder purgeProto = PurgeClientStaticDataResponseProto
+						.newBuilder();
 				purgeProto.setSenderUuid(playa);
 				purgeProto.setStaticDataStuff(sdp);
-				
+
 				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());
 				writer.handleEvent(pcsd);
 			}
@@ -217,15 +226,17 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 
 	@Override
 	public void onMessage(Message<ServerMessage> msg) {
-		if (msg.getMessageObject().equals(ServerMessage.DONE_RELOADING_STATIC_DATA)) {
+		if (msg.getMessageObject().equals(
+				ServerMessage.DONE_RELOADING_STATIC_DATA)) {
 			instancesDoneReloadingCount++;
-			log.info("Instance done reloading static data: {}/{}", instancesDoneReloadingCount,
-					instanceCountForDataReload);
+			log.info("Instance done reloading static data: {}/{}",
+					instancesDoneReloadingCount, instanceCountForDataReload);
 			if (instancesDoneReloadingCount >= instanceCountForDataReload
-					|| instancesDoneReloadingCount >= getHazel().getCluster().getMembers().size()) {
+					|| instancesDoneReloadingCount >= getHazel().getCluster()
+							.getMembers().size()) {
 				log.info("All instances done reloading static data");
 				//providing data type Object worked in hazelcast 2.6
-//				getStaticDataReloadDone().removeMessageListener(this);
+				//				getStaticDataReloadDone().removeMessageListener(this);
 				getStaticDataReloadDone().removeMessageListener(registrationId);
 				sendPurgeStaticDataNotificationToAllClients();
 				instancesReloadingLock.forceUnlock();

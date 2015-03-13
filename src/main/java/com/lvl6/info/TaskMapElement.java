@@ -3,9 +3,9 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
-	
+
 	private static final long serialVersionUID = -2908955455491317104L;
-	
+
 	private int id;
 	private int taskId;
 	private int xPos;
@@ -23,24 +23,12 @@ public class TaskMapElement implements Serializable {
 	private float charImgScaleFactor;
 	private boolean isFake;
 
-	public TaskMapElement(
-		int id,
-		int taskId,
-		int xPos,
-		int yPos,
-		String element,
-		boolean boss,
-		String bossImgName,
-		int itemDropId,
-		String sectionName,
-		int cashReward,
-		int oilReward,
-		String characterImgName,
-		int charImgVertPixelOffset,
-		int charImgHorizPixelOffset,
-		float charImgScaleFactor,
-		boolean isFake )
-	{
+	public TaskMapElement(int id, int taskId, int xPos, int yPos,
+			String element, boolean boss, String bossImgName, int itemDropId,
+			String sectionName, int cashReward, int oilReward,
+			String characterImgName, int charImgVertPixelOffset,
+			int charImgHorizPixelOffset, float charImgScaleFactor,
+			boolean isFake) {
 		super();
 		this.id = id;
 		this.taskId = taskId;
@@ -60,153 +48,123 @@ public class TaskMapElement implements Serializable {
 		this.isFake = isFake;
 	}
 
-	public int getId()
-	{
+	public int getId() {
 		return id;
 	}
 
-	public void setId( int id )
-	{
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getTaskId()
-	{
+	public int getTaskId() {
 		return taskId;
 	}
 
-	public void setTaskId( int taskId )
-	{
+	public void setTaskId(int taskId) {
 		this.taskId = taskId;
 	}
 
-	public int getxPos()
-	{
+	public int getxPos() {
 		return xPos;
 	}
 
-	public void setxPos( int xPos )
-	{
+	public void setxPos(int xPos) {
 		this.xPos = xPos;
 	}
 
-	public int getyPos()
-	{
+	public int getyPos() {
 		return yPos;
 	}
 
-	public void setyPos( int yPos )
-	{
+	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
 
-	public String getElement()
-	{
+	public String getElement() {
 		return element;
 	}
 
-	public void setElement( String element )
-	{
+	public void setElement(String element) {
 		this.element = element;
 	}
 
-	public boolean isBoss()
-	{
+	public boolean isBoss() {
 		return boss;
 	}
 
-	public void setBoss( boolean boss )
-	{
+	public void setBoss(boolean boss) {
 		this.boss = boss;
 	}
 
-	public String getBossImgName()
-	{
+	public String getBossImgName() {
 		return bossImgName;
 	}
 
-	public void setBossImgName( String bossImgName )
-	{
+	public void setBossImgName(String bossImgName) {
 		this.bossImgName = bossImgName;
 	}
 
-	public int getItemDropId()
-	{
+	public int getItemDropId() {
 		return itemDropId;
 	}
 
-	public void setItemDropId( int itemDropId )
-	{
+	public void setItemDropId(int itemDropId) {
 		this.itemDropId = itemDropId;
 	}
 
-	public String getSectionName()
-	{
+	public String getSectionName() {
 		return sectionName;
 	}
 
-	public void setSectionName( String sectionName )
-	{
+	public void setSectionName(String sectionName) {
 		this.sectionName = sectionName;
 	}
 
-	public int getCashReward()
-	{
+	public int getCashReward() {
 		return cashReward;
 	}
 
-	public void setCashReward( int cashReward )
-	{
+	public void setCashReward(int cashReward) {
 		this.cashReward = cashReward;
 	}
 
-	public int getOilReward()
-	{
+	public int getOilReward() {
 		return oilReward;
 	}
 
-	public void setOilReward( int oilReward )
-	{
+	public void setOilReward(int oilReward) {
 		this.oilReward = oilReward;
 	}
 
-	public String getCharacterImgName()
-	{
+	public String getCharacterImgName() {
 		return characterImgName;
 	}
 
-	public void setCharacterImgName( String characterImgName )
-	{
+	public void setCharacterImgName(String characterImgName) {
 		this.characterImgName = characterImgName;
 	}
 
-	public int getCharImgVertPixelOffset()
-	{
+	public int getCharImgVertPixelOffset() {
 		return charImgVertPixelOffset;
 	}
 
-	public void setCharImgVertPixelOffset( int charImgVertPixelOffset )
-	{
+	public void setCharImgVertPixelOffset(int charImgVertPixelOffset) {
 		this.charImgVertPixelOffset = charImgVertPixelOffset;
 	}
 
-	public int getCharImgHorizPixelOffset()
-	{
+	public int getCharImgHorizPixelOffset() {
 		return charImgHorizPixelOffset;
 	}
 
-	public void setCharImgHorizPixelOffset( int charImgHorizPixelOffset )
-	{
+	public void setCharImgHorizPixelOffset(int charImgHorizPixelOffset) {
 		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
 	}
 
-	public float getCharImgScaleFactor()
-	{
+	public float getCharImgScaleFactor() {
 		return charImgScaleFactor;
 	}
 
-	public void setCharImgScaleFactor( float charImgScaleFactor )
-	{
+	public void setCharImgScaleFactor(float charImgScaleFactor) {
 		this.charImgScaleFactor = charImgScaleFactor;
 	}
 
@@ -231,5 +189,5 @@ public class TaskMapElement implements Serializable {
 	public void setFake(boolean isFake) {
 		this.isFake = isFake;
 	}
-	
+
 }

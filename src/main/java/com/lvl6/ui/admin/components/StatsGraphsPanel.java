@@ -10,19 +10,17 @@ public class StatsGraphsPanel extends Panel {
 
 	private static Logger log = LoggerFactory.getLogger(StatsGraphsPanel.class);
 	protected String statsField;
-	
+
 	public StatsGraphsPanel(String id, String statsField) {
 		super(id);
 		this.statsField = statsField;
-		if(statsField == null || statsField.equals("")) {
+		if (statsField == null || statsField.equals("")) {
 			setResponsePage(AdminPage.class);
 		}
 		setupPanel();
 	}
-	
-	
-		
-	protected void  setupPanel() {
+
+	protected void setupPanel() {
 		/*List<List<RollupEntry>> graphs = getGraphs();
 		RepeatingView view = new RepeatingView("graphs");
 		for(List<RollupEntry> graph : graphs) {
@@ -34,6 +32,7 @@ public class StatsGraphsPanel extends Panel {
 		}
 		add(view);*/
 	}
+
 	/*
 	protected List<List<RollupEntry>> getGraphs(){
 		RollupUtil rolo = AppContext.getApplicationContext().getBean(RollupUtil.class);

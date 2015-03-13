@@ -12,37 +12,39 @@ import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
 
 public class TradeItemForSpeedUpsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      tradeItemForSpeedUpsRequestProto = TradeItemForSpeedUpsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = tradeItemForSpeedUpsRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("TradeItemForSpeedUpsRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public TradeItemForSpeedUpsRequestProto getTradeItemForSpeedUpsRequestProto() {
-    return tradeItemForSpeedUpsRequestProto;
-  }
+	private TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto;
 
-  public void setTradeItemForSpeedUpsRequestProto( TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto )
-  {
-	  this.tradeItemForSpeedUpsRequestProto = tradeItemForSpeedUpsRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			tradeItemForSpeedUpsRequestProto = TradeItemForSpeedUpsRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = tradeItemForSpeedUpsRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("TradeItemForSpeedUpsRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "TradeItemForSpeedUpsRequestEvent [tradeItemForSpeedUpsRequestProto="
-		  + tradeItemForSpeedUpsRequestProto
-		  + "]";
-  }
+	public TradeItemForSpeedUpsRequestProto getTradeItemForSpeedUpsRequestProto() {
+		return tradeItemForSpeedUpsRequestProto;
+	}
+
+	public void setTradeItemForSpeedUpsRequestProto(
+			TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto) {
+		this.tradeItemForSpeedUpsRequestProto = tradeItemForSpeedUpsRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "TradeItemForSpeedUpsRequestEvent [tradeItemForSpeedUpsRequestProto="
+				+ tradeItemForSpeedUpsRequestProto + "]";
+	}
 
 }

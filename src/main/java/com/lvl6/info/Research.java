@@ -1,12 +1,11 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Research implements Serializable {
-	
+
 	private static final long serialVersionUID = -7558436754504360378L;
-	
+
 	private int id;
 	//reducing resource cost or speed
 	private String researchType;
@@ -22,21 +21,11 @@ public class Research implements Serializable {
 	private int costAmt;
 	private String costType;
 	private int level;
-	
-	public Research(
-		int id,
-		String researchType,
-		String researchDomain,
-		String iconImgName,
-		String name,
-		int predId,
-		int succId,
-		String desc,
-		int durationMin,
-		int costAmt,
-		String costType,
-		int level)
-	{
+
+	public Research(int id, String researchType, String researchDomain,
+			String iconImgName, String name, int predId, int succId,
+			String desc, int durationMin, int costAmt, String costType,
+			int level) {
 		super();
 		this.id = id;
 		this.researchType = researchType;
@@ -52,76 +41,59 @@ public class Research implements Serializable {
 		this.level = level;
 	}
 
-	public int getId()
-	{
+	public int getId() {
 		return id;
 	}
 
-	public void setId( int id )
-	{
+	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	public String getIconImgName()
-	{
+	public String getIconImgName() {
 		return iconImgName;
 	}
 
-	public void setIconImgName( String iconImgName )
-	{
+	public void setIconImgName(String iconImgName) {
 		this.iconImgName = iconImgName;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
-	public void setName( String name )
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
-	public String getDesc()
-	{
+	public String getDesc() {
 		return desc;
 	}
 
-	public void setDesc( String desc )
-	{
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
-	public int getDurationMin()
-	{
+	public int getDurationMin() {
 		return durationMin;
 	}
 
-	public void setDurationMin( int durationMin )
-	{
+	public void setDurationMin(int durationMin) {
 		this.durationMin = durationMin;
 	}
 
-	public int getCostAmt()
-	{
+	public int getCostAmt() {
 		return costAmt;
 	}
 
-	public void setCostAmt( int costAmt )
-	{
+	public void setCostAmt(int costAmt) {
 		this.costAmt = costAmt;
 	}
 
-	public String getCostType()
-	{
+	public String getCostType() {
 		return costType;
 	}
 
-	public void setCostType( String costType )
-	{
+	public void setCostType(String costType) {
 		this.costType = costType;
 	}
 
@@ -134,7 +106,6 @@ public class Research implements Serializable {
 				+ durationMin + ", costAmt=" + costAmt + ", costType="
 				+ costType + ", level=" + level + "]";
 	}
-
 
 	public String getResearchType() {
 		return researchType;
@@ -175,8 +146,5 @@ public class Research implements Serializable {
 	public void setSuccId(int succId) {
 		this.succId = succId;
 	}
-
-
-
 
 }

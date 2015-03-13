@@ -12,32 +12,34 @@ import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 
 public class UpdateMonsterHealthRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private UpdateMonsterHealthRequestProto updateMonsterHealthRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      updateMonsterHealthRequestProto = UpdateMonsterHealthRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = updateMonsterHealthRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("UpdateMonsterHealthRequest exception", e);
-    }
-  }
+	private UpdateMonsterHealthRequestProto updateMonsterHealthRequestProto;
 
-  public UpdateMonsterHealthRequestProto getUpdateMonsterHealthRequestProto() {
-    return updateMonsterHealthRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			updateMonsterHealthRequestProto = UpdateMonsterHealthRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = updateMonsterHealthRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("UpdateMonsterHealthRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "UpdateMonsterHealthRequestEvent [updateMonsterHealthRequestProto="
-		  + updateMonsterHealthRequestProto
-		  + "]";
-  }
-  
+	public UpdateMonsterHealthRequestProto getUpdateMonsterHealthRequestProto() {
+		return updateMonsterHealthRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "UpdateMonsterHealthRequestEvent [updateMonsterHealthRequestProto="
+				+ updateMonsterHealthRequestProto + "]";
+	}
+
 }

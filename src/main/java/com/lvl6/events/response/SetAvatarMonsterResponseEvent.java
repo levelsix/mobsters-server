@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
 
-  private SetAvatarMonsterResponseProto setAvatarMonsterResponseProto;
-  
-  public SetAvatarMonsterResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_SET_AVATAR_MONSTER_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = setAvatarMonsterResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private SetAvatarMonsterResponseProto setAvatarMonsterResponseProto;
 
-  public void setSetAvatarMonsterResponseProto(SetAvatarMonsterResponseProto setAvatarMonsterResponseProto) {
-    this.setAvatarMonsterResponseProto = setAvatarMonsterResponseProto;
-  }
+	public SetAvatarMonsterResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_SET_AVATAR_MONSTER_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = setAvatarMonsterResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setSetAvatarMonsterResponseProto(
+			SetAvatarMonsterResponseProto setAvatarMonsterResponseProto) {
+		this.setAvatarMonsterResponseProto = setAvatarMonsterResponseProto;
+	}
 
 }

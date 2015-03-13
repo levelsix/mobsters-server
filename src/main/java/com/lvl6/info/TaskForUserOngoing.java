@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TaskForUserOngoing implements Serializable {
-	
+
 	private static final long serialVersionUID = -7704949664984076199L;
-	
+
 	private String id;
 	private String userId;
 	private int taskId;
@@ -16,15 +16,14 @@ public class TaskForUserOngoing implements Serializable {
 	public int numRevives;
 	private Date startDate;
 	private int taskStageId;
-	
-	public TaskForUserOngoing()
-	{
+
+	public TaskForUserOngoing() {
 		super();
 	}
 
-	public TaskForUserOngoing(String id, String userId, int taskId, int expGained,
-			int cashGained, int oilGained, int numRevives, Date startDate,
-			int taskStageId) {
+	public TaskForUserOngoing(String id, String userId, int taskId,
+			int expGained, int cashGained, int oilGained, int numRevives,
+			Date startDate, int taskStageId) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -37,23 +36,19 @@ public class TaskForUserOngoing implements Serializable {
 		this.taskStageId = taskStageId;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

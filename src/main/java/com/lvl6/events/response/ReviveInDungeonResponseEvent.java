@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
 
-  private ReviveInDungeonResponseProto reviveInDungeonResponseProto;
-  
-  public ReviveInDungeonResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_REVIVE_IN_DUNGEON_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = reviveInDungeonResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private ReviveInDungeonResponseProto reviveInDungeonResponseProto;
 
-  public void setReviveInDungeonResponseProto(ReviveInDungeonResponseProto reviveInDungeonResponseProto) {
-    this.reviveInDungeonResponseProto = reviveInDungeonResponseProto;
-  }
+	public ReviveInDungeonResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_REVIVE_IN_DUNGEON_EVENT;
+	}
 
-  public ReviveInDungeonResponseProto getReviveInDungeonResponseProto() {   //because APNS required
-    return reviveInDungeonResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = reviveInDungeonResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setReviveInDungeonResponseProto(
+			ReviveInDungeonResponseProto reviveInDungeonResponseProto) {
+		this.reviveInDungeonResponseProto = reviveInDungeonResponseProto;
+	}
+
+	public ReviveInDungeonResponseProto getReviveInDungeonResponseProto() {   //because APNS required
+		return reviveInDungeonResponseProto;
+	}
+
 }

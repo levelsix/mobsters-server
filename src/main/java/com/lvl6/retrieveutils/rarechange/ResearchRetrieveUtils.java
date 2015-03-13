@@ -13,13 +13,14 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ResearchsProto.ResearchDomain;
-import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class ResearchRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class ResearchRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, Research> idsToResearch;
 
@@ -34,8 +35,8 @@ import com.lvl6.utils.DBConnection;
 	}
 
 	public static Research getResearchForId(int researchId) {
-		log.debug(String.format(
-			"retrieve research data for research=%s", researchId));
+		log.debug(String.format("retrieve research data for research=%s",
+				researchId));
 		if (null == idsToResearch) {
 			setStaticIdsToResearch();
 		}
@@ -55,10 +56,9 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Research> idsToResearchTemp =
-							new HashMap<Integer, Research>();
+						Map<Integer, Research> idsToResearchTemp = new HashMap<Integer, Research>();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							Research research = convertRSRowToResearch(rs);
 							if (research == null) {
 								continue;
@@ -73,7 +73,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("research retrieve db error.", e);
@@ -89,7 +89,8 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Research convertRSRowToResearch(ResultSet rs) throws SQLException {
+	private static Research convertRSRowToResearch(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.RESEARCH__ID);
 		String type = rs.getString(DBConstants.RESEARCH__RESEARCH_TYPE);
 		String domain = rs.getString(DBConstants.RESEARCH__RESEARCH_DOMAIN);
@@ -100,40 +101,37 @@ import com.lvl6.utils.DBConnection;
 		int costAmt = rs.getInt(DBConstants.RESEARCH__COST_AMT);
 		String costType = rs.getString(DBConstants.RESEARCH__COST_TYPE);
 		int level = rs.getInt(DBConstants.RESEARCH__LEVEL);
-		
+
 		int predId = rs.getInt(DBConstants.RESEARCH__PRED_ID);
 		if (rs.wasNull()) {
 			predId = 0;
 		}
-		
+
 		int succId = rs.getInt(DBConstants.RESEARCH__SUCC_ID);
 		if (rs.wasNull()) {
 			succId = 0;
 		}
-		
+
 		if (null != type) {
-	    	String newType = type.trim().toUpperCase();
-	    	if (!type.equals(newType)) {
-	    		log.error(String.format(
-	    			"type incorrect: %s, id=%s",
-	    			type, id));
-	    		type = newType;
-	    	}
-	    }
-		
+			String newType = type.trim().toUpperCase();
+			if (!type.equals(newType)) {
+				log.error(String.format("type incorrect: %s, id=%s", type, id));
+				type = newType;
+			}
+		}
+
 		if (null != costType) {
-	    	String newCostType = costType.trim().toUpperCase();
-	    	if (!costType.equals(newCostType)) {
-	    		log.error(String.format(
-	    			"CostType incorrect: %s, id=%s",
-	    			costType, id));
-	    		costType = newCostType;
-	    	}
-	    }
-		
-		Research research = new Research(id, type, domain, iconImgName,
-			name, predId, succId, desc, durationMin, costAmt, costType, level);
+			String newCostType = costType.trim().toUpperCase();
+			if (!costType.equals(newCostType)) {
+				log.error(String.format("CostType incorrect: %s, id=%s",
+						costType, id));
+				costType = newCostType;
+			}
+		}
+
+		Research research = new Research(id, type, domain, iconImgName, name,
+				predId, succId, desc, durationMin, costAmt, costType, level);
 		return research;
 	}
-	
+
 }

@@ -17,8 +17,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class FulfillTeamDonationSolicitationAction
-{
+public class FulfillTeamDonationSolicitationAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -32,15 +31,13 @@ public class FulfillTeamDonationSolicitationAction
 	private InsertUtil insertUtil;
 
 	public FulfillTeamDonationSolicitationAction(
-		String donatorId,
-		String clanId,
-		MonsterSnapshotForUser msfu,
-		ClanMemberTeamDonation cmtd,
-		Date clientDate,
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-		UpdateUtil updateUtil,
-		InsertUtil insertUtil )
-	{
+			String donatorId,
+			String clanId,
+			MonsterSnapshotForUser msfu,
+			ClanMemberTeamDonation cmtd,
+			Date clientDate,
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
+			UpdateUtil updateUtil, InsertUtil insertUtil) {
 		super();
 		this.donatorId = donatorId;
 		this.clanId = clanId;
@@ -70,13 +67,12 @@ public class FulfillTeamDonationSolicitationAction
 	private String solicitorId;
 	private ClanMemberTeamDonation solicitation;
 	private MonsterSnapshotForUser msfuNew;
-	
+
 	//	private Map<String, Integer> currencyDeltas;
 	//	private Map<String, Integer> prevCurrencies;
 	//	private Map<String, Integer> curCurrencies;
 	//	private Map<String, String> reasonsForChanges;
 	//	private Map<String, String> details;
-
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
@@ -100,7 +96,7 @@ public class FulfillTeamDonationSolicitationAction
 		}
 
 		resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.SUCCESS);
-		
+
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -113,65 +109,64 @@ public class FulfillTeamDonationSolicitationAction
 		solicitationId = cmtd.getId();
 		solicitorId = cmtd.getUserId();
 		solicitation = clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonation(solicitationId, solicitorId);
+				.getClanMemberTeamDonation(solicitationId, solicitorId);
 
 		if (null == solicitation) {
-			log.error("nonexistent solicitation. origClientSolicitation={}", cmtd);
-			resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_NONEXISTENT_SOLICITATION);
+			log.error("nonexistent solicitation. origClientSolicitation={}",
+					cmtd);
+			resBuilder
+					.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_NONEXISTENT_SOLICITATION);
 			return false;
 		}
 
 		if (solicitation.isFulfilled()) {
 			log.error("already fulfilled solicitation. {}", solicitation);
-			resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_ALREADY_FULFILLED);
+			resBuilder
+					.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_ALREADY_FULFILLED);
 			return false;
 		}
 
 		return true;
 	}
-
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 
 		solicitation.setFulfilled(true);
 		int numUpdated = updateUtil.updateClanMemberTeamDonation(solicitation);
 		log.info("numUpdated donations: {}", numUpdated);
-		
+
 		//reduce donated monster's health to 0
-		Map<String, Integer> userMonsterIdToExpectedHealth =
-			Collections.singletonMap(msfu.getMonsterForUserId(), 0);
-		numUpdated = UpdateUtils.get()
-			.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-		log.info(String.format(
-			"numUpdated=%s", numUpdated));
-		
+		Map<String, Integer> userMonsterIdToExpectedHealth = Collections
+				.singletonMap(msfu.getMonsterForUserId(), 0);
+		numUpdated = UpdateUtils.get().updateUserMonstersHealth(
+				userMonsterIdToExpectedHealth);
+		log.info(String.format("numUpdated=%s", numUpdated));
+
 		//insert into monster_snapshot_for_user
 		msfuNew = new MonsterSnapshotForUser(msfu);
 		msfuNew.setTimeOfEntry(clientTime);
 		msfuNew.setType(SnapshotType.TEAM_DONATE.name());
 		msfuNew.setIdInTable(solicitationId);
-		
+
 		//need to set the id
 		String msfuNewId = insertUtil.insertIntoMonsterSnapshotForUser(msfuNew);
 		msfuNew.setId(msfuNewId);
-		log.info("MonsterSnapshotForUser before {} \t MonsterSnapshotForUser after {}",
-			msfu, msfuNew);
+		log.info(
+				"MonsterSnapshotForUser before {} \t MonsterSnapshotForUser after {}",
+				msfu, msfuNew);
 		return true;
 	}
 
-	public ClanMemberTeamDonation getSolicitation()
-	{
+	public ClanMemberTeamDonation getSolicitation() {
 		return solicitation;
 	}
 
-	public void setSolicitation( ClanMemberTeamDonation solicitation )
-	{
+	public void setSolicitation(ClanMemberTeamDonation solicitation) {
 		this.solicitation = solicitation;
 	}
 
-	public MonsterSnapshotForUser getMsfuNew()
-	{
+	public MonsterSnapshotForUser getMsfuNew() {
 		return msfuNew;
 	}
-	
+
 }

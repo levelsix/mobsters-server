@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PerformResearchResponseEvent extends NormalResponseEvent {
 
-  private PerformResearchResponseProto performResearchResponseProto;
-  
-  public PerformResearchResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_PERFORM_RESEARCH_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = performResearchResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private PerformResearchResponseProto performResearchResponseProto;
 
-  public void setPerformResearchResponseProto(PerformResearchResponseProto performResearchResponseProto) {
-    this.performResearchResponseProto = performResearchResponseProto;
-  }
+	public PerformResearchResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_PERFORM_RESEARCH_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = performResearchResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setPerformResearchResponseProto(
+			PerformResearchResponseProto performResearchResponseProto) {
+		this.performResearchResponseProto = performResearchResponseProto;
+	}
 
 }

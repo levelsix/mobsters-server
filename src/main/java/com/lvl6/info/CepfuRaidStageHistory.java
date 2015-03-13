@@ -5,9 +5,9 @@ import java.util.Date;
 
 //user can have multiple of these (different clanIds)
 public class CepfuRaidStageHistory implements Serializable {
-	
+
 	private static final long serialVersionUID = -5565318334857067439L;
-	
+
 	private String userId;
 	private Date crsStartTime;
 	private String clanId;
@@ -17,15 +17,14 @@ public class CepfuRaidStageHistory implements Serializable {
 	private int crsDmgDone;
 	private int stageHealth;
 	private Date crsEndTime;
-	
-	public CepfuRaidStageHistory()
-	{
+
+	public CepfuRaidStageHistory() {
 		super();
 	}
 
-	public CepfuRaidStageHistory(String userId, Date crsStartTime, String clanId,
-			int clanEventPersistentId, int crId, int crsId, int crsDmgDone,
-			int stageHealth, Date crsEndTime) {
+	public CepfuRaidStageHistory(String userId, Date crsStartTime,
+			String clanId, int clanEventPersistentId, int crId, int crsId,
+			int crsDmgDone, int stageHealth, Date crsEndTime) {
 		super();
 		this.userId = userId;
 		this.crsStartTime = crsStartTime;
@@ -113,10 +112,11 @@ public class CepfuRaidStageHistory implements Serializable {
 	@Override
 	public String toString() {
 		return "CepfuRaidStageHistory [userId=" + userId + ", crsStartTime="
-				+ crsStartTime + ", clanId=" + clanId + ", clanEventPersistentId="
-				+ clanEventPersistentId + ", crId=" + crId + ", crsId=" + crsId
-				+ ", crsDmgDone=" + crsDmgDone + ", stageHealth=" + stageHealth
-				+ ", crsEndTime=" + crsEndTime + "]";
-		
+				+ crsStartTime + ", clanId=" + clanId
+				+ ", clanEventPersistentId=" + clanEventPersistentId
+				+ ", crId=" + crId + ", crsId=" + crsId + ", crsDmgDone="
+				+ crsDmgDone + ", stageHealth=" + stageHealth + ", crsEndTime="
+				+ crsEndTime + "]";
+
 	}
 }

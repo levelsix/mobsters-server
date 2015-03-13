@@ -7,7 +7,9 @@ import java.util.Map;
 import com.hazelcast.util.IterationType;
 //used to order the PvpUser objects returned by hazelcast's querying system
 //via the Paging Predicate
-@SuppressWarnings("rawtypes") //idk why, could just use Map<String, PvpUser>
+
+@SuppressWarnings("rawtypes")
+//idk why, could just use Map<String, PvpUser>
 public class PvpUserComparator implements Comparator<Map.Entry>, Serializable {
 
 	private static final long serialVersionUID = 673698211756933678L;
@@ -27,6 +29,7 @@ public class PvpUserComparator implements Comparator<Map.Entry>, Serializable {
 	//Compares its two arguments for order. Returns a negative integer, zero, or
 	//a positive integer as the first argument is less than, equal to, or
 	//greater than the second.
+	@Override
 	public int compare(Map.Entry e1, Map.Entry e2) {
 		@SuppressWarnings("unchecked")
 		Map.Entry<String, PvpUser> o1 = e1;

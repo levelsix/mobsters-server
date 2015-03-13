@@ -12,36 +12,38 @@ import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
 
 public class EvolutionFinishedRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private EvolutionFinishedRequestProto evolutionFinishedRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      evolutionFinishedRequestProto = EvolutionFinishedRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = evolutionFinishedRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EvolutionFinishedRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EvolutionFinishedRequestProto getEvolutionFinishedRequestProto() {
-    return evolutionFinishedRequestProto;
-  }
+	private EvolutionFinishedRequestProto evolutionFinishedRequestProto;
 
-  public void setEvolutionFinishedRequestProto(EvolutionFinishedRequestProto efrp) {
-	  this.evolutionFinishedRequestProto = efrp;
-  }
-  
-  @Override
-  public String toString()
-  {
-	  return "EvolutionFinishedRequestEvent [evolutionFinishedRequestProto="
-		  + evolutionFinishedRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			evolutionFinishedRequestProto = EvolutionFinishedRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = evolutionFinishedRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EvolutionFinishedRequest exception", e);
+		}
+	}
+
+	public EvolutionFinishedRequestProto getEvolutionFinishedRequestProto() {
+		return evolutionFinishedRequestProto;
+	}
+
+	public void setEvolutionFinishedRequestProto(
+			EvolutionFinishedRequestProto efrp) {
+		this.evolutionFinishedRequestProto = efrp;
+	}
+
+	@Override
+	public String toString() {
+		return "EvolutionFinishedRequestEvent [evolutionFinishedRequestProto="
+				+ evolutionFinishedRequestProto + "]";
+	}
 
 }

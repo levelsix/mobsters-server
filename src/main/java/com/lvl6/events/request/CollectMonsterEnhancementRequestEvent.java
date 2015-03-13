@@ -12,17 +12,21 @@ import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 
 public class CollectMonsterEnhancementRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private CollectMonsterEnhancementRequestProto collectMonsterEnhancementRequestProto;
 
 	/**
 	 * read the event from the given ByteBuffer to populate this event
 	 */
+	@Override
 	public void read(ByteBuffer buff) {
 		try {
-			collectMonsterEnhancementRequestProto = CollectMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-			playerId = collectMonsterEnhancementRequestProto.getSender().getUserUuid();
+			collectMonsterEnhancementRequestProto = CollectMonsterEnhancementRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = collectMonsterEnhancementRequestProto.getSender()
+					.getUserUuid();
 		} catch (InvalidProtocolBufferException e) {
 			log.error("CollectMonsterEnhancementRequest exception", e);
 		}
@@ -32,15 +36,14 @@ public class CollectMonsterEnhancementRequestEvent extends RequestEvent {
 		return collectMonsterEnhancementRequestProto;
 	}
 
-	public void setCollectMonsterEnhancementRequestProto(CollectMonsterEnhancementRequestProto cmerp) {
+	public void setCollectMonsterEnhancementRequestProto(
+			CollectMonsterEnhancementRequestProto cmerp) {
 		this.collectMonsterEnhancementRequestProto = cmerp;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "CollectMonsterEnhancementRequestEvent [collectMonsterEnhancementRequestProto="
-				+ collectMonsterEnhancementRequestProto
-				+ "]";
+				+ collectMonsterEnhancementRequestProto + "]";
 	}
 }

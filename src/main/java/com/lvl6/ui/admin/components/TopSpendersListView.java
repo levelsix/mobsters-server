@@ -21,11 +21,12 @@ public class TopSpendersListView extends ListView<Spender> {
 	@Override
 	protected void populateItem(ListItem<Spender> item) {
 		Spender spend = item.getModelObject();
-    item.add(new Label("spender", spend.getUserId().toString()));
-    item.add(new Label("name", spend.getName()));
-		item.add(new Label("amountSpent", "$"+spend.getAmountSpent().longValue()));
+		item.add(new Label("spender", spend.getUserId().toString()));
+		item.add(new Label("name", spend.getName()));
+		item.add(new Label("amountSpent", "$"
+				+ spend.getAmountSpent().longValue()));
 		item.add(new Label("userName", spend.getName()));
-		
+
 	}
 
 }

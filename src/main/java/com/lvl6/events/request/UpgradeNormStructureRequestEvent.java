@@ -11,33 +11,35 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 
 public class UpgradeNormStructureRequestEvent extends RequestEvent {
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private UpgradeNormStructureRequestProto upgradeNormStructureRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      upgradeNormStructureRequestProto = UpgradeNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = upgradeNormStructureRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("UpgradeNormStructureRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public UpgradeNormStructureRequestProto getUpgradeNormStructureRequestProto() {
-    return upgradeNormStructureRequestProto;
-  }
+	private UpgradeNormStructureRequestProto upgradeNormStructureRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "UpgradeNormStructureRequestEvent [upgradeNormStructureRequestProto="
-		  + upgradeNormStructureRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			upgradeNormStructureRequestProto = UpgradeNormStructureRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = upgradeNormStructureRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("UpgradeNormStructureRequest exception", e);
+		}
+	}
+
+	public UpgradeNormStructureRequestProto getUpgradeNormStructureRequestProto() {
+		return upgradeNormStructureRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "UpgradeNormStructureRequestEvent [upgradeNormStructureRequestProto="
+				+ upgradeNormStructureRequestProto + "]";
+	}
+
 }

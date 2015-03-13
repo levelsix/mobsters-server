@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class TaskStageForUser implements Serializable {
 
 	private static final long serialVersionUID = -5818927353360595314L;
-	
+
 	private String id;
 	private String userTaskId;
 	private int stageNum;
@@ -18,22 +18,14 @@ public class TaskStageForUser implements Serializable {
 	private int itemIdDropped;
 	//maybe should specify the (enhancement) level of monster dropped
 	private boolean attackedFirst;
-	
-	public TaskStageForUser() { }
-	
-	public TaskStageForUser(
-		String id,
-		String userTaskId,
-		int stageNum,
-		int taskStageMonsterId,
-		String monsterType,
-		int expGained,
-		int cashGained,
-		int oilGained,
-		boolean monsterPieceDropped,
-		int itemIdDropped,
-		boolean attackedFirst )
-	{
+
+	public TaskStageForUser() {
+	}
+
+	public TaskStageForUser(String id, String userTaskId, int stageNum,
+			int taskStageMonsterId, String monsterType, int expGained,
+			int cashGained, int oilGained, boolean monsterPieceDropped,
+			int itemIdDropped, boolean attackedFirst) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
@@ -128,42 +120,23 @@ public class TaskStageForUser implements Serializable {
 		this.itemIdDropped = itemIdDropped;
 	}
 
-	public boolean isAttackedFirst()
-	{
+	public boolean isAttackedFirst() {
 		return attackedFirst;
 	}
 
-	public void setAttackedFirst( boolean attackedFirst )
-	{
+	public void setAttackedFirst(boolean attackedFirst) {
 		this.attackedFirst = attackedFirst;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "TaskStageForUser [id="
-			+ id
-			+ ", userTaskId="
-			+ userTaskId
-			+ ", stageNum="
-			+ stageNum
-			+ ", taskStageMonsterId="
-			+ taskStageMonsterId
-			+ ", monsterType="
-			+ monsterType
-			+ ", expGained="
-			+ expGained
-			+ ", cashGained="
-			+ cashGained
-			+ ", oilGained="
-			+ oilGained
-			+ ", monsterPieceDropped="
-			+ monsterPieceDropped
-			+ ", itemIdDropped="
-			+ itemIdDropped
-			+ ", attackedFirst="
-			+ attackedFirst
-			+ "]";
+	public String toString() {
+		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
+				+ ", stageNum=" + stageNum + ", taskStageMonsterId="
+				+ taskStageMonsterId + ", monsterType=" + monsterType
+				+ ", expGained=" + expGained + ", cashGained=" + cashGained
+				+ ", oilGained=" + oilGained + ", monsterPieceDropped="
+				+ monsterPieceDropped + ", itemIdDropped=" + itemIdDropped
+				+ ", attackedFirst=" + attackedFirst + "]";
 	}
 
 }

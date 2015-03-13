@@ -11,33 +11,35 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 
 public class EndPvpBattleRequestEvent extends RequestEvent {
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private EndPvpBattleRequestProto endPvpBattleRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      endPvpBattleRequestProto = EndPvpBattleRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = endPvpBattleRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EndPvpBattleRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EndPvpBattleRequestProto getEndPvpBattleRequestProto() {
-    return endPvpBattleRequestProto;
-  }
+	private EndPvpBattleRequestProto endPvpBattleRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "EndPvpBattleRequestEvent [endPvpBattleRequestProto="
-		  + endPvpBattleRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			endPvpBattleRequestProto = EndPvpBattleRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = endPvpBattleRequestProto.getSender().getMinUserProto()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EndPvpBattleRequest exception", e);
+		}
+	}
+
+	public EndPvpBattleRequestProto getEndPvpBattleRequestProto() {
+		return endPvpBattleRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "EndPvpBattleRequestEvent [endPvpBattleRequestProto="
+				+ endPvpBattleRequestProto + "]";
+	}
 
 }

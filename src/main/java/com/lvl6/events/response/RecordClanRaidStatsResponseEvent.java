@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent {
 
-  private RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto;
-  
-  public RecordClanRaidStatsResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_RECORD_CLAN_RAID_STATS_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = recordClanRaidStatsResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto;
 
-  public void setRecordClanRaidStatsResponseProto(RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto) {
-    this.recordClanRaidStatsResponseProto = recordClanRaidStatsResponseProto;
-  }
+	public RecordClanRaidStatsResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_RECORD_CLAN_RAID_STATS_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = recordClanRaidStatsResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setRecordClanRaidStatsResponseProto(
+			RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto) {
+		this.recordClanRaidStatsResponseProto = recordClanRaidStatsResponseProto;
+	}
 
 }

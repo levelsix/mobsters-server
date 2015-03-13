@@ -2,29 +2,23 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class ResearchForUser implements Serializable {
 
 	private static final long serialVersionUID = 1231410779566628623L;
-	
+
 	private String id;
 	private String userId;
 	private int researchId;
 	private Timestamp timePurchased;
 	private boolean isComplete;
-	 
+
 	public ResearchForUser() {
 		super();
 	}
 
-	public ResearchForUser(
-		String id,
-		String userId,
-		int researchId,
-		Timestamp timePurchased,
-		boolean isComplete )
-	{
+	public ResearchForUser(String id, String userId, int researchId,
+			Timestamp timePurchased, boolean isComplete) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -33,44 +27,35 @@ public class ResearchForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public int getResearchId()
-	{
+	public int getResearchId() {
 		return researchId;
 	}
 
-	public void setResearchId( int researchId )
-	{
+	public void setResearchId(int researchId) {
 		this.researchId = researchId;
 	}
 
-
-	public boolean isComplete()
-	{
+	public boolean isComplete() {
 		return isComplete;
 	}
 
-	public void setComplete( boolean isComplete )
-	{
+	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
 	}
 
@@ -88,5 +73,5 @@ public class ResearchForUser implements Serializable {
 	public void setTimePurchased(Timestamp timePurchased) {
 		this.timePurchased = timePurchased;
 	}
-	
+
 }

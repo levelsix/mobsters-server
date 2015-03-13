@@ -11,7 +11,7 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent 
 
 	private CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto;
 
-	public CustomizePvpBoardObstacleResponseEvent(String playerId){
+	public CustomizePvpBoardObstacleResponseEvent(String playerId) {
 		super(playerId);
 		eventType = EventProtocolResponse.S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT;
 	}
@@ -23,7 +23,8 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent 
 		return b.size();
 	}
 
-	public void setCustomizePvpBoardObstacleResponseProto(CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto) {
+	public void setCustomizePvpBoardObstacleResponseProto(
+			CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto) {
 		this.customizePvpBoardObstacleResponseProto = customizePvpBoardObstacleResponseProto;
 	}
 

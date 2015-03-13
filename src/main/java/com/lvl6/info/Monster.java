@@ -3,9 +3,9 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class Monster implements Serializable {
-	
+
 	private static final long serialVersionUID = -2038969910987427104L;
-	
+
 	private int id;
 	private String evolutionGroup;
 	private String monsterGroup;
@@ -290,7 +290,8 @@ public class Monster implements Serializable {
 		return atkAnimationRepeatedFramesEnd;
 	}
 
-	public void setAtkAnimationRepeatedFramesEnd(int atkAnimationRepeatedFramesEnd) {
+	public void setAtkAnimationRepeatedFramesEnd(
+			int atkAnimationRepeatedFramesEnd) {
 		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
 	}
 
@@ -302,112 +303,65 @@ public class Monster implements Serializable {
 		this.shorterName = shorterName;
 	}
 
-	public float getShadowScaleFactor()
-	{
+	public float getShadowScaleFactor() {
 		return shadowScaleFactor;
 	}
 
-	public void setShadowScaleFactor( float shadowScaleFactor )
-	{
+	public void setShadowScaleFactor(float shadowScaleFactor) {
 		this.shadowScaleFactor = shadowScaleFactor;
 	}
 
-	public int getBaseOffensiveSkillId()
-	{
+	public int getBaseOffensiveSkillId() {
 		return baseOffensiveSkillId;
 	}
 
-	public void setBaseOffensiveSkillId( int baseOffensiveSkillId )
-	{
+	public void setBaseOffensiveSkillId(int baseOffensiveSkillId) {
 		this.baseOffensiveSkillId = baseOffensiveSkillId;
 	}
 
-	public int getBaseDefensiveSkillId()
-	{
+	public int getBaseDefensiveSkillId() {
 		return baseDefensiveSkillId;
 	}
 
-	public void setBaseDefensiveSkillId( int baseDefensiveSkillId )
-	{
+	public void setBaseDefensiveSkillId(int baseDefensiveSkillId) {
 		this.baseDefensiveSkillId = baseDefensiveSkillId;
 	}
 
-	public int getPvpMonsterDropId()
-	{
+	public int getPvpMonsterDropId() {
 		return pvpMonsterDropId;
 	}
 
-	public void setPvpMonsterDropId( int pvpMonsterDropId )
-	{
+	public void setPvpMonsterDropId(int pvpMonsterDropId) {
 		this.pvpMonsterDropId = pvpMonsterDropId;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Monster [id="
-			+ id
-			+ ", evolutionGroup="
-			+ evolutionGroup
-			+ ", monsterGroup="
-			+ monsterGroup
-			+ ", quality="
-			+ quality
-			+ ", evolutionLevel="
-			+ evolutionLevel
-			+ ", displayName="
-			+ displayName
-			+ ", element="
-			+ element
-			+ ", imagePrefix="
-			+ imagePrefix
-			+ ", numPuzzlePieces="
-			+ numPuzzlePieces
-			+ ", minutesToCombinePieces="
-			+ minutesToCombinePieces
-			+ ", maxLevel="
-			+ maxLevel
-			+ ", evolutionMonsterId="
-			+ evolutionMonsterId
-			+ ", evolutionCatalystMonsterId="
-			+ evolutionCatalystMonsterId
-			+ ", minutesToEvolve="
-			+ minutesToEvolve
-			+ ", numCatalystsRequired="
-			+ numCatalystsRequired
-			+ ", carrotRecruited="
-			+ carrotRecruited
-			+ ", carrotDefeated="
-			+ carrotDefeated
-			+ ", carrotEvolved="
-			+ carrotEvolved
-			+ ", description="
-			+ description
-			+ ", evolutionCost="
-			+ evolutionCost
-			+ ", animationType="
-			+ animationType
-			+ ", verticalPixelOffset="
-			+ verticalPixelOffset
-			+ ", atkSoundFile="
-			+ atkSoundFile
-			+ ", atkSoundAnimationFrame="
-			+ atkSoundAnimationFrame
-			+ ", atkAnimationRepeatedFramesStart="
-			+ atkAnimationRepeatedFramesStart
-			+ ", atkAnimationRepeatedFramesEnd="
-			+ atkAnimationRepeatedFramesEnd
-			+ ", shorterName="
-			+ shorterName
-			+ ", shadowScaleFactor="
-			+ shadowScaleFactor
-			+ ", baseOffensiveSkillId="
-			+ baseOffensiveSkillId
-			+ ", baseDefensiveSkillId="
-			+ baseDefensiveSkillId
-			+ ", pvpMonsterDropId="
-			+ pvpMonsterDropId
-			+ "]";
+	public String toString() {
+		return "Monster [id=" + id + ", evolutionGroup=" + evolutionGroup
+				+ ", monsterGroup=" + monsterGroup + ", quality=" + quality
+				+ ", evolutionLevel=" + evolutionLevel + ", displayName="
+				+ displayName + ", element=" + element + ", imagePrefix="
+				+ imagePrefix + ", numPuzzlePieces=" + numPuzzlePieces
+				+ ", minutesToCombinePieces=" + minutesToCombinePieces
+				+ ", maxLevel=" + maxLevel + ", evolutionMonsterId="
+				+ evolutionMonsterId + ", evolutionCatalystMonsterId="
+				+ evolutionCatalystMonsterId + ", minutesToEvolve="
+				+ minutesToEvolve + ", numCatalystsRequired="
+				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
+				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
+				+ carrotEvolved + ", description=" + description
+				+ ", evolutionCost=" + evolutionCost + ", animationType="
+				+ animationType + ", verticalPixelOffset="
+				+ verticalPixelOffset + ", atkSoundFile=" + atkSoundFile
+				+ ", atkSoundAnimationFrame=" + atkSoundAnimationFrame
+				+ ", atkAnimationRepeatedFramesStart="
+				+ atkAnimationRepeatedFramesStart
+				+ ", atkAnimationRepeatedFramesEnd="
+				+ atkAnimationRepeatedFramesEnd + ", shorterName="
+				+ shorterName + ", shadowScaleFactor=" + shadowScaleFactor
+				+ ", baseOffensiveSkillId=" + baseOffensiveSkillId
+				+ ", baseDefensiveSkillId=" + baseDefensiveSkillId
+				+ ", pvpMonsterDropId=" + pvpMonsterDropId + "]";
 	}
 
 }

@@ -6,11 +6,11 @@ import java.util.Date;
 public class StructureRetrieval implements Serializable {
 
 	private static final long serialVersionUID = -3115943757909999684L;
-	
+
 	private String userStructId;
 	private Date timeOfRetrieval;
 	private int amountCollected;
-	
+
 	public StructureRetrieval() {
 		super();
 	}

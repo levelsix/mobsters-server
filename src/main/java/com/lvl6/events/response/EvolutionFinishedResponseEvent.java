@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EvolutionFinishedResponseEvent extends NormalResponseEvent {
 
-  private EvolutionFinishedResponseProto evolutionFinishedResponseProto;
-  
-  public EvolutionFinishedResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_EVOLUTION_FINISHED_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = evolutionFinishedResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private EvolutionFinishedResponseProto evolutionFinishedResponseProto;
 
-  public void setEvolutionFinishedResponseProto(EvolutionFinishedResponseProto evolutionFinishedResponseProto) {
-    this.evolutionFinishedResponseProto = evolutionFinishedResponseProto;
-  }
+	public EvolutionFinishedResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_EVOLUTION_FINISHED_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = evolutionFinishedResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setEvolutionFinishedResponseProto(
+			EvolutionFinishedResponseProto evolutionFinishedResponseProto) {
+		this.evolutionFinishedResponseProto = evolutionFinishedResponseProto;
+	}
 
 }

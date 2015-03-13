@@ -17,16 +17,21 @@ import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class MonsterBattleDialogueRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class MonsterBattleDialogueRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, List<MonsterBattleDialogue>> monsterIdToBattleDialogue;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_BATTLE_DIALOGUE_CONFIG;
 
-	public static List<MonsterBattleDialogue> getMonsterBattleDialogueForMonsterId(int monsterId) {
-		log.debug("retrieving data for monsterBattleDialogue with monster id " + monsterId);
+	public static List<MonsterBattleDialogue> getMonsterBattleDialogueForMonsterId(
+			int monsterId) {
+		log.debug("retrieving data for monsterBattleDialogue with monster id "
+				+ monsterId);
 		if (monsterIdToBattleDialogue == null) {
 			setStaticMonsterIdToMonsterBattleDialogue();
 		}
@@ -51,20 +56,21 @@ import com.lvl6.utils.DBConnection;
 				try {
 					rs.last();
 					rs.beforeFirst();
-					Map <Integer, List<MonsterBattleDialogue>> monsterIdToMonsterBattleDialogueTemp =
-							new HashMap<Integer, List<MonsterBattleDialogue>>();
-					while(rs.next()) {  //should only be one
+					Map<Integer, List<MonsterBattleDialogue>> monsterIdToMonsterBattleDialogueTemp = new HashMap<Integer, List<MonsterBattleDialogue>>();
+					while (rs.next()) {  //should only be one
 						MonsterBattleDialogue monsterBattleDialogue = convertRSRowToMonsterBattleDialogue(rs);
 						if (null == monsterBattleDialogue) {
 							continue;
 						}
 
 						int monsterId = monsterBattleDialogue.getMonsterId();
-						if (!monsterIdToMonsterBattleDialogueTemp.containsKey(monsterId)) {
+						if (!monsterIdToMonsterBattleDialogueTemp
+								.containsKey(monsterId)) {
 							List<MonsterBattleDialogue> dialogue = new ArrayList<MonsterBattleDialogue>();
-							monsterIdToMonsterBattleDialogueTemp.put(monsterId, dialogue);
+							monsterIdToMonsterBattleDialogueTemp.put(monsterId,
+									dialogue);
 						}
-						List<MonsterBattleDialogue> dialogue =  monsterIdToMonsterBattleDialogueTemp
+						List<MonsterBattleDialogue> dialogue = monsterIdToMonsterBattleDialogueTemp
 								.get(monsterId);
 						dialogue.add(monsterBattleDialogue);
 					}
@@ -75,39 +81,44 @@ import com.lvl6.utils.DBConnection;
 				}
 			}
 		} catch (Exception e) {
-    	log.error("monsterBattleDialogue retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-	}   
+			log.error("monsterBattleDialogue retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
 	public static void reload() {
 		setStaticMonsterIdToMonsterBattleDialogue();
 	}
 
-
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static MonsterBattleDialogue convertRSRowToMonsterBattleDialogue(ResultSet rs) throws SQLException {
+	private static MonsterBattleDialogue convertRSRowToMonsterBattleDialogue(
+			ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__ID);
-		int monsterId = rs.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__MONSTER_ID);
-		String dialogueType = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE_TYPE);
-		String dialogue = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE);
-		float probabilityUttered = rs.getFloat(DBConstants.MONSTER_BATTLE_DIALOGUE__PROBABILITY_UTTERED);
+		int monsterId = rs
+				.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__MONSTER_ID);
+		String dialogueType = rs
+				.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE_TYPE);
+		String dialogue = rs
+				.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE);
+		float probabilityUttered = rs
+				.getFloat(DBConstants.MONSTER_BATTLE_DIALOGUE__PROBABILITY_UTTERED);
 
 		if (null != dialogueType) {
 			String newDialogueType = dialogueType.trim().toUpperCase();
 			if (!dialogueType.equals(newDialogueType)) {
-				log.error(String.format("incorrect MonsterBattleDialogue type. %s, id=%s",
-					dialogueType, id));
+				log.error(String.format(
+						"incorrect MonsterBattleDialogue type. %s, id=%s",
+						dialogueType, id));
 				dialogueType = newDialogueType;
 			}
 		}
-		
-		MonsterBattleDialogue monsterBattleDialogue = new MonsterBattleDialogue(id,
-				monsterId, dialogueType, dialogue, probabilityUttered);
-		
+
+		MonsterBattleDialogue monsterBattleDialogue = new MonsterBattleDialogue(
+				id, monsterId, dialogueType, dialogue, probabilityUttered);
+
 		return monsterBattleDialogue;
 	}
 

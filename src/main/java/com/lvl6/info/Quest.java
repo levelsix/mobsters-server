@@ -6,7 +6,7 @@ import java.util.List;
 public class Quest implements Serializable {
 
 	private static final long serialVersionUID = 943974595064267438L;
-	
+
 	private int id;
 	//	private int cityId;
 	private String questName;
@@ -30,13 +30,13 @@ public class Quest implements Serializable {
 	private String carrotId;
 	//	private boolean isAchievement;
 	private String monsterElement;
-	
-	public Quest(int id, String questName, String description, String doneResponse,
-			Dialogue acceptDialogue, int cashReward, int oilReward, int gemReward,
-			int expReward, int monsterIdReward, boolean isCompleteMonster,
-			List<Integer> questsRequiredForThis, String questGiverName,
-			String questGiverImagePrefix, int priority, String carrotId,
-			String monsterElement) {
+
+	public Quest(int id, String questName, String description,
+			String doneResponse, Dialogue acceptDialogue, int cashReward,
+			int oilReward, int gemReward, int expReward, int monsterIdReward,
+			boolean isCompleteMonster, List<Integer> questsRequiredForThis,
+			String questGiverName, String questGiverImagePrefix, int priority,
+			String carrotId, String monsterElement) {
 		super();
 		this.id = id;
 		this.questName = questName;

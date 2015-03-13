@@ -24,11 +24,12 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class ItemForUserRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ItemForUserRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_FOR_USER; 
+	private static Logger log = LoggerFactory
+			.getLogger(ItemForUserRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_FOR_USER;
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -36,33 +37,30 @@ public class ItemForUserRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, ItemForUser> getSpecificOrAllItemForUserMap(
-	    String userId, Collection<Integer> itemIds)
-    {
-		Map<Integer, ItemForUser> itemIdToUserItems =
-			new HashMap<Integer, ItemForUser>();
-		
+			String userId, Collection<Integer> itemIds) {
+		Map<Integer, ItemForUser> itemIdToUserItems = new HashMap<Integer, ItemForUser>();
+
 		List<ItemForUser> ifuList = getSpecificOrAllItemForUser(userId, itemIds);
-		
+
 		for (ItemForUser afu : ifuList) {
 			int itemId = afu.getItemId();
 
 			itemIdToUserItems.put(itemId, afu);
 		}
-		
+
 		return itemIdToUserItems;
 	}
-	
-	public List<ItemForUser> getSpecificOrAllItemForUser(
-	    String userId, Collection<Integer> itemIds)
-	{
+
+	public List<ItemForUser> getSpecificOrAllItemForUser(String userId,
+			Collection<Integer> itemIds) {
 		List<ItemForUser> userItems = null;
 		try {
 			List<String> columnsToSelected = UserItemForClientMapper
@@ -75,10 +73,9 @@ public class ItemForUserRetrieveUtil {
 			Map<String, Collection<?>> inConditions = null;
 			if (null != itemIds && !itemIds.isEmpty()) {
 				inConditions = new HashMap<String, Collection<?>>();
-				inConditions.put(DBConstants.ITEM_FOR_USER__ITEM_ID,
-						itemIds);
+				inConditions.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemIds);
 			}
-			String inDelim = getQueryConstructionUtil().getAnd(); 
+			String inDelim = getQueryConstructionUtil().getAnd();
 
 			String overallDelim = getQueryConstructionUtil().getAnd();
 			//query db, "values" is not used 
@@ -88,33 +85,32 @@ public class ItemForUserRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityAndInConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, inConditions, inDelim, overallDelim,
-							values, preparedStatement);
+					.selectRowsQueryEqualityAndInConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim,
+							inConditions, inDelim, overallDelim, values,
+							preparedStatement);
 
-			log.info("getSpecificOrAllItemIdToItemForUserId() query=" +
-					query);
+			log.info("getSpecificOrAllItemIdToItemForUserId() query=" + query);
 
-			userItems = this.jdbcTemplate
-					.query(query, values.toArray(), new UserItemForClientMapper());
-			
+			userItems = this.jdbcTemplate.query(query, values.toArray(),
+					new UserItemForClientMapper());
+
 		} catch (Exception e) {
-			log.error(
-				String.format(
+			log.error(String.format(
 					"could not retrieve user item for userId=%s, itemIds=%s",
-					userId, itemIds),
-				e);
+					userId, itemIds), e);
 			userItems = new ArrayList<ItemForUser>();
 		}
-		
+
 		return userItems;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -129,17 +125,19 @@ public class ItemForUserRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserItemForClientMapper implements RowMapper<ItemForUser> {
+	private static final class UserItemForClientMapper implements
+			RowMapper<ItemForUser> {
 
 		private static List<String> columnsSelected;
 
+		@Override
 		public ItemForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ItemForUser ifu = new ItemForUser();
 			ifu.setUserId(rs.getString(DBConstants.ITEM_FOR_USER__USER_ID));
 			ifu.setItemId(rs.getInt(DBConstants.ITEM_FOR_USER__ITEM_ID));
 			ifu.setQuantity(rs.getInt(DBConstants.ITEM_FOR_USER__QUANTITY));
 			return ifu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -150,5 +148,5 @@ public class ItemForUserRetrieveUtil {
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

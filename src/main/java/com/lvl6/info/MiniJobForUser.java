@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class MiniJobForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = -5431494347613930829L;
-	
+
 	private String id;
 	private String userId;
 	private int miniJobId;
@@ -17,7 +17,7 @@ public class MiniJobForUser implements Serializable {
 	private List<String> userMonsterIds;
 	private String userMonsterIdStr;
 	private Date timeCompleted;
-	
+
 	public MiniJobForUser() {
 		super();
 	}
@@ -110,8 +110,7 @@ public class MiniJobForUser implements Serializable {
 		this.timeCompleted = timeCompleted;
 	}
 
-	public int getDurationMinutes()
-	{
+	public int getDurationMinutes() {
 		return durationSeconds / 60;
 	}
 

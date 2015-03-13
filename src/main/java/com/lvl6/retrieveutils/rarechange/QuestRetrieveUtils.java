@@ -20,171 +20,180 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.QuestGraph;
 
-@Component @DependsOn("gameServer") public class QuestRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class QuestRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  //private static Map<Integer, List<Quest>> cityIdToQuests;
-  private static Map<Integer, Quest> questIdsToQuests;
-  private static QuestGraph questGraph;
+	//private static Map<Integer, List<Quest>> cityIdToQuests;
+	private static Map<Integer, Quest> questIdsToQuests;
+	private static QuestGraph questGraph;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_CONFIG;
+	private static final String TABLE_NAME = DBConstants.TABLE_QUEST_CONFIG;
 
-  public static Map<Integer, Quest> getQuestIdsToQuests() {
-    log.debug("retrieving all quest data");
-    if (questIdsToQuests == null) {
-      setStaticQuestIdsToQuests();
-    }
-    return questIdsToQuests;
-  }
+	public static Map<Integer, Quest> getQuestIdsToQuests() {
+		log.debug("retrieving all quest data");
+		if (questIdsToQuests == null) {
+			setStaticQuestIdsToQuests();
+		}
+		return questIdsToQuests;
+	}
 
-  public static Quest getQuestForQuestId(int questId) {
-    log.debug("retrieving quest with questId " + questId);
-    if (questIdsToQuests == null) {
-      setStaticQuestIdsToQuests();
-    }
-    return questIdsToQuests.get(questId);
-  }
+	public static Quest getQuestForQuestId(int questId) {
+		log.debug("retrieving quest with questId " + questId);
+		if (questIdsToQuests == null) {
+			setStaticQuestIdsToQuests();
+		}
+		return questIdsToQuests.get(questId);
+	}
 
-  public static QuestGraph getQuestGraph() {
-    log.debug("retrieving quest graph");
-    if (questGraph == null) {
-      setStaticQuestGraph();
-    }
-    return questGraph;
-  }
+	public static QuestGraph getQuestGraph() {
+		log.debug("retrieving quest graph");
+		if (questGraph == null) {
+			setStaticQuestGraph();
+		}
+		return questGraph;
+	}
 
-  private static void setStaticQuestIdsToQuests() {
-    log.debug("setting static map of questIds to quests");
+	private static void setStaticQuestIdsToQuests() {
+		log.debug("setting static map of questIds to quests");
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      Map<Integer, Quest> tmp = new HashMap<Integer, Quest>();
-			      while(rs.next()) {
-			        Quest quest = convertRSRowToQuest(rs);
-			        if (quest != null) {
-			            tmp.put(quest.getId(), quest);
-			        }
-			      }
-			      questIdsToQuests = tmp;
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  }
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						Map<Integer, Quest> tmp = new HashMap<Integer, Quest>();
+						while (rs.next()) {
+							Quest quest = convertRSRowToQuest(rs);
+							if (quest != null) {
+								tmp.put(quest.getId(), quest);
+							}
+						}
+						questIdsToQuests = tmp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("quest retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-  }
+			log.error("quest retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
-  private static void setStaticQuestGraph() {
-    log.debug("setting static quest graph");
+	private static void setStaticQuestGraph() {
+		log.debug("setting static quest graph");
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      List<Quest> quests = new ArrayList<Quest>();
-			      while(rs.next()) {  //should only be one
-			        Quest quest = convertRSRowToQuest(rs);
-			        if (quest != null) {
-			            quests.add(quest);
-			        }
-			      }
-			      QuestGraph tmp = new QuestGraph(quests);
-			      questGraph = tmp;
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  }    
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						List<Quest> quests = new ArrayList<Quest>();
+						while (rs.next()) {  //should only be one
+							Quest quest = convertRSRowToQuest(rs);
+							if (quest != null) {
+								quests.add(quest);
+							}
+						}
+						QuestGraph tmp = new QuestGraph(quests);
+						questGraph = tmp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("quest retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-  }
+			log.error("quest retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
-  public static void reload() {
-    //setStaticCityIdsToQuests();
-    setStaticQuestGraph();
-    setStaticQuestIdsToQuests();
-  }
+	public static void reload() {
+		//setStaticCityIdsToQuests();
+		setStaticQuestGraph();
+		setStaticQuestIdsToQuests();
+	}
 
-  /*
-   * assumes the resultset is apprpriately set up. traverses the row it's on.
-   */
-  private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
-    String delimiter = ",";
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
+		String delimiter = ",";
 
-    int id = rs.getInt(DBConstants.QUEST__ID);
-//    int cityId = rs.getInt(DBConstants.);
-    String questName = rs.getString(DBConstants.QUEST__QUEST_NAME);
-    String description = rs.getString(DBConstants.QUEST__DESCRIPTION);
-    String doneResponse = rs.getString(DBConstants.QUEST__DONE_RESPONSE);
+		int id = rs.getInt(DBConstants.QUEST__ID);
+		//    int cityId = rs.getInt(DBConstants.);
+		String questName = rs.getString(DBConstants.QUEST__QUEST_NAME);
+		String description = rs.getString(DBConstants.QUEST__DESCRIPTION);
+		String doneResponse = rs.getString(DBConstants.QUEST__DONE_RESPONSE);
 
-    String acceptDialogueBlob = rs.getString(DBConstants.QUEST__ACCEPT_DIALOGUE);
-    Dialogue acceptDialogue = MiscMethods.createDialogue(acceptDialogueBlob);
+		String acceptDialogueBlob = rs
+				.getString(DBConstants.QUEST__ACCEPT_DIALOGUE);
+		Dialogue acceptDialogue = MiscMethods
+				.createDialogue(acceptDialogueBlob);
 
-//    String questType = rs.getString(DBConstants.);
-//    String jobDescription = rs.getString(DBConstants.);
-//    int staticDataId = rs.getInt(DBConstants.);
-//    int quantity = rs.getInt(DBConstants.);
-    int cashReward = rs.getInt(DBConstants.QUEST__CASH_REWARD);
-    int oilReward = rs.getInt(DBConstants.QUEST__OIL_REWARD);
-    int gemReward = rs.getInt(DBConstants.QUEST__GEM_REWARD);
-    int expReward = rs.getInt(DBConstants.QUEST__EXP_REWARD);
-    int monsterIdReward = rs.getInt(DBConstants.QUEST__MONSTER_ID_REWARD);
-    boolean isCompleteMonster = rs.getBoolean(DBConstants.QUEST__IS_COMPLETE_MONSTER);
-    
-    String questsRequiredForThisString = rs.getString(DBConstants.QUEST__QUESTS_REQUIRED_FOR_THIS);
-    List<Integer> questsRequiredForThis = new ArrayList<Integer>();
-    if (questsRequiredForThisString != null) {
-      MiscMethods.explodeIntoInts(questsRequiredForThisString,
-      		delimiter, questsRequiredForThis);
-    }
+		//    String questType = rs.getString(DBConstants.);
+		//    String jobDescription = rs.getString(DBConstants.);
+		//    int staticDataId = rs.getInt(DBConstants.);
+		//    int quantity = rs.getInt(DBConstants.);
+		int cashReward = rs.getInt(DBConstants.QUEST__CASH_REWARD);
+		int oilReward = rs.getInt(DBConstants.QUEST__OIL_REWARD);
+		int gemReward = rs.getInt(DBConstants.QUEST__GEM_REWARD);
+		int expReward = rs.getInt(DBConstants.QUEST__EXP_REWARD);
+		int monsterIdReward = rs.getInt(DBConstants.QUEST__MONSTER_ID_REWARD);
+		boolean isCompleteMonster = rs
+				.getBoolean(DBConstants.QUEST__IS_COMPLETE_MONSTER);
 
-    String questGiverName = rs.getString(DBConstants.QUEST__QUEST_GIVER_NAME);
-    String questGiverImagePrefix = rs.getString(DBConstants.QUEST__QUEST_GIVER_IMAGE_PREFIX);
-    int priority = rs.getInt(DBConstants.QUEST__PRIORITY);
-    String carrotId = rs.getString(DBConstants.QUEST__CARROT_ID);
-//    boolean isAchievement = rs.getBoolean(DBConstants.);
-    String monsterElement = rs.getString(DBConstants.QUEST__MONSTER_ELEMENT);
-    
-    if (null != monsterElement) {
-    	String newMonsterElement = monsterElement.trim().toUpperCase();
-    	if (!monsterElement.equals(newMonsterElement)) {
-    		log.error(String.format(
-    			"monsterElement incorrect: %s, id=%s",
-    			monsterElement, id));
-    		monsterElement = newMonsterElement;
-    	}
-    }
-    
-    Quest quest = new Quest(id, questName, description, doneResponse,
-    		acceptDialogue, cashReward, oilReward, gemReward, expReward,
-    		monsterIdReward, isCompleteMonster, questsRequiredForThis,
-    		questGiverName, questGiverImagePrefix, priority, carrotId,
-    		monsterElement); 
-    
-    return quest;
-  }
+		String questsRequiredForThisString = rs
+				.getString(DBConstants.QUEST__QUESTS_REQUIRED_FOR_THIS);
+		List<Integer> questsRequiredForThis = new ArrayList<Integer>();
+		if (questsRequiredForThisString != null) {
+			MiscMethods.explodeIntoInts(questsRequiredForThisString, delimiter,
+					questsRequiredForThis);
+		}
+
+		String questGiverName = rs
+				.getString(DBConstants.QUEST__QUEST_GIVER_NAME);
+		String questGiverImagePrefix = rs
+				.getString(DBConstants.QUEST__QUEST_GIVER_IMAGE_PREFIX);
+		int priority = rs.getInt(DBConstants.QUEST__PRIORITY);
+		String carrotId = rs.getString(DBConstants.QUEST__CARROT_ID);
+		//    boolean isAchievement = rs.getBoolean(DBConstants.);
+		String monsterElement = rs
+				.getString(DBConstants.QUEST__MONSTER_ELEMENT);
+
+		if (null != monsterElement) {
+			String newMonsterElement = monsterElement.trim().toUpperCase();
+			if (!monsterElement.equals(newMonsterElement)) {
+				log.error(String.format("monsterElement incorrect: %s, id=%s",
+						monsterElement, id));
+				monsterElement = newMonsterElement;
+			}
+		}
+
+		Quest quest = new Quest(id, questName, description, doneResponse,
+				acceptDialogue, cashReward, oilReward, gemReward, expReward,
+				monsterIdReward, isCompleteMonster, questsRequiredForThis,
+				questGiverName, questGiverImagePrefix, priority, carrotId,
+				monsterElement);
+
+		return quest;
+	}
 
 }

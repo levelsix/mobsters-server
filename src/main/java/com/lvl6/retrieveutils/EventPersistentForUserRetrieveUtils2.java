@@ -20,9 +20,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.properties.DBConstants;
 
-@Component @DependsOn("gameServer") public class EventPersistentForUserRetrieveUtils2 {
+@Component
+@DependsOn("gameServer")
+public class EventPersistentForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static final String TABLE_NAME = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
 	private static final UserEventPersistentForClientMapper rowMapper = new UserEventPersistentForClientMapper();
@@ -34,22 +37,22 @@ import com.lvl6.properties.DBConstants;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public List<EventPersistentForUser> getUserPersistentEventForUserId(String userId) {
+	public List<EventPersistentForUser> getUserPersistentEventForUserId(
+			String userId) {
 		Object[] values = { userId };
-		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID);
-		
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID);
+
 		List<EventPersistentForUser> userPersistentEvents = null;//new ArrayList<EventPersistentForUser>();
 		try {
-			userPersistentEvents = this.jdbcTemplate
-				.query(query, values, rowMapper);
-			
+			userPersistentEvents = this.jdbcTemplate.query(query, values,
+					rowMapper);
+
 		} catch (Exception e) {
 			log.error("event persistent for user retrieve db error.", e);
 			userPersistentEvents = new ArrayList<EventPersistentForUser>();
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userPersistentEvents;
 	}
@@ -58,30 +61,39 @@ import com.lvl6.properties.DBConstants;
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserEventPersistentForClientMapper implements RowMapper<EventPersistentForUser> {
+	private static final class UserEventPersistentForClientMapper implements
+			RowMapper<EventPersistentForUser> {
 
 		private static List<String> columnsSelected;
 
-		public EventPersistentForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public EventPersistentForUser mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			EventPersistentForUser epfu = new EventPersistentForUser();
-			epfu.setUserId(rs.getString(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID));
-			epfu.setEventPersistentId(rs.getInt(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID));
-			Timestamp time = rs.getTimestamp(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY);
+			epfu.setUserId(rs
+					.getString(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID));
+			epfu.setEventPersistentId(rs
+					.getInt(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID));
+			Timestamp time = rs
+					.getTimestamp(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY);
 			if (null != time) {
 				epfu.setTimeOfEntry(new Date(time.getTime()));
 			}
 			return epfu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID);
-				columnsSelected.add(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID);
-				columnsSelected.add(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY);
+				columnsSelected
+						.add(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID);
+				columnsSelected
+						.add(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID);
+				columnsSelected
+						.add(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 
 }

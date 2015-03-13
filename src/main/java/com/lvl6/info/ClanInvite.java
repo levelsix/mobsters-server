@@ -4,26 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClanInvite implements Serializable {
-	
+
 	private static final long serialVersionUID = -2542433676672978497L;
-	
+
 	private String id;
 	private String userId;
-	private String inviterId; 
+	private String inviterId;
 	private String clanId;
 	private Date timeOfInvite;
-	
+
 	public ClanInvite() {
 		super();
 	}
 
-	public ClanInvite(
-		String id,
-		String userId,
-		String inviterId,
-		String clanId,
-		Date timeOfInvite )
-	{
+	public ClanInvite(String id, String userId, String inviterId,
+			String clanId, Date timeOfInvite) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -32,70 +27,51 @@ public class ClanInvite implements Serializable {
 		this.timeOfInvite = timeOfInvite;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getInviterId()
-	{
+	public String getInviterId() {
 		return inviterId;
 	}
 
-	public void setInviterId( String inviterId )
-	{
+	public void setInviterId(String inviterId) {
 		this.inviterId = inviterId;
 	}
 
-	public String getClanId()
-	{
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId( String clanId )
-	{
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 
-	public Date getTimeOfInvite()
-	{
+	public Date getTimeOfInvite() {
 		return timeOfInvite;
 	}
 
-	public void setTimeOfInvite( Date timeOfInvite )
-	{
+	public void setTimeOfInvite(Date timeOfInvite) {
 		this.timeOfInvite = timeOfInvite;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "ClanInvite [id="
-			+ id
-			+ ", userId="
-			+ userId
-			+ ", inviterId="
-			+ inviterId
-			+ ", clanId="
-			+ clanId
-			+ ", timeOfInvite="
-			+ timeOfInvite
-			+ "]";
+	public String toString() {
+		return "ClanInvite [id=" + id + ", userId=" + userId + ", inviterId="
+				+ inviterId + ", clanId=" + clanId + ", timeOfInvite="
+				+ timeOfInvite + "]";
 	}
 
 }

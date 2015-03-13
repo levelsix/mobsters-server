@@ -1,10 +1,10 @@
 package com.lvl6.pvp;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -33,7 +33,8 @@ import com.lvl6.utils.ConnectedPlayer;
 @Component
 public class HazelcastPvpUtil implements InitializingBean {
 
-	private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(HazelcastPvpUtil.class);
 
 	//these are the users that are online
 	@javax.annotation.Resource(name = "playersByPlayerId")
@@ -42,10 +43,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
-	public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
-		this.playersByPlayerId = playersByPlayerId;
-	} 
 
+	public void setPlayersByPlayerId(
+			IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+		this.playersByPlayerId = playersByPlayerId;
+	}
 
 	@javax.annotation.Resource(name = "initializationFlags")
 	protected IMap<String, Boolean> initializationFlagsMap;
@@ -53,25 +55,26 @@ public class HazelcastPvpUtil implements InitializingBean {
 	public IMap<String, Boolean> getInitializationFlagsMap() {
 		return initializationFlagsMap;
 	}
+
 	public void setInitializationFlagsMap(
 			IMap<String, Boolean> initializationFlagsMap) {
 		this.initializationFlagsMap = initializationFlagsMap;
 	}
 
-
 	//need to put this in spring-hazelcast.xml
 	//distributed map that is seen across all our servers
 	@javax.annotation.Resource(name = "pvpUserMap")
-
 	protected IMap<String, PvpUser> pvpUserMap;
+
 	public IMap<String, PvpUser> getPvpUserMap() {
 		return pvpUserMap;
 	}
+
 	public void setPvpUserMap(IMap<String, PvpUser> pvpUserMap) {
 		this.pvpUserMap = pvpUserMap;
 	}
-	private final String pvpUserMapName = "pvpUserMap"; //refers to IMap name above
 
+	private final String pvpUserMapName = "pvpUserMap"; //refers to IMap name above
 
 	@Autowired
 	protected Locker locker;
@@ -87,10 +90,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//Used to get offline people that can be attacked in pvp
 	@Autowired
 	protected PvpUserRetrieveUtil pvpUserRetrieveUtil;
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
-	
 
 	//properties used to create random names, related: textFileResourceLoaderAware
 	private static int syllablesInName1 = 2;
@@ -100,19 +102,21 @@ public class HazelcastPvpUtil implements InitializingBean {
 	private List<String> randomNames; //should this be a distributed collection?
 	private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
 	private boolean useDatabaseInstead = false;
-	
+
 	/**
-	 * 	In case hazelcast is giving trouble and the database should be
-	 *	used instead. Should be called before retrieving users.
+	 * In case hazelcast is giving trouble and the database should be used
+	 * instead. Should be called before retrieving users.
+	 * 
 	 * @return
 	 */
 	public boolean isUseDatabaseInstead() {
 		return useDatabaseInstead;
 	}
+
 	public void setUseDatabaseInstead(boolean useDatabaseInstead) {
 		this.useDatabaseInstead = useDatabaseInstead;
 	}
-	
+
 	//TODO: consider moving to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
 	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, Date now,
@@ -121,7 +125,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		for (String i : excludeIds) {
 			excludeIdStrs.add(i.toString());
 		}
-		
+
 		if (isUseDatabaseInstead()) {
 			log.info("querying db instead of hazelcast");
 			return getPvpUserRetrieveUtil().retrievePvpUsers(minElo, maxElo,
@@ -133,24 +137,31 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 
 	}
-	
+
 	//look here for examples on using PagingPredicate
 	//https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/test/java/com/hazelcast/map/SortLimitTest.java
 	protected Set<PvpUser> retrievePvpUsersViaHazelcast(int minElo, int maxElo,
 			Date now, int limit, Collection<String> excludeIds) {
-		log.info("querying for people to attack. shieldEndTime should be before now=" +
-				now + "\t elo should be between minElo=" + minElo + ", maxElo=" +
-				maxElo + "\t (page size aka) limit=" + limit);
+		log.info("querying for people to attack. shieldEndTime should be before now="
+				+ now
+				+ "\t elo should be between minElo="
+				+ minElo
+				+ ", maxElo=" + maxElo + "\t (page size aka) limit=" + limit);
 
-		Predicate<?,?> pred = generatePredicate(minElo, maxElo, now, limit, excludeIds);
-		
-		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(pred);
+		//return 10 opponents
+		Set<PvpUser> users = new HashSet<PvpUser>();
+		for(int i=0; i<limit; i++) {
+			Predicate<?, ?> pred = generatePredicate(minElo, maxElo, now, limit,
+					excludeIds);
+
+			Set<PvpUser> user = (Set<PvpUser>) pvpUserMap.values(pred);
+			users.addAll(user);
+		}
 		log.info("users:" + users);
 
-		
 		return users;
 	}
-	
+
 	/*
 	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
@@ -163,8 +174,8 @@ public class HazelcastPvpUtil implements InitializingBean {
 		if (null != excludeIds && !excludeIds.isEmpty()) {
 			String userIdStr = PvpConstants.PVP_USER__USER_ID;
 			//doesn't work >:[, list is not a Comparable data type
-//			Predicate<?, ?> pIn = Predicates.in(userIdStr, excludeIds);
-//			Predicate<?, ?> pNotIn = Predicates.not(pIn);
+	//			Predicate<?, ?> pIn = Predicates.in(userIdStr, excludeIds);
+	//			Predicate<?, ?> pNotIn = Predicates.not(pIn);
 			
 			Map<String, Object> lessThanConditions = null;
 			Map<String, Object> greaterThanConditions = null;
@@ -198,46 +209,46 @@ public class HazelcastPvpUtil implements InitializingBean {
 		
 		return advPredicate;
 	}*/
-	
+
 	//doesn't matter if use java.util.Date or java.sql.Timestamp
 	public Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
-		String inBattleShieldEndTimeStr =
-				PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
+		String inBattleShieldEndTimeStr = PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
 		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
 		String eloStr = PvpConstants.PVP_USER__ELO;
-		
+
 		//need to enclose whitespaces in a single quote
 		String nowStr = "'" + now + "'";
 		Map<String, Object> lessThanConditions = new HashMap<String, Object>();
 		lessThanConditions.put(inBattleShieldEndTimeStr, nowStr);
 		lessThanConditions.put(shieldEndTimeStr, nowStr);
 		lessThanConditions.put(eloStr, maxElo);
-		
-		Map<String, Object> greaterThanConditions =
-				new HashMap<String, Object>();
+
+		Map<String, Object> greaterThanConditions = new HashMap<String, Object>();
 		greaterThanConditions.put(eloStr, minElo);
-		
+
 		boolean isNotIn = true;
 		Map<String, Collection<?>> inConditions = null;
 		if (null != excludeIds && !excludeIds.isEmpty()) {
 			String userIdStr = PvpConstants.PVP_USER__USER_ID;
-			inConditions = new HashMap<String, Collection<?>>(); 
+			inConditions = new HashMap<String, Collection<?>>();
 			inConditions.put(userIdStr, excludeIds);
 		}
-		
+
 		String sql = getQueryConstructionUtil().createWhereConditionString(
-				lessThanConditions, greaterThanConditions, isNotIn, inConditions);
+				lessThanConditions, greaterThanConditions, isNotIn,
+				inConditions);
 		log.info("predicate used in querying hazelcast object: " + sql);
-		
-		Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
-		
+
+		Predicate<?, ?> sqlPredicate = new SqlPredicate(sql);
+
+		//Byron's change to limit->1
 		PagingPredicate advPredicate = new PagingPredicate(sqlPredicate,
-				new PvpUserComparator(true, IterationType.VALUE), limit);
+				new PvpUserComparator(true, IterationType.VALUE), 1);
+		
 		
 		return advPredicate;
 	}
-
 
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
 	public PvpUser getPvpUser(String userId) {
@@ -250,32 +261,35 @@ public class HazelcastPvpUtil implements InitializingBean {
 			return getPvpUserViaHazelcast(userIdStr);
 		}
 	}
-	
+
 	public Map<String, PvpUser> getPvpUsers(Collection<String> userIds) {
 		List<String> stringIds = Lists.transform(
-			new ArrayList<String>(userIds), Functions.toStringFunction());
-			
+				new ArrayList<String>(userIds), Functions.toStringFunction());
+
 		if (isUseDatabaseInstead()) {
-			log.info("getting users from db instead of hazelcast. userIds=" + userIds);
+			log.info("getting users from db instead of hazelcast. userIds="
+					+ userIds);
 			return getPvpUserRetrieveUtil().getUserPvpLeagueForUsers(stringIds);
 		}
-		
+
 		Map<String, PvpUser> users = new HashMap<String, PvpUser>();
 		for (String userId : userIds) {
 			String userIdStr = String.valueOf(userId);
-			
+
 			users.put(userIdStr, getPvpUserViaHazelcast(userIdStr));
 		}
 		return users;
 	}
-	
+
 	protected PvpUser getPvpUserViaHazelcast(String userIdStr) {
 		if (playersByPlayerId.containsKey(userIdStr)) {
-			log.info("PvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
+			log.info("PvpUser is online, in ConnectedPlayers map. id="
+					+ userIdStr);
 		}
 
 		if (!pvpUserMap.containsKey(userIdStr)) {
-			log.warn("trying to access nonexistent PvpUser with id: " + userIdStr);
+			log.warn("trying to access nonexistent PvpUser with id: "
+					+ userIdStr);
 			return null;
 		} else {
 			return pvpUserMap.get(userIdStr);
@@ -315,15 +329,16 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//    	}
 	//    }
 
-//	public void removePvpUser(String userId) {
+	//	public void removePvpUser(String userId) {
 	public void removePvpUser(String userIdStr) {
 		if (isUseDatabaseInstead()) {
 			return;
 		}
-//		String userIdStr = String.valueOf(userId);
+		//		String userIdStr = String.valueOf(userId);
 
 		if (pvpUserMap.containsKey(userIdStr)) {
-			log.info("removing userId from available pvp enemies. userId=" + userIdStr);
+			log.info("removing userId from available pvp enemies. userId="
+					+ userIdStr);
 		}
 		pvpUserMap.remove(userIdStr);
 	}
@@ -336,10 +351,6 @@ public class HazelcastPvpUtil implements InitializingBean {
 		return randomNames.get(randInt);
 	}
 
-
-
-
-
 	//SETUP STUFF
 	//REQUIRED INITIALIZING BEAN STUFF
 	@Override
@@ -351,12 +362,14 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//creates the random names for fake users
 	protected void createRandomNames() {
 		rand = ControllerConstants.RAND;
-		Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
+		Resource nameFile = getTextFileResourceLoaderAware().getResource(
+				FILE_OF_RANDOM_NAMES);
 
 		try {
 			//maybe don't need to close, deallocate nameFile?
 			if (!nameFile.exists()) {
-				log.error("file with random names does not exist. filePath=" + FILE_OF_RANDOM_NAMES);
+				log.error("file with random names does not exist. filePath="
+						+ FILE_OF_RANDOM_NAMES);
 				return;
 			}
 
@@ -377,13 +390,14 @@ public class HazelcastPvpUtil implements InitializingBean {
 	}
 
 	protected void createName(Random rand, NameGenerator nameGenerator) {
-		int syllablesInName = (Math.random() < .5) ? syllablesInName1 : syllablesInName2;
+		int syllablesInName = (Math.random() < .5) ? syllablesInName1
+				: syllablesInName2;
 		String name = nameGenerator.compose(syllablesInName);
 		if (Math.random() < .5) {
 			name = name.toLowerCase();
 		}
 		if (Math.random() < .3) {
-			name = name + (int)(Math.ceil(Math.random() * 98));
+			name = name + (int) (Math.ceil(Math.random() * 98));
 		}
 		randomNames.add(name);
 
@@ -396,7 +410,8 @@ public class HazelcastPvpUtil implements InitializingBean {
 			if (gotLock) {
 				boolean pvpUserMapInitialized = false;
 				if (initializationFlagsMap.containsKey(pvpUserMapName)) {
-					pvpUserMapInitialized = initializationFlagsMap.get(pvpUserMapName);
+					pvpUserMapInitialized = initializationFlagsMap
+							.get(pvpUserMapName);
 				}
 
 				if (!pvpUserMapInitialized) {
@@ -409,10 +424,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 				}
 
 			} else {
-				log.warn("not initializing pvpUserMap. didn't get lock: " + pvpUserMapName);
+				log.warn("not initializing pvpUserMap. didn't get lock: "
+						+ pvpUserMapName);
 			}
 
-		} catch(Exception e) {
+		} catch (Exception e) {
 			log.error("failed to initialize pvpUserMap", e);
 		} finally {
 
@@ -436,7 +452,8 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 
 		//now we have almost all users, put them into the userIdToPvpUser IMap
-		Collection<PvpUser> validUsers = getPvpUserRetrieveUtil().getPvpValidUsers();
+		Collection<PvpUser> validUsers = getPvpUserRetrieveUtil()
+				.getPvpValidUsers();
 		if (null != validUsers && !validUsers.isEmpty()) {
 			log.info("populating the IMap with users that can be attacked in pvp. numUsers="
 					+ validUsers.size());
@@ -468,10 +485,10 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 	}
 
-
 	public Locker getLocker() {
 		return locker;
 	}
+
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
@@ -479,6 +496,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 	public TextFileResourceLoaderAware getTextFileResourceLoaderAware() {
 		return textFileResourceLoaderAware;
 	}
+
 	public void setTextFileResourceLoaderAware(
 			TextFileResourceLoaderAware textFileResourceLoaderAware) {
 		this.textFileResourceLoaderAware = textFileResourceLoaderAware;
@@ -487,17 +505,18 @@ public class HazelcastPvpUtil implements InitializingBean {
 	public PvpUserRetrieveUtil getPvpUserRetrieveUtil() {
 		return pvpUserRetrieveUtil;
 	}
-	public void setPvpUserRetrieveUtil(
-			PvpUserRetrieveUtil pvpUserRetrieveUtil) {
+
+	public void setPvpUserRetrieveUtil(PvpUserRetrieveUtil pvpUserRetrieveUtil) {
 		this.pvpUserRetrieveUtil = pvpUserRetrieveUtil;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
-	
 }

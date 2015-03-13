@@ -12,32 +12,33 @@ import com.lvl6.proto.EventUserProto.SetAvatarMonsterRequestProto;
 
 public class SetAvatarMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private SetAvatarMonsterRequestProto setAvatarMonsterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      setAvatarMonsterRequestProto = SetAvatarMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = setAvatarMonsterRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SetAvatarMonsterRequest exception", e);
-    }
-  }
+	private SetAvatarMonsterRequestProto setAvatarMonsterRequestProto;
 
-  public SetAvatarMonsterRequestProto getSetAvatarMonsterRequestProto() {
-    return setAvatarMonsterRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			setAvatarMonsterRequestProto = SetAvatarMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = setAvatarMonsterRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SetAvatarMonsterRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "SetAvatarMonsterRequestEvent [setAvatarMonsterRequestProto="
-		  + setAvatarMonsterRequestProto
-		  + "]";
-  }
+	public SetAvatarMonsterRequestProto getSetAvatarMonsterRequestProto() {
+		return setAvatarMonsterRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "SetAvatarMonsterRequestEvent [setAvatarMonsterRequestProto="
+				+ setAvatarMonsterRequestProto + "]";
+	}
 
 }

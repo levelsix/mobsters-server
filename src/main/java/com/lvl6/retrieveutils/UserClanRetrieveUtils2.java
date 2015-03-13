@@ -24,9 +24,12 @@ import com.lvl6.info.UserClan;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component @DependsOn("gameServer") public class UserClanRetrieveUtils2 {
+@Component
+@DependsOn("gameServer")
+public class UserClanRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private final String TABLE_NAME = DBConstants.TABLE_CLAN_FOR_USER;
 	private static final UserClanForClientMapper rowMapper = new UserClanForClientMapper();
@@ -41,7 +44,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public Map<String, UserClan> getUserClanForUsers(String clanId, List<String> userIds) {
+	public Map<String, UserClan> getUserClanForUsers(String clanId,
+			List<String> userIds) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME);
@@ -53,7 +57,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		int numQuestionMarks = userIds.size();
 		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
-		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils
+				.csvList(questionMarks);
 		querySb.append(questionMarkStr);
 		querySb.append(");");
 
@@ -62,62 +67,57 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		values.addAll(userIds);
 
 		String query = querySb.toString();
-		log.info(String.format(
-			"user clan query=%s, values=%s",
-			query, values));
+		log.info(String.format("user clan query=%s, values=%s", query, values));
 
 		Map<String, UserClan> userIdsToStatuses = new HashMap<String, UserClan>();
 		try {
-			List<UserClan> userClans = this.jdbcTemplate
-				.query(query, values.toArray(), rowMapper);
+			List<UserClan> userClans = this.jdbcTemplate.query(query,
+					values.toArray(), rowMapper);
 			for (UserClan uc : userClans) {
 				String userId = uc.getUserId();
 				userIdsToStatuses.put(userId, uc);
 			}
-			
+
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		//should not be null
 		return userIdsToStatuses;
 	}
-	
+
 	public List<UserClan> getUserClansRelatedToUser(String userId) {
 		Object[] values = { userId };
-		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.CLAN_FOR_USER__USER_ID);
-		
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.CLAN_FOR_USER__USER_ID);
+
 		List<UserClan> userClans = null;
 		try {
-			userClans = this.jdbcTemplate
-				.query(query, values, rowMapper);
+			userClans = this.jdbcTemplate.query(query, values, rowMapper);
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userClans;
 	}
 
 	public List<UserClan> getUserClansRelatedToClan(String clanId) {
 		Object[] values = { clanId };
-		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.CLAN_FOR_USER__CLAN_ID);
-		
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.CLAN_FOR_USER__CLAN_ID);
+
 		List<UserClan> userClans = null;
 		try {
-			userClans = this.jdbcTemplate
-				.query(query, values, rowMapper);
+			userClans = this.jdbcTemplate.query(query, values, rowMapper);
 		} catch (Exception e) {
-			log.error(String.format(
-				"getUserClansRelatedToClan user clan retrieve db error. clanId=%s",
-				clanId), e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			log.error(
+					String.format(
+							"getUserClansRelatedToClan user clan retrieve db error. clanId=%s",
+							clanId), e);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userClans;
 	}
@@ -125,30 +125,29 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	////@Cacheable(value="specificUserClan")
 	public UserClan getSpecificUserClan(String userId, String clanId) {
 		Object[] values = { clanId, userId };
-		String query = String.format(
-			"select * from %s where %s=? and %s=?",
-			TABLE_NAME, DBConstants.CLAN_FOR_USER__CLAN_ID,
-			DBConstants.CLAN_FOR_USER__USER_ID);
-		
+		String query = String.format("select * from %s where %s=? and %s=?",
+				TABLE_NAME, DBConstants.CLAN_FOR_USER__CLAN_ID,
+				DBConstants.CLAN_FOR_USER__USER_ID);
+
 		UserClan userClan = null;
 		try {
-			List<UserClan> userClans = this.jdbcTemplate
-				.query(query, values, rowMapper);
+			List<UserClan> userClans = this.jdbcTemplate.query(query, values,
+					rowMapper);
 			if (null != userClans && !userClans.isEmpty()) {
 				userClan = userClans.get(0);
 			}
 		} catch (Exception e) {
 			log.error(String.format(
-				"user clan retrieve db error. userId=%s, clanId=%s",
-				userId, clanId), e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+					"user clan retrieve db error. userId=%s, clanId=%s",
+					userId, clanId), e);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userClan;
 	}
 
-
-	public List<UserClan> getUserUserClansWithStatuses(String clanId, List<String> statuses) {
+	public List<UserClan> getUserUserClansWithStatuses(String clanId,
+			List<String> statuses) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT *");
 		querySb.append(" FROM ");
@@ -161,7 +160,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		int numQuestionMarks = statuses.size();
 		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
-		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils
+				.csvList(questionMarks);
 		querySb.append(questionMarkStr);
 		querySb.append(");");
 
@@ -170,39 +170,37 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		values.addAll(statuses);
 
 		String query = querySb.toString();
-		log.info(String.format(
-			"user clan query=%s, values=%s", query, values));
+		log.info(String.format("user clan query=%s, values=%s", query, values));
 
 		List<UserClan> userClans = null;
 		try {
-			userClans = this.jdbcTemplate
-				.query(query, values.toArray(), rowMapper);
-				
+			userClans = this.jdbcTemplate.query(query, values.toArray(),
+					rowMapper);
+
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
 			userClans = new ArrayList<UserClan>();
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		//should not be null and should be a list object
 		return userClans;
 	}
 
-	public Map<String, String> getUserIdsToStatuses(String clanId, List<String> statuses)
-	{
+	public Map<String, String> getUserIdsToStatuses(String clanId,
+			List<String> statuses) {
 		int numQuestionMarks = statuses.size();
 		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
-		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
-		
+		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils
+				.csvList(questionMarks);
+
 		String query = String.format(
-			"SELECT %s, %s FROM %s WHERE %s=? AND %s in (%s);",
-			DBConstants.CLAN_FOR_USER__USER_ID,
-			DBConstants.CLAN_FOR_USER__STATUS,
-			TABLE_NAME,
-			DBConstants.CLAN_FOR_USER__CLAN_ID,
-			DBConstants.CLAN_FOR_USER__STATUS,
-			questionMarkStr);
-		
+				"SELECT %s, %s FROM %s WHERE %s=? AND %s in (%s);",
+				DBConstants.CLAN_FOR_USER__USER_ID,
+				DBConstants.CLAN_FOR_USER__STATUS, TABLE_NAME,
+				DBConstants.CLAN_FOR_USER__CLAN_ID,
+				DBConstants.CLAN_FOR_USER__STATUS, questionMarkStr);
+
 		List<Object> values = new ArrayList<Object>();
 		values.add(clanId);
 		values.addAll(statuses);
@@ -211,23 +209,24 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		Map<String, String> userIdsToStatuses = new HashMap<String, String>();
 		try {
-			List<UserIdAndStatus> userIdsAndStatuses = this.jdbcTemplate
-				.query(query, values.toArray(), userIdAndStatusMapper);
-			
+			List<UserIdAndStatus> userIdsAndStatuses = this.jdbcTemplate.query(
+					query, values.toArray(), userIdAndStatusMapper);
+
 			for (UserIdAndStatus uias : userIdsAndStatuses) {
 				userIdsToStatuses.put(uias.getUserId(), uias.getStatus());
 			}
-			
+
 		} catch (Exception e) {
 			log.error("getUserIdsToStatuses() retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
-		
+
 		return userIdsToStatuses;
 	}
-	
-	public List<String> getUserIdsWithStatuses(String clanId, List<String> statuses) {
+
+	public List<String> getUserIdsWithStatuses(String clanId,
+			List<String> statuses) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT ");
 		querySb.append(DBConstants.CLAN_FOR_USER__USER_ID);
@@ -241,7 +240,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		int numQuestionMarks = statuses.size();
 		List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
-		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+		String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils
+				.csvList(questionMarks);
 		querySb.append(questionMarkStr);
 		querySb.append(");");
 
@@ -255,19 +255,19 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		List<String> userIds = null;
 		try {
 			userIds = this.jdbcTemplate.query(query, values.toArray(),
-				userIdMapper);
+					userIdMapper);
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
 			userIds = new ArrayList<String>();
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		//should not be null and should be a list object
 		return userIds;
 	}
 
-	public Map<String, Integer> getClanSizeForClanIdsAndStatuses(List<String> clanIds,
-		List<String> statuses) {
+	public Map<String, Integer> getClanSizeForClanIdsAndStatuses(
+			List<String> clanIds, List<String> statuses) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT ");
 		querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
@@ -297,29 +297,27 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		values.addAll(statuses);
 
 		String query = querySb.toString();
-		log.info(String.format(
-			"user clan size query=%s, values=%s",
-			query, values));
+		log.info(String.format("user clan size query=%s, values=%s", query,
+				values));
 
 		Map<String, Integer> clanIdsToSize = new HashMap<String, Integer>();
 		try {
-			List<ClanSize> sizes = this.jdbcTemplate
-				.query(query, values.toArray(), clanSizeMapper);
-			
+			List<ClanSize> sizes = this.jdbcTemplate.query(query,
+					values.toArray(), clanSizeMapper);
+
 			for (ClanSize size : sizes) {
 				clanIdsToSize.put(size.getClanId(), size.getSize());
 			}
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		//should not be null and should be a list object
 		return clanIdsToSize;
 	}
 
-	public Map<String, Integer> getClanSizeForStatuses( List<String> statuses )
-	{
+	public Map<String, Integer> getClanSizeForStatuses(List<String> statuses) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT ");
 		querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
@@ -345,27 +343,26 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		values.addAll(statuses);
 
 		String query = querySb.toString();
-		log.info(String.format(
-			"all clan's size query=%s, values=%s",
-			query, values));
+		log.info(String.format("all clan's size query=%s, values=%s", query,
+				values));
 
 		Map<String, Integer> clanIdsToSize = new HashMap<String, Integer>();
 		try {
-			List<ClanSize> sizes = this.jdbcTemplate
-				.query(query, values.toArray(), clanSizeMapper);
-			
+			List<ClanSize> sizes = this.jdbcTemplate.query(query,
+					values.toArray(), clanSizeMapper);
+
 			for (ClanSize size : sizes) {
 				clanIdsToSize.put(size.getClanId(), size.getSize());
 			}
 		} catch (Exception e) {
 			log.error("user clan retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		//should not be null and should be a list object
 		return clanIdsToSize;
 	}
-	
+
 	public List<String> getUserIdsRelatedToClan(String clanId) {
 		List<UserClan> userClans = getUserClansRelatedToClan(clanId);
 		List<String> userIds = new ArrayList<String>();
@@ -379,40 +376,43 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserClanForClientMapper implements RowMapper<UserClan> {
+	private static final class UserClanForClientMapper implements
+			RowMapper<UserClan> {
 
 		private static List<String> columnsSelected;
 
+		@Override
 		public UserClan mapRow(ResultSet rs, int rowNum) throws SQLException {
 			UserClan uc = new UserClan();
 			uc.setUserId(rs.getString(DBConstants.CLAN_FOR_USER__USER_ID));
 			uc.setClanId(rs.getString(DBConstants.CLAN_FOR_USER__CLAN_ID));
-			
+
 			String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
 			if (null != status) {
 				String newStatus = status.trim().toUpperCase();
 				if (!status.equals(newStatus)) {
-					log.error(String.format(
-		    			"UserClanStatus incorrect: %s, userId=%s, clanId=%s",
-		    			status, uc.getUserId(), uc.getClanId()));
-		    		status = newStatus;
+					log.error(String
+							.format("UserClanStatus incorrect: %s, userId=%s, clanId=%s",
+									status, uc.getUserId(), uc.getClanId()));
+					status = newStatus;
 				}
 				uc.setStatus(status);
 			}
-			
+
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.CLAN_FOR_USER__REQUEST_TIME);
+				Timestamp time = rs
+						.getTimestamp(DBConstants.CLAN_FOR_USER__REQUEST_TIME);
 				if (null != time && !rs.wasNull()) {
 					Date date = new Date(time.getTime());
 					uc.setRequestTime(date);
 				}
 			} catch (Exception e) {
-				log.error(String.format(
-					"maybe requestTime is invalid, uc=%s", uc), e);
+				log.error(String.format("maybe requestTime is invalid, uc=%s",
+						uc), e);
 			}
 
 			return uc;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -424,94 +424,92 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 
 	protected static class ClanSize {
 		private String clanId;
 		private int size;
 
-		public ClanSize()
-		{
+		public ClanSize() {
 			super();
 		}
 
-		public String getClanId()
-		{
+		public String getClanId() {
 			return clanId;
 		}
 
-		public void setClanId( String clanId )
-		{
+		public void setClanId(String clanId) {
 			this.clanId = clanId;
 		}
 
-		public int getSize()
-		{
+		public int getSize() {
 			return size;
 		}
 
-		public void setSize( int size )
-		{
+		public void setSize(int size) {
 			this.size = size;
 		}
-		
+
 	}
-	
+
 	private static final class ClanSizeMapper implements RowMapper<ClanSize> {
-		
+
+		@Override
 		public ClanSize mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ClanSize cs = new ClanSize();
 			cs.setClanId(rs.getString(DBConstants.CLAN_FOR_USER__CLAN_ID));
 			cs.setSize(rs.getInt(2));
 			return cs;
-		}	
+		}
 	}
 
 	protected static class UserIdAndStatus {
 		private String userId;
 		private String status;
-		
-		public UserIdAndStatus( String userId, String status )
-		{
+
+		public UserIdAndStatus(String userId, String status) {
 			super();
 			this.userId = userId;
 			this.status = status;
 		}
-		public String getUserId()
-		{
+
+		public String getUserId() {
 			return userId;
 		}
-		public void setUserId( String userId )
-		{
+
+		public void setUserId(String userId) {
 			this.userId = userId;
 		}
-		public String getStatus()
-		{
+
+		public String getStatus() {
 			return status;
 		}
-		public void setStatus( String status )
-		{
+
+		public void setStatus(String status) {
 			this.status = status;
 		}
 
 	}
-	
-	private static final class UserIdAndStatusMapper implements RowMapper<UserIdAndStatus> {
 
-		public UserIdAndStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
+	private static final class UserIdAndStatusMapper implements
+			RowMapper<UserIdAndStatus> {
+
+		@Override
+		public UserIdAndStatus mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+
 			String userId = rs.getString(DBConstants.CLAN_FOR_USER__USER_ID);
 			String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
 			return new UserIdAndStatus(userId, status);
-		}	
+		}
 	}
 
-	
 	private static final class UserIdMapper implements RowMapper<String> {
 
+		@Override
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return rs.getString(DBConstants.CLAN_FOR_USER__USER_ID);
-		}	
+		}
 	}
-	
+
 }

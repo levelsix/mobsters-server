@@ -31,241 +31,244 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class GiveClanHelpController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class GiveClanHelpController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
-   
-  @Autowired
-  protected TimeUtils timeUtil;
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public GiveClanHelpController() {
-    numAllocatedThreads = 4;
-  }
+	@Autowired
+	protected Locker locker;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new GiveClanHelpRequestEvent();
-  }
+	@Autowired
+	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_GIVE_CLAN_HELP_EVENT;
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent)event)
-    	.getGiveClanHelpRequestProto();
-    
-    log.info(String.format("reqProto=%s", reqProto));
+	@Autowired
+	protected TimeUtils timeUtil;
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    String clanId = null;
-    
-    if (null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanUuid();
-    }
-    
-    //NOTE: For all these ids, append userId to helperIds property
-    List<String> clanHelpIds = reqProto.getClanHelpUuidsList();
+	public GiveClanHelpController() {
+		numAllocatedThreads = 4;
+	}
 
-    GiveClanHelpResponseProto.Builder resBuilder = GiveClanHelpResponseProto.newBuilder();
-    resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
-    resBuilder.setSender(senderProto);
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new GiveClanHelpRequestEvent();
+	}
 
-    boolean invalidUuids = true;
-    try {
-      UUID.fromString(userId);
-      UUID.fromString(clanId);
-      
-      for (String clanHelpId : clanHelpIds) {
-        UUID.fromString(clanHelpId);
-      }
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_GIVE_CLAN_HELP_EVENT;
+	}
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s, clanId=%s, clanHelpIds=%s",
-          userId, clanId, clanHelpIds), e);
-      invalidUuids = true;
-    }
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
+				.getGiveClanHelpRequestProto();
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
-      GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+		log.info(String.format("reqProto=%s", reqProto));
 
-    /*int clanId = 0;
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
-    }
-    
-    //maybe should get clan lock instead of locking person
-    //but going to modify user, so lock user. however maybe locking is not necessary
-    boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
-    } else {
-    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    }*/
-    try {
-//      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      
-      boolean legitLeave = checkLegitLeave(resBuilder, userId, clanId);
-      
-      boolean success = false;
-      if (legitLeave) {
-      	success = writeChangesToDB(userId, clanId, clanHelpIds);
-      }
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		String clanId = null;
 
-      GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      if (!success) {
-    	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-    	  
-      } else {
-    	  //only write to clan if success
-    	  //send back most up to date ClanHelps that changed
-    	  //NOTE: Sending most up to date ClanHelps incurs a db read
-    	  setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
-    	  resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
-    	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-    	  server.writeClanEvent(resEvent, clanId);
-      }
-      
-    } catch (Exception e) {
-      log.error("exception in GiveClanHelp processEvent", e);
-      try {
-    	  resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
-    	  GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in GiveClanHelp processEvent", e);
-    	}
-    } /*finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    	}
-    }*/
-  }
+		if (null != senderProto.getClan()) {
+			clanId = senderProto.getClan().getClanUuid();
+		}
 
-  private boolean checkLegitLeave(Builder resBuilder, String userId, String clanId) {
+		//NOTE: For all these ids, append userId to helperIds property
+		List<String> clanHelpIds = reqProto.getClanHelpUuidsList();
 
-    if (userId == null || clanId == null) {
-      log.error("invalid: userId=%s, clanId=%s", userId, clanId );
-      return false;
-    }
+		GiveClanHelpResponseProto.Builder resBuilder = GiveClanHelpResponseProto
+				.newBuilder();
+		resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+		resBuilder.setSender(senderProto);
 
-    return true;
-  }
+		boolean invalidUuids = true;
+		try {
+			UUID.fromString(userId);
+			UUID.fromString(clanId);
 
-  private boolean writeChangesToDB(String userId, String clanId,
-	  List<String> clanHelpIds)
-  {
-    int numUpdated = UpdateUtils.get().updateClanHelp(userId, clanId,
-    	clanHelpIds);
-    
-    log.info(String.format(
-    	"numUpdated=%s", numUpdated));
-    
-    
-    User user = getUserRetrieveUtils().getUserById(userId);
-    boolean updated = user.updateClanHelps(clanHelpIds.size());
-    log.info(String.format( "updated=%s", updated ));
-    
-    int solicited = 0;
-    int given = clanHelpIds.size();
-    Date date = timeUtil.createDateAtStartOfDay(new Date());
-    ClanHelpCountForUser chcfu = new ClanHelpCountForUser(
-    	userId, clanId, date, solicited, given);
+			for (String clanHelpId : clanHelpIds) {
+				UUID.fromString(clanHelpId);
+			}
 
-    try {
-    	numUpdated = InsertUtils.get()
-    		.insertIntoUpdateClanHelpCount(chcfu);
-    	log.info("numUpdated ClanHelpCountForUser={}", numUpdated);
-    } catch(Exception e) {
-    	log.error(String.format(
-    		"Unable to increment ClanHelpCountForUser: %s",
-    		chcfu),
-    		e);
-    }
-    
-    return true;
-  }
-  
-  private void setClanHelpings(Builder resBuilder, User solicitor,
-	  MinimumUserProto mup, List<String> clanHelpIds)
-  {
-	  List<ClanHelp> modifiedSolicitations = clanHelpRetrieveUtil
-		  .getClanHelpsForIds( clanHelpIds );
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(
+					String.format(
+							"UUID error. incorrect userId=%s, clanId=%s, clanHelpIds=%s",
+							userId, clanId, clanHelpIds), e);
+			invalidUuids = true;
+		}
+
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+			GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
+		/*int clanId = 0;
+		if (senderProto.hasClan() && null != senderProto.getClan()) {
+			clanId = senderProto.getClan().getClanId();
+		}
+		
+		//maybe should get clan lock instead of locking person
+		//but going to modify user, so lock user. however maybe locking is not necessary
+		boolean lockedClan = false;
+		if (0 != clanId) {
+			lockedClan = getLocker().lockClan(clanId);
+		} else {
+			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		}*/
+		try {
+			//      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+
+			boolean legitLeave = checkLegitLeave(resBuilder, userId, clanId);
+
+			boolean success = false;
+			if (legitLeave) {
+				success = writeChangesToDB(userId, clanId, clanHelpIds);
+			}
+
+			GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			if (!success) {
+				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+
+			} else {
+				//only write to clan if success
+				//send back most up to date ClanHelps that changed
+				//NOTE: Sending most up to date ClanHelps incurs a db read
+				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
+				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
+				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				server.writeClanEvent(resEvent, clanId);
+			}
+
+		} catch (Exception e) {
+			log.error("exception in GiveClanHelp processEvent", e);
+			try {
+				resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+				GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in GiveClanHelp processEvent", e);
+			}
+		} /*finally {
+			if (0 != clanId && lockedClan) {
+				getLocker().unlockClan(clanId);
+			} else {
+				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			}
+			}*/
+	}
+
+	private boolean checkLegitLeave(Builder resBuilder, String userId,
+			String clanId) {
+
+		if (userId == null || clanId == null) {
+			log.error("invalid: userId=%s, clanId=%s", userId, clanId);
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean writeChangesToDB(String userId, String clanId,
+			List<String> clanHelpIds) {
+		int numUpdated = UpdateUtils.get().updateClanHelp(userId, clanId,
+				clanHelpIds);
+
+		log.info(String.format("numUpdated=%s", numUpdated));
+
+		User user = getUserRetrieveUtils().getUserById(userId);
+		boolean updated = user.updateClanHelps(clanHelpIds.size());
+		log.info(String.format("updated=%s", updated));
+
+		int solicited = 0;
+		int given = clanHelpIds.size();
+		Date date = timeUtil.createDateAtStartOfDay(new Date());
+		ClanHelpCountForUser chcfu = new ClanHelpCountForUser(userId, clanId,
+				date, solicited, given);
+
+		try {
+			numUpdated = InsertUtils.get().insertIntoUpdateClanHelpCount(chcfu);
+			log.info("numUpdated ClanHelpCountForUser={}", numUpdated);
+		} catch (Exception e) {
+			log.error(String.format(
+					"Unable to increment ClanHelpCountForUser: %s", chcfu), e);
+		}
+
+		return true;
+	}
+
+	private void setClanHelpings(Builder resBuilder, User solicitor,
+			MinimumUserProto mup, List<String> clanHelpIds) {
+		List<ClanHelp> modifiedSolicitations = clanHelpRetrieveUtil
+				.getClanHelpsForIds(clanHelpIds);
+
+		for (ClanHelp aid : modifiedSolicitations) {
+			//only need the name
+			MinimumUserProto mup2 = MinimumUserProto.newBuilder()
+					.setUserUuid(aid.getUserId()).build();
+
+			//only need name not clan
+			ClanHelpProto chp = CreateInfoProtoUtils
+					.createClanHelpProtoFromClanHelp(aid, solicitor, null, mup2);
+
+			resBuilder.addClanHelps(chp);
+		}
+	}
+
+	/*
+	private void notifyClan(User aUser, Clan aClan) {
+	  int clanId = aClan.getId();
 	  
-	  for (ClanHelp aid : modifiedSolicitations) {
-		  //only need the name
-		  MinimumUserProto mup2 = MinimumUserProto.newBuilder().setUserUuid(aid.getUserId()).build();
+	  int level = aUser.getLevel();
+	  String deserter = aUser.getName();
+	  Notification aNote = new Notification();
+	  
+	  aNote.setAsUserLeftClan(level, deserter);
+	  MiscMethods.writeClanApnsNotification(aNote, server, clanId);
+	}*/
 
-		  //only need name not clan
-		  ClanHelpProto chp = CreateInfoProtoUtils
-			  .createClanHelpProtoFromClanHelp(aid, solicitor, null, mup2);
+	public Locker getLocker() {
+		return locker;
+	}
 
-		  resBuilder.addClanHelps(chp);
-	  }
-  }
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
-  /*
-  private void notifyClan(User aUser, Clan aClan) {
-    int clanId = aClan.getId();
-    
-    int level = aUser.getLevel();
-    String deserter = aUser.getName();
-    Notification aNote = new Notification();
-    
-    aNote.setAsUserLeftClan(level, deserter);
-    MiscMethods.writeClanApnsNotification(aNote, server, clanId);
-  }*/
-  
-  public Locker getLocker() {
-	  return locker;
-  }
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+	public ClanHelpRetrieveUtil getClanHelpRetrieveUtil() {
+		return clanHelpRetrieveUtil;
+	}
 
-  public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
-  {
-	  return clanHelpRetrieveUtil;
-  }
+	public void setClanHelpRetrieveUtil(
+			ClanHelpRetrieveUtil clanHelpRetrieveUtil) {
+		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
+	}
 
-  public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
-  {
-	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
-  }
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
-  
 }

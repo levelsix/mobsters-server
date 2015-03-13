@@ -3,19 +3,19 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Clan implements Serializable{
-	
-	private static final long	serialVersionUID	= -6551373040373362240L;
+public class Clan implements Serializable {
+
+	private static final long serialVersionUID = -6551373040373362240L;
 
 	private String id;
-//	private String ownerId;
+	//	private String ownerId;
 	private String name;
 	private Date createTime;
 	private String description;
 	private String tag;
 	private boolean requestToJoinRequired;
 	private int clanIconId;
-	
+
 	public Clan() {
 		super();
 	}
@@ -90,10 +90,10 @@ public class Clan implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Clan [id=" + id + ", name=" + name + ", createTime=" + createTime
-				+ ", description=" + description + ", tag=" + tag
-				+ ", requestToJoinRequired=" + requestToJoinRequired + ", clanIconId="
-				+ clanIconId + "]";
+		return "Clan [id=" + id + ", name=" + name + ", createTime="
+				+ createTime + ", description=" + description + ", tag=" + tag
+				+ ", requestToJoinRequired=" + requestToJoinRequired
+				+ ", clanIconId=" + clanIconId + "]";
 	}
-	
+
 }

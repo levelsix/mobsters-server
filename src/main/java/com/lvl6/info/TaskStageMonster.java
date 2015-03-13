@@ -6,7 +6,7 @@ import java.util.Random;
 public class TaskStageMonster implements Serializable {
 
 	private static final long serialVersionUID = 2948530539491033163L;
-	
+
 	private int id;
 	private int stageId;
 	private int monsterId;
@@ -30,32 +30,16 @@ public class TaskStageMonster implements Serializable {
 	private int offensiveSkillId;
 	private Dialogue initD;
 	private Dialogue defaultD;
-	
+
 	private Random rand;
 
-	public TaskStageMonster(
-		int id,
-		int stageId,
-		int monsterId,
-		String monsterType,
-		int expReward,
-		int minCashDrop,
-		int maxCashDrop,
-		int minOilDrop,
-		int maxOilDrop,
-		float puzzlePieceDropRate,
-		int level,
-		float chanceToAppear,
-		float dmgMultiplier,
-		int monsterIdDrop,
-		int monsterDropLvl,
-		int defensiveSkillId,
-		int offensiveSkillId,
-		String initDialogue,
-		String defaultDialogue,
-		Dialogue initD,
-		Dialogue defaultD )
-	{
+	public TaskStageMonster(int id, int stageId, int monsterId,
+			String monsterType, int expReward, int minCashDrop,
+			int maxCashDrop, int minOilDrop, int maxOilDrop,
+			float puzzlePieceDropRate, int level, float chanceToAppear,
+			float dmgMultiplier, int monsterIdDrop, int monsterDropLvl,
+			int defensiveSkillId, int offensiveSkillId, String initDialogue,
+			String defaultDialogue, Dialogue initD, Dialogue defaultD) {
 		super();
 		this.id = id;
 		this.stageId = stageId;
@@ -100,7 +84,7 @@ public class TaskStageMonster implements Serializable {
 			return 0;
 		}
 
-		int randCash = rand.nextInt(minMaxDiff + 1); 
+		int randCash = rand.nextInt(minMaxDiff + 1);
 
 		//number generated in [0, max-min] range, but need to transform
 		//back to original range [min, max]. so add min. [0+min, max-min+min]
@@ -114,12 +98,12 @@ public class TaskStageMonster implements Serializable {
 			return 0;
 		}
 
-		int randOil = rand.nextInt(minMaxDiff + 1); 
+		int randOil = rand.nextInt(minMaxDiff + 1);
 
 		//number generated in [0, max-min] range, but need to transform
 		//back to original range [min, max]. so add min. [0+min, max-min+min]
 		return randOil + getMinOilDrop();
-	}  
+	}
 
 	public boolean didPuzzlePieceDrop() {
 		float randFloat = getRand().nextFloat();
@@ -130,6 +114,7 @@ public class TaskStageMonster implements Serializable {
 			return false;
 		}
 	}
+
 	//end covenience methods--------------------------------------------------------
 
 	public int getId() {
@@ -228,142 +213,93 @@ public class TaskStageMonster implements Serializable {
 		this.chanceToAppear = chanceToAppear;
 	}
 
-	public float getDmgMultiplier()
-	{
+	public float getDmgMultiplier() {
 		return dmgMultiplier;
 	}
 
-	public void setDmgMultiplier( float dmgMultiplier )
-	{
+	public void setDmgMultiplier(float dmgMultiplier) {
 		this.dmgMultiplier = dmgMultiplier;
 	}
 
-	public int getMonsterIdDrop()
-	{
+	public int getMonsterIdDrop() {
 		return monsterIdDrop;
 	}
 
-	public void setMonsterIdDrop( int monsterIdDrop )
-	{
+	public void setMonsterIdDrop(int monsterIdDrop) {
 		this.monsterIdDrop = monsterIdDrop;
 	}
 
-	public int getMonsterDropLvl()
-	{
+	public int getMonsterDropLvl() {
 		return monsterDropLvl;
 	}
 
-	public void setMonsterDropLvl( int monsterDropLvl )
-	{
+	public void setMonsterDropLvl(int monsterDropLvl) {
 		this.monsterDropLvl = monsterDropLvl;
 	}
 
-	public int getDefensiveSkillId()
-	{
+	public int getDefensiveSkillId() {
 		return defensiveSkillId;
 	}
 
-	public void setDefensiveSkillId( int defensiveSkillId )
-	{
+	public void setDefensiveSkillId(int defensiveSkillId) {
 		this.defensiveSkillId = defensiveSkillId;
 	}
 
-	public int getOffensiveSkillId()
-	{
+	public int getOffensiveSkillId() {
 		return offensiveSkillId;
 	}
 
-	public void setOffensiveSkillId( int offensiveSkillId )
-	{
+	public void setOffensiveSkillId(int offensiveSkillId) {
 		this.offensiveSkillId = offensiveSkillId;
 	}
 
-	public String getInitDialogue()
-	{
+	public String getInitDialogue() {
 		return initDialogue;
 	}
 
-	public void setInitDialogue( String initDialogue )
-	{
+	public void setInitDialogue(String initDialogue) {
 		this.initDialogue = initDialogue;
 	}
 
-	public String getDefaultDialogue()
-	{
+	public String getDefaultDialogue() {
 		return defaultDialogue;
 	}
 
-	public void setDefaultDialogue( String defaultDialogue )
-	{
+	public void setDefaultDialogue(String defaultDialogue) {
 		this.defaultDialogue = defaultDialogue;
 	}
 
-	public Dialogue getInitD()
-	{
+	public Dialogue getInitD() {
 		return initD;
 	}
 
-	public void setInitD( Dialogue initD )
-	{
+	public void setInitD(Dialogue initD) {
 		this.initD = initD;
 	}
 
-	public Dialogue getDefaultD()
-	{
+	public Dialogue getDefaultD() {
 		return defaultD;
 	}
 
-	public void setDefaultD( Dialogue defaultD )
-	{
+	public void setDefaultD(Dialogue defaultD) {
 		this.defaultD = defaultD;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "TaskStageMonster [id="
-			+ id
-			+ ", stageId="
-			+ stageId
-			+ ", monsterId="
-			+ monsterId
-			+ ", monsterType="
-			+ monsterType
-			+ ", expReward="
-			+ expReward
-			+ ", minCashDrop="
-			+ minCashDrop
-			+ ", maxCashDrop="
-			+ maxCashDrop
-			+ ", minOilDrop="
-			+ minOilDrop
-			+ ", maxOilDrop="
-			+ maxOilDrop
-			+ ", puzzlePieceDropRate="
-			+ puzzlePieceDropRate
-			+ ", level="
-			+ level
-			+ ", chanceToAppear="
-			+ chanceToAppear
-			+ ", dmgMultiplier="
-			+ dmgMultiplier
-			+ ", monsterIdDrop="
-			+ monsterIdDrop
-			+ ", monsterDropLvl="
-			+ monsterDropLvl
-			+ ", defensiveSkillId="
-			+ defensiveSkillId
-			+ ", initDialogue="
-			+ initDialogue
-			+ ", defaultDialogue="
-			+ defaultDialogue
-			+ ", offensiveSkillId="
-			+ offensiveSkillId
-			+ ", initD="
-			+ initD
-			+ ", defaultD="
-			+ defaultD
-			+ "]";
+	public String toString() {
+		return "TaskStageMonster [id=" + id + ", stageId=" + stageId
+				+ ", monsterId=" + monsterId + ", monsterType=" + monsterType
+				+ ", expReward=" + expReward + ", minCashDrop=" + minCashDrop
+				+ ", maxCashDrop=" + maxCashDrop + ", minOilDrop=" + minOilDrop
+				+ ", maxOilDrop=" + maxOilDrop + ", puzzlePieceDropRate="
+				+ puzzlePieceDropRate + ", level=" + level
+				+ ", chanceToAppear=" + chanceToAppear + ", dmgMultiplier="
+				+ dmgMultiplier + ", monsterIdDrop=" + monsterIdDrop
+				+ ", monsterDropLvl=" + monsterDropLvl + ", defensiveSkillId="
+				+ defensiveSkillId + ", initDialogue=" + initDialogue
+				+ ", defaultDialogue=" + defaultDialogue
+				+ ", offensiveSkillId=" + offensiveSkillId + ", initD=" + initD
+				+ ", defaultD=" + defaultD + "]";
 	}
 
 }

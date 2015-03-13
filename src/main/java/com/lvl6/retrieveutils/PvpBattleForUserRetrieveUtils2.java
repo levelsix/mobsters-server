@@ -20,9 +20,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.properties.DBConstants;
 
-@Component @DependsOn("gameServer") public class PvpBattleForUserRetrieveUtils2 {
+@Component
+@DependsOn("gameServer")
+public class PvpBattleForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
 	private static final UserPvpBattleForClientMapper rowMapper = new UserPvpBattleForClientMapper();
@@ -39,23 +42,22 @@ import com.lvl6.properties.DBConstants;
 		log.debug("retrieving pvp battle for user");
 
 		Object[] values = { userId };
-		String query = String.format(
-			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
 
 		PvpBattleForUser pvpBattleForUser = null;
 		try {
-			List<PvpBattleForUser> pbfuList = this.jdbcTemplate
-				.query(query, values, rowMapper);
-			
+			List<PvpBattleForUser> pbfuList = this.jdbcTemplate.query(query,
+					values, rowMapper);
+
 			if (null != pbfuList && !pbfuList.isEmpty()) {
 				pvpBattleForUser = pbfuList.get(0);
 			}
-			
+
 		} catch (Exception e) {
 			log.error("pvp battle for user retrieve db error.", e);
-//		} finally {
-//			DBConnection.get().close(rs, null, conn);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
 		}
 		return pvpBattleForUser;
 	}
@@ -64,45 +66,62 @@ import com.lvl6.properties.DBConstants;
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserPvpBattleForClientMapper implements RowMapper<PvpBattleForUser> {
+	private static final class UserPvpBattleForClientMapper implements
+			RowMapper<PvpBattleForUser> {
 
 		private static List<String> columnsSelected;
 
-		public PvpBattleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public PvpBattleForUser mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			PvpBattleForUser pbfu = new PvpBattleForUser();
-			pbfu.setAttackerId(rs.getString(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID));
-			pbfu.setDefenderId(rs.getString(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID));
-			pbfu.setAttackerWinEloChange(rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE));
-			pbfu.setDefenderLoseEloChange(rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE));
-			pbfu.setAttackerLoseEloChange(rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE));
-			pbfu.setDefenderWinEloChange(rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE));
-			
+			pbfu.setAttackerId(rs
+					.getString(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID));
+			pbfu.setDefenderId(rs
+					.getString(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID));
+			pbfu.setAttackerWinEloChange(rs
+					.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE));
+			pbfu.setDefenderLoseEloChange(rs
+					.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE));
+			pbfu.setAttackerLoseEloChange(rs
+					.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE));
+			pbfu.setDefenderWinEloChange(rs
+					.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE));
+
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME);
+				Timestamp time = rs
+						.getTimestamp(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME);
 				if (null != time && !rs.wasNull()) {
 					Date date = new Date(time.getTime());
 					pbfu.setBattleStartTime(date);
 				}
 			} catch (Exception e) {
 				log.error(String.format(
-					"maybe battle start time is invalid, pbfu=%s", pbfu), e);
+						"maybe battle start time is invalid, pbfu=%s", pbfu), e);
 			}
 
 			return pbfu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE);
-				columnsSelected.add(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

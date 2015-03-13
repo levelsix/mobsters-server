@@ -31,7 +31,6 @@ message BattleItemProto {
 	optional int32 createCost = 7;
 	optional string description = 8;
 	optional int32 powerAmount = 9;	
-	optional string imageName = 10;
 	optional int32 priority = 11;
 	optional int32 minutesToCreate = 12;
 	optional int32 inBattleGemCost = 13;

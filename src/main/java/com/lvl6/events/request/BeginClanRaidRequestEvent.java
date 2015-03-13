@@ -12,32 +12,33 @@ import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
 
 public class BeginClanRaidRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private BeginClanRaidRequestProto beginClanRaidRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      beginClanRaidRequestProto = BeginClanRaidRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = beginClanRaidRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("BeginClanRaidRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public BeginClanRaidRequestProto getBeginClanRaidRequestProto() {
-    return beginClanRaidRequestProto;
-  }
+	private BeginClanRaidRequestProto beginClanRaidRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "BeginClanRaidRequestEvent [beginClanRaidRequestProto="
-		  + beginClanRaidRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			beginClanRaidRequestProto = BeginClanRaidRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = beginClanRaidRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("BeginClanRaidRequest exception", e);
+		}
+	}
+
+	public BeginClanRaidRequestProto getBeginClanRaidRequestProto() {
+		return beginClanRaidRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "BeginClanRaidRequestEvent [beginClanRaidRequestProto="
+				+ beginClanRaidRequestProto + "]";
+	}
 
 }

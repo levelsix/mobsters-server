@@ -33,7 +33,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -76,10 +75,12 @@ public class SellUserMonsterController extends EventController {
 				.getSellUserMonsterRequestProto();
 
 		// get values sent from the client (the request proto)
-		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
+				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		String userId = senderProto.getUserUuid();
-		List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
+		List<MinimumUserMonsterSellProto> userMonsters = reqProto
+				.getSalesList();
 		Map<String, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
 		Set<String> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
@@ -132,13 +133,13 @@ public class SellUserMonsterController extends EventController {
 
 			User aUser = getUserRetrieveUtils().getUserById(userId);
 			Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
-					.getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIds);
+					.getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
+							userMonsterIds);
 
-			boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
-					idsToUserMonsters);
+			boolean legit = checkLegit(resBuilder, userId, aUser,
+					userMonsterIds, idsToUserMonsters);
 
-			Map<String, Integer> currencyChange =
-					new HashMap<String, Integer>();
+			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			boolean successful = false;
 			if (legit) {
 				previousCash = aUser.getCash();
@@ -156,16 +157,17 @@ public class SellUserMonsterController extends EventController {
 			resEvent.setSellUserMonsterResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
-
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
 				writeChangesToHistory(userId, userMonsterIds,
-						userMonsterIdsToCashAmounts, idsToUserMonsters, deleteDate);
+						userMonsterIdsToCashAmounts, idsToUserMonsters,
+						deleteDate);
 				// WRITE TO USER CURRENCY HISTORY
 				writeToUserCurrencyHistory(userId, aUser, previousCash,
 						deleteTime, userMonsterIdsToCashAmounts,
@@ -182,11 +184,12 @@ public class SellUserMonsterController extends EventController {
 				resEvent.setSellUserMonsterResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in SellUserMonsterController processEvent", e);
+				log.error(
+						"exception2 in SellUserMonsterController processEvent",
+						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass()
-					.getSimpleName());
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
@@ -200,7 +203,8 @@ public class SellUserMonsterController extends EventController {
 	 * 'd'
 	 */
 	private boolean checkLegit(Builder resBuilder, String userId, User u,
-			List<String> userMonsterIds, Map<String, MonsterForUser> idsToUserMonsters) {
+			List<String> userMonsterIds,
+			Map<String, MonsterForUser> idsToUserMonsters) {
 
 		if (null == u) {
 			log.error("user is null. no user exists with id=" + userId + "");
@@ -208,16 +212,17 @@ public class SellUserMonsterController extends EventController {
 		}
 		if (null == userMonsterIds || userMonsterIds.isEmpty()
 				|| idsToUserMonsters.isEmpty()) {
-			log.error("no user monsters exist. userMonsterIds=" + userMonsterIds
-					+ "\t idsToUserMonsters=" + idsToUserMonsters);
+			log.error("no user monsters exist. userMonsterIds="
+					+ userMonsterIds + "\t idsToUserMonsters="
+					+ idsToUserMonsters);
 			return false;
 		}
 
 		// can only sell the user monsters that exist
 		if (userMonsterIds.size() != idsToUserMonsters.size()) {
 			log.warn("not all monster_for_user_ids exist. userMonsterIds="
-					+ userMonsterIds + "\t idsToUserMonsters=" + idsToUserMonsters
-					+ "\t. Will continue processing");
+					+ userMonsterIds + "\t idsToUserMonsters="
+					+ idsToUserMonsters + "\t. Will continue processing");
 
 			// retaining only the user monster ids that exist
 			userMonsterIds.clear();
@@ -242,9 +247,9 @@ public class SellUserMonsterController extends EventController {
 		//if user at max resources, user can still delete monster, but won't get any resources
 		if (0 != sum) {
 			if (!aUser.updateRelativeCashNaive(sum)) {
-				log.error(String.format(
-						"error updating user coins by %s. not deleting userMonstersIdsToCashAmounts=%s",
-						sum, userMonsterIdsToCashAmounts));
+				log.error(String
+						.format("error updating user coins by %s. not deleting userMonstersIdsToCashAmounts=%s",
+								sum, userMonsterIdsToCashAmounts));
 				return false;
 			} else {
 				currencyChange.put(MiscMethods.cash, sum);
@@ -255,14 +260,15 @@ public class SellUserMonsterController extends EventController {
 		if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
 			int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
 			log.info(String.format(
-					"num user monsters deleted: %s, ids deleted: %s",
-					num, userMonsterIds));
+					"num user monsters deleted: %s, ids deleted: %s", num,
+					userMonsterIds));
 		}
 		return success;
 	}
 
 	// FOR USER MONSTER HISTORY PURPOSES
-	private void writeChangesToHistory(String userId, List<String> userMonsterIds,
+	private void writeChangesToHistory(String userId,
+			List<String> userMonsterIds,
 			Map<String, Integer> userMonsterIdsToCashAmounts,
 			Map<String, MonsterForUser> idsToUserMonsters, Date deleteDate) {
 
@@ -273,18 +279,19 @@ public class SellUserMonsterController extends EventController {
 
 		String deletedReason = ControllerConstants.MFUDR__SELL;
 		Timestamp deletedTime = new Timestamp(deleteDate.getTime());
-		for(String userMonsterId : idsToUserMonsters.keySet()) {
-			String details = "sold for: " + userMonsterIdsToCashAmounts.get(userMonsterId);
+		for (String userMonsterId : idsToUserMonsters.keySet()) {
+			String details = "sold for: "
+					+ userMonsterIdsToCashAmounts.get(userMonsterId);
 			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
-			MonsterDeleteHistory mdh = new MonsterDeleteHistory(mfu, deletedReason, details, deletedTime);
+			MonsterDeleteHistory mdh = new MonsterDeleteHistory(mfu,
+					deletedReason, details, deletedTime);
 			monsterDeleteHistoryList.add(mdh);
 		}
 
 		InsertUtils.get().insertMonsterDeleteHistory(monsterDeleteHistoryList);
 
-
-		log.info("user monsters added to history table. userMonsterIds:" + userMonsterIds);
-
+		log.info("user monsters added to history table. userMonsterIds:"
+				+ userMonsterIds);
 
 	}
 

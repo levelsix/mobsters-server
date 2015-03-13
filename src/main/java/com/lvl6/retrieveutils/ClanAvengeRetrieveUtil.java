@@ -25,11 +25,12 @@ import com.lvl6.info.ClanAvenge;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class ClanAvengeRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ClanAvengeRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_AVENGE; 
+	private static Logger log = LoggerFactory
+			.getLogger(ClanAvengeRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_AVENGE;
 	private static final ClanAvengeForClientMapper rowMapper = new ClanAvengeForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -38,15 +39,14 @@ public class ClanAvengeRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
-	public List<ClanAvenge> getClanAvengesForIds(List<String> clanAvengeIds)
-	{
+	public List<ClanAvenge> getClanAvengesForIds(List<String> clanAvengeIds) {
 		List<ClanAvenge> clanAvenges = null;
 		try {
 			List<String> columnsToSelect = ClanAvengeForClientMapper
@@ -54,7 +54,7 @@ public class ClanAvengeRetrieveUtil {
 
 			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
 			inConditions.put(DBConstants.CLAN_AVENGE__ID, clanAvengeIds);
-			
+
 			String conditionDelimiter = getQueryConstructionUtil().getOr();
 
 			//(its purpose is to hold the values that were supposed to be put
@@ -64,25 +64,25 @@ public class ClanAvengeRetrieveUtil {
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryInConditions(columnsToSelect, TABLE_NAME,
-						inConditions, conditionDelimiter, values, preparedStatement);
-			log.info("getClanAvengesForIds() query={} \t values={}",
-				query, values);
-			
-			clanAvenges = this.jdbcTemplate
-					.query(query, values.toArray(), rowMapper);
-			
+							inConditions, conditionDelimiter, values,
+							preparedStatement);
+			log.info("getClanAvengesForIds() query={} \t values={}", query,
+					values);
+
+			clanAvenges = this.jdbcTemplate.query(query, values.toArray(),
+					rowMapper);
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve ClanAvenge for clanAvengeId=%s", clanAvengeIds),
-				e);
+					"could not retrieve ClanAvenge for clanAvengeId=%s",
+					clanAvengeIds), e);
 			clanAvenges = new ArrayList<ClanAvenge>();
 		}
-		
+
 		return clanAvenges;
 	}
-	
-	public List<ClanAvenge> getClanAvenge( String clanId )
-	{
+
+	public List<ClanAvenge> getClanAvenge(String clanId) {
 		List<ClanAvenge> clanAvenges = null;
 		try {
 			List<String> columnsToSelected = ClanAvengeForClientMapper
@@ -90,13 +90,14 @@ public class ClanAvengeRetrieveUtil {
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			if (null != clanId && !clanId.isEmpty()) {
-				equalityConditions.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
+				equalityConditions
+						.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
 			}
-			
+
 			if (equalityConditions.isEmpty()) {
 				return new ArrayList<ClanAvenge>();
 			}
-			
+
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			//(its purpose is to hold the values that were supposed to be put
@@ -105,28 +106,28 @@ public class ClanAvengeRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, values, preparedStatement);
-			log.info("getClanAvenge() query={} \t values={}",
-				query, values);
-			clanAvenges = this.jdbcTemplate
-					.query(query, values.toArray(), rowMapper);
-			
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim, values,
+							preparedStatement);
+			log.info("getClanAvenge() query={} \t values={}", query, values);
+			clanAvenges = this.jdbcTemplate.query(query, values.toArray(),
+					rowMapper);
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve ClanAvenge for clanId=%s", clanId),
-				e);
+					"could not retrieve ClanAvenge for clanId=%s", clanId), e);
 			clanAvenges = new ArrayList<ClanAvenge>();
 		}
-		
+
 		return clanAvenges;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -141,30 +142,33 @@ public class ClanAvengeRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class ClanAvengeForClientMapper implements RowMapper<ClanAvenge> {
+	private static final class ClanAvengeForClientMapper implements
+			RowMapper<ClanAvenge> {
 
 		private static List<String> columnsSelected;
 
+		@Override
 		public ClanAvenge mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ClanAvenge ca = new ClanAvenge();
-			
+
 			ca.setId(rs.getString(DBConstants.CLAN_AVENGE__ID));
 			ca.setClanId(rs.getString(DBConstants.CLAN_AVENGE__CLAN_ID));
 			ca.setAttackerId(rs.getString(DBConstants.CLAN_AVENGE__ATTACKER_ID));
 			ca.setDefenderId(rs.getString(DBConstants.CLAN_AVENGE__DEFENDER_ID));
 
-			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_AVENGE__BATTLE_END_TIME);
+			Timestamp ts = rs
+					.getTimestamp(DBConstants.CLAN_AVENGE__BATTLE_END_TIME);
 			if (null != ts) {
 				ca.setBattleEndTime(new Date(ts.getTime()));
 			}
-			
+
 			ts = rs.getTimestamp(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME);
 			if (null != ts) {
 				ca.setAvengeRequestTime(new Date(ts.getTime()));
 			}
-			
+
 			return ca;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -174,9 +178,10 @@ public class ClanAvengeRetrieveUtil {
 				columnsSelected.add(DBConstants.CLAN_AVENGE__ATTACKER_ID);
 				columnsSelected.add(DBConstants.CLAN_AVENGE__DEFENDER_ID);
 				columnsSelected.add(DBConstants.CLAN_AVENGE__BATTLE_END_TIME);
-				columnsSelected.add(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME);
+				columnsSelected
+						.add(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

@@ -25,10 +25,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 public class DBConnection {
 
 	public static DBConnection get() {
-		return (DBConnection) AppContext.getApplicationContext().getBean("dbConnection");
+		return (DBConnection) AppContext.getApplicationContext().getBean(
+				"dbConnection");
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(DBConnection.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(DBConnection.class);
 
 	// private final Level MCHANGE_LOG_LEVEL = Level.DEBUG;
 	// private final Level MCHANGE_LOG_LEVEL = Level.INFO;
@@ -54,16 +56,16 @@ public class DBConnection {
 		return conn;
 	}
 
-/*	public Connection getReadOnlyConnection() {
-		Connection conn = DBConnection.get().getConnection();
-		try {
-			conn.setReadOnly(true);
-			conn.setAutoCommit(false);
-		} catch (Exception e) {
-			log.error("Error setting connection to readOnly=true", e);
-		}
-		return conn;
-	}*/
+	/*	public Connection getReadOnlyConnection() {
+			Connection conn = DBConnection.get().getConnection();
+			try {
+				conn.setReadOnly(true);
+				conn.setAutoCommit(false);
+			} catch (Exception e) {
+				log.error("Error setting connection to readOnly=true", e);
+			}
+			return conn;
+		}*/
 
 	private void printConnectionInfoInDebug() {
 		try {
@@ -124,89 +126,99 @@ public class DBConnection {
 		printConnectionInfoInDebug();
 	}
 
-//	public ResultSet selectRowsByUserId(Connection conn, int userId, String tablename) {
-//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__USER_ID, userId, tablename);
-//	}
-//
-//	public ResultSet selectRowsById(Connection conn, int id, String tablename) {
-//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
-//	}
-	
-//	public ResultSet selectRowsByLongId(Connection conn, long id, String tablename) {
-//		return selectRowsByLongAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
-//	}
+	//	public ResultSet selectRowsByUserId(Connection conn, int userId, String tablename) {
+	//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__USER_ID, userId, tablename);
+	//	}
+	//
+	//	public ResultSet selectRowsById(Connection conn, int id, String tablename) {
+	//		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
+	//	}
+
+	//	public ResultSet selectRowsByLongId(Connection conn, long id, String tablename) {
+	//		return selectRowsByLongAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
+	//	}
 
 	public ResultSet selectWholeTable(Connection conn, String tablename) {
-		return selectRows(conn, null, null, null, null, null, tablename, null, null, false,
-				SELECT_LIMIT_NOT_SET, false);
+		return selectRows(conn, null, null, null, null, null, tablename, null,
+				null, false, SELECT_LIMIT_NOT_SET, false);
 	}
 
-	public ResultSet selectRowsAbsoluteOr(Connection conn, Map<String, Object> absoluteConditionParams,
-			String tablename) {
-		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "or", null,
-				false, SELECT_LIMIT_NOT_SET, false);
+	public ResultSet selectRowsAbsoluteOr(Connection conn,
+			Map<String, Object> absoluteConditionParams, String tablename) {
+		return selectRows(conn, null, absoluteConditionParams, null, null,
+				null, tablename, "or", null, false, SELECT_LIMIT_NOT_SET, false);
 	}
 
-	public ResultSet selectRowsAbsoluteAnd(Connection conn, Map<String, Object> absoluteConditionParams,
-			String tablename) {
-		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and", null,
-				false, SELECT_LIMIT_NOT_SET, false);
+	public ResultSet selectRowsAbsoluteAnd(Connection conn,
+			Map<String, Object> absoluteConditionParams, String tablename) {
+		return selectRows(conn, null, absoluteConditionParams, null, null,
+				null, tablename, "and", null, false, SELECT_LIMIT_NOT_SET,
+				false);
 	}
-	
-	public ResultSet selectRowsAbsoluteAndLimit(Connection conn, Map<String, Object> absoluteConditionParams,
-      String tablename, int limit) {
-    return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and", null,
-        false, limit, false);
-  }
-//
-//	public ResultSet selectRowsAbsoluteAndOrderbydesc(Connection conn,
-//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn) {
-//		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and",
-//				orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
-//	}
+
+	public ResultSet selectRowsAbsoluteAndLimit(Connection conn,
+			Map<String, Object> absoluteConditionParams, String tablename,
+			int limit) {
+		return selectRows(conn, null, absoluteConditionParams, null, null,
+				null, tablename, "and", null, false, limit, false);
+	}
+
+	//
+	//	public ResultSet selectRowsAbsoluteAndOrderbydesc(Connection conn,
+	//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn) {
+	//		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and",
+	//				orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
+	//	}
 
 	public ResultSet selectRowsAbsoluteAndOrderbydescLimit(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit) {
-		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and",
-				orderByColumn, false, limit, false);
+			Map<String, Object> absoluteConditionParams, String tablename,
+			String orderByColumn, int limit) {
+		return selectRows(conn, null, absoluteConditionParams, null, null,
+				null, tablename, "and", orderByColumn, false, limit, false);
 	}
 
-	public ResultSet selectRowsAbsoluteAndOrderbydescLimitLessthan(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
+	public ResultSet selectRowsAbsoluteAndOrderbydescLimitLessthan(
+			Connection conn, Map<String, Object> absoluteConditionParams,
+			String tablename, String orderByColumn, int limit,
 			Map<String, Object> lessThanConditionParams) {
-		return selectRows(conn, null, absoluteConditionParams, null, lessThanConditionParams, null,
-				tablename, "and", orderByColumn, false, limit, false);
+		return selectRows(conn, null, absoluteConditionParams, null,
+				lessThanConditionParams, null, tablename, "and", orderByColumn,
+				false, limit, false);
 	}
-//
-//	public ResultSet selectRowsAbsoluteAndOrderbydescLimitGreaterthan(Connection conn,
-//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
-//			Map<String, Object> greaterThanConditionParams) {
-//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams, null, null,
-//				tablename, "and", orderByColumn, false, limit, false);
-//	}
-//
-//	public ResultSet selectRowsAbsoluteAndLimitLessthanGreaterthanRand(Connection conn,
-//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
-//			Map<String, Object> lessThanConditionParams, Map<String, Object> greaterThanConditionParams) {
-//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams,
-//				lessThanConditionParams, null, tablename, "and", null, false, limit, true);
-//	}
 
-	public ResultSet selectRowsAbsoluteAndOrderbydescGreaterthan(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn,
+	//
+	//	public ResultSet selectRowsAbsoluteAndOrderbydescLimitGreaterthan(Connection conn,
+	//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
+	//			Map<String, Object> greaterThanConditionParams) {
+	//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams, null, null,
+	//				tablename, "and", orderByColumn, false, limit, false);
+	//	}
+	//
+	//	public ResultSet selectRowsAbsoluteAndLimitLessthanGreaterthanRand(Connection conn,
+	//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
+	//			Map<String, Object> lessThanConditionParams, Map<String, Object> greaterThanConditionParams) {
+	//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams,
+	//				lessThanConditionParams, null, tablename, "and", null, false, limit, true);
+	//	}
+
+	public ResultSet selectRowsAbsoluteAndOrderbydescGreaterthan(
+			Connection conn, Map<String, Object> absoluteConditionParams,
+			String tablename, String orderByColumn,
 			Map<String, Object> greaterThanConditionParams) {
-		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams, null, null,
-				tablename, "and", orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
+		return selectRows(conn, null, absoluteConditionParams,
+				greaterThanConditionParams, null, null, tablename, "and",
+				orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
 	}
 
-	public ResultSet selectRowsLikeOr(Connection conn, Map<String, Object> likeConditionParams,
-			String tablename) {
-		return selectRows(conn, null, null, null, null, likeConditionParams, tablename, "or", null, false,
-				SELECT_LIMIT_NOT_SET, false);
+	public ResultSet selectRowsLikeOr(Connection conn,
+			Map<String, Object> likeConditionParams, String tablename) {
+		return selectRows(conn, null, null, null, null, likeConditionParams,
+				tablename, "or", null, false, SELECT_LIMIT_NOT_SET, false);
 	}
 
 	/* assumes number of ? in the query = values.size() */
-	public ResultSet selectDirectQueryNaive(Connection conn, String query, List<Object> values) {
+	public ResultSet selectDirectQueryNaive(Connection conn, String query,
+			List<Object> values) {
 		ResultSet rs = null;
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
@@ -221,7 +233,8 @@ public class DBConnection {
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
-			log.error("null pointer problem with " + query + ", values are " + values, e);
+			log.error("null pointer problem with " + query + ", values are "
+					+ values, e);
 		}
 		return rs;
 	}
@@ -246,7 +259,8 @@ public class DBConnection {
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
-			log.error("null pointer problem with " + query + ", values are " + values, e);
+			log.error("null pointer problem with " + query + ", values are "
+					+ values, e);
 		} finally {
 			close(null, stmt, conn);
 		}
@@ -256,8 +270,10 @@ public class DBConnection {
 	/*
 	 * returns num of rows affected
 	 */
-	public int updateTableRows(String tablename, Map<String, Object> relativeParams,
-			Map<String, Object> absoluteParams, Map<String, Object> conditionParams, String condDelim) {
+	public int updateTableRows(String tablename,
+			Map<String, Object> relativeParams,
+			Map<String, Object> absoluteParams,
+			Map<String, Object> conditionParams, String condDelim) {
 		String query = "update " + tablename;
 		List<Object> values = new LinkedList<Object>();
 
@@ -316,14 +332,15 @@ public class DBConnection {
 			numUpdated = stmt.executeUpdate();
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		} finally {
 			close(null, stmt, conn);
 		}
 		return numUpdated;
 	}
 
-	public int insertIntoTableBasic(String tablename, Map<String, Object> insertParams) {
+	public int insertIntoTableBasic(String tablename,
+			Map<String, Object> insertParams) {
 		List<String> questions = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
 		List<Object> values = new LinkedList<Object>();
@@ -335,8 +352,9 @@ public class DBConnection {
 				columns.add(column);
 				values.add(insertParams.get(column));
 			}
-			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
-					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
+			String query = "insert into " + tablename + "("
+					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
+					+ StringUtils.getListInString(questions, ",") + ")";
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
@@ -353,52 +371,53 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
+				//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
 		}
 		return numUpdated;
 	}
-//
-//	public int insertIntoTableIgnore(String tablename, Map<String, Object> insertParams) {
-//		List<String> questions = new LinkedList<String>();
-//		List<String> columns = new LinkedList<String>();
-//		List<Object> values = new LinkedList<Object>();
-//		int numUpdated = 0;
-//
-//		if (insertParams != null && insertParams.size() > 0) {
-//			for (String column : insertParams.keySet()) {
-//				questions.add("?");
-//				columns.add(column);
-//				values.add(insertParams.get(column));
-//			}
-//			String query = "insert ignore into " + tablename + "("
-//					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
-//					+ StringUtils.getListInString(questions, ",") + ")";
-//
-//			Connection conn = null;
-//			PreparedStatement stmt = null;
-//			try {
-//				conn = dataSource.getConnection();
-//				stmt = conn.prepareStatement(query);
-//				if (values.size() > 0) {
-//					int i = 1;
-//					for (Object value : values) {
-//						stmt.setObject(i, value);
-//						i++;
-//					}
-//				}
-//				numUpdated = stmt.executeUpdate();
-//			} catch (SQLException e) {
-//				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
-//			} finally {
-//				close(null, stmt, conn);
-//			}
-//		}
-//		return numUpdated;
-//	}
+
+	//
+	//	public int insertIntoTableIgnore(String tablename, Map<String, Object> insertParams) {
+	//		List<String> questions = new LinkedList<String>();
+	//		List<String> columns = new LinkedList<String>();
+	//		List<Object> values = new LinkedList<Object>();
+	//		int numUpdated = 0;
+	//
+	//		if (insertParams != null && insertParams.size() > 0) {
+	//			for (String column : insertParams.keySet()) {
+	//				questions.add("?");
+	//				columns.add(column);
+	//				values.add(insertParams.get(column));
+	//			}
+	//			String query = "insert ignore into " + tablename + "("
+	//					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
+	//					+ StringUtils.getListInString(questions, ",") + ")";
+	//
+	//			Connection conn = null;
+	//			PreparedStatement stmt = null;
+	//			try {
+	//				conn = dataSource.getConnection();
+	//				stmt = conn.prepareStatement(query);
+	//				if (values.size() > 0) {
+	//					int i = 1;
+	//					for (Object value : values) {
+	//						stmt.setObject(i, value);
+	//						i++;
+	//					}
+	//				}
+	//				numUpdated = stmt.executeUpdate();
+	//			} catch (SQLException e) {
+	//				log.error("problem with " + query + ", values are " + values, e);
+	//				e.printStackTrace();
+	//			} finally {
+	//				close(null, stmt, conn);
+	//			}
+	//		}
+	//		return numUpdated;
+	//	}
 
 	/*
 	 * assumes every list for each column is numRows length insertParams: key,
@@ -406,8 +425,8 @@ public class DBConnection {
 	 * row2ValueForColumn1,...); columnName2->List(row1ValueForColumn2,
 	 * row2ValueForColumn2,...); . . .
 	 */
-	public int insertIntoTableMultipleRows(String tablename, Map<String, List<?>> insertParams,
-			int numRows) {
+	public int insertIntoTableMultipleRows(String tablename,
+			Map<String, List<?>> insertParams, int numRows) {
 		List<String> questionsPerRow = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
 		List<Object> values = new LinkedList<Object>();
@@ -431,10 +450,11 @@ public class DBConnection {
 				firstTime = false;
 			}
 
-			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
-					+ ") VALUES ";
+			String query = "insert into " + tablename + "("
+					+ StringUtils.getListInString(columns, ",") + ") VALUES ";
 			List<String> valuesStrings = new ArrayList<String>();
-			String rowQuestionsString = StringUtils.getListInString(questionsPerRow, ",");
+			String rowQuestionsString = StringUtils.getListInString(
+					questionsPerRow, ",");
 			for (int i = 0; i < numRows; i++) {
 				valuesStrings.add("(" + rowQuestionsString + ")");
 			}
@@ -455,7 +475,7 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
+				//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
@@ -508,50 +528,50 @@ public class DBConnection {
 		}
 		return generatedKey;
 	}*/
-//	
-//	/* returns 0 if error */
-//	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
-//		List<String> questions = new LinkedList<String>();
-//		List<String> columns = new LinkedList<String>();
-//		List<Object> values = new LinkedList<Object>();
-//
-//		long generatedKey = 0;
-//		if (insertParams != null && insertParams.size() > 0) {
-//			for (String column : insertParams.keySet()) {
-//				questions.add("?");
-//				columns.add(column);
-//				values.add(insertParams.get(column));
-//			}
-//			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
-//					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
-//			Connection conn = null;
-//			PreparedStatement stmt = null;
-//			try {
-//				conn = dataSource.getConnection();
-//				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//				if (values.size() > 0) {
-//					int i = 1;
-//					for (Object value : values) {
-//						stmt.setObject(i, value);
-//						i++;
-//					}
-//				}
-//				int numUpdated = stmt.executeUpdate();
-//				if (numUpdated == 1) {
-//					ResultSet rs = stmt.getGeneratedKeys();
-//					if (rs.next()) {
-//						generatedKey = rs.getLong(1);
-//					}
-//				}
-//			} catch (SQLException e) {
-//				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
-//			} finally {
-//				close(null, stmt, conn);
-//			}
-//		}
-//		return generatedKey;
-//	}
+	//	
+	//	/* returns 0 if error */
+	//	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
+	//		List<String> questions = new LinkedList<String>();
+	//		List<String> columns = new LinkedList<String>();
+	//		List<Object> values = new LinkedList<Object>();
+	//
+	//		long generatedKey = 0;
+	//		if (insertParams != null && insertParams.size() > 0) {
+	//			for (String column : insertParams.keySet()) {
+	//				questions.add("?");
+	//				columns.add(column);
+	//				values.add(insertParams.get(column));
+	//			}
+	//			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
+	//					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
+	//			Connection conn = null;
+	//			PreparedStatement stmt = null;
+	//			try {
+	//				conn = dataSource.getConnection();
+	//				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	//				if (values.size() > 0) {
+	//					int i = 1;
+	//					for (Object value : values) {
+	//						stmt.setObject(i, value);
+	//						i++;
+	//					}
+	//				}
+	//				int numUpdated = stmt.executeUpdate();
+	//				if (numUpdated == 1) {
+	//					ResultSet rs = stmt.getGeneratedKeys();
+	//					if (rs.next()) {
+	//						generatedKey = rs.getLong(1);
+	//					}
+	//				}
+	//			} catch (SQLException e) {
+	//				log.error("problem with " + query + ", values are " + values, e);
+	//				e.printStackTrace();
+	//			} finally {
+	//				close(null, stmt, conn);
+	//			}
+	//		}
+	//		return generatedKey;
+	//	}
 
 	/*
 	 * newRows should contain maps that are different only by the value in the
@@ -580,7 +600,7 @@ public class DBConnection {
 		}
 		return null;
 	}*/
-	
+
 	/*
 	public List<Long> insertIntoTableBasicReturnLongIds(String tableName, List<Map<String, Object>> newRows) {
 		List<String> questions = new LinkedList<String>();
@@ -598,23 +618,26 @@ public class DBConnection {
 		}
 		return new ArrayList<Long>();
 	}*/
-  
-  public int insertIntoTableBasicReturnNumUpdated(String tableName, List<Map<String, Object>> newRows) {
-    List<String> questions = new LinkedList<String>();
-    List<String> columns = new LinkedList<String>();
-    List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 
-    populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
+	public int insertIntoTableBasicReturnNumUpdated(String tableName,
+			List<Map<String, Object>> newRows) {
+		List<String> questions = new LinkedList<String>();
+		List<String> columns = new LinkedList<String>();
+		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 
-    if (0 <= columns.size()) {
-      boolean isInsert = true;
-      int numberOfQuestionLists = valuesListCollection.size();
-      String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName, columns, questions,
-          numberOfQuestionLists, isInsert);
-      return queryDbAndReturnNumUpdated(query, valuesListCollection);
-    }
-    return 0;
-  }
+		populateQuestionsColumnsValues(questions, columns,
+				valuesListCollection, newRows);
+
+		if (0 <= columns.size()) {
+			boolean isInsert = true;
+			int numberOfQuestionLists = valuesListCollection.size();
+			String query = constructInsertOrReplaceIntoTableValuesSQLQuery(
+					tableName, columns, questions, numberOfQuestionLists,
+					isInsert);
+			return queryDbAndReturnNumUpdated(query, valuesListCollection);
+		}
+		return 0;
+	}
 
 	// assumption: ordering of keys returned matches ordering of the list
 	// elements in list inserted in a specific order, the keys/ids returned
@@ -631,7 +654,7 @@ public class DBConnection {
 
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-//			e.printStackTrace();
+	//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
@@ -640,7 +663,7 @@ public class DBConnection {
 		return generatedKeys;
 	}*/
 
-  /*
+	/*
 	private List<Long> queryDBAndReturnAutoIncLongIds(String query, List<List<Object>> valuesListCollection) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -653,7 +676,7 @@ public class DBConnection {
 
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-//			e.printStackTrace();
+	//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
@@ -661,8 +684,8 @@ public class DBConnection {
 		}
 		return generatedKeys;
 	}*/
-	
-  /*
+
+	/*
 	private void executeStmtReturnAutoIncIds(PreparedStatement stmt, List<Integer> generatedKeys)
 			throws SQLException {
 		int numUpdated = stmt.executeUpdate();
@@ -680,8 +703,8 @@ public class DBConnection {
 			}
 		}
 	}*/
-	
-  /*
+
+	/*
 	private void executeStmtReturnAutoIncLongIds(PreparedStatement stmt, List<Long> generatedKeys)
 			throws SQLException {
 		int numUpdated = stmt.executeUpdate();
@@ -694,7 +717,7 @@ public class DBConnection {
 				}
 			} catch (Exception e) {
 				log.error("executeStmtReturnAutoIncLongIds() error", e);
-//				e.printStackTrace();
+	//				e.printStackTrace();
 			} finally {
 				close(rs, null, null);
 			}
@@ -706,8 +729,10 @@ public class DBConnection {
 	 * Map<String, Object> insertParams, String columnUpdate, Object
 	 * updateQuantity) {
 	 */
-	public int insertOnDuplicateKeyUpdate(String tablename, Map<String, Object> insertParams,
-			Map<String, Object> relativeUpdates, Map<String, Object> absoluteUpdates) {
+	public int insertOnDuplicateKeyUpdate(String tablename,
+			Map<String, Object> insertParams,
+			Map<String, Object> relativeUpdates,
+			Map<String, Object> absoluteUpdates) {
 
 		List<String> questions = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
@@ -722,8 +747,9 @@ public class DBConnection {
 				values.add(insertParams.get(column));
 			}
 			// values.add(updateQuantity);
-			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
-					+ ") VALUES (" + StringUtils.getListInString(questions, ",")
+			String query = "insert into " + tablename + "("
+					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
+					+ StringUtils.getListInString(questions, ",")
 					+ ") on duplicate key update ";/*
 													 * + columnUpdate + "=" +
 													 * columnUpdate + "+?";
@@ -734,7 +760,8 @@ public class DBConnection {
 				// "insert on duplicate key" encounters a duplicate key
 				List<String> updateColumnClauses = new LinkedList<String>();
 				for (String columnToUpdate : relativeUpdates.keySet()) {
-					updateColumnClauses.add(columnToUpdate + "=" + columnToUpdate + "+?");
+					updateColumnClauses.add(columnToUpdate + "="
+							+ columnToUpdate + "+?");
 					values.add(relativeUpdates.get(columnToUpdate));
 				}
 				query += StringUtils.getListInString(updateColumnClauses, ",");
@@ -746,7 +773,8 @@ public class DBConnection {
 					absoluteColumnClauses.add(columnToUpdate + "=?");
 					values.add(absoluteUpdates.get(columnToUpdate));
 				}
-				query += StringUtils.getListInString(absoluteColumnClauses, ",");
+				query += StringUtils
+						.getListInString(absoluteColumnClauses, ",");
 			}
 
 			Connection conn = null;
@@ -764,7 +792,7 @@ public class DBConnection {
 				numUpdated = stmt.executeUpdate();
 			} catch (SQLException e) {
 				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
+				//				e.printStackTrace();
 			} finally {
 				close(null, stmt, conn);
 			}
@@ -779,56 +807,58 @@ public class DBConnection {
 	 */
 	public int insertOnDuplicateKeyUpdateColumnsAbsolute(String tableName,
 			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns) {
-		
+
 		List<String> columns = new ArrayList<String>();
-		List<String> questions =  new ArrayList<String>();
+		List<String> questions = new ArrayList<String>();
 		//could just be a List<Object> but eh
 		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 		int numUpdated = 0;
-		
-		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
-		
+
+		populateQuestionsColumnsValues(questions, columns,
+				valuesListCollection, newRows);
+
 		if (columns.isEmpty()) {
 			return numUpdated;
 		}
 		boolean isInsert = true;
 		int numberOfQuestionLists = valuesListCollection.size();
-		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
-				columns, questions, numberOfQuestionLists, isInsert);
+		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(
+				tableName, columns, questions, numberOfQuestionLists, isInsert);
 		//append the "ON DUPLICATE KEY UPDATE" part
 		query = transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
-		
+
 		//log.info("insertOnDuplicateKeyUpdateColumnsAbsolute() query=" + query +
 		//		"\t valuesListCollection=" + valuesListCollection);
-		
+
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
 	}
-	
-	
+
 	// query setup is similar to how insertIntoTableBasicReturnIds() works, but
 	// actual querying
 	// of db is slightly different in that this does not return the ids of rows
 	// modified in the table.
 	// Hopefully the comments for insertIntoTableBasicReturnIds() will be
 	// helpful.
-	public int replaceIntoTableValues(String tableName, List<Map<String, Object>> newRows) {
+	public int replaceIntoTableValues(String tableName,
+			List<Map<String, Object>> newRows) {
 		List<String> questions = new ArrayList<String>();
 		List<String> columns = new ArrayList<String>();
 		//could just be a List<Object> but eh
 		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 		int numUpdated = 0;
 
-		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
+		populateQuestionsColumnsValues(questions, columns,
+				valuesListCollection, newRows);
 
 		if (columns.isEmpty()) {
 			return numUpdated;
 		}
 		boolean isInsert = false;
 		int numberOfQuestionLists = valuesListCollection.size();
-		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
-				columns, questions, numberOfQuestionLists, isInsert);
-		
+		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(
+				tableName, columns, questions, numberOfQuestionLists, isInsert);
+
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
 	}
@@ -851,28 +881,28 @@ public class DBConnection {
 		//												 SecondList(ValueForColumnA, valueForColumnB...),
 		//                         ...)
 		populateColumnsAndQuestions(columns, questions, newRows);
-		
+
 		for (Map<String, Object> newRow : newRows) {
 			if (null == newRow || newRow.isEmpty()) {
 				continue;
 			}
-			
+
 			// generate a values list for all rows,
 			// i.e. the (?,...,?) in VALUES (?,...,?),...(?,...,?)
-			List<Object> valuesList =  generateValuesList(columns, newRow);
+			List<Object> valuesList = generateValuesList(columns, newRow);
 			valuesListCollection.add(valuesList);
 		}
-		
+
 	}
 
-	private void populateColumnsAndQuestions(List<String> columns, List<String> questions,
-			List<Map<String, Object>> newRows) {
+	private void populateColumnsAndQuestions(List<String> columns,
+			List<String> questions, List<Map<String, Object>> newRows) {
 		//set the ordering of the columns
 		Map<String, Object> aRow = newRows.get(0);
 		Set<String> uniqColumns = aRow.keySet();
 		List<String> uniqColumnsList = new ArrayList<String>(uniqColumns);
 		columns.addAll(uniqColumnsList);
-		
+
 		int amount = columns.size();
 		List<String> questionsTemp = Collections.nCopies(amount, "?");
 		questions.addAll(questionsTemp);
@@ -889,9 +919,10 @@ public class DBConnection {
 		}
 		return valuesList;
 	}
-	
-	private String constructInsertOrReplaceIntoTableValuesSQLQuery(String tableName, List<String> columns,
-			List<String> questions, int numberOfQuestionLists, boolean isInsert) {
+
+	private String constructInsertOrReplaceIntoTableValuesSQLQuery(
+			String tableName, List<String> columns, List<String> questions,
+			int numberOfQuestionLists, boolean isInsert) {
 		String delimiter = ",";
 		StringBuilder query = new StringBuilder();
 		if (isInsert) {
@@ -907,18 +938,21 @@ public class DBConnection {
 		query.append(") VALUES ");
 
 		// construct the (?,...,?),...(?,...,?) in VALUES (?,...,?),...(?,...,?)
-		String questionList = "(" + StringUtils.getListInString(questions, ",") + ")";
-		List<String> questionLists = Collections.nCopies(numberOfQuestionLists, questionList);
-		String questionListsStr = StringUtils.getListInString(questionLists, delimiter + " ");
+		String questionList = "(" + StringUtils.getListInString(questions, ",")
+				+ ")";
+		List<String> questionLists = Collections.nCopies(numberOfQuestionLists,
+				questionList);
+		String questionListsStr = StringUtils.getListInString(questionLists,
+				delimiter + " ");
 		query.append(questionListsStr);
-		
+
 		String queryStr = query.toString();
-//		log.info("(constructInsertOrReplaceIntoTableValuesSQLQuery()) sqlQuery: " + queryStr);
+		//		log.info("(constructInsertOrReplaceIntoTableValuesSQLQuery()) sqlQuery: " + queryStr);
 		return queryStr;
 	}
-	
-	private void setValuesInPreparedStatement(PreparedStatement stmt, List<List<Object>> valuesListCollection)
-			throws Exception {
+
+	private void setValuesInPreparedStatement(PreparedStatement stmt,
+			List<List<Object>> valuesListCollection) throws Exception {
 		int i = 1;
 		for (List<Object> valueList : valuesListCollection) {
 			if (valueList.size() > 0) {
@@ -931,52 +965,55 @@ public class DBConnection {
 			}
 		}
 	}
-	
-	private String transformToOnDuplicateKeyUpdateQuery(String query, 
+
+	private String transformToOnDuplicateKeyUpdateQuery(String query,
 			Set<String> replaceTheseColumns) {
-		
+
 		StringBuilder newQuery = new StringBuilder();
 		newQuery.append(query);
 		newQuery.append(" ON DUPLICATE KEY UPDATE ");
-		
+
 		//this will hold the the individual update clauses in
 		//"some_column1=VALUES(some_column1), some_column2=VALUES(some_column2),...";
 		List<String> updateClauseList = new ArrayList<String>();
-		
+
 		//generate the individual update clauses. The "some_column1=VALUES(some_column1)"
 		//from example above
-		for(String replacedColumn : replaceTheseColumns) {
+		for (String replacedColumn : replaceTheseColumns) {
 			StringBuilder updateClause = new StringBuilder();
 			updateClause.append(replacedColumn);
 			updateClause.append("=VALUES(");
 			updateClause.append(replacedColumn);
 			updateClause.append(")");
-			
+
 			updateClauseList.add(updateClause.toString());
 		}
-		
-		String allUpdateClauses = StringUtils.getListInString(updateClauseList, ", ");
+
+		String allUpdateClauses = StringUtils.getListInString(updateClauseList,
+				", ");
 		newQuery.append(allUpdateClauses);
-		
+
 		return newQuery.toString();
 	}
-	
-	private int queryDbAndReturnNumUpdated(String query, List<List<Object>> valuesListCollection) {
+
+	private int queryDbAndReturnNumUpdated(String query,
+			List<List<Object>> valuesListCollection) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		int numUpdated = 0;
-		
+
 		try {
 			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(query);
 			setValuesInPreparedStatement(stmt, valuesListCollection);
-			
+
 			// if this throws an error, then switch to stmt.execute()
-			numUpdated = stmt.executeUpdate(); 
-			
+			numUpdated = stmt.executeUpdate();
+
 		} catch (SQLException e) {
-			log.error("problem with " + query + ", values are " + valuesListCollection, e);
-//			e.printStackTrace();
+			log.error("problem with " + query + ", values are "
+					+ valuesListCollection, e);
+			//			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("DID NOT MODIFY DB", e);
 		} finally {
@@ -984,76 +1021,68 @@ public class DBConnection {
 		}
 		return numUpdated;
 	}
-	
-//	/*
-//	 * mysql replace statement either: 1) inserts new row into table if there
-//	 * does not exist a row in the table that has the same PRIMARY KEY or UNIQUE
-//	 * index 2) drops preexisting row in the table with the same PRIMARY KEY and
-//	 * inserts new row
-//	 * 
-//	 * in case (1) this function returns 1 in case (2) this function returns at
-//	 * least 2
-//	 */
-//	public int replace(String tableName, Map<String, Object> columnsAndValues) {
-//		// return value
-//		int numUpdated = 0;
-//
-//		if (null != columnsAndValues && 0 < columnsAndValues.size()) {
-//			// for prepared statement
-//			List<String> columns = new LinkedList<String>();
-//			List<Object> values = new LinkedList<Object>();
-//			List<String> questions = new LinkedList<String>();
-//
-//			for (String column : columnsAndValues.keySet()) {
-//				columns.add(column);
-//				values.add(columnsAndValues.get(column));
-//				questions.add("?");
-//			}
-//
-//			String query = "REPLACE INTO " + tableName + "(" + StringUtils.getListInString(columns, ",")
-//					+ ")" + " VALUE " + "( " + StringUtils.getListInString(questions, ",") + ")";
-//
-//			Connection conn = null;
-//			PreparedStatement stmt = null;
-//			try {
-//				conn = dataSource.getConnection();
-//				stmt = conn.prepareStatement(query);
-//
-//				int i = 1;
-//				for (Object value : values) {
-//					stmt.setObject(i, value);
-//					i++;
-//				}
-//				numUpdated = stmt.executeUpdate();
-//			} catch (SQLException e) {
-//				log.error("problem with " + query + ", values are " + values, e);
-//				e.printStackTrace();
-//			} finally {
-//				close(null, stmt, conn);
-//			}
-//		}
-//
-//		return numUpdated;
-//	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//	/*
+	//	 * mysql replace statement either: 1) inserts new row into table if there
+	//	 * does not exist a row in the table that has the same PRIMARY KEY or UNIQUE
+	//	 * index 2) drops preexisting row in the table with the same PRIMARY KEY and
+	//	 * inserts new row
+	//	 * 
+	//	 * in case (1) this function returns 1 in case (2) this function returns at
+	//	 * least 2
+	//	 */
+	//	public int replace(String tableName, Map<String, Object> columnsAndValues) {
+	//		// return value
+	//		int numUpdated = 0;
+	//
+	//		if (null != columnsAndValues && 0 < columnsAndValues.size()) {
+	//			// for prepared statement
+	//			List<String> columns = new LinkedList<String>();
+	//			List<Object> values = new LinkedList<Object>();
+	//			List<String> questions = new LinkedList<String>();
+	//
+	//			for (String column : columnsAndValues.keySet()) {
+	//				columns.add(column);
+	//				values.add(columnsAndValues.get(column));
+	//				questions.add("?");
+	//			}
+	//
+	//			String query = "REPLACE INTO " + tableName + "(" + StringUtils.getListInString(columns, ",")
+	//					+ ")" + " VALUE " + "( " + StringUtils.getListInString(questions, ",") + ")";
+	//
+	//			Connection conn = null;
+	//			PreparedStatement stmt = null;
+	//			try {
+	//				conn = dataSource.getConnection();
+	//				stmt = conn.prepareStatement(query);
+	//
+	//				int i = 1;
+	//				for (Object value : values) {
+	//					stmt.setObject(i, value);
+	//					i++;
+	//				}
+	//				numUpdated = stmt.executeUpdate();
+	//			} catch (SQLException e) {
+	//				log.error("problem with " + query + ", values are " + values, e);
+	//				e.printStackTrace();
+	//			} finally {
+	//				close(null, stmt, conn);
+	//			}
+	//		}
+	//
+	//		return numUpdated;
+	//	}
+
 	/*
 	 * returns num of rows affected
 	 */
-	public int deleteRows(String tablename, Map<String, Object> absoluteConditionParams, String condDelim) {
+	public int deleteRows(String tablename,
+			Map<String, Object> absoluteConditionParams, String condDelim) {
 		String query = "delete from " + tablename;
 		List<Object> values = new LinkedList<Object>();
 
-		if (absoluteConditionParams != null && absoluteConditionParams.size() > 0) {
+		if (absoluteConditionParams != null
+				&& absoluteConditionParams.size() > 0) {
 			query += " where ";
 			List<String> condClauses = new LinkedList<String>();
 			for (String param : absoluteConditionParams.keySet()) {
@@ -1062,9 +1091,9 @@ public class DBConnection {
 			}
 			query += StringUtils.getListInString(condClauses, condDelim);
 		}
-		
-//		log.info("query=" + query);
-//		log.info("values=" + values);
+
+		//		log.info("query=" + query);
+		//		log.info("values=" + values);
 
 		int numDeleted = 0;
 		Connection conn = null;
@@ -1139,7 +1168,7 @@ public class DBConnection {
 		}
 		return rs;
 	}*/
-	
+
 	//works with longs instead of int, like above
 	/*private ResultSet selectRowsByLongAttr(Connection conn, List<String> columns, String attr, long value,
 			String tablename) {
@@ -1167,9 +1196,10 @@ public class DBConnection {
 	public ResultSet selectRows(Connection conn, List<String> columns,
 			Map<String, Object> absoluteConditionParams,
 			Map<String, Object> relativeGreaterThanConditionParams,
-			Map<String, Object> relativeLessThanConditionParams, Map<String, Object> likeCondParams,
-			String tablename, String conddelim, String orderByColumn, boolean orderByAsc, int limit,
-			boolean random) {
+			Map<String, Object> relativeLessThanConditionParams,
+			Map<String, Object> likeCondParams, String tablename,
+			String conddelim, String orderByColumn, boolean orderByAsc,
+			int limit, boolean random) {
 		String query = "select ";
 		if (columns != null) {
 			query += StringUtils.getListInString(columns, ",");
@@ -1186,7 +1216,8 @@ public class DBConnection {
 		List<Object> values = new LinkedList<Object>();
 
 		boolean useWhere = true;
-		if (absoluteConditionParams != null && absoluteConditionParams.size() > 0) {
+		if (absoluteConditionParams != null
+				&& absoluteConditionParams.size() > 0) {
 			for (String param : absoluteConditionParams.keySet()) {
 				absoluteCondClauses.add(param + "=?");
 				values.add(absoluteConditionParams.get(param));
@@ -1198,11 +1229,13 @@ public class DBConnection {
 				query += " and (";
 			}
 			useWhere = false;
-			query += StringUtils.getListInString(absoluteCondClauses, conddelim);
+			query += StringUtils
+					.getListInString(absoluteCondClauses, conddelim);
 			query += " ) ";
 		}
 
-		if (relativeGreaterThanConditionParams != null && relativeGreaterThanConditionParams.size() > 0) {
+		if (relativeGreaterThanConditionParams != null
+				&& relativeGreaterThanConditionParams.size() > 0) {
 			for (String param : relativeGreaterThanConditionParams.keySet()) {
 				greaterthanCondClauses.add(param + ">?");
 				values.add(relativeGreaterThanConditionParams.get(param));
@@ -1214,11 +1247,13 @@ public class DBConnection {
 				query += " and (";
 			}
 			useWhere = false;
-			query += StringUtils.getListInString(greaterthanCondClauses, conddelim);
+			query += StringUtils.getListInString(greaterthanCondClauses,
+					conddelim);
 			query += " ) ";
 		}
 
-		if (relativeLessThanConditionParams != null && relativeLessThanConditionParams.size() > 0) {
+		if (relativeLessThanConditionParams != null
+				&& relativeLessThanConditionParams.size() > 0) {
 			for (String param : relativeLessThanConditionParams.keySet()) {
 				lessthanCondClauses.add(param + "<?");
 				values.add(relativeLessThanConditionParams.get(param));
@@ -1230,7 +1265,8 @@ public class DBConnection {
 				query += " and (";
 			}
 			useWhere = false;
-			query += StringUtils.getListInString(lessthanCondClauses, conddelim);
+			query += StringUtils
+					.getListInString(lessthanCondClauses, conddelim);
 			query += " ) ";
 		}
 
@@ -1264,7 +1300,7 @@ public class DBConnection {
 		}
 
 		ResultSet rs = null;
-//		PreparedStatement stmt = null;
+		//		PreparedStatement stmt = null;
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			if (values.size() > 0) {
@@ -1280,8 +1316,8 @@ public class DBConnection {
 		} catch (NullPointerException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 			//caller will get the result set and when result set closes the statement will be to
-//		} finally {
-//			close(null, stmt, null);
+			//		} finally {
+			//			close(null, stmt, null);
 		}
 		return rs;
 	}

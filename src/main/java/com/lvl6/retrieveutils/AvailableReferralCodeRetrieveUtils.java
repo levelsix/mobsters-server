@@ -12,71 +12,77 @@ import org.springframework.stereotype.Component;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class AvailableReferralCodeRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class AvailableReferralCodeRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_REFERRAL_CODE_AVAILABLE_CONFIG;
+	private static final String TABLE_NAME = DBConstants.TABLE_REFERRAL_CODE_AVAILABLE_CONFIG;
 
-  public static String getAvailableReferralCode() {
-    log.debug("generating available referral code");
-    String availableReferralCode = null;
-    
-    String query = "select floor(rand()*count(*)) from " + TABLE_NAME;
+	public static String getAvailableReferralCode() {
+		log.debug("generating available referral code");
+		String availableReferralCode = null;
 
-    Integer offset = null;
-    
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+		String query = "select floor(rand()*count(*)) from " + TABLE_NAME;
+
+		Integer offset = null;
+
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectDirectQueryNaive(conn, query, null);
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      while(rs.next()) {
-			        offset = rs.getInt(1);
-			        break;
-			      }
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			    }
-			  } 
+				rs = DBConnection.get().selectDirectQueryNaive(conn, query,
+						null);
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						while (rs.next()) {
+							offset = rs.getInt(1);
+							break;
+						}
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("available referral code retrieve db error.", e);
-    } finally {
-    	//not closing connection because, query below uses it
-    	DBConnection.get().close(rs, null, null);
-    }
-    
-    ResultSet rs2 = null;
-    try {
+			log.error("available referral code retrieve db error.", e);
+		} finally {
+			//not closing connection because, query below uses it
+			DBConnection.get().close(rs, null, null);
+		}
+
+		ResultSet rs2 = null;
+		try {
 			if (conn != null) {
-			  query = "SELECT " + DBConstants.AVAILABLE_REFERRAL_CODES__CODE+ " FROM " + TABLE_NAME + " LIMIT " + offset + ", 1"; 
-			  rs2 = DBConnection.get().selectDirectQueryNaive(conn, query, null);
-			  if (rs2 != null) {
-			    try {
-			      rs2.last();
-			      rs2.beforeFirst();
-			      while(rs2.next()) {
-			        availableReferralCode = rs2.getString(DBConstants.AVAILABLE_REFERRAL_CODES__CODE);
-			        break;
-			      }
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			    }
-			  } 
+				query = "SELECT " + DBConstants.AVAILABLE_REFERRAL_CODES__CODE
+						+ " FROM " + TABLE_NAME + " LIMIT " + offset + ", 1";
+				rs2 = DBConnection.get().selectDirectQueryNaive(conn, query,
+						null);
+				if (rs2 != null) {
+					try {
+						rs2.last();
+						rs2.beforeFirst();
+						while (rs2.next()) {
+							availableReferralCode = rs2
+									.getString(DBConstants.AVAILABLE_REFERRAL_CODES__CODE);
+							break;
+						}
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("available referral code retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs2, null, conn);
-    }
+			log.error("available referral code retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs2, null, conn);
+		}
 
-    return availableReferralCode;
-  }
-
+		return availableReferralCode;
+	}
 
 }

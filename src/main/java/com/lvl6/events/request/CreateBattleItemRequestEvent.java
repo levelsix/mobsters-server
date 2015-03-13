@@ -12,36 +12,40 @@ import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 
 public class CreateBattleItemRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private CreateBattleItemRequestProto createBattleItemRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      createBattleItemRequestProto = CreateBattleItemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = createBattleItemRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("CreateBattleItemRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public CreateBattleItemRequestProto getCreateBattleItemRequestProto() {
-    return createBattleItemRequestProto;
-  }
-  //added for testing purposes
-  public void setCreateBattleItemRequestProto(CreateBattleItemRequestProto sorp) {
-	  this.createBattleItemRequestProto = sorp;
-  }
+	private CreateBattleItemRequestProto createBattleItemRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "CreateBattleItemRequestEvent [createBattleItemRequestProto="
-		  + createBattleItemRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			createBattleItemRequestProto = CreateBattleItemRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = createBattleItemRequestProto.getSender()
+					.getMinUserProto().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("CreateBattleItemRequest exception", e);
+		}
+	}
+
+	public CreateBattleItemRequestProto getCreateBattleItemRequestProto() {
+		return createBattleItemRequestProto;
+	}
+
+	//added for testing purposes
+	public void setCreateBattleItemRequestProto(
+			CreateBattleItemRequestProto sorp) {
+		this.createBattleItemRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "CreateBattleItemRequestEvent [createBattleItemRequestProto="
+				+ createBattleItemRequestProto + "]";
+	}
+
 }

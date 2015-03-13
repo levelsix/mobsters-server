@@ -15,21 +15,22 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @Component
 public class QueryConstructionUtil {
 
-	private static final Logger log = LoggerFactory.getLogger(QueryConstructionUtil.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(QueryConstructionUtil.class);
 	private final String COMMA = ",";
 	private final String EQUALITY = "=";
 	private final String GREATERTHAN = ">";
 	private final String LESSTHAN = "<";
 	private final String PERCENT = "%";
-	
+
 	private final String AND = " AND ";
 	private final String FROM = "from";
 	private final String NOTNULL = " NOT NULL ";
 	private final String NULLSTR = " NULL ";
 	private final String OR = " OR ";
 	private final String NOTIN = "NOT IN";
-	private final String IN = "IN"; 
-	private final String IS = "IS"; 
+	private final String IN = "IN";
+	private final String IS = "IS";
 	private final String LPAREN = "(";
 	private final String RPAREN = ")";
 	private final String LIKE = "LIKE";
@@ -45,20 +46,27 @@ public class QueryConstructionUtil {
 	//the values to be set into the CqlPreparedStatement IN the proper order, but is not
 	//used at the moment. NOT USED ATM.
 	public String selectRowsQueryManyConditions(List<String> columnsToSelect,
-			String tableName, Map<String, ?> equalityConditions, String equalityCondDelim,
-			Map<String, ?> greaterThanConditions, String greaterThanCondDelim,
+			String tableName, Map<String, ?> equalityConditions,
+			String equalityCondDelim, Map<String, ?> greaterThanConditions,
+			String greaterThanCondDelim,
 			Map<String, Collection<?>> inConditions, String inCondDelim,
-			Map<String, ?> isConditions, String isCondDelim, String delimAcrossConditions,
-			List<Object> values) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+			Map<String, ?> isConditions, String isCondDelim,
+			String delimAcrossConditions, List<Object> values) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
 
-		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty()); 
-		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions.isEmpty());
-		boolean emptyInConditions = (null == inConditions || inConditions.isEmpty());
-		boolean emptyIsConditions = (null == isConditions || isConditions.isEmpty());
+		boolean emptyEqConditions = (null == equalityConditions || equalityConditions
+				.isEmpty());
+		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions
+				.isEmpty());
+		boolean emptyInConditions = (null == inConditions || inConditions
+				.isEmpty());
+		boolean emptyIsConditions = (null == isConditions || isConditions
+				.isEmpty());
 
 		//(paranoia) if caller doesn't provide anything, select whole table
-		if (emptyEqConditions && emptyGtConditions && emptyInConditions && emptyIsConditions) {
+		if (emptyEqConditions && emptyGtConditions && emptyInConditions
+				&& emptyIsConditions) {
 			//sb.append(";");
 			String query = sb.toString();
 			log.info("no args provided. query=" + query);
@@ -69,16 +77,16 @@ public class QueryConstructionUtil {
 		//EQUALITY CONDITIONS
 		String conjunction = "";
 		if (!emptyEqConditions) {
-			String eqConditionsStr = createComparisonConditionsString(equalityConditions,
-					EQUALITY, equalityCondDelim);
+			String eqConditionsStr = createComparisonConditionsString(
+					equalityConditions, EQUALITY, equalityCondDelim);
 			sb.append(eqConditionsStr);
 
 			conjunction = delimAcrossConditions;
 		}
 		//GREATER THAN CONDITIONS
 		if (!emptyGtConditions) {
-			String gtConditionsStr = createComparisonConditionsString(greaterThanConditions,
-					GREATERTHAN, greaterThanCondDelim);
+			String gtConditionsStr = createComparisonConditionsString(
+					greaterThanConditions, GREATERTHAN, greaterThanCondDelim);
 			sb.append(conjunction);
 			sb.append(gtConditionsStr);
 
@@ -88,26 +96,28 @@ public class QueryConstructionUtil {
 		}
 		// IN (VALUES) CONDITIONS
 		if (!emptyInConditions) {
-			List<String> allInConditions = new ArrayList<String>(); 
+			List<String> allInConditions = new ArrayList<String>();
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
-				String inConditionsStr = createColInValuesString(column, inValues);
-				
+				String inConditionsStr = createColInValuesString(column,
+						inValues);
+
 				allInConditions.add(inConditionsStr);
 			}
 			sb.append(conjunction);
 			sb.append(StringUtils.implode(allInConditions, inCondDelim));
 			conjunction = delimAcrossConditions;
-			
+
 		} else {
 			conjunction = "";
 		}
 		// IS CONDITIONS
 		if (!emptyIsConditions) {
-			String strConditionStr = createIsConditionString(isConditions, isCondDelim);
+			String strConditionStr = createIsConditionString(isConditions,
+					isCondDelim);
 			sb.append(conjunction);
 			sb.append(strConditionStr);
-			
+
 			conjunction = delimAcrossConditions;
 		} else {
 			conjunction = "";
@@ -115,17 +125,20 @@ public class QueryConstructionUtil {
 
 		//CLOSE THE QUERY
 		//sb.append(";");
-		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values="
+				+ values);
 		return sb.toString();
 	}
 
 	//generalized method to construct a query, the argument "values" IS another return
 	//value. It will contain the values to be set into the CqlPreparedStatement IN the
 	//proper order. NOT USED ATM.
-	public String selectRowsQueryEqualityConditions(List<String> columnsToSelect,
-			String tableName, Map<String, ?> equalityConditions, String condDelim,
+	public String selectRowsQueryEqualityConditions(
+			List<String> columnsToSelect, String tableName,
+			Map<String, ?> equalityConditions, String condDelim,
 			List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
 
 		if (null == equalityConditions || equalityConditions.isEmpty()) {
 			//sb.append(";");
@@ -146,25 +159,31 @@ public class QueryConstructionUtil {
 
 		//close the query
 		//sb.append(";");
-		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values="
+				+ values);
 		return sb.toString();
 	}
-	
+
 	//generalized method to construct a query, the argument "values" IS another return
 	//value. It will contain the values to be set into the CqlPreparedStatement IN the
 	//proper order. NOT USED ATM.
-	public String selectRowsQueryComparisonConditions(List<String> columnsToSelect,
-			String tableName, Map<String, ?> equalityConditions, String equalityCondDelim,
+	public String selectRowsQueryComparisonConditions(
+			List<String> columnsToSelect, String tableName,
+			Map<String, ?> equalityConditions, String equalityCondDelim,
 			Map<String, ?> lessThanConditions, String lessThanCondDelim,
-			Map<String,  ?> greaterThanConditions, String greaterThanCondDelim,
-			String delimAcrossConditions, List<Object> values, boolean preparedStatement,
-			int limit) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+			Map<String, ?> greaterThanConditions, String greaterThanCondDelim,
+			String delimAcrossConditions, List<Object> values,
+			boolean preparedStatement, int limit) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
 
-		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty()); 
-		boolean emptyLtConditions = (null == lessThanConditions || lessThanConditions.isEmpty());
-		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions.isEmpty());
-		
+		boolean emptyEqConditions = (null == equalityConditions || equalityConditions
+				.isEmpty());
+		boolean emptyLtConditions = (null == lessThanConditions || lessThanConditions
+				.isEmpty());
+		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions
+				.isEmpty());
+
 		if (emptyEqConditions && emptyLtConditions && emptyGtConditions) {
 			//sb.append(";");
 			log.info("selectRowsQuery=" + sb.toString());
@@ -175,16 +194,16 @@ public class QueryConstructionUtil {
 		//EQUALITY CONDITIONS
 		String conjunction = "";
 		if (!emptyEqConditions) {
-			String eqConditionsStr = createComparisonConditionsString(equalityConditions,
-					EQUALITY, equalityCondDelim);
+			String eqConditionsStr = createComparisonConditionsString(
+					equalityConditions, EQUALITY, equalityCondDelim);
 			sb.append(eqConditionsStr);
 
 			conjunction = delimAcrossConditions;
 		}
 		//GREATER THAN CONDITIONS
 		if (!emptyGtConditions) {
-			String gtConditionsStr = createComparisonConditionsString(greaterThanConditions,
-					GREATERTHAN, greaterThanCondDelim);
+			String gtConditionsStr = createComparisonConditionsString(
+					greaterThanConditions, GREATERTHAN, greaterThanCondDelim);
 			sb.append(conjunction);
 			sb.append(gtConditionsStr);
 
@@ -194,8 +213,8 @@ public class QueryConstructionUtil {
 		}
 		//PERCENT SIGN AT THE BEGINNING
 		if (!emptyLtConditions) {
-			String ltConditionsStr = createComparisonConditionsString(lessThanConditions,
-					LESSTHAN, lessThanCondDelim);
+			String ltConditionsStr = createComparisonConditionsString(
+					lessThanConditions, LESSTHAN, lessThanCondDelim);
 			sb.append(conjunction);
 			sb.append(ltConditionsStr);
 
@@ -210,10 +229,11 @@ public class QueryConstructionUtil {
 			sb.append(SPACE);
 			sb.append(limit);
 		}
-		
+
 		//close the query
 		//sb.append(";");
-		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		log.info("conditional selectRowsQuery=" + sb.toString() + "\t values="
+				+ values);
 		return sb.toString();
 	}
 
@@ -221,69 +241,74 @@ public class QueryConstructionUtil {
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
 	//proper order. NOT USED ATM.
 	public String selectRowsQueryLikeConditions(List<String> columnsToSelect,
-			String tableName, Map<String, ?> beginsWith, String beginsWithCondDelim,
-			Map<String, ?> beginsAndEndsWith, String beginsAndEndsWithCondDelim,
-			Map<String, ?> endsWith, String endsWithCondDelim, String overallDelimiter,
+			String tableName, Map<String, ?> beginsWith,
+			String beginsWithCondDelim, Map<String, ?> beginsAndEndsWith,
+			String beginsAndEndsWithCondDelim, Map<String, ?> endsWith,
+			String endsWithCondDelim, String overallDelimiter,
 			List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
-		
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
+
 		boolean emptyBeginsWith = (null == beginsWith || beginsWith.isEmpty());
-		boolean emptyBeginsAndEndsWith = (null == beginsAndEndsWith || beginsAndEndsWith.isEmpty());
+		boolean emptyBeginsAndEndsWith = (null == beginsAndEndsWith || beginsAndEndsWith
+				.isEmpty());
 		boolean emptyEndsWith = (null == endsWith || endsWith.isEmpty());
-		
+
 		if (emptyBeginsWith && emptyBeginsAndEndsWith && emptyEndsWith) {
 			//sb.append(";");
 			log.info("selectRowsQuery=" + sb.toString());
 			return sb.toString();
 		}
 		sb.append(WHERE);
-		
+
 		String conjunction = "";
 		//PERCENT SIGN AT THE END
 		if (!emptyBeginsWith) {
 			String beginsWithConditionsStr = createLikeConditionsString(
 					beginsWith, beginsWithCondDelim, true, false);
 			sb.append(beginsWithConditionsStr);
-			
+
 			conjunction = overallDelimiter;
 		}
 		//PERCENT SIGN AT THE BEGINNING AND END
 		if (!emptyBeginsAndEndsWith) {
-			String beginsAndEndsWithCondStr = createLikeConditionsString(beginsAndEndsWith,
-					beginsAndEndsWithCondDelim, true, true);
+			String beginsAndEndsWithCondStr = createLikeConditionsString(
+					beginsAndEndsWith, beginsAndEndsWithCondDelim, true, true);
 			sb.append(conjunction);
 			sb.append(beginsAndEndsWithCondStr);
-			
+
 			conjunction = overallDelimiter;
 		} else {
 			conjunction = "";
 		}
 		//PERCENT SIGN AT THE BEGINNING
 		if (!emptyEndsWith) {
-			String endsWithCondStr = createLikeConditionsString(beginsAndEndsWith,
-					beginsAndEndsWithCondDelim, true, true);
+			String endsWithCondStr = createLikeConditionsString(
+					beginsAndEndsWith, beginsAndEndsWithCondDelim, true, true);
 			sb.append(conjunction);
 			sb.append(endsWithCondStr);
-			
+
 			conjunction = overallDelimiter;
 		} else {
 			conjunction = "";
 		}
-		
+
 		//close the query
 		//sb.append(";");
-		log.info("(LIKE) selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		log.info("(LIKE) selectRowsQuery=" + sb.toString() + "\t values="
+				+ values);
 		return sb.toString();
 	}
-	
-	
+
 	//generalized method to construct a query, the argument "values" is another return
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
 	//proper order. NOT USED ATM.
-	public String selectRowsQueryInConditions(List<String> columnsToSelect, String tableName,
-			Map<String, Collection<?>> inConditions, String conditionDelimiter,
-			List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+	public String selectRowsQueryInConditions(List<String> columnsToSelect,
+			String tableName, Map<String, Collection<?>> inConditions,
+			String conditionDelimiter, List<Object> values,
+			boolean preparedStatement) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
 
 		if (null == inConditions || inConditions.isEmpty()) {
 			//sb.append(";");
@@ -293,22 +318,23 @@ public class QueryConstructionUtil {
 		sb.append(WHERE);
 
 		if (preparedStatement) {
-			List<String> allInConditions = new ArrayList<String>(); 
+			List<String> allInConditions = new ArrayList<String>();
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
 				String inConditionsStr = createPreparedColInValuesString(
 						column, inValues, values);
-				
+
 				allInConditions.add(inConditionsStr);
 			}
 			sb.append(StringUtils.implode(allInConditions, conditionDelimiter));
-			
+
 		} else {
-			List<String> allInConditions = new ArrayList<String>(); 
+			List<String> allInConditions = new ArrayList<String>();
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
-				String inConditionsStr = createColInValuesString(column, inValues);
-				
+				String inConditionsStr = createColInValuesString(column,
+						inValues);
+
 				allInConditions.add(inConditionsStr);
 			}
 			sb.append(StringUtils.implode(allInConditions, conditionDelimiter));
@@ -316,47 +342,50 @@ public class QueryConstructionUtil {
 
 		//close the query
 		//sb.append(";");
-		log.info("(IN) selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		log.info("(IN) selectRowsQuery=" + sb.toString() + "\t values="
+				+ values);
 		return sb.toString();
 	}
 
 	//generalized method to construct a query, the argument "values" is another return
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
 	//proper order. NOT USED ATM (used in researchretrieve)
-	public String selectRowsQueryEqualityAndInConditions(List<String> columnsToSelect,
-			String tableName, Map<String, ?> equalityConditions, String eqDelim,
+	public String selectRowsQueryEqualityAndInConditions(
+			List<String> columnsToSelect, String tableName,
+			Map<String, ?> equalityConditions, String eqDelim,
 			Map<String, Collection<?>> inConditions, String inDelim,
 			String overallDelim, List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = createSelectColumnsFromTableString(
-				columnsToSelect, tableName);
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect,
+				tableName);
 
-		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty());
-		boolean emptyInConditions = (null == inConditions || inConditions.isEmpty());
-		
+		boolean emptyEqConditions = (null == equalityConditions || equalityConditions
+				.isEmpty());
+		boolean emptyInConditions = (null == inConditions || inConditions
+				.isEmpty());
+
 		sb.append(WHERE);
 
 		String conjunction = "";
 		if (preparedStatement) {
 			if (!emptyEqConditions) {
-				String preparedEqualityConditionsStr =
-						createPreparedComparisonConditionsString(
-								equalityConditions, values, EQUALITY, eqDelim);
+				String preparedEqualityConditionsStr = createPreparedComparisonConditionsString(
+						equalityConditions, values, EQUALITY, eqDelim);
 				sb.append(preparedEqualityConditionsStr);
-				
+
 				//this is so if inConditions are set, the conjunction is 
 				//used after setting these equality conditions
 				conjunction = overallDelim;
 			}
 			if (!emptyInConditions) {
-				List<String> allInConditions = new ArrayList<String>(); 
+				List<String> allInConditions = new ArrayList<String>();
 				for (String column : inConditions.keySet()) {
 					Collection<?> inValues = inConditions.get(column);
 					String inConditionsStr = createPreparedColInValuesString(
 							column, inValues, values);
-					
+
 					allInConditions.add(inConditionsStr);
 				}
-				
+
 				sb.append(conjunction); //in case equality conditions are set
 				sb.append(StringUtils.implode(allInConditions, inDelim));
 			}
@@ -365,42 +394,44 @@ public class QueryConstructionUtil {
 				String equalityConditionsStr = createComparisonConditionsString(
 						equalityConditions, EQUALITY, eqDelim);
 				sb.append(equalityConditionsStr);
-				
+
 				//this is so if inConditions are set, the conjunction is 
 				//used after setting these equality conditions
 				conjunction = overallDelim;
 			}
 			if (!emptyInConditions) {
-				List<String> allInConditions = new ArrayList<String>(); 
+				List<String> allInConditions = new ArrayList<String>();
 				for (String column : inConditions.keySet()) {
 					Collection<?> inValues = inConditions.get(column);
-					String inConditionsStr = createColInValuesString(column, inValues);
-					
+					String inConditionsStr = createColInValuesString(column,
+							inValues);
+
 					allInConditions.add(inConditionsStr);
 				}
-				
+
 				sb.append(conjunction); //in case equality conditions are set
 				sb.append(StringUtils.implode(allInConditions, inDelim));
-				
+
 			}
 		}
-		
+
 		//close the query
 		//sb.append(";");
-		log.info("(Equality and IN) selectRowsQuery=" + sb.toString() +
-				"\t values=" + values);
+		log.info("(Equality and IN) selectRowsQuery=" + sb.toString()
+				+ "\t values=" + values);
 		return sb.toString();
 	}
-	
+
 	public StringBuilder createSelectColumnsFromTableString(
 			List<String> columnsToSelect, String tableName) {
 		StringBuilder sb = new StringBuilder();
-		if (null == columnsToSelect || columnsToSelect.isEmpty()) { 
+		if (null == columnsToSelect || columnsToSelect.isEmpty()) {
 			sb.append(SELECTSTAR);
 		} else {
 			sb.append(SELECT);
 			sb.append(SPACE);
-			String columnsToSelectStr = StringUtils.implode(columnsToSelect, COMMA);
+			String columnsToSelectStr = StringUtils.implode(columnsToSelect,
+					COMMA);
 			sb.append(columnsToSelectStr);
 		}
 		sb.append(SPACE);
@@ -413,8 +444,9 @@ public class QueryConstructionUtil {
 	//the argument "values" is another return value. It will contain the values
 	//to be set into the CqlPreparedStatement IN the proper order.
 	//look at createComparisonConditionsString() for details. This IS just a copy of it.
-	public String createPreparedComparisonConditionsString(Map<String, ?> conditions,
-			List<Object> values, String comparator, String conditionDelimiter) {
+	public String createPreparedComparisonConditionsString(
+			Map<String, ?> conditions, List<Object> values, String comparator,
+			String conditionDelimiter) {
 		List<Object> clauses = new ArrayList<Object>();
 
 		for (String key : conditions.keySet()) {
@@ -430,11 +462,11 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String equalityConditionsStr = 
-				StringUtils.implode(clauses, conditionDelimiter); 
+		String equalityConditionsStr = StringUtils.implode(clauses,
+				conditionDelimiter);
 
-		log.info("equalityConditionsStr=" + equalityConditionsStr +
-				"\t values=" + values);
+		log.info("equalityConditionsStr=" + equalityConditionsStr
+				+ "\t values=" + values);
 		return equalityConditionsStr;
 	}
 
@@ -463,8 +495,8 @@ public class QueryConstructionUtil {
 		//implode (join together) the EQUALITY conditions with "AND"
 
 		//e.g. List becomes String(String(col1=x) + AND +...+String(colN=something))
-		String equalityConditionsStr = 
-				StringUtils.implode(clauses, conditionDelimiter); 
+		String equalityConditionsStr = StringUtils.implode(clauses,
+				conditionDelimiter);
 
 		log.info("equalityConditionsStr=" + equalityConditionsStr);
 		return equalityConditionsStr;
@@ -478,19 +510,19 @@ public class QueryConstructionUtil {
 		sb.append(IN);
 		sb.append(SPACE);
 		sb.append(LPAREN);
-		
+
 		int size = inValues.size();
 		List<String> questions = Collections.nCopies(size, QUESTION);
 		String valuesStr = StringUtils.implode(questions, COMMA);
 		sb.append(valuesStr);
-		
+
 		sb.append(RPAREN);
 		values.addAll(inValues);
-		
+
 		String result = sb.toString();
 		return result;
 	}
-	
+
 	public String createColInValuesString(String column, Collection<?> inValues) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(column);
@@ -503,12 +535,13 @@ public class QueryConstructionUtil {
 		sb.append(valuesStr);
 
 		sb.append(RPAREN);
-		
+
 		String result = sb.toString();
 		return result;
 	}
-	
-	public String createColNotInValuesString(String column, Collection<?> inValues) {
+
+	public String createColNotInValuesString(String column,
+			Collection<?> inValues) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(column);
 		sb.append(SPACE);
@@ -523,7 +556,7 @@ public class QueryConstructionUtil {
 		String result = sb.toString();
 		return result;
 	}
-	
+
 	public String createIsConditionString(Map<String, ?> isConditions,
 			String conditionDelimiter) {
 		List<Object> clauses = new ArrayList<Object>();
@@ -542,16 +575,16 @@ public class QueryConstructionUtil {
 			clauses.add(clause);
 		}
 
-
-		String isConditionsStr = StringUtils.implode(clauses, conditionDelimiter); 
+		String isConditionsStr = StringUtils.implode(clauses,
+				conditionDelimiter);
 
 		log.info("equalityConditionsStr=" + isConditionsStr);
 		return isConditionsStr;
 	}
-	
-	public String createPreparedLikeConditionsString(Map<String, ?> likeCondition,
-			String likeCondDelim, boolean beginsWith, boolean endsWith,
-			List<Object> values) {
+
+	public String createPreparedLikeConditionsString(
+			Map<String, ?> likeCondition, String likeCondDelim,
+			boolean beginsWith, boolean endsWith, List<Object> values) {
 		List<Object> clauses = new ArrayList<Object>();
 
 		for (String key : likeCondition.keySet()) {
@@ -562,7 +595,7 @@ public class QueryConstructionUtil {
 			clauseSb.append(SPACE);
 			clauseSb.append(LIKE);
 			clauseSb.append(SPACE);
-			
+
 			if (endsWith) {
 				clauseSb.append(PERCENT);
 			}
@@ -575,12 +608,13 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim); 
+		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim);
 
-		log.info("equalityConditionsStr=" + likeConditionsStr + "\t values=" + values);
+		log.info("equalityConditionsStr=" + likeConditionsStr + "\t values="
+				+ values);
 		return likeConditionsStr;
 	}
-	
+
 	public String createLikeConditionsString(Map<String, ?> likeCondition,
 			String likeCondDelim, boolean beginsWith, boolean endsWith) {
 		List<Object> clauses = new ArrayList<Object>();
@@ -605,7 +639,7 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim); 
+		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim);
 
 		log.info("equalityConditionsStr=" + likeConditionsStr);
 		return likeConditionsStr;
@@ -615,16 +649,16 @@ public class QueryConstructionUtil {
 	public String createWhereConditionString(Map<String, ?> lessThanConditions,
 			Map<String, ?> greaterThanConditions, boolean isNotIn,
 			Map<String, Collection<?>> inConditions) {
-		
+
 		StringBuilder whereConditionsSb = new StringBuilder();
-		
-		boolean emptyLtConditions = (null == lessThanConditions ||
-				lessThanConditions.isEmpty()); 
-		boolean emptyGtConditions = (null == greaterThanConditions ||
-				greaterThanConditions.isEmpty());
-		boolean emptyInConditions = (null == inConditions ||
-				inConditions.isEmpty());
-		
+
+		boolean emptyLtConditions = (null == lessThanConditions || lessThanConditions
+				.isEmpty());
+		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions
+				.isEmpty());
+		boolean emptyInConditions = (null == inConditions || inConditions
+				.isEmpty());
+
 		String conjunction = "";
 		if (!emptyLtConditions) {
 			String eqConditionsStr = createComparisonConditionsString(
@@ -646,22 +680,21 @@ public class QueryConstructionUtil {
 		}
 		// IN (SOME VALUES) CONDITIONS
 		if (!emptyInConditions) {
-			List<String> allInConditions = new ArrayList<String>(); 
+			List<String> allInConditions = new ArrayList<String>();
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
-				String inConditionsStr = createColNotInValuesString(column, inValues);
-				
+				String inConditionsStr = createColNotInValuesString(column,
+						inValues);
+
 				allInConditions.add(inConditionsStr);
 			}
 			whereConditionsSb.append(conjunction);
 			whereConditionsSb.append(StringUtils.implode(allInConditions, AND));
 		}
-		
+
 		return whereConditionsSb.toString();
 	}
-	
-	
-	
+
 	public String getAnd() {
 		return AND;
 	}
@@ -677,5 +710,5 @@ public class QueryConstructionUtil {
 	public String getOr() {
 		return OR;
 	}
-	
+
 }

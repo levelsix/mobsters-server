@@ -24,11 +24,12 @@ import com.lvl6.info.ClanInvite;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class ClanInviteRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ClanInviteRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_INVITE; 
+	private static Logger log = LoggerFactory
+			.getLogger(ClanInviteRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_INVITE;
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -36,23 +37,22 @@ public class ClanInviteRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
-	public List<ClanInvite> getClanInvitesForUserId(int userId)
-	{
+	public List<ClanInvite> getClanInvitesForUserId(int userId) {
 		List<ClanInvite> clanInvites = null;
 		try {
 			List<String> columnsToSelected = ClanInviteForClientMapper
-				.getColumnsSelected();
+					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.CLAN_INVITE__USER_ID, userId);
-			
+
 			String eqDelim = getQueryConstructionUtil().getOr();
 
 			//query db, "values" is not used 
@@ -62,27 +62,24 @@ public class ClanInviteRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, values, preparedStatement);
-			log.info(String.format(
-				"getUserIdToClanInviteForClanId() query=%s", query));
-			clanInvites = this.jdbcTemplate
-					.query(query, new ClanInviteForClientMapper());
-			
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim, values,
+							preparedStatement);
+			log.info(String.format("getUserIdToClanInviteForClanId() query=%s",
+					query));
+			clanInvites = this.jdbcTemplate.query(query,
+					new ClanInviteForClientMapper());
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve clan invites for userId=%s", userId),
-				e);
-			clanInvites =
-					new ArrayList<ClanInvite>();
+					"could not retrieve clan invites for userId=%s", userId), e);
+			clanInvites = new ArrayList<ClanInvite>();
 		}
-		
+
 		return clanInvites;
 	}
-	
-	public ClanInvite getClanInvite( String userId, String inviterId )
-	{
+
+	public ClanInvite getClanInvite(String userId, String inviterId) {
 		ClanInvite invite = null;
 		try {
 			List<String> columnsToSelected = ClanInviteForClientMapper
@@ -90,8 +87,9 @@ public class ClanInviteRetrieveUtil {
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.CLAN_INVITE__USER_ID, userId);
-			equalityConditions.put(DBConstants.CLAN_INVITE__INVITER_ID, inviterId);
-			
+			equalityConditions.put(DBConstants.CLAN_INVITE__INVITER_ID,
+					inviterId);
+
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			//query db, "values" is not used 
@@ -101,37 +99,37 @@ public class ClanInviteRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, values, preparedStatement);
-			log.info(String.format(
-				"getClanInvite() query=%s", query));
-			List<ClanInvite> invites = this.jdbcTemplate
-					.query(query, values.toArray(), new ClanInviteForClientMapper());
-			
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim, values,
+							preparedStatement);
+			log.info(String.format("getClanInvite() query=%s", query));
+			List<ClanInvite> invites = this.jdbcTemplate.query(query,
+					values.toArray(), new ClanInviteForClientMapper());
+
 			if (null != invites && !invites.isEmpty()) {
 				invite = invites.get(0);
 				if (invites.size() > 1) {
-					log.error(String.format(
-						"wtf, userId and inviterId s'posd 2b unique. invites=%s",
-						invites));
+					log.error(String
+							.format("wtf, userId and inviterId s'posd 2b unique. invites=%s",
+									invites));
 				}
 			}
-			
-			
+
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve clan invite for clanId=%s", inviterId),
-				e);
+					"could not retrieve clan invite for clanId=%s", inviterId),
+					e);
 		}
-		
+
 		return invite;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -146,20 +144,23 @@ public class ClanInviteRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class ClanInviteForClientMapper implements RowMapper<ClanInvite> {
+	private static final class ClanInviteForClientMapper implements
+			RowMapper<ClanInvite> {
 
 		private static List<String> columnsSelected;
 
+		@Override
 		public ClanInvite mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ClanInvite ci = new ClanInvite();
 			ci.setUserId(rs.getString(DBConstants.CLAN_INVITE__USER_ID));
 			ci.setInviterId(rs.getString(DBConstants.CLAN_INVITE__INVITER_ID));
 			ci.setClanId(rs.getString(DBConstants.CLAN_INVITE__CLAN_ID));
-			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
+			Timestamp ts = rs
+					.getTimestamp(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
 			ci.setTimeOfInvite(new Date(ts.getTime()));
-			
+
 			return ci;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -172,5 +173,5 @@ public class ClanInviteRetrieveUtil {
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

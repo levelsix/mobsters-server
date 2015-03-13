@@ -12,17 +12,21 @@ import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 
 public class SellUserMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private SellUserMonsterRequestProto sellUserMonsterRequestProto;
 
 	/**
 	 * read the event from the given ByteBuffer to populate this event
 	 */
+	@Override
 	public void read(ByteBuffer buff) {
 		try {
-			sellUserMonsterRequestProto = SellUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-			playerId = sellUserMonsterRequestProto.getSender().getMinUserProto().getUserUuid();
+			sellUserMonsterRequestProto = SellUserMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = sellUserMonsterRequestProto.getSender()
+					.getMinUserProto().getUserUuid();
 		} catch (InvalidProtocolBufferException e) {
 			log.error("SellUserMonsterRequest exception", e);
 		}
@@ -33,15 +37,13 @@ public class SellUserMonsterRequestEvent extends RequestEvent {
 	}
 
 	public void setSellUserMonsterRequestProto(SellUserMonsterRequestProto sumrp) {
-		this.sellUserMonsterRequestProto= sumrp;
+		this.sellUserMonsterRequestProto = sumrp;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "SellUserMonsterRequestEvent [sellUserMonsterRequestProto="
-				+ sellUserMonsterRequestProto
-				+ "]";
+				+ sellUserMonsterRequestProto + "]";
 	}
 
 }

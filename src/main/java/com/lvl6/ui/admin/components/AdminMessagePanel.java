@@ -14,7 +14,8 @@ import com.lvl6.properties.ControllerConstants;
 
 public class AdminMessagePanel extends Panel {
 
-	private static final Logger log = LoggerFactory.getLogger(AdminMessagePanel.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(AdminMessagePanel.class);
 
 	protected AdminChatPost adminChatPost;
 
@@ -32,29 +33,32 @@ public class AdminMessagePanel extends Panel {
 		addMarkAsReadLink();
 		addReplyForm();
 	}
-	
+
 	protected void addMessageContent() {
 		Label content = new Label("messageContent", adminChatPost.getContent());
 		add(content);
 	}
 
 	protected void addMessageFrom() {
-		String fromText = adminChatPost.getPosterId() == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID ? "Admin" : adminChatPost.getUsername();
+		String fromText = adminChatPost.getPosterId() == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID ? "Admin"
+				: adminChatPost.getUsername();
 		Label from = new Label("messageFrom", fromText);
 		add(from);
 	}
 
 	protected void addMessageTo() {
-		String toText = adminChatPost.getPosterId() != ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID ? "Admin" : adminChatPost.getUsername();
+		String toText = adminChatPost.getPosterId() != ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID ? "Admin"
+				: adminChatPost.getUsername();
 		Label to = new Label("messageTo", toText);
 		add(to);
 	}
-	
+
 	AjaxLink<String> replyLink;
-	
+
 	protected void addReplyLink() {
-		 replyLink = new AjaxLink<String>("replyLink") {
+		replyLink = new AjaxLink<String>("replyLink") {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				replyLink.setVisible(false);
@@ -68,41 +72,36 @@ public class AdminMessagePanel extends Panel {
 		replyLink.setOutputMarkupId(true);
 	}
 
-	
 	AjaxLink<String> markAsRead;
-	
+
 	protected void addMarkAsReadLink() {
-		 markAsRead = new AjaxLink<String>("markAsReadLink") {
+		markAsRead = new AjaxLink<String>("markAsReadLink") {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		};
 		markAsRead.setVisible(false);
 		markAsRead.setOutputMarkupId(true);
 		add(markAsRead);
 	}
-	
+
 	SendAdminMessageForm form;
-	
+
 	protected void addReplyForm() {
-	  String sender = ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID;
-	  String recipient = !adminChatPost.getPosterId().equals(sender) ? adminChatPost.getPosterId() : adminChatPost.getRecipientId();
-		form = new SendAdminMessageForm("replyForm",
-				new AdminChatPost(
-						"", 
-						sender, recipient,
-						new Date(),
-						"", 
-						adminChatPost.getUsername()));
+		String sender = ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID;
+		String recipient = !adminChatPost.getPosterId().equals(sender) ? adminChatPost
+				.getPosterId() : adminChatPost.getRecipientId();
+		form = new SendAdminMessageForm("replyForm", new AdminChatPost("",
+				sender, recipient, new Date(), "", adminChatPost.getUsername()));
 		form.setOutputMarkupId(true);
 		//form.setVisible(false);
 		add(form);
 	}
-	
-	
+
 	private static final long serialVersionUID = -2625835646085053890L;
 
 }

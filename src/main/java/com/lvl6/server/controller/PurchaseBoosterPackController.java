@@ -1,11 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -24,15 +21,12 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ItemForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
-import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -40,21 +34,20 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class PurchaseBoosterPackController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class PurchaseBoosterPackController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public static int BOOSTER_PURCHASES_MAX_SIZE = 50;
 
@@ -66,7 +59,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -75,8 +68,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
-
-
 
 	public PurchaseBoosterPackController() {
 		numAllocatedThreads = 4;
@@ -94,7 +85,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent)event).getPurchaseBoosterPackRequestProto();
+		PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent) event)
+				.getPurchaseBoosterPackRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -105,7 +97,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
 
 		//values to send to client
-		PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto.newBuilder();
+		PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
@@ -116,16 +109,16 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
+			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -135,45 +128,50 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
-				userId, boosterPackId, now, nowTimestamp,
-				freeBoosterPack, timeUtils, userRetrieveUtils,
-				itemForUserRetrieveUtil, updateUtil);
+					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
+					timeUtils, userRetrieveUtils, itemForUserRetrieveUtil,
+					updateUtil);
 
 			pbpa.execute(resBuilder);
 
-			if (PurchaseBoosterPackStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (PurchaseBoosterPackStatus.SUCCESS
+					.equals(resBuilder.getStatus())) {
 				//assume user only purchases 1 item. NEED TO LET CLIENT KNOW THE PRIZE
-				List<BoosterItem> itemsUserReceives = pbpa.getItemsUserReceives();
+				List<BoosterItem> itemsUserReceives = pbpa
+						.getItemsUserReceives();
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
-					BoosterItemProto bip = CreateInfoProtoUtils.createBoosterItemProto(bi);
+					BoosterItemProto bip = CreateInfoProtoUtils
+							.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
 				//item reward
 				List<ItemForUser> ifuList = pbpa.getIfuList();
 				log.info("ifuList={}", ifuList);
-			    if (null != ifuList && !ifuList.isEmpty()) {
-			    	int numUpdated = updateUtil.updateItemForUser(ifuList);
-			    	log.info("items numUpdated={}", numUpdated);
-			    	List<UserItemProto> uipList = CreateInfoProtoUtils
-			    		.createUserItemProtosFromUserItems(ifuList);
-			    	resBuilder.addAllUpdatedUserItems(uipList);
-			    }
+				if (null != ifuList && !ifuList.isEmpty()) {
+					int numUpdated = updateUtil.updateItemForUser(ifuList);
+					log.info("items numUpdated={}", numUpdated);
+					List<UserItemProto> uipList = CreateInfoProtoUtils
+							.createUserItemProtosFromUserItems(ifuList);
+					resBuilder.addAllUpdatedUserItems(uipList);
+				}
 			}
 
 			//check if setting the items the user won
 			PurchaseBoosterPackResponseProto resProto = resBuilder.build();
-			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
+			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseBoosterPackResponseProto(resProto);
 			server.writeEvent(resEvent);
 
-			if (PurchaseBoosterPackStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (PurchaseBoosterPackStatus.SUCCESS
+					.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-						pbpa.getUser(), null, null);
-				
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								pbpa.getUser(), null, null);
+
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -181,28 +179,34 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 				//just assume user can only buy one booster pack at a time
 				writeToBoosterPackPurchaseHistory(userId, boosterPackId,
-					pbpa.getItemsUserReceives(),
-					resBuilder.getUpdatedOrNewList(), nowTimestamp);
-//				sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
+						pbpa.getItemsUserReceives(),
+						resBuilder.getUpdatedOrNewList(), nowTimestamp);
+				//				sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
 			}
 		} catch (Exception e) {
-			log.error("exception in PurchaseBoosterPackController processEvent", e);
+			log.error(
+					"exception in PurchaseBoosterPackController processEvent",
+					e);
 			// don't let the client hang
 			try {
 				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-				PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
+				PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
+						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in SellUserMonsterController processEvent", e);
+				log.error(
+						"exception2 in SellUserMonsterController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName()); 
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
-	private void sendBoosterPurchaseMessage(User user, BoosterPack aPack, List<BoosterItem> itemsUserReceives) {
+	private void sendBoosterPurchaseMessage(User user, BoosterPack aPack,
+			List<BoosterItem> itemsUserReceives) {
 		//    Map<Integer, Monster> equipMap = MonsterRetrieveUtils.getMonsterIdsToMonster();
 		//    Date d = new Date();
 		//    for (BoosterItem bi : itemsUserReceives) {
@@ -228,7 +232,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		//    }
 	}
 
-
 	//  private int getNumEquipsPurchasedToday(int userId, int boosterPackId, 
 	//      DateTime startOfDayInLA) {
 	//    //get the time at the start of the day in UTC
@@ -243,31 +246,31 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	//  }
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-		PurchaseBoosterPackAction pbpa)
-	{
+			PurchaseBoosterPackAction pbpa) {
 		MiscMethods.writeToUserCurrencyOneUser(userId, date,
-			pbpa.getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
-    		pbpa.getCurrentCurrencies(), pbpa.getReasons(),
-    		pbpa.getDetails());
+				pbpa.getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
+				pbpa.getCurrentCurrencies(), pbpa.getReasons(),
+				pbpa.getDetails());
 	}
 
-	private void writeToBoosterPackPurchaseHistory(String userId, int boosterPackId,
-		List<BoosterItem> itemsUserReceives, List<FullUserMonsterProto> fumpList,
-		Timestamp timeOfPurchase)
-	{
+	private void writeToBoosterPackPurchaseHistory(String userId,
+			int boosterPackId, List<BoosterItem> itemsUserReceives,
+			List<FullUserMonsterProto> fumpList, Timestamp timeOfPurchase) {
 		//just assuming there is one Booster Item
 		if (itemsUserReceives.isEmpty()) {
 			return;
 		}
 		BoosterItem bi = itemsUserReceives.get(0);
 
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(fumpList); 
+		List<String> userMonsterIds = MonsterStuffUtils
+				.getUserMonsterIds(fumpList);
 
-		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(userId,
-			boosterPackId, timeOfPurchase, bi, userMonsterIds);
+		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
+				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
 
-		log.info("wrote to booster pack history!!!! \t numInserted={}\t boosterItem={}",
-			num, itemsUserReceives);
+		log.info(
+				"wrote to booster pack history!!!! \t numInserted={}\t boosterItem={}",
+				num, itemsUserReceives);
 	}
 
 	public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
@@ -275,7 +278,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	}
 
 	public void setGoodEquipsRecievedFromBoosterPacks(
-		IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks) {
+			IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks) {
 		this.goodEquipsRecievedFromBoosterPacks = goodEquipsRecievedFromBoosterPacks;
 	}
 
@@ -287,13 +290,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.locker = locker;
 	}
 
-	public TimeUtils getTimeUtils()
-	{
+	public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
 
-	public void setTimeUtils( TimeUtils timeUtils )
-	{
+	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
 
@@ -305,23 +306,20 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.userRetrieveUtils = userRetrieveUtils;
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
-	public UpdateUtil getUpdateUtil()
-	{
+	public UpdateUtil getUpdateUtil() {
 		return updateUtil;
 	}
 
-	public void setUpdateUtil( UpdateUtil updateUtil )
-	{
+	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
 

@@ -19,100 +19,103 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class ClanIconRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static Map<Integer, ClanIcon> clanIconIdsToClanIcons;
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_ICON_CONFIG;
-  
+	private static Map<Integer, ClanIcon> clanIconIdsToClanIcons;
+	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_ICON_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
-  public static Map<Integer, ClanIcon> getClanIconIdsToClanIcons() {
-  	if (null == clanIconIdsToClanIcons) {
-  		setStaticClanIconIdsToClanIcons();
-  	}
-  	return clanIconIdsToClanIcons;
-  }
+	public static Map<Integer, ClanIcon> getClanIconIdsToClanIcons() {
+		if (null == clanIconIdsToClanIcons) {
+			setStaticClanIconIdsToClanIcons();
+		}
+		return clanIconIdsToClanIcons;
+	}
 
-  public static ClanIcon getClanIconForId(int id) {
-  	if (null == clanIconIdsToClanIcons) {
-  		setStaticClanIconIdsToClanIcons();
-  	}
-  	
-  	if (!clanIconIdsToClanIcons.containsKey(id)) {
-  		log.warn("no clan icon with id=" + id);
-  		return null;
-  	}
-  	return clanIconIdsToClanIcons.get(id);
-  }
-  
-  public static Map<Integer, ClanIcon> getClanIconsForIds(Collection<Integer> ids) {
-  	if (null == clanIconIdsToClanIcons) {
-  		setStaticClanIconIdsToClanIcons();
-  	}
-  	Map<Integer, ClanIcon> returnMap = new HashMap<Integer, ClanIcon>();
-  	
-  	for (int id : ids) {
-  		ClanIcon tsm = clanIconIdsToClanIcons.get(id);
-  		returnMap.put(id, tsm);
-  	}
-  	return returnMap;
-  }
+	public static ClanIcon getClanIconForId(int id) {
+		if (null == clanIconIdsToClanIcons) {
+			setStaticClanIconIdsToClanIcons();
+		}
 
-  private static void setStaticClanIconIdsToClanIcons() {
-    log.debug("setting static map of clanIcon ids to clanIcons");
+		if (!clanIconIdsToClanIcons.containsKey(id)) {
+			log.warn("no clan icon with id=" + id);
+			return null;
+		}
+		return clanIconIdsToClanIcons.get(id);
+	}
 
-    Random rand = new Random();
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+	public static Map<Integer, ClanIcon> getClanIconsForIds(
+			Collection<Integer> ids) {
+		if (null == clanIconIdsToClanIcons) {
+			setStaticClanIconIdsToClanIcons();
+		}
+		Map<Integer, ClanIcon> returnMap = new HashMap<Integer, ClanIcon>();
+
+		for (int id : ids) {
+			ClanIcon tsm = clanIconIdsToClanIcons.get(id);
+			returnMap.put(id, tsm);
+		}
+		return returnMap;
+	}
+
+	private static void setStaticClanIconIdsToClanIcons() {
+		log.debug("setting static map of clanIcon ids to clanIcons");
+
+		Random rand = new Random();
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      Map<Integer, ClanIcon> clanIconIdsToClanIconsTemp =
-			      		new HashMap<Integer, ClanIcon>();
-			      
-			      //loop through each row and convert it into a java object
-			      while(rs.next()) {  
-			        ClanIcon clanIcon = convertRSRowToClanIcon(rs, rand);
-			        
-			        int clanIconId = clanIcon.getId();
-			        clanIconIdsToClanIconsTemp.put(clanIconId, clanIcon);
-			      }
-			      
-			      clanIconIdsToClanIcons = clanIconIdsToClanIconsTemp;
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  }    
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						Map<Integer, ClanIcon> clanIconIdsToClanIconsTemp = new HashMap<Integer, ClanIcon>();
+
+						//loop through each row and convert it into a java object
+						while (rs.next()) {
+							ClanIcon clanIcon = convertRSRowToClanIcon(rs, rand);
+
+							int clanIconId = clanIcon.getId();
+							clanIconIdsToClanIconsTemp
+									.put(clanIconId, clanIcon);
+						}
+
+						clanIconIdsToClanIcons = clanIconIdsToClanIconsTemp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("clanIcon retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-  }
+			log.error("clanIcon retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
-  public static void reload() {
-  	setStaticClanIconIdsToClanIcons();
-  }
+	public static void reload() {
+		setStaticClanIconIdsToClanIcons();
+	}
 
-  /*
-   * assumes the resultset is apprpriately set up. traverses the row it's on.
-   */
-  private static ClanIcon convertRSRowToClanIcon(ResultSet rs, Random rand) throws SQLException {
-    int id = rs.getInt(DBConstants.CLAN_ICON__ID);
-    String imgName = rs.getString(DBConstants.CLAN_ICON__IMG_NAME);
-    boolean isAvailable = rs.getBoolean(DBConstants.CLAN_ICON__IS_AVAILABLE);
-    
-    ClanIcon clanIcon = new ClanIcon(id, imgName, isAvailable);
-    return clanIcon;
-  }
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private static ClanIcon convertRSRowToClanIcon(ResultSet rs, Random rand)
+			throws SQLException {
+		int id = rs.getInt(DBConstants.CLAN_ICON__ID);
+		String imgName = rs.getString(DBConstants.CLAN_ICON__IMG_NAME);
+		boolean isAvailable = rs
+				.getBoolean(DBConstants.CLAN_ICON__IS_AVAILABLE);
+
+		ClanIcon clanIcon = new ClanIcon(id, imgName, isAvailable);
+		return clanIcon;
+	}
 
 }

@@ -24,11 +24,12 @@ import com.lvl6.info.AchievementForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class AchievementForUserRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(AchievementForUserRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_FOR_USER; 
+	private static Logger log = LoggerFactory
+			.getLogger(AchievementForUserRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
 	private static final UserAchievementForClientMapper rowMapper = new UserAchievementForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -37,32 +38,33 @@ public class AchievementForUserRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, AchievementForUser> getSpecificOrAllAchievementIdToAchievementForUserId(
-		String userId, Collection<Integer> achievementIds)
-	{
+			String userId, Collection<Integer> achievementIds) {
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = null;
 		try {
 			List<String> columnsToSelected = UserAchievementForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID, userId);
+			equalityConditions.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID,
+					userId);
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			Map<String, Collection<?>> inConditions = null;
 			if (null != achievementIds && !achievementIds.isEmpty()) {
 				inConditions = new HashMap<String, Collection<?>>();
-				inConditions.put(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
+				inConditions.put(
+						DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
 						achievementIds);
 			}
-			String inDelim = getQueryConstructionUtil().getAnd(); 
+			String inDelim = getQueryConstructionUtil().getAnd();
 
 			String overallDelim = getQueryConstructionUtil().getAnd();
 			//query db, "values" is not used 
@@ -72,37 +74,39 @@ public class AchievementForUserRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityAndInConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, inConditions, inDelim, overallDelim,
-							values, preparedStatement);
+					.selectRowsQueryEqualityAndInConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim,
+							inConditions, inDelim, overallDelim, values,
+							preparedStatement);
 
-			log.info("getSpecificOrAllAchievementIdToAchievementForUserId() query=" +
-					query);
+			log.info("getSpecificOrAllAchievementIdToAchievementForUserId() query="
+					+ query);
 
-			List<AchievementForUser> afuList = this.jdbcTemplate
-					.query(query, values.toArray(), rowMapper);
-			achievementIdToUserAchievements =
-					new HashMap<Integer, AchievementForUser>();
+			List<AchievementForUser> afuList = this.jdbcTemplate.query(query,
+					values.toArray(), rowMapper);
+			achievementIdToUserAchievements = new HashMap<Integer, AchievementForUser>();
 			for (AchievementForUser afu : afuList) {
 				int achievementId = afu.getAchievementId();
-				
+
 				achievementIdToUserAchievements.put(achievementId, afu);
 			}
 		} catch (Exception e) {
-			log.error(String.format(
-				"could not retrieve user achievement for userId=%s", userId), e);
-			achievementIdToUserAchievements =
-					new HashMap<Integer, AchievementForUser>();
+			log.error(
+					String.format(
+							"could not retrieve user achievement for userId=%s",
+							userId), e);
+			achievementIdToUserAchievements = new HashMap<Integer, AchievementForUser>();
 		}
-		
+
 		return achievementIdToUserAchievements;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -117,28 +121,38 @@ public class AchievementForUserRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserAchievementForClientMapper implements RowMapper<AchievementForUser> {
+	private static final class UserAchievementForClientMapper implements
+			RowMapper<AchievementForUser> {
 
 		private static List<String> columnsSelected;
 
-		public AchievementForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public AchievementForUser mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			AchievementForUser afu = new AchievementForUser();
-			afu.setAchievementId(rs.getInt(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID));
-			afu.setProgress(rs.getInt(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS));
-			afu.setComplete(rs.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE));
-			afu.setRedeemed(rs.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED));
+			afu.setAchievementId(rs
+					.getInt(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID));
+			afu.setProgress(rs
+					.getInt(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS));
+			afu.setComplete(rs
+					.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE));
+			afu.setRedeemed(rs
+					.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED));
 			return afu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID);
+				columnsSelected
+						.add(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID);
 				columnsSelected.add(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS);
-				columnsSelected.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE);
-				columnsSelected.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED);
+				columnsSelected
+						.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE);
+				columnsSelected
+						.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

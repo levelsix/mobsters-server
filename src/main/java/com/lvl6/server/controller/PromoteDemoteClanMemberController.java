@@ -32,252 +32,289 @@ import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class PromoteDemoteClanMemberController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class PromoteDemoteClanMemberController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
-  @Autowired
-  protected Locker locker;
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected ClanRetrieveUtils2 clanRetrieveUtils;
+	@Autowired
+	protected Locker locker;
 
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
+	@Autowired
+	protected ClanRetrieveUtils2 clanRetrieveUtils;
 
-  @Autowired
-  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
+
+	@Autowired
+	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public PromoteDemoteClanMemberController() {
-    numAllocatedThreads = 4;
-  }
+		numAllocatedThreads = 4;
+	}
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new PromoteDemoteClanMemberRequestEvent();
-  }
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new PromoteDemoteClanMemberRequestEvent();
+	}
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
-  }
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
+	}
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    PromoteDemoteClanMemberRequestProto reqProto = ((PromoteDemoteClanMemberRequestEvent)event).getPromoteDemoteClanMemberRequestProto();
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		PromoteDemoteClanMemberRequestProto reqProto = ((PromoteDemoteClanMemberRequestEvent) event)
+				.getPromoteDemoteClanMemberRequestProto();
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    String victimId = reqProto.getVictimUuid();
-    UserClanStatus newUserClanStatus = reqProto.getUserClanStatus();
-    List<String> userIds = new ArrayList<String>();
-    userIds.add(userId);
-    userIds.add(victimId);
-    
-    PromoteDemoteClanMemberResponseProto.Builder resBuilder = PromoteDemoteClanMemberResponseProto.newBuilder();
-    resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
-    resBuilder.setSender(senderProto);
-    resBuilder.setUserClanStatus(newUserClanStatus);
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		String victimId = reqProto.getVictimUuid();
+		UserClanStatus newUserClanStatus = reqProto.getUserClanStatus();
+		List<String> userIds = new ArrayList<String>();
+		userIds.add(userId);
+		userIds.add(victimId);
 
-    String clanId = null;
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanUuid();
-    }
+		PromoteDemoteClanMemberResponseProto.Builder resBuilder = PromoteDemoteClanMemberResponseProto
+				.newBuilder();
+		resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+		resBuilder.setSender(senderProto);
+		resBuilder.setUserClanStatus(newUserClanStatus);
 
-    UUID userUuid = null;
-    UUID victimUuid = null;
-    UUID clanUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
-      victimUuid = UUID.fromString(victimId);
-      clanUuid = UUID.fromString(clanId);
+		String clanId = null;
+		if (senderProto.hasClan() && null != senderProto.getClan()) {
+			clanId = senderProto.getClan().getClanUuid();
+		}
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s, victimId=%s, clanId=%s",
-          userId, victimId, clanId), e);
-      invalidUuids = true;
-    }
+		UUID userUuid = null;
+		UUID victimUuid = null;
+		UUID clanUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			victimUuid = UUID.fromString(victimId);
+			clanUuid = UUID.fromString(clanId);
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
-      PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
-    
-    boolean lockedClan = false;
-    if (clanUuid != null) {
-    	lockedClan = getLocker().lockClan(clanUuid);
-    }
-    try {
-    	Map<String,User> users = getUserRetrieveUtils().getUsersByIds(userIds);
-    	Map<String, UserClan> userClans = getUserClanRetrieveUtils()
-    			.getUserClanForUsers(clanId, userIds);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s, victimId=%s, clanId=%s",
+					userId, victimId, clanId), e);
+			invalidUuids = true;
+		}
 
-      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, userId, victimId,
-      		newUserClanStatus, users, userClans);
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+			PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-      boolean success = false;
-      if (legitRequest) { 
-      	User victim = users.get(victimId);
-      	UserClan oldInfo = userClans.get(victimId);
-      	try {
-      		UserClanStatus ucs = UserClanStatus.valueOf(oldInfo.getStatus());
-      		resBuilder.setPrevUserClanStatus(ucs);
-      	} catch (Exception e) {
-      		log.error("incorrect user clan status. userClan=" + oldInfo);
-      	}
-      	
-      	success = writeChangesToDB(victim, victimId, clanId, oldInfo, newUserClanStatus);
-      }
-      
-      PromoteDemoteClanMemberResponseEvent resEvent =
-      		new PromoteDemoteClanMemberResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      //only write to user if failed
-      if (!success) {
-      	resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build()); 
-      	server.writeEvent(resEvent);
-      	
-      } else {
-    	  //TODO: Is clan needed here?
-      	//only write to clan if success
-        resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
-        User victim = users.get(victimId);
-        Clan victimClan = getClanRetrieveUtils().getClanWithId(clanId);
-        MinimumUserProto mup = CreateInfoProtoUtils
-        	.createMinimumUserProtoFromUserAndClan(victim, victimClan);
-        resBuilder.setVictim(mup);
-        
-      	resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
-      	server.writeClanEvent(resEvent, clanId);
-      }
+		boolean lockedClan = false;
+		if (clanUuid != null) {
+			lockedClan = getLocker().lockClan(clanUuid);
+		}
+		try {
+			Map<String, User> users = getUserRetrieveUtils().getUsersByIds(
+					userIds);
+			Map<String, UserClan> userClans = getUserClanRetrieveUtils()
+					.getUserClanForUsers(clanId, userIds);
 
-    } catch (Exception e) {
-      log.error("exception in PromoteDemoteClanMember processEvent", e);
-      try {
-    	  resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
-    	  PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in PromoteDemoteClanMember processEvent", e);
-    	}
-    } finally {
-    	if (clanId != null && lockedClan) {
-    		getLocker().unlockClan(clanUuid);
-    	}
-    }
-  }
+			boolean legitRequest = checkLegitRequest(resBuilder, lockedClan,
+					userId, victimId, newUserClanStatus, users, userClans);
 
-  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, String userId,
-      String victimId, UserClanStatus newUserClanStatus, Map<String, User> userIdsToUsers,
-  		Map<String, UserClan> userIdsToUserClans) {
-  	
-  	if (!lockedClan) {
-  		log.error("couldn't obtain clan lock");
-  		return false;
-  	}
-    if (null == userIdsToUsers || userIdsToUsers.size() != 2 ||
-    		null == userIdsToUserClans || userIdsToUserClans.size() != 2) {
-      log.error("user or userClan objects do not total 2. users=" + userIdsToUsers +
-      		"\t userIdsToUserClans=" + userIdsToUserClans);
-      return false;      
-    }
-    
-    //check if users are in the db
-    if (!userIdsToUserClans.containsKey(userId) || !userIdsToUsers.containsKey(userId)) {
-    	log.error("user promoting or demoting not in clan or db. userId=" + userId +
-    			"\t userIdsToUserClans=" + userIdsToUserClans + "\t userIdsToUsers=" +
-    			userIdsToUsers);
-    	resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
-    	return false;
-    }
-    if (!userIdsToUserClans.containsKey(victimId) || !userIdsToUsers.containsKey(victimId)) {
-    	log.error("user to be promoted or demoted not in clan or db. victim=" + victimId +
-    			"\t userIdsToUserClans=" + userIdsToUserClans + "\t userIdsToUsers=" +
-    			userIdsToUsers);
-    	resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
-    	return false;
-    }
-    
-    //check if user can demote/promote the other one
-    UserClan promoterDemoter = userIdsToUserClans.get(userId);
-    UserClan victim = userIdsToUserClans.get(victimId);
-    
-    UserClanStatus first = UserClanStatus.valueOf(promoterDemoter.getStatus());
-    UserClanStatus second = UserClanStatus.valueOf(victim.getStatus());
-    if (UserClanStatus.CAPTAIN.equals(first) || 
-    		!ClanStuffUtils.firstUserClanStatusAboveSecond(first, second)) {
-    	log.error("user not authorized to promote or demote otherUser. clanStatus of user=" +
-    			first + "\t clanStatus of other user=" + second);
-    	resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
-    	return false;
-    }
-    if (!ClanStuffUtils.firstUserClanStatusAboveSecond(first, newUserClanStatus)) {
-    	log.error("user not authorized to promote or demote otherUser. clanStatus of user=" +
-    			first + "\t clanStatus of other user=" + second + "\t newClanStatus of other user=" +
-    			newUserClanStatus);
-    	resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
-    	return false;
-    }
-    if (UserClanStatus.REQUESTING.equals(second)) {
-    	log.error("user can't promote, demote a non-clan member. UserClan for user=" +
-    			promoterDemoter + "\t UserClan for victim=" + victim + "\t users=" + userIdsToUsers);
-    	resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
-    	return false;
-    }
-    
-    return true;
-  }
+			boolean success = false;
+			if (legitRequest) {
+				User victim = users.get(victimId);
+				UserClan oldInfo = userClans.get(victimId);
+				try {
+					UserClanStatus ucs = UserClanStatus.valueOf(oldInfo
+							.getStatus());
+					resBuilder.setPrevUserClanStatus(ucs);
+				} catch (Exception e) {
+					log.error("incorrect user clan status. userClan=" + oldInfo);
+				}
 
-  private boolean writeChangesToDB(User victim, String victimId, String clanId,
-  		UserClan oldInfo, UserClanStatus newUserClanStatus) {
-  	if (!UpdateUtils.get().updateUserClanStatus(victimId, clanId, newUserClanStatus)) {
-      log.error("problem with updating user clan status for user=" + victim +
-      		"\t oldInfo=" + oldInfo + "\t newUserClanStatus=" + newUserClanStatus);
-      return false;
-    }
-  	return true;
-  }
-  
-  public Locker getLocker() {
-    return locker;
-  }
-  public void setLocker(Locker locker) {
-    this.locker = locker;
-  }
+				success = writeChangesToDB(victim, victimId, clanId, oldInfo,
+						newUserClanStatus);
+			}
 
-  public ClanRetrieveUtils2 getClanRetrieveUtils() {
-    return clanRetrieveUtils;
-  }
+			PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			//only write to user if failed
+			if (!success) {
+				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
 
-  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
-    this.clanRetrieveUtils = clanRetrieveUtils;
-  }
+			} else {
+				//TODO: Is clan needed here?
+				//only write to clan if success
+				resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
+				User victim = users.get(victimId);
+				Clan victimClan = getClanRetrieveUtils().getClanWithId(clanId);
+				MinimumUserProto mup = CreateInfoProtoUtils
+						.createMinimumUserProtoFromUserAndClan(victim,
+								victimClan);
+				resBuilder.setVictim(mup);
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+						.build());
+				server.writeClanEvent(resEvent, clanId);
+			}
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
+		} catch (Exception e) {
+			log.error("exception in PromoteDemoteClanMember processEvent", e);
+			try {
+				resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+				PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in PromoteDemoteClanMember processEvent",
+						e);
+			}
+		} finally {
+			if (clanId != null && lockedClan) {
+				getLocker().unlockClan(clanUuid);
+			}
+		}
+	}
 
-  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
-    return userClanRetrieveUtils;
-  }
+	private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
+			String userId, String victimId, UserClanStatus newUserClanStatus,
+			Map<String, User> userIdsToUsers,
+			Map<String, UserClan> userIdsToUserClans) {
 
-  public void setUserClanRetrieveUtils(
-      UserClanRetrieveUtils2 userClanRetrieveUtils) {
-    this.userClanRetrieveUtils = userClanRetrieveUtils;
-  }
+		if (!lockedClan) {
+			log.error("couldn't obtain clan lock");
+			return false;
+		}
+		if (null == userIdsToUsers || userIdsToUsers.size() != 2
+				|| null == userIdsToUserClans || userIdsToUserClans.size() != 2) {
+			log.error("user or userClan objects do not total 2. users="
+					+ userIdsToUsers + "\t userIdsToUserClans="
+					+ userIdsToUserClans);
+			return false;
+		}
+
+		//check if users are in the db
+		if (!userIdsToUserClans.containsKey(userId)
+				|| !userIdsToUsers.containsKey(userId)) {
+			log.error("user promoting or demoting not in clan or db. userId="
+					+ userId + "\t userIdsToUserClans=" + userIdsToUserClans
+					+ "\t userIdsToUsers=" + userIdsToUsers);
+			resBuilder
+					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
+			return false;
+		}
+		if (!userIdsToUserClans.containsKey(victimId)
+				|| !userIdsToUsers.containsKey(victimId)) {
+			log.error("user to be promoted or demoted not in clan or db. victim="
+					+ victimId
+					+ "\t userIdsToUserClans="
+					+ userIdsToUserClans
+					+ "\t userIdsToUsers=" + userIdsToUsers);
+			resBuilder
+					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
+			return false;
+		}
+
+		//check if user can demote/promote the other one
+		UserClan promoterDemoter = userIdsToUserClans.get(userId);
+		UserClan victim = userIdsToUserClans.get(victimId);
+
+		UserClanStatus first = UserClanStatus.valueOf(promoterDemoter
+				.getStatus());
+		UserClanStatus second = UserClanStatus.valueOf(victim.getStatus());
+		if (UserClanStatus.CAPTAIN.equals(first)
+				|| !ClanStuffUtils
+						.firstUserClanStatusAboveSecond(first, second)) {
+			log.error("user not authorized to promote or demote otherUser. clanStatus of user="
+					+ first + "\t clanStatus of other user=" + second);
+			resBuilder
+					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			return false;
+		}
+		if (!ClanStuffUtils.firstUserClanStatusAboveSecond(first,
+				newUserClanStatus)) {
+			log.error("user not authorized to promote or demote otherUser. clanStatus of user="
+					+ first
+					+ "\t clanStatus of other user="
+					+ second
+					+ "\t newClanStatus of other user=" + newUserClanStatus);
+			resBuilder
+					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			return false;
+		}
+		if (UserClanStatus.REQUESTING.equals(second)) {
+			log.error("user can't promote, demote a non-clan member. UserClan for user="
+					+ promoterDemoter
+					+ "\t UserClan for victim="
+					+ victim
+					+ "\t users=" + userIdsToUsers);
+			resBuilder
+					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean writeChangesToDB(User victim, String victimId,
+			String clanId, UserClan oldInfo, UserClanStatus newUserClanStatus) {
+		if (!UpdateUtils.get().updateUserClanStatus(victimId, clanId,
+				newUserClanStatus)) {
+			log.error("problem with updating user clan status for user="
+					+ victim + "\t oldInfo=" + oldInfo
+					+ "\t newUserClanStatus=" + newUserClanStatus);
+			return false;
+		}
+		return true;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public ClanRetrieveUtils2 getClanRetrieveUtils() {
+		return clanRetrieveUtils;
+	}
+
+	public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+		this.clanRetrieveUtils = clanRetrieveUtils;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
+
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+		return userClanRetrieveUtils;
+	}
+
+	public void setUserClanRetrieveUtils(
+			UserClanRetrieveUtils2 userClanRetrieveUtils) {
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
+	}
 
 }
