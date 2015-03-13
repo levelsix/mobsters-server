@@ -135,9 +135,9 @@ message LabProto {
 	//IGNORE	//TODO: get rid of this since enhancing is instantaneous
 				//maybe convert monsters to points and it will take (points)(second/points)='x' seconds
 				//for a main monster to be enhanced with all those points
-	optional float pointsPerSecond = 3;
+	optional float feederTimeMultiplier = 3;
 	
-	optional float feederTimeMultiplier = 4;
+	optional float pointsMultiplier = 4;
 }
 
 //------------------------------------------------------------------------------------------
