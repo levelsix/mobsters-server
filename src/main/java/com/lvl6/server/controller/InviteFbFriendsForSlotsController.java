@@ -37,304 +37,327 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
-@Component @DependsOn("gameServer") public class InviteFbFriendsForSlotsController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class InviteFbFriendsForSlotsController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
-  
-  @Autowired
-  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+	@Autowired
+	protected Locker locker;
 
-  public InviteFbFriendsForSlotsController() {
-    numAllocatedThreads = 4;
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new InviteFbFriendsForSlotsRequestEvent();
-  }
+	@Autowired
+	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
-  }
+	public InviteFbFriendsForSlotsController() {
+		numAllocatedThreads = 4;
+	}
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent)event).getInviteFbFriendsForSlotsRequestProto();
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new InviteFbFriendsForSlotsRequestEvent();
+	}
 
-    log.info(String.format("reqProto=%s", reqProto));
-    
-    //get values sent from the client (the request proto)
-    MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
-    String userId = senderProto.getMinUserProto().getUserUuid();
-    List<FacebookInviteStructure> invites = reqProto.getInvitesList();
-    
-    Map<String, String> fbIdsToUserStructIds = new HashMap<String, String>();
-    Map<String, Integer> fbIdsToUserStructFbLvl = new HashMap<String, Integer>();
-    List<String> fbIdsOfFriends = demultiplexFacebookInviteStructure(invites,
-    		fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
-    
-    
-    Timestamp curTime = new Timestamp((new Date()).getTime());
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
+	}
 
-    //set some values to send to the client (the response proto)
-    InviteFbFriendsForSlotsResponseProto.Builder resBuilder = InviteFbFriendsForSlotsResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
-    resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
+				.getInviteFbFriendsForSlotsRequestProto();
 
-    UUID userUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
+		log.info(String.format("reqProto=%s", reqProto));
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s",
-          userId), e);
-      invalidUuids = true;
-    }
+		//get values sent from the client (the request proto)
+		MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
+		String userId = senderProto.getMinUserProto().getUserUuid();
+		List<FacebookInviteStructure> invites = reqProto.getInvitesList();
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
-      InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+		Map<String, String> fbIdsToUserStructIds = new HashMap<String, String>();
+		Map<String, Integer> fbIdsToUserStructFbLvl = new HashMap<String, Integer>();
+		List<String> fbIdsOfFriends = demultiplexFacebookInviteStructure(
+				invites, fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
 
-    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
-    try {
-      User aUser = getUserRetrieveUtils().getUserById(userId);
-      //get all the invites the user sent
-      List<String> specificIds = null;
-      boolean filterByAccepted = false;
-      boolean isAccepted = false;
-      boolean filterByRedeemed = false;
-      boolean isRedeemed = false;
-      Map<String, UserFacebookInviteForSlot> idsToInvites = 
-      		getUserFacebookInviteForSlotRetrieveUtils().getSpecificOrAllInvitesForInviter(
-      				userId, specificIds, filterByAccepted, isAccepted, filterByRedeemed, isRedeemed);
-      
-      //will contain the facebook ids of new users the user can invite
-      //new is defined as: for each facebookId the tuple
-      //(inviterId, recipientId)=(userId, facebookId) 
-      //doesn't already exist in the table 
-      List<String> newFacebookIdsToInvite = new ArrayList<String>();
-      boolean legit = checkLegit(resBuilder, userId, aUser, fbIdsOfFriends,
-      		idsToInvites, newFacebookIdsToInvite);
+		Timestamp curTime = new Timestamp((new Date()).getTime());
 
-      boolean successful = false;
-      List<String> inviteIds = new ArrayList<String>();
-      if(legit) {
-      	//will populate inviteIds
-    	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime,
-    	  		fbIdsToUserStructIds, fbIdsToUserStructFbLvl, inviteIds);
-      }
+		//set some values to send to the client (the response proto)
+		InviteFbFriendsForSlotsResponseProto.Builder resBuilder = InviteFbFriendsForSlotsResponseProto
+				.newBuilder();
+		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
 
-      if (successful) {
-    	  Clan inviterClan = null;
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
 
-    	  //inviteIds can be empty when user invites some facebook friends
-    	  //he's already invited
-    	  //NOTE: Could construct the Map<String, UserFacebookInviteForSlot> newIdsToInvites
-    	  //instead of retrieveing from db
-    	  if (!inviteIds.isEmpty()) {
-    		  Map<String, UserFacebookInviteForSlot> newIdsToInvites =
-    			  getUserFacebookInviteForSlotRetrieveUtils().getInviteForId(inviteIds);
-    		  //client needs to know what the new invites are;
-    		  for (String id : newIdsToInvites.keySet()) {
-    			  UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
-    			  UserFacebookInviteForSlotProto inviteProto =
-    				  CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite,
-    					  aUser, inviterClan, senderProto);
-    			  resBuilder.addInvitesNew(inviteProto);
-    		  }
-    	  }
-    	  resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
-      }
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
+			invalidUuids = true;
+		}
 
-      InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
+			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-      //send this to all the recipients in fbIdsOfFriends that have a user id
-      //if want to send to the new ones only use newFacebookIdsToInvite
-      //if want to send to old and new ones use fbIdsOfFriends
-      //old one means a User who has already been invited by senderProto
-      if (successful && !newFacebookIdsToInvite.isEmpty()) {
-    	  List<String> recipientUserIds = getUserRetrieveUtils()
-    		  .getUserIdsForFacebookIds(newFacebookIdsToInvite);
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+			User aUser = getUserRetrieveUtils().getUserById(userId);
+			//get all the invites the user sent
+			List<String> specificIds = null;
+			boolean filterByAccepted = false;
+			boolean isAccepted = false;
+			boolean filterByRedeemed = false;
+			boolean isRedeemed = false;
+			Map<String, UserFacebookInviteForSlot> idsToInvites = getUserFacebookInviteForSlotRetrieveUtils()
+					.getSpecificOrAllInvitesForInviter(userId, specificIds,
+							filterByAccepted, isAccepted, filterByRedeemed,
+							isRedeemed);
 
-    	  InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
-    	  for (String recipientUserId : recipientUserIds) {
-    		  InviteFbFriendsForSlotsResponseEvent newResEvent =
-    			  new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
-    		  newResEvent.setTag(0);
-    		  newResEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
-    		  server.writeEvent(newResEvent);
-    	  }
-      }
-    } catch (Exception e) {
-      log.error("exception in InviteFbFriendsForSlotsController processEvent", e);
-      //don't let the client hang
-      try {
-    	  resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
-    	  InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-      } catch (Exception e2) {
-    	  log.error("exception2 in InviteFbFriendsForSlotsController processEvent", e);
-      }
-    } finally {
-      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
-    }
-  }
-  
-  private List<String> demultiplexFacebookInviteStructure(List<FacebookInviteStructure> invites,
-  		Map<String, String> fbIdsToUserStructIds, Map<String, Integer> fbIdsToUserStructFbLvl) {
-  	
-  	List<String> retVal = new ArrayList<String>();
-  	for (FacebookInviteStructure fis : invites) {
-  		String fbId = fis.getFbFriendId();
-  		
-  		String userStructId = fis.getUserStructUuid();
-  		int userStructFbLvl = fis.getUserStructFbLvl();
-  		
-  		retVal.add(fbId);
-  		fbIdsToUserStructIds.put(fbId, userStructId);
-  		fbIdsToUserStructFbLvl.put(fbId, userStructFbLvl);
-  	}
-  	return retVal;
-  }
+			//will contain the facebook ids of new users the user can invite
+			//new is defined as: for each facebookId the tuple
+			//(inviterId, recipientId)=(userId, facebookId) 
+			//doesn't already exist in the table 
+			List<String> newFacebookIdsToInvite = new ArrayList<String>();
+			boolean legit = checkLegit(resBuilder, userId, aUser,
+					fbIdsOfFriends, idsToInvites, newFacebookIdsToInvite);
 
+			boolean successful = false;
+			List<String> inviteIds = new ArrayList<String>();
+			if (legit) {
+				//will populate inviteIds
+				successful = writeChangesToDb(aUser, newFacebookIdsToInvite,
+						curTime, fbIdsToUserStructIds, fbIdsToUserStructFbLvl,
+						inviteIds);
+			}
 
-  /*
-   * Return true if user request is valid; false otherwise and set the
-   * builder status to the appropriate value. newUserIdsToInvite will be 
-   * modified
-   */
-  private boolean checkLegit(Builder resBuilder, String userId, User u,
-  		List<String> fbIdsOfFriends, Map<String, UserFacebookInviteForSlot> idsToInvites,
-  		List<String> newFacebookIdsToInvite) {
-  	
-  	if (null == u) {
-  		log.error("user is null. no user exists with id=" + userId);
-  		return false;
-  	}
-  	
-  	//if the user already invited some friends, don't invite again, keep
-  	//only new ones
-  	List<String> newFacebookIdsToInviteTemp = getNewInvites(
-  			fbIdsOfFriends, idsToInvites);
-  	newFacebookIdsToInvite.addAll(newFacebookIdsToInviteTemp);
-  	return true;
-  }
-  
-  //keeps and returns the facebook ids that have not been invited yet
-  private List<String> getNewInvites(List<String> fbIdsOfFriends,
-  		 Map<String, UserFacebookInviteForSlot> idsToInvites) {
-  	//CONTAINS THE DUPLICATE INVITES, THAT NEED TO BE DELETED
-  	//E.G. TWO INVITES EXIST WITH SAME INVITERID AND RECIPIENTID
-  	List<String> inviteIdsOfDuplicateInvites = new ArrayList<String>();
-  	
-  	//running collection of recipient ids already seen
-  	Set<String> processedRecipientIds = new HashSet<String>();
-  	
-  	//for each recipientId separate the unique ones from the duplicates
-  	for (String inviteId : idsToInvites.keySet()) {
-  		UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
-  		String recipientId = invite.getRecipientFacebookId(); 
-  		
-  		//if seen this recipientId place it in the duplicates list
-  		if (processedRecipientIds.contains(recipientId)) {
-  			//done to ensure a user does not invite another user more than once
-  			//i.e. tuple (inviterId, recipientId) is unique
-  			inviteIdsOfDuplicateInvites.add(inviteId);
-  		} else {
-  			//keep track of the recipientIds seen so far (the unique ones)
-  			processedRecipientIds.add(recipientId);
-  		}
-  	}
-  	
-  	//DELETE THE DUPLICATE INVITES THAT ARE ALREADY IN DB
-  	//maybe need to determine which invites should be deleted, as in most recent or somethings
-  	//because right now, any of the nonunique invites could be deleted
-  	if (!inviteIdsOfDuplicateInvites.isEmpty()) {
-  		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsOfDuplicateInvites);
-  		log.warn("num duplicate invites deleted: {} \t allInvites={}",
-  			num, idsToInvites);
-  	}
-  	
-  	
-  	List<String> newFacebookIdsToInvite = new ArrayList<String>();
-  	//don't want to generate an invite to a recipient the user has already invited
-  	//going through the facebook ids client sends and select only the new ones
-  	for (String prospectiveRecipientId : fbIdsOfFriends) {
-  		
-  		//keep only the recipient ids that have not been seen/invited
-  		if(!processedRecipientIds.contains(prospectiveRecipientId)) {
-  			newFacebookIdsToInvite.add(prospectiveRecipientId);
-  		}
-  	}
-  	return newFacebookIdsToInvite;
-  }
-  
-  private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
-  		Timestamp curTime, Map<String, String> fbIdsToUserStructIds,
-  		Map<String, Integer> fbIdsToUserStructsFbLvl, List<String> inviteIds) {
-  	if (newFacebookIdsToInvite.isEmpty()) {
-  		return true;
-  	}
-  	String userId = aUser.getId();
-  	List<String> inviteIdsTemp = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
-  			newFacebookIdsToInvite, curTime, fbIdsToUserStructIds, fbIdsToUserStructsFbLvl);
-  	int numInserted = inviteIdsTemp.size();
-  	
-  	int expectedNum = newFacebookIdsToInvite.size();
-  	if (numInserted != expectedNum) {
-  		log.error("problem with updating user monster inventory slots and diamonds." +
-  				" num inserted: " + numInserted + "\t should have been: " + expectedNum);
-  	} 
-  	log.info("num inserted: " + numInserted + "\t ids=" + inviteIdsTemp);
-  	
-  	inviteIds.addAll(inviteIdsTemp);
-  	return true;
-  }
+			if (successful) {
+				Clan inviterClan = null;
 
-  public Locker getLocker() {
-	  return locker;
-  }
+				//inviteIds can be empty when user invites some facebook friends
+				//he's already invited
+				//NOTE: Could construct the Map<String, UserFacebookInviteForSlot> newIdsToInvites
+				//instead of retrieveing from db
+				if (!inviteIds.isEmpty()) {
+					Map<String, UserFacebookInviteForSlot> newIdsToInvites = getUserFacebookInviteForSlotRetrieveUtils()
+							.getInviteForId(inviteIds);
+					//client needs to know what the new invites are;
+					for (String id : newIdsToInvites.keySet()) {
+						UserFacebookInviteForSlot invite = newIdsToInvites
+								.get(id);
+						UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+								.createUserFacebookInviteForSlotProtoFromInvite(
+										invite, aUser, inviterClan, senderProto);
+						resBuilder.addInvitesNew(inviteProto);
+					}
+				}
+				resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
+			}
 
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+			//send this to all the recipients in fbIdsOfFriends that have a user id
+			//if want to send to the new ones only use newFacebookIdsToInvite
+			//if want to send to old and new ones use fbIdsOfFriends
+			//old one means a User who has already been invited by senderProto
+			if (successful && !newFacebookIdsToInvite.isEmpty()) {
+				List<String> recipientUserIds = getUserRetrieveUtils()
+						.getUserIdsForFacebookIds(newFacebookIdsToInvite);
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
+				InviteFbFriendsForSlotsResponseProto responseProto = resBuilder
+						.build();
+				for (String recipientUserId : recipientUserIds) {
+					InviteFbFriendsForSlotsResponseEvent newResEvent = new InviteFbFriendsForSlotsResponseEvent(
+							recipientUserId);
+					newResEvent.setTag(0);
+					newResEvent
+							.setInviteFbFriendsForSlotsResponseProto(responseProto);
+					server.writeEvent(newResEvent);
+				}
+			}
+		} catch (Exception e) {
+			log.error(
+					"exception in InviteFbFriendsForSlotsController processEvent",
+					e);
+			//don't let the client hang
+			try {
+				resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
+				InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in InviteFbFriendsForSlotsController processEvent",
+						e);
+			}
+		} finally {
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
 
-  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
-    return userFacebookInviteForSlotRetrieveUtils;
-  }
+	private List<String> demultiplexFacebookInviteStructure(
+			List<FacebookInviteStructure> invites,
+			Map<String, String> fbIdsToUserStructIds,
+			Map<String, Integer> fbIdsToUserStructFbLvl) {
 
-  public void setUserFacebookInviteForSlotRetrieveUtils(
-      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
-    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
-  }
-  
+		List<String> retVal = new ArrayList<String>();
+		for (FacebookInviteStructure fis : invites) {
+			String fbId = fis.getFbFriendId();
+
+			String userStructId = fis.getUserStructUuid();
+			int userStructFbLvl = fis.getUserStructFbLvl();
+
+			retVal.add(fbId);
+			fbIdsToUserStructIds.put(fbId, userStructId);
+			fbIdsToUserStructFbLvl.put(fbId, userStructFbLvl);
+		}
+		return retVal;
+	}
+
+	/*
+	 * Return true if user request is valid; false otherwise and set the
+	 * builder status to the appropriate value. newUserIdsToInvite will be 
+	 * modified
+	 */
+	private boolean checkLegit(Builder resBuilder, String userId, User u,
+			List<String> fbIdsOfFriends,
+			Map<String, UserFacebookInviteForSlot> idsToInvites,
+			List<String> newFacebookIdsToInvite) {
+
+		if (null == u) {
+			log.error("user is null. no user exists with id=" + userId);
+			return false;
+		}
+
+		//if the user already invited some friends, don't invite again, keep
+		//only new ones
+		List<String> newFacebookIdsToInviteTemp = getNewInvites(fbIdsOfFriends,
+				idsToInvites);
+		newFacebookIdsToInvite.addAll(newFacebookIdsToInviteTemp);
+		return true;
+	}
+
+	//keeps and returns the facebook ids that have not been invited yet
+	private List<String> getNewInvites(List<String> fbIdsOfFriends,
+			Map<String, UserFacebookInviteForSlot> idsToInvites) {
+		//CONTAINS THE DUPLICATE INVITES, THAT NEED TO BE DELETED
+		//E.G. TWO INVITES EXIST WITH SAME INVITERID AND RECIPIENTID
+		List<String> inviteIdsOfDuplicateInvites = new ArrayList<String>();
+
+		//running collection of recipient ids already seen
+		Set<String> processedRecipientIds = new HashSet<String>();
+
+		//for each recipientId separate the unique ones from the duplicates
+		for (String inviteId : idsToInvites.keySet()) {
+			UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
+			String recipientId = invite.getRecipientFacebookId();
+
+			//if seen this recipientId place it in the duplicates list
+			if (processedRecipientIds.contains(recipientId)) {
+				//done to ensure a user does not invite another user more than once
+				//i.e. tuple (inviterId, recipientId) is unique
+				inviteIdsOfDuplicateInvites.add(inviteId);
+			} else {
+				//keep track of the recipientIds seen so far (the unique ones)
+				processedRecipientIds.add(recipientId);
+			}
+		}
+
+		//DELETE THE DUPLICATE INVITES THAT ARE ALREADY IN DB
+		//maybe need to determine which invites should be deleted, as in most recent or somethings
+		//because right now, any of the nonunique invites could be deleted
+		if (!inviteIdsOfDuplicateInvites.isEmpty()) {
+			int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(
+					inviteIdsOfDuplicateInvites);
+			log.warn("num duplicate invites deleted: {} \t allInvites={}", num,
+					idsToInvites);
+		}
+
+		List<String> newFacebookIdsToInvite = new ArrayList<String>();
+		//don't want to generate an invite to a recipient the user has already invited
+		//going through the facebook ids client sends and select only the new ones
+		for (String prospectiveRecipientId : fbIdsOfFriends) {
+
+			//keep only the recipient ids that have not been seen/invited
+			if (!processedRecipientIds.contains(prospectiveRecipientId)) {
+				newFacebookIdsToInvite.add(prospectiveRecipientId);
+			}
+		}
+		return newFacebookIdsToInvite;
+	}
+
+	private boolean writeChangesToDb(User aUser,
+			List<String> newFacebookIdsToInvite, Timestamp curTime,
+			Map<String, String> fbIdsToUserStructIds,
+			Map<String, Integer> fbIdsToUserStructsFbLvl, List<String> inviteIds) {
+		if (newFacebookIdsToInvite.isEmpty()) {
+			return true;
+		}
+		String userId = aUser.getId();
+		List<String> inviteIdsTemp = InsertUtils.get()
+				.insertIntoUserFbInviteForSlot(userId, newFacebookIdsToInvite,
+						curTime, fbIdsToUserStructIds, fbIdsToUserStructsFbLvl);
+		int numInserted = inviteIdsTemp.size();
+
+		int expectedNum = newFacebookIdsToInvite.size();
+		if (numInserted != expectedNum) {
+			log.error("problem with updating user monster inventory slots and diamonds."
+					+ " num inserted: "
+					+ numInserted
+					+ "\t should have been: "
+					+ expectedNum);
+		}
+		log.info("num inserted: " + numInserted + "\t ids=" + inviteIdsTemp);
+
+		inviteIds.addAll(inviteIdsTemp);
+		return true;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
+
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+		return userFacebookInviteForSlotRetrieveUtils;
+	}
+
+	public void setUserFacebookInviteForSlotRetrieveUtils(
+			UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+	}
+
 }

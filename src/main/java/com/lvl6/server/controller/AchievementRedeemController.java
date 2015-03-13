@@ -34,10 +34,13 @@ import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class AchievementRedeemController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class AchievementRedeemController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	@Autowired
 	protected Locker locker;
 
@@ -63,7 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		AchievementRedeemRequestProto reqProto = ((AchievementRedeemRequestEvent)event)
+		AchievementRedeemRequestProto reqProto = ((AchievementRedeemRequestEvent) event)
 				.getAchievementRedeemRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -72,45 +75,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Date currentDate = new Date();
 		Timestamp now = new Timestamp(currentDate.getTime());
 
-		AchievementRedeemResponseProto.Builder resBuilder =
-				AchievementRedeemResponseProto.newBuilder();
+		AchievementRedeemResponseProto.Builder resBuilder = AchievementRedeemResponseProto
+				.newBuilder();
 		resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
-		
+
 		UUID userUuid = null;
 		boolean invalidUuids = false;
 		try {
 			userUuid = UUID.fromString(userId);
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
-			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(userId);
+		if (invalidUuids) {
+			resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
+			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+			return;
+		}
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
-			User user = userRetrieveUtil
-					.getUserById(senderProto.getUserUuid());
+			User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
 			int previousGems = 0;
 
-			Map<Integer, AchievementForUser> achievementIdToUserAchievement = 
-					getAchievementForUserRetrieveUtil()
+			Map<Integer, AchievementForUser> achievementIdToUserAchievement = getAchievementForUserRetrieveUtil()
 					.getSpecificOrAllAchievementIdToAchievementForUserId(
 							userId, Collections.singleton(achievementId));
-			
+
 			boolean legitRedeem = checkLegitRedeem(resBuilder, userId,
 					achievementId, achievementIdToUserAchievement);
 
@@ -118,24 +118,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			boolean success = false;
 			if (legitRedeem) {
 				previousGems = user.getGems();
-				
-				success = writeChangesToDB(userId, user, achievementId,
-						now, currencyChange);
+
+				success = writeChangesToDB(userId, user, achievementId, now,
+						currencyChange);
 			}
-			
+
 			if (success) {
 				resBuilder.setStatus(AchievementRedeemStatus.SUCCESS);
 			}
-			
-			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(senderProto.getUserUuid());
+
+			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementRedeemResponseProto(resBuilder.build());  
+			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-			
+
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -144,14 +146,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				writeToUserCurrencyHistory(user, userId, achievementId,
 						currencyChange, previousCurrency, now);
 			}
-			
-			
+
 		} catch (Exception e) {
 			log.error("exception in AchievementRedeem processEvent", e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
-				AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(userId);
+				AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setAchievementRedeemResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
@@ -159,25 +161,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in AchievementRedeem processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
-
 
 	private boolean checkLegitRedeem(Builder resBuilder, String userId,
 			int achievementId,
 			Map<Integer, AchievementForUser> achievementIdToUserAchievement) {
-		if (null == achievementIdToUserAchievement ||
-				achievementIdToUserAchievement.isEmpty() ||
-				!achievementIdToUserAchievement.containsKey(achievementId)) {
+		if (null == achievementIdToUserAchievement
+				|| achievementIdToUserAchievement.isEmpty()
+				|| !achievementIdToUserAchievement.containsKey(achievementId)) {
 			resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
-			log.error(String.format(
-				"userAchievement does not exist. id=%s, userAchievement=%s",
-				achievementId, achievementIdToUserAchievement));
+			log.error(String
+					.format("userAchievement does not exist. id=%s, userAchievement=%s",
+							achievementId, achievementIdToUserAchievement));
 			return false;
 		}
-		
-		
+
 		AchievementForUser userAchievement = achievementIdToUserAchievement
 				.get(achievementId);
 		if (!userAchievement.isComplete()) {
@@ -185,44 +185,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.error("userAchievement is not complete");
 			return false;
 		}
-		
+
 		if (userAchievement.isRedeemed()) {
 			resBuilder.setStatus(AchievementRedeemStatus.FAIL_ALREADY_REDEEMED);
-			log.error(String.format(
-				"userAchievement is already redeemed: %s",
-				userAchievement));
+			log.error(String.format("userAchievement is already redeemed: %s",
+					userAchievement));
 			return false;
 		}
-		
-		return true;  
+
+		return true;
 	}
 
 	private boolean writeChangesToDB(String userId, User user,
 			int achievementId, Timestamp redeemTime,
 			Map<String, Integer> currencyChange) {
 		int numUpdated = UpdateUtils.get().updateRedeemAchievementForUser(
-				userId, Collections.singletonList(achievementId), redeemTime); 
+				userId, Collections.singletonList(achievementId), redeemTime);
 		log.info(String.format(
-			"user achievements redeemed. numUpdated=%s, achievementId=%s",
-			numUpdated, achievementId));
+				"user achievements redeemed. numUpdated=%s, achievementId=%s",
+				numUpdated, achievementId));
 
-		Achievement achievement = AchievementRetrieveUtils 
+		Achievement achievement = AchievementRetrieveUtils
 				.getAchievementForAchievementId(achievementId);
 		int gemReward = achievement.getGemReward();
 		int gemsGained = Math.max(0, gemReward);
-		int expGained = achievement.getExpReward(); 
+		int expGained = achievement.getExpReward();
 
 		if (0 == gemsGained) {
 			log.info(String.format(
-				"redeeming achievement does not give gem reward: %s",
+					"redeeming achievement does not give gem reward: %s",
 					achievement));
 		}
 
-		if (!user.updateRelativeGemsCashOilExperienceNaive(gemsGained,
-				0, 0, expGained)) {
-			log.error(String.format(
-				"problem with giving user %s gems",
-				gemsGained));
+		if (!user.updateRelativeGemsCashOilExperienceNaive(gemsGained, 0, 0,
+				expGained)) {
+			log.error(String.format("problem with giving user %s gems",
+					gemsGained));
 		} else {
 			//things worked
 			if (0 != gemsGained) {
@@ -251,8 +249,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, details);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
-				previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 	}
 
 	public AchievementForUserRetrieveUtil getAchievementForUserRetrieveUtil() {

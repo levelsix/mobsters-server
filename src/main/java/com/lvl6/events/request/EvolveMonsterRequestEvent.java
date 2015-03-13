@@ -12,36 +12,37 @@ import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 
 public class EvolveMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private EvolveMonsterRequestProto evolveMonsterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      evolveMonsterRequestProto = EvolveMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = evolveMonsterRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EvolveMonsterRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EvolveMonsterRequestProto getEvolveMonsterRequestProto() {
-    return evolveMonsterRequestProto;
-  }
-  
-  public void setEvolveMonsterRequestProto(EvolveMonsterRequestProto emrp) {
-	  this.evolveMonsterRequestProto = emrp;
-  }
+	private EvolveMonsterRequestProto evolveMonsterRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "EvolveMonsterRequestEvent [evolveMonsterRequestProto="
-		  + evolveMonsterRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			evolveMonsterRequestProto = EvolveMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = evolveMonsterRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EvolveMonsterRequest exception", e);
+		}
+	}
+
+	public EvolveMonsterRequestProto getEvolveMonsterRequestProto() {
+		return evolveMonsterRequestProto;
+	}
+
+	public void setEvolveMonsterRequestProto(EvolveMonsterRequestProto emrp) {
+		this.evolveMonsterRequestProto = emrp;
+	}
+
+	@Override
+	public String toString() {
+		return "EvolveMonsterRequestEvent [evolveMonsterRequestProto="
+				+ evolveMonsterRequestProto + "]";
+	}
 
 }

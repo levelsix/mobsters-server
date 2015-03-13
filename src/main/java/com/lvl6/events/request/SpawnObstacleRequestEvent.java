@@ -12,36 +12,38 @@ import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 
 public class SpawnObstacleRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private SpawnObstacleRequestProto spawnObstacleRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      spawnObstacleRequestProto = SpawnObstacleRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = spawnObstacleRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SpawnObstacleRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public SpawnObstacleRequestProto getSpawnObstacleRequestProto() {
-    return spawnObstacleRequestProto;
-  }
-  //added for testing purposes
-  public void setSpawnObstacleRequestProto(SpawnObstacleRequestProto sorp) {
-	  this.spawnObstacleRequestProto = sorp;
-  }
+	private SpawnObstacleRequestProto spawnObstacleRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "SpawnObstacleRequestEvent [spawnObstacleRequestProto="
-		  + spawnObstacleRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			spawnObstacleRequestProto = SpawnObstacleRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = spawnObstacleRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SpawnObstacleRequest exception", e);
+		}
+	}
+
+	public SpawnObstacleRequestProto getSpawnObstacleRequestProto() {
+		return spawnObstacleRequestProto;
+	}
+
+	//added for testing purposes
+	public void setSpawnObstacleRequestProto(SpawnObstacleRequestProto sorp) {
+		this.spawnObstacleRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "SpawnObstacleRequestEvent [spawnObstacleRequestProto="
+				+ spawnObstacleRequestProto + "]";
+	}
+
 }

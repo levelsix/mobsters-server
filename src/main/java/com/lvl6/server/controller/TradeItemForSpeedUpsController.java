@@ -28,14 +28,17 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class TradeItemForSpeedUpsController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class TradeItemForSpeedUpsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public TradeItemForSpeedUpsController() {
 		numAllocatedThreads = 1;
 	}
-	
+
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -51,98 +54,110 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		TradeItemForSpeedUpsRequestProto reqProto = ((TradeItemForSpeedUpsRequestEvent)event).getTradeItemForSpeedUpsRequestProto();
+		TradeItemForSpeedUpsRequestProto reqProto = ((TradeItemForSpeedUpsRequestEvent) event)
+				.getTradeItemForSpeedUpsRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
-		
+
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		List<UserItemUsageProto> itemsUsedProtos = reqProto.getItemsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
 
-		TradeItemForSpeedUpsResponseProto.Builder resBuilder = TradeItemForSpeedUpsResponseProto.newBuilder();
+		TradeItemForSpeedUpsResponseProto.Builder resBuilder = TradeItemForSpeedUpsResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
 
-    UUID userUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s",
-          userId), e);
-      invalidUuids = true;
-    }
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
+			invalidUuids = true;
+		}
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
-      TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
-    
-		    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
+			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+				.getSimpleName());
 		//TODO: Logic similar to PurchaseSpeedUpsPack, see what else can be optimized/shared
 		try {
 			List<ItemForUserUsage> itemsUsed = null;
 			List<ItemForUser> nuUserItems = null;
-			
+
 			if (null != itemsUsedProtos && !itemsUsedProtos.isEmpty()) {
 				itemsUsed = ItemUtil.javafyUserItemUsageProto(itemsUsedProtos);
 			}
 			if (null != nuUserItemsProtos && !nuUserItemsProtos.isEmpty()) {
 				nuUserItems = ItemUtil.javafyUserItemProto(nuUserItemsProtos);
 			}
-			
+
 			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
-				userId, itemsUsed, nuUserItems,itemForUserRetrieveUtil,
-				InsertUtils.get(), UpdateUtils.get());
-				
+					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
+					InsertUtils.get(), UpdateUtils.get());
+
 			tifsua.execute(resBuilder);
-			
-			if (resBuilder.getStatus().equals(TradeItemForSpeedUpsStatus.SUCCESS)) {
-				List<ItemForUserUsage> itemsUsedWithIds = tifsua.getItemForUserUsages();
+
+			if (resBuilder.getStatus().equals(
+					TradeItemForSpeedUpsStatus.SUCCESS)) {
+				List<ItemForUserUsage> itemsUsedWithIds = tifsua
+						.getItemForUserUsages();
 				List<UserItemUsageProto> uiupList = CreateInfoProtoUtils
-					.createUserItemUsageProto(itemsUsedWithIds);
+						.createUserItemUsageProto(itemsUsedWithIds);
 				resBuilder.addAllItemsUsed(uiupList);
 			}
-			
+
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();
-			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(senderProto.getUserUuid());
+			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForSpeedUpsResponseProto(resProto);
 			server.writeEvent(resEvent);
-			
+
 		} catch (Exception e) {
-			log.error("exception in TradeItemForSpeedUpsController processEvent", e);
+			log.error(
+					"exception in TradeItemForSpeedUpsController processEvent",
+					e);
 			try {
 				resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
-				TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(userId);
+				TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
+				resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in TradeItemForSpeedUpsController processEvent", e);
+				log.error(
+						"exception2 in TradeItemForSpeedUpsController processEvent",
+						e);
 			}
 
 		} finally {
-			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 		}
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 

@@ -15,16 +15,14 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
 //purpose of this class: limit number of calls to user table and clan table
-public class StartUpResource
-{
+public class StartUpResource {
 	private Set<String> userIds;
 	private Set<String> facebookIds;
 	private UserRetrieveUtils2 ur;
 	ClanRetrieveUtils2 clanRetrieveUtil;
 
 	public StartUpResource(UserRetrieveUtils2 ur,
-		ClanRetrieveUtils2 clanRetrieveUtil)
-	{
+			ClanRetrieveUtils2 clanRetrieveUtil) {
 		userIds = new HashSet<String>();
 		facebookIds = new HashSet<String>();
 		this.ur = ur;
@@ -47,6 +45,7 @@ public class StartUpResource
 	public void addFacebookId(String fbId) {
 		facebookIds.add(fbId);
 	}
+
 	public void addFacebookId(Collection<String> fbIds) {
 		facebookIds.addAll(fbIds);
 	}
@@ -68,15 +67,14 @@ public class StartUpResource
 		}
 	}
 
-	public void fetchUsersOnly()
-	{
+	public void fetchUsersOnly() {
 		if (!userIds.isEmpty() && facebookIds.isEmpty()) {
 			userIdsToUsers = ur.getUsersByIds(userIds);
 
 		} else if (!userIds.isEmpty() || !facebookIds.isEmpty()) {
 			userIdsToUsers = ur.getUsersForFacebookIdsOrUserIds(
-				new ArrayList<String>(facebookIds),
-				new ArrayList<String>(userIds));
+					new ArrayList<String>(facebookIds), new ArrayList<String>(
+							userIds));
 
 		}
 
@@ -86,13 +84,11 @@ public class StartUpResource
 	}
 
 	public Map<String, User> getUserIdsToUsers() {
-		ImmutableMap<String, User> iMap =
-			new Builder<String, User>()
-			.putAll(userIdsToUsers)
-			.build();
+		ImmutableMap<String, User> iMap = new Builder<String, User>().putAll(
+				userIdsToUsers).build();
 		return iMap;
 	}
-	
+
 	public User getUser(String userId) {
 		if (null == userIdsToUsers || !userIdsToUsers.containsKey(userId)) {
 			return null;
@@ -108,29 +104,22 @@ public class StartUpResource
 				if (!userIdsToUsers.containsKey(userId)) {
 					continue;
 				}
-				userIdsToUsersTemp.put(
-					userId,
-					userIdsToUsers.get(userId));
+				userIdsToUsersTemp.put(userId, userIdsToUsers.get(userId));
 			}
 		}
 
-		ImmutableMap<String, User> iMap =
-			new Builder<String, User>()
-			.putAll(userIdsToUsersTemp)
-			.build();
+		ImmutableMap<String, User> iMap = new Builder<String, User>().putAll(
+				userIdsToUsersTemp).build();
 		return iMap;
 	}
-
 
 	public Map<String, Clan> getClanIdsToClans() {
 		if (null == clanIdsToClans) {
 			clanIdsToClans = new HashMap<String, Clan>();
 		}
 
-		ImmutableMap<String, Clan> iMap =
-			new Builder<String, Clan>()
-			.putAll(clanIdsToClans)
-			.build();
+		ImmutableMap<String, Clan> iMap = new Builder<String, Clan>().putAll(
+				clanIdsToClans).build();
 		return iMap;
 	}
 
@@ -140,7 +129,7 @@ public class StartUpResource
 		}
 		return clanIdsToClans.get(clanId);
 	}
-	
+
 	public Map<String, Clan> getClanIdsToClans(Collection<String> clanIds) {
 		if (null == clanIdsToClans) {
 			clanIdsToClans = new HashMap<String, Clan>();
@@ -151,15 +140,11 @@ public class StartUpResource
 			if (!clanIdsToClans.containsKey(clanId)) {
 				continue;
 			}
-			clanIdsToClansTemp.put(
-				clanId,
-				clanIdsToClans.get(clanId));
+			clanIdsToClansTemp.put(clanId, clanIdsToClans.get(clanId));
 		}
 
-		ImmutableMap<String, Clan> iMap =
-			new Builder<String, Clan>()
-			.putAll(clanIdsToClansTemp)
-			.build();
+		ImmutableMap<String, Clan> iMap = new Builder<String, Clan>().putAll(
+				clanIdsToClansTemp).build();
 		return iMap;
 	}
 
@@ -184,19 +169,14 @@ public class StartUpResource
 				if (user.getClanId() != null) {
 					Clan c = clanIdsToClans.get(user.getClanId());
 					if (c != null) {
-						userIdsToClansTemp.put(
-							userId,
-							c
-							);
+						userIdsToClansTemp.put(userId, c);
 					}
 				}
 			}
 		}
 
-		ImmutableMap<String, Clan> iMap =
-			new Builder<String, Clan>()
-			.putAll(userIdsToClansTemp)
-			.build();
+		ImmutableMap<String, Clan> iMap = new Builder<String, Clan>().putAll(
+				userIdsToClansTemp).build();
 		return iMap;
 	}
 }

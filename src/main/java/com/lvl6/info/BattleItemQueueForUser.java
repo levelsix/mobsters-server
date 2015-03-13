@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 
 public class BattleItemQueueForUser implements Serializable {
 
-	public BattleItemQueueForUser(int priority, String userId, int battleItemId,
-			Timestamp expectedStartTime, float elapsedTime) {
+	public BattleItemQueueForUser(int priority, String userId,
+			int battleItemId, Timestamp expectedStartTime, float elapsedTime) {
 		super();
 		this.priority = priority;
 		this.userId = userId;
@@ -15,18 +15,15 @@ public class BattleItemQueueForUser implements Serializable {
 		this.elapsedTime = elapsedTime;
 	}
 
-
 	private static final long serialVersionUID = -1293698119576984508L;
-	
+
 	private int priority;
 	private String userId;
 	private int battleItemId;
 	private Timestamp expectedStartTime;
 	private float elapsedTime;
-	
-	
-	public BattleItemQueueForUser()
-	{
+
+	public BattleItemQueueForUser() {
 		super();
 	}
 
@@ -49,7 +46,7 @@ public class BattleItemQueueForUser implements Serializable {
 	public int getPriority() {
 		return priority;
 	}
-	
+
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
@@ -77,11 +74,5 @@ public class BattleItemQueueForUser implements Serializable {
 				+ ", expectedStartTime=" + expectedStartTime + ", elapsedTime="
 				+ elapsedTime + "]";
 	}
-
-
-
-
-	
-	
 
 }

@@ -32,8 +32,8 @@ public abstract class EventController extends Wrap {
 	protected PlatformTransactionManager transactionManager;
 
 	protected MetricRegistry registry;
-	
-	@Resource(name="metrics")
+
+	@Resource(name = "metrics")
 	public void setRegistry(MetricRegistry registry) {
 		this.registry = registry;
 	}
@@ -57,12 +57,15 @@ public abstract class EventController extends Wrap {
 	//SHOULD REALLY PHASE THIS OUT---------------------------------------------------------
 	@Autowired
 	protected GameServer server;
+
 	public GameServer getServer() {
 		return server;
 	}
+
 	public void setServer(GameServer server) {
 		this.server = server;
 	}
+
 	//------------------------------------------------------------------------------------
 	@Autowired
 	private EventWriter eventWriter;
@@ -74,9 +77,9 @@ public abstract class EventController extends Wrap {
 	public void setEventWriter(EventWriter eventWriter) {
 		this.eventWriter = eventWriter;
 	}
-	
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	// we have the controllers call server.writeEvent manually already
 	// /**
@@ -105,22 +108,21 @@ public abstract class EventController extends Wrap {
 	 */
 
 	protected String getMetricName() {
-		return "controllers."+getClass().getSimpleName().toLowerCase()+".processEvent";
+		return "controllers." + getClass().getSimpleName().toLowerCase()
+				+ ".processEvent";
 	}
-	
+
+	@Override
 	protected void processEvent(GameEvent event) throws Exception {
 		Timer timer = registry.timer(getMetricName());
 		Timer.Context context = timer.time();
 		try {
 			final RequestEvent reqEvent = (RequestEvent) event;
-			MiscMethods
-					.setMDCProperties(
-							null,
-							reqEvent.getPlayerId(),
-							MiscMethods.getIPOfPlayer(server,
-									reqEvent.getPlayerId(), null));
+			MiscMethods.setMDCProperties(null, reqEvent.getPlayerId(),
+					MiscMethods.getIPOfPlayer(server, reqEvent.getPlayerId(),
+							null));
 			log.info("Received event: {}", event.getClass().getSimpleName());
-	
+
 			final long startTime = System.nanoTime();
 			final long endTime;
 			try {
@@ -135,33 +137,37 @@ public abstract class EventController extends Wrap {
 				DBConnection.get().getConnection().close();
 			}
 			double numSeconds = (endTime - startTime) / 1000000;
-	
-			log.info("Finished processing event: {}, took ~{}ms", event.getClass().getSimpleName(), numSeconds);
-	
+
+			log.info("Finished processing event: {}, took ~{}ms", event
+					.getClass().getSimpleName(), numSeconds);
+
 			if (numSeconds / 1000 > Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING) {
-				log.warn("Event {} took over {} seconds", event.getClass().getSimpleName(),  Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING);
+				log.warn(
+						"Event {} took over {} seconds",
+						event.getClass().getSimpleName(),
+						Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING);
 			}
-	
+
 			MiscMethods.purgeMDCProperties();
-		}finally {
+		} finally {
 			context.stop();
 		}
 	}
 
 	protected Exception doInTransaction(final RequestEvent reqEvent) {
-//		return transactionTemplate
-//				.execute(new TransactionCallback<Exception>() {
-//
-//					@Override
-//					public Exception doInTransaction(TransactionStatus arg0) {
-						try {
-							processRequestEvent(reqEvent);
-							return null;
-						} catch (Exception e) {
-							return e;
-						}
-//					}
-//				});
+		//		return transactionTemplate
+		//				.execute(new TransactionCallback<Exception>() {
+		//
+		//					@Override
+		//					public Exception doInTransaction(TransactionStatus arg0) {
+		try {
+			processRequestEvent(reqEvent);
+			return null;
+		} catch (Exception e) {
+			return e;
+		}
+		//					}
+		//				});
 	}
 
 	/**

@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class StructureResourceGenerator implements Serializable {
 
 	private static final long serialVersionUID = -2371172975086740032L;
-	
+
 	private int structId;
 	private String resourceTypeGenerated;
 	//at the moment, some amount per hour
 	private float productionRate;
 	private int capacity;
-	
-	public StructureResourceGenerator(int structId, String resourceTypeGenerated,
-			float productionRate, int capacity) {
+
+	public StructureResourceGenerator(int structId,
+			String resourceTypeGenerated, float productionRate, int capacity) {
 		super();
 		this.structId = structId;
 		this.resourceTypeGenerated = resourceTypeGenerated;
@@ -57,7 +57,8 @@ public class StructureResourceGenerator implements Serializable {
 	public String toString() {
 		return "ResourceGenerator [structId=" + structId
 				+ ", resourceTypeGenerated=" + resourceTypeGenerated
-				+ ", productionRate=" + productionRate + ", capacity=" + capacity + "]";
+				+ ", productionRate=" + productionRate + ", capacity="
+				+ capacity + "]";
 	}
-	
+
 }

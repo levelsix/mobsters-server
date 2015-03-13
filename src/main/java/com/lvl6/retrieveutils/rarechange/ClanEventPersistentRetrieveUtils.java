@@ -23,17 +23,19 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class ClanEventPersistentRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class ClanEventPersistentRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_CONFIG;
-  private static String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
-		"SATURDAY", "SUNDAY"};
-  private static Set<String> daysSet;
-  
-  private static Map<Integer, ClanEventPersistent> eventIdToEvent;
-  
+	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_CONFIG;
+	private static String[] days = { "MONDAY", "TUESDAY", "WEDNESDAY",
+			"THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY" };
+	private static Set<String> daysSet;
+
+	private static Map<Integer, ClanEventPersistent> eventIdToEvent;
 
 	//clan raids overlap so more than one can be active at the moment
 	public static Map<Integer, ClanEventPersistent> getActiveClanEventIdsToEvents(
@@ -42,55 +44,59 @@ import com.lvl6.utils.DBConnection;
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
-		Map<Integer, ClanEventPersistent> clanEventIdToEvent =
-				new HashMap<Integer, ClanEventPersistent>();
-		
+		Map<Integer, ClanEventPersistent> clanEventIdToEvent = new HashMap<Integer, ClanEventPersistent>();
+
 		DateTime dt = new DateTime(curDate);
 		log.info("dtNow=" + dt);
-		DateTime pstDt = new DateTime(curDate, DateTimeZone
-  		.forTimeZone(TimeZone.getTimeZone("America/Los_Angeles")));
+		DateTime pstDt = new DateTime(curDate,
+				DateTimeZone.forTimeZone(TimeZone
+						.getTimeZone("America/Los_Angeles")));
 		log.info("pstDtNow=" + pstDt);
-		
+
 		curDate = timeUtils.createPstDateAddMinutes(curDate, 0);
-		
+
 		//go through each event and see which ones are active
 		//Event is active if today is between the event's start time and end time
 		for (ClanEventPersistent cep : eventIdToEvent.values()) {
-//			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
-//				continue;
-//			}
+			//			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
+			//				continue;
+			//			}
 			log.info("cep=" + cep);
 			//check if correct time
 			int eventDayOfWeek = timeUtils.getDayOfWeek(cep.getDayOfWeek());
 			if (eventDayOfWeek <= 0 || eventDayOfWeek >= 8) {
-				log.error("ClanEventPersistent has invalid DayOfWeek. event=" + cep);
+				log.error("ClanEventPersistent has invalid DayOfWeek. event="
+						+ cep);
 				//days of week go from 1 to 7, with 1 being Monday
 				continue;
 			}
 			int curDayOfWeekPst = timeUtils.getDayOfWeekPst(curDate);
-			
+
 			//either 0 or negative number
-			int dayOffset = calculateEventStartDayOffset(curDayOfWeekPst, eventDayOfWeek);
+			int dayOffset = calculateEventStartDayOffset(curDayOfWeekPst,
+					eventDayOfWeek);
 			int hour = cep.getStartHour();
 			int minutesAddend = 0;
-			
-			Date eventStartTime = timeUtils.createPstDate(curDate, dayOffset, hour, minutesAddend);
-			
+
+			Date eventStartTime = timeUtils.createPstDate(curDate, dayOffset,
+					hour, minutesAddend);
+
 			minutesAddend = cep.getEventDurationMinutes();
-			Date eventEndTime = timeUtils.createPstDateAddMinutes(eventStartTime, minutesAddend);
-			
+			Date eventEndTime = timeUtils.createPstDateAddMinutes(
+					eventStartTime, minutesAddend);
+
 			log.info("eventStartTime=" + eventStartTime);
 			log.info("eventEndTime=" + eventEndTime);
-			
+
 			//eventStartTime is always earlier than curDate, given the way it's calculated
 			if (!timeUtils.isFirstEarlierThanSecond(curDate, eventEndTime)) {
 				//event has ended already.
 				continue;
 			}
-			
+
 			//current date is in between start and end time for event.
-//			int clanRaidId = cep.getClanRaidId();
-//			raidIdToEvent.put(clanRaidId, cep);
+			//			int clanRaidId = cep.getClanRaidId();
+			//			raidIdToEvent.put(clanRaidId, cep);
 			int clanEventId = cep.getId();
 			clanEventIdToEvent.put(clanEventId, cep);
 		}
@@ -104,95 +110,98 @@ import com.lvl6.utils.DBConnection;
 	//so the day offset should be 6, so the return value should be -6
 	//formula:
 	// {[(curDayOfWeekPst - eventDayOfWeek) + 7] % 7} * -1
-	private static int calculateEventStartDayOffset(int curDayOfWeekPst, int eventDayOfWeek) {
+	private static int calculateEventStartDayOffset(int curDayOfWeekPst,
+			int eventDayOfWeek) {
 		int dayDiff = curDayOfWeekPst - eventDayOfWeek;
 		dayDiff = dayDiff + 7;
 		dayDiff = dayDiff % 7;
 		dayDiff = dayDiff * -1;
-		
+
 		return dayDiff;
 	}
-  
-  public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
-  	if (null == eventIdToEvent) {
-		  setStaticEventIdsToEvents();
-	  }
-	  
-	  return eventIdToEvent;
-  }
 
-  public static ClanEventPersistent getEventById(int id) {
-	  if (null == eventIdToEvent) {
-		  setStaticEventIdsToEvents();
-	  }
-	  ClanEventPersistent ep = eventIdToEvent.get(id); 
-	  if (null == ep) {
-	  	log.error("No ClanEventPersistent for id=" + id);
-	  }
-	  return ep;
-  	}
-  
+	public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
+		if (null == eventIdToEvent) {
+			setStaticEventIdsToEvents();
+		}
 
-  
-  public static void reload() {
-  	daysSet = new HashSet<String>(Arrays.asList(days));
-	  setStaticEventIdsToEvents();
-  }
-  
-  private static void setStaticEventIdsToEvents() {
-	  log.debug("setting static map of id to ClanEventPersistent");
+		return eventIdToEvent;
+	}
 
-	    Connection conn = DBConnection.get().getConnection();
-	    ResultSet rs = null;
-	    try {
-	    	if (conn != null) {
-	    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+	public static ClanEventPersistent getEventById(int id) {
+		if (null == eventIdToEvent) {
+			setStaticEventIdsToEvents();
+		}
+		ClanEventPersistent ep = eventIdToEvent.get(id);
+		if (null == ep) {
+			log.error("No ClanEventPersistent for id=" + id);
+		}
+		return ep;
+	}
 
-	    		if (rs != null) {
-	    			try {
-	    				rs.last();
-	    				rs.beforeFirst();
-	    				Map<Integer, ClanEventPersistent> idToEvent = new HashMap<Integer, ClanEventPersistent>();
-	    				while(rs.next()) { 
-	    					ClanEventPersistent cec = convertRSRowToClanEventPersistent(rs);
-	    					if (null != cec)
-	    						idToEvent.put(cec.getId(), cec);
-	    				}
-	    				eventIdToEvent = idToEvent;
-	    			} catch (SQLException e) {
-	    				log.error("problem with database call.", e);
+	public static void reload() {
+		daysSet = new HashSet<String>(Arrays.asList(days));
+		setStaticEventIdsToEvents();
+	}
 
-	    			}
-	    		}    
-	    	}
-	    } catch (Exception e) {
-	    	log.error("event persistent retrieve db error.", e);
-	    } finally {
-	    	DBConnection.get().close(rs, null, conn);
-	    }
-  }
-  
-  private static ClanEventPersistent convertRSRowToClanEventPersistent(ResultSet rs) throws SQLException {
-    int id = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__ID);
-    String dayOfWeek = rs.getString(DBConstants.CLAN_EVENT_PERSISTENT__DAY_OF_WEEK);
-    int startHour = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__START_HOUR);
-    int eventDurationMinutes = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES);
-    int clanRaidId = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__CLAN_RAID_ID);
-    
-    if (null != dayOfWeek) {
-    	String newDayOfWeek = dayOfWeek.trim().toUpperCase();
-    	if (!dayOfWeek.equals(newDayOfWeek)) {// || !daysSet.contains(newDayOfWeek)) {
-    		log.error(String.format(
-    			"string for day of week is incorrect: %s, id=%s",
-    			dayOfWeek, id));
-    		dayOfWeek = newDayOfWeek;
-    	}
-    }
-    
-    ClanEventPersistent ep = new ClanEventPersistent(id, dayOfWeek, startHour,
-    		eventDurationMinutes, clanRaidId);
-    
-    
-    return ep;
-  }
+	private static void setStaticEventIdsToEvents() {
+		log.debug("setting static map of id to ClanEventPersistent");
+
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
+			if (conn != null) {
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						Map<Integer, ClanEventPersistent> idToEvent = new HashMap<Integer, ClanEventPersistent>();
+						while (rs.next()) {
+							ClanEventPersistent cec = convertRSRowToClanEventPersistent(rs);
+							if (null != cec)
+								idToEvent.put(cec.getId(), cec);
+						}
+						eventIdToEvent = idToEvent;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error("event persistent retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
+
+	private static ClanEventPersistent convertRSRowToClanEventPersistent(
+			ResultSet rs) throws SQLException {
+		int id = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__ID);
+		String dayOfWeek = rs
+				.getString(DBConstants.CLAN_EVENT_PERSISTENT__DAY_OF_WEEK);
+		int startHour = rs
+				.getInt(DBConstants.CLAN_EVENT_PERSISTENT__START_HOUR);
+		int eventDurationMinutes = rs
+				.getInt(DBConstants.CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES);
+		int clanRaidId = rs
+				.getInt(DBConstants.CLAN_EVENT_PERSISTENT__CLAN_RAID_ID);
+
+		if (null != dayOfWeek) {
+			String newDayOfWeek = dayOfWeek.trim().toUpperCase();
+			if (!dayOfWeek.equals(newDayOfWeek)) {// || !daysSet.contains(newDayOfWeek)) {
+				log.error(String.format(
+						"string for day of week is incorrect: %s, id=%s",
+						dayOfWeek, id));
+				dayOfWeek = newDayOfWeek;
+			}
+		}
+
+		ClanEventPersistent ep = new ClanEventPersistent(id, dayOfWeek,
+				startHour, eventDurationMinutes, clanRaidId);
+
+		return ep;
+	}
 }

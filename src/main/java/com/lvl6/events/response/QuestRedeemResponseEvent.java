@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QuestRedeemResponseEvent extends NormalResponseEvent {
 
-  private QuestRedeemResponseProto questRedeemResponseProto;
-  
-  public QuestRedeemResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_QUEST_REDEEM_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = questRedeemResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private QuestRedeemResponseProto questRedeemResponseProto;
 
-  public void setQuestRedeemResponseProto(QuestRedeemResponseProto questRedeemResponseProto) {
-    this.questRedeemResponseProto = questRedeemResponseProto;
-  }
+	public QuestRedeemResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_QUEST_REDEEM_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = questRedeemResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setQuestRedeemResponseProto(
+			QuestRedeemResponseProto questRedeemResponseProto) {
+		this.questRedeemResponseProto = questRedeemResponseProto;
+	}
 
 }

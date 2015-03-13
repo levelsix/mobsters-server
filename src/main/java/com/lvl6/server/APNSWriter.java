@@ -15,8 +15,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.io.ClassPathResource;
-
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.events.ResponseEvent;
@@ -45,27 +43,28 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 	@Autowired
 	UserClanRetrieveUtils2 userClanRetrieveUtil;
-	
+
 	public UserClanRetrieveUtils2 getUserClanRetrieveUtil() {
 		return userClanRetrieveUtil;
 	}
-	
-	public void setUserClanRetrieveUtil(UserClanRetrieveUtils2 userClanRetrieveUtil) {
+
+	public void setUserClanRetrieveUtil(
+			UserClanRetrieveUtils2 userClanRetrieveUtil) {
 		this.userClanRetrieveUtil = userClanRetrieveUtil;
 	}
-	
+
 	public Map<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
-	
-	public void setPlayersByPlayerId(Map<String, ConnectedPlayer> playersByPlayerId) {
+
+	public void setPlayersByPlayerId(
+			Map<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
-	@Resource(name="playersByPlayerId")
+	@Resource(name = "playersByPlayerId")
 	protected Map<String, ConnectedPlayer> playersByPlayerId;
 
-	
 	@Autowired
 	private GameServer server;
 
@@ -73,9 +72,9 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 	private static final int SOFT_MAX_NOTIFICATION_BADGES = 20;
 
-//	private static final int MIN_MINUTES_BETWEEN_BATTLE_NOTIFICATIONS = 180; // 3
-																				// hours
-//	private static final int MIN_MINUTES_BETWEEN_WALL_POST_NOTIFICATIONS = 0;//15;
+	//	private static final int MIN_MINUTES_BETWEEN_BATTLE_NOTIFICATIONS = 180; // 3
+	// hours
+	//	private static final int MIN_MINUTES_BETWEEN_WALL_POST_NOTIFICATIONS = 0;//15;
 
 	private static final int MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST = 120;
 
@@ -97,8 +96,8 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 	}
 
-
 	/** unused */
+	@Override
 	protected void processEvent(GameEvent event) {
 		if (event instanceof NormalResponseEvent)
 			processResponseEvent((NormalResponseEvent) event);
@@ -113,36 +112,45 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 		String playerId = event.getPlayerId();
 		ConnectedPlayer connectedPlayer = server.getPlayerById(playerId);
 		if (connectedPlayer != null) {
-			log.info("wrote a response event to connected player with id " 
-					+ playerId
-					+ " instead of sending APNS message");
+			log.info("wrote a response event to connected player with id "
+					+ playerId + " instead of sending APNS message");
 			server.writeEvent(event);
 		} else {
-			log.info("received APNS notification to send to player with id " + playerId);
+			log.info("received APNS notification to send to player with id "
+					+ playerId);
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(playerId);
-			if (user != null && user.getDeviceToken() != null && user.getDeviceToken().length() > 0) {
+			if (user != null && user.getDeviceToken() != null
+					&& user.getDeviceToken().length() > 0) {
 				try {
 					ApnsService service = getApnsService();
 					if (service != null) {
 						// service.start();
 						Date now = new Date();
-						if (LAST_NULLIFY_INACTIVE_DEVICE_TOKEN_TIME.getTime() + 60000
-								* MINUTES_BETWEEN_INACTIVE_DEVICE_TOKEN_FLUSH < now.getTime()) {
+						if (LAST_NULLIFY_INACTIVE_DEVICE_TOKEN_TIME.getTime()
+								+ 60000
+								* MINUTES_BETWEEN_INACTIVE_DEVICE_TOKEN_FLUSH < now
+									.getTime()) {
 							LAST_NULLIFY_INACTIVE_DEVICE_TOKEN_TIME = now;
-							Map<String, Date> inactiveDevices = service.getInactiveDevices();
-							UpdateUtils.get().updateNullifyDeviceTokens(inactiveDevices.keySet());
+							Map<String, Date> inactiveDevices = service
+									.getInactiveDevices();
+							UpdateUtils.get().updateNullifyDeviceTokens(
+									inactiveDevices.keySet());
 						}
 
-						if (PrivateChatPostResponseEvent.class.isInstance(event)) {
-						  handlePrivateChatPostNotification(service,
-						      (PrivateChatPostResponseEvent) event, user, user.getDeviceToken());
+						if (PrivateChatPostResponseEvent.class
+								.isInstance(event)) {
+							handlePrivateChatPostNotification(service,
+									(PrivateChatPostResponseEvent) event, user,
+									user.getDeviceToken());
 						}
-						
-						if (GeneralNotificationResponseEvent.class.isInstance(event)) {
-						  handleGeneralNotification(service,
-						      (GeneralNotificationResponseEvent) event, user, user.getDeviceToken());
+
+						if (GeneralNotificationResponseEvent.class
+								.isInstance(event)) {
+							handleGeneralNotification(service,
+									(GeneralNotificationResponseEvent) event,
+									user, user.getDeviceToken());
 						}
-						
+
 						// if
 						// (ReferralCodeUsedResponseEvent.class.isInstance(event))
 						// {
@@ -152,22 +160,22 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 						// }
 
 						// service.stop();
-					}else {
+					} else {
 						log.warn("Apns service is null");
 					}
-					
+
 				} catch (FileNotFoundException e) {
 					log.error("File not found", e);
 				}
 			} else {
-				log.warn("could not send push notification because user " + user + " has no device token");
+				log.warn("could not send push notification because user "
+						+ user + " has no device token");
 			}
 		}
 	}
 
 	protected ApnsService service;
 
-	
 	@PostConstruct
 	public ApnsService getApnsService() throws FileNotFoundException {
 		if (service == null) {
@@ -182,29 +190,30 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 		}
 		return service;
 	}
-	
-	
-/*	@Scheduled(fixedRate=1000*60*60)
-	public void resetApnsService() {
-		log.info("Rebuilding APNSService");
-		service.stop();
-		service = null;
-		try {
-			getApnsService();
-		} catch (FileNotFoundException e) {
-			log.error("Error rebuilding APNSService", e);
-		}
-	}*/
+
+	/*	@Scheduled(fixedRate=1000*60*60)
+		public void resetApnsService() {
+			log.info("Rebuilding APNSService");
+			service.stop();
+			service = null;
+			try {
+				getApnsService();
+			} catch (FileNotFoundException e) {
+				log.error("Error rebuilding APNSService", e);
+			}
+		}*/
 
 	protected void buildService() {
 		log.info("Building ApnsService");
 		try {
 			//InputStream inputStream = getClass().getClassLoader().getResourceAsStream(apnsProperties.pathToCert);
-			org.springframework.core.io.Resource resource = context.getResource(apnsProperties.pathToCert);
-			Object[] args = {apnsProperties.pathToCert, resource.exists(), resource.contentLength()};
+			org.springframework.core.io.Resource resource = context
+					.getResource(apnsProperties.pathToCert);
+			Object[] args = { apnsProperties.pathToCert, resource.exists(),
+					resource.contentLength() };
 			log.info("Loading cert: {}, exists: {}, length: {}", args);
-			ApnsServiceBuilder builder = APNS.newService()
-					.withCert(resource.getInputStream(), apnsProperties.certPassword);
+			ApnsServiceBuilder builder = APNS.newService().withCert(
+					resource.getInputStream(), apnsProperties.certPassword);
 			if (Globals.IS_SANDBOX()) {
 				log.info("Building apns with sandbox=true");
 				builder.withSandboxDestination();
@@ -215,45 +224,49 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 			service = builder.build();
 			service.start();
 		} catch (Exception e) {
-			log.error("Error getting apns cert.. Invalid SSL Config Exception", e);
+			log.error("Error getting apns cert.. Invalid SSL Config Exception",
+					e);
 		}
 	}
 
-	private void handleGeneralNotification(ApnsService service, GeneralNotificationResponseEvent event,
-      User user, String token) {
-	  if(user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES) {
-	    PayloadBuilder pb = APNS.newPayload().actionKey("View Now").badge(1);
-	    
-	    log.info("GeneralNotification for user: " + user.getId());
-	    GeneralNotificationResponseProto resProto = event.getGeneralNotificationResponseProto();
-	    String title = resProto.getTitle();
-	    String subtitle = resProto.getSubtitle();
-	    
-	    String alertBody = title + " " + subtitle;
-	    pb.alertBody(alertBody);
-	    if (!pb.isTooLong()) {
-	      log.info("sending apns for a general notification");
-	      service.push(token, pb.build());
-	    } else {
-	      log.error("PlayloadBuilder isTooLong to send apns message for general notification");
-	    }
-	  }
-	}
-	
+	private void handleGeneralNotification(ApnsService service,
+			GeneralNotificationResponseEvent event, User user, String token) {
+		if (user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES) {
+			PayloadBuilder pb = APNS.newPayload().actionKey("View Now")
+					.badge(1);
 
-	private void determineEvent(ResponseEvent event, User user, String deviceToken) {
+			log.info("GeneralNotification for user: " + user.getId());
+			GeneralNotificationResponseProto resProto = event
+					.getGeneralNotificationResponseProto();
+			String title = resProto.getTitle();
+			String subtitle = resProto.getSubtitle();
+
+			String alertBody = title + " " + subtitle;
+			pb.alertBody(alertBody);
+			if (!pb.isTooLong()) {
+				log.info("sending apns for a general notification");
+				service.push(token, pb.build());
+			} else {
+				log.error("PlayloadBuilder isTooLong to send apns message for general notification");
+			}
+		}
+	}
+
+	private void determineEvent(ResponseEvent event, User user,
+			String deviceToken) {
 		try {
 			ApnsService service = getApnsService();
 			if (service != null) {
-				
+
 				if (GeneralNotificationResponseEvent.class.isInstance(event)) {
-				  handleGeneralNotification(service, 
-				      (GeneralNotificationResponseEvent) event, user, deviceToken);
+					handleGeneralNotification(service,
+							(GeneralNotificationResponseEvent) event, user,
+							deviceToken);
 				}
-			}else {
+			} else {
 				log.warn("Apns service is null");
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			log.error("File not found", e);
 		}
@@ -261,84 +274,92 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 	/**
 	 * sends to offline people
+	 * 
 	 * @param event
 	 * @param playerId - person to send event to
 	 */
-	protected void sendApnsNotificationToPlayer(ResponseEvent event, String playerId) {
+	protected void sendApnsNotificationToPlayer(ResponseEvent event,
+			String playerId) {
 		ConnectedPlayer player = playersByPlayerId.get(playerId);
-		if(player == null){ 
-			log.info("sending apns with type=" + event.getEventType()+ " to player with id " + playerId + ", event=" + event);
-			
+		if (player == null) {
+			log.info("sending apns with type=" + event.getEventType()
+					+ " to player with id " + playerId + ", event=" + event);
+
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(playerId);
 			String deviceToken = user.getDeviceToken();
 			if (user != null && deviceToken != null && deviceToken.length() > 0) {
 				determineEvent(event, user, deviceToken);
 			} else {
-				log.warn("could not send push notification because user " + user + " has no device token");
+				log.warn("could not send push notification because user "
+						+ user + " has no device token");
 			}
 		}
 	}
-	
+
 	// copied from EventWriter.processClanResponseEvent
+	@Override
 	public void processClanResponseEvent(ResponseEvent event, String clanId) {
 		log.debug("apnsWriter received clan event=" + event);
-		ResponseEvent e = (ResponseEvent) event;
+		ResponseEvent e = event;
 		List<String> statuses = new ArrayList<String>();
-	    statuses.add(UserClanStatus.LEADER.name());
-	    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-	    statuses.add(UserClanStatus.CAPTAIN.name());
-	    statuses.add(UserClanStatus.MEMBER.name());
-	    List<String> userIds = RetrieveUtils.userClanRetrieveUtils()
-	    		.getUserIdsWithStatuses(clanId, statuses);
-		
+		statuses.add(UserClanStatus.LEADER.name());
+		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+		statuses.add(UserClanStatus.CAPTAIN.name());
+		statuses.add(UserClanStatus.MEMBER.name());
+		List<String> userIds = RetrieveUtils.userClanRetrieveUtils()
+				.getUserIdsWithStatuses(clanId, statuses);
+
 		for (String userId : userIds) {
 			log.info("Sending apns to clan: {} member: {}", clanId, userId);
 			sendApnsNotificationToPlayer(e, userId);
 		}
 	}
-	
-	 private void handlePrivateChatPostNotification(ApnsService service,
-	     PrivateChatPostResponseEvent event, User user, String token) {
-	    if (user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES) {
-	      PayloadBuilder pb = APNS.newPayload().actionKey("View").badge(1);
-	      log.info("PrivateChatPostNotification for user: " + user.getId());
-	      PrivateChatPostResponseProto resProto = event.getPrivateChatPostResponseProto();
-	      PrivateChatPostProto post = resProto.getPost();
 
-	      String content = post.getContent();
-	      if (content.length() > MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST) {
-	        content = content.substring(0, MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST);
-	        int index = content.lastIndexOf(" ");
-	        if (index > 0) {
-	          content = content.substring(0, index);
-	          content += "...";
-	        }
-	      }
-	      MinimumUserProto mup = post.getPoster().getMinUserProto();
-	      String clanId = "";
-	      if (null != mup.getClan()) {
-	    	  clanId = mup.getClan().getClanUuid();
-	      }
-	      String clan =  !clanId.isEmpty() ? "[" + mup.getClan().getTag() + "] " : "";
-	      pb.alertBody(clan + mup.getName()
-	          + " sent a private message: " + content);
+	private void handlePrivateChatPostNotification(ApnsService service,
+			PrivateChatPostResponseEvent event, User user, String token) {
+		if (user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES) {
+			PayloadBuilder pb = APNS.newPayload().actionKey("View").badge(1);
+			log.info("PrivateChatPostNotification for user: " + user.getId());
+			PrivateChatPostResponseProto resProto = event
+					.getPrivateChatPostResponseProto();
+			PrivateChatPostProto post = resProto.getPost();
 
-	      if (!pb.isTooLong()) {
-	        log.info("Pushing apns message");
-	        service.push(token, pb.build());
-	      } else {
-	        log.error("PlayloadBuilder isTooLong to send apns message");
-	      }
-	    }
-	  }
+			String content = post.getContent();
+			if (content.length() > MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST) {
+				content = content.substring(0,
+						MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST);
+				int index = content.lastIndexOf(" ");
+				if (index > 0) {
+					content = content.substring(0, index);
+					content += "...";
+				}
+			}
+			MinimumUserProto mup = post.getPoster().getMinUserProto();
+			String clanId = "";
+			if (null != mup.getClan()) {
+				clanId = mup.getClan().getClanUuid();
+			}
+			String clan = !clanId.isEmpty() ? "[" + mup.getClan().getTag()
+					+ "] " : "";
+			pb.alertBody(clan + mup.getName() + " sent a private message: "
+					+ content);
 
-	 
-	 private ApplicationContext context; 
-	@Override
-	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
-		context = arg0;
-		
+			if (!pb.isTooLong()) {
+				log.info("Pushing apns message");
+				service.push(token, pb.build());
+			} else {
+				log.error("PlayloadBuilder isTooLong to send apns message");
+			}
+		}
 	}
-	
+
+	private ApplicationContext context;
+
+	@Override
+	public void setApplicationContext(ApplicationContext arg0)
+			throws BeansException {
+		context = arg0;
+
+	}
 
 }// APNSWriter

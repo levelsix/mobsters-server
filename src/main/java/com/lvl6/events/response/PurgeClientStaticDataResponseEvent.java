@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent {
 
-  private PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto;
-  
-  public PurgeClientStaticDataResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_PURGE_STATIC_DATA_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = purgeClientStaticDataResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto;
 
-  public void setPurgeClientStaticDataResponseProto(PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto) {
-    this.purgeClientStaticDataResponseProto = purgeClientStaticDataResponseProto;
-  }
+	public PurgeClientStaticDataResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_PURGE_STATIC_DATA_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = purgeClientStaticDataResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setPurgeClientStaticDataResponseProto(
+			PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto) {
+		this.purgeClientStaticDataResponseProto = purgeClientStaticDataResponseProto;
+	}
 
 }

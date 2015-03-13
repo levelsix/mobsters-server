@@ -6,7 +6,7 @@ import java.util.Date;
 public class UserFacebookInviteForSlot implements Serializable {
 
 	private static final long serialVersionUID = -4204353720920788286L;
-	
+
 	private String id;
 	private String inviterUserId;
 	private String recipientFacebookId;
@@ -15,9 +15,8 @@ public class UserFacebookInviteForSlot implements Serializable {
 	private String userStructId;
 	private int userStructFbLvl;
 	private Date timeRedeemed;
-	
-	public UserFacebookInviteForSlot()
-	{
+
+	public UserFacebookInviteForSlot() {
 		super();
 	}
 
@@ -102,10 +101,11 @@ public class UserFacebookInviteForSlot implements Serializable {
 	@Override
 	public String toString() {
 		return "UserFacebookInviteForSlot [id=" + id + ", inviterUserId="
-				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
-				+ ", timeOfInvite=" + timeOfInvite + ", timeAccepted=" + timeAccepted
-				+ ", userStructId=" + userStructId + ", userStructFbLvl="
-				+ userStructFbLvl + ", timeRedeemed=" + timeRedeemed + "]";
+				+ inviterUserId + ", recipientFacebookId="
+				+ recipientFacebookId + ", timeOfInvite=" + timeOfInvite
+				+ ", timeAccepted=" + timeAccepted + ", userStructId="
+				+ userStructId + ", userStructFbLvl=" + userStructFbLvl
+				+ ", timeRedeemed=" + timeRedeemed + "]";
 	}
-	
+
 }

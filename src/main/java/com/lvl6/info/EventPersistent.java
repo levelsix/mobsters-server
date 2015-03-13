@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class EventPersistent implements Serializable {
-	
+
 	private static final long serialVersionUID = 1511718617355339151L;
 	private int id;
 	private String dayOfWeek;
@@ -13,7 +13,7 @@ public class EventPersistent implements Serializable {
 	private int cooldownMinutes;
 	private String eventType;
 	private String monsterElement;
-	
+
 	public EventPersistent(int id, String dayOfWeek, int startHour,
 			int eventDurationMinutes, int taskId, int cooldownMinutes,
 			String eventType, String monsterElement) {
@@ -96,9 +96,9 @@ public class EventPersistent implements Serializable {
 	public String toString() {
 		return "EventPersistent [id=" + id + ", dayOfWeek=" + dayOfWeek
 				+ ", startHour=" + startHour + ", eventDurationMinutes="
-				+ eventDurationMinutes + ", taskId=" + taskId + ", cooldownMinutes="
-				+ cooldownMinutes + ", eventType=" + eventType + ", monsterElement="
-				+ monsterElement + "]";
+				+ eventDurationMinutes + ", taskId=" + taskId
+				+ ", cooldownMinutes=" + cooldownMinutes + ", eventType="
+				+ eventType + ", monsterElement=" + monsterElement + "]";
 	}
-	
+
 }

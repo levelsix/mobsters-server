@@ -14,65 +14,69 @@ import org.springframework.stereotype.Component;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class ProfanityRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class ProfanityRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static Set<String> oneWordProfanity;
+	private static Set<String> oneWordProfanity;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_PROFANITY_CONFIG;
+	private static final String TABLE_NAME = DBConstants.TABLE_PROFANITY_CONFIG;
 
-  public static Set<String> getAllProfanity() {
-    log.debug("retrieving all profanity placed in a set");
-    if (oneWordProfanity == null) {
-      setStaticProfanity();
-    }
-    return oneWordProfanity;
-  }
+	public static Set<String> getAllProfanity() {
+		log.debug("retrieving all profanity placed in a set");
+		if (oneWordProfanity == null) {
+			setStaticProfanity();
+		}
+		return oneWordProfanity;
+	}
 
-  private static void setStaticProfanity() {
-    log.debug("setting static Set of profanity");
+	private static void setStaticProfanity() {
+		log.debug("setting static Set of profanity");
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      Set<String> oneWordProfanityTemp = new HashSet<String>();
-			      while(rs.next()) { 
-			        String profanityTerm = convertRSRowToProfanity(rs);
-			        if (null != profanityTerm)
-			          oneWordProfanityTemp.add(profanityTerm);
-			      }
-			      oneWordProfanity = oneWordProfanityTemp;
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  }    
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						Set<String> oneWordProfanityTemp = new HashSet<String>();
+						while (rs.next()) {
+							String profanityTerm = convertRSRowToProfanity(rs);
+							if (null != profanityTerm)
+								oneWordProfanityTemp.add(profanityTerm);
+						}
+						oneWordProfanity = oneWordProfanityTemp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("profanity retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-  }
+			log.error("profanity retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
-  public static void reload() {
-    setStaticProfanity();
-  }
+	public static void reload() {
+		setStaticProfanity();
+	}
 
-  /*
-   * assumes the resultset is apprpriately set up. traverses the row it's on.
-   */
-  private static String convertRSRowToProfanity(ResultSet rs) throws SQLException {
-    String profanityTerm = rs.getString(DBConstants.PROFANITY__TERM);
-    
-    return profanityTerm;
-  }
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private static String convertRSRowToProfanity(ResultSet rs)
+			throws SQLException {
+		String profanityTerm = rs.getString(DBConstants.PROFANITY__TERM);
+
+		return profanityTerm;
+	}
 }

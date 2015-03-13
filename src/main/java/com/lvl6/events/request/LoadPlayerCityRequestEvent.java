@@ -12,32 +12,33 @@ import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 
 public class LoadPlayerCityRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private LoadPlayerCityRequestProto loadPlayerCityRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      loadPlayerCityRequestProto = LoadPlayerCityRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = loadPlayerCityRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("LoadPlayerCityRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public LoadPlayerCityRequestProto getLoadPlayerCityRequestProto() {
-    return loadPlayerCityRequestProto;
-  }
+	private LoadPlayerCityRequestProto loadPlayerCityRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "LoadPlayerCityRequestEvent [loadPlayerCityRequestProto="
-		  + loadPlayerCityRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			loadPlayerCityRequestProto = LoadPlayerCityRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = loadPlayerCityRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("LoadPlayerCityRequest exception", e);
+		}
+	}
+
+	public LoadPlayerCityRequestProto getLoadPlayerCityRequestProto() {
+		return loadPlayerCityRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "LoadPlayerCityRequestEvent [loadPlayerCityRequestProto="
+				+ loadPlayerCityRequestProto + "]";
+	}
+
 }

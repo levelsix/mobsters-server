@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent {
 
-  private CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto;
-  
-  public CollectMonsterEnhancementResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_COLLECT_MONSTER_ENHANCEMENT_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = collectMonsterEnhancementResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto;
 
-  public void setCollectMonsterEnhancementResponseProto(CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto) {
-    this.collectMonsterEnhancementResponseProto = collectMonsterEnhancementResponseProto;
-  }
+	public CollectMonsterEnhancementResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_COLLECT_MONSTER_ENHANCEMENT_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = collectMonsterEnhancementResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setCollectMonsterEnhancementResponseProto(
+			CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto) {
+		this.collectMonsterEnhancementResponseProto = collectMonsterEnhancementResponseProto;
+	}
 
 }

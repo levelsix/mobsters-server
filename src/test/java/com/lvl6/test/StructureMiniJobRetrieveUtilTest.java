@@ -16,33 +16,32 @@ import com.lvl6.info.StructureMiniJob;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
 public class StructureMiniJobRetrieveUtilTest extends TestCase {
-	
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
-  }.getClass().getEnclosingClass());
-	
+	}.getClass().getEnclosingClass());
+
 	@Test
 	public void testGetStructureMiniJobs() {
 		log.info("testing retrieving structure mini jobs");
-		
-		Map<Integer, StructureMiniJob> structIdToStructureMiniJob =
-				StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
-		
+
+		Map<Integer, StructureMiniJob> structIdToStructureMiniJob = StructureMiniJobRetrieveUtils
+				.getStructIdsToMiniJobs();
+
 		for (Integer structId : structIdToStructureMiniJob.keySet()) {
-			Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
-			assertTrue("Expected: not null. Actual: " + struct,
-					null != struct);
+			Structure struct = StructureRetrieveUtils
+					.getStructForStructId(structId);
+			assertTrue("Expected: not null. Actual: " + struct, null != struct);
 		}
-		
+
 		log.info("structIdToStructureMiniJob=" + structIdToStructureMiniJob);
-		
-		assertTrue("Expected: some miniJobStructs. Actual: " +
-				structIdToStructureMiniJob,
+
+		assertTrue("Expected: some miniJobStructs. Actual: "
+				+ structIdToStructureMiniJob,
 				!structIdToStructureMiniJob.isEmpty());
-		
+
 	}
-	
+
 }

@@ -7,9 +7,9 @@ import java.util.Date;
 //A DEFENDER SHOULD NOT BE ATTACKED BY MORE THAN ONE ATTACKER,
 //EXCEPT IF THE DEFENDER ID IS 0, i.e. defender is fake 
 public class PvpBattleForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 3932008730259614440L;
-	
+
 	private String attackerId;
 	private String defenderId;
 	private int attackerWinEloChange;
@@ -17,15 +17,15 @@ public class PvpBattleForUser implements Serializable {
 	private int attackerLoseEloChange;
 	private int defenderWinEloChange;
 	private Date battleStartTime;
-	
-	public PvpBattleForUser()
-	{
+
+	public PvpBattleForUser() {
 		super();
 	}
 
 	public PvpBattleForUser(String attackerId, String defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange,
-			int attackerLoseEloChange, int defenderWinEloChange, Date battleStartTime) {
+			int attackerLoseEloChange, int defenderWinEloChange,
+			Date battleStartTime) {
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -101,5 +101,5 @@ public class PvpBattleForUser implements Serializable {
 				+ ", defenderWinEloChange=" + defenderWinEloChange
 				+ ", battleStartTime=" + battleStartTime + "]";
 	}
-	
+
 }

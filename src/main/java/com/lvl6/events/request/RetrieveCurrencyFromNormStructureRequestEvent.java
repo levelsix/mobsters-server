@@ -10,34 +10,36 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 
-public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent{
+public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	private RetrieveCurrencyFromNormStructureRequestProto retrieveCurrencyFromNormStructureRequestProto;
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  @Override
-  public void read(ByteBuffer buff) {
-    try {
-      retrieveCurrencyFromNormStructureRequestProto = RetrieveCurrencyFromNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveCurrencyFromNormStructureRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RetrieveCurrencyFromNormStructureRequest exception", e);
-    }
-  }
 
-  public RetrieveCurrencyFromNormStructureRequestProto getRetrieveCurrencyFromNormStructureRequestProto() {
-    return retrieveCurrencyFromNormStructureRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			retrieveCurrencyFromNormStructureRequestProto = RetrieveCurrencyFromNormStructureRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = retrieveCurrencyFromNormStructureRequestProto
+					.getSender().getMinUserProto().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RetrieveCurrencyFromNormStructureRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "RetrieveCurrencyFromNormStructureRequestEvent [retrieveCurrencyFromNormStructureRequestProto="
-		  + retrieveCurrencyFromNormStructureRequestProto
-		  + "]";
-  }
-  
+	public RetrieveCurrencyFromNormStructureRequestProto getRetrieveCurrencyFromNormStructureRequestProto() {
+		return retrieveCurrencyFromNormStructureRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "RetrieveCurrencyFromNormStructureRequestEvent [retrieveCurrencyFromNormStructureRequestProto="
+				+ retrieveCurrencyFromNormStructureRequestProto + "]";
+	}
+
 }//RetrieveCurrencyFromNormStructureRequestProto

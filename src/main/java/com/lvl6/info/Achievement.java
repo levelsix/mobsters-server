@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Achievement implements Serializable {
 
 	private static final long serialVersionUID = 1739660744843110613L;
-	
+
 	private int id;
 	private String achievementName;
 	private String description;
@@ -21,7 +21,7 @@ public class Achievement implements Serializable {
 	private int prerequisiteId;
 	private int successorId;
 	private int expReward;
-	
+
 	public Achievement(int id, String achievementName, String description,
 			int gemReward, int lvl, String achievementType,
 			String resourceType, String monsterElement, String monsterQuality,
@@ -157,50 +157,25 @@ public class Achievement implements Serializable {
 		this.successorId = successorId;
 	}
 
-	public int getExpReward()
-	{
+	public int getExpReward() {
 		return expReward;
 	}
 
-	public void setExpReward( int expReward )
-	{
+	public void setExpReward(int expReward) {
 		this.expReward = expReward;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Achievement [id="
-			+ id
-			+ ", achievementName="
-			+ achievementName
-			+ ", description="
-			+ description
-			+ ", gemReward="
-			+ gemReward
-			+ ", lvl="
-			+ lvl
-			+ ", achievementType="
-			+ achievementType
-			+ ", resourceType="
-			+ resourceType
-			+ ", monsterElement="
-			+ monsterElement
-			+ ", monsterQuality="
-			+ monsterQuality
-			+ ", staticDataId="
-			+ staticDataId
-			+ ", quantity="
-			+ quantity
-			+ ", priority="
-			+ priority
-			+ ", prerequisiteId="
-			+ prerequisiteId
-			+ ", successorId="
-			+ successorId
-			+ ", expReward="
-			+ expReward
-			+ "]";
+	public String toString() {
+		return "Achievement [id=" + id + ", achievementName=" + achievementName
+				+ ", description=" + description + ", gemReward=" + gemReward
+				+ ", lvl=" + lvl + ", achievementType=" + achievementType
+				+ ", resourceType=" + resourceType + ", monsterElement="
+				+ monsterElement + ", monsterQuality=" + monsterQuality
+				+ ", staticDataId=" + staticDataId + ", quantity=" + quantity
+				+ ", priority=" + priority + ", prerequisiteId="
+				+ prerequisiteId + ", successorId=" + successorId
+				+ ", expReward=" + expReward + "]";
 	}
 
 }

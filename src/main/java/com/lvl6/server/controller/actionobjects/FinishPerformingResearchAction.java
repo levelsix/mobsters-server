@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -19,13 +17,10 @@ import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class FinishPerformingResearchAction
-{
+public class FinishPerformingResearchAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-
-	
 	private String userId;
 	private User user;
 	private String userResearchUuid; //update the row when researchs are upgraded
@@ -34,16 +29,10 @@ public class FinishPerformingResearchAction
 	protected UpdateUtil updateUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
-
-	public FinishPerformingResearchAction(
-		String userId,
-		User user,
-		String userResearchUuid,
-		int gemsCost,
-		Date now,
-		UpdateUtil updateUtil,
-		ResearchForUserRetrieveUtils researchForUserRetrieveUtil)
-	{
+	public FinishPerformingResearchAction(String userId, User user,
+			String userResearchUuid, int gemsCost, Date now,
+			UpdateUtil updateUtil,
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -60,10 +49,9 @@ public class FinishPerformingResearchAction
 	private Map<String, String> reasonsForChanges;
 	private Map<String, String> details;
 
-	
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
-		
+
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
 
@@ -82,65 +70,70 @@ public class FinishPerformingResearchAction
 	private boolean verifySemantics(Builder resBuilder) {
 		if (null == user) {
 			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
-			log.error( "no user with id={}", userId );
+			log.error("no user with id={}", userId);
 			return false;
 		}
-		
+
 		boolean userHasUserResearch = false;
-		if(userResearchUuid != null) {
+		if (userResearchUuid != null) {
 			userHasUserResearch = verifyUserResearch(resBuilder);
 		}
-		
-		if(!userHasUserResearch) {
-			log.error("user does not have this research with userresearchid={}", userResearchUuid);
+
+		if (!userHasUserResearch) {
+			log.error(
+					"user does not have this research with userresearchid={}",
+					userResearchUuid);
 			return false;
 		}
-		
+
 		boolean hasEnoughGems = true;
-		
-		if(gemsCost > 0) {
+
+		if (gemsCost > 0) {
 			hasEnoughGems = verifyEnoughGems(resBuilder);
 		}
 
-		if(hasEnoughGems) {
+		if (hasEnoughGems) {
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
-	
+
 	private boolean verifyUserResearch(Builder resBuilder) {
-		List<ResearchForUser> userResearchList = researchForUserRetrieveUtil.getAllResearchForUser(userId);
+		List<ResearchForUser> userResearchList = researchForUserRetrieveUtil
+				.getAllResearchForUser(userId);
 		boolean containsUserResearch = false;
-		for(ResearchForUser rfu : userResearchList) {
-			if(rfu.getId().equals(userResearchUuid)) {
+		for (ResearchForUser rfu : userResearchList) {
+			if (rfu.getId().equals(userResearchUuid)) {
 				containsUserResearch = true;
 			}
 		}
 		return containsUserResearch;
 	}
-	
+
 	private boolean verifyEnoughGems(Builder resBuilder) {
 		int userGems = user.getGems();
 
 		//check if user can afford to buy however many more user wants to buy
 		if (userGems < gemsCost) {
-			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_NOT_ENOUGH_GEMS);
-			return false; 
-		}
-		else return true;
+			resBuilder
+					.setStatus(FinishPerformingResearchStatus.FAIL_NOT_ENOUGH_GEMS);
+			return false;
+		} else
+			return true;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 		boolean successfulInsertOrUpdate = false;
 
-		successfulInsertOrUpdate = updateUtil.updateUserResearchCompleteStatus(userResearchUuid);
+		successfulInsertOrUpdate = updateUtil
+				.updateUserResearchCompleteStatus(userResearchUuid);
 
-		if(!successfulInsertOrUpdate) {
+		if (!successfulInsertOrUpdate) {
 			return false;
 		}
 
-		if(gemsCost > 0) {
+		if (gemsCost > 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			updateUserCurrency();
 			prepCurrencyHistory();
@@ -148,20 +141,19 @@ public class FinishPerformingResearchAction
 		return true;
 	}
 
-	private void updateUserCurrency()
-	{
+	private void updateUserCurrency() {
 		int gemsDelta = -1 * gemsCost;
 		int resourceDelta = 0; //cant use resources only gems
 		ResourceType resourceType = null;
-		
-		boolean updated = user.updateGemsandResourcesFromPerformingResearch(gemsDelta, resourceDelta, resourceType);
+
+		boolean updated = user.updateGemsandResourcesFromPerformingResearch(
+				gemsDelta, resourceDelta, resourceType);
 		log.info("updated, user paid to complete research {}", updated);
 	}
-	
-	private void prepCurrencyHistory()
-	{
+
+	private void prepCurrencyHistory() {
 		String gems = MiscMethods.gems;
-		
+
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
@@ -182,7 +174,7 @@ public class FinishPerformingResearchAction
 	public User getUser() {
 		return user;
 	}
-	
+
 	public String getUserResearchUuid() {
 		return userResearchUuid;
 	}

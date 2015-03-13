@@ -12,37 +12,38 @@ import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 
 public class InviteToClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private InviteToClanRequestProto inviteToClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      inviteToClanRequestProto = InviteToClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = inviteToClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("InviteToClanRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public InviteToClanRequestProto getInviteToClanRequestProto() {
-    return inviteToClanRequestProto;
-  }
+	private InviteToClanRequestProto inviteToClanRequestProto;
 
-  public void setInviteToClanRequestProto( InviteToClanRequestProto inviteToClanRequestProto )
-  {
-	  this.inviteToClanRequestProto = inviteToClanRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			inviteToClanRequestProto = InviteToClanRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = inviteToClanRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("InviteToClanRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "InviteToClanRequestEvent [inviteToClanRequestProto="
-		  + inviteToClanRequestProto
-		  + "]";
-  }
-  
+	public InviteToClanRequestProto getInviteToClanRequestProto() {
+		return inviteToClanRequestProto;
+	}
+
+	public void setInviteToClanRequestProto(
+			InviteToClanRequestProto inviteToClanRequestProto) {
+		this.inviteToClanRequestProto = inviteToClanRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "InviteToClanRequestEvent [inviteToClanRequestProto="
+				+ inviteToClanRequestProto + "]";
+	}
+
 }

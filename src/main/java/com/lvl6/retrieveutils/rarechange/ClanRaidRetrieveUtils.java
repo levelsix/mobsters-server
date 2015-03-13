@@ -15,9 +15,12 @@ import com.lvl6.info.ClanRaid;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class ClanRaidRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class ClanRaidRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, ClanRaid> clanRaidIdToClanRaid;
 
@@ -54,11 +57,12 @@ import com.lvl6.utils.DBConnection;
 				try {
 					rs.last();
 					rs.beforeFirst();
-					Map <Integer, ClanRaid> clanRaidIdToClanRaidTemp = new HashMap<Integer, ClanRaid>();
-					while(rs.next()) {  //should only be one
+					Map<Integer, ClanRaid> clanRaidIdToClanRaidTemp = new HashMap<Integer, ClanRaid>();
+					while (rs.next()) {  //should only be one
 						ClanRaid clanRaid = convertRSRowToClanRaid(rs);
 						if (clanRaid != null)
-							clanRaidIdToClanRaidTemp.put(clanRaid.getId(), clanRaid);
+							clanRaidIdToClanRaidTemp.put(clanRaid.getId(),
+									clanRaid);
 					}
 					clanRaidIdToClanRaid = clanRaidIdToClanRaidTemp;
 				} catch (SQLException e) {
@@ -67,21 +71,21 @@ import com.lvl6.utils.DBConnection;
 				}
 			}
 		} catch (Exception e) {
-    	log.error("clanRaid retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-	}   
+			log.error("clanRaid retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
 	public static void reload() {
 		setStaticClanRaidIdsToClanRaid();
 	}
 
-
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ClanRaid convertRSRowToClanRaid(ResultSet rs) throws SQLException {
+	private static ClanRaid convertRSRowToClanRaid(ResultSet rs)
+			throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);
 		String clanRaidName = rs.getString(i++);
@@ -92,10 +96,11 @@ import com.lvl6.utils.DBConnection;
 		String inactiveDescription = rs.getString(i++);
 		String dialogueText = rs.getString(i++);
 		String spotlightMonsterImgName = rs.getString(i++);
-		
+
 		ClanRaid clanRaid = new ClanRaid(id, clanRaidName, activeTitleImgName,
-				activeBackgroundImgName, activeDescription, inactiveMonsterImgName,
-				inactiveDescription, dialogueText, spotlightMonsterImgName); 
+				activeBackgroundImgName, activeDescription,
+				inactiveMonsterImgName, inactiveDescription, dialogueText,
+				spotlightMonsterImgName);
 		return clanRaid;
 	}
 

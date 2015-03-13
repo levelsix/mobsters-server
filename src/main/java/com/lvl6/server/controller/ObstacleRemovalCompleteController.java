@@ -30,10 +30,12 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
+@Component
+@DependsOn("gameServer")
+public class ObstacleRemovalCompleteController extends EventController {
 
-@Component @DependsOn("gameServer") public class ObstacleRemovalCompleteController extends EventController{
-
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -41,8 +43,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public ObstacleRemovalCompleteController() {
 		numAllocatedThreads = 4;
@@ -60,8 +62,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent)event).getObstacleRemovalCompleteRequestProto();
-		
+		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent) event)
+				.getObstacleRemovalCompleteRequestProto();
+
 		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -72,111 +75,133 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		String userObstacleId = reqProto.getUserObstacleUuid();
 		boolean atMaxObstacles = reqProto.getAtMaxObstacles();
 
-		ObstacleRemovalCompleteResponseProto.Builder resBuilder = ObstacleRemovalCompleteResponseProto.newBuilder();
+		ObstacleRemovalCompleteResponseProto.Builder resBuilder = ObstacleRemovalCompleteResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
 
-    UUID userUuid = null;
-    UUID userObstacleUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
-      userObstacleUuid = UUID.fromString(userObstacleId);
+		UUID userUuid = null;
+		UUID userObstacleUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			userObstacleUuid = UUID.fromString(userObstacleId);
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect posterId=%s, recipientId=%s",
-          userId, userObstacleId), e);
-      invalidUuids = true;
-    }
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect posterId=%s, recipientId=%s",
+					userId, userObstacleId), e);
+			invalidUuids = true;
+		}
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
-      ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
-			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
-					getUserObstacleForId(userObstacleId);
-			
-			boolean legitExpansionComplete = checkLegit(resBuilder, userId, user,
-					userObstacleId, ofu, speedUp, gemCostToSpeedUp);
+			User user = getUserRetrieveUtils().getUserById(
+					senderProto.getUserUuid());
+			ObstacleForUser ofu = getObstacleForUserRetrieveUtil()
+					.getUserObstacleForId(userObstacleId);
+
+			boolean legitExpansionComplete = checkLegit(resBuilder, userId,
+					user, userObstacleId, ofu, speedUp, gemCostToSpeedUp);
 			int previousGems = 0;
 
 			boolean success = false;
 			Map<String, Integer> money = new HashMap<String, Integer>();
 			if (legitExpansionComplete) {
 				previousGems = user.getGems();
-				success = writeChangesToDB(user, userObstacleId, speedUp, gemCostToSpeedUp,
-						clientTime, atMaxObstacles, money);
+				success = writeChangesToDB(user, userObstacleId, speedUp,
+						gemCostToSpeedUp, clientTime, atMaxObstacles, money);
 			}
-			
-			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(senderProto.getUserUuid());
+
+			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());  
+			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-			
+
 			if (success && (speedUp || atMaxObstacles)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-      	resEventUpdate.setTag(event.getTag());
-      	server.writeEvent(resEventUpdate);
-      	
-				writeToUserCurrencyHistory(userId, user, clientTime, money, previousGems, ofu);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToUserCurrencyHistory(userId, user, clientTime, money,
+						previousGems, ofu);
 			}
-			
+
 		} catch (Exception e) {
-			log.error("exception in ObstacleRemovalCompleteController processEvent", e);
+			log.error(
+					"exception in ObstacleRemovalCompleteController processEvent",
+					e);
 			//don't let the client hang
-      try {
-      	resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
-      	ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(userId);
-      	resEvent.setTag(event.getTag());
-      	resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
-      	server.writeEvent(resEvent);
-      } catch (Exception e2) {
-      	log.error("exception2 in ObstacleRemovalCompleteController processEvent", e);
-      }
+			try {
+				resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+				ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setObstacleRemovalCompleteResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in ObstacleRemovalCompleteController processEvent",
+						e);
+			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
 	private boolean checkLegit(Builder resBuilder, String userId, User user,
-	    String ofuId, ObstacleForUser ofu, boolean speedUp, int gemCostToSpeedup) {
-		
+			String ofuId, ObstacleForUser ofu, boolean speedUp,
+			int gemCostToSpeedup) {
+
 		if (null == user || null == ofu) {
 			resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
-			log.error("unexpected error: user or obstacle for user is null. user=" + user +
-					"\t userId=" + userId + "\t obstacleForUser=" + ofu + "\t ofuId=" + ofuId);
+			log.error("unexpected error: user or obstacle for user is null. user="
+					+ user
+					+ "\t userId="
+					+ userId
+					+ "\t obstacleForUser="
+					+ ofu + "\t ofuId=" + ofuId);
 			return false;
 		}
-		
+
 		if (speedUp && user.getGems() < gemCostToSpeedup) {
-			resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_INSUFFICIENT_GEMS);
-			log.error("user error: user does not have enough gems to speed up removal." +
-					"\t obstacleForUser=" + ofu + "\t cost=" + gemCostToSpeedup);
-			return false;      
+			resBuilder
+					.setStatus(ObstacleRemovalCompleteStatus.FAIL_INSUFFICIENT_GEMS);
+			log.error("user error: user does not have enough gems to speed up removal."
+					+ "\t obstacleForUser="
+					+ ofu
+					+ "\t cost="
+					+ gemCostToSpeedup);
+			return false;
 		}
-		
+
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.SUCCESS);
-		return true;  
+		return true;
 	}
-	
-	private boolean writeChangesToDB(User user, String ofuId, boolean speedUp, 
-			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
+
+	private boolean writeChangesToDB(User user, String ofuId, boolean speedUp,
+			int gemCost, Timestamp clientTime, boolean atMaxObstacles,
+			Map<String, Integer> money) {
 		int gemChange = -1 * gemCost;
 		int obstaclesRemovedDelta = 1;
-		
+
 		if (speedUp && atMaxObstacles) {
 			log.info("isSpeedup and maxObstacles");
 		} else if (speedUp) {
@@ -193,9 +218,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 			clientTime = null;
 			log.info("not isSpeedup and not maxObstacles");
 		}
-		
-		if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, clientTime,
-				obstaclesRemovedDelta)) {
+
+		if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange,
+				clientTime, obstaclesRemovedDelta)) {
 			log.error("problem updating user gems. gemChange=" + gemChange);
 			return false;
 		} else {
@@ -204,14 +229,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 				money.put(MiscMethods.gems, gemChange);
 			}
 		}
-		
+
 		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
 		log.info("(obstacles) numDeleted=" + numDeleted);
 		return true;
 	}
 
-	private void writeToUserCurrencyHistory(String userId, User user, Timestamp curTime,
-			Map<String, Integer> currencyChange, int previousGems, ObstacleForUser ofu) {
+	private void writeToUserCurrencyHistory(String userId, User user,
+			Timestamp curTime, Map<String, Integer> currencyChange,
+			int previousGems, ObstacleForUser ofu) {
 		String reason = ControllerConstants.UCHRFC__SPED_UP_REMOVE_OBSTACLE;
 		StringBuilder detailsSb = new StringBuilder();
 		detailsSb.append("obstacleId=");
@@ -221,26 +247,28 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		detailsSb.append(" y=");
 		detailsSb.append(ofu.getYcoord());
 		String details = detailsSb.toString();
-		
+
 		Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String gems = MiscMethods.gems;
-		
+
 		previousCurrency.put(gems, previousGems);
 		currentCurrency.put(gems, user.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, details);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
-        previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 
 	}
-	
+
 	public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
 		return obstacleForUserRetrieveUtil;
 	}
+
 	public void setObstacleForUserRetrieveUtil(
 			ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
 		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
@@ -254,12 +282,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		this.locker = locker;
 	}
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
-	
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
 }

@@ -26,14 +26,16 @@ import com.lvl6.server.controller.actionobjects.CustomizePvpBoardObstacleAction;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-@Component @DependsOn("gameServer") public class CustomizePvpBoardObstacleController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class CustomizePvpBoardObstacleController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public CustomizePvpBoardObstacleController() {
 		numAllocatedThreads = 4;
 	}
-
 
 	@Autowired
 	protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
@@ -56,16 +58,19 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		CustomizePvpBoardObstacleRequestProto reqProto = ((CustomizePvpBoardObstacleRequestEvent)event).getCustomizePvpBoardObstacleRequestProto();
+		CustomizePvpBoardObstacleRequestProto reqProto = ((CustomizePvpBoardObstacleRequestEvent) event)
+				.getCustomizePvpBoardObstacleRequestProto();
 
 		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<UserPvpBoardObstacleProto> nuOrUpdatedObstacles = reqProto.getNuOrUpdatedObstaclesList();
+		List<UserPvpBoardObstacleProto> nuOrUpdatedObstacles = reqProto
+				.getNuOrUpdatedObstaclesList();
 		List<Integer> removeUpboIds = reqProto.getRemoveUpboIdsList();
 
-		CustomizePvpBoardObstacleResponseProto.Builder resBuilder = CustomizePvpBoardObstacleResponseProto.newBuilder();
+		CustomizePvpBoardObstacleResponseProto.Builder resBuilder = CustomizePvpBoardObstacleResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
 
@@ -74,9 +79,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s",
-					userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
@@ -84,9 +88,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
 			resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
-			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(userId);
+			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder.build());
+			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 			return;
 		}
@@ -95,26 +101,35 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		try {
 			Collection<PvpBoardObstacleForUser> newOrUpdatedPbofus = javafyUserPvpBoardObstacleProto(nuOrUpdatedObstacles);
 			CustomizePvpBoardObstacleAction rsga = new CustomizePvpBoardObstacleAction(
-					userId, newOrUpdatedPbofus, removeUpboIds, pvpBoardObstacleForUserRetrieveUtil,
-					insertUtil, deleteUtil);
+					userId, newOrUpdatedPbofus, removeUpboIds,
+					pvpBoardObstacleForUserRetrieveUtil, insertUtil, deleteUtil);
 
 			rsga.execute(resBuilder);
 
-			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(senderProto.getUserUuid());
+			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder.build());
+			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in CustomizePvpBoardObstacleController processEvent", e);
+			log.error(
+					"exception in CustomizePvpBoardObstacleController processEvent",
+					e);
 			try {
-				resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
-				CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(userId);
+				resBuilder
+						.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
+				CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder.build());
+				resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in CustomizePvpBoardObstacleController processEvent", e);
+				log.error(
+						"exception2 in CustomizePvpBoardObstacleController processEvent",
+						e);
 			}
 
 		} finally {
@@ -123,11 +138,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 
 	private Collection<PvpBoardObstacleForUser> javafyUserPvpBoardObstacleProto(
-			List<UserPvpBoardObstacleProto> protos)
-			{
+			List<UserPvpBoardObstacleProto> protos) {
 		List<PvpBoardObstacleForUser> pbofus = new ArrayList<PvpBoardObstacleForUser>();
-		for (UserPvpBoardObstacleProto upbop : protos)
-		{
+		for (UserPvpBoardObstacleProto upbop : protos) {
 			PvpBoardObstacleForUser newPbofu = new PvpBoardObstacleForUser();
 			newPbofu.setId(upbop.getUserPvpBoardObstacleId());
 			newPbofu.setUserId(upbop.getUserUuid());
@@ -139,7 +152,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		return pbofus;
-			}
+	}
 
 	public PvpBoardObstacleForUserRetrieveUtil getPvpBoardObstacleForUserRetrieveUtil() {
 		return pvpBoardObstacleForUserRetrieveUtil;

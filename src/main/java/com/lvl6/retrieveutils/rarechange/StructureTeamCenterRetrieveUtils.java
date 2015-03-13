@@ -16,102 +16,114 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class StructureTeamCenterRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class StructureTeamCenterRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private static Map<Integer, StructureTeamCenter> structIdsToTeamCenters;
+	private static Map<Integer, StructureTeamCenter> structIdsToTeamCenters;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TEAM_CENTER_CONFIG;
+	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TEAM_CENTER_CONFIG;
 
-  public static Map<Integer, StructureTeamCenter> getStructIdsToTeamCenters() {
-    log.debug("retrieving all structs data");
-    if (structIdsToTeamCenters == null) {
-      setStaticStructIdsToTeamCenters();
-    }
-    return structIdsToTeamCenters;
-  }
+	public static Map<Integer, StructureTeamCenter> getStructIdsToTeamCenters() {
+		log.debug("retrieving all structs data");
+		if (structIdsToTeamCenters == null) {
+			setStaticStructIdsToTeamCenters();
+		}
+		return structIdsToTeamCenters;
+	}
 
-  public static StructureTeamCenter getTeamCenterForStructId(int structId) {
-    log.debug("retrieve struct data for structId " + structId);
-    if (structIdsToTeamCenters == null) {
-      setStaticStructIdsToTeamCenters();      
-    }
-    return structIdsToTeamCenters.get(structId);
-  }
-  
-  public static StructureTeamCenter getUpgradedTeamCenterForStructId(int structId) {
-  	log.debug("retrieve upgraded struct data for structId " + structId);
-  	if (structIdsToTeamCenters == null) {
-      setStaticStructIdsToTeamCenters();      
-    }
-  	Structure curStruct = StructureRetrieveUtils.getUpgradedStructForStructId(structId);
-  	if (null != curStruct) {
-  		int successorStructId = curStruct.getId();
-  		StructureTeamCenter upgradedStruct = structIdsToTeamCenters.get(successorStructId);
-  		return upgradedStruct;
-  	}
-  	return null;
-  }
-  
-  public static StructureTeamCenter getPredecessorTeamCenterForStructId(int structId) {
-  	log.debug("retrieve predecessor struct data for structId " + structId);
-  	if (structIdsToTeamCenters == null) {
-      setStaticStructIdsToTeamCenters();      
-    }
-  	Structure curStruct = StructureRetrieveUtils.getUpgradedStructForStructId(structId);
-  	if (null != curStruct) {
-  		int predecessorStructId = curStruct.getId();
-  		StructureTeamCenter predecessorStruct = structIdsToTeamCenters.get(predecessorStructId);
-  		return predecessorStruct;
-  	}
-  	return null;
-  }
+	public static StructureTeamCenter getTeamCenterForStructId(int structId) {
+		log.debug("retrieve struct data for structId " + structId);
+		if (structIdsToTeamCenters == null) {
+			setStaticStructIdsToTeamCenters();
+		}
+		return structIdsToTeamCenters.get(structId);
+	}
 
-  private static void setStaticStructIdsToTeamCenters() {
-    log.debug("setting static map of structIds to structs");
+	public static StructureTeamCenter getUpgradedTeamCenterForStructId(
+			int structId) {
+		log.debug("retrieve upgraded struct data for structId " + structId);
+		if (structIdsToTeamCenters == null) {
+			setStaticStructIdsToTeamCenters();
+		}
+		Structure curStruct = StructureRetrieveUtils
+				.getUpgradedStructForStructId(structId);
+		if (null != curStruct) {
+			int successorStructId = curStruct.getId();
+			StructureTeamCenter upgradedStruct = structIdsToTeamCenters
+					.get(successorStructId);
+			return upgradedStruct;
+		}
+		return null;
+	}
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    try {
+	public static StructureTeamCenter getPredecessorTeamCenterForStructId(
+			int structId) {
+		log.debug("retrieve predecessor struct data for structId " + structId);
+		if (structIdsToTeamCenters == null) {
+			setStaticStructIdsToTeamCenters();
+		}
+		Structure curStruct = StructureRetrieveUtils
+				.getUpgradedStructForStructId(structId);
+		if (null != curStruct) {
+			int predecessorStructId = curStruct.getId();
+			StructureTeamCenter predecessorStruct = structIdsToTeamCenters
+					.get(predecessorStructId);
+			return predecessorStruct;
+		}
+		return null;
+	}
+
+	private static void setStaticStructIdsToTeamCenters() {
+		log.debug("setting static map of structIds to structs");
+
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
 			if (conn != null) {
-			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      HashMap<Integer, StructureTeamCenter> structIdsToStructsTemp = new HashMap<Integer, StructureTeamCenter>();
-			      while(rs.next()) {
-			        StructureTeamCenter struct = convertRSRowToTeamCenter(rs);
-			        if (struct != null)
-			          structIdsToStructsTemp.put(struct.getStructId(), struct);
-			      }
-			      structIdsToTeamCenters = structIdsToStructsTemp;
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  }    
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						HashMap<Integer, StructureTeamCenter> structIdsToStructsTemp = new HashMap<Integer, StructureTeamCenter>();
+						while (rs.next()) {
+							StructureTeamCenter struct = convertRSRowToTeamCenter(rs);
+							if (struct != null)
+								structIdsToStructsTemp.put(
+										struct.getStructId(), struct);
+						}
+						structIdsToTeamCenters = structIdsToStructsTemp;
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
 		} catch (Exception e) {
-    	log.error("TeamCenter retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
-    }
-  }
+			log.error("TeamCenter retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+	}
 
-  public static void reload() {
-    setStaticStructIdsToTeamCenters();
-  }
+	public static void reload() {
+		setStaticStructIdsToTeamCenters();
+	}
 
-  /*
-   * assumes the resultset is apprpriately set up. traverses the row it's on.
-   */
-  private static StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs) throws SQLException {
-    int structId = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__STRUCT_ID);
-    int teamCostLimit = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT);
-    
-    return new StructureTeamCenter(structId, teamCostLimit);
-  }
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private static StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs)
+			throws SQLException {
+		int structId = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__STRUCT_ID);
+		int teamCostLimit = rs
+				.getInt(DBConstants.STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT);
+
+		return new StructureTeamCenter(structId, teamCostLimit);
+	}
 }

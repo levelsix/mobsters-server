@@ -4,165 +4,174 @@
 package com.lvl6.proto;
 
 public final class DevProto {
-  private DevProto() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-  }
-  /**
-   * Protobuf enum {@code com.lvl6.proto.DevRequest}
-   */
-  public enum DevRequest
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>RESET_ACCOUNT = 1;</code>
-     */
-    RESET_ACCOUNT(0, 1),
-    /**
-     * <code>GET_MONZTER = 2;</code>
-     */
-    GET_MONZTER(1, 2),
-    /**
-     * <code>F_B_GET_CASH = 3;</code>
-     */
-    F_B_GET_CASH(2, 3),
-    /**
-     * <code>F_B_GET_OIL = 4;</code>
-     */
-    F_B_GET_OIL(3, 4),
-    /**
-     * <code>F_B_GET_GEMS = 5;</code>
-     */
-    F_B_GET_GEMS(4, 5),
-    /**
-     * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
-     */
-    F_B_GET_CASH_OIL_GEMS(5, 6),
-    /**
-     * <code>GET_ITEM = 7;</code>
-     */
-    GET_ITEM(6, 7),
-    ;
+	private DevProto() {
+	}
 
-    /**
-     * <code>RESET_ACCOUNT = 1;</code>
-     */
-    public static final int RESET_ACCOUNT_VALUE = 1;
-    /**
-     * <code>GET_MONZTER = 2;</code>
-     */
-    public static final int GET_MONZTER_VALUE = 2;
-    /**
-     * <code>F_B_GET_CASH = 3;</code>
-     */
-    public static final int F_B_GET_CASH_VALUE = 3;
-    /**
-     * <code>F_B_GET_OIL = 4;</code>
-     */
-    public static final int F_B_GET_OIL_VALUE = 4;
-    /**
-     * <code>F_B_GET_GEMS = 5;</code>
-     */
-    public static final int F_B_GET_GEMS_VALUE = 5;
-    /**
-     * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
-     */
-    public static final int F_B_GET_CASH_OIL_GEMS_VALUE = 6;
-    /**
-     * <code>GET_ITEM = 7;</code>
-     */
-    public static final int GET_ITEM_VALUE = 7;
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistry registry) {
+	}
 
+	/**
+	 * Protobuf enum {@code com.lvl6.proto.DevRequest}
+	 */
+	public enum DevRequest implements com.google.protobuf.ProtocolMessageEnum {
+		/**
+		 * <code>RESET_ACCOUNT = 1;</code>
+		 */
+		RESET_ACCOUNT(0, 1),
+		/**
+		 * <code>GET_MONZTER = 2;</code>
+		 */
+		GET_MONZTER(1, 2),
+		/**
+		 * <code>F_B_GET_CASH = 3;</code>
+		 */
+		F_B_GET_CASH(2, 3),
+		/**
+		 * <code>F_B_GET_OIL = 4;</code>
+		 */
+		F_B_GET_OIL(3, 4),
+		/**
+		 * <code>F_B_GET_GEMS = 5;</code>
+		 */
+		F_B_GET_GEMS(4, 5),
+		/**
+		 * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
+		 */
+		F_B_GET_CASH_OIL_GEMS(5, 6),
+		/**
+		 * <code>GET_ITEM = 7;</code>
+		 */
+		GET_ITEM(6, 7), ;
 
-    public final int getNumber() { return value; }
+		/**
+		 * <code>RESET_ACCOUNT = 1;</code>
+		 */
+		public static final int RESET_ACCOUNT_VALUE = 1;
+		/**
+		 * <code>GET_MONZTER = 2;</code>
+		 */
+		public static final int GET_MONZTER_VALUE = 2;
+		/**
+		 * <code>F_B_GET_CASH = 3;</code>
+		 */
+		public static final int F_B_GET_CASH_VALUE = 3;
+		/**
+		 * <code>F_B_GET_OIL = 4;</code>
+		 */
+		public static final int F_B_GET_OIL_VALUE = 4;
+		/**
+		 * <code>F_B_GET_GEMS = 5;</code>
+		 */
+		public static final int F_B_GET_GEMS_VALUE = 5;
+		/**
+		 * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
+		 */
+		public static final int F_B_GET_CASH_OIL_GEMS_VALUE = 6;
+		/**
+		 * <code>GET_ITEM = 7;</code>
+		 */
+		public static final int GET_ITEM_VALUE = 7;
 
-    public static DevRequest valueOf(int value) {
-      switch (value) {
-        case 1: return RESET_ACCOUNT;
-        case 2: return GET_MONZTER;
-        case 3: return F_B_GET_CASH;
-        case 4: return F_B_GET_OIL;
-        case 5: return F_B_GET_GEMS;
-        case 6: return F_B_GET_CASH_OIL_GEMS;
-        case 7: return GET_ITEM;
-        default: return null;
-      }
-    }
+		@Override
+		public final int getNumber() {
+			return value;
+		}
 
-    public static com.google.protobuf.Internal.EnumLiteMap<DevRequest>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<DevRequest>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<DevRequest>() {
-            public DevRequest findValueByNumber(int number) {
-              return DevRequest.valueOf(number);
-            }
-          };
+		public static DevRequest valueOf(int value) {
+			switch (value) {
+			case 1:
+				return RESET_ACCOUNT;
+			case 2:
+				return GET_MONZTER;
+			case 3:
+				return F_B_GET_CASH;
+			case 4:
+				return F_B_GET_OIL;
+			case 5:
+				return F_B_GET_GEMS;
+			case 6:
+				return F_B_GET_CASH_OIL_GEMS;
+			case 7:
+				return GET_ITEM;
+			default:
+				return null;
+			}
+		}
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.DevProto.getDescriptor().getEnumTypes().get(0);
-    }
+		public static com.google.protobuf.Internal.EnumLiteMap<DevRequest> internalGetValueMap() {
+			return internalValueMap;
+		}
 
-    private static final DevRequest[] VALUES = values();
+		private static com.google.protobuf.Internal.EnumLiteMap<DevRequest> internalValueMap = new com.google.protobuf.Internal.EnumLiteMap<DevRequest>() {
+			@Override
+			public DevRequest findValueByNumber(int number) {
+				return DevRequest.valueOf(number);
+			}
+		};
 
-    public static DevRequest valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
+		@Override
+		public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+			return getDescriptor().getValues().get(index);
+		}
 
-    private final int index;
-    private final int value;
+		@Override
+		public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
+			return getDescriptor();
+		}
 
-    private DevRequest(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
+		public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
+			return com.lvl6.proto.DevProto.getDescriptor().getEnumTypes()
+					.get(0);
+		}
 
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DevRequest)
-  }
+		private static final DevRequest[] VALUES = values();
 
+		public static DevRequest valueOf(
+				com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+			if (desc.getType() != getDescriptor()) {
+				throw new java.lang.IllegalArgumentException(
+						"EnumValueDescriptor is not for this type.");
+			}
+			return VALUES[desc.getIndex()];
+		}
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\tDev.proto\022\016com.lvl6.proto*\216\001\n\nDevReque" +
-      "st\022\021\n\rRESET_ACCOUNT\020\001\022\017\n\013GET_MONZTER\020\002\022\020" +
-      "\n\014F_B_GET_CASH\020\003\022\017\n\013F_B_GET_OIL\020\004\022\020\n\014F_B" +
-      "_GET_GEMS\020\005\022\031\n\025F_B_GET_CASH_OIL_GEMS\020\006\022\014" +
-      "\n\010GET_ITEM\020\007B\nB\010DevProto"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
-  }
+		private final int index;
+		private final int value;
 
-  // @@protoc_insertion_point(outer_class_scope)
+		private DevRequest(int index, int value) {
+			this.index = index;
+			this.value = value;
+		}
+
+		// @@protoc_insertion_point(enum_scope:com.lvl6.proto.DevRequest)
+	}
+
+	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
+	static {
+		java.lang.String[] descriptorData = { "\n\tDev.proto\022\016com.lvl6.proto*\216\001\n\nDevReque"
+				+ "st\022\021\n\rRESET_ACCOUNT\020\001\022\017\n\013GET_MONZTER\020\002\022\020"
+				+ "\n\014F_B_GET_CASH\020\003\022\017\n\013F_B_GET_OIL\020\004\022\020\n\014F_B"
+				+ "_GET_GEMS\020\005\022\031\n\025F_B_GET_CASH_OIL_GEMS\020\006\022\014"
+				+ "\n\010GET_ITEM\020\007B\nB\010DevProto" };
+		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+			@Override
+			public com.google.protobuf.ExtensionRegistry assignDescriptors(
+					com.google.protobuf.Descriptors.FileDescriptor root) {
+				descriptor = root;
+				return null;
+			}
+		};
+		com.google.protobuf.Descriptors.FileDescriptor
+				.internalBuildGeneratedFileFrom(
+						descriptorData,
+						new com.google.protobuf.Descriptors.FileDescriptor[] {},
+						assigner);
+	}
+
+	// @@protoc_insertion_point(outer_class_scope)
 }

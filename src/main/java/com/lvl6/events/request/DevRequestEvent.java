@@ -12,37 +12,36 @@ import com.lvl6.proto.EventDevProto.DevRequestProto;
 
 public class DevRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private DevRequestProto devRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      devRequestProto = DevRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = devRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("DevRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public DevRequestProto getDevRequestProto() {
-    return devRequestProto;
-  }
+	private DevRequestProto devRequestProto;
 
-  public void setDevRequestProto( DevRequestProto devRequestProto )
-  {
-	  this.devRequestProto = devRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			devRequestProto = DevRequestProto.parseFrom(ByteString
+					.copyFrom(buff));
+			playerId = devRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("DevRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "DevRequestEvent [devRequestProto="
-		  + devRequestProto
-		  + "]";
-  }
+	public DevRequestProto getDevRequestProto() {
+		return devRequestProto;
+	}
+
+	public void setDevRequestProto(DevRequestProto devRequestProto) {
+		this.devRequestProto = devRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "DevRequestEvent [devRequestProto=" + devRequestProto + "]";
+	}
 
 }

@@ -27,125 +27,132 @@ import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class BeginPvpBattleController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class BeginPvpBattleController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected HazelcastPvpUtil hazelcastPvpUtil;
-  
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected TimeUtils timeUtil;
-  
-  @Autowired
-  protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-  
-  @Autowired
-  protected InsertUtil insertUtil;
-  
-  @Autowired
-  protected UpdateUtil updateUtil;
-  
+	@Autowired
+	protected HazelcastPvpUtil hazelcastPvpUtil;
 
-  public BeginPvpBattleController() {
-    numAllocatedThreads = 7;
-  }
+	@Autowired
+	protected Locker locker;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new BeginPvpBattleRequestEvent();
-  }
+	@Autowired
+	protected TimeUtils timeUtil;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_BEGIN_PVP_BATTLE_EVENT;
-  }
+	@Autowired
+	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent)event)
-    		.getBeginPvpBattleRequestProto();
-    log.info("reqProto={}", reqProto);
+	@Autowired
+	protected InsertUtil insertUtil;
 
-    //get values sent from the client (the request proto)
-    MinimumUserProto senderProto = reqProto.getSender();
-    //TODO: FIGURE OUT IF STILL NEEDED
-    //int senderElo = reqProto.getSenderElo();
-    
-    String attackerId = senderProto.getUserUuid();
-    PvpProto enemyProto = reqProto.getEnemy();
-    String enemyUserId = null;
-    
-    boolean exactingRevenge = reqProto.getExactingRevenge();
-    Timestamp previousBattleEndTime = null;
-    if (exactingRevenge) {
-    	//the battle that allowed sender to start this revenge battle
-    	//where sender was the defender and enemy was the attacker
-    	previousBattleEndTime = new Timestamp(reqProto.getPreviousBattleEndTime());
-    }
-    
-    //set some values to send to the client (the response proto)
-    BeginPvpBattleResponseProto.Builder resBuilder = BeginPvpBattleResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
-    resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER); //default
-    BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(attackerId);
-    resEvent.setTag(event.getTag());
+	@Autowired
+	protected UpdateUtil updateUtil;
 
-    UUID enemyUserUuid = null;
-    try {
-    	UUID.fromString(attackerId);
+	public BeginPvpBattleController() {
+		numAllocatedThreads = 7;
+	}
 
-    	enemyUserId = enemyProto.getDefender().getMinUserProto().getUserUuid();
-    	if (!"".equals(enemyUserId)) {
-    		enemyUserUuid = UUID.fromString(enemyUserId);
-    	}
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new BeginPvpBattleRequestEvent();
+	}
 
-    } catch (Exception e1) {
-    	log.error(String.format(
-    			"UUID error. incorrect enemyUserId=%s",
-    			enemyUserId), e1);
-    }
-    
-    
-    //lock the user that client is going to attack, in order to prevent others from
-    //attacking same guy, only lock a real user
-    if (null != enemyUserId && !enemyUserId.isEmpty()) {
-    	locker.lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
-    }
-    try {
-    	Date curDate = new Date(reqProto.getAttackStartTime());
-    	int enemyElo = enemyProto.getPvpLeagueStats().getElo();
-    	
-    	BeginPvpBattleAction bpa = new BeginPvpBattleAction(attackerId, enemyUserId,
-    			enemyElo, curDate, exactingRevenge, previousBattleEndTime,
-    			pvpLeagueForUserRetrieveUtil, hazelcastPvpUtil, timeUtil,
-    			insertUtil, updateUtil);
-    	
-    	bpa.execute(resBuilder);
-    	
-    	resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
-    	server.writeEvent(resEvent);
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_BEGIN_PVP_BATTLE_EVENT;
+	}
 
-    } catch (Exception e) {
-      log.error("exception in BeginPvpBattleController processEvent", e);
-      //don't let the client hang
-      try {
-    	  resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-      } catch (Exception e2) {
-    	  log.error("exception2 in BeginPvpBattleController processEvent", e);
-      }
-      
-    } finally {
-    	if (null != enemyUserId && !enemyUserId.isEmpty()) {
-    		//only unlock if real user
-    		locker.unlockPlayer(enemyUserUuid, this.getClass().getSimpleName());
-    	}
-    }
-  }
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent) event)
+				.getBeginPvpBattleRequestProto();
+		log.info("reqProto={}", reqProto);
+
+		//get values sent from the client (the request proto)
+		MinimumUserProto senderProto = reqProto.getSender();
+		//TODO: FIGURE OUT IF STILL NEEDED
+		//int senderElo = reqProto.getSenderElo();
+
+		String attackerId = senderProto.getUserUuid();
+		PvpProto enemyProto = reqProto.getEnemy();
+		String enemyUserId = null;
+
+		boolean exactingRevenge = reqProto.getExactingRevenge();
+		Timestamp previousBattleEndTime = null;
+		if (exactingRevenge) {
+			//the battle that allowed sender to start this revenge battle
+			//where sender was the defender and enemy was the attacker
+			previousBattleEndTime = new Timestamp(
+					reqProto.getPreviousBattleEndTime());
+		}
+
+		//set some values to send to the client (the response proto)
+		BeginPvpBattleResponseProto.Builder resBuilder = BeginPvpBattleResponseProto
+				.newBuilder();
+		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER); //default
+		BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(
+				attackerId);
+		resEvent.setTag(event.getTag());
+
+		UUID enemyUserUuid = null;
+		try {
+			UUID.fromString(attackerId);
+
+			enemyUserId = enemyProto.getDefender().getMinUserProto()
+					.getUserUuid();
+			if (!"".equals(enemyUserId)) {
+				enemyUserUuid = UUID.fromString(enemyUserId);
+			}
+
+		} catch (Exception e1) {
+			log.error(String.format("UUID error. incorrect enemyUserId=%s",
+					enemyUserId), e1);
+		}
+
+		//lock the user that client is going to attack, in order to prevent others from
+		//attacking same guy, only lock a real user
+		if (null != enemyUserId && !enemyUserId.isEmpty()) {
+			locker.lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
+		}
+		try {
+			Date curDate = new Date(reqProto.getAttackStartTime());
+			int enemyElo = enemyProto.getPvpLeagueStats().getElo();
+
+			BeginPvpBattleAction bpa = new BeginPvpBattleAction(attackerId,
+					enemyUserId, enemyElo, curDate, exactingRevenge,
+					previousBattleEndTime, pvpLeagueForUserRetrieveUtil,
+					hazelcastPvpUtil, timeUtil, insertUtil, updateUtil);
+
+			bpa.execute(resBuilder);
+
+			resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+
+		} catch (Exception e) {
+			log.error("exception in BeginPvpBattleController processEvent", e);
+			//don't let the client hang
+			try {
+				resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in BeginPvpBattleController processEvent",
+						e);
+			}
+
+		} finally {
+			if (null != enemyUserId && !enemyUserId.isEmpty()) {
+				//only unlock if real user
+				locker.unlockPlayer(enemyUserUuid, this.getClass()
+						.getSimpleName());
+			}
+		}
+	}
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
@@ -166,7 +173,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public TimeUtils getTimeUtil() {
 		return timeUtil;
 	}
-	
+
 	public void setTimeUtil(TimeUtils timeUtil) {
 		this.timeUtil = timeUtil;
 	}
@@ -199,5 +206,5 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
-	
+
 }

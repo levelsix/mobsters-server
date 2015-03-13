@@ -12,36 +12,39 @@ import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
 
 public class EnhancementWaitTimeCompleteRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private EnhancementWaitTimeCompleteRequestProto enhancementWaitTimeCompleteRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-    	enhancementWaitTimeCompleteRequestProto = EnhancementWaitTimeCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = enhancementWaitTimeCompleteRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EnhancementWaitTimeCompleteRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EnhancementWaitTimeCompleteRequestProto getEnhancementWaitTimeCompleteRequestProto() {
-    return enhancementWaitTimeCompleteRequestProto;
-  }
-  
-  public void setEnhancementWaitTimeCompleteRequestProto(EnhancementWaitTimeCompleteRequestProto ewtcrq) {
-	    this.enhancementWaitTimeCompleteRequestProto = ewtcrq;
-	  }
+	private EnhancementWaitTimeCompleteRequestProto enhancementWaitTimeCompleteRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "EnhancementWaitTimeCompleteRequestEvent [enhancementWaitTimeCompleteRequestProto="
-		  + enhancementWaitTimeCompleteRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			enhancementWaitTimeCompleteRequestProto = EnhancementWaitTimeCompleteRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = enhancementWaitTimeCompleteRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EnhancementWaitTimeCompleteRequest exception", e);
+		}
+	}
+
+	public EnhancementWaitTimeCompleteRequestProto getEnhancementWaitTimeCompleteRequestProto() {
+		return enhancementWaitTimeCompleteRequestProto;
+	}
+
+	public void setEnhancementWaitTimeCompleteRequestProto(
+			EnhancementWaitTimeCompleteRequestProto ewtcrq) {
+		this.enhancementWaitTimeCompleteRequestProto = ewtcrq;
+	}
+
+	@Override
+	public String toString() {
+		return "EnhancementWaitTimeCompleteRequestEvent [enhancementWaitTimeCompleteRequestProto="
+				+ enhancementWaitTimeCompleteRequestProto + "]";
+	}
 
 }

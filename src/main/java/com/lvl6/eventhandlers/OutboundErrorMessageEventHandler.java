@@ -17,63 +17,56 @@ import com.lvl6.utils.ConnectedPlayer;
 
 public class OutboundErrorMessageEventHandler implements MessageHandler {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(OutboundErrorMessageEventHandler.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(OutboundErrorMessageEventHandler.class);
 
-	@Resource(name="playersByPlayerId")
-	Map<Integer, ConnectedPlayer> playersByPlayerId; 
-	
-	
+	@Resource(name = "playersByPlayerId")
+	Map<Integer, ConnectedPlayer> playersByPlayerId;
+
 	public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
-
-
-	public void setPlayersByPlayerId(Map<Integer, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(
+			Map<Integer, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
-
-
-	@Resource(name="messagesForDisconnectedPlayers")
+	@Resource(name = "messagesForDisconnectedPlayers")
 	protected Map<String, List<Message<?>>> messagesForDisconnectedPlayers;
 
-	
-	
 	public Map<String, List<Message<?>>> getMessagesForDisconnectedPlayers() {
 		return messagesForDisconnectedPlayers;
 	}
-
-
 
 	public void setMessagesForDisconnectedPlayers(
 			Map<String, List<Message<?>>> messagesForDisconnectedPlayers) {
 		this.messagesForDisconnectedPlayers = messagesForDisconnectedPlayers;
 	}
 
-
-
 	@Override
-	public void handleMessage(Message<?> failedMessage) throws MessagingException {
+	public void handleMessage(Message<?> failedMessage)
+			throws MessagingException {
 		log.info("Handling failed message");
-		if(failedMessage.getHeaders().containsKey("playerId")) {
-			NormalResponseEvent ev = (NormalResponseEvent) failedMessage.getPayload();
+		if (failedMessage.getHeaders().containsKey("playerId")) {
+			NormalResponseEvent ev = (NormalResponseEvent) failedMessage
+					.getPayload();
 			String user = ev.getPlayerId();
-			log.info("Failed to send message to user "+user+"... saving in case they reconnect ");
+			log.info("Failed to send message to user " + user
+					+ "... saving in case they reconnect ");
 			List<Message<?>> playerPendingMessages;
-			if(messagesForDisconnectedPlayers.containsKey(user)) {
-				playerPendingMessages = messagesForDisconnectedPlayers.get(user);
-			}else {
+			if (messagesForDisconnectedPlayers.containsKey(user)) {
+				playerPendingMessages = messagesForDisconnectedPlayers
+						.get(user);
+			} else {
 				playerPendingMessages = new ArrayList<Message<?>>();
 				messagesForDisconnectedPlayers.put(user, playerPendingMessages);
 			}
 			playerPendingMessages.add(failedMessage);
-			if(playersByPlayerId.containsKey(user)) {
+			if (playersByPlayerId.containsKey(user)) {
 				playersByPlayerId.remove(user);
 			}
-		}else {
+		} else {
 			log.warn("Message that failed to send had no playerId header");
 			log.warn(failedMessage.getHeaders().toString());
 		}

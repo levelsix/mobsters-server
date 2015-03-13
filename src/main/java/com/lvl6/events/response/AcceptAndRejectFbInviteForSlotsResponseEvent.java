@@ -7,28 +7,31 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponseEvent {
+public class AcceptAndRejectFbInviteForSlotsResponseEvent extends
+		NormalResponseEvent {
 
-  private AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto;
-  
-  public AcceptAndRejectFbInviteForSlotsResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = acceptAndRejectFbInviteForSlotsResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto;
 
-  public void setAcceptAndRejectFbInviteForSlotsResponseProto(AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto) {
-    this.acceptAndRejectFbInviteForSlotsResponseProto = acceptAndRejectFbInviteForSlotsResponseProto;
-  }
+	public AcceptAndRejectFbInviteForSlotsResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT;
+	}
 
-  public AcceptAndRejectFbInviteForSlotsResponseProto getAcceptAndRejectFbInviteForSlotsResponseProto() {   //because APNS required
-    return acceptAndRejectFbInviteForSlotsResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = acceptAndRejectFbInviteForSlotsResponseProto
+				.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setAcceptAndRejectFbInviteForSlotsResponseProto(
+			AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto) {
+		this.acceptAndRejectFbInviteForSlotsResponseProto = acceptAndRejectFbInviteForSlotsResponseProto;
+	}
+
+	public AcceptAndRejectFbInviteForSlotsResponseProto getAcceptAndRejectFbInviteForSlotsResponseProto() {   //because APNS required
+		return acceptAndRejectFbInviteForSlotsResponseProto;
+	}
+
 }

@@ -4,716 +4,811 @@
 package com.lvl6.proto;
 
 public final class EventStaticDataProto {
-  private EventStaticDataProto() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-  }
-  public interface PurgeClientStaticDataResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurgeClientStaticDataResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+	private EventStaticDataProto() {
+	}
 
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    boolean hasSenderUuid();
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    java.lang.String getSenderUuid();
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getSenderUuidBytes();
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistry registry) {
+	}
 
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    boolean hasStaticDataStuff();
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff();
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
-   */
-  public static final class PurgeClientStaticDataResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
-      PurgeClientStaticDataResponseProtoOrBuilder {
-    // Use PurgeClientStaticDataResponseProto.newBuilder() to construct.
-    private PurgeClientStaticDataResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private PurgeClientStaticDataResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+	public interface PurgeClientStaticDataResponseProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+			com.google.protobuf.MessageOrBuilder {
 
-    private static final PurgeClientStaticDataResponseProto defaultInstance;
-    public static PurgeClientStaticDataResponseProto getDefaultInstance() {
-      return defaultInstance;
-    }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		boolean hasSenderUuid();
 
-    public PurgeClientStaticDataResponseProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		java.lang.String getSenderUuid();
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PurgeClientStaticDataResponseProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              senderUuid_ = bs;
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = staticDataStuff_.toBuilder();
-              }
-              staticDataStuff_ = input.readMessage(com.lvl6.proto.StaticDataStuffProto.StaticDataProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(staticDataStuff_);
-                staticDataStuff_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
-    }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		com.google.protobuf.ByteString getSenderUuidBytes();
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.class, com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.Builder.class);
-    }
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		boolean hasStaticDataStuff();
 
-    public static com.google.protobuf.Parser<PurgeClientStaticDataResponseProto> PARSER =
-        new com.google.protobuf.AbstractParser<PurgeClientStaticDataResponseProto>() {
-      public PurgeClientStaticDataResponseProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PurgeClientStaticDataResponseProto(input, extensionRegistry);
-      }
-    };
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff();
 
-    @java.lang.Override
-    public com.google.protobuf.Parser<PurgeClientStaticDataResponseProto> getParserForType() {
-      return PARSER;
-    }
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder();
+	}
 
-    private int bitField0_;
-    public static final int SENDERUUID_FIELD_NUMBER = 1;
-    private java.lang.Object senderUuid_;
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    public boolean hasSenderUuid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    public java.lang.String getSenderUuid() {
-      java.lang.Object ref = senderUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          senderUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string senderUuid = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSenderUuidBytes() {
-      java.lang.Object ref = senderUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        senderUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
+	/**
+	 * Protobuf type {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
+	 */
+	public static final class PurgeClientStaticDataResponseProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+			PurgeClientStaticDataResponseProtoOrBuilder {
+		// Use PurgeClientStaticDataResponseProto.newBuilder() to construct.
+		private PurgeClientStaticDataResponseProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
 
-    public static final int STATICDATASTUFF_FIELD_NUMBER = 2;
-    private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_;
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    public boolean hasStaticDataStuff() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    public com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff() {
-      return staticDataStuff_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-     */
-    public com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder() {
-      return staticDataStuff_;
-    }
+		private PurgeClientStaticDataResponseProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
 
-    private void initFields() {
-      senderUuid_ = "";
-      staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+		private static final PurgeClientStaticDataResponseProto defaultInstance;
 
-      memoizedIsInitialized = 1;
-      return true;
-    }
+		public static PurgeClientStaticDataResponseProto getDefaultInstance() {
+			return defaultInstance;
+		}
 
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getSenderUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, staticDataStuff_);
-      }
-      getUnknownFields().writeTo(output);
-    }
+		@Override
+		public PurgeClientStaticDataResponseProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
 
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
 
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getSenderUuidBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, staticDataStuff_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
 
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
+		private PurgeClientStaticDataResponseProto(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 10: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000001;
+						senderUuid_ = bs;
+						break;
+					}
+					case 18: {
+						com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder subBuilder = null;
+						if (((bitField0_ & 0x00000002) == 0x00000002)) {
+							subBuilder = staticDataStuff_.toBuilder();
+						}
+						staticDataStuff_ = input
+								.readMessage(
+										com.lvl6.proto.StaticDataStuffProto.StaticDataProto.PARSER,
+										extensionRegistry);
+						if (subBuilder != null) {
+							subBuilder.mergeFrom(staticDataStuff_);
+							staticDataStuff_ = subBuilder.buildPartial();
+						}
+						bitField0_ |= 0x00000002;
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
 
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
+		}
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.class,
+							com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.Builder.class);
+		}
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
-        com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
-      }
+		public static com.google.protobuf.Parser<PurgeClientStaticDataResponseProto> PARSER = new com.google.protobuf.AbstractParser<PurgeClientStaticDataResponseProto>() {
+			@Override
+			public PurgeClientStaticDataResponseProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new PurgeClientStaticDataResponseProto(input,
+						extensionRegistry);
+			}
+		};
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.class, com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.Builder.class);
-      }
+		@java.lang.Override
+		public com.google.protobuf.Parser<PurgeClientStaticDataResponseProto> getParserForType() {
+			return PARSER;
+		}
 
-      // Construct using com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
+		private int bitField0_;
+		public static final int SENDERUUID_FIELD_NUMBER = 1;
+		private java.lang.Object senderUuid_;
 
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getStaticDataStuffFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		@Override
+		public boolean hasSenderUuid() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
 
-      public Builder clear() {
-        super.clear();
-        senderUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (staticDataStuffBuilder_ == null) {
-          staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
-        } else {
-          staticDataStuffBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		@Override
+		public java.lang.String getSenderUuid() {
+			java.lang.Object ref = senderUuid_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					senderUuid_ = s;
+				}
+				return s;
+			}
+		}
 
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
+		/**
+		 * <code>optional string senderUuid = 1;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getSenderUuidBytes() {
+			java.lang.Object ref = senderUuid_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				senderUuid_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
 
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
-      }
+		public static final int STATICDATASTUFF_FIELD_NUMBER = 2;
+		private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_;
 
-      public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.getDefaultInstance();
-      }
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		@Override
+		public boolean hasStaticDataStuff() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
 
-      public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto build() {
-        com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		@Override
+		public com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff() {
+			return staticDataStuff_;
+		}
 
-      public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto buildPartial() {
-        com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto result = new com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.senderUuid_ = senderUuid_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (staticDataStuffBuilder_ == null) {
-          result.staticDataStuff_ = staticDataStuff_;
-        } else {
-          result.staticDataStuff_ = staticDataStuffBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
+		/**
+		 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+		 */
+		@Override
+		public com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder() {
+			return staticDataStuff_;
+		}
 
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
+		private void initFields() {
+			senderUuid_ = "";
+			staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+					.getDefaultInstance();
+		}
 
-      public Builder mergeFrom(com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto other) {
-        if (other == com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.getDefaultInstance()) return this;
-        if (other.hasSenderUuid()) {
-          bitField0_ |= 0x00000001;
-          senderUuid_ = other.senderUuid_;
-          onChanged();
-        }
-        if (other.hasStaticDataStuff()) {
-          mergeStaticDataStuff(other.getStaticDataStuff());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
+		private byte memoizedIsInitialized = -1;
 
-      public final boolean isInitialized() {
-        return true;
-      }
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
 
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
+			memoizedIsInitialized = 1;
+			return true;
+		}
 
-      private java.lang.Object senderUuid_ = "";
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public boolean hasSenderUuid() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public java.lang.String getSenderUuid() {
-        java.lang.Object ref = senderUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            senderUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSenderUuidBytes() {
-        java.lang.Object ref = senderUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          senderUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public Builder setSenderUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        senderUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public Builder clearSenderUuid() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        senderUuid_ = getDefaultInstance().getSenderUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string senderUuid = 1;</code>
-       */
-      public Builder setSenderUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        senderUuid_ = value;
-        onChanged();
-        return this;
-      }
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeBytes(1, getSenderUuidBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeMessage(2, staticDataStuff_);
+			}
+			getUnknownFields().writeTo(output);
+		}
 
-      private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> staticDataStuffBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public boolean hasStaticDataStuff() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff() {
-        if (staticDataStuffBuilder_ == null) {
-          return staticDataStuff_;
-        } else {
-          return staticDataStuffBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public Builder setStaticDataStuff(com.lvl6.proto.StaticDataStuffProto.StaticDataProto value) {
-        if (staticDataStuffBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          staticDataStuff_ = value;
-          onChanged();
-        } else {
-          staticDataStuffBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public Builder setStaticDataStuff(
-          com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder builderForValue) {
-        if (staticDataStuffBuilder_ == null) {
-          staticDataStuff_ = builderForValue.build();
-          onChanged();
-        } else {
-          staticDataStuffBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public Builder mergeStaticDataStuff(com.lvl6.proto.StaticDataStuffProto.StaticDataProto value) {
-        if (staticDataStuffBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              staticDataStuff_ != com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance()) {
-            staticDataStuff_ =
-              com.lvl6.proto.StaticDataStuffProto.StaticDataProto.newBuilder(staticDataStuff_).mergeFrom(value).buildPartial();
-          } else {
-            staticDataStuff_ = value;
-          }
-          onChanged();
-        } else {
-          staticDataStuffBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public Builder clearStaticDataStuff() {
-        if (staticDataStuffBuilder_ == null) {
-          staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
-          onChanged();
-        } else {
-          staticDataStuffBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder getStaticDataStuffBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getStaticDataStuffFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      public com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder() {
-        if (staticDataStuffBuilder_ != null) {
-          return staticDataStuffBuilder_.getMessageOrBuilder();
-        } else {
-          return staticDataStuff_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> 
-          getStaticDataStuffFieldBuilder() {
-        if (staticDataStuffBuilder_ == null) {
-          staticDataStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder>(
-                  getStaticDataStuff(),
-                  getParentForChildren(),
-                  isClean());
-          staticDataStuff_ = null;
-        }
-        return staticDataStuffBuilder_;
-      }
+		private int memoizedSerializedSize = -1;
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurgeClientStaticDataResponseProto)
-    }
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
 
-    static {
-      defaultInstance = new PurgeClientStaticDataResponseProto(true);
-      defaultInstance.initFields();
-    }
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						1, getSenderUuidBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream
+						.computeMessageSize(2, staticDataStuff_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurgeClientStaticDataResponseProto)
-  }
+		private static final long serialVersionUID = 0L;
 
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable;
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\025EventStaticData.proto\022\016com.lvl6.proto\032" +
-      "\020StaticData.proto\"r\n\"PurgeClientStaticDa" +
-      "taResponseProto\022\022\n\nsenderUuid\030\001 \001(\t\0228\n\017s" +
-      "taticDataStuff\030\002 \001(\0132\037.com.lvl6.proto.St" +
-      "aticDataProtoB\026B\024EventStaticDataProto"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.StaticDataStuffProto.getDescriptor(),
-        }, assigner);
-    internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor,
-        new java.lang.String[] { "SenderUuid", "StaticDataStuff", });
-    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
-  }
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
 
-  // @@protoc_insertion_point(outer_class_scope)
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type
+		 * {@code com.lvl6.proto.PurgeClientStaticDataResponseProto}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder>
+				implements
+				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+				com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.class,
+								com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+					getStaticDataStuffFieldBuilder();
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				senderUuid_ = "";
+				bitField0_ = (bitField0_ & ~0x00000001);
+				if (staticDataStuffBuilder_ == null) {
+					staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+							.getDefaultInstance();
+				} else {
+					staticDataStuffBuilder_.clear();
+				}
+				bitField0_ = (bitField0_ & ~0x00000002);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.EventStaticDataProto.internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto getDefaultInstanceForType() {
+				return com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto build() {
+				com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto buildPartial() {
+				com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto result = new com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.senderUuid_ = senderUuid_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				if (staticDataStuffBuilder_ == null) {
+					result.staticDataStuff_ = staticDataStuff_;
+				} else {
+					result.staticDataStuff_ = staticDataStuffBuilder_.build();
+				}
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto) {
+					return mergeFrom((com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto other) {
+				if (other == com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasSenderUuid()) {
+					bitField0_ |= 0x00000001;
+					senderUuid_ = other.senderUuid_;
+					onChanged();
+				}
+				if (other.hasStaticDataStuff()) {
+					mergeStaticDataStuff(other.getStaticDataStuff());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private java.lang.Object senderUuid_ = "";
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			@Override
+			public boolean hasSenderUuid() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			@Override
+			public java.lang.String getSenderUuid() {
+				java.lang.Object ref = senderUuid_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						senderUuid_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getSenderUuidBytes() {
+				java.lang.Object ref = senderUuid_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					senderUuid_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			public Builder setSenderUuid(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				senderUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			public Builder clearSenderUuid() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				senderUuid_ = getDefaultInstance().getSenderUuid();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string senderUuid = 1;</code>
+			 */
+			public Builder setSenderUuidBytes(
+					com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				senderUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+					.getDefaultInstance();
+			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> staticDataStuffBuilder_;
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			@Override
+			public boolean hasStaticDataStuff() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			@Override
+			public com.lvl6.proto.StaticDataStuffProto.StaticDataProto getStaticDataStuff() {
+				if (staticDataStuffBuilder_ == null) {
+					return staticDataStuff_;
+				} else {
+					return staticDataStuffBuilder_.getMessage();
+				}
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			public Builder setStaticDataStuff(
+					com.lvl6.proto.StaticDataStuffProto.StaticDataProto value) {
+				if (staticDataStuffBuilder_ == null) {
+					if (value == null) {
+						throw new NullPointerException();
+					}
+					staticDataStuff_ = value;
+					onChanged();
+				} else {
+					staticDataStuffBuilder_.setMessage(value);
+				}
+				bitField0_ |= 0x00000002;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			public Builder setStaticDataStuff(
+					com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder builderForValue) {
+				if (staticDataStuffBuilder_ == null) {
+					staticDataStuff_ = builderForValue.build();
+					onChanged();
+				} else {
+					staticDataStuffBuilder_.setMessage(builderForValue.build());
+				}
+				bitField0_ |= 0x00000002;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			public Builder mergeStaticDataStuff(
+					com.lvl6.proto.StaticDataStuffProto.StaticDataProto value) {
+				if (staticDataStuffBuilder_ == null) {
+					if (((bitField0_ & 0x00000002) == 0x00000002)
+							&& staticDataStuff_ != com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+									.getDefaultInstance()) {
+						staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+								.newBuilder(staticDataStuff_).mergeFrom(value)
+								.buildPartial();
+					} else {
+						staticDataStuff_ = value;
+					}
+					onChanged();
+				} else {
+					staticDataStuffBuilder_.mergeFrom(value);
+				}
+				bitField0_ |= 0x00000002;
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			public Builder clearStaticDataStuff() {
+				if (staticDataStuffBuilder_ == null) {
+					staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto
+							.getDefaultInstance();
+					onChanged();
+				} else {
+					staticDataStuffBuilder_.clear();
+				}
+				bitField0_ = (bitField0_ & ~0x00000002);
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			public com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder getStaticDataStuffBuilder() {
+				bitField0_ |= 0x00000002;
+				onChanged();
+				return getStaticDataStuffFieldBuilder().getBuilder();
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			@Override
+			public com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffOrBuilder() {
+				if (staticDataStuffBuilder_ != null) {
+					return staticDataStuffBuilder_.getMessageOrBuilder();
+				} else {
+					return staticDataStuff_;
+				}
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
+			 */
+			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> getStaticDataStuffFieldBuilder() {
+				if (staticDataStuffBuilder_ == null) {
+					staticDataStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder>(
+							getStaticDataStuff(), getParentForChildren(),
+							isClean());
+					staticDataStuff_ = null;
+				}
+				return staticDataStuffBuilder_;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+		}
+
+		static {
+			defaultInstance = new PurgeClientStaticDataResponseProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.PurgeClientStaticDataResponseProto)
+	}
+
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable;
+
+	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
+	static {
+		java.lang.String[] descriptorData = { "\n\025EventStaticData.proto\022\016com.lvl6.proto\032"
+				+ "\020StaticData.proto\"r\n\"PurgeClientStaticDa"
+				+ "taResponseProto\022\022\n\nsenderUuid\030\001 \001(\t\0228\n\017s"
+				+ "taticDataStuff\030\002 \001(\0132\037.com.lvl6.proto.St"
+				+ "aticDataProtoB\026B\024EventStaticDataProto" };
+		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+			@Override
+			public com.google.protobuf.ExtensionRegistry assignDescriptors(
+					com.google.protobuf.Descriptors.FileDescriptor root) {
+				descriptor = root;
+				return null;
+			}
+		};
+		com.google.protobuf.Descriptors.FileDescriptor
+				.internalBuildGeneratedFileFrom(
+						descriptorData,
+						new com.google.protobuf.Descriptors.FileDescriptor[] { com.lvl6.proto.StaticDataStuffProto
+								.getDescriptor(), }, assigner);
+		internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor = getDescriptor()
+				.getMessageTypes().get(0);
+		internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor,
+				new java.lang.String[] { "SenderUuid", "StaticDataStuff", });
+		com.lvl6.proto.StaticDataStuffProto.getDescriptor();
+	}
+
+	// @@protoc_insertion_point(outer_class_scope)
 }

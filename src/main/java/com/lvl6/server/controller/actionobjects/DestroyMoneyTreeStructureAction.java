@@ -15,9 +15,7 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-
-public class DestroyMoneyTreeStructureAction
-{
+public class DestroyMoneyTreeStructureAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -26,15 +24,11 @@ public class DestroyMoneyTreeStructureAction
 	private Date now;
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 	protected DeleteUtil deleteUtil;
-	
 
-	public DestroyMoneyTreeStructureAction(
-		String userId,
-		List<String> userStructIdsList,
-		Date now,
-		StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
-		DeleteUtil deleteUtil )
-	{
+	public DestroyMoneyTreeStructureAction(String userId,
+			List<String> userStructIdsList, Date now,
+			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
+			DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.userStructIdsList = userStructIdsList;
@@ -56,22 +50,21 @@ public class DestroyMoneyTreeStructureAction
 	//		
 	//	}
 
-
 	//derived state
 	private Map<String, String> reasonsForChanges;
 	private Map<String, String> details;
 
-	
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = false;
-		
+
 		valid = verifySemantics(resBuilder);
 
 		if (!valid) {
-			resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_NOT_EXPIRED_YET);
+			resBuilder
+					.setStatus(DestroyMoneyTreeStructureStatus.FAIL_NOT_EXPIRED_YET);
 			return;
 		}
 
@@ -84,54 +77,57 @@ public class DestroyMoneyTreeStructureAction
 
 	}
 
-
 	private boolean verifySemantics(Builder resBuilder) {
 		boolean success = false;
-		List<StructureForUser> sfuList = structureForUserRetrieveUtils2.getSpecificOrAllUserStructsForUser(userId, userStructIdsList);
-		
-		for(StructureForUser sfu : sfuList) {
-			StructureMoneyTree smt = StructureMoneyTreeRetrieveUtils.getMoneyTreeForStructId(sfu.getStructId());
-		
-			int millisecondsConvertingToOneDayConstant = 1000*60*60*24;
+		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
+				.getSpecificOrAllUserStructsForUser(userId, userStructIdsList);
+
+		for (StructureForUser sfu : sfuList) {
+			StructureMoneyTree smt = StructureMoneyTreeRetrieveUtils
+					.getMoneyTreeForStructId(sfu.getStructId());
+
+			int millisecondsConvertingToOneDayConstant = 1000 * 60 * 60 * 24;
 			Date purchaseTime = sfu.getPurchaseTime();
-			
-			int timeOfDuration = (int)( (now.getTime() - purchaseTime.getTime()) 
-	                / (millisecondsConvertingToOneDayConstant * smt.getDaysOfDuration()) );
-			
-			if(!(timeOfDuration > 0)) {
-				log.error("not done collecting from money tree with userstructid {}", sfu.getId());
+
+			int timeOfDuration = (int) ((now.getTime() - purchaseTime.getTime()) / (millisecondsConvertingToOneDayConstant * smt
+					.getDaysOfDuration()));
+
+			if (!(timeOfDuration > 0)) {
+				log.error(
+						"not done collecting from money tree with userstructid {}",
+						sfu.getId());
 				success = false;
-			}
-			else success = true;
-			
+			} else
+				success = true;
+
 			Date lastRetrieved = sfu.getLastRetrieved();
-			int timeForRenewal = (int)( (now.getTime() - lastRetrieved.getTime()) 
-	                / (millisecondsConvertingToOneDayConstant * smt.getDaysForRenewal()) );
-			
-			
-			if(!(timeForRenewal > 0)) {
-				log.error("renewal period not over yet for money tree with userstructid {}", sfu.getId());
+			int timeForRenewal = (int) ((now.getTime() - lastRetrieved
+					.getTime()) / (millisecondsConvertingToOneDayConstant * smt
+					.getDaysForRenewal()));
+
+			if (!(timeForRenewal > 0)) {
+				log.error(
+						"renewal period not over yet for money tree with userstructid {}",
+						sfu.getId());
 				success = false;
-			}
-			else success = true;
+			} else
+				success = true;
 		}
-		
+
 		return success;
 	}
-
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = false;
-		for(String userStructId : userStructIdsList) {
+		for (String userStructId : userStructIdsList) {
 			success = deleteUtil.deleteUserStruct(userStructId);
-			if(!success) {
+			if (!success) {
 				return success;
 			}
-			
+
 		}
 		return success;
 	}
-	
 
 	public Map<String, String> getReasons() {
 		return reasonsForChanges;

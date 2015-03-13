@@ -6,9 +6,9 @@ import java.util.Date;
 import com.lvl6.pvp.PvpUser;
 
 public class PvpLeagueForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 5869847017999707936L;
-	
+
 	private String userId;
 	private int pvpLeagueId;
 	private int rank;
@@ -23,7 +23,7 @@ public class PvpLeagueForUser implements Serializable {
 	private int defensesLost;
 	private Date lastBattleNotificationTime;
 	private float monsterDmgMultiplier;
-	
+
 	public PvpLeagueForUser() {
 		super();
 	}
@@ -42,7 +42,7 @@ public class PvpLeagueForUser implements Serializable {
 		this.defensesLost = pu.getDefensesLost();
 		this.monsterDmgMultiplier = pu.getMonsterDmgMultiplier();
 	}
-	
+
 	public PvpLeagueForUser(PvpLeagueForUser plfu) {
 		super();
 		this.userId = plfu.getUserId();
@@ -58,7 +58,7 @@ public class PvpLeagueForUser implements Serializable {
 		this.lastBattleNotificationTime = plfu.getLastBattleNotificationTime();
 		this.monsterDmgMultiplier = plfu.getMonsterDmgMultiplier();
 	}
-	
+
 	public PvpLeagueForUser(String userId, int pvpLeagueId, int rank, int elo,
 			Date shieldEndTime, Date inBattleShieldEndTime, int attacksWon,
 			int defensesWon, int attacksLost, int defensesLost,
@@ -78,13 +78,12 @@ public class PvpLeagueForUser implements Serializable {
 		this.monsterDmgMultiplier = monsterDmgMultiplier;
 	}
 
-
 	//covenience methods------------------------------------------------------------
 	public int getBattlesWon() {
 		int battlesWon = getAttacksWon() + getDefensesWon();
 		return battlesWon;
 	}
-	
+
 	public int getBattlesLost() {
 		int battlesLost = getAttacksLost() + getDefensesLost();
 		return battlesLost;
@@ -94,6 +93,7 @@ public class PvpLeagueForUser implements Serializable {
 		int numBattles = getBattlesWon() + getBattlesLost();
 		return numBattles;
 	}
+
 	//end covenience methods--------------------------------------------------------
 
 	public String getUserId() {
@@ -184,44 +184,25 @@ public class PvpLeagueForUser implements Serializable {
 		this.lastBattleNotificationTime = lastBattleNotificationTime;
 	}
 
-	public float getMonsterDmgMultiplier()
-	{
+	public float getMonsterDmgMultiplier() {
 		return monsterDmgMultiplier;
 	}
 
-	public void setMonsterDmgMultiplier( float monsterDmgMultiplier )
-	{
+	public void setMonsterDmgMultiplier(float monsterDmgMultiplier) {
 		this.monsterDmgMultiplier = monsterDmgMultiplier;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "PvpLeagueForUser [userId="
-			+ userId
-			+ ", pvpLeagueId="
-			+ pvpLeagueId
-			+ ", rank="
-			+ rank
-			+ ", elo="
-			+ elo
-			+ ", shieldEndTime="
-			+ shieldEndTime
-			+ ", inBattleShieldEndTime="
-			+ inBattleShieldEndTime
-			+ ", attacksWon="
-			+ attacksWon
-			+ ", defensesWon="
-			+ defensesWon
-			+ ", attacksLost="
-			+ attacksLost
-			+ ", defensesLost="
-			+ defensesLost
-			+ ", lastBattleNotificationTime="
-			+ lastBattleNotificationTime
-			+ ", monsterDmgMultiplier="
-			+ monsterDmgMultiplier
-			+ "]";
+	public String toString() {
+		return "PvpLeagueForUser [userId=" + userId + ", pvpLeagueId="
+				+ pvpLeagueId + ", rank=" + rank + ", elo=" + elo
+				+ ", shieldEndTime=" + shieldEndTime
+				+ ", inBattleShieldEndTime=" + inBattleShieldEndTime
+				+ ", attacksWon=" + attacksWon + ", defensesWon=" + defensesWon
+				+ ", attacksLost=" + attacksLost + ", defensesLost="
+				+ defensesLost + ", lastBattleNotificationTime="
+				+ lastBattleNotificationTime + ", monsterDmgMultiplier="
+				+ monsterDmgMultiplier + "]";
 	}
 
 }

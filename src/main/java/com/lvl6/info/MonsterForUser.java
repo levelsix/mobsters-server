@@ -6,7 +6,7 @@ import java.util.Date;
 public class MonsterForUser implements Serializable {
 
 	private static final long serialVersionUID = -8786371005426860510L;
-	
+
 	private String id;
 	private String userId;
 	private int monsterId;
@@ -22,17 +22,16 @@ public class MonsterForUser implements Serializable {
 	private boolean restricted;
 	private int offensiveSkillId;
 	private int defensiveSkillId;
-  
-	public MonsterForUser()
-	{
+
+	public MonsterForUser() {
 		super();
 	}
 
-	public MonsterForUser(String id, String userId, int monsterId, int currentExp,
-			int currentLvl, int currentHealth, int numPieces, boolean hasAllPieces,
-			boolean isComplete, Date combineStartTime, int teamSlotNum,
-			String sourceOfPieces, boolean restricted, int offensiveSkillId,
-			int defensiveSkillId) {
+	public MonsterForUser(String id, String userId, int monsterId,
+			int currentExp, int currentLvl, int currentHealth, int numPieces,
+			boolean hasAllPieces, boolean isComplete, Date combineStartTime,
+			int teamSlotNum, String sourceOfPieces, boolean restricted,
+			int offensiveSkillId, int defensiveSkillId) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -51,23 +50,19 @@ public class MonsterForUser implements Serializable {
 		this.defensiveSkillId = defensiveSkillId;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -111,13 +106,11 @@ public class MonsterForUser implements Serializable {
 		this.numPieces = numPieces;
 	}
 
-	public boolean isHasAllPieces()
-	{
+	public boolean isHasAllPieces() {
 		return hasAllPieces;
 	}
 
-	public void setHasAllPieces( boolean hasAllPieces )
-	{
+	public void setHasAllPieces(boolean hasAllPieces) {
 		this.hasAllPieces = hasAllPieces;
 	}
 
@@ -153,70 +146,42 @@ public class MonsterForUser implements Serializable {
 		this.sourceOfPieces = sourceOfPieces;
 	}
 
-	public boolean isRestricted()
-	{
+	public boolean isRestricted() {
 		return restricted;
 	}
 
-	public void setRestricted( boolean restricted )
-	{
+	public void setRestricted(boolean restricted) {
 		this.restricted = restricted;
 	}
 
-	public int getOffensiveSkillId()
-	{
+	public int getOffensiveSkillId() {
 		return offensiveSkillId;
 	}
 
-	public void setOffensiveSkillId( int offensiveSkillId )
-	{
+	public void setOffensiveSkillId(int offensiveSkillId) {
 		this.offensiveSkillId = offensiveSkillId;
 	}
 
-	public int getDefensiveSkillId()
-	{
+	public int getDefensiveSkillId() {
 		return defensiveSkillId;
 	}
 
-	public void setDefensiveSkillId( int defensiveSkillId )
-	{
+	public void setDefensiveSkillId(int defensiveSkillId) {
 		this.defensiveSkillId = defensiveSkillId;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "MonsterForUser [id="
-			+ id
-			+ ", userId="
-			+ userId
-			+ ", monsterId="
-			+ monsterId
-			+ ", currentExp="
-			+ currentExp
-			+ ", currentLvl="
-			+ currentLvl
-			+ ", currentHealth="
-			+ currentHealth
-			+ ", numPieces="
-			+ numPieces
-			+ ", hasAllPieces="
-			+ hasAllPieces
-			+ ", isComplete="
-			+ isComplete
-			+ ", combineStartTime="
-			+ combineStartTime
-			+ ", teamSlotNum="
-			+ teamSlotNum
-			+ ", sourceOfPieces="
-			+ sourceOfPieces
-			+ ", restricted="
-			+ restricted
-			+ ", offensiveSkillId="
-			+ offensiveSkillId
-			+ ", defensiveSkillId="
-			+ defensiveSkillId
-			+ "]";
+	public String toString() {
+		return "MonsterForUser [id=" + id + ", userId=" + userId
+				+ ", monsterId=" + monsterId + ", currentExp=" + currentExp
+				+ ", currentLvl=" + currentLvl + ", currentHealth="
+				+ currentHealth + ", numPieces=" + numPieces
+				+ ", hasAllPieces=" + hasAllPieces + ", isComplete="
+				+ isComplete + ", combineStartTime=" + combineStartTime
+				+ ", teamSlotNum=" + teamSlotNum + ", sourceOfPieces="
+				+ sourceOfPieces + ", restricted=" + restricted
+				+ ", offensiveSkillId=" + offensiveSkillId
+				+ ", defensiveSkillId=" + defensiveSkillId + "]";
 	}
 
 }

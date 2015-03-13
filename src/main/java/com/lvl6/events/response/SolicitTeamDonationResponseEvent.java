@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SolicitTeamDonationResponseEvent extends NormalResponseEvent {
 
-  private SolicitTeamDonationResponseProto solicitTeamDonationResponseProto;
-  
-  public SolicitTeamDonationResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_SOLICIT_TEAM_DONATION_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = solicitTeamDonationResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private SolicitTeamDonationResponseProto solicitTeamDonationResponseProto;
 
-  public void setSolicitTeamDonationResponseProto(SolicitTeamDonationResponseProto solicitTeamDonationResponseProto) {
-    this.solicitTeamDonationResponseProto = solicitTeamDonationResponseProto;
-  }
+	public SolicitTeamDonationResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_SOLICIT_TEAM_DONATION_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = solicitTeamDonationResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setSolicitTeamDonationResponseProto(
+			SolicitTeamDonationResponseProto solicitTeamDonationResponseProto) {
+		this.solicitTeamDonationResponseProto = solicitTeamDonationResponseProto;
+	}
 
 }

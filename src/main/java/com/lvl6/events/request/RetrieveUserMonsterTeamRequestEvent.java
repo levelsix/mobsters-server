@@ -12,29 +12,33 @@ import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamRequestProto;
 
 public class RetrieveUserMonsterTeamRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RetrieveUserMonsterTeamRequestProto retrieveUserMonsterTeamRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      retrieveUserMonsterTeamRequestProto = RetrieveUserMonsterTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveUserMonsterTeamRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RetrieveUserMonsterTeam request exception", e);
-    }
-  }
+	private Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RetrieveUserMonsterTeamRequestProto getRetrieveUserMonsterTeamRequestProto() {
-    return retrieveUserMonsterTeamRequestProto;
-  }
+	private RetrieveUserMonsterTeamRequestProto retrieveUserMonsterTeamRequestProto;
 
-  public void setRetrieveUserMonsterTeamRequestProto( RetrieveUserMonsterTeamRequestProto retrieveUserMonsterTeamRequestProto )
-  {
-	  this.retrieveUserMonsterTeamRequestProto = retrieveUserMonsterTeamRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			retrieveUserMonsterTeamRequestProto = RetrieveUserMonsterTeamRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = retrieveUserMonsterTeamRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RetrieveUserMonsterTeam request exception", e);
+		}
+	}
+
+	public RetrieveUserMonsterTeamRequestProto getRetrieveUserMonsterTeamRequestProto() {
+		return retrieveUserMonsterTeamRequestProto;
+	}
+
+	public void setRetrieveUserMonsterTeamRequestProto(
+			RetrieveUserMonsterTeamRequestProto retrieveUserMonsterTeamRequestProto) {
+		this.retrieveUserMonsterTeamRequestProto = retrieveUserMonsterTeamRequestProto;
+	}
 
 }

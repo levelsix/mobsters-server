@@ -17,18 +17,16 @@ import com.lvl6.utils.DBConnection;
 
 @Component
 @DependsOn("gameServer")
-public class ServerToggleRetrieveUtils
-{
+public class ServerToggleRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {}.getClass()
-		.getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<String, ServerToggle> namesToServerToggles;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SERVER_TOGGLE_CONFIG;
 
-	public static boolean getToggleValueForName( String name )
-	{
+	public static boolean getToggleValueForName(String name) {
 		log.debug("retrieve toggle for toggleName: {}", name);
 		if (namesToServerToggles == null) {
 			setStaticNamesToServerToggles();
@@ -43,28 +41,25 @@ public class ServerToggleRetrieveUtils
 		return toggle.isOn();
 	}
 
-	private static void setStaticNamesToServerToggles()
-	{
+	private static void setStaticNamesToServerToggles() {
 		log.debug("setting static map of names to ServerToggles");
 
-		Connection conn = DBConnection.get()
-			.getConnection();
+		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
 		try {
 			if (conn != null) {
-				rs = DBConnection.get()
-					.selectWholeTable(conn, TABLE_NAME);
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
 				if (rs != null) {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<String, ServerToggle> namesToTogglesTemp =
-							new HashMap<String, ServerToggle>();
+						Map<String, ServerToggle> namesToTogglesTemp = new HashMap<String, ServerToggle>();
 						while (rs.next()) {
 							ServerToggle toggle = convertRSRowToTeamCenter(rs);
 							if (toggle != null)
-								namesToTogglesTemp.put(toggle.getName(), toggle);
+								namesToTogglesTemp
+										.put(toggle.getName(), toggle);
 						}
 						namesToServerToggles = namesToTogglesTemp;
 					} catch (SQLException e) {
@@ -76,21 +71,19 @@ public class ServerToggleRetrieveUtils
 		} catch (Exception e) {
 			log.error("ServerToggle retrieve db error.", e);
 		} finally {
-			DBConnection.get()
-				.close(rs, null, conn);
+			DBConnection.get().close(rs, null, conn);
 		}
 	}
 
-	public static void reload()
-	{
+	public static void reload() {
 		setStaticNamesToServerToggles();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ServerToggle convertRSRowToTeamCenter( ResultSet rs ) throws SQLException
-	{
+	private static ServerToggle convertRSRowToTeamCenter(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.SERVER_TOGGLE__ID);
 		String name = rs.getString(DBConstants.SERVER_TOGGLE__NAME);
 		boolean on = rs.getBoolean(DBConstants.SERVER_TOGGLE__ON);

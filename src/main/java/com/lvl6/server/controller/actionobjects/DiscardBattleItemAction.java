@@ -11,8 +11,7 @@ import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Builde
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-public class DiscardBattleItemAction
-{ 
+public class DiscardBattleItemAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -20,14 +19,10 @@ public class DiscardBattleItemAction
 	private User user;
 	private List<BattleItemForUser> discardedBattleItemList;
 	protected DeleteUtil deleteUtil;
-	
-	public DiscardBattleItemAction( 
-		String userId,
-		User user,
-		List<BattleItemForUser> discardedBattleItemList,
-		DeleteUtil deleteUtil
-	 )
-	{
+
+	public DiscardBattleItemAction(String userId, User user,
+			List<BattleItemForUser> discardedBattleItemList,
+			DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -37,7 +32,7 @@ public class DiscardBattleItemAction
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
-		
+
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
 
@@ -56,28 +51,30 @@ public class DiscardBattleItemAction
 	private boolean verifySemantics(Builder resBuilder) {
 		if (null == user) {
 			resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
-			log.error( "no user with id={}", userId );
+			log.error("no user with id={}", userId);
 			return false;
 		}
-		
-		if(discardedBattleItemList == null || discardedBattleItemList.isEmpty()) {
-			resBuilder.setStatus(DiscardBattleItemStatus.FAIL_BATTLE_ITEMS_DONT_EXIST);
-			log.error( "no battle item list");
+
+		if (discardedBattleItemList == null
+				|| discardedBattleItemList.isEmpty()) {
+			resBuilder
+					.setStatus(DiscardBattleItemStatus.FAIL_BATTLE_ITEMS_DONT_EXIST);
+			log.error("no battle item list");
 			return false;
 		}
-		
+
 		return true;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		int numDeleted = deleteUtil.deleteUserBattleItems(userId, discardedBattleItemList);
-		if(numDeleted != discardedBattleItemList.size()) {
-	    	log.error("did not properly delete all user battle items");
-	    	return false;
-	    }
+		int numDeleted = deleteUtil.deleteUserBattleItems(userId,
+				discardedBattleItemList);
+		if (numDeleted != discardedBattleItemList.size()) {
+			log.error("did not properly delete all user battle items");
+			return false;
+		}
 
 		return true;
 	}
-
 
 }

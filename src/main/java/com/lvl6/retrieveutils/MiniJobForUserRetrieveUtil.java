@@ -25,11 +25,12 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component 
+@Component
 public class MiniJobForUserRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(MiniJobForUserRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_MINI_JOB_FOR_USER; 
+	private static Logger log = LoggerFactory
+			.getLogger(MiniJobForUserRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_MINI_JOB_FOR_USER;
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -37,12 +38,12 @@ public class MiniJobForUserRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<String, MiniJobForUser> getSpecificOrAllIdToMiniJobForUser(
 			String userId, Collection<String> userMiniJobIds) {
@@ -52,7 +53,8 @@ public class MiniJobForUserRetrieveUtil {
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);
+			equalityConditions.put(DBConstants.MINI_JOB_FOR_USER__USER_ID,
+					userId);
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			Map<String, Collection<?>> inConditions = null;
@@ -61,7 +63,7 @@ public class MiniJobForUserRetrieveUtil {
 				inConditions.put(DBConstants.MINI_JOB_FOR_USER__ID,
 						userMiniJobIds);
 			}
-			String inDelim = getQueryConstructionUtil().getAnd(); 
+			String inDelim = getQueryConstructionUtil().getAnd();
 
 			String overallDelim = getQueryConstructionUtil().getAnd();
 			//query db, "values" is not used 
@@ -71,36 +73,37 @@ public class MiniJobForUserRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityAndInConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, inConditions, inDelim, overallDelim,
-							values, preparedStatement);
+					.selectRowsQueryEqualityAndInConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim,
+							inConditions, inDelim, overallDelim, values,
+							preparedStatement);
 
-			log.info("getSpecificOrAllMiniJobIdToMiniJobForUserId() query=" +
-					query);
+			log.info("getSpecificOrAllMiniJobIdToMiniJobForUserId() query="
+					+ query);
 
-			List<MiniJobForUser> mjfuList = this.jdbcTemplate
-					.query(query, values.toArray(), new UserMiniJobForClientMapper());
-			miniJobIdToUserMiniJobs =
-					new HashMap<String, MiniJobForUser>();
+			List<MiniJobForUser> mjfuList = this.jdbcTemplate.query(query,
+					values.toArray(), new UserMiniJobForClientMapper());
+			miniJobIdToUserMiniJobs = new HashMap<String, MiniJobForUser>();
 			for (MiniJobForUser mjfu : mjfuList) {
 				String miniJobId = mjfu.getId();
-				
+
 				miniJobIdToUserMiniJobs.put(miniJobId, mjfu);
 			}
 		} catch (Exception e) {
-			log.error("could not retrieve user obstacle for userId=" + userId, e);
-			miniJobIdToUserMiniJobs =
-					new HashMap<String, MiniJobForUser>();
+			log.error("could not retrieve user obstacle for userId=" + userId,
+					e);
+			miniJobIdToUserMiniJobs = new HashMap<String, MiniJobForUser>();
 		}
-		
+
 		return miniJobIdToUserMiniJobs;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -108,28 +111,36 @@ public class MiniJobForUserRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserMiniJobForClientMapper implements RowMapper<MiniJobForUser> {
+	private static final class UserMiniJobForClientMapper implements
+			RowMapper<MiniJobForUser> {
 
 		private static List<String> columnsSelected;
 
-		public MiniJobForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public MiniJobForUser mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			MiniJobForUser mjfu = new MiniJobForUser();
 			mjfu.setId(rs.getString(DBConstants.MINI_JOB_FOR_USER__ID));
-			mjfu.setMiniJobId(rs.getInt(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID));
-			mjfu.setBaseDmgReceived(rs.getInt(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED));
-			mjfu.setDurationSeconds(rs.getInt(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS));
-			
+			mjfu.setMiniJobId(rs
+					.getInt(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID));
+			mjfu.setBaseDmgReceived(rs
+					.getInt(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED));
+			mjfu.setDurationSeconds(rs
+					.getInt(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS));
+
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
+				Timestamp time = rs
+						.getTimestamp(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
 				if (!rs.wasNull()) {
 					mjfu.setTimeStarted(new Date(time.getTime()));
 				}
 			} catch (Exception e) {
 				log.error("maybe MiniJobForUser start time is invalid", e);
 			}
-			
+
 			try {
-				String stringToExplode = rs.getString(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS); 
+				String stringToExplode = rs
+						.getString(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS);
 				if (null != stringToExplode) {
 					List<String> userMonsterIds = StringUtils
 							.explodeIntoStrings(stringToExplode, ",");
@@ -137,34 +148,41 @@ public class MiniJobForUserRetrieveUtil {
 					mjfu.setUserMonsterIdStr(stringToExplode);
 				}
 			} catch (Exception e) {
-				log.error("maybe MiniJobForUser user monster ids are invalid", e);
+				log.error("maybe MiniJobForUser user monster ids are invalid",
+						e);
 			}
-			
+
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED);
+				Timestamp time = rs
+						.getTimestamp(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED);
 				if (!rs.wasNull()) {
 					mjfu.setTimeCompleted(new Date(time.getTime()));
 				}
 			} catch (Exception e) {
 				log.error("maybe MiniJobForUser completed time is invalid", e);
 			}
-			
+
 			return mjfu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__ID);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED);
+				columnsSelected
+						.add(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED);
+				columnsSelected
+						.add(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS);
+				columnsSelected
+						.add(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
+				columnsSelected
+						.add(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS);
+				columnsSelected
+						.add(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED);
 			}
 			return columnsSelected;
 		}
 
-	} 	
+	}
 }

@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginPvpBattleResponseEvent extends NormalResponseEvent {
 
-  private BeginPvpBattleResponseProto beginPvpBattleResponseProto;
-  
-  public BeginPvpBattleResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_BEGIN_PVP_BATTLE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = beginPvpBattleResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private BeginPvpBattleResponseProto beginPvpBattleResponseProto;
 
-  public void setBeginPvpBattleResponseProto(BeginPvpBattleResponseProto beginPvpBattleResponseProto) {
-    this.beginPvpBattleResponseProto = beginPvpBattleResponseProto;
-  }
+	public BeginPvpBattleResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_BEGIN_PVP_BATTLE_EVENT;
+	}
 
-  public BeginPvpBattleResponseProto getBeginPvpBattleResponseProto() {   //because APNS required
-    return beginPvpBattleResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = beginPvpBattleResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setBeginPvpBattleResponseProto(
+			BeginPvpBattleResponseProto beginPvpBattleResponseProto) {
+		this.beginPvpBattleResponseProto = beginPvpBattleResponseProto;
+	}
+
+	public BeginPvpBattleResponseProto getBeginPvpBattleResponseProto() {   //because APNS required
+		return beginPvpBattleResponseProto;
+	}
+
 }

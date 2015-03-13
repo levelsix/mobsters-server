@@ -6,14 +6,14 @@ import java.util.Date;
 public class ItemForUserUsage implements Serializable {
 
 	private static final long serialVersionUID = -1882610447601120418L;
-	
+
 	private String id;
 	private String userId;
 	private int itemId;
 	private Date timeOfEntry;
 	private String userDataId;
 	private String actionType;
-	
+
 	public ItemForUserUsage() {
 		super();
 	}
@@ -27,15 +27,9 @@ public class ItemForUserUsage implements Serializable {
 		this.userDataId = ifuu.userDataId;
 		this.actionType = ifuu.actionType;
 	}
-	
-	public ItemForUserUsage(
-		String id,
-		String userId,
-		int itemId,
-		Date timeOfEntry,
-		String userDataId,
-		String actionType )
-	{
+
+	public ItemForUserUsage(String id, String userId, int itemId,
+			Date timeOfEntry, String userDataId, String actionType) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -45,82 +39,60 @@ public class ItemForUserUsage implements Serializable {
 		this.actionType = actionType;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public int getItemId()
-	{
+	public int getItemId() {
 		return itemId;
 	}
 
-	public void setItemId( int itemId )
-	{
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public Date getTimeOfEntry()
-	{
+	public Date getTimeOfEntry() {
 		return timeOfEntry;
 	}
 
-	public void setTimeOfEntry( Date timeOfEntry )
-	{
+	public void setTimeOfEntry(Date timeOfEntry) {
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public String getUserDataId()
-	{
+	public String getUserDataId() {
 		return userDataId;
 	}
 
-	public void setUserDataId( String userDataId )
-	{
+	public void setUserDataId(String userDataId) {
 		this.userDataId = userDataId;
 	}
 
-	public String getActionType()
-	{
+	public String getActionType() {
 		return actionType;
 	}
 
-	public void setActionType( String actionType )
-	{
+	public void setActionType(String actionType) {
 		this.actionType = actionType;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "ItemForUserUsage [id="
-			+ id
-			+ ", userId="
-			+ userId
-			+ ", itemId="
-			+ itemId
-			+ ", timeOfEntry="
-			+ timeOfEntry
-			+ ", userDataId="
-			+ userDataId
-			+ ", actionType="
-			+ actionType
-			+ "]";
+	public String toString() {
+		return "ItemForUserUsage [id=" + id + ", userId=" + userId
+				+ ", itemId=" + itemId + ", timeOfEntry=" + timeOfEntry
+				+ ", userDataId=" + userDataId + ", actionType=" + actionType
+				+ "]";
 	}
-	
+
 }

@@ -15,9 +15,12 @@ import com.lvl6.info.Board;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class BoardRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class BoardRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, Board> idsToBoards;
 
@@ -32,8 +35,7 @@ import com.lvl6.utils.DBConnection;
 	}
 
 	public static Board getBoardForId(int boardId) {
-		log.debug(String.format(
-			"retrieve board data for board=%s", boardId));
+		log.debug(String.format("retrieve board data for board=%s", boardId));
 		if (null == idsToBoards) {
 			setStaticIdsToBoards();
 		}
@@ -53,10 +55,9 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Board> idsToBoardsTemp =
-							new HashMap<Integer, Board>();
+						Map<Integer, Board> idsToBoardsTemp = new HashMap<Integer, Board>();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							Board board = convertRSRowToBoard(rs);
 							if (board == null) {
 								continue;
@@ -71,7 +72,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("board retrieve db error.", e);
@@ -92,45 +93,40 @@ import com.lvl6.utils.DBConnection;
 		int width = rs.getInt(DBConstants.BOARD__WIDTH);
 		int height = rs.getInt(DBConstants.BOARD__HEIGHT);
 		String orbElements = rs.getString(DBConstants.BOARD__ORB_ELEMENTS);
-		
-		
+
 		if (null != orbElements) {
-	    	String newOrbElements = orbElements.trim();
-	    	if (!orbElements.equals(newOrbElements)) {
-	    		log.error(String.format(
-	    			"orbElements has spaces.%s, id=%s",
-	    			orbElements, id));
-	    		orbElements = newOrbElements;
-	    	}
-	    } else {
-	    	log.error("elements is not set boardId={}", id);
-	    	return null;
-	    }
-		
+			String newOrbElements = orbElements.trim();
+			if (!orbElements.equals(newOrbElements)) {
+				log.error(String.format("orbElements has spaces.%s, id=%s",
+						orbElements, id));
+				orbElements = newOrbElements;
+			}
+		} else {
+			log.error("elements is not set boardId={}", id);
+			return null;
+		}
+
 		//make sure orbElements has only 0s and 1s
 		String orbElementsSansOnes = orbElements.replace("1", "");
 		String orbElementsEmpty = orbElementsSansOnes.replace("0", "");
-		
+
 		if (!orbElementsEmpty.isEmpty()) {
-			log.error(String.format(
-				"ORB_ELEMENTS INCORRECT: %s, ID=%s",
-				orbElements, id));
+			log.error(String.format("ORB_ELEMENTS INCORRECT: %s, ID=%s",
+					orbElements, id));
 			return null;
-	    }
-		
+		}
+
 		int orbElementsInt = 0;
 		try {
 			orbElementsInt = Integer.parseInt(orbElements);
-			
+
 		} catch (NumberFormatException e) {
-			log.error(String.format(
-				"ORB_ELEMENTS INCORRECT: %s, ID=%s",
-				orbElements, id),
-				e);
+			log.error(String.format("ORB_ELEMENTS INCORRECT: %s, ID=%s",
+					orbElements, id), e);
 		}
-		
+
 		Board board = new Board(id, width, height, orbElementsInt);
 		return board;
 	}
-	
+
 }

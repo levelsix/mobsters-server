@@ -11,14 +11,13 @@ import java.util.Date;
 public class ConnectedPlayer implements Serializable {
 
 	private static final long serialVersionUID = -4695628631220580445L;
-	
+
 	protected String playerId;
 	protected String ip_connection_id = "";
 	protected String serverHostName = "";
 	protected String udid = "";
 	protected Date lastMessageSentToServer = new Date();
 
-	
 	public Date getLastMessageSentToServer() {
 		return lastMessageSentToServer;
 	}

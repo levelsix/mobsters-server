@@ -25,68 +25,68 @@ public class MonsterEnhanceHistory {
 	private String monsterForUserIdBeingEnhanced;
 	private List<String> feederMonsterForUserId;
 	private int currExp;
-	private int prevExp; 
-	private List<Timestamp> enhancingStartTime; 
+	private int prevExp;
+	private List<Timestamp> enhancingStartTime;
 	private Timestamp timeOfEntry;
 	private int enhancingCost;
 
 	public String getUserId() {
 		return userId;
 	}
-	
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	public String getMonsterForUserIdBeingEnhanced() {
 		return monsterForUserIdBeingEnhanced;
 	}
-	
+
 	public void setMonsterForUserIdBeingEnhanced(
 			String monsterForUserIdBeingEnhanced) {
 		this.monsterForUserIdBeingEnhanced = monsterForUserIdBeingEnhanced;
 	}
-	
+
 	public List<String> getFeederMonsterForUserId() {
 		return feederMonsterForUserId;
 	}
-	
+
 	public void setFeederMonsterForUserId(List<String> feederMonsterForUserId) {
 		this.feederMonsterForUserId = feederMonsterForUserId;
 	}
-	
+
 	public int getCurrExp() {
 		return currExp;
 	}
-	
+
 	public void setCurrExp(int currExp) {
 		this.currExp = currExp;
 	}
-	
+
 	public int getPrevExp() {
 		return prevExp;
 	}
-	
+
 	public void setPrevExp(int prevExp) {
 		this.prevExp = prevExp;
 	}
-	
+
 	public Timestamp getTimeOfEntry() {
 		return timeOfEntry;
 	}
-	
+
 	public void setTimeOfEntry(Timestamp timeOfEntry) {
 		this.timeOfEntry = timeOfEntry;
 	}
-	
+
 	public int getEnhancingCost() {
 		return enhancingCost;
 	}
-	
+
 	public void setEnhancingCost(int enhancingCost) {
 		this.enhancingCost = enhancingCost;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MonsterEnhanceHistory [userId=" + userId
@@ -105,10 +105,5 @@ public class MonsterEnhanceHistory {
 	public void setEnhancingStartTime(List<Timestamp> enhancingStartTime) {
 		this.enhancingStartTime = enhancingStartTime;
 	}
-
-
-
-
-
 
 }

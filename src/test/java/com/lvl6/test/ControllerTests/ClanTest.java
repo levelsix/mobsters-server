@@ -29,8 +29,11 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.CreateClanController;
+import com.lvl6.server.controller.FinishPerformingResearchController;
+import com.lvl6.server.controller.PerformResearchController;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -38,25 +41,34 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class ClanTest {
 
-
-	private JdbcTemplate jdbcTemplate;
-
-	private User user;
-	private MinimumUserProto mup;
-	private String userId;
-
-
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+
+	private JdbcTemplate jdbcTemplate;
+	private static boolean endOfTesting;
+	private static User user;
+
+	private static MinimumUserProto mup;
+	private static String userId;
+	private static String userResearchUuid;
+
+	@Autowired
+	InsertUtil insertUtil;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
-	ClanRetrieveUtils2 clanRetrieveUtil;
-	
+	ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+
 	@Autowired
-	InsertUtil insertUtil;
+	PerformResearchController performResearchController;
+
+	@Autowired
+	FinishPerformingResearchController finishPerformingResearchController;
+
+	@Autowired
+	ClanRetrieveUtils2 clanRetrieveUtil;
 
 	@Autowired
 	CreateClanController createClanController;
@@ -69,67 +81,79 @@ public class ClanTest {
 
 	@Before
 	public void setUp() {
-		log.info("setUp");
-		Timestamp createTime = new Timestamp((new Date()).getTime());
 
-		String name = "bobUnitTest";
-		String udid = "bobUdid";
-		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
-		int playerExp = 10;
-		int cash = 10000;
-		int oil = 10000;
-		int gems = 10000;
-		String deviceToken = "bobToken";
-		String facebookId = null;
-		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
-		String email = null;
-		String fbData = null;
+		if (userId == null) {
+			endOfTesting = false;
+			log.info("setUp");
+			Timestamp createTime = new Timestamp((new Date()).getTime());
 
-		userId = insertUtil.insertUser(name, udid, lvl,  playerExp, cash, oil,
-				gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
-				email, fbData);
+			String name = "bobUnitTest";
+			String udid = "bobUdid";
+			int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
+			int playerExp = 10;
+			int cash = 10000;
+			int oil = 10000;
+			int gems = 10000;
+			String deviceToken = "bobToken";
+			String facebookId = null;
+			int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
+			String email = null;
+			String fbData = null;
 
-		user = userRetrieveUtil.getUserById(userId);
+			userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
+					oil, gems, false, deviceToken, createTime, facebookId,
+					avatarMonsterId, email, fbData);
 
-		if (null == user) {
-			throw new RuntimeException("no user was created!");
+			//		if (null == userId) {
+			//			throw new RuntimeException("no user was created!");
+			//		}
+
+			user = userRetrieveUtil.getUserById(userId);
 		}
-
-		mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null);
-
 	}
-	
+
 	@After
 	public void tearDown() {
-		if (null == user) {
-			log.info("no user to delete");
-			return;
+		if (endOfTesting) {
+			if (null == user) {
+				log.info("no user to delete");
+				return;
+			}
+
+			String query1 = String.format("DELETE FROM %s where %s=?",
+					DBConstants.TABLE_RESEARCH_FOR_USER,
+					DBConstants.RESEARCH_FOR_USER__ID);
+			Object[] values1 = new Object[] { userResearchUuid };
+
+			int numDeleted = jdbcTemplate.update(query1, values1);
+			if (numDeleted != 1) {
+				log.error("did not delete test research for user when cleaning up");
+			}
+
+			String query2 = String.format("DELETE FROM %s where %s=?",
+					DBConstants.TABLE_USER, DBConstants.USER__ID);
+			Object[] values2 = new Object[] { user.getId() };
+			int[] types2 = new int[] { java.sql.Types.VARCHAR };
+
+			int numDeleted2 = jdbcTemplate.update(query2, values2, types2);
+			if (numDeleted2 != 1) {
+				log.error("did not delete test user when cleaning up");
+			}
+
 		}
 
-		String query = String.format(
-				"DELETE FROM %s where %s=?",
-				DBConstants.TABLE_USER,
-				DBConstants.USER__ID);
-		Object[] values = new Object[] {
-				user.getId()
-		};
-		int[] types = new int[] {
-				java.sql.Types.VARCHAR
-		};
-
-		int numDeleted = jdbcTemplate.update( query, values, types );
-
 	}
-	
-	
+
 	@Test
 	public void testCreatingClan() {
-		CreateClanRequestProto.Builder ccrpb = CreateClanRequestProto.newBuilder();
+		CreateClanRequestProto.Builder ccrpb = CreateClanRequestProto
+				.newBuilder();
 		User user = userRetrieveUtil.getUserById(userId);
 		int userGems = user.getGems();
 		int userCash = user.getCash();
 
-		ccrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		ccrpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user, null));
 		ccrpb.setName("test clan");
 		ccrpb.setTag("tes");
 		ccrpb.setRequestToJoinClanRequired(true);
@@ -137,28 +161,20 @@ public class ClanTest {
 		ccrpb.setClanIconId(1);
 		ccrpb.setGemsSpent(100);
 		ccrpb.setCashChange(100);
-		
+
 		CreateClanRequestEvent ccre = new CreateClanRequestEvent();
 		ccre.setTag(1);
 		ccre.setCreateClanRequestProto(ccrpb.build());
 		createClanController.handleEvent(ccre);
-		
+
 		User user2 = userRetrieveUtil.getUserById(userId);
 		assertEquals(userGems - 100, user2.getGems());
 		assertEquals(userCash - 100, user2.getCash());
-		
-		List<Clan> clanList = clanRetrieveUtil.getClansWithSimilarNameOrTag("test clan", "tes");
+
+		List<Clan> clanList = clanRetrieveUtil.getClansWithSimilarNameOrTag(
+				"test clan", "tes");
 		assertTrue(!clanList.isEmpty());
 
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

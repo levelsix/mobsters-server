@@ -9,28 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendAdminMessageResponseEvent extends NormalResponseEvent {
 
-  private SendAdminMessageResponseProto sendAdminMessageResponseProto;
-  
-  public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
-	return sendAdminMessageResponseProto;
-}
+	private SendAdminMessageResponseProto sendAdminMessageResponseProto;
 
-public void setSendAdminMessageResponseProto(SendAdminMessageResponseProto sendAdminMessageResponseProto) {
-	this.sendAdminMessageResponseProto = sendAdminMessageResponseProto;
-}
+	public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
+		return sendAdminMessageResponseProto;
+	}
 
-public SendAdminMessageResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_SEND_ADMIN_MESSAGE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = sendAdminMessageResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	public void setSendAdminMessageResponseProto(
+			SendAdminMessageResponseProto sendAdminMessageResponseProto) {
+		this.sendAdminMessageResponseProto = sendAdminMessageResponseProto;
+	}
 
+	public SendAdminMessageResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_SEND_ADMIN_MESSAGE_EVENT;
+	}
 
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = sendAdminMessageResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
 }

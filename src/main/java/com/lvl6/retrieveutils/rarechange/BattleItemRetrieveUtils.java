@@ -16,13 +16,15 @@ import com.lvl6.info.BattleItem;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class BattleItemRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class BattleItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, BattleItem> idsToBattleItems;
 	private static final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_CONFIG;
-
 
 	public static Map<Integer, BattleItem> getBattleItemIdsToBattleItems() {
 		if (null == idsToBattleItems) {
@@ -43,7 +45,8 @@ import com.lvl6.utils.DBConnection;
 		return idsToBattleItems.get(id);
 	}
 
-	public static Map<Integer, BattleItem> getBattleItemsForIds(Collection<Integer> ids) {
+	public static Map<Integer, BattleItem> getBattleItemsForIds(
+			Collection<Integer> ids) {
 		if (null == idsToBattleItems) {
 			setStaticIdsToBattleItems();
 		}
@@ -70,7 +73,7 @@ import com.lvl6.utils.DBConnection;
 						rs.last();
 						rs.beforeFirst();
 						HashMap<Integer, BattleItem> idsToBattleItemTemp = new HashMap<Integer, BattleItem>();
-						while(rs.next()) {
+						while (rs.next()) {
 							BattleItem bi = convertRSRowToBattleItem(rs);
 							if (bi != null)
 								idsToBattleItemTemp.put(bi.getId(), bi);
@@ -80,7 +83,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("BattleItem retrieve db error.", e);
@@ -96,24 +99,31 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static BattleItem convertRSRowToBattleItem(ResultSet rs) throws SQLException {
+	private static BattleItem convertRSRowToBattleItem(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__ID);
 		String type = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__TYPE);
-		String category = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CATEGORY);
-		String createResourceType = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE);
+		String category = rs
+				.getString(DBConstants.BATTLE_ITEM_CONFIG__CATEGORY);
+		String createResourceType = rs
+				.getString(DBConstants.BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE);
 		int createCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__CREATE_COST);
 		String name = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__NAME);
-		String description = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
-		int powerAmount = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
-		String imageName = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
+		String description = rs
+				.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
+		int powerAmount = rs
+				.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
+		String imageName = rs
+				.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
 		int priority = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__PRIORITY);
-		int minutesToCreate = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE);
-		int inBattleGemCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST);
+		int minutesToCreate = rs
+				.getInt(DBConstants.BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE);
+		int inBattleGemCost = rs
+				.getInt(DBConstants.BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST);
 
-
-		BattleItem bi = new BattleItem(id, type, category, createResourceType, 
-				createCost, name, description, powerAmount, imageName, priority, 
-				minutesToCreate, inBattleGemCost);
+		BattleItem bi = new BattleItem(id, type, category, createResourceType,
+				createCost, name, description, powerAmount, imageName,
+				priority, minutesToCreate, inBattleGemCost);
 
 		return bi;
 	}

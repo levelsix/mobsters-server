@@ -12,31 +12,33 @@ import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 
 public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private CombineUserMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      combineMonsterPiecesRequestProto = CombineUserMonsterPiecesRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = combineMonsterPiecesRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("CombineUserMonsterPiecesRequest exeption", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public CombineUserMonsterPiecesRequestProto getCombineUserMonsterPiecesRequestProto() {
-    return combineMonsterPiecesRequestProto;
-  }
+	private CombineUserMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "CombineUserMonsterPiecesRequestEvent [combineMonsterPiecesRequestProto="
-		  + combineMonsterPiecesRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			combineMonsterPiecesRequestProto = CombineUserMonsterPiecesRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = combineMonsterPiecesRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("CombineUserMonsterPiecesRequest exeption", e);
+		}
+	}
+
+	public CombineUserMonsterPiecesRequestProto getCombineUserMonsterPiecesRequestProto() {
+		return combineMonsterPiecesRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "CombineUserMonsterPiecesRequestEvent [combineMonsterPiecesRequestProto="
+				+ combineMonsterPiecesRequestProto + "]";
+	}
 }

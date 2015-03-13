@@ -66,14 +66,13 @@ public class InAppPurchaseController extends EventController {
 	protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 
 	@Autowired
-	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	
 
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
@@ -100,12 +99,13 @@ public class InAppPurchaseController extends EventController {
 				.getInAppPurchaseRequestProto();
 
 		log.info("reqProto: {}", reqProto);
-		
+
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String receipt = reqProto.getReceipt();
 
-		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto.newBuilder();
+		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setReceipt(reqProto.getReceipt());
 
@@ -116,16 +116,16 @@ public class InAppPurchaseController extends EventController {
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s",
-					userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setInAppPurchaseResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -148,12 +148,14 @@ public class InAppPurchaseController extends EventController {
 
 			URLConnection conn = url.openConnection();
 			conn.setDoOutput(true);
-			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			OutputStreamWriter wr = new OutputStreamWriter(
+					conn.getOutputStream());
 			wr.write(jsonReceipt.toString());
 			wr.flush();
 
 			// Get the response
-			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(
+					conn.getInputStream()));
 
 			String responseString = "";
 			String line;
@@ -164,7 +166,8 @@ public class InAppPurchaseController extends EventController {
 
 			response = new JSONObject(responseString);
 
-			if (response.getInt(IAPValues.STATUS) == 21007 || response.getInt(IAPValues.STATUS) == 21008) {
+			if (response.getInt(IAPValues.STATUS) == 21007
+					|| response.getInt(IAPValues.STATUS) == 21008) {
 				wr.close();
 				rd.close();
 				url = new URL(SANDBOX_URL);
@@ -173,7 +176,8 @@ public class InAppPurchaseController extends EventController {
 				wr = new OutputStreamWriter(conn.getOutputStream());
 				wr.write(jsonReceipt.toString());
 				wr.flush();
-				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				rd = new BufferedReader(new InputStreamReader(
+						conn.getInputStream()));
 				responseString = "";
 				while ((line = rd.readLine()) != null) {
 					responseString += line;
@@ -186,7 +190,9 @@ public class InAppPurchaseController extends EventController {
 				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
 				writeChangesToDb(userId, resBuilder, user, receiptFromApple);
 			} else {
-				log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
+				log.error(
+						"problem with in-app purchase that client sent, with receipt {}",
+						receipt);
 			}
 
 			wr.close();
@@ -198,22 +204,24 @@ public class InAppPurchaseController extends EventController {
 
 			InAppPurchaseResponseProto resProto = resBuilder.build();
 
-			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserUuid());
+			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setInAppPurchaseResponseProto(resProto);
 			server.writeEvent(resEvent);
 
 			/*if (Globals.KABAM_ENABLED()) {
-        if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
-          JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
-          List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
-          doKabamPost(queryParams, 0);
-        }
-      }*/
+			if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
+			JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
+			List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
+			doKabamPost(queryParams, 0);
+			}
+			}*/
 
 			//null PvpLeagueFromUser means will pull from hazelcast instead
 			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+							user, null, null);
 			resEventUpdate.setTag(event.getTag());
 			server.writeEvent(resEventUpdate);
 
@@ -227,12 +235,14 @@ public class InAppPurchaseController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-				InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+				InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setInAppPurchaseResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in InAppPurchaseController processEvent", e);
+				log.error("exception2 in InAppPurchaseController processEvent",
+						e);
 			}
 		} finally {
 			// Unlock this player
@@ -240,30 +250,29 @@ public class InAppPurchaseController extends EventController {
 		}
 	}
 
-	private void writeChangesToDb(
-			String userId,
-			InAppPurchaseResponseProto.Builder resBuilder,
-			User user,
-			JSONObject receiptFromApple
-			)
-	{
+	private void writeChangesToDb(String userId,
+			InAppPurchaseResponseProto.Builder resBuilder, User user,
+			JSONObject receiptFromApple) {
 		try {
-			String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
-			double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
-						
+			String packageName = receiptFromApple
+					.getString(IAPValues.PRODUCT_ID);
+			double realLifeCashCost = IAPValues
+					.getCashSpentForPackageName(packageName);
+
 			Date now = new Date();
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
-					receiptFromApple, packageName, now, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, 
-					structureForUserRetrieveUtils2, insertUtil, updateUtil);
+					receiptFromApple, packageName, now, iapHistoryRetrieveUtil,
+					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
+					insertUtil, updateUtil);
 
 			iapa.execute(resBuilder);
 
-			if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS))
-			{
+			if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
 				resBuilder.setPackageName(packageName);
 				resBuilder.setPackagePrice(realLifeCashCost);
-								
-				log.info("successful in-app purchase from user {} for package {}",
+
+				log.info(
+						"successful in-app purchase from user {} for package {}",
 						userId, packageName);
 
 				Timestamp date = new Timestamp(now.getTime());
@@ -273,104 +282,104 @@ public class InAppPurchaseController extends EventController {
 			log.error("problem with in app purchase flow", e);
 		}
 	}
-	
-	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(String iapProductId) {
-		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+
+	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(
+			String iapProductId) {
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils
+				.getStructIdsToMoneyTrees();
 		log.info(structIdsToMoneyTrees.toString());
-		
-		for(Integer i : structIdsToMoneyTrees.keySet()) {
+
+		for (Integer i : structIdsToMoneyTrees.keySet()) {
 			StructureMoneyTree smt = structIdsToMoneyTrees.get(i);
-			if(smt.getIapProductId().equals(iapProductId)) {
+			if (smt.getIapProductId().equals(iapProductId)) {
 				return smt;
 			}
 		}
 		return null;
 	}
 
-
 	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
-    log.info("Posting to Kabam");
-    String host = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_PAYMENT_URL : KabamProperties.PRODUCTION_PAYMENT_URL;
-    HttpClient client = new DefaultHttpClient();
-    HttpPost post = new HttpPost(host);
-    try {
-      log.info ("Sending post query: " + queryParams);
-      post.setEntity(new UrlEncodedFormEntity(queryParams, Consts.UTF_8));
-      HttpResponse response = client.execute(post);
-      BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-      String responseString = "";
-      String line;
-      while ((line = rd.readLine()) != null) {
-        responseString += line;
-      }
-      log.info("Received response: " + responseString);
+	log.info("Posting to Kabam");
+	String host = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_PAYMENT_URL : KabamProperties.PRODUCTION_PAYMENT_URL;
+	HttpClient client = new DefaultHttpClient();
+	HttpPost post = new HttpPost(host);
+	try {
+	  log.info ("Sending post query: " + queryParams);
+	  post.setEntity(new UrlEncodedFormEntity(queryParams, Consts.UTF_8));
+	  HttpResponse response = client.execute(post);
+	  BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+	  String responseString = "";
+	  String line;
+	  while ((line = rd.readLine()) != null) {
+	    responseString += line;
+	  }
+	  log.info("Received response: " + responseString);
 
-      JSONObject jsonResponse = new JSONObject(responseString);
-      if (!jsonResponse.getBoolean("success")) {
-        log.error("Failed to log kabam payment with errorcode: "+jsonResponse.getInt("errorcode")+ " and errormessage: "+jsonResponse.getString("errormessage"));
-        if (numTries < 10) {
-          doKabamPost(queryParams, numTries+1);
-        } else {
-          log.error("Giving up..");
-        }
-      }
-    } catch (Exception e) {
-      log.error("Error doing Kabam post", e);
-    }
-  }
+	  JSONObject jsonResponse = new JSONObject(responseString);
+	  if (!jsonResponse.getBoolean("success")) {
+	    log.error("Failed to log kabam payment with errorcode: "+jsonResponse.getInt("errorcode")+ " and errormessage: "+jsonResponse.getString("errormessage"));
+	    if (numTries < 10) {
+	      doKabamPost(queryParams, numTries+1);
+	    } else {
+	      log.error("Giving up..");
+	    }
+	  }
+	} catch (Exception e) {
+	  log.error("Error doing Kabam post", e);
+	}
+	}
 
-  private List<NameValuePair> getKabamQueryParams(String receipt, User user, JSONObject logJson)throws NoSuchAlgorithmException {
-    log.info("Generating Post parameters");
-    int gameid = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_CLIENT_ID : KabamProperties.PRODUCTION_CLIENT_ID;
-    String secret = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_SECRET : KabamProperties.PRODUCTION_SECRET;
-    long time = new Date().getTime() / 1000;
-    List<NameValuePair> queryParams = new ArrayList<NameValuePair>();
-    queryParams.add(new BasicNameValuePair("gameid", ""+gameid));
-    queryParams.add(new BasicNameValuePair("log", logJson.toString()));
-    queryParams.add(new BasicNameValuePair("mobileid", user.getUdid()));
-    queryParams.add(new BasicNameValuePair("receipt", receipt));
-    queryParams.add(new BasicNameValuePair("timestamp", "" + time));
-    queryParams.add(new BasicNameValuePair("userid", "" + user.getKabamNaid()));
-    String str = "";
-    for (NameValuePair key : queryParams) {
-      str += key.getName() + key.getValue();
-    }
-    str += secret;
-    queryParams.add(new BasicNameValuePair("sig", sha1(str)));
-    return queryParams;
-  }
+	private List<NameValuePair> getKabamQueryParams(String receipt, User user, JSONObject logJson)throws NoSuchAlgorithmException {
+	log.info("Generating Post parameters");
+	int gameid = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_CLIENT_ID : KabamProperties.PRODUCTION_CLIENT_ID;
+	String secret = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_SECRET : KabamProperties.PRODUCTION_SECRET;
+	long time = new Date().getTime() / 1000;
+	List<NameValuePair> queryParams = new ArrayList<NameValuePair>();
+	queryParams.add(new BasicNameValuePair("gameid", ""+gameid));
+	queryParams.add(new BasicNameValuePair("log", logJson.toString()));
+	queryParams.add(new BasicNameValuePair("mobileid", user.getUdid()));
+	queryParams.add(new BasicNameValuePair("receipt", receipt));
+	queryParams.add(new BasicNameValuePair("timestamp", "" + time));
+	queryParams.add(new BasicNameValuePair("userid", "" + user.getKabamNaid()));
+	String str = "";
+	for (NameValuePair key : queryParams) {
+	  str += key.getName() + key.getValue();
+	}
+	str += secret;
+	queryParams.add(new BasicNameValuePair("sig", sha1(str)));
+	return queryParams;
+	}
 
-  private JSONObject getKabamJsonLogObject(InAppPurchaseRequestProto reqProto,
-      InAppPurchaseResponseProto.Builder resBuilder, JSONObject receiptFromApple) throws JSONException {
-    Map<String, Object> logParams = new TreeMap<String, Object>();
-    logParams.put("serverid", "1");
-    logParams.put("localcents", reqProto.getLocalcents());
-    logParams.put("localcurrency", reqProto.getLocalcurrency());
-    logParams.put("igc", resBuilder.hasDiamondsGained() ? resBuilder.getDiamondsGained() : resBuilder.getCoinsGained());
-    logParams.put("igctype", resBuilder.hasDiamondsGained() ? "gold" : "silver");
-    logParams.put("transactionid", receiptFromApple.get(IAPValues.TRANSACTION_ID));
-    logParams.put("platform", "itunes");
-    logParams.put("locale", reqProto.getLocale());
-    logParams.put("lang", "en");
-    logParams.put("ipaddr", reqProto.getIpaddr());
-    JSONObject logJson = new JSONObject(logParams);
-    return logJson;
-  }*/
+	private JSONObject getKabamJsonLogObject(InAppPurchaseRequestProto reqProto,
+	  InAppPurchaseResponseProto.Builder resBuilder, JSONObject receiptFromApple) throws JSONException {
+	Map<String, Object> logParams = new TreeMap<String, Object>();
+	logParams.put("serverid", "1");
+	logParams.put("localcents", reqProto.getLocalcents());
+	logParams.put("localcurrency", reqProto.getLocalcurrency());
+	logParams.put("igc", resBuilder.hasDiamondsGained() ? resBuilder.getDiamondsGained() : resBuilder.getCoinsGained());
+	logParams.put("igctype", resBuilder.hasDiamondsGained() ? "gold" : "silver");
+	logParams.put("transactionid", receiptFromApple.get(IAPValues.TRANSACTION_ID));
+	logParams.put("platform", "itunes");
+	logParams.put("locale", reqProto.getLocale());
+	logParams.put("lang", "en");
+	logParams.put("ipaddr", reqProto.getIpaddr());
+	JSONObject logJson = new JSONObject(logParams);
+	return logJson;
+	}*/
 
-//	private static String sha1(String input) throws NoSuchAlgorithmException {
-//		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-//		byte[] result = mDigest.digest(input.getBytes());
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < result.length; i++) {
-//			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-//		}
-//
-//		return sb.toString();
-//	}
+	//	private static String sha1(String input) throws NoSuchAlgorithmException {
+	//		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+	//		byte[] result = mDigest.digest(input.getBytes());
+	//		StringBuilder sb = new StringBuilder();
+	//		for (int i = 0; i < result.length; i++) {
+	//			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+	//		}
+	//
+	//		return sb.toString();
+	//	}
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-			InAppPurchaseAction iapa)
-	{
+			InAppPurchaseAction iapa) {
 
 		MiscMethods.writeToUserCurrencyOneUser(userId, date,
 				iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
@@ -386,55 +395,46 @@ public class InAppPurchaseController extends EventController {
 		this.locker = locker;
 	}
 
-	public InsertUtil getInsertUtil()
-	{
+	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
-	public void setInsertUtil( InsertUtil insertUtil )
-	{
+	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
 	}
 
-	public UpdateUtil getUpdateUtil()
-	{
+	public UpdateUtil getUpdateUtil() {
 		return updateUtil;
 	}
 
-	public void setUpdateUtil( UpdateUtil updateUtil )
-	{
+	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil()
-	{
+	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
 		return iapHistoryRetrieveUtil;
 	}
 
-	public void setIapHistoryRetrieveUtil( IAPHistoryRetrieveUtils iapHistoryRetrieveUtil )
-	{
+	public void setIapHistoryRetrieveUtil(
+			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
-
 
 }

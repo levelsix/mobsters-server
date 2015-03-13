@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LevelUpResponseEvent extends NormalResponseEvent {
 
-  private LevelUpResponseProto levelUpResponseProto;
-  
-  public LevelUpResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_LEVEL_UP_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = levelUpResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private LevelUpResponseProto levelUpResponseProto;
 
-  public void setLevelUpResponseProto(LevelUpResponseProto levelUpResponseProto) {
-    this.levelUpResponseProto = levelUpResponseProto;
-  }
+	public LevelUpResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_LEVEL_UP_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = levelUpResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setLevelUpResponseProto(
+			LevelUpResponseProto levelUpResponseProto) {
+		this.levelUpResponseProto = levelUpResponseProto;
+	}
 
 }

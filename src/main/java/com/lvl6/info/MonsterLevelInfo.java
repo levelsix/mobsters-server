@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MonsterLevelInfo implements Serializable {
 
 	private static final long serialVersionUID = 6445604577625300716L;
-	
+
 	private int monsterId;
 	private int level;
 	private int hp;
@@ -24,50 +24,30 @@ public class MonsterLevelInfo implements Serializable {
 	private float expLvlExponent;
 	private int sellAmount;
 	private int teamCost;
-    private int costToFullyHeal;
-    private float costToFullyHealExponent;
-    private int secsToFullyHeal;
-    private float secsToFullyHealExponent;
+	private int costToFullyHeal;
+	private float costToFullyHealExponent;
+	private int secsToFullyHeal;
+	private float secsToFullyHealExponent;
 	private int enhanceCostPerFeeder;
 	private float enhanceCostExponent;
 	private float enhanceExpPerSecond;
 	private float enhanceExpPerSecondExponent;
 	private float pvpDropRate;
 
-	public MonsterLevelInfo()
-	{
+	public MonsterLevelInfo() {
 		super();
 	}
 
-	public MonsterLevelInfo(
-		int monsterId,
-		int level,
-		int hp,
-		int curLvlRequiredExp,
-		int feederExp,
-		int fireDmg,
-		int grassDmg,
-		int waterDmg,
-		int lightningDmg,
-		int darknessDmg,
-		int rockDmg,
-		int speed,
-		float hpExponentBase,
-		float dmgExponentBase,
-		float expLvlDivisor,
-		float expLvlExponent,
-		int sellAmount,
-		int teamCost,
-        int costToFullyHeal,
-        float costToFullyHealExponent,
-        int secsToFullyHeal,
-        float secsToFullyHealExponent,
-		int enhanceCostPerFeeder,
-		float enhanceCostExponent,
-		float enhanceExpPerSecond,
-		float enhanceExpPerSecondExponent,
-		float pvpDropRate )
-	{
+	public MonsterLevelInfo(int monsterId, int level, int hp,
+			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,
+			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg,
+			int speed, float hpExponentBase, float dmgExponentBase,
+			float expLvlDivisor, float expLvlExponent, int sellAmount,
+			int teamCost, int costToFullyHeal, float costToFullyHealExponent,
+			int secsToFullyHeal, float secsToFullyHealExponent,
+			int enhanceCostPerFeeder, float enhanceCostExponent,
+			float enhanceExpPerSecond, float enhanceExpPerSecondExponent,
+			float pvpDropRate) {
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -87,10 +67,10 @@ public class MonsterLevelInfo implements Serializable {
 		this.expLvlExponent = expLvlExponent;
 		this.sellAmount = sellAmount;
 		this.teamCost = teamCost;
-        this.costToFullyHeal = costToFullyHeal;
-        this.costToFullyHealExponent = costToFullyHealExponent;
-        this.secsToFullyHeal = secsToFullyHeal;
-        this.secsToFullyHealExponent = secsToFullyHealExponent;
+		this.costToFullyHeal = costToFullyHeal;
+		this.costToFullyHealExponent = costToFullyHealExponent;
+		this.secsToFullyHeal = secsToFullyHeal;
+		this.secsToFullyHealExponent = secsToFullyHealExponent;
 		this.enhanceCostPerFeeder = enhanceCostPerFeeder;
 		this.enhanceCostExponent = enhanceCostExponent;
 		this.enhanceExpPerSecond = enhanceExpPerSecond;
@@ -234,123 +214,107 @@ public class MonsterLevelInfo implements Serializable {
 		this.sellAmount = sellAmount;
 	}
 
-	public int getTeamCost()
-	{
+	public int getTeamCost() {
 		return teamCost;
 	}
 
-	public void setTeamCost( int teamCost )
-	{
+	public void setTeamCost(int teamCost) {
 		this.teamCost = teamCost;
 	}
 
-	public int getCostToFullyHeal()
-	{
+	public int getCostToFullyHeal() {
 		return costToFullyHeal;
 	}
 
-	public void setCostToFullyHeal( int costToFullyHeal )
-	{
+	public void setCostToFullyHeal(int costToFullyHeal) {
 		this.costToFullyHeal = costToFullyHeal;
 	}
 
-	public int getSecsToFullyHeal()
-	{
+	public int getSecsToFullyHeal() {
 		return secsToFullyHeal;
 	}
 
-	public void setSecsToFullyHeal( int secsToFullyHeal )
-	{
+	public void setSecsToFullyHeal(int secsToFullyHeal) {
 		this.secsToFullyHeal = secsToFullyHeal;
 	}
 
-	public int getEnhanceCostPerFeeder()
-	{
+	public int getEnhanceCostPerFeeder() {
 		return enhanceCostPerFeeder;
 	}
 
-	public void setEnhanceCostPerFeeder( int enhanceCostPerFeeder )
-	{
+	public void setEnhanceCostPerFeeder(int enhanceCostPerFeeder) {
 		this.enhanceCostPerFeeder = enhanceCostPerFeeder;
 	}
 
-	public float getEnhanceCostExponent()
-	{
+	public float getEnhanceCostExponent() {
 		return enhanceCostExponent;
 	}
 
-	public void setEnhanceCostExponent( float enhanceCostExponent )
-	{
+	public void setEnhanceCostExponent(float enhanceCostExponent) {
 		this.enhanceCostExponent = enhanceCostExponent;
 	}
 
-	public float getEnhanceExpPerSecond()
-	{
+	public float getEnhanceExpPerSecond() {
 		return enhanceExpPerSecond;
 	}
 
-	public void setEnhanceExpPerSecond( float enhanceExpPerSecond )
-	{
+	public void setEnhanceExpPerSecond(float enhanceExpPerSecond) {
 		this.enhanceExpPerSecond = enhanceExpPerSecond;
 	}
 
-	public float getEnhanceExpPerSecondExponent()
-	{
+	public float getEnhanceExpPerSecondExponent() {
 		return enhanceExpPerSecondExponent;
 	}
 
-	public void setEnhanceExpPerSecondExponent( float enhanceExpPerSecondExponent )
-	{
+	public void setEnhanceExpPerSecondExponent(float enhanceExpPerSecondExponent) {
 		this.enhanceExpPerSecondExponent = enhanceExpPerSecondExponent;
 	}
 
-	public float getPvpDropRate()
-	{
+	public float getPvpDropRate() {
 		return pvpDropRate;
 	}
 
-	public void setPvpDropRate( float pvpDropRate )
-	{
+	public void setPvpDropRate(float pvpDropRate) {
 		this.pvpDropRate = pvpDropRate;
 	}
 
 	public float getCostToFullyHealExponent() {
-        return costToFullyHealExponent;
-    }
+		return costToFullyHealExponent;
+	}
 
-    public void setCostToFullyHealExponent(float costToFullyHealExponent) {
-        this.costToFullyHealExponent = costToFullyHealExponent;
-    }
+	public void setCostToFullyHealExponent(float costToFullyHealExponent) {
+		this.costToFullyHealExponent = costToFullyHealExponent;
+	}
 
-    public float getSecsToFullyHealExponent() {
-        return secsToFullyHealExponent;
-    }
+	public float getSecsToFullyHealExponent() {
+		return secsToFullyHealExponent;
+	}
 
-    public void setSecsToFullyHealExponent(float secsToFullyHealExponent) {
-        this.secsToFullyHealExponent = secsToFullyHealExponent;
-    }
+	public void setSecsToFullyHealExponent(float secsToFullyHealExponent) {
+		this.secsToFullyHealExponent = secsToFullyHealExponent;
+	}
 
-    @Override
-    public String toString() {
-        return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
-                + ", hp=" + hp + ", curLvlRequiredExp=" + curLvlRequiredExp
-                + ", feederExp=" + feederExp + ", fireDmg=" + fireDmg
-                + ", grassDmg=" + grassDmg + ", waterDmg=" + waterDmg
-                + ", lightningDmg=" + lightningDmg + ", darknessDmg="
-                + darknessDmg + ", rockDmg=" + rockDmg + ", speed=" + speed
-                + ", hpExponentBase=" + hpExponentBase + ", dmgExponentBase="
-                + dmgExponentBase + ", expLvlDivisor=" + expLvlDivisor
-                + ", expLvlExponent=" + expLvlExponent + ", sellAmount="
-                + sellAmount + ", teamCost=" + teamCost + ", costToFullyHeal="
-                + costToFullyHeal + ", costToFullyHealExponent="
-                + costToFullyHealExponent + ", secsToFullyHeal="
-                + secsToFullyHeal + ", secsToFullyHealExponent="
-                + secsToFullyHealExponent + ", enhanceCostPerFeeder="
-                + enhanceCostPerFeeder + ", enhanceCostExponent="
-                + enhanceCostExponent + ", enhanceExpPerSecond="
-                + enhanceExpPerSecond + ", enhanceExpPerSecondExponent="
-                + enhanceExpPerSecondExponent + ", pvpDropRate=" + pvpDropRate
-                + "]";
-    }
-	
+	@Override
+	public String toString() {
+		return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
+				+ ", hp=" + hp + ", curLvlRequiredExp=" + curLvlRequiredExp
+				+ ", feederExp=" + feederExp + ", fireDmg=" + fireDmg
+				+ ", grassDmg=" + grassDmg + ", waterDmg=" + waterDmg
+				+ ", lightningDmg=" + lightningDmg + ", darknessDmg="
+				+ darknessDmg + ", rockDmg=" + rockDmg + ", speed=" + speed
+				+ ", hpExponentBase=" + hpExponentBase + ", dmgExponentBase="
+				+ dmgExponentBase + ", expLvlDivisor=" + expLvlDivisor
+				+ ", expLvlExponent=" + expLvlExponent + ", sellAmount="
+				+ sellAmount + ", teamCost=" + teamCost + ", costToFullyHeal="
+				+ costToFullyHeal + ", costToFullyHealExponent="
+				+ costToFullyHealExponent + ", secsToFullyHeal="
+				+ secsToFullyHeal + ", secsToFullyHealExponent="
+				+ secsToFullyHealExponent + ", enhanceCostPerFeeder="
+				+ enhanceCostPerFeeder + ", enhanceCostExponent="
+				+ enhanceCostExponent + ", enhanceExpPerSecond="
+				+ enhanceExpPerSecond + ", enhanceExpPerSecondExponent="
+				+ enhanceExpPerSecondExponent + ", pvpDropRate=" + pvpDropRate
+				+ "]";
+	}
+
 }

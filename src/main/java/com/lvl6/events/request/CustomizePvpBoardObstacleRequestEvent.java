@@ -12,17 +12,21 @@ import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto;
 
 public class CustomizePvpBoardObstacleRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private CustomizePvpBoardObstacleRequestProto customizePvpBoardObstacleRequestProto;
 
 	/**
 	 * read the event from the given ByteBuffer to populate this event
 	 */
+	@Override
 	public void read(ByteBuffer buff) {
 		try {
-			customizePvpBoardObstacleRequestProto = CustomizePvpBoardObstacleRequestProto.parseFrom(ByteString.copyFrom(buff));
-			playerId = customizePvpBoardObstacleRequestProto.getSender().getUserUuid();
+			customizePvpBoardObstacleRequestProto = CustomizePvpBoardObstacleRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = customizePvpBoardObstacleRequestProto.getSender()
+					.getUserUuid();
 		} catch (InvalidProtocolBufferException e) {
 			log.error("CustomizePvpBoardObstacle request exception", e);
 		}
@@ -32,8 +36,8 @@ public class CustomizePvpBoardObstacleRequestEvent extends RequestEvent {
 		return customizePvpBoardObstacleRequestProto;
 	}
 
-	public void setCustomizePvpBoardObstacleRequestProto( CustomizePvpBoardObstacleRequestProto customizePvpBoardObstacleRequestProto )
-	{
+	public void setCustomizePvpBoardObstacleRequestProto(
+			CustomizePvpBoardObstacleRequestProto customizePvpBoardObstacleRequestProto) {
 		this.customizePvpBoardObstacleRequestProto = customizePvpBoardObstacleRequestProto;
 	}
 

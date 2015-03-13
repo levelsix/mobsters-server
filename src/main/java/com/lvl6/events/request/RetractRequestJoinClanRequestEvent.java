@@ -11,33 +11,35 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 
 public class RetractRequestJoinClanRequestEvent extends RequestEvent {
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private RetractRequestJoinClanRequestProto retractRequestJoinClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      retractRequestJoinClanRequestProto = RetractRequestJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retractRequestJoinClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RetractRequestJoinClanRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RetractRequestJoinClanRequestProto getRetractRequestJoinClanRequestProto() {
-    return retractRequestJoinClanRequestProto;
-  }
+	private RetractRequestJoinClanRequestProto retractRequestJoinClanRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "RetractRequestJoinClanRequestEvent [retractRequestJoinClanRequestProto="
-		  + retractRequestJoinClanRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			retractRequestJoinClanRequestProto = RetractRequestJoinClanRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = retractRequestJoinClanRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RetractRequestJoinClanRequest exception", e);
+		}
+	}
+
+	public RetractRequestJoinClanRequestProto getRetractRequestJoinClanRequestProto() {
+		return retractRequestJoinClanRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "RetractRequestJoinClanRequestEvent [retractRequestJoinClanRequestProto="
+				+ retractRequestJoinClanRequestProto + "]";
+	}
+
 }

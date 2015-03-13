@@ -22,9 +22,12 @@ import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component @DependsOn("gameServer") public class EndClanHelpController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class EndClanHelpController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -45,7 +48,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		EndClanHelpRequestProto reqProto = ((EndClanHelpRequestEvent)event)
+		EndClanHelpRequestProto reqProto = ((EndClanHelpRequestEvent) event)
 				.getEndClanHelpRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
@@ -54,7 +57,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		List<String> clanHelpIdList = reqProto.getClanHelpUuidsList();
 		String userId = senderProto.getUserUuid();
 
-		EndClanHelpResponseProto.Builder resBuilder = EndClanHelpResponseProto.newBuilder();
+		EndClanHelpResponseProto.Builder resBuilder = EndClanHelpResponseProto
+				.newBuilder();
 		resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.addAllClanHelpUuids(clanHelpIdList);
@@ -77,14 +81,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-					"UUID error. incorrect userId=%s, clanId=%s",
-					userId, clanId), e);
+					"UUID error. incorrect userId=%s, clanId=%s", userId,
+					clanId), e);
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
-			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(userId);
+			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setEndClanHelpResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -92,14 +97,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
 
 		try {
-			boolean legitLeave = checkLegitLeave(resBuilder, userId, clanHelpIdList);
+			boolean legitLeave = checkLegitLeave(resBuilder, userId,
+					clanHelpIdList);
 
 			boolean success = false;
 			if (legitLeave) {
 				success = writeChangesToDB(userId, clanId, clanHelpIdList);
 			}
 
-			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(userId);
+			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
@@ -120,7 +127,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			log.error("exception in EndClanHelp processEvent", e);
 			try {
 				resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
-				EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(userId);
+				EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setEndClanHelpResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
@@ -128,12 +136,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				log.error("exception2 in EndClanHelp processEvent", e);
 			}
 		} /*finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    	}
-    }*/
+			if (0 != clanId && lockedClan) {
+			getLocker().unlockClan(clanId);
+			} else {
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			}
+			}*/
 	}
 
 	private boolean checkLegitLeave(Builder resBuilder, String userId,
@@ -141,7 +149,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		if (userId.isEmpty()) {
 			log.error(String.format("user is null. id=%s", userId));
-			return false;      
+			return false;
 		}
 
 		if (null == clanHelpIds || clanHelpIds.isEmpty()) {
@@ -153,29 +161,30 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	}
 
 	private boolean writeChangesToDB(String userId, String clanId,
-			List<String> clanHelpIdList)
-	{
-		int numDeleted = DeleteUtils.get().deleteClanHelp(userId, clanHelpIdList);
+			List<String> clanHelpIdList) {
+		int numDeleted = DeleteUtils.get().deleteClanHelp(userId,
+				clanHelpIdList);
 		log.info(String.format("numDeleted: %s", numDeleted));
 
 		return true;
 	}
 
 	/*
-  private void notifyClan(User aUser, Clan aClan) {
-    int clanId = aClan.getId();
+	private void notifyClan(User aUser, Clan aClan) {
+	int clanId = aClan.getId();
 
-    int level = aUser.getLevel();
-    String deserter = aUser.getName();
-    Notification aNote = new Notification();
+	int level = aUser.getLevel();
+	String deserter = aUser.getName();
+	Notification aNote = new Notification();
 
-    aNote.setAsUserLeftClan(level, deserter);
-    MiscMethods.writeClanApnsNotification(aNote, server, clanId);
-  }*/
+	aNote.setAsUserLeftClan(level, deserter);
+	MiscMethods.writeClanApnsNotification(aNote, server, clanId);
+	}*/
 
 	public Locker getLocker() {
 		return locker;
 	}
+
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}

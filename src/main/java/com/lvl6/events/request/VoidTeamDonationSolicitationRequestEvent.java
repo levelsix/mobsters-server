@@ -12,32 +12,34 @@ import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationRequestProto;
 
 public class VoidTeamDonationSolicitationRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private VoidTeamDonationSolicitationRequestProto voidTeamDonationSolicitationRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      voidTeamDonationSolicitationRequestProto = VoidTeamDonationSolicitationRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = voidTeamDonationSolicitationRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("VoidTeamDonationSolicitationRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public VoidTeamDonationSolicitationRequestProto getVoidTeamDonationSolicitationRequestProto() {
-    return voidTeamDonationSolicitationRequestProto;
-  }
+	private VoidTeamDonationSolicitationRequestProto voidTeamDonationSolicitationRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "VoidTeamDonationSolicitationRequestEvent [voidTeamDonationSolicitationRequestProto="
-		  + voidTeamDonationSolicitationRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			voidTeamDonationSolicitationRequestProto = VoidTeamDonationSolicitationRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = voidTeamDonationSolicitationRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("VoidTeamDonationSolicitationRequest exception", e);
+		}
+	}
+
+	public VoidTeamDonationSolicitationRequestProto getVoidTeamDonationSolicitationRequestProto() {
+		return voidTeamDonationSolicitationRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "VoidTeamDonationSolicitationRequestEvent [voidTeamDonationSolicitationRequestProto="
+				+ voidTeamDonationSolicitationRequestProto + "]";
+	}
+
 }

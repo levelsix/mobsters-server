@@ -25,11 +25,12 @@ import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class ItemForUserUsageRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ItemForUserUsageRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_FOR_USER_USAGE; 
+	private static Logger log = LoggerFactory
+			.getLogger(ItemForUserUsageRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_FOR_USER_USAGE;
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -37,22 +38,23 @@ public class ItemForUserUsageRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
-	public List<ItemForUserUsage> getItemForUserUsage(
-	    String userId, Collection<Integer> itemIds) {
+	public List<ItemForUserUsage> getItemForUserUsage(String userId,
+			Collection<Integer> itemIds) {
 		List<ItemForUserUsage> itemUsages = null;
 		try {
 			List<String> columnsToSelected = UserItemUsageForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, userId);
+			equalityConditions.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID,
+					userId);
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			Map<String, Collection<?>> inConditions = null;
@@ -61,7 +63,7 @@ public class ItemForUserUsageRetrieveUtil {
 				inConditions.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID,
 						itemIds);
 			}
-			String inDelim = getQueryConstructionUtil().getAnd(); 
+			String inDelim = getQueryConstructionUtil().getAnd();
 
 			String overallDelim = getQueryConstructionUtil().getAnd();
 			//query db, "values" is not used 
@@ -71,33 +73,34 @@ public class ItemForUserUsageRetrieveUtil {
 			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
-					.selectRowsQueryEqualityAndInConditions(
-							columnsToSelected, TABLE_NAME, equalityConditions,
-							eqDelim, inConditions, inDelim, overallDelim,
-							values, preparedStatement);
+					.selectRowsQueryEqualityAndInConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim,
+							inConditions, inDelim, overallDelim, values,
+							preparedStatement);
 
 			log.info(String.format(
-				"getSpecificOrAllItemIdToItemForUserUsageId() query=%s",
-				query));
+					"getSpecificOrAllItemIdToItemForUserUsageId() query=%s",
+					query));
 
-			itemUsages = this.jdbcTemplate
-					.query(query, values.toArray(), new UserItemUsageForClientMapper());
+			itemUsages = this.jdbcTemplate.query(query, values.toArray(),
+					new UserItemUsageForClientMapper());
 		} catch (Exception e) {
 			log.error(
-				String.format(
-					"could not retrieve UserItemUsage for userId=%s, itemIds=%s",
-					userId, itemIds),
-				e);
+					String.format(
+							"could not retrieve UserItemUsage for userId=%s, itemIds=%s",
+							userId, itemIds), e);
 			itemUsages = new ArrayList<ItemForUserUsage>();
 		}
-		
+
 		return itemUsages;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -112,35 +115,42 @@ public class ItemForUserUsageRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserItemUsageForClientMapper implements RowMapper<ItemForUserUsage> {
+	private static final class UserItemUsageForClientMapper implements
+			RowMapper<ItemForUserUsage> {
 
 		private static List<String> columnsSelected;
 
-		public ItemForUserUsage mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public ItemForUserUsage mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			ItemForUserUsage ifuu = new ItemForUserUsage();
 			ifuu.setId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ID));
-			ifuu.setUserId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_ID));
+			ifuu.setUserId(rs
+					.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_ID));
 			ifuu.setItemId(rs.getInt(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID));
-			
-			Timestamp ts = rs.getTimestamp(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
+
+			Timestamp ts = rs
+					.getTimestamp(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
 			ifuu.setTimeOfEntry(new Date(ts.getTime()));
-			
-			ifuu.setUserDataId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID));
-			
-			String actionType = rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
+
+			ifuu.setUserDataId(rs
+					.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID));
+
+			String actionType = rs
+					.getString(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
 			if (null != actionType) {
-		    	String newActionType = actionType.trim().toUpperCase();
-		    	if (!actionType.equals(newActionType)) {
-		    		log.error(String.format(
-		    			"actionType incorrect: %s, ItemForUserUsage=%s",
-		    			actionType, ifuu));
-		    		actionType = newActionType;
-		    	}
-		    }
+				String newActionType = actionType.trim().toUpperCase();
+				if (!actionType.equals(newActionType)) {
+					log.error(String.format(
+							"actionType incorrect: %s, ItemForUserUsage=%s",
+							actionType, ifuu));
+					actionType = newActionType;
+				}
+			}
 			ifuu.setActionType(actionType);
-			
+
 			return ifuu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -148,11 +158,14 @@ public class ItemForUserUsageRetrieveUtil {
 				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ID);
 				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__USER_ID);
 				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
+				columnsSelected
+						.add(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
+				columnsSelected
+						.add(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID);
+				columnsSelected
+						.add(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

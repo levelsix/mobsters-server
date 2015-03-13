@@ -6,7 +6,7 @@ import java.util.Date;
 public class MonsterHealingForUser implements Serializable {
 
 	private static final long serialVersionUID = 918458842273792522L;
-	
+
 	private String userId;
 	private String monsterForUserId;
 	private Date queuedTime;
@@ -15,20 +15,13 @@ public class MonsterHealingForUser implements Serializable {
 	private int priority;
 	private float elapsedSeconds;
 
-	public MonsterHealingForUser()
-	{
+	public MonsterHealingForUser() {
 		super();
 	}
 
-	public MonsterHealingForUser(
-		String userId,
-		String monsterForUserId,
-		Date queuedTime,
-		String userStructHospitalId,
-		float healthProgress,
-		int priority,
-		float elapsedSeconds )
-	{
+	public MonsterHealingForUser(String userId, String monsterForUserId,
+			Date queuedTime, String userStructHospitalId, float healthProgress,
+			int priority, float elapsedSeconds) {
 		super();
 		this.userId = userId;
 		this.monsterForUserId = monsterForUserId;
@@ -63,13 +56,11 @@ public class MonsterHealingForUser implements Serializable {
 		this.queuedTime = queuedTime;
 	}
 
-	public String getUserStructHospitalId()
-	{
+	public String getUserStructHospitalId() {
 		return userStructHospitalId;
 	}
 
-	public void setUserStructHospitalId( String userStructHospitalId )
-	{
+	public void setUserStructHospitalId(String userStructHospitalId) {
 		this.userStructHospitalId = userStructHospitalId;
 	}
 
@@ -89,34 +80,21 @@ public class MonsterHealingForUser implements Serializable {
 		this.priority = priority;
 	}
 
-	public float getElapsedSeconds()
-	{
+	public float getElapsedSeconds() {
 		return elapsedSeconds;
 	}
 
-	public void setElapsedSeconds( float elapsedSeconds )
-	{
+	public void setElapsedSeconds(float elapsedSeconds) {
 		this.elapsedSeconds = elapsedSeconds;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "MonsterHealingForUser [userId="
-			+ userId
-			+ ", monsterForUserId="
-			+ monsterForUserId
-			+ ", queuedTime="
-			+ queuedTime
-			+ ", userStructHospitalId="
-			+ userStructHospitalId
-			+ ", healthProgress="
-			+ healthProgress
-			+ ", priority="
-			+ priority
-			+ ", elapsedSeconds="
-			+ elapsedSeconds
-			+ "]";
+	public String toString() {
+		return "MonsterHealingForUser [userId=" + userId
+				+ ", monsterForUserId=" + monsterForUserId + ", queuedTime="
+				+ queuedTime + ", userStructHospitalId=" + userStructHospitalId
+				+ ", healthProgress=" + healthProgress + ", priority="
+				+ priority + ", elapsedSeconds=" + elapsedSeconds + "]";
 	}
 
 }

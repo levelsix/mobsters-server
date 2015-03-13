@@ -16,12 +16,14 @@ public class HealthCheckPage extends TemplatePage {
 	public HealthCheckPage() {
 		super();
 		log.info("Health check");
-		HealthCheck hc = AppContext.getApplicationContext().getBean(HealthCheck.class);
-		if(!hc.check()) {
+		HealthCheck hc = AppContext.getApplicationContext().getBean(
+				HealthCheck.class);
+		if (!hc.check()) {
 			log.error("Health check failed");
 			hc.logCurrentSystemInfo();
-			throw new AbortWithHttpErrorCodeException(HttpStatus.SC_SERVICE_UNAVAILABLE);
+			throw new AbortWithHttpErrorCodeException(
+					HttpStatus.SC_SERVICE_UNAVAILABLE);
 		}
 	}
-	
+
 }

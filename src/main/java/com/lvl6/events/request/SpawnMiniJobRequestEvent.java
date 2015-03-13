@@ -12,36 +12,38 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 
 public class SpawnMiniJobRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private SpawnMiniJobRequestProto spawnMiniJobRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      spawnMiniJobRequestProto = SpawnMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = spawnMiniJobRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SpawnMiniJobRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public SpawnMiniJobRequestProto getSpawnMiniJobRequestProto() {
-    return spawnMiniJobRequestProto;
-  }
-  //added for testing purposes
-  public void setSpawnMiniJobRequestProto(SpawnMiniJobRequestProto sorp) {
-	  this.spawnMiniJobRequestProto = sorp;
-  }
+	private SpawnMiniJobRequestProto spawnMiniJobRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "SpawnMiniJobRequestEvent [spawnMiniJobRequestProto="
-		  + spawnMiniJobRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			spawnMiniJobRequestProto = SpawnMiniJobRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = spawnMiniJobRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SpawnMiniJobRequest exception", e);
+		}
+	}
+
+	public SpawnMiniJobRequestProto getSpawnMiniJobRequestProto() {
+		return spawnMiniJobRequestProto;
+	}
+
+	//added for testing purposes
+	public void setSpawnMiniJobRequestProto(SpawnMiniJobRequestProto sorp) {
+		this.spawnMiniJobRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "SpawnMiniJobRequestEvent [spawnMiniJobRequestProto="
+				+ spawnMiniJobRequestProto + "]";
+	}
+
 }

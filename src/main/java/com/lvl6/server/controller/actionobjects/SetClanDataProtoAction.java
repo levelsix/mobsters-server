@@ -16,15 +16,14 @@ import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 
-public class SetClanDataProtoAction
-{ 
+public class SetClanDataProtoAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	private String clanId;
 	private Clan clan;
 	private User user;
-	private String userId; 
+	private String userId;
 	private List<Date> lastChatTimeContainer;
 	private StartUpResource fillMe;
 	private ClanHelpRetrieveUtil clanHelpRetrieveUtil;
@@ -33,22 +32,20 @@ public class SetClanDataProtoAction
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
-	public SetClanDataProtoAction( 
-		String clanId,
-		Clan clan,
-		User user,
-		String userId,
-		List<Date> lastChatTimeContainer,
-		StartUpResource fillMe,
-		ClanHelpRetrieveUtil clanHelpRetrieveUtil,
-		ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
-		ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
-		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil
-	)
-	{
+
+	public SetClanDataProtoAction(
+			String clanId,
+			Clan clan,
+			User user,
+			String userId,
+			List<Date> lastChatTimeContainer,
+			StartUpResource fillMe,
+			ClanHelpRetrieveUtil clanHelpRetrieveUtil,
+			ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
+			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
+			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		super();
 		this.clanId = clanId;
 		this.clan = clan;
@@ -68,22 +65,21 @@ public class SetClanDataProtoAction
 		log.info("setting clanData proto for clan {}", clan);
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 
-		SetClanChatMessageAction sccma = new SetClanChatMessageAction(
-			cdpb, user, clanChatPostRetrieveUtils);
+		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
+				user, clanChatPostRetrieveUtils);
 		sccma.setUp(fillMe);
-		SetClanHelpingsAction scha = new SetClanHelpingsAction(
-			cdpb, user, userId, clanHelpRetrieveUtil);
+		SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
+				userId, clanHelpRetrieveUtil);
 		scha.setUp(fillMe);
-		SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
-			cdpb, user, userId, clanAvengeRetrieveUtil,
-			clanAvengeUserRetrieveUtil);
+		SetClanRetaliationsAction scra = new SetClanRetaliationsAction(cdpb,
+				user, userId, clanAvengeRetrieveUtil,
+				clanAvengeUserRetrieveUtil);
 		scra.setUp(fillMe);
 		SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
 				cdpb, user, userId, clanMemberTeamDonationRetrieveUtil,
 				monsterSnapshotForUserRetrieveUtil);
 		scmtda.setUp(fillMe);
 
-		
 		fillMe.fetchUsersOnly();
 		fillMe.addClan(clanId, clan);
 
@@ -93,12 +89,9 @@ public class SetClanDataProtoAction
 		scmtda.execute(fillMe);
 
 		lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
-		
+
 		return cdpb.build();
-	
+
 	}
-	
-	
-	
 
 }

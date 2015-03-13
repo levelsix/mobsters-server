@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RedeemSecretGiftAction
-{
+public class RedeemSecretGiftAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -44,16 +43,13 @@ public class RedeemSecretGiftAction
 	private InsertUtil insertUtil;
 
 	public RedeemSecretGiftAction(
-		String userId,
-		List<String> itemIdsRedeemed,
-		Timestamp clientTime,
-		ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil,
-		UserRetrieveUtils2 userRetrieveUtil,
-		ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-		DeleteUtil deleteUtil,
-		UpdateUtil updateUtil,
-		InsertUtil insertUtil )
-	{
+			String userId,
+			List<String> itemIdsRedeemed,
+			Timestamp clientTime,
+			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil,
+			UserRetrieveUtils2 userRetrieveUtil,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			DeleteUtil deleteUtil, UpdateUtil updateUtil, InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
 		this.idsRedeemed = itemIdsRedeemed;
@@ -83,7 +79,7 @@ public class RedeemSecretGiftAction
 	private User user;
 	private Map<String, ItemSecretGiftForUser> idToSecretGift;
 
-	private Map<Integer,Integer> itemIdToNuQuantity;
+	private Map<Integer, Integer> itemIdToNuQuantity;
 	private Map<Integer, ItemForUser> itemIdToUserItem;
 	private List<ItemSecretGiftForUser> gifts;
 
@@ -93,20 +89,16 @@ public class RedeemSecretGiftAction
 	//	private Map<String, String> reasonsForChanges;
 	//	private Map<String, String> details;
 
-
 	//select items at random to gift to the user
-	public static List<ItemSecretGiftForUser> calculateGiftsForUser(String userId,
-		int numGifts, long now)
-	{
-		List<ItemSecretGiftForUser> gifts =
-			new ArrayList<ItemSecretGiftForUser>();
-		
+	public static List<ItemSecretGiftForUser> calculateGiftsForUser(
+			String userId, int numGifts, long now) {
+		List<ItemSecretGiftForUser> gifts = new ArrayList<ItemSecretGiftForUser>();
+
 		//random to select an item
 		Random rand = ControllerConstants.RAND;
-		
+
 		//chi random to calculate seconds till collection
-		ChiSquaredDistribution randChi = ControllerConstants
-			.ITEM_SECRET_GIFT_FOR_USER__RANDOM;
+		ChiSquaredDistribution randChi = ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__RANDOM;
 
 		//(round((chisq(df = 4)^3) * 6.5)+329)
 		for (int giftI = 0; giftI < numGifts; giftI++) {
@@ -115,38 +107,33 @@ public class RedeemSecretGiftAction
 
 			ItemSecretGiftForUser isgfu = new ItemSecretGiftForUser();
 			isgfu.setUserId(userId);
-			isgfu.setItemId(
-				secretGift.getId());
-			
+			isgfu.setItemId(secretGift.getId());
+
 			//so the client knows which item came first
 			Date newTime = new Date(now + giftI * 1000);
 			isgfu.setCreateTime(newTime);
-			
-			double randDoub = randChi.sample();
-			log.info(String.format(
-				"randDoub=%s", randDoub));
-			
-			randDoub = Math.pow(randDoub, 3D);
-			log.info(String.format(
-				"(randDoub ^ 3)=%s", randDoub));
-			
-			double waitTimeSecs = randDoub * 6.5 + 329;
-			log.info(String.format(
-				"uncapped waitTimeSecs=%s", waitTimeSecs));
-			
-			//(round((chisq(df = 4)^3) * 6.5)+329)
-			waitTimeSecs = Math.min(waitTimeSecs, ControllerConstants
-				.ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME);
-//			waitTimeSecs = Math.max(waitTimeSecs, ControllerConstants
-//				.ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME);
-			log.info(String.format(
-				"capped waitTimeSecs=%s", waitTimeSecs));
-			
-			isgfu.setSecsTillCollection( (int)Math.round(waitTimeSecs) );
 
-			log.info(String.format(
-				"gift=%s", isgfu));
-			
+			double randDoub = randChi.sample();
+			log.info(String.format("randDoub=%s", randDoub));
+
+			randDoub = Math.pow(randDoub, 3D);
+			log.info(String.format("(randDoub ^ 3)=%s", randDoub));
+
+			double waitTimeSecs = randDoub * 6.5 + 329;
+			log.info(String.format("uncapped waitTimeSecs=%s", waitTimeSecs));
+
+			//(round((chisq(df = 4)^3) * 6.5)+329)
+			waitTimeSecs = Math
+					.min(waitTimeSecs,
+							ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME);
+			//			waitTimeSecs = Math.max(waitTimeSecs, ControllerConstants
+			//				.ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME);
+			log.info(String.format("capped waitTimeSecs=%s", waitTimeSecs));
+
+			isgfu.setSecsTillCollection((int) Math.round(waitTimeSecs));
+
+			log.info(String.format("gift=%s", isgfu));
+
 			gifts.add(isgfu);
 		}
 
@@ -181,9 +168,7 @@ public class RedeemSecretGiftAction
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (null == idsRedeemed || idsRedeemed.isEmpty()) {
-			log.error(String.format(
-				"invalid itemIdsRedeemed=%s.",
-				idsRedeemed));
+			log.error(String.format("invalid itemIdsRedeemed=%s.", idsRedeemed));
 			return false;
 		}
 
@@ -193,21 +178,19 @@ public class RedeemSecretGiftAction
 	private boolean verifySemantics(Builder resBuilder) {
 		//get the secret gifts to redeem, check to see if they exist
 		idToSecretGift = itemSecretGiftForUserRetrieveUtil
-			.getSpecificOrAllItemSecretGiftForUserMap(
-				userId,
-				idsRedeemed);
+				.getSpecificOrAllItemSecretGiftForUserMap(userId, idsRedeemed);
 
-		if (null == idToSecretGift || idToSecretGift.size() != idsRedeemed.size()) {
-			log.info(String.format(
-				"inconsistent itemSecretGiftForUser in db: %s and what client asked: %s",
-				idToSecretGift, idsRedeemed));
+		if (null == idToSecretGift
+				|| idToSecretGift.size() != idsRedeemed.size()) {
+			log.info(String
+					.format("inconsistent itemSecretGiftForUser in db: %s and what client asked: %s",
+							idToSecretGift, idsRedeemed));
 			return false;
 		}
 
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			log.error(String.format(
-				"no user with id=%s", userId));
+			log.error(String.format("no user with id=%s", userId));
 			return false;
 		}
 
@@ -243,26 +226,26 @@ public class RedeemSecretGiftAction
 		ifuList.addAll(itemIdToUserItem.values());
 		int numUpdated = updateUtil.updateItemForUser(ifuList);
 		log.info(String.format(
-			"itemSecretGiftForUser numUpdated: %s, itemIdToUserItem=%s",
-			numUpdated, itemIdToUserItem));
+				"itemSecretGiftForUser numUpdated: %s, itemIdToUserItem=%s",
+				numUpdated, itemIdToUserItem));
 
 		//create new SecretGifts
 		gifts = calculateGiftsForUser(userId,
-			ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
-			clientTime.getTime());
-		
+				ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
+				clientTime.getTime());
+
 		List<String> ids = null;
 		if (null != gifts && !gifts.isEmpty()) {
 			//save new SecretGifts
 			ids = insertUtil.insertIntoItemSecretGiftForUserGetId(gifts);
 		}
-		
+
 		if (null != ids && ids.size() == gifts.size()) {
 			setGiftIds(ids);
 		} else {
-			log.error(String.format(
-				"Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
-				gifts, ids));
+			log.error(String
+					.format("Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
+							gifts, ids));
 		}
 
 		//		prepCurrencyHistory();
@@ -273,8 +256,7 @@ public class RedeemSecretGiftAction
 	private void aggregateGifts() {
 		itemIdToNuQuantity = new HashMap<Integer, Integer>();
 
-		for (ItemSecretGiftForUser gif : idToSecretGift.values())
-		{
+		for (ItemSecretGiftForUser gif : idToSecretGift.values()) {
 			int itemId = gif.getItemId();
 			if (!itemIdToNuQuantity.containsKey(itemId)) {
 				itemIdToNuQuantity.put(itemId, 0);
@@ -289,12 +271,10 @@ public class RedeemSecretGiftAction
 		Collection<Integer> itemIds = itemIdToNuQuantity.keySet();
 
 		itemIdToUserItem = itemForUserRetrieveUtil
-			.getSpecificOrAllItemForUserMap(userId, itemIds);
+				.getSpecificOrAllItemForUserMap(userId, itemIds);
 
-		for (Integer itemId : itemIds)
-		{
-			if (!itemIdToUserItem.containsKey(itemId))
-			{
+		for (Integer itemId : itemIds) {
+			if (!itemIdToUserItem.containsKey(itemId)) {
 				ItemForUser nuItemForUser = new ItemForUser(userId, itemId, 0);
 				itemIdToUserItem.put(itemId, nuItemForUser);
 			}
@@ -357,8 +337,7 @@ public class RedeemSecretGiftAction
 		return user;
 	}
 
-	public List<ItemSecretGiftForUser> getGifts()
-	{
+	public List<ItemSecretGiftForUser> getGifts() {
 		return gifts;
 	}
 

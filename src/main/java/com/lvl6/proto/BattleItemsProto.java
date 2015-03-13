@@ -4,3351 +4,3761 @@
 package com.lvl6.proto;
 
 public final class BattleItemsProto {
-  private BattleItemsProto() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-  }
-  /**
-   * Protobuf enum {@code com.lvl6.proto.BattleItemType}
-   */
-  public enum BattleItemType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>ANTIDOTE = 1;</code>
-     */
-    ANTIDOTE(0, 1),
-    /**
-     * <code>HAMMER = 2;</code>
-     */
-    HAMMER(1, 2),
-    ;
-
-    /**
-     * <code>ANTIDOTE = 1;</code>
-     */
-    public static final int ANTIDOTE_VALUE = 1;
-    /**
-     * <code>HAMMER = 2;</code>
-     */
-    public static final int HAMMER_VALUE = 2;
-
-
-    public final int getNumber() { return value; }
-
-    public static BattleItemType valueOf(int value) {
-      switch (value) {
-        case 1: return ANTIDOTE;
-        case 2: return HAMMER;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<BattleItemType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<BattleItemType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<BattleItemType>() {
-            public BattleItemType findValueByNumber(int number) {
-              return BattleItemType.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.BattleItemsProto.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final BattleItemType[] VALUES = values();
-
-    public static BattleItemType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private BattleItemType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemType)
-  }
-
-  /**
-   * Protobuf enum {@code com.lvl6.proto.BattleItemCategory}
-   */
-  public enum BattleItemCategory
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>POTION = 1;</code>
-     */
-    POTION(0, 1),
-    /**
-     * <code>PUZZLE = 2;</code>
-     */
-    PUZZLE(1, 2),
-    ;
-
-    /**
-     * <code>POTION = 1;</code>
-     */
-    public static final int POTION_VALUE = 1;
-    /**
-     * <code>PUZZLE = 2;</code>
-     */
-    public static final int PUZZLE_VALUE = 2;
-
-
-    public final int getNumber() { return value; }
-
-    public static BattleItemCategory valueOf(int value) {
-      switch (value) {
-        case 1: return POTION;
-        case 2: return PUZZLE;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>() {
-            public BattleItemCategory findValueByNumber(int number) {
-              return BattleItemCategory.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.BattleItemsProto.getDescriptor().getEnumTypes().get(1);
-    }
-
-    private static final BattleItemCategory[] VALUES = values();
-
-    public static BattleItemCategory valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private BattleItemCategory(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemCategory)
-  }
-
-  public interface UserBattleItemProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserBattleItemProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    boolean hasUserBattleItemId();
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    java.lang.String getUserBattleItemId();
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserBattleItemIdBytes();
-
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    boolean hasUserUuid();
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    java.lang.String getUserUuid();
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserUuidBytes();
-
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    boolean hasBattleItemId();
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    int getBattleItemId();
-
-    /**
-     * <code>optional int32 quantity = 4;</code>
-     */
-    boolean hasQuantity();
-    /**
-     * <code>optional int32 quantity = 4;</code>
-     */
-    int getQuantity();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
-   */
-  public static final class UserBattleItemProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserBattleItemProto)
-      UserBattleItemProtoOrBuilder {
-    // Use UserBattleItemProto.newBuilder() to construct.
-    private UserBattleItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private UserBattleItemProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final UserBattleItemProto defaultInstance;
-    public static UserBattleItemProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public UserBattleItemProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserBattleItemProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              userBattleItemId_ = bs;
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              userUuid_ = bs;
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              battleItemId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              quantity_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.BattleItemsProto.UserBattleItemProto.class, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<UserBattleItemProto> PARSER =
-        new com.google.protobuf.AbstractParser<UserBattleItemProto>() {
-      public UserBattleItemProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserBattleItemProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserBattleItemProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int USERBATTLEITEMID_FIELD_NUMBER = 1;
-    private java.lang.Object userBattleItemId_;
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    public boolean hasUserBattleItemId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    public java.lang.String getUserBattleItemId() {
-      java.lang.Object ref = userBattleItemId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userBattleItemId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string userBattleItemId = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserBattleItemIdBytes() {
-      java.lang.Object ref = userBattleItemId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userBattleItemId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int USERUUID_FIELD_NUMBER = 2;
-    private java.lang.Object userUuid_;
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public boolean hasUserUuid() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public java.lang.String getUserUuid() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserUuidBytes() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BATTLEITEMID_FIELD_NUMBER = 3;
-    private int battleItemId_;
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    public boolean hasBattleItemId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    public int getBattleItemId() {
-      return battleItemId_;
-    }
-
-    public static final int QUANTITY_FIELD_NUMBER = 4;
-    private int quantity_;
-    /**
-     * <code>optional int32 quantity = 4;</code>
-     */
-    public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 quantity = 4;</code>
-     */
-    public int getQuantity() {
-      return quantity_;
-    }
-
-    private void initFields() {
-      userBattleItemId_ = "";
-      userUuid_ = "";
-      battleItemId_ = 0;
-      quantity_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserBattleItemIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getUserUuidBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, quantity_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserBattleItemIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getUserUuidBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, quantity_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.BattleItemsProto.UserBattleItemProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserBattleItemProto)
-        com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.BattleItemsProto.UserBattleItemProto.class, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.BattleItemsProto.UserBattleItemProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        userBattleItemId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        battleItemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        quantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto getDefaultInstanceForType() {
-        return com.lvl6.proto.BattleItemsProto.UserBattleItemProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto build() {
-        com.lvl6.proto.BattleItemsProto.UserBattleItemProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto buildPartial() {
-        com.lvl6.proto.BattleItemsProto.UserBattleItemProto result = new com.lvl6.proto.BattleItemsProto.UserBattleItemProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userBattleItemId_ = userBattleItemId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.userUuid_ = userUuid_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.battleItemId_ = battleItemId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.quantity_ = quantity_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.BattleItemsProto.UserBattleItemProto) {
-          return mergeFrom((com.lvl6.proto.BattleItemsProto.UserBattleItemProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.BattleItemsProto.UserBattleItemProto other) {
-        if (other == com.lvl6.proto.BattleItemsProto.UserBattleItemProto.getDefaultInstance()) return this;
-        if (other.hasUserBattleItemId()) {
-          bitField0_ |= 0x00000001;
-          userBattleItemId_ = other.userBattleItemId_;
-          onChanged();
-        }
-        if (other.hasUserUuid()) {
-          bitField0_ |= 0x00000002;
-          userUuid_ = other.userUuid_;
-          onChanged();
-        }
-        if (other.hasBattleItemId()) {
-          setBattleItemId(other.getBattleItemId());
-        }
-        if (other.hasQuantity()) {
-          setQuantity(other.getQuantity());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.BattleItemsProto.UserBattleItemProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.BattleItemsProto.UserBattleItemProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object userBattleItemId_ = "";
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public boolean hasUserBattleItemId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public java.lang.String getUserBattleItemId() {
-        java.lang.Object ref = userBattleItemId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userBattleItemId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserBattleItemIdBytes() {
-        java.lang.Object ref = userBattleItemId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userBattleItemId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public Builder setUserBattleItemId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userBattleItemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public Builder clearUserBattleItemId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userBattleItemId_ = getDefaultInstance().getUserBattleItemId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userBattleItemId = 1;</code>
-       */
-      public Builder setUserBattleItemIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userBattleItemId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object userUuid_ = "";
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public boolean hasUserUuid() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public java.lang.String getUserUuid() {
-        java.lang.Object ref = userUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserUuidBytes() {
-        java.lang.Object ref = userUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder setUserUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder clearUserUuid() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        userUuid_ = getDefaultInstance().getUserUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder setUserUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int battleItemId_ ;
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public boolean hasBattleItemId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public int getBattleItemId() {
-        return battleItemId_;
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public Builder setBattleItemId(int value) {
-        bitField0_ |= 0x00000004;
-        battleItemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public Builder clearBattleItemId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int quantity_ ;
-      /**
-       * <code>optional int32 quantity = 4;</code>
-       */
-      public boolean hasQuantity() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 quantity = 4;</code>
-       */
-      public int getQuantity() {
-        return quantity_;
-      }
-      /**
-       * <code>optional int32 quantity = 4;</code>
-       */
-      public Builder setQuantity(int value) {
-        bitField0_ |= 0x00000008;
-        quantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 quantity = 4;</code>
-       */
-      public Builder clearQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        quantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserBattleItemProto)
-    }
-
-    static {
-      defaultInstance = new UserBattleItemProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserBattleItemProto)
-  }
-
-  public interface BattleItemProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 battleItemId = 1;</code>
-     */
-    boolean hasBattleItemId();
-    /**
-     * <code>optional int32 battleItemId = 1;</code>
-     */
-    int getBattleItemId();
-
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    boolean hasImgName();
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    java.lang.String getImgName();
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getImgNameBytes();
-
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-     */
-    boolean hasBattleItemType();
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-     */
-    com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType();
-
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-     */
-    boolean hasBattleItemCategory();
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-     */
-    com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory();
-
-    /**
-     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-     */
-    boolean hasCreateResourceType();
-    /**
-     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-     */
-    com.lvl6.proto.StructureProto.ResourceType getCreateResourceType();
-
-    /**
-     * <code>optional int32 createCost = 7;</code>
-     */
-    boolean hasCreateCost();
-    /**
-     * <code>optional int32 createCost = 7;</code>
-     */
-    int getCreateCost();
-
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
-     * <code>optional int32 powerAmount = 9;</code>
-     */
-    boolean hasPowerAmount();
-    /**
-     * <code>optional int32 powerAmount = 9;</code>
-     */
-    int getPowerAmount();
-
-    /**
-     * <code>optional int32 priority = 11;</code>
-     */
-    boolean hasPriority();
-    /**
-     * <code>optional int32 priority = 11;</code>
-     */
-    int getPriority();
-
-    /**
-     * <code>optional int32 minutesToCreate = 12;</code>
-     */
-    boolean hasMinutesToCreate();
-    /**
-     * <code>optional int32 minutesToCreate = 12;</code>
-     */
-    int getMinutesToCreate();
-
-    /**
-     * <code>optional int32 inBattleGemCost = 13;</code>
-     */
-    boolean hasInBattleGemCost();
-    /**
-     * <code>optional int32 inBattleGemCost = 13;</code>
-     */
-    int getInBattleGemCost();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.BattleItemProto}
-   */
-  public static final class BattleItemProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemProto)
-      BattleItemProtoOrBuilder {
-    // Use BattleItemProto.newBuilder() to construct.
-    private BattleItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private BattleItemProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final BattleItemProto defaultInstance;
-    public static BattleItemProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public BattleItemProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private BattleItemProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              battleItemId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              name_ = bs;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              imgName_ = bs;
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.BattleItemsProto.BattleItemType value = com.lvl6.proto.BattleItemsProto.BattleItemType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                battleItemType_ = value;
-              }
-              break;
-            }
-            case 40: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.BattleItemsProto.BattleItemCategory value = com.lvl6.proto.BattleItemsProto.BattleItemCategory.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(5, rawValue);
-              } else {
-                bitField0_ |= 0x00000010;
-                battleItemCategory_ = value;
-              }
-              break;
-            }
-            case 48: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(6, rawValue);
-              } else {
-                bitField0_ |= 0x00000020;
-                createResourceType_ = value;
-              }
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              createCost_ = input.readInt32();
-              break;
-            }
-            case 66: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000080;
-              description_ = bs;
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00000100;
-              powerAmount_ = input.readInt32();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00000200;
-              priority_ = input.readInt32();
-              break;
-            }
-            case 96: {
-              bitField0_ |= 0x00000400;
-              minutesToCreate_ = input.readInt32();
-              break;
-            }
-            case 104: {
-              bitField0_ |= 0x00000800;
-              inBattleGemCost_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.BattleItemsProto.BattleItemProto.class, com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<BattleItemProto> PARSER =
-        new com.google.protobuf.AbstractParser<BattleItemProto>() {
-      public BattleItemProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new BattleItemProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<BattleItemProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int BATTLEITEMID_FIELD_NUMBER = 1;
-    private int battleItemId_;
-    /**
-     * <code>optional int32 battleItemId = 1;</code>
-     */
-    public boolean hasBattleItemId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 battleItemId = 1;</code>
-     */
-    public int getBattleItemId() {
-      return battleItemId_;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
-    private java.lang.Object name_;
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string name = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IMGNAME_FIELD_NUMBER = 3;
-    private java.lang.Object imgName_;
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    public boolean hasImgName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    public java.lang.String getImgName() {
-      java.lang.Object ref = imgName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          imgName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string imgName = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getImgNameBytes() {
-      java.lang.Object ref = imgName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        imgName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BATTLEITEMTYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_;
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-     */
-    public boolean hasBattleItemType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-     */
-    public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
-      return battleItemType_;
-    }
-
-    public static final int BATTLEITEMCATEGORY_FIELD_NUMBER = 5;
-    private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_;
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-     */
-    public boolean hasBattleItemCategory() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-     */
-    public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
-      return battleItemCategory_;
-    }
-
-    public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
-    private com.lvl6.proto.StructureProto.ResourceType createResourceType_;
-    /**
-     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-     */
-    public boolean hasCreateResourceType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-     */
-    public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
-      return createResourceType_;
-    }
-
-    public static final int CREATECOST_FIELD_NUMBER = 7;
-    private int createCost_;
-    /**
-     * <code>optional int32 createCost = 7;</code>
-     */
-    public boolean hasCreateCost() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 createCost = 7;</code>
-     */
-    public int getCreateCost() {
-      return createCost_;
-    }
-
-    public static final int DESCRIPTION_FIELD_NUMBER = 8;
-    private java.lang.Object description_;
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 8;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int POWERAMOUNT_FIELD_NUMBER = 9;
-    private int powerAmount_;
-    /**
-     * <code>optional int32 powerAmount = 9;</code>
-     */
-    public boolean hasPowerAmount() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional int32 powerAmount = 9;</code>
-     */
-    public int getPowerAmount() {
-      return powerAmount_;
-    }
-
-    public static final int PRIORITY_FIELD_NUMBER = 11;
-    private int priority_;
-    /**
-     * <code>optional int32 priority = 11;</code>
-     */
-    public boolean hasPriority() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional int32 priority = 11;</code>
-     */
-    public int getPriority() {
-      return priority_;
-    }
-
-    public static final int MINUTESTOCREATE_FIELD_NUMBER = 12;
-    private int minutesToCreate_;
-    /**
-     * <code>optional int32 minutesToCreate = 12;</code>
-     */
-    public boolean hasMinutesToCreate() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional int32 minutesToCreate = 12;</code>
-     */
-    public int getMinutesToCreate() {
-      return minutesToCreate_;
-    }
-
-    public static final int INBATTLEGEMCOST_FIELD_NUMBER = 13;
-    private int inBattleGemCost_;
-    /**
-     * <code>optional int32 inBattleGemCost = 13;</code>
-     */
-    public boolean hasInBattleGemCost() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    /**
-     * <code>optional int32 inBattleGemCost = 13;</code>
-     */
-    public int getInBattleGemCost() {
-      return inBattleGemCost_;
-    }
-
-    private void initFields() {
-      battleItemId_ = 0;
-      name_ = "";
-      imgName_ = "";
-      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
-      battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-      createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-      createCost_ = 0;
-      description_ = "";
-      powerAmount_ = 0;
-      priority_ = 0;
-      minutesToCreate_ = 0;
-      inBattleGemCost_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getImgNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, battleItemType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeEnum(5, battleItemCategory_.getNumber());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeEnum(6, createResourceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, createCost_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, powerAmount_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(11, priority_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(12, minutesToCreate_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(13, inBattleGemCost_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getImgNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, battleItemType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, battleItemCategory_.getNumber());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, createResourceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, createCost_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, powerAmount_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, priority_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, minutesToCreate_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, inBattleGemCost_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.BattleItemsProto.BattleItemProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.BattleItemProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemProto)
-        com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.BattleItemsProto.BattleItemProto.class, com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.BattleItemsProto.BattleItemProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        battleItemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        imgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        createCost_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000080);
-        powerAmount_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        minutesToCreate_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        inBattleGemCost_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemProto getDefaultInstanceForType() {
-        return com.lvl6.proto.BattleItemsProto.BattleItemProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemProto build() {
-        com.lvl6.proto.BattleItemsProto.BattleItemProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemProto buildPartial() {
-        com.lvl6.proto.BattleItemsProto.BattleItemProto result = new com.lvl6.proto.BattleItemsProto.BattleItemProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.battleItemId_ = battleItemId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.imgName_ = imgName_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.battleItemType_ = battleItemType_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.battleItemCategory_ = battleItemCategory_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.createResourceType_ = createResourceType_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.createCost_ = createCost_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.description_ = description_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.powerAmount_ = powerAmount_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.priority_ = priority_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.minutesToCreate_ = minutesToCreate_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
-        }
-        result.inBattleGemCost_ = inBattleGemCost_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.BattleItemsProto.BattleItemProto) {
-          return mergeFrom((com.lvl6.proto.BattleItemsProto.BattleItemProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.BattleItemsProto.BattleItemProto other) {
-        if (other == com.lvl6.proto.BattleItemsProto.BattleItemProto.getDefaultInstance()) return this;
-        if (other.hasBattleItemId()) {
-          setBattleItemId(other.getBattleItemId());
-        }
-        if (other.hasName()) {
-          bitField0_ |= 0x00000002;
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.hasImgName()) {
-          bitField0_ |= 0x00000004;
-          imgName_ = other.imgName_;
-          onChanged();
-        }
-        if (other.hasBattleItemType()) {
-          setBattleItemType(other.getBattleItemType());
-        }
-        if (other.hasBattleItemCategory()) {
-          setBattleItemCategory(other.getBattleItemCategory());
-        }
-        if (other.hasCreateResourceType()) {
-          setCreateResourceType(other.getCreateResourceType());
-        }
-        if (other.hasCreateCost()) {
-          setCreateCost(other.getCreateCost());
-        }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000080;
-          description_ = other.description_;
-          onChanged();
-        }
-        if (other.hasPowerAmount()) {
-          setPowerAmount(other.getPowerAmount());
-        }
-        if (other.hasPriority()) {
-          setPriority(other.getPriority());
-        }
-        if (other.hasMinutesToCreate()) {
-          setMinutesToCreate(other.getMinutesToCreate());
-        }
-        if (other.hasInBattleGemCost()) {
-          setInBattleGemCost(other.getInBattleGemCost());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.BattleItemsProto.BattleItemProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.BattleItemsProto.BattleItemProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int battleItemId_ ;
-      /**
-       * <code>optional int32 battleItemId = 1;</code>
-       */
-      public boolean hasBattleItemId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 battleItemId = 1;</code>
-       */
-      public int getBattleItemId() {
-        return battleItemId_;
-      }
-      /**
-       * <code>optional int32 battleItemId = 1;</code>
-       */
-      public Builder setBattleItemId(int value) {
-        bitField0_ |= 0x00000001;
-        battleItemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 battleItemId = 1;</code>
-       */
-      public Builder clearBattleItemId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        battleItemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 2;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object imgName_ = "";
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public boolean hasImgName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public java.lang.String getImgName() {
-        java.lang.Object ref = imgName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imgName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getImgNameBytes() {
-        java.lang.Object ref = imgName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          imgName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public Builder setImgName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        imgName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public Builder clearImgName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        imgName_ = getDefaultInstance().getImgName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string imgName = 3;</code>
-       */
-      public Builder setImgNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        imgName_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-       */
-      public boolean hasBattleItemType() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-       */
-      public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
-        return battleItemType_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-       */
-      public Builder setBattleItemType(com.lvl6.proto.BattleItemsProto.BattleItemType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000008;
-        battleItemType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
-       */
-      public Builder clearBattleItemType() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-       */
-      public boolean hasBattleItemCategory() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-       */
-      public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
-        return battleItemCategory_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-       */
-      public Builder setBattleItemCategory(com.lvl6.proto.BattleItemsProto.BattleItemCategory value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000010;
-        battleItemCategory_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
-       */
-      public Builder clearBattleItemCategory() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.StructureProto.ResourceType createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-      /**
-       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-       */
-      public boolean hasCreateResourceType() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-       */
-      public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
-        return createResourceType_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-       */
-      public Builder setCreateResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000020;
-        createResourceType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
-       */
-      public Builder clearCreateResourceType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-        onChanged();
-        return this;
-      }
-
-      private int createCost_ ;
-      /**
-       * <code>optional int32 createCost = 7;</code>
-       */
-      public boolean hasCreateCost() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 createCost = 7;</code>
-       */
-      public int getCreateCost() {
-        return createCost_;
-      }
-      /**
-       * <code>optional int32 createCost = 7;</code>
-       */
-      public Builder setCreateCost(int value) {
-        bitField0_ |= 0x00000040;
-        createCost_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 createCost = 7;</code>
-       */
-      public Builder clearCreateCost() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        createCost_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object description_ = "";
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int powerAmount_ ;
-      /**
-       * <code>optional int32 powerAmount = 9;</code>
-       */
-      public boolean hasPowerAmount() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional int32 powerAmount = 9;</code>
-       */
-      public int getPowerAmount() {
-        return powerAmount_;
-      }
-      /**
-       * <code>optional int32 powerAmount = 9;</code>
-       */
-      public Builder setPowerAmount(int value) {
-        bitField0_ |= 0x00000100;
-        powerAmount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 powerAmount = 9;</code>
-       */
-      public Builder clearPowerAmount() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        powerAmount_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int priority_ ;
-      /**
-       * <code>optional int32 priority = 11;</code>
-       */
-      public boolean hasPriority() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional int32 priority = 11;</code>
-       */
-      public int getPriority() {
-        return priority_;
-      }
-      /**
-       * <code>optional int32 priority = 11;</code>
-       */
-      public Builder setPriority(int value) {
-        bitField0_ |= 0x00000200;
-        priority_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 priority = 11;</code>
-       */
-      public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        priority_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int minutesToCreate_ ;
-      /**
-       * <code>optional int32 minutesToCreate = 12;</code>
-       */
-      public boolean hasMinutesToCreate() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional int32 minutesToCreate = 12;</code>
-       */
-      public int getMinutesToCreate() {
-        return minutesToCreate_;
-      }
-      /**
-       * <code>optional int32 minutesToCreate = 12;</code>
-       */
-      public Builder setMinutesToCreate(int value) {
-        bitField0_ |= 0x00000400;
-        minutesToCreate_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 minutesToCreate = 12;</code>
-       */
-      public Builder clearMinutesToCreate() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        minutesToCreate_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int inBattleGemCost_ ;
-      /**
-       * <code>optional int32 inBattleGemCost = 13;</code>
-       */
-      public boolean hasInBattleGemCost() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      /**
-       * <code>optional int32 inBattleGemCost = 13;</code>
-       */
-      public int getInBattleGemCost() {
-        return inBattleGemCost_;
-      }
-      /**
-       * <code>optional int32 inBattleGemCost = 13;</code>
-       */
-      public Builder setInBattleGemCost(int value) {
-        bitField0_ |= 0x00000800;
-        inBattleGemCost_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 inBattleGemCost = 13;</code>
-       */
-      public Builder clearInBattleGemCost() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        inBattleGemCost_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemProto)
-    }
-
-    static {
-      defaultInstance = new BattleItemProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemProto)
-  }
-
-  public interface BattleItemQueueForUserProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemQueueForUserProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 priority = 1;</code>
-     */
-    boolean hasPriority();
-    /**
-     * <code>optional int32 priority = 1;</code>
-     */
-    int getPriority();
-
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    boolean hasUserUuid();
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    java.lang.String getUserUuid();
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getUserUuidBytes();
-
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    boolean hasBattleItemId();
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    int getBattleItemId();
-
-    /**
-     * <code>optional int64 expectedStartTime = 4;</code>
-     */
-    boolean hasExpectedStartTime();
-    /**
-     * <code>optional int64 expectedStartTime = 4;</code>
-     */
-    long getExpectedStartTime();
-
-    /**
-     * <code>optional float elapsedTime = 5;</code>
-     */
-    boolean hasElapsedTime();
-    /**
-     * <code>optional float elapsedTime = 5;</code>
-     */
-    float getElapsedTime();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
-   */
-  public static final class BattleItemQueueForUserProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemQueueForUserProto)
-      BattleItemQueueForUserProtoOrBuilder {
-    // Use BattleItemQueueForUserProto.newBuilder() to construct.
-    private BattleItemQueueForUserProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private BattleItemQueueForUserProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final BattleItemQueueForUserProto defaultInstance;
-    public static BattleItemQueueForUserProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public BattleItemQueueForUserProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private BattleItemQueueForUserProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              priority_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              userUuid_ = bs;
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              battleItemId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              expectedStartTime_ = input.readInt64();
-              break;
-            }
-            case 45: {
-              bitField0_ |= 0x00000010;
-              elapsedTime_ = input.readFloat();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.class, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<BattleItemQueueForUserProto> PARSER =
-        new com.google.protobuf.AbstractParser<BattleItemQueueForUserProto>() {
-      public BattleItemQueueForUserProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new BattleItemQueueForUserProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<BattleItemQueueForUserProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int PRIORITY_FIELD_NUMBER = 1;
-    private int priority_;
-    /**
-     * <code>optional int32 priority = 1;</code>
-     */
-    public boolean hasPriority() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 priority = 1;</code>
-     */
-    public int getPriority() {
-      return priority_;
-    }
-
-    public static final int USERUUID_FIELD_NUMBER = 2;
-    private java.lang.Object userUuid_;
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public boolean hasUserUuid() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public java.lang.String getUserUuid() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userUuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string userUuid = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUserUuidBytes() {
-      java.lang.Object ref = userUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BATTLEITEMID_FIELD_NUMBER = 3;
-    private int battleItemId_;
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    public boolean hasBattleItemId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 battleItemId = 3;</code>
-     */
-    public int getBattleItemId() {
-      return battleItemId_;
-    }
-
-    public static final int EXPECTEDSTARTTIME_FIELD_NUMBER = 4;
-    private long expectedStartTime_;
-    /**
-     * <code>optional int64 expectedStartTime = 4;</code>
-     */
-    public boolean hasExpectedStartTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int64 expectedStartTime = 4;</code>
-     */
-    public long getExpectedStartTime() {
-      return expectedStartTime_;
-    }
-
-    public static final int ELAPSEDTIME_FIELD_NUMBER = 5;
-    private float elapsedTime_;
-    /**
-     * <code>optional float elapsedTime = 5;</code>
-     */
-    public boolean hasElapsedTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional float elapsedTime = 5;</code>
-     */
-    public float getElapsedTime() {
-      return elapsedTime_;
-    }
-
-    private void initFields() {
-      priority_ = 0;
-      userUuid_ = "";
-      battleItemId_ = 0;
-      expectedStartTime_ = 0L;
-      elapsedTime_ = 0F;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, priority_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getUserUuidBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, expectedStartTime_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeFloat(5, elapsedTime_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, priority_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getUserUuidBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, battleItemId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, expectedStartTime_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, elapsedTime_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemQueueForUserProto)
-        com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.class, com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userUuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        battleItemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        expectedStartTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        elapsedTime_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getDefaultInstanceForType() {
-        return com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto build() {
-        com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto buildPartial() {
-        com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto result = new com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.priority_ = priority_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.userUuid_ = userUuid_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.battleItemId_ = battleItemId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.expectedStartTime_ = expectedStartTime_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.elapsedTime_ = elapsedTime_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto) {
-          return mergeFrom((com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto other) {
-        if (other == com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.getDefaultInstance()) return this;
-        if (other.hasPriority()) {
-          setPriority(other.getPriority());
-        }
-        if (other.hasUserUuid()) {
-          bitField0_ |= 0x00000002;
-          userUuid_ = other.userUuid_;
-          onChanged();
-        }
-        if (other.hasBattleItemId()) {
-          setBattleItemId(other.getBattleItemId());
-        }
-        if (other.hasExpectedStartTime()) {
-          setExpectedStartTime(other.getExpectedStartTime());
-        }
-        if (other.hasElapsedTime()) {
-          setElapsedTime(other.getElapsedTime());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int priority_ ;
-      /**
-       * <code>optional int32 priority = 1;</code>
-       */
-      public boolean hasPriority() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 priority = 1;</code>
-       */
-      public int getPriority() {
-        return priority_;
-      }
-      /**
-       * <code>optional int32 priority = 1;</code>
-       */
-      public Builder setPriority(int value) {
-        bitField0_ |= 0x00000001;
-        priority_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 priority = 1;</code>
-       */
-      public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        priority_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object userUuid_ = "";
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public boolean hasUserUuid() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public java.lang.String getUserUuid() {
-        java.lang.Object ref = userUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserUuidBytes() {
-        java.lang.Object ref = userUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder setUserUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder clearUserUuid() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        userUuid_ = getDefaultInstance().getUserUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string userUuid = 2;</code>
-       */
-      public Builder setUserUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        userUuid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int battleItemId_ ;
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public boolean hasBattleItemId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public int getBattleItemId() {
-        return battleItemId_;
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public Builder setBattleItemId(int value) {
-        bitField0_ |= 0x00000004;
-        battleItemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 battleItemId = 3;</code>
-       */
-      public Builder clearBattleItemId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long expectedStartTime_ ;
-      /**
-       * <code>optional int64 expectedStartTime = 4;</code>
-       */
-      public boolean hasExpectedStartTime() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int64 expectedStartTime = 4;</code>
-       */
-      public long getExpectedStartTime() {
-        return expectedStartTime_;
-      }
-      /**
-       * <code>optional int64 expectedStartTime = 4;</code>
-       */
-      public Builder setExpectedStartTime(long value) {
-        bitField0_ |= 0x00000008;
-        expectedStartTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 expectedStartTime = 4;</code>
-       */
-      public Builder clearExpectedStartTime() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        expectedStartTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private float elapsedTime_ ;
-      /**
-       * <code>optional float elapsedTime = 5;</code>
-       */
-      public boolean hasElapsedTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional float elapsedTime = 5;</code>
-       */
-      public float getElapsedTime() {
-        return elapsedTime_;
-      }
-      /**
-       * <code>optional float elapsedTime = 5;</code>
-       */
-      public Builder setElapsedTime(float value) {
-        bitField0_ |= 0x00000010;
-        elapsedTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float elapsedTime = 5;</code>
-       */
-      public Builder clearElapsedTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        elapsedTime_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemQueueForUserProto)
-    }
-
-    static {
-      defaultInstance = new BattleItemQueueForUserProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemQueueForUserProto)
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_BattleItemProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable;
-
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\020BattleItem.proto\022\016com.lvl6.proto\032\026Shar" +
-      "edEnumConfig.proto\032\017Structure.proto\"i\n\023U" +
-      "serBattleItemProto\022\030\n\020userBattleItemId\030\001" +
-      " \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030\003" +
-      " \001(\005\022\020\n\010quantity\030\004 \001(\005\"\372\002\n\017BattleItemPro" +
-      "to\022\024\n\014battleItemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017" +
-      "\n\007imgName\030\003 \001(\t\0226\n\016battleItemType\030\004 \001(\0162" +
-      "\036.com.lvl6.proto.BattleItemType\022>\n\022battl" +
-      "eItemCategory\030\005 \001(\0162\".com.lvl6.proto.Bat" +
-      "tleItemCategory\0228\n\022createResourceType\030\006 ",
-      "\001(\0162\034.com.lvl6.proto.ResourceType\022\022\n\ncre" +
-      "ateCost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013po" +
-      "werAmount\030\t \001(\005\022\020\n\010priority\030\013 \001(\005\022\027\n\017min" +
-      "utesToCreate\030\014 \001(\005\022\027\n\017inBattleGemCost\030\r " +
-      "\001(\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010p" +
-      "riority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battl" +
-      "eItemId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003" +
-      "\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleItemType\022" +
-      "\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemC" +
-      "ategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Battl",
-      "eItemsProto"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
-          com.lvl6.proto.StructureProto.getDescriptor(),
-        }, assigner);
-    internal_static_com_lvl6_proto_UserBattleItemProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserBattleItemProto_descriptor,
-        new java.lang.String[] { "UserBattleItemId", "UserUuid", "BattleItemId", "Quantity", });
-    internal_static_com_lvl6_proto_BattleItemProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BattleItemProto_descriptor,
-        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "Priority", "MinutesToCreate", "InBattleGemCost", });
-    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
-        new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
-  }
-
-  // @@protoc_insertion_point(outer_class_scope)
+	private BattleItemsProto() {
+	}
+
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistry registry) {
+	}
+
+	/**
+	 * Protobuf enum {@code com.lvl6.proto.BattleItemType}
+	 */
+	public enum BattleItemType implements
+			com.google.protobuf.ProtocolMessageEnum {
+		/**
+		 * <code>ANTIDOTE = 1;</code>
+		 */
+		ANTIDOTE(0, 1),
+		/**
+		 * <code>HAMMER = 2;</code>
+		 */
+		HAMMER(1, 2), ;
+
+		/**
+		 * <code>ANTIDOTE = 1;</code>
+		 */
+		public static final int ANTIDOTE_VALUE = 1;
+		/**
+		 * <code>HAMMER = 2;</code>
+		 */
+		public static final int HAMMER_VALUE = 2;
+
+		@Override
+		public final int getNumber() {
+			return value;
+		}
+
+		public static BattleItemType valueOf(int value) {
+			switch (value) {
+			case 1:
+				return ANTIDOTE;
+			case 2:
+				return HAMMER;
+			default:
+				return null;
+			}
+		}
+
+		public static com.google.protobuf.Internal.EnumLiteMap<BattleItemType> internalGetValueMap() {
+			return internalValueMap;
+		}
+
+		private static com.google.protobuf.Internal.EnumLiteMap<BattleItemType> internalValueMap = new com.google.protobuf.Internal.EnumLiteMap<BattleItemType>() {
+			@Override
+			public BattleItemType findValueByNumber(int number) {
+				return BattleItemType.valueOf(number);
+			}
+		};
+
+		@Override
+		public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+			return getDescriptor().getValues().get(index);
+		}
+
+		@Override
+		public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
+			return getDescriptor();
+		}
+
+		public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
+			return com.lvl6.proto.BattleItemsProto.getDescriptor()
+					.getEnumTypes().get(0);
+		}
+
+		private static final BattleItemType[] VALUES = values();
+
+		public static BattleItemType valueOf(
+				com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+			if (desc.getType() != getDescriptor()) {
+				throw new java.lang.IllegalArgumentException(
+						"EnumValueDescriptor is not for this type.");
+			}
+			return VALUES[desc.getIndex()];
+		}
+
+		private final int index;
+		private final int value;
+
+		private BattleItemType(int index, int value) {
+			this.index = index;
+			this.value = value;
+		}
+
+		// @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemType)
+	}
+
+	/**
+	 * Protobuf enum {@code com.lvl6.proto.BattleItemCategory}
+	 */
+	public enum BattleItemCategory implements
+			com.google.protobuf.ProtocolMessageEnum {
+		/**
+		 * <code>POTION = 1;</code>
+		 */
+		POTION(0, 1),
+		/**
+		 * <code>PUZZLE = 2;</code>
+		 */
+		PUZZLE(1, 2), ;
+
+		/**
+		 * <code>POTION = 1;</code>
+		 */
+		public static final int POTION_VALUE = 1;
+		/**
+		 * <code>PUZZLE = 2;</code>
+		 */
+		public static final int PUZZLE_VALUE = 2;
+
+		@Override
+		public final int getNumber() {
+			return value;
+		}
+
+		public static BattleItemCategory valueOf(int value) {
+			switch (value) {
+			case 1:
+				return POTION;
+			case 2:
+				return PUZZLE;
+			default:
+				return null;
+			}
+		}
+
+		public static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory> internalGetValueMap() {
+			return internalValueMap;
+		}
+
+		private static com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory> internalValueMap = new com.google.protobuf.Internal.EnumLiteMap<BattleItemCategory>() {
+			@Override
+			public BattleItemCategory findValueByNumber(int number) {
+				return BattleItemCategory.valueOf(number);
+			}
+		};
+
+		@Override
+		public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
+			return getDescriptor().getValues().get(index);
+		}
+
+		@Override
+		public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
+			return getDescriptor();
+		}
+
+		public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
+			return com.lvl6.proto.BattleItemsProto.getDescriptor()
+					.getEnumTypes().get(1);
+		}
+
+		private static final BattleItemCategory[] VALUES = values();
+
+		public static BattleItemCategory valueOf(
+				com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+			if (desc.getType() != getDescriptor()) {
+				throw new java.lang.IllegalArgumentException(
+						"EnumValueDescriptor is not for this type.");
+			}
+			return VALUES[desc.getIndex()];
+		}
+
+		private final int index;
+		private final int value;
+
+		private BattleItemCategory(int index, int value) {
+			this.index = index;
+			this.value = value;
+		}
+
+		// @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemCategory)
+	}
+
+	public interface UserBattleItemProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserBattleItemProto)
+			com.google.protobuf.MessageOrBuilder {
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		boolean hasUserBattleItemId();
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		java.lang.String getUserBattleItemId();
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		com.google.protobuf.ByteString getUserBattleItemIdBytes();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		boolean hasUserUuid();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		java.lang.String getUserUuid();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		com.google.protobuf.ByteString getUserUuidBytes();
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		boolean hasBattleItemId();
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		int getBattleItemId();
+
+		/**
+		 * <code>optional int32 quantity = 4;</code>
+		 */
+		boolean hasQuantity();
+
+		/**
+		 * <code>optional int32 quantity = 4;</code>
+		 */
+		int getQuantity();
+	}
+
+	/**
+	 * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
+	 */
+	public static final class UserBattleItemProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.UserBattleItemProto)
+			UserBattleItemProtoOrBuilder {
+		// Use UserBattleItemProto.newBuilder() to construct.
+		private UserBattleItemProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
+
+		private UserBattleItemProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
+
+		private static final UserBattleItemProto defaultInstance;
+
+		public static UserBattleItemProto getDefaultInstance() {
+			return defaultInstance;
+		}
+
+		@Override
+		public UserBattleItemProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
+
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
+
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		private UserBattleItemProto(com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 10: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000001;
+						userBattleItemId_ = bs;
+						break;
+					}
+					case 18: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000002;
+						userUuid_ = bs;
+						break;
+					}
+					case 24: {
+						bitField0_ |= 0x00000004;
+						battleItemId_ = input.readInt32();
+						break;
+					}
+					case 32: {
+						bitField0_ |= 0x00000008;
+						quantity_ = input.readInt32();
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
+
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
+		}
+
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.BattleItemsProto.UserBattleItemProto.class,
+							com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder.class);
+		}
+
+		public static com.google.protobuf.Parser<UserBattleItemProto> PARSER = new com.google.protobuf.AbstractParser<UserBattleItemProto>() {
+			@Override
+			public UserBattleItemProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new UserBattleItemProto(input, extensionRegistry);
+			}
+		};
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<UserBattleItemProto> getParserForType() {
+			return PARSER;
+		}
+
+		private int bitField0_;
+		public static final int USERBATTLEITEMID_FIELD_NUMBER = 1;
+		private java.lang.Object userBattleItemId_;
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		@Override
+		public boolean hasUserBattleItemId() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		@Override
+		public java.lang.String getUserBattleItemId() {
+			java.lang.Object ref = userBattleItemId_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					userBattleItemId_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string userBattleItemId = 1;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getUserBattleItemIdBytes() {
+			java.lang.Object ref = userBattleItemId_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				userBattleItemId_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int USERUUID_FIELD_NUMBER = 2;
+		private java.lang.Object userUuid_;
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public boolean hasUserUuid() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public java.lang.String getUserUuid() {
+			java.lang.Object ref = userUuid_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					userUuid_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getUserUuidBytes() {
+			java.lang.Object ref = userUuid_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				userUuid_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int BATTLEITEMID_FIELD_NUMBER = 3;
+		private int battleItemId_;
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		@Override
+		public boolean hasBattleItemId() {
+			return ((bitField0_ & 0x00000004) == 0x00000004);
+		}
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		@Override
+		public int getBattleItemId() {
+			return battleItemId_;
+		}
+
+		public static final int QUANTITY_FIELD_NUMBER = 4;
+		private int quantity_;
+
+		/**
+		 * <code>optional int32 quantity = 4;</code>
+		 */
+		@Override
+		public boolean hasQuantity() {
+			return ((bitField0_ & 0x00000008) == 0x00000008);
+		}
+
+		/**
+		 * <code>optional int32 quantity = 4;</code>
+		 */
+		@Override
+		public int getQuantity() {
+			return quantity_;
+		}
+
+		private void initFields() {
+			userBattleItemId_ = "";
+			userUuid_ = "";
+			battleItemId_ = 0;
+			quantity_ = 0;
+		}
+
+		private byte memoizedIsInitialized = -1;
+
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
+
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeBytes(1, getUserBattleItemIdBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeBytes(2, getUserUuidBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				output.writeInt32(3, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				output.writeInt32(4, quantity_);
+			}
+			getUnknownFields().writeTo(output);
+		}
+
+		private int memoizedSerializedSize = -1;
+
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						1, getUserBattleItemIdBytes());
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						2, getUserUuidBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						3, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						4, quantity_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
+
+		private static final long serialVersionUID = 0L;
+
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.UserBattleItemProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.BattleItemsProto.UserBattleItemProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserBattleItemProto)
+				com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.BattleItemsProto.UserBattleItemProto.class,
+								com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.BattleItemsProto.UserBattleItemProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				userBattleItemId_ = "";
+				bitField0_ = (bitField0_ & ~0x00000001);
+				userUuid_ = "";
+				bitField0_ = (bitField0_ & ~0x00000002);
+				battleItemId_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000004);
+				quantity_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.UserBattleItemProto getDefaultInstanceForType() {
+				return com.lvl6.proto.BattleItemsProto.UserBattleItemProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.UserBattleItemProto build() {
+				com.lvl6.proto.BattleItemsProto.UserBattleItemProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.UserBattleItemProto buildPartial() {
+				com.lvl6.proto.BattleItemsProto.UserBattleItemProto result = new com.lvl6.proto.BattleItemsProto.UserBattleItemProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.userBattleItemId_ = userBattleItemId_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.userUuid_ = userUuid_;
+				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+					to_bitField0_ |= 0x00000004;
+				}
+				result.battleItemId_ = battleItemId_;
+				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+					to_bitField0_ |= 0x00000008;
+				}
+				result.quantity_ = quantity_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.BattleItemsProto.UserBattleItemProto) {
+					return mergeFrom((com.lvl6.proto.BattleItemsProto.UserBattleItemProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.BattleItemsProto.UserBattleItemProto other) {
+				if (other == com.lvl6.proto.BattleItemsProto.UserBattleItemProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasUserBattleItemId()) {
+					bitField0_ |= 0x00000001;
+					userBattleItemId_ = other.userBattleItemId_;
+					onChanged();
+				}
+				if (other.hasUserUuid()) {
+					bitField0_ |= 0x00000002;
+					userUuid_ = other.userUuid_;
+					onChanged();
+				}
+				if (other.hasBattleItemId()) {
+					setBattleItemId(other.getBattleItemId());
+				}
+				if (other.hasQuantity()) {
+					setQuantity(other.getQuantity());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.BattleItemsProto.UserBattleItemProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.BattleItemsProto.UserBattleItemProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private java.lang.Object userBattleItemId_ = "";
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			@Override
+			public boolean hasUserBattleItemId() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			@Override
+			public java.lang.String getUserBattleItemId() {
+				java.lang.Object ref = userBattleItemId_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						userBattleItemId_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getUserBattleItemIdBytes() {
+				java.lang.Object ref = userBattleItemId_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					userBattleItemId_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			public Builder setUserBattleItemId(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				userBattleItemId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			public Builder clearUserBattleItemId() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				userBattleItemId_ = getDefaultInstance().getUserBattleItemId();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userBattleItemId = 1;</code>
+			 */
+			public Builder setUserBattleItemIdBytes(
+					com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000001;
+				userBattleItemId_ = value;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object userUuid_ = "";
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public boolean hasUserUuid() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public java.lang.String getUserUuid() {
+				java.lang.Object ref = userUuid_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						userUuid_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getUserUuidBytes() {
+				java.lang.Object ref = userUuid_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					userUuid_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder setUserUuid(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				userUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder clearUserUuid() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				userUuid_ = getDefaultInstance().getUserUuid();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder setUserUuidBytes(com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				userUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			private int battleItemId_;
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			@Override
+			public boolean hasBattleItemId() {
+				return ((bitField0_ & 0x00000004) == 0x00000004);
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			@Override
+			public int getBattleItemId() {
+				return battleItemId_;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			public Builder setBattleItemId(int value) {
+				bitField0_ |= 0x00000004;
+				battleItemId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			public Builder clearBattleItemId() {
+				bitField0_ = (bitField0_ & ~0x00000004);
+				battleItemId_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int quantity_;
+
+			/**
+			 * <code>optional int32 quantity = 4;</code>
+			 */
+			@Override
+			public boolean hasQuantity() {
+				return ((bitField0_ & 0x00000008) == 0x00000008);
+			}
+
+			/**
+			 * <code>optional int32 quantity = 4;</code>
+			 */
+			@Override
+			public int getQuantity() {
+				return quantity_;
+			}
+
+			/**
+			 * <code>optional int32 quantity = 4;</code>
+			 */
+			public Builder setQuantity(int value) {
+				bitField0_ |= 0x00000008;
+				quantity_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 quantity = 4;</code>
+			 */
+			public Builder clearQuantity() {
+				bitField0_ = (bitField0_ & ~0x00000008);
+				quantity_ = 0;
+				onChanged();
+				return this;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserBattleItemProto)
+		}
+
+		static {
+			defaultInstance = new UserBattleItemProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.UserBattleItemProto)
+	}
+
+	public interface BattleItemProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemProto)
+			com.google.protobuf.MessageOrBuilder {
+
+		/**
+		 * <code>optional int32 battleItemId = 1;</code>
+		 */
+		boolean hasBattleItemId();
+
+		/**
+		 * <code>optional int32 battleItemId = 1;</code>
+		 */
+		int getBattleItemId();
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		boolean hasName();
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		java.lang.String getName();
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		com.google.protobuf.ByteString getNameBytes();
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		boolean hasImgName();
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		java.lang.String getImgName();
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		com.google.protobuf.ByteString getImgNameBytes();
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+		 */
+		boolean hasBattleItemType();
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+		 */
+		com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType();
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+		 */
+		boolean hasBattleItemCategory();
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+		 */
+		com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory();
+
+		/**
+		 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+		 */
+		boolean hasCreateResourceType();
+
+		/**
+		 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+		 */
+		com.lvl6.proto.StructureProto.ResourceType getCreateResourceType();
+
+		/**
+		 * <code>optional int32 createCost = 7;</code>
+		 */
+		boolean hasCreateCost();
+
+		/**
+		 * <code>optional int32 createCost = 7;</code>
+		 */
+		int getCreateCost();
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		boolean hasDescription();
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		java.lang.String getDescription();
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		com.google.protobuf.ByteString getDescriptionBytes();
+
+		/**
+		 * <code>optional int32 powerAmount = 9;</code>
+		 */
+		boolean hasPowerAmount();
+
+		/**
+		 * <code>optional int32 powerAmount = 9;</code>
+		 */
+		int getPowerAmount();
+
+		/**
+		 * <code>optional int32 priority = 11;</code>
+		 */
+		boolean hasPriority();
+
+		/**
+		 * <code>optional int32 priority = 11;</code>
+		 */
+		int getPriority();
+
+		/**
+		 * <code>optional int32 minutesToCreate = 12;</code>
+		 */
+		boolean hasMinutesToCreate();
+
+		/**
+		 * <code>optional int32 minutesToCreate = 12;</code>
+		 */
+		int getMinutesToCreate();
+
+		/**
+		 * <code>optional int32 inBattleGemCost = 13;</code>
+		 */
+		boolean hasInBattleGemCost();
+
+		/**
+		 * <code>optional int32 inBattleGemCost = 13;</code>
+		 */
+		int getInBattleGemCost();
+	}
+
+	/**
+	 * Protobuf type {@code com.lvl6.proto.BattleItemProto}
+	 */
+	public static final class BattleItemProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemProto)
+			BattleItemProtoOrBuilder {
+		// Use BattleItemProto.newBuilder() to construct.
+		private BattleItemProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
+
+		private BattleItemProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
+
+		private static final BattleItemProto defaultInstance;
+
+		public static BattleItemProto getDefaultInstance() {
+			return defaultInstance;
+		}
+
+		@Override
+		public BattleItemProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
+
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
+
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		private BattleItemProto(com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 8: {
+						bitField0_ |= 0x00000001;
+						battleItemId_ = input.readInt32();
+						break;
+					}
+					case 18: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000002;
+						name_ = bs;
+						break;
+					}
+					case 26: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000004;
+						imgName_ = bs;
+						break;
+					}
+					case 32: {
+						int rawValue = input.readEnum();
+						com.lvl6.proto.BattleItemsProto.BattleItemType value = com.lvl6.proto.BattleItemsProto.BattleItemType
+								.valueOf(rawValue);
+						if (value == null) {
+							unknownFields.mergeVarintField(4, rawValue);
+						} else {
+							bitField0_ |= 0x00000008;
+							battleItemType_ = value;
+						}
+						break;
+					}
+					case 40: {
+						int rawValue = input.readEnum();
+						com.lvl6.proto.BattleItemsProto.BattleItemCategory value = com.lvl6.proto.BattleItemsProto.BattleItemCategory
+								.valueOf(rawValue);
+						if (value == null) {
+							unknownFields.mergeVarintField(5, rawValue);
+						} else {
+							bitField0_ |= 0x00000010;
+							battleItemCategory_ = value;
+						}
+						break;
+					}
+					case 48: {
+						int rawValue = input.readEnum();
+						com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType
+								.valueOf(rawValue);
+						if (value == null) {
+							unknownFields.mergeVarintField(6, rawValue);
+						} else {
+							bitField0_ |= 0x00000020;
+							createResourceType_ = value;
+						}
+						break;
+					}
+					case 56: {
+						bitField0_ |= 0x00000040;
+						createCost_ = input.readInt32();
+						break;
+					}
+					case 66: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000080;
+						description_ = bs;
+						break;
+					}
+					case 72: {
+						bitField0_ |= 0x00000100;
+						powerAmount_ = input.readInt32();
+						break;
+					}
+					case 88: {
+						bitField0_ |= 0x00000200;
+						priority_ = input.readInt32();
+						break;
+					}
+					case 96: {
+						bitField0_ |= 0x00000400;
+						minutesToCreate_ = input.readInt32();
+						break;
+					}
+					case 104: {
+						bitField0_ |= 0x00000800;
+						inBattleGemCost_ = input.readInt32();
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
+
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
+		}
+
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.BattleItemsProto.BattleItemProto.class,
+							com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder.class);
+		}
+
+		public static com.google.protobuf.Parser<BattleItemProto> PARSER = new com.google.protobuf.AbstractParser<BattleItemProto>() {
+			@Override
+			public BattleItemProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new BattleItemProto(input, extensionRegistry);
+			}
+		};
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<BattleItemProto> getParserForType() {
+			return PARSER;
+		}
+
+		private int bitField0_;
+		public static final int BATTLEITEMID_FIELD_NUMBER = 1;
+		private int battleItemId_;
+
+		/**
+		 * <code>optional int32 battleItemId = 1;</code>
+		 */
+		@Override
+		public boolean hasBattleItemId() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>optional int32 battleItemId = 1;</code>
+		 */
+		@Override
+		public int getBattleItemId() {
+			return battleItemId_;
+		}
+
+		public static final int NAME_FIELD_NUMBER = 2;
+		private java.lang.Object name_;
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		@Override
+		public boolean hasName() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		@Override
+		public java.lang.String getName() {
+			java.lang.Object ref = name_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					name_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string name = 2;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getNameBytes() {
+			java.lang.Object ref = name_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				name_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int IMGNAME_FIELD_NUMBER = 3;
+		private java.lang.Object imgName_;
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		@Override
+		public boolean hasImgName() {
+			return ((bitField0_ & 0x00000004) == 0x00000004);
+		}
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		@Override
+		public java.lang.String getImgName() {
+			java.lang.Object ref = imgName_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					imgName_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string imgName = 3;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getImgNameBytes() {
+			java.lang.Object ref = imgName_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				imgName_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int BATTLEITEMTYPE_FIELD_NUMBER = 4;
+		private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_;
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+		 */
+		@Override
+		public boolean hasBattleItemType() {
+			return ((bitField0_ & 0x00000008) == 0x00000008);
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+		 */
+		@Override
+		public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
+			return battleItemType_;
+		}
+
+		public static final int BATTLEITEMCATEGORY_FIELD_NUMBER = 5;
+		private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_;
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+		 */
+		@Override
+		public boolean hasBattleItemCategory() {
+			return ((bitField0_ & 0x00000010) == 0x00000010);
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+		 */
+		@Override
+		public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
+			return battleItemCategory_;
+		}
+
+		public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
+		private com.lvl6.proto.StructureProto.ResourceType createResourceType_;
+
+		/**
+		 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+		 */
+		@Override
+		public boolean hasCreateResourceType() {
+			return ((bitField0_ & 0x00000020) == 0x00000020);
+		}
+
+		/**
+		 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+		 */
+		@Override
+		public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+			return createResourceType_;
+		}
+
+		public static final int CREATECOST_FIELD_NUMBER = 7;
+		private int createCost_;
+
+		/**
+		 * <code>optional int32 createCost = 7;</code>
+		 */
+		@Override
+		public boolean hasCreateCost() {
+			return ((bitField0_ & 0x00000040) == 0x00000040);
+		}
+
+		/**
+		 * <code>optional int32 createCost = 7;</code>
+		 */
+		@Override
+		public int getCreateCost() {
+			return createCost_;
+		}
+
+		public static final int DESCRIPTION_FIELD_NUMBER = 8;
+		private java.lang.Object description_;
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		@Override
+		public boolean hasDescription() {
+			return ((bitField0_ & 0x00000080) == 0x00000080);
+		}
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		@Override
+		public java.lang.String getDescription() {
+			java.lang.Object ref = description_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					description_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string description = 8;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getDescriptionBytes() {
+			java.lang.Object ref = description_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				description_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int POWERAMOUNT_FIELD_NUMBER = 9;
+		private int powerAmount_;
+
+		/**
+		 * <code>optional int32 powerAmount = 9;</code>
+		 */
+		@Override
+		public boolean hasPowerAmount() {
+			return ((bitField0_ & 0x00000100) == 0x00000100);
+		}
+
+		/**
+		 * <code>optional int32 powerAmount = 9;</code>
+		 */
+		@Override
+		public int getPowerAmount() {
+			return powerAmount_;
+		}
+
+		public static final int PRIORITY_FIELD_NUMBER = 11;
+		private int priority_;
+
+		/**
+		 * <code>optional int32 priority = 11;</code>
+		 */
+		@Override
+		public boolean hasPriority() {
+			return ((bitField0_ & 0x00000200) == 0x00000200);
+		}
+
+		/**
+		 * <code>optional int32 priority = 11;</code>
+		 */
+		@Override
+		public int getPriority() {
+			return priority_;
+		}
+
+		public static final int MINUTESTOCREATE_FIELD_NUMBER = 12;
+		private int minutesToCreate_;
+
+		/**
+		 * <code>optional int32 minutesToCreate = 12;</code>
+		 */
+		@Override
+		public boolean hasMinutesToCreate() {
+			return ((bitField0_ & 0x00000400) == 0x00000400);
+		}
+
+		/**
+		 * <code>optional int32 minutesToCreate = 12;</code>
+		 */
+		@Override
+		public int getMinutesToCreate() {
+			return minutesToCreate_;
+		}
+
+		public static final int INBATTLEGEMCOST_FIELD_NUMBER = 13;
+		private int inBattleGemCost_;
+
+		/**
+		 * <code>optional int32 inBattleGemCost = 13;</code>
+		 */
+		@Override
+		public boolean hasInBattleGemCost() {
+			return ((bitField0_ & 0x00000800) == 0x00000800);
+		}
+
+		/**
+		 * <code>optional int32 inBattleGemCost = 13;</code>
+		 */
+		@Override
+		public int getInBattleGemCost() {
+			return inBattleGemCost_;
+		}
+
+		private void initFields() {
+			battleItemId_ = 0;
+			name_ = "";
+			imgName_ = "";
+			battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+			battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
+			createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+			createCost_ = 0;
+			description_ = "";
+			powerAmount_ = 0;
+			priority_ = 0;
+			minutesToCreate_ = 0;
+			inBattleGemCost_ = 0;
+		}
+
+		private byte memoizedIsInitialized = -1;
+
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
+
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeInt32(1, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeBytes(2, getNameBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				output.writeBytes(3, getImgNameBytes());
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				output.writeEnum(4, battleItemType_.getNumber());
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				output.writeEnum(5, battleItemCategory_.getNumber());
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				output.writeEnum(6, createResourceType_.getNumber());
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				output.writeInt32(7, createCost_);
+			}
+			if (((bitField0_ & 0x00000080) == 0x00000080)) {
+				output.writeBytes(8, getDescriptionBytes());
+			}
+			if (((bitField0_ & 0x00000100) == 0x00000100)) {
+				output.writeInt32(9, powerAmount_);
+			}
+			if (((bitField0_ & 0x00000200) == 0x00000200)) {
+				output.writeInt32(11, priority_);
+			}
+			if (((bitField0_ & 0x00000400) == 0x00000400)) {
+				output.writeInt32(12, minutesToCreate_);
+			}
+			if (((bitField0_ & 0x00000800) == 0x00000800)) {
+				output.writeInt32(13, inBattleGemCost_);
+			}
+			getUnknownFields().writeTo(output);
+		}
+
+		private int memoizedSerializedSize = -1;
+
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						1, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						2, getNameBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						3, getImgNameBytes());
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
+						4, battleItemType_.getNumber());
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
+						5, battleItemCategory_.getNumber());
+			}
+			if (((bitField0_ & 0x00000020) == 0x00000020)) {
+				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
+						6, createResourceType_.getNumber());
+			}
+			if (((bitField0_ & 0x00000040) == 0x00000040)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						7, createCost_);
+			}
+			if (((bitField0_ & 0x00000080) == 0x00000080)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						8, getDescriptionBytes());
+			}
+			if (((bitField0_ & 0x00000100) == 0x00000100)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						9, powerAmount_);
+			}
+			if (((bitField0_ & 0x00000200) == 0x00000200)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						11, priority_);
+			}
+			if (((bitField0_ & 0x00000400) == 0x00000400)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						12, minutesToCreate_);
+			}
+			if (((bitField0_ & 0x00000800) == 0x00000800)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						13, inBattleGemCost_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
+
+		private static final long serialVersionUID = 0L;
+
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.BattleItemsProto.BattleItemProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type {@code com.lvl6.proto.BattleItemProto}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemProto)
+				com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.BattleItemsProto.BattleItemProto.class,
+								com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.BattleItemsProto.BattleItemProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				battleItemId_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000001);
+				name_ = "";
+				bitField0_ = (bitField0_ & ~0x00000002);
+				imgName_ = "";
+				bitField0_ = (bitField0_ & ~0x00000004);
+				battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
+				bitField0_ = (bitField0_ & ~0x00000010);
+				createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+				bitField0_ = (bitField0_ & ~0x00000020);
+				createCost_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000040);
+				description_ = "";
+				bitField0_ = (bitField0_ & ~0x00000080);
+				powerAmount_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000100);
+				priority_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000200);
+				minutesToCreate_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000400);
+				inBattleGemCost_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000800);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemProto getDefaultInstanceForType() {
+				return com.lvl6.proto.BattleItemsProto.BattleItemProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemProto build() {
+				com.lvl6.proto.BattleItemsProto.BattleItemProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemProto buildPartial() {
+				com.lvl6.proto.BattleItemsProto.BattleItemProto result = new com.lvl6.proto.BattleItemsProto.BattleItemProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.battleItemId_ = battleItemId_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.name_ = name_;
+				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+					to_bitField0_ |= 0x00000004;
+				}
+				result.imgName_ = imgName_;
+				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+					to_bitField0_ |= 0x00000008;
+				}
+				result.battleItemType_ = battleItemType_;
+				if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+					to_bitField0_ |= 0x00000010;
+				}
+				result.battleItemCategory_ = battleItemCategory_;
+				if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+					to_bitField0_ |= 0x00000020;
+				}
+				result.createResourceType_ = createResourceType_;
+				if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+					to_bitField0_ |= 0x00000040;
+				}
+				result.createCost_ = createCost_;
+				if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+					to_bitField0_ |= 0x00000080;
+				}
+				result.description_ = description_;
+				if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+					to_bitField0_ |= 0x00000100;
+				}
+				result.powerAmount_ = powerAmount_;
+				if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+					to_bitField0_ |= 0x00000200;
+				}
+				result.priority_ = priority_;
+				if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+					to_bitField0_ |= 0x00000400;
+				}
+				result.minutesToCreate_ = minutesToCreate_;
+				if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+					to_bitField0_ |= 0x00000800;
+				}
+				result.inBattleGemCost_ = inBattleGemCost_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.BattleItemsProto.BattleItemProto) {
+					return mergeFrom((com.lvl6.proto.BattleItemsProto.BattleItemProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.BattleItemsProto.BattleItemProto other) {
+				if (other == com.lvl6.proto.BattleItemsProto.BattleItemProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasBattleItemId()) {
+					setBattleItemId(other.getBattleItemId());
+				}
+				if (other.hasName()) {
+					bitField0_ |= 0x00000002;
+					name_ = other.name_;
+					onChanged();
+				}
+				if (other.hasImgName()) {
+					bitField0_ |= 0x00000004;
+					imgName_ = other.imgName_;
+					onChanged();
+				}
+				if (other.hasBattleItemType()) {
+					setBattleItemType(other.getBattleItemType());
+				}
+				if (other.hasBattleItemCategory()) {
+					setBattleItemCategory(other.getBattleItemCategory());
+				}
+				if (other.hasCreateResourceType()) {
+					setCreateResourceType(other.getCreateResourceType());
+				}
+				if (other.hasCreateCost()) {
+					setCreateCost(other.getCreateCost());
+				}
+				if (other.hasDescription()) {
+					bitField0_ |= 0x00000080;
+					description_ = other.description_;
+					onChanged();
+				}
+				if (other.hasPowerAmount()) {
+					setPowerAmount(other.getPowerAmount());
+				}
+				if (other.hasPriority()) {
+					setPriority(other.getPriority());
+				}
+				if (other.hasMinutesToCreate()) {
+					setMinutesToCreate(other.getMinutesToCreate());
+				}
+				if (other.hasInBattleGemCost()) {
+					setInBattleGemCost(other.getInBattleGemCost());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.BattleItemsProto.BattleItemProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.BattleItemsProto.BattleItemProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private int battleItemId_;
+
+			/**
+			 * <code>optional int32 battleItemId = 1;</code>
+			 */
+			@Override
+			public boolean hasBattleItemId() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 1;</code>
+			 */
+			@Override
+			public int getBattleItemId() {
+				return battleItemId_;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 1;</code>
+			 */
+			public Builder setBattleItemId(int value) {
+				bitField0_ |= 0x00000001;
+				battleItemId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 1;</code>
+			 */
+			public Builder clearBattleItemId() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				battleItemId_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object name_ = "";
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			@Override
+			public boolean hasName() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			@Override
+			public java.lang.String getName() {
+				java.lang.Object ref = name_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						name_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getNameBytes() {
+				java.lang.Object ref = name_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					name_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			public Builder setName(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				name_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			public Builder clearName() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				name_ = getDefaultInstance().getName();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string name = 2;</code>
+			 */
+			public Builder setNameBytes(com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				name_ = value;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object imgName_ = "";
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			@Override
+			public boolean hasImgName() {
+				return ((bitField0_ & 0x00000004) == 0x00000004);
+			}
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			@Override
+			public java.lang.String getImgName() {
+				java.lang.Object ref = imgName_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						imgName_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getImgNameBytes() {
+				java.lang.Object ref = imgName_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					imgName_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			public Builder setImgName(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000004;
+				imgName_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			public Builder clearImgName() {
+				bitField0_ = (bitField0_ & ~0x00000004);
+				imgName_ = getDefaultInstance().getImgName();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string imgName = 3;</code>
+			 */
+			public Builder setImgNameBytes(com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000004;
+				imgName_ = value;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+			 */
+			@Override
+			public boolean hasBattleItemType() {
+				return ((bitField0_ & 0x00000008) == 0x00000008);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+			 */
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType() {
+				return battleItemType_;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+			 */
+			public Builder setBattleItemType(
+					com.lvl6.proto.BattleItemsProto.BattleItemType value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000008;
+				battleItemType_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
+			 */
+			public Builder clearBattleItemType() {
+				bitField0_ = (bitField0_ & ~0x00000008);
+				battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+			 */
+			@Override
+			public boolean hasBattleItemCategory() {
+				return ((bitField0_ & 0x00000010) == 0x00000010);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+			 */
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory() {
+				return battleItemCategory_;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+			 */
+			public Builder setBattleItemCategory(
+					com.lvl6.proto.BattleItemsProto.BattleItemCategory value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000010;
+				battleItemCategory_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
+			 */
+			public Builder clearBattleItemCategory() {
+				bitField0_ = (bitField0_ & ~0x00000010);
+				battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
+				onChanged();
+				return this;
+			}
+
+			private com.lvl6.proto.StructureProto.ResourceType createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+
+			/**
+			 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+			 */
+			@Override
+			public boolean hasCreateResourceType() {
+				return ((bitField0_ & 0x00000020) == 0x00000020);
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+			 */
+			@Override
+			public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+				return createResourceType_;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+			 */
+			public Builder setCreateResourceType(
+					com.lvl6.proto.StructureProto.ResourceType value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000020;
+				createResourceType_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
+			 */
+			public Builder clearCreateResourceType() {
+				bitField0_ = (bitField0_ & ~0x00000020);
+				createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+				onChanged();
+				return this;
+			}
+
+			private int createCost_;
+
+			/**
+			 * <code>optional int32 createCost = 7;</code>
+			 */
+			@Override
+			public boolean hasCreateCost() {
+				return ((bitField0_ & 0x00000040) == 0x00000040);
+			}
+
+			/**
+			 * <code>optional int32 createCost = 7;</code>
+			 */
+			@Override
+			public int getCreateCost() {
+				return createCost_;
+			}
+
+			/**
+			 * <code>optional int32 createCost = 7;</code>
+			 */
+			public Builder setCreateCost(int value) {
+				bitField0_ |= 0x00000040;
+				createCost_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 createCost = 7;</code>
+			 */
+			public Builder clearCreateCost() {
+				bitField0_ = (bitField0_ & ~0x00000040);
+				createCost_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object description_ = "";
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			@Override
+			public boolean hasDescription() {
+				return ((bitField0_ & 0x00000080) == 0x00000080);
+			}
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			@Override
+			public java.lang.String getDescription() {
+				java.lang.Object ref = description_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						description_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getDescriptionBytes() {
+				java.lang.Object ref = description_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					description_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			public Builder setDescription(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000080;
+				description_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			public Builder clearDescription() {
+				bitField0_ = (bitField0_ & ~0x00000080);
+				description_ = getDefaultInstance().getDescription();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string description = 8;</code>
+			 */
+			public Builder setDescriptionBytes(
+					com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000080;
+				description_ = value;
+				onChanged();
+				return this;
+			}
+
+			private int powerAmount_;
+
+			/**
+			 * <code>optional int32 powerAmount = 9;</code>
+			 */
+			@Override
+			public boolean hasPowerAmount() {
+				return ((bitField0_ & 0x00000100) == 0x00000100);
+			}
+
+			/**
+			 * <code>optional int32 powerAmount = 9;</code>
+			 */
+			@Override
+			public int getPowerAmount() {
+				return powerAmount_;
+			}
+
+			/**
+			 * <code>optional int32 powerAmount = 9;</code>
+			 */
+			public Builder setPowerAmount(int value) {
+				bitField0_ |= 0x00000100;
+				powerAmount_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 powerAmount = 9;</code>
+			 */
+			public Builder clearPowerAmount() {
+				bitField0_ = (bitField0_ & ~0x00000100);
+				powerAmount_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int priority_;
+
+			/**
+			 * <code>optional int32 priority = 11;</code>
+			 */
+			@Override
+			public boolean hasPriority() {
+				return ((bitField0_ & 0x00000200) == 0x00000200);
+			}
+
+			/**
+			 * <code>optional int32 priority = 11;</code>
+			 */
+			@Override
+			public int getPriority() {
+				return priority_;
+			}
+
+			/**
+			 * <code>optional int32 priority = 11;</code>
+			 */
+			public Builder setPriority(int value) {
+				bitField0_ |= 0x00000200;
+				priority_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 priority = 11;</code>
+			 */
+			public Builder clearPriority() {
+				bitField0_ = (bitField0_ & ~0x00000200);
+				priority_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int minutesToCreate_;
+
+			/**
+			 * <code>optional int32 minutesToCreate = 12;</code>
+			 */
+			@Override
+			public boolean hasMinutesToCreate() {
+				return ((bitField0_ & 0x00000400) == 0x00000400);
+			}
+
+			/**
+			 * <code>optional int32 minutesToCreate = 12;</code>
+			 */
+			@Override
+			public int getMinutesToCreate() {
+				return minutesToCreate_;
+			}
+
+			/**
+			 * <code>optional int32 minutesToCreate = 12;</code>
+			 */
+			public Builder setMinutesToCreate(int value) {
+				bitField0_ |= 0x00000400;
+				minutesToCreate_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 minutesToCreate = 12;</code>
+			 */
+			public Builder clearMinutesToCreate() {
+				bitField0_ = (bitField0_ & ~0x00000400);
+				minutesToCreate_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private int inBattleGemCost_;
+
+			/**
+			 * <code>optional int32 inBattleGemCost = 13;</code>
+			 */
+			@Override
+			public boolean hasInBattleGemCost() {
+				return ((bitField0_ & 0x00000800) == 0x00000800);
+			}
+
+			/**
+			 * <code>optional int32 inBattleGemCost = 13;</code>
+			 */
+			@Override
+			public int getInBattleGemCost() {
+				return inBattleGemCost_;
+			}
+
+			/**
+			 * <code>optional int32 inBattleGemCost = 13;</code>
+			 */
+			public Builder setInBattleGemCost(int value) {
+				bitField0_ |= 0x00000800;
+				inBattleGemCost_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 inBattleGemCost = 13;</code>
+			 */
+			public Builder clearInBattleGemCost() {
+				bitField0_ = (bitField0_ & ~0x00000800);
+				inBattleGemCost_ = 0;
+				onChanged();
+				return this;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemProto)
+		}
+
+		static {
+			defaultInstance = new BattleItemProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemProto)
+	}
+
+	public interface BattleItemQueueForUserProtoOrBuilder extends
+	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemQueueForUserProto)
+			com.google.protobuf.MessageOrBuilder {
+
+		/**
+		 * <code>optional int32 priority = 1;</code>
+		 */
+		boolean hasPriority();
+
+		/**
+		 * <code>optional int32 priority = 1;</code>
+		 */
+		int getPriority();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		boolean hasUserUuid();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		java.lang.String getUserUuid();
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		com.google.protobuf.ByteString getUserUuidBytes();
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		boolean hasBattleItemId();
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		int getBattleItemId();
+
+		/**
+		 * <code>optional int64 expectedStartTime = 4;</code>
+		 */
+		boolean hasExpectedStartTime();
+
+		/**
+		 * <code>optional int64 expectedStartTime = 4;</code>
+		 */
+		long getExpectedStartTime();
+
+		/**
+		 * <code>optional float elapsedTime = 5;</code>
+		 */
+		boolean hasElapsedTime();
+
+		/**
+		 * <code>optional float elapsedTime = 5;</code>
+		 */
+		float getElapsedTime();
+	}
+
+	/**
+	 * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
+	 */
+	public static final class BattleItemQueueForUserProto extends
+			com.google.protobuf.GeneratedMessage implements
+	// @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemQueueForUserProto)
+			BattleItemQueueForUserProtoOrBuilder {
+		// Use BattleItemQueueForUserProto.newBuilder() to construct.
+		private BattleItemQueueForUserProto(
+				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+			super(builder);
+			this.unknownFields = builder.getUnknownFields();
+		}
+
+		private BattleItemQueueForUserProto(boolean noInit) {
+			this.unknownFields = com.google.protobuf.UnknownFieldSet
+					.getDefaultInstance();
+		}
+
+		private static final BattleItemQueueForUserProto defaultInstance;
+
+		public static BattleItemQueueForUserProto getDefaultInstance() {
+			return defaultInstance;
+		}
+
+		@Override
+		public BattleItemQueueForUserProto getDefaultInstanceForType() {
+			return defaultInstance;
+		}
+
+		private final com.google.protobuf.UnknownFieldSet unknownFields;
+
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		private BattleItemQueueForUserProto(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			initFields();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
+					.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+					case 0:
+						done = true;
+						break;
+					default: {
+						if (!parseUnknownField(input, unknownFields,
+								extensionRegistry, tag)) {
+							done = true;
+						}
+						break;
+					}
+					case 8: {
+						bitField0_ |= 0x00000001;
+						priority_ = input.readInt32();
+						break;
+					}
+					case 18: {
+						com.google.protobuf.ByteString bs = input.readBytes();
+						bitField0_ |= 0x00000002;
+						userUuid_ = bs;
+						break;
+					}
+					case 24: {
+						bitField0_ |= 0x00000004;
+						battleItemId_ = input.readInt32();
+						break;
+					}
+					case 32: {
+						bitField0_ |= 0x00000008;
+						expectedStartTime_ = input.readInt64();
+						break;
+					}
+					case 45: {
+						bitField0_ |= 0x00000010;
+						elapsedTime_ = input.readFloat();
+						break;
+					}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e.getMessage()).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
+
+		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+		}
+
+		@Override
+		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+			return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.class,
+							com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder.class);
+		}
+
+		public static com.google.protobuf.Parser<BattleItemQueueForUserProto> PARSER = new com.google.protobuf.AbstractParser<BattleItemQueueForUserProto>() {
+			@Override
+			public BattleItemQueueForUserProto parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new BattleItemQueueForUserProto(input, extensionRegistry);
+			}
+		};
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<BattleItemQueueForUserProto> getParserForType() {
+			return PARSER;
+		}
+
+		private int bitField0_;
+		public static final int PRIORITY_FIELD_NUMBER = 1;
+		private int priority_;
+
+		/**
+		 * <code>optional int32 priority = 1;</code>
+		 */
+		@Override
+		public boolean hasPriority() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>optional int32 priority = 1;</code>
+		 */
+		@Override
+		public int getPriority() {
+			return priority_;
+		}
+
+		public static final int USERUUID_FIELD_NUMBER = 2;
+		private java.lang.Object userUuid_;
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public boolean hasUserUuid() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public java.lang.String getUserUuid() {
+			java.lang.Object ref = userUuid_;
+			if (ref instanceof java.lang.String) {
+				return (java.lang.String) ref;
+			} else {
+				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+				java.lang.String s = bs.toStringUtf8();
+				if (bs.isValidUtf8()) {
+					userUuid_ = s;
+				}
+				return s;
+			}
+		}
+
+		/**
+		 * <code>optional string userUuid = 2;</code>
+		 */
+		@Override
+		public com.google.protobuf.ByteString getUserUuidBytes() {
+			java.lang.Object ref = userUuid_;
+			if (ref instanceof java.lang.String) {
+				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+						.copyFromUtf8((java.lang.String) ref);
+				userUuid_ = b;
+				return b;
+			} else {
+				return (com.google.protobuf.ByteString) ref;
+			}
+		}
+
+		public static final int BATTLEITEMID_FIELD_NUMBER = 3;
+		private int battleItemId_;
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		@Override
+		public boolean hasBattleItemId() {
+			return ((bitField0_ & 0x00000004) == 0x00000004);
+		}
+
+		/**
+		 * <code>optional int32 battleItemId = 3;</code>
+		 */
+		@Override
+		public int getBattleItemId() {
+			return battleItemId_;
+		}
+
+		public static final int EXPECTEDSTARTTIME_FIELD_NUMBER = 4;
+		private long expectedStartTime_;
+
+		/**
+		 * <code>optional int64 expectedStartTime = 4;</code>
+		 */
+		@Override
+		public boolean hasExpectedStartTime() {
+			return ((bitField0_ & 0x00000008) == 0x00000008);
+		}
+
+		/**
+		 * <code>optional int64 expectedStartTime = 4;</code>
+		 */
+		@Override
+		public long getExpectedStartTime() {
+			return expectedStartTime_;
+		}
+
+		public static final int ELAPSEDTIME_FIELD_NUMBER = 5;
+		private float elapsedTime_;
+
+		/**
+		 * <code>optional float elapsedTime = 5;</code>
+		 */
+		@Override
+		public boolean hasElapsedTime() {
+			return ((bitField0_ & 0x00000010) == 0x00000010);
+		}
+
+		/**
+		 * <code>optional float elapsedTime = 5;</code>
+		 */
+		@Override
+		public float getElapsedTime() {
+			return elapsedTime_;
+		}
+
+		private void initFields() {
+			priority_ = 0;
+			userUuid_ = "";
+			battleItemId_ = 0;
+			expectedStartTime_ = 0L;
+			elapsedTime_ = 0F;
+		}
+
+		private byte memoizedIsInitialized = -1;
+
+		@Override
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1)
+				return true;
+			if (isInitialized == 0)
+				return false;
+
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		@Override
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			getSerializedSize();
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeInt32(1, priority_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeBytes(2, getUserUuidBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				output.writeInt32(3, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				output.writeInt64(4, expectedStartTime_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				output.writeFloat(5, elapsedTime_);
+			}
+			getUnknownFields().writeTo(output);
+		}
+
+		private int memoizedSerializedSize = -1;
+
+		@Override
+		public int getSerializedSize() {
+			int size = memoizedSerializedSize;
+			if (size != -1)
+				return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						1, priority_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
+						2, getUserUuidBytes());
+			}
+			if (((bitField0_ & 0x00000004) == 0x00000004)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
+						3, battleItemId_);
+			}
+			if (((bitField0_ & 0x00000008) == 0x00000008)) {
+				size += com.google.protobuf.CodedOutputStream.computeInt64Size(
+						4, expectedStartTime_);
+			}
+			if (((bitField0_ & 0x00000010) == 0x00000010)) {
+				size += com.google.protobuf.CodedOutputStream.computeFloatSize(
+						5, elapsedTime_);
+			}
+			size += getUnknownFields().getSerializedSize();
+			memoizedSerializedSize = size;
+			return size;
+		}
+
+		private static final long serialVersionUID = 0L;
+
+		@java.lang.Override
+		protected java.lang.Object writeReplace()
+				throws java.io.ObjectStreamException {
+			return super.writeReplace();
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseDelimitedFrom(
+				java.io.InputStream input) throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseDelimitedFrom(input, extensionRegistry);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input);
+		}
+
+		public static com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return PARSER.parseFrom(input, extensionRegistry);
+		}
+
+		public static Builder newBuilder() {
+			return Builder.create();
+		}
+
+		@Override
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public static Builder newBuilder(
+				com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto prototype) {
+			return newBuilder().mergeFrom(prototype);
+		}
+
+		@Override
+		public Builder toBuilder() {
+			return newBuilder(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		/**
+		 * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessage.Builder<Builder>
+				implements
+				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemQueueForUserProto)
+				com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder {
+			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+			}
+
+			@Override
+			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.class,
+								com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.Builder.class);
+			}
+
+			// Construct using com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+				}
+			}
+
+			private static Builder create() {
+				return new Builder();
+			}
+
+			@Override
+			public Builder clear() {
+				super.clear();
+				priority_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000001);
+				userUuid_ = "";
+				bitField0_ = (bitField0_ & ~0x00000002);
+				battleItemId_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000004);
+				expectedStartTime_ = 0L;
+				bitField0_ = (bitField0_ & ~0x00000008);
+				elapsedTime_ = 0F;
+				bitField0_ = (bitField0_ & ~0x00000010);
+				return this;
+			}
+
+			@Override
+			public Builder clone() {
+				return create().mergeFrom(buildPartial());
+			}
+
+			@Override
+			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+				return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto getDefaultInstanceForType() {
+				return com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto
+						.getDefaultInstance();
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto build() {
+				com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			@Override
+			public com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto buildPartial() {
+				com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto result = new com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto(
+						this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.priority_ = priority_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.userUuid_ = userUuid_;
+				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+					to_bitField0_ |= 0x00000004;
+				}
+				result.battleItemId_ = battleItemId_;
+				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+					to_bitField0_ |= 0x00000008;
+				}
+				result.expectedStartTime_ = expectedStartTime_;
+				if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+					to_bitField0_ |= 0x00000010;
+				}
+				result.elapsedTime_ = elapsedTime_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			@Override
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto) {
+					return mergeFrom((com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(
+					com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto other) {
+				if (other == com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto
+						.getDefaultInstance())
+					return this;
+				if (other.hasPriority()) {
+					setPriority(other.getPriority());
+				}
+				if (other.hasUserUuid()) {
+					bitField0_ |= 0x00000002;
+					userUuid_ = other.userUuid_;
+					onChanged();
+				}
+				if (other.hasBattleItemId()) {
+					setBattleItemId(other.getBattleItemId());
+				}
+				if (other.hasExpectedStartTime()) {
+					setExpectedStartTime(other.getExpectedStartTime());
+				}
+				if (other.hasElapsedTime()) {
+					setElapsedTime(other.getElapsedTime());
+				}
+				this.mergeUnknownFields(other.getUnknownFields());
+				return this;
+			}
+
+			@Override
+			public final boolean isInitialized() {
+				return true;
+			}
+
+			@Override
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input,
+							extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto) e
+							.getUnfinishedMessage();
+					throw e;
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			private int bitField0_;
+
+			private int priority_;
+
+			/**
+			 * <code>optional int32 priority = 1;</code>
+			 */
+			@Override
+			public boolean hasPriority() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>optional int32 priority = 1;</code>
+			 */
+			@Override
+			public int getPriority() {
+				return priority_;
+			}
+
+			/**
+			 * <code>optional int32 priority = 1;</code>
+			 */
+			public Builder setPriority(int value) {
+				bitField0_ |= 0x00000001;
+				priority_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 priority = 1;</code>
+			 */
+			public Builder clearPriority() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				priority_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private java.lang.Object userUuid_ = "";
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public boolean hasUserUuid() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public java.lang.String getUserUuid() {
+				java.lang.Object ref = userUuid_;
+				if (!(ref instanceof java.lang.String)) {
+					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+					java.lang.String s = bs.toStringUtf8();
+					if (bs.isValidUtf8()) {
+						userUuid_ = s;
+					}
+					return s;
+				} else {
+					return (java.lang.String) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			@Override
+			public com.google.protobuf.ByteString getUserUuidBytes() {
+				java.lang.Object ref = userUuid_;
+				if (ref instanceof String) {
+					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
+							.copyFromUtf8((java.lang.String) ref);
+					userUuid_ = b;
+					return b;
+				} else {
+					return (com.google.protobuf.ByteString) ref;
+				}
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder setUserUuid(java.lang.String value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				userUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder clearUserUuid() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				userUuid_ = getDefaultInstance().getUserUuid();
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional string userUuid = 2;</code>
+			 */
+			public Builder setUserUuidBytes(com.google.protobuf.ByteString value) {
+				if (value == null) {
+					throw new NullPointerException();
+				}
+				bitField0_ |= 0x00000002;
+				userUuid_ = value;
+				onChanged();
+				return this;
+			}
+
+			private int battleItemId_;
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			@Override
+			public boolean hasBattleItemId() {
+				return ((bitField0_ & 0x00000004) == 0x00000004);
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			@Override
+			public int getBattleItemId() {
+				return battleItemId_;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			public Builder setBattleItemId(int value) {
+				bitField0_ |= 0x00000004;
+				battleItemId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int32 battleItemId = 3;</code>
+			 */
+			public Builder clearBattleItemId() {
+				bitField0_ = (bitField0_ & ~0x00000004);
+				battleItemId_ = 0;
+				onChanged();
+				return this;
+			}
+
+			private long expectedStartTime_;
+
+			/**
+			 * <code>optional int64 expectedStartTime = 4;</code>
+			 */
+			@Override
+			public boolean hasExpectedStartTime() {
+				return ((bitField0_ & 0x00000008) == 0x00000008);
+			}
+
+			/**
+			 * <code>optional int64 expectedStartTime = 4;</code>
+			 */
+			@Override
+			public long getExpectedStartTime() {
+				return expectedStartTime_;
+			}
+
+			/**
+			 * <code>optional int64 expectedStartTime = 4;</code>
+			 */
+			public Builder setExpectedStartTime(long value) {
+				bitField0_ |= 0x00000008;
+				expectedStartTime_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional int64 expectedStartTime = 4;</code>
+			 */
+			public Builder clearExpectedStartTime() {
+				bitField0_ = (bitField0_ & ~0x00000008);
+				expectedStartTime_ = 0L;
+				onChanged();
+				return this;
+			}
+
+			private float elapsedTime_;
+
+			/**
+			 * <code>optional float elapsedTime = 5;</code>
+			 */
+			@Override
+			public boolean hasElapsedTime() {
+				return ((bitField0_ & 0x00000010) == 0x00000010);
+			}
+
+			/**
+			 * <code>optional float elapsedTime = 5;</code>
+			 */
+			@Override
+			public float getElapsedTime() {
+				return elapsedTime_;
+			}
+
+			/**
+			 * <code>optional float elapsedTime = 5;</code>
+			 */
+			public Builder setElapsedTime(float value) {
+				bitField0_ |= 0x00000010;
+				elapsedTime_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>optional float elapsedTime = 5;</code>
+			 */
+			public Builder clearElapsedTime() {
+				bitField0_ = (bitField0_ & ~0x00000010);
+				elapsedTime_ = 0F;
+				onChanged();
+				return this;
+			}
+
+			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.BattleItemQueueForUserProto)
+		}
+
+		static {
+			defaultInstance = new BattleItemQueueForUserProto(true);
+			defaultInstance.initFields();
+		}
+
+		// @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemQueueForUserProto)
+	}
+
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable;
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_BattleItemProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable;
+	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
+	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable;
+
+	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
+		return descriptor;
+	}
+
+	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
+	static {
+		java.lang.String[] descriptorData = {
+				"\n\020BattleItem.proto\022\016com.lvl6.proto\032\026Shar"
+						+ "edEnumConfig.proto\032\017Structure.proto\"i\n\023U"
+						+ "serBattleItemProto\022\030\n\020userBattleItemId\030\001"
+						+ " \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030\003"
+						+ " \001(\005\022\020\n\010quantity\030\004 \001(\005\"\372\002\n\017BattleItemPro"
+						+ "to\022\024\n\014battleItemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017"
+						+ "\n\007imgName\030\003 \001(\t\0226\n\016battleItemType\030\004 \001(\0162"
+						+ "\036.com.lvl6.proto.BattleItemType\022>\n\022battl"
+						+ "eItemCategory\030\005 \001(\0162\".com.lvl6.proto.Bat"
+						+ "tleItemCategory\0228\n\022createResourceType\030\006 ",
+				"\001(\0162\034.com.lvl6.proto.ResourceType\022\022\n\ncre"
+						+ "ateCost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013po"
+						+ "werAmount\030\t \001(\005\022\020\n\010priority\030\013 \001(\005\022\027\n\017min"
+						+ "utesToCreate\030\014 \001(\005\022\027\n\017inBattleGemCost\030\r "
+						+ "\001(\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010p"
+						+ "riority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battl"
+						+ "eItemId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003"
+						+ "\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleItemType\022"
+						+ "\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemC"
+						+ "ategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Battl",
+				"eItemsProto" };
+		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+			@Override
+			public com.google.protobuf.ExtensionRegistry assignDescriptors(
+					com.google.protobuf.Descriptors.FileDescriptor root) {
+				descriptor = root;
+				return null;
+			}
+		};
+		com.google.protobuf.Descriptors.FileDescriptor
+				.internalBuildGeneratedFileFrom(
+						descriptorData,
+						new com.google.protobuf.Descriptors.FileDescriptor[] {
+								com.lvl6.proto.SharedEnumConfigProto
+										.getDescriptor(),
+								com.lvl6.proto.StructureProto.getDescriptor(), },
+						assigner);
+		internal_static_com_lvl6_proto_UserBattleItemProto_descriptor = getDescriptor()
+				.getMessageTypes().get(0);
+		internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_UserBattleItemProto_descriptor,
+				new java.lang.String[] { "UserBattleItemId", "UserUuid",
+						"BattleItemId", "Quantity", });
+		internal_static_com_lvl6_proto_BattleItemProto_descriptor = getDescriptor()
+				.getMessageTypes().get(1);
+		internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_BattleItemProto_descriptor,
+				new java.lang.String[] { "BattleItemId", "Name", "ImgName",
+						"BattleItemType", "BattleItemCategory",
+						"CreateResourceType", "CreateCost", "Description",
+						"PowerAmount", "Priority", "MinutesToCreate",
+						"InBattleGemCost", });
+		internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor = getDescriptor()
+				.getMessageTypes().get(2);
+		internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+				internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
+				new java.lang.String[] { "Priority", "UserUuid",
+						"BattleItemId", "ExpectedStartTime", "ElapsedTime", });
+		com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+		com.lvl6.proto.StructureProto.getDescriptor();
+	}
+
+	// @@protoc_insertion_point(outer_class_scope)
 }

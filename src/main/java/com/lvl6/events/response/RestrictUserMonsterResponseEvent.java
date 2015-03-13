@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RestrictUserMonsterResponseEvent extends NormalResponseEvent {
 
-  private RestrictUserMonsterResponseProto restrictUserMonsterResponseProto;
-  
-  public RestrictUserMonsterResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_RESTRICT_USER_MONSTER_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = restrictUserMonsterResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private RestrictUserMonsterResponseProto restrictUserMonsterResponseProto;
 
-  public void setRestrictUserMonsterResponseProto(RestrictUserMonsterResponseProto restrictUserMonsterResponseProto) {
-    this.restrictUserMonsterResponseProto = restrictUserMonsterResponseProto;
-  }
+	public RestrictUserMonsterResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_RESTRICT_USER_MONSTER_EVENT;
+	}
 
-  public RestrictUserMonsterResponseProto getRestrictUserMonsterResponseProto() {   //because APNS required
-    return restrictUserMonsterResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = restrictUserMonsterResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setRestrictUserMonsterResponseProto(
+			RestrictUserMonsterResponseProto restrictUserMonsterResponseProto) {
+		this.restrictUserMonsterResponseProto = restrictUserMonsterResponseProto;
+	}
+
+	public RestrictUserMonsterResponseProto getRestrictUserMonsterResponseProto() {   //because APNS required
+		return restrictUserMonsterResponseProto;
+	}
+
 }

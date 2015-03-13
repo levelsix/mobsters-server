@@ -19,23 +19,24 @@ import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanMemberTeamDonationAction implements StartUpAction
-{
+public class SetClanMemberTeamDonationAction implements StartUpAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	private static String typeDonation = SnapshotType.TEAM_DONATE.name();
-	
+
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
 	private final String userId;
 	private final ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	private final MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+
 	public SetClanMemberTeamDonationAction(
-		ClanDataProto.Builder cdpBuilder, User user, String userId,
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil)
-	{
+			ClanDataProto.Builder cdpBuilder,
+			User user,
+			String userId,
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		super();
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
@@ -49,152 +50,138 @@ public class SetClanMemberTeamDonationAction implements StartUpAction
 	private Map<String, ClanMemberTeamDonation> userIdToDonationSolicitations;
 	private MonsterSnapshotForUser donationToMe;
 	private String donatorId;
-	
+
 	private Map<String, MinimumUserProto> mupSolicitors;
-	
+
 	//Extracted from Startup
 	@Override
-	public void setUp(StartUpResource fillMe)
-	{
+	public void setUp(StartUpResource fillMe) {
 		clanId = user.getClanId();
-		
+
 		if (null == clanId) {
 			log.info("clanId null.");
 			return;
 		}
-		
+
 		List<ClanMemberTeamDonation> clanMemberTeamDonations = clanMemberTeamDonationRetrieveUtil
-			.getClanMemberTeamDonationForClanId(clanId);
+				.getClanMemberTeamDonationForClanId(clanId);
 		log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
-		
+
 		//log.info(String.format("clanMemberTeamDonations=%s", clanMemberTeamDonations));
-		if (null == clanMemberTeamDonations || clanMemberTeamDonations.isEmpty())
-		{
+		if (null == clanMemberTeamDonations
+				|| clanMemberTeamDonations.isEmpty()) {
 			return;
 		}
 		userIdToDonationSolicitations = new HashMap<String, ClanMemberTeamDonation>();
-		
+
 		//users in a clan can have at most one solicitation for ClanMemberTeamDonation
 		ClanMemberTeamDonation mySolicitation = null;
-		for (ClanMemberTeamDonation cmtd : clanMemberTeamDonations)
-		{
+		for (ClanMemberTeamDonation cmtd : clanMemberTeamDonations) {
 			String solicitorId = cmtd.getUserId();
 			userIdToDonationSolicitations.put(solicitorId, cmtd);
-			
-			if (solicitorId.equals(userId))
-			{
+
+			if (solicitorId.equals(userId)) {
 				mySolicitation = cmtd;
 			}
-			
+
 		}
-		
-		log.info("userIdToDonationSolicitations={}", userIdToDonationSolicitations);
-		
+
+		log.info("userIdToDonationSolicitations={}",
+				userIdToDonationSolicitations);
+
 		fillMe.addUserId(userIdToDonationSolicitations.keySet());
-		
-		
-		
+
 		//need to get the person who donated to this user, if any
-		if ( null != mySolicitation && mySolicitation.isFulfilled() )
-		{
+		if (null != mySolicitation && mySolicitation.isFulfilled()) {
 			//only fulfilled solicitation has MonsterSnapshot
-			List<MonsterSnapshotForUser> donationsToMe =
-				monsterSnapshotForUserRetrieveUtil.
-				getMonstersSnapshots(typeDonation, mySolicitation.getId());
-			
+			List<MonsterSnapshotForUser> donationsToMe = monsterSnapshotForUserRetrieveUtil
+					.getMonstersSnapshots(typeDonation, mySolicitation.getId());
+
 			//since for user's team, there's only one donation
 			if (null == donationsToMe || donationsToMe.isEmpty()) {
-				log.error(
-					"{} has no donations {}",
-					"fulfilled ClanMemberTeamDonation solicitation",
-					mySolicitation);
-				
+				log.error("{} has no donations {}",
+						"fulfilled ClanMemberTeamDonation solicitation",
+						mySolicitation);
+
 			} else if (donationsToMe.size() > 1) {
 				String preface = "fulfilled ClanMemberTeamDonation solicitation";
-				log.error(
-					"{} {} has multiple donations: {}",
-					new Object[] {
-						preface, mySolicitation, donationsToMe
-					} );
+				log.error("{} {} has multiple donations: {}", new Object[] {
+						preface, mySolicitation, donationsToMe });
 				donationToMe = donationsToMe.get(0);
-				
+
 			} else {
 				donationToMe = donationsToMe.get(0);
 			}
-			
+
 		}
-		
+
 		if (null != donationToMe) {
 			donatorId = donationToMe.getUserId();
 			fillMe.addUserId(donatorId);
 		}
-		
+
 	}
 
 	@Override
-	public void execute( StartUpResource useMe )
-	{
-		if (null == userIdToDonationSolicitations ||
-			userIdToDonationSolicitations.isEmpty())
-		{
-			log.info("userIdToDonationSolicitations={}", userIdToDonationSolicitations);
+	public void execute(StartUpResource useMe) {
+		if (null == userIdToDonationSolicitations
+				|| userIdToDonationSolicitations.isEmpty()) {
+			log.info("userIdToDonationSolicitations={}",
+					userIdToDonationSolicitations);
 			return;
 		}
-		Map<String, User> solicitors = useMe.getUserIdsToUsers(
-			userIdToDonationSolicitations.keySet());
-		
+		Map<String, User> solicitors = useMe
+				.getUserIdsToUsers(userIdToDonationSolicitations.keySet());
+
 		if (null == solicitors || solicitors.isEmpty()) {
 			log.info("solicitors={}", solicitors);
 			return;
 		}
-		
+
 		Clan c = useMe.getClan(clanId);
 		log.info("c={}", c);
-		
+
 		User donator = null;
 		if (null != donatorId) {
 			donator = useMe.getUser(donatorId);
 		}
-		
-		
+
 		//convert all solicitors into MinimumUserProtos
 		protofySolicitors(solicitors, c);
-		
+
 		//create protos
 		for (String solicitationId : userIdToDonationSolicitations.keySet()) {
-			ClanMemberTeamDonation cmtd = 
-				userIdToDonationSolicitations.get(solicitationId);
-			
-			
+			ClanMemberTeamDonation cmtd = userIdToDonationSolicitations
+					.get(solicitationId);
+
 			String solicitorId = cmtd.getUserId();
 			MinimumUserProto solicitor = mupSolicitors.get(solicitorId);
-			
+
 			MonsterSnapshotForUser msfu = null;
 			MinimumUserProto donatorProto = null;
 			//only need MonsterSnapshotForUser for current user's solicitation
 			if (solicitorId.equals(userId) && null != donationToMe) {
 				msfu = donationToMe;
 				donatorProto = CreateInfoProtoUtils
-					.createMinimumUserProtoFromUserAndClan(donator, c);
+						.createMinimumUserProtoFromUserAndClan(donator, c);
 			}
-			
+
 			ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-				.createClanMemberTeamDonationProto(cmtd, msfu, solicitor,
-					donatorProto);
+					.createClanMemberTeamDonationProto(cmtd, msfu, solicitor,
+							donatorProto);
 
 			log.info("cmtdp={}", cmtdp);
 			cdpBuilder.addClanDonationSolicitations(cmtdp);
 		}
 	}
 
-	private void protofySolicitors( Map<String, User> solicitors, Clan c )
-	{
+	private void protofySolicitors(Map<String, User> solicitors, Clan c) {
 		mupSolicitors = new HashMap<String, MinimumUserProto>();
 		for (String solicitorId : solicitors.keySet()) {
 			User solicitor = solicitors.get(solicitorId);
-			
+
 			MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUserAndClan(solicitor, c);
+					.createMinimumUserProtoFromUserAndClan(solicitor, c);
 			mupSolicitors.put(solicitorId, mup);
 		}
 	}

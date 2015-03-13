@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class ApplicationStats {
 
-	
 	public Map<String, Number> values = new HashMap<>();
 	public Integer connectedPlayersCount = 0;
 	public Integer totalPlayersCount = 0;
@@ -70,19 +69,19 @@ public class ApplicationStats {
 
 	protected void setRevenuePerPayingPlayer() {
 		if (getSumOfInAppPurchases() > 0 && getTotalPayingPlayers() > 0) {
-			revenuePerPayingPlayer = getSumOfInAppPurchases().doubleValue() / getTotalPayingPlayers().doubleValue();
+			revenuePerPayingPlayer = getSumOfInAppPurchases().doubleValue()
+					/ getTotalPayingPlayers().doubleValue();
 		}
 		values.put("revenuePerPayingPlayer", revenuePerPayingPlayer);
 	}
 
 	protected void setPercentagePaidPlayers() {
 		if (getTotalPayingPlayers() > 0 && getTotalPlayersCount() > 0) {
-			percentageOfPaidPlayers = 100d * (getTotalPayingPlayers().doubleValue()
-					/ getTotalPlayersCount().doubleValue());
+			percentageOfPaidPlayers = 100d * (getTotalPayingPlayers()
+					.doubleValue() / getTotalPlayersCount().doubleValue());
 		}
 		values.put("percentageOfPaidPlayers", percentageOfPaidPlayers);
 	}
-
 
 	public Long getAverageSilverPerPlayer() {
 		if (getTotalPlayersCount() == 0) {
@@ -132,7 +131,8 @@ public class ApplicationStats {
 		return countNumberKiipRewardsRedeemed;
 	}
 
-	public void setCountNumberKiipRewardsRedeemed(Long countNumberKiipRewardsRedeemed) {
+	public void setCountNumberKiipRewardsRedeemed(
+			Long countNumberKiipRewardsRedeemed) {
 		this.countNumberKiipRewardsRedeemed = countNumberKiipRewardsRedeemed;
 	}
 
@@ -140,7 +140,8 @@ public class ApplicationStats {
 		return countMarketplaceTransactions;
 	}
 
-	public void setCountMarketplaceTransactions(Long countMarketplaceTransactions) {
+	public void setCountMarketplaceTransactions(
+			Long countMarketplaceTransactions) {
 		this.countMarketplaceTransactions = countMarketplaceTransactions;
 	}
 

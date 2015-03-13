@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent {
 
-  private InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto;
-  
-  public InviteFbFriendsForSlotsResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = inviteFbFriendsForSlotsResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto;
 
-  public void setInviteFbFriendsForSlotsResponseProto(InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto) {
-    this.inviteFbFriendsForSlotsResponseProto = inviteFbFriendsForSlotsResponseProto;
-  }
+	public InviteFbFriendsForSlotsResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
+	}
 
-  public InviteFbFriendsForSlotsResponseProto getInviteFbFriendsForSlotsResponseProto() {   //because APNS required
-    return inviteFbFriendsForSlotsResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = inviteFbFriendsForSlotsResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setInviteFbFriendsForSlotsResponseProto(
+			InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto) {
+		this.inviteFbFriendsForSlotsResponseProto = inviteFbFriendsForSlotsResponseProto;
+	}
+
+	public InviteFbFriendsForSlotsResponseProto getInviteFbFriendsForSlotsResponseProto() {   //because APNS required
+		return inviteFbFriendsForSlotsResponseProto;
+	}
+
 }

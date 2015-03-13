@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendGroupChatResponseEvent extends NormalResponseEvent {
 
-  private SendGroupChatResponseProto sendGroupChatResponseProto;
-  
-  public SendGroupChatResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_SEND_GROUP_CHAT_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = sendGroupChatResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private SendGroupChatResponseProto sendGroupChatResponseProto;
 
-  public void setSendGroupChatResponseProto(SendGroupChatResponseProto sendGroupChatResponseProto) {
-    this.sendGroupChatResponseProto = sendGroupChatResponseProto;
-  }
+	public SendGroupChatResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_SEND_GROUP_CHAT_EVENT;
+	}
 
-  public SendGroupChatResponseProto getSendGroupChatResponseProto() { //required for APNS
-    return sendGroupChatResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = sendGroupChatResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setSendGroupChatResponseProto(
+			SendGroupChatResponseProto sendGroupChatResponseProto) {
+		this.sendGroupChatResponseProto = sendGroupChatResponseProto;
+	}
+
+	public SendGroupChatResponseProto getSendGroupChatResponseProto() { //required for APNS
+		return sendGroupChatResponseProto;
+	}
+
 }

@@ -16,7 +16,8 @@ public class ControllerConstants {
 	//MOBSTERS CONSTANTS
 	public static final Random RAND = new Random();
 	//Date we launched the game...close enough
-	public static final Date INCEPTION_DATE = new DateTime(2014, 12, 4, 0, 0).toDate();
+	public static final Date INCEPTION_DATE = new DateTime(2014, 12, 4, 0, 0)
+			.toDate();
 
 	//includes oil and cash, 1 gem per 1000 resource? 
 	public static final float GEMS_PER_RESOURCE = 0.001F;
@@ -26,16 +27,18 @@ public class ControllerConstants {
 
 	//this multiplies with the cost to heal all monsters on user's battle team
 	//BATTLE, DUNGEON, TASK
-	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
+	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F;
 	public static final float BATTLE__RUN_AWAY_BASE_PERCENT = 0.5F;
-	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
+	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;
 
 	//BOOSTER_PACK
 	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
-	
+
 	//clan
-	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 20 : 100;
-	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
+	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 20
+			: 100;
+	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = { 1000,
+			1001, 1002 };
 	public static final int CLAN__TOP_N_CLANS = 50;
 	public static final int CLAN__MINS_TO_RESOLICIT_TEAM_DONATION = 20;
 
@@ -54,43 +57,40 @@ public class ControllerConstants {
 	//	public static final float CLAN_HELP__UPGRADE_STRUCT_PERCENT_REMOVED = 0.01F;
 
 	public static final String[] CLAN_HELP__HELP_TYPE = {
-		GameActionType.EVOLVE.name(),
-		GameActionType.HEAL.name(),
-		GameActionType.MINI_JOB.name(),
-		GameActionType.UPGRADE_STRUCT.name(),
-		GameActionType.ENHANCE_TIME.name(),
-		GameActionType.PERFORMING_RESEARCH.name(),
-		GameActionType.CREATE_BATTLE_ITEM.name()
+			GameActionType.EVOLVE.name(), GameActionType.HEAL.name(),
+			GameActionType.MINI_JOB.name(),
+			GameActionType.UPGRADE_STRUCT.name(),
+			GameActionType.ENHANCE_TIME.name(),
+			GameActionType.PERFORMING_RESEARCH.name(),
+			GameActionType.CREATE_BATTLE_ITEM.name()
 
 	};
-	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		1,		1,		1,		1,		1,		1};
-	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,	0.01F,	0.01F,	0.01F,	0.01F,	0.01F,	0.01F};
+	public static final int[] CLAN_HELP__AMOUNT_REMOVED = { 1, 1, 1, 1, 1, 1, 1 };
+	public static final float[] CLAN_HELP__PERCENT_REMOVED = { 0.01F, 0.01F,
+			0.01F, 0.01F, 0.01F, 0.01F, 0.01F };
 
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
-	
+
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
-	
+
 	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
-	public static final ChiSquaredDistribution ITEM_SECRET_GIFT_FOR_USER__RANDOM = 
-		new ChiSquaredDistribution(ITEM_SECRET_GIFT_FOR_USER__DOF);
+	public static final ChiSquaredDistribution ITEM_SECRET_GIFT_FOR_USER__RANDOM = new ChiSquaredDistribution(
+			ITEM_SECRET_GIFT_FOR_USER__DOF);
 
 	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
-	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
-		52, 2, 21, 53, 3
-	};
+	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = { 52, 2,
+			21, 53, 3 };
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
-		90, 150, 179, 265, 2280
-	};
+			90, 150, 179, 265, 2280 };
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 2100;
-	public static final int ITEM_SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = 
-		ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME -
-		ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME
+			- ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
 
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
@@ -108,7 +108,7 @@ public class ControllerConstants {
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
 	public static final String MFUSOP__MINI_JOB = "miniJobId";
 	public static final String MFUSOP__PVP = "pvp";
-	public static final String MFUSOP__QUEST = "questId"; 
+	public static final String MFUSOP__QUEST = "questId";
 	public static final String MFUSOP__REDEEM_ITEM = "redeem itemId";
 	public static final String MFUSOP__USER_CREATE = "user create";
 
@@ -131,7 +131,7 @@ public class ControllerConstants {
 	//PVP
 	public static final int PVP__DEFAULT_MIN_ELO = 1000;
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
-	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
+	public static final int PVP__REQUIRED_MIN_LEVEL = 30;
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
 	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
 	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
@@ -139,7 +139,7 @@ public class ControllerConstants {
 	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
 	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
 	public static final int PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS = 1250;
-	
+
 	//NOT USING ANYMORE--------------------------------------------------------------------
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
@@ -158,7 +158,7 @@ public class ControllerConstants {
 	//-------------------------------------------------------------------------------------
 	public static final float PVP__PERCENT_CASH_LOST = 0.25F;
 	public static final float PVP__PERCENT_OIL_LOST = 0.25F;
-	public static final int PVP__SHIELD_DURATION_DAYS = 3; 
+	public static final int PVP__SHIELD_DURATION_DAYS = 3;
 	public static final int PVP__LOST_BATTLE_SHIELD_DURATION_HOURS = 12;
 	public static final int PVP__INITIAL_LEAGUE_ID = 1;
 	public static final float PVP__MONSTER_DMG_MULTIPLIER = 2F;
@@ -167,44 +167,36 @@ public class ControllerConstants {
 	public static final float PVP__MIN_DMG_DELTA = 0.5F;
 	public static final float PVP__MAX_DMG_DELTA = 0.3F;
 
-
 	//PVP BATTLE HISTORY
-	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;  
+	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;
 
-	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = {
-		1, 1000, 10000, 100000, 1000000, 2000000000 
-	};
-	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = {
-		1, 1, 9, 80, 720, 1440000
-	};
+	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
+			10000, 100000, 1000000, 2000000000 };
+	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
+			720, 1440000 };
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
-		ResourceType.CASH.name(), ResourceType.OIL.name()  
-	};
-	
-	
+			ResourceType.CASH.name(), ResourceType.OIL.name() };
+
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
 	//TOGGLES
-//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
+	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__LOGGING_PVP_BATTLE_OUTCOME_DETAILS = "logging_pvp_battle_outcome_details";
-	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo"; 
-	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo"; 
+	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo";
+	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo";
 	public static final String SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO = "pvp_bots_only_below_some_elo";
-	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity"; 
-	
+	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity";
+
 	//SKILL
 	public static final int SKILL_FIRST_TASK_ID = 12;
-	 
+
 	//SPEED UP
-	public static final int[] SPEED_UP__SECONDS = {
-		1, 300, 3600, 86400, 604800, 157852800
-	};
-	public static final int[] SPEED_UP__NUM_GEMS = {
-		1, 1, 12, 144, 840, 219240
-	};
-	
+	public static final int[] SPEED_UP__SECONDS = { 1, 300, 3600, 86400,
+			604800, 157852800 };
+	public static final int[] SPEED_UP__NUM_GEMS = { 1, 1, 12, 144, 840, 219240 };
+
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
@@ -230,23 +222,30 @@ public class ControllerConstants {
 	public static final int TUTORIAL__ENHANCE_GUIDE_MONSTER_ID = 1750;
 
 	//everything at index i goes together
-	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     {200,  400,  600,  700,  825,  /*170,*/ 1000};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  15F,  20F,  /*15F,*/  15F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  24F,  16F,  /*-5F,*/  17F};
-	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 100, 300};
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = { 200, 400,
+			600, 700, 825, /*170,*/1000 };
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = { 20F, 10F,
+			14F, 15F, 20F, /*15F,*/15F };
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = { 12F, 16F,
+			11F, 24F, 16F, /*-5F,*/17F };
+	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = { 1, 100,
+			300 };
 
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
-	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON = 5; 
+	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON = 5;
 	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON = 6;
 	public static final int TUTORIAL__INIT_CASH = 2500;
 	public static final int TUTORIAL__INIT_OIL = 2500;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final int TUTORIAL__INIT_RANK = 100;
-	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,   2, 2, 2,   2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5,  5};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  { 2, 4,5,  10,22,25,  26,28,   3, 4,7,   8,17,20,  23,27,28,   2, 2, 7,   8,10,15,  20,25,27, 28};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5,  25,21, 4,  12,27,  16,25,9,  28,22, 5,  28, 9,20,  10,28,20,  13, 6,22,  26,23,16,  2};
-
-
+	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2, 2, 2, 2, 2,
+			2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+	public static final int[] TUTORIAL__INIT_OBSTACLE_X = { 2, 4, 5, 10, 22,
+			25, 26, 28, 3, 4, 7, 8, 17, 20, 23, 27, 28, 2, 2, 7, 8, 10, 15, 20,
+			25, 27, 28 };
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y = { 21, 13, 5, 25, 21,
+			4, 12, 27, 16, 25, 9, 28, 22, 5, 28, 9, 20, 10, 28, 20, 13, 6, 22,
+			26, 23, 16, 2 };
 
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__ACHIEVEMENT_REDEEM = "achievement redeemed";
@@ -282,8 +281,6 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
-
-
 
 	//old aoc constants
 	public static final int NOT_SET = -1;
@@ -333,13 +330,13 @@ public class ControllerConstants {
 
 	public static final double BATTLE__HIT_ATTACKER_PERCENT_OF_HEALTH = 0.2;
 	public static final double BATTLE__HIT_DEFENDER_PERCENT_OF_HEALTH = 0.25;
-	public static final double BATTLE__PERCENT_OF_WEAPON = 1.0/9.0;
-	public static final double BATTLE__PERCENT_OF_ARMOR = 1.0/9.0;  
-	public static final double BATTLE__PERCENT_OF_AMULET = 1.0/9.0;
-	public static final double BATTLE__PERCENT_OF_PLAYER_STATS = 3.0/9.0;
+	public static final double BATTLE__PERCENT_OF_WEAPON = 1.0 / 9.0;
+	public static final double BATTLE__PERCENT_OF_ARMOR = 1.0 / 9.0;
+	public static final double BATTLE__PERCENT_OF_AMULET = 1.0 / 9.0;
+	public static final double BATTLE__PERCENT_OF_PLAYER_STATS = 3.0 / 9.0;
 	public static final double BATTLE__ATTACK_EXPO_MULTIPLIER = 0.8;
-	public static final double BATTLE__PERCENT_OF_EQUIPMENT = 3.0/9.0;      
-	public static final double BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP = 5.0; 
+	public static final double BATTLE__PERCENT_OF_EQUIPMENT = 3.0 / 9.0;
+	public static final double BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP = 5.0;
 	public static final double BATTLE__FAKE_PLAYER_COIN_GAIN_MULTIPLIER = 3;
 	public static final double BATTLE__CHANCE_OF_ZERO_GAIN_FOR_SILVER = .2;
 	public static final int BATTLE__ELO_DISTANCE_ONE = 100;
@@ -347,7 +344,7 @@ public class ControllerConstants {
 	public static final int BATTLE__ELO_DISTANCE_THREE = 300;
 	public static final int BATTLE__ELO_USER_LIMIT_ONE = 68;
 	public static final int BATTLE__ELO_USER_LIMIT_TWO = 13;
-	public static final int BATTLE__ELO_USER_LIMIT_THREE = 3;  
+	public static final int BATTLE__ELO_USER_LIMIT_THREE = 3;
 	public static final int BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND = 600000; //10 MINUTES
 
 	//--------------------------------------------------------------------------------------------------------------------------
@@ -366,7 +363,8 @@ public class ControllerConstants {
 	public static final String TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE = "Excellent work soldier. Good to know I have a competent ally watching my back.";
 	public static final int TUTORIAL__FIRST_TASK_ID = 1;
 	//in development select any task, doesn't matter for now
-	public static final int TUTORIAL__FAKE_QUEST_TASK_ID = Globals.IS_SANDBOX() ? 1 : 168;
+	public static final int TUTORIAL__FAKE_QUEST_TASK_ID = Globals.IS_SANDBOX() ? 1
+			: 168;
 	public static final int TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY = 0;
 	public static final int TUTORIAL__FAKE_QUEST_COINS_GAINED = 8;
 	public static final int TUTORIAL__FAKE_QUEST_EXP_GAINED = 4;
@@ -394,10 +392,12 @@ public class ControllerConstants {
 	//public static final int STARTUP__DAILY_BONUS_RECEIVE_EQUIP_LEVEL_RANGE = 5;
 	//public static final int STARTUP__DAILY_BONUS_MYSTERY_BOX_EQUIP_FORGE_LEVEL_MAX = 2;
 	public static final int STARTUP__LEADERBOARD_MIN_LEVEL = 1;
-	public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20; 
+	public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20;
 	//if development then use user with id = 1
 	//TODO: GET THE REAL IDS
-	public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? "96db181e-4b63-40c4-8746-d62114f587a2" : "4df84fdd-705f-4089-ac80-70c1a0143f24";//Globals.IS_SANDBOX() ? 98437 : 131287;
+	public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals
+			.IS_SANDBOX() ? "96db181e-4b63-40c4-8746-d62114f587a2"
+			: "4df84fdd-705f-4089-ac80-70c1a0143f24";//Globals.IS_SANDBOX() ? 98437 : 131287;
 	public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
 	public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
 
@@ -410,7 +410,8 @@ public class ControllerConstants {
 	public static final double BATTLE__EXP_BASE_MULTIPLIER = 0.8;
 	public static final int BATTLE__EXP_MIN = 1;
 	public static final double BATTLE__EXP_LEVEL_DIFF_WEIGHT = 0.2;
-	public static final double BATTLE__CHANCE_OF_EQUIP_LOOT_INITIAL_WALL = Globals.IS_SANDBOX() ? 0.5 : 0.15;
+	public static final double BATTLE__CHANCE_OF_EQUIP_LOOT_INITIAL_WALL = Globals
+			.IS_SANDBOX() ? 0.5 : 0.15;
 	public static final double BATTLE__EQUIP_AND_STATS_WEIGHT = 1.08;
 	public static final double BATTLE__MIN_LEVEL_TO_NOT_DISPLAY_BOTS_IN_ATTACK_LIST = 30;
 
@@ -436,11 +437,12 @@ public class ControllerConstants {
 	public static final int USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER = 100;
 	public static final int USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED = 50;
 	public static final double USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER = .2;
-	public static final String USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals.IS_SANDBOX() ? "1" : "1";
-	public static final String USER_CREATE__FIRST_WALL_POST_TEXT = 
-		"Hi! My name's " + (Globals.KABAM_ENABLED() ? "Stevie" : "Andrew") + ", one of the creators of this game. Feel free to message me if you need any help.";
+	public static final String USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals
+			.IS_SANDBOX() ? "1" : "1";
+	public static final String USER_CREATE__FIRST_WALL_POST_TEXT = "Hi! My name's "
+			+ (Globals.KABAM_ENABLED() ? "Stevie" : "Andrew")
+			+ ", one of the creators of this game. Feel free to message me if you need any help.";
 	public static final int USER_CREATE__INITIAL_GLOBAL_CHATS = 10;
-
 
 	//LEVEL UP
 	public static final int LEVEL_UP__MAX_LEVEL_FOR_USER = 100; //add level up equipment for fake players if increasing
@@ -449,7 +451,6 @@ public class ControllerConstants {
 	public static final double LEVEL_UP_DEFENSE_GAINED = 2.0;
 
 	//LEVEL UP EQUIPMENT FOR FAKE PLAYERS (levels 1-30 must add more if going above level 30)
-
 
 	//CHARACTER MOD
 	public static final int CHARACTER_MOD__DIAMOND_COST_OF_CHANGE_NAME = 50;
@@ -468,9 +469,9 @@ public class ControllerConstants {
 	public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION = 350;
 	public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG = 3;
 	public static final int RETRIEVE_CLANS__NUM_CLANS_CAP = 50;
-	public static final String CLAN__CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? "967" : "0";
+	public static final String CLAN__CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals
+			.IS_SANDBOX() ? "967" : "0";
 	public static final int CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB = 50;
-
 
 	//TIME BEFORE RESHOWING MENUS
 	public static final int NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE = 24;
@@ -488,8 +489,6 @@ public class ControllerConstants {
 	public static final int TOURNAMENT_EVENT__LOSSES_WEIGHT = -1;
 	public static final int TOURNAMENT_EVENT__FLEES_WEIGHT = -3;
 	public static final int TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END = 24;
-
-
 
 	public static final String UCHRFC__USER_CREATED = "user created";
 	public static final String UCHRFC__LEADERBOARD = "leaderboard event";
@@ -521,7 +520,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__PURCHASED_ADDITIONAL_FORGE_SLOTS = "purchased additional forge slots";
 	//silver only reasons
 	public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT = "retrieve currency from normal structures";
-	public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_MONEY_TREE = "retrieve currency from money tree"; 
+	public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_MONEY_TREE = "retrieve currency from money tree";
 	public static final String UCHRFC__TASK_ACTION = "performed task with id ";
 	public static final String UCHRFC__STARTUP_DAILY_BONUS = "startup daily bonus";
 	public static final String UCHRFC__USER_CREATE_REFERRED_A_USER = "referred a user";
@@ -556,27 +555,28 @@ public class ControllerConstants {
 	public static final float TASK_MAP__TOTAL_HEIGHT = 4819;
 
 	public static final AnimatedSpriteOffset[] STARTUP__ANIMATED_SPRITE_OFFSETS = {
-		new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),
-		new AnimatedSpriteOffset("TutorialGuideBad", new CoordinatePair(0, -7)),
-		new AnimatedSpriteOffset("AllianceArcher", new CoordinatePair(0, -5)),
-		new AnimatedSpriteOffset("AllianceWarrior", new CoordinatePair(0, -7)),
-		new AnimatedSpriteOffset("AllianceMage", new CoordinatePair(0, -6)),
-		new AnimatedSpriteOffset("LegionArcher", new CoordinatePair(0, -7)),
-		new AnimatedSpriteOffset("LegionWarrior", new CoordinatePair(0, -11)),
-		new AnimatedSpriteOffset("LegionMage", new CoordinatePair(0, -8)),
-		new AnimatedSpriteOffset("Bandit", new CoordinatePair(0, -15)),
-		new AnimatedSpriteOffset("FarmerMitch", new CoordinatePair(0, -8)),
-		new AnimatedSpriteOffset("Carpenter", new CoordinatePair(0, -6)),
-		new AnimatedSpriteOffset("Bandit", new CoordinatePair(0, -6)),
-	};
+			new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),
+			new AnimatedSpriteOffset("TutorialGuideBad", new CoordinatePair(0,
+					-7)),
+			new AnimatedSpriteOffset("AllianceArcher",
+					new CoordinatePair(0, -5)),
+			new AnimatedSpriteOffset("AllianceWarrior", new CoordinatePair(0,
+					-7)),
+			new AnimatedSpriteOffset("AllianceMage", new CoordinatePair(0, -6)),
+			new AnimatedSpriteOffset("LegionArcher", new CoordinatePair(0, -7)),
+			new AnimatedSpriteOffset("LegionWarrior",
+					new CoordinatePair(0, -11)),
+			new AnimatedSpriteOffset("LegionMage", new CoordinatePair(0, -8)),
+			new AnimatedSpriteOffset("Bandit", new CoordinatePair(0, -15)),
+			new AnimatedSpriteOffset("FarmerMitch", new CoordinatePair(0, -8)),
+			new AnimatedSpriteOffset("Carpenter", new CoordinatePair(0, -6)),
+			new AnimatedSpriteOffset("Bandit", new CoordinatePair(0, -6)), };
 
 	public static final String[] STARTUP__NOTICES_TO_PLAYERS = {
-		//    "FREE limited edition gold equip for joining today!"
-		//    "Forging Contest! 50 GOLD reward! Details at forum.lvl6.com"
-		//      "We have just added 40+ equips, a new city, and increased the level cap!"
-		"Happy birthday AoC! Buildings will make silver twice as fast all week long!"
-	};
-
+	//    "FREE limited edition gold equip for joining today!"
+	//    "Forging Contest! 50 GOLD reward! Details at forum.lvl6.com"
+	//      "We have just added 40+ equips, a new city, and increased the level cap!"
+	"Happy birthday AoC! Buildings will make silver twice as fast all week long!" };
 
 	public static final int STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL = 326;
 	public static final String STARTUP__FAQ_FILE_NAME = "FAQ.3.txt";
@@ -585,6 +585,5 @@ public class ControllerConstants {
 	public static final String NIB_NAME__TRAVELING_MAP = "TravelingMap.4";
 	public static final String NIB_NAME__EXPANSION = "Expansion.2";
 	public static final String NIB_NAME__GOLD_SHOPPE = "GoldShoppe.4";
-
 
 }

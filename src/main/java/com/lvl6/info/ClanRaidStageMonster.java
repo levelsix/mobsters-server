@@ -14,7 +14,7 @@ public class ClanRaidStageMonster implements Serializable {
 	private int minDmg;
 	private int maxDmg;
 	private int monsterNum;
-	
+
 	public ClanRaidStageMonster(int id, int clanRaidStageId, int monsterId,
 			int monsterHp, int minDmg, int maxDmg, int monsterNum) {
 		super();
@@ -90,5 +90,5 @@ public class ClanRaidStageMonster implements Serializable {
 				+ monsterHp + ", minDmg=" + minDmg + ", maxDmg=" + maxDmg
 				+ ", monsterNum=" + monsterNum + "]";
 	}
-	
+
 }

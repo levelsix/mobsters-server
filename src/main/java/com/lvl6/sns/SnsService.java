@@ -14,25 +14,25 @@ import com.amazonaws.services.sns.model.PublishRequest;
 @Component
 public class SnsService {
 	private static final Logger log = LoggerFactory.getLogger(SnsService.class);
-	
-	
+
 	protected AmazonSNSClient snsClient;
-	
+
 	protected String topicArn = "arn:aws:sns:us-west-2:194330317589:mobsters-game-alerts";
-	
+
 	@PostConstruct
 	public void setup() {
-		snsClient = new AmazonSNSClient();		                           
+		snsClient = new AmazonSNSClient();
 		snsClient.setRegion(Region.getRegion(Regions.US_WEST_2));
 	}
-	
+
 	public void sendNotification(String message) {
 		try {
-			PublishRequest publishRequest = new PublishRequest(topicArn, message);
+			PublishRequest publishRequest = new PublishRequest(topicArn,
+					message);
 			snsClient.publish(publishRequest);
-		}catch(Throwable e) {
+		} catch (Throwable e) {
 			log.error("Error sending sns notification", e);
 		}
 	}
-	
+
 }

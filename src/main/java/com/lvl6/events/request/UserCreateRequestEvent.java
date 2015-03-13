@@ -10,42 +10,43 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.PreDatabaseRequestEvent;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 
-public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
+public class UserCreateRequestEvent extends PreDatabaseRequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private UserCreateRequestProto userCreateRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try { 
-      userCreateRequestProto = UserCreateRequestProto.parseFrom(ByteString.copyFrom(buff));
-      
-      // Player id is -1 since it won't be initialized yet. 
-      playerId = "";
-      
-      udid = userCreateRequestProto.getUdid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("UserCreateRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public UserCreateRequestProto getUserCreateRequestProto() {
-    return userCreateRequestProto;
-  }
-  
-  public void setUserCreateRequestProto(UserCreateRequestProto ucrp) {
-  	this.userCreateRequestProto = ucrp;
-  }
+	private UserCreateRequestProto userCreateRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "UserCreateRequestEvent [userCreateRequestProto="
-		  + userCreateRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			userCreateRequestProto = UserCreateRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+
+			// Player id is -1 since it won't be initialized yet. 
+			playerId = "";
+
+			udid = userCreateRequestProto.getUdid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("UserCreateRequest exception", e);
+		}
+	}
+
+	public UserCreateRequestProto getUserCreateRequestProto() {
+		return userCreateRequestProto;
+	}
+
+	public void setUserCreateRequestProto(UserCreateRequestProto ucrp) {
+		this.userCreateRequestProto = ucrp;
+	}
+
+	@Override
+	public String toString() {
+		return "UserCreateRequestEvent [userCreateRequestProto="
+				+ userCreateRequestProto + "]";
+	}
+
 }

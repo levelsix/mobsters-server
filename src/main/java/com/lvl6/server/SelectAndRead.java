@@ -22,7 +22,8 @@ import com.lvl6.utils.ConnectedPlayer;
 
 public class SelectAndRead extends Thread {
 	// Logger
-	private static final Logger log = LoggerFactory.getLogger(SelectAndRead.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(SelectAndRead.class);
 	// Tracks pending SocketChannel connections
 	private LinkedList<SocketChannel> newClients;
 
@@ -53,6 +54,7 @@ public class SelectAndRead extends Thread {
 	/**
 	 * loop forever, first doing our select() then check for new connections
 	 */
+	@Override
 	public void run() {
 		try {
 			selector = Selector.open();
@@ -90,7 +92,9 @@ public class SelectAndRead extends Thread {
 					if (nbytes == -1) {
 						removePlayerFromServer(channel);
 						channel.close();
-						log.info("disconnect: " + channel.socket().getInetAddress() + ", end-of-stream");
+						log.info("disconnect: "
+								+ channel.socket().getInetAddress()
+								+ ", end-of-stream");
 					}
 
 					if (attachment.readBuff.position() >= Attachment.HEADER_SIZE) {
@@ -99,7 +103,8 @@ public class SelectAndRead extends Thread {
 						// read as many events as are available in the buffer
 						while (attachment.eventReady()) {
 							RequestEvent event = getEvent(attachment);
-							log.info("Recieved event from client: " + event.getPlayerId());
+							log.info("Recieved event from client: "
+									+ event.getPlayerId());
 							delegateEvent(event, channel, attachment.eventType);
 							attachment.reset();
 						}
@@ -154,10 +159,12 @@ public class SelectAndRead extends Thread {
 	 */
 	private RequestEvent getEvent(Attachment attachment) {
 		RequestEvent event = null;
-		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload, attachment.payloadSize));
+		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload,
+				attachment.payloadSize));
 
 		// get the controller and tell it to instantiate an event for us
-		EventController ec = server.getEventControllerByEventType(attachment.eventType);
+		EventController ec = server
+				.getEventControllerByEventType(attachment.eventType);
 
 		if (ec == null) {
 			return null;
@@ -174,7 +181,8 @@ public class SelectAndRead extends Thread {
 	 * pass off an event to the appropriate GameController based on the GameName
 	 * of the event
 	 */
-	private void delegateEvent(RequestEvent event, SocketChannel channel, EventProtocolRequest eventType) {
+	private void delegateEvent(RequestEvent event, SocketChannel channel,
+			EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
 			log.error("the event type is < 0");
 			return;
@@ -228,12 +236,16 @@ public class SelectAndRead extends Thread {
 				try {
 					SocketChannel clientChannel = newClients.removeFirst();
 					clientChannel.configureBlocking(false);
-					clientChannel.register(selector, SelectionKey.OP_READ, new Attachment());
-					log.info("Adding new client connection to selector" + clientChannel.hashCode());
+					clientChannel.register(selector, SelectionKey.OP_READ,
+							new Attachment());
+					log.info("Adding new client connection to selector"
+							+ clientChannel.hashCode());
 				} catch (ClosedChannelException cce) {
 					log.error("checkNewConnections - channel closed", cce);
 				} catch (IOException ioe) {
-					log.error("checkNewConnections - ioexception on clientChannel", ioe);
+					log.error(
+							"checkNewConnections - ioexception on clientChannel",
+							ioe);
 				}
 			}
 		}

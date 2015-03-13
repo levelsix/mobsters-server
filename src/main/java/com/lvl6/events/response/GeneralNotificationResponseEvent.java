@@ -9,27 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class GeneralNotificationResponseEvent extends NormalResponseEvent {
 
-  private GeneralNotificationResponseProto generalNotificationResponseProto;
+	private GeneralNotificationResponseProto generalNotificationResponseProto;
 
-  //The input argument is not used.
-  public GeneralNotificationResponseEvent(String playerId){
-    super(playerId); 
-    eventType = EventProtocolResponse.S_GENERAL_NOTIFICATION_EVENT;
-  }
+	//The input argument is not used.
+	public GeneralNotificationResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_GENERAL_NOTIFICATION_EVENT;
+	}
 
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = generalNotificationResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = generalNotificationResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
 
-  public void setGeneralNotificationResponseProto(
-      GeneralNotificationResponseProto generalNotificationResponseProto) {
-    this.generalNotificationResponseProto = generalNotificationResponseProto;
-  }
+	public void setGeneralNotificationResponseProto(
+			GeneralNotificationResponseProto generalNotificationResponseProto) {
+		this.generalNotificationResponseProto = generalNotificationResponseProto;
+	}
 
-  public GeneralNotificationResponseProto getGeneralNotificationResponseProto() {
-    return generalNotificationResponseProto;
-  }
+	public GeneralNotificationResponseProto getGeneralNotificationResponseProto() {
+		return generalNotificationResponseProto;
+	}
 }

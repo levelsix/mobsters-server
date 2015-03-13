@@ -11,33 +11,34 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto;
 
 public class QuestAcceptRequestEvent extends RequestEvent {
-	
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private QuestAcceptRequestProto questAcceptRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      questAcceptRequestProto = QuestAcceptRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = questAcceptRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("QuestAcceptRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public QuestAcceptRequestProto getQuestAcceptRequestProto() {
-    return questAcceptRequestProto;
-  }
+	private QuestAcceptRequestProto questAcceptRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "QuestAcceptRequestEvent [questAcceptRequestProto="
-		  + questAcceptRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			questAcceptRequestProto = QuestAcceptRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = questAcceptRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("QuestAcceptRequest exception", e);
+		}
+	}
+
+	public QuestAcceptRequestProto getQuestAcceptRequestProto() {
+		return questAcceptRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestAcceptRequestEvent [questAcceptRequestProto="
+				+ questAcceptRequestProto + "]";
+	}
+
 }

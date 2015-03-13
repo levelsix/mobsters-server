@@ -12,29 +12,33 @@ import com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto;
 
 public class TradeItemForResourcesRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private TradeItemForResourcesRequestProto tradeItemForResourcesRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      tradeItemForResourcesRequestProto = TradeItemForResourcesRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = tradeItemForResourcesRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("TradeItemForResources request exception", e);
-    }
-  }
+	private Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public TradeItemForResourcesRequestProto getTradeItemForResourcesRequestProto() {
-    return tradeItemForResourcesRequestProto;
-  }
+	private TradeItemForResourcesRequestProto tradeItemForResourcesRequestProto;
 
-  public void setTradeItemForResourcesRequestProto( TradeItemForResourcesRequestProto tradeItemForResourcesRequestProto )
-  {
-	  this.tradeItemForResourcesRequestProto = tradeItemForResourcesRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			tradeItemForResourcesRequestProto = TradeItemForResourcesRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = tradeItemForResourcesRequestProto.getSender()
+					.getMinUserProto().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("TradeItemForResources request exception", e);
+		}
+	}
+
+	public TradeItemForResourcesRequestProto getTradeItemForResourcesRequestProto() {
+		return tradeItemForResourcesRequestProto;
+	}
+
+	public void setTradeItemForResourcesRequestProto(
+			TradeItemForResourcesRequestProto tradeItemForResourcesRequestProto) {
+		this.tradeItemForResourcesRequestProto = tradeItemForResourcesRequestProto;
+	}
 
 }

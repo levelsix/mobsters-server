@@ -12,36 +12,39 @@ import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 
 public class RedeemMiniJobRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RedeemMiniJobRequestProto redeemMiniJobRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      redeemMiniJobRequestProto = RedeemMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = redeemMiniJobRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RedeemMiniJobRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RedeemMiniJobRequestProto getRedeemMiniJobRequestProto() {
-    return redeemMiniJobRequestProto;
-  }
-  //added for testing purposes
-  public void setRedeemMiniJobRequestProto(RedeemMiniJobRequestProto sorp) {
-	  this.redeemMiniJobRequestProto = sorp;
-  }
+	private RedeemMiniJobRequestProto redeemMiniJobRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "RedeemMiniJobRequestEvent [redeemMiniJobRequestProto="
-		  + redeemMiniJobRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			redeemMiniJobRequestProto = RedeemMiniJobRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = redeemMiniJobRequestProto.getSender().getMinUserProto()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RedeemMiniJobRequest exception", e);
+		}
+	}
+
+	public RedeemMiniJobRequestProto getRedeemMiniJobRequestProto() {
+		return redeemMiniJobRequestProto;
+	}
+
+	//added for testing purposes
+	public void setRedeemMiniJobRequestProto(RedeemMiniJobRequestProto sorp) {
+		this.redeemMiniJobRequestProto = sorp;
+	}
+
+	@Override
+	public String toString() {
+		return "RedeemMiniJobRequestEvent [redeemMiniJobRequestProto="
+				+ redeemMiniJobRequestProto + "]";
+	}
+
 }

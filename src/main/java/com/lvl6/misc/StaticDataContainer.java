@@ -143,11 +143,10 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //	the data is refreshed, after which this class will hold the current
 //	snapshot of all static data.
 @Component
-public class StaticDataContainer
-{
+public class StaticDataContainer {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {}.getClass()
-			.getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static StaticDataProto.Builder staticDataBuilder = null;
 
@@ -167,8 +166,7 @@ public class StaticDataContainer
 		setStaticData();
 	}
 
-	private static void setStaticData()
-	{
+	private static void setStaticData() {
 		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
 		//		setPlayerCityExpansions(sdpb);
 		//		setCities(sdpb);
@@ -194,7 +192,6 @@ public class StaticDataContainer
 		staticDataBuilder = sdpb;
 	}
 
-
 	//	private static void setPlayerCityExpansions(Builder sdpb) {
 	//		//Player city expansions
 	//		Map<Integer, ExpansionCost> expansionCosts =
@@ -216,24 +213,30 @@ public class StaticDataContainer
 
 	private static void setTasks(Builder sdpb) {
 		//Tasks
-		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
+		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils
+				.getTaskIdsToTasks();
 		for (Task aTask : taskIdsToTasks.values()) {
-			FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
+			FullTaskProto ftp = CreateInfoProtoUtils
+					.createFullTaskProtoFromTask(aTask);
 			sdpb.addAllTasks(ftp);
 		}
 
-		Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils.getTaskMapElement();
+		Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils
+				.getTaskMapElement();
 		for (TaskMapElement tme : idsToMapElement.values()) {
-			TaskMapElementProto tmep = CreateInfoProtoUtils.createTaskMapElementProto(tme);
+			TaskMapElementProto tmep = CreateInfoProtoUtils
+					.createTaskMapElementProto(tme);
 			sdpb.addAllTaskMapElements(tmep);
 		}
 
 	}
+
 	//TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
 	//ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
 	private static void setMonsters(Builder sdpb) {
 		//Monsters
-		Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+		Map<Integer, Monster> monsters = MonsterRetrieveUtils
+				.getMonsterIdsToMonsters();
 		for (Monster monster : monsters.values()) {
 
 			//get the level info for this monster
@@ -241,18 +244,21 @@ public class StaticDataContainer
 			Map<Integer, MonsterLevelInfo> monsterLvlInfo = MonsterLevelInfoRetrieveUtils
 					.getMonsterLevelInfoForMonsterId(monsterId);
 
-			sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
+			sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(
+					monster, monsterLvlInfo));
 		}
 	}
+
 	private static void setUserLevelStuff(Builder sdpb) {
 		//User level stuff
-		Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
-				StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
-		for (int lvl : levelToStaticUserLevelInfo.keySet())  {
+		Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = StaticUserLevelInfoRetrieveUtils
+				.getAllStaticUserLevelInfo();
+		for (int lvl : levelToStaticUserLevelInfo.keySet()) {
 			StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
 			int exp = sli.getRequiredExp();
 
-			StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
+			StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto
+					.newBuilder();
 			slipb.setLevel(lvl);
 			slipb.setRequiredExperience(exp);
 			sdpb.addSlip(slipb.build());
@@ -263,48 +269,47 @@ public class StaticDataContainer
 		//Booster pack stuff
 		Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
 				.getBoosterPackIdsToBoosterPacks();
-		Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
-				BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
-		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
-				BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
+		Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems = BoosterItemRetrieveUtils
+				.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems = BoosterDisplayItemRetrieveUtils
+				.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 
-		int starterPackId = ControllerConstants
-				.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
+		int starterPackId = ControllerConstants.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
 
 		for (Integer bpackId : idsToBoosterPacks.keySet()) {
 			BoosterPack bp = idsToBoosterPacks.get(bpackId);
 
 			//get the booster items associated with this booster pack
-			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
+			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems
+					.get(bpackId);
 			Collection<BoosterItem> items = null;
 			if (null != itemIdsToItems) {
 				items = itemIdsToItems.values();
 			}
 
-
 			//get the booster display items for this booster pack
-			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
-					packIdToDisplayIdsToDisplayItems.get(bpackId);
+			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = packIdToDisplayIdsToDisplayItems
+					.get(bpackId);
 			Collection<BoosterDisplayItem> displayItems = null;
 			if (null != displayIdsToDisplayItems) {
 				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
 				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
 				Collections.sort(displayItemIds);
 
-                displayItems = new ArrayList<BoosterDisplayItem>();
-                
-                for (Integer displayItemId : displayItemIds) {
-                    displayItems.add(displayIdsToDisplayItems.get(displayItemId));
-                }
+				displayItems = new ArrayList<BoosterDisplayItem>();
+
+				for (Integer displayItemId : displayItemIds) {
+					displayItems.add(displayIdsToDisplayItems
+							.get(displayItemId));
+				}
 			}
 
-
-			BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
-					bp, items, displayItems);
+			BoosterPackProto bpProto = CreateInfoProtoUtils
+					.createBoosterPackProto(bp, items, displayItems);
 			//do not put the starterPack into the BoosterPacks
 			if (bpackId == starterPackId) {
-				sdpb.setStarterPack(bpProto);	
-				
+				sdpb.setStarterPack(bpProto);
+
 			} else if (bp.isDisplayToUser()) {
 				sdpb.addBoosterPacks(bpProto);
 			}
@@ -312,13 +317,16 @@ public class StaticDataContainer
 		}
 
 	}
+
 	private static void setStructures(Builder sdpb) {
 		//Structures
-		Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
+		Map<Integer, Structure> structs = StructureRetrieveUtils
+				.getStructIdsToStructs();
 		Map<Integer, StructureInfoProto> structProtos = new HashMap<Integer, StructureInfoProto>();
 		for (Integer structId : structs.keySet()) {
 			Structure struct = structs.get(structId);
-			StructureInfoProto sip = CreateInfoProtoUtils.createStructureInfoProtoFromStructure(struct);
+			StructureInfoProto sip = CreateInfoProtoUtils
+					.createStructureInfoProtoFromStructure(struct);
 			structProtos.put(structId, sip);
 		}
 
@@ -340,91 +348,107 @@ public class StaticDataContainer
 	}
 
 	//battle item factory
-	private static void setBattleItemFactories(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setBattleItemFactories(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureBattleItemFactory> idsToFactories = 
-				StructureBattleItemFactoryRetrieveUtils.getStructIdsToBattleItemFactorys();
+		Map<Integer, StructureBattleItemFactory> idsToFactories = StructureBattleItemFactoryRetrieveUtils
+				.getStructIdsToBattleItemFactorys();
 		for (Integer structId : idsToFactories.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureBattleItemFactory sbif = idsToFactories.get(structId);
 
-			BattleItemFactoryProto bifp = CreateInfoProtoUtils.createBattleItemFactoryProto(s, sip, sbif);
+			BattleItemFactoryProto bifp = CreateInfoProtoUtils
+					.createBattleItemFactoryProto(s, sip, sbif);
 			sdpb.addAllBattleItemFactorys(bifp);
 		}
 	}
 
-
 	//resource generator
-	private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setGenerators(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureResourceGenerator> idsToGenerators = 
-				StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
+		Map<Integer, StructureResourceGenerator> idsToGenerators = StructureResourceGeneratorRetrieveUtils
+				.getStructIdsToResourceGenerators();
 		for (Integer structId : idsToGenerators.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureResourceGenerator srg = idsToGenerators.get(structId);
 
-			ResourceGeneratorProto rgp = CreateInfoProtoUtils.createResourceGeneratorProto(s, sip, srg);
+			ResourceGeneratorProto rgp = CreateInfoProtoUtils
+					.createResourceGeneratorProto(s, sip, srg);
 			sdpb.addAllGenerators(rgp);
 		}
 	}
+
 	//resource storage
-	private static void setStorages(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setStorages(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureResourceStorage> idsToStorages = 
-				StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
+		Map<Integer, StructureResourceStorage> idsToStorages = StructureResourceStorageRetrieveUtils
+				.getStructIdsToResourceStorages();
 		for (Integer structId : idsToStorages.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureResourceStorage srg = idsToStorages.get(structId);
 
-			ResourceStorageProto rgp = CreateInfoProtoUtils.createResourceStorageProto(s, sip, srg);
+			ResourceStorageProto rgp = CreateInfoProtoUtils
+					.createResourceStorageProto(s, sip, srg);
 			sdpb.addAllStorages(rgp);
 		}
 	}
+
 	//hospitals
-	private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setHospitals(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureHospital> idsToHospitals = 
-				StructureHospitalRetrieveUtils.getStructIdsToHospitals();
+		Map<Integer, StructureHospital> idsToHospitals = StructureHospitalRetrieveUtils
+				.getStructIdsToHospitals();
 		for (Integer structId : idsToHospitals.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureHospital srg = idsToHospitals.get(structId);
 
-			HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s, sip, srg);
+			HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s,
+					sip, srg);
 			sdpb.addAllHospitals(rgp);
 		}
 	}
+
 	//residences
-	private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setResidences(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureResidence> idsToResidences = 
-				StructureResidenceRetrieveUtils.getStructIdsToResidences();
+		Map<Integer, StructureResidence> idsToResidences = StructureResidenceRetrieveUtils
+				.getStructIdsToResidences();
 		for (Integer structId : idsToResidences.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureResidence srg = idsToResidences.get(structId);
 
-			ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s, sip, srg);
+			ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s,
+					sip, srg);
 			sdpb.addAllResidences(rgp);
 		}
 	}
+
 	//town hall
-	private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
+	private static void setTownHalls(Builder sdpb,
+			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureTownHall> idsToTownHalls = 
-				StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
+		Map<Integer, StructureTownHall> idsToTownHalls = StructureTownHallRetrieveUtils
+				.getStructIdsToTownHalls();
 		for (Integer structId : idsToTownHalls.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureTownHall srg = idsToTownHalls.get(structId);
 
-			TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s, sip, srg);
+			TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s,
+					sip, srg);
 			sdpb.addAllTownHalls(rgp);
 		}
 	}
+
 	//lab
 	private static void setLabs(Builder sdpb, Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
@@ -437,14 +461,15 @@ public class StaticDataContainer
 
 			LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
 			sdpb.addAllLabs(rgp);
-		}		
+		}
 	}
+
 	//mini job center
 	private static void setMiniJobCenters(Builder sdpb,
 			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		Map<Integer, StructureMiniJob> idsToMiniJobs =
-				StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
+		Map<Integer, StructureMiniJob> idsToMiniJobs = StructureMiniJobRetrieveUtils
+				.getStructIdsToMiniJobs();
 		for (Integer structId : idsToMiniJobs.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
@@ -458,54 +483,51 @@ public class StaticDataContainer
 
 	private static void setEvoChambers(Builder sdpb,
 			Map<Integer, Structure> structs,
-			Map<Integer, StructureInfoProto> structProtos)
-	{
-		Map<Integer, StructureEvoChamber> idsToEvoChambers =
-				StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
+			Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureEvoChamber> idsToEvoChambers = StructureEvoChamberRetrieveUtils
+				.getStructIdsToEvoChambers();
 
 		for (Integer structId : idsToEvoChambers.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureEvoChamber sec = idsToEvoChambers.get(structId);
 
-			EvoChamberProto ecp = CreateInfoProtoUtils
-					.createEvoChamberProto(s, sip, sec);
+			EvoChamberProto ecp = CreateInfoProtoUtils.createEvoChamberProto(s,
+					sip, sec);
 			sdpb.addAllEvoChambers(ecp);
 		}
 	}
 
 	private static void setTeamCenters(Builder sdpb,
 			Map<Integer, Structure> structs,
-			Map<Integer, StructureInfoProto> structProtos)
-	{
-		Map<Integer, StructureTeamCenter> idsToTeamCenters =
-				StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
+			Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureTeamCenter> idsToTeamCenters = StructureTeamCenterRetrieveUtils
+				.getStructIdsToTeamCenters();
 
 		for (Integer structId : idsToTeamCenters.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureTeamCenter stc = idsToTeamCenters.get(structId);
 
-			TeamCenterProto tcp = CreateInfoProtoUtils
-					.createTeamCenterProto(s, sip, stc);
+			TeamCenterProto tcp = CreateInfoProtoUtils.createTeamCenterProto(s,
+					sip, stc);
 			sdpb.addAllTeamCenters(tcp);
 		}
 	}
 
 	private static void setClanHouses(Builder sdpb,
 			Map<Integer, Structure> structs,
-			Map<Integer, StructureInfoProto> structProtos)
-	{
-		Map<Integer, StructureClanHouse> idsToClanHouses =
-				StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
+			Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureClanHouse> idsToClanHouses = StructureClanHouseRetrieveUtils
+				.getStructIdsToClanHouses();
 
 		for (Integer structId : idsToClanHouses.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureClanHouse stc = idsToClanHouses.get(structId);
 
-			ClanHouseProto tcp = CreateInfoProtoUtils
-					.createClanHouseProto(s, sip, stc);
+			ClanHouseProto tcp = CreateInfoProtoUtils.createClanHouseProto(s,
+					sip, stc);
 			sdpb.addAllClanHouses(tcp);
 		}
 	}
@@ -514,12 +536,12 @@ public class StaticDataContainer
 			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
 
-		Map<Integer, StructureMoneyTree> idsToMoneyTrees =
-				StructureMoneyTreeRetrieveUtils.getStructIdsToMoneyTrees();
+		Map<Integer, StructureMoneyTree> idsToMoneyTrees = StructureMoneyTreeRetrieveUtils
+				.getStructIdsToMoneyTrees();
 
 		for (Integer structId : idsToMoneyTrees.keySet()) {
-            Structure s = structs.get(structId);
-            StructureInfoProto sip = structProtos.get(structId);
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
 			StructureMoneyTree smt = idsToMoneyTrees.get(structId);
 
 			MoneyTreeProto mtp = CreateInfoProtoUtils
@@ -527,18 +549,17 @@ public class StaticDataContainer
 			sdpb.addAllMoneyTrees(mtp);
 		}
 	}
-	
+
 	private static void setPvpBoardHouses(Builder sdpb,
 			Map<Integer, Structure> structs,
-			Map<Integer, StructureInfoProto> structProtos)
-	{
+			Map<Integer, StructureInfoProto> structProtos) {
 
-		Map<Integer, StructurePvpBoard> idsToPvpBoards =
-				StructurePvpBoardRetrieveUtils.getStructIdsToPvpBoards();
+		Map<Integer, StructurePvpBoard> idsToPvpBoards = StructurePvpBoardRetrieveUtils
+				.getStructIdsToPvpBoards();
 
 		for (Integer structId : idsToPvpBoards.keySet()) {
-            Structure s = structs.get(structId);
-            StructureInfoProto sip = structProtos.get(structId);
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
 			StructurePvpBoard smt = idsToPvpBoards.get(structId);
 
 			PvpBoardHouseProto pbhp = CreateInfoProtoUtils
@@ -546,42 +567,42 @@ public class StaticDataContainer
 			sdpb.addAllPvpBoardHouses(pbhp);
 		}
 	}
-	
+
 	private static void setPvpBoardObstacles(Builder sdpb) {
-		Map<Integer, BoardObstacle> idToBoardObstacle =
-				BoardObstacleRetrieveUtils.getIdsToBoardObstacles();
-		
+		Map<Integer, BoardObstacle> idToBoardObstacle = BoardObstacleRetrieveUtils
+				.getIdsToBoardObstacles();
+
 		for (BoardObstacle bo : idToBoardObstacle.values()) {
 			PvpBoardObstacleProto pbop = CreateInfoProtoUtils
 					.createPvpBoardObstacleProto(bo);
 			sdpb.addPvpBoardObstacleProtos(pbop);
 		}
 	}
-	
+
 	private static void setResearchHouses(Builder sdpb,
 			Map<Integer, Structure> structs,
 			Map<Integer, StructureInfoProto> structProtos) {
-		
-		Map<Integer, StructureResearchHouse> idsToResearchHouse =
-				StructureResearchHouseRetrieveUtils.getStructIdsToResearchHouses();
+
+		Map<Integer, StructureResearchHouse> idsToResearchHouse = StructureResearchHouseRetrieveUtils
+				.getStructIdsToResearchHouses();
 
 		for (Integer structId : idsToResearchHouse.keySet()) {
-            Structure s = structs.get(structId);
-            StructureInfoProto sip = structProtos.get(structId);
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
 			StructureResearchHouse srh = idsToResearchHouse.get(structId);
 
 			ResearchHouseProto rhp = CreateInfoProtoUtils
-					.createResearchHouseProtoFromStructureResearchHouse(s, sip, srh);
+					.createResearchHouseProtoFromStructureResearchHouse(s, sip,
+							srh);
 			sdpb.addAllResearchHouses(rhp);
 		}
 	}
 
-
 	private static void setEvents(Builder sdpb) {
 		Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
 				.getAllEventIdsToEvents();
-		for (Integer eventId: idsToEvents.keySet()) {
-			EventPersistent event  = idsToEvents.get(eventId);
+		for (Integer eventId : idsToEvents.keySet()) {
+			EventPersistent event = idsToEvents.get(eventId);
 			PersistentEventProto eventProto = CreateInfoProtoUtils
 					.createPersistentEventProtoFromEvent(event);
 			sdpb.addPersistentEvents(eventProto);
@@ -589,11 +610,12 @@ public class StaticDataContainer
 	}
 
 	private static void setMonsterDialogue(Builder sdpb) {
-		Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
-				MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
+		Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue = MonsterBattleDialogueRetrieveUtils
+				.getMonsterIdToBattleDialogue();
 
 		List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
-		for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
+		for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue
+				.values()) {
 
 			for (MonsterBattleDialogue mbd : dialogue) {
 				MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
@@ -606,28 +628,31 @@ public class StaticDataContainer
 	}
 
 	private static void setClanRaidStuff(Builder sdpb) {
-		Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
+		Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils
+				.getClanRaidIdsToClanRaids();
 		List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
 		for (ClanRaid cr : idsToClanRaid.values()) {
-			ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
+			ClanRaidProto crProto = CreateInfoProtoUtils
+					.createClanRaidProto(cr);
 			raidList.add(crProto);
 		}
 		sdpb.addAllRaids(raidList);
 
-
 		//protofy clan events
 		List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
-		Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
-				ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+		Map<Integer, ClanEventPersistent> idsToClanEventPersistent = ClanEventPersistentRetrieveUtils
+				.getAllEventIdsToEvents();
 		for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
-			PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
+			PersistentClanEventProto pcep = CreateInfoProtoUtils
+					.createPersistentClanEventProto(cep);
 			clanEventProtos.add(pcep);
 		}
 		sdpb.addAllPersistentClanEvents(clanEventProtos);
 	}
 
 	private static void setItemStuff(Builder sdpb) {
-		Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
+		Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils
+				.getItemIdsToItems();
 
 		if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
 			log.warn("no items");
@@ -635,7 +660,8 @@ public class StaticDataContainer
 		}
 
 		for (Item i : itemIdsToItems.values()) {
-			ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
+			ItemProto itemProto = CreateInfoProtoUtils
+					.createItemProtoFromItem(i);
 			sdpb.addItems(itemProto);
 		}
 
@@ -650,13 +676,15 @@ public class StaticDataContainer
 		}
 
 		for (Obstacle o : idsToObstacles.values()) {
-			ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
+			ObstacleProto op = CreateInfoProtoUtils
+					.createObstacleProtoFromObstacle(o);
 			sdpb.addObstacles(op);
 		}
 	}
 
 	private static void setClanIconStuff(Builder sdpb) {
-		Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
+		Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils
+				.getClanIconIdsToClanIcons();
 
 		if (null == clanIconIdsToClanIcons || clanIconIdsToClanIcons.isEmpty()) {
 			log.warn("no clan_icons");
@@ -664,7 +692,8 @@ public class StaticDataContainer
 		}
 
 		for (ClanIcon ci : clanIconIdsToClanIcons.values()) {
-			ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
+			ClanIconProto cip = CreateInfoProtoUtils
+					.createClanIconProtoFromClanIcon(ci);
 			sdpb.addClanIcons(cip);
 		}
 	}
@@ -685,57 +714,55 @@ public class StaticDataContainer
 	}
 
 	private static void setAchievementStuff(Builder sdpb) {
-		Map<Integer, Achievement> achievementIdsToAchievements =
-				AchievementRetrieveUtils.getAchievementIdsToAchievements();
-		if (null == achievementIdsToAchievements ||
-				achievementIdsToAchievements.isEmpty()) {
+		Map<Integer, Achievement> achievementIdsToAchievements = AchievementRetrieveUtils
+				.getAchievementIdsToAchievements();
+		if (null == achievementIdsToAchievements
+				|| achievementIdsToAchievements.isEmpty()) {
 			log.warn("setAchievementStuff() no achievements");
 			return;
 		}
 		for (Achievement a : achievementIdsToAchievements.values()) {
-			AchievementProto ap = CreateInfoProtoUtils.createAchievementProto(a);
+			AchievementProto ap = CreateInfoProtoUtils
+					.createAchievementProto(a);
 			sdpb.addAchievements(ap);
 		}
 	}
 
 	private static void setSkillStuff(Builder sdpb) {
-		Map<Integer, Skill> skillz =
-				SkillRetrieveUtils.getIdsToSkills();
-		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
-				SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
+		Map<Integer, Skill> skillz = SkillRetrieveUtils.getIdsToSkills();
+		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz = SkillPropertyRetrieveUtils
+				.getSkillIdsToIdsToSkillPropertys();
 
-		
 		if (null == skillz || skillz.isEmpty()) {
 			log.warn("setSkillStuff() no skillz");
 		} else {
 			//get id and then manually get Skill
 			//could also get Skill, but then manually get id
-			for (Integer skillId : skillz.keySet())
-			{
+			for (Integer skillId : skillz.keySet()) {
 				Skill skil = skillz.get(skillId);
-				
+
 				//skill can have no properties
 				Map<Integer, SkillProperty> propertyz = null;
 				if (skillPropertyz.containsKey(skillId)) {
 					propertyz = skillPropertyz.get(skillId);
 				}
-				
-				SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
+
+				SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(
+						skil, propertyz);
 				sdpb.addSkills(sp);
 			}
 		}
 
-		Map<Integer, SkillSideEffect> skillSideEffects =
-			SkillSideEffectRetrieveUtils.getIdsToSkillSideEffects();
-		
+		Map<Integer, SkillSideEffect> skillSideEffects = SkillSideEffectRetrieveUtils
+				.getIdsToSkillSideEffects();
+
 		if (null == skillSideEffects || skillSideEffects.isEmpty()) {
 			log.warn("setSkillStuff() no skillSideEffects");
 		} else {
-			for (Integer id : skillSideEffects.keySet())
-			{
+			for (Integer id : skillSideEffects.keySet()) {
 				SkillSideEffect sse = skillSideEffects.get(id);
 				SkillSideEffectProto ssep = CreateInfoProtoUtils
-					.createSkillSideEffectProto(sse);
+						.createSkillSideEffectProto(sse);
 				sdpb.addSideEffects(ssep);
 			}
 		}
@@ -743,8 +770,8 @@ public class StaticDataContainer
 	}
 
 	private static void setPrereqs(Builder sdpb) {
-		Map<Integer, Prerequisite> idsToPrereqs = 
-				PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
+		Map<Integer, Prerequisite> idsToPrereqs = PrerequisiteRetrieveUtils
+				.getPrerequisiteIdsToPrerequisites();
 
 		if (null == idsToPrereqs || idsToPrereqs.isEmpty()) {
 			log.warn("setPrereqs() no prerequisites");
@@ -754,24 +781,23 @@ public class StaticDataContainer
 		for (Integer prereqId : idsToPrereqs.keySet()) {
 			Prerequisite prereq = idsToPrereqs.get(prereqId);
 
-			PrereqProto pp = CreateInfoProtoUtils.createPrerequisiteProto(prereq);
+			PrereqProto pp = CreateInfoProtoUtils
+					.createPrerequisiteProto(prereq);
 			sdpb.addPrereqs(pp);
 		}
 	}
 
 	private static void setBoards(Builder sdpb) {
-		Map<Integer, Board> idsToBoards =
-				BoardRetrieveUtils.getIdsToBoards();
+		Map<Integer, Board> idsToBoards = BoardRetrieveUtils.getIdsToBoards();
 
 		if (null == idsToBoards || idsToBoards.isEmpty()) {
 			log.warn("setBoards() no boards");
 		}
 
-		Map<Integer, Collection<BoardProperty>> boardIdsToProperties =
-				BoardPropertyRetrieveUtils.getBoardIdsToProperties();
+		Map<Integer, Collection<BoardProperty>> boardIdsToProperties = BoardPropertyRetrieveUtils
+				.getBoardIdsToProperties();
 
-		for (Integer boardId : idsToBoards.keySet())
-		{
+		for (Integer boardId : idsToBoards.keySet()) {
 			Board b = idsToBoards.get(boardId);
 
 			//board can have no properties
@@ -780,28 +806,26 @@ public class StaticDataContainer
 				propertyz = boardIdsToProperties.get(boardId);
 			}
 
-			BoardLayoutProto blp = CreateInfoProtoUtils
-					.createBoardLayoutProto(b, propertyz);
+			BoardLayoutProto blp = CreateInfoProtoUtils.createBoardLayoutProto(
+					b, propertyz);
 			sdpb.addBoards(blp);
 		}
 	}
 
 	private static void setResearch(Builder sdpb) {
-		Map<Integer, Research> idsToResearch =
-				ResearchRetrieveUtils.getIdsToResearch();
-		
+		Map<Integer, Research> idsToResearch = ResearchRetrieveUtils
+				.getIdsToResearch();
+
 		if (null == idsToResearch || idsToResearch.isEmpty()) {
 			log.warn("setResearch() no research");
 		}
 
-		for (Integer researchId : idsToResearch.keySet())
-		{
+		for (Integer researchId : idsToResearch.keySet()) {
 			Research r = idsToResearch.get(researchId);
 
 			//research can have no properties
-			Map<Integer, ResearchProperty> properties =
-					ResearchPropertyRetrieveUtils.
-					getResearchPropertiesForResearchId(researchId);
+			Map<Integer, ResearchProperty> properties = ResearchPropertyRetrieveUtils
+					.getResearchPropertiesForResearchId(researchId);
 
 			Collection<ResearchProperty> propertyz = null;
 
@@ -809,23 +833,22 @@ public class StaticDataContainer
 				propertyz = properties.values();
 			}
 
-			ResearchProto rlp = CreateInfoProtoUtils
-					.createResearchProto(r, propertyz);
+			ResearchProto rlp = CreateInfoProtoUtils.createResearchProto(r,
+					propertyz);
 			sdpb.addResearch(rlp);
 		}
 	}
-	
+
 	private static void setBattleItem(Builder sdpb) {
-		Map<Integer, BattleItem> idsToBattleItem =
-				BattleItemRetrieveUtils.getBattleItemIdsToBattleItems();
+		Map<Integer, BattleItem> idsToBattleItem = BattleItemRetrieveUtils
+				.getBattleItemIdsToBattleItems();
 
 		if (null == idsToBattleItem || idsToBattleItem.isEmpty()) {
 			log.warn("setBattleItem() no battle item");
 			return;
 		}
-		
-		for (Integer battleItemId : idsToBattleItem.keySet())
-		{
+
+		for (Integer battleItemId : idsToBattleItem.keySet()) {
 			BattleItem bi = idsToBattleItem.get(battleItemId);
 
 			BattleItemProto bip = CreateInfoProtoUtils
@@ -834,13 +857,5 @@ public class StaticDataContainer
 			sdpb.addBattleItem(bip);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -12,32 +12,34 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 
 public class HealMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private HealMonsterRequestProto healMonsterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      healMonsterRequestProto = HealMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = healMonsterRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("HealMonsterRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public HealMonsterRequestProto getHealMonsterRequestProto() {
-    return healMonsterRequestProto;
-  }
+	private HealMonsterRequestProto healMonsterRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "HealMonsterRequestEvent [healMonsterRequestProto="
-		  + healMonsterRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			healMonsterRequestProto = HealMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = healMonsterRequestProto.getSender().getMinUserProto()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("HealMonsterRequest exception", e);
+		}
+	}
+
+	public HealMonsterRequestProto getHealMonsterRequestProto() {
+		return healMonsterRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "HealMonsterRequestEvent [healMonsterRequestProto="
+				+ healMonsterRequestProto + "]";
+	}
+
 }

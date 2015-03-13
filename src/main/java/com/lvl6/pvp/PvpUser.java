@@ -12,9 +12,9 @@ import com.lvl6.info.PvpLeagueForUser;
 //2) maybe data in PvpLeagueForUser is extraneous and less is needed when
 //storing in hazelcast
 public class PvpUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 6639036676061529713L;
-	
+
 	private String userId;
 	private int pvpLeagueId;
 	private int rank;
@@ -29,8 +29,9 @@ public class PvpUser implements Serializable {
 
 	public PvpUser() {
 		super();
-		
+
 	}
+
 	public PvpUser(PvpLeagueForUser plfu) {
 		super();
 		String userId = plfu.getUserId();
@@ -70,7 +71,7 @@ public class PvpUser implements Serializable {
 		int battlesWon = getAttacksWon() + getDefensesWon();
 		return battlesWon;
 	}
-	
+
 	public int getBattlesLost() {
 		int battlesLost = getAttacksLost() + getDefensesLost();
 		return battlesLost;
@@ -80,8 +81,9 @@ public class PvpUser implements Serializable {
 		int numBattles = getBattlesWon() + getBattlesLost();
 		return numBattles;
 	}
+
 	//end covenience methods--------------------------------------------------------
-	
+
 	public String getUserId() {
 		return userId;
 	}
@@ -162,41 +164,23 @@ public class PvpUser implements Serializable {
 		this.defensesLost = defensesLost;
 	}
 
-	public float getMonsterDmgMultiplier()
-	{
+	public float getMonsterDmgMultiplier() {
 		return monsterDmgMultiplier;
 	}
-	public void setMonsterDmgMultiplier( float monsterDmgMultiplier )
-	{
+
+	public void setMonsterDmgMultiplier(float monsterDmgMultiplier) {
 		this.monsterDmgMultiplier = monsterDmgMultiplier;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "PvpUser [userId="
-			+ userId
-			+ ", pvpLeagueId="
-			+ pvpLeagueId
-			+ ", rank="
-			+ rank
-			+ ", elo="
-			+ elo
-			+ ", shieldEndTime="
-			+ shieldEndTime
-			+ ", inBattleEndTime="
-			+ inBattleEndTime
-			+ ", attacksWon="
-			+ attacksWon
-			+ ", defensesWon="
-			+ defensesWon
-			+ ", attacksLost="
-			+ attacksLost
-			+ ", defensesLost="
-			+ defensesLost
-			+ ", monsterDmgMultiplier="
-			+ monsterDmgMultiplier
-			+ "]";
+	public String toString() {
+		return "PvpUser [userId=" + userId + ", pvpLeagueId=" + pvpLeagueId
+				+ ", rank=" + rank + ", elo=" + elo + ", shieldEndTime="
+				+ shieldEndTime + ", inBattleEndTime=" + inBattleEndTime
+				+ ", attacksWon=" + attacksWon + ", defensesWon=" + defensesWon
+				+ ", attacksLost=" + attacksLost + ", defensesLost="
+				+ defensesLost + ", monsterDmgMultiplier="
+				+ monsterDmgMultiplier + "]";
 	}
-	
+
 }

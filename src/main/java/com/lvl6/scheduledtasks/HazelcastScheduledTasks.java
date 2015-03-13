@@ -12,13 +12,12 @@ import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.lvl6.utils.ConnectedPlayer;
 
-
 //@Component
 public class HazelcastScheduledTasks {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(HazelcastScheduledTasks.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(HazelcastScheduledTasks.class);
+
 	@Resource(name = "playersByPlayerId")
 	protected IMap<String, ConnectedPlayer> playersByPlayerId;
 
@@ -26,11 +25,11 @@ public class HazelcastScheduledTasks {
 		return playersByPlayerId;
 	}
 
-	public void setPlayersByPlayerId(IMap<String, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(
+			IMap<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
-	
-	
+
 	@Autowired
 	protected HazelcastInstance hazel;
 
@@ -41,42 +40,50 @@ public class HazelcastScheduledTasks {
 	public void setHazel(HazelcastInstance hazel) {
 		this.hazel = hazel;
 	}
-	
-	private int fifteenMinutes = 60*15*1000;
-	
-	@Scheduled(fixedRate=60000)
+
+	private int fifteenMinutes = 60 * 15 * 1000;
+
+	@Scheduled(fixedRate = 60000)
 	public void cleanupPlayersByPlayerIdMap() {
 		int count = 0;
 		int countActive = 0;
 		boolean gotLock = false;
 		ILock playersCleanupLock = getHazel().getLock("playersCleanupLock");
 		try {
-			if(playersCleanupLock.tryLock()) {
+			if (playersCleanupLock.tryLock()) {
 				gotLock = true;
-				for(String playerId : getPlayersByPlayerId().keySet()) {
+				for (String playerId : getPlayersByPlayerId().keySet()) {
 					try {
-						ConnectedPlayer player = getPlayersByPlayerId().get(playerId);
-						if(System.currentTimeMillis() - fifteenMinutes > player.getLastMessageSentToServer().getTime()) {
-							log.info("Player {} timed out... removing from playersByPlayerId map", player.getPlayerId());
+						ConnectedPlayer player = getPlayersByPlayerId().get(
+								playerId);
+						if (System.currentTimeMillis() - fifteenMinutes > player
+								.getLastMessageSentToServer().getTime()) {
+							log.info(
+									"Player {} timed out... removing from playersByPlayerId map",
+									player.getPlayerId());
 							getPlayersByPlayerId().remove(playerId);
 							count++;
-						}else {
+						} else {
 							countActive++;
 						}
-					}catch(Exception e) {
-						log.error("Error removing player {}, playerId from connectedPlayers", playerId, e);
+					} catch (Exception e) {
+						log.error(
+								"Error removing player {}, playerId from connectedPlayers",
+								playerId, e);
 					}
 				}
-				log.info("Removed {} players from playersByPlayerId map during cleanup", count);
+				log.info(
+						"Removed {} players from playersByPlayerId map during cleanup",
+						count);
 				log.info("Currently {} active players", countActive);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error("Error cleaning up playersByPlayerId map", e);
-		}finally {
-			if(gotLock) {
+		} finally {
+			if (gotLock) {
 				playersCleanupLock.forceUnlock();
 			}
 		}
 	}
-	
+
 }

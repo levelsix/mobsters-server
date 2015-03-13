@@ -2,62 +2,140 @@ package com.lvl6.test.ControllerTests;
 
 import static org.junit.Assert.*;
 
-
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
-
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.DestroyMoneyTreeStructureController;
 import com.lvl6.server.controller.InAppPurchaseController;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
 public class MoneyTreeTest {
 
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
-	
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
+	private JdbcTemplate jdbcTemplate;
+	private boolean endOfTesting;
+	private User user;
+
+	private MinimumUserProto mup;
+	private String userId;
+	private String userResearchUuid;
+
+	@Autowired
+	InsertUtil insertUtil;
+
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	InAppPurchaseController inAppPurchaseController;
-	
+
 	@Autowired
 	StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
-	
+
 	@Autowired
 	DestroyMoneyTreeStructureController destroyMoneyTreeStructureController;
 
+	@Resource
+	public void setDataSource(DataSource dataSource) {
+		log.info("Setting datasource and creating jdbcTemplate");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
 
+	@Before
+	public void setUp() {
+
+		log.info("setUp");
+		Timestamp createTime = new Timestamp((new Date()).getTime());
+
+		String name = "bobUnitTest";
+		String udid = "bobUdid";
+		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
+		int playerExp = 10;
+		int cash = 10000;
+		int oil = 10000;
+		int gems = 10000;
+		String deviceToken = "bobToken";
+		String facebookId = null;
+		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
+		String email = null;
+		String fbData = null;
+
+		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
+				gems, false, deviceToken, createTime, facebookId,
+				avatarMonsterId, email, fbData);
+
+		//		if (null == userId) {
+		//			throw new RuntimeException("no user was created!");
+		//		}
+
+		user = userRetrieveUtil.getUserById(userId);
+
+	}
+
+	@After
+	public void tearDown() {
+		if (null == user) {
+			log.info("no user to delete");
+			return;
+		}
+
+		deleteMoneyTreePurchases(userId);
+
+		String query2 = String.format("DELETE FROM %s where %s=?",
+				DBConstants.TABLE_USER, DBConstants.USER__ID);
+		Object[] values2 = new Object[] { user.getId() };
+		int[] types2 = new int[] { java.sql.Types.VARCHAR };
+
+		int numDeleted2 = jdbcTemplate.update(query2, values2, types2);
+		if (numDeleted2 != 1) {
+			log.error("did not delete test user when cleaning up");
+		}
+
+	}
 
 	//buy money tree twice, then destroy it
 	@Test
 	public void testBuyingMoneyTree() {
-		User user = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		InAppPurchaseRequestProto.Builder iaprpb = InAppPurchaseRequestProto.newBuilder();
-		iaprpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null));
+		InAppPurchaseRequestProto.Builder iaprpb = InAppPurchaseRequestProto
+				.newBuilder();
+		iaprpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user, null));
 		String receipt1 = "ewoJInNpZ25hdHVyZSIgPSAiQXJCRkpXdkttVytTMHlRNlU5cmh5azVnWE93ajgwZCtnNm"
 				+ "NDRjdxOFNnbjU4OEhZY2VVR3h1aE9QKzV3NERKVDAvdjBwQ3VTbFArV3JvOWV0YmRRZFZOcE1YdWVDc"
 				+ "GNvdEVpc2FRbzVuUE1rTFdkQUhHSVFtbFBVbnVzVEhZUmh2djZhTC9ITVc3ZXNDL2d4Ti92dkRCWWxu"
@@ -107,10 +185,11 @@ public class MoneyTreeTest {
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
 		inAppPurchaseController.handleEvent(iapre);
 
-		List<StructureForUser> sfuList = structureForUserRetrieveUtils2.getUserStructsForUser(user.getId());
+		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
+				.getUserStructsForUser(user.getId());
 		boolean hasMoneyTree = false;
-		for(StructureForUser sfu : sfuList) {
-			if(sfu.getStructId() >= 10000) {
+		for (StructureForUser sfu : sfuList) {
+			if (sfu.getStructId() >= 10000) {
 				hasMoneyTree = true;
 			}
 		}
@@ -155,9 +234,11 @@ public class MoneyTreeTest {
 				+ "OSI7CgkiZW52aXJvbm1lbnQiID0gIlNhbmRib3giOwoJInBvZCIgPSAiMTAwIjsKCSJzaWduaW5nLXN0YXR1cy"
 				+ "IgPSAiMCI7Cn0";
 
-		User user2 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		InAppPurchaseRequestProto.Builder iaprpb2 = InAppPurchaseRequestProto.newBuilder();
-		iaprpb2.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user2, null));	
+		User user2 = userRetrieveUtil.getUserById(user.getId());
+		InAppPurchaseRequestProto.Builder iaprpb2 = InAppPurchaseRequestProto
+				.newBuilder();
+		iaprpb2.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user2, null));
 
 		iaprpb2.setReceipt(receipt2);
 
@@ -167,10 +248,11 @@ public class MoneyTreeTest {
 		inAppPurchaseController.handleEvent(iapre2);
 		String userStructId = "";
 
-		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2.getUserStructsForUser(user2.getId());
+		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
+				.getUserStructsForUser(user2.getId());
 		int moneyTreeCounter = 0;
-		for(StructureForUser sfu : sfuList2) {
-			if(sfu.getStructId() >= 10000) {
+		for (StructureForUser sfu : sfuList2) {
+			if (sfu.getStructId() >= 10000) {
 				moneyTreeCounter++;
 				userStructId = sfu.getId();
 			}
@@ -178,9 +260,11 @@ public class MoneyTreeTest {
 		assertTrue(moneyTreeCounter == 1);
 
 		//destroy money tree
-		User user3 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		DestroyMoneyTreeStructureRequestProto.Builder dmtsrpb = DestroyMoneyTreeStructureRequestProto.newBuilder();
-		dmtsrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user3, null));	
+		User user3 = userRetrieveUtil.getUserById(user.getId());
+		DestroyMoneyTreeStructureRequestProto.Builder dmtsrpb = DestroyMoneyTreeStructureRequestProto
+				.newBuilder();
+		dmtsrpb.setSender(CreateInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(user3, null));
 
 		dmtsrpb.addUserStructUuid(userStructId);
 
@@ -189,34 +273,33 @@ public class MoneyTreeTest {
 		dmtsre.setDestroyMoneyTreeStructureRequestProto(dmtsrpb.build());
 		destroyMoneyTreeStructureController.handleEvent(dmtsre);
 
-		User user4 = userRetrieveUtil.getUserById("02ae9fb2-5117-4f18-b05c-de4b19a6aaad");
-		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2.getUserStructsForUser(user4.getId());
+		User user4 = userRetrieveUtil.getUserById(user.getId());
+		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2
+				.getUserStructsForUser(user4.getId());
 		int moneyTreeCounter2 = 0;
-		for(StructureForUser sfu : sfuList3) {
-			if(sfu.getStructId() >= 10000) {
+		for (StructureForUser sfu : sfuList3) {
+			if (sfu.getStructId() >= 10000) {
 				moneyTreeCounter2++;
 
 			}
 		}
-		assertTrue(moneyTreeCounter2 == 0);	
-		
-		//clean up a bit
-		deleteMoneyTreePurchases(user.getId());
+		assertTrue(moneyTreeCounter2 == 0);
+
 	}
-	
+
 	private int deleteMoneyTreePurchases(String userId) {
 		String tableName = DBConstants.TABLE_IAP_HISTORY;
 		String condDelim = "and";
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		int totalDeleted = 0;
 
-		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID, userId);
-		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
+		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
+				userId);
+		int numDeleted = DBConnection.get().deleteRows(tableName,
+				conditionParams, condDelim);
 		totalDeleted += numDeleted;
 
 		return totalDeleted;
 	}
-	
-
 
 }

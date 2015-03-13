@@ -3,15 +3,15 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class BoardObstacle implements Serializable {
-	
+
 	private static final long serialVersionUID = 3719473963420857938L;
-	
+
 	private int id;
 	private String name;
 	private String type;
 	private int powerAmt;
 	private boolean initAvailable;
-	
+
 	public BoardObstacle(int id, String name, String type, int powerAmt,
 			boolean initAvailable) {
 		super();

@@ -21,7 +21,5 @@ public class StructureResearchHouse {
 	public String toString() {
 		return "StructureResearchHouse [structId=" + structId + "]";
 	}
-	
-	
-	
+
 }

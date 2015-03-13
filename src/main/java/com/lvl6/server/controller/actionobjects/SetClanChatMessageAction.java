@@ -18,61 +18,56 @@ import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanChatMessageAction implements StartUpAction
-{
+public class SetClanChatMessageAction implements StartUpAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
-  private final ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
-	
-	public SetClanChatMessageAction(
-		ClanDataProto.Builder cdpBuilder, User user, 
-		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils)
-	{
+	private final ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+
+	public SetClanChatMessageAction(ClanDataProto.Builder cdpBuilder,
+			User user, ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
 	}
-	
+
 	//derived state
 	private Set<String> userIds;
 	private String clanId;
 	private List<ClanChatPost> activeClanChatPosts;
 	private Date lastClanChatPostTime = ControllerConstants.INCEPTION_DATE;
-	
+
 	//Extracted from Startup
 	@Override
-	public void setUp(StartUpResource fillMe)
-	{
+	public void setUp(StartUpResource fillMe) {
 		userIds = new HashSet<String>();
-		clanId = user.getClanId(); 
+		clanId = user.getClanId();
 
 		if (clanId == null) {
 			return;
 		}
-		
+
 		int limit = ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP;
 		activeClanChatPosts = clanChatPostRetrieveUtils
-			.getMostRecentClanChatPostsForClan(limit , clanId);
+				.getMostRecentClanChatPostsForClan(limit, clanId);
 
 		if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
-			log.warn(String.format("no activeClanChatPosts for clanId=%s", clanId));
+			log.warn(String.format("no activeClanChatPosts for clanId=%s",
+					clanId));
 			return;
-		}  		
-		
+		}
+
 		for (ClanChatPost p : activeClanChatPosts) {
 			userIds.add(p.getPosterId());
 		}
-		
+
 		fillMe.addUserId(userIds);
 	}
 
 	@Override
-	public void execute( StartUpResource useMe )
-	{
+	public void execute(StartUpResource useMe) {
 		if (null == userIds || userIds.isEmpty()) {
 			return;
 		}
@@ -80,26 +75,25 @@ public class SetClanChatMessageAction implements StartUpAction
 		if (userIdsToUsers.isEmpty()) {
 			return;
 		}
-		
+
 		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans();
-		
+
 		for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
 			ClanChatPost pwp = activeClanChatPosts.get(i);
 			String userId = pwp.getPosterId();
 			User u = userIdsToUsers.get(userId);
 			String clanId = u.getClanId();
 			Clan c = null;
-			
+
 			if (clanIdsToClans.containsKey(clanId)) {
 				c = clanIdsToClans.get(clanId);
 			}
-			
+
 			GroupChatMessageProto gcmp = CreateInfoProtoUtils
-			.createGroupChatMessageProtoFromClanChatPost(pwp, u, c);
-			
+					.createGroupChatMessageProtoFromClanChatPost(pwp, u, c);
+
 			cdpBuilder.addClanChats(gcmp);
-			
-			
+
 			//find the last clan chat time
 			Date timeOfPost = pwp.getTimeOfPost();
 			if (timeOfPost.compareTo(lastClanChatPostTime) > 0) {
@@ -108,9 +102,8 @@ public class SetClanChatMessageAction implements StartUpAction
 		}
 	}
 
-	public Date getLastClanChatPostTime()
-	{
+	public Date getLastClanChatPostTime() {
 		return lastClanChatPostTime;
 	}
-	
+
 }

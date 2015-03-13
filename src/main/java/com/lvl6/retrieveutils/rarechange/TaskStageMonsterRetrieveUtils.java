@@ -27,7 +27,8 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class TaskStageMonsterRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
 	private static Map<Integer, Set<Integer>> taskStageIdsToDroppableMonsterIds;
@@ -53,7 +54,7 @@ public class TaskStageMonsterRetrieveUtils {
 	public static TaskStageMonster getTaskStageMonsterForId(int tsmId) {
 		log.debug("retrieve task stage monster for id={}", tsmId);
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
-			setStaticTaskStageIdsToTaskStageMonster();      
+			setStaticTaskStageIdsToTaskStageMonster();
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
@@ -66,58 +67,64 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageMonsterIdsToTaskStageMonsters.get(tsmId);
 	}
 
-	public static Set<Integer> getDroppableMonsterIdsForTaskStageId(int taskStageId) {
+	public static Set<Integer> getDroppableMonsterIdsForTaskStageId(
+			int taskStageId) {
 		log.debug("retrieve stage monster data for stage {}", taskStageId);
 		if (null == taskStageIdsToDroppableMonsterIds) {
-			setStaticTaskStageIdsToTaskStageMonster();      
+			setStaticTaskStageIdsToTaskStageMonster();
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
 		}
 
 		if (!taskStageIdsToDroppableMonsterIds.containsKey(taskStageId)) {
-//			log.error("no monster ids for task stage id={}", taskStageId);
+			//			log.error("no monster ids for task stage id={}", taskStageId);
 			return new HashSet<Integer>();
 		}
 
 		return taskStageIdsToDroppableMonsterIds.get(taskStageId);
 	}
-	
-	public static Set<String> getDroppableQualitiesForTaskStageId(int taskStageId) {
-		log.debug("retrieve stage monster quality data for stage {}", taskStageId);
+
+	public static Set<String> getDroppableQualitiesForTaskStageId(
+			int taskStageId) {
+		log.debug("retrieve stage monster quality data for stage {}",
+				taskStageId);
 		if (null == taskStageIdsToDroppableRarities) {
-			setStaticTaskStageIdsToTaskStageMonster();      
+			setStaticTaskStageIdsToTaskStageMonster();
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
 		}
 
 		if (!taskStageIdsToDroppableRarities.containsKey(taskStageId)) {
-//			log.error("no monster qualities for task stage id={}", taskStageId);
+			//			log.error("no monster qualities for task stage id={}", taskStageId);
 			return new HashSet<String>();
 		}
 
 		return taskStageIdsToDroppableRarities.get(taskStageId);
-	}	
+	}
 
-	public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
+	public static List<TaskStageMonster> getMonstersForTaskStageId(
+			int taskStageId) {
 		log.debug("retrieve task stage monster data for stage {}", taskStageId);
 		if (null == taskStageIdsToTaskStageMonsters) {
-			setStaticTaskStageIdsToTaskStageMonster();      
+			setStaticTaskStageIdsToTaskStageMonster();
 		}
 		if (!reassignedSkills) {
 			reassignSkills();
 		}
 
 		if (!taskStageIdsToTaskStageMonsters.containsKey(taskStageId)) {
-			log.error("no task stage monsters for task stage id={}", taskStageId);
+			log.error("no task stage monsters for task stage id={}",
+					taskStageId);
 			return new ArrayList<TaskStageMonster>();
 		}
 
 		return taskStageIdsToTaskStageMonsters.get(taskStageId);
 	}
 
-	public static Map<Integer, TaskStageMonster> getTaskStageMonstersForIds(Collection<Integer> ids) {
+	public static Map<Integer, TaskStageMonster> getTaskStageMonstersForIds(
+			Collection<Integer> ids) {
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();
 		}
@@ -128,7 +135,8 @@ public class TaskStageMonsterRetrieveUtils {
 		Map<Integer, TaskStageMonster> returnMap = new HashMap<Integer, TaskStageMonster>();
 
 		for (int id : ids) {
-			TaskStageMonster tsm = taskStageMonsterIdsToTaskStageMonsters.get(id);
+			TaskStageMonster tsm = taskStageMonsterIdsToTaskStageMonsters
+					.get(id);
 			returnMap.put(id, tsm);
 		}
 		return returnMap;
@@ -140,21 +148,21 @@ public class TaskStageMonsterRetrieveUtils {
 			return;
 		}
 
-		Map<Integer, Monster> idToMonster = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+		Map<Integer, Monster> idToMonster = MonsterRetrieveUtils
+				.getMonsterIdsToMonsters();
 		if (null == idToMonster) {
 			return;
 		}
 
 		boolean resetAllSkills = true;
 		//incorporating nonskill logic
-		Map<Integer, Set<Integer>> taskStageIdsToMonsterIdsTemp =
-			new HashMap<Integer, Set<Integer>>();
-		Map<Integer, Set<String>> taskStageIdsToRaritiesTemp =
-			new HashMap<Integer, Set<String>>();
+		Map<Integer, Set<Integer>> taskStageIdsToMonsterIdsTemp = new HashMap<Integer, Set<Integer>>();
+		Map<Integer, Set<String>> taskStageIdsToRaritiesTemp = new HashMap<Integer, Set<String>>();
 
 		//for the TaskStageMonsters that have their defensive skill not set
 		//reassign to the skill the monster has, also set the offensive skill
-		for (TaskStageMonster tsm : taskStageMonsterIdsToTaskStageMonsters.values()) {
+		for (TaskStageMonster tsm : taskStageMonsterIdsToTaskStageMonsters
+				.values()) {
 			Monster monzter = null;
 			int monsterId = tsm.getMonsterId();
 			if (idToMonster.containsKey(monsterId)) {
@@ -163,8 +171,7 @@ public class TaskStageMonsterRetrieveUtils {
 
 			if (null == monzter) {
 				resetAllSkills = false;
-				log.error("no monster for id={}, tsm={}",
-						monsterId, tsm);
+				log.error("no monster for id={}, tsm={}", monsterId, tsm);
 				continue;
 			}
 
@@ -173,31 +180,31 @@ public class TaskStageMonsterRetrieveUtils {
 			if (ControllerConstants.NOT_SET == tsm.getDefensiveSkillId()) {
 				tsm.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
 			}
-			
+
 			//incorporating nonskill logic, calculating the monsters that can drop
 			if (tsm.getPuzzlePieceDropRate() <= 0F) {
 				//only care about the ones that can drop
 				log.info("tsm drops no monster. {}", tsm);
 				continue;
 			}
-			
+
 			int stageId = tsm.getStageId();
 			if (!taskStageIdsToMonsterIdsTemp.containsKey(stageId)) {
 				//base case
-				taskStageIdsToMonsterIdsTemp.put(stageId, new HashSet<Integer>());
+				taskStageIdsToMonsterIdsTemp.put(stageId,
+						new HashSet<Integer>());
 			}
 			if (!taskStageIdsToRaritiesTemp.containsKey(stageId)) {
 				//base case
 				taskStageIdsToRaritiesTemp.put(stageId, new HashSet<String>());
 			}
-			
+
 			Set<Integer> stageMonsterIds = taskStageIdsToMonsterIdsTemp
-				.get(stageId);
+					.get(stageId);
 			stageMonsterIds.add(monsterId);
-			Set<String> stageMonsterQualities = taskStageIdsToRaritiesTemp.
-				get(stageId);
-			stageMonsterQualities.add(
-				monzter.getQuality());
+			Set<String> stageMonsterQualities = taskStageIdsToRaritiesTemp
+					.get(stageId);
+			stageMonsterQualities.add(monzter.getQuality());
 		}
 
 		reassignedSkills = resetAllSkills;
@@ -221,26 +228,30 @@ public class TaskStageMonsterRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp =
-							new HashMap<Integer, List<TaskStageMonster>>();
-						Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonstersTemp =
-							new HashMap<Integer, TaskStageMonster>();
+						Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp = new HashMap<Integer, List<TaskStageMonster>>();
+						Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonstersTemp = new HashMap<Integer, TaskStageMonster>();
 
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
-							TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(rs, rand);
+						while (rs.next()) {
+							TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(
+									rs, rand);
 
 							int stageId = taskStageMonster.getStageId();
-							if (!taskStageIdsToTaskStageMonstersTemp.containsKey(stageId)) {
+							if (!taskStageIdsToTaskStageMonstersTemp
+									.containsKey(stageId)) {
 								//base case
-								taskStageIdsToTaskStageMonstersTemp.put(stageId, new ArrayList<TaskStageMonster>());
+								taskStageIdsToTaskStageMonstersTemp.put(
+										stageId,
+										new ArrayList<TaskStageMonster>());
 							}
-							
-							List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
+
+							List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp
+									.get(stageId);
 							monsters.add(taskStageMonster);
 
 							int taskStageMonsterId = taskStageMonster.getId();
-							taskStageMonsterIdsToTaskStageMonstersTemp.put(taskStageMonsterId, taskStageMonster);
+							taskStageMonsterIdsToTaskStageMonstersTemp.put(
+									taskStageMonsterId, taskStageMonster);
 						}
 						taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
 						taskStageMonsterIdsToTaskStageMonsters = taskStageMonsterIdsToTaskStageMonstersTemp;
@@ -248,7 +259,7 @@ public class TaskStageMonsterRetrieveUtils {
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("task stage monster retrieve db error.", e);
@@ -265,64 +276,76 @@ public class TaskStageMonsterRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs,
-		Random rand) throws SQLException {
+	private static TaskStageMonster convertRSRowToTaskStageMonster(
+			ResultSet rs, Random rand) throws SQLException {
 		int id = rs.getInt(DBConstants.TASK_STAGE_MONSTER__ID);
 		int stageId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__TASK_STAGE_ID);
 		int monsterId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID);
-		String monsterType = rs.getString(DBConstants.TASK_STAGE_MONSTER__MONSTER_TYPE);
+		String monsterType = rs
+				.getString(DBConstants.TASK_STAGE_MONSTER__MONSTER_TYPE);
 		int expReward = rs.getInt(DBConstants.TASK_STAGE_MONSTER__EXP_REWARD);
-		int minCashDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_CASH_DROP);
-		int maxCashDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_CASH_DROP);
-		int minOilDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_OIL_DROP);
-		int maxOilDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_OIL_DROP);
-		float puzzlePieceDropRate = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__PUZZLE_PIECE_DROP_RATE);
+		int minCashDrop = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_CASH_DROP);
+		int maxCashDrop = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_CASH_DROP);
+		int minOilDrop = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_OIL_DROP);
+		int maxOilDrop = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_OIL_DROP);
+		float puzzlePieceDropRate = rs
+				.getFloat(DBConstants.TASK_STAGE_MONSTER__PUZZLE_PIECE_DROP_RATE);
 		int level = rs.getInt(DBConstants.TASK_STAGE_MONSTER__LEVEL);
-		float chanceToAppear = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__CHANCE_TO_APPEAR);
-		float dmgMultiplier = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
-		int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
-		int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
-		
-		int defensiveSkillId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
+		float chanceToAppear = rs
+				.getFloat(DBConstants.TASK_STAGE_MONSTER__CHANCE_TO_APPEAR);
+		float dmgMultiplier = rs
+				.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
+		int monsterIdDrop = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
+		int monsterDropLvl = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
+
+		int defensiveSkillId = rs
+				.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
 		//if defensiveSkillId was null
 		if (rs.wasNull()) {
 			//default to skill in task stage monster
 			defensiveSkillId = ControllerConstants.NOT_SET;
 		}
-		String initDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__INIT_DIALOGUE);
-		String defaultDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
+		String initDialogue = rs
+				.getString(DBConstants.TASK_STAGE_MONSTER__INIT_DIALOGUE);
+		String defaultDialogue = rs
+				.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
 
 		//continue putting new properties above here
-		
+
 		if (null != monsterType) {
 			String newMonsterType = monsterType.trim().toUpperCase();
 			if (!monsterType.equals(newMonsterType)) {
-				log.error(String.format(
-					"monster type incorrect: %s, tsmId=%s",
-					monsterType, id));
+				log.error(String.format("monster type incorrect: %s, tsmId=%s",
+						monsterType, id));
 				monsterType = newMonsterType;
 			}
 		}
 
 		if (puzzlePieceDropRate > 1F || puzzlePieceDropRate < 0F) {
-			log.error(String.format(
-				"incorrect puzzlePieceDropRate: %s. Forcing it to be in [0,1] inclusive. id=%s",
-				puzzlePieceDropRate, id));
+			log.error(String
+					.format("incorrect puzzlePieceDropRate: %s. Forcing it to be in [0,1] inclusive. id=%s",
+							puzzlePieceDropRate, id));
 			puzzlePieceDropRate = Math.min(1F, puzzlePieceDropRate);
 			puzzlePieceDropRate = Math.max(0F, puzzlePieceDropRate);
 		}
 
 		if (chanceToAppear < 0F) {
-			log.error(String.format(
-				"incorrect chanceToAppear: %s. Forcing it to be at/above 0. id=%s",
-				chanceToAppear, id));
+			log.error(String
+					.format("incorrect chanceToAppear: %s. Forcing it to be at/above 0. id=%s",
+							chanceToAppear, id));
 			chanceToAppear = Math.max(0F, chanceToAppear);
 		}
 
 		if (dmgMultiplier < 0F) {
-			log.error(String.format(
-				"incorrect dmgMultiplier: %s. Forcing it to be at/above 0. id=%s",
-				dmgMultiplier, id));
+			log.error(String
+					.format("incorrect dmgMultiplier: %s. Forcing it to be at/above 0. id=%s",
+							dmgMultiplier, id));
 			dmgMultiplier = Math.max(0F, dmgMultiplier);
 		}
 
@@ -335,16 +358,17 @@ public class TaskStageMonsterRetrieveUtils {
 			defaultD = MiscMethods.createDialogue(defaultDialogue);
 		}
 
-		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
-			monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
-			puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop,
-			monsterDropLvl, defensiveSkillId, 0, initDialogue, defaultDialogue,
-			initD, defaultD);
+		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId,
+				monsterId, monsterType, expReward, minCashDrop, maxCashDrop,
+				minOilDrop, maxOilDrop, puzzlePieceDropRate, level,
+				chanceToAppear, dmgMultiplier, monsterIdDrop, monsterDropLvl,
+				defensiveSkillId, 0, initDialogue, defaultDialogue, initD,
+				defaultD);
 
 		if (null == monsterType) {
-			log.error(String.format(
-				"TaskStageMonster, monster type incorrect, offending tsm=%s",
-				taskStageMonster));
+			log.error(String
+					.format("TaskStageMonster, monster type incorrect, offending tsm=%s",
+							taskStageMonster));
 		}
 		taskStageMonster.setRand(rand);
 		return taskStageMonster;

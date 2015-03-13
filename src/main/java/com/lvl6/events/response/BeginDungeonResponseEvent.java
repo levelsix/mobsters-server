@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginDungeonResponseEvent extends NormalResponseEvent {
 
-  private BeginDungeonResponseProto beginDungeonResponseProto;
-  
-  public BeginDungeonResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_BEGIN_DUNGEON_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = beginDungeonResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private BeginDungeonResponseProto beginDungeonResponseProto;
 
-  public void setBeginDungeonResponseProto(BeginDungeonResponseProto beginDungeonResponseProto) {
-    this.beginDungeonResponseProto = beginDungeonResponseProto;
-  }
+	public BeginDungeonResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_BEGIN_DUNGEON_EVENT;
+	}
 
-  public BeginDungeonResponseProto getBeginDungeonResponseProto() {   //because APNS required
-    return beginDungeonResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = beginDungeonResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setBeginDungeonResponseProto(
+			BeginDungeonResponseProto beginDungeonResponseProto) {
+		this.beginDungeonResponseProto = beginDungeonResponseProto;
+	}
+
+	public BeginDungeonResponseProto getBeginDungeonResponseProto() {   //because APNS required
+		return beginDungeonResponseProto;
+	}
+
 }

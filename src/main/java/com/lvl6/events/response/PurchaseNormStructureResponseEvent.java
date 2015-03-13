@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {
 
-  private PurchaseNormStructureResponseProto purchaseNormStructureResponseProto;
-  
-  public PurchaseNormStructureResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_PURCHASE_NORM_STRUCTURE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = purchaseNormStructureResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private PurchaseNormStructureResponseProto purchaseNormStructureResponseProto;
 
-  public void setPurchaseNormStructureResponseProto(PurchaseNormStructureResponseProto purchaseNormStructureResponseProto) {
-    this.purchaseNormStructureResponseProto = purchaseNormStructureResponseProto;
-  }
+	public PurchaseNormStructureResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_PURCHASE_NORM_STRUCTURE_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = purchaseNormStructureResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setPurchaseNormStructureResponseProto(
+			PurchaseNormStructureResponseProto purchaseNormStructureResponseProto) {
+		this.purchaseNormStructureResponseProto = purchaseNormStructureResponseProto;
+	}
 
 }

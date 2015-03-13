@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent {
 
-  private UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto;
-  
-  public UpdateUserCurrencyResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_UPDATE_USER_CURRENCY_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = updateUserCurrencyResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto;
 
-  public void setUpdateUserCurrencyResponseProto(UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto) {
-    this.updateUserCurrencyResponseProto = updateUserCurrencyResponseProto;
-  }
+	public UpdateUserCurrencyResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_UPDATE_USER_CURRENCY_EVENT;
+	}
 
-  public UpdateUserCurrencyResponseProto getUpdateUserCurrencyResponseProto() {   //because APNS required
-    return updateUserCurrencyResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = updateUserCurrencyResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setUpdateUserCurrencyResponseProto(
+			UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto) {
+		this.updateUserCurrencyResponseProto = updateUserCurrencyResponseProto;
+	}
+
+	public UpdateUserCurrencyResponseProto getUpdateUserCurrencyResponseProto() {   //because APNS required
+		return updateUserCurrencyResponseProto;
+	}
+
 }

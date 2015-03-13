@@ -24,8 +24,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class BeginPvpBattleAction
-{
+public class BeginPvpBattleAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -41,14 +40,12 @@ public class BeginPvpBattleAction
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 
-
 	public BeginPvpBattleAction(String attackerId, String defenderId,
 			int defenderElo, Date clientDate, boolean exactingRevenge,
 			Timestamp previousBattleEndTime,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			HazelcastPvpUtil hazelcastPvpUtil, TimeUtils timeUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil)
-	{
+			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -77,8 +74,8 @@ public class BeginPvpBattleAction
 	//	}
 
 	//derived state
-	boolean fakeDefender; 
-//	private PvpUser attacker;
+	boolean fakeDefender;
+	//	private PvpUser attacker;
 	private PvpLeagueForUser attackerPlfu;
 	private PvpLeagueForUser defenderPlfu;
 	private int attackerWinEloChange;
@@ -86,8 +83,7 @@ public class BeginPvpBattleAction
 	private int defenderWinEloChange;
 	private int attackerLoseEloChange;
 
-	public void execute(Builder resBuilder)
-	{
+	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -112,39 +108,36 @@ public class BeginPvpBattleAction
 
 	}
 
-	private boolean verifySyntax(Builder resBuilder)
-	{
+	private boolean verifySyntax(Builder resBuilder) {
 		if (null == defenderId || defenderId.isEmpty()) {
-	  		//if fake user, just allow this to happen
+			//if fake user, just allow this to happen
 			fakeDefender = true;
-	  		return true;
-	  	} else {
-	  		fakeDefender = false;
-	  	}
+			return true;
+		} else {
+			fakeDefender = false;
+		}
 
 		return true;
 	}
 
-	private boolean verifySemantics(Builder resBuilder)
-	{
+	private boolean verifySemantics(Builder resBuilder) {
 		List<String> userIds = new ArrayList<String>();
 		//Not pulling from hazelcast since want up to date attacker info
-//		attacker = hazelcastPvpUtil.getPvpUser(attackerId);
-//		if (null == attacker) {
-//			log.warn("User has no PvpUser in hazelcast, going to query db");
-//			userIds.add(attackerId);
-//		}
-		
+		//		attacker = hazelcastPvpUtil.getPvpUser(attackerId);
+		//		if (null == attacker) {
+		//			log.warn("User has no PvpUser in hazelcast, going to query db");
+		//			userIds.add(attackerId);
+		//		}
+
 		userIds.add(attackerId);
 		if (!fakeDefender) {
 			log.info("defender is real user. {}", defenderId);
 			userIds.add(defenderId);
 		}
 
-		Map<String, PvpLeagueForUser> userIdsToPlfus =
-				pvpLeagueForUserRetrieveUtil
+		Map<String, PvpLeagueForUser> userIdsToPlfus = pvpLeagueForUserRetrieveUtil
 				.getUserPvpLeagueForUsers(userIds);
-		
+
 		if (!fakeDefender) {
 			if (!userIdsToPlfus.containsKey(defenderId)) {
 				log.error("enemy has no PvpLeagueForUser info. defenderId={}",
@@ -155,136 +148,134 @@ public class BeginPvpBattleAction
 			}
 		}
 
-		
 		if (!userIdsToPlfus.containsKey(attackerId)) {
 			log.error("no attacker PvpLeagueForUser with id={}", attackerId);
 			return false;
 		} else {
 			attackerPlfu = userIdsToPlfus.get(attackerId);
 		}
-		
-		 
-	    // Disabling shield until further optimizations -- Affecting revenge too much
-//	    //check the shield times just to make sure this user is still attackable
-//	    //his shield end times should be in the past
-//	    Date shieldEndTime = enemyPlfu.getShieldEndTime();
-//	    Date inBattleEndTime = enemyPlfu.getInBattleShieldEndTime();
-	//    
-//	    if (shieldEndTime.getTime() > curDate.getTime() ||
-//	    		inBattleEndTime.getTime() > curDate.getTime()) {
-//	    	//this is possible if another attacker got to this person first
-//	    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
-//	    	log.warn("The user this client wants to attack has already been atttacked" +
-//	    			" or is being attacked. pvpUser=" + enemyPlfu + "\t curDate" + curDate);
-//	    	return false;
-//	    }
-		
+
+		// Disabling shield until further optimizations -- Affecting revenge too much
+		//	    //check the shield times just to make sure this user is still attackable
+		//	    //his shield end times should be in the past
+		//	    Date shieldEndTime = enemyPlfu.getShieldEndTime();
+		//	    Date inBattleEndTime = enemyPlfu.getInBattleShieldEndTime();
+		//    
+		//	    if (shieldEndTime.getTime() > curDate.getTime() ||
+		//	    		inBattleEndTime.getTime() > curDate.getTime()) {
+		//	    	//this is possible if another attacker got to this person first
+		//	    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
+		//	    	log.warn("The user this client wants to attack has already been atttacked" +
+		//	    			" or is being attacked. pvpUser=" + enemyPlfu + "\t curDate" + curDate);
+		//	    	return false;
+		//	    }
+
 		return true;
 	}
 
-	private boolean writeChangesToDB(Builder resBuilder)
-	{
+	private boolean writeChangesToDB(Builder resBuilder) {
 		calculateEloChange();
-		
+
 		//if user exacting revenge update the history to say he can't exact revenge anymore
 		//also turn off sender's shield if it's on (in the case of revenge)
 		log.info("inserting into PvpBattleForUser");
 		PvpBattleForUser pbfu = new PvpBattleForUser(attackerId, defenderId,
-				attackerWinEloChange, defenderLoseEloChange, attackerLoseEloChange,
-				defenderWinEloChange, clientDate);
+				attackerWinEloChange, defenderLoseEloChange,
+				attackerLoseEloChange, defenderWinEloChange, clientDate);
 		int numInserted = insertUtil.insertUpdatePvpBattleForUser(pbfu);
 		log.info("numInserted (should be 1): {}", numInserted);
-		
+
 		//ACCOUNTING FOR FAKE DEFENDERS!
-	  	if (!fakeDefender) {
-	  		//assume that the longest a battle can go for is one hour from now
-	  		//so other users can't attack this person (who is under attack atm) for one hour
-	  		long nowMillis = clientDate.getTime();
-	  		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
-	  		
-	  		// Only update if this new time is more in the future than the current shield time
-	  		if (defenderPlfu.getInBattleShieldEndTime().getTime() < newInBattleEndTime.getTime()) {
-	  		    
-	  			defenderPlfu.setInBattleShieldEndTime(newInBattleEndTime);
-	  	        
-	  	        //replace hazelcast object
-	  	        PvpUser nuEnemyPu = new PvpUser(defenderPlfu);
-	  	        hazelcastPvpUtil.replacePvpUser(nuEnemyPu, defenderId);
-	  	        
-	  	        //as well as update db
-	  	        Timestamp nuInBattleEndTime = new Timestamp(newInBattleEndTime.getTime());
-	  	        log.info("now={}",  clientDate);
-	  	        log.info("should be one hour later, battleEndTime={}", nuInBattleEndTime);
-	  	        int numUpdated = UpdateUtils.get().updatePvpLeagueForUserShields(defenderId,
-	  	                null, nuInBattleEndTime);
-	  	        log.info("(defender shield) num updated={}", numUpdated);
-	  		}
-	  		
-	  		//turn off attacker's shield if it's on, attacker can't revenge fake person
-	  		exactRevenge();
-	  	}
-		
+		if (!fakeDefender) {
+			//assume that the longest a battle can go for is one hour from now
+			//so other users can't attack this person (who is under attack atm) for one hour
+			long nowMillis = clientDate.getTime();
+			Date newInBattleEndTime = new Date(nowMillis
+					+ ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
+
+			// Only update if this new time is more in the future than the current shield time
+			if (defenderPlfu.getInBattleShieldEndTime().getTime() < newInBattleEndTime
+					.getTime()) {
+
+				defenderPlfu.setInBattleShieldEndTime(newInBattleEndTime);
+
+				//replace hazelcast object
+				PvpUser nuEnemyPu = new PvpUser(defenderPlfu);
+				hazelcastPvpUtil.replacePvpUser(nuEnemyPu, defenderId);
+
+				//as well as update db
+				Timestamp nuInBattleEndTime = new Timestamp(
+						newInBattleEndTime.getTime());
+				log.info("now={}", clientDate);
+				log.info("should be one hour later, battleEndTime={}",
+						nuInBattleEndTime);
+				int numUpdated = UpdateUtils.get()
+						.updatePvpLeagueForUserShields(defenderId, null,
+								nuInBattleEndTime);
+				log.info("(defender shield) num updated={}", numUpdated);
+			}
+
+			//turn off attacker's shield if it's on, attacker can't revenge fake person
+			exactRevenge();
+		}
+
 		return true;
 	}
-	
+
 	private void calculateEloChange() {
 		int attackerElo = attackerPlfu.getElo();
 		int defenderElo = this.defenderElo;
-		
+
 		if (!fakeDefender) {
 			defenderElo = defenderPlfu.getElo();
 		}
-		
-		defenderElo = Math.max(defenderElo, ControllerConstants.PVP__DEFAULT_MIN_ELO);
-		
+
+		defenderElo = Math.max(defenderElo,
+				ControllerConstants.PVP__DEFAULT_MIN_ELO);
+
 		User attacker = new User();
 		attacker.setId(attackerId);
-		
+
 		User user = new User();
 		user.setCash(0);
 		user.setOil(0);
 		user.setId(defenderId);
-		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo, defenderElo, user);
-		  
-	  	attackerWins(defenderElo, results);
-	  	attackerLoses(attackerElo, results);
+		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo,
+				defenderElo, user);
+
+		attackerWins(defenderElo, results);
+		attackerLoses(attackerElo, results);
 	}
 
-	private void attackerWins(int defenderElo,
-			PvpBattleOutcome results) {
-	  	attackerWinEloChange = results.getUnsignedEloAttackerWins();
-	  	defenderLoseEloChange = -1 * attackerWinEloChange;
-	  	//when defender loses elo, it should not go below a minimum
-	  	if ((defenderElo + defenderLoseEloChange) <
-	  			ControllerConstants.PVP__DEFAULT_MIN_ELO)
-	  	{
-	  		defenderLoseEloChange = 0;
-	  	}
-	  	
-	  	if (attackerWinEloChange < 0) {
-	  		String preface = "WTF, attacker wins negative elo. ";
-	  		log.error("{}, {}", preface, results);
-	  	}
+	private void attackerWins(int defenderElo, PvpBattleOutcome results) {
+		attackerWinEloChange = results.getUnsignedEloAttackerWins();
+		defenderLoseEloChange = -1 * attackerWinEloChange;
+		//when defender loses elo, it should not go below a minimum
+		if ((defenderElo + defenderLoseEloChange) < ControllerConstants.PVP__DEFAULT_MIN_ELO) {
+			defenderLoseEloChange = 0;
+		}
+
+		if (attackerWinEloChange < 0) {
+			String preface = "WTF, attacker wins negative elo. ";
+			log.error("{}, {}", preface, results);
+		}
 	}
-	
+
 	private void attackerLoses(int attackerElo, PvpBattleOutcome results) {
 		defenderWinEloChange = results.getUnsignedEloAttackerLoses();
 		attackerLoseEloChange = -1 * defenderWinEloChange;
 		//when attacker loses elo, it should not go below a minimum
-		if ((attackerElo + attackerLoseEloChange) <
-				ControllerConstants.PVP__DEFAULT_MIN_ELO) 
-		{
+		if ((attackerElo + attackerLoseEloChange) < ControllerConstants.PVP__DEFAULT_MIN_ELO) {
 			attackerLoseEloChange = 0;
 		}
-		
+
 		if (defenderWinEloChange < 0) {
-	  		String preface = "WTF, defender wins negative elo. ";
-	  		log.error("{}, {}", preface, results);
-	  	}
+			String preface = "WTF, defender wins negative elo. ";
+			log.error("{}, {}", preface, results);
+		}
 	}
-	
-	private void exactRevenge()
-	{
+
+	private void exactRevenge() {
 		Timestamp clientTime = new Timestamp(clientDate.getTime());
 		if (!exactingRevenge) {
 			log.info("not exacting revenge");
@@ -301,7 +292,8 @@ public class BeginPvpBattleAction
 		String historyDefenderId = attackerId;
 		int numUpdated = UpdateUtils.get().updatePvpBattleHistoryExactRevenge(
 				historyAttackerId, historyDefenderId, previousBattleEndTime);
-		log.info("recorded that user exacted revenge. numUpdated (should be 1)=" + numUpdated);
+		log.info("recorded that user exacted revenge. numUpdated (should be 1)="
+				+ numUpdated);
 
 		PvpLeagueForUser attackerPlfu = pvpLeagueForUserRetrieveUtil
 				.getUserPvpLeagueForId(attackerId);
@@ -313,22 +305,23 @@ public class BeginPvpBattleAction
 		if (timeUtil.isFirstEarlierThanSecond(clientDate, curShieldEndTime)) {
 			log.info("user shield end time is now being reset since he's attacking with a shield");
 			log.info("1cur pvpuser={}", hazelcastPvpUtil.getPvpUser(attackerId));
-//			Date login = attacker.getLastLogin();
-//			Timestamp loginTime = new Timestamp(login.getTime());
+			//			Date login = attacker.getLastLogin();
+			//			Timestamp loginTime = new Timestamp(login.getTime());
 
 			numUpdated = updateUtil.updatePvpLeagueForUserShields(attackerId,
 					null, clientTime);
 			log.info("(defender shield) num updated={}", numUpdated);
 
 			PvpUser attackerOpu = new PvpUser(attackerPlfu);
-//			attackerOpu.setShieldEndTime(login);
-//			attackerOpu.setInBattleEndTime(login);               
+			//			attackerOpu.setShieldEndTime(login);
+			//			attackerOpu.setInBattleEndTime(login);               
 			attackerOpu.setShieldEndTime(clientDate);
 			attackerOpu.setInBattleEndTime(clientDate);
 			hazelcastPvpUtil.replacePvpUser(attackerOpu, attackerId);
 			//Note: changes in Hazelcast take time to propagate 
-//			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
-			log.info("(should be same as 1cur pvpUser) 3cur pvpuser={}", attackerOpu);
+			//			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("(should be same as 1cur pvpUser) 3cur pvpuser={}",
+					attackerOpu);
 		}
 	}
 }

@@ -44,14 +44,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
 public class QueueUpTest extends TestCase {
-	
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
-  }.getClass().getEnclosingClass());
-	
+	}.getClass().getEnclosingClass());
+
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
 
@@ -72,16 +71,16 @@ public class QueueUpTest extends TestCase {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
-	protected  QueueUpController queueUpController;
-	
+	protected QueueUpController queueUpController;
+
 	private User user;
 	@Autowired
 	private InsertUtil insertUtil;
@@ -94,12 +93,13 @@ public class QueueUpTest extends TestCase {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
+	@Override
 	@Before
 	public void setUp() {
 		log.info("setUp");
 		Timestamp createTime = new Timestamp((new Date()).getTime());
-		
+
 		String name = "bobUnitTest";
 		String udid = "bobUdid";
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
@@ -112,85 +112,84 @@ public class QueueUpTest extends TestCase {
 		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 		String email = null;
 		String fbData = null;
-		
-		String userId = insertUtil.insertUser(name, udid, lvl,  playerExp, cash, oil,
-			gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
-			email, fbData);
-		
+
+		String userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
+				oil, gems, false, deviceToken, createTime, facebookId,
+				avatarMonsterId, email, fbData);
+
 		user = userRetrieveUtil.getUserById(userId);
-		
+
 		if (null == user) {
 			throw new RuntimeException("no user was created!");
 		}
-		
+
 		int elo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 		int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
-		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils.getLeaguesForElo(elo);
+		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils
+				.getLeaguesForElo(elo);
 		if (pvpLeagueList.size() > 1) {
-			log.error("multiple leagues for init elo: {}\t leagues={}\t choosing first one.",
-				elo, pvpLeagueList);
-		} else if (pvpLeagueList.isEmpty()){
+			log.error(
+					"multiple leagues for init elo: {}\t leagues={}\t choosing first one.",
+					elo, pvpLeagueList);
+		} else if (pvpLeagueList.isEmpty()) {
 			log.error("no pvp league id for elo: {}", elo);
 		} else { //size is one
 			pvpLeagueId = pvpLeagueList.get(0).getId();
 		}
 
 		int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
-		  
+
 		int numInserted = InsertUtils.get().insertPvpLeagueForUser(userId,
-			  pvpLeagueId, rank, elo, createTime, createTime);
-		
+				pvpLeagueId, rank, elo, createTime, createTime);
+
 		if (numInserted <= 0) {
 			throw new RuntimeException("no pvp info was created!");
 		}
 	}
-	
+
+	@Override
 	@After
 	public void tearDown() {
 		if (null == user) {
 			log.info("no user to delete");
 			return;
 		}
-		
-		String query = String.format(
-			"DELETE FROM %s where %s=?",
-			DBConstants.TABLE_USER,
-			DBConstants.USER__ID);
-		Object[] values = new Object[] {
-			user.getId()
-		};
-		int[] types = new int[] {
-			java.sql.Types.VARCHAR
-		};
-		
-		int numDeleted = jdbcTemplate.update( query, values, types );
-		
-		query = String.format(
-			"DELETE FROM %s where %s=?",
-			DBConstants.TABLE_PVP_LEAGUE_FOR_USER,
-			DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
-		numDeleted = jdbcTemplate.update( query, values, types );
+
+		String query = String.format("DELETE FROM %s where %s=?",
+				DBConstants.TABLE_USER, DBConstants.USER__ID);
+		Object[] values = new Object[] { user.getId() };
+		int[] types = new int[] { java.sql.Types.VARCHAR };
+
+		int numDeleted = jdbcTemplate.update(query, values, types);
+
+		query = String.format("DELETE FROM %s where %s=?",
+				DBConstants.TABLE_PVP_LEAGUE_FOR_USER,
+				DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
+		numDeleted = jdbcTemplate.update(query, values, types);
 	}
-	
+
 	@Test
-//	@Rollback(true) //doesn't roll back transaction >:C
-//	@Transactional //just manually undo...
+	//	@Rollback(true) //doesn't roll back transaction >:C
+	//	@Transactional //just manually undo...
 	public void testQueueUp() {
 		Date clientTime = new Date();
-		String userId = user.getId(); 
-		PvpLeagueForUser plfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(userId);
+		String userId = user.getId();
+		PvpLeagueForUser plfu = pvpLeagueForUserRetrieveUtil
+				.getUserPvpLeagueForId(userId);
 		int elo = plfu.getElo();
 		sendQueueUpRequestEvent(user, elo, clientTime);
-		
+
 		//gotta check the logs to see if good or not
 		//trying to simulate not finding anyone
 		int eloChange = 4000;
 		int pvpLeagueId = plfu.getPvpLeagueId();
-		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils.getLeaguesForElo(elo);
+		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils
+				.getLeaguesForElo(elo);
 		if (pvpLeagueList.size() > 1) {
-			log.error("multiple leagues for init elo: {}\t leagues={}\t choosing first one.",
-				elo, pvpLeagueList);
-		} else if (pvpLeagueList.isEmpty()){
+			log.error(
+					"multiple leagues for init elo: {}\t leagues={}\t choosing first one.",
+					elo, pvpLeagueList);
+		} else if (pvpLeagueList.isEmpty()) {
 			log.error("no pvp league id for elo: {}", elo);
 		} else { //size is one
 			pvpLeagueId = pvpLeagueList.get(0).getId();
@@ -199,181 +198,137 @@ public class QueueUpTest extends TestCase {
 		int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
 		Timestamp nowish = new Timestamp(clientTime.getTime());
 		int updated = updateUtil.updatePvpLeagueForUser(userId, pvpLeagueId,
-			rank, eloChange, nowish, nowish, 0, 0, 0, 0, 0);
+				rank, eloChange, nowish, nowish, 0, 0, 0, 0, 0);
 		assertEquals(1, updated);
-		
+
 		sendQueueUpRequestEvent(user, elo, clientTime);
-		
+
 	}
-	
-	
-	protected void sendQueueUpRequestEvent(User user, int elo,
-			Date clientTime) {
-		QueueUpRequestProto qurp = createQueueUpRequestProto(
-				user, elo, clientTime);
+
+	protected void sendQueueUpRequestEvent(User user, int elo, Date clientTime) {
+		QueueUpRequestProto qurp = createQueueUpRequestProto(user, elo,
+				clientTime);
 		QueueUpRequestEvent smjre = new QueueUpRequestEvent();
 		smjre.setTag(0);
 		smjre.setQueueUpRequestProto(qurp);
-		
+
 		//SENDING THE REQUEST
 		queueUpController.handleEvent(smjre);
 	}
-	protected QueueUpRequestProto createQueueUpRequestProto(
-		User user, int elo, Date clientTime)
-	{
-		assertNotNull( user );
+
+	protected QueueUpRequestProto createQueueUpRequestProto(User user, int elo,
+			Date clientTime) {
+		assertNotNull(user);
 		MinimumUserProto mup = CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user, null);
-		
-		QueueUpRequestProto.Builder smjrpb =
-				QueueUpRequestProto.newBuilder();
-		
+
+		QueueUpRequestProto.Builder smjrpb = QueueUpRequestProto.newBuilder();
+
 		smjrpb.setAttacker(mup);
 		smjrpb.setAttackerElo(elo);
 		smjrpb.setClientTime(clientTime.getTime());
-		
+
 		return smjrpb.build();
 	}
 
-
-	public HazelcastPvpUtil getHazelcastPvpUtil()
-	{
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
 
-
-	public void setHazelcastPvpUtil( HazelcastPvpUtil hazelcastPvpUtil )
-	{
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 
-
-	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtil()
-	{
+	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtil() {
 		return monsterForPvpRetrieveUtil;
 	}
 
-
-	public void setMonsterForPvpRetrieveUtil( MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil )
-	{
+	public void setMonsterForPvpRetrieveUtil(
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil) {
 		this.monsterForPvpRetrieveUtil = monsterForPvpRetrieveUtil;
 	}
 
-
-	public TimeUtils getTimeUtil()
-	{
+	public TimeUtils getTimeUtil() {
 		return timeUtil;
 	}
 
-
-	public void setTimeUtil( TimeUtils timeUtil )
-	{
+	public void setTimeUtil(TimeUtils timeUtil) {
 		this.timeUtil = timeUtil;
 	}
 
-
-	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil()
-	{
+	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
 		return pvpLeagueForUserRetrieveUtil;
 	}
 
-
 	public void setPvpLeagueForUserRetrieveUtil(
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
-	{
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
 
-
-	public ClanRetrieveUtils2 getClanRetrieveUtil()
-	{
+	public ClanRetrieveUtils2 getClanRetrieveUtil() {
 		return clanRetrieveUtil;
 	}
 
-
-	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
-	{
+	public void setClanRetrieveUtil(ClanRetrieveUtils2 clanRetrieveUtil) {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-
-	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
-	{
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil() {
 		return monsterForUserRetrieveUtil;
 	}
 
-
 	public void setMonsterForUserRetrieveUtil(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
-	{
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
-
-	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
-	{
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;
 	}
 
-
 	public void setClanMemberTeamDonationRetrieveUtil(
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil )
-	{
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 	}
 
-
-	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil()
-	{
+	public MonsterSnapshotForUserRetrieveUtil getMonsterSnapshotForUserRetrieveUtil() {
 		return monsterSnapshotForUserRetrieveUtil;
 	}
 
-
 	public void setMonsterSnapshotForUserRetrieveUtil(
-		MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil )
-	{
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 	}
 
-	public InsertUtil getInsertUtil()
-	{
+	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
-	public void setInsertUtil( InsertUtil insertUtil )
-	{
+	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
 	}
 
-	public QueueUpController getQueueUpController()
-	{
+	public QueueUpController getQueueUpController() {
 		return queueUpController;
 	}
 
-	public void setQueueUpController( QueueUpController queueUpController )
-	{
+	public void setQueueUpController(QueueUpController queueUpController) {
 		this.queueUpController = queueUpController;
 	}
 
-	public UpdateUtil getUpdateUtil()
-	{
+	public UpdateUtil getUpdateUtil() {
 		return updateUtil;
 	}
 
-	public void setUpdateUtil( UpdateUtil updateUtil )
-	{
+	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
 

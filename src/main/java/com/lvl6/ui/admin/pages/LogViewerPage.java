@@ -14,17 +14,17 @@ public class LogViewerPage extends TemplatePage {
 
 	public LogViewerPage() {
 		super();
-		if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		if (SecurityContextHolder.getContext() != null
+				&& SecurityContextHolder.getContext().getAuthentication() != null) {
+			String user = SecurityContextHolder.getContext()
+					.getAuthentication().getName();
 			log.info("Loading Log Viewer Page for: {}", user);
 		} else {
 			log.info("Loading Log Viewer Page");
 		}
 		setup();
 	}
-	
-	
-	
+
 	protected void setup() {
 		form.setOutputMarkupId(true);
 		resultLabel.setOutputMarkupId(true);
@@ -33,72 +33,70 @@ public class LogViewerPage extends TemplatePage {
 		add(resultLabel);
 		//add(feedback);
 	}
-	
-	
+
 	protected MultiLineLabel resultLabel = new MultiLineLabel("result");
 	//final FeedbackPanel feedback = new FeedbackPanel("feedback");
-	
-	
+
 	protected LogSearchForm form = new LogSearchForm("logSearch") {
 		private static final long serialVersionUID = 1L;
-/*
-		@Override
-		protected void onSubmit() {
-			super.onSubmit();
-			SearchResponse result;
-			LogSearchInputModel model = getModelObject();
-			LoggingElasticSearchQuery search = AppContext.getApplicationContext().getBean(LoggingElasticSearchQuery.class);
-			if(model.getEnd() != null)
-				search.setEndDate(model.getEnd());
-			if(model.getStart() != null)
-				search.setStartDate(model.getStart());
-			search.setMessage(model.getSearchInput());
-			search.setLevel(model.getLevel());
-			if(model.getPlayerId() != null) {
-				search.setPlayerId(Integer.valueOf(model.getPlayerId()));
-			}
-			search.setOffset(model.getOffset());
-			search.setLimit(model.getShow());
-			result = search.search();
-			log.info("Log search found {} results", result.getHits().getTotalHits());
-			StringBuilder sb = buildResultString(result);
-			//info(sb.toString());
-			resultLabel.setDefaultModel(new Model<String>(sb.toString()));
-			//add(resultLabel);
-		}
-
-		private StringBuilder buildResultString(SearchResponse result) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Hits: ")
-			.append(result.hits().getTotalHits())
-			.append("\n")
-			.append("Took: ")
-			.append(result.getTookInMillis())
-			.append("ms\n")
-			.append("Results: \n\n");
-			Iterator<SearchHit> it = result.hits().iterator();
-			while(it.hasNext()) {
-				SearchHit hit = it.next();
-				Map<String, Object> hi = hit.sourceAsMap();
-				for(String key: hi.keySet()) {
-					Object h = hi.get(key);
-					sb.append(key)
-					.append(": ")
-					.append(format(key, h))
-					.append("\n");
+		/*
+				@Override
+				protected void onSubmit() {
+					super.onSubmit();
+					SearchResponse result;
+					LogSearchInputModel model = getModelObject();
+					LoggingElasticSearchQuery search = AppContext.getApplicationContext().getBean(LoggingElasticSearchQuery.class);
+					if(model.getEnd() != null)
+						search.setEndDate(model.getEnd());
+					if(model.getStart() != null)
+						search.setStartDate(model.getStart());
+					search.setMessage(model.getSearchInput());
+					search.setLevel(model.getLevel());
+					if(model.getPlayerId() != null) {
+						search.setPlayerId(Integer.valueOf(model.getPlayerId()));
+					}
+					search.setOffset(model.getOffset());
+					search.setLimit(model.getShow());
+					result = search.search();
+					log.info("Log search found {} results", result.getHits().getTotalHits());
+					StringBuilder sb = buildResultString(result);
+					//info(sb.toString());
+					resultLabel.setDefaultModel(new Model<String>(sb.toString()));
+					//add(resultLabel);
 				}
-				sb.append("\n");
-			}
-			return sb;
-		}
-		
-		protected SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSS");
-		private String format(String key, Object entry) {
-			if(key.equals(LoggingConstants.TIME)) {
-				return format.format(new Date((Long) entry));
-			}
-			return entry.toString();
-		}*/
+
+				private StringBuilder buildResultString(SearchResponse result) {
+					StringBuilder sb = new StringBuilder();
+					sb.append("Hits: ")
+					.append(result.hits().getTotalHits())
+					.append("\n")
+					.append("Took: ")
+					.append(result.getTookInMillis())
+					.append("ms\n")
+					.append("Results: \n\n");
+					Iterator<SearchHit> it = result.hits().iterator();
+					while(it.hasNext()) {
+						SearchHit hit = it.next();
+						Map<String, Object> hi = hit.sourceAsMap();
+						for(String key: hi.keySet()) {
+							Object h = hi.get(key);
+							sb.append(key)
+							.append(": ")
+							.append(format(key, h))
+							.append("\n");
+						}
+						sb.append("\n");
+					}
+					return sb;
+				}
+				
+				protected SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSS");
+				private String format(String key, Object entry) {
+					if(key.equals(LoggingConstants.TIME)) {
+						return format.format(new Date((Long) entry));
+					}
+					return entry.toString();
+				}*/
 	};
 
 }

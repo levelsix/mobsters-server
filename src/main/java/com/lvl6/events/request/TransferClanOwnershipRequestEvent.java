@@ -12,38 +12,39 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 
 public class TransferClanOwnershipRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private TransferClanOwnershipRequestProto transferClanOwnershipRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      transferClanOwnershipRequestProto = TransferClanOwnershipRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = transferClanOwnershipRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("TransferClanOwnershipRequest exception", e);
-    }
-  }
+	private TransferClanOwnershipRequestProto transferClanOwnershipRequestProto;
 
-  public TransferClanOwnershipRequestProto getTransferClanOwnershipRequestProto() {
-    return transferClanOwnershipRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			transferClanOwnershipRequestProto = TransferClanOwnershipRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = transferClanOwnershipRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("TransferClanOwnershipRequest exception", e);
+		}
+	}
 
-  public void setTransferClanOwnershipRequestProto(
-	  TransferClanOwnershipRequestProto transferClanOwnershipRequestProto )
-  {
-	  this.transferClanOwnershipRequestProto = transferClanOwnershipRequestProto;
-  }
+	public TransferClanOwnershipRequestProto getTransferClanOwnershipRequestProto() {
+		return transferClanOwnershipRequestProto;
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "TransferClanOwnershipRequestEvent [transferClanOwnershipRequestProto="
-		  + transferClanOwnershipRequestProto
-		  + "]";
-  }
-  
+	public void setTransferClanOwnershipRequestProto(
+			TransferClanOwnershipRequestProto transferClanOwnershipRequestProto) {
+		this.transferClanOwnershipRequestProto = transferClanOwnershipRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "TransferClanOwnershipRequestEvent [transferClanOwnershipRequestProto="
+				+ transferClanOwnershipRequestProto + "]";
+	}
+
 }

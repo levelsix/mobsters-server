@@ -30,16 +30,19 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class SolicitTeamDonationController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class SolicitTeamDonationController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	public SolicitTeamDonationController() {
 		numAllocatedThreads = 4;
 	}
@@ -56,8 +59,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent)event)
-			.getSolicitTeamDonationRequestProto();
+		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent) event)
+				.getSolicitTeamDonationRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -68,7 +71,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Date clientTime = new Date(reqProto.getClientTime());
 		int gemsSpent = reqProto.getGemsSpent();
 
-		SolicitTeamDonationResponseProto.Builder resBuilder = SolicitTeamDonationResponseProto.newBuilder();
+		SolicitTeamDonationResponseProto.Builder resBuilder = SolicitTeamDonationResponseProto
+				.newBuilder();
 		resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
@@ -86,15 +90,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, clanId=%s",
-				userId, clanId), e);
+					"UUID error. incorrect userId=%s, clanId=%s", userId,
+					clanId), e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
-			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(userId);
+			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -102,32 +107,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		/*int clanId = 0;
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
-    }
+		if (senderProto.hasClan() && null != senderProto.getClan()) {
+		clanId = senderProto.getClan().getClanId();
+		}
 
-    //maybe should get clan lock instead of locking person
-    //but going to modify user, so lock user. however maybe locking is not necessary
-    boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
-    } else {
-    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    }*/
+		//maybe should get clan lock instead of locking person
+		//but going to modify user, so lock user. however maybe locking is not necessary
+		boolean lockedClan = false;
+		if (0 != clanId) {
+		lockedClan = getLocker().lockClan(clanId);
+		} else {
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		}*/
 		try {
 			SolicitTeamDonationAction stda = new SolicitTeamDonationAction(
-				userId, clanId, msg, powerLimit, clientTime, gemsSpent,
-				userRetrieveUtil, clanMemberTeamDonationRetrieveUtil,
-				InsertUtils.get(), UpdateUtils.get());
-			
+					userId, clanId, msg, powerLimit, clientTime, gemsSpent,
+					userRetrieveUtil, clanMemberTeamDonationRetrieveUtil,
+					InsertUtils.get(), UpdateUtils.get());
+
 			stda.execute(resBuilder);
-			
-			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(userId);
+
+			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 
 			//only write to user if failed
-			if (!resBuilder.getStatus().equals(SolicitTeamDonationStatus.SUCCESS)) {
+			if (!resBuilder.getStatus().equals(
+					SolicitTeamDonationStatus.SUCCESS)) {
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 
@@ -135,10 +142,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				//only write to clan if success
 				ClanMemberTeamDonation solicitation = stda.getSolicitation();
 				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
-					.createClanMemberTeamDonationProto(solicitation, null, senderProto,
-						null);
+						.createClanMemberTeamDonationProto(solicitation, null,
+								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
-				
+
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 				server.writeClanEvent(resEvent, clanId);
 				//this works for other clan members, but not for the person 
@@ -147,19 +154,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				if (gemsSpent > 0) {
 					User user = stda.getUser();
 					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+									user, null, null);
 					resEventUpdate.setTag(event.getTag());
 					server.writeEvent(resEventUpdate);
-					
+
 					writeToCurrencyHistory(userId, clientTime, stda);
 				}
-				
+
 			}
 		} catch (Exception e) {
 			log.error("exception in SolicitTeamDonation processEvent", e);
 			try {
 				resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
-				SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(userId);
+				SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
@@ -167,54 +176,48 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in SolicitTeamDonation processEvent", e);
 			}
 		} /*finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    	}
-    }*/
+			if (0 != clanId && lockedClan) {
+			getLocker().unlockClan(clanId);
+			} else {
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			}
+			}*/
 	}
 
 	private void writeToCurrencyHistory(String userId, Date date,
-		SolicitTeamDonationAction stda)
-	{
+			SolicitTeamDonationAction stda) {
 		MiscMethods.writeToUserCurrencyOneUser(userId,
-			new Timestamp(date.getTime()),
-			stda.getCurrencyDeltas(), stda.getPreviousCurrencies(),
-    		stda.getCurrentCurrencies(), stda.getReasons(),
-    		stda.getDetails());
+				new Timestamp(date.getTime()), stda.getCurrencyDeltas(),
+				stda.getPreviousCurrencies(), stda.getCurrentCurrencies(),
+				stda.getReasons(), stda.getDetails());
 	}
-	
+
 	/*
-  private void notifyClan(User aUser, Clan aClan) {
-    int clanId = aClan.getId();
+	private void notifyClan(User aUser, Clan aClan) {
+	int clanId = aClan.getId();
 
-    int level = aUser.getLevel();
-    String deserter = aUser.getName();
-    Notification aNote = new Notification();
+	int level = aUser.getLevel();
+	String deserter = aUser.getName();
+	Notification aNote = new Notification();
 
-    aNote.setAsUserLeftClan(level, deserter);
-    MiscMethods.writeClanApnsNotification(aNote, server, clanId);
-  }*/
-	
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	aNote.setAsUserLeftClan(level, deserter);
+	MiscMethods.writeClanApnsNotification(aNote, server, clanId);
+	}*/
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil()
-	{
+	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;
 	}
 
 	public void setClanMemberTeamDonationRetrieveUtil(
-		ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil )
-	{
+			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 	}
 

@@ -34,9 +34,13 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class RetrieveCurrencyFromNormStructureController extends EventController{
+@Component
+@DependsOn("gameServer")
+public class RetrieveCurrencyFromNormStructureController extends
+		EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -46,7 +50,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
 
@@ -66,32 +70,36 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
+		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent) event)
+				.getRetrieveCurrencyFromNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);
 		//get stuff client sent
-		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
+				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		String userId = senderProto.getUserUuid();
-		List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
+		List<StructRetrieval> structRetrievals = reqProto
+				.getStructRetrievalsList();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
 		int maxCash = senderResourcesProto.getMaxCash();
 		int maxOil = senderResourcesProto.getMaxOil();
 
-//		Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
-//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
+		//		Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
+		//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
 		//create map from ids to times and check for duplicates
-//		getIdsAndTimes(structRetrievals, duplicates,
-//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
+		//		getIdsAndTimes(structRetrievals, duplicates,
+		//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
 
-//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
+		//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
 
 		List<String> duplicates = new ArrayList<String>();
-		Map<String, StructureRetrieval> userStructIdsToStructRetrievals =
-				getStructureRetrievalMap(structRetrievals, duplicates);
+		Map<String, StructureRetrieval> userStructIdsToStructRetrievals = getStructureRetrievalMap(
+				structRetrievals, duplicates);
 
-		RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
-				RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
-		resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+		RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder = RetrieveCurrencyFromNormStructureResponseProto
+				.newBuilder();
+		resBuilder
+				.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
 		resBuilder.setSender(senderResourcesProto);
 
 		UUID userUuid = null;
@@ -113,64 +121,74 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
+			resBuilder
+					.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
+			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-					
-			RetrieveCurrencyFromNormStructureAction rcfnsa =
-					new RetrieveCurrencyFromNormStructureAction(
-							userId, maxCash, maxOil, duplicates,
-							userStructIdsToStructRetrievals,
-							userRetrieveUtil, userStructRetrieveUtil, updateUtil);
-			
+
+			RetrieveCurrencyFromNormStructureAction rcfnsa = new RetrieveCurrencyFromNormStructureAction(
+					userId, maxCash, maxOil, duplicates,
+					userStructIdsToStructRetrievals, userRetrieveUtil,
+					userStructRetrieveUtil, updateUtil);
+
 			rcfnsa.execute(resBuilder);
 
-			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
+			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());  
+			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 
-			if (RetrieveCurrencyFromNormStructureStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (RetrieveCurrencyFromNormStructureStatus.SUCCESS
+					.equals(resBuilder.getStatus())) {
 				User user = rcfnsa.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
 				writeToCurrencyHistory(userId, curTime, rcfnsa);
 			}
 		} catch (Exception e) {
-			log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
+			log.error(
+					"exception in RetrieveCurrencyFromNormStructureController processEvent",
+					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
+				resBuilder
+						.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
+				resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in RetrieveCurrencyFromNormStructureController processEvent", e);
+				log.error(
+						"exception2 in RetrieveCurrencyFromNormStructureController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
 	private Map<String, StructureRetrieval> getStructureRetrievalMap(
-			List<StructRetrieval> structRetrievalProtos, List<String> duplicates)
-	{
-		Map<String, StructureRetrieval> userStructIdToStructureRetrieval =
-				new HashMap<String, StructureRetrieval>();
-		if (null == structRetrievalProtos || structRetrievalProtos.isEmpty())
-		{
+			List<StructRetrieval> structRetrievalProtos, List<String> duplicates) {
+		Map<String, StructureRetrieval> userStructIdToStructureRetrieval = new HashMap<String, StructureRetrieval>();
+		if (null == structRetrievalProtos || structRetrievalProtos.isEmpty()) {
 			log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
 			return userStructIdToStructureRetrieval;
 		}
@@ -178,8 +196,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		for (StructRetrieval srProto : structRetrievalProtos) {
 			StructureRetrieval sr = new StructureRetrieval();
 			String userStructId = srProto.getUserStructUuid();
-			
-			if(userStructIdToStructureRetrieval.containsKey(userStructId)) {
+
+			if (userStructIdToStructureRetrieval.containsKey(userStructId)) {
 				duplicates.add(userStructId);
 				continue;
 			}
@@ -199,17 +217,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		return userStructIdToStructureRetrieval;
 	}
-	
-	private void writeToCurrencyHistory(String userId, Timestamp date,
-			RetrieveCurrencyFromNormStructureAction rcfnsa)
-		{
-			MiscMethods.writeToUserCurrencyOneUser(userId, date,
-				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
-	    		rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
-	    		rcfnsa.getDetails());
-		}
-		
 
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+			RetrieveCurrencyFromNormStructureAction rcfnsa) {
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
+				rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
+				rcfnsa.getDetails());
+	}
 
 	public Locker getLocker() {
 		return locker;

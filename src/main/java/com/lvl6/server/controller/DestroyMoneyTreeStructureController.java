@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -19,15 +18,11 @@ import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DestroyMoneyTreeStructureAction;
 import com.lvl6.utils.utilmethods.DeleteUtil;
-import com.lvl6.utils.utilmethods.StringUtils;
-
 
 @Component
 @DependsOn("gameServer")
@@ -44,10 +39,9 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
-
 
 	public DestroyMoneyTreeStructureController() {
 		numAllocatedThreads = 2;
@@ -77,7 +71,8 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<String> userStructIdList = reqProto.getUserStructUuidList();
 
-		DestroyMoneyTreeStructureResponseProto.Builder resBuilder = DestroyMoneyTreeStructureResponseProto.newBuilder();
+		DestroyMoneyTreeStructureResponseProto.Builder resBuilder = DestroyMoneyTreeStructureResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -86,18 +81,19 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s",
-					userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
-			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(userId);
+			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDestroyMoneyTreeStructureResponseProto(resBuilder.build());
+			resEvent.setDestroyMoneyTreeStructureResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 			return;
 		}
@@ -105,23 +101,27 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		// Lock this player's ID
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			
 
 			writeChangesToDb(userId, resBuilder, userStructIdList);
 
 			if (!resBuilder.hasStatus()) {
-				resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
+				resBuilder
+						.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
 			}
 
-			DestroyMoneyTreeStructureResponseProto resProto = resBuilder.build();
+			DestroyMoneyTreeStructureResponseProto resProto = resBuilder
+					.build();
 
-			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(senderProto.getUserUuid());
+			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setDestroyMoneyTreeStructureResponseProto(resProto);
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in DestroyMoneyTreeStructureController processEvent", e);
+			log.error(
+					"exception in DestroyMoneyTreeStructureController processEvent",
+					e);
 			//don't let the client hang
 		} finally {
 			// Unlock this player
@@ -129,30 +129,25 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		}
 	}
 
-	private void writeChangesToDb(
-			String userId,
+	private void writeChangesToDb(String userId,
 			DestroyMoneyTreeStructureResponseProto.Builder resBuilder,
-			List<String> userStructIdsList
-			)
-	{
+			List<String> userStructIdsList) {
 		try {
 			Date now = new Date();
-			DestroyMoneyTreeStructureAction dmtsa = new DestroyMoneyTreeStructureAction(userId,
-					userStructIdsList, now, structureForUserRetrieveUtils2, deleteUtil);
+			DestroyMoneyTreeStructureAction dmtsa = new DestroyMoneyTreeStructureAction(
+					userId, userStructIdsList, now,
+					structureForUserRetrieveUtils2, deleteUtil);
 
 			dmtsa.execute(resBuilder);
 
-			if (resBuilder.getStatus().equals(DestroyMoneyTreeStructureStatus.SUCCESS))
-			{
-				log.info("successful money tree destroy from user {}",
-						userId);
+			if (resBuilder.getStatus().equals(
+					DestroyMoneyTreeStructureStatus.SUCCESS)) {
+				log.info("successful money tree destroy from user {}", userId);
 			}
 		} catch (Exception e) {
 			log.error("problem with destroying user's money tree", e);
 		}
 	}
-
-
 
 	public Locker getLocker() {
 		return locker;
@@ -162,27 +157,20 @@ public class DestroyMoneyTreeStructureController extends EventController {
 		this.locker = locker;
 	}
 
-	public DeleteUtil getDeleteUtil()
-	{
+	public DeleteUtil getDeleteUtil() {
 		return deleteUtil;
 	}
 
-	public void setDeleteUtil( DeleteUtil deleteUtil )
-	{
+	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
-
-
-
 
 }

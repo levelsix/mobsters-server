@@ -12,13 +12,12 @@ public class MonsterDeleteHistory {
 		this.details = details;
 		this.deletedTime = deletedTime;
 	}
-	
+
 	private MonsterForUser mfu;
 	private String deletedReason;
 	private String details;
 	private Timestamp deletedTime;
-	
-	
+
 	public MonsterForUser getMfu() {
 		return mfu;
 	}
@@ -34,11 +33,11 @@ public class MonsterDeleteHistory {
 	public void setDeletedReason(String deletedReason) {
 		this.deletedReason = deletedReason;
 	}
-	
+
 	public String getDetails() {
 		return details;
 	}
-	
+
 	public void setDetails(String details) {
 		this.details = details;
 	}
@@ -50,14 +49,12 @@ public class MonsterDeleteHistory {
 	public void setDeletedTime(Timestamp deletedTime) {
 		this.deletedTime = deletedTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MonsterDeleteHistory [mfu=" + mfu + ", deletedReason="
 				+ deletedReason + ", details=" + details + ", deletedTime="
 				+ deletedTime + "]";
 	}
-	
-	
-	
+
 }

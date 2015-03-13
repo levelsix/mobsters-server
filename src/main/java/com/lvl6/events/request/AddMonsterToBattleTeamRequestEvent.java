@@ -12,32 +12,34 @@ import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProto;
 
 public class AddMonsterToBattleTeamRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private AddMonsterToBattleTeamRequestProto addMonsterToBattleTeamRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      addMonsterToBattleTeamRequestProto = AddMonsterToBattleTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = addMonsterToBattleTeamRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("AddMonsterToBattleTeamRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public AddMonsterToBattleTeamRequestProto getAddMonsterToBattleTeamRequestProto() {
-    return addMonsterToBattleTeamRequestProto;
-  }
+	private AddMonsterToBattleTeamRequestProto addMonsterToBattleTeamRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "AddMonsterToBattleTeamRequestEvent [addMonsterToBattleTeamRequestProto="
-		  + addMonsterToBattleTeamRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			addMonsterToBattleTeamRequestProto = AddMonsterToBattleTeamRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = addMonsterToBattleTeamRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("AddMonsterToBattleTeamRequest exception", e);
+		}
+	}
+
+	public AddMonsterToBattleTeamRequestProto getAddMonsterToBattleTeamRequestProto() {
+		return addMonsterToBattleTeamRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "AddMonsterToBattleTeamRequestEvent [addMonsterToBattleTeamRequestProto="
+				+ addMonsterToBattleTeamRequestProto + "]";
+	}
 
 }

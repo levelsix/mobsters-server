@@ -13,27 +13,27 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.response.FinishPerformingResearchResponseEvent;
-import com.lvl6.info.Research;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.FinishPerformingResearchAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class FinishPerformingResearchController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class FinishPerformingResearchController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -43,17 +43,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
-
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
-
 
 	public FinishPerformingResearchController() {
 		numAllocatedThreads = 4;
@@ -71,21 +69,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		FinishPerformingResearchRequestProto reqProto = ((FinishPerformingResearchRequestEvent)event).getFinishPerformingResearchRequestProto();
+		FinishPerformingResearchRequestProto reqProto = ((FinishPerformingResearchRequestEvent) event)
+				.getFinishPerformingResearchRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 
-		String userResearchUuid= reqProto.getUserResearchUuid();
+		String userResearchUuid = reqProto.getUserResearchUuid();
 
 		int gemsCost = 0;
-		if(reqProto.hasGemsCost()) {
-			 gemsCost = reqProto.getGemsCost();
+		if (reqProto.hasGemsCost()) {
+			gemsCost = reqProto.getGemsCost();
 		}
-		
 
 		//values to send to client
-		FinishPerformingResearchResponseProto.Builder resBuilder = FinishPerformingResearchResponseProto.newBuilder();
+		FinishPerformingResearchResponseProto.Builder resBuilder = FinishPerformingResearchResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
 
@@ -96,18 +95,19 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
-			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
+			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishPerformingResearchResponseProto(resBuilder.build());
+			resEvent.setFinishPerformingResearchResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 			return;
 		}
@@ -116,13 +116,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			User user = userRetrieveUtils.getUserById(userId);
 			Date now = new Date();
-			FinishPerformingResearchAction fpra = new FinishPerformingResearchAction(userId, user, userResearchUuid, 
-					gemsCost, now, updateUtil, researchForUserRetrieveUtil);
+			FinishPerformingResearchAction fpra = new FinishPerformingResearchAction(
+					userId, user, userResearchUuid, gemsCost, now, updateUtil,
+					researchForUserRetrieveUtil);
 
 			fpra.execute(resBuilder);
 
 			FinishPerformingResearchResponseProto resProto = resBuilder.build();
-			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
+			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setFinishPerformingResearchResponseProto(resProto);
 			server.writeEvent(resEvent);
@@ -131,31 +133,34 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
 
 		} catch (Exception e) {
-			log.error("exception in FinishPerformingResearchController processEvent", e);
+			log.error(
+					"exception in FinishPerformingResearchController processEvent",
+					e);
 			// don't let the client hang
 			try {
 				resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
-				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
+				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
+						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setFinishPerformingResearchResponseProto(resBuilder.build());
+				resEvent.setFinishPerformingResearchResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in SellUserMonsterController processEvent", e);
+				log.error(
+						"exception2 in SellUserMonsterController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName()); 
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-		FinishPerformingResearchAction pra)
-	{
+			FinishPerformingResearchAction pra) {
 		MiscMethods.writeToUserCurrencyOneUser(userId, date,
-			pra.getCurrencyDeltas(), pra.getPreviousCurrencies(),
-    		pra.getCurrentCurrencies(), pra.getReasons(),
-    		pra.getDetails());
+				pra.getCurrencyDeltas(), pra.getPreviousCurrencies(),
+				pra.getCurrentCurrencies(), pra.getReasons(), pra.getDetails());
 	}
-
 
 	public Locker getLocker() {
 		return locker;
@@ -165,13 +170,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.locker = locker;
 	}
 
-	public TimeUtils getTimeUtils()
-	{
+	public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
 
-	public void setTimeUtils( TimeUtils timeUtils )
-	{
+	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
 
@@ -183,13 +186,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.userRetrieveUtils = userRetrieveUtils;
 	}
 
-	public UpdateUtil getUpdateUtil()
-	{
+	public UpdateUtil getUpdateUtil() {
 		return updateUtil;
 	}
 
-	public void setUpdateUtil( UpdateUtil updateUtil )
-	{
+	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
 
@@ -201,7 +202,5 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 	}
-	
-	
 
 }

@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent {
 
-  private NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto;
-  
-  public NormStructWaitCompleteResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_NORM_STRUCT_WAIT_COMPLETE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = normStructWaitCompleteResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto;
 
-  public void setNormStructWaitCompleteResponseProto(NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto) {
-    this.normStructWaitCompleteResponseProto = normStructWaitCompleteResponseProto;
-  }
+	public NormStructWaitCompleteResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_NORM_STRUCT_WAIT_COMPLETE_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = normStructWaitCompleteResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setNormStructWaitCompleteResponseProto(
+			NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto) {
+		this.normStructWaitCompleteResponseProto = normStructWaitCompleteResponseProto;
+	}
 
 }

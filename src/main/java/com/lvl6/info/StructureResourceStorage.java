@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class StructureResourceStorage implements Serializable {
 
 	private static final long serialVersionUID = 5021640371198924904L;
-	
+
 	private int structId;
 	private String resourceTypeStored;
 	private int capacity;
-	
-	public StructureResourceStorage(int structId, String resourceTypeStored, int capacity) {
+
+	public StructureResourceStorage(int structId, String resourceTypeStored,
+			int capacity) {
 		super();
 		this.structId = structId;
 		this.resourceTypeStored = resourceTypeStored;
@@ -43,7 +44,8 @@ public class StructureResourceStorage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ResourceStorage [structId=" + structId + ", resourceTypeStored="
-				+ resourceTypeStored + ", capacity=" + capacity + "]";
+		return "ResourceStorage [structId=" + structId
+				+ ", resourceTypeStored=" + resourceTypeStored + ", capacity="
+				+ capacity + "]";
 	}
 }

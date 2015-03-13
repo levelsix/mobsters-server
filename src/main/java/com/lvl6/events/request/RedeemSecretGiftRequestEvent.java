@@ -12,29 +12,32 @@ import com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto;
 
 public class RedeemSecretGiftRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RedeemSecretGiftRequestProto redeemSecretGiftRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      redeemSecretGiftRequestProto = RedeemSecretGiftRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = redeemSecretGiftRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RedeemSecretGift request exception", e);
-    }
-  }
+	private Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RedeemSecretGiftRequestProto getRedeemSecretGiftRequestProto() {
-    return redeemSecretGiftRequestProto;
-  }
+	private RedeemSecretGiftRequestProto redeemSecretGiftRequestProto;
 
-  public void setRedeemSecretGiftRequestProto( RedeemSecretGiftRequestProto redeemSecretGiftRequestProto )
-  {
-	  this.redeemSecretGiftRequestProto = redeemSecretGiftRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			redeemSecretGiftRequestProto = RedeemSecretGiftRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = redeemSecretGiftRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RedeemSecretGift request exception", e);
+		}
+	}
+
+	public RedeemSecretGiftRequestProto getRedeemSecretGiftRequestProto() {
+		return redeemSecretGiftRequestProto;
+	}
+
+	public void setRedeemSecretGiftRequestProto(
+			RedeemSecretGiftRequestProto redeemSecretGiftRequestProto) {
+		this.redeemSecretGiftRequestProto = redeemSecretGiftRequestProto;
+	}
 
 }

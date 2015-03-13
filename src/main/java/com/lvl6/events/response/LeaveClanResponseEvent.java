@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LeaveClanResponseEvent extends NormalResponseEvent {
 
-  private LeaveClanResponseProto leaveClanResponseProto;
-  
-  public LeaveClanResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_LEAVE_CLAN_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = leaveClanResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private LeaveClanResponseProto leaveClanResponseProto;
 
-  public void setLeaveClanResponseProto(LeaveClanResponseProto leaveClanResponseProto) {
-    this.leaveClanResponseProto = leaveClanResponseProto;
-  }
+	public LeaveClanResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_LEAVE_CLAN_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = leaveClanResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setLeaveClanResponseProto(
+			LeaveClanResponseProto leaveClanResponseProto) {
+		this.leaveClanResponseProto = leaveClanResponseProto;
+	}
 
 }

@@ -12,38 +12,40 @@ import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
 
 public class PurchaseCityExpansionRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      purchaseCityExpansionRequestProto = PurchaseCityExpansionRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("PurchaseCityExpansionRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public PurchaseCityExpansionRequestProto getPurchaseCityExpansionRequestProto() {
-    return purchaseCityExpansionRequestProto;
-  }
-  
-  public void setPurchaseCityExpansionRequestProto(
-  		PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto) {
-  	this.purchaseCityExpansionRequestProto = purchaseCityExpansionRequestProto;
-  	playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
-  }
+	private PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "PurchaseCityExpansionRequestEvent [purchaseCityExpansionRequestProto="
-		  + purchaseCityExpansionRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			purchaseCityExpansionRequestProto = PurchaseCityExpansionRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = purchaseCityExpansionRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("PurchaseCityExpansionRequest exception", e);
+		}
+	}
+
+	public PurchaseCityExpansionRequestProto getPurchaseCityExpansionRequestProto() {
+		return purchaseCityExpansionRequestProto;
+	}
+
+	public void setPurchaseCityExpansionRequestProto(
+			PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto) {
+		this.purchaseCityExpansionRequestProto = purchaseCityExpansionRequestProto;
+		playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseCityExpansionRequestEvent [purchaseCityExpansionRequestProto="
+				+ purchaseCityExpansionRequestProto + "]";
+	}
+
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 
 //user can have multiple of these (different clanIds)
 public class ClanEventPersistentUserReward implements Serializable {
-	
+
 	private static final long serialVersionUID = -6109900992140941207L;
-	
+
 	private String id;
 	private String userId;
 	private Date crsStartTime;
@@ -18,24 +18,15 @@ public class ClanEventPersistentUserReward implements Serializable {
 	private int quantity;
 	private int clanEventPersistentId;
 	private Date timeRedeemed;
-	
-	public ClanEventPersistentUserReward()
-	{
+
+	public ClanEventPersistentUserReward() {
 		super();
 	}
 
-	public ClanEventPersistentUserReward(
-		String id,
-		String userId,
-		Date crsStartTime,
-		int crsId,
-		Date crsEndTime,
-		String resourceType,
-		int staticDataId,
-		int quantity,
-		int clanEventPersistentId,
-		Date timeRedeemed )
-	{
+	public ClanEventPersistentUserReward(String id, String userId,
+			Date crsStartTime, int crsId, Date crsEndTime, String resourceType,
+			int staticDataId, int quantity, int clanEventPersistentId,
+			Date timeRedeemed) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -133,10 +124,11 @@ public class ClanEventPersistentUserReward implements Serializable {
 	public String toString() {
 		return "ClanEventPersistentUserReward [id=" + id + ", userId=" + userId
 				+ ", crsStartTime=" + crsStartTime + ", crsId=" + crsId
-				+ ", crsEndTime=" + crsEndTime + ", resourceType=" + resourceType
-				+ ", staticDataId=" + staticDataId + ", quantity=" + quantity
-				+ ", clanEventPersistentId=" + clanEventPersistentId
-				+ ", timeRedeemed=" + timeRedeemed + "]";
+				+ ", crsEndTime=" + crsEndTime + ", resourceType="
+				+ resourceType + ", staticDataId=" + staticDataId
+				+ ", quantity=" + quantity + ", clanEventPersistentId="
+				+ clanEventPersistentId + ", timeRedeemed=" + timeRedeemed
+				+ "]";
 	}
-	
+
 }

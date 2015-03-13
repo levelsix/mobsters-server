@@ -3,15 +3,15 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class ClanEventPersistent implements Serializable {
-	
+
 	private static final long serialVersionUID = -3881447951245558541L;
-	
+
 	private int id;
 	private String dayOfWeek;
 	private int startHour;
 	private int eventDurationMinutes;
 	private int clanRaidId;
-	
+
 	public ClanEventPersistent(int id, String dayOfWeek, int startHour,
 			int eventDurationMinutes, int clanRaidId) {
 		super();
@@ -68,5 +68,5 @@ public class ClanEventPersistent implements Serializable {
 				+ ", startHour=" + startHour + ", eventDurationMinutes="
 				+ eventDurationMinutes + ", clanRaidId=" + clanRaidId + "]";
 	}
-	
+
 }

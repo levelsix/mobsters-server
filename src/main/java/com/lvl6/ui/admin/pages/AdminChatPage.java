@@ -20,22 +20,26 @@ public class AdminChatPage extends TemplatePage {
 
 	private static final long serialVersionUID = -1728365297134290240L;
 	//private static Logger log = LoggerFactory.getLogger(AdminChatPage.class);
-	
+
 	protected Integer page = 0;
 	protected Integer itemsPerPage = 50;
 	protected List<AdminChatPost> messages;
 
-	
-	protected List<AdminChatPost> getAdminChatMessages(){
-		if(messages == null) {
-			messages = AppContext.getApplicationContext().getBean(AdminChatUtil.class).getMessagesToAndFromAdmin(page*itemsPerPage, itemsPerPage);
+	protected List<AdminChatPost> getAdminChatMessages() {
+		if (messages == null) {
+			messages = AppContext
+					.getApplicationContext()
+					.getBean(AdminChatUtil.class)
+					.getMessagesToAndFromAdmin(page * itemsPerPage,
+							itemsPerPage);
 		}
 		return messages;
 	}
-	
+
 	public AdminChatPage() {
 		super();
-		if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
+		if (SecurityContextHolder.getContext() != null
+				&& SecurityContextHolder.getContext().getAuthentication() != null) {
 			//String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			//log.info("Loading Admin Chat Page for: {}", user);
 		} else {
@@ -45,31 +49,29 @@ public class AdminChatPage extends TemplatePage {
 		setupMessages();
 		add(abstractAjaxTimerBehavior);
 	}
-	
 
 	protected void setupMessages() {
-		ListView<AdminChatPost> list = new ListView<AdminChatPost>("adminMessages", getAdminChatMessages()) {
+		ListView<AdminChatPost> list = new ListView<AdminChatPost>(
+				"adminMessages", getAdminChatMessages()) {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void populateItem(ListItem<AdminChatPost> itm) {
-				itm.add(new AdminMessagePanel("adminMessage", itm.getModelObject()));
+				itm.add(new AdminMessagePanel("adminMessage", itm
+						.getModelObject()));
 			}
 		};
 		add(list);
 	}
-	
-	
 
-	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(Duration.seconds(360))
-	{
+	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(
+			Duration.seconds(360)) {
 		private static final long serialVersionUID = 5721917435743521271L;
 
 		@Override
-		protected void onTimer(AjaxRequestTarget target)
-		{
+		protected void onTimer(AjaxRequestTarget target) {
 			setResponsePage(AdminChatPage.class);
 		}
 	};
-	
 
 }

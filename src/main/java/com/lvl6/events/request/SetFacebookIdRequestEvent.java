@@ -12,32 +12,33 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 
 public class SetFacebookIdRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private SetFacebookIdRequestProto setFacebookIdRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      setFacebookIdRequestProto = SetFacebookIdRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = setFacebookIdRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SetFacebookIdRequest", e);
-    }
-  }
+	private SetFacebookIdRequestProto setFacebookIdRequestProto;
 
-  public SetFacebookIdRequestProto getSetFacebookIdRequestProto() {
-    return setFacebookIdRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			setFacebookIdRequestProto = SetFacebookIdRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = setFacebookIdRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SetFacebookIdRequest", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "SetFacebookIdRequestEvent [setFacebookIdRequestProto="
-		  + setFacebookIdRequestProto
-		  + "]";
-  }
-  
+	public SetFacebookIdRequestProto getSetFacebookIdRequestProto() {
+		return setFacebookIdRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "SetFacebookIdRequestEvent [setFacebookIdRequestProto="
+				+ setFacebookIdRequestProto + "]";
+	}
+
 }

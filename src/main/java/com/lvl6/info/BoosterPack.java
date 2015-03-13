@@ -3,9 +3,9 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class BoosterPack implements Serializable {
-	
+
 	private static final long serialVersionUID = 1549953377153488834L;
-	
+
 	private int id;
 	private String name;
 	private int gemPrice;//prices for all booster packs should be same
@@ -18,21 +18,12 @@ public class BoosterPack implements Serializable {
 	private boolean displayToUser;
 	private int riggedId; //if pack is/isn't rigged then this is/isn't set
 	private String type;
-  
-	public BoosterPack(
-		int id,
-		String name,
-		int gemPrice,
-		String listBackgroundImgName,
-		String listDescription,
-		String navBarImgName,
-		String navTitleImgName,
-		String machineImgName,
-		int expPerItem,
-		boolean displayToUser,
-		int riggedId,
-		String type )
-	{
+
+	public BoosterPack(int id, String name, int gemPrice,
+			String listBackgroundImgName, String listDescription,
+			String navBarImgName, String navTitleImgName,
+			String machineImgName, int expPerItem, boolean displayToUser,
+			int riggedId, String type) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -112,74 +103,47 @@ public class BoosterPack implements Serializable {
 		this.machineImgName = machineImgName;
 	}
 
-	public int getExpPerItem()
-	{
+	public int getExpPerItem() {
 		return expPerItem;
 	}
 
-	public void setExpPerItem( int expPerItem )
-	{
+	public void setExpPerItem(int expPerItem) {
 		this.expPerItem = expPerItem;
 	}
 
-	public boolean isDisplayToUser()
-	{
+	public boolean isDisplayToUser() {
 		return displayToUser;
 	}
 
-	public void setDisplayToUser( boolean displayToUser )
-	{
+	public void setDisplayToUser(boolean displayToUser) {
 		this.displayToUser = displayToUser;
 	}
 
-	public int getRiggedId()
-	{
+	public int getRiggedId() {
 		return riggedId;
 	}
 
-	public void setRiggedId( int riggedId )
-	{
+	public void setRiggedId(int riggedId) {
 		this.riggedId = riggedId;
 	}
 
-	public String getType()
-	{
+	public String getType() {
 		return type;
 	}
 
-	public void setType( String type )
-	{
+	public void setType(String type) {
 		this.type = type;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "BoosterPack [id="
-			+ id
-			+ ", name="
-			+ name
-			+ ", gemPrice="
-			+ gemPrice
-			+ ", listBackgroundImgName="
-			+ listBackgroundImgName
-			+ ", listDescription="
-			+ listDescription
-			+ ", navBarImgName="
-			+ navBarImgName
-			+ ", navTitleImgName="
-			+ navTitleImgName
-			+ ", machineImgName="
-			+ machineImgName
-			+ ", expPerItem="
-			+ expPerItem
-			+ ", displayToUser="
-			+ displayToUser
-			+ ", riggedId="
-			+ riggedId
-			+ ", type="
-			+ type
-			+ "]";
+	public String toString() {
+		return "BoosterPack [id=" + id + ", name=" + name + ", gemPrice="
+				+ gemPrice + ", listBackgroundImgName=" + listBackgroundImgName
+				+ ", listDescription=" + listDescription + ", navBarImgName="
+				+ navBarImgName + ", navTitleImgName=" + navTitleImgName
+				+ ", machineImgName=" + machineImgName + ", expPerItem="
+				+ expPerItem + ", displayToUser=" + displayToUser
+				+ ", riggedId=" + riggedId + ", type=" + type + "]";
 	}
 
 }

@@ -30,200 +30,213 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-  @Component @DependsOn("gameServer") public class LoadPlayerCityController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class LoadPlayerCityController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
-  @Autowired
-  protected Locker locker;
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
+	@Autowired
+	protected Locker locker;
 
-  @Autowired
-  protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
-  
-  @Autowired
-  protected ClanRetrieveUtils2 clanRetrieveUtils;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
+	@Autowired
+	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
-  public LoadPlayerCityController() {
-    numAllocatedThreads = 10;
-  }
+	@Autowired
+	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new LoadPlayerCityRequestEvent();
-  }
+	@Autowired
+	protected ClanRetrieveUtils2 clanRetrieveUtils;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_LOAD_PLAYER_CITY_EVENT;
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent)event).getLoadPlayerCityRequestProto();
+	public LoadPlayerCityController() {
+		numAllocatedThreads = 10;
+	}
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    String cityOwnerId = reqProto.getCityOwnerUuid();
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new LoadPlayerCityRequestEvent();
+	}
 
-    LoadPlayerCityResponseProto.Builder resBuilder = LoadPlayerCityResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_LOAD_PLAYER_CITY_EVENT;
+	}
 
-    resBuilder.setStatus(LoadPlayerCityStatus.SUCCESS);
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent) event)
+				.getLoadPlayerCityRequestProto();
 
-    UUID userUuid = null;
-    UUID cityOwnerUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
-      cityOwnerUuid = UUID.fromString(cityOwnerId);
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		String cityOwnerId = reqProto.getCityOwnerUuid();
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s, cityOwnerId=%s",
-          userId, cityOwnerId), e);
-      invalidUuids = true;
-    }
+		LoadPlayerCityResponseProto.Builder resBuilder = LoadPlayerCityResponseProto
+				.newBuilder();
+		resBuilder.setSender(senderProto);
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
-      LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+		resBuilder.setStatus(LoadPlayerCityStatus.SUCCESS);
 
-    //I guess in case someone attacks this guy while loading the city, want
-    //both people to have one consistent view
-    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
-    try {
-      User owner = getUserRetrieveUtils().getUserById(cityOwnerId);
+		UUID userUuid = null;
+		UUID cityOwnerUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			cityOwnerUuid = UUID.fromString(cityOwnerId);
 
-      List<StructureForUser> userStructs = getUserStructRetrieveUtils().getUserStructsForUser(cityOwnerId);
-      setResponseUserStructs(resBuilder, userStructs);
-      setObstacleStuff(resBuilder, cityOwnerId);
-      
-//      List<ExpansionPurchaseForUser> userCityExpansionDataList = geExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserUuid());
-//      List<UserCityExpansionDataProto> userCityExpansionDataProtoList = new ArrayList<UserCityExpansionDataProto>();
-//      if (userCityExpansionDataList != null) {
-//    	for(ExpansionPurchaseForUser uced : userCityExpansionDataList) {
-//    		userCityExpansionDataProtoList.add(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
-//    	}
-//        resBuilder.addAllUserCityExpansionDataProtoList(userCityExpansionDataProtoList);
-//      }
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s, cityOwnerId=%s", userId,
+					cityOwnerId), e);
+			invalidUuids = true;
+		}
 
-      if (owner == null) {
-        log.error(String.format(
-        	"owner is null for ownerId=%s", cityOwnerId));
-      } else if (cityOwnerId.equals(userId)) {
-    	  resBuilder.setCityOwner(senderProto);
-      }
-      else {
-    	  String clanId = owner.getClanId(); 
-    	  Clan clan = null;
-    	  if (clanId != null ) {
-    		  clan = getClanRetrieveUtils().getClanWithId(clanId);
-    	  }
-    	  resBuilder.setCityOwner(CreateInfoProtoUtils
-    		  .createMinimumUserProtoFromUserAndClan(owner, clan));
-      }
-      
-      LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setLoadPlayerCityResponseProto(resBuilder.build());  
-      server.writeEvent(resEvent);
-      
-    } catch (Exception e) {
-      log.error("exception in LoadPlayerCity processEvent", e);
-      try {
-        resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
-        LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(userId);
-        resEvent.setTag(event.getTag());
-        resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-        server.writeEvent(resEvent);
-      } catch (Exception e2) {
-        log.error("exception2 in SubmitMonsterEnhancementController processEvent", e);
-      }
-    } finally {
-      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
-    }
-  }
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-  private void setResponseUserStructs(Builder resBuilder,
-      List<StructureForUser> userStructs) {
-    if (userStructs != null) {
-      for (StructureForUser userStruct : userStructs) {
-        resBuilder.addOwnerNormStructs(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
-      }
-    } else {
-      resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
-      log.error("user structs found for user is null");
-    }
-  }
-  
-  private void setObstacleStuff(Builder resBuilder, String userId) {
-  	List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
-  			.getUserObstacleForUser(userId);
-  	
-  	if (null == ofuList) {
-  		return;
-  	}
-  	
-  	for (ObstacleForUser ofu : ofuList) {
-  		UserObstacleProto uop = CreateInfoProtoUtils.createUserObstacleProto(ofu);
-  		resBuilder.addObstacles(uop);
-  	}
-  	
-  }
+		//I guess in case someone attacks this guy while loading the city, want
+		//both people to have one consistent view
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+			User owner = getUserRetrieveUtils().getUserById(cityOwnerId);
 
-  public Locker getLocker() {
-	  return locker;
-  }
+			List<StructureForUser> userStructs = getUserStructRetrieveUtils()
+					.getUserStructsForUser(cityOwnerId);
+			setResponseUserStructs(resBuilder, userStructs);
+			setObstacleStuff(resBuilder, cityOwnerId);
 
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+			//      List<ExpansionPurchaseForUser> userCityExpansionDataList = geExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserUuid());
+			//      List<UserCityExpansionDataProto> userCityExpansionDataProtoList = new ArrayList<UserCityExpansionDataProto>();
+			//      if (userCityExpansionDataList != null) {
+			//    	for(ExpansionPurchaseForUser uced : userCityExpansionDataList) {
+			//    		userCityExpansionDataProtoList.add(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
+			//    	}
+			//        resBuilder.addAllUserCityExpansionDataProtoList(userCityExpansionDataProtoList);
+			//      }
 
-  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
-    return userStructRetrieveUtils;
-  }
+			if (owner == null) {
+				log.error(String.format("owner is null for ownerId=%s",
+						cityOwnerId));
+			} else if (cityOwnerId.equals(userId)) {
+				resBuilder.setCityOwner(senderProto);
+			} else {
+				String clanId = owner.getClanId();
+				Clan clan = null;
+				if (clanId != null) {
+					clan = getClanRetrieveUtils().getClanWithId(clanId);
+				}
+				resBuilder.setCityOwner(CreateInfoProtoUtils
+						.createMinimumUserProtoFromUserAndClan(owner, clan));
+			}
 
-  public void setUserStructRetrieveUtils(
-      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
-    this.userStructRetrieveUtils = userStructRetrieveUtils;
-  }
+			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
-  public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
-    return obstacleForUserRetrieveUtil;
-  }
+		} catch (Exception e) {
+			log.error("exception in LoadPlayerCity processEvent", e);
+			try {
+				resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+				LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in SubmitMonsterEnhancementController processEvent",
+						e);
+			}
+		} finally {
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
 
-  public void setObstacleForUserRetrieveUtil(
-      ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
-    this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-  }
+	private void setResponseUserStructs(Builder resBuilder,
+			List<StructureForUser> userStructs) {
+		if (userStructs != null) {
+			for (StructureForUser userStruct : userStructs) {
+				resBuilder
+						.addOwnerNormStructs(CreateInfoProtoUtils
+								.createFullUserStructureProtoFromUserstruct(userStruct));
+			}
+		} else {
+			resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+			log.error("user structs found for user is null");
+		}
+	}
 
-  public ClanRetrieveUtils2 getClanRetrieveUtils() {
-    return clanRetrieveUtils;
-  }
+	private void setObstacleStuff(Builder resBuilder, String userId) {
+		List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
+				.getUserObstacleForUser(userId);
 
-  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
-    this.clanRetrieveUtils = clanRetrieveUtils;
-  }
+		if (null == ofuList) {
+			return;
+		}
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+		for (ObstacleForUser ofu : ofuList) {
+			UserObstacleProto uop = CreateInfoProtoUtils
+					.createUserObstacleProto(ofu);
+			resBuilder.addObstacles(uop);
+		}
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
-  
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+		return userStructRetrieveUtils;
+	}
+
+	public void setUserStructRetrieveUtils(
+			StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+		this.userStructRetrieveUtils = userStructRetrieveUtils;
+	}
+
+	public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
+		return obstacleForUserRetrieveUtil;
+	}
+
+	public void setObstacleForUserRetrieveUtil(
+			ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
+		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+	}
+
+	public ClanRetrieveUtils2 getClanRetrieveUtils() {
+		return clanRetrieveUtils;
+	}
+
+	public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+		this.clanRetrieveUtils = clanRetrieveUtils;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
+
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
 }

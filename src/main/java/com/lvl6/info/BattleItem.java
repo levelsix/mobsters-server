@@ -24,7 +24,7 @@ public class BattleItem implements Serializable {
 	}
 
 	private static final long serialVersionUID = -1293698119576984508L;
-	
+
 	private int id;
 	private String type;
 	private String battleItemCategory;
@@ -37,11 +37,8 @@ public class BattleItem implements Serializable {
 	private int priority;
 	private int minutesToCreate;
 	private int inBattleGemCost;
-	
 
-	
-	public BattleItem()
-	{
+	public BattleItem() {
 		super();
 	}
 
@@ -141,7 +138,6 @@ public class BattleItem implements Serializable {
 				+ ", inBattleGemCost=" + inBattleGemCost + "]";
 	}
 
-
 	public int getMinutesToCreate() {
 		return minutesToCreate;
 	}
@@ -157,10 +153,5 @@ public class BattleItem implements Serializable {
 	public void setInBattleGemCost(int inBattleGemCost) {
 		this.inBattleGemCost = inBattleGemCost;
 	}
-
-
-	
-	
-	
 
 }

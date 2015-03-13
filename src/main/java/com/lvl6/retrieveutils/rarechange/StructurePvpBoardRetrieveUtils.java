@@ -16,9 +16,12 @@ import com.lvl6.info.StructurePvpBoard;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class StructurePvpBoardRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class StructurePvpBoardRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, StructurePvpBoard> structIdsToPvpBoards;
 
@@ -35,7 +38,7 @@ import com.lvl6.utils.DBConnection;
 	public static StructurePvpBoard getPvpBoardForStructId(int structId) {
 		log.debug("retrieve struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
-			setStaticStructIdsToPvpBoards();      
+			setStaticStructIdsToPvpBoards();
 		}
 		return structIdsToPvpBoards.get(structId);
 	}
@@ -43,26 +46,31 @@ import com.lvl6.utils.DBConnection;
 	public static StructurePvpBoard getUpgradedPvpBoardForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
-			setStaticStructIdsToPvpBoards();      
+			setStaticStructIdsToPvpBoards();
 		}
-		Structure curStruct = StructureRetrieveUtils.getUpgradedStructForStructId(structId);
+		Structure curStruct = StructureRetrieveUtils
+				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
-			StructurePvpBoard upgradedStruct = structIdsToPvpBoards.get(successorStructId);
+			StructurePvpBoard upgradedStruct = structIdsToPvpBoards
+					.get(successorStructId);
 			return upgradedStruct;
 		}
 		return null;
 	}
 
-	public static StructurePvpBoard getPredecessorPvpBoardForStructId(int structId) {
+	public static StructurePvpBoard getPredecessorPvpBoardForStructId(
+			int structId) {
 		log.debug("retrieve predecessor struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
-			setStaticStructIdsToPvpBoards();      
+			setStaticStructIdsToPvpBoards();
 		}
-		Structure curStruct = StructureRetrieveUtils.getUpgradedStructForStructId(structId);
+		Structure curStruct = StructureRetrieveUtils
+				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
-			StructurePvpBoard predecessorStruct = structIdsToPvpBoards.get(predecessorStructId);
+			StructurePvpBoard predecessorStruct = structIdsToPvpBoards
+					.get(predecessorStructId);
 			return predecessorStruct;
 		}
 		return null;
@@ -82,17 +90,18 @@ import com.lvl6.utils.DBConnection;
 						rs.last();
 						rs.beforeFirst();
 						HashMap<Integer, StructurePvpBoard> structIdsToStructsTemp = new HashMap<Integer, StructurePvpBoard>();
-						while(rs.next()) {
+						while (rs.next()) {
 							StructurePvpBoard struct = convertRSRowToPvpBoard(rs);
 							if (struct != null)
-								structIdsToStructsTemp.put(struct.getStructId(), struct);
+								structIdsToStructsTemp.put(
+										struct.getStructId(), struct);
 						}
 						structIdsToPvpBoards = structIdsToStructsTemp;
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("PvpBoard retrieve db error.", e);
@@ -108,9 +117,11 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructurePvpBoard convertRSRowToPvpBoard(ResultSet rs) throws SQLException {
+	private static StructurePvpBoard convertRSRowToPvpBoard(ResultSet rs)
+			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_PVP_BOARD__STRUCT_ID);
-		int powerLimit = rs.getInt(DBConstants.STRUCTURE_PVP_BOARD__POWER_LIMIT);
+		int powerLimit = rs
+				.getInt(DBConstants.STRUCTURE_PVP_BOARD__POWER_LIMIT);
 
 		return new StructurePvpBoard(structId, powerLimit);
 	}

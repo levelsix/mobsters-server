@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent {
 
-  private ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto;
-  
-  public ExchangeGemsForResourcesResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = exchangeGemsForResourcesResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto;
 
-  public void setExchangeGemsForResourcesResponseProto(ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto) {
-    this.exchangeGemsForResourcesResponseProto = exchangeGemsForResourcesResponseProto;
-  }
+	public ExchangeGemsForResourcesResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = exchangeGemsForResourcesResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setExchangeGemsForResourcesResponseProto(
+			ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto) {
+		this.exchangeGemsForResourcesResponseProto = exchangeGemsForResourcesResponseProto;
+	}
 
 }

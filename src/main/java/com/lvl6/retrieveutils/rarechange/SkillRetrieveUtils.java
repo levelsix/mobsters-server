@@ -15,9 +15,12 @@ import com.lvl6.info.Skill;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class SkillRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class SkillRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, Skill> idsToSkills;
 
@@ -32,8 +35,7 @@ import com.lvl6.utils.DBConnection;
 	}
 
 	public static Skill getSkillForId(int skillId) {
-		log.debug(String.format(
-			"retrieve skill data for skill=%s", skillId));
+		log.debug(String.format("retrieve skill data for skill=%s", skillId));
 		if (null == idsToSkills) {
 			setStaticIdsToSkills();
 		}
@@ -53,10 +55,9 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Skill> idsToSkillsTemp =
-							new HashMap<Integer, Skill>();
+						Map<Integer, Skill> idsToSkillsTemp = new HashMap<Integer, Skill>();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							Skill skill = convertRSRowToSkill(rs);
 							if (skill == null) {
 								continue;
@@ -71,7 +72,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("skill retrieve db error.", e);
@@ -92,51 +93,49 @@ import com.lvl6.utils.DBConnection;
 		String name = rs.getString(DBConstants.SKILL__NAME);
 		int orbCost = rs.getInt(DBConstants.SKILL__ORB_COST);
 		String type = rs.getString(DBConstants.SKILL__TYPE);
-		String activationType = rs.getString(DBConstants.SKILL__ACTIVATION_TYPE);
+		String activationType = rs
+				.getString(DBConstants.SKILL__ACTIVATION_TYPE);
 		String defDesc = rs.getString(DBConstants.SKILL__DEFENSIVE_DESC);
 		String offDesc = rs.getString(DBConstants.SKILL__OFFENSIVE_DESC);
 		String imgNamePrefix = rs.getString(DBConstants.SKILL__IMG_NAME_PREFIX);
-//		String iconImgName = rs.getString(DBConstants.SKILL__ICON_IMG_NAME);
-//		String logoImgName = rs.getString(DBConstants.SKILL__LOGO_IMG_NAME);
-		int skillEffectDuration = rs.getInt(DBConstants.SKILL__SKILL_EFFECT_DURATION);
+		//		String iconImgName = rs.getString(DBConstants.SKILL__ICON_IMG_NAME);
+		//		String logoImgName = rs.getString(DBConstants.SKILL__LOGO_IMG_NAME);
+		int skillEffectDuration = rs
+				.getInt(DBConstants.SKILL__SKILL_EFFECT_DURATION);
 		String shortDefDesc = rs.getString(DBConstants.SKILL__SHORT_DEF_DESC);
 		String shortOffDesc = rs.getString(DBConstants.SKILL__SHORT_OFF_DESC);
-			
-		
+
 		int predecId = rs.getInt(DBConstants.SKILL__PREDEC_ID);
 		if (rs.wasNull()) {
 			predecId = 0;
 		}
-		
+
 		int succId = rs.getInt(DBConstants.SKILL__SUCC_ID);
 		if (rs.wasNull()) {
 			succId = 0;
 		}
-		
+
 		if (null != type) {
-	    	String newType = type.trim().toUpperCase();
-	    	if (!type.equals(newType)) {
-	    		log.error(String.format(
-	    			"type incorrect: %s, id=%s",
-	    			type, id));
-	    		type = newType;
-	    	}
-	    }
-		
+			String newType = type.trim().toUpperCase();
+			if (!type.equals(newType)) {
+				log.error(String.format("type incorrect: %s, id=%s", type, id));
+				type = newType;
+			}
+		}
+
 		if (null != activationType) {
-	    	String newActivationType = activationType.trim().toUpperCase();
-	    	if (!activationType.equals(newActivationType)) {
-	    		log.error(String.format(
-	    			"activationType incorrect: %s, id=%s",
-	    			activationType, id));
-	    		activationType = newActivationType;
-	    	}
-	    }
-		
+			String newActivationType = activationType.trim().toUpperCase();
+			if (!activationType.equals(newActivationType)) {
+				log.error(String.format("activationType incorrect: %s, id=%s",
+						activationType, id));
+				activationType = newActivationType;
+			}
+		}
+
 		Skill skill = new Skill(id, name, orbCost, type, activationType,
-			predecId, succId, defDesc, offDesc, imgNamePrefix,
-			skillEffectDuration, shortDefDesc, shortOffDesc);//, logoImgName);
+				predecId, succId, defDesc, offDesc, imgNamePrefix,
+				skillEffectDuration, shortDefDesc, shortOffDesc);//, logoImgName);
 		return skill;
 	}
-	
+
 }

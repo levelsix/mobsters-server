@@ -7,25 +7,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement
 public class Response {
 
-    @JsonProperty("returnCode")
-    protected int returnCode = 0;
+	@JsonProperty("returnCode")
+	protected int returnCode = 0;
 
-    @JsonProperty("error")
-    protected String error;
+	@JsonProperty("error")
+	protected String error;
 
-    public int getReturnCode() {
-        return this.returnCode;
-    }
+	public int getReturnCode() {
+		return this.returnCode;
+	}
 
-    public void setReturnCode(int returnCode) {
-        this.returnCode = returnCode;
-    }
+	public void setReturnCode(int returnCode) {
+		this.returnCode = returnCode;
+	}
 
-    public String getError() {
-        return error;
-    }
+	public String getError() {
+		return error;
+	}
 
-    public void setError(String error) {
-        this.error = error;
-    }
+	public void setError(String error) {
+		this.error = error;
+	}
 }

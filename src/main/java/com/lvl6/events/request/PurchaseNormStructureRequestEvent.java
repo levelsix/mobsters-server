@@ -12,32 +12,34 @@ import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 
 public class PurchaseNormStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private PurchaseNormStructureRequestProto purchaseNormStructureRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      purchaseNormStructureRequestProto = PurchaseNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseNormStructureRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("PurchaseNormStructureRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public PurchaseNormStructureRequestProto getPurchaseNormStructureRequestProto() {
-    return purchaseNormStructureRequestProto;
-  }
+	private PurchaseNormStructureRequestProto purchaseNormStructureRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "PurchaseNormStructureRequestEvent [purchaseNormStructureRequestProto="
-		  + purchaseNormStructureRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			purchaseNormStructureRequestProto = PurchaseNormStructureRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = purchaseNormStructureRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("PurchaseNormStructureRequest exception", e);
+		}
+	}
+
+	public PurchaseNormStructureRequestProto getPurchaseNormStructureRequestProto() {
+		return purchaseNormStructureRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseNormStructureRequestEvent [purchaseNormStructureRequestProto="
+				+ purchaseNormStructureRequestProto + "]";
+	}
+
 }

@@ -12,32 +12,34 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto
 
 public class IncreaseMonsterInventorySlotRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private IncreaseMonsterInventorySlotRequestProto increaseMonsterInventorySlotRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      increaseMonsterInventorySlotRequestProto = IncreaseMonsterInventorySlotRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = increaseMonsterInventorySlotRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("IncreaseMonsterInventorySlotRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public IncreaseMonsterInventorySlotRequestProto getIncreaseMonsterInventorySlotRequestProto() {
-    return increaseMonsterInventorySlotRequestProto;
-  }
+	private IncreaseMonsterInventorySlotRequestProto increaseMonsterInventorySlotRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "IncreaseMonsterInventorySlotRequestEvent [increaseMonsterInventorySlotRequestProto="
-		  + increaseMonsterInventorySlotRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			increaseMonsterInventorySlotRequestProto = IncreaseMonsterInventorySlotRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = increaseMonsterInventorySlotRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("IncreaseMonsterInventorySlotRequest exception", e);
+		}
+	}
+
+	public IncreaseMonsterInventorySlotRequestProto getIncreaseMonsterInventorySlotRequestProto() {
+		return increaseMonsterInventorySlotRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "IncreaseMonsterInventorySlotRequestEvent [increaseMonsterInventorySlotRequestProto="
+				+ increaseMonsterInventorySlotRequestProto + "]";
+	}
+
 }

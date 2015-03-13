@@ -13,8 +13,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class CustomizePvpBoardObstacleAction
-{
+public class CustomizePvpBoardObstacleAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -25,13 +24,12 @@ public class CustomizePvpBoardObstacleAction
 	protected InsertUtil insertUtil;
 	protected DeleteUtil deleteUtil;
 
-	public CustomizePvpBoardObstacleAction(String userId,
+	public CustomizePvpBoardObstacleAction(
+			String userId,
 			Collection<PvpBoardObstacleForUser> nuOrUpdated,
 			List<Integer> removeUserPvpBoardObstacleIds,
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
-			InsertUtil insertUtil,
-			DeleteUtil deleteUtil)
-	{
+			InsertUtil insertUtil, DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.nuOrUpdated = nuOrUpdated;
@@ -62,7 +60,6 @@ public class CustomizePvpBoardObstacleAction
 	//	private Map<String, String> reasonsForChanges;
 	//	private Map<String, String> details;
 
-
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
 
@@ -91,7 +88,7 @@ public class CustomizePvpBoardObstacleAction
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (nuOrUpdated.isEmpty() && removeUserPvpBoardObstacleIds.isEmpty()) {
-			log.error( "nuOrUpdated and removeUserPvpBoardObstacleIds are empty" );
+			log.error("nuOrUpdated and removeUserPvpBoardObstacleIds are empty");
 			return false;
 		}
 
@@ -119,16 +116,17 @@ public class CustomizePvpBoardObstacleAction
 
 		//delete obstacles first
 		if (!removeUserPvpBoardObstacleIds.isEmpty()) {
-			int numDeleted = deleteUtil.deletePvpBoardObstacleForUser(removeUserPvpBoardObstacleIds, userId);
-			log.info("numDeleted={}. deletedIds={}",
-					numDeleted, removeUserPvpBoardObstacleIds);
+			int numDeleted = deleteUtil.deletePvpBoardObstacleForUser(
+					removeUserPvpBoardObstacleIds, userId);
+			log.info("numDeleted={}. deletedIds={}", numDeleted,
+					removeUserPvpBoardObstacleIds);
 		}
 
 		//insert/update the others
 		if (!nuOrUpdated.isEmpty()) {
-			int numInserted = insertUtil.insertIntoUpdatePvpBoardObstacleForUser(nuOrUpdated);
-			log.info("numInserted={}, nuOrUpdated={}",
-					numInserted, nuOrUpdated);
+			int numInserted = insertUtil
+					.insertIntoUpdatePvpBoardObstacleForUser(nuOrUpdated);
+			log.info("numInserted={}, nuOrUpdated={}", numInserted, nuOrUpdated);
 		}
 
 		//		prepCurrencyHistory();
@@ -171,7 +169,6 @@ public class CustomizePvpBoardObstacleAction
 	//			details.put(key.toString(), value);
 	//		}
 	//	}
-
 
 	//	public Map<String, Integer> getCurrencyDeltas() {
 	//		return currencyDeltas;

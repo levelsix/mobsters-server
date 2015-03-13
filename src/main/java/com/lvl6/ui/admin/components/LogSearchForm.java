@@ -8,12 +8,11 @@ import org.apache.wicket.model.CompoundPropertyModel;
 public class LogSearchForm extends Form<LogSearchInputModel> {
 
 	public LogSearchForm(String id) {
-		super(id, new CompoundPropertyModel<LogSearchInputModel>(new LogSearchInputModel()));
+		super(id, new CompoundPropertyModel<LogSearchInputModel>(
+				new LogSearchInputModel()));
 		setup();
 	}
-	
-	
-	
+
 	protected void setup() {
 		add(new DateTimeField("start"));
 		add(new DateTimeField("end"));
@@ -23,14 +22,6 @@ public class LogSearchForm extends Form<LogSearchInputModel> {
 		add(new TextField<Integer>("offset"));
 		add(new TextField<Integer>("show"));
 	}
-	
-	
-	
-	
-
-
-
-
 
 	private static final long serialVersionUID = 1L;
 

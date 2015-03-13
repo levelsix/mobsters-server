@@ -1,13 +1,9 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,21 +12,17 @@ import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.Builder;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class AvengeClanMateAction
-{
+public class AvengeClanMateAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -44,20 +36,15 @@ public class AvengeClanMateAction
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 	private InsertUtil insertUtil;
-	
 
-	public AvengeClanMateAction(
-		String avengerId,
-		String clanId,
-		String clanAvengeId,
-		ClanAvengeUser cau,
-		ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
-		UserRetrieveUtils2 userRetrieveUtil,
-		HazelcastPvpUtil hazelcastPvpUtil,
-		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil,
-		InsertUtil insertUtil )
-	{
+	public AvengeClanMateAction(String avengerId, String clanId,
+			String clanAvengeId, ClanAvengeUser cau,
+			ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
+			UserRetrieveUtils2 userRetrieveUtil,
+			HazelcastPvpUtil hazelcastPvpUtil,
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil,
+			InsertUtil insertUtil) {
 		super();
 		this.avengerId = avengerId;
 		this.avengerClanId = clanId;
@@ -71,20 +58,18 @@ public class AvengeClanMateAction
 		this.insertUtil = insertUtil;
 	}
 
-//	//encapsulates the return value from this Action Object
-//	static class AvengeClanMateResource {
-//		
-//		
-//		public AvengeClanMateResource() {
-//			
-//		}
-//	}
-//
-//	public AvengeClanMateResource execute() {
-//		
-//	}
-	
-
+	//	//encapsulates the return value from this Action Object
+	//	static class AvengeClanMateResource {
+	//		
+	//		
+	//		public AvengeClanMateResource() {
+	//			
+	//		}
+	//	}
+	//
+	//	public AvengeClanMateResource execute() {
+	//		
+	//	}
 
 	//derived state
 	protected String victimId;
@@ -95,68 +80,65 @@ public class AvengeClanMateAction
 	protected Map<String, Integer> victimMonsterDrops;
 	protected int expectedCashVictimLost;
 	protected int expectedOilVictimLost;
-	
-	
+
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
-		
+
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
-		
+
 		if (!valid) {
 			return;
 		}
-		
+
 		valid = verifySemantics(resBuilder);
-		
+
 		if (!valid) {
 			return;
 		}
-		
+
 		boolean success = writeChangesToDB(resBuilder);
 		if (!success) {
 			return;
 		}
-		
+
 		resBuilder.setStatus(AvengeClanMateStatus.SUCCESS);
 	}
-	
+
 	private boolean verifySyntax(Builder resBuilder) {
-		
+
 		if (null == cau) {
-			log.error( "client didn't send user who is avenging clan mate" );
+			log.error("client didn't send user who is avenging clan mate");
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	private boolean verifySemantics(Builder resBuilder) {
-		
+
 		List<ClanAvenge> caList = clanAvengeRetrieveUtil
-			.getClanAvengesForIds(Collections.singletonList(clanAvengeId));
-		
-		if (null == caList || caList.isEmpty())
-		{
+				.getClanAvengesForIds(Collections.singletonList(clanAvengeId));
+
+		if (null == caList || caList.isEmpty()) {
 			log.error("no ClanAvenge in db with id={}", clanAvengeId);
 			return false;
 		}
-		
+
 		ClanAvenge ca = caList.get(0);
 		victimId = ca.getAttackerId();
 		victim = userRetrieveUtil.getUserById(victimId);
-		if (null == victim)
-		{
-			log.error("invalid ClanAvenge, no user with id (the attackerId) {}",
-				ca);
+		if (null == victim) {
+			log.error(
+					"invalid ClanAvenge, no user with id (the attackerId) {}",
+					ca);
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	private boolean writeChangesToDB(Builder resBuilder)
-	{
+
+	private boolean writeChangesToDB(Builder resBuilder) {
 		/*
 		//prepare PvpProto arguments
 		victimPu = hazelcastPvpUtil.getPvpUser(victimId);
@@ -217,17 +199,16 @@ public class AvengeClanMateAction
 		expectedCashVictimLost = potentialResult.getUnsignedCashAttackerWins();
 		expectedOilVictimLost = potentialResult.getUnsignedOilAttackerWins();
 		*/
-		
-		
+
 		//insert into the clan_avenge_user table
-		int numInserted = insertUtil.insertIntoClanAvengeUser(
-			Collections.singletonList(cau));
+		int numInserted = insertUtil.insertIntoClanAvengeUser(Collections
+				.singletonList(cau));
 		log.info("numInserted int clan_avenge_user (should be 1) {}",
-			numInserted);
-		
+				numInserted);
+
 		return true;
 	}
-	
+
 	/*
 	//TODO: copy pasted from QueueUpController, figure another way to do this
 	private Map<String, List<MonsterForUser>> selectMonstersForUsers(
@@ -379,5 +360,5 @@ public class AvengeClanMateAction
 		return expectedOilVictimLost;
 	}
 	*/
-	
+
 }

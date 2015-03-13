@@ -21,10 +21,8 @@ public class HealthCheckImpl implements HealthCheck {
 
 	private static Logger log = LoggerFactory.getLogger(HealthCheckImpl.class);
 
-	
 	//TODO: Fix this class
-	
-	
+
 	/*
 	public MessageChannel getSendToServer() {
 		return sendToServer;
@@ -33,7 +31,7 @@ public class HealthCheckImpl implements HealthCheck {
 	public void setSendToServer(MessageChannel sendToServer) {
 		this.sendToServer = sendToServer;
 	}
-*/
+	*/
 	public QueueChannel getServerResponses() {
 		return serverResponses;
 	}
@@ -42,9 +40,9 @@ public class HealthCheckImpl implements HealthCheck {
 		this.serverResponses = serverResponses;
 	}
 
-/*
-	@Resource(name = "outboundFakeClientMessageChannel")
-	protected MessageChannel sendToServer;*/
+	/*
+		@Resource(name = "outboundFakeClientMessageChannel")
+		protected MessageChannel sendToServer;*/
 
 	@Resource(name = "inboundFakeClientChannel")
 	protected QueueChannel serverResponses;
@@ -126,13 +124,16 @@ public class HealthCheckImpl implements HealthCheck {
 	protected void checkNumberOfConnections() {
 		Field f;
 		try {
-			f = serverConnectionFactory.getClass().getDeclaredField("connections");
+			f = serverConnectionFactory.getClass().getDeclaredField(
+					"connections");
 			f.setAccessible(true);
 			@SuppressWarnings("unchecked")
-			Map<SocketChannel, TcpNioConnection> connections = (Map<SocketChannel, TcpNioConnection>) f.get(serverConnectionFactory);
-			if(connections != null && !connections.isEmpty()) {
-				log.info("ServerConnectionFactory.connections.size:  "+connections.size());
-			}else {
+			Map<SocketChannel, TcpNioConnection> connections = (Map<SocketChannel, TcpNioConnection>) f
+					.get(serverConnectionFactory);
+			if (connections != null && !connections.isEmpty()) {
+				log.info("ServerConnectionFactory.connections.size:  "
+						+ connections.size());
+			} else {
 				log.info("ServerConnectionFactory.connections is null or empty");
 			}
 		} catch (Throwable e1) {
@@ -153,7 +154,6 @@ public class HealthCheckImpl implements HealthCheck {
 		 */
 	}
 
-
 	@Override
 	public void logCurrentSystemInfo() {
 		Runtime runtime = Runtime.getRuntime();
@@ -164,9 +164,12 @@ public class HealthCheckImpl implements HealthCheck {
 		long freeMemory = runtime.freeMemory();
 		// long cpus = runtime.availableProcessors();
 		sb.append("free memory: " + format.format(freeMemory / 1024) + "\n");
-		sb.append("allocated memory: " + format.format(allocatedMemory / 1024)+ "\n");
+		sb.append("allocated memory: " + format.format(allocatedMemory / 1024)
+				+ "\n");
 		sb.append("max memory: " + format.format(maxMemory / 1024) + "\n");
-		sb.append("total free memory: "	+ format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024)+ "\n");
+		sb.append("total free memory: "
+				+ format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024)
+				+ "\n");
 		// sb.append("total cpus: " + cpus + "\n");
 		log.info("System info: {}", sb.toString());
 	}

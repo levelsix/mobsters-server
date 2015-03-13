@@ -12,32 +12,34 @@ import com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProto;
 
 public class RecordClanRaidStatsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RecordClanRaidStatsRequestProto recordClanRaidStatsRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      recordClanRaidStatsRequestProto = RecordClanRaidStatsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = recordClanRaidStatsRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RecordClanRaidStatsRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RecordClanRaidStatsRequestProto getRecordClanRaidStatsRequestProto() {
-    return recordClanRaidStatsRequestProto;
-  }
+	private RecordClanRaidStatsRequestProto recordClanRaidStatsRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "RecordClanRaidStatsRequestEvent [recordClanRaidStatsRequestProto="
-		  + recordClanRaidStatsRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			recordClanRaidStatsRequestProto = RecordClanRaidStatsRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = recordClanRaidStatsRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RecordClanRaidStatsRequest exception", e);
+		}
+	}
+
+	public RecordClanRaidStatsRequestProto getRecordClanRaidStatsRequestProto() {
+		return recordClanRaidStatsRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "RecordClanRaidStatsRequestEvent [recordClanRaidStatsRequestProto="
+				+ recordClanRaidStatsRequestProto + "]";
+	}
+
 }

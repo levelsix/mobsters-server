@@ -12,32 +12,33 @@ import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 
 public class SendGroupChatRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private SendGroupChatRequestProto sendGroupChatRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      sendGroupChatRequestProto = SendGroupChatRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = sendGroupChatRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SendGroupChatRequest exception", e);
-    }
-  }
+	private SendGroupChatRequestProto sendGroupChatRequestProto;
 
-  public SendGroupChatRequestProto getSendGroupChatRequestProto() {
-    return sendGroupChatRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			sendGroupChatRequestProto = SendGroupChatRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = sendGroupChatRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SendGroupChatRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "SendGroupChatRequestEvent [sendGroupChatRequestProto="
-		  + sendGroupChatRequestProto
-		  + "]";
-  }
-  
+	public SendGroupChatRequestProto getSendGroupChatRequestProto() {
+		return sendGroupChatRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "SendGroupChatRequestEvent [sendGroupChatRequestProto="
+				+ sendGroupChatRequestProto + "]";
+	}
+
 }

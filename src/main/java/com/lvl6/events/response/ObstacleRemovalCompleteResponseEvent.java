@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
 
-  private ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto;
-  
-  public ObstacleRemovalCompleteResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_OBSTACLE_REMOVAL_COMPLETE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = obstacleRemovalCompleteResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto;
 
-  public void setObstacleRemovalCompleteResponseProto(ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto) {
-    this.obstacleRemovalCompleteResponseProto = obstacleRemovalCompleteResponseProto;
-  }
+	public ObstacleRemovalCompleteResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_OBSTACLE_REMOVAL_COMPLETE_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = obstacleRemovalCompleteResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setObstacleRemovalCompleteResponseProto(
+			ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto) {
+		this.obstacleRemovalCompleteResponseProto = obstacleRemovalCompleteResponseProto;
+	}
 
 }

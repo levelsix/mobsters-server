@@ -3,17 +3,16 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class PvpBoardObstacleForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 7948431947926085118L;
-	
+
 	private int id;
 	private String userId;
 	private int obstacleId;
 	private int posX;
 	private int posY;
 
-	public PvpBoardObstacleForUser()
-	{
+	public PvpBoardObstacleForUser() {
 		super();
 	}
 

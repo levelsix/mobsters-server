@@ -30,22 +30,22 @@ import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-
 @Component
-public class BeginObstacleRemovalController extends EventController{
+public class BeginObstacleRemovalController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
-	
+
 	public BeginObstacleRemovalController() {
 		numAllocatedThreads = 4;
 	}
-	
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new BeginObstacleRemovalRequestEvent();
@@ -58,243 +58,258 @@ public class BeginObstacleRemovalController extends EventController{
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent)event).getBeginObstacleRemovalRequestProto();
-		log.info(String.format(
-			"reqProto=%s", reqProto));
+		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent) event)
+				.getBeginObstacleRemovalRequestProto();
+		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int gemsSpent = reqProto.getGemsSpent();
-	    //positive means refund, negative means charge user
+		//positive means refund, negative means charge user
 		int resourceChange = reqProto.getResourceChange();
 		ResourceType rt = reqProto.getResourceType();
 		String userObstacleId = reqProto.getUserObstacleUuid();
 
-		BeginObstacleRemovalResponseProto.Builder resBuilder = BeginObstacleRemovalResponseProto.newBuilder();
+		BeginObstacleRemovalResponseProto.Builder resBuilder = BeginObstacleRemovalResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
-		
+
 		try {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
-	      	BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(userId);
-	      	resEvent.setTag(event.getTag());
-	      	resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+		if (invalidUuids) {
+			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(
+					senderProto.getUserUuid());
 			ObstacleForUser ofu = obstacleForUserRetrieveUtil
-				.getUserObstacleForId(userObstacleId);
-			
-			boolean legitComplete = checkLegit(resBuilder, userId, user, userObstacleId, ofu,
-					gemsSpent, resourceChange, rt);
+					.getUserObstacleForId(userObstacleId);
+
+			boolean legitComplete = checkLegit(resBuilder, userId, user,
+					userObstacleId, ofu, gemsSpent, resourceChange, rt);
 
 			boolean success = false;
 			//make it easier to record currency history
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
 			if (legitComplete) {
-				success = writeChangesToDB(user, userObstacleId, gemsSpent, resourceChange, rt,
-						clientTime, currencyChange, previousCurrency);
+				success = writeChangesToDB(user, userObstacleId, gemsSpent,
+						resourceChange, rt, clientTime, currencyChange,
+						previousCurrency);
 			}
-			
-			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(senderProto.getUserUuid());
+
+			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());  
+			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-			
+
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(userId, user, clientTime, currencyChange,
-					previousCurrency, ofu, rt);
+				writeToUserCurrencyHistory(userId, user, clientTime,
+						currencyChange, previousCurrency, ofu, rt);
 			}
-			
+
 		} catch (Exception e) {
-			log.error("exception in BeginObstacleRemovalController processEvent", e);
+			log.error(
+					"exception in BeginObstacleRemovalController processEvent",
+					e);
 			//don't let the client hang
-      try {
-      	resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
-      	BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(userId);
-      	resEvent.setTag(event.getTag());
-      	resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
-      	server.writeEvent(resEvent);
-      } catch (Exception e2) {
-      	log.error("exception2 in BeginObstacleRemovalController processEvent", e);
-      }
+			try {
+				resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+				BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setBeginObstacleRemovalResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in BeginObstacleRemovalController processEvent",
+						e);
+			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
 	private boolean checkLegit(Builder resBuilder, String userId, User user,
-		String ofuId, ObstacleForUser ofu, int gemsSpent, int resourceChange,
-		ResourceType rt)
-	{
-		
+			String ofuId, ObstacleForUser ofu, int gemsSpent,
+			int resourceChange, ResourceType rt) {
+
 		if (null == user || null == ofu) {
 			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
-			log.error(String.format(
-				"user or ofu is null. user=%s, userId=%s, ofu=%s, ofuId=%s",
-				user, userId, ofu, ofuId));
+			log.error(String
+					.format("user or ofu is null. user=%s, userId=%s, ofu=%s, ofuId=%s",
+							user, userId, ofu, ofuId));
 			return false;
 		}
-		
-		 
-    if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
-    		return false;
-    }
 
-    //since negative resourceChange means charge, then negative of that is
-    //the cost. If resourceChange is positive, meaning refund, user will always
-    //have more than a negative amount
-    int resourceRequired = -1 * resourceChange;
-    if (ResourceType.CASH.equals(rt)) {
-    	if (!hasEnoughCash(resBuilder, user, resourceRequired)) {
-    		return false;
-      }
-    }
+		if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
+			return false;
+		}
 
-    if (ResourceType.OIL.equals(rt)) {
-      if (!hasEnoughOil(resBuilder, user, resourceRequired)) {
-      		return false;
-      }
-    }
-		
+		//since negative resourceChange means charge, then negative of that is
+		//the cost. If resourceChange is positive, meaning refund, user will always
+		//have more than a negative amount
+		int resourceRequired = -1 * resourceChange;
+		if (ResourceType.CASH.equals(rt)) {
+			if (!hasEnoughCash(resBuilder, user, resourceRequired)) {
+				return false;
+			}
+		}
+
+		if (ResourceType.OIL.equals(rt)) {
+			if (!hasEnoughOil(resBuilder, user, resourceRequired)) {
+				return false;
+			}
+		}
+
 		resBuilder.setStatus(BeginObstacleRemovalStatus.SUCCESS);
-		return true;  
+		return true;
 	}
-	
-  
-  private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent) {
-  	int userGems = u.getGems();
-  	//if user's aggregate gems is < cost, don't allow transaction
-  	if (userGems < gemsSpent) {
-  		log.error(String.format(
-  			"not enough gems. userGems=%s, gemsSpent=%s",
-  			userGems, gemsSpent));
-  		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_GEMS);
-  		return false;
-  	}
-  	
-  	return true;
-  }
-  
-  private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
-  	int userCash = u.getCash();
-  	//if user's aggregate cash is < cost, don't allow transaction
-  	if (userCash < cashSpent) {
-  		log.error(String.format(
-  			"not enough cash. userCash=%s, cashSpent=%s",
-  			userCash, cashSpent));
-  		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
-  		return false;
-  	}
-  	
-  	return true;
-  }
 
-  private boolean hasEnoughOil(Builder resBuilder, User u, int oilSpent) {
-  	int userOil = u.getOil();
-  	//if user's aggregate oil is < cost, don't allow transaction
-  	if (userOil < oilSpent) {
-  		log.error(String.format(
-  			"not enough oil. userOil=%s, oilSpent=%s",
-  			userOil, oilSpent));
-  		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
-  		return false;
-  	}
+	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent) {
+		int userGems = u.getGems();
+		//if user's aggregate gems is < cost, don't allow transaction
+		if (userGems < gemsSpent) {
+			log.error(String.format(
+					"not enough gems. userGems=%s, gemsSpent=%s", userGems,
+					gemsSpent));
+			resBuilder
+					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_GEMS);
+			return false;
+		}
 
-  	return true;
-  }
+		return true;
+	}
 
-  private boolean writeChangesToDB(User user, String ofuId, int gemsSpent, int resourceChange,
-  		ResourceType rt, Timestamp clientTime, Map<String, Integer> currencyChange,
-  		Map<String, Integer> previousCurrency) {
-  	
-  	//update user currency
-  	int gemsChange = -1 * Math.abs(gemsSpent);
-  	int cashChange = 0;
-  	int oilChange = 0;
-  	
-  	if (0 != gemsChange) {
-  		previousCurrency.put(MiscMethods.gems, user.getGems());
-  	}
-  	if (ResourceType.CASH.equals(rt)) {
-  		log.info("user spent cash.");
-  		cashChange = resourceChange;
-  		previousCurrency.put(MiscMethods.cash, user.getCash());
-  	}
-  	if (ResourceType.OIL.equals(rt)) {
-  		log.info("user spent cash.");
-  		oilChange = resourceChange;
-  		previousCurrency.put(MiscMethods.oil, user.getOil());
-  	}
-  	
-  	if (!updateUser(user, gemsChange, cashChange, oilChange)) {
-		  log.error(String.format(
-			  "could not decrement user's gems by %s, cash by %s,  or oil by %s",
-			  gemsChange, cashChange, oilChange));
-		  return false;
-	  } else {
-	  	if (0 != gemsChange) {
-	  		currencyChange.put(MiscMethods.gems, gemsChange);
-	  	}
-	  	if (0 != cashChange) {
-	  		currencyChange.put(MiscMethods.cash, cashChange);
-	  	}
-	  	if (0 != oilChange) {
-	  		currencyChange.put(MiscMethods.oil, oilChange);
-	  	}
-	  }
-	  
-  	int numUpdated = UpdateUtils.get().updateObstacleForUserRemovalTime(ofuId, clientTime);
-  	log.info(String.format(
-  		"(obstacles, should be 1) numUpdated=%s", numUpdated));
-  	return true;
-  }
+	private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
+		int userCash = u.getCash();
+		//if user's aggregate cash is < cost, don't allow transaction
+		if (userCash < cashSpent) {
+			log.error(String.format(
+					"not enough cash. userCash=%s, cashSpent=%s", userCash,
+					cashSpent));
+			resBuilder
+					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
+			return false;
+		}
 
-  private boolean updateUser(User u, int gemsChange, int cashChange, int oilChange) {
-	  int numChange = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemsChange);
+		return true;
+	}
 
-	  if (numChange <= 0) {
-	  	log.error(String.format(
-	  		"problem updating user gems, cash, oil. gemChange=%s, cash=%s, oil=%s, user=%s",
-	  		gemsChange, cashChange, oilChange, u));
-	  	return false;
-	  }
-	  return true;
-  }
+	private boolean hasEnoughOil(Builder resBuilder, User u, int oilSpent) {
+		int userOil = u.getOil();
+		//if user's aggregate oil is < cost, don't allow transaction
+		if (userOil < oilSpent) {
+			log.error(String.format("not enough oil. userOil=%s, oilSpent=%s",
+					userOil, oilSpent));
+			resBuilder
+					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
+			return false;
+		}
 
-	private void writeToUserCurrencyHistory(String userId, User user, Timestamp curTime,
-			Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency,
-			ObstacleForUser ofu, ResourceType rt) {
+		return true;
+	}
+
+	private boolean writeChangesToDB(User user, String ofuId, int gemsSpent,
+			int resourceChange, ResourceType rt, Timestamp clientTime,
+			Map<String, Integer> currencyChange,
+			Map<String, Integer> previousCurrency) {
+
+		//update user currency
+		int gemsChange = -1 * Math.abs(gemsSpent);
+		int cashChange = 0;
+		int oilChange = 0;
+
+		if (0 != gemsChange) {
+			previousCurrency.put(MiscMethods.gems, user.getGems());
+		}
+		if (ResourceType.CASH.equals(rt)) {
+			log.info("user spent cash.");
+			cashChange = resourceChange;
+			previousCurrency.put(MiscMethods.cash, user.getCash());
+		}
+		if (ResourceType.OIL.equals(rt)) {
+			log.info("user spent cash.");
+			oilChange = resourceChange;
+			previousCurrency.put(MiscMethods.oil, user.getOil());
+		}
+
+		if (!updateUser(user, gemsChange, cashChange, oilChange)) {
+			log.error(String
+					.format("could not decrement user's gems by %s, cash by %s,  or oil by %s",
+							gemsChange, cashChange, oilChange));
+			return false;
+		} else {
+			if (0 != gemsChange) {
+				currencyChange.put(MiscMethods.gems, gemsChange);
+			}
+			if (0 != cashChange) {
+				currencyChange.put(MiscMethods.cash, cashChange);
+			}
+			if (0 != oilChange) {
+				currencyChange.put(MiscMethods.oil, oilChange);
+			}
+		}
+
+		int numUpdated = UpdateUtils.get().updateObstacleForUserRemovalTime(
+				ofuId, clientTime);
+		log.info(String.format("(obstacles, should be 1) numUpdated=%s",
+				numUpdated));
+		return true;
+	}
+
+	private boolean updateUser(User u, int gemsChange, int cashChange,
+			int oilChange) {
+		int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
+				oilChange, gemsChange);
+
+		if (numChange <= 0) {
+			log.error(String
+					.format("problem updating user gems, cash, oil. gemChange=%s, cash=%s, oil=%s, user=%s",
+							gemsChange, cashChange, oilChange, u));
+			return false;
+		}
+		return true;
+	}
+
+	private void writeToUserCurrencyHistory(String userId, User user,
+			Timestamp curTime, Map<String, Integer> currencyChange,
+			Map<String, Integer> previousCurrency, ObstacleForUser ofu,
+			ResourceType rt) {
 		if (currencyChange.isEmpty()) {
 			return;
 		}
-		
+
 		String reason = ControllerConstants.UCHRFC__REMOVE_OBSTACLE;
 		StringBuilder detailsSb = new StringBuilder();
 		detailsSb.append("obstacleId=");
@@ -306,14 +321,14 @@ public class BeginObstacleRemovalController extends EventController{
 		detailsSb.append(" resourceType=");
 		detailsSb.append(rt.name());
 		String details = detailsSb.toString();
-		
+
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String gems = MiscMethods.gems;
 		String cash = MiscMethods.cash;
 		String oil = MiscMethods.oil;
-		
+
 		if (currencyChange.containsKey(gems)) {
 			currentCurrency.put(gems, user.getGems());
 			reasonsForChanges.put(gems, reason);
@@ -330,23 +345,27 @@ public class BeginObstacleRemovalController extends EventController{
 			detailsMap.put(oil, details);
 		}
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
-        previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 
 	}
-	
+
 	public Locker getLocker() {
 		return locker;
 	}
+
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
 	public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
 		return obstacleForUserRetrieveUtil;
 	}
+
 	public void setObstacleForUserRetrieveUtil(
 			ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
 		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
 	}
-	
+
 }

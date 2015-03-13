@@ -9,29 +9,30 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DestroyMoneyTreeStructureResponseEvent extends NormalResponseEvent {
 
-  private DestroyMoneyTreeStructureResponseProto destroyMoneyTreeStructureResponse;
-  
-  public DestroyMoneyTreeStructureResponseEvent(String playerId) {
-    super(playerId);
-    eventType = EventProtocolResponse.S_DESTROY_MONEY_TREE_STRUCTURE_EVENT;
-  }
+	private DestroyMoneyTreeStructureResponseProto destroyMoneyTreeStructureResponse;
 
-  /** 
-   * write the event to the given ByteBuffer
-   * 
-   * note we are using 1.4 ByteBuffers for both client and server
-   * depending on the deployment you may need to support older java
-   * versions on the client and use old-style socket input/output streams
-   */
-  public int write(ByteBuffer buff) {
-    ByteString b = destroyMoneyTreeStructureResponse.toByteString();
-    b.copyTo(buff);
-    return b.size();
-  }
+	public DestroyMoneyTreeStructureResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_DESTROY_MONEY_TREE_STRUCTURE_EVENT;
+	}
 
-  public void setDestroyMoneyTreeStructureResponseProto(
-      DestroyMoneyTreeStructureResponseProto destroyMoneyTreeStructureResponse) {
-    this.destroyMoneyTreeStructureResponse = destroyMoneyTreeStructureResponse;
-  }
-  
+	/**
+	 * write the event to the given ByteBuffer
+	 * 
+	 * note we are using 1.4 ByteBuffers for both client and server depending on
+	 * the deployment you may need to support older java versions on the client
+	 * and use old-style socket input/output streams
+	 */
+	@Override
+	public int write(ByteBuffer buff) {
+		ByteString b = destroyMoneyTreeStructureResponse.toByteString();
+		b.copyTo(buff);
+		return b.size();
+	}
+
+	public void setDestroyMoneyTreeStructureResponseProto(
+			DestroyMoneyTreeStructureResponseProto destroyMoneyTreeStructureResponse) {
+		this.destroyMoneyTreeStructureResponse = destroyMoneyTreeStructureResponse;
+	}
+
 }
