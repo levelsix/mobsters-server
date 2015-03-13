@@ -137,7 +137,7 @@ message LabProto {
 				//for a main monster to be enhanced with all those points
 	optional float pointsPerSecond = 3;
 	
-	optional float pointsMultiplier = 4;
+	optional float feederTimeMultiplier = 4;
 }
 
 //------------------------------------------------------------------------------------------
