@@ -18,7 +18,6 @@ option java_outer_classname = "EventPvpProto";
 
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
-	optional int32 attackerElo = 2;
 
 	/* an EventUser.proto UpdateUserCurrencyEvent will be used instead of this stuff
 	//if user needs, say, five more cash, then user can spend gems to replace
