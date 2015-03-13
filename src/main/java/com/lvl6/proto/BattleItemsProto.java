@@ -1062,20 +1062,6 @@ public final class BattleItemsProto {
     int getPowerAmount();
 
     /**
-     * <code>optional string imageName = 10;</code>
-     */
-    boolean hasImageName();
-    /**
-     * <code>optional string imageName = 10;</code>
-     */
-    java.lang.String getImageName();
-    /**
-     * <code>optional string imageName = 10;</code>
-     */
-    com.google.protobuf.ByteString
-        getImageNameBytes();
-
-    /**
      * <code>optional int32 priority = 11;</code>
      */
     boolean hasPriority();
@@ -1220,24 +1206,18 @@ public final class BattleItemsProto {
               powerAmount_ = input.readInt32();
               break;
             }
-            case 82: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000200;
-              imageName_ = bs;
-              break;
-            }
             case 88: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000200;
               priority_ = input.readInt32();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00000400;
               minutesToCreate_ = input.readInt32();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00000800;
               inBattleGemCost_ = input.readInt32();
               break;
             }
@@ -1497,55 +1477,13 @@ public final class BattleItemsProto {
       return powerAmount_;
     }
 
-    public static final int IMAGENAME_FIELD_NUMBER = 10;
-    private java.lang.Object imageName_;
-    /**
-     * <code>optional string imageName = 10;</code>
-     */
-    public boolean hasImageName() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional string imageName = 10;</code>
-     */
-    public java.lang.String getImageName() {
-      java.lang.Object ref = imageName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          imageName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string imageName = 10;</code>
-     */
-    public com.google.protobuf.ByteString
-        getImageNameBytes() {
-      java.lang.Object ref = imageName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        imageName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     public static final int PRIORITY_FIELD_NUMBER = 11;
     private int priority_;
     /**
      * <code>optional int32 priority = 11;</code>
      */
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional int32 priority = 11;</code>
@@ -1560,7 +1498,7 @@ public final class BattleItemsProto {
      * <code>optional int32 minutesToCreate = 12;</code>
      */
     public boolean hasMinutesToCreate() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional int32 minutesToCreate = 12;</code>
@@ -1575,7 +1513,7 @@ public final class BattleItemsProto {
      * <code>optional int32 inBattleGemCost = 13;</code>
      */
     public boolean hasInBattleGemCost() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional int32 inBattleGemCost = 13;</code>
@@ -1594,7 +1532,6 @@ public final class BattleItemsProto {
       createCost_ = 0;
       description_ = "";
       powerAmount_ = 0;
-      imageName_ = "";
       priority_ = 0;
       minutesToCreate_ = 0;
       inBattleGemCost_ = 0;
@@ -1640,15 +1577,12 @@ public final class BattleItemsProto {
         output.writeInt32(9, powerAmount_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(10, getImageNameBytes());
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(11, priority_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(12, minutesToCreate_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(13, inBattleGemCost_);
       }
       getUnknownFields().writeTo(output);
@@ -1698,17 +1632,13 @@ public final class BattleItemsProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, getImageNameBytes());
+          .computeInt32Size(11, priority_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, priority_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, minutesToCreate_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(13, inBattleGemCost_);
       }
@@ -1847,14 +1777,12 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         powerAmount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        imageName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000200);
         priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         minutesToCreate_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         inBattleGemCost_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -1922,17 +1850,13 @@ public final class BattleItemsProto {
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.imageName_ = imageName_;
+        result.priority_ = priority_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.priority_ = priority_;
+        result.minutesToCreate_ = minutesToCreate_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
-        }
-        result.minutesToCreate_ = minutesToCreate_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00001000;
         }
         result.inBattleGemCost_ = inBattleGemCost_;
         result.bitField0_ = to_bitField0_;
@@ -1983,11 +1907,6 @@ public final class BattleItemsProto {
         }
         if (other.hasPowerAmount()) {
           setPowerAmount(other.getPowerAmount());
-        }
-        if (other.hasImageName()) {
-          bitField0_ |= 0x00000200;
-          imageName_ = other.imageName_;
-          onChanged();
         }
         if (other.hasPriority()) {
           setPriority(other.getPriority());
@@ -2454,88 +2373,12 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private java.lang.Object imageName_ = "";
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public boolean hasImageName() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public java.lang.String getImageName() {
-        java.lang.Object ref = imageName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imageName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public com.google.protobuf.ByteString
-          getImageNameBytes() {
-        java.lang.Object ref = imageName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          imageName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public Builder setImageName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000200;
-        imageName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public Builder clearImageName() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        imageName_ = getDefaultInstance().getImageName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string imageName = 10;</code>
-       */
-      public Builder setImageNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000200;
-        imageName_ = value;
-        onChanged();
-        return this;
-      }
-
       private int priority_ ;
       /**
        * <code>optional int32 priority = 11;</code>
        */
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional int32 priority = 11;</code>
@@ -2547,7 +2390,7 @@ public final class BattleItemsProto {
        * <code>optional int32 priority = 11;</code>
        */
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000200;
         priority_ = value;
         onChanged();
         return this;
@@ -2556,7 +2399,7 @@ public final class BattleItemsProto {
        * <code>optional int32 priority = 11;</code>
        */
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         priority_ = 0;
         onChanged();
         return this;
@@ -2567,7 +2410,7 @@ public final class BattleItemsProto {
        * <code>optional int32 minutesToCreate = 12;</code>
        */
       public boolean hasMinutesToCreate() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional int32 minutesToCreate = 12;</code>
@@ -2579,7 +2422,7 @@ public final class BattleItemsProto {
        * <code>optional int32 minutesToCreate = 12;</code>
        */
       public Builder setMinutesToCreate(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000400;
         minutesToCreate_ = value;
         onChanged();
         return this;
@@ -2588,7 +2431,7 @@ public final class BattleItemsProto {
        * <code>optional int32 minutesToCreate = 12;</code>
        */
       public Builder clearMinutesToCreate() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         minutesToCreate_ = 0;
         onChanged();
         return this;
@@ -2599,7 +2442,7 @@ public final class BattleItemsProto {
        * <code>optional int32 inBattleGemCost = 13;</code>
        */
       public boolean hasInBattleGemCost() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional int32 inBattleGemCost = 13;</code>
@@ -2611,7 +2454,7 @@ public final class BattleItemsProto {
        * <code>optional int32 inBattleGemCost = 13;</code>
        */
       public Builder setInBattleGemCost(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000800;
         inBattleGemCost_ = value;
         onChanged();
         return this;
@@ -2620,7 +2463,7 @@ public final class BattleItemsProto {
        * <code>optional int32 inBattleGemCost = 13;</code>
        */
       public Builder clearInBattleGemCost() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         inBattleGemCost_ = 0;
         onChanged();
         return this;
@@ -3453,7 +3296,7 @@ public final class BattleItemsProto {
       "edEnumConfig.proto\032\017Structure.proto\"i\n\023U" +
       "serBattleItemProto\022\030\n\020userBattleItemId\030\001" +
       " \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030\003" +
-      " \001(\005\022\020\n\010quantity\030\004 \001(\005\"\215\003\n\017BattleItemPro" +
+      " \001(\005\022\020\n\010quantity\030\004 \001(\005\"\372\002\n\017BattleItemPro" +
       "to\022\024\n\014battleItemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017" +
       "\n\007imgName\030\003 \001(\t\0226\n\016battleItemType\030\004 \001(\0162" +
       "\036.com.lvl6.proto.BattleItemType\022>\n\022battl" +
@@ -3461,15 +3304,15 @@ public final class BattleItemsProto {
       "tleItemCategory\0228\n\022createResourceType\030\006 ",
       "\001(\0162\034.com.lvl6.proto.ResourceType\022\022\n\ncre" +
       "ateCost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013po" +
-      "werAmount\030\t \001(\005\022\021\n\timageName\030\n \001(\t\022\020\n\010pr" +
-      "iority\030\013 \001(\005\022\027\n\017minutesToCreate\030\014 \001(\005\022\027\n" +
-      "\017inBattleGemCost\030\r \001(\005\"\207\001\n\033BattleItemQue" +
-      "ueForUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010user" +
-      "Uuid\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expe" +
-      "ctedStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002" +
-      "**\n\016BattleItemType\022\014\n\010ANTIDOTE\020\001\022\n\n\006HAMM" +
-      "ER\020\002*,\n\022BattleItemCategory\022\n\n\006POTION\020\001\022\n",
-      "\n\006PUZZLE\020\002B\022B\020BattleItemsProto"
+      "werAmount\030\t \001(\005\022\020\n\010priority\030\013 \001(\005\022\027\n\017min" +
+      "utesToCreate\030\014 \001(\005\022\027\n\017inBattleGemCost\030\r " +
+      "\001(\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010p" +
+      "riority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battl" +
+      "eItemId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003" +
+      "\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleItemType\022" +
+      "\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemC" +
+      "ategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Battl",
+      "eItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3496,7 +3339,7 @@ public final class BattleItemsProto {
     internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemProto_descriptor,
-        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "ImageName", "Priority", "MinutesToCreate", "InBattleGemCost", });
+        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "Priority", "MinutesToCreate", "InBattleGemCost", });
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
