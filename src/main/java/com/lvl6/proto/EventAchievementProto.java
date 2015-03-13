@@ -4,3691 +4,3232 @@
 package com.lvl6.proto;
 
 public final class EventAchievementProto {
-	private EventAchievementProto() {
-	}
-
-	public static void registerAllExtensions(
-			com.google.protobuf.ExtensionRegistry registry) {
-	}
-
-	public interface AchievementProgressRequestProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressRequestProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		boolean hasSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProto getSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> getUapListList();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(
-				int index);
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		int getUapListCount();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> getUapListOrBuilderList();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
-				int index);
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		boolean hasClientTime();
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		long getClientTime();
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.AchievementProgressRequestProto}
-	 *
-	 * <pre>
-	 * event to update status of achievements
-	 * </pre>
-	 */
-	public static final class AchievementProgressRequestProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressRequestProto)
-			AchievementProgressRequestProtoOrBuilder {
-		// Use AchievementProgressRequestProto.newBuilder() to construct.
-		private AchievementProgressRequestProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private AchievementProgressRequestProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final AchievementProgressRequestProto defaultInstance;
-
-		public static AchievementProgressRequestProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public AchievementProgressRequestProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private AchievementProgressRequestProto(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 10: {
-						com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-						if (((bitField0_ & 0x00000001) == 0x00000001)) {
-							subBuilder = sender_.toBuilder();
-						}
-						sender_ = input
-								.readMessage(
-										com.lvl6.proto.UserProto.MinimumUserProto.PARSER,
-										extensionRegistry);
-						if (subBuilder != null) {
-							subBuilder.mergeFrom(sender_);
-							sender_ = subBuilder.buildPartial();
-						}
-						bitField0_ |= 0x00000001;
-						break;
-					}
-					case 18: {
-						if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-							uapList_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>();
-							mutable_bitField0_ |= 0x00000002;
-						}
-						uapList_.add(input
-								.readMessage(
-										com.lvl6.proto.AchievementStuffProto.UserAchievementProto.PARSER,
-										extensionRegistry));
-						break;
-					}
-					case 24: {
-						bitField0_ |= 0x00000002;
-						clientTime_ = input.readInt64();
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-					uapList_ = java.util.Collections.unmodifiableList(uapList_);
-				}
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.class,
-							com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<AchievementProgressRequestProto> PARSER = new com.google.protobuf.AbstractParser<AchievementProgressRequestProto>() {
-			@Override
-			public AchievementProgressRequestProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new AchievementProgressRequestProto(input,
-						extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<AchievementProgressRequestProto> getParserForType() {
-			return PARSER;
-		}
-
-		private int bitField0_;
-		public static final int SENDER_FIELD_NUMBER = 1;
-		private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public boolean hasSender() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-			return sender_;
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-			return sender_;
-		}
-
-		public static final int UAPLIST_FIELD_NUMBER = 2;
-		private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_;
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		@Override
-		public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> getUapListList() {
-			return uapList_;
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		@Override
-		public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> getUapListOrBuilderList() {
-			return uapList_;
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		@Override
-		public int getUapListCount() {
-			return uapList_.size();
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		@Override
-		public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(
-				int index) {
-			return uapList_.get(index);
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-		 *
-		 * <pre>
-		 * the ones the user has made progress in or completed
-		 * </pre>
-		 */
-		@Override
-		public com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
-				int index) {
-			return uapList_.get(index);
-		}
-
-		public static final int CLIENTTIME_FIELD_NUMBER = 3;
-		private long clientTime_;
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		@Override
-		public boolean hasClientTime() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		@Override
-		public long getClientTime() {
-			return clientTime_;
-		}
-
-		private void initFields() {
-			sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			uapList_ = java.util.Collections.emptyList();
-			clientTime_ = 0L;
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeMessage(1, sender_);
-			}
-			for (int i = 0; i < uapList_.size(); i++) {
-				output.writeMessage(2, uapList_.get(i));
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeInt64(3, clientTime_);
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(1, sender_);
-			}
-			for (int i = 0; i < uapList_.size(); i++) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(2, uapList_.get(i));
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt64Size(
-						3, clientTime_);
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.AchievementProgressRequestProto}
-		 *
-		 * <pre>
-		 * event to update status of achievements
-		 * </pre>
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder>
-				implements
-				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressRequestProto)
-				com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.class,
-								com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-					getSenderFieldBuilder();
-					getUapListFieldBuilder();
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				if (uapListBuilder_ == null) {
-					uapList_ = java.util.Collections.emptyList();
-					bitField0_ = (bitField0_ & ~0x00000002);
-				} else {
-					uapListBuilder_.clear();
-				}
-				clientTime_ = 0L;
-				bitField0_ = (bitField0_ & ~0x00000004);
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto getDefaultInstanceForType() {
-				return com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto build() {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto buildPartial() {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto result = new com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				if (senderBuilder_ == null) {
-					result.sender_ = sender_;
-				} else {
-					result.sender_ = senderBuilder_.build();
-				}
-				if (uapListBuilder_ == null) {
-					if (((bitField0_ & 0x00000002) == 0x00000002)) {
-						uapList_ = java.util.Collections
-								.unmodifiableList(uapList_);
-						bitField0_ = (bitField0_ & ~0x00000002);
-					}
-					result.uapList_ = uapList_;
-				} else {
-					result.uapList_ = uapListBuilder_.build();
-				}
-				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.clientTime_ = clientTime_;
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto) {
-					return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto other) {
-				if (other == com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasSender()) {
-					mergeSender(other.getSender());
-				}
-				if (uapListBuilder_ == null) {
-					if (!other.uapList_.isEmpty()) {
-						if (uapList_.isEmpty()) {
-							uapList_ = other.uapList_;
-							bitField0_ = (bitField0_ & ~0x00000002);
-						} else {
-							ensureUapListIsMutable();
-							uapList_.addAll(other.uapList_);
-						}
-						onChanged();
-					}
-				} else {
-					if (!other.uapList_.isEmpty()) {
-						if (uapListBuilder_.isEmpty()) {
-							uapListBuilder_.dispose();
-							uapListBuilder_ = null;
-							uapList_ = other.uapList_;
-							bitField0_ = (bitField0_ & ~0x00000002);
-							uapListBuilder_ = com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ? getUapListFieldBuilder()
-									: null;
-						} else {
-							uapListBuilder_.addAllMessages(other.uapList_);
-						}
-					}
-				}
-				if (other.hasClientTime()) {
-					setClientTime(other.getClientTime());
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public boolean hasSender() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-				if (senderBuilder_ == null) {
-					return sender_;
-				} else {
-					return senderBuilder_.getMessage();
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					sender_ = value;
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-				if (senderBuilder_ == null) {
-					sender_ = builderForValue.build();
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(builderForValue.build());
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder mergeSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (((bitField0_ & 0x00000001) == 0x00000001)
-							&& sender_ != com.lvl6.proto.UserProto.MinimumUserProto
-									.getDefaultInstance()) {
-						sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-								.newBuilder(sender_).mergeFrom(value)
-								.buildPartial();
-					} else {
-						sender_ = value;
-					}
-					onChanged();
-				} else {
-					senderBuilder_.mergeFrom(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder clearSender() {
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-					onChanged();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-				bitField0_ |= 0x00000001;
-				onChanged();
-				return getSenderFieldBuilder().getBuilder();
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-				if (senderBuilder_ != null) {
-					return senderBuilder_.getMessageOrBuilder();
-				} else {
-					return sender_;
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> getSenderFieldBuilder() {
-				if (senderBuilder_ == null) {
-					senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-							getSender(), getParentForChildren(), isClean());
-					sender_ = null;
-				}
-				return senderBuilder_;
-			}
-
-			private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_ = java.util.Collections
-					.emptyList();
-
-			private void ensureUapListIsMutable() {
-				if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-					uapList_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>(
-							uapList_);
-					bitField0_ |= 0x00000002;
-				}
-			}
-
-			private com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> uapListBuilder_;
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			@Override
-			public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> getUapListList() {
-				if (uapListBuilder_ == null) {
-					return java.util.Collections.unmodifiableList(uapList_);
-				} else {
-					return uapListBuilder_.getMessageList();
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			@Override
-			public int getUapListCount() {
-				if (uapListBuilder_ == null) {
-					return uapList_.size();
-				} else {
-					return uapListBuilder_.getCount();
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			@Override
-			public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(
-					int index) {
-				if (uapListBuilder_ == null) {
-					return uapList_.get(index);
-				} else {
-					return uapListBuilder_.getMessage(index);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder setUapList(
-					int index,
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
-				if (uapListBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensureUapListIsMutable();
-					uapList_.set(index, value);
-					onChanged();
-				} else {
-					uapListBuilder_.setMessage(index, value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder setUapList(
-					int index,
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
-				if (uapListBuilder_ == null) {
-					ensureUapListIsMutable();
-					uapList_.set(index, builderForValue.build());
-					onChanged();
-				} else {
-					uapListBuilder_.setMessage(index, builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder addUapList(
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
-				if (uapListBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensureUapListIsMutable();
-					uapList_.add(value);
-					onChanged();
-				} else {
-					uapListBuilder_.addMessage(value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder addUapList(
-					int index,
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
-				if (uapListBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensureUapListIsMutable();
-					uapList_.add(index, value);
-					onChanged();
-				} else {
-					uapListBuilder_.addMessage(index, value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder addUapList(
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
-				if (uapListBuilder_ == null) {
-					ensureUapListIsMutable();
-					uapList_.add(builderForValue.build());
-					onChanged();
-				} else {
-					uapListBuilder_.addMessage(builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder addUapList(
-					int index,
-					com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
-				if (uapListBuilder_ == null) {
-					ensureUapListIsMutable();
-					uapList_.add(index, builderForValue.build());
-					onChanged();
-				} else {
-					uapListBuilder_.addMessage(index, builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder addAllUapList(
-					java.lang.Iterable<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProto> values) {
-				if (uapListBuilder_ == null) {
-					ensureUapListIsMutable();
-					com.google.protobuf.AbstractMessageLite.Builder.addAll(
-							values, uapList_);
-					onChanged();
-				} else {
-					uapListBuilder_.addAllMessages(values);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder clearUapList() {
-				if (uapListBuilder_ == null) {
-					uapList_ = java.util.Collections.emptyList();
-					bitField0_ = (bitField0_ & ~0x00000002);
-					onChanged();
-				} else {
-					uapListBuilder_.clear();
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public Builder removeUapList(int index) {
-				if (uapListBuilder_ == null) {
-					ensureUapListIsMutable();
-					uapList_.remove(index);
-					onChanged();
-				} else {
-					uapListBuilder_.remove(index);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder getUapListBuilder(
-					int index) {
-				return getUapListFieldBuilder().getBuilder(index);
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			@Override
-			public com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
-					int index) {
-				if (uapListBuilder_ == null) {
-					return uapList_.get(index);
-				} else {
-					return uapListBuilder_.getMessageOrBuilder(index);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			@Override
-			public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> getUapListOrBuilderList() {
-				if (uapListBuilder_ != null) {
-					return uapListBuilder_.getMessageOrBuilderList();
-				} else {
-					return java.util.Collections.unmodifiableList(uapList_);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder addUapListBuilder() {
-				return getUapListFieldBuilder()
-						.addBuilder(
-								com.lvl6.proto.AchievementStuffProto.UserAchievementProto
-										.getDefaultInstance());
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder addUapListBuilder(
-					int index) {
-				return getUapListFieldBuilder()
-						.addBuilder(
-								index,
-								com.lvl6.proto.AchievementStuffProto.UserAchievementProto
-										.getDefaultInstance());
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
-			 *
-			 * <pre>
-			 * the ones the user has made progress in or completed
-			 * </pre>
-			 */
-			public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder> getUapListBuilderList() {
-				return getUapListFieldBuilder().getBuilderList();
-			}
-
-			private com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> getUapListFieldBuilder() {
-				if (uapListBuilder_ == null) {
-					uapListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder>(
-							uapList_,
-							((bitField0_ & 0x00000002) == 0x00000002),
-							getParentForChildren(), isClean());
-					uapList_ = null;
-				}
-				return uapListBuilder_;
-			}
-
-			private long clientTime_;
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			@Override
-			public boolean hasClientTime() {
-				return ((bitField0_ & 0x00000004) == 0x00000004);
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			@Override
-			public long getClientTime() {
-				return clientTime_;
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			public Builder setClientTime(long value) {
-				bitField0_ |= 0x00000004;
-				clientTime_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			public Builder clearClientTime() {
-				bitField0_ = (bitField0_ & ~0x00000004);
-				clientTime_ = 0L;
-				onChanged();
-				return this;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProgressRequestProto)
-		}
-
-		static {
-			defaultInstance = new AchievementProgressRequestProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressRequestProto)
-	}
-
-	public interface AchievementProgressResponseProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressResponseProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		boolean hasSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProto getSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-		 */
-		boolean hasStatus();
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-		 */
-		com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus();
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.AchievementProgressResponseProto}
-	 *
-	 * <pre>
-	 * DONE
-	 * </pre>
-	 */
-	public static final class AchievementProgressResponseProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressResponseProto)
-			AchievementProgressResponseProtoOrBuilder {
-		// Use AchievementProgressResponseProto.newBuilder() to construct.
-		private AchievementProgressResponseProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private AchievementProgressResponseProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final AchievementProgressResponseProto defaultInstance;
-
-		public static AchievementProgressResponseProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public AchievementProgressResponseProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private AchievementProgressResponseProto(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 10: {
-						com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-						if (((bitField0_ & 0x00000001) == 0x00000001)) {
-							subBuilder = sender_.toBuilder();
-						}
-						sender_ = input
-								.readMessage(
-										com.lvl6.proto.UserProto.MinimumUserProto.PARSER,
-										extensionRegistry);
-						if (subBuilder != null) {
-							subBuilder.mergeFrom(sender_);
-							sender_ = subBuilder.buildPartial();
-						}
-						bitField0_ |= 0x00000001;
-						break;
-					}
-					case 16: {
-						int rawValue = input.readEnum();
-						com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus
-								.valueOf(rawValue);
-						if (value == null) {
-							unknownFields.mergeVarintField(2, rawValue);
-						} else {
-							bitField0_ |= 0x00000002;
-							status_ = value;
-						}
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.class,
-							com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<AchievementProgressResponseProto> PARSER = new com.google.protobuf.AbstractParser<AchievementProgressResponseProto>() {
-			@Override
-			public AchievementProgressResponseProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new AchievementProgressResponseProto(input,
-						extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<AchievementProgressResponseProto> getParserForType() {
-			return PARSER;
-		}
-
-		/**
-		 * Protobuf enum
-		 * {@code com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus}
-		 */
-		public enum AchievementProgressStatus implements
-				com.google.protobuf.ProtocolMessageEnum {
-			/**
-			 * <code>SUCCESS = 1;</code>
-			 */
-			SUCCESS(0, 1),
-			/**
-			 * <code>FAIL_OTHER = 2;</code>
-			 */
-			FAIL_OTHER(1, 2), ;
-
-			/**
-			 * <code>SUCCESS = 1;</code>
-			 */
-			public static final int SUCCESS_VALUE = 1;
-			/**
-			 * <code>FAIL_OTHER = 2;</code>
-			 */
-			public static final int FAIL_OTHER_VALUE = 2;
-
-			@Override
-			public final int getNumber() {
-				return value;
-			}
-
-			public static AchievementProgressStatus valueOf(int value) {
-				switch (value) {
-				case 1:
-					return SUCCESS;
-				case 2:
-					return FAIL_OTHER;
-				default:
-					return null;
-				}
-			}
-
-			public static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus> internalGetValueMap() {
-				return internalValueMap;
-			}
-
-			private static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus> internalValueMap = new com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>() {
-				@Override
-				public AchievementProgressStatus findValueByNumber(int number) {
-					return AchievementProgressStatus.valueOf(number);
-				}
-			};
-
-			@Override
-			public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
-				return getDescriptor().getValues().get(index);
-			}
-
-			@Override
-			public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
-				return getDescriptor();
-			}
-
-			public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto
-						.getDescriptor().getEnumTypes().get(0);
-			}
-
-			private static final AchievementProgressStatus[] VALUES = values();
-
-			public static AchievementProgressStatus valueOf(
-					com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-				if (desc.getType() != getDescriptor()) {
-					throw new java.lang.IllegalArgumentException(
-							"EnumValueDescriptor is not for this type.");
-				}
-				return VALUES[desc.getIndex()];
-			}
-
-			private final int index;
-			private final int value;
-
-			private AchievementProgressStatus(int index, int value) {
-				this.index = index;
-				this.value = value;
-			}
-
-			// @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus)
-		}
-
-		private int bitField0_;
-		public static final int SENDER_FIELD_NUMBER = 1;
-		private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public boolean hasSender() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-			return sender_;
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-			return sender_;
-		}
-
-		public static final int STATUS_FIELD_NUMBER = 2;
-		private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-		 */
-		@Override
-		public boolean hasStatus() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-		 */
-		@Override
-		public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
-			return status_;
-		}
-
-		private void initFields() {
-			sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeMessage(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeEnum(2, status_.getNumber());
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
-						2, status_.getNumber());
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.AchievementProgressResponseProto}
-		 *
-		 * <pre>
-		 * DONE
-		 * </pre>
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder>
-				implements
-				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressResponseProto)
-				com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.class,
-								com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-					getSenderFieldBuilder();
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
-				bitField0_ = (bitField0_ & ~0x00000002);
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto getDefaultInstanceForType() {
-				return com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto build() {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto buildPartial() {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto result = new com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				if (senderBuilder_ == null) {
-					result.sender_ = sender_;
-				} else {
-					result.sender_ = senderBuilder_.build();
-				}
-				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.status_ = status_;
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto) {
-					return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto other) {
-				if (other == com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasSender()) {
-					mergeSender(other.getSender());
-				}
-				if (other.hasStatus()) {
-					setStatus(other.getStatus());
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public boolean hasSender() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-				if (senderBuilder_ == null) {
-					return sender_;
-				} else {
-					return senderBuilder_.getMessage();
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					sender_ = value;
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-				if (senderBuilder_ == null) {
-					sender_ = builderForValue.build();
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(builderForValue.build());
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder mergeSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (((bitField0_ & 0x00000001) == 0x00000001)
-							&& sender_ != com.lvl6.proto.UserProto.MinimumUserProto
-									.getDefaultInstance()) {
-						sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-								.newBuilder(sender_).mergeFrom(value)
-								.buildPartial();
-					} else {
-						sender_ = value;
-					}
-					onChanged();
-				} else {
-					senderBuilder_.mergeFrom(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder clearSender() {
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-					onChanged();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-				bitField0_ |= 0x00000001;
-				onChanged();
-				return getSenderFieldBuilder().getBuilder();
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-				if (senderBuilder_ != null) {
-					return senderBuilder_.getMessageOrBuilder();
-				} else {
-					return sender_;
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> getSenderFieldBuilder() {
-				if (senderBuilder_ == null) {
-					senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-							getSender(), getParentForChildren(), isClean());
-					sender_ = null;
-				}
-				return senderBuilder_;
-			}
-
-			private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-			 */
-			@Override
-			public boolean hasStatus() {
-				return ((bitField0_ & 0x00000002) == 0x00000002);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-			 */
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
-				return status_;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-			 */
-			public Builder setStatus(
-					com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value) {
-				if (value == null) {
-					throw new NullPointerException();
-				}
-				bitField0_ |= 0x00000002;
-				status_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
-			 */
-			public Builder clearStatus() {
-				bitField0_ = (bitField0_ & ~0x00000002);
-				status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
-				onChanged();
-				return this;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProgressResponseProto)
-		}
-
-		static {
-			defaultInstance = new AchievementProgressResponseProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressResponseProto)
-	}
-
-	public interface AchievementRedeemRequestProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemRequestProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		boolean hasSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProto getSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-		/**
-		 * <code>optional int32 achievementId = 2;</code>
-		 */
-		boolean hasAchievementId();
-
-		/**
-		 * <code>optional int32 achievementId = 2;</code>
-		 */
-		int getAchievementId();
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		boolean hasClientTime();
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		long getClientTime();
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.AchievementRedeemRequestProto}
-	 *
-	 * <pre>
-	 * ------------------------------------------------------------------------------------------
-	 * event to redeem one achievement
-	 * </pre>
-	 */
-	public static final class AchievementRedeemRequestProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemRequestProto)
-			AchievementRedeemRequestProtoOrBuilder {
-		// Use AchievementRedeemRequestProto.newBuilder() to construct.
-		private AchievementRedeemRequestProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private AchievementRedeemRequestProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final AchievementRedeemRequestProto defaultInstance;
-
-		public static AchievementRedeemRequestProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public AchievementRedeemRequestProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private AchievementRedeemRequestProto(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 10: {
-						com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-						if (((bitField0_ & 0x00000001) == 0x00000001)) {
-							subBuilder = sender_.toBuilder();
-						}
-						sender_ = input
-								.readMessage(
-										com.lvl6.proto.UserProto.MinimumUserProto.PARSER,
-										extensionRegistry);
-						if (subBuilder != null) {
-							subBuilder.mergeFrom(sender_);
-							sender_ = subBuilder.buildPartial();
-						}
-						bitField0_ |= 0x00000001;
-						break;
-					}
-					case 16: {
-						bitField0_ |= 0x00000002;
-						achievementId_ = input.readInt32();
-						break;
-					}
-					case 24: {
-						bitField0_ |= 0x00000004;
-						clientTime_ = input.readInt64();
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.class,
-							com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<AchievementRedeemRequestProto> PARSER = new com.google.protobuf.AbstractParser<AchievementRedeemRequestProto>() {
-			@Override
-			public AchievementRedeemRequestProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new AchievementRedeemRequestProto(input,
-						extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<AchievementRedeemRequestProto> getParserForType() {
-			return PARSER;
-		}
-
-		private int bitField0_;
-		public static final int SENDER_FIELD_NUMBER = 1;
-		private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public boolean hasSender() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-			return sender_;
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-			return sender_;
-		}
-
-		public static final int ACHIEVEMENTID_FIELD_NUMBER = 2;
-		private int achievementId_;
-
-		/**
-		 * <code>optional int32 achievementId = 2;</code>
-		 */
-		@Override
-		public boolean hasAchievementId() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional int32 achievementId = 2;</code>
-		 */
-		@Override
-		public int getAchievementId() {
-			return achievementId_;
-		}
-
-		public static final int CLIENTTIME_FIELD_NUMBER = 3;
-		private long clientTime_;
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		@Override
-		public boolean hasClientTime() {
-			return ((bitField0_ & 0x00000004) == 0x00000004);
-		}
-
-		/**
-		 * <code>optional int64 clientTime = 3;</code>
-		 */
-		@Override
-		public long getClientTime() {
-			return clientTime_;
-		}
-
-		private void initFields() {
-			sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			achievementId_ = 0;
-			clientTime_ = 0L;
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeMessage(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeInt32(2, achievementId_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				output.writeInt64(3, clientTime_);
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						2, achievementId_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt64Size(
-						3, clientTime_);
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.AchievementRedeemRequestProto}
-		 *
-		 * <pre>
-		 * ------------------------------------------------------------------------------------------
-		 * event to redeem one achievement
-		 * </pre>
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder>
-				implements
-				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemRequestProto)
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.class,
-								com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-					getSenderFieldBuilder();
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				achievementId_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000002);
-				clientTime_ = 0L;
-				bitField0_ = (bitField0_ & ~0x00000004);
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto getDefaultInstanceForType() {
-				return com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto build() {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto buildPartial() {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto result = new com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				if (senderBuilder_ == null) {
-					result.sender_ = sender_;
-				} else {
-					result.sender_ = senderBuilder_.build();
-				}
-				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.achievementId_ = achievementId_;
-				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-					to_bitField0_ |= 0x00000004;
-				}
-				result.clientTime_ = clientTime_;
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto) {
-					return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto other) {
-				if (other == com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasSender()) {
-					mergeSender(other.getSender());
-				}
-				if (other.hasAchievementId()) {
-					setAchievementId(other.getAchievementId());
-				}
-				if (other.hasClientTime()) {
-					setClientTime(other.getClientTime());
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public boolean hasSender() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-				if (senderBuilder_ == null) {
-					return sender_;
-				} else {
-					return senderBuilder_.getMessage();
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					sender_ = value;
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-				if (senderBuilder_ == null) {
-					sender_ = builderForValue.build();
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(builderForValue.build());
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder mergeSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (((bitField0_ & 0x00000001) == 0x00000001)
-							&& sender_ != com.lvl6.proto.UserProto.MinimumUserProto
-									.getDefaultInstance()) {
-						sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-								.newBuilder(sender_).mergeFrom(value)
-								.buildPartial();
-					} else {
-						sender_ = value;
-					}
-					onChanged();
-				} else {
-					senderBuilder_.mergeFrom(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder clearSender() {
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-					onChanged();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-				bitField0_ |= 0x00000001;
-				onChanged();
-				return getSenderFieldBuilder().getBuilder();
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-				if (senderBuilder_ != null) {
-					return senderBuilder_.getMessageOrBuilder();
-				} else {
-					return sender_;
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> getSenderFieldBuilder() {
-				if (senderBuilder_ == null) {
-					senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-							getSender(), getParentForChildren(), isClean());
-					sender_ = null;
-				}
-				return senderBuilder_;
-			}
-
-			private int achievementId_;
-
-			/**
-			 * <code>optional int32 achievementId = 2;</code>
-			 */
-			@Override
-			public boolean hasAchievementId() {
-				return ((bitField0_ & 0x00000002) == 0x00000002);
-			}
-
-			/**
-			 * <code>optional int32 achievementId = 2;</code>
-			 */
-			@Override
-			public int getAchievementId() {
-				return achievementId_;
-			}
-
-			/**
-			 * <code>optional int32 achievementId = 2;</code>
-			 */
-			public Builder setAchievementId(int value) {
-				bitField0_ |= 0x00000002;
-				achievementId_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 achievementId = 2;</code>
-			 */
-			public Builder clearAchievementId() {
-				bitField0_ = (bitField0_ & ~0x00000002);
-				achievementId_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private long clientTime_;
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			@Override
-			public boolean hasClientTime() {
-				return ((bitField0_ & 0x00000004) == 0x00000004);
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			@Override
-			public long getClientTime() {
-				return clientTime_;
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			public Builder setClientTime(long value) {
-				bitField0_ |= 0x00000004;
-				clientTime_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int64 clientTime = 3;</code>
-			 */
-			public Builder clearClientTime() {
-				bitField0_ = (bitField0_ & ~0x00000004);
-				clientTime_ = 0L;
-				onChanged();
-				return this;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementRedeemRequestProto)
-		}
-
-		static {
-			defaultInstance = new AchievementRedeemRequestProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemRequestProto)
-	}
-
-	public interface AchievementRedeemResponseProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemResponseProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		boolean hasSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProto getSender();
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-		 */
-		boolean hasStatus();
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-		 */
-		com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus();
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.AchievementRedeemResponseProto}
-	 *
-	 * <pre>
-	 * DONE
-	 * </pre>
-	 */
-	public static final class AchievementRedeemResponseProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemResponseProto)
-			AchievementRedeemResponseProtoOrBuilder {
-		// Use AchievementRedeemResponseProto.newBuilder() to construct.
-		private AchievementRedeemResponseProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private AchievementRedeemResponseProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final AchievementRedeemResponseProto defaultInstance;
-
-		public static AchievementRedeemResponseProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public AchievementRedeemResponseProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private AchievementRedeemResponseProto(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 10: {
-						com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-						if (((bitField0_ & 0x00000001) == 0x00000001)) {
-							subBuilder = sender_.toBuilder();
-						}
-						sender_ = input
-								.readMessage(
-										com.lvl6.proto.UserProto.MinimumUserProto.PARSER,
-										extensionRegistry);
-						if (subBuilder != null) {
-							subBuilder.mergeFrom(sender_);
-							sender_ = subBuilder.buildPartial();
-						}
-						bitField0_ |= 0x00000001;
-						break;
-					}
-					case 16: {
-						int rawValue = input.readEnum();
-						com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus
-								.valueOf(rawValue);
-						if (value == null) {
-							unknownFields.mergeVarintField(2, rawValue);
-						} else {
-							bitField0_ |= 0x00000002;
-							status_ = value;
-						}
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.class,
-							com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<AchievementRedeemResponseProto> PARSER = new com.google.protobuf.AbstractParser<AchievementRedeemResponseProto>() {
-			@Override
-			public AchievementRedeemResponseProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new AchievementRedeemResponseProto(input,
-						extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<AchievementRedeemResponseProto> getParserForType() {
-			return PARSER;
-		}
-
-		/**
-		 * Protobuf enum
-		 * {@code com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus}
-		 */
-		public enum AchievementRedeemStatus implements
-				com.google.protobuf.ProtocolMessageEnum {
-			/**
-			 * <code>SUCCESS = 1;</code>
-			 */
-			SUCCESS(0, 1),
-			/**
-			 * <code>FAIL_NOT_COMPLETE = 2;</code>
-			 */
-			FAIL_NOT_COMPLETE(1, 2),
-			/**
-			 * <code>FAIL_OTHER = 3;</code>
-			 */
-			FAIL_OTHER(2, 3),
-			/**
-			 * <code>FAIL_ALREADY_REDEEMED = 4;</code>
-			 */
-			FAIL_ALREADY_REDEEMED(3, 4), ;
-
-			/**
-			 * <code>SUCCESS = 1;</code>
-			 */
-			public static final int SUCCESS_VALUE = 1;
-			/**
-			 * <code>FAIL_NOT_COMPLETE = 2;</code>
-			 */
-			public static final int FAIL_NOT_COMPLETE_VALUE = 2;
-			/**
-			 * <code>FAIL_OTHER = 3;</code>
-			 */
-			public static final int FAIL_OTHER_VALUE = 3;
-			/**
-			 * <code>FAIL_ALREADY_REDEEMED = 4;</code>
-			 */
-			public static final int FAIL_ALREADY_REDEEMED_VALUE = 4;
-
-			@Override
-			public final int getNumber() {
-				return value;
-			}
-
-			public static AchievementRedeemStatus valueOf(int value) {
-				switch (value) {
-				case 1:
-					return SUCCESS;
-				case 2:
-					return FAIL_NOT_COMPLETE;
-				case 3:
-					return FAIL_OTHER;
-				case 4:
-					return FAIL_ALREADY_REDEEMED;
-				default:
-					return null;
-				}
-			}
-
-			public static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus> internalGetValueMap() {
-				return internalValueMap;
-			}
-
-			private static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus> internalValueMap = new com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>() {
-				@Override
-				public AchievementRedeemStatus findValueByNumber(int number) {
-					return AchievementRedeemStatus.valueOf(number);
-				}
-			};
-
-			@Override
-			public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
-				return getDescriptor().getValues().get(index);
-			}
-
-			@Override
-			public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
-				return getDescriptor();
-			}
-
-			public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto
-						.getDescriptor().getEnumTypes().get(0);
-			}
-
-			private static final AchievementRedeemStatus[] VALUES = values();
-
-			public static AchievementRedeemStatus valueOf(
-					com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-				if (desc.getType() != getDescriptor()) {
-					throw new java.lang.IllegalArgumentException(
-							"EnumValueDescriptor is not for this type.");
-				}
-				return VALUES[desc.getIndex()];
-			}
-
-			private final int index;
-			private final int value;
-
-			private AchievementRedeemStatus(int index, int value) {
-				this.index = index;
-				this.value = value;
-			}
-
-			// @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus)
-		}
-
-		private int bitField0_;
-		public static final int SENDER_FIELD_NUMBER = 1;
-		private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public boolean hasSender() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-			return sender_;
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-		 */
-		@Override
-		public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-			return sender_;
-		}
-
-		public static final int STATUS_FIELD_NUMBER = 2;
-		private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-		 */
-		@Override
-		public boolean hasStatus() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-		 */
-		@Override
-		public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
-			return status_;
-		}
-
-		private void initFields() {
-			sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeMessage(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeEnum(2, status_.getNumber());
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(1, sender_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
-						2, status_.getNumber());
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.AchievementRedeemResponseProto}
-		 *
-		 * <pre>
-		 * DONE
-		 * </pre>
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder>
-				implements
-				// @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemResponseProto)
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.class,
-								com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-					getSenderFieldBuilder();
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
-				bitField0_ = (bitField0_ & ~0x00000002);
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto getDefaultInstanceForType() {
-				return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto build() {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto buildPartial() {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto result = new com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				if (senderBuilder_ == null) {
-					result.sender_ = sender_;
-				} else {
-					result.sender_ = senderBuilder_.build();
-				}
-				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.status_ = status_;
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto) {
-					return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto other) {
-				if (other == com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasSender()) {
-					mergeSender(other.getSender());
-				}
-				if (other.hasStatus()) {
-					setStatus(other.getStatus());
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-					.getDefaultInstance();
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public boolean hasSender() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-				if (senderBuilder_ == null) {
-					return sender_;
-				} else {
-					return senderBuilder_.getMessage();
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					sender_ = value;
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder setSender(
-					com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-				if (senderBuilder_ == null) {
-					sender_ = builderForValue.build();
-					onChanged();
-				} else {
-					senderBuilder_.setMessage(builderForValue.build());
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder mergeSender(
-					com.lvl6.proto.UserProto.MinimumUserProto value) {
-				if (senderBuilder_ == null) {
-					if (((bitField0_ & 0x00000001) == 0x00000001)
-							&& sender_ != com.lvl6.proto.UserProto.MinimumUserProto
-									.getDefaultInstance()) {
-						sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-								.newBuilder(sender_).mergeFrom(value)
-								.buildPartial();
-					} else {
-						sender_ = value;
-					}
-					onChanged();
-				} else {
-					senderBuilder_.mergeFrom(value);
-				}
-				bitField0_ |= 0x00000001;
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public Builder clearSender() {
-				if (senderBuilder_ == null) {
-					sender_ = com.lvl6.proto.UserProto.MinimumUserProto
-							.getDefaultInstance();
-					onChanged();
-				} else {
-					senderBuilder_.clear();
-				}
-				bitField0_ = (bitField0_ & ~0x00000001);
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-				bitField0_ |= 0x00000001;
-				onChanged();
-				return getSenderFieldBuilder().getBuilder();
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			@Override
-			public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-				if (senderBuilder_ != null) {
-					return senderBuilder_.getMessageOrBuilder();
-				} else {
-					return sender_;
-				}
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-			 */
-			private com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> getSenderFieldBuilder() {
-				if (senderBuilder_ == null) {
-					senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-							getSender(), getParentForChildren(), isClean());
-					sender_ = null;
-				}
-				return senderBuilder_;
-			}
-
-			private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-			 */
-			@Override
-			public boolean hasStatus() {
-				return ((bitField0_ & 0x00000002) == 0x00000002);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-			 */
-			@Override
-			public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
-				return status_;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-			 */
-			public Builder setStatus(
-					com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value) {
-				if (value == null) {
-					throw new NullPointerException();
-				}
-				bitField0_ |= 0x00000002;
-				status_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
-			 */
-			public Builder clearStatus() {
-				bitField0_ = (bitField0_ & ~0x00000002);
-				status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
-				onChanged();
-				return this;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementRedeemResponseProto)
-		}
-
-		static {
-			defaultInstance = new AchievementRedeemResponseProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemResponseProto)
-	}
-
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable;
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable;
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable;
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable;
-
-	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
-		return descriptor;
-	}
-
-	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
-	static {
-		java.lang.String[] descriptorData = {
-				"\n\026EventAchievement.proto\022\016com.lvl6.proto"
-						+ "\032\026AchievementStuff.proto\032\nUser.proto\"\236\001\n"
-						+ "\037AchievementProgressRequestProto\0220\n\006send"
-						+ "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro"
-						+ "to\0225\n\007uapList\030\002 \003(\0132$.com.lvl6.proto.Use"
-						+ "rAchievementProto\022\022\n\nclientTime\030\003 \001(\003\"\352\001"
-						+ "\n AchievementProgressResponseProto\0220\n\006se"
-						+ "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP"
-						+ "roto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Ac"
-						+ "hievementProgressResponseProto.Achieveme",
-				"ntProgressStatus\"8\n\031AchievementProgressS"
-						+ "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"|\n\035Ac"
-						+ "hievementRedeemRequestProto\0220\n\006sender\030\001 "
-						+ "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n"
-						+ "\rachievementId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003"
-						+ "\"\224\002\n\036AchievementRedeemResponseProto\0220\n\006s"
-						+ "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser"
-						+ "Proto\022V\n\006status\030\002 \001(\0162F.com.lvl6.proto.A"
-						+ "chievementRedeemResponseProto.Achievemen"
-						+ "tRedeemStatus\"h\n\027AchievementRedeemStatus",
-				"\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\n"
-						+ "FAIL_OTHER\020\003\022\031\n\025FAIL_ALREADY_REDEEMED\020\004B"
-						+ "\027B\025EventAchievementProto" };
-		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-			@Override
-			public com.google.protobuf.ExtensionRegistry assignDescriptors(
-					com.google.protobuf.Descriptors.FileDescriptor root) {
-				descriptor = root;
-				return null;
-			}
-		};
-		com.google.protobuf.Descriptors.FileDescriptor
-				.internalBuildGeneratedFileFrom(
-						descriptorData,
-						new com.google.protobuf.Descriptors.FileDescriptor[] {
-								com.lvl6.proto.AchievementStuffProto
-										.getDescriptor(),
-								com.lvl6.proto.UserProto.getDescriptor(), },
-						assigner);
-		internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor = getDescriptor()
-				.getMessageTypes().get(0);
-		internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor,
-				new java.lang.String[] { "Sender", "UapList", "ClientTime", });
-		internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor = getDescriptor()
-				.getMessageTypes().get(1);
-		internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor,
-				new java.lang.String[] { "Sender", "Status", });
-		internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor = getDescriptor()
-				.getMessageTypes().get(2);
-		internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor,
-				new java.lang.String[] { "Sender", "AchievementId",
-						"ClientTime", });
-		internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor = getDescriptor()
-				.getMessageTypes().get(3);
-		internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor,
-				new java.lang.String[] { "Sender", "Status", });
-		com.lvl6.proto.AchievementStuffProto.getDescriptor();
-		com.lvl6.proto.UserProto.getDescriptor();
-	}
-
-	// @@protoc_insertion_point(outer_class_scope)
+  private EventAchievementProto() {}
+  public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistry registry) {
+  }
+  public interface AchievementProgressRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> 
+        getUapListList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    int getUapListCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> 
+        getUapListOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
+        int index);
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AchievementProgressRequestProto}
+   *
+   * <pre>
+   *event to update status of achievements
+   * </pre>
+   */
+  public static final class AchievementProgressRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressRequestProto)
+      AchievementProgressRequestProtoOrBuilder {
+    // Use AchievementProgressRequestProto.newBuilder() to construct.
+    private AchievementProgressRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AchievementProgressRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AchievementProgressRequestProto defaultInstance;
+    public static AchievementProgressRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AchievementProgressRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AchievementProgressRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                uapList_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              uapList_.add(input.readMessage(com.lvl6.proto.AchievementStuffProto.UserAchievementProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          uapList_ = java.util.Collections.unmodifiableList(uapList_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.class, com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AchievementProgressRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<AchievementProgressRequestProto>() {
+      public AchievementProgressRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AchievementProgressRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AchievementProgressRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int UAPLIST_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> getUapListList() {
+      return uapList_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> 
+        getUapListOrBuilderList() {
+      return uapList_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    public int getUapListCount() {
+      return uapList_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(int index) {
+      return uapList_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+     *
+     * <pre>
+     *the ones the user has made progress in or completed
+     * </pre>
+     */
+    public com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
+        int index) {
+      return uapList_.get(index);
+    }
+
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      uapList_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < uapList_.size(); i++) {
+        output.writeMessage(2, uapList_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(3, clientTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < uapList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, uapList_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AchievementProgressRequestProto}
+     *
+     * <pre>
+     *event to update status of achievements
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressRequestProto)
+        com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.class, com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getUapListFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (uapListBuilder_ == null) {
+          uapList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          uapListBuilder_.clear();
+        }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto build() {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto buildPartial() {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto result = new com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (uapListBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            uapList_ = java.util.Collections.unmodifiableList(uapList_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.uapList_ = uapList_;
+        } else {
+          result.uapList_ = uapListBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto other) {
+        if (other == com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (uapListBuilder_ == null) {
+          if (!other.uapList_.isEmpty()) {
+            if (uapList_.isEmpty()) {
+              uapList_ = other.uapList_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUapListIsMutable();
+              uapList_.addAll(other.uapList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.uapList_.isEmpty()) {
+            if (uapListBuilder_.isEmpty()) {
+              uapListBuilder_.dispose();
+              uapListBuilder_ = null;
+              uapList_ = other.uapList_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              uapListBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUapListFieldBuilder() : null;
+            } else {
+              uapListBuilder_.addAllMessages(other.uapList_);
+            }
+          }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> uapList_ =
+        java.util.Collections.emptyList();
+      private void ensureUapListIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          uapList_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.UserAchievementProto>(uapList_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> uapListBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> getUapListList() {
+        if (uapListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(uapList_);
+        } else {
+          return uapListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public int getUapListCount() {
+        if (uapListBuilder_ == null) {
+          return uapList_.size();
+        } else {
+          return uapListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getUapList(int index) {
+        if (uapListBuilder_ == null) {
+          return uapList_.get(index);
+        } else {
+          return uapListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder setUapList(
+          int index, com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
+        if (uapListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUapListIsMutable();
+          uapList_.set(index, value);
+          onChanged();
+        } else {
+          uapListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder setUapList(
+          int index, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
+        if (uapListBuilder_ == null) {
+          ensureUapListIsMutable();
+          uapList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          uapListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder addUapList(com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
+        if (uapListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUapListIsMutable();
+          uapList_.add(value);
+          onChanged();
+        } else {
+          uapListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder addUapList(
+          int index, com.lvl6.proto.AchievementStuffProto.UserAchievementProto value) {
+        if (uapListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUapListIsMutable();
+          uapList_.add(index, value);
+          onChanged();
+        } else {
+          uapListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder addUapList(
+          com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
+        if (uapListBuilder_ == null) {
+          ensureUapListIsMutable();
+          uapList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          uapListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder addUapList(
+          int index, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder builderForValue) {
+        if (uapListBuilder_ == null) {
+          ensureUapListIsMutable();
+          uapList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          uapListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder addAllUapList(
+          java.lang.Iterable<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProto> values) {
+        if (uapListBuilder_ == null) {
+          ensureUapListIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, uapList_);
+          onChanged();
+        } else {
+          uapListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder clearUapList() {
+        if (uapListBuilder_ == null) {
+          uapList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          uapListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public Builder removeUapList(int index) {
+        if (uapListBuilder_ == null) {
+          ensureUapListIsMutable();
+          uapList_.remove(index);
+          onChanged();
+        } else {
+          uapListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder getUapListBuilder(
+          int index) {
+        return getUapListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUapListOrBuilder(
+          int index) {
+        if (uapListBuilder_ == null) {
+          return uapList_.get(index);  } else {
+          return uapListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> 
+           getUapListOrBuilderList() {
+        if (uapListBuilder_ != null) {
+          return uapListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(uapList_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder addUapListBuilder() {
+        return getUapListFieldBuilder().addBuilder(
+            com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder addUapListBuilder(
+          int index) {
+        return getUapListFieldBuilder().addBuilder(
+            index, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserAchievementProto uapList = 2;</code>
+       *
+       * <pre>
+       *the ones the user has made progress in or completed
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder> 
+           getUapListBuilderList() {
+        return getUapListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder> 
+          getUapListFieldBuilder() {
+        if (uapListBuilder_ == null) {
+          uapListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.AchievementStuffProto.UserAchievementProto, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder>(
+                  uapList_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          uapList_ = null;
+        }
+        return uapListBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProgressRequestProto)
+    }
+
+    static {
+      defaultInstance = new AchievementProgressRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressRequestProto)
+  }
+
+  public interface AchievementProgressResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProgressResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AchievementProgressResponseProto}
+   *
+   * <pre>
+   *DONE
+   * </pre>
+   */
+  public static final class AchievementProgressResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProgressResponseProto)
+      AchievementProgressResponseProtoOrBuilder {
+    // Use AchievementProgressResponseProto.newBuilder() to construct.
+    private AchievementProgressResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AchievementProgressResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AchievementProgressResponseProto defaultInstance;
+    public static AchievementProgressResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AchievementProgressResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AchievementProgressResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.class, com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AchievementProgressResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<AchievementProgressResponseProto>() {
+      public AchievementProgressResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AchievementProgressResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AchievementProgressResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus}
+     */
+    public enum AchievementProgressStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static AchievementProgressStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>() {
+              public AchievementProgressStatus findValueByNumber(int number) {
+                return AchievementProgressStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final AchievementProgressStatus[] VALUES = values();
+
+      public static AchievementProgressStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private AchievementProgressStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AchievementProgressResponseProto}
+     *
+     * <pre>
+     *DONE
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProgressResponseProto)
+        com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.class, com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto build() {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto buildPartial() {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto result = new com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto other) {
+        if (other == com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProgressResponseProto)
+    }
+
+    static {
+      defaultInstance = new AchievementProgressResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProgressResponseProto)
+  }
+
+  public interface AchievementRedeemRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional int32 achievementId = 2;</code>
+     */
+    boolean hasAchievementId();
+    /**
+     * <code>optional int32 achievementId = 2;</code>
+     */
+    int getAchievementId();
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AchievementRedeemRequestProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   *event to redeem one achievement
+   * </pre>
+   */
+  public static final class AchievementRedeemRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemRequestProto)
+      AchievementRedeemRequestProtoOrBuilder {
+    // Use AchievementRedeemRequestProto.newBuilder() to construct.
+    private AchievementRedeemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AchievementRedeemRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AchievementRedeemRequestProto defaultInstance;
+    public static AchievementRedeemRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AchievementRedeemRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AchievementRedeemRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              achievementId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.class, com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AchievementRedeemRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<AchievementRedeemRequestProto>() {
+      public AchievementRedeemRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AchievementRedeemRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AchievementRedeemRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int ACHIEVEMENTID_FIELD_NUMBER = 2;
+    private int achievementId_;
+    /**
+     * <code>optional int32 achievementId = 2;</code>
+     */
+    public boolean hasAchievementId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 achievementId = 2;</code>
+     */
+    public int getAchievementId() {
+      return achievementId_;
+    }
+
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      achievementId_ = 0;
+      clientTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, achievementId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, clientTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, achievementId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AchievementRedeemRequestProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     *event to redeem one achievement
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemRequestProto)
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.class, com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        achievementId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto build() {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto buildPartial() {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto result = new com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.achievementId_ = achievementId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto other) {
+        if (other == com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasAchievementId()) {
+          setAchievementId(other.getAchievementId());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private int achievementId_ ;
+      /**
+       * <code>optional int32 achievementId = 2;</code>
+       */
+      public boolean hasAchievementId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 achievementId = 2;</code>
+       */
+      public int getAchievementId() {
+        return achievementId_;
+      }
+      /**
+       * <code>optional int32 achievementId = 2;</code>
+       */
+      public Builder setAchievementId(int value) {
+        bitField0_ |= 0x00000002;
+        achievementId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 achievementId = 2;</code>
+       */
+      public Builder clearAchievementId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        achievementId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementRedeemRequestProto)
+    }
+
+    static {
+      defaultInstance = new AchievementRedeemRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemRequestProto)
+  }
+
+  public interface AchievementRedeemResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementRedeemResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AchievementRedeemResponseProto}
+   *
+   * <pre>
+   *DONE
+   * </pre>
+   */
+  public static final class AchievementRedeemResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementRedeemResponseProto)
+      AchievementRedeemResponseProtoOrBuilder {
+    // Use AchievementRedeemResponseProto.newBuilder() to construct.
+    private AchievementRedeemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AchievementRedeemResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AchievementRedeemResponseProto defaultInstance;
+    public static AchievementRedeemResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AchievementRedeemResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AchievementRedeemResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.class, com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AchievementRedeemResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<AchievementRedeemResponseProto>() {
+      public AchievementRedeemResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AchievementRedeemResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AchievementRedeemResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus}
+     */
+    public enum AchievementRedeemStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_NOT_COMPLETE = 2;</code>
+       */
+      FAIL_NOT_COMPLETE(1, 2),
+      /**
+       * <code>FAIL_OTHER = 3;</code>
+       */
+      FAIL_OTHER(2, 3),
+      /**
+       * <code>FAIL_ALREADY_REDEEMED = 4;</code>
+       */
+      FAIL_ALREADY_REDEEMED(3, 4),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_NOT_COMPLETE = 2;</code>
+       */
+      public static final int FAIL_NOT_COMPLETE_VALUE = 2;
+      /**
+       * <code>FAIL_OTHER = 3;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 3;
+      /**
+       * <code>FAIL_ALREADY_REDEEMED = 4;</code>
+       */
+      public static final int FAIL_ALREADY_REDEEMED_VALUE = 4;
+
+
+      public final int getNumber() { return value; }
+
+      public static AchievementRedeemStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_NOT_COMPLETE;
+          case 3: return FAIL_OTHER;
+          case 4: return FAIL_ALREADY_REDEEMED;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>() {
+              public AchievementRedeemStatus findValueByNumber(int number) {
+                return AchievementRedeemStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final AchievementRedeemStatus[] VALUES = values();
+
+      public static AchievementRedeemStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private AchievementRedeemStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AchievementRedeemResponseProto}
+     *
+     * <pre>
+     *DONE
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementRedeemResponseProto)
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.class, com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto build() {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto buildPartial() {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto result = new com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto other) {
+        if (other == com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementRedeemResponseProto)
+    }
+
+    static {
+      defaultInstance = new AchievementRedeemResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementRedeemResponseProto)
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable;
+
+  public static com.google.protobuf.Descriptors.FileDescriptor
+      getDescriptor() {
+    return descriptor;
+  }
+  private static com.google.protobuf.Descriptors.FileDescriptor
+      descriptor;
+  static {
+    java.lang.String[] descriptorData = {
+      "\n\026EventAchievement.proto\022\016com.lvl6.proto" +
+      "\032\026AchievementStuff.proto\032\nUser.proto\"\236\001\n" +
+      "\037AchievementProgressRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\0225\n\007uapList\030\002 \003(\0132$.com.lvl6.proto.Use" +
+      "rAchievementProto\022\022\n\nclientTime\030\003 \001(\003\"\352\001" +
+      "\n AchievementProgressResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Ac" +
+      "hievementProgressResponseProto.Achieveme",
+      "ntProgressStatus\"8\n\031AchievementProgressS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"|\n\035Ac" +
+      "hievementRedeemRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
+      "\rachievementId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003" +
+      "\"\224\002\n\036AchievementRedeemResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022V\n\006status\030\002 \001(\0162F.com.lvl6.proto.A" +
+      "chievementRedeemResponseProto.Achievemen" +
+      "tRedeemStatus\"h\n\027AchievementRedeemStatus",
+      "\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003\022\031\n\025FAIL_ALREADY_REDEEMED\020\004B" +
+      "\027B\025EventAchievementProto"
+    };
+    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
+    com.google.protobuf.Descriptors.FileDescriptor
+      .internalBuildGeneratedFileFrom(descriptorData,
+        new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.AchievementStuffProto.getDescriptor(),
+          com.lvl6.proto.UserProto.getDescriptor(),
+        }, assigner);
+    internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_AchievementProgressRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UapList", "ClientTime", });
+    internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_AchievementProgressResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementProgressResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_AchievementRedeemRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementRedeemRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "AchievementId", "ClientTime", });
+    internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
+  }
+
+  // @@protoc_insertion_point(outer_class_scope)
 }

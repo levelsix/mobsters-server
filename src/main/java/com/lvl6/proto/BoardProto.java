@@ -4,2446 +4,2154 @@
 package com.lvl6.proto;
 
 public final class BoardProto {
-	private BoardProto() {
-	}
-
-	public static void registerAllExtensions(
-			com.google.protobuf.ExtensionRegistry registry) {
-	}
-
-	public interface BoardLayoutProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardLayoutProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional int32 boardId = 1;</code>
-		 */
-		boolean hasBoardId();
-
-		/**
-		 * <code>optional int32 boardId = 1;</code>
-		 */
-		int getBoardId();
-
-		/**
-		 * <code>optional int32 height = 2;</code>
-		 */
-		boolean hasHeight();
-
-		/**
-		 * <code>optional int32 height = 2;</code>
-		 */
-		int getHeight();
-
-		/**
-		 * <code>optional int32 width = 3;</code>
-		 */
-		boolean hasWidth();
-
-		/**
-		 * <code>optional int32 width = 3;</code>
-		 */
-		int getWidth();
-
-		/**
-		 * <code>optional int32 orbElements = 4;</code>
-		 *
-		 * <pre>
-		 * bit representation of what elements are active. Example 100001, only two elements are active
-		 * </pre>
-		 */
-		boolean hasOrbElements();
-
-		/**
-		 * <code>optional int32 orbElements = 4;</code>
-		 *
-		 * <pre>
-		 * bit representation of what elements are active. Example 100001, only two elements are active
-		 * </pre>
-		 */
-		int getOrbElements();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index);
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		int getPropertiesCount();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> getPropertiesOrBuilderList();
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
-				int index);
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
-	 */
-	public static final class BoardLayoutProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardLayoutProto)
-			BoardLayoutProtoOrBuilder {
-		// Use BoardLayoutProto.newBuilder() to construct.
-		private BoardLayoutProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private BoardLayoutProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final BoardLayoutProto defaultInstance;
-
-		public static BoardLayoutProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public BoardLayoutProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private BoardLayoutProto(com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 8: {
-						bitField0_ |= 0x00000001;
-						boardId_ = input.readInt32();
-						break;
-					}
-					case 16: {
-						bitField0_ |= 0x00000002;
-						height_ = input.readInt32();
-						break;
-					}
-					case 24: {
-						bitField0_ |= 0x00000004;
-						width_ = input.readInt32();
-						break;
-					}
-					case 32: {
-						bitField0_ |= 0x00000008;
-						orbElements_ = input.readInt32();
-						break;
-					}
-					case 42: {
-						if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-							properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>();
-							mutable_bitField0_ |= 0x00000010;
-						}
-						properties_
-								.add(input
-										.readMessage(
-												com.lvl6.proto.BoardProto.BoardPropertyProto.PARSER,
-												extensionRegistry));
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-					properties_ = java.util.Collections
-							.unmodifiableList(properties_);
-				}
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.BoardProto.BoardLayoutProto.class,
-							com.lvl6.proto.BoardProto.BoardLayoutProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<BoardLayoutProto> PARSER = new com.google.protobuf.AbstractParser<BoardLayoutProto>() {
-			@Override
-			public BoardLayoutProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new BoardLayoutProto(input, extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<BoardLayoutProto> getParserForType() {
-			return PARSER;
-		}
-
-		private int bitField0_;
-		public static final int BOARDID_FIELD_NUMBER = 1;
-		private int boardId_;
-
-		/**
-		 * <code>optional int32 boardId = 1;</code>
-		 */
-		@Override
-		public boolean hasBoardId() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional int32 boardId = 1;</code>
-		 */
-		@Override
-		public int getBoardId() {
-			return boardId_;
-		}
-
-		public static final int HEIGHT_FIELD_NUMBER = 2;
-		private int height_;
-
-		/**
-		 * <code>optional int32 height = 2;</code>
-		 */
-		@Override
-		public boolean hasHeight() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional int32 height = 2;</code>
-		 */
-		@Override
-		public int getHeight() {
-			return height_;
-		}
-
-		public static final int WIDTH_FIELD_NUMBER = 3;
-		private int width_;
-
-		/**
-		 * <code>optional int32 width = 3;</code>
-		 */
-		@Override
-		public boolean hasWidth() {
-			return ((bitField0_ & 0x00000004) == 0x00000004);
-		}
-
-		/**
-		 * <code>optional int32 width = 3;</code>
-		 */
-		@Override
-		public int getWidth() {
-			return width_;
-		}
-
-		public static final int ORBELEMENTS_FIELD_NUMBER = 4;
-		private int orbElements_;
-
-		/**
-		 * <code>optional int32 orbElements = 4;</code>
-		 *
-		 * <pre>
-		 * bit representation of what elements are active. Example 100001, only two elements are active
-		 * </pre>
-		 */
-		@Override
-		public boolean hasOrbElements() {
-			return ((bitField0_ & 0x00000008) == 0x00000008);
-		}
-
-		/**
-		 * <code>optional int32 orbElements = 4;</code>
-		 *
-		 * <pre>
-		 * bit representation of what elements are active. Example 100001, only two elements are active
-		 * </pre>
-		 */
-		@Override
-		public int getOrbElements() {
-			return orbElements_;
-		}
-
-		public static final int PROPERTIES_FIELD_NUMBER = 5;
-		private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_;
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		@Override
-		public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
-			return properties_;
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		@Override
-		public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> getPropertiesOrBuilderList() {
-			return properties_;
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		@Override
-		public int getPropertiesCount() {
-			return properties_.size();
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		@Override
-		public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(
-				int index) {
-			return properties_.get(index);
-		}
-
-		/**
-		 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-		 */
-		@Override
-		public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
-				int index) {
-			return properties_.get(index);
-		}
-
-		private void initFields() {
-			boardId_ = 0;
-			height_ = 0;
-			width_ = 0;
-			orbElements_ = 0;
-			properties_ = java.util.Collections.emptyList();
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeInt32(1, boardId_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeInt32(2, height_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				output.writeInt32(3, width_);
-			}
-			if (((bitField0_ & 0x00000008) == 0x00000008)) {
-				output.writeInt32(4, orbElements_);
-			}
-			for (int i = 0; i < properties_.size(); i++) {
-				output.writeMessage(5, properties_.get(i));
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						1, boardId_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						2, height_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						3, width_);
-			}
-			if (((bitField0_ & 0x00000008) == 0x00000008)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						4, orbElements_);
-			}
-			for (int i = 0; i < properties_.size(); i++) {
-				size += com.google.protobuf.CodedOutputStream
-						.computeMessageSize(5, properties_.get(i));
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.BoardProto.BoardLayoutProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardLayoutProto)
-				com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.BoardProto.BoardLayoutProto.class,
-								com.lvl6.proto.BoardProto.BoardLayoutProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.BoardProto.BoardLayoutProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-					getPropertiesFieldBuilder();
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				boardId_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000001);
-				height_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000002);
-				width_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000004);
-				orbElements_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000008);
-				if (propertiesBuilder_ == null) {
-					properties_ = java.util.Collections.emptyList();
-					bitField0_ = (bitField0_ & ~0x00000010);
-				} else {
-					propertiesBuilder_.clear();
-				}
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardLayoutProto getDefaultInstanceForType() {
-				return com.lvl6.proto.BoardProto.BoardLayoutProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardLayoutProto build() {
-				com.lvl6.proto.BoardProto.BoardLayoutProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardLayoutProto buildPartial() {
-				com.lvl6.proto.BoardProto.BoardLayoutProto result = new com.lvl6.proto.BoardProto.BoardLayoutProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				result.boardId_ = boardId_;
-				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.height_ = height_;
-				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-					to_bitField0_ |= 0x00000004;
-				}
-				result.width_ = width_;
-				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-					to_bitField0_ |= 0x00000008;
-				}
-				result.orbElements_ = orbElements_;
-				if (propertiesBuilder_ == null) {
-					if (((bitField0_ & 0x00000010) == 0x00000010)) {
-						properties_ = java.util.Collections
-								.unmodifiableList(properties_);
-						bitField0_ = (bitField0_ & ~0x00000010);
-					}
-					result.properties_ = properties_;
-				} else {
-					result.properties_ = propertiesBuilder_.build();
-				}
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.BoardProto.BoardLayoutProto) {
-					return mergeFrom((com.lvl6.proto.BoardProto.BoardLayoutProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.BoardProto.BoardLayoutProto other) {
-				if (other == com.lvl6.proto.BoardProto.BoardLayoutProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasBoardId()) {
-					setBoardId(other.getBoardId());
-				}
-				if (other.hasHeight()) {
-					setHeight(other.getHeight());
-				}
-				if (other.hasWidth()) {
-					setWidth(other.getWidth());
-				}
-				if (other.hasOrbElements()) {
-					setOrbElements(other.getOrbElements());
-				}
-				if (propertiesBuilder_ == null) {
-					if (!other.properties_.isEmpty()) {
-						if (properties_.isEmpty()) {
-							properties_ = other.properties_;
-							bitField0_ = (bitField0_ & ~0x00000010);
-						} else {
-							ensurePropertiesIsMutable();
-							properties_.addAll(other.properties_);
-						}
-						onChanged();
-					}
-				} else {
-					if (!other.properties_.isEmpty()) {
-						if (propertiesBuilder_.isEmpty()) {
-							propertiesBuilder_.dispose();
-							propertiesBuilder_ = null;
-							properties_ = other.properties_;
-							bitField0_ = (bitField0_ & ~0x00000010);
-							propertiesBuilder_ = com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ? getPropertiesFieldBuilder()
-									: null;
-						} else {
-							propertiesBuilder_
-									.addAllMessages(other.properties_);
-						}
-					}
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.BoardProto.BoardLayoutProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.BoardProto.BoardLayoutProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private int boardId_;
-
-			/**
-			 * <code>optional int32 boardId = 1;</code>
-			 */
-			@Override
-			public boolean hasBoardId() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional int32 boardId = 1;</code>
-			 */
-			@Override
-			public int getBoardId() {
-				return boardId_;
-			}
-
-			/**
-			 * <code>optional int32 boardId = 1;</code>
-			 */
-			public Builder setBoardId(int value) {
-				bitField0_ |= 0x00000001;
-				boardId_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 boardId = 1;</code>
-			 */
-			public Builder clearBoardId() {
-				bitField0_ = (bitField0_ & ~0x00000001);
-				boardId_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int height_;
-
-			/**
-			 * <code>optional int32 height = 2;</code>
-			 */
-			@Override
-			public boolean hasHeight() {
-				return ((bitField0_ & 0x00000002) == 0x00000002);
-			}
-
-			/**
-			 * <code>optional int32 height = 2;</code>
-			 */
-			@Override
-			public int getHeight() {
-				return height_;
-			}
-
-			/**
-			 * <code>optional int32 height = 2;</code>
-			 */
-			public Builder setHeight(int value) {
-				bitField0_ |= 0x00000002;
-				height_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 height = 2;</code>
-			 */
-			public Builder clearHeight() {
-				bitField0_ = (bitField0_ & ~0x00000002);
-				height_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int width_;
-
-			/**
-			 * <code>optional int32 width = 3;</code>
-			 */
-			@Override
-			public boolean hasWidth() {
-				return ((bitField0_ & 0x00000004) == 0x00000004);
-			}
-
-			/**
-			 * <code>optional int32 width = 3;</code>
-			 */
-			@Override
-			public int getWidth() {
-				return width_;
-			}
-
-			/**
-			 * <code>optional int32 width = 3;</code>
-			 */
-			public Builder setWidth(int value) {
-				bitField0_ |= 0x00000004;
-				width_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 width = 3;</code>
-			 */
-			public Builder clearWidth() {
-				bitField0_ = (bitField0_ & ~0x00000004);
-				width_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int orbElements_;
-
-			/**
-			 * <code>optional int32 orbElements = 4;</code>
-			 *
-			 * <pre>
-			 * bit representation of what elements are active. Example 100001, only two elements are active
-			 * </pre>
-			 */
-			@Override
-			public boolean hasOrbElements() {
-				return ((bitField0_ & 0x00000008) == 0x00000008);
-			}
-
-			/**
-			 * <code>optional int32 orbElements = 4;</code>
-			 *
-			 * <pre>
-			 * bit representation of what elements are active. Example 100001, only two elements are active
-			 * </pre>
-			 */
-			@Override
-			public int getOrbElements() {
-				return orbElements_;
-			}
-
-			/**
-			 * <code>optional int32 orbElements = 4;</code>
-			 *
-			 * <pre>
-			 * bit representation of what elements are active. Example 100001, only two elements are active
-			 * </pre>
-			 */
-			public Builder setOrbElements(int value) {
-				bitField0_ |= 0x00000008;
-				orbElements_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 orbElements = 4;</code>
-			 *
-			 * <pre>
-			 * bit representation of what elements are active. Example 100001, only two elements are active
-			 * </pre>
-			 */
-			public Builder clearOrbElements() {
-				bitField0_ = (bitField0_ & ~0x00000008);
-				orbElements_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_ = java.util.Collections
-					.emptyList();
-
-			private void ensurePropertiesIsMutable() {
-				if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-					properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>(
-							properties_);
-					bitField0_ |= 0x00000010;
-				}
-			}
-
-			private com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> propertiesBuilder_;
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			@Override
-			public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
-				if (propertiesBuilder_ == null) {
-					return java.util.Collections.unmodifiableList(properties_);
-				} else {
-					return propertiesBuilder_.getMessageList();
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			@Override
-			public int getPropertiesCount() {
-				if (propertiesBuilder_ == null) {
-					return properties_.size();
-				} else {
-					return propertiesBuilder_.getCount();
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			@Override
-			public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(
-					int index) {
-				if (propertiesBuilder_ == null) {
-					return properties_.get(index);
-				} else {
-					return propertiesBuilder_.getMessage(index);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder setProperties(int index,
-					com.lvl6.proto.BoardProto.BoardPropertyProto value) {
-				if (propertiesBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensurePropertiesIsMutable();
-					properties_.set(index, value);
-					onChanged();
-				} else {
-					propertiesBuilder_.setMessage(index, value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder setProperties(
-					int index,
-					com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
-				if (propertiesBuilder_ == null) {
-					ensurePropertiesIsMutable();
-					properties_.set(index, builderForValue.build());
-					onChanged();
-				} else {
-					propertiesBuilder_.setMessage(index,
-							builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder addProperties(
-					com.lvl6.proto.BoardProto.BoardPropertyProto value) {
-				if (propertiesBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensurePropertiesIsMutable();
-					properties_.add(value);
-					onChanged();
-				} else {
-					propertiesBuilder_.addMessage(value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder addProperties(int index,
-					com.lvl6.proto.BoardProto.BoardPropertyProto value) {
-				if (propertiesBuilder_ == null) {
-					if (value == null) {
-						throw new NullPointerException();
-					}
-					ensurePropertiesIsMutable();
-					properties_.add(index, value);
-					onChanged();
-				} else {
-					propertiesBuilder_.addMessage(index, value);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder addProperties(
-					com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
-				if (propertiesBuilder_ == null) {
-					ensurePropertiesIsMutable();
-					properties_.add(builderForValue.build());
-					onChanged();
-				} else {
-					propertiesBuilder_.addMessage(builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder addProperties(
-					int index,
-					com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
-				if (propertiesBuilder_ == null) {
-					ensurePropertiesIsMutable();
-					properties_.add(index, builderForValue.build());
-					onChanged();
-				} else {
-					propertiesBuilder_.addMessage(index,
-							builderForValue.build());
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder addAllProperties(
-					java.lang.Iterable<? extends com.lvl6.proto.BoardProto.BoardPropertyProto> values) {
-				if (propertiesBuilder_ == null) {
-					ensurePropertiesIsMutable();
-					com.google.protobuf.AbstractMessageLite.Builder.addAll(
-							values, properties_);
-					onChanged();
-				} else {
-					propertiesBuilder_.addAllMessages(values);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder clearProperties() {
-				if (propertiesBuilder_ == null) {
-					properties_ = java.util.Collections.emptyList();
-					bitField0_ = (bitField0_ & ~0x00000010);
-					onChanged();
-				} else {
-					propertiesBuilder_.clear();
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public Builder removeProperties(int index) {
-				if (propertiesBuilder_ == null) {
-					ensurePropertiesIsMutable();
-					properties_.remove(index);
-					onChanged();
-				} else {
-					propertiesBuilder_.remove(index);
-				}
-				return this;
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder getPropertiesBuilder(
-					int index) {
-				return getPropertiesFieldBuilder().getBuilder(index);
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			@Override
-			public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
-					int index) {
-				if (propertiesBuilder_ == null) {
-					return properties_.get(index);
-				} else {
-					return propertiesBuilder_.getMessageOrBuilder(index);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			@Override
-			public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> getPropertiesOrBuilderList() {
-				if (propertiesBuilder_ != null) {
-					return propertiesBuilder_.getMessageOrBuilderList();
-				} else {
-					return java.util.Collections.unmodifiableList(properties_);
-				}
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder() {
-				return getPropertiesFieldBuilder().addBuilder(
-						com.lvl6.proto.BoardProto.BoardPropertyProto
-								.getDefaultInstance());
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder(
-					int index) {
-				return getPropertiesFieldBuilder().addBuilder(
-						index,
-						com.lvl6.proto.BoardProto.BoardPropertyProto
-								.getDefaultInstance());
-			}
-
-			/**
-			 * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
-			 */
-			public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto.Builder> getPropertiesBuilderList() {
-				return getPropertiesFieldBuilder().getBuilderList();
-			}
-
-			private com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> getPropertiesFieldBuilder() {
-				if (propertiesBuilder_ == null) {
-					propertiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder>(
-							properties_,
-							((bitField0_ & 0x00000010) == 0x00000010),
-							getParentForChildren(), isClean());
-					properties_ = null;
-				}
-				return propertiesBuilder_;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoardLayoutProto)
-		}
-
-		static {
-			defaultInstance = new BoardLayoutProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardLayoutProto)
-	}
-
-	public interface BoardPropertyProtoOrBuilder extends
-	// @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardPropertyProto)
-			com.google.protobuf.MessageOrBuilder {
-
-		/**
-		 * <code>optional int32 boardPropertyId = 1;</code>
-		 */
-		boolean hasBoardPropertyId();
-
-		/**
-		 * <code>optional int32 boardPropertyId = 1;</code>
-		 */
-		int getBoardPropertyId();
-
-		/**
-		 * <code>optional int32 boardId = 2;</code>
-		 */
-		boolean hasBoardId();
-
-		/**
-		 * <code>optional int32 boardId = 2;</code>
-		 */
-		int getBoardId();
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		boolean hasName();
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		java.lang.String getName();
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		com.google.protobuf.ByteString getNameBytes();
-
-		/**
-		 * <code>optional int32 posX = 4;</code>
-		 */
-		boolean hasPosX();
-
-		/**
-		 * <code>optional int32 posX = 4;</code>
-		 */
-		int getPosX();
-
-		/**
-		 * <code>optional int32 posY = 5;</code>
-		 */
-		boolean hasPosY();
-
-		/**
-		 * <code>optional int32 posY = 5;</code>
-		 */
-		int getPosY();
-
-		/**
-		 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-		 */
-		boolean hasElem();
-
-		/**
-		 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-		 */
-		com.lvl6.proto.SharedEnumConfigProto.Element getElem();
-
-		/**
-		 * <code>optional int32 value = 7;</code>
-		 */
-		boolean hasValue();
-
-		/**
-		 * <code>optional int32 value = 7;</code>
-		 */
-		int getValue();
-
-		/**
-		 * <code>optional int32 quantity = 8;</code>
-		 *
-		 * <pre>
-		 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-		 * </pre>
-		 */
-		boolean hasQuantity();
-
-		/**
-		 * <code>optional int32 quantity = 8;</code>
-		 *
-		 * <pre>
-		 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-		 * </pre>
-		 */
-		int getQuantity();
-	}
-
-	/**
-	 * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
-	 */
-	public static final class BoardPropertyProto extends
-			com.google.protobuf.GeneratedMessage implements
-	// @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardPropertyProto)
-			BoardPropertyProtoOrBuilder {
-		// Use BoardPropertyProto.newBuilder() to construct.
-		private BoardPropertyProto(
-				com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-			super(builder);
-			this.unknownFields = builder.getUnknownFields();
-		}
-
-		private BoardPropertyProto(boolean noInit) {
-			this.unknownFields = com.google.protobuf.UnknownFieldSet
-					.getDefaultInstance();
-		}
-
-		private static final BoardPropertyProto defaultInstance;
-
-		public static BoardPropertyProto getDefaultInstance() {
-			return defaultInstance;
-		}
-
-		@Override
-		public BoardPropertyProto getDefaultInstanceForType() {
-			return defaultInstance;
-		}
-
-		private final com.google.protobuf.UnknownFieldSet unknownFields;
-
-		@java.lang.Override
-		public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-			return this.unknownFields;
-		}
-
-		private BoardPropertyProto(com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			initFields();
-			int mutable_bitField0_ = 0;
-			com.google.protobuf.UnknownFieldSet.Builder unknownFields = com.google.protobuf.UnknownFieldSet
-					.newBuilder();
-			try {
-				boolean done = false;
-				while (!done) {
-					int tag = input.readTag();
-					switch (tag) {
-					case 0:
-						done = true;
-						break;
-					default: {
-						if (!parseUnknownField(input, unknownFields,
-								extensionRegistry, tag)) {
-							done = true;
-						}
-						break;
-					}
-					case 8: {
-						bitField0_ |= 0x00000001;
-						boardPropertyId_ = input.readInt32();
-						break;
-					}
-					case 16: {
-						bitField0_ |= 0x00000002;
-						boardId_ = input.readInt32();
-						break;
-					}
-					case 26: {
-						com.google.protobuf.ByteString bs = input.readBytes();
-						bitField0_ |= 0x00000004;
-						name_ = bs;
-						break;
-					}
-					case 32: {
-						bitField0_ |= 0x00000008;
-						posX_ = input.readInt32();
-						break;
-					}
-					case 40: {
-						bitField0_ |= 0x00000010;
-						posY_ = input.readInt32();
-						break;
-					}
-					case 48: {
-						int rawValue = input.readEnum();
-						com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element
-								.valueOf(rawValue);
-						if (value == null) {
-							unknownFields.mergeVarintField(6, rawValue);
-						} else {
-							bitField0_ |= 0x00000020;
-							elem_ = value;
-						}
-						break;
-					}
-					case 56: {
-						bitField0_ |= 0x00000040;
-						value_ = input.readInt32();
-						break;
-					}
-					case 64: {
-						bitField0_ |= 0x00000080;
-						quantity_ = input.readInt32();
-						break;
-					}
-					}
-				}
-			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-				throw e.setUnfinishedMessage(this);
-			} catch (java.io.IOException e) {
-				throw new com.google.protobuf.InvalidProtocolBufferException(
-						e.getMessage()).setUnfinishedMessage(this);
-			} finally {
-				this.unknownFields = unknownFields.build();
-				makeExtensionsImmutable();
-			}
-		}
-
-		public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-			return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
-		}
-
-		@Override
-		protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-			return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable
-					.ensureFieldAccessorsInitialized(
-							com.lvl6.proto.BoardProto.BoardPropertyProto.class,
-							com.lvl6.proto.BoardProto.BoardPropertyProto.Builder.class);
-		}
-
-		public static com.google.protobuf.Parser<BoardPropertyProto> PARSER = new com.google.protobuf.AbstractParser<BoardPropertyProto>() {
-			@Override
-			public BoardPropertyProto parsePartialFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws com.google.protobuf.InvalidProtocolBufferException {
-				return new BoardPropertyProto(input, extensionRegistry);
-			}
-		};
-
-		@java.lang.Override
-		public com.google.protobuf.Parser<BoardPropertyProto> getParserForType() {
-			return PARSER;
-		}
-
-		private int bitField0_;
-		public static final int BOARDPROPERTYID_FIELD_NUMBER = 1;
-		private int boardPropertyId_;
-
-		/**
-		 * <code>optional int32 boardPropertyId = 1;</code>
-		 */
-		@Override
-		public boolean hasBoardPropertyId() {
-			return ((bitField0_ & 0x00000001) == 0x00000001);
-		}
-
-		/**
-		 * <code>optional int32 boardPropertyId = 1;</code>
-		 */
-		@Override
-		public int getBoardPropertyId() {
-			return boardPropertyId_;
-		}
-
-		public static final int BOARDID_FIELD_NUMBER = 2;
-		private int boardId_;
-
-		/**
-		 * <code>optional int32 boardId = 2;</code>
-		 */
-		@Override
-		public boolean hasBoardId() {
-			return ((bitField0_ & 0x00000002) == 0x00000002);
-		}
-
-		/**
-		 * <code>optional int32 boardId = 2;</code>
-		 */
-		@Override
-		public int getBoardId() {
-			return boardId_;
-		}
-
-		public static final int NAME_FIELD_NUMBER = 3;
-		private java.lang.Object name_;
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		@Override
-		public boolean hasName() {
-			return ((bitField0_ & 0x00000004) == 0x00000004);
-		}
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		@Override
-		public java.lang.String getName() {
-			java.lang.Object ref = name_;
-			if (ref instanceof java.lang.String) {
-				return (java.lang.String) ref;
-			} else {
-				com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-				java.lang.String s = bs.toStringUtf8();
-				if (bs.isValidUtf8()) {
-					name_ = s;
-				}
-				return s;
-			}
-		}
-
-		/**
-		 * <code>optional string name = 3;</code>
-		 */
-		@Override
-		public com.google.protobuf.ByteString getNameBytes() {
-			java.lang.Object ref = name_;
-			if (ref instanceof java.lang.String) {
-				com.google.protobuf.ByteString b = com.google.protobuf.ByteString
-						.copyFromUtf8((java.lang.String) ref);
-				name_ = b;
-				return b;
-			} else {
-				return (com.google.protobuf.ByteString) ref;
-			}
-		}
-
-		public static final int POSX_FIELD_NUMBER = 4;
-		private int posX_;
-
-		/**
-		 * <code>optional int32 posX = 4;</code>
-		 */
-		@Override
-		public boolean hasPosX() {
-			return ((bitField0_ & 0x00000008) == 0x00000008);
-		}
-
-		/**
-		 * <code>optional int32 posX = 4;</code>
-		 */
-		@Override
-		public int getPosX() {
-			return posX_;
-		}
-
-		public static final int POSY_FIELD_NUMBER = 5;
-		private int posY_;
-
-		/**
-		 * <code>optional int32 posY = 5;</code>
-		 */
-		@Override
-		public boolean hasPosY() {
-			return ((bitField0_ & 0x00000010) == 0x00000010);
-		}
-
-		/**
-		 * <code>optional int32 posY = 5;</code>
-		 */
-		@Override
-		public int getPosY() {
-			return posY_;
-		}
-
-		public static final int ELEM_FIELD_NUMBER = 6;
-		private com.lvl6.proto.SharedEnumConfigProto.Element elem_;
-
-		/**
-		 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-		 */
-		@Override
-		public boolean hasElem() {
-			return ((bitField0_ & 0x00000020) == 0x00000020);
-		}
-
-		/**
-		 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-		 */
-		@Override
-		public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
-			return elem_;
-		}
-
-		public static final int VALUE_FIELD_NUMBER = 7;
-		private int value_;
-
-		/**
-		 * <code>optional int32 value = 7;</code>
-		 */
-		@Override
-		public boolean hasValue() {
-			return ((bitField0_ & 0x00000040) == 0x00000040);
-		}
-
-		/**
-		 * <code>optional int32 value = 7;</code>
-		 */
-		@Override
-		public int getValue() {
-			return value_;
-		}
-
-		public static final int QUANTITY_FIELD_NUMBER = 8;
-		private int quantity_;
-
-		/**
-		 * <code>optional int32 quantity = 8;</code>
-		 *
-		 * <pre>
-		 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-		 * </pre>
-		 */
-		@Override
-		public boolean hasQuantity() {
-			return ((bitField0_ & 0x00000080) == 0x00000080);
-		}
-
-		/**
-		 * <code>optional int32 quantity = 8;</code>
-		 *
-		 * <pre>
-		 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-		 * </pre>
-		 */
-		@Override
-		public int getQuantity() {
-			return quantity_;
-		}
-
-		private void initFields() {
-			boardPropertyId_ = 0;
-			boardId_ = 0;
-			name_ = "";
-			posX_ = 0;
-			posY_ = 0;
-			elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-			value_ = 0;
-			quantity_ = 0;
-		}
-
-		private byte memoizedIsInitialized = -1;
-
-		@Override
-		public final boolean isInitialized() {
-			byte isInitialized = memoizedIsInitialized;
-			if (isInitialized == 1)
-				return true;
-			if (isInitialized == 0)
-				return false;
-
-			memoizedIsInitialized = 1;
-			return true;
-		}
-
-		@Override
-		public void writeTo(com.google.protobuf.CodedOutputStream output)
-				throws java.io.IOException {
-			getSerializedSize();
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				output.writeInt32(1, boardPropertyId_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				output.writeInt32(2, boardId_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				output.writeBytes(3, getNameBytes());
-			}
-			if (((bitField0_ & 0x00000008) == 0x00000008)) {
-				output.writeInt32(4, posX_);
-			}
-			if (((bitField0_ & 0x00000010) == 0x00000010)) {
-				output.writeInt32(5, posY_);
-			}
-			if (((bitField0_ & 0x00000020) == 0x00000020)) {
-				output.writeEnum(6, elem_.getNumber());
-			}
-			if (((bitField0_ & 0x00000040) == 0x00000040)) {
-				output.writeInt32(7, value_);
-			}
-			if (((bitField0_ & 0x00000080) == 0x00000080)) {
-				output.writeInt32(8, quantity_);
-			}
-			getUnknownFields().writeTo(output);
-		}
-
-		private int memoizedSerializedSize = -1;
-
-		@Override
-		public int getSerializedSize() {
-			int size = memoizedSerializedSize;
-			if (size != -1)
-				return size;
-
-			size = 0;
-			if (((bitField0_ & 0x00000001) == 0x00000001)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						1, boardPropertyId_);
-			}
-			if (((bitField0_ & 0x00000002) == 0x00000002)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						2, boardId_);
-			}
-			if (((bitField0_ & 0x00000004) == 0x00000004)) {
-				size += com.google.protobuf.CodedOutputStream.computeBytesSize(
-						3, getNameBytes());
-			}
-			if (((bitField0_ & 0x00000008) == 0x00000008)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						4, posX_);
-			}
-			if (((bitField0_ & 0x00000010) == 0x00000010)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						5, posY_);
-			}
-			if (((bitField0_ & 0x00000020) == 0x00000020)) {
-				size += com.google.protobuf.CodedOutputStream.computeEnumSize(
-						6, elem_.getNumber());
-			}
-			if (((bitField0_ & 0x00000040) == 0x00000040)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						7, value_);
-			}
-			if (((bitField0_ & 0x00000080) == 0x00000080)) {
-				size += com.google.protobuf.CodedOutputStream.computeInt32Size(
-						8, quantity_);
-			}
-			size += getUnknownFields().getSerializedSize();
-			memoizedSerializedSize = size;
-			return size;
-		}
-
-		private static final long serialVersionUID = 0L;
-
-		@java.lang.Override
-		protected java.lang.Object writeReplace()
-				throws java.io.ObjectStreamException {
-			return super.writeReplace();
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				com.google.protobuf.ByteString data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				com.google.protobuf.ByteString data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				byte[] data)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				byte[] data,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws com.google.protobuf.InvalidProtocolBufferException {
-			return PARSER.parseFrom(data, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseDelimitedFrom(
-				java.io.InputStream input) throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseDelimitedFrom(
-				java.io.InputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseDelimitedFrom(input, extensionRegistry);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				com.google.protobuf.CodedInputStream input)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input);
-		}
-
-		public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
-				com.google.protobuf.CodedInputStream input,
-				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-				throws java.io.IOException {
-			return PARSER.parseFrom(input, extensionRegistry);
-		}
-
-		public static Builder newBuilder() {
-			return Builder.create();
-		}
-
-		@Override
-		public Builder newBuilderForType() {
-			return newBuilder();
-		}
-
-		public static Builder newBuilder(
-				com.lvl6.proto.BoardProto.BoardPropertyProto prototype) {
-			return newBuilder().mergeFrom(prototype);
-		}
-
-		@Override
-		public Builder toBuilder() {
-			return newBuilder(this);
-		}
-
-		@java.lang.Override
-		protected Builder newBuilderForType(
-				com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-			Builder builder = new Builder(parent);
-			return builder;
-		}
-
-		/**
-		 * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
-		 */
-		public static final class Builder extends
-				com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-		// @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardPropertyProto)
-				com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder {
-			public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
-			}
-
-			@Override
-			protected com.google.protobuf.GeneratedMessage.FieldAccessorTable internalGetFieldAccessorTable() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable
-						.ensureFieldAccessorsInitialized(
-								com.lvl6.proto.BoardProto.BoardPropertyProto.class,
-								com.lvl6.proto.BoardProto.BoardPropertyProto.Builder.class);
-			}
-
-			// Construct using com.lvl6.proto.BoardProto.BoardPropertyProto.newBuilder()
-			private Builder() {
-				maybeForceBuilderInitialization();
-			}
-
-			private Builder(
-					com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-				super(parent);
-				maybeForceBuilderInitialization();
-			}
-
-			private void maybeForceBuilderInitialization() {
-				if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-				}
-			}
-
-			private static Builder create() {
-				return new Builder();
-			}
-
-			@Override
-			public Builder clear() {
-				super.clear();
-				boardPropertyId_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000001);
-				boardId_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000002);
-				name_ = "";
-				bitField0_ = (bitField0_ & ~0x00000004);
-				posX_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000008);
-				posY_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000010);
-				elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-				bitField0_ = (bitField0_ & ~0x00000020);
-				value_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000040);
-				quantity_ = 0;
-				bitField0_ = (bitField0_ & ~0x00000080);
-				return this;
-			}
-
-			@Override
-			public Builder clone() {
-				return create().mergeFrom(buildPartial());
-			}
-
-			@Override
-			public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-				return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardPropertyProto getDefaultInstanceForType() {
-				return com.lvl6.proto.BoardProto.BoardPropertyProto
-						.getDefaultInstance();
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardPropertyProto build() {
-				com.lvl6.proto.BoardProto.BoardPropertyProto result = buildPartial();
-				if (!result.isInitialized()) {
-					throw newUninitializedMessageException(result);
-				}
-				return result;
-			}
-
-			@Override
-			public com.lvl6.proto.BoardProto.BoardPropertyProto buildPartial() {
-				com.lvl6.proto.BoardProto.BoardPropertyProto result = new com.lvl6.proto.BoardProto.BoardPropertyProto(
-						this);
-				int from_bitField0_ = bitField0_;
-				int to_bitField0_ = 0;
-				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-					to_bitField0_ |= 0x00000001;
-				}
-				result.boardPropertyId_ = boardPropertyId_;
-				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-					to_bitField0_ |= 0x00000002;
-				}
-				result.boardId_ = boardId_;
-				if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-					to_bitField0_ |= 0x00000004;
-				}
-				result.name_ = name_;
-				if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-					to_bitField0_ |= 0x00000008;
-				}
-				result.posX_ = posX_;
-				if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-					to_bitField0_ |= 0x00000010;
-				}
-				result.posY_ = posY_;
-				if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-					to_bitField0_ |= 0x00000020;
-				}
-				result.elem_ = elem_;
-				if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-					to_bitField0_ |= 0x00000040;
-				}
-				result.value_ = value_;
-				if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-					to_bitField0_ |= 0x00000080;
-				}
-				result.quantity_ = quantity_;
-				result.bitField0_ = to_bitField0_;
-				onBuilt();
-				return result;
-			}
-
-			@Override
-			public Builder mergeFrom(com.google.protobuf.Message other) {
-				if (other instanceof com.lvl6.proto.BoardProto.BoardPropertyProto) {
-					return mergeFrom((com.lvl6.proto.BoardProto.BoardPropertyProto) other);
-				} else {
-					super.mergeFrom(other);
-					return this;
-				}
-			}
-
-			public Builder mergeFrom(
-					com.lvl6.proto.BoardProto.BoardPropertyProto other) {
-				if (other == com.lvl6.proto.BoardProto.BoardPropertyProto
-						.getDefaultInstance())
-					return this;
-				if (other.hasBoardPropertyId()) {
-					setBoardPropertyId(other.getBoardPropertyId());
-				}
-				if (other.hasBoardId()) {
-					setBoardId(other.getBoardId());
-				}
-				if (other.hasName()) {
-					bitField0_ |= 0x00000004;
-					name_ = other.name_;
-					onChanged();
-				}
-				if (other.hasPosX()) {
-					setPosX(other.getPosX());
-				}
-				if (other.hasPosY()) {
-					setPosY(other.getPosY());
-				}
-				if (other.hasElem()) {
-					setElem(other.getElem());
-				}
-				if (other.hasValue()) {
-					setValue(other.getValue());
-				}
-				if (other.hasQuantity()) {
-					setQuantity(other.getQuantity());
-				}
-				this.mergeUnknownFields(other.getUnknownFields());
-				return this;
-			}
-
-			@Override
-			public final boolean isInitialized() {
-				return true;
-			}
-
-			@Override
-			public Builder mergeFrom(
-					com.google.protobuf.CodedInputStream input,
-					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-					throws java.io.IOException {
-				com.lvl6.proto.BoardProto.BoardPropertyProto parsedMessage = null;
-				try {
-					parsedMessage = PARSER.parsePartialFrom(input,
-							extensionRegistry);
-				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
-					parsedMessage = (com.lvl6.proto.BoardProto.BoardPropertyProto) e
-							.getUnfinishedMessage();
-					throw e;
-				} finally {
-					if (parsedMessage != null) {
-						mergeFrom(parsedMessage);
-					}
-				}
-				return this;
-			}
-
-			private int bitField0_;
-
-			private int boardPropertyId_;
-
-			/**
-			 * <code>optional int32 boardPropertyId = 1;</code>
-			 */
-			@Override
-			public boolean hasBoardPropertyId() {
-				return ((bitField0_ & 0x00000001) == 0x00000001);
-			}
-
-			/**
-			 * <code>optional int32 boardPropertyId = 1;</code>
-			 */
-			@Override
-			public int getBoardPropertyId() {
-				return boardPropertyId_;
-			}
-
-			/**
-			 * <code>optional int32 boardPropertyId = 1;</code>
-			 */
-			public Builder setBoardPropertyId(int value) {
-				bitField0_ |= 0x00000001;
-				boardPropertyId_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 boardPropertyId = 1;</code>
-			 */
-			public Builder clearBoardPropertyId() {
-				bitField0_ = (bitField0_ & ~0x00000001);
-				boardPropertyId_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int boardId_;
-
-			/**
-			 * <code>optional int32 boardId = 2;</code>
-			 */
-			@Override
-			public boolean hasBoardId() {
-				return ((bitField0_ & 0x00000002) == 0x00000002);
-			}
-
-			/**
-			 * <code>optional int32 boardId = 2;</code>
-			 */
-			@Override
-			public int getBoardId() {
-				return boardId_;
-			}
-
-			/**
-			 * <code>optional int32 boardId = 2;</code>
-			 */
-			public Builder setBoardId(int value) {
-				bitField0_ |= 0x00000002;
-				boardId_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 boardId = 2;</code>
-			 */
-			public Builder clearBoardId() {
-				bitField0_ = (bitField0_ & ~0x00000002);
-				boardId_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private java.lang.Object name_ = "";
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			@Override
-			public boolean hasName() {
-				return ((bitField0_ & 0x00000004) == 0x00000004);
-			}
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			@Override
-			public java.lang.String getName() {
-				java.lang.Object ref = name_;
-				if (!(ref instanceof java.lang.String)) {
-					com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-					java.lang.String s = bs.toStringUtf8();
-					if (bs.isValidUtf8()) {
-						name_ = s;
-					}
-					return s;
-				} else {
-					return (java.lang.String) ref;
-				}
-			}
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			@Override
-			public com.google.protobuf.ByteString getNameBytes() {
-				java.lang.Object ref = name_;
-				if (ref instanceof String) {
-					com.google.protobuf.ByteString b = com.google.protobuf.ByteString
-							.copyFromUtf8((java.lang.String) ref);
-					name_ = b;
-					return b;
-				} else {
-					return (com.google.protobuf.ByteString) ref;
-				}
-			}
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			public Builder setName(java.lang.String value) {
-				if (value == null) {
-					throw new NullPointerException();
-				}
-				bitField0_ |= 0x00000004;
-				name_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			public Builder clearName() {
-				bitField0_ = (bitField0_ & ~0x00000004);
-				name_ = getDefaultInstance().getName();
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional string name = 3;</code>
-			 */
-			public Builder setNameBytes(com.google.protobuf.ByteString value) {
-				if (value == null) {
-					throw new NullPointerException();
-				}
-				bitField0_ |= 0x00000004;
-				name_ = value;
-				onChanged();
-				return this;
-			}
-
-			private int posX_;
-
-			/**
-			 * <code>optional int32 posX = 4;</code>
-			 */
-			@Override
-			public boolean hasPosX() {
-				return ((bitField0_ & 0x00000008) == 0x00000008);
-			}
-
-			/**
-			 * <code>optional int32 posX = 4;</code>
-			 */
-			@Override
-			public int getPosX() {
-				return posX_;
-			}
-
-			/**
-			 * <code>optional int32 posX = 4;</code>
-			 */
-			public Builder setPosX(int value) {
-				bitField0_ |= 0x00000008;
-				posX_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 posX = 4;</code>
-			 */
-			public Builder clearPosX() {
-				bitField0_ = (bitField0_ & ~0x00000008);
-				posX_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int posY_;
-
-			/**
-			 * <code>optional int32 posY = 5;</code>
-			 */
-			@Override
-			public boolean hasPosY() {
-				return ((bitField0_ & 0x00000010) == 0x00000010);
-			}
-
-			/**
-			 * <code>optional int32 posY = 5;</code>
-			 */
-			@Override
-			public int getPosY() {
-				return posY_;
-			}
-
-			/**
-			 * <code>optional int32 posY = 5;</code>
-			 */
-			public Builder setPosY(int value) {
-				bitField0_ |= 0x00000010;
-				posY_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 posY = 5;</code>
-			 */
-			public Builder clearPosY() {
-				bitField0_ = (bitField0_ & ~0x00000010);
-				posY_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-
-			/**
-			 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-			 */
-			@Override
-			public boolean hasElem() {
-				return ((bitField0_ & 0x00000020) == 0x00000020);
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-			 */
-			@Override
-			public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
-				return elem_;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-			 */
-			public Builder setElem(
-					com.lvl6.proto.SharedEnumConfigProto.Element value) {
-				if (value == null) {
-					throw new NullPointerException();
-				}
-				bitField0_ |= 0x00000020;
-				elem_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
-			 */
-			public Builder clearElem() {
-				bitField0_ = (bitField0_ & ~0x00000020);
-				elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-				onChanged();
-				return this;
-			}
-
-			private int value_;
-
-			/**
-			 * <code>optional int32 value = 7;</code>
-			 */
-			@Override
-			public boolean hasValue() {
-				return ((bitField0_ & 0x00000040) == 0x00000040);
-			}
-
-			/**
-			 * <code>optional int32 value = 7;</code>
-			 */
-			@Override
-			public int getValue() {
-				return value_;
-			}
-
-			/**
-			 * <code>optional int32 value = 7;</code>
-			 */
-			public Builder setValue(int value) {
-				bitField0_ |= 0x00000040;
-				value_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 value = 7;</code>
-			 */
-			public Builder clearValue() {
-				bitField0_ = (bitField0_ & ~0x00000040);
-				value_ = 0;
-				onChanged();
-				return this;
-			}
-
-			private int quantity_;
-
-			/**
-			 * <code>optional int32 quantity = 8;</code>
-			 *
-			 * <pre>
-			 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-			 * </pre>
-			 */
-			@Override
-			public boolean hasQuantity() {
-				return ((bitField0_ & 0x00000080) == 0x00000080);
-			}
-
-			/**
-			 * <code>optional int32 quantity = 8;</code>
-			 *
-			 * <pre>
-			 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-			 * </pre>
-			 */
-			@Override
-			public int getQuantity() {
-				return quantity_;
-			}
-
-			/**
-			 * <code>optional int32 quantity = 8;</code>
-			 *
-			 * <pre>
-			 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-			 * </pre>
-			 */
-			public Builder setQuantity(int value) {
-				bitField0_ |= 0x00000080;
-				quantity_ = value;
-				onChanged();
-				return this;
-			}
-
-			/**
-			 * <code>optional int32 quantity = 8;</code>
-			 *
-			 * <pre>
-			 * At the moment, mostly used for jelly, as in break jelly twice kind of thing.
-			 * </pre>
-			 */
-			public Builder clearQuantity() {
-				bitField0_ = (bitField0_ & ~0x00000080);
-				quantity_ = 0;
-				onChanged();
-				return this;
-			}
-
-			// @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoardPropertyProto)
-		}
-
-		static {
-			defaultInstance = new BoardPropertyProto(true);
-			defaultInstance.initFields();
-		}
-
-		// @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardPropertyProto)
-	}
-
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable;
-	private static final com.google.protobuf.Descriptors.Descriptor internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
-	private static com.google.protobuf.GeneratedMessage.FieldAccessorTable internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable;
-
-	public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
-		return descriptor;
-	}
-
-	private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
-	static {
-		java.lang.String[] descriptorData = {
-				"\n\013Board.proto\022\016com.lvl6.proto\032\026SharedEnu"
-						+ "mConfig.proto\"\217\001\n\020BoardLayoutProto\022\017\n\007bo"
-						+ "ardId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001"
-						+ "(\005\022\023\n\013orbElements\030\004 \001(\005\0226\n\nproperties\030\005 "
-						+ "\003(\0132\".com.lvl6.proto.BoardPropertyProto\""
-						+ "\274\001\n\022BoardPropertyProto\022\027\n\017boardPropertyI"
-						+ "d\030\001 \001(\005\022\017\n\007boardId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014"
-						+ "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\0221\n\004elem\030\006 \001(\016"
-						+ "2\027.com.lvl6.proto.Element:\nNO_ELEMENT\022\r\n"
-						+ "\005value\030\007 \001(\005\022\020\n\010quantity\030\010 \001(\005B\014B\nBoardP",
-				"roto" };
-		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner = new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-			@Override
-			public com.google.protobuf.ExtensionRegistry assignDescriptors(
-					com.google.protobuf.Descriptors.FileDescriptor root) {
-				descriptor = root;
-				return null;
-			}
-		};
-		com.google.protobuf.Descriptors.FileDescriptor
-				.internalBuildGeneratedFileFrom(
-						descriptorData,
-						new com.google.protobuf.Descriptors.FileDescriptor[] { com.lvl6.proto.SharedEnumConfigProto
-								.getDescriptor(), }, assigner);
-		internal_static_com_lvl6_proto_BoardLayoutProto_descriptor = getDescriptor()
-				.getMessageTypes().get(0);
-		internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_BoardLayoutProto_descriptor,
-				new java.lang.String[] { "BoardId", "Height", "Width",
-						"OrbElements", "Properties", });
-		internal_static_com_lvl6_proto_BoardPropertyProto_descriptor = getDescriptor()
-				.getMessageTypes().get(1);
-		internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-				internal_static_com_lvl6_proto_BoardPropertyProto_descriptor,
-				new java.lang.String[] { "BoardPropertyId", "BoardId", "Name",
-						"PosX", "PosY", "Elem", "Value", "Quantity", });
-		com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-	}
-
-	// @@protoc_insertion_point(outer_class_scope)
+  private BoardProto() {}
+  public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistry registry) {
+  }
+  public interface BoardLayoutProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardLayoutProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 boardId = 1;</code>
+     */
+    boolean hasBoardId();
+    /**
+     * <code>optional int32 boardId = 1;</code>
+     */
+    int getBoardId();
+
+    /**
+     * <code>optional int32 height = 2;</code>
+     */
+    boolean hasHeight();
+    /**
+     * <code>optional int32 height = 2;</code>
+     */
+    int getHeight();
+
+    /**
+     * <code>optional int32 width = 3;</code>
+     */
+    boolean hasWidth();
+    /**
+     * <code>optional int32 width = 3;</code>
+     */
+    int getWidth();
+
+    /**
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
+     */
+    boolean hasOrbElements();
+    /**
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
+     */
+    int getOrbElements();
+
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> 
+        getPropertiesList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    int getPropertiesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+        getPropertiesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
+   */
+  public static final class BoardLayoutProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardLayoutProto)
+      BoardLayoutProtoOrBuilder {
+    // Use BoardLayoutProto.newBuilder() to construct.
+    private BoardLayoutProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BoardLayoutProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BoardLayoutProto defaultInstance;
+    public static BoardLayoutProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BoardLayoutProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BoardLayoutProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              boardId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              height_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              width_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              orbElements_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              properties_.add(input.readMessage(com.lvl6.proto.BoardProto.BoardPropertyProto.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          properties_ = java.util.Collections.unmodifiableList(properties_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.BoardProto.BoardLayoutProto.class, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BoardLayoutProto> PARSER =
+        new com.google.protobuf.AbstractParser<BoardLayoutProto>() {
+      public BoardLayoutProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BoardLayoutProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BoardLayoutProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int BOARDID_FIELD_NUMBER = 1;
+    private int boardId_;
+    /**
+     * <code>optional int32 boardId = 1;</code>
+     */
+    public boolean hasBoardId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 boardId = 1;</code>
+     */
+    public int getBoardId() {
+      return boardId_;
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 2;
+    private int height_;
+    /**
+     * <code>optional int32 height = 2;</code>
+     */
+    public boolean hasHeight() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 height = 2;</code>
+     */
+    public int getHeight() {
+      return height_;
+    }
+
+    public static final int WIDTH_FIELD_NUMBER = 3;
+    private int width_;
+    /**
+     * <code>optional int32 width = 3;</code>
+     */
+    public boolean hasWidth() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 width = 3;</code>
+     */
+    public int getWidth() {
+      return width_;
+    }
+
+    public static final int ORBELEMENTS_FIELD_NUMBER = 4;
+    private int orbElements_;
+    /**
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
+     */
+    public boolean hasOrbElements() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 orbElements = 4;</code>
+     *
+     * <pre>
+     *bit representation of what elements are active. Example 100001, only two elements are active
+     * </pre>
+     */
+    public int getOrbElements() {
+      return orbElements_;
+    }
+
+    public static final int PROPERTIES_FIELD_NUMBER = 5;
+    private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_;
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
+      return properties_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+        getPropertiesOrBuilderList() {
+      return properties_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public int getPropertiesCount() {
+      return properties_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index) {
+      return properties_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+     */
+    public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+        int index) {
+      return properties_.get(index);
+    }
+
+    private void initFields() {
+      boardId_ = 0;
+      height_ = 0;
+      width_ = 0;
+      orbElements_ = 0;
+      properties_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, boardId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, height_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, width_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, orbElements_);
+      }
+      for (int i = 0; i < properties_.size(); i++) {
+        output.writeMessage(5, properties_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, boardId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, height_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, width_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, orbElements_);
+      }
+      for (int i = 0; i < properties_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, properties_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardLayoutProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BoardProto.BoardLayoutProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.BoardLayoutProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardLayoutProto)
+        com.lvl6.proto.BoardProto.BoardLayoutProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.BoardProto.BoardLayoutProto.class, com.lvl6.proto.BoardProto.BoardLayoutProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.BoardProto.BoardLayoutProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPropertiesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        boardId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        height_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        width_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        orbElements_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (propertiesBuilder_ == null) {
+          properties_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          propertiesBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
+      }
+
+      public com.lvl6.proto.BoardProto.BoardLayoutProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BoardProto.BoardLayoutProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.BoardProto.BoardLayoutProto build() {
+        com.lvl6.proto.BoardProto.BoardLayoutProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.BoardProto.BoardLayoutProto buildPartial() {
+        com.lvl6.proto.BoardProto.BoardLayoutProto result = new com.lvl6.proto.BoardProto.BoardLayoutProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.boardId_ = boardId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.height_ = height_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.width_ = width_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.orbElements_ = orbElements_;
+        if (propertiesBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            properties_ = java.util.Collections.unmodifiableList(properties_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.properties_ = properties_;
+        } else {
+          result.properties_ = propertiesBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BoardProto.BoardLayoutProto) {
+          return mergeFrom((com.lvl6.proto.BoardProto.BoardLayoutProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.BoardProto.BoardLayoutProto other) {
+        if (other == com.lvl6.proto.BoardProto.BoardLayoutProto.getDefaultInstance()) return this;
+        if (other.hasBoardId()) {
+          setBoardId(other.getBoardId());
+        }
+        if (other.hasHeight()) {
+          setHeight(other.getHeight());
+        }
+        if (other.hasWidth()) {
+          setWidth(other.getWidth());
+        }
+        if (other.hasOrbElements()) {
+          setOrbElements(other.getOrbElements());
+        }
+        if (propertiesBuilder_ == null) {
+          if (!other.properties_.isEmpty()) {
+            if (properties_.isEmpty()) {
+              properties_ = other.properties_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensurePropertiesIsMutable();
+              properties_.addAll(other.properties_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.properties_.isEmpty()) {
+            if (propertiesBuilder_.isEmpty()) {
+              propertiesBuilder_.dispose();
+              propertiesBuilder_ = null;
+              properties_ = other.properties_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              propertiesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPropertiesFieldBuilder() : null;
+            } else {
+              propertiesBuilder_.addAllMessages(other.properties_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.BoardProto.BoardLayoutProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.BoardProto.BoardLayoutProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int boardId_ ;
+      /**
+       * <code>optional int32 boardId = 1;</code>
+       */
+      public boolean hasBoardId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 boardId = 1;</code>
+       */
+      public int getBoardId() {
+        return boardId_;
+      }
+      /**
+       * <code>optional int32 boardId = 1;</code>
+       */
+      public Builder setBoardId(int value) {
+        bitField0_ |= 0x00000001;
+        boardId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 boardId = 1;</code>
+       */
+      public Builder clearBoardId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        boardId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int height_ ;
+      /**
+       * <code>optional int32 height = 2;</code>
+       */
+      public boolean hasHeight() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 height = 2;</code>
+       */
+      public int getHeight() {
+        return height_;
+      }
+      /**
+       * <code>optional int32 height = 2;</code>
+       */
+      public Builder setHeight(int value) {
+        bitField0_ |= 0x00000002;
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 height = 2;</code>
+       */
+      public Builder clearHeight() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        height_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int width_ ;
+      /**
+       * <code>optional int32 width = 3;</code>
+       */
+      public boolean hasWidth() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 width = 3;</code>
+       */
+      public int getWidth() {
+        return width_;
+      }
+      /**
+       * <code>optional int32 width = 3;</code>
+       */
+      public Builder setWidth(int value) {
+        bitField0_ |= 0x00000004;
+        width_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 width = 3;</code>
+       */
+      public Builder clearWidth() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        width_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int orbElements_ ;
+      /**
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
+       */
+      public boolean hasOrbElements() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
+       */
+      public int getOrbElements() {
+        return orbElements_;
+      }
+      /**
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
+       */
+      public Builder setOrbElements(int value) {
+        bitField0_ |= 0x00000008;
+        orbElements_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 orbElements = 4;</code>
+       *
+       * <pre>
+       *bit representation of what elements are active. Example 100001, only two elements are active
+       * </pre>
+       */
+      public Builder clearOrbElements() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        orbElements_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> properties_ =
+        java.util.Collections.emptyList();
+      private void ensurePropertiesIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          properties_ = new java.util.ArrayList<com.lvl6.proto.BoardProto.BoardPropertyProto>(properties_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> propertiesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto> getPropertiesList() {
+        if (propertiesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(properties_);
+        } else {
+          return propertiesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public int getPropertiesCount() {
+        if (propertiesBuilder_ == null) {
+          return properties_.size();
+        } else {
+          return propertiesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto getProperties(int index) {
+        if (propertiesBuilder_ == null) {
+          return properties_.get(index);
+        } else {
+          return propertiesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder setProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.set(index, value);
+          onChanged();
+        } else {
+          propertiesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder setProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.add(value);
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto value) {
+        if (propertiesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePropertiesIsMutable();
+          properties_.add(index, value);
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.add(builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addProperties(
+          int index, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder builderForValue) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          propertiesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder addAllProperties(
+          java.lang.Iterable<? extends com.lvl6.proto.BoardProto.BoardPropertyProto> values) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, properties_);
+          onChanged();
+        } else {
+          propertiesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder clearProperties() {
+        if (propertiesBuilder_ == null) {
+          properties_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          propertiesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public Builder removeProperties(int index) {
+        if (propertiesBuilder_ == null) {
+          ensurePropertiesIsMutable();
+          properties_.remove(index);
+          onChanged();
+        } else {
+          propertiesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder getPropertiesBuilder(
+          int index) {
+        return getPropertiesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder getPropertiesOrBuilder(
+          int index) {
+        if (propertiesBuilder_ == null) {
+          return properties_.get(index);  } else {
+          return propertiesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+           getPropertiesOrBuilderList() {
+        if (propertiesBuilder_ != null) {
+          return propertiesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(properties_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder() {
+        return getPropertiesFieldBuilder().addBuilder(
+            com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public com.lvl6.proto.BoardProto.BoardPropertyProto.Builder addPropertiesBuilder(
+          int index) {
+        return getPropertiesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.BoardPropertyProto properties = 5;</code>
+       */
+      public java.util.List<com.lvl6.proto.BoardProto.BoardPropertyProto.Builder> 
+           getPropertiesBuilderList() {
+        return getPropertiesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder> 
+          getPropertiesFieldBuilder() {
+        if (propertiesBuilder_ == null) {
+          propertiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BoardProto.BoardPropertyProto, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder, com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder>(
+                  properties_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          properties_ = null;
+        }
+        return propertiesBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoardLayoutProto)
+    }
+
+    static {
+      defaultInstance = new BoardLayoutProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardLayoutProto)
+  }
+
+  public interface BoardPropertyProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoardPropertyProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 boardPropertyId = 1;</code>
+     */
+    boolean hasBoardPropertyId();
+    /**
+     * <code>optional int32 boardPropertyId = 1;</code>
+     */
+    int getBoardPropertyId();
+
+    /**
+     * <code>optional int32 boardId = 2;</code>
+     */
+    boolean hasBoardId();
+    /**
+     * <code>optional int32 boardId = 2;</code>
+     */
+    int getBoardId();
+
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    boolean hasPosX();
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    int getPosX();
+
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    boolean hasPosY();
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    int getPosY();
+
+    /**
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+     */
+    boolean hasElem();
+    /**
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Element getElem();
+
+    /**
+     * <code>optional int32 value = 7;</code>
+     */
+    boolean hasValue();
+    /**
+     * <code>optional int32 value = 7;</code>
+     */
+    int getValue();
+
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    boolean hasQuantity();
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    int getQuantity();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
+   */
+  public static final class BoardPropertyProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoardPropertyProto)
+      BoardPropertyProtoOrBuilder {
+    // Use BoardPropertyProto.newBuilder() to construct.
+    private BoardPropertyProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BoardPropertyProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BoardPropertyProto defaultInstance;
+    public static BoardPropertyProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BoardPropertyProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BoardPropertyProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              boardPropertyId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              boardId_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              name_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              posX_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              posY_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                elem_ = value;
+              }
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              value_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              quantity_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.BoardProto.BoardPropertyProto.class, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BoardPropertyProto> PARSER =
+        new com.google.protobuf.AbstractParser<BoardPropertyProto>() {
+      public BoardPropertyProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BoardPropertyProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BoardPropertyProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int BOARDPROPERTYID_FIELD_NUMBER = 1;
+    private int boardPropertyId_;
+    /**
+     * <code>optional int32 boardPropertyId = 1;</code>
+     */
+    public boolean hasBoardPropertyId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 boardPropertyId = 1;</code>
+     */
+    public int getBoardPropertyId() {
+      return boardPropertyId_;
+    }
+
+    public static final int BOARDID_FIELD_NUMBER = 2;
+    private int boardId_;
+    /**
+     * <code>optional int32 boardId = 2;</code>
+     */
+    public boolean hasBoardId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 boardId = 2;</code>
+     */
+    public int getBoardId() {
+      return boardId_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 3;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int POSX_FIELD_NUMBER = 4;
+    private int posX_;
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    public boolean hasPosX() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 posX = 4;</code>
+     */
+    public int getPosX() {
+      return posX_;
+    }
+
+    public static final int POSY_FIELD_NUMBER = 5;
+    private int posY_;
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    public boolean hasPosY() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 posY = 5;</code>
+     */
+    public int getPosY() {
+      return posY_;
+    }
+
+    public static final int ELEM_FIELD_NUMBER = 6;
+    private com.lvl6.proto.SharedEnumConfigProto.Element elem_;
+    /**
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+     */
+    public boolean hasElem() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
+      return elem_;
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 7;
+    private int value_;
+    /**
+     * <code>optional int32 value = 7;</code>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 value = 7;</code>
+     */
+    public int getValue() {
+      return value_;
+    }
+
+    public static final int QUANTITY_FIELD_NUMBER = 8;
+    private int quantity_;
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 quantity = 8;</code>
+     *
+     * <pre>
+     *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+     * </pre>
+     */
+    public int getQuantity() {
+      return quantity_;
+    }
+
+    private void initFields() {
+      boardPropertyId_ = 0;
+      boardId_ = 0;
+      name_ = "";
+      posX_ = 0;
+      posY_ = 0;
+      elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+      value_ = 0;
+      quantity_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, boardPropertyId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, boardId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, posX_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, posY_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(6, elem_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, value_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, quantity_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, boardPropertyId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, boardId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, posX_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, posY_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, elem_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, value_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, quantity_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BoardProto.BoardPropertyProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BoardProto.BoardPropertyProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.BoardPropertyProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoardPropertyProto)
+        com.lvl6.proto.BoardProto.BoardPropertyProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.BoardProto.BoardPropertyProto.class, com.lvl6.proto.BoardProto.BoardPropertyProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.BoardProto.BoardPropertyProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        boardPropertyId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        boardId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        posX_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        posY_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        value_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        quantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BoardProto.internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
+      }
+
+      public com.lvl6.proto.BoardProto.BoardPropertyProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.BoardProto.BoardPropertyProto build() {
+        com.lvl6.proto.BoardProto.BoardPropertyProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.BoardProto.BoardPropertyProto buildPartial() {
+        com.lvl6.proto.BoardProto.BoardPropertyProto result = new com.lvl6.proto.BoardProto.BoardPropertyProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.boardPropertyId_ = boardPropertyId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.boardId_ = boardId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.posX_ = posX_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.posY_ = posY_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.elem_ = elem_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.value_ = value_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.quantity_ = quantity_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BoardProto.BoardPropertyProto) {
+          return mergeFrom((com.lvl6.proto.BoardProto.BoardPropertyProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.BoardProto.BoardPropertyProto other) {
+        if (other == com.lvl6.proto.BoardProto.BoardPropertyProto.getDefaultInstance()) return this;
+        if (other.hasBoardPropertyId()) {
+          setBoardPropertyId(other.getBoardPropertyId());
+        }
+        if (other.hasBoardId()) {
+          setBoardId(other.getBoardId());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000004;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasPosX()) {
+          setPosX(other.getPosX());
+        }
+        if (other.hasPosY()) {
+          setPosY(other.getPosY());
+        }
+        if (other.hasElem()) {
+          setElem(other.getElem());
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.BoardProto.BoardPropertyProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.BoardProto.BoardPropertyProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int boardPropertyId_ ;
+      /**
+       * <code>optional int32 boardPropertyId = 1;</code>
+       */
+      public boolean hasBoardPropertyId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 boardPropertyId = 1;</code>
+       */
+      public int getBoardPropertyId() {
+        return boardPropertyId_;
+      }
+      /**
+       * <code>optional int32 boardPropertyId = 1;</code>
+       */
+      public Builder setBoardPropertyId(int value) {
+        bitField0_ |= 0x00000001;
+        boardPropertyId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 boardPropertyId = 1;</code>
+       */
+      public Builder clearBoardPropertyId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        boardPropertyId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int boardId_ ;
+      /**
+       * <code>optional int32 boardId = 2;</code>
+       */
+      public boolean hasBoardId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 boardId = 2;</code>
+       */
+      public int getBoardId() {
+        return boardId_;
+      }
+      /**
+       * <code>optional int32 boardId = 2;</code>
+       */
+      public Builder setBoardId(int value) {
+        bitField0_ |= 0x00000002;
+        boardId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 boardId = 2;</code>
+       */
+      public Builder clearBoardId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        boardId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int posX_ ;
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public boolean hasPosX() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public int getPosX() {
+        return posX_;
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public Builder setPosX(int value) {
+        bitField0_ |= 0x00000008;
+        posX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posX = 4;</code>
+       */
+      public Builder clearPosX() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        posX_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int posY_ ;
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public boolean hasPosY() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public int getPosY() {
+        return posY_;
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public Builder setPosY(int value) {
+        bitField0_ |= 0x00000010;
+        posY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 posY = 5;</code>
+       */
+      public Builder clearPosY() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        posY_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+      /**
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+       */
+      public boolean hasElem() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Element getElem() {
+        return elem_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+       */
+      public Builder setElem(com.lvl6.proto.SharedEnumConfigProto.Element value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        elem_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element elem = 6 [default = NO_ELEMENT];</code>
+       */
+      public Builder clearElem() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+        onChanged();
+        return this;
+      }
+
+      private int value_ ;
+      /**
+       * <code>optional int32 value = 7;</code>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 value = 7;</code>
+       */
+      public int getValue() {
+        return value_;
+      }
+      /**
+       * <code>optional int32 value = 7;</code>
+       */
+      public Builder setValue(int value) {
+        bitField0_ |= 0x00000040;
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 value = 7;</code>
+       */
+      public Builder clearValue() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        value_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int quantity_ ;
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public int getQuantity() {
+        return quantity_;
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000080;
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 quantity = 8;</code>
+       *
+       * <pre>
+       *At the moment, mostly used for jelly, as in break jelly twice kind of thing.
+       * </pre>
+       */
+      public Builder clearQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        quantity_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoardPropertyProto)
+    }
+
+    static {
+      defaultInstance = new BoardPropertyProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoardPropertyProto)
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BoardLayoutProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BoardPropertyProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable;
+
+  public static com.google.protobuf.Descriptors.FileDescriptor
+      getDescriptor() {
+    return descriptor;
+  }
+  private static com.google.protobuf.Descriptors.FileDescriptor
+      descriptor;
+  static {
+    java.lang.String[] descriptorData = {
+      "\n\013Board.proto\022\016com.lvl6.proto\032\026SharedEnu" +
+      "mConfig.proto\"\217\001\n\020BoardLayoutProto\022\017\n\007bo" +
+      "ardId\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001" +
+      "(\005\022\023\n\013orbElements\030\004 \001(\005\0226\n\nproperties\030\005 " +
+      "\003(\0132\".com.lvl6.proto.BoardPropertyProto\"" +
+      "\274\001\n\022BoardPropertyProto\022\027\n\017boardPropertyI" +
+      "d\030\001 \001(\005\022\017\n\007boardId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014" +
+      "\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\0221\n\004elem\030\006 \001(\016" +
+      "2\027.com.lvl6.proto.Element:\nNO_ELEMENT\022\r\n" +
+      "\005value\030\007 \001(\005\022\020\n\010quantity\030\010 \001(\005B\014B\nBoardP",
+      "roto"
+    };
+    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
+    com.google.protobuf.Descriptors.FileDescriptor
+      .internalBuildGeneratedFileFrom(descriptorData,
+        new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
+        }, assigner);
+    internal_static_com_lvl6_proto_BoardLayoutProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_BoardLayoutProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoardLayoutProto_descriptor,
+        new java.lang.String[] { "BoardId", "Height", "Width", "OrbElements", "Properties", });
+    internal_static_com_lvl6_proto_BoardPropertyProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_BoardPropertyProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoardPropertyProto_descriptor,
+        new java.lang.String[] { "BoardPropertyId", "BoardId", "Name", "PosX", "PosY", "Elem", "Value", "Quantity", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+  }
+
+  // @@protoc_insertion_point(outer_class_scope)
 }
