@@ -269,9 +269,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 			User defender = userIdsToUsers.get(defenderId);
 			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
 
-			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-				userId, attackerElo, defenderId, defenderPu.getElo(),
-				defender.getCash(), defender.getOil());
+			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
+				attackerElo, defenderPu.getElo(), defender);
 
 			userIdToCashStolen.put(defenderId, 
 				potentialResult.getUnsignedCashAttackerWins());

@@ -11,9 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpLeagueForUser;
+import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.BeginPvpBattleStatus;
+import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.Builder;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
@@ -236,7 +237,14 @@ public class BeginPvpBattleAction
 		
 		defenderElo = Math.max(defenderElo, ControllerConstants.PVP__DEFAULT_MIN_ELO);
 		
-		PvpBattleOutcome results = new PvpBattleOutcome(attackerId, attackerElo, defenderId, defenderElo, 0, 0);
+		User attacker = new User();
+		attacker.setId(attackerId);
+		
+		User user = new User();
+		user.setCash(0);
+		user.setOil(0);
+		user.setId(defenderId);
+		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo, defenderElo, user);
 		  
 	  	attackerWins(defenderElo, results);
 	  	attackerLoses(attackerElo, results);

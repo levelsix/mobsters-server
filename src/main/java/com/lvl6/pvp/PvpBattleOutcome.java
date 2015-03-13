@@ -4,6 +4,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 
@@ -16,7 +17,8 @@ public class PvpBattleOutcome
 	private static double SCORING_CURVE_LINEARITY = 0.15D;
 	
 	private static double ELO_SCALE_DIVIDEND_MULTIPLE = 0.05D;
-	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;
+	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;//changed from 0.4
+
 	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
@@ -26,27 +28,28 @@ public class PvpBattleOutcome
 	
 	private String attackerId;
 	private double attackerElo;
-	
+	private User attacker;
+	private User defender;
 	private String defenderId;
 	private double defenderElo;
 	private double defenderCash;
 	private double defenderOil;
-	
+		
 	public PvpBattleOutcome(
-		String attackerId,
+		User attacker,
 		int attackerElo,
-		String defenderId,
 		int defenderElo,
-		int defenderCash,
-		int defenderOil )
+		User defender )
 	{
 		super();
-		this.attackerId = attackerId;
+		this.attacker = attacker;
+		this.defender = defender;
+		this.attackerId = attacker.getId();
 		this.attackerElo = attackerElo;
-		this.defenderId = defenderId;
+		this.defenderId = defender.getId();
 		this.defenderElo = defenderElo;
-		this.defenderCash = defenderCash;
-		this.defenderOil = defenderOil;
+		this.defenderCash = defender.getCash();
+		this.defenderOil = defender.getOil();
 		
 		setLoggingBoolean();
 	}
@@ -233,7 +236,11 @@ public class PvpBattleOutcome
 					matchRange, offset );
 		}
 
-		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * defenderCash;
+		//arin's constant to factor in player lvl
+		int diffInPlayerLvl = attacker.getLevel() - defender.getLevel();
+		double convertBackToDouble = 0.01;
+		double scaleDividend = Math.abs((Math.abs((double)diffInPlayerLvl * RESOURCE_SCALE_DIVIDEND_MULTIPLE) 
+				- (double)(RESOURCE_SCALE_DIVIDEND_MULTIPLE*100)))*convertBackToDouble * defenderCash;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
 		if (loggingOn) {
@@ -287,7 +294,10 @@ public class PvpBattleOutcome
 		
 
 //		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * lowerElo;
-		double scaleDividend = RESOURCE_SCALE_DIVIDEND_MULTIPLE * defenderOil;
+		int diffInPlayerLvl = attacker.getLevel() - defender.getLevel();
+		double convertBackToDouble = 0.01;
+		double scaleDividend = Math.abs((Math.abs((double)diffInPlayerLvl * RESOURCE_SCALE_DIVIDEND_MULTIPLE) 
+				- (double)(RESOURCE_SCALE_DIVIDEND_MULTIPLE*100)))*convertBackToDouble * defenderOil;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(-1 * matchRange) - offset;
 		double scale = scaleDividend / scaleDivisor;
 		if (loggingOn) {

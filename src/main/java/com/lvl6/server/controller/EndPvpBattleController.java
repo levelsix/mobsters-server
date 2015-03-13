@@ -1150,8 +1150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  //need to calculate the resources defender can steal
 	  PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-			defender.getId(), defenderElo, attackerId, attackerElo,
-			defender.getCash(), defender.getOil());
+			defender, defenderElo, attackerElo, attacker);
 	  
 	  Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 		  .singletonMap(attackerId, potentialResult.getUnsignedCashAttackerWins());

@@ -177,6 +177,7 @@ public class RetrieveUserMonsterTeamAction
 		allButRetrieverUserIdToOilLost = new HashMap<String, Integer>();
 		log.info("calculating the PvpBattleOutcomes");
 		int retrieverElo = this.retrieverPu.getElo();
+		User retrieveUser = userRetrieveUtil.getUserById(retrieverUserId);
 		for (String userId : userIdToUser.keySet()) {
 			if (userId.equals(retrieverUserId)) {
 				continue;
@@ -185,9 +186,8 @@ public class RetrieveUserMonsterTeamAction
 			PvpUser pu = userIdToPvpUsers.get(userId);
 			
 			User u = userIdToUser.get(userId);
-			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-				retrieverUserId, retrieverElo, userId, pu.getElo(),
-				u.getCash(), u.getOil());
+			PvpBattleOutcome potentialResult = new PvpBattleOutcome(retrieveUser, 
+					retrieverElo, pu.getElo(), u);
 			
 			allButRetrieverUserIdToCashLost.put(userId,
 				potentialResult.getUnsignedCashAttackerWins());
