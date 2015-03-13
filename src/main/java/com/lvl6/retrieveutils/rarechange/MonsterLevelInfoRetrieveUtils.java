@@ -318,9 +318,9 @@ public class MonsterLevelInfoRetrieveUtils {
 		float enhanceCostExponent = rs
 				.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT);
 		float enhanceExpPerSec = rs
-				.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC);
+				.getFloat(DBConstants.MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER);
 		float enhanceExpPerSecExponent = rs
-				.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT);
+				.getFloat(DBConstants.MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER_EXPONENT);
 		float pvpDropRate = rs
 				.getFloat(DBConstants.MONSTER_LEVEL_INFO__PVP_DROP_RATE);
 

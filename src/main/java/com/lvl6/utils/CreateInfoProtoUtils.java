@@ -2373,10 +2373,9 @@ public class CreateInfoProtoUtils {
 
 			mlipb.setEnhanceCostPerFeeder(info.getEnhanceCostPerFeeder());
 			mlipb.setEnhanceCostExponent(info.getEnhanceCostExponent());
-			mlipb.setEnhanceExpPerSecond(info.getEnhanceExpPerSecond());
-			mlipb.setEnhanceExpPerSecondExponent(info
-					.getEnhanceExpPerSecondExponent());
-
+			mlipb.setSecsToEnhancePerFeeder(info.getSecondsToEnhancePerFeeder());
+			mlipb.setSecsToEnhancePerFeederExponent(info.getSecondsToEnhancePerFeederExponent());
+			
 			lvlInfoProtos.add(mlipb.build());
 		}
 
@@ -3485,7 +3484,7 @@ public class CreateInfoProtoUtils {
 		lpb.setStructInfo(sip);
 		lpb.setQueueSize(sl.getQueueSize());
 		lpb.setPointsMultiplier(sl.getPointsMultiplier());
-		lpb.setPointsPerSecond(sl.getPointsPerSecond());
+		lpb.setFeederTimeMultiplier(sl.getFeederTimeMultiplier());
 
 		return lpb.build();
 	}

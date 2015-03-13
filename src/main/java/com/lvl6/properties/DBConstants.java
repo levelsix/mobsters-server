@@ -1028,8 +1028,8 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent";
-	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";
-	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT = "enhance_exp_per_sec_exponent";
+	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER = "seconds_to_enhance_per_feeder";
+	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER_EXPONENT = "seconds_to_enhance_per_feeder_exponent";
 	public static final String MONSTER_LEVEL_INFO__PVP_DROP_RATE = "pvp_drop_rate";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
@@ -1206,7 +1206,7 @@ public class DBConstants {
 	public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
 	public static final String STRUCTURE_LAB__POINTS_MULTIPLIER = "points_multiplier";
-	public static final String STRUCTURE_LAB__POINTS_PER_SECOND = "points_per_second";
+	public static final String STRUCTURE_LAB__FEEDER_TIME_MULTIPLIER = "feeder_time_multiplier";
 
 	public static final String STRUCTURE_MINI_JOB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT = "generated_job_limit";

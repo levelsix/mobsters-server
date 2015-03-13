@@ -6804,7 +6804,7 @@ public final class StructureProto {
     int getQueueSize();
 
     /**
-     * <code>optional float pointsPerSecond = 3;</code>
+     * <code>optional float feederTimeMultiplier = 3;</code>
      *
      * <pre>
      *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -6812,9 +6812,9 @@ public final class StructureProto {
      *for a main monster to be enhanced with all those points
      * </pre>
      */
-    boolean hasPointsPerSecond();
+    boolean hasFeederTimeMultiplier();
     /**
-     * <code>optional float pointsPerSecond = 3;</code>
+     * <code>optional float feederTimeMultiplier = 3;</code>
      *
      * <pre>
      *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -6822,7 +6822,7 @@ public final class StructureProto {
      *for a main monster to be enhanced with all those points
      * </pre>
      */
-    float getPointsPerSecond();
+    float getFeederTimeMultiplier();
 
     /**
      * <code>optional float pointsMultiplier = 4;</code>
@@ -6909,7 +6909,7 @@ public final class StructureProto {
             }
             case 29: {
               bitField0_ |= 0x00000004;
-              pointsPerSecond_ = input.readFloat();
+              feederTimeMultiplier_ = input.readFloat();
               break;
             }
             case 37: {
@@ -6993,10 +6993,10 @@ public final class StructureProto {
       return queueSize_;
     }
 
-    public static final int POINTSPERSECOND_FIELD_NUMBER = 3;
-    private float pointsPerSecond_;
+    public static final int FEEDERTIMEMULTIPLIER_FIELD_NUMBER = 3;
+    private float feederTimeMultiplier_;
     /**
-     * <code>optional float pointsPerSecond = 3;</code>
+     * <code>optional float feederTimeMultiplier = 3;</code>
      *
      * <pre>
      *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7004,11 +7004,11 @@ public final class StructureProto {
      *for a main monster to be enhanced with all those points
      * </pre>
      */
-    public boolean hasPointsPerSecond() {
+    public boolean hasFeederTimeMultiplier() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional float pointsPerSecond = 3;</code>
+     * <code>optional float feederTimeMultiplier = 3;</code>
      *
      * <pre>
      *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7016,8 +7016,8 @@ public final class StructureProto {
      *for a main monster to be enhanced with all those points
      * </pre>
      */
-    public float getPointsPerSecond() {
-      return pointsPerSecond_;
+    public float getFeederTimeMultiplier() {
+      return feederTimeMultiplier_;
     }
 
     public static final int POINTSMULTIPLIER_FIELD_NUMBER = 4;
@@ -7038,7 +7038,7 @@ public final class StructureProto {
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       queueSize_ = 0;
-      pointsPerSecond_ = 0F;
+      feederTimeMultiplier_ = 0F;
       pointsMultiplier_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
@@ -7061,7 +7061,7 @@ public final class StructureProto {
         output.writeInt32(2, queueSize_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeFloat(3, pointsPerSecond_);
+        output.writeFloat(3, feederTimeMultiplier_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeFloat(4, pointsMultiplier_);
@@ -7085,7 +7085,7 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, pointsPerSecond_);
+          .computeFloatSize(3, feederTimeMultiplier_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7221,7 +7221,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         queueSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        pointsPerSecond_ = 0F;
+        feederTimeMultiplier_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
         pointsMultiplier_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -7268,7 +7268,7 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.pointsPerSecond_ = pointsPerSecond_;
+        result.feederTimeMultiplier_ = feederTimeMultiplier_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -7295,8 +7295,8 @@ public final class StructureProto {
         if (other.hasQueueSize()) {
           setQueueSize(other.getQueueSize());
         }
-        if (other.hasPointsPerSecond()) {
-          setPointsPerSecond(other.getPointsPerSecond());
+        if (other.hasFeederTimeMultiplier()) {
+          setFeederTimeMultiplier(other.getFeederTimeMultiplier());
         }
         if (other.hasPointsMultiplier()) {
           setPointsMultiplier(other.getPointsMultiplier());
@@ -7476,9 +7476,9 @@ public final class StructureProto {
         return this;
       }
 
-      private float pointsPerSecond_ ;
+      private float feederTimeMultiplier_ ;
       /**
-       * <code>optional float pointsPerSecond = 3;</code>
+       * <code>optional float feederTimeMultiplier = 3;</code>
        *
        * <pre>
        *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7486,11 +7486,11 @@ public final class StructureProto {
        *for a main monster to be enhanced with all those points
        * </pre>
        */
-      public boolean hasPointsPerSecond() {
+      public boolean hasFeederTimeMultiplier() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional float pointsPerSecond = 3;</code>
+       * <code>optional float feederTimeMultiplier = 3;</code>
        *
        * <pre>
        *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7498,11 +7498,11 @@ public final class StructureProto {
        *for a main monster to be enhanced with all those points
        * </pre>
        */
-      public float getPointsPerSecond() {
-        return pointsPerSecond_;
+      public float getFeederTimeMultiplier() {
+        return feederTimeMultiplier_;
       }
       /**
-       * <code>optional float pointsPerSecond = 3;</code>
+       * <code>optional float feederTimeMultiplier = 3;</code>
        *
        * <pre>
        *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7510,14 +7510,14 @@ public final class StructureProto {
        *for a main monster to be enhanced with all those points
        * </pre>
        */
-      public Builder setPointsPerSecond(float value) {
+      public Builder setFeederTimeMultiplier(float value) {
         bitField0_ |= 0x00000004;
-        pointsPerSecond_ = value;
+        feederTimeMultiplier_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float pointsPerSecond = 3;</code>
+       * <code>optional float feederTimeMultiplier = 3;</code>
        *
        * <pre>
        *IGNORE	//TODO: get rid of this since enhancing is instantaneous
@@ -7525,9 +7525,9 @@ public final class StructureProto {
        *for a main monster to be enhanced with all those points
        * </pre>
        */
-      public Builder clearPointsPerSecond() {
+      public Builder clearFeederTimeMultiplier() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        pointsPerSecond_ = 0F;
+        feederTimeMultiplier_ = 0F;
         onChanged();
         return this;
       }
@@ -21691,85 +21691,86 @@ public final class StructureProto {
       "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
       "nfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\033\n\017healthPer" +
       "Second\030\003 \001(\002B\002\030\001\022!\n\031secsToFullyHealMulti",
-      "plier\030\004 \001(\002\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001" +
+      "plier\030\004 \001(\002\"\215\001\n\010LabProto\0226\n\nstructInfo\030\001" +
       " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003" +
-      " \001(\002\022\030\n\020pointsMultiplier\030\004 \001(\002\"\341\001\n\016Resid" +
-      "enceProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\022\027\n\017numMonsterS" +
-      "lots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005" +
-      "\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAccepted" +
-      "FbInvites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022" +
-      "\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\n",
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
-      "ureInfoProto\022 \n\030numResourceOneGenerators" +
-      "\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 " +
-      "\n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n\026numR" +
-      "esourceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals" +
-      "\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMons" +
-      "terSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQu" +
-      "eueCashCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 " +
-      "\001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobC" +
-      "enterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl",
-      "6.proto.StructureInfoProto\022\031\n\021generatedJ" +
-      "obLimit\030\002 \001(\005\022!\n\031hoursBetweenJobGenerati" +
-      "on\030\003 \001(\005\"\236\002\n\026FullUserStructureProto\022\026\n\016u" +
-      "serStructUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n" +
-      "\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024" +
-      "\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010" +
-      "\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.proto.C" +
-      "oordinateProto\0226\n\013orientation\030\010 \001(\0162!.co" +
-      "m.lvl6.proto.StructOrientation\022\031\n\021fbInvi" +
-      "teStructLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001",
-      "x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProt" +
-      "o\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\"\342\002\n\rObs" +
-      "tacleProto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002" +
-      " \001(\t\0225\n\017removalCostType\030\003 \001(\0162\034.com.lvl6" +
-      ".proto.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017sec" +
-      "ondsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006hei" +
-      "ght\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVertica" +
-      "lPixelOffset\030\t \001(\002\022\023\n\013description\030\n \001(\t\022" +
-      "\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshadowImgName",
-      "\030\014 \001(\t\022\034\n\024shadowVerticalOffset\030\r \001(\002\022\037\n\027" +
-      "shadowHorizontalOfffset\030\016 \001(\002\"\227\001\n\024Minimu" +
-      "mObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\nco" +
-      "ordinate\030\002 \001(\0132\037.com.lvl6.proto.Coordina" +
-      "teProto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6." +
-      "proto.StructOrientation\"\333\001\n\021UserObstacle" +
-      "Proto\022\030\n\020userObstacleUuid\030\001 \001(\t\022\020\n\010userU" +
-      "uid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordin" +
-      "ates\030\004 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot",
-      "o.StructOrientation\022\030\n\020removalStartTime\030" +
-      "\006 \001(\003\"\234\001\n\017EvoChamberProto\0226\n\nstructInfo\030" +
-      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
-      "o\0228\n\017qualityUnlocked\030\002 \001(\0162\027.com.lvl6.pr" +
-      "oto.Quality:\006COMMON\022\027\n\017evoTierUnlocked\030\003" +
-      " \001(\005\"`\n\017TeamCenterProto\0226\n\nstructInfo\030\001 " +
-      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
-      "\025\n\rteamCostLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProt" +
+      "\022\021\n\tqueueSize\030\002 \001(\005\022\034\n\024feederTimeMultipl" +
+      "ier\030\003 \001(\002\022\030\n\020pointsMultiplier\030\004 \001(\002\"\341\001\n\016" +
+      "ResidenceProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
+      ".lvl6.proto.StructureInfoProto\022\027\n\017numMon" +
+      "sterSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030" +
+      "\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAcc" +
+      "eptedFbInvites\030\005 \001(\005\022\026\n\016occupationName\030\006" +
+      " \001(\t\022\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownHallProt",
       "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
-      "tructureInfoProto\022!\n\031maxHelpersPerSolici",
-      "tation\030\002 \001(\005\022\036\n\026teamDonationPowerLimit\030\003" +
-      " \001(\005\"h\n\022PvpBoardHouseProto\0226\n\nstructInfo" +
-      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
-      "to\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\240\001\n\025PvpBo" +
-      "ardObstacleProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004" +
-      "name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!.com.l" +
-      "vl6.proto.BoardObstacleType\022\020\n\010powerAmt\030" +
-      "\004 \001(\005\022\032\n\022initiallyAvailable\030\005 \001(\010\"}\n\031Use" +
-      "rPvpBoardObstacleProto\022\036\n\026userPvpBoardOb" +
-      "stacleId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobst",
-      "acleId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005" +
-      "\"d\n\026BattleItemFactoryProto\0226\n\nstructInfo" +
-      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
-      "to\022\022\n\npowerLimit\030\002 \001(\005*I\n\014ResourceType\022\017" +
-      "\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GE" +
-      "MS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022" +
-      "\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
-      "SITION_2\020\002*2\n\021BoardObstacleType\022\t\n\005CLOUD" +
-      "\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003B\020B\016StructureProto"
+      "tructureInfoProto\022 \n\030numResourceOneGener" +
+      "ators\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 " +
+      "\001(\005\022 \n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n" +
+      "\026numResourceTwoStorages\030\005 \001(\005\022\024\n\014numHosp" +
+      "itals\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017nu" +
+      "mMonsterSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020" +
+      "pvpQueueCashCost\030\n \001(\005\022\030\n\020resourceCapaci" +
+      "ty\030\013 \001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022Min" +
+      "iJobCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
+      "m.lvl6.proto.StructureInfoProto\022\031\n\021gener" +
+      "atedJobLimit\030\002 \001(\005\022!\n\031hoursBetweenJobGen" +
+      "eration\030\003 \001(\005\"\236\002\n\026FullUserStructureProto" +
+      "\022\026\n\016userStructUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001" +
+      "(\t\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 " +
+      "\001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete\030" +
+      "\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.pr" +
+      "oto.CoordinateProto\0226\n\013orientation\030\010 \001(\016" +
+      "2!.com.lvl6.proto.StructOrientation\022\031\n\021f" +
+      "bInviteStructLvl\030\t \001(\005\"\'\n\017CoordinateProt",
+      "o\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStruc" +
+      "tProto\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002" +
+      " \001(\0132\037.com.lvl6.proto.CoordinateProto\"\342\002" +
+      "\n\rObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004n" +
+      "ame\030\002 \001(\t\0225\n\017removalCostType\030\003 \001(\0162\034.com" +
+      ".lvl6.proto.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027" +
+      "\n\017secondsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016" +
+      "\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVe" +
+      "rticalPixelOffset\030\t \001(\002\022\023\n\013description\030\n" +
+      " \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshadowIm",
+      "gName\030\014 \001(\t\022\034\n\024shadowVerticalOffset\030\r \001(" +
+      "\002\022\037\n\027shadowHorizontalOfffset\030\016 \001(\002\"\227\001\n\024M" +
+      "inimumObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\022" +
+      "3\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\0226\n\013orientation\030\005 \001(\0162!.com." +
+      "lvl6.proto.StructOrientation\"\333\001\n\021UserObs" +
+      "tacleProto\022\030\n\020userObstacleUuid\030\001 \001(\t\022\020\n\010" +
+      "userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013co" +
+      "ordinates\030\004 \001(\0132\037.com.lvl6.proto.Coordin" +
+      "ateProto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6",
+      ".proto.StructOrientation\022\030\n\020removalStart" +
+      "Time\030\006 \001(\003\"\234\001\n\017EvoChamberProto\0226\n\nstruct" +
+      "Info\030\001 \001(\0132\".com.lvl6.proto.StructureInf" +
+      "oProto\0228\n\017qualityUnlocked\030\002 \001(\0162\027.com.lv" +
+      "l6.proto.Quality:\006COMMON\022\027\n\017evoTierUnloc" +
+      "ked\030\003 \001(\005\"`\n\017TeamCenterProto\0226\n\nstructIn" +
+      "fo\030\001 \001(\0132\".com.lvl6.proto.StructureInfoP" +
+      "roto\022\025\n\rteamCostLimit\030\002 \001(\005\"\213\001\n\016ClanHous" +
+      "eProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
+      "oto.StructureInfoProto\022!\n\031maxHelpersPerS",
+      "olicitation\030\002 \001(\005\022\036\n\026teamDonationPowerLi" +
+      "mit\030\003 \001(\005\"h\n\022PvpBoardHouseProto\0226\n\nstruc" +
+      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
+      "foProto\022\032\n\022pvpBoardPowerLimit\030\002 \001(\005\"\240\001\n\025" +
+      "PvpBoardObstacleProto\022\022\n\npvpBoardId\030\001 \001(" +
+      "\005\022\014\n\004name\030\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!." +
+      "com.lvl6.proto.BoardObstacleType\022\020\n\010powe" +
+      "rAmt\030\004 \001(\005\022\032\n\022initiallyAvailable\030\005 \001(\010\"}" +
+      "\n\031UserPvpBoardObstacleProto\022\036\n\026userPvpBo" +
+      "ardObstacleId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\022\n",
+      "\nobstacleId\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030" +
+      "\005 \001(\005\"d\n\026BattleItemFactoryProto\0226\n\nstruc" +
+      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
+      "foProto\022\022\n\npowerLimit\030\002 \001(\005*I\n\014ResourceT" +
+      "ype\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022" +
+      "\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientat" +
+      "ion\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022" +
+      "\016\n\nPOSITION_2\020\002*2\n\021BoardObstacleType\022\t\n\005" +
+      "CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003B\020B\016Structure" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21825,7 +21826,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_LabProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_LabProto_descriptor,
-        new java.lang.String[] { "StructInfo", "QueueSize", "PointsPerSecond", "PointsMultiplier", });
+        new java.lang.String[] { "StructInfo", "QueueSize", "FeederTimeMultiplier", "PointsMultiplier", });
     internal_static_com_lvl6_proto_ResidenceProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new

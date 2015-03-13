@@ -225,7 +225,6 @@ public class QueueUpTest extends TestCase {
 		QueueUpRequestProto.Builder smjrpb = QueueUpRequestProto.newBuilder();
 
 		smjrpb.setAttacker(mup);
-		smjrpb.setAttackerElo(elo);
 		smjrpb.setClientTime(clientTime.getTime());
 
 		return smjrpb.build();
