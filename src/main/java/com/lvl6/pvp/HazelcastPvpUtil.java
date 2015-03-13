@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -147,10 +148,15 @@ public class HazelcastPvpUtil implements InitializingBean {
 				+ minElo
 				+ ", maxElo=" + maxElo + "\t (page size aka) limit=" + limit);
 
-		Predicate<?, ?> pred = generatePredicate(minElo, maxElo, now, limit,
-				excludeIds);
+		//return 10 opponents
+		Set<PvpUser> users = new HashSet<PvpUser>();
+		for(int i=0; i<limit; i++) {
+			Predicate<?, ?> pred = generatePredicate(minElo, maxElo, now, limit,
+					excludeIds);
 
-		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(pred);
+			Set<PvpUser> user = (Set<PvpUser>) pvpUserMap.values(pred);
+			users.addAll(user);
+		}
 		log.info("users:" + users);
 
 		return users;
@@ -236,9 +242,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 		Predicate<?, ?> sqlPredicate = new SqlPredicate(sql);
 
+		//Byron's change to limit->1
 		PagingPredicate advPredicate = new PagingPredicate(sqlPredicate,
-				new PvpUserComparator(true, IterationType.VALUE), limit);
-
+				new PvpUserComparator(true, IterationType.VALUE), 1);
+		
+		
 		return advPredicate;
 	}
 
