@@ -122,10 +122,8 @@ public class StructureLabRetrieveUtils {
 		int queueSize = rs.getInt(DBConstants.STRUCTURE_LAB__QUEUE_SIZE);
 		float pointsMultiplier = rs
 				.getFloat(DBConstants.STRUCTURE_LAB__POINTS_MULTIPLIER);
-		float pointsPerSecond = rs
-				.getFloat(DBConstants.STRUCTURE_LAB__FEEDER_TIME_MULTIPLIER);
 
-		return new StructureLab(structId, queueSize, pointsMultiplier,
-				pointsPerSecond);
+
+		return new StructureLab(structId, queueSize, pointsMultiplier);
 	}
 }

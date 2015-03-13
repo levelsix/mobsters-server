@@ -9,15 +9,12 @@ public class StructureLab implements Serializable {
 	private int structId;
 	private int queueSize;
 	private float pointsMultiplier;
-	private float feederTimeMultiplier;
 
-	public StructureLab(int structId, int queueSize, float pointsMultiplier,
-			float feederTimeMultiplier) {
+	public StructureLab(int structId, int queueSize, float pointsMultiplier) {
 		super();
 		this.structId = structId;
 		this.queueSize = queueSize;
 		this.pointsMultiplier = pointsMultiplier;
-		this.feederTimeMultiplier = feederTimeMultiplier;
 	}
 
 	public int getStructId() {
@@ -44,21 +41,14 @@ public class StructureLab implements Serializable {
 		this.pointsMultiplier = pointsMultiplier;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "StructureLab [structId=" + structId + ", queueSize="
-				+ queueSize + ", pointsMultiplier=" + pointsMultiplier
-				+ ", feederTimeMultiplier=" + feederTimeMultiplier + "]";
+				+ queueSize + ", pointsMultiplier=" + pointsMultiplier + "]";
 	}
 
-	public float getFeederTimeMultiplier() {
-		return feederTimeMultiplier;
-	}
 
-	public void setFeederTimeMultiplier(float feederTimeMultiplier) {
-		this.feederTimeMultiplier = feederTimeMultiplier;
-	}
+
+
 
 }
