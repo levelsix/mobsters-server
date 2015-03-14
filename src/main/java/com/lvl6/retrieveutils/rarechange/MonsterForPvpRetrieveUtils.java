@@ -58,7 +58,8 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 				.values(predicate);
 		//log.info("users:" + monsters);
 		Iterator<MonsterForPvp> it = monsters.iterator();
-		while(monsters.size() > 2) {
+		while(it.hasNext() && monsters.size() > 2) {
+			it.next();
 			it.remove();
 		}
 
