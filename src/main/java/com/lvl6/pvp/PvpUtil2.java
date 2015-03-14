@@ -1,7 +1,9 @@
 package com.lvl6.pvp;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,27 +37,37 @@ public class PvpUtil2 {
 	 * elo should be between minElo and maxElo:
 	 *  defaultMinElo <= computed elo <= defaultMaxElo
 	 */
-	public static Map.Entry<Integer, Integer> getMinAndMaxElo(double playerElo) {
-		double randVar = ELO__RANDOM_VAR_MIN
-				+ (Math.random() * (ELO__RANDOM_VAR_MAX - ELO__RANDOM_VAR_MIN));
+	public static Map<Integer, Integer> getMinAndMaxElo(double playerElo) {
+		Map<Integer, Integer> setOfEloRanges = new HashMap<Integer, Integer>();
+		
+		for(int i=0; i<ControllerConstants.PVP__MAX_QUEUE_SIZE; i++) {
+			double randVar = ELO__RANDOM_VAR_MIN
+					+ (Math.random() * (ELO__RANDOM_VAR_MAX - ELO__RANDOM_VAR_MIN));
 
-		double computedElo = getProspectiveOpponentElo(randVar, playerElo);
+			double computedElo = getProspectiveOpponentElo(randVar, playerElo);
 
-		int minElo = (int) (0.95D * computedElo);
-		int maxElo = (int) (1.05D * computedElo);
-		log.info(String.format("computedElo=%f, minElo=%d, maxElo=%d",
-				computedElo, minElo, maxElo));
+			int minElo = (int) (0.95D * computedElo);
+			int maxElo = (int) (1.05D * computedElo);
+			log.info(String.format("computedElo=%f, minElo=%d, maxElo=%d",
+					computedElo, minElo, maxElo));
 
-		//the minimum elo to be searched for is 1000, er PVP__DEFAULT_MIN_ELO
-		//TODO: Fix up this hackiness: ensuring DEFAULT MIN ELO is between min (inclusive) and max elo (inclusive)
-		minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO - 1, minElo);
-		maxElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO + 1, maxElo);
-		log.info(String.format(
-				"after capping minElo. computedElo=%f, minElo=%d, maxElo=%d",
-				computedElo, minElo, maxElo));
+			//the minimum elo to be searched for is 1000, er PVP__DEFAULT_MIN_ELO
+			//TODO: Fix up this hackiness: ensuring DEFAULT MIN ELO is between min (inclusive) and max elo (inclusive)
+			minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO - 1, minElo);
+			maxElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO + 1, maxElo);
+			log.info(String.format(
+					"after capping minElo. computedElo=%f, minElo=%d, maxElo=%d",
+					computedElo, minElo, maxElo));
+			
+			if(setOfEloRanges.containsKey(minElo)) {
+				setOfEloRanges.put(minElo+i, maxElo);
+			}
+			else setOfEloRanges.put(minElo, maxElo);
+		}
 
 		//poor man's pair
-		return new AbstractMap.SimpleEntry<Integer, Integer>(minElo, maxElo);
+//		return new AbstractMap.SimpleEntry<Integer, Integer>(minElo, maxElo);
+		return setOfEloRanges;
 	}
 
 	public static double getProspectiveOpponentElo(double randVar,

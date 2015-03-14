@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -69,6 +70,7 @@ public class QueueUpAction {
 	//derived state
 	private PvpLeagueForUser attackerPlfu;
 	private int attackerElo;
+	private Map<Integer, Integer> minAndMaxEloMap;
 	private int minElo;
 	private int maxElo;
 	private List<String> queuedOpponentIdsList;
@@ -150,10 +152,8 @@ public class QueueUpAction {
 	private void selectRealUsers() {
 		attackerElo = attackerPlfu.getElo();
 
-		Map.Entry<Integer, Integer> minAndMaxElo = PvpUtil2
+		minAndMaxEloMap = PvpUtil2
 				.getMinAndMaxElo(attackerElo);
-		minElo = minAndMaxElo.getKey();
-		maxElo = minAndMaxElo.getValue();
 
 		boolean attackerBelowSomeElo = attackerElo < ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
 		boolean showBotsBelowSomeElo = ServerToggleRetrieveUtils
@@ -169,7 +169,7 @@ public class QueueUpAction {
 	private void getQueuedOpponentIds() {
 		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
-				minElo, maxElo, clientDate, numNeeded, userIdBlackList);
+				minAndMaxEloMap, clientDate, numNeeded, userIdBlackList);
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
@@ -249,30 +249,36 @@ public class QueueUpAction {
 		//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
 		log.info("no valid users for attacker={}", attackerId);
 		log.info("generating fake users.");
-		Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil
-				.retrievePvpMonsters(minElo, maxElo);
+		
+		fakeUserMonsters = new ArrayList<List<MonsterForPvp>>();
+		for(Integer minElo : minAndMaxEloMap.keySet()) {
+			int maxElo = minAndMaxEloMap.get(minElo);
+			
+			Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil
+					.retrievePvpMonsters(minElo, maxElo);
 
-		try {
-			//group monsters off
-			//25% of the time one monster
-			//50% of the time two monsters
-			//25% of the time three monsters
-			//limit the number of groups of 3
-			//NOTE: this is assuming there are more than enough monsters...
-			fakeUserMonsters = createFakeUserMonsters(fakeMonsters, numWanted);
+			try {
+				//group monsters off
+				//25% of the time one monster
+				//50% of the time two monsters
+				//25% of the time three monsters
+				//limit the number of groups of 3
+				//NOTE: this is assuming there are more than enough monsters...
+				fakeUserMonsters.addAll(createFakeUserMonsters(fakeMonsters, numWanted));
 
-			if (!fakeUserMonsters.isEmpty()) {
-				//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
-				//					fakeUserMonsters, attackerElo);
-			} else {
-				log.error("no fake users generated. minElo={} \t maxElo={}",
-						minElo, maxElo);
+				if (!fakeUserMonsters.isEmpty()) {
+					//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
+					//					fakeUserMonsters, attackerElo);
+				} else {
+					log.error("no fake users generated. minElo={} \t maxElo={}",
+							minElo, maxElo);
+				}
+			} catch (Exception e) {
+				log.error(
+						String.format(
+								"creating fake user exceptioned out. fakeMonsters=%s, numWanted=%s",
+								fakeMonsters, numWanted), e);
 			}
-		} catch (Exception e) {
-			log.error(
-					String.format(
-							"creating fake user exceptioned out. fakeMonsters=%s, numWanted=%s",
-							fakeMonsters, numWanted), e);
 		}
 	}
 
