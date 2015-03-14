@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -56,6 +57,10 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 		Set<MonsterForPvp> monsters = (Set<MonsterForPvp>) idToMonsterForPvp
 				.values(predicate);
 		//log.info("users:" + monsters);
+		Iterator<MonsterForPvp> it = monsters.iterator();
+		while(monsters.size() > 2) {
+			it.remove();
+		}
 
 		return monsters;
 	}
