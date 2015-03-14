@@ -4,6 +4,27 @@ import java.io.Serializable;
 
 public class Research implements Serializable {
 
+	public Research(int id, String researchType, String researchDomain,
+			String iconImgName, String name, int predId, int succId,
+			String desc, int durationMin, int costAmt, String costType,
+			int level, float priority, int tier) {
+		super();
+		this.id = id;
+		this.researchType = researchType;
+		this.researchDomain = researchDomain;
+		this.iconImgName = iconImgName;
+		this.name = name;
+		this.predId = predId;
+		this.succId = succId;
+		this.desc = desc;
+		this.durationMin = durationMin;
+		this.costAmt = costAmt;
+		this.costType = costType;
+		this.level = level;
+		this.priority = priority;
+		this.tier = tier;
+	}
+
 	private static final long serialVersionUID = -7558436754504360378L;
 
 	private int id;
@@ -21,25 +42,9 @@ public class Research implements Serializable {
 	private int costAmt;
 	private String costType;
 	private int level;
+	private float priority;
+	private int tier;
 
-	public Research(int id, String researchType, String researchDomain,
-			String iconImgName, String name, int predId, int succId,
-			String desc, int durationMin, int costAmt, String costType,
-			int level) {
-		super();
-		this.id = id;
-		this.researchType = researchType;
-		this.researchDomain = researchDomain;
-		this.iconImgName = iconImgName;
-		this.name = name;
-		this.predId = predId;
-		this.succId = succId;
-		this.desc = desc;
-		this.durationMin = durationMin;
-		this.costAmt = costAmt;
-		this.costType = costType;
-		this.level = level;
-	}
 
 	public int getId() {
 		return id;
@@ -104,7 +109,8 @@ public class Research implements Serializable {
 				+ iconImgName + ", name=" + name + ", predId=" + predId
 				+ ", succId=" + succId + ", desc=" + desc + ", durationMin="
 				+ durationMin + ", costAmt=" + costAmt + ", costType="
-				+ costType + ", level=" + level + "]";
+				+ costType + ", level=" + level + ", priority=" + priority
+				+ ", tier=" + tier + "]";
 	}
 
 	public String getResearchType() {
@@ -145,6 +151,22 @@ public class Research implements Serializable {
 
 	public void setSuccId(int succId) {
 		this.succId = succId;
+	}
+
+	public float getPriority() {
+		return priority;
+	}
+
+	public void setPriority(float priority) {
+		this.priority = priority;
+	}
+
+	public int getTier() {
+		return tier;
+	}
+
+	public void setTier(int tier) {
+		this.tier = tier;
 	}
 
 }

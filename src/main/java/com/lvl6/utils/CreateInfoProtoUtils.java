@@ -3051,6 +3051,9 @@ public class CreateInfoProtoUtils {
 			List<ResearchPropertyProto> rppList = createResearchPropertyProto(researchProperties);
 			rpb.addAllProperties(rppList);
 		}
+		
+		rpb.setPriority(r.getPriority());
+		rpb.setTier(r.getTier());
 
 		return rpb.build();
 	}

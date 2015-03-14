@@ -101,6 +101,8 @@ public class ResearchRetrieveUtils {
 		int costAmt = rs.getInt(DBConstants.RESEARCH__COST_AMT);
 		String costType = rs.getString(DBConstants.RESEARCH__COST_TYPE);
 		int level = rs.getInt(DBConstants.RESEARCH__LEVEL);
+		float priority = rs.getFloat(DBConstants.RESEARCH__PRIORITY);
+		int tier = rs.getInt(DBConstants.RESEARCH__TIER);
 
 		int predId = rs.getInt(DBConstants.RESEARCH__PRED_ID);
 		if (rs.wasNull()) {
@@ -130,7 +132,7 @@ public class ResearchRetrieveUtils {
 		}
 
 		Research research = new Research(id, type, domain, iconImgName, name,
-				predId, succId, desc, durationMin, costAmt, costType, level);
+				predId, succId, desc, durationMin, costAmt, costType, level, priority, tier);
 		return research;
 	}
 

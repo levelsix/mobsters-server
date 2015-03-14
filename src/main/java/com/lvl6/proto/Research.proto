@@ -41,6 +41,8 @@ message ResearchProto {
 	repeated ResearchPropertyProto properties = 12;
 	
 	optional int32 level = 13;
+	optional float priority = 14;
+	optional int32 tier = 15;
 	
 }
 

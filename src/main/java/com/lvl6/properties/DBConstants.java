@@ -1112,6 +1112,8 @@ public class DBConstants {
 	public static final String RESEARCH__COST_AMT = "cost_amt";
 	public static final String RESEARCH__COST_TYPE = "cost_type";
 	public static final String RESEARCH__LEVEL = "level";
+	public static final String RESEARCH__PRIORITY = "priority";
+	public static final String RESEARCH__TIER = "tier";
 
 	public static final String RESEARCH_PROPERTY__ID = GENERIC__ID;
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";

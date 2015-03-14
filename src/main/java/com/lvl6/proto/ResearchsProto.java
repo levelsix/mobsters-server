@@ -461,6 +461,24 @@ public final class ResearchsProto {
      * <code>optional int32 level = 13;</code>
      */
     int getLevel();
+
+    /**
+     * <code>optional float priority = 14;</code>
+     */
+    boolean hasPriority();
+    /**
+     * <code>optional float priority = 14;</code>
+     */
+    float getPriority();
+
+    /**
+     * <code>optional int32 tier = 15;</code>
+     */
+    boolean hasTier();
+    /**
+     * <code>optional int32 tier = 15;</code>
+     */
+    int getTier();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ResearchProto}
@@ -601,6 +619,16 @@ public final class ResearchsProto {
             case 104: {
               bitField0_ |= 0x00000800;
               level_ = input.readInt32();
+              break;
+            }
+            case 117: {
+              bitField0_ |= 0x00001000;
+              priority_ = input.readFloat();
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00002000;
+              tier_ = input.readInt32();
               break;
             }
           }
@@ -982,6 +1010,36 @@ public final class ResearchsProto {
       return level_;
     }
 
+    public static final int PRIORITY_FIELD_NUMBER = 14;
+    private float priority_;
+    /**
+     * <code>optional float priority = 14;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional float priority = 14;</code>
+     */
+    public float getPriority() {
+      return priority_;
+    }
+
+    public static final int TIER_FIELD_NUMBER = 15;
+    private int tier_;
+    /**
+     * <code>optional int32 tier = 15;</code>
+     */
+    public boolean hasTier() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional int32 tier = 15;</code>
+     */
+    public int getTier() {
+      return tier_;
+    }
+
     private void initFields() {
       researchId_ = 0;
       researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
@@ -996,6 +1054,8 @@ public final class ResearchsProto {
       costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       properties_ = java.util.Collections.emptyList();
       level_ = 0;
+      priority_ = 0F;
+      tier_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1048,6 +1108,12 @@ public final class ResearchsProto {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(13, level_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeFloat(14, priority_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(15, tier_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1109,6 +1175,14 @@ public final class ResearchsProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(13, level_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(14, priority_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, tier_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1258,6 +1332,10 @@ public final class ResearchsProto {
         }
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
+        priority_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        tier_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -1343,6 +1421,14 @@ public final class ResearchsProto {
           to_bitField0_ |= 0x00000800;
         }
         result.level_ = level_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.tier_ = tier_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1426,6 +1512,12 @@ public final class ResearchsProto {
         }
         if (other.hasLevel()) {
           setLevel(other.getLevel());
+        }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
+        }
+        if (other.hasTier()) {
+          setTier(other.getTier());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2295,6 +2387,70 @@ public final class ResearchsProto {
       public Builder clearLevel() {
         bitField0_ = (bitField0_ & ~0x00001000);
         level_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float priority_ ;
+      /**
+       * <code>optional float priority = 14;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional float priority = 14;</code>
+       */
+      public float getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional float priority = 14;</code>
+       */
+      public Builder setPriority(float value) {
+        bitField0_ |= 0x00002000;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float priority = 14;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        priority_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private int tier_ ;
+      /**
+       * <code>optional int32 tier = 15;</code>
+       */
+      public boolean hasTier() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional int32 tier = 15;</code>
+       */
+      public int getTier() {
+        return tier_;
+      }
+      /**
+       * <code>optional int32 tier = 15;</code>
+       */
+      public Builder setTier(int value) {
+        bitField0_ |= 0x00004000;
+        tier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 tier = 15;</code>
+       */
+      public Builder clearTier() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        tier_ = 0;
         onChanged();
         return this;
       }
@@ -4000,7 +4156,7 @@ public final class ResearchsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Research.proto\022\016com.lvl6.proto\032\017Struct" +
-      "ure.proto\"\200\003\n\rResearchProto\022\022\n\nresearchI" +
+      "ure.proto\"\240\003\n\rResearchProto\022\022\n\nresearchI" +
       "d\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.com.lvl6" +
       ".proto.ResearchType\0226\n\016researchDomain\030\003 " +
       "\001(\0162\036.com.lvl6.proto.ResearchDomain\022\023\n\013i" +
@@ -4009,21 +4165,22 @@ public final class ResearchsProto {
       "durationMin\030\t \001(\005\022\017\n\007costAmt\030\n \001(\005\022.\n\010co" +
       "stType\030\013 \001(\0162\034.com.lvl6.proto.ResourceTy" +
       "pe\0229\n\nproperties\030\014 \003(\0132%.com.lvl6.proto.",
-      "ResearchPropertyProto\022\r\n\005level\030\r \001(\005\"l\n\025" +
-      "ResearchPropertyProto\022\032\n\022researchPropert" +
-      "yId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchValue" +
-      "\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005\"|\n\021UserResear" +
-      "chProto\022\030\n\020userResearchUuid\030\001 \001(\t\022\020\n\010use" +
-      "rUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(\005\022\025\n\rtimeP" +
-      "urchased\030\004 \001(\003\022\020\n\010complete\030\005 \001(\010*\330\001\n\014Res" +
-      "earchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005" +
-      "SPEED\020\003\022\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCR" +
-      "EASE_NUM_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030IN",
-      "CREASE_CASH_PRODUCTION\020\007\022\033\n\027INCREASE_OIL" +
-      "_PRODUCTION\020\010\022\023\n\017INCREASE_ATTACK\020\t\022\017\n\013IN" +
-      "CREASE_HP\020\n*X\n\016ResearchDomain\022\r\n\tNO_DOMA" +
-      "IN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRE" +
-      "SOURCES\020\004\022\n\n\006BATTLE\020\005B\020B\016ResearchsProto"
+      "ResearchPropertyProto\022\r\n\005level\030\r \001(\005\022\020\n\010" +
+      "priority\030\016 \001(\002\022\014\n\004tier\030\017 \001(\005\"l\n\025Research" +
+      "PropertyProto\022\032\n\022researchPropertyId\030\001 \001(" +
+      "\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchValue\030\003 \001(\002\022\022" +
+      "\n\nresearchId\030\004 \001(\005\"|\n\021UserResearchProto\022" +
+      "\030\n\020userResearchUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 " +
+      "\001(\t\022\022\n\nresearchId\030\003 \001(\005\022\025\n\rtimePurchased" +
+      "\030\004 \001(\003\022\020\n\010complete\030\005 \001(\010*\330\001\n\014ResearchTyp" +
+      "e\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022" +
+      "\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCREASE_NUM",
+      "_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\034\n\030INCREASE_C" +
+      "ASH_PRODUCTION\020\007\022\033\n\027INCREASE_OIL_PRODUCT" +
+      "ION\020\010\022\023\n\017INCREASE_ATTACK\020\t\022\017\n\013INCREASE_H" +
+      "P\020\n*X\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013" +
+      "RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020" +
+      "\004\022\n\n\006BATTLE\020\005B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4043,7 +4200,7 @@ public final class ResearchsProto {
     internal_static_com_lvl6_proto_ResearchProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResearchProto_descriptor,
-        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", "Level", });
+        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", "Level", "Priority", "Tier", });
     internal_static_com_lvl6_proto_ResearchPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_ResearchPropertyProto_fieldAccessorTable = new
