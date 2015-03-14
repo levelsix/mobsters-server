@@ -3,15 +3,14 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.EloPair;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.properties.ControllerConstants;
@@ -70,7 +69,7 @@ public class QueueUpAction {
 	//derived state
 	private PvpLeagueForUser attackerPlfu;
 	private int attackerElo;
-	private Map<Integer, Integer> minAndMaxEloMap;
+	private List<EloPair> listOfEloPairs;
 	private int minElo;
 	private int maxElo;
 	private List<String> queuedOpponentIdsList;
@@ -152,7 +151,7 @@ public class QueueUpAction {
 	private void selectRealUsers() {
 		attackerElo = attackerPlfu.getElo();
 
-		minAndMaxEloMap = PvpUtil2
+		listOfEloPairs = PvpUtil2
 				.getMinAndMaxElo(attackerElo);
 
 		boolean attackerBelowSomeElo = attackerElo < ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
@@ -169,7 +168,7 @@ public class QueueUpAction {
 	private void getQueuedOpponentIds() {
 		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
-				minAndMaxEloMap, clientDate, numNeeded, userIdBlackList);
+				listOfEloPairs, clientDate, numNeeded, userIdBlackList);
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
@@ -251,8 +250,9 @@ public class QueueUpAction {
 		log.info("generating fake users.");
 		
 		fakeUserMonsters = new ArrayList<List<MonsterForPvp>>();
-		for(Integer minElo : minAndMaxEloMap.keySet()) {
-			int maxElo = minAndMaxEloMap.get(minElo);
+		for(EloPair ep : listOfEloPairs) {
+			int minElo = ep.getMinElo();
+			int maxElo = ep.getMaxElo();
 			
 			Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil
 					.retrievePvpMonsters(minElo, maxElo);

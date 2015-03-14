@@ -24,6 +24,7 @@ import com.hazelcast.query.PagingPredicate;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.SqlPredicate;
 import com.hazelcast.util.IterationType;
+import com.lvl6.info.EloPair;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
@@ -119,7 +120,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//TODO: consider moving to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
-	public Set<PvpUser> retrievePvpUsers(Map<Integer, Integer> minAndMaxEloMap, Date now,
+	public Set<PvpUser> retrievePvpUsers(List<EloPair> listOfEloPairs, Date now,
 			int limit, Collection<String> excludeIds) {
 		Collection<String> excludeIdStrs = new ArrayList<String>();
 		for (String i : excludeIds) {
@@ -129,14 +130,14 @@ public class HazelcastPvpUtil implements InitializingBean {
 		if (isUseDatabaseInstead()) {
 			log.info("querying db instead of hazelcast");
 			//if quering db, something's fucked up, just grab first elo min/max pair from map
-			Map.Entry<Integer, Integer> entry = minAndMaxEloMap.entrySet().iterator().next();
-			int minElo = entry.getKey();
-			int maxElo = entry.getValue();
+			
+			int minElo = listOfEloPairs.get(0).getMinElo();
+			int maxElo = listOfEloPairs.get(0).getMaxElo();
 			return getPvpUserRetrieveUtil().retrievePvpUsers(minElo, maxElo,
 					now, limit, excludeIdStrs);
 		} else {
 			log.info("retrieving from hazelcast instead of db");
-			return retrievePvpUsersViaHazelcast(minAndMaxEloMap, now, limit,
+			return retrievePvpUsersViaHazelcast(listOfEloPairs, now, limit,
 					excludeIdStrs);
 		}
 
@@ -144,18 +145,19 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//look here for examples on using PagingPredicate
 	//https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/test/java/com/hazelcast/map/SortLimitTest.java
-	protected Set<PvpUser> retrievePvpUsersViaHazelcast(Map<Integer, Integer> minAndMaxEloMap,
+	protected Set<PvpUser> retrievePvpUsersViaHazelcast(List<EloPair> listOfEloPairs,
 			Date now, int limit, Collection<String> excludeIds) {
 		log.info("querying for people to attack. shieldEndTime should be before now="
 				+ now
-				+ "\t eloMap="
-				+ minAndMaxEloMap
+				+ "\t eloPairs="
+				+ listOfEloPairs
 				+ "\t (page size aka) limit=" + limit);
 
 		//return 10 opponents
 		Set<PvpUser> users = new HashSet<PvpUser>();
-		for(Integer minElo : minAndMaxEloMap.keySet()) {
-			int maxElo = minAndMaxEloMap.get(minElo);
+		for(EloPair ep : listOfEloPairs) {
+			int minElo = ep.getMinElo();
+			int maxElo = ep.getMaxElo();
 			Predicate<?, ?> pred = generatePredicate(minElo, maxElo, now, limit,
 					excludeIds);
 

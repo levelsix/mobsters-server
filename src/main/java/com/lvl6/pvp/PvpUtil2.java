@@ -1,13 +1,13 @@
 package com.lvl6.pvp;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.EloPair;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 
@@ -40,8 +40,8 @@ public class PvpUtil2 {
 	 * elo should be between minElo and maxElo:
 	 *  defaultMinElo <= computed elo <= defaultMaxElo
 	 */
-	public static Map<Integer, Integer> getMinAndMaxElo(double playerElo) {
-		Map<Integer, Integer> setOfEloRanges = new HashMap<Integer, Integer>();
+	public static List<EloPair> getMinAndMaxElo(double playerElo) {
+		List<EloPair> listOfEloPairs = new ArrayList<EloPair>();
 		
 		for(int i=0; i<ControllerConstants.PVP__MAX_QUEUE_SIZE; i++) {
 			double randVar = ELO__RANDOM_VAR_MIN
@@ -62,15 +62,13 @@ public class PvpUtil2 {
 					"after capping minElo. computedElo=%f, minElo=%d, maxElo=%d",
 					computedElo, minElo, maxElo));
 			
-			if(setOfEloRanges.containsKey(minElo)) {
-				setOfEloRanges.put(minElo+i, maxElo);
-			}
-			else setOfEloRanges.put(minElo, maxElo);
+			EloPair ep = new EloPair(minElo, maxElo);
+			listOfEloPairs.add(ep);
 		}
 
 		//poor man's pair
 //		return new AbstractMap.SimpleEntry<Integer, Integer>(minElo, maxElo);
-		return setOfEloRanges;
+		return listOfEloPairs;
 	}
 
 	public static double getProspectiveOpponentElo(double randVar,
