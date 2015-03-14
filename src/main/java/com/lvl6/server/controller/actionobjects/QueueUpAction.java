@@ -245,7 +245,7 @@ public class QueueUpAction {
 		generateFakeDefenders(numWanted);
 	}
 
-	private void generateFakeDefenders(int numWanted) {
+	private void generateFakeDefenders(int numWanted) { //numWanted not currently used
 		//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
 		log.info("no valid users for attacker={}", attackerId);
 		log.info("generating fake users.");
@@ -264,7 +264,7 @@ public class QueueUpAction {
 				//25% of the time three monsters
 				//limit the number of groups of 3
 				//NOTE: this is assuming there are more than enough monsters...
-				fakeUserMonsters.addAll(createFakeUserMonsters(fakeMonsters, numWanted));
+				fakeUserMonsters.addAll(createFakeUserMonsters(fakeMonsters, 1)); //used to have numwanted as field here
 
 				if (!fakeUserMonsters.isEmpty()) {
 					//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
