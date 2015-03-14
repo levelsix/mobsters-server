@@ -19,10 +19,13 @@ public class PvpUtil2 {
 	//METHODS FOR MATCH MAKING
 
 	public static final double ELO__RANDOM_VAR_MIN = 0.1D;
-	public static final double ELO__RANDOM_VAR_MAX = 0.8D;
+	public static final double ELO__RANDOM_VAR_MAX = 0.95D;
 	public static final double ELO__ICND_MEAN = -0.1D;
 	public static final double ELO__ICND_STANDARD_DEVIATION = 0.608D;
-	public static final double ELO__MAX_RANGE = 0.4D;
+	public static final double ELO__MAX_RANGE = 0.2D;
+	public static final double ELO__1250_TO_1400_RANGE = 0.12D;
+	public static final double ELO__1400_TO_1500_RANGE = 0.143D;
+	public static final double ELO__1500_TO_1600_RANGE = 0.167D;
 
 	/*
 	 * randVal (aka eloAddend) = [Max Range] x Player's Score x ICND( Random( 0.1, 0.9 ), [Bias], 0.608 )
@@ -74,9 +77,20 @@ public class PvpUtil2 {
 			double playerElo) {
 		NormalDistribution eloRangeFunc = new NormalDistribution(
 				ELO__ICND_MEAN, ELO__ICND_STANDARD_DEVIATION);
-
+		
+		double eloAddend = 0.0;
 		double cndVal = eloRangeFunc.inverseCumulativeProbability(randVar);
-		double eloAddend = ELO__MAX_RANGE * playerElo * cndVal;
+
+		if(playerElo > 1250 && playerElo < 1400) {
+			eloAddend = ELO__1250_TO_1400_RANGE * playerElo * cndVal;
+		}
+		else if(playerElo > 1399 && playerElo < 1500) {
+			eloAddend = ELO__1400_TO_1500_RANGE * playerElo * cndVal;
+		}
+		else if(playerElo > 1499 && playerElo < 1600) {
+			eloAddend = ELO__1500_TO_1600_RANGE * playerElo * cndVal;
+		}
+		else eloAddend = ELO__MAX_RANGE * playerElo * cndVal;
 		log.info(String.format(
 				"cndVal=%f, playerElo=%f, randVar=%f, eloAddend=%f", cndVal,
 				playerElo, randVar, eloAddend));
