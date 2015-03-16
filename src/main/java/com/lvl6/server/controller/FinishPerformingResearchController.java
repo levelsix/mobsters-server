@@ -130,7 +130,9 @@ public class FinishPerformingResearchController extends EventController {
 			server.writeEvent(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
-			writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
+			if(gemsCost > 0) {
+				writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
+			}
 
 		} catch (Exception e) {
 			log.error(

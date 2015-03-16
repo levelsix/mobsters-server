@@ -156,22 +156,17 @@ public class FinishPerformingResearchAction {
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
-		curCurrencies.put(gems, user.getGems());
 		reasonsForChanges = new HashMap<String, String>();
 		StringBuilder detailSb = new StringBuilder();
 		details = new HashMap<String, String>();
 
-		if (0 != gemsCost) {
-			currencyDeltas.put(gems, gemsCost);
-			reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
-			detailSb.append(" gemsCost=");
-			detailSb.append(gemsCost);
-			details.put(gems, detailSb.toString());
-		}
-		else {
-			currencyDeltas.put(gems, 0);
-		}
+		currencyDeltas.put(gems, gemsCost);
+		curCurrencies.put(gems, user.getGems());
+		reasonsForChanges.put(gems,
+				ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
+		detailSb.append(" gemsCost=");
+		detailSb.append(gemsCost);
+		details.put(gems, detailSb.toString());
 	}
 
 	public User getUser() {
