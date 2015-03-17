@@ -175,60 +175,64 @@ public class QueueUpAction {
 
 		//choose users either randomly or all of them
 		queuedOpponentIdsList = new ArrayList<String>();
-		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
-				queuedOpponentIdsList);//, userIdToPvpUser);
+		
+		for(PvpUser pUser : prospectiveDefenders) {
+			queuedOpponentIdsList.add(pUser.getUserId());
+		}
+//		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
+//				queuedOpponentIdsList);//, userIdToPvpUser);
 
 		log.info("the lucky ids who get to be attacked! ids={}",
 				queuedOpponentIdsList);
 	}
 
 	//prospectiveUserIds and userIdToPvpUser are the return values
-	private void selectUsers(int numNeeded, int numDefenders,
-			Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds)//,
-	//Map<String, PvpUser> userIdToPvpUser)
-	{
-		Random rand = ControllerConstants.RAND;
-
-		float numNeededSoFar = numNeeded;
-		float numDefendersLeft = numDefenders;
-		//go through them and select the one that has not been seen yet
-		for (PvpUser pvpUser : prospectiveDefenders) {
-			//regardless of numNeededSoFar
-			//			log.info("pvp opponents, numNeeded={}", numNeededSoFar);
-			//			log.info("pvp opponents, numAvailable={}", numDefendersLeft);
-
-			if (prospectiveUserIds.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
-				//don't want to send every eligible victim to user.
-				log.info("reached queue length of {}",
-						ControllerConstants.PVP__MAX_QUEUE_SIZE);
-				break;
-			}
-
-			String userId = pvpUser.getUserId();
-			//if we whittle down the entire applicant pool to the minimum,
-			//we want to select all of them
-			if (numNeededSoFar >= numDefendersLeft) {
-				prospectiveUserIds.add(userId);
-				//userIdToPvpUser.put(userId, pvpUser);
-				numNeededSoFar -= 1;
-				numDefendersLeft -= 1;
-				continue;
-			}
-
-			//randomly pick people
-			float randFloat = rand.nextFloat();
-			float probabilityToBeSelected = numNeededSoFar / numDefendersLeft;
-			//			log.info("randFloat={}", randFloat);
-			//			log.info("probabilityToBeSelected={}", probabilityToBeSelected);
-			if (randFloat < probabilityToBeSelected) {
-				//we have a winner!
-				prospectiveUserIds.add(userId);
-				//userIdToPvpUser.put(userId, pvpUser);
-				numNeededSoFar -= 1;
-			}
-			numDefendersLeft -= 1;
-		}
-	}
+//	private void selectUsers(int numNeeded, int numDefenders,
+//			Set<PvpUser> prospectiveDefenders, List<String> prospectiveUserIds)//,
+//	//Map<String, PvpUser> userIdToPvpUser)
+//	{
+//		Random rand = ControllerConstants.RAND;
+//
+//		float numNeededSoFar = numNeeded;
+//		float numDefendersLeft = numDefenders;
+//		//go through them and select the one that has not been seen yet
+//		for (PvpUser pvpUser : prospectiveDefenders) {
+//			//regardless of numNeededSoFar
+//			//			log.info("pvp opponents, numNeeded={}", numNeededSoFar);
+//			//			log.info("pvp opponents, numAvailable={}", numDefendersLeft);
+//
+//			if (prospectiveUserIds.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
+//				//don't want to send every eligible victim to user.
+//				log.info("reached queue length of {}",
+//						ControllerConstants.PVP__MAX_QUEUE_SIZE);
+//				break;
+//			}
+//
+//			String userId = pvpUser.getUserId();
+//			//if we whittle down the entire applicant pool to the minimum,
+//			//we want to select all of them
+//			if (numNeededSoFar >= numDefendersLeft) {
+//				prospectiveUserIds.add(userId);
+//				//userIdToPvpUser.put(userId, pvpUser);
+//				numNeededSoFar -= 1;
+//				numDefendersLeft -= 1;
+//				continue;
+//			}
+//
+//			//randomly pick people
+//			float randFloat = rand.nextFloat();
+//			float probabilityToBeSelected = numNeededSoFar / numDefendersLeft;
+//			//			log.info("randFloat={}", randFloat);
+//			//			log.info("probabilityToBeSelected={}", probabilityToBeSelected);
+//			if (randFloat < probabilityToBeSelected) {
+//				//we have a winner!
+//				prospectiveUserIds.add(userId);
+//				//userIdToPvpUser.put(userId, pvpUser);
+//				numNeededSoFar -= 1;
+//			}
+//			numDefendersLeft -= 1;
+//		}
+//	}
 
 	private void selectFakeDefenders() {
 		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
