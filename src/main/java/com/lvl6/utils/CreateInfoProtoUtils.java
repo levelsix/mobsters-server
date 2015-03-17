@@ -3435,7 +3435,7 @@ public class CreateInfoProtoUtils {
 
 		ResearchHouseProto.Builder rhpb = ResearchHouseProto.newBuilder();
 
-		rhpb.setStructId(srh.getStructId());
+		rhpb.setStructInfo(sip);
 		return rhpb.build();
 	}
 

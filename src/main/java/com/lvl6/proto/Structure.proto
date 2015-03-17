@@ -108,9 +108,7 @@ message MoneyTreeProto {
 //------------------------------------------------------------------------------------------
 
 message ResearchHouseProto {	
-	optional int32 structId = 1;
-
-
+	optional StructureInfoProto structInfo = 1;
 }
 
 //------------------------------------------------------------------------------------------
