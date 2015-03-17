@@ -366,6 +366,8 @@ public class ClanTest {
 		assertTrue(uc.getStatus().equals("MEMBER"));
 			
 	}
+	
+	
 
 	
 
