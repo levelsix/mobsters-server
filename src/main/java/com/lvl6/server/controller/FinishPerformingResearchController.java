@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FinishPerformingResearchRequestEvent;
 import com.lvl6.events.response.FinishPerformingResearchResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
@@ -130,7 +131,14 @@ public class FinishPerformingResearchController extends EventController {
 			server.writeEvent(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
-			if(gemsCost > 0) {
+			if(gemsCost > 0 && resBuilder.getStatus().equals(FinishPerformingResearchStatus.SUCCESS)) {
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								fpra.getUser(), null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+				
 				writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
 			}
 
