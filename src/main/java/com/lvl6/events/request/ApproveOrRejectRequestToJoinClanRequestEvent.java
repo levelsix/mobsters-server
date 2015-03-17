@@ -35,6 +35,10 @@ public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
 	public ApproveOrRejectRequestToJoinClanRequestProto getApproveOrRejectRequestToJoinClanRequestProto() {
 		return approveOrRejectRequestToJoinClanRequestProto;
 	}
+	
+	public void setApproveOrRejectRequestToJoinClanRequestProto(ApproveOrRejectRequestToJoinClanRequestProto aorrtjcrp) {
+		this.approveOrRejectRequestToJoinClanRequestProto = aorrtjcrp;
+	}
 
 	@Override
 	public String toString() {

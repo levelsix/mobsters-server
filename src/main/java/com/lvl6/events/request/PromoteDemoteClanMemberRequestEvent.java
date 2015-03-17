@@ -36,6 +36,10 @@ public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
 		return promoteDemoteClanMemberRequestProto;
 	}
 
+	public void setPromoteDemoteClanMemberRequestProto(PromoteDemoteClanMemberRequestProto pdcmrp) {
+		this.promoteDemoteClanMemberRequestProto = pdcmrp;
+	}
+
 	@Override
 	public String toString() {
 		return "PromoteDemoteClanMemberRequestEvent [promoteDemoteClanMemberRequestProto="

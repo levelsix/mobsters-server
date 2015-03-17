@@ -1119,7 +1119,7 @@ public class DBConstants {
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_PROPERTY__NAME = "name";
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
-
+	
 	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
 	public static final String SERVER_TOGGLE__NAME = "name";
 	public static final String SERVER_TOGGLE__ON = "on";

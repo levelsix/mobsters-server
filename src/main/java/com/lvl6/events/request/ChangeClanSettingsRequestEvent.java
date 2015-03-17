@@ -35,6 +35,10 @@ public class ChangeClanSettingsRequestEvent extends RequestEvent {
 		return changeClanSettingsRequestProto;
 	}
 
+	public void setChangeClanSettingsRequestProto(ChangeClanSettingsRequestProto ccsrp) {
+		this.changeClanSettingsRequestProto = ccsrp;
+	}
+	
 	@Override
 	public String toString() {
 		return "ChangeClanSettingsRequestEvent [changeClanSettingsRequestProto="

@@ -34,6 +34,10 @@ public class RequestJoinClanRequestEvent extends RequestEvent {
 	public RequestJoinClanRequestProto getRequestJoinClanRequestProto() {
 		return requestJoinClanRequestProto;
 	}
+	
+	public void setRequestJoinClanRequestProto(RequestJoinClanRequestProto rjcrp) {
+		this.requestJoinClanRequestProto = rjcrp;
+	}
 
 	@Override
 	public String toString() {
