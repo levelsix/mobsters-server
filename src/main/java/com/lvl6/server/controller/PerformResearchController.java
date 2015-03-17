@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PerformResearchRequestEvent;
 import com.lvl6.events.response.PerformResearchResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto;
@@ -160,6 +161,13 @@ public class PerformResearchController extends EventController {
 			server.writeEvent(resEvent);
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								pra.getUser(), null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+				
 				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
 			}
 
