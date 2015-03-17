@@ -99,6 +99,9 @@ public class DBConstants {
 	public static final String TABLE_RESEARCH_CONFIG = "research_config";
 	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
 	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
+	public static final String TABLE_SALES_DISPLAY_ITEM_CONFIG = "sales_display_item_config";
+	public static final String TABLE_SALES_ITEM_CONFIG = "sales_item_config";
+	public static final String TABLE_SALES_PACKAGE_CONFIG = "sales_package_config";	
 	public static final String TABLE_REWARD_CONFIG = "reward_config";
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
@@ -1200,6 +1203,26 @@ public class DBConstants {
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_PROPERTY__NAME = "name";
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
+	
+	public static final String SALES_DISPLAY_ITEM__ID = GENERIC__ID;
+	public static final String SALES_DISPLAY_ITEM__SALES_PACKAGE_ID = "booster_pack_id";
+	public static final String SALES_DISPLAY_ITEM__MONSTER_ID = "monster_id";
+	public static final String SALES_DISPLAY_ITEM__MONSTER_QUANTITY = "monster_quantity";
+	public static final String SALES_DISPLAY_ITEM__ITEM_ID = "item_id";
+	public static final String SALES_DISPLAY_ITEM__ITEM_QUANTITY = "item_quantity";
+	
+	public static final String SALES_ITEM__ID = GENERIC__ID;
+	public static final String SALES_ITEM__SALES_PACKAGE_ID = "sales_package_id";
+	public static final String SALES_ITEM__MONSTER_ID = "monster_id";
+	public static final String SALES_ITEM__MONSTER_QUANTITY = "monster_quantity";
+	public static final String SALES_ITEM__ITEM_ID = "item_id";
+	public static final String SALES_ITEM__ITEM_QUANTITY = "item_quantity";
+	
+	public static final String SALES_PACKAGE__ID = GENERIC__ID;
+	public static final String SALES_PACKAGE__NAME = "name";
+	public static final String SALES_PACKAGE__PRICE = "price";
+	public static final String SALES_PACKAGE__UUID = "uuid";
+	
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

@@ -1091,6 +1091,57 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
+<<<<<<< HEAD
+=======
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemProto> 
+        getBattleItemList();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    com.lvl6.proto.BattleItemsProto.BattleItemProto getBattleItem(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    int getBattleItemCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder> 
+        getBattleItemOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder getBattleItemOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> 
+        getSalesPackageList();
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    int getSalesPackageCount();
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+        getSalesPackageOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
+        int index);
+
+    /**
+>>>>>>> created protos and stuff for sales
      * <code>repeated .com.lvl6.proto.PvpBoardObstacleProto pvpBoardObstacleProtos = 40;</code>
      *
      * <pre>
@@ -1575,9 +1626,15 @@ public final class StaticDataStuffProto {
               break;
             }
             case 322: {
+<<<<<<< HEAD
               if (!((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
                 pvpBoardObstacleProtos_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.PvpBoardObstacleProto>();
                 mutable_bitField1_ |= 0x00000100;
+=======
+              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
+                pvpBoardObstacleProtos_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.PvpBoardObstacleProto>();
+                mutable_bitField1_ |= 0x00000400;
+>>>>>>> created protos and stuff for sales
               }
               pvpBoardObstacleProtos_.add(input.readMessage(com.lvl6.proto.StructureProto.PvpBoardObstacleProto.PARSER, extensionRegistry));
               break;
@@ -1607,11 +1664,19 @@ public final class StaticDataStuffProto {
               break;
             }
             case 354: {
+<<<<<<< HEAD
               if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
                 reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
                 mutable_bitField1_ |= 0x00000400;
               }
               reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
+=======
+              if (!((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
+                salesPackage_ = new java.util.ArrayList<com.lvl6.proto.SalesProto.SalesPackageProto>();
+                mutable_bitField1_ |= 0x00000200;
+              }
+              salesPackage_.add(input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry));
+>>>>>>> created protos and stuff for sales
               break;
             }
           }
@@ -1730,7 +1795,11 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
           allPvpBoardHouses_ = java.util.Collections.unmodifiableList(allPvpBoardHouses_);
         }
+<<<<<<< HEAD
         if (((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
+=======
+        if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
+>>>>>>> created protos and stuff for sales
           pvpBoardObstacleProtos_ = java.util.Collections.unmodifiableList(pvpBoardObstacleProtos_);
         }
         if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
@@ -1742,8 +1811,13 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
           battleItem_ = java.util.Collections.unmodifiableList(battleItem_);
         }
+<<<<<<< HEAD
         if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
           reward_ = java.util.Collections.unmodifiableList(reward_);
+=======
+        if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
+          salesPackage_ = java.util.Collections.unmodifiableList(salesPackage_);
+>>>>>>> created protos and stuff for sales
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3289,6 +3363,79 @@ public final class StaticDataStuffProto {
       return research_.get(index);
     }
 
+<<<<<<< HEAD
+=======
+    public static final int BATTLEITEM_FIELD_NUMBER = 43;
+    private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemProto> battleItem_;
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemProto> getBattleItemList() {
+      return battleItem_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder> 
+        getBattleItemOrBuilderList() {
+      return battleItem_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    public int getBattleItemCount() {
+      return battleItem_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    public com.lvl6.proto.BattleItemsProto.BattleItemProto getBattleItem(int index) {
+      return battleItem_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.BattleItemProto battleItem = 43;</code>
+     */
+    public com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder getBattleItemOrBuilder(
+        int index) {
+      return battleItem_.get(index);
+    }
+
+    public static final int SALESPACKAGE_FIELD_NUMBER = 44;
+    private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackage_;
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> getSalesPackageList() {
+      return salesPackage_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+        getSalesPackageOrBuilderList() {
+      return salesPackage_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    public int getSalesPackageCount() {
+      return salesPackage_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index) {
+      return salesPackage_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
+        int index) {
+      return salesPackage_.get(index);
+    }
+
+>>>>>>> created protos and stuff for sales
     public static final int PVPBOARDOBSTACLEPROTOS_FIELD_NUMBER = 40;
     private java.util.List<com.lvl6.proto.StructureProto.PvpBoardObstacleProto> pvpBoardObstacleProtos_;
     /**
@@ -3480,6 +3627,11 @@ public final class StaticDataStuffProto {
       prereqs_ = java.util.Collections.emptyList();
       boards_ = java.util.Collections.emptyList();
       research_ = java.util.Collections.emptyList();
+<<<<<<< HEAD
+=======
+      battleItem_ = java.util.Collections.emptyList();
+      salesPackage_ = java.util.Collections.emptyList();
+>>>>>>> created protos and stuff for sales
       pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
       battleItem_ = java.util.Collections.emptyList();
       reward_ = java.util.Collections.emptyList();
@@ -3623,8 +3775,13 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < battleItem_.size(); i++) {
         output.writeMessage(43, battleItem_.get(i));
       }
+<<<<<<< HEAD
       for (int i = 0; i < reward_.size(); i++) {
         output.writeMessage(44, reward_.get(i));
+=======
+      for (int i = 0; i < salesPackage_.size(); i++) {
+        output.writeMessage(44, salesPackage_.get(i));
+>>>>>>> created protos and stuff for sales
       }
       getUnknownFields().writeTo(output);
     }
@@ -3803,9 +3960,15 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(43, battleItem_.get(i));
       }
+<<<<<<< HEAD
       for (int i = 0; i < reward_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(44, reward_.get(i));
+=======
+      for (int i = 0; i < salesPackage_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(44, salesPackage_.get(i));
+>>>>>>> created protos and stuff for sales
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3956,6 +4119,11 @@ public final class StaticDataStuffProto {
           getPrereqsFieldBuilder();
           getBoardsFieldBuilder();
           getResearchFieldBuilder();
+<<<<<<< HEAD
+=======
+          getBattleItemFieldBuilder();
+          getSalesPackageFieldBuilder();
+>>>>>>> created protos and stuff for sales
           getPvpBoardObstacleProtosFieldBuilder();
           getBattleItemFieldBuilder();
           getRewardFieldBuilder();
@@ -4219,8 +4387,19 @@ public final class StaticDataStuffProto {
         } else {
           battleItemBuilder_.clear();
         }
+<<<<<<< HEAD
         if (rewardBuilder_ == null) {
           reward_ = java.util.Collections.emptyList();
+=======
+        if (salesPackageBuilder_ == null) {
+          salesPackage_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000200);
+        } else {
+          salesPackageBuilder_.clear();
+        }
+        if (pvpBoardObstacleProtosBuilder_ == null) {
+          pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
+>>>>>>> created protos and stuff for sales
           bitField1_ = (bitField1_ & ~0x00000400);
         } else {
           rewardBuilder_.clear();
@@ -4621,12 +4800,30 @@ public final class StaticDataStuffProto {
         } else {
           result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtosBuilder_.build();
         }
+<<<<<<< HEAD
         if (battleItemBuilder_ == null) {
           if (((bitField1_ & 0x00000200) == 0x00000200)) {
             battleItem_ = java.util.Collections.unmodifiableList(battleItem_);
             bitField1_ = (bitField1_ & ~0x00000200);
           }
           result.battleItem_ = battleItem_;
+=======
+        if (salesPackageBuilder_ == null) {
+          if (((bitField1_ & 0x00000200) == 0x00000200)) {
+            salesPackage_ = java.util.Collections.unmodifiableList(salesPackage_);
+            bitField1_ = (bitField1_ & ~0x00000200);
+          }
+          result.salesPackage_ = salesPackage_;
+        } else {
+          result.salesPackage_ = salesPackageBuilder_.build();
+        }
+        if (pvpBoardObstacleProtosBuilder_ == null) {
+          if (((bitField1_ & 0x00000400) == 0x00000400)) {
+            pvpBoardObstacleProtos_ = java.util.Collections.unmodifiableList(pvpBoardObstacleProtos_);
+            bitField1_ = (bitField1_ & ~0x00000400);
+          }
+          result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtos_;
+>>>>>>> created protos and stuff for sales
         } else {
           result.battleItem_ = battleItemBuilder_.build();
         }
@@ -5675,11 +5872,45 @@ public final class StaticDataStuffProto {
             }
           }
         }
+<<<<<<< HEAD
         if (battleItemBuilder_ == null) {
           if (!other.battleItem_.isEmpty()) {
             if (battleItem_.isEmpty()) {
               battleItem_ = other.battleItem_;
               bitField1_ = (bitField1_ & ~0x00000200);
+=======
+        if (salesPackageBuilder_ == null) {
+          if (!other.salesPackage_.isEmpty()) {
+            if (salesPackage_.isEmpty()) {
+              salesPackage_ = other.salesPackage_;
+              bitField1_ = (bitField1_ & ~0x00000200);
+            } else {
+              ensureSalesPackageIsMutable();
+              salesPackage_.addAll(other.salesPackage_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.salesPackage_.isEmpty()) {
+            if (salesPackageBuilder_.isEmpty()) {
+              salesPackageBuilder_.dispose();
+              salesPackageBuilder_ = null;
+              salesPackage_ = other.salesPackage_;
+              bitField1_ = (bitField1_ & ~0x00000200);
+              salesPackageBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getSalesPackageFieldBuilder() : null;
+            } else {
+              salesPackageBuilder_.addAllMessages(other.salesPackage_);
+            }
+          }
+        }
+        if (pvpBoardObstacleProtosBuilder_ == null) {
+          if (!other.pvpBoardObstacleProtos_.isEmpty()) {
+            if (pvpBoardObstacleProtos_.isEmpty()) {
+              pvpBoardObstacleProtos_ = other.pvpBoardObstacleProtos_;
+              bitField1_ = (bitField1_ & ~0x00000400);
+>>>>>>> created protos and stuff for sales
             } else {
               ensureBattleItemIsMutable();
               battleItem_.addAll(other.battleItem_);
@@ -5687,6 +5918,7 @@ public final class StaticDataStuffProto {
             onChanged();
           }
         } else {
+<<<<<<< HEAD
           if (!other.battleItem_.isEmpty()) {
             if (battleItemBuilder_.isEmpty()) {
               battleItemBuilder_.dispose();
@@ -5694,6 +5926,15 @@ public final class StaticDataStuffProto {
               battleItem_ = other.battleItem_;
               bitField1_ = (bitField1_ & ~0x00000200);
               battleItemBuilder_ = 
+=======
+          if (!other.pvpBoardObstacleProtos_.isEmpty()) {
+            if (pvpBoardObstacleProtosBuilder_.isEmpty()) {
+              pvpBoardObstacleProtosBuilder_.dispose();
+              pvpBoardObstacleProtosBuilder_ = null;
+              pvpBoardObstacleProtos_ = other.pvpBoardObstacleProtos_;
+              bitField1_ = (bitField1_ & ~0x00000400);
+              pvpBoardObstacleProtosBuilder_ = 
+>>>>>>> created protos and stuff for sales
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBattleItemFieldBuilder() : null;
             } else {
@@ -15923,12 +16164,261 @@ public final class StaticDataStuffProto {
         return pvpBoardObstacleProtosBuilder_;
       }
 
+<<<<<<< HEAD
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemProto> battleItem_ =
         java.util.Collections.emptyList();
       private void ensureBattleItemIsMutable() {
         if (!((bitField1_ & 0x00000200) == 0x00000200)) {
           battleItem_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.BattleItemProto>(battleItem_);
           bitField1_ |= 0x00000200;
+=======
+      private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackage_ =
+        java.util.Collections.emptyList();
+      private void ensureSalesPackageIsMutable() {
+        if (!((bitField1_ & 0x00000200) == 0x00000200)) {
+          salesPackage_ = new java.util.ArrayList<com.lvl6.proto.SalesProto.SalesPackageProto>(salesPackage_);
+          bitField1_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> salesPackageBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> getSalesPackageList() {
+        if (salesPackageBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(salesPackage_);
+        } else {
+          return salesPackageBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public int getSalesPackageCount() {
+        if (salesPackageBuilder_ == null) {
+          return salesPackage_.size();
+        } else {
+          return salesPackageBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index) {
+        if (salesPackageBuilder_ == null) {
+          return salesPackage_.get(index);
+        } else {
+          return salesPackageBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder setSalesPackage(
+          int index, com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (salesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSalesPackageIsMutable();
+          salesPackage_.set(index, value);
+          onChanged();
+        } else {
+          salesPackageBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder setSalesPackage(
+          int index, com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (salesPackageBuilder_ == null) {
+          ensureSalesPackageIsMutable();
+          salesPackage_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          salesPackageBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder addSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (salesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSalesPackageIsMutable();
+          salesPackage_.add(value);
+          onChanged();
+        } else {
+          salesPackageBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder addSalesPackage(
+          int index, com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (salesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSalesPackageIsMutable();
+          salesPackage_.add(index, value);
+          onChanged();
+        } else {
+          salesPackageBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder addSalesPackage(
+          com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (salesPackageBuilder_ == null) {
+          ensureSalesPackageIsMutable();
+          salesPackage_.add(builderForValue.build());
+          onChanged();
+        } else {
+          salesPackageBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder addSalesPackage(
+          int index, com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (salesPackageBuilder_ == null) {
+          ensureSalesPackageIsMutable();
+          salesPackage_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          salesPackageBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder addAllSalesPackage(
+          java.lang.Iterable<? extends com.lvl6.proto.SalesProto.SalesPackageProto> values) {
+        if (salesPackageBuilder_ == null) {
+          ensureSalesPackageIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, salesPackage_);
+          onChanged();
+        } else {
+          salesPackageBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder clearSalesPackage() {
+        if (salesPackageBuilder_ == null) {
+          salesPackage_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000200);
+          onChanged();
+        } else {
+          salesPackageBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public Builder removeSalesPackage(int index) {
+        if (salesPackageBuilder_ == null) {
+          ensureSalesPackageIsMutable();
+          salesPackage_.remove(index);
+          onChanged();
+        } else {
+          salesPackageBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder getSalesPackageBuilder(
+          int index) {
+        return getSalesPackageFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
+          int index) {
+        if (salesPackageBuilder_ == null) {
+          return salesPackage_.get(index);  } else {
+          return salesPackageBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+           getSalesPackageOrBuilderList() {
+        if (salesPackageBuilder_ != null) {
+          return salesPackageBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(salesPackage_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder addSalesPackageBuilder() {
+        return getSalesPackageFieldBuilder().addBuilder(
+            com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder addSalesPackageBuilder(
+          int index) {
+        return getSalesPackageFieldBuilder().addBuilder(
+            index, com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
+       */
+      public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto.Builder> 
+           getSalesPackageBuilderList() {
+        return getSalesPackageFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+          getSalesPackageFieldBuilder() {
+        if (salesPackageBuilder_ == null) {
+          salesPackageBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
+                  salesPackage_,
+                  ((bitField1_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          salesPackage_ = null;
+        }
+        return salesPackageBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.StructureProto.PvpBoardObstacleProto> pvpBoardObstacleProtos_ =
+        java.util.Collections.emptyList();
+      private void ensurePvpBoardObstacleProtosIsMutable() {
+        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
+          pvpBoardObstacleProtos_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.PvpBoardObstacleProto>(pvpBoardObstacleProtos_);
+          bitField1_ |= 0x00000400;
+>>>>>>> created protos and stuff for sales
          }
       }
 
@@ -16130,10 +16620,17 @@ public final class StaticDataStuffProto {
        *repeated BattleItemFactoryProto allBattleItemFactorys = 42; defined above
        * </pre>
        */
+<<<<<<< HEAD
       public Builder clearBattleItem() {
         if (battleItemBuilder_ == null) {
           battleItem_ = java.util.Collections.emptyList();
           bitField1_ = (bitField1_ & ~0x00000200);
+=======
+      public Builder clearPvpBoardObstacleProtos() {
+        if (pvpBoardObstacleProtosBuilder_ == null) {
+          pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000400);
+>>>>>>> created protos and stuff for sales
           onChanged();
         } else {
           battleItemBuilder_.clear();
@@ -16239,6 +16736,7 @@ public final class StaticDataStuffProto {
         return getBattleItemFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
+<<<<<<< HEAD
           com.lvl6.proto.BattleItemsProto.BattleItemProto, com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder> 
           getBattleItemFieldBuilder() {
         if (battleItemBuilder_ == null) {
@@ -16246,6 +16744,15 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.BattleItemsProto.BattleItemProto, com.lvl6.proto.BattleItemsProto.BattleItemProto.Builder, com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder>(
                   battleItem_,
                   ((bitField1_ & 0x00000200) == 0x00000200),
+=======
+          com.lvl6.proto.StructureProto.PvpBoardObstacleProto, com.lvl6.proto.StructureProto.PvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.PvpBoardObstacleProtoOrBuilder> 
+          getPvpBoardObstacleProtosFieldBuilder() {
+        if (pvpBoardObstacleProtosBuilder_ == null) {
+          pvpBoardObstacleProtosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.PvpBoardObstacleProto, com.lvl6.proto.StructureProto.PvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.PvpBoardObstacleProtoOrBuilder>(
+                  pvpBoardObstacleProtos_,
+                  ((bitField1_ & 0x00000400) == 0x00000400),
+>>>>>>> created protos and stuff for sales
                   getParentForChildren(),
                   isClean());
           battleItem_ = null;
@@ -16523,6 +17030,7 @@ public final class StaticDataStuffProto {
       "Item.proto\032\013Board.proto\032\026BoosterPackStuf" +
       "f.proto\032\nCity.proto\032\nClan.proto\032\nItem.pr" +
       "oto\032\022MonsterStuff.proto\032\022Prerequisite.pr" +
+<<<<<<< HEAD
       "oto\032\013Quest.proto\032\016Research.proto\032\014Reward" +
       ".proto\032\013Skill.proto\032\017Structure.proto\032\nTa" +
       "sk.proto\032\nUser.proto\"\340\022\n\017StaticDataProto" +
@@ -16587,6 +17095,72 @@ public final class StaticDataStuffProto {
       "to.BattleItemProto\022+\n\006reward\030, \003(\0132\033.com" +
       ".lvl6.proto.RewardProtoB\026B\024StaticDataStu" +
       "ffProto"
+=======
+      "oto\032\013Quest.proto\032\016Research.proto\032\013Sales." +
+      "proto\032\013Skill.proto\032\017Structure.proto\032\nTas" +
+      "k.proto\032\nUser.proto\"\354\022\n\017StaticDataProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022>\n\016expansionCosts\030\002 \003(\0132&.com.",
+      "lvl6.proto.CityExpansionCostProto\0220\n\tall" +
+      "Cities\030\003 \003(\0132\035.com.lvl6.proto.FullCityPr" +
+      "oto\022/\n\010allTasks\030\004 \003(\0132\035.com.lvl6.proto.F" +
+      "ullTaskProto\022?\n\022allTaskMapElements\030\034 \003(\013" +
+      "2#.com.lvl6.proto.TaskMapElementProto\0221\n" +
+      "\013allMonsters\030\005 \003(\0132\034.com.lvl6.proto.Mons" +
+      "terProto\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto." +
+      "StaticUserLevelInfoProto\0228\n\020inProgressQu" +
+      "ests\030\007 \003(\0132\036.com.lvl6.proto.FullQuestPro" +
+      "to\0228\n\020unredeemedQuests\030\010 \003(\0132\036.com.lvl6.",
+      "proto.FullQuestProto\0227\n\017availableQuests\030" +
+      "\t \003(\0132\036.com.lvl6.proto.FullQuestProto\0226\n" +
+      "\014boosterPacks\030\013 \003(\0132 .com.lvl6.proto.Boo" +
+      "sterPackProto\0225\n\013starterPack\030$ \001(\0132 .com" +
+      ".lvl6.proto.BoosterPackProto\022=\n\rallGener" +
+      "ators\030\014 \003(\0132&.com.lvl6.proto.ResourceGen" +
+      "eratorProto\0229\n\013allStorages\030\r \003(\0132$.com.l" +
+      "vl6.proto.ResourceStorageProto\0223\n\014allHos" +
+      "pitals\030\016 \003(\0132\035.com.lvl6.proto.HospitalPr" +
+      "oto\0225\n\rallResidences\030\017 \003(\0132\036.com.lvl6.pr",
+      "oto.ResidenceProto\0223\n\014allTownHalls\030\020 \003(\013" +
+      "2\035.com.lvl6.proto.TownHallProto\022)\n\007allLa" +
+      "bs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\022=\n\021al" +
+      "lMiniJobCenters\030\033 \003(\0132\".com.lvl6.proto.M" +
+      "iniJobCenterProto\0227\n\016allEvoChambers\030\035 \003(" +
+      "\0132\037.com.lvl6.proto.EvoChamberProto\0227\n\016al" +
+      "lTeamCenters\030\036 \003(\0132\037.com.lvl6.proto.Team" +
+      "CenterProto\0225\n\rallClanHouses\030  \003(\0132\036.com" +
+      ".lvl6.proto.ClanHouseProto\0225\n\rallMoneyTr" +
+      "ees\030& \003(\0132\036.com.lvl6.proto.MoneyTreeProt",
+      "o\022=\n\021allPvpBoardHouses\030\' \003(\0132\".com.lvl6." +
+      "proto.PvpBoardHouseProto\022=\n\021allResearchH" +
+      "ouses\030) \003(\0132\".com.lvl6.proto.ResearchHou" +
+      "seProto\022E\n\025allBattleItemFactorys\030* \003(\0132&" +
+      ".com.lvl6.proto.BattleItemFactoryProto\022>" +
+      "\n\020persistentEvents\030\022 \003(\0132$.com.lvl6.prot" +
+      "o.PersistentEventProto\0228\n\004mbds\030\023 \003(\0132*.c" +
+      "om.lvl6.proto.MonsterBattleDialogueProto" +
+      "\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.proto.ClanRai" +
+      "dProto\022F\n\024persistentClanEvents\030\025 \003(\0132(.c",
+      "om.lvl6.proto.PersistentClanEventProto\022(" +
+      "\n\005items\030\026 \003(\0132\031.com.lvl6.proto.ItemProto" +
+      "\0220\n\tobstacles\030\027 \003(\0132\035.com.lvl6.proto.Obs" +
+      "tacleProto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6" +
+      ".proto.ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036." +
+      "com.lvl6.proto.PvpLeagueProto\0226\n\014achieve" +
+      "ments\030\032 \003(\0132 .com.lvl6.proto.Achievement" +
+      "Proto\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.S" +
+      "killProto\0229\n\013sideEffects\030% \003(\0132$.com.lvl" +
+      "6.proto.SkillSideEffectProto\022,\n\007prereqs\030",
+      "! \003(\0132\033.com.lvl6.proto.PrereqProto\0220\n\006bo" +
+      "ards\030\" \003(\0132 .com.lvl6.proto.BoardLayoutP" +
+      "roto\022/\n\010research\030# \003(\0132\035.com.lvl6.proto." +
+      "ResearchProto\0223\n\nbattleItem\030+ \003(\0132\037.com." +
+      "lvl6.proto.BattleItemProto\0227\n\014salesPacka" +
+      "ge\030, \003(\0132!.com.lvl6.proto.SalesPackagePr" +
+      "oto\022E\n\026pvpBoardObstacleProtos\030( \003(\0132%.co" +
+      "m.lvl6.proto.PvpBoardObstacleProtoB\026B\024St" +
+      "aticDataStuffProto"
+>>>>>>> created protos and stuff for sales
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16611,7 +17185,11 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.PrerequisiteProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.ResearchsProto.getDescriptor(),
+<<<<<<< HEAD
           com.lvl6.proto.RewardsProto.getDescriptor(),
+=======
+          com.lvl6.proto.SalesProto.getDescriptor(),
+>>>>>>> created protos and stuff for sales
           com.lvl6.proto.SkillsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
@@ -16622,7 +17200,11 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
+<<<<<<< HEAD
         new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "PvpBoardObstacleProtos", "BattleItem", "Reward", });
+=======
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "SalesPackage", "PvpBoardObstacleProtos", });
+>>>>>>> created protos and stuff for sales
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();
@@ -16635,7 +17217,11 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.PrerequisiteProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.ResearchsProto.getDescriptor();
+<<<<<<< HEAD
     com.lvl6.proto.RewardsProto.getDescriptor();
+=======
+    com.lvl6.proto.SalesProto.getDescriptor();
+>>>>>>> created protos and stuff for sales
     com.lvl6.proto.SkillsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.TaskProto.getDescriptor();

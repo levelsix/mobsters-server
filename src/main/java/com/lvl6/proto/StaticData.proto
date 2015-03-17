@@ -13,11 +13,13 @@ import "MonsterStuff.proto";
 import "Prerequisite.proto";
 import "Quest.proto";
 import "Research.proto";
+import "Sales.proto";
 import "Reward.proto";
 import "Skill.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";
+
 
 package com.lvl6.proto;
 
@@ -83,6 +85,9 @@ message StaticDataProto {
 	repeated BoardLayoutProto boards = 34;
 	
 	repeated ResearchProto research = 35;
+	
+	repeated BattleItemProto battleItem = 43;
+	repeated SalesPackageProto salesPackage = 44;
 	
 	//repeated PvpBoardHouseProto allPvpBoardHouses = 39; defined above
 	repeated PvpBoardObstacleProto pvpBoardObstacleProtos = 40;

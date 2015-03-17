@@ -177,10 +177,11 @@ public class QueueUpAction {
 
 		//choose users either randomly or all of them
 		queuedOpponentIdsList = new ArrayList<String>();
-		
+
 		for(PvpUser pUser : prospectiveDefenders) {
 			queuedOpponentIdsList.add(pUser.getUserId());
 		}
+		
 //		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
 //				queuedOpponentIdsList);//, userIdToPvpUser);
 

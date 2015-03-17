@@ -12,7 +12,10 @@ public class SalesItem {
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> created protos and stuff for sales
 	private static final long serialVersionUID = 1549953377153488834L;
 
 	private int id;
@@ -25,6 +28,7 @@ public class SalesItem {
 	public int getId() {
 		return id;
 	}
+<<<<<<< HEAD
 	
 	public void setId(int id) {
 		this.id = id;
@@ -66,6 +70,38 @@ public class SalesItem {
 		return itemQuantity;
 	}
 	
+=======
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getSalesPackageId() {
+		return salesPackageId;
+	}
+	public void setSalesPackageId(int salesPackageId) {
+		this.salesPackageId = salesPackageId;
+	}
+	public int getMonsterId() {
+		return monsterId;
+	}
+	public void setMonsterId(int monsterId) {
+		this.monsterId = monsterId;
+	}
+	public int getMonsterQuantity() {
+		return monsterQuantity;
+	}
+	public void setMonsterQuantity(int monsterQuantity) {
+		this.monsterQuantity = monsterQuantity;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+>>>>>>> created protos and stuff for sales
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
@@ -78,6 +114,10 @@ public class SalesItem {
 				+ itemQuantity + "]";
 	}
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> created protos and stuff for sales
 
 }
