@@ -120,7 +120,7 @@ public class CompleteBattleItemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -148,7 +148,7 @@ public class CompleteBattleItemController extends EventController {
 
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -156,7 +156,7 @@ public class CompleteBattleItemController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -172,7 +172,7 @@ public class CompleteBattleItemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CompleteBattleItemController processEvent",

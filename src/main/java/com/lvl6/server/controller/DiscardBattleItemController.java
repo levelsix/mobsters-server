@@ -100,7 +100,7 @@ public class DiscardBattleItemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -117,7 +117,7 @@ public class DiscardBattleItemController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in DiscardBattleItemController processEvent",
@@ -129,7 +129,7 @@ public class DiscardBattleItemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in DiscardBattleItemController processEvent",
