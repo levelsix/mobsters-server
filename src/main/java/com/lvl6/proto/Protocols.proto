@@ -20,6 +20,7 @@ import "EventDev.proto";
 import "EventDungeon.proto";
 import "EventInAppPurchase.proto";
 import "EventItem.proto";
+import "EventMiniEvent.proto";
 import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
@@ -33,11 +34,13 @@ import "EventTournament.proto";
 import "EventUser.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
+import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Prerequisite.proto";
 import "Quest.proto";
 import "Research.proto";
+import "Reward.proto";
 import "SharedEnumConfig.proto";
 import "Skill.proto";
 import "StaticData.proto";
@@ -182,7 +185,8 @@ enum EventProtocolRequest {
 	C_CREATE_BATTLE_ITEM_EVENT = 204;
 	C_DISCARD_BATTLE_ITEM_EVENT = 205;
 	C_COMPLETE_BATTLE_ITEM_EVENT = 206;
-	C_TRANSLATE_SELECT_MESSAGES_EVENT = 207;
+	C_REDEEM_MINI_EVENT_REWARD_EVENT = 207;
+	C_TRANSLATE_SELECT_MESSAGES_EVENT = 208;
 	
 }
 
@@ -328,7 +332,8 @@ enum EventProtocolResponse {
 	S_CREATE_BATTLE_ITEM_EVENT = 204;
 	S_DISCARD_BATTLE_ITEM_EVENT = 205;
 	S_COMPLETE_BATTLE_ITEM_EVENT = 206;
-	S_TRANSLATE_SELECT_MESSAGES_EVENT = 207;
+	S_REDEEM_MINI_EVENT_REWARD_EVENT = 207;
+	S_TRANSLATE_SELECT_MESSAGES_EVENT = 208;
 	
 	
 }
