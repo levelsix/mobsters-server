@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -21,10 +23,11 @@ import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DiscardBattleItemAction;
-import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -38,9 +41,12 @@ public class DiscardBattleItemController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 
 	@Autowired
-	protected DeleteUtil deleteUtil;
+	protected UpdateUtil updateUtil;
 
 	public DiscardBattleItemController() {
 		numAllocatedThreads = 8;
@@ -66,10 +72,10 @@ public class DiscardBattleItemController extends EventController {
 		String userId = senderProto.getUserUuid();
 		//the new items added to queue, updated refers to those finished as well as 
 		//priorities changing, deleted refers to those removed from queue and completed
-		List<UserBattleItemProto> discardedBattleItemList = reqProto
-				.getDiscardedBattleItemsList();
-		List<BattleItemForUser> bifuList = getBattleItemForUserListFromProtos(discardedBattleItemList);
-
+		List<Integer> discardedBattleItemIdsList = reqProto
+				.getDiscardedBattleItemIdsList();
+		Map<Integer, Integer> battleItemIdsToQuantity = battleItemIdsToQuantity(discardedBattleItemIdsList);
+		
 		DiscardBattleItemResponseProto.Builder resBuilder = DiscardBattleItemResponseProto
 				.newBuilder();
 		resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
@@ -94,7 +100,7 @@ public class DiscardBattleItemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -103,7 +109,7 @@ public class DiscardBattleItemController extends EventController {
 			User user = userRetrieveUtil.getUserById(userId);
 
 			DiscardBattleItemAction dbia = new DiscardBattleItemAction(userId,
-					user, bifuList, deleteUtil);
+					user, battleItemIdsToQuantity, battleItemForUserRetrieveUtil, updateUtil);
 
 			dbia.execute(resBuilder);
 
@@ -111,7 +117,7 @@ public class DiscardBattleItemController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in DiscardBattleItemController processEvent",
@@ -123,7 +129,7 @@ public class DiscardBattleItemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in DiscardBattleItemController processEvent",
@@ -153,6 +159,19 @@ public class DiscardBattleItemController extends EventController {
 		}
 
 		return battleItemForUserList;
+	}
+	
+	private Map<Integer, Integer> battleItemIdsToQuantity(List<Integer> battleItemIdsList) {
+		Map<Integer, Integer> returnMap = new HashMap<Integer, Integer>();
+		for(Integer id : battleItemIdsList) {
+			if(returnMap.containsKey(id)) {
+				returnMap.put(id, returnMap.get(id) + 1);
+			}
+			else {
+				returnMap.put(id, 1);
+			}
+		}
+		return returnMap;
 	}
 
 	public Locker getLocker() {

@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -96,7 +97,6 @@ public interface DeleteUtil {
 	public abstract int deleteFromBattleItemQueueForUser(String userId,
 			List<BattleItemQueueForUser> biqfuList);
 
-	public abstract int deleteUserBattleItems(String userId,
-			List<BattleItemForUser> bifuList);
+
 
 }

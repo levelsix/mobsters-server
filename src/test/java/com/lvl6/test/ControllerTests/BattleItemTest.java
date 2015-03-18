@@ -140,7 +140,7 @@ public class BattleItemTest {
 
 	@Test
 	public void testBattleItems() {
-		User user1 = userRetrieveUtil.getUserById(user.getId());
+		User user1 = userRetrieveUtil.getUserById(userId);
 		int userCash1 = user1.getCash();
 		int userOil1 = user1.getOil();
 		int userGems1 = user1.getGems();
@@ -163,7 +163,7 @@ public class BattleItemTest {
 		newList.add(biqfup);
 
 		cbirpb.addAllBiqfuNew(newList);
-		cbirpb.setCashChange(50);
+		cbirpb.setCashChange(-50);
 		cbirpb.setOilChange(0);
 		cbirpb.setGemCostForCreating(0);
 
@@ -175,7 +175,7 @@ public class BattleItemTest {
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 
 		List<BattleItemQueueForUser> bifuList = battleItemQueueForUserRetrieveUtil
-				.getUserBattleItemQueuesForUser(user1.getId());
+				.getUserBattleItemQueuesForUser(userId);
 		assertTrue(bifuList.size() == 1);
 		assertEquals(user2.getCash() + 50, userCash1);
 
@@ -187,7 +187,7 @@ public class BattleItemTest {
 				.newBuilder();
 		MinimumUserProtoWithMaxResources mupwmr2 = CreateInfoProtoUtils
 				.createMinimumUserProtoWithMaxResources(mup, 1000000, 1000000);
-		cbirpb.setSender(mupwmr2);
+		cbirpb2.setSender(mupwmr2);
 
 		//deleted list
 		List<BattleItemQueueForUserProto> deletedList2 = new ArrayList<BattleItemQueueForUserProto>();
@@ -196,7 +196,7 @@ public class BattleItemTest {
 		biqfu2.setPriority(1);
 		Date now2 = new Date();
 		biqfu2.setExpectedStartTime(new Timestamp(now2.getTime()));
-		biqfu2.setUserId(user2.getId());
+		biqfu2.setUserId(userId);
 		BattleItemQueueForUserProto biqfup2 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu2);
 		deletedList2.add(biqfup2);
@@ -208,7 +208,7 @@ public class BattleItemTest {
 		biqfu3.setPriority(1);
 		Date now3 = new Date();
 		biqfu3.setExpectedStartTime(new Timestamp(now3.getTime() + 1000));
-		biqfu3.setUserId(user2.getId());
+		biqfu3.setUserId(userId);
 		BattleItemQueueForUserProto biqfup3 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu3);
 
@@ -217,7 +217,7 @@ public class BattleItemTest {
 		biqfu4.setPriority(2);
 		Date now4 = new Date();
 		biqfu4.setExpectedStartTime(new Timestamp(now4.getTime() + 1000));
-		biqfu4.setUserId(user2.getId());
+		biqfu4.setUserId(userId);
 		BattleItemQueueForUserProto biqfup4 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu4);
 
@@ -226,7 +226,7 @@ public class BattleItemTest {
 		biqfu5.setPriority(3);
 		Date now5 = new Date();
 		biqfu5.setExpectedStartTime(new Timestamp(now5.getTime() + 1000));
-		biqfu5.setUserId(user2.getId());
+		biqfu5.setUserId(userId);
 		BattleItemQueueForUserProto biqfup5 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu5);
 
@@ -236,8 +236,8 @@ public class BattleItemTest {
 
 		cbirpb2.addAllBiqfuNew(newList2);
 		cbirpb2.addAllBiqfuDelete(deletedList2);
-		cbirpb2.setCashChange(75);
-		cbirpb2.setOilChange(100);
+		cbirpb2.setCashChange(-75);
+		cbirpb2.setOilChange(-100);
 		cbirpb2.setGemCostForCreating(100);
 
 		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
@@ -245,10 +245,10 @@ public class BattleItemTest {
 		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
 		createBattleItemController.handleEvent(cbire2);
 
-		User user3 = userRetrieveUtil.getUserById(user.getId());
+		User user3 = userRetrieveUtil.getUserById(userId);
 
 		List<BattleItemQueueForUser> bifuList2 = battleItemQueueForUserRetrieveUtil
-				.getUserBattleItemQueuesForUser(user1.getId());
+				.getUserBattleItemQueuesForUser(userId);
 		assertTrue(bifuList2.size() == 3);
 		assertEquals(user3.getCash() + 75, userCash2);
 		assertEquals(user3.getOil() + 100, userOil2);
@@ -262,7 +262,7 @@ public class BattleItemTest {
 				.newBuilder();
 		MinimumUserProtoWithMaxResources mupwmr3 = CreateInfoProtoUtils
 				.createMinimumUserProtoWithMaxResources(mup, 1000000, 1000000);
-		cbirpb.setSender(mupwmr3);
+		cbirpb3.setSender(mupwmr3);
 
 		//removed list
 		List<BattleItemQueueForUserProto> removedList3 = new ArrayList<BattleItemQueueForUserProto>();
@@ -271,7 +271,7 @@ public class BattleItemTest {
 		biqfu6.setPriority(1);
 		Date now6 = new Date();
 		biqfu6.setExpectedStartTime(new Timestamp(now6.getTime()));
-		biqfu6.setUserId(user2.getId());
+		biqfu6.setUserId(userId);
 		BattleItemQueueForUserProto biqfup6 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu6);
 		removedList3.add(biqfup6);
@@ -283,7 +283,7 @@ public class BattleItemTest {
 		biqfu7.setPriority(2);
 		Date now7 = new Date();
 		biqfu7.setExpectedStartTime(new Timestamp(now7.getTime() + 2000));
-		biqfu7.setUserId(user2.getId());
+		biqfu7.setUserId(userId);
 		BattleItemQueueForUserProto biqfup7 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu7);
 
@@ -292,7 +292,7 @@ public class BattleItemTest {
 		biqfu8.setPriority(3);
 		Date now8 = new Date();
 		biqfu8.setExpectedStartTime(new Timestamp(now8.getTime() + 2000));
-		biqfu8.setUserId(user2.getId());
+		biqfu8.setUserId(userId);
 		BattleItemQueueForUserProto biqfup8 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu8);
 		updatedList3.add(biqfup7);
@@ -309,12 +309,12 @@ public class BattleItemTest {
 		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
 		createBattleItemController.handleEvent(cbire3);
 
-		User user4 = userRetrieveUtil.getUserById(user.getId());
+		User user4 = userRetrieveUtil.getUserById(userId);
 
 		List<BattleItemQueueForUser> bifuList3 = battleItemQueueForUserRetrieveUtil
-				.getUserBattleItemQueuesForUser(user4.getId());
+				.getUserBattleItemQueuesForUser(userId);
 		assertTrue(bifuList3.size() == 2);
-		assertEquals(user4.getCash() - 50, userCash3);
+		assertEquals(user4.getCash() + 50, userCash3);
 		assertEquals(user4.getOil(), userOil3);
 		assertEquals(user4.getGems(), userGems3);
 
@@ -333,13 +333,13 @@ public class BattleItemTest {
 		cobire.setCompleteBattleItemRequestProto(cobirpb.build());
 		completeBattleItemController.handleEvent(cobire);
 
-		User user5 = userRetrieveUtil.getUserById(user.getId());
+		User user5 = userRetrieveUtil.getUserById(userId);
 
 		List<BattleItemQueueForUser> biqfuList = battleItemQueueForUserRetrieveUtil
-				.getUserBattleItemQueuesForUser(user5.getId());
+				.getUserBattleItemQueuesForUser(userId);
 		assertTrue(biqfuList.size() == 0);
 		Map<Integer, BattleItemForUser> bifuMap = battleItemForUserRetrieveUtil
-				.getBattleItemIdsToUserBattleItemForUser(user.getId());
+				.getBattleItemIdsToUserBattleItemForUser(userId);
 		assertTrue(bifuMap.size() == 2);
 		assertEquals(user4.getGems() - 100, user5.getGems());
 
@@ -349,20 +349,23 @@ public class BattleItemTest {
 		dbirpb.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user5, null));
 
-		List<BattleItemForUser> listOfBattleItems = battleItemForUserRetrieveUtil
-				.getUserBattleItemsForUser(user.getId());
-		dbirpb.addAllDiscardedBattleItems(CreateInfoProtoUtils
-				.convertBattleItemForUserListToBattleItemForUserProtoList(listOfBattleItems));
-
+		List<Integer> listOfBattleItems = new ArrayList<Integer>();
+		listOfBattleItems.add(2);
+		listOfBattleItems.add(3);
+		
+		dbirpb.addAllDiscardedBattleItemIds(listOfBattleItems);
+		
 		DiscardBattleItemRequestEvent dbire = new DiscardBattleItemRequestEvent();
 		dbire.setTag(1);
 		dbire.setDiscardBattleItemRequestProto(dbirpb.build());
 		discardBattleItemController.handleEvent(dbire);
 
 		List<BattleItemForUser> listOfBattleItems2 = battleItemForUserRetrieveUtil
-				.getUserBattleItemsForUser(user.getId());
+				.getUserBattleItemsForUser(userId);
 
-		assertTrue(listOfBattleItems2.isEmpty());
+		for(BattleItemForUser bifu : listOfBattleItems2) {
+			assertTrue(bifu.getQuantity() == 0);
+		}
 	}
 
 }

@@ -5681,53 +5681,32 @@ public final class EventBattleItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> 
-        getDiscardedBattleItemsList();
+    java.util.List<java.lang.Integer> getDiscardedBattleItemIdsList();
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    com.lvl6.proto.BattleItemsProto.UserBattleItemProto getDiscardedBattleItems(int index);
+    int getDiscardedBattleItemIdsCount();
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    int getDiscardedBattleItemsCount();
-    /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-     *
-     * <pre>
-     *user can choose to throw away existing battle items so he has the 
-     *"power" to create different ones
-     * </pre>
-     */
-    java.util.List<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder> 
-        getDiscardedBattleItemsOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-     *
-     * <pre>
-     *user can choose to throw away existing battle items so he has the 
-     *"power" to create different ones
-     * </pre>
-     */
-    com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder getDiscardedBattleItemsOrBuilder(
-        int index);
+    int getDiscardedBattleItemIds(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemRequestProto}
@@ -5794,12 +5773,25 @@ public final class EventBattleItemProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 18: {
+            case 16: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                discardedBattleItems_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.UserBattleItemProto>();
+                discardedBattleItemIds_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              discardedBattleItems_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.UserBattleItemProto.PARSER, extensionRegistry));
+              discardedBattleItemIds_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                discardedBattleItemIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                discardedBattleItemIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -5811,7 +5803,7 @@ public final class EventBattleItemProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          discardedBattleItems_ = java.util.Collections.unmodifiableList(discardedBattleItems_);
+          discardedBattleItemIds_ = java.util.Collections.unmodifiableList(discardedBattleItemIds_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -5866,69 +5858,46 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
-    public static final int DISCARDEDBATTLEITEMS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> discardedBattleItems_;
+    public static final int DISCARDEDBATTLEITEMIDS_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> discardedBattleItemIds_;
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    public java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> getDiscardedBattleItemsList() {
-      return discardedBattleItems_;
+    public java.util.List<java.lang.Integer>
+        getDiscardedBattleItemIdsList() {
+      return discardedBattleItemIds_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    public java.util.List<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder> 
-        getDiscardedBattleItemsOrBuilderList() {
-      return discardedBattleItems_;
+    public int getDiscardedBattleItemIdsCount() {
+      return discardedBattleItemIds_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+     * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
      * <pre>
      *user can choose to throw away existing battle items so he has the 
      *"power" to create different ones
      * </pre>
      */
-    public int getDiscardedBattleItemsCount() {
-      return discardedBattleItems_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-     *
-     * <pre>
-     *user can choose to throw away existing battle items so he has the 
-     *"power" to create different ones
-     * </pre>
-     */
-    public com.lvl6.proto.BattleItemsProto.UserBattleItemProto getDiscardedBattleItems(int index) {
-      return discardedBattleItems_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-     *
-     * <pre>
-     *user can choose to throw away existing battle items so he has the 
-     *"power" to create different ones
-     * </pre>
-     */
-    public com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder getDiscardedBattleItemsOrBuilder(
-        int index) {
-      return discardedBattleItems_.get(index);
+    public int getDiscardedBattleItemIds(int index) {
+      return discardedBattleItemIds_.get(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      discardedBattleItems_ = java.util.Collections.emptyList();
+      discardedBattleItemIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5946,8 +5915,8 @@ public final class EventBattleItemProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < discardedBattleItems_.size(); i++) {
-        output.writeMessage(2, discardedBattleItems_.get(i));
+      for (int i = 0; i < discardedBattleItemIds_.size(); i++) {
+        output.writeInt32(2, discardedBattleItemIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5962,9 +5931,14 @@ public final class EventBattleItemProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < discardedBattleItems_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, discardedBattleItems_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < discardedBattleItemIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(discardedBattleItemIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getDiscardedBattleItemIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6076,7 +6050,6 @@ public final class EventBattleItemProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getDiscardedBattleItemsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6091,12 +6064,8 @@ public final class EventBattleItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (discardedBattleItemsBuilder_ == null) {
-          discardedBattleItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          discardedBattleItemsBuilder_.clear();
-        }
+        discardedBattleItemIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -6133,15 +6102,11 @@ public final class EventBattleItemProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (discardedBattleItemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            discardedBattleItems_ = java.util.Collections.unmodifiableList(discardedBattleItems_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.discardedBattleItems_ = discardedBattleItems_;
-        } else {
-          result.discardedBattleItems_ = discardedBattleItemsBuilder_.build();
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          discardedBattleItemIds_ = java.util.Collections.unmodifiableList(discardedBattleItemIds_);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
+        result.discardedBattleItemIds_ = discardedBattleItemIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6161,31 +6126,15 @@ public final class EventBattleItemProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (discardedBattleItemsBuilder_ == null) {
-          if (!other.discardedBattleItems_.isEmpty()) {
-            if (discardedBattleItems_.isEmpty()) {
-              discardedBattleItems_ = other.discardedBattleItems_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureDiscardedBattleItemsIsMutable();
-              discardedBattleItems_.addAll(other.discardedBattleItems_);
-            }
-            onChanged();
+        if (!other.discardedBattleItemIds_.isEmpty()) {
+          if (discardedBattleItemIds_.isEmpty()) {
+            discardedBattleItemIds_ = other.discardedBattleItemIds_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureDiscardedBattleItemIdsIsMutable();
+            discardedBattleItemIds_.addAll(other.discardedBattleItemIds_);
           }
-        } else {
-          if (!other.discardedBattleItems_.isEmpty()) {
-            if (discardedBattleItemsBuilder_.isEmpty()) {
-              discardedBattleItemsBuilder_.dispose();
-              discardedBattleItemsBuilder_ = null;
-              discardedBattleItems_ = other.discardedBattleItems_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              discardedBattleItemsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDiscardedBattleItemsFieldBuilder() : null;
-            } else {
-              discardedBattleItemsBuilder_.addAllMessages(other.discardedBattleItems_);
-            }
-          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6330,334 +6279,105 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> discardedBattleItems_ =
-        java.util.Collections.emptyList();
-      private void ensureDiscardedBattleItemsIsMutable() {
+      private java.util.List<java.lang.Integer> discardedBattleItemIds_ = java.util.Collections.emptyList();
+      private void ensureDiscardedBattleItemIdsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          discardedBattleItems_ = new java.util.ArrayList<com.lvl6.proto.BattleItemsProto.UserBattleItemProto>(discardedBattleItems_);
+          discardedBattleItemIds_ = new java.util.ArrayList<java.lang.Integer>(discardedBattleItemIds_);
           bitField0_ |= 0x00000002;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.BattleItemsProto.UserBattleItemProto, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder, com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder> discardedBattleItemsBuilder_;
-
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> getDiscardedBattleItemsList() {
-        if (discardedBattleItemsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(discardedBattleItems_);
-        } else {
-          return discardedBattleItemsBuilder_.getMessageList();
-        }
+      public java.util.List<java.lang.Integer>
+          getDiscardedBattleItemIdsList() {
+        return java.util.Collections.unmodifiableList(discardedBattleItemIds_);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public int getDiscardedBattleItemsCount() {
-        if (discardedBattleItemsBuilder_ == null) {
-          return discardedBattleItems_.size();
-        } else {
-          return discardedBattleItemsBuilder_.getCount();
-        }
+      public int getDiscardedBattleItemIdsCount() {
+        return discardedBattleItemIds_.size();
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto getDiscardedBattleItems(int index) {
-        if (discardedBattleItemsBuilder_ == null) {
-          return discardedBattleItems_.get(index);
-        } else {
-          return discardedBattleItemsBuilder_.getMessage(index);
-        }
+      public int getDiscardedBattleItemIds(int index) {
+        return discardedBattleItemIds_.get(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public Builder setDiscardedBattleItems(
-          int index, com.lvl6.proto.BattleItemsProto.UserBattleItemProto value) {
-        if (discardedBattleItemsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.set(index, value);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.setMessage(index, value);
-        }
+      public Builder setDiscardedBattleItemIds(
+          int index, int value) {
+        ensureDiscardedBattleItemIdsIsMutable();
+        discardedBattleItemIds_.set(index, value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public Builder setDiscardedBattleItems(
-          int index, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder builderForValue) {
-        if (discardedBattleItemsBuilder_ == null) {
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.setMessage(index, builderForValue.build());
-        }
+      public Builder addDiscardedBattleItemIds(int value) {
+        ensureDiscardedBattleItemIdsIsMutable();
+        discardedBattleItemIds_.add(value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public Builder addDiscardedBattleItems(com.lvl6.proto.BattleItemsProto.UserBattleItemProto value) {
-        if (discardedBattleItemsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.add(value);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.addMessage(value);
-        }
+      public Builder addAllDiscardedBattleItemIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureDiscardedBattleItemIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, discardedBattleItemIds_);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
+       * <code>repeated int32 discardedBattleItemIds = 2;</code>
        *
        * <pre>
        *user can choose to throw away existing battle items so he has the 
        *"power" to create different ones
        * </pre>
        */
-      public Builder addDiscardedBattleItems(
-          int index, com.lvl6.proto.BattleItemsProto.UserBattleItemProto value) {
-        if (discardedBattleItemsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.add(index, value);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.addMessage(index, value);
-        }
+      public Builder clearDiscardedBattleItemIds() {
+        discardedBattleItemIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public Builder addDiscardedBattleItems(
-          com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder builderForValue) {
-        if (discardedBattleItemsBuilder_ == null) {
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.add(builderForValue.build());
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public Builder addDiscardedBattleItems(
-          int index, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder builderForValue) {
-        if (discardedBattleItemsBuilder_ == null) {
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public Builder addAllDiscardedBattleItems(
-          java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProto> values) {
-        if (discardedBattleItemsBuilder_ == null) {
-          ensureDiscardedBattleItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, discardedBattleItems_);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public Builder clearDiscardedBattleItems() {
-        if (discardedBattleItemsBuilder_ == null) {
-          discardedBattleItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public Builder removeDiscardedBattleItems(int index) {
-        if (discardedBattleItemsBuilder_ == null) {
-          ensureDiscardedBattleItemsIsMutable();
-          discardedBattleItems_.remove(index);
-          onChanged();
-        } else {
-          discardedBattleItemsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder getDiscardedBattleItemsBuilder(
-          int index) {
-        return getDiscardedBattleItemsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder getDiscardedBattleItemsOrBuilder(
-          int index) {
-        if (discardedBattleItemsBuilder_ == null) {
-          return discardedBattleItems_.get(index);  } else {
-          return discardedBattleItemsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public java.util.List<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder> 
-           getDiscardedBattleItemsOrBuilderList() {
-        if (discardedBattleItemsBuilder_ != null) {
-          return discardedBattleItemsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(discardedBattleItems_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder addDiscardedBattleItemsBuilder() {
-        return getDiscardedBattleItemsFieldBuilder().addBuilder(
-            com.lvl6.proto.BattleItemsProto.UserBattleItemProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder addDiscardedBattleItemsBuilder(
-          int index) {
-        return getDiscardedBattleItemsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserBattleItemProto discardedBattleItems = 2;</code>
-       *
-       * <pre>
-       *user can choose to throw away existing battle items so he has the 
-       *"power" to create different ones
-       * </pre>
-       */
-      public java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder> 
-           getDiscardedBattleItemsBuilderList() {
-        return getDiscardedBattleItemsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.BattleItemsProto.UserBattleItemProto, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder, com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder> 
-          getDiscardedBattleItemsFieldBuilder() {
-        if (discardedBattleItemsBuilder_ == null) {
-          discardedBattleItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.BattleItemsProto.UserBattleItemProto, com.lvl6.proto.BattleItemsProto.UserBattleItemProto.Builder, com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder>(
-                  discardedBattleItems_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          discardedBattleItems_ = null;
-        }
-        return discardedBattleItemsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.DiscardBattleItemRequestProto)
@@ -7428,18 +7148,17 @@ public final class EventBattleItemProto {
       "rBattleItemProto\"s\n\030CompleteBattleItemSt",
       "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAI" +
       "L_INVALID_BATTLE_ITEMS\020\003\022\033\n\027FAIL_INSUFFI" +
-      "CIENT_FUNDS\020\004\"\224\001\n\035DiscardBattleItemReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022A\n\024discardedBattleItem" +
-      "s\030\002 \003(\0132#.com.lvl6.proto.UserBattleItemP" +
-      "roto\"\204\002\n\036DiscardBattleItemResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022V\n\006status\030\002 \001(\0162F.com.lvl6.pro" +
-      "to.DiscardBattleItemResponseProto.Discar",
-      "dBattleItemStatus\"X\n\027DiscardBattleItemSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022 \n\034FAI" +
-      "L_BATTLE_ITEMS_DONT_EXIST\020\003B\026B\024EventBatt" +
-      "leItemProto"
+      "CIENT_FUNDS\020\004\"q\n\035DiscardBattleItemReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\036\n\026discardedBattleItemI" +
+      "ds\030\002 \003(\005\"\204\002\n\036DiscardBattleItemResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022V\n\006status\030\002 \001(\0162F.com.lvl6" +
+      ".proto.DiscardBattleItemResponseProto.Di" +
+      "scardBattleItemStatus\"X\n\027DiscardBattleIt",
+      "emStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022 \n" +
+      "\034FAIL_BATTLE_ITEMS_DONT_EXIST\020\003B\026B\024Event" +
+      "BattleItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7484,7 +7203,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DiscardedBattleItems", });
+        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", });
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_fieldAccessorTable = new

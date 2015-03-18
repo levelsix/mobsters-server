@@ -1,15 +1,20 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.BattleItem;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Builder;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus;
-import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class DiscardBattleItemAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -17,17 +22,20 @@ public class DiscardBattleItemAction {
 
 	private String userId;
 	private User user;
-	private List<BattleItemForUser> discardedBattleItemList;
-	protected DeleteUtil deleteUtil;
+	private Map<Integer, Integer> deletedBattleItemIdsToQuantity;
+	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
+	protected UpdateUtil updateUtil;
 
 	public DiscardBattleItemAction(String userId, User user,
-			List<BattleItemForUser> discardedBattleItemList,
-			DeleteUtil deleteUtil) {
+			Map<Integer, Integer> deletedBattleItemIdsToQuantity,
+			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil, 
+			UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
 		this.user = user;
-		this.discardedBattleItemList = discardedBattleItemList;
-		this.deleteUtil = deleteUtil;
+		this.deletedBattleItemIdsToQuantity = deletedBattleItemIdsToQuantity;
+		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
+		this.updateUtil = updateUtil;
 	}
 
 	public void execute(Builder resBuilder) {
@@ -55,8 +63,8 @@ public class DiscardBattleItemAction {
 			return false;
 		}
 
-		if (discardedBattleItemList == null
-				|| discardedBattleItemList.isEmpty()) {
+		if (deletedBattleItemIdsToQuantity == null
+				|| deletedBattleItemIdsToQuantity.isEmpty()) {
 			resBuilder
 					.setStatus(DiscardBattleItemStatus.FAIL_BATTLE_ITEMS_DONT_EXIST);
 			log.error("no battle item list");
@@ -67,14 +75,30 @@ public class DiscardBattleItemAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		int numDeleted = deleteUtil.deleteUserBattleItems(userId,
-				discardedBattleItemList);
-		if (numDeleted != discardedBattleItemList.size()) {
-			log.error("did not properly delete all user battle items");
-			return false;
+		List<BattleItemForUser> updateList = createMapForUserBattleItems(deletedBattleItemIdsToQuantity);
+		boolean success = updateUtil.updateUserBattleItems(userId, updateList);
+		if(success) {
+			return true;
 		}
-
-		return true;
+		else return false;
+	}
+	
+	private List<BattleItemForUser> createMapForUserBattleItems(Map<Integer, Integer> deletedBattleItemIdsToQuantity) {
+		List<BattleItemForUser> userBattleItemsList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
+		List<BattleItemForUser> updatedBattleItemsList = new ArrayList<BattleItemForUser>();
+		
+		for(BattleItemForUser bifu : userBattleItemsList) {
+			if(deletedBattleItemIdsToQuantity.containsKey(bifu.getBattleItemId())) {
+				int newQuantity = bifu.getQuantity() - deletedBattleItemIdsToQuantity.get(bifu.getBattleItemId());
+				if(newQuantity < 0) {
+					bifu.setQuantity(0);
+				}
+				else bifu.setQuantity(newQuantity);
+				
+				updatedBattleItemsList.add(bifu);
+			}
+		}
+		return updatedBattleItemsList;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.lvl6.utils.utilmethods;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -619,29 +621,6 @@ public class DeleteUtils implements DeleteUtil {
 		for (BattleItemQueueForUser biqfu : biqfuList) {
 			values.add(biqfu.getPriority());
 		}
-
-		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
-				values);
-		return numDeleted;
-	}
-
-	@Override
-	public int deleteUserBattleItems(String userId,
-			List<BattleItemForUser> bifuList) {
-		String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
-		int size = bifuList.size();
-		List<String> questions = Collections.nCopies(size, "?");
-		List<Object> values = new ArrayList<Object>();
-		values.add(userId);
-		for (BattleItemForUser bifu : bifuList) {
-			values.add(bifu.getBattleItemId());
-		}
-
-		String query = String.format(
-				" DELETE FROM %s WHERE %s=? and %s IN (%s)", tableName,
-				DBConstants.BATTLE_ITEM_FOR_USER__USER_ID,
-				DBConstants.BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID,
-				StringUtils.csvList(questions));
 
 		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
 				values);

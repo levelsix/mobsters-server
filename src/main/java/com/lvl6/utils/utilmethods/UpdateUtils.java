@@ -11,11 +11,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.AchievementForUser;
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
@@ -42,6 +47,14 @@ public class UpdateUtils implements UpdateUtil {
 	public static UpdateUtil get() {
 		return (UpdateUtil) AppContext.getApplicationContext().getBean(
 				"updateUtils");
+	}
+	
+	private JdbcTemplate jdbcTemplate;
+
+	@Resource
+	public void setDataSource(DataSource dataSource) {
+		log.info("Setting datasource and creating jdbcTemplate");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	//  private Logger log = Logger.getLogger(new Object() { }.getClass().getEnclosingClass());
@@ -1864,5 +1877,52 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean updateUserBattleItems(String userId,
+			List<BattleItemForUser> updateList) {
+		String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
+
+		log.debug(String.format("updating/deleting user battle items for userId %s",
+				userId));
+
+		List<Object> values = new ArrayList<Object>();
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("insert into %s (%s, %s, %s) values ");
+		List<String> questionsList = Collections.nCopies(updateList.size(),"(?, ?, ?)");
+		String questionMarks = StringUtils.csvList(questionsList);
+		
+		for(BattleItemForUser bifu : updateList) {
+			values.add(bifu.getId());
+			values.add(bifu.getUserId());
+			values.add(bifu.getQuantity());
+		}
+		
+		sb.append(questionMarks);
+		sb.append(" on duplicate key update %s = values(%s)");
+		
+		log.info(sb.toString());
+		log.info(""+ values);
+		
+		String query = String.format(sb.toString(), tableName,
+				DBConstants.BATTLE_ITEM_FOR_USER__ID, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, 
+				DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, 
+				DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY);
+		
+		log.info(query);
+
+		try {
+//			this.jdbcTemplate.execute(query);
+			this.jdbcTemplate.update(query, values.toArray());
+
+		} catch (Exception e) {
+			log.error("error updating quantities for user battle items.", e);
+			return false;
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return true;
+	}		
 
 }

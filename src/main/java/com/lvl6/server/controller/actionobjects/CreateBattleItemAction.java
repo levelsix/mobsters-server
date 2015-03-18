@@ -257,7 +257,7 @@ public class CreateBattleItemAction {
 	}
 
 	private void updateUserCurrency() {
-		if (cashChange > 0) {
+		if (cashChange != 0) {
 			//for refunds
 			int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash.
 			log.info("curCash={}", curCash);
@@ -266,7 +266,7 @@ public class CreateBattleItemAction {
 			cashChange = Math.min(cashChange, maxCashUserCanGain);
 		}
 
-		if (oilChange > 0) {
+		if (oilChange != 0) {
 			//for refunds
 			int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
 			log.info("curOil={}", curOil);
