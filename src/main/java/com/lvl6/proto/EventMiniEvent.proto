@@ -1,0 +1,41 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Reward.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventMiniEventProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//------------------------------------------------------------------------------------------
+
+message RedeemMiniEventRewardRequestProto {
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	
+	optional RewardTier tier = 2;
+	optional int32 miniEventId = 3;
+	
+	optional int64 clientTime = 4;
+	
+	enum RewardTier {
+		TIER_ONE = 1;
+		TIER_TWO = 2;
+		TIER_THREE = 3;
+	}
+}
+																						//DONE
+message RedeemMiniEventRewardResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
+     repeated RewardProto rewards = 3;
+     
+
+     enum RedeemMiniEventRewardStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------

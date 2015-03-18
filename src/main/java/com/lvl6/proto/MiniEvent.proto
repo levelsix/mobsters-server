@@ -1,0 +1,87 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+package com.lvl6.proto;
+
+option java_outer_classname = "MiniEventProtos";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message MiniEventProto {
+     optional int32 miniEventId = 1;
+     optional int64 miniEventStartTime = 2;
+     optional int64 miniEventEndTime = 3;
+     
+     optional MiniEventForPlayerLevelProto lvlEntered = 4;
+     repeated MiniEventGoalProto goals = 5;
+     repeated MiniEventLeaderboardRewardProto leaderboardRewards = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MiniEventGoalProto {
+	optional int32 miniEventGoalId = 1;
+	optional int32 miniEventId = 2;
+	optional MiniEventGoalType goalType = 3 [default = NO_GOAL];
+	optional int32 goalAmt = 4;
+	optional string goalDesc = 5;
+	optional int32 pointsGained = 6;
+	
+	enum MiniEventGoalType {
+		NO_GOAL = 1;
+	} 
+}
+
+//------------------------------------------------------------------------------------------
+
+message MiniEventForPlayerLevelProto {
+	optional int32 mefplId = 1;
+	optional int32 miniEventId = 2;
+	//inclusive
+	optional int32 playerLvlMin = 3;
+	//inclusive
+	optional int32 playerLvlMax = 4;
+	optional int32 tierOneMinPts = 5;
+	optional int32 tierTwoMinPts = 6;
+	optional int32 tierThreeMinPts = 7;
+	
+     repeated MiniEventTierRewardProto rewards = 8;
+	
+}
+
+//------------------------------------------------------------------------------------------
+
+message MiniEventTierRewardProto {
+	optional int32 metrId = 1;
+	optional int32 mefplId = 2;
+	optional int32 rewardId = 3;
+	//tier one, two, or three
+	optional int32 tierLvl = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MiniEventLeaderboardRewardProto {
+	optional int32 melrId = 1;
+	optional int32 miniEventId = 2;
+	optional int32 rewardId = 3;
+	//minimum position (inclusive)
+	optional int32 leaderboardMinPos = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message UserMiniEventProto {
+	optional int32 miniEventId = 1;
+    optional string userUuid = 2;
+    //what the user's level is when mini event starts
+	optional int32 userLvl = 3; 
+	//points earned
+	optional int32 ptsEarned = 4;
+	optional bool tierOneRedeemed = 5;
+	optional bool tierTwoRedeemed = 6;
+	optional bool tierThreeRedeemed = 7;
+	
+	optional MiniEventProto miniEvent = 8;
+}
+
+//------------------------------------------------------------------------------------------
