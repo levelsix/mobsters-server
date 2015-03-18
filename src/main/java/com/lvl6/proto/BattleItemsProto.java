@@ -14,31 +14,67 @@ public final class BattleItemsProto {
   public enum BattleItemType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>ANTIDOTE = 1;</code>
+     * <code>MINOR_POTION = 1;</code>
      */
-    ANTIDOTE(0, 1),
+    MINOR_POTION(0, 1),
     /**
-     * <code>HAMMER = 2;</code>
+     * <code>CHILL_ANTIDOTE = 2;</code>
      */
-    HAMMER(1, 2),
+    CHILL_ANTIDOTE(1, 2),
+    /**
+     * <code>POISON_ANTIDOTE = 3;</code>
+     */
+    POISON_ANTIDOTE(2, 3),
+    /**
+     * <code>ORB_HAMMER = 4;</code>
+     */
+    ORB_HAMMER(3, 4),
+    /**
+     * <code>HAND_SWAP = 5;</code>
+     */
+    HAND_SWAP(4, 5),
+    /**
+     * <code>BOARD_SHUFFLE = 6;</code>
+     */
+    BOARD_SHUFFLE(5, 6),
     ;
 
     /**
-     * <code>ANTIDOTE = 1;</code>
+     * <code>MINOR_POTION = 1;</code>
      */
-    public static final int ANTIDOTE_VALUE = 1;
+    public static final int MINOR_POTION_VALUE = 1;
     /**
-     * <code>HAMMER = 2;</code>
+     * <code>CHILL_ANTIDOTE = 2;</code>
      */
-    public static final int HAMMER_VALUE = 2;
+    public static final int CHILL_ANTIDOTE_VALUE = 2;
+    /**
+     * <code>POISON_ANTIDOTE = 3;</code>
+     */
+    public static final int POISON_ANTIDOTE_VALUE = 3;
+    /**
+     * <code>ORB_HAMMER = 4;</code>
+     */
+    public static final int ORB_HAMMER_VALUE = 4;
+    /**
+     * <code>HAND_SWAP = 5;</code>
+     */
+    public static final int HAND_SWAP_VALUE = 5;
+    /**
+     * <code>BOARD_SHUFFLE = 6;</code>
+     */
+    public static final int BOARD_SHUFFLE_VALUE = 6;
 
 
     public final int getNumber() { return value; }
 
     public static BattleItemType valueOf(int value) {
       switch (value) {
-        case 1: return ANTIDOTE;
-        case 2: return HAMMER;
+        case 1: return MINOR_POTION;
+        case 2: return CHILL_ANTIDOTE;
+        case 3: return POISON_ANTIDOTE;
+        case 4: return ORB_HAMMER;
+        case 5: return HAND_SWAP;
+        case 6: return BOARD_SHUFFLE;
         default: return null;
       }
     }
@@ -1526,7 +1562,7 @@ public final class BattleItemsProto {
       battleItemId_ = 0;
       name_ = "";
       imgName_ = "";
-      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
       battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
       createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       createCost_ = 0;
@@ -1765,7 +1801,7 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
         bitField0_ = (bitField0_ & ~0x00000008);
         battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -2128,7 +2164,7 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
       /**
        * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
@@ -2158,7 +2194,7 @@ public final class BattleItemsProto {
        */
       public Builder clearBattleItemType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.ANTIDOTE;
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
         onChanged();
         return this;
       }
@@ -3309,10 +3345,12 @@ public final class BattleItemsProto {
       "\001(\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010p" +
       "riority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battl" +
       "eItemId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003" +
-      "\022\023\n\013elapsedTime\030\005 \001(\002**\n\016BattleItemType\022" +
-      "\014\n\010ANTIDOTE\020\001\022\n\n\006HAMMER\020\002*,\n\022BattleItemC" +
-      "ategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Battl",
-      "eItemsProto"
+      "\022\023\n\013elapsedTime\030\005 \001(\002*}\n\016BattleItemType\022" +
+      "\020\n\014MINOR_POTION\020\001\022\022\n\016CHILL_ANTIDOTE\020\002\022\023\n" +
+      "\017POISON_ANTIDOTE\020\003\022\016\n\nORB_HAMMER\020\004\022\r\n\tHA",
+      "ND_SWAP\020\005\022\021\n\rBOARD_SHUFFLE\020\006*,\n\022BattleIt" +
+      "emCategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Ba" +
+      "ttleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

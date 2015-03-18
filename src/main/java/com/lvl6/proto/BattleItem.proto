@@ -40,11 +40,12 @@ message BattleItemProto {
 //------------------------------------------------------------------------------------------
 
 enum BattleItemType {
-	ANTIDOTE = 1;
-	HAMMER = 2;
-	
-	
-	
+	MINOR_POTION = 1;
+	CHILL_ANTIDOTE = 2;
+	POISON_ANTIDOTE = 3;
+	ORB_HAMMER = 4;
+	HAND_SWAP = 5;
+	BOARD_SHUFFLE = 6;
 	
 }
 
