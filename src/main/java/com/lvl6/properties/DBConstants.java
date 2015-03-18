@@ -56,6 +56,12 @@ public class DBConstants {
 	public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";		//TODO: delete
 	public static final String TABLE_LOCK_BOX_ITEM_CONFIG = "lock_box_item_config";				//TODO: delete
 	public static final String TABLE_LOGIN_HISTORY = "login_history";
+	public static final String TABLE_MINI_EVENT_CONFIG = "mini_event_config";
+	public static final String TABLE_MINI_EVENT_FOR_PLAYER_LVL_CONFIG = "mini_event_for_player_lvl_config";
+	public static final String TABLE_MINI_EVENT_FOR_USER = "mini_event_for_user";
+	public static final String TABLE_MINI_EVENT_GOAL_CONFIG = "mini_event_goal_config";
+	public static final String TABLE_MINI_EVENT_LEADERBOARD_REWARD_CONFIG = "mini_event_leaderboard_reward_config";
+	public static final String TABLE_MINI_EVENT_TIER_REWARD_CONFIG = "mini_event_tier_reward_config";
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
 	public static final String TABLE_MINI_JOB_FOR_USER = "mini_job_for_user";
 	public static final String TABLE_MINI_JOB_FOR_USER_HISTORY = "mini_job_for_user_history";
@@ -403,6 +409,15 @@ public class DBConstants {
 	public static final String LOGIN_HISTORY__DATE = "date";
 	public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
 
+	/*MINI EVENT FOR USER*/
+	public static final String MINI_EVENT_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_FOR_USER__USER_LVL = "user_lvl";
+	public static final String MINI_EVENT_FOR_USER__PTS_EARNED = "pts_earned";
+	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED = "tier_one_redeemed";
+	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED = "tier_two_redeemed";
+	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED = "tier_three_redeemed";
+	
 	/*MINI TASK FOR USER*/
 	public static final String MINI_JOB_FOR_USER__ID = GENERIC__ID;
 	public static final String MINI_JOB_FOR_USER__USER_ID = "user_id";
@@ -954,6 +969,35 @@ public class DBConstants {
 	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
 	public static final String ITEM__GAME_TYPE = "game_type";
 
+	public static final String MINI_EVENT__ID = GENERIC__ID;
+	public static final String MINI_EVENT__START_TIME = "start_time";
+	public static final String MINI_EVENT__END_TIME = "end_time";
+	
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__ID = GENERIC__ID;
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__PLAYER_LVL_MIN = "player_lvl_min";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__PLAYER_LVL_MAX = "player_lvl_max";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_ONE_MIN_PTS = "tier_one_min_pts";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_TWO_MIN_PTS = "tier_two_min_pts";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_THREE_MIN_PTS = "tier_three_min_pts";
+	
+	public static final String MINI_EVENT_GOAL__ID = GENERIC__ID;
+	public static final String MINI_EVENT_GOAL__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_GOAL__TYPE = "type";
+	public static final String MINI_EVENT_GOAL__AMT = "amt";
+	public static final String MINI_EVENT_GOAL__DESC = "desc";
+	public static final String MINI_EVENT_GOAL__PTS_REWARD = "pts_reward";
+	
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__ID = GENERIC__ID;
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__REWARD_ID = "reward_id";
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__LEADERBOARD_POS = "leaderboard_pos";
+	
+	public static final String MINI_EVENT_TIER_REWARD__ID = GENERIC__ID;
+	public static final String MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID = "mini_event_for_player_lvl_id";
+	public static final String MINI_EVENT_TIER_REWARD__REWARD_ID = "reward_id";
+	public static final String MINI_EVENT_TIER_REWARD__REWARD_TIER = "reward_tier";
+	
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id";
 	public static final String MINI_JOB__NAME = "name";
