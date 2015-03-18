@@ -98,6 +98,7 @@ public class DBConstants {
 	public static final String TABLE_RESEARCH_CONFIG = "research_config";
 	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
 	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
+	public static final String TABLE_REWARD_CONFIG = "reward_config";
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
@@ -1185,6 +1186,11 @@ public class DBConstants {
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_PROPERTY__NAME = "name";
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
+	
+	public static final String REWARD__ID = GENERIC__ID;
+	public static final String REWARD__STATIC_DATA_ID = "static_data_id";
+	public static final String REWARD__TYPE ="type";
+	public static final String REWARD__AMT = "amt";
 	
 	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
 	public static final String SERVER_TOGGLE__NAME = "name";
