@@ -101,6 +101,7 @@ enum SkillType {
 	FLAME_BREAK = 33;
 	POISON_SKEWER = 34;
 	POISON_FIRE = 35;
+	CHILL = 36;
 }
 
 enum SkillActivationType {
