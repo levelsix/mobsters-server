@@ -4347,6 +4347,7 @@ public class CreateInfoProtoUtils {
 		bipb.setPriority(bi.getPriority());
 		bipb.setMinutesToCreate(bi.getMinutesToCreate());
 		bipb.setInBattleGemCost(bi.getInBattleGemCost());
+		bipb.setAmount(bi.getAmount());
 
 		return bipb.build();
 	}

@@ -101,29 +101,30 @@ public class BattleItemRetrieveUtils {
 	 */
 	private static BattleItem convertRSRowToBattleItem(ResultSet rs)
 			throws SQLException {
-		int id = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__ID);
-		String type = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__TYPE);
+		int id = rs.getInt(DBConstants.BATTLE_ITEM__ID);
+		String type = rs.getString(DBConstants.BATTLE_ITEM__TYPE);
 		String category = rs
-				.getString(DBConstants.BATTLE_ITEM_CONFIG__CATEGORY);
+				.getString(DBConstants.BATTLE_ITEM__CATEGORY);
 		String createResourceType = rs
-				.getString(DBConstants.BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE);
-		int createCost = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__CREATE_COST);
-		String name = rs.getString(DBConstants.BATTLE_ITEM_CONFIG__NAME);
+				.getString(DBConstants.BATTLE_ITEM__CREATE_RESOURCE_TYPE);
+		int createCost = rs.getInt(DBConstants.BATTLE_ITEM__CREATE_COST);
+		String name = rs.getString(DBConstants.BATTLE_ITEM__NAME);
 		String description = rs
-				.getString(DBConstants.BATTLE_ITEM_CONFIG__DESCRIPTION);
+				.getString(DBConstants.BATTLE_ITEM__DESCRIPTION);
 		int powerAmount = rs
-				.getInt(DBConstants.BATTLE_ITEM_CONFIG__POWER_AMOUNT);
+				.getInt(DBConstants.BATTLE_ITEM__POWER_AMOUNT);
 		String imageName = rs
-				.getString(DBConstants.BATTLE_ITEM_CONFIG__IMAGE_NAME);
-		int priority = rs.getInt(DBConstants.BATTLE_ITEM_CONFIG__PRIORITY);
+				.getString(DBConstants.BATTLE_ITEM__IMAGE_NAME);
+		int priority = rs.getInt(DBConstants.BATTLE_ITEM__PRIORITY);
 		int minutesToCreate = rs
-				.getInt(DBConstants.BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE);
+				.getInt(DBConstants.BATTLE_ITEM__MINUTES_TO_CREATE);
 		int inBattleGemCost = rs
-				.getInt(DBConstants.BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST);
+				.getInt(DBConstants.BATTLE_ITEM__IN_BATTLE_GEM_COST);
+		int amount = rs.getInt(DBConstants.BATTLE_ITEM__AMOUNT);
 
 		BattleItem bi = new BattleItem(id, type, category, createResourceType,
 				createCost, name, description, powerAmount, imageName,
-				priority, minutesToCreate, inBattleGemCost);
+				priority, minutesToCreate, inBattleGemCost, amount);
 
 		return bi;
 	}

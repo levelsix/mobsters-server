@@ -7,7 +7,7 @@ public class BattleItem implements Serializable {
 	public BattleItem(int id, String type, String battleItemCategory,
 			String createResourceType, int createCost, String name,
 			String description, int powerAmount, String imageName,
-			int priority, int minutesToCreate, int inBattleGemCost) {
+			int priority, int minutesToCreate, int inBattleGemCost, int amount) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -21,6 +21,7 @@ public class BattleItem implements Serializable {
 		this.priority = priority;
 		this.minutesToCreate = minutesToCreate;
 		this.inBattleGemCost = inBattleGemCost;
+		this.amount = amount;
 	}
 
 	private static final long serialVersionUID = -1293698119576984508L;
@@ -37,6 +38,7 @@ public class BattleItem implements Serializable {
 	private int priority;
 	private int minutesToCreate;
 	private int inBattleGemCost;
+	private int amount;
 
 	public BattleItem() {
 		super();
@@ -135,7 +137,8 @@ public class BattleItem implements Serializable {
 				+ ", description=" + description + ", powerAmount="
 				+ powerAmount + ", imageName=" + imageName + ", priority="
 				+ priority + ", minutesToCreate=" + minutesToCreate
-				+ ", inBattleGemCost=" + inBattleGemCost + "]";
+				+ ", inBattleGemCost=" + inBattleGemCost + ", amount=" + amount
+				+ "]";
 	}
 
 	public int getMinutesToCreate() {
@@ -152,6 +155,14 @@ public class BattleItem implements Serializable {
 
 	public void setInBattleGemCost(int inBattleGemCost) {
 		this.inBattleGemCost = inBattleGemCost;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }

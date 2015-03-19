@@ -831,18 +831,19 @@ public class DBConstants {
 	public static final String BANNED_USER__USER_ID = GENERIC__USER_ID;
 
 	/*BATTLE ITEM*/
-	public static final String BATTLE_ITEM_CONFIG__ID = GENERIC__ID;
-	public static final String BATTLE_ITEM_CONFIG__TYPE = "type";
-	public static final String BATTLE_ITEM_CONFIG__CATEGORY = "battle_item_category";
-	public static final String BATTLE_ITEM_CONFIG__CREATE_RESOURCE_TYPE = "create_resource_type";
-	public static final String BATTLE_ITEM_CONFIG__CREATE_COST = "create_cost";
-	public static final String BATTLE_ITEM_CONFIG__NAME = "name";
-	public static final String BATTLE_ITEM_CONFIG__DESCRIPTION = "description";
-	public static final String BATTLE_ITEM_CONFIG__POWER_AMOUNT = "power_amount";
-	public static final String BATTLE_ITEM_CONFIG__IMAGE_NAME = "image_name";
-	public static final String BATTLE_ITEM_CONFIG__PRIORITY = "priority";
-	public static final String BATTLE_ITEM_CONFIG__MINUTES_TO_CREATE = "minutes_to_create";
-	public static final String BATTLE_ITEM_CONFIG__IN_BATTLE_GEM_COST = "in_battle_gem_cost";
+	public static final String BATTLE_ITEM__ID = GENERIC__ID;
+	public static final String BATTLE_ITEM__TYPE = "type";
+	public static final String BATTLE_ITEM__CATEGORY = "battle_item_category";
+	public static final String BATTLE_ITEM__CREATE_RESOURCE_TYPE = "create_resource_type";
+	public static final String BATTLE_ITEM__CREATE_COST = "create_cost";
+	public static final String BATTLE_ITEM__NAME = "name";
+	public static final String BATTLE_ITEM__DESCRIPTION = "description";
+	public static final String BATTLE_ITEM__POWER_AMOUNT = "power_amount";
+	public static final String BATTLE_ITEM__IMAGE_NAME = "image_name";
+	public static final String BATTLE_ITEM__PRIORITY = "priority";
+	public static final String BATTLE_ITEM__MINUTES_TO_CREATE = "minutes_to_create";
+	public static final String BATTLE_ITEM__IN_BATTLE_GEM_COST = "in_battle_gem_cost";
+	public static final String BATTLE_ITEM__AMOUNT = "amount";
 
 	/*BOARD*/
 	public static final String BOARD__ID = GENERIC__ID;

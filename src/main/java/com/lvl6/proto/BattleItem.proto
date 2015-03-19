@@ -34,13 +34,14 @@ message BattleItemProto {
 	optional int32 priority = 11;
 	optional int32 minutesToCreate = 12;
 	optional int32 inBattleGemCost = 13;
+	optional int32 amount = 14;
 }
 
 
 //------------------------------------------------------------------------------------------
 
 enum BattleItemType {
-	MINOR_POTION = 1;
+	HEALING_POTION = 1;
 	CHILL_ANTIDOTE = 2;
 	POISON_ANTIDOTE = 3;
 	ORB_HAMMER = 4;
