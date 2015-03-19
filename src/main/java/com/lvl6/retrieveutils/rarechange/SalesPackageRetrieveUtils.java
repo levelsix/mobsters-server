@@ -3,6 +3,8 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,8 +106,31 @@ public class SalesPackageRetrieveUtils {
 		String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
 		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
+		Date timeStart = null;
+		Date timeEnd = null;
+		Timestamp ts = null;
+		
+		try {
+			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__START_TIME);
+			if (!rs.wasNull()) {
+				timeStart = new Date(ts.getTime());
+			}
+		} catch (Exception e) {
+			log.error("last_purchase_time null...?", e);
+		}
+		
+		try {
+			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__END_TIME);
+			if (!rs.wasNull()) {
+				timeEnd = new Date(ts.getTime());
+			}
+		} catch (Exception e) {
+			log.error("last_purchase_time null...?", e);
+		}
+		
+		int predId = rs.getInt(DBConstants.SALES_PACKAGE__PRED_ID);
 
-		SalesPackage salesPackage = new SalesPackage(id, name, price, uuid);
+		SalesPackage salesPackage = new SalesPackage(id, name, price, uuid, timeStart, timeEnd, predId);
 		return salesPackage;
 	}
 }

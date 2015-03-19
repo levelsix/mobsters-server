@@ -45,7 +45,7 @@ public class SalesItemRetrieveUtils {
 		return salesItemIdsToSalesItemsForSalesPackIds;
 	}
 
-	public static Map<Integer, SalesItem> getSalesItemIdsToSalesItemsForSalesPackId(
+	public static Map<Integer, SalesItem> getSalesItemIdsToSalesItemsForSalesPackageId(
 			int salesPackId) {
 		try {
 			log.debug("retrieve salesPack data for salesPack "
@@ -153,14 +153,49 @@ public class SalesItemRetrieveUtils {
 		int id = rs.getInt(DBConstants.SALES_ITEM__ID);
 		int salesPackageId = rs
 				.getInt(DBConstants.SALES_ITEM__SALES_PACKAGE_ID);
-		int monsterId = rs.getInt(DBConstants.SALES_ITEM__MONSTER_ID);
-		int monsterQuantity = rs.getInt(DBConstants.SALES_ITEM__MONSTER_QUANTITY);
-		int itemId = rs
-				.getInt(DBConstants.SALES_ITEM__ITEM_ID);
-		int itemQuantity = rs.getInt(DBConstants.SALES_ITEM__ITEM_QUANTITY);
 		
-		SalesItem salesItem = new SalesItem(id, salesPackageId, monsterId, 
-				monsterQuantity, itemId, itemQuantity);
+		int monsterId = 0;
+		monsterId = rs.getInt(DBConstants.SALES_ITEM__MONSTER_ID);
+		
+		int monsterLevel = 0;
+		monsterLevel = rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
+		
+		int monsterQuantity = 0;
+		monsterQuantity = rs.getInt(DBConstants.SALES_ITEM__MONSTER_QUANTITY);
+		
+		int itemId = 0;
+		itemId = rs.getInt(DBConstants.SALES_ITEM__ITEM_ID);
+		
+		int itemQuantity = 0;
+		itemQuantity = rs.getInt(DBConstants.SALES_ITEM__ITEM_QUANTITY);
+		
+		int gemReward = 0;
+		gemReward = rs.getInt(DBConstants.SALES_ITEM__GEM_REWARD);
+
+		SalesItem salesItem = new SalesItem();
+		
+		salesItem.setId(id);
+		salesItem.setSalesPackageId(salesPackageId);
+		
+		if(monsterId != 0) {
+			salesItem.setMonsterId(monsterId);
+		}
+		if(monsterLevel != 0) {
+			salesItem.setMonsterLevel(monsterLevel);
+		}
+		if(monsterQuantity != 0) {
+			salesItem.setMonsterQuantity(monsterQuantity);
+		}
+		if(itemId != 0) {
+			salesItem.setItemId(itemId);
+		}
+		if(itemQuantity != 0) {
+			salesItem.setItemQuantity(itemQuantity);
+		}
+		if(gemReward != 0) {
+			salesItem.setGemReward(gemReward);
+		}
+		
 		return salesItem;
 	}
 }

@@ -56,6 +56,8 @@ public class User implements Serializable {
 	private String pvpDefendingMessage;
 	private Date lastTeamDonateSolicitation;
 	private boolean boughtRiggedBoosterPack;
+	private int salesValue;
+	private Date lastPurchaseTime;
 	private long totalStrength;
 
 	public User() {
@@ -76,6 +78,8 @@ public class User implements Serializable {
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
+			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
+			int salesValue, Date lastPurchaseTime) {
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack, 
 			long totalStrength) {
 		super();
@@ -120,6 +124,8 @@ public class User implements Serializable {
 		this.pvpDefendingMessage = pvpDefendingMessage;
 		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
+		this.salesValue = salesValue;
+		this.lastPurchaseTime = lastPurchaseTime;
 		this.totalStrength = totalStrength;
 	}
 
@@ -1477,8 +1483,27 @@ public class User implements Serializable {
 				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
 				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
 				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
+				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
+				+ ", lastPurchaseTime=" + lastPurchaseTime + "]";
+				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
 				+ boughtRiggedBoosterPack + ", totalStrength=" + totalStrength
 				+ "]";
+	}
+
+	public int getSalesValue() {
+		return salesValue;
+	}
+
+	public void setSalesValue(int salesValue) {
+		this.salesValue = salesValue;
+	}
+
+	public Date getLastPurchaseTime() {
+		return lastPurchaseTime;
+	}
+
+	public void setLastPurchaseTime(Date lastPurchaseTime) {
+		this.lastPurchaseTime = lastPurchaseTime;
 	}
 
 }

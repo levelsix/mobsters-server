@@ -804,6 +804,8 @@ public class DBConstants {
 	public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
 	public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
 	public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
+	public static final String USER__SALES_VALUE = "sales_value";
+	public static final String USER__SALES_LAST_PURCHASE_TIME = "sales_last_purchase_time";
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
@@ -1214,14 +1216,19 @@ public class DBConstants {
 	public static final String SALES_ITEM__ID = GENERIC__ID;
 	public static final String SALES_ITEM__SALES_PACKAGE_ID = "sales_package_id";
 	public static final String SALES_ITEM__MONSTER_ID = "monster_id";
+	public static final String SALES_ITEM__MONSTER_LEVEL = "monster_level";
 	public static final String SALES_ITEM__MONSTER_QUANTITY = "monster_quantity";
 	public static final String SALES_ITEM__ITEM_ID = "item_id";
 	public static final String SALES_ITEM__ITEM_QUANTITY = "item_quantity";
-	
+	public static final String SALES_ITEM__GEM_REWARD = "gem_reward";
+
 	public static final String SALES_PACKAGE__ID = GENERIC__ID;
 	public static final String SALES_PACKAGE__NAME = "name";
 	public static final String SALES_PACKAGE__PRICE = "price";
 	public static final String SALES_PACKAGE__UUID = "uuid";
+	public static final String SALES_PACKAGE__START_TIME = "start_time";
+	public static final String SALES_PACKAGE__END_TIME = "end_time";
+	public static final String SALES_PACKAGE__PRED_ID = "pred_id";
 	
 
 	public static final String REWARD__ID = GENERIC__ID;

@@ -14,6 +14,7 @@ import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "Sales.proto";
 import "Research.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
@@ -140,8 +141,7 @@ message StartupResponseProto {
 	repeated BattleItemQueueForUserProto battleItemQueue = 48;
 	repeated UserBattleItemProto battleItem = 49;	
 	repeated UserResearchProto userResearchs = 50;
-	
-	optional DefaultLanguagesProto userDefaultLanguages = 51;
+	repeated SalesPackageProto salesPackages = 51;
 
 	optional UserMiniEventProto userMiniEvent = 52;
 

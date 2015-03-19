@@ -2,28 +2,35 @@ package com.lvl6.info;
 
 public class SalesItem {
 
-	public SalesItem(int id, int salesPackageId, int monsterId,
-			int monsterQuantity, int itemId, int itemQuantity) {
+	public SalesItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public SalesItem(int id, int salesPackageId, int monsterId, int monsterLevel,
+			int monsterQuantity, int itemId, int itemQuantity, int gemReward) {
 		super();
 		this.id = id;
 		this.salesPackageId = salesPackageId;
 		this.monsterId = monsterId;
+		this.monsterLevel = monsterLevel;
 		this.monsterQuantity = monsterQuantity;
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
-	}
-<<<<<<< HEAD
+		this.gemReward = gemReward;
 
-=======
->>>>>>> created protos and stuff for sales
+	}
+
 	private static final long serialVersionUID = 1549953377153488834L;
 
 	private int id;
 	private int salesPackageId;
 	private int monsterId;
+	private int monsterLevel;
 	private int monsterQuantity;
 	private int itemId;
 	private int itemQuantity;
+	private int gemReward;
+
 
 	public int getId() {
 		return id;
@@ -109,9 +116,22 @@ public class SalesItem {
 	@Override
 	public String toString() {
 		return "SalesItem [id=" + id + ", salesPackageId=" + salesPackageId
-				+ ", monsterId=" + monsterId + ", monsterQuantity="
-				+ monsterQuantity + ", itemId=" + itemId + ", itemQuantity="
-				+ itemQuantity + "]";
+				+ ", monsterId=" + monsterId + ", monsterLevel=" + monsterLevel
+				+ ", monsterQuantity=" + monsterQuantity + ", itemId=" + itemId
+				+ ", itemQuantity=" + itemQuantity + ", gemReward=" + gemReward
+				+ "]";
+	}
+	public int getGemReward() {
+		return gemReward;
+	}
+	public void setGemReward(int gemReward) {
+		this.gemReward = gemReward;
+	}
+	public int getMonsterLevel() {
+		return monsterLevel;
+	}
+	public void setMonsterLevel(int monsterLevel) {
+		this.monsterLevel = monsterLevel;
 	}
 
 <<<<<<< HEAD

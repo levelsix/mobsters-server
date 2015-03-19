@@ -1574,6 +1574,15 @@ public final class SalesProto {
      * <code>optional int32 itemQuantity = 6;</code>
      */
     int getItemQuantity();
+
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    boolean hasGemReward();
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    int getGemReward();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesItemProto}
@@ -1655,6 +1664,11 @@ public final class SalesProto {
             case 48: {
               bitField0_ |= 0x00000020;
               itemQuantity_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              gemReward_ = input.readInt32();
               break;
             }
           }
@@ -1787,6 +1801,21 @@ public final class SalesProto {
       return itemQuantity_;
     }
 
+    public static final int GEMREWARD_FIELD_NUMBER = 7;
+    private int gemReward_;
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    public int getGemReward() {
+      return gemReward_;
+    }
+
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
@@ -1794,6 +1823,7 @@ public final class SalesProto {
       monsterQuantity_ = 0;
       itemId_ = 0;
       itemQuantity_ = 0;
+      gemReward_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1825,6 +1855,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, itemQuantity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, gemReward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1858,6 +1891,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, itemQuantity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, gemReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1988,6 +2025,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         itemQuantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        gemReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2040,6 +2079,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000020;
         }
         result.itemQuantity_ = itemQuantity_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.gemReward_ = gemReward_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2073,6 +2116,9 @@ public final class SalesProto {
         }
         if (other.hasItemQuantity()) {
           setItemQuantity(other.getItemQuantity());
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2293,6 +2339,38 @@ public final class SalesProto {
         return this;
       }
 
+      private int gemReward_ ;
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public int getGemReward() {
+        return gemReward_;
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000040;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesItemProto)
     }
 
@@ -2361,6 +2439,15 @@ public final class SalesProto {
      * <code>optional int32 itemQuantity = 6;</code>
      */
     int getItemQuantity();
+
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    boolean hasGemReward();
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    int getGemReward();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesDisplayItemProto}
@@ -2442,6 +2529,11 @@ public final class SalesProto {
             case 48: {
               bitField0_ |= 0x00000020;
               itemQuantity_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              gemReward_ = input.readInt32();
               break;
             }
           }
@@ -2574,6 +2666,21 @@ public final class SalesProto {
       return itemQuantity_;
     }
 
+    public static final int GEMREWARD_FIELD_NUMBER = 7;
+    private int gemReward_;
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 gemReward = 7;</code>
+     */
+    public int getGemReward() {
+      return gemReward_;
+    }
+
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
@@ -2581,6 +2688,7 @@ public final class SalesProto {
       monsterQuantity_ = 0;
       itemId_ = 0;
       itemQuantity_ = 0;
+      gemReward_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2612,6 +2720,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, itemQuantity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, gemReward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2645,6 +2756,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, itemQuantity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, gemReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2775,6 +2890,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         itemQuantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        gemReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2827,6 +2944,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000020;
         }
         result.itemQuantity_ = itemQuantity_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.gemReward_ = gemReward_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2860,6 +2981,9 @@ public final class SalesProto {
         }
         if (other.hasItemQuantity()) {
           setItemQuantity(other.getItemQuantity());
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3080,6 +3204,38 @@ public final class SalesProto {
         return this;
       }
 
+      private int gemReward_ ;
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public int getGemReward() {
+        return gemReward_;
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000040;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemReward = 7;</code>
+       */
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesDisplayItemProto)
     }
 
@@ -3121,15 +3277,16 @@ public final class SalesProto {
       "PackageName\030\002 \001(\t\022\r\n\005price\030\003 \001(\005\022\014\n\004uuid" +
       "\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.Sal" +
       "esItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.pro" +
-      "to.SalesDisplayItemProto\"\217\001\n\016SalesItemPr" +
+      "to.SalesDisplayItemProto\"\242\001\n\016SalesItemPr" +
       "oto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackage" +
       "Id\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQu" +
       "antity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuan",
-      "tity\030\006 \001(\005\"\226\001\n\025SalesDisplayItemProto\022\023\n\013" +
-      "salesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001(" +
-      "\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQuantity\030" +
-      "\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuantity\030\006 " +
-      "\001(\005B\014B\nSalesProto"
+      "tity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005\"\251\001\n\025SalesD" +
+      "isplayItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016" +
+      "salesPackageId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022" +
+      "\027\n\017monsterQuantity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005" +
+      "\022\024\n\014itemQuantity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(" +
+      "\005B\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3156,13 +3313,13 @@ public final class SalesProto {
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesItemProto_descriptor,
-        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", });
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", });
     internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_SalesDisplayItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor,
-        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", });
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

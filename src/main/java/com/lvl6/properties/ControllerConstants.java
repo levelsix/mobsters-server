@@ -105,6 +105,7 @@ public class ControllerConstants {
 
 	//MFUSOP = monster_for_user_source_of_pieces
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
+	public static final String MFUSOP__SALES_PACKAGE = "salesPackageId";
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
 	public static final String MFUSOP__MINI_JOB = "miniJobId";
 	public static final String MFUSOP__PVP = "pvp";

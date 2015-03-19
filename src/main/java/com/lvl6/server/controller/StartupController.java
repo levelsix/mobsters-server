@@ -59,6 +59,9 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
@@ -103,6 +106,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -164,6 +168,9 @@ import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
@@ -712,6 +719,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+			setSalesForUser(resBuilder, user);
+			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -1629,7 +1638,65 @@ public class StartupController extends EventController {
 			resBuilder.addAllBattleItemQueue(biqfupList);
 		}
 	}
+	
+	private void setSalesForUser(Builder resBuilder, User user) {
+		Map<Integer, SalesPackage> idsToSalesPackages = SalesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = SalesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = SalesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+		int userSalesValue = user.getSalesValue();
+		Date lastPurchaseTime = user.getLastPurchaseTime();
+		
+		//TODO: arin's formula
+		int currentSalesValue = 9001;
+		
+		int newMinPrice = 9999;
+		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
+			int price = idsToSalesPackages.get(salesPackageId).getPrice();
+			if(price > currentSalesValue) {
+				if(price < newMinPrice) {
+					newMinPrice = price;
+				}
+			}
+		}
+		
+		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
+			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
+				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
+				//get the sales items associated with this booster pack
+				Map<Integer, SalesItem> itemIdsToItems = salesPackageIdToItemIdsToSalesItems
+						.get(salesPackageId);
+				Collection<SalesItem> items = null;
+				if (null != itemIdsToItems) {
+					items = itemIdsToItems.values();
+				}
+				
+				//get the booster display items for this booster pack
+				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+						.get(salesPackageId);
+				Collection<SalesDisplayItem> displayItems = null;
+				if (null != displayIdsToDisplayItems) {
+					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+					Collections.sort(displayItemIds);
+
+					displayItems = new ArrayList<SalesDisplayItem>();
+
+					for (Integer displayItemId : displayItemIds) {
+						displayItems.add(displayIdsToDisplayItems
+								.get(displayItemId));
+					}
+				}
+				
+				SalesPackageProto spProto = CreateInfoProtoUtils
+						.createSalesPackageProto(sp, items, displayItems);			
+				resBuilder.addSalesPackages(spProto);
+			}
+		}	
+	}
+	
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);

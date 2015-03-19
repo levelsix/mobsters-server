@@ -1,6 +1,5 @@
 package com.lvl6.info;
 
-<<<<<<< HEAD
 import java.util.Date;
 
 public class SalesPackage {
@@ -16,11 +15,16 @@ public class SalesPackage {
 	
 	public SalesPackage(int id, String name, int price, String uuid) {
 >>>>>>> created protos and stuff for sales
+	public SalesPackage(int id, String name, int price, String uuid,
+			Date timeStart, Date timeEnd, int predId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.uuid = uuid;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.predId = predId;
 	}
 <<<<<<< HEAD
 
@@ -74,6 +78,10 @@ public class SalesPackage {
 =======
 	private int price;
 	private String uuid;
+	private Date timeStart;
+	private Date timeEnd;
+	private int predId;
+	
 	public int getId() {
 		return id;
 	}
@@ -98,13 +106,33 @@ public class SalesPackage {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
+	
 	@Override
 	public String toString() {
 		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
-				+ ", uuid=" + uuid + "]";
+				+ ", uuid=" + uuid + ", timeStart=" + timeStart + ", timeEnd="
+				+ timeEnd + ", predId=" + predId + "]";
+	}
+	
+	public Date getTimeStart() {
+		return timeStart;
+	}
+	public void setTimeStart(Date timeStart) {
+		this.timeStart = timeStart;
+	}
+	public Date getTimeEnd() {
+		return timeEnd;
+	}
+	public void setTimeEnd(Date timeEnd) {
+		this.timeEnd = timeEnd;
+	}
+	public int getPredId() {
+		return predId;
+	}
+	public void setPredId(int predId) {
+		this.predId = predId;
 	}
 	
 	
->>>>>>> created protos and stuff for sales
 
 }

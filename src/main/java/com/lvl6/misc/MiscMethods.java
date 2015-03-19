@@ -39,6 +39,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.SalesItem;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -261,11 +262,41 @@ public class MiscMethods {
 		}
 		return monstersExist;
 	}
+	
+	public static boolean checkIfMonstersExistInSalesItem(
+			List<SalesItem> itemsUserReceives) {
+		boolean monstersExist = true;
+
+		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+				.getMonsterIdsToMonsters();
+		for (SalesItem si : itemsUserReceives) {
+			int monsterId = si.getMonsterId();
+
+			if (0 == monsterId) {
+				//this sales item does not contain a monster reward
+				continue;
+			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
+				log.error("This sales item contains nonexistent monsterId. item="
+						+ si);
+				monstersExist = false;
+			}
+		}
+		return monstersExist;
+	}
 
 	public int determineGemReward(List<BoosterItem> boosterItems) {
 		int gemReward = 0;
 		for (BoosterItem bi : boosterItems) {
 			gemReward += bi.getGemReward();
+		}
+
+		return gemReward;
+	}
+	
+	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
+		int gemReward = 0;
+		for (SalesItem si : saleItems) {
+			gemReward += si.getGemReward();
 		}
 
 		return gemReward;
@@ -314,6 +345,54 @@ public class MiscMethods {
 		if (!boosterItemIds.isEmpty()) {
 			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
 			sb.append(boosterItemIdsStr);
+		}
+
+		log.info(sb.toString());
+		return sb.toString();
+	}
+	
+	public static String createUpdateUserMonsterArgumentsForSales(String userId,
+			int salesPackageId, List<SalesItem> salesItems,
+			Map<Integer, Integer> monsterIdsToNumPieces,
+			List<MonsterForUser> completeUserMonsters, Date now) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(ControllerConstants.MFUSOP__SALES_PACKAGE);
+		sb.append(" ");
+		sb.append(salesPackageId);
+		sb.append(" salesItemMonsterIds ");
+
+		List<Integer> salesItemIds = new ArrayList<Integer>();
+		for (SalesItem item : salesItems) {
+			Integer id = item.getId();
+			Integer monsterId = item.getMonsterId();
+
+			//only keep track of the sales item ids that are a monster reward
+			if (monsterId <= 0) {
+				continue;
+			}
+			if (item.getMonsterLevel() > 0) {
+				//create a "complete" user monster
+				int monsterQuantity = item.getMonsterQuantity();
+				Monster monzter = MonsterRetrieveUtils
+						.getMonsterForMonsterId(monsterId);
+				List<MonsterForUser> monstersCreated = MonsterStuffUtils
+						.createLeveledMonsterForUserFromQuantity(userId, monzter, 
+								monsterQuantity, now, item.getMonsterLevel());
+				log.info("monster for users just created" + monstersCreated);
+
+				//return this monster in the argument list completeUserMonsters, so caller
+				//can use it
+				completeUserMonsters.addAll(monstersCreated);
+
+
+			} else {
+				monsterIdsToNumPieces.put(item.getMonsterId(), item.getMonsterQuantity());
+			}
+			salesItemIds.add(id);
+		}
+		if (!salesItemIds.isEmpty()) {
+			String salesItemIdsStr = StringUtils.csvList(salesItemIds);
+			sb.append(salesItemIdsStr);
 		}
 
 		return sb.toString();

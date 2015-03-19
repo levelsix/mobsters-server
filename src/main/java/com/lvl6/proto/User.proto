@@ -27,7 +27,7 @@ message MinimumClanProto {
 
 message MinimumUserProto {
 	optional string userUuid = 1;
-	optional string name = 2;
+	optional string name = 2;   
 	optional MinimumClanProto clan = 3;
 	optional int32 avatarMonsterId = 4;
 }
