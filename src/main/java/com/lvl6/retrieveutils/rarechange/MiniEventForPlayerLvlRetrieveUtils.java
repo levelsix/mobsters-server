@@ -3,8 +3,10 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,31 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_FOR_PLAYER_LVL_CONFIG;
 
 	private static Map<Integer, MiniEventForPlayerLvl> idToMiniEventForPlayerLvl;
+	private static Map<Integer, TreeSet<MiniEventForPlayerLvl>> miniEventIdToOrderedMefpl;
+	private static final MefplComparator comparator = new MefplComparator();
+
+	private static final class MefplComparator implements Comparator<MiniEventForPlayerLvl>
+	{
+		@Override
+		public int compare(MiniEventForPlayerLvl o1, MiniEventForPlayerLvl o2)
+		{
+			int lvlMax1 = o1.getPlayerLvlMax();
+			int lvlMax2 = o2.getPlayerLvlMax();
+
+			if (lvlMax1 < lvlMax2) {
+				return -1;
+			} else if (lvlMax1 > lvlMax2) {
+				return 1;
+			} else if (o1.getId() < o2.getId()) {
+				return -1;
+			} else if (o1.getId() > o2.getId()) {
+				return 1;
+			} else {
+				return 0;
+			}
+
+		}
+	}
 
 	public static Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
 		if (null == idToMiniEventForPlayerLvl) {
@@ -45,8 +72,40 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return ep;
 	}
 
+	public static MiniEventForPlayerLvl getMiniEventForPlayerLvl(
+			int miniEventId, int playerLvl)
+	{
+		if (null == miniEventIdToOrderedMefpl) {
+			log.warn("no ordered MiniEventForPlayerLvl");
+			return null;
+		}
+
+		if (!miniEventIdToOrderedMefpl.containsKey(miniEventId))
+		{
+			log.warn("no MiniEventForPlayerLvl for eventId={}",
+					miniEventId);
+			return null;
+		}
+
+		TreeSet<MiniEventForPlayerLvl> orderedMefpl =
+				miniEventIdToOrderedMefpl.get(miniEventId);
+
+		MiniEventForPlayerLvl curLvl = new MiniEventForPlayerLvl();
+		curLvl.setId(0);
+		curLvl.setPlayerLvlMax(playerLvl);
+
+		MiniEventForPlayerLvl mefpl = orderedMefpl.ceiling(curLvl);
+
+		if (null == mefpl) {
+			log.warn("no MiniEventForPlayerLvl for eventId={}, lvl={}",
+					miniEventId, playerLvl);
+		}
+		return mefpl;
+	}
+
 	public static void reload() {
 		setStaticIdsToMiniEventForPlayerLvls();
+		setOrderedMiniEventForPlayerLvls();
 	}
 
 	private static void setStaticIdsToMiniEventForPlayerLvls() {
@@ -80,6 +139,37 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		} finally {
 			DBConnection.get().close(rs, null, conn);
 		}
+	}
+
+	private static void setOrderedMiniEventForPlayerLvls()
+	{
+		if (null == idToMiniEventForPlayerLvl)
+		{
+			log.warn("no MiniEventForPlayerLvl");
+			return;
+		}
+
+		Map<Integer, TreeSet<MiniEventForPlayerLvl>> miniEventIdToOrderedMefplTemp =
+				new HashMap<Integer, TreeSet<MiniEventForPlayerLvl>>();
+
+		for (MiniEventForPlayerLvl mefpl : idToMiniEventForPlayerLvl.values())
+		{
+			int miniEventId = mefpl.getMiniEventId();
+
+			if (!miniEventIdToOrderedMefplTemp.containsKey(miniEventId))
+			{
+				miniEventIdToOrderedMefplTemp.put(miniEventId,
+						new TreeSet<MiniEventForPlayerLvl>());
+			}
+
+			TreeSet<MiniEventForPlayerLvl> orderedMefpl =
+					miniEventIdToOrderedMefplTemp.get(miniEventId);
+
+			orderedMefpl.add(mefpl);
+		}
+
+		miniEventIdToOrderedMefpl = miniEventIdToOrderedMefplTemp;
+
 	}
 
 	private static MiniEventForPlayerLvl convertRSRowToMiniEventForPlayerLvl(ResultSet rs)

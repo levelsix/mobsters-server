@@ -10,6 +10,7 @@ import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
+import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
@@ -139,6 +140,7 @@ message StartupResponseProto {
 	repeated BattleItemQueueForUserProto battleItemQueue = 48;
 	repeated UserBattleItemProto battleItem = 49;	
 	repeated UserResearchProto userResearchs = 50;
+	optional UserMiniEventProto userMiniEvent = 51;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

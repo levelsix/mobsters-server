@@ -48,6 +48,22 @@ public class MiniEventTierRewardRetrieveUtils {
 		return ep;
 	}
 
+	public static Collection<MiniEventTierReward> getMiniEventTierReward(int mefplId)
+	{
+		if (null == mefplIdToReward) {
+			log.warn("no MiniEventTierRewards");
+			return new ArrayList<MiniEventTierReward>();
+		}
+
+		if (!mefplIdToReward.containsKey(mefplId))
+		{
+			log.warn("no MiniEventTierRewards for mefplId={}", mefplId);
+			return new ArrayList<MiniEventTierReward>();
+		}
+
+		return mefplIdToReward.get(mefplId);
+	}
+
 	public static void reload() {
 		setStaticIdsToMiniEventTierRewards();
 	}

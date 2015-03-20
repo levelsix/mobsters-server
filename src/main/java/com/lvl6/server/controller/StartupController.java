@@ -46,6 +46,12 @@ import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.MiniEvent;
+import com.lvl6.info.MiniEventForPlayerLvl;
+import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoal;
+import com.lvl6.info.MiniEventLeaderboardReward;
+import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -86,6 +92,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -124,6 +131,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
@@ -146,6 +154,11 @@ import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -330,6 +343,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+
+	@Autowired
+	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -534,7 +550,7 @@ public class StartupController extends EventController {
 		//log.info("user after change user login via db. user=" + user);
 	}
 
-	//priority of user returned is 
+	//priority of user returned is
 	//user with specified fbId
 	//user with specified udid
 	//null
@@ -645,6 +661,9 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+			setMiniEventForUser(resBuilder, user, playerId, nowDate);
+			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
+
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1323,9 +1342,9 @@ public class StartupController extends EventController {
 				attackerId, attackerElo, defenderId, defenderPu.getElo(),
 				defender.getCash(), defender.getOil());
 
-			userIdToCashStolen.put(defenderId, 
+			userIdToCashStolen.put(defenderId,
 				potentialResult.getUnsignedCashAttackerWins());
-			userIdToOilStolen.put(defenderId, 
+			userIdToOilStolen.put(defenderId,
 				potentialResult.getUnsignedOilAttackerWins());
 		}
 	}
@@ -1541,6 +1560,62 @@ public class StartupController extends EventController {
 		}
 	}
 
+	private void setMiniEventForUser(
+			Builder resBuilder, User u, String userId, Date now)
+	{
+		MiniEventForUser mefu = miniEventForUserRetrieveUtil
+				.getSpecificUserMiniEvent(userId);
+
+		MiniEvent me = null;
+		if (null == mefu) {
+			me = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+		} else {
+			me = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
+		}
+
+		if (null == me) {
+			return;
+		}
+		int meId = me.getId();
+
+		MiniEventForPlayerLvl lvlEntered = MiniEventForPlayerLvlRetrieveUtils
+				.getMiniEventForPlayerLvl(meId, u.getLevel());
+
+		if (null == lvlEntered) {
+			log.error("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}",
+					 me);
+			return;
+		}
+
+		Collection<MiniEventTierReward> rewards = MiniEventTierRewardRetrieveUtils
+				.getMiniEventTierReward(lvlEntered.getId());
+		if (null == rewards || rewards.isEmpty()) {
+			log.error("MiniEventForPlayerLvl has no rewards. MiniEventForPlayerLvl={}",
+					lvlEntered);
+			return;
+		}
+
+		Collection<MiniEventGoal> goals =
+				MiniEventGoalRetrieveUtils.getGoalsForMiniEventId(meId);
+		if (null == goals || goals.isEmpty()) {
+			log.error("MiniEvent has no goals. MiniEvent={}", me);
+			return;
+		}
+
+		Collection<MiniEventLeaderboardReward> leaderboardRewards =
+				MiniEventLeaderboardRewardRetrieveUtils
+				.getRewardsForMiniEventId(meId);
+		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
+			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", me);
+			return;
+		}
+
+		UserMiniEventProto umep = CreateInfoProtoUtils.createUserMiniEventProto(
+				mefu, me, lvlEntered, rewards, goals, leaderboardRewards);
+
+		resBuilder.setUserMiniEvent(umep);
+	}
+
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
 			Timestamp now) {
 		Date nowDate = new Date(now.getTime());
@@ -1583,7 +1658,7 @@ public class StartupController extends EventController {
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 		/*NOTE: DB CALL*/
-		//TODO: when retrieving clan info, and user's current teams, maybe query for 
+		//TODO: when retrieving clan info, and user's current teams, maybe query for
 		//these monsters as well
 		Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
 				.getSpecificUserMonsters(userMonsterIds);
@@ -1632,7 +1707,7 @@ public class StartupController extends EventController {
 	}
 
 	//  private void setAllBosses(Builder resBuilder, UserType type) {
-	//    Map<Integer, Monster> bossIdsToBosses = 
+	//    Map<Integer, Monster> bossIdsToBosses =
 	//        MonsterRetrieveUtils.getBossIdsToBosses();
 	//
 	//    for (Monster b : bossIdsToBosses.values()) {
@@ -2357,6 +2432,24 @@ public class StartupController extends EventController {
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
+	public BattleItemQueueForUserRetrieveUtil getBattleItemQueueForUserRetrieveUtil() {
+		return battleItemQueueForUserRetrieveUtil;
+	}
+
+	public void setBattleItemQueueForUserRetrieveUtil(
+			BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil) {
+		this.battleItemQueueForUserRetrieveUtil = battleItemQueueForUserRetrieveUtil;
+	}
+
+	public BattleItemForUserRetrieveUtil getBattleItemForUserRetrieveUtil() {
+		return battleItemForUserRetrieveUtil;
+	}
+
+	public void setBattleItemForUserRetrieveUtil(
+			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil) {
+		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
+	}
+
 	public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
 		return questForUserRetrieveUtils;
 	}
@@ -2588,6 +2681,15 @@ public class StartupController extends EventController {
 	public void setMonsterSnapshotForUserRetrieveUtil(
 			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
+	}
+
+	public MiniEventForUserRetrieveUtil getMiniEventForUserRetrieveUtil() {
+		return miniEventForUserRetrieveUtil;
+	}
+
+	public void setMiniEventForUserRetrieveUtil(
+			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil) {
+		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 	}
 
 	public InsertUtil getInsertUtil() {
