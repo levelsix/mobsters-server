@@ -55,6 +55,12 @@ import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.MiniEvent;
+import com.lvl6.info.MiniEventForPlayerLvl;
+import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoal;
+import com.lvl6.info.MiniEventLeaderboardReward;
+import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
@@ -81,6 +87,7 @@ import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.ResearchProperty;
+import com.lvl6.info.Reward;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
@@ -167,6 +174,13 @@ import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
+import com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto;
+import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto;
+import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType;
+import com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto;
+import com.lvl6.proto.MiniEventProtos.MiniEventProto;
+import com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProto;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
@@ -198,6 +212,8 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.RewardsProto.RewardProto;
+import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -2212,6 +2228,190 @@ public class CreateInfoProtoUtils {
 		return uisgpb.build();
 	}
 
+	/** MiniEvent.proto ********************************************/
+	public static UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
+			MiniEvent me,
+			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
+			Collection<MiniEventGoal> goals,
+			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+	{
+		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
+		umepb.setMiniEventId(mefu.getMiniEventId());
+		umepb.setUserUuid(mefu.getUserId());
+		umepb.setUserLvl(mefu.getUserLvl());
+		umepb.setTierOneRedeemed(mefu.isTierOneRedeemed());
+		umepb.setTierTwoRedeemed(mefu.isTierTwoRedeemed());
+		umepb.setTierThreeRedeemed(mefu.isTierThreeRedeemed());
+
+		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
+				leaderboardRewards);
+
+		umepb.setMiniEvent(mep);
+
+		return umepb.build();
+	}
+
+	public static MiniEventProto createMiniEventProto(MiniEvent me,
+			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
+			Collection<MiniEventGoal> goals,
+			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+	{
+		MiniEventProto.Builder mepb = MiniEventProto.newBuilder();
+		mepb.setMiniEventId(me.getId());
+
+		Date d = me.getStartTime();
+		if (null != d) {
+			mepb.setMiniEventStartTime(d.getTime());
+		}
+
+		d = me.getEndTime();
+		if (null != d) {
+			mepb.setMiniEventEndTime(d.getTime());
+		}
+
+		MiniEventForPlayerLevelProto mefplp =
+				createMiniEventForPlayerLevelProto(mefpl, rewards);
+		mepb.setLvlEntered(mefplp);
+
+		Collection<MiniEventGoalProto> goalProtos = createMiniEventGoalProto(goals);
+		mepb.addAllGoals(goalProtos);
+
+		Collection<MiniEventLeaderboardRewardProto> leaderboardRewardProtos =
+				createMiniEventLeaderboardRewardProto(leaderboardRewards);
+		mepb.addAllLeaderboardRewards(leaderboardRewardProtos);
+
+		return mepb.build();
+	}
+
+	public static MiniEventForPlayerLevelProto createMiniEventForPlayerLevelProto(
+			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards)
+	{
+		MiniEventForPlayerLevelProto.Builder mefplpb =
+				createMiniEventForPlayerLevelProto(mefpl);
+
+		if (null != rewards && !rewards.isEmpty()) {
+			Collection<MiniEventTierRewardProto> rewardProtos =
+					createMiniEventTierRewardProto(rewards);
+			mefplpb.addAllRewards(rewardProtos);
+		}
+
+
+		return mefplpb.build();
+	}
+
+	private static MiniEventForPlayerLevelProto.Builder createMiniEventForPlayerLevelProto(
+			MiniEventForPlayerLvl mefpl) {
+		MiniEventForPlayerLevelProto.Builder mefplpb =
+				MiniEventForPlayerLevelProto.newBuilder();
+		mefplpb.setMefplId(mefpl.getId());
+		mefplpb.setMiniEventId(mefpl.getMiniEventId());
+		mefplpb.setPlayerLvlMin(mefpl.getPlayerLvlMin());
+		mefplpb.setPlayerLvlMax(mefpl.getPlayerLvlMax());
+		mefplpb.setTierOneMinPts(mefpl.getTierOneMinPts());
+		mefplpb.setTierTwoMinPts(mefpl.getTierTwoMinPts());
+		mefplpb.setTierThreeMinPts(mefpl.getTierThreeMinPts());
+		return mefplpb;
+	}
+
+	public static Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
+			Collection<MiniEventTierReward> metrs)
+	{
+		Collection<MiniEventTierRewardProto> rewardProtos =
+				new ArrayList<MiniEventTierRewardProto>();
+
+		for (MiniEventTierReward metr : metrs) {
+			MiniEventTierRewardProto metrp = createMiniEventTierRewardProto(metr);
+			rewardProtos.add(metrp);
+		}
+
+		return rewardProtos;
+	}
+
+	private static MiniEventTierRewardProto createMiniEventTierRewardProto(
+			MiniEventTierReward metr)
+	{
+		MiniEventTierRewardProto.Builder metrpb =
+				MiniEventTierRewardProto.newBuilder();
+
+		metrpb.setMetrId(metr.getId());
+		metrpb.setMefplId(metr.getMiniEventForPlayerLvlId());
+		metrpb.setRewardId(metr.getRewardId());
+		metrpb.setTierLvl(metr.getRewardTier());
+
+		return metrpb.build();
+	}
+
+	private static Collection<MiniEventGoalProto> createMiniEventGoalProto(
+			Collection<MiniEventGoal> goals)
+	{
+		Collection<MiniEventGoalProto> goalProtos = new ArrayList<MiniEventGoalProto>();
+		for (MiniEventGoal meg : goals)
+		{
+			MiniEventGoalProto megp = createMiniEventGoalProto(meg);
+			goalProtos.add(megp);
+
+		}
+
+		return goalProtos;
+	}
+
+	private static MiniEventGoalProto createMiniEventGoalProto(MiniEventGoal meg) {
+		MiniEventGoalProto.Builder megpb = MiniEventGoalProto.newBuilder();
+		megpb.setMiniEventGoalId(meg.getId());
+		megpb.setMiniEventId(meg.getMiniEventId());
+
+		String str = meg.getType();
+		if (null != str) {
+			try {
+				MiniEventGoalType q = MiniEventGoalType.valueOf(str);
+				megpb.setGoalType(q);
+			} catch (Exception e) {
+				log.error(
+						String.format("invalid MiniEventGoalType. MiniEventGoal=%s",
+								meg),
+				e);
+			}
+		}
+		megpb.setGoalAmt(meg.getAmt());
+
+		str = meg.getDesc();
+		if (null != str) {
+			megpb.setGoalDesc(str);
+		}
+
+		megpb.setPointsGained(meg.getPtsReward());
+		return megpb.build();
+	}
+
+	private static Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
+			Collection<MiniEventLeaderboardReward> rewards)
+	{
+		Collection<MiniEventLeaderboardRewardProto> rewardProtos =
+				new ArrayList<MiniEventLeaderboardRewardProto>();
+
+		for (MiniEventLeaderboardReward melr : rewards) {
+			MiniEventLeaderboardRewardProto melrp =
+					createMiniEventLeaderboardRewardProto(melr);
+
+			rewardProtos.add(melrp);
+		}
+
+		return rewardProtos;
+	}
+
+	private static MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
+			MiniEventLeaderboardReward melr)
+	{
+		MiniEventLeaderboardRewardProto.Builder melrpb =
+				MiniEventLeaderboardRewardProto.newBuilder();
+		melrpb.setMelrId(melr.getId());
+		melrpb.setMiniEventId(melr.getMiniEventId());
+		melrpb.setRewardId(melr.getRewardId());
+		melrpb.setLeaderboardMinPos(melr.getLeaderboardPos());
+
+		return melrpb.build();
+	}
+
 	/** MiniJobConfig.proto ********************************************/
 	public static MiniJobProto createMiniJobProto(MiniJob mj) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
@@ -3213,6 +3413,30 @@ public class CreateInfoProtoUtils {
 
 		return urpb.build();
 	}
+
+	/** Reward.proto ***************************************************/
+	public static RewardProto createRewardProto(Reward r)
+	{
+		RewardProto.Builder rpb = RewardProto.newBuilder();
+
+		rpb.setRewardId(r.getId());
+		rpb.setStaticDataId(r.getStaticDataId());
+		String str = r.getType();
+
+		if (null != str && !str.isEmpty()) {
+			try {
+				RewardType rt = RewardType.valueOf(str);
+				rpb.setTyp(rt);
+			} catch (Exception e) {
+				log.error(String.format("invalid RewardType. Reward=%s",
+						r), e);
+			}
+		}
+		rpb.setAmt(r.getAmt());
+
+		return rpb.build();
+	}
+
 
 	/** Skill.proto ***************************************************/
 	public static SkillProto createSkillProtoFromSkill(Skill s,
