@@ -765,6 +765,8 @@ public class MiscMethods {
 			}
 
 		}
+		
+		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()

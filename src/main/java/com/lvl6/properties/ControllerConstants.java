@@ -400,6 +400,7 @@ public class ControllerConstants {
 			: "4df84fdd-705f-4089-ac80-70c1a0143f24";//Globals.IS_SANDBOX() ? 98437 : 131287;
 	public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
 	public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
+	public static final int STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL = 6;
 
 	//BATTLE
 	public static final int BATTLE__MAX_ITEMS_USED = 4;   //unused right now
