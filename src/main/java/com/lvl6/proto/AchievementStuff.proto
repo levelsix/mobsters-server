@@ -59,6 +59,8 @@ message AchievementProto {
      	JOIN_CLAN = 18;
      	SOLICIT_HELP = 19;
      	GIVE_HELP = 20;
+     	
+     	REQUEST_TOON = 21;
      }
 }
 

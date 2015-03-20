@@ -136,6 +136,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
+
 public class MiscMethods {
 
 	private static final Logger log = LoggerFactory
@@ -144,6 +145,9 @@ public class MiscMethods {
 	public static final String gems = "gems";
 	public static final String oil = "oil";
 	public static final String boosterPackId = "boosterPackId";
+	
+	private static String pClientId = "ToonSquad";
+	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
@@ -765,8 +769,6 @@ public class MiscMethods {
 			}
 
 		}
-		
-		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
@@ -1915,5 +1917,8 @@ public class MiscMethods {
 	//		sdpb.addAllRaids(staticData.getRaidsList());
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
+	
+
+	
 
 }
