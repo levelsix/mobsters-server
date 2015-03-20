@@ -123,7 +123,8 @@ message FullUserProto {
 	
 	optional string pvpDefendingMessage = 56;
 	optional int64 lastTeamDonationSolicitation = 57;
-
+	
+	
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
 	optional string udidForHistory = 46;
