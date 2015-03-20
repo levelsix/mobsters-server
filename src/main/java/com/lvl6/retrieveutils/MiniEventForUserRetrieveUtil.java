@@ -87,31 +87,31 @@ public class MiniEventForUserRetrieveUtil {
 	}*/
 
 	////@Cacheable(value="specificUserStruct", key="#userStructId")
-	public MiniEventForUser getSpecificUserMiniEvent(String userId,
-			int miniEventId) {
+	public MiniEventForUser getSpecificUserMiniEvent(String userId)//,
+			//int miniEventId)
+	{
 		log.debug(
-				"retrieving user battle item with userId={}, miniEventId={}",
-				userId, miniEventId);
+				"retrieving MiniEventForUser with userId={}",
+				userId);
 
-		Object[] values = { userId, miniEventId };
-		String query = String.format("select * from %s where %s=? and %s=?",
-				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID,
-				DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+		Object[] values = { userId };
+		String query = String.format("select * from %s where %s=?",
+				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID);
 
 		MiniEventForUser userMiniEvent = null;
 		try {
-			List<MiniEventForUser> bifuList = this.jdbcTemplate.query(query,
+			List<MiniEventForUser> mefuList = this.jdbcTemplate.query(query,
 					values, rowMapper);
 
-			if (null != bifuList && !bifuList.isEmpty()) {
-				userMiniEvent = bifuList.get(0);
+			if (null != mefuList && !mefuList.isEmpty()) {
+				userMiniEvent = mefuList.get(0);
 			}
 
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"battle item for user retrieve db error. userId=%s, miniEventId=%s",
-							userId, miniEventId), e);
+							"MiniEventForUser retrieve db error. userId=%s",
+							userId), e);
 		}
 
 		return userMiniEvent;

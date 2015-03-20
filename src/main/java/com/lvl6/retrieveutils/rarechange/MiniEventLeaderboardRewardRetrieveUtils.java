@@ -48,7 +48,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		return ep;
 	}
 
-	public static Collection<MiniEventLeaderboardReward> getGoalsForMiniEventId(
+	public static Collection<MiniEventLeaderboardReward> getRewardsForMiniEventId(
 			int miniEventId)
 	{
 		if (null == miniEventIdToRewards) {
@@ -56,7 +56,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		}
 
 		if (!miniEventIdToRewards.containsKey(miniEventId)) {
-			log.error("No MiniEventLeaderboardRewards for id={}", miniEventId);
+			log.error("No MiniEventLeaderboardRewards for miniEventId={}", miniEventId);
 			return new ArrayList<MiniEventLeaderboardReward>();
 		}
 

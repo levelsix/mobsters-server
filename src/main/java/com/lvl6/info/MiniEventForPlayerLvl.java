@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MiniEventForPlayerLvl implements Serializable {
 
-	private static final long serialVersionUID = -4761009839588722898L;
+	private static final long serialVersionUID = 6543717172004073353L;
 
 	private int id;
 	private int miniEventId;
@@ -13,6 +13,10 @@ public class MiniEventForPlayerLvl implements Serializable {
 	private int tierOneMinPts;
 	private int tierTwoMinPts;
 	private int tierThreeMinPts;
+
+	public MiniEventForPlayerLvl() {
+		super();
+	}
 
 	public MiniEventForPlayerLvl(int id, int miniEventId, int playerLvlMin,
 			int playerLvlMax, int tierOneMinPts, int tierTwoMinPts,

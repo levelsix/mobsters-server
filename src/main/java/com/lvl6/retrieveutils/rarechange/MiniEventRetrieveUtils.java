@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,45 @@ public class MiniEventRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_CONFIG;
 
 	private static Map<Integer, MiniEvent> idToMiniEvent;
+	private static TreeSet<MiniEvent> miniEventTree;
+	private static final MiniEventComparator comparator = new MiniEventComparator();
+
+	private static final class MiniEventComparator implements Comparator<MiniEvent>
+	{
+		@Override
+		public int compare(MiniEvent o1, MiniEvent o2) {
+			long o1Time = o1.getEndTime().getTime();
+			long o2Time = o2.getEndTime().getTime();
+			if ( o1Time < o2Time ) {
+				return -1;
+			} else if ( o1Time > o2Time ) {
+				return 1;
+			} else if (o1.getId() < o2.getId()) {
+				return -1;
+			} else if (o1.getId() > o2.getId()) {
+				return 1;
+			} else {
+				return 0;
+			}
+
+		}
+	}
+
+	public static MiniEvent getCurrentlyActiveMiniEvent( Date now )
+	{
+		if (null == miniEventTree) {
+			log.warn("no miniEvents are currently active");
+			return null;
+		}
+		MiniEvent me = new MiniEvent();
+		me.setId(0);
+		me.setEndTime(now);
+		MiniEvent active = miniEventTree.ceiling(me);
+
+		log.info("for given time={}, selected {}",
+				now, active);
+		return active;
+	}
 
 	public static Map<Integer, MiniEvent> getAllIdsToMiniEvents() {
 		if (null == idToMiniEvent) {
@@ -49,6 +90,7 @@ public class MiniEventRetrieveUtils {
 
 	public static void reload() {
 		setStaticIdsToMiniEvents();
+		setOrderedMiniEvents();
 	}
 
 	private static void setStaticIdsToMiniEvents() {
@@ -82,6 +124,26 @@ public class MiniEventRetrieveUtils {
 		} finally {
 			DBConnection.get().close(rs, null, conn);
 		}
+	}
+
+	private static void setOrderedMiniEvents() {
+		if ( null == idToMiniEvent) {
+			log.warn("NO MINIEVENTS!");
+			return;
+		}
+
+		TreeSet<MiniEvent> miniEventTreeTemp = new TreeSet<MiniEvent>(comparator);
+
+		for (MiniEvent me : idToMiniEvent.values()) {
+			boolean added = miniEventTreeTemp.add(me);
+			if (!added) {
+				log.error("(shouldn't happen...) can't add MiniEvent={} to treeSet={}",
+						me, miniEventTreeTemp);
+			}
+		}
+
+		miniEventTree = miniEventTreeTemp;
+
 	}
 
 	private static MiniEvent convertRSRowToMiniEvent(ResultSet rs)

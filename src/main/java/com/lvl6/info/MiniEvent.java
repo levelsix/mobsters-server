@@ -5,11 +5,15 @@ import java.util.Date;
 
 public class MiniEvent implements Serializable {
 
-	private static final long serialVersionUID = -214095102565259550L;
+	private static final long serialVersionUID = 7951935352524271812L;
 
 	private int id;
 	private Date startTime;
 	private Date endTime;
+
+	public MiniEvent() {
+		super();
+	}
 
 	public MiniEvent(int id, Date startTime, Date endTime) {
 		super();
