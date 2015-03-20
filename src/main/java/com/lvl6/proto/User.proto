@@ -123,6 +123,10 @@ message FullUserProto {
 	
 	optional string pvpDefendingMessage = 56;
 	optional int64 lastTeamDonationSolicitation = 57;
+	
+	optional float salesValue = 58;
+	optional int64 salesLastPurchaseTime = 59;
+
 	optional int64 totalStrength = 58;
 	
 	
