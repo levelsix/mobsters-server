@@ -1,6 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.util.List;
+import java.util.Date;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -15,12 +15,14 @@ import com.lvl6.events.response.RetrieveMiniEventResponseEvent;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
-import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -34,7 +36,13 @@ public class RetrieveMiniEventController extends EventController {
 	}
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected UserRetrieveUtils2 userRetrieveUtil;
+
+	@Autowired
+	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
+
+	@Autowired
+	protected InsertUtil insertUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -43,7 +51,7 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_REMOVE_USER_ITEM_USED_EVENT;
+		return EventProtocolRequest.C_RETRIEVE_MINI_EVENT_EVENT;
 	}
 
 	@Override
@@ -51,28 +59,26 @@ public class RetrieveMiniEventController extends EventController {
 		RetrieveMiniEventRequestProto reqProto = ((RetrieveMiniEventRequestEvent) event)
 				.getRetrieveMiniEventRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<String> userItemUsedIdList = reqProto.getUserItemUsedUuidList();
+		Date now = new Date();
 
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
 
-		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			userUuid = UUID.fromString(userId);
-			StringUtils.convertToUUID(userItemUsedIdList);
+			UUID.fromString(userId);
 
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-					"UUID error. incorrect userId=%s, userItemUsedIdList=%s",
-					userId, userItemUsedIdList), e);
+					"UUID error. incorrect userId=%s",
+					userId), e);
 			invalidUuids = true;
 		}
 
@@ -87,14 +93,25 @@ public class RetrieveMiniEventController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
-				.getSimpleName());
+		server.lockPlayer(userId, this.getClass().getSimpleName());
 		try {
 
-			RetrieveMiniEventAction tifsua = new RetrieveMiniEventAction(
-					userId, userItemUsedIdList, DeleteUtils.get());
+			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+					userId, now, userRetrieveUtil, miniEventForUserRetrieveUtil,
+					insertUtil);
 
-			tifsua.execute(resBuilder);
+			rmea.execute(resBuilder);
+
+			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS)) {
+				//get UserMiniEvent info and create the proto to set into resBuilder
+				//TODO: Consider protofying MiniEvent stuff
+				UserMiniEventProto umep = CreateInfoProtoUtils
+						.createUserMiniEventProto(
+								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+								rmea.getLvlEntered(), rmea.getRewards(),
+								rmea.getGoals(), rmea.getLeaderboardRewards());
+				resBuilder.setUserMiniEvent(umep);
+			}
 
 			RetrieveMiniEventResponseProto resProto = resBuilder.build();
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
@@ -120,9 +137,33 @@ public class RetrieveMiniEventController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
-					.getSimpleName());
+			server.unlockPlayer(userId, this.getClass().getSimpleName());
 		}
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public MiniEventForUserRetrieveUtil getMiniEventForUserRetrieveUtil() {
+		return miniEventForUserRetrieveUtil;
+	}
+
+	public void setMiniEventForUserRetrieveUtil(
+			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil) {
+		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
 	}
 
 }

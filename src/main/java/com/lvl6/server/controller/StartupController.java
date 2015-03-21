@@ -46,12 +46,6 @@ import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
-import com.lvl6.info.MiniEvent;
-import com.lvl6.info.MiniEventForPlayerLvl;
-import com.lvl6.info.MiniEventForUser;
-import com.lvl6.info.MiniEventGoal;
-import com.lvl6.info.MiniEventLeaderboardReward;
-import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -86,6 +80,8 @@ import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto;
@@ -160,17 +156,13 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
+import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
@@ -1599,57 +1591,26 @@ public class StartupController extends EventController {
 	private void setMiniEventForUser(
 			Builder resBuilder, User u, String userId, Date now)
 	{
-		MiniEventForUser mefu = miniEventForUserRetrieveUtil
-				.getSpecificUserMiniEvent(userId);
+		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
+				RetrieveMiniEventResponseProto.newBuilder();
 
-		MiniEvent me = null;
-		if (null == mefu) {
-			me = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
-		} else {
-			me = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
+		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+				userId, now, userRetrieveUtils, miniEventForUserRetrieveUtil,
+				insertUtil);
+
+		rmea.execute(rmeaResBuilder);
+
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS)) {
+			//get UserMiniEvent info and create the proto to set into resBuilder
+			//TODO: Consider protofying MiniEvent stuff
+			UserMiniEventProto umep = CreateInfoProtoUtils
+					.createUserMiniEventProto(
+							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getLvlEntered(), rmea.getRewards(),
+							rmea.getGoals(), rmea.getLeaderboardRewards());
+			resBuilder.setUserMiniEvent(umep);
 		}
 
-		if (null == me) {
-			return;
-		}
-		int meId = me.getId();
-
-		MiniEventForPlayerLvl lvlEntered = MiniEventForPlayerLvlRetrieveUtils
-				.getMiniEventForPlayerLvl(meId, u.getLevel());
-
-		if (null == lvlEntered) {
-			log.error("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}",
-					 me);
-			return;
-		}
-
-		Collection<MiniEventTierReward> rewards = MiniEventTierRewardRetrieveUtils
-				.getMiniEventTierReward(lvlEntered.getId());
-		if (null == rewards || rewards.isEmpty()) {
-			log.error("MiniEventForPlayerLvl has no rewards. MiniEventForPlayerLvl={}",
-					lvlEntered);
-			return;
-		}
-
-		Collection<MiniEventGoal> goals =
-				MiniEventGoalRetrieveUtils.getGoalsForMiniEventId(meId);
-		if (null == goals || goals.isEmpty()) {
-			log.error("MiniEvent has no goals. MiniEvent={}", me);
-			return;
-		}
-
-		Collection<MiniEventLeaderboardReward> leaderboardRewards =
-				MiniEventLeaderboardRewardRetrieveUtils
-				.getRewardsForMiniEventId(meId);
-		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
-			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", me);
-			return;
-		}
-
-		UserMiniEventProto umep = CreateInfoProtoUtils.createUserMiniEventProto(
-				mefu, me, lvlEntered, rewards, goals, leaderboardRewards);
-
-		resBuilder.setUserMiniEvent(umep);
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,

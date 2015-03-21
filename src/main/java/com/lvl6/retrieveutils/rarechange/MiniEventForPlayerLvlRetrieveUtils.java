@@ -149,6 +149,8 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 			return;
 		}
 
+		//TreeSets are used so I don't have to manually search for the
+		//MiniEventForPlayerLvl that sandwiches a given playerLevel
 		Map<Integer, TreeSet<MiniEventForPlayerLvl>> miniEventIdToOrderedMefplTemp =
 				new HashMap<Integer, TreeSet<MiniEventForPlayerLvl>>();
 
@@ -159,7 +161,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 			if (!miniEventIdToOrderedMefplTemp.containsKey(miniEventId))
 			{
 				miniEventIdToOrderedMefplTemp.put(miniEventId,
-						new TreeSet<MiniEventForPlayerLvl>());
+						new TreeSet<MiniEventForPlayerLvl>(comparator));
 			}
 
 			TreeSet<MiniEventForPlayerLvl> orderedMefpl =
