@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "MiniEvent.proto";
 import "Reward.proto";
 import "User.proto";
 
@@ -8,6 +9,24 @@ package com.lvl6.proto;
 
 option java_outer_classname = "EventMiniEventProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//------------------------------------------------------------------------------------------
+
+message RetrieveMiniEventRequestProto {
+	optional MinimumUserProto sender = 1;
+}
+
+message RetrieveMiniEventResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UserMiniEventProto userMiniEvent = 2;
+	
+	optional RetrieveMiniEventStatus status = 3;
+	
+	enum RetrieveMiniEventStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
 
 //------------------------------------------------------------------------------------------
 
