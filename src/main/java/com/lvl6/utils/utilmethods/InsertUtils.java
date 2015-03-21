@@ -32,6 +32,7 @@ import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -241,7 +242,7 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	/*
-	 * assumptions: all the entries at index i across all the lists, 
+	 * assumptions: all the entries at index i across all the lists,
 	 * they make up the values for one row to insert into user_currency_history
 	 */
 	@Override
@@ -628,7 +629,7 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	/*
-	 * assumptions: all the entries at index i across all the lists, 
+	 * assumptions: all the entries at index i across all the lists,
 	 * they make up the values for one row to insert into user_currency_history
 	 */
 	@Override
@@ -991,22 +992,22 @@ public class InsertUtils implements InsertUtil {
 			Map<Integer, Integer> tsmIdToItemId) {
 		//even if a taskStageMonsterId has multiple items, just choose the first one
 		List<Integer> itemIds = new ArrayList<Integer>();
-		
+
 		for (Integer tsmId : tsmIds) {
-			
+
 			if (!tsmIdToItemId.containsKey(tsmId)) {
 				//0 in db means no item dropped
 				itemIds.add(0);
 				continue;
 			}
-			
+
 			//task stage monster has an item drop associated with it.
 			int itemId = tsmIdToItemId.get(tsmId);
 			if (-1 == itemId) {
 				itemId = 0;
 			}
 			itemIds.add(itemId);
-			
+
 		}
 
 		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
@@ -1022,10 +1023,10 @@ public class InsertUtils implements InsertUtil {
 	  insertParams.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, oilGained);
 	  insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
 	  insertParams.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, itemIds);
-	  
-	  int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+
+	  int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename,
 	      insertParams, numRows);
-	  
+
 	  return numInserted;
 	}
 	*/
@@ -1119,7 +1120,7 @@ public class InsertUtils implements InsertUtil {
 
 	/*
 	 * README!!!!!!!!!!!!!!!
-	* assumptions: all the entries at index i across all the lists, 
+	* assumptions: all the entries at index i across all the lists,
 	* they make up the values for one row to insert into the table
 	*/
 	@Override
@@ -1548,7 +1549,7 @@ public class InsertUtils implements InsertUtil {
 		return numUpdated;
 	}
 
-	//SAVE CLAN RAID USER HISTORY 
+	//SAVE CLAN RAID USER HISTORY
 	@Override
 	public int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
 			Map<String, ClanEventPersistentForUser> clanUserInfo) {
@@ -1736,7 +1737,7 @@ public class InsertUtils implements InsertUtil {
 	//				Timestamp crsEndTime, int clanEventId,
 	//				List<ClanEventPersistentUserReward> userRewards) {
 	//			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;
-	//			
+	//
 	//			List<Integer> userIdList = new ArrayList<Integer>();
 	//			List<Timestamp> crsStartTimeList = new ArrayList<Timestamp>();
 	//			List<Integer> crsIdList = new ArrayList<Integer>();
@@ -1745,13 +1746,13 @@ public class InsertUtils implements InsertUtil {
 	//			List<Integer> staticDataIdList = new ArrayList<Integer>();
 	//			List<Integer> quantityList = new ArrayList<Integer>();
 	//			List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
-	//			
+	//
 	//			for (ClanEventPersistentUserReward reward : userRewards) {
 	//				int userId = reward.getUserId();
 	//				String resourceType = reward.getResourceType();
 	//				int staticDataId = reward.getStaticDataId();
 	//				int quantity = reward.getQuantity();
-	//				
+	//
 	//				userIdList.add(userId);
 	//				crsStartTimeList.add(crsStartTime);
 	//				crsIdList.add(crsId);
@@ -1761,7 +1762,7 @@ public class InsertUtils implements InsertUtil {
 	//				quantityList.add(quantity);
 	//				clanEventPersistentIdList.add(clanEventId);
 	//			}
-	//			
+	//
 	//			Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userIdList);
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,
@@ -1769,7 +1770,7 @@ public class InsertUtils implements InsertUtil {
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_ID, crsIdList);
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_END_TIME,
 	//					crsEndTimeList);
-	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE, 
+	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__RESOURCE_TYPE,
 	//					resourceTypeList);
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID,
 	//					staticDataIdList);
@@ -1777,12 +1778,12 @@ public class InsertUtils implements InsertUtil {
 	//					quantityList);
 	//			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID,
 	//					clanEventPersistentIdList);
-	//			
+	//
 	//			int numRows = userRewards.size();
-	//			
-	//			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+	//
+	//			int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName,
 	//	        insertParams, numRows);
-	//	    
+	//
 	//	    return numInserted;
 	//		}
 
@@ -2665,5 +2666,48 @@ public class InsertUtils implements InsertUtil {
 	}
 	
 	
+
+	@Override
+	public boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu)
+	{
+		String tableName = DBConstants.TABLE_MINI_EVENT_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		Map<String, Object> newRow = new HashMap<String, Object>();
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_ID,
+				mefu.getUserId());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID,
+				mefu.getMiniEventId());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_LVL,
+				mefu.getUserLvl());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__PTS_EARNED,
+				mefu.getPtsEarned());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED,
+				mefu.isTierOneRedeemed());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED,
+				mefu.isTierTwoRedeemed());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED,
+				mefu.isTierThreeRedeemed());
+		newRows.add(newRow);
+
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__USER_LVL);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__PTS_EARNED);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
+
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
+		if (numUpdated > 0) {
+			return true;
+		} else {
+			log.error("numUpdated={}", numUpdated);
+			return false;
+		}
+	}
 
 }

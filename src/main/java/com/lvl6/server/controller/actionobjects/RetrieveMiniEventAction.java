@@ -1,27 +1,49 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.MiniEvent;
+import com.lvl6.info.MiniEventForPlayerLvl;
+import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoal;
+import com.lvl6.info.MiniEventLeaderboardReward;
+import com.lvl6.info.MiniEventTierReward;
+import com.lvl6.info.User;
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
-import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetrieveMiniEventAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	private String userId;
-	private List<String> userItemUsedIdList;
-	private DeleteUtil deleteUtil;
+	private Date now;
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	private MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
+	private InsertUtil insertUtil;
 
-	public RetrieveMiniEventAction(String userId,
-			List<String> userItemUsedIdList, DeleteUtil deleteUtil) {
+	public RetrieveMiniEventAction(String userId, Date now,
+			UserRetrieveUtils2 userRetrieveUtil,
+			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
+			InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
-		this.userItemUsedIdList = userItemUsedIdList;
-		this.deleteUtil = deleteUtil;
+		this.now = now;
+		this.userRetrieveUtil = userRetrieveUtil;
+		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
+		this.insertUtil = insertUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -38,6 +60,13 @@ public class RetrieveMiniEventAction {
 	//	}
 
 	//derived state
+	private User u;
+	private MiniEvent curActiveMiniEvent;
+	private MiniEventForPlayerLvl lvlEntered;
+	private MiniEventForUser mefu;
+	private Collection<MiniEventTierReward> rewards;
+	private Collection<MiniEventGoal> goals;
+	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
@@ -66,28 +95,142 @@ public class RetrieveMiniEventAction {
 
 	private boolean verifySyntax(Builder resBuilder) {
 
-		if (userItemUsedIdList.isEmpty()) {
-			log.error(String.format("invalid userItemUsedIdList=%s",
-					userItemUsedIdList));
+		return true;
+	}
+
+	private boolean verifySemantics(Builder resBuilder) {
+
+		u = userRetrieveUtil.getUserById(userId);
+
+		if (null == u) {
+			log.error("no user with id={}", userId);
 			return false;
 		}
 
 		return true;
 	}
 
-	private boolean verifySemantics(Builder resBuilder) {
+	private boolean writeChangesToDB(Builder resBuilder) {
+
+		mefu = miniEventForUserRetrieveUtil
+				.getSpecificUserMiniEvent(userId);
+
+		curActiveMiniEvent = null;
+		if (null == mefu) {
+			curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+		} else {
+			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
+		}
+
+		if (null == curActiveMiniEvent) {
+			return false;
+		}
+
+		int meId = curActiveMiniEvent.getId();
+		int userLvl = u.getLevel();
+		lvlEntered = MiniEventForPlayerLvlRetrieveUtils
+				.getMiniEventForPlayerLvl(meId, userLvl);
+
+		if (null == lvlEntered) {
+			log.error("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}",
+					 curActiveMiniEvent);
+			return false;
+		}
+
+		rewards = MiniEventTierRewardRetrieveUtils
+				.getMiniEventTierReward(lvlEntered.getId());
+		if (null == rewards || rewards.isEmpty()) {
+			log.error("MiniEventForPlayerLvl has no rewards. MiniEventForPlayerLvl={}",
+					lvlEntered);
+			return false;
+		}
+
+		goals = MiniEventGoalRetrieveUtils.getGoalsForMiniEventId(meId);
+		if (null == goals || goals.isEmpty()) {
+			log.error("MiniEvent has no goals. MiniEvent={}", curActiveMiniEvent);
+			return false;
+		}
+
+		leaderboardRewards =
+				MiniEventLeaderboardRewardRetrieveUtils
+				.getRewardsForMiniEventId(meId);
+		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
+			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
+			return false;
+		}
+
+		if (null == mefu) {
+			//create a MiniEvent for this user, most likely the first one for him
+			mefu = new MiniEventForUser();
+			mefu.setUserId(userId);
+			mefu.setMiniEventId(curActiveMiniEvent.getId());
+			mefu.setUserLvl(userLvl);
+			mefu.setPtsEarned(0);
+			mefu.setTierOneRedeemed(false);
+			mefu.setTierTwoRedeemed(false);
+			mefu.setTierThreeRedeemed(false);
+
+			return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
+		}
+
 		return true;
 	}
 
-	private boolean writeChangesToDB(Builder resBuilder) {
+	public User getU() {
+		return u;
+	}
 
-		//record that user used items
-		log.info(String.format("deleting ids: %s", userItemUsedIdList));
-		int numDeleted = deleteUtil.deleteItemUsed(userId, userItemUsedIdList);
+	public void setU(User u) {
+		this.u = u;
+	}
 
-		log.info(String.format("num ids deleted: %s", numDeleted));
+	public MiniEvent getCurActiveMiniEvent() {
+		return curActiveMiniEvent;
+	}
 
-		return true;
+	public void setCurActiveMiniEvent(MiniEvent curActiveMiniEvent) {
+		this.curActiveMiniEvent = curActiveMiniEvent;
+	}
+
+	public MiniEventForPlayerLvl getLvlEntered() {
+		return lvlEntered;
+	}
+
+	public void setLvlEntered(MiniEventForPlayerLvl lvlEntered) {
+		this.lvlEntered = lvlEntered;
+	}
+
+	public MiniEventForUser getMefu() {
+		return mefu;
+	}
+
+	public void setMefu(MiniEventForUser mefu) {
+		this.mefu = mefu;
+	}
+
+	public Collection<MiniEventTierReward> getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(Collection<MiniEventTierReward> rewards) {
+		this.rewards = rewards;
+	}
+
+	public Collection<MiniEventGoal> getGoals() {
+		return goals;
+	}
+
+	public void setGoals(Collection<MiniEventGoal> goals) {
+		this.goals = goals;
+	}
+
+	public Collection<MiniEventLeaderboardReward> getLeaderboardRewards() {
+		return leaderboardRewards;
+	}
+
+	public void setLeaderboardRewards(
+			Collection<MiniEventLeaderboardReward> leaderboardRewards) {
+		this.leaderboardRewards = leaderboardRewards;
 	}
 
 }
