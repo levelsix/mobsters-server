@@ -29,6 +29,24 @@ message RetrieveMiniEventResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+message UpdateMiniEventRequestProto {
+	optional MinimumUserProto sender = 1;
+	//what the UserMiniEvent in the database will be
+	optional UserMiniEventProto updatedUserMiniEvent = 2;
+}
+
+message UpdateMiniEventResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UpdateMiniEventStatus status = 2;
+	optional UserMiniEventProto updatedUserMiniEvent = 3;
+	
+	enum UpdateMiniEventStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
 
 message RedeemMiniEventRewardRequestProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
