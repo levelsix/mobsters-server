@@ -43,6 +43,7 @@ message ResearchProto {
 	optional int32 level = 13;
 	optional float priority = 14;
 	optional int32 tier = 15;
+	optional int32 strength = 16;
 	
 }
 

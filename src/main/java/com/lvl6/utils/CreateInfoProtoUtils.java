@@ -2375,6 +2375,8 @@ public class CreateInfoProtoUtils {
 			mlipb.setEnhanceCostExponent(info.getEnhanceCostExponent());
 			mlipb.setSecsToEnhancePerFeeder(info.getSecondsToEnhancePerFeeder());
 			mlipb.setSecsToEnhancePerFeederExponent(info.getSecondsToEnhancePerFeederExponent());
+			mlipb.setStrength(info.getStrength());
+			mlipb.setStrengthExponent(info.getStrengthExponent());
 			
 			lvlInfoProtos.add(mlipb.build());
 		}
@@ -3054,6 +3056,7 @@ public class CreateInfoProtoUtils {
 		
 		rpb.setPriority(r.getPriority());
 		rpb.setTier(r.getTier());
+		rpb.setStrength(r.getStrength());
 
 		return rpb.build();
 	}
@@ -3378,6 +3381,7 @@ public class CreateInfoProtoUtils {
 		builder.setShadowVerticalOffset(s.getShadowVerticalOffset());
 		builder.setShadowHorizontalOfffset(s.getShadowHorizontalOffset());
 		builder.setShadowScale(s.getShadowScale());
+		builder.setStrength(s.getStrength());
 
 		return builder.build();
 	}
@@ -4274,6 +4278,7 @@ public class CreateInfoProtoUtils {
 		tmepb.setCharImgHorizPixelOffset(tme.getCharImgHorizPixelOffset());
 		tmepb.setCharImgScaleFactor(tme.getCharImgScaleFactor());
 		tmepb.setIsFake(tme.isFake());
+		tmepb.setStrength(tme.getStrength());
 
 		return tmepb.build();
 	}

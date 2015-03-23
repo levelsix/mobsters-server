@@ -22,13 +22,14 @@ public class TaskMapElement implements Serializable {
 	private int charImgHorizPixelOffset;
 	private float charImgScaleFactor;
 	private boolean isFake;
+	private int strength;
 
 	public TaskMapElement(int id, int taskId, int xPos, int yPos,
 			String element, boolean boss, String bossImgName, int itemDropId,
 			String sectionName, int cashReward, int oilReward,
 			String characterImgName, int charImgVertPixelOffset,
 			int charImgHorizPixelOffset, float charImgScaleFactor,
-			boolean isFake) {
+			boolean isFake, int strength) {
 		super();
 		this.id = id;
 		this.taskId = taskId;
@@ -46,6 +47,15 @@ public class TaskMapElement implements Serializable {
 		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
 		this.charImgScaleFactor = charImgScaleFactor;
 		this.isFake = isFake;
+		this.strength = strength;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
 	}
 
 	public int getId() {
@@ -179,7 +189,7 @@ public class TaskMapElement implements Serializable {
 				+ ", charImgVertPixelOffset=" + charImgVertPixelOffset
 				+ ", charImgHorizPixelOffset=" + charImgHorizPixelOffset
 				+ ", charImgScaleFactor=" + charImgScaleFactor + ", isFake="
-				+ isFake + "]";
+				+ isFake + ", strength=" + strength + "]";
 	}
 
 	public boolean isFake() {

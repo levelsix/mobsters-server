@@ -605,6 +605,15 @@ public final class ResearchsProto {
      * <code>optional int32 tier = 15;</code>
      */
     int getTier();
+
+    /**
+     * <code>optional int32 strength = 16;</code>
+     */
+    boolean hasStrength();
+    /**
+     * <code>optional int32 strength = 16;</code>
+     */
+    int getStrength();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ResearchProto}
@@ -755,6 +764,11 @@ public final class ResearchsProto {
             case 120: {
               bitField0_ |= 0x00002000;
               tier_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00004000;
+              strength_ = input.readInt32();
               break;
             }
           }
@@ -1166,6 +1180,21 @@ public final class ResearchsProto {
       return tier_;
     }
 
+    public static final int STRENGTH_FIELD_NUMBER = 16;
+    private int strength_;
+    /**
+     * <code>optional int32 strength = 16;</code>
+     */
+    public boolean hasStrength() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional int32 strength = 16;</code>
+     */
+    public int getStrength() {
+      return strength_;
+    }
+
     private void initFields() {
       researchId_ = 0;
       researchType_ = com.lvl6.proto.ResearchsProto.ResearchType.NO_RESEARCH;
@@ -1182,6 +1211,7 @@ public final class ResearchsProto {
       level_ = 0;
       priority_ = 0F;
       tier_ = 0;
+      strength_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1240,6 +1270,9 @@ public final class ResearchsProto {
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(15, tier_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(16, strength_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1309,6 +1342,10 @@ public final class ResearchsProto {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(15, tier_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(16, strength_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1462,6 +1499,8 @@ public final class ResearchsProto {
         bitField0_ = (bitField0_ & ~0x00002000);
         tier_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
+        strength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00008000);
         return this;
       }
 
@@ -1555,6 +1594,10 @@ public final class ResearchsProto {
           to_bitField0_ |= 0x00002000;
         }
         result.tier_ = tier_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.strength_ = strength_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1644,6 +1687,9 @@ public final class ResearchsProto {
         }
         if (other.hasTier()) {
           setTier(other.getTier());
+        }
+        if (other.hasStrength()) {
+          setStrength(other.getStrength());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2577,6 +2623,38 @@ public final class ResearchsProto {
       public Builder clearTier() {
         bitField0_ = (bitField0_ & ~0x00004000);
         tier_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int strength_ ;
+      /**
+       * <code>optional int32 strength = 16;</code>
+       */
+      public boolean hasStrength() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional int32 strength = 16;</code>
+       */
+      public int getStrength() {
+        return strength_;
+      }
+      /**
+       * <code>optional int32 strength = 16;</code>
+       */
+      public Builder setStrength(int value) {
+        bitField0_ |= 0x00008000;
+        strength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 strength = 16;</code>
+       */
+      public Builder clearStrength() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        strength_ = 0;
         onChanged();
         return this;
       }
@@ -4282,7 +4360,7 @@ public final class ResearchsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Research.proto\022\016com.lvl6.proto\032\017Struct" +
-      "ure.proto\"\240\003\n\rResearchProto\022\022\n\nresearchI" +
+      "ure.proto\"\262\003\n\rResearchProto\022\022\n\nresearchI" +
       "d\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.com.lvl6" +
       ".proto.ResearchType\0226\n\016researchDomain\030\003 " +
       "\001(\0162\036.com.lvl6.proto.ResearchDomain\022\023\n\013i" +
@@ -4292,29 +4370,29 @@ public final class ResearchsProto {
       "stType\030\013 \001(\0162\034.com.lvl6.proto.ResourceTy" +
       "pe\0229\n\nproperties\030\014 \003(\0132%.com.lvl6.proto.",
       "ResearchPropertyProto\022\r\n\005level\030\r \001(\005\022\020\n\010" +
-      "priority\030\016 \001(\002\022\014\n\004tier\030\017 \001(\005\"l\n\025Research" +
-      "PropertyProto\022\032\n\022researchPropertyId\030\001 \001(" +
-      "\005\022\014\n\004name\030\002 \001(\t\022\025\n\rresearchValue\030\003 \001(\002\022\022" +
-      "\n\nresearchId\030\004 \001(\005\"|\n\021UserResearchProto\022" +
-      "\030\n\020userResearchUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 " +
-      "\001(\t\022\022\n\nresearchId\030\003 \001(\005\022\025\n\rtimePurchased" +
-      "\030\004 \001(\003\022\020\n\010complete\030\005 \001(\010*\351\003\n\014ResearchTyp" +
-      "e\022\017\n\013NO_RESEARCH\020\001\022\010\n\004COST\020\002\022\t\n\005SPEED\020\003\022" +
-      "\027\n\023INCREASE_QUEUE_SIZE\020\004\022\032\n\026INCREASE_NUM",
-      "_CAN_BUILD\020\005\022\014\n\010XP_BONUS\020\006\022\036\n\032INCREASE_C" +
-      "ONSTRUCTION_TIME\020\007\022\034\n\030INCREASE_CASH_PROD" +
-      "UCTION\020\010\022\033\n\027INCREASE_OIL_PRODUCTION\020\t\022\033\n" +
-      "\027INCREASE_GEM_PRODUCTION\020\n\022\023\n\017INCREASE_A" +
-      "TTACK\020\013\022\017\n\013INCREASE_HP\020\014\022\020\n\014MINOR_POTION" +
-      "\020\r\022\031\n\025UNLOCK_CHILL_ANTIDOTE\020\016\022\032\n\026UNLOCK_" +
-      "POISON_ANTIDOTE\020\017\022\032\n\026UNLOCK_LOLLIPOP_HAM" +
-      "MER\020\020\022\020\n\014UNLOCK_PUTTY\020\021\022\022\n\016UNLOCK_SHUFFL" +
-      "E\020\022\022\021\n\rUNLOCK_CLOUDS\020\023\022\020\n\014UNLOCK_LOCKS\020\024" +
-      "\022\020\n\014UNLOCK_HOLES\020\025\022\020\n\014UNLOCK_VINES\020\026*|\n\016",
-      "ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORA" +
-      "TIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BA" +
-      "TTLE\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBSTACLES" +
-      "\020\007B\020B\016ResearchsProto"
+      "priority\030\016 \001(\002\022\014\n\004tier\030\017 \001(\005\022\020\n\010strength" +
+      "\030\020 \001(\005\"l\n\025ResearchPropertyProto\022\032\n\022resea" +
+      "rchPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rres" +
+      "earchValue\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005\"|\n\021" +
+      "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
+      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
+      "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
+      "(\010*\351\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004" +
+      "COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCREASE_QUEUE_SIZE",
+      "\020\004\022\032\n\026INCREASE_NUM_CAN_BUILD\020\005\022\014\n\010XP_BON" +
+      "US\020\006\022\036\n\032INCREASE_CONSTRUCTION_TIME\020\007\022\034\n\030" +
+      "INCREASE_CASH_PRODUCTION\020\010\022\033\n\027INCREASE_O" +
+      "IL_PRODUCTION\020\t\022\033\n\027INCREASE_GEM_PRODUCTI" +
+      "ON\020\n\022\023\n\017INCREASE_ATTACK\020\013\022\017\n\013INCREASE_HP" +
+      "\020\014\022\020\n\014MINOR_POTION\020\r\022\031\n\025UNLOCK_CHILL_ANT" +
+      "IDOTE\020\016\022\032\n\026UNLOCK_POISON_ANTIDOTE\020\017\022\032\n\026U" +
+      "NLOCK_LOLLIPOP_HAMMER\020\020\022\020\n\014UNLOCK_PUTTY\020" +
+      "\021\022\022\n\016UNLOCK_SHUFFLE\020\022\022\021\n\rUNLOCK_CLOUDS\020\023" +
+      "\022\020\n\014UNLOCK_LOCKS\020\024\022\020\n\014UNLOCK_HOLES\020\025\022\020\n\014",
+      "UNLOCK_VINES\020\026*|\n\016ResearchDomain\022\r\n\tNO_D" +
+      "OMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n" +
+      "\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS\020\006\022\027\n\023T" +
+      "RAPS_AND_OBSTACLES\020\007B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4334,7 +4412,7 @@ public final class ResearchsProto {
     internal_static_com_lvl6_proto_ResearchProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResearchProto_descriptor,
-        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", "Level", "Priority", "Tier", });
+        new java.lang.String[] { "ResearchId", "ResearchType", "ResearchDomain", "IconImgName", "Name", "PredId", "SuccId", "Desc", "DurationMin", "CostAmt", "CostType", "Properties", "Level", "Priority", "Tier", "Strength", });
     internal_static_com_lvl6_proto_ResearchPropertyProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_ResearchPropertyProto_fieldAccessorTable = new

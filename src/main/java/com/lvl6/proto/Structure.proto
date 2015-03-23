@@ -37,6 +37,7 @@ message StructureInfoProto {
 	optional float shadowVerticalOffset = 19;
 	optional float shadowHorizontalOfffset = 20;
 	optional float shadowScale = 21;
+	optional int32 strength = 22;
 	
 	enum StructType {
 		NO_STRUCT = 8;

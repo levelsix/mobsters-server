@@ -1033,7 +1033,9 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER = "seconds_to_enhance_per_feeder";
 	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER_EXPONENT = "seconds_to_enhance_per_feeder_exponent";
 	public static final String MONSTER_LEVEL_INFO__PVP_DROP_RATE = "pvp_drop_rate";
-
+	public static final String MONSTER_LEVEL_INFO__STRENGTH = "strength";
+	public static final String MONSTER_LEVEL_INFO__STRENGTH_EXPONENT = "strength_exponent";
+	
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";
 	public static final String OBSTACLE__REMOVAL_COST_TYPE = "removal_cost_type";
@@ -1116,6 +1118,7 @@ public class DBConstants {
 	public static final String RESEARCH__LEVEL = "level";
 	public static final String RESEARCH__PRIORITY = "priority";
 	public static final String RESEARCH__TIER = "tier";
+	public static final String RESEARCH__STRENGTH = "strength";
 
 	public static final String RESEARCH_PROPERTY__ID = GENERIC__ID;
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
@@ -1189,6 +1192,7 @@ public class DBConstants {
 	public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
 	public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
 	public static final String STRUCTURE__EXP_REWARD = "exp_reward";
+	public static final String STRUCTURE__STRENGTH = "strength";
 
 	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__POWER_LIMIT = "power_limit";
@@ -1291,6 +1295,7 @@ public class DBConstants {
 	public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
 	public static final String TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR = "char_scale_factor";
 	public static final String TASK_MAP_ELEMENT__IS_FAKE = "is_fake";
+	public static final String TASK_MAP_ELEMENT__STRENGTH = "strength";
 
 	public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
 	public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

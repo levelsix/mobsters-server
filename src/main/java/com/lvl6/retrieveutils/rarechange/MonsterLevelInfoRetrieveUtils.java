@@ -331,6 +331,10 @@ public class MonsterLevelInfoRetrieveUtils {
 			pvpDropRate = Math.min(pvpDropRate, 1);
 			log.error("new pvpDropRate: {}", pvpDropRate);
 		}
+		
+		int strength = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__STRENGTH);
+		float strengthExponent = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__STRENGTH_EXPONENT);
+
 
 		MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
 				curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,
@@ -339,7 +343,7 @@ public class MonsterLevelInfoRetrieveUtils {
 				teamCost, costToFullyHeal, costToFullyHealExponent,
 				secsToFullyHeal, secsToFullyHealExponent, enhanceCostPerFeeder,
 				enhanceCostExponent, enhanceExpPerSec,
-				enhanceExpPerSecExponent, pvpDropRate);
+				enhanceExpPerSecExponent, pvpDropRate, strength, strengthExponent);
 
 		return srs;
 	}
