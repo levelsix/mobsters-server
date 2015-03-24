@@ -1368,7 +1368,7 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
-			String chatId) {
+			String chatId, Map<TranslateLanguages, String> translatedMap) {
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
 
@@ -1379,7 +1379,6 @@ public class CreateInfoProtoUtils {
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation) {
-			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, content);
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
 				ttpb.setLanguage(tl);
@@ -1400,6 +1399,7 @@ public class CreateInfoProtoUtils {
 		}
 		return gcmpb.build();
 	}
+
 
 	/** City.proto *****************************************************/
 	//	public static FullUserCityExpansionDataProto createFullUserCityExpansionDataProtoFromUserCityExpansionData(UserCityExpansionData uced) {

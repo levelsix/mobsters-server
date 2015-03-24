@@ -8,13 +8,13 @@ public class AdminChatPost extends PrivateChatPost {
 
 	public AdminChatPost(String id, String posterId, String recipientId,
 			Date timeOfPost, String content) {
-		super(id, posterId, recipientId, timeOfPost, content);
+		super(id, posterId, recipientId, timeOfPost, content, null);
 		//setUsername(username);
 	}
 
 	public AdminChatPost(String id, String posterId, String recipientId,
 			Date timeOfPost, String content, String username) {
-		super(id, posterId, recipientId, timeOfPost, content);
+		super(id, posterId, recipientId, timeOfPost, content, null);
 		setUsername(username);
 	}
 

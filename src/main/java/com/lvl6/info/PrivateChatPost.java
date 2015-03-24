@@ -12,19 +12,29 @@ public class PrivateChatPost implements Serializable {
 	protected String recipientId;
 	protected Date timeOfPost;
 	protected String content;
+	protected TranslatedText translatedText;
+
+	public TranslatedText getTranslatedText() {
+		return translatedText;
+	}
+
+	public void setTranslatedText(TranslatedText translatedText) {
+		this.translatedText = translatedText;
+	}
 
 	public PrivateChatPost() {
 		super();
 	}
 
 	public PrivateChatPost(String id, String posterId, String recipientId,
-			Date timeOfPost, String content) {
+			Date timeOfPost, String content, TranslatedText translatedText) {
 		super();
 		this.id = id;
 		this.posterId = posterId;
 		this.recipientId = recipientId;
 		this.timeOfPost = timeOfPost;
 		this.content = content;
+		this.translatedText = translatedText;
 	}
 
 	public String getId() {
@@ -69,8 +79,9 @@ public class PrivateChatPost implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PlayerWallPost [id=" + id + ", posterId=" + posterId
+		return "PrivateChatPost [id=" + id + ", posterId=" + posterId
 				+ ", recipientId=" + recipientId + ", timeOfPost=" + timeOfPost
-				+ ", content=" + content + "]";
+				+ ", content=" + content + ", translatedText=" + translatedText
+				+ "]";
 	}
 }

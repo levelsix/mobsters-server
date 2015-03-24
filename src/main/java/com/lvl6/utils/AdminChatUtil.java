@@ -184,7 +184,7 @@ public class AdminChatUtil {
 		//		} else {
 
 		PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId,
-				recipientId, timeOfPost, censoredContent);
+				recipientId, timeOfPost, censoredContent, null);
 		User poster = users.get(posterId);
 		User recipient = users.get(recipientId);
 		PrivateChatPostProto pcpp = CreateInfoProtoUtils

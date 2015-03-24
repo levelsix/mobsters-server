@@ -22,6 +22,7 @@ import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.info.AdminChatPost;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslatedText;
 import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -165,6 +166,7 @@ public class PrivateChatPostController extends EventController {
 					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
 					Language senderLanguage;
 					Language recipientLanguage;
+					TranslatedText tt = new TranslatedText();
 					
 					//get sender's language setting, it's either set in private chat or default global's
 					if(settingForSender == null) {
@@ -196,9 +198,12 @@ public class PrivateChatPostController extends EventController {
 					}
 					else {
 						translatedMessage = MiscMethods.translate(recipientLanguage, censoredContent);
+						
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
 							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl));
+							tt.setLanguage(recipientLanguage.toString());
+							tt.setText(translatedMessage.get(tl));
 						}
 					}
 					
@@ -211,7 +216,7 @@ public class PrivateChatPostController extends EventController {
 					}
 					PrivateChatPost pwp = new PrivateChatPost(
 							privateChatPostId, posterId, recipientId,
-							timeOfPost, censoredContent);
+							timeOfPost, censoredContent, tt);
 					User poster = users.get(posterId);
 					User recipient = users.get(recipientId);
 

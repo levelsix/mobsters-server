@@ -17,9 +17,11 @@ import com.lvl6.events.request.RetrievePrivateChatPostsRequestEvent;
 import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslatedText;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus;
@@ -133,10 +135,13 @@ public class RetrievePrivateChatPostsController extends EventController {
 									.get(posterId);
 							String content = pwp.getContent();
 							boolean isAdmin = false;
+							TranslatedText tt = pwp.getTranslatedText();
+							Map<TranslateLanguages, String> translatedMap = new HashMap<TranslateLanguages, String>();
+							translatedMap.put(TranslateLanguages.valueOf(tt.getLanguage()), tt.getText());	
 
 							GroupChatMessageProto gcmp = CreateInfoProtoUtils
 									.createGroupChatMessageProto(time, user,
-											content, isAdmin, pwp.getId());
+											content, isAdmin, pwp.getId(), translatedMap);
 							resBuilder.addPosts(gcmp);
 						}
 					}
