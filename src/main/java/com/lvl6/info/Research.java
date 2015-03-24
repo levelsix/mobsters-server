@@ -7,7 +7,7 @@ public class Research implements Serializable {
 	public Research(int id, String researchType, String researchDomain,
 			String iconImgName, String name, int predId, int succId,
 			String desc, int durationMin, int costAmt, String costType,
-			int level, float priority, int tier) {
+			int level, float priority, int tier, int strength) {
 		super();
 		this.id = id;
 		this.researchType = researchType;
@@ -23,6 +23,7 @@ public class Research implements Serializable {
 		this.level = level;
 		this.priority = priority;
 		this.tier = tier;
+		this.strength = strength;
 	}
 
 	private static final long serialVersionUID = -7558436754504360378L;
@@ -44,7 +45,16 @@ public class Research implements Serializable {
 	private int level;
 	private float priority;
 	private int tier;
+	private int strength;
 
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
 
 	public int getId() {
 		return id;
@@ -110,7 +120,7 @@ public class Research implements Serializable {
 				+ ", succId=" + succId + ", desc=" + desc + ", durationMin="
 				+ durationMin + ", costAmt=" + costAmt + ", costType="
 				+ costType + ", level=" + level + ", priority=" + priority
-				+ ", tier=" + tier + "]";
+				+ ", tier=" + tier + ", strength=" + strength + "]";
 	}
 
 	public String getResearchType() {

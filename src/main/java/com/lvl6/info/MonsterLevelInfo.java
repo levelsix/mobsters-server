@@ -33,6 +33,8 @@ public class MonsterLevelInfo implements Serializable {
 	private float secondsToEnhancePerFeeder;
 	private float secondsToEnhancePerFeederExponent;
 	private float pvpDropRate;
+	private int strength;
+	private float strengthExponent;
 
 	public MonsterLevelInfo() {
 		super();
@@ -47,7 +49,7 @@ public class MonsterLevelInfo implements Serializable {
 			int secsToFullyHeal, float secsToFullyHealExponent,
 			int enhanceCostPerFeeder, float enhanceCostExponent,
 			float secondsToEnhancePerFeeder, float secondsToEnhancePerFeederExponent,
-			float pvpDropRate) {
+			float pvpDropRate, int strength, float strengthExponent) {
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -76,6 +78,24 @@ public class MonsterLevelInfo implements Serializable {
 		this.secondsToEnhancePerFeeder = secondsToEnhancePerFeeder;
 		this.secondsToEnhancePerFeederExponent = secondsToEnhancePerFeederExponent;
 		this.pvpDropRate = pvpDropRate;
+		this.strength = strength;
+		this.strengthExponent = strengthExponent;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	public float getStrengthExponent() {
+		return strengthExponent;
+	}
+
+	public void setStrengthExponent(float strengthExponent) {
+		this.strengthExponent = strengthExponent;
 	}
 
 	public int getMonsterId() {
@@ -301,7 +321,8 @@ public class MonsterLevelInfo implements Serializable {
 				+ secondsToEnhancePerFeeder
 				+ ", secondsToEnhancePerFeederExponent="
 				+ secondsToEnhancePerFeederExponent + ", pvpDropRate="
-				+ pvpDropRate + "]";
+				+ pvpDropRate + ", strength=" + strength
+				+ ", strengthExponent=" + strengthExponent + "]";
 	}
 
 	public float getSecondsToEnhancePerFeeder() {

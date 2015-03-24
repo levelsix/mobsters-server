@@ -130,9 +130,12 @@ public class ResearchRetrieveUtils {
 				costType = newCostType;
 			}
 		}
+		
+		int strength = rs.getInt(DBConstants.RESEARCH__STRENGTH);
 
 		Research research = new Research(id, type, domain, iconImgName, name,
-				predId, succId, desc, durationMin, costAmt, costType, level, priority, tier);
+				predId, succId, desc, durationMin, costAmt, costType, level, 
+				priority, tier, strength);
 		return research;
 	}
 

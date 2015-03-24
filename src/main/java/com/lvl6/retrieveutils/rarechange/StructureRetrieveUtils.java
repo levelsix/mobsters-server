@@ -192,13 +192,15 @@ public class StructureRetrieveUtils {
 				buildResourceType = newBuildResourceType;
 			}
 		}
+		
+		int strength = rs.getInt(DBConstants.STRUCTURE__STRENGTH);
 
 		Structure s = new Structure(id, name, level, structType,
 				buildResourceType, buildCost, minutesToBuild, width, height,
 				predecessorStructId, successorStructId, imgName,
 				imgVerticalPixelOffset, imgHorizontalPixelOffset, description,
 				shortDescription, shadowImgName, shadowVerticalOffset,
-				shadowHorizontalOffset, shadowScale, expReward);
+				shadowHorizontalOffset, shadowScale, expReward, strength);
 
 		return s;
 	}

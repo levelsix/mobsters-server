@@ -132,12 +132,14 @@ public class TaskMapElementRetrieveUtils {
 				element = newElement;
 			}
 		}
+		
+		int strength = rs.getInt(DBConstants.TASK_MAP_ELEMENT__STRENGTH);
 
 		TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
 				element, boss, bossImgName, itemDropId, sectionName,
 				cashReward, oilReward, characterImgName,
 				charImgVertPixelOffset, charImgHorizPixelOffset,
-				charImgScaleFactor, isFake);
+				charImgScaleFactor, isFake, strength);
 
 		return taskMap;
 	}

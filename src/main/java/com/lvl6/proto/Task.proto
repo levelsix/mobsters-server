@@ -155,4 +155,5 @@ message TaskMapElementProto {
 	optional int32 charImgHorizPixelOffset = 14;
 	optional float charImgScaleFactor = 15;
 	optional bool isFake = 16;
+	optional int32 strength = 17;
 } 
