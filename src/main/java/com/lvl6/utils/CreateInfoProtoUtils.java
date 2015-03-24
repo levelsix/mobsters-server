@@ -1376,6 +1376,7 @@ public class CreateInfoProtoUtils {
 				ttpb.setLanguage(tl);
 				ttpb.setText(translatedMap.get(tl));
 				gcmpb.addTranslatedContent(ttpb.build());
+				log.info("" + translatedMap.get(0));
 				gcmpb.setContent(translatedMap.get(0));
 
 			}
