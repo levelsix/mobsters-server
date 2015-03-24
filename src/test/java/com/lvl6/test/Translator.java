@@ -1,3 +1,7 @@
+package com.lvl6.test;
+
+import com.lvl6.proto.ChatProto.TranslateLanguages;
+
 //package com.lvl6.test;
 //
 //import java.util.Map;
@@ -34,3 +38,11 @@
 //		
 //	}
 //}
+
+public class Translator {
+	public static void main(String[] args) throws Exception {
+		System.out.println(TranslateLanguages.CHINESE_TRADITIONAL.toString());
+		
+		
+	}
+}

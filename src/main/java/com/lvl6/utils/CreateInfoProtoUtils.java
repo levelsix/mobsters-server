@@ -1377,7 +1377,9 @@ public class CreateInfoProtoUtils {
 				ttpb.setText(translatedMap.get(tl));
 				gcmpb.addTranslatedContent(ttpb.build());
 				log.info("translatedMap string: " + translatedMap.get(tl));
-				gcmpb.setContent(translatedMap.get(tl));
+				if(tl.toString().equals("CHINESE_TRADITIONAL")) {
+					gcmpb.setContent(translatedMap.get(tl));
+				}
 
 			}
 		}
