@@ -3031,22 +3031,38 @@ public final class EventMiniEventProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+     *
+     * <pre>
+     *the tier that is being redeemed
+     * </pre>
      */
-    boolean hasTier();
+    boolean hasTierRedeemed();
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+     *
+     * <pre>
+     *the tier that is being redeemed
+     * </pre>
      */
-    com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTier();
+    com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTierRedeemed();
 
     /**
-     * <code>optional int32 miniEventId = 3;</code>
+     * <code>optional int32 mefplId = 3;</code>
+     *
+     * <pre>
+     *MiniEventForPlayerLevelProto.mefplId
+     * </pre>
      */
-    boolean hasMiniEventId();
+    boolean hasMefplId();
     /**
-     * <code>optional int32 miniEventId = 3;</code>
+     * <code>optional int32 mefplId = 3;</code>
+     *
+     * <pre>
+     *MiniEventForPlayerLevelProto.mefplId
+     * </pre>
      */
-    int getMiniEventId();
+    int getMefplId();
 
     /**
      * <code>optional int64 clientTime = 4;</code>
@@ -3129,13 +3145,13 @@ public final class EventMiniEventProto {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
                 bitField0_ |= 0x00000002;
-                tier_ = value;
+                tierRedeemed_ = value;
               }
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              miniEventId_ = input.readInt32();
+              mefplId_ = input.readInt32();
               break;
             }
             case 32: {
@@ -3295,34 +3311,50 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    public static final int TIER_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tier_;
+    public static final int TIERREDEEMED_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed_;
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+     *
+     * <pre>
+     *the tier that is being redeemed
+     * </pre>
      */
-    public boolean hasTier() {
+    public boolean hasTierRedeemed() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+     *
+     * <pre>
+     *the tier that is being redeemed
+     * </pre>
      */
-    public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTier() {
-      return tier_;
+    public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTierRedeemed() {
+      return tierRedeemed_;
     }
 
-    public static final int MINIEVENTID_FIELD_NUMBER = 3;
-    private int miniEventId_;
+    public static final int MEFPLID_FIELD_NUMBER = 3;
+    private int mefplId_;
     /**
-     * <code>optional int32 miniEventId = 3;</code>
+     * <code>optional int32 mefplId = 3;</code>
+     *
+     * <pre>
+     *MiniEventForPlayerLevelProto.mefplId
+     * </pre>
      */
-    public boolean hasMiniEventId() {
+    public boolean hasMefplId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 miniEventId = 3;</code>
+     * <code>optional int32 mefplId = 3;</code>
+     *
+     * <pre>
+     *MiniEventForPlayerLevelProto.mefplId
+     * </pre>
      */
-    public int getMiniEventId() {
-      return miniEventId_;
+    public int getMefplId() {
+      return mefplId_;
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
@@ -3342,8 +3374,8 @@ public final class EventMiniEventProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      tier_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
-      miniEventId_ = 0;
+      tierRedeemed_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
+      mefplId_ = 0;
       clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -3363,10 +3395,10 @@ public final class EventMiniEventProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, tier_.getNumber());
+        output.writeEnum(2, tierRedeemed_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, miniEventId_);
+        output.writeInt32(3, mefplId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, clientTime_);
@@ -3386,11 +3418,11 @@ public final class EventMiniEventProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, tier_.getNumber());
+          .computeEnumSize(2, tierRedeemed_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, miniEventId_);
+          .computeInt32Size(3, mefplId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3520,9 +3552,9 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        tier_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
+        tierRedeemed_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
         bitField0_ = (bitField0_ & ~0x00000002);
-        miniEventId_ = 0;
+        mefplId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -3565,11 +3597,11 @@ public final class EventMiniEventProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.tier_ = tier_;
+        result.tierRedeemed_ = tierRedeemed_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.miniEventId_ = miniEventId_;
+        result.mefplId_ = mefplId_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -3593,11 +3625,11 @@ public final class EventMiniEventProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasTier()) {
-          setTier(other.getTier());
+        if (other.hasTierRedeemed()) {
+          setTierRedeemed(other.getTierRedeemed());
         }
-        if (other.hasMiniEventId()) {
-          setMiniEventId(other.getMiniEventId());
+        if (other.hasMefplId()) {
+          setMefplId(other.getMefplId());
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
@@ -3745,69 +3777,101 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tier_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
+      private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+       *
+       * <pre>
+       *the tier that is being redeemed
+       * </pre>
        */
-      public boolean hasTier() {
+      public boolean hasTierRedeemed() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+       *
+       * <pre>
+       *the tier that is being redeemed
+       * </pre>
        */
-      public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTier() {
-        return tier_;
+      public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTierRedeemed() {
+        return tierRedeemed_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+       *
+       * <pre>
+       *the tier that is being redeemed
+       * </pre>
        */
-      public Builder setTier(com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier value) {
+      public Builder setTierRedeemed(com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000002;
-        tier_ = value;
+        tierRedeemed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tier = 2;</code>
+       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
+       *
+       * <pre>
+       *the tier that is being redeemed
+       * </pre>
        */
-      public Builder clearTier() {
+      public Builder clearTierRedeemed() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        tier_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
+        tierRedeemed_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
         onChanged();
         return this;
       }
 
-      private int miniEventId_ ;
+      private int mefplId_ ;
       /**
-       * <code>optional int32 miniEventId = 3;</code>
+       * <code>optional int32 mefplId = 3;</code>
+       *
+       * <pre>
+       *MiniEventForPlayerLevelProto.mefplId
+       * </pre>
        */
-      public boolean hasMiniEventId() {
+      public boolean hasMefplId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 miniEventId = 3;</code>
+       * <code>optional int32 mefplId = 3;</code>
+       *
+       * <pre>
+       *MiniEventForPlayerLevelProto.mefplId
+       * </pre>
        */
-      public int getMiniEventId() {
-        return miniEventId_;
+      public int getMefplId() {
+        return mefplId_;
       }
       /**
-       * <code>optional int32 miniEventId = 3;</code>
+       * <code>optional int32 mefplId = 3;</code>
+       *
+       * <pre>
+       *MiniEventForPlayerLevelProto.mefplId
+       * </pre>
        */
-      public Builder setMiniEventId(int value) {
+      public Builder setMefplId(int value) {
         bitField0_ |= 0x00000004;
-        miniEventId_ = value;
+        mefplId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 miniEventId = 3;</code>
+       * <code>optional int32 mefplId = 3;</code>
+       *
+       * <pre>
+       *MiniEventForPlayerLevelProto.mefplId
+       * </pre>
        */
-      public Builder clearMiniEventId() {
+      public Builder clearMefplId() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        miniEventId_ = 0;
+        mefplId_ = 0;
         onChanged();
         return this;
       }
@@ -4961,22 +5025,22 @@ public final class EventMiniEventProto {
       "tStatus\022@\n\024updatedUserMiniEvent\030\003 \001(\0132\".",
       "com.lvl6.proto.UserMiniEventProto\"4\n\025Upd" +
       "ateMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"\224\002\n!RedeemMiniEventRewardRequest" +
+      "OTHER\020\002\"\230\002\n!RedeemMiniEventRewardRequest" +
       "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
-      "inimumUserProtoWithMaxResources\022J\n\004tier\030" +
-      "\002 \001(\0162<.com.lvl6.proto.RedeemMiniEventRe" +
-      "wardRequestProto.RewardTier\022\023\n\013miniEvent" +
-      "Id\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"8\n\nRewardTi" +
-      "er\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO\020\002\022\016\n\nTIER_T" +
-      "HREE\020\003\"\254\002\n\"RedeemMiniEventRewardResponse",
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022j\n\006status\030\002 \001(\0162N.com.lv" +
-      "l6.proto.RedeemMiniEventRewardResponsePr" +
-      "oto.RedeemMiniEventRewardStatus:\nFAIL_OT" +
-      "HER\022,\n\007rewards\030\003 \003(\0132\033.com.lvl6.proto.Re" +
-      "wardProto\":\n\033RedeemMiniEventRewardStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\025B\023EventMi" +
-      "niEventProto"
+      "inimumUserProtoWithMaxResources\022R\n\014tierR" +
+      "edeemed\030\002 \001(\0162<.com.lvl6.proto.RedeemMin" +
+      "iEventRewardRequestProto.RewardTier\022\017\n\007m" +
+      "efplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"8\n\nRewa" +
+      "rdTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO\020\002\022\016\n\nTI" +
+      "ER_THREE\020\003\"\254\002\n\"RedeemMiniEventRewardResp",
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022j\n\006status\030\002 \001(\0162N.co" +
+      "m.lvl6.proto.RedeemMiniEventRewardRespon" +
+      "seProto.RedeemMiniEventRewardStatus:\nFAI" +
+      "L_OTHER\022,\n\007rewards\030\003 \003(\0132\033.com.lvl6.prot" +
+      "o.RewardProto\":\n\033RedeemMiniEventRewardSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\025B\023Eve" +
+      "ntMiniEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5022,7 +5086,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Tier", "MiniEventId", "ClientTime", });
+        new java.lang.String[] { "Sender", "TierRedeemed", "MefplId", "ClientTime", });
     internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_fieldAccessorTable = new

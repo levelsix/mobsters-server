@@ -51,8 +51,10 @@ message UpdateMiniEventResponseProto {
 message RedeemMiniEventRewardRequestProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
 	
-	optional RewardTier tier = 2;
-	optional int32 miniEventId = 3;
+	//the tier that is being redeemed
+	optional RewardTier tierRedeemed = 2;
+	//MiniEventForPlayerLevelProto.mefplId
+	optional int32 mefplId = 3;
 	
 	optional int64 clientTime = 4;
 	

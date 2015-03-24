@@ -29,7 +29,7 @@ public class UpdateMiniEventController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public UpdateMiniEventController() {
-		numAllocatedThreads = 1;
+		numAllocatedThreads = 4;
 	}
 
 	@Autowired
@@ -95,8 +95,6 @@ public class UpdateMiniEventController extends EventController {
 			rmea.execute(resBuilder);
 
 			if (resBuilder.getStatus().equals(UpdateMiniEventStatus.SUCCESS)) {
-				//get UserMiniEvent info and create the proto to set into resBuilder
-				//TODO: Consider protofying MiniEvent stuff
 				resBuilder.setUpdatedUserMiniEvent(umep);
 			}
 
