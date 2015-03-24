@@ -1939,6 +1939,53 @@ public class MiscMethods {
 		listOfLanguages.add(Language.GERMAN);
 		listOfLanguages.add(Language.SPANISH);
 
-	
+		try {
+			if(language != null) {
+				translatedText = Translate.execute(text, language);
+			}
+			else {
+				for(Language language2 : listOfLanguages) {
+					translatedText = Translate.execute(text, language2);
+					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+					returnMap.put(tl, translatedText);
+				}	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return returnMap;
+	} 
 
+	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
+		if(language.equals(Language.ARABIC)) {
+			TranslateLanguages tl = TranslateLanguages.ARABIC;
+			return tl;
+		}
+		else if(language.equals(Language.CHINESE_SIMPLIFIED)) {
+			TranslateLanguages tl = TranslateLanguages.CHINESE_SIMPLIFIED;
+			return tl;		
+		}
+		else if(language.equals(Language.CHINESE_TRADITIONAL)) {
+			TranslateLanguages tl = TranslateLanguages.CHINESE_TRADITIONAL;
+			return tl;		
+		}
+		else if(language.equals(Language.ENGLISH)) {
+			TranslateLanguages tl = TranslateLanguages.ENGLISH;
+			return tl;		
+		}
+		else if(language.equals(Language.FRENCH)) {
+			TranslateLanguages tl = TranslateLanguages.FRENCH;
+			return tl;	
+		}
+		else if(language.equals(Language.GERMAN)) {
+			TranslateLanguages tl = TranslateLanguages.GERMAN;
+			return tl;	
+		}
+		else {
+			TranslateLanguages tl = TranslateLanguages.SPANISH;
+			return tl;	
+		}
+	}
+	
 }
