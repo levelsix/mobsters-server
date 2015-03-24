@@ -48,6 +48,7 @@ enum BattleItemType {
 	HAND_SWAP = 5;
 	BOARD_SHUFFLE = 6;
 	PUTTY = 7;
+	NONE = 8;
 	
 }
 

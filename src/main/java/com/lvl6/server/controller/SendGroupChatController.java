@@ -143,7 +143,7 @@ public class SendGroupChatController extends EventController {
 					chatMessage);
 
 			resEvent.setSendGroupChatResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (legitSend) {
 				log.info("Group chat message is legit... sending to group");
@@ -156,7 +156,7 @@ public class SendGroupChatController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 				chatProto.setChatMessage(censoredChatMessage);
@@ -187,7 +187,7 @@ public class SendGroupChatController extends EventController {
 			try {
 				resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
 				resEvent.setSendGroupChatResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SendGroupChat processEvent", e);
 			}
