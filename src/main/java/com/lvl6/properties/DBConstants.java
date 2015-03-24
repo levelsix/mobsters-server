@@ -25,6 +25,7 @@ public class DBConstants {
 	public static final String TABLE_CEPFU_RAID_HISTORY = "cepfu_raid_history";	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CEPFU_RAID_STAGE_HISTORY = "cepfu_raid_stage_history";
 	public static final String TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY = "cepfu_raid_stage_monster_history";
+	public static final String TABLE_CHAT_TRANSLATIONS = "chat_translations";
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_CONFIG = "clan_event_persistent_config";//EVENT TABLE FOR CLANS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY = "clan_event_persistent_for_clan_history";//HISTORY TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
@@ -277,6 +278,13 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID = "crsm_id";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_DMG_DONE = "crsm_dmg_done";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_END_TIME = "crsm_end_time";
+	
+	//translations of chats
+	public static final String CHAT_TRANSLATIONS__ID = GENERIC__ID;
+	public static final String CHAT_TRANSLATIONS__CHAT_TYPE = "chat_type";
+	public static final String CHAT_TRANSLATIONS__CHAT_ID = "chat_id";
+	public static final String CHAT_TRANSLATIONS__LANGUAGE = "language";
+	public static final String CHAT_TRANSLATIONS__TEXT = "text";
 
 	//TODO: FINISH THESE COLUMNS; THIS TABLE STORES THE REWARDS CLAN USERS GET FROM A RAID
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__ID = GENERIC__ID;

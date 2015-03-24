@@ -34,6 +34,8 @@ import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
+import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 
 public interface InsertUtil {
@@ -115,6 +117,9 @@ public interface InsertUtil {
 
 	public abstract String insertClanChatPost(String userId, String clanId,
 			String content, Timestamp timeOfPost);
+	
+	public abstract boolean insertTranslatedText(ChatType chatType, String chatId, 
+			Map<TranslateLanguages, String> translatedTextMap);
 
 	//	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
 	//			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);

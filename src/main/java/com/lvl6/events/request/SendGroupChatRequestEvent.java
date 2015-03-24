@@ -34,6 +34,10 @@ public class SendGroupChatRequestEvent extends RequestEvent {
 	public SendGroupChatRequestProto getSendGroupChatRequestProto() {
 		return sendGroupChatRequestProto;
 	}
+	
+	public void setSendGroupChatRequestProto(SendGroupChatRequestProto sgcrp) {
+		this.sendGroupChatRequestProto = sgcrp;
+	}
 
 	@Override
 	public String toString() {

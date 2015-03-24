@@ -46,6 +46,8 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
+import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
@@ -513,6 +515,43 @@ public class InsertUtils implements InsertUtil {
 			wallPostId = null;
 		}
 		return wallPostId;
+	}
+	
+	@Override
+	public boolean insertTranslatedText(ChatType chatType, String chatId, 
+			Map<TranslateLanguages, String> translatedTextMap) {
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		int numRows = translatedTextMap.size();
+		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
+
+		List<String> ids = new ArrayList<String>();
+		List<String> chatTypes = new ArrayList<String>();
+		List<String> chatIds = new ArrayList<String>();
+		List<String> languageList = new ArrayList<String>();
+		List<String> translatedList = new ArrayList<String>();
+		for (TranslateLanguages language : translatedTextMap.keySet()) {
+			ids.add(randomUUID());
+			String chatTypeString = chatType.toString();
+			chatTypes.add(chatTypeString);
+			chatIds.add(chatId);
+			String languageString = language.toString();
+			languageList.add(languageString);
+			translatedList.add(translatedTextMap.get(language));
+		}
+		
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, ids);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypes);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIds);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, translatedList);
+		
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, numRows);
+		
+		if(numInserted == numRows) {
+			return true;
+		}
+		else return false;
 	}
 
 	@Override

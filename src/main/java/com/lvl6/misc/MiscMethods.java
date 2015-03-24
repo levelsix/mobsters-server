@@ -43,6 +43,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -135,6 +136,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
+import com.memetix.mst.language.Language;
+import com.memetix.mst.translate.Translate;
 
 
 public class MiscMethods {
@@ -1920,6 +1923,21 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 	
+	public static Map<TranslateLanguages, String> translate(Language language, String text) {
+		Translate.setClientId(pClientId);
+		Translate.setClientSecret(secretId);
+		
+		String translatedText = "";
+		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
+		
+		List<Language> listOfLanguages = new ArrayList<Language>();
+		listOfLanguages.add(Language.ARABIC);
+		listOfLanguages.add(Language.CHINESE_SIMPLIFIED);
+		listOfLanguages.add(Language.CHINESE_TRADITIONAL);
+		listOfLanguages.add(Language.ENGLISH);
+		listOfLanguages.add(Language.FRENCH);
+		listOfLanguages.add(Language.GERMAN);
+		listOfLanguages.add(Language.SPANISH);
 
 	
 

@@ -28,8 +28,10 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
@@ -141,7 +143,7 @@ public class SendGroupChatController extends EventController {
 					chatMessage);
 
 			resEvent.setSendGroupChatResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (legitSend) {
 				log.info("Group chat message is legit... sending to group");
@@ -154,7 +156,7 @@ public class SendGroupChatController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 				chatProto.setChatMessage(censoredChatMessage);
@@ -185,7 +187,7 @@ public class SendGroupChatController extends EventController {
 			try {
 				resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
 				resEvent.setSendGroupChatResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SendGroupChat processEvent", e);
 			}
@@ -250,11 +252,23 @@ public class SendGroupChatController extends EventController {
 		// if (!user.updateRelativeNumGroupChatsRemainingAndDiamonds(-1, 0)) {
 		// log.error("problem with decrementing a global chat");
 		// }
+		
+		Map<TranslateLanguages, String> translatedTextMap;
 
 		if (scope == GroupChatScope.CLAN) {
 			String clanId = user.getClanId();
-			InsertUtils.get().insertClanChatPost(user.getId(), clanId, content,
+			
+//			translatedTextMap = MiscMethods.translate(null, content);
+
+			String clanChatId = InsertUtils.get().insertClanChatPost(user.getId(), clanId, content,
 					timeOfPost);
+			
+//			ChatType chatType = ChatType.CLAN_CHAT;
+//			
+//			boolean success = InsertUtils.get().insertTranslatedText(chatType, clanChatId, translatedTextMap);
+//			if(!success) {
+//				log.error("error inserting translated texts into table");
+//			}
 
 			//update clan cache
 			Clan c = clanRetrieveUtil.getClanWithId(clanId);
@@ -278,6 +292,7 @@ public class SendGroupChatController extends EventController {
 
 			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
 		}
+
 	}
 
 	private boolean checkLegitSend(Builder resBuilder, User user,

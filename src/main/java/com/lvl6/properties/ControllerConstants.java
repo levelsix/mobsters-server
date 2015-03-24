@@ -188,6 +188,7 @@ public class ControllerConstants {
 	public static final String SERVER_TOGGLE__PVP_BOT_SHOW_ELO = "pvp_bot_show_elo";
 	public static final String SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO = "pvp_bots_only_below_some_elo";
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity";
+	public static final String SERVER_TOGGLE__TURN_OFF_TRANSLATIONS = "turn_off_translations";
 
 	//SKILL
 	public static final int SKILL_FIRST_TASK_ID = 12;
