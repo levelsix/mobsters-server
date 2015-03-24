@@ -110,6 +110,7 @@ import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
@@ -134,6 +135,8 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
+import com.lvl6.proto.ChatProto.TranslatedTextProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -261,6 +264,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
@@ -1333,7 +1337,23 @@ public class CreateInfoProtoUtils {
 				.newBuilder();
 		gcmpb.setSender(createMinimumUserProtoWithLevel(user, clan, null));
 		gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
+		
+		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
+
+
 		gcmpb.setContent(p.getContent());
+
+//		if(!turnOffTranslation) {
+//			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, p.getContent());
+//			for(TranslateLanguages tl : translatedMap.keySet()) {
+//				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+//				ttpb.setLanguage(tl);
+//				ttpb.setText(translatedMap.get(tl));
+//				gcmpb.addTranslatedContent(ttpb.build());
+//			}
+//		}
+		
+//		gcmpb.setContent(p.getContent());
 		return gcmpb.build();
 	}
 
@@ -1346,6 +1366,19 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
+
+		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
+
+		if(!turnOffTranslation) {
+			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, content);
+			for(TranslateLanguages tl : translatedMap.keySet()) {
+				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+				ttpb.setLanguage(tl);
+				ttpb.setText(translatedMap.get(tl));
+				gcmpb.addTranslatedContent(ttpb.build());
+			}
+		}
+
 		gcmpb.setIsAdmin(isAdmin);
 
 		if (chatId != null) {

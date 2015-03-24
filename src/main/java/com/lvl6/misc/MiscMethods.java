@@ -43,6 +43,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -135,6 +136,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
+import com.memetix.mst.language.Language;
+import com.memetix.mst.translate.Translate;
 
 public class MiscMethods {
 
@@ -144,6 +147,9 @@ public class MiscMethods {
 	public static final String gems = "gems";
 	public static final String oil = "oil";
 	public static final String boosterPackId = "boosterPackId";
+	
+	private static String pClientId = "ToonSquad";
+	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
@@ -1913,5 +1919,73 @@ public class MiscMethods {
 	//		sdpb.addAllRaids(staticData.getRaidsList());
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
+	
+	public static Map<TranslateLanguages, String> translate(Language language, String text) {
+		Translate.setClientId(pClientId);
+		Translate.setClientSecret(secretId);
+		
+		String translatedText = "";
+		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
+		
+		List<Language> listOfLanguages = new ArrayList<Language>();
+		listOfLanguages.add(Language.ARABIC);
+		listOfLanguages.add(Language.CHINESE_SIMPLIFIED);
+		listOfLanguages.add(Language.CHINESE_TRADITIONAL);
+		listOfLanguages.add(Language.ENGLISH);
+		listOfLanguages.add(Language.FRENCH);
+		listOfLanguages.add(Language.GERMAN);
+		listOfLanguages.add(Language.SPANISH);
+
+		try {
+			if(language != null) {
+				translatedText = Translate.execute(text, language);
+			}
+			else {
+				for(Language language2 : listOfLanguages) {
+					translatedText = Translate.execute(text, language2);
+					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+					returnMap.put(tl, translatedText);
+				}	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return returnMap;
+	} 
+
+	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
+		if(language.equals(Language.ARABIC)) {
+			TranslateLanguages tl = TranslateLanguages.ARABIC;
+			return tl;
+		}
+		else if(language.equals(Language.CHINESE_SIMPLIFIED)) {
+			TranslateLanguages tl = TranslateLanguages.CHINESE_SIMPLIFIED;
+			return tl;		
+		}
+		else if(language.equals(Language.CHINESE_TRADITIONAL)) {
+			TranslateLanguages tl = TranslateLanguages.CHINESE_TRADITIONAL;
+			return tl;		
+		}
+		else if(language.equals(Language.ENGLISH)) {
+			TranslateLanguages tl = TranslateLanguages.ENGLISH;
+			return tl;		
+		}
+		else if(language.equals(Language.FRENCH)) {
+			TranslateLanguages tl = TranslateLanguages.FRENCH;
+			return tl;	
+		}
+		else if(language.equals(Language.GERMAN)) {
+			TranslateLanguages tl = TranslateLanguages.GERMAN;
+			return tl;	
+		}
+		else {
+			TranslateLanguages tl = TranslateLanguages.SPANISH;
+			return tl;	
+		}
+	}
+
+	
+	
 
 }

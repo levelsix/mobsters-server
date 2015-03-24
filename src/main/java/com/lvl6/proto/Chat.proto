@@ -29,8 +29,9 @@ message GroupChatMessageProto {
 	optional MinimumUserProtoWithLevel sender = 1;
 	optional int64 timeOfChat = 2;
 	optional string content = 3;
-	optional bool isAdmin = 4;
-	optional string chatUuid = 5;
+	repeated TranslatedTextProto translatedContent = 4;
+	optional bool isAdmin = 5;
+	optional string chatUuid = 6;
 }
 
 //-------------------------------------------------------------------------------------
@@ -41,4 +42,41 @@ enum GroupChatScope {
 }
 
 //------------------------------------------------------------------------------------------
+
+message ChatTranslationsProto {
+	optional string chatTranslationId = 1;
+	optional ChatType chatType = 2;
+	optional string chatId = 3;
+	optional TranslateLanguages language = 4;
+	optional string text = 5;
+}
+
+//-------------------------------------------------------------------------------------
+
+enum ChatType {
+	CLAN_CHAT = 1;
+	PRIVATE_CHAT = 2;
+}
+
+//-------------------------------------------------------------------------------------
+
+enum TranslateLanguages {
+	ARABIC = 1;
+	CHINESE_SIMPLIFIED = 2;
+	CHINESE_TRADITIONAL = 3;
+	ENGLISH = 4;
+	FRENCH = 5;
+	GERMAN = 6;
+	SPANISH = 7;
+}
+
+//-------------------------------------------------------------------------------------
+
+message TranslatedTextProto {
+	optional TranslateLanguages language = 1;
+	optional string text = 2;
+
+}
+
+
 
