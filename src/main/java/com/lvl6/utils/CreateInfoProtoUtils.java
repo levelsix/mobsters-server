@@ -1223,7 +1223,7 @@ public class CreateInfoProtoUtils {
 	/** Chat.proto *****************************************************/
 	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost(
 			PrivateChatPost p, User poster, Clan posterClan, User recipient,
-			Clan recipientClan) {
+			Clan recipientClan, Map<TranslateLanguages, String> translatedMessage) {
 		MinimumUserProtoWithLevel mupwlPoster = createMinimumUserProtoWithLevel(
 				poster, posterClan, null);
 		MinimumUserProtoWithLevel mupwlRecipient = createMinimumUserProtoWithLevel(
@@ -1239,6 +1239,15 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(time);
 		pcppb.setContent(p.getContent());
+		
+		if(translatedMessage != null) {
+			for(TranslateLanguages tl : translatedMessage.keySet()) {
+				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+				ttpb.setLanguage(tl);
+				ttpb.setText(translatedMessage.get(tl));
+				pcppb.setTranslatedContent(ttpb.build());
+			}
+		}
 
 		return pcppb.build();
 	}

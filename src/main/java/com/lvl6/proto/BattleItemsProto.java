@@ -41,6 +41,10 @@ public final class BattleItemsProto {
      * <code>PUTTY = 7;</code>
      */
     PUTTY(6, 7),
+    /**
+     * <code>NONE = 8;</code>
+     */
+    NONE(7, 8),
     ;
 
     /**
@@ -71,6 +75,10 @@ public final class BattleItemsProto {
      * <code>PUTTY = 7;</code>
      */
     public static final int PUTTY_VALUE = 7;
+    /**
+     * <code>NONE = 8;</code>
+     */
+    public static final int NONE_VALUE = 8;
 
 
     public final int getNumber() { return value; }
@@ -84,6 +92,7 @@ public final class BattleItemsProto {
         case 5: return HAND_SWAP;
         case 6: return BOARD_SHUFFLE;
         case 7: return PUTTY;
+        case 8: return NONE;
         default: return null;
       }
     }
@@ -3432,13 +3441,13 @@ public final class BattleItemsProto {
       "\001(\005\022\016\n\006amount\030\016 \001(\005\"\207\001\n\033BattleItemQueueF" +
       "orUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUui" +
       "d\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expecte" +
-      "dStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002*\212\001" +
+      "dStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002*\224\001" +
       "\n\016BattleItemType\022\022\n\016HEALING_POTION\020\001\022\022\n\016" +
       "CHILL_ANTIDOTE\020\002\022\023\n\017POISON_ANTIDOTE\020\003\022\016\n",
       "\nORB_HAMMER\020\004\022\r\n\tHAND_SWAP\020\005\022\021\n\rBOARD_SH" +
-      "UFFLE\020\006\022\t\n\005PUTTY\020\007*,\n\022BattleItemCategory" +
-      "\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020BattleItemsP" +
-      "roto"
+      "UFFLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NONE\020\010*,\n\022BattleIt" +
+      "emCategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Ba" +
+      "ttleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

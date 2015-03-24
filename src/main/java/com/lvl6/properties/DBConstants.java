@@ -126,6 +126,7 @@ public class DBConstants {
 	public static final String TABLE_TOURNAMENT_EVENT_CONFIG = "tournament_event_config";		//TODO: delete
 	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";	//TODO: delete
 	public static final String TABLE_TOURNAMENT_REWARD_CONFIG = "tournament_reward_config";		//TODO: delete
+	public static final String TABLE_TRANSLATION_SETTINGS_FOR_USER = "translation_settings_for_user";
 	public static final String TABLE_USER = "user";
 	public static final String TABLE_BANNED_USER = "user_banned";
 	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
@@ -726,6 +727,13 @@ public class DBConstants {
 	public static final String TOURNAMENT_REWARD__BLUE = "blue";
 	public static final String TOURNAMENT_REWARD__GREEN = "green";
 	public static final String TOURNAMENT_REWARD__RED = "red";
+	
+	/*USER TRANSLATION SETTINGS*/
+	public static final String TRANSLATION_SETTINGS_FOR_USER__ID = GENERIC__ID;
+	public static final String TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID = "sender_user_id";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__LANGUAGE = "language";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE = "chat_type";
 
 	/*USER TABLE*/
 	public static final String USER__ID = GENERIC__ID;
