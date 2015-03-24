@@ -762,11 +762,1299 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RewardProto)
   }
 
+  public interface UserRewardProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserRewardProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
+        getUpdatedOrNewList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    int getUpdatedOrNewCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> 
+        getUpdatedUserItemsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    int getUpdatedUserItemsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index);
+
+    /**
+     * <code>optional int32 gems = 3;</code>
+     */
+    boolean hasGems();
+    /**
+     * <code>optional int32 gems = 3;</code>
+     */
+    int getGems();
+
+    /**
+     * <code>optional int32 cash = 4;</code>
+     */
+    boolean hasCash();
+    /**
+     * <code>optional int32 cash = 4;</code>
+     */
+    int getCash();
+
+    /**
+     * <code>optional int32 oil = 5;</code>
+     */
+    boolean hasOil();
+    /**
+     * <code>optional int32 oil = 5;</code>
+     */
+    int getOil();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserRewardProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   *there is no analog of this in the db/server
+   * </pre>
+   */
+  public static final class UserRewardProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserRewardProto)
+      UserRewardProtoOrBuilder {
+    // Use UserRewardProto.newBuilder() to construct.
+    private UserRewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserRewardProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserRewardProto defaultInstance;
+    public static UserRewardProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserRewardProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserRewardProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              updatedOrNew_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              updatedUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000001;
+              gems_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              cash_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000004;
+              oil_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.RewardsProto.UserRewardProto.class, com.lvl6.proto.RewardsProto.UserRewardProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserRewardProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserRewardProto>() {
+      public UserRewardProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserRewardProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserRewardProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int UPDATEDORNEW_FIELD_NUMBER = 1;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    public int getUpdatedOrNewCount() {
+      return updatedOrNew_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+      return updatedOrNew_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index) {
+      return updatedOrNew_.get(index);
+    }
+
+    public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getUpdatedUserItemsOrBuilderList() {
+      return updatedUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    public int getUpdatedUserItemsCount() {
+      return updatedUserItems_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+      return updatedUserItems_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+        int index) {
+      return updatedUserItems_.get(index);
+    }
+
+    public static final int GEMS_FIELD_NUMBER = 3;
+    private int gems_;
+    /**
+     * <code>optional int32 gems = 3;</code>
+     */
+    public boolean hasGems() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 gems = 3;</code>
+     */
+    public int getGems() {
+      return gems_;
+    }
+
+    public static final int CASH_FIELD_NUMBER = 4;
+    private int cash_;
+    /**
+     * <code>optional int32 cash = 4;</code>
+     */
+    public boolean hasCash() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 cash = 4;</code>
+     */
+    public int getCash() {
+      return cash_;
+    }
+
+    public static final int OIL_FIELD_NUMBER = 5;
+    private int oil_;
+    /**
+     * <code>optional int32 oil = 5;</code>
+     */
+    public boolean hasOil() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 oil = 5;</code>
+     */
+    public int getOil() {
+      return oil_;
+    }
+
+    private void initFields() {
+      updatedOrNew_ = java.util.Collections.emptyList();
+      updatedUserItems_ = java.util.Collections.emptyList();
+      gems_ = 0;
+      cash_ = 0;
+      oil_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        output.writeMessage(1, updatedOrNew_.get(i));
+      }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        output.writeMessage(2, updatedUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(3, gems_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, cash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(5, oil_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, updatedOrNew_.get(i));
+      }
+      for (int i = 0; i < updatedUserItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, updatedUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, gems_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, cash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, oil_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.RewardsProto.UserRewardProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.RewardsProto.UserRewardProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserRewardProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     *there is no analog of this in the db/server
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserRewardProto)
+        com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.RewardsProto.UserRewardProto.class, com.lvl6.proto.RewardsProto.UserRewardProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.RewardsProto.UserRewardProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUpdatedOrNewFieldBuilder();
+          getUpdatedUserItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
+        gems_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cash_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        oil_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_descriptor;
+      }
+
+      public com.lvl6.proto.RewardsProto.UserRewardProto getDefaultInstanceForType() {
+        return com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.RewardsProto.UserRewardProto build() {
+        com.lvl6.proto.RewardsProto.UserRewardProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.RewardsProto.UserRewardProto buildPartial() {
+        com.lvl6.proto.RewardsProto.UserRewardProto result = new com.lvl6.proto.RewardsProto.UserRewardProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (updatedOrNewBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.updatedOrNew_ = updatedOrNew_;
+        } else {
+          result.updatedOrNew_ = updatedOrNewBuilder_.build();
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.updatedUserItems_ = updatedUserItems_;
+        } else {
+          result.updatedUserItems_ = updatedUserItemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.gems_ = gems_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.cash_ = cash_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.oil_ = oil_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.RewardsProto.UserRewardProto) {
+          return mergeFrom((com.lvl6.proto.RewardsProto.UserRewardProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserRewardProto other) {
+        if (other == com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance()) return this;
+        if (updatedOrNewBuilder_ == null) {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNew_.isEmpty()) {
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureUpdatedOrNewIsMutable();
+              updatedOrNew_.addAll(other.updatedOrNew_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNewBuilder_.isEmpty()) {
+              updatedOrNewBuilder_.dispose();
+              updatedOrNewBuilder_ = null;
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              updatedOrNewBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedOrNewFieldBuilder() : null;
+            } else {
+              updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
+            }
+          }
+        }
+        if (updatedUserItemsBuilder_ == null) {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItems_.isEmpty()) {
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUpdatedUserItemsIsMutable();
+              updatedUserItems_.addAll(other.updatedUserItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedUserItems_.isEmpty()) {
+            if (updatedUserItemsBuilder_.isEmpty()) {
+              updatedUserItemsBuilder_.dispose();
+              updatedUserItemsBuilder_ = null;
+              updatedUserItems_ = other.updatedUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              updatedUserItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedUserItemsFieldBuilder() : null;
+            } else {
+              updatedUserItemsBuilder_.addAllMessages(other.updatedUserItems_);
+            }
+          }
+        }
+        if (other.hasGems()) {
+          setGems(other.getGems());
+        }
+        if (other.hasCash()) {
+          setCash(other.getCash());
+        }
+        if (other.hasOil()) {
+          setOil(other.getOil());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.RewardsProto.UserRewardProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.RewardsProto.UserRewardProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedOrNewIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNew_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+        if (updatedOrNewBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        } else {
+          return updatedOrNewBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public int getUpdatedOrNewCount() {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.size();
+        } else {
+          return updatedOrNewBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);
+        } else {
+          return updatedOrNewBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder addUpdatedOrNew(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder addUpdatedOrNew(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder addAllUpdatedOrNew(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedOrNew_);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder clearUpdatedOrNew() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public Builder removeUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.remove(index);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+          int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);  } else {
+          return updatedOrNewBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+           getUpdatedOrNewOrBuilderList() {
+        if (updatedOrNewBuilder_ != null) {
+          return updatedOrNewBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder() {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
+           getUpdatedOrNewBuilderList() {
+        return getUpdatedOrNewFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getUpdatedOrNewFieldBuilder() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  updatedOrNew_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          updatedOrNew_ = null;
+        }
+        return updatedOrNewBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedUserItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          updatedUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>(updatedUserItems_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> updatedUserItemsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getUpdatedUserItemsList() {
+        if (updatedUserItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        } else {
+          return updatedUserItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public int getUpdatedUserItemsCount() {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.size();
+        } else {
+          return updatedUserItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto getUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);
+        } else {
+          return updatedUserItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder setUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder addUpdatedUserItems(com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (updatedUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, value);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder addUpdatedUserItems(
+          com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder addUpdatedUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder addAllUpdatedUserItems(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedUserItems_);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder clearUpdatedUserItems() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public Builder removeUpdatedUserItems(int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          ensureUpdatedUserItemsIsMutable();
+          updatedUserItems_.remove(index);
+          onChanged();
+        } else {
+          updatedUserItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder getUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
+          int index) {
+        if (updatedUserItemsBuilder_ == null) {
+          return updatedUserItems_.get(index);  } else {
+          return updatedUserItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+           getUpdatedUserItemsOrBuilderList() {
+        if (updatedUserItemsBuilder_ != null) {
+          return updatedUserItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder() {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addUpdatedUserItemsBuilder(
+          int index) {
+        return getUpdatedUserItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto.Builder> 
+           getUpdatedUserItemsBuilderList() {
+        return getUpdatedUserItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+          getUpdatedUserItemsFieldBuilder() {
+        if (updatedUserItemsBuilder_ == null) {
+          updatedUserItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
+                  updatedUserItems_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          updatedUserItems_ = null;
+        }
+        return updatedUserItemsBuilder_;
+      }
+
+      private int gems_ ;
+      /**
+       * <code>optional int32 gems = 3;</code>
+       */
+      public boolean hasGems() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 gems = 3;</code>
+       */
+      public int getGems() {
+        return gems_;
+      }
+      /**
+       * <code>optional int32 gems = 3;</code>
+       */
+      public Builder setGems(int value) {
+        bitField0_ |= 0x00000004;
+        gems_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gems = 3;</code>
+       */
+      public Builder clearGems() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gems_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int cash_ ;
+      /**
+       * <code>optional int32 cash = 4;</code>
+       */
+      public boolean hasCash() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 cash = 4;</code>
+       */
+      public int getCash() {
+        return cash_;
+      }
+      /**
+       * <code>optional int32 cash = 4;</code>
+       */
+      public Builder setCash(int value) {
+        bitField0_ |= 0x00000008;
+        cash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 cash = 4;</code>
+       */
+      public Builder clearCash() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cash_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int oil_ ;
+      /**
+       * <code>optional int32 oil = 5;</code>
+       */
+      public boolean hasOil() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 oil = 5;</code>
+       */
+      public int getOil() {
+        return oil_;
+      }
+      /**
+       * <code>optional int32 oil = 5;</code>
+       */
+      public Builder setOil(int value) {
+        bitField0_ |= 0x00000010;
+        oil_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 oil = 5;</code>
+       */
+      public Builder clearOil() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        oil_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserRewardProto)
+    }
+
+    static {
+      defaultInstance = new UserRewardProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserRewardProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RewardProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserRewardProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -776,12 +2064,17 @@ public final class RewardsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Reward.proto\022\016com.lvl6.proto\"\236\001\n\013Rewar" +
-      "dProto\022\020\n\010rewardId\030\001 \001(\005\022\024\n\014staticDataId" +
-      "\030\002 \001(\005\0223\n\003typ\030\003 \001(\0162&.com.lvl6.proto.Rew" +
-      "ardProto.RewardType\022\013\n\003amt\030\004 \001(\005\"%\n\nRewa" +
-      "rdType\022\r\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002B\016B\014Rewar" +
-      "dsProto"
+      "\n\014Reward.proto\022\016com.lvl6.proto\032\022MonsterS" +
+      "tuff.proto\032\nItem.proto\"\236\001\n\013RewardProto\022\020" +
+      "\n\010rewardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223" +
+      "\n\003typ\030\003 \001(\0162&.com.lvl6.proto.RewardProto" +
+      ".RewardType\022\013\n\003amt\030\004 \001(\005\"%\n\nRewardType\022\r" +
+      "\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\"\257\001\n\017UserRewardPr" +
+      "oto\022:\n\014updatedOrNew\030\001 \003(\0132$.com.lvl6.pro" +
+      "to.FullUserMonsterProto\0227\n\020updatedUserIt" +
+      "ems\030\002 \003(\0132\035.com.lvl6.proto.UserItemProto" +
+      "\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(",
+      "\005B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -794,6 +2087,8 @@ public final class RewardsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.ItemsProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_RewardProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -801,6 +2096,14 @@ public final class RewardsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RewardProto_descriptor,
         new java.lang.String[] { "RewardId", "StaticDataId", "Typ", "Amt", });
+    internal_static_com_lvl6_proto_UserRewardProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserRewardProto_descriptor,
+        new java.lang.String[] { "UpdatedOrNew", "UpdatedUserItems", "Gems", "Cash", "Oil", });
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

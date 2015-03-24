@@ -32,7 +32,7 @@ public class RetrieveMiniEventController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public RetrieveMiniEventController() {
-		numAllocatedThreads = 1;
+		numAllocatedThreads = 4;
 	}
 
 	@Autowired

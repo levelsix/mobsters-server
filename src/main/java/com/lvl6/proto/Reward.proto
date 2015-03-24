@@ -1,6 +1,9 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "MonsterStuff.proto";
+import "Item.proto";
+
 package com.lvl6.proto;
 
 option java_outer_classname = "RewardsProto";
@@ -25,3 +28,11 @@ message RewardProto {
 }
 
 //------------------------------------------------------------------------------------------
+//there is no analog of this in the db/server
+message UserRewardProto {
+	repeated FullUserMonsterProto updatedOrNew = 1;
+	repeated UserItemProto updatedUserItems = 2;
+	optional int32 gems = 3;
+	optional int32 cash = 4;
+	optional int32 oil = 5;
+}
