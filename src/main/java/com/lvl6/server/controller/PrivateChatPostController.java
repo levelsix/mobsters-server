@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,13 @@ import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.info.AdminChatPost;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.Builder;
@@ -32,11 +36,13 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPos
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -56,6 +62,9 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	public PrivateChatPostController() {
 		numAllocatedThreads = 4;
@@ -146,7 +155,53 @@ public class PrivateChatPostController extends EventController {
 							+ ", censoredContent="
 							+ censoredContent + ", timeOfPost=" + timeOfPost);
 				} else {
-
+					
+					//check the language settings between the two
+					boolean translationRequired = true;
+					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
+							getSpecificUserTranslationSettings(recipientId, posterId);
+					TranslationSettingsForUser settingForSender = translationSettingsForUserRetrieveUtil.
+							getSpecificUserTranslationSettings(posterId, recipientId);
+					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
+					Language senderLanguage;
+					Language recipientLanguage;
+					
+					//get sender's language setting, it's either set in private chat or default global's
+					if(settingForSender == null) {
+						TranslationSettingsForUser globalChatSettingsForSender = translationSettingsForUserRetrieveUtil.
+								getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT.toString());
+						insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForSender.getLanguage(), 
+								ChatType.PRIVATE_CHAT.toString());
+						senderLanguage = Language.valueOf(globalChatSettingsForSender.getLanguage());
+					}
+					else {
+						senderLanguage = Language.valueOf(settingForSender.getLanguage());
+					}
+					
+					if(settingForRecipient == null) {
+						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
+								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT.toString());
+						insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
+								ChatType.PRIVATE_CHAT.toString());
+						recipientLanguage = Language.valueOf(globalChatSettingsForRecipient.getLanguage());
+					}
+					else {
+						recipientLanguage = Language.valueOf(settingForRecipient.getLanguage());
+					}
+					
+					//if languages are different, translate
+					if(recipientLanguage.toString().equals(senderLanguage.toString())) {
+						//translations dont occur
+						translationRequired = false;
+					}
+					else {
+						translatedMessage = MiscMethods.translate(recipientLanguage, censoredContent);
+						for(TranslateLanguages tl : translatedMessage.keySet()) {
+							ChatType chatType = ChatType.PRIVATE_CHAT;
+							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl));
+						}
+					}
+					
 					if (recipientId == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID) {
 						AdminChatPost acp = new AdminChatPost(
 								privateChatPostId, posterId, recipientId,
@@ -183,10 +238,21 @@ public class PrivateChatPostController extends EventController {
 							recipientClan = clanIdsToClans.get(recipientClanId);
 						}
 					}
-					PrivateChatPostProto pcpp = CreateInfoProtoUtils
-							.createPrivateChatPostProtoFromPrivateChatPost(pwp,
-									poster, posterClan, recipient,
-									recipientClan);
+					
+					PrivateChatPostProto pcpp;
+					
+					if(translationRequired) {
+						pcpp = CreateInfoProtoUtils
+								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
+										poster, posterClan, recipient,
+										recipientClan, translatedMessage);
+					}
+					else {
+						pcpp = CreateInfoProtoUtils
+								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
+										poster, posterClan, recipient,
+										recipientClan, null);
+					}
 					resBuilder.setPost(pcpp);
 
 					// send to recipient of the private chat post

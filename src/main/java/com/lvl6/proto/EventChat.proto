@@ -103,3 +103,26 @@ message RetrievePrivateChatPostsResponseProto {
 
 //------------------------------------------------------------------------------------
 
+message TranslateSelectMessagesRequestProto {
+	optional MinimumUserProto sender = 1; //person receiving msgs
+	optional string otherUserUuid = 2;
+	optional TranslateLanguages language = 3;
+	repeated PrivateChatPostRequestProto messagesToBeTranslated = 4;
+
+}
+
+message TranslateSelectMessagesResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string originalMessage = 2;
+	repeated TranslatedTextProto messagesTranslated = 3;
+	optional TranslateSelectMessagesStatus status = 4;
+
+	enum TranslateSelectMessagesStatus {
+		FAIL_OTHER = 1;
+		SUCCESS = 2;
+	}
+}
+
+
+
+
