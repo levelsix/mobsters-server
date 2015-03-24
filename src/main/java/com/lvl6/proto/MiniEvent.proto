@@ -14,6 +14,11 @@ message MiniEventProto {
      optional MiniEventForPlayerLevelProto lvlEntered = 4;
      repeated MiniEventGoalProto goals = 5;
      repeated MiniEventLeaderboardRewardProto leaderboardRewards = 6;
+     
+     optional string name = 7;
+     optional string desc = 8;
+     optional string img = 9;
+     
 }
 
 //------------------------------------------------------------------------------------------

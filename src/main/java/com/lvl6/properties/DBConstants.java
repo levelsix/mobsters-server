@@ -277,7 +277,7 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_HISTORY__STAGE_HEALTH = "stage_health";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CRS_END_TIME = "crs_end_time";
 
-	//history of user's clan raid damage for a monster 
+	//history of user's clan raid damage for a monster
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_START_TIME = "crsm_start_time";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_ID = "clan_id";
@@ -418,7 +418,7 @@ public class DBConstants {
 	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED = "tier_one_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED = "tier_two_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED = "tier_three_redeemed";
-	
+
 	/*MINI TASK FOR USER*/
 	public static final String MINI_JOB_FOR_USER__ID = GENERIC__ID;
 	public static final String MINI_JOB_FOR_USER__USER_ID = "user_id";
@@ -973,7 +973,10 @@ public class DBConstants {
 	public static final String MINI_EVENT__ID = GENERIC__ID;
 	public static final String MINI_EVENT__START_TIME = "start_time";
 	public static final String MINI_EVENT__END_TIME = "end_time";
-	
+	public static final String MINI_EVENT__NAME = "name";
+	public static final String MINI_EVENT__DESC = "desc";
+	public static final String MINI_EVENT__IMG = "img";
+
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__ID = GENERIC__ID;
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID = "mini_event_id";
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__PLAYER_LVL_MIN = "player_lvl_min";
@@ -981,24 +984,24 @@ public class DBConstants {
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_ONE_MIN_PTS = "tier_one_min_pts";
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_TWO_MIN_PTS = "tier_two_min_pts";
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_THREE_MIN_PTS = "tier_three_min_pts";
-	
+
 	public static final String MINI_EVENT_GOAL__ID = GENERIC__ID;
 	public static final String MINI_EVENT_GOAL__MINI_EVENT_ID = "mini_event_id";
 	public static final String MINI_EVENT_GOAL__TYPE = "type";
 	public static final String MINI_EVENT_GOAL__AMT = "amt";
 	public static final String MINI_EVENT_GOAL__DESC = "desc";
 	public static final String MINI_EVENT_GOAL__PTS_REWARD = "pts_reward";
-	
+
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__ID = GENERIC__ID;
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__MINI_EVENT_ID = "mini_event_id";
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__REWARD_ID = "reward_id";
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__LEADERBOARD_POS = "leaderboard_pos";
-	
+
 	public static final String MINI_EVENT_TIER_REWARD__ID = GENERIC__ID;
 	public static final String MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID = "mini_event_for_player_lvl_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_ID = "reward_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_TIER = "reward_tier";
-	
+
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id";
 	public static final String MINI_JOB__NAME = "name";
@@ -1186,12 +1189,12 @@ public class DBConstants {
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_PROPERTY__NAME = "name";
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
-	
+
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";
 	public static final String REWARD__TYPE ="type";
 	public static final String REWARD__AMT = "amt";
-	
+
 	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
 	public static final String SERVER_TOGGLE__NAME = "name";
 	public static final String SERVER_TOGGLE__ON = "on";

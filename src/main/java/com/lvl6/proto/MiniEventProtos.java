@@ -99,6 +99,48 @@ public final class MiniEventProtos {
      */
     com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProtoOrBuilder getLeaderboardRewardsOrBuilder(
         int index);
+
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    boolean hasDesc();
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    java.lang.String getDesc();
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescBytes();
+
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    boolean hasImg();
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    java.lang.String getImg();
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getImgBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniEventProto}
@@ -194,6 +236,24 @@ public final class MiniEventProtos {
                 mutable_bitField0_ |= 0x00000020;
               }
               leaderboardRewards_.add(input.readMessage(com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              name_ = bs;
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              desc_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              img_ = bs;
               break;
             }
           }
@@ -378,6 +438,132 @@ public final class MiniEventProtos {
       return leaderboardRewards_.get(index);
     }
 
+    public static final int NAME_FIELD_NUMBER = 7;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DESC_FIELD_NUMBER = 8;
+    private java.lang.Object desc_;
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    public boolean hasDesc() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    public java.lang.String getDesc() {
+      java.lang.Object ref = desc_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          desc_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string desc = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescBytes() {
+      java.lang.Object ref = desc_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        desc_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IMG_FIELD_NUMBER = 9;
+    private java.lang.Object img_;
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    public boolean hasImg() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    public java.lang.String getImg() {
+      java.lang.Object ref = img_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          img_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string img = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getImgBytes() {
+      java.lang.Object ref = img_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        img_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       miniEventId_ = 0;
       miniEventStartTime_ = 0L;
@@ -385,6 +571,9 @@ public final class MiniEventProtos {
       lvlEntered_ = com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto.getDefaultInstance();
       goals_ = java.util.Collections.emptyList();
       leaderboardRewards_ = java.util.Collections.emptyList();
+      name_ = "";
+      desc_ = "";
+      img_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -416,6 +605,15 @@ public final class MiniEventProtos {
       }
       for (int i = 0; i < leaderboardRewards_.size(); i++) {
         output.writeMessage(6, leaderboardRewards_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(7, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(8, getDescBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(9, getImgBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -449,6 +647,18 @@ public final class MiniEventProtos {
       for (int i = 0; i < leaderboardRewards_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, leaderboardRewards_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getDescBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getImgBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -594,6 +804,12 @@ public final class MiniEventProtos {
         } else {
           leaderboardRewardsBuilder_.clear();
         }
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        desc_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        img_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -660,6 +876,18 @@ public final class MiniEventProtos {
         } else {
           result.leaderboardRewards_ = leaderboardRewardsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.desc_ = desc_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.img_ = img_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -739,6 +967,21 @@ public final class MiniEventProtos {
               leaderboardRewardsBuilder_.addAllMessages(other.leaderboardRewards_);
             }
           }
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000040;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasDesc()) {
+          bitField0_ |= 0x00000080;
+          desc_ = other.desc_;
+          onChanged();
+        }
+        if (other.hasImg()) {
+          bitField0_ |= 0x00000100;
+          img_ = other.img_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1457,6 +1700,234 @@ public final class MiniEventProtos {
           leaderboardRewards_ = null;
         }
         return leaderboardRewardsBuilder_;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 7;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object desc_ = "";
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public boolean hasDesc() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public java.lang.String getDesc() {
+        java.lang.Object ref = desc_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            desc_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescBytes() {
+        java.lang.Object ref = desc_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          desc_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public Builder setDesc(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        desc_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public Builder clearDesc() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        desc_ = getDefaultInstance().getDesc();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string desc = 8;</code>
+       */
+      public Builder setDescBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        desc_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object img_ = "";
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public boolean hasImg() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public java.lang.String getImg() {
+        java.lang.Object ref = img_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            img_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getImgBytes() {
+        java.lang.Object ref = img_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          img_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public Builder setImg(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        img_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public Builder clearImg() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        img_ = getDefaultInstance().getImg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string img = 9;</code>
+       */
+      public Builder setImgBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        img_ = value;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniEventProto)
@@ -6269,7 +6740,7 @@ public final class MiniEventProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017MiniEvent.proto\022\016com.lvl6.proto\"\235\002\n\016Mi" +
+      "\n\017MiniEvent.proto\022\016com.lvl6.proto\"\306\002\n\016Mi" +
       "niEventProto\022\023\n\013miniEventId\030\001 \001(\005\022\032\n\022min" +
       "iEventStartTime\030\002 \001(\003\022\030\n\020miniEventEndTim" +
       "e\030\003 \001(\003\022@\n\nlvlEntered\030\004 \001(\0132,.com.lvl6.p" +
@@ -6277,30 +6748,31 @@ public final class MiniEventProtos {
       "ls\030\005 \003(\0132\".com.lvl6.proto.MiniEventGoalP" +
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
-      "o\"\356\001\n\022MiniEventGoalProto\022\027\n\017miniEventGoa" +
-      "lId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022O\n\010goalTy",
-      "pe\030\003 \001(\01624.com.lvl6.proto.MiniEventGoalP" +
-      "roto.MiniEventGoalType:\007NO_GOAL\022\017\n\007goalA" +
-      "mt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(\t\022\024\n\014pointsGain" +
-      "ed\030\006 \001(\005\" \n\021MiniEventGoalType\022\013\n\007NO_GOAL" +
-      "\020\001\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007m" +
-      "efplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014pla" +
-      "yerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n" +
-      "\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 " +
-      "\001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030" +
-      "\010 \003(\0132(.com.lvl6.proto.MiniEventTierRewa",
-      "rdProto\"^\n\030MiniEventTierRewardProto\022\016\n\006m" +
-      "etrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardId" +
-      "\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLead" +
-      "erboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013mi" +
-      "niEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021lea" +
-      "derboardMinPos\030\004 \001(\005\"\337\001\n\022UserMiniEventPr" +
-      "oto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001" +
-      "(\t\022\017\n\007userLvl\030\003 \001(\005\022\021\n\tptsEarned\030\004 \001(\005\022\027" +
-      "\n\017tierOneRedeemed\030\005 \001(\010\022\027\n\017tierTwoRedeem" +
-      "ed\030\006 \001(\010\022\031\n\021tierThreeRedeemed\030\007 \001(\010\0221\n\tm",
-      "iniEvent\030\010 \001(\0132\036.com.lvl6.proto.MiniEven" +
-      "tProtoB\021B\017MiniEventProtos"
+      "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
+      "(\t\"\356\001\n\022MiniEventGoalProto\022\027\n\017miniEventGo",
+      "alId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022O\n\010goalT" +
+      "ype\030\003 \001(\01624.com.lvl6.proto.MiniEventGoal" +
+      "Proto.MiniEventGoalType:\007NO_GOAL\022\017\n\007goal" +
+      "Amt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(\t\022\024\n\014pointsGai" +
+      "ned\030\006 \001(\005\" \n\021MiniEventGoalType\022\013\n\007NO_GOA" +
+      "L\020\001\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007" +
+      "mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014pl" +
+      "ayerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025" +
+      "\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006" +
+      " \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards",
+      "\030\010 \003(\0132(.com.lvl6.proto.MiniEventTierRew" +
+      "ardProto\"^\n\030MiniEventTierRewardProto\022\016\n\006" +
+      "metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardI" +
+      "d\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLea" +
+      "derboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013m" +
+      "iniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021le" +
+      "aderboardMinPos\030\004 \001(\005\"\337\001\n\022UserMiniEventP" +
+      "roto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 " +
+      "\001(\t\022\017\n\007userLvl\030\003 \001(\005\022\021\n\tptsEarned\030\004 \001(\005\022" +
+      "\027\n\017tierOneRedeemed\030\005 \001(\010\022\027\n\017tierTwoRedee",
+      "med\030\006 \001(\010\022\031\n\021tierThreeRedeemed\030\007 \001(\010\0221\n\t" +
+      "miniEvent\030\010 \001(\0132\036.com.lvl6.proto.MiniEve" +
+      "ntProtoB\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6319,7 +6791,7 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_MiniEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", });
+        new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", "Name", "Desc", "Img", });
     internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new

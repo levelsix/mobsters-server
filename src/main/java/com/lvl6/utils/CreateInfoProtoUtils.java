@@ -2280,6 +2280,22 @@ public class CreateInfoProtoUtils {
 				createMiniEventLeaderboardRewardProto(leaderboardRewards);
 		mepb.addAllLeaderboardRewards(leaderboardRewardProtos);
 
+		String str = me.getName();
+		if (null != str) {
+			mepb.setName(str);
+		}
+
+		str = me.getDesc();
+		if (null != str) {
+			mepb.setDesc(str);
+		}
+
+		str = me.getImg();
+		if (null != str) {
+			mepb.setImg(str);
+		}
+
+
 		return mepb.build();
 	}
 
