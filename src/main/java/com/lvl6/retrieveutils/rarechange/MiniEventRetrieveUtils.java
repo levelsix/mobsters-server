@@ -161,7 +161,12 @@ public class MiniEventRetrieveUtils {
 			endDate = new Date(ts.getTime());
 		}
 
-		MiniEvent me = new MiniEvent(id, startDate, endDate);
+		String name = rs.getString(DBConstants.MINI_EVENT__NAME);
+		String desc = rs.getString(DBConstants.MINI_EVENT__DESC);
+		String img = rs.getString(DBConstants.MINI_EVENT__IMG);
+
+		MiniEvent me = new MiniEvent(id, startDate, endDate,
+				name, desc, img);
 		return me;
 	}
 }
