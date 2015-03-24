@@ -1379,6 +1379,9 @@ public class CreateInfoProtoUtils {
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation) {
+			if(translatedMap == null) {
+				translatedMap = MiscMethods.translate(null, content);
+			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
 				ttpb.setLanguage(tl);
