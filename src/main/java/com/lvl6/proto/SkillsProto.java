@@ -600,6 +600,10 @@ public final class SkillsProto {
      * <code>NERF_CHILL = 21;</code>
      */
     NERF_CHILL(20, 21),
+    /**
+     * <code>BUFF_FLAME_STRIKE = 22;</code>
+     */
+    BUFF_FLAME_STRIKE(21, 22),
     ;
 
     /**
@@ -686,6 +690,10 @@ public final class SkillsProto {
      * <code>NERF_CHILL = 21;</code>
      */
     public static final int NERF_CHILL_VALUE = 21;
+    /**
+     * <code>BUFF_FLAME_STRIKE = 22;</code>
+     */
+    public static final int BUFF_FLAME_STRIKE_VALUE = 22;
 
 
     public final int getNumber() { return value; }
@@ -713,6 +721,7 @@ public final class SkillsProto {
         case 19: return BUFF_HAMMER_TIME;
         case 20: return BUFF_TAKE_AIM;
         case 21: return NERF_CHILL;
+        case 22: return BUFF_FLAME_STRIKE;
         default: return null;
       }
     }
@@ -6251,7 +6260,7 @@ public final class SkillsProto {
       "URANCE\020 \022\017\n\013FLAME_BREAK\020!\022\021\n\rPOISON_SKEW" +
       "ER\020\"\022\017\n\013POISON_FIRE\020#\022\t\n\005CHILL\020$*J\n\023Skil",
       "lActivationType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016A" +
-      "UTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003*\274\003\n\016SideEff" +
+      "UTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003*\323\003\n\016SideEff" +
       "ectType\022\022\n\016NO_SIDE_EFFECT\020\001\022\017\n\013NERF_POIS" +
       "ON\020\002\022\016\n\nNERF_CURSE\020\003\022\r\n\tNERF_STUN\020\004\022\022\n\016N" +
       "ERF_CONFUSION\020\005\022\027\n\023NERF_BLINDING_LIGHT\020\006" +
@@ -6262,12 +6271,13 @@ public final class SkillsProto {
       "OUNTER_STRIKE\020\016\022\022\n\016BUFF_ROID_RAGE\020\017\022\026\n\022B",
       "UFF_SHALLOW_GRAVE\020\020\022\021\n\rBUFF_ENERGIZE\020\021\022\022" +
       "\n\016BUFF_INSURANCE\020\022\022\024\n\020BUFF_HAMMER_TIME\020\023" +
-      "\022\021\n\rBUFF_TAKE_AIM\020\024\022\016\n\nNERF_CHILL\020\025*7\n\023S" +
-      "ideEffectTraitType\022\014\n\010NO_TRAIT\020\001\022\010\n\004BUFF" +
-      "\020\002\022\010\n\004NERF\020\003*B\n\026SideEffectPositionType\022\023" +
-      "\n\017BELOW_CHARACTER\020\001\022\023\n\017ABOVE_CHARACTER\020\002" +
-      "*.\n\023SideEffectBlendMode\022\027\n\023NORMAL_FULL_O" +
-      "PACITY\020\001B\rB\013SkillsProto"
+      "\022\021\n\rBUFF_TAKE_AIM\020\024\022\016\n\nNERF_CHILL\020\025\022\025\n\021B" +
+      "UFF_FLAME_STRIKE\020\026*7\n\023SideEffectTraitTyp" +
+      "e\022\014\n\010NO_TRAIT\020\001\022\010\n\004BUFF\020\002\022\010\n\004NERF\020\003*B\n\026S" +
+      "ideEffectPositionType\022\023\n\017BELOW_CHARACTER" +
+      "\020\001\022\023\n\017ABOVE_CHARACTER\020\002*.\n\023SideEffectBle" +
+      "ndMode\022\027\n\023NORMAL_FULL_OPACITY\020\001B\rB\013Skill" +
+      "sProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

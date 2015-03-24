@@ -155,6 +155,7 @@ enum SideEffectType {
 	BUFF_HAMMER_TIME = 19;
 	BUFF_TAKE_AIM = 20;
 	NERF_CHILL = 21;
+	BUFF_FLAME_STRIKE = 22;
 	
 }
 enum SideEffectTraitType {
