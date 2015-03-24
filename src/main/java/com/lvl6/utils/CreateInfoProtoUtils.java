@@ -1372,13 +1372,12 @@ public class CreateInfoProtoUtils {
 		if(!turnOffTranslation) {
 			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, content);
 			for(TranslateLanguages tl : translatedMap.keySet()) {
-				if(tl.toString().equals("CHINESE_TRADITIONAL")) {
-					gcmpb.setContent(translatedMap.get(tl));
-				}
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
 				ttpb.setLanguage(tl);
 				ttpb.setText(translatedMap.get(tl));
 				gcmpb.addTranslatedContent(ttpb.build());
+				gcmpb.setContent(translatedMap.get(0));
+
 			}
 		}
 
