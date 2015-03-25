@@ -324,4 +324,6 @@ public interface InsertUtil {
 	public abstract boolean insertMonsterEnhanceHistory(
 			MonsterEnhanceHistory meh);
 
+	public abstract boolean insertMultipleTranslationsForPrivateChat(
+			Map<String, String> chatIdToTranslations, Language language);
 }

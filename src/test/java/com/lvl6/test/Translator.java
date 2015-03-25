@@ -1,4 +1,9 @@
-//package com.lvl6.test;
+package com.lvl6.test;
+
+import com.lvl6.proto.ChatProto.TranslateLanguages;
+import com.memetix.mst.detect.Detect;
+import com.memetix.mst.language.Language;
+
 //
 //import com.lvl6.proto.ChatProto.TranslateLanguages;
 //
@@ -39,10 +44,21 @@
 ////	}
 ////}
 //
-//public class Translator {
-//	public static void main(String[] args) throws Exception {
-//		System.out.println(TranslateLanguages.CHINESE_TRADITIONAL.toString());
-//		
-//		
-//	}
-//}
+public class Translator {
+	
+	private static String pClientId = "ToonSquad";
+	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+	
+	public static void main(String[] args) throws Exception {
+		
+		Detect.setClientId(pClientId);
+		Detect.setClientSecret(secretId);
+		
+		Language detelctedLanguage = Detect.execute("hello this is chicken omlette flower");
+		Language detected = Detect.execute("hola");
+		System.out.println(detected.getName(Language.ENGLISH));
+		
+		
+		
+	}
+}

@@ -161,39 +161,28 @@ public class PrivateChatPostController extends EventController {
 					boolean translationRequired = true;
 					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
 							getSpecificUserTranslationSettings(recipientId, posterId);
-					TranslationSettingsForUser settingForSender = translationSettingsForUserRetrieveUtil.
-							getSpecificUserTranslationSettings(posterId, recipientId);
 					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
-					Language senderLanguage;
+
 					Language recipientLanguage;
+					String recipientLanguageString = "";
 					TranslatedText tt = new TranslatedText();
 					
-					//get sender's language setting, it's either set in private chat or default global's
-					if(settingForSender == null) {
-						TranslationSettingsForUser globalChatSettingsForSender = translationSettingsForUserRetrieveUtil.
-								getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT.toString());
-						insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForSender.getLanguage(), 
-								ChatType.PRIVATE_CHAT.toString());
-						senderLanguage = Language.valueOf(globalChatSettingsForSender.getLanguage());
-					}
-					else {
-						senderLanguage = Language.valueOf(settingForSender.getLanguage());
-					}
-					
+					//get recipient's language setting
 					if(settingForRecipient == null) {
 						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
 								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT.toString());
 						insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
 								ChatType.PRIVATE_CHAT.toString());
-						recipientLanguage = Language.valueOf(globalChatSettingsForRecipient.getLanguage());
+						recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
 					}
 					else {
-						recipientLanguage = Language.valueOf(settingForRecipient.getLanguage());
+						recipientLanguageString = settingForRecipient.getLanguage();
 					}
+					recipientLanguage = Language.valueOf(recipientLanguageString);
 					
-					//if languages are different, translate
-					if(recipientLanguage.toString().equals(senderLanguage.toString())) {
-						//translations dont occur
+					//detect the language of msg, if it matches language setting of recipient, dont translate anything
+					Language detectedLanguage = MiscMethods.detectedLanguage(censoredContent);
+					if(recipientLanguageString.equalsIgnoreCase(detectedLanguage.getName(Language.ENGLISH))) {
 						translationRequired = false;
 					}
 					else {

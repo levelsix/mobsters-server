@@ -2617,5 +2617,53 @@ public class InsertUtils implements InsertUtil {
 			return false;
 
 	}
+	
+	@Override
+	public boolean insertMultipleTranslationsForPrivateChat(
+			Map<String, String> chatIdToTranslations, Language language) {
+		if(chatIdToTranslations == null) {
+			log.error("map containing ids to translations is null");
+		}
+		
+		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
+		int size = chatIdToTranslations.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		
+		List<String> idList = new ArrayList<String>();
+		List<String> chatTypeList = new ArrayList<String>();
+		List<String> chatIdList = new ArrayList<String>();
+		List<String> languageList = new ArrayList<String>();
+		List<String> textList = new ArrayList<String>();
+
+		try {
+			for(String chatId : chatIdToTranslations.keySet()) {
+				idList.add(randomUUID());
+				chatTypeList.add(ChatType.PRIVATE_CHAT.toString());
+				chatIdList.add(chatId);
+				languageList.add(language.getName(Language.ENGLISH));
+				textList.add(chatIdToTranslations.get(chatId));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("error converting language to string");
+			e.printStackTrace();
+		}
+		
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, idList);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypeList);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIdList);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
+		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, textList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		} else
+			return false;
+	}
+	
+	
 
 }

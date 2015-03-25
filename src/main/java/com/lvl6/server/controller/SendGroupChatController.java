@@ -168,7 +168,7 @@ public class SendGroupChatController extends EventController {
 				
 				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, censoredChatMessage);				
 					
-				chatProto.setTranslations(CreateInfoProtoUtils
+				chatProto.setMessage(CreateInfoProtoUtils
 					.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
 							censoredChatMessage, user.isAdmin(), null, translateMap));	
 

@@ -136,6 +136,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
+import com.memetix.mst.detect.Detect;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
@@ -1960,34 +1961,32 @@ public class MiscMethods {
 	} 
 
 	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
-		if(language.equals(Language.ARABIC)) {
-			TranslateLanguages tl = TranslateLanguages.ARABIC;
-			return tl;
+		try {
+			if(language.getName(Language.ENGLISH).equals("ARABIC")) {
+				TranslateLanguages tl = TranslateLanguages.ARABIC;
+				return tl;
+			}
+			else if(language.getName(Language.ENGLISH).equals("ENGLISH")) {
+				TranslateLanguages tl = TranslateLanguages.ENGLISH;
+				return tl;		
+			}
+			else if(language.getName(Language.ENGLISH).equals("FRENCH")) {
+				TranslateLanguages tl = TranslateLanguages.FRENCH;
+				return tl;	
+			}
+			else if(language.getName(Language.ENGLISH).equals("GERMAN")) {
+				TranslateLanguages tl = TranslateLanguages.GERMAN;
+				return tl;	
+			}
+			else {
+				TranslateLanguages tl = TranslateLanguages.SPANISH;
+				return tl;	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if(language.equals(Language.CHINESE_SIMPLIFIED)) {
-			TranslateLanguages tl = TranslateLanguages.CHINESE_SIMPLIFIED;
-			return tl;		
-		}
-		else if(language.equals(Language.CHINESE_TRADITIONAL)) {
-			TranslateLanguages tl = TranslateLanguages.CHINESE_TRADITIONAL;
-			return tl;		
-		}
-		else if(language.equals(Language.ENGLISH)) {
-			TranslateLanguages tl = TranslateLanguages.ENGLISH;
-			return tl;		
-		}
-		else if(language.equals(Language.FRENCH)) {
-			TranslateLanguages tl = TranslateLanguages.FRENCH;
-			return tl;	
-		}
-		else if(language.equals(Language.GERMAN)) {
-			TranslateLanguages tl = TranslateLanguages.GERMAN;
-			return tl;	
-		}
-		else {
-			TranslateLanguages tl = TranslateLanguages.SPANISH;
-			return tl;	
-		}
+		return null;
 	}
 
 	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {
@@ -2009,7 +2008,20 @@ public class MiscMethods {
 		else return null;
 	}
 		
-	
+	public static Language detectedLanguage(String text) {
+		Detect.setClientId(pClientId);
+        Detect.setClientSecret(secretId);
+        Language detectedLanguage = null;
+        
+        try {
+			detectedLanguage = Detect.execute(text);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("error detecting language of text=%s", text);
+			e.printStackTrace();
+		}
+        return detectedLanguage;
+	}
 	
 	
 	
