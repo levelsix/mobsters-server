@@ -41,7 +41,7 @@ message BattleItemProto {
 //------------------------------------------------------------------------------------------
 
 enum BattleItemType {
-	HEALING_POTION = 1;
+	MINOR_POTION = 1;
 	CHILL_ANTIDOTE = 2;
 	POISON_ANTIDOTE = 3;
 	ORB_HAMMER = 4;
