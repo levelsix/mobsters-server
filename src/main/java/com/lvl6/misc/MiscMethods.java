@@ -1942,6 +1942,7 @@ public class MiscMethods {
 		try {
 			if(language != null) {
 				translatedText = Translate.execute(text, language);
+				returnMap.put(TranslateLanguages.valueOf(language.toString()), translatedText);
 			}
 			else {
 				for(Language language2 : listOfLanguages) {
