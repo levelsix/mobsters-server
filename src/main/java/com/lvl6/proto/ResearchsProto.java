@@ -18,89 +18,77 @@ public final class ResearchsProto {
      */
     NO_RESEARCH(0, 1),
     /**
-     * <code>COST = 2;</code>
+     * <code>HEALING_COST = 2;</code>
      */
-    COST(1, 2),
+    HEALING_COST(1, 2),
     /**
-     * <code>SPEED = 3;</code>
+     * <code>HEALING_SPEED = 3;</code>
      */
-    SPEED(2, 3),
+    HEALING_SPEED(2, 3),
     /**
-     * <code>INCREASE_QUEUE_SIZE = 4;</code>
+     * <code>ENHANCE_COST = 4;</code>
      */
-    INCREASE_QUEUE_SIZE(3, 4),
+    ENHANCE_COST(3, 4),
     /**
-     * <code>INCREASE_NUM_CAN_BUILD = 5;</code>
+     * <code>XP_BONUS = 5;</code>
      */
-    INCREASE_NUM_CAN_BUILD(4, 5),
+    XP_BONUS(4, 5),
     /**
-     * <code>XP_BONUS = 6;</code>
+     * <code>DECREASE_ENHANCE_TIME = 6;</code>
      */
-    XP_BONUS(5, 6),
+    DECREASE_ENHANCE_TIME(5, 6),
     /**
-     * <code>INCREASE_CONSTRUCTION_TIME = 7;</code>
+     * <code>ATTACK_INCREASE = 7;</code>
      */
-    INCREASE_CONSTRUCTION_TIME(6, 7),
+    ATTACK_INCREASE(6, 7),
     /**
-     * <code>INCREASE_CASH_PRODUCTION = 8;</code>
+     * <code>HP_INCREASE = 8;</code>
      */
-    INCREASE_CASH_PRODUCTION(7, 8),
+    HP_INCREASE(7, 8),
     /**
-     * <code>INCREASE_OIL_PRODUCTION = 9;</code>
+     * <code>SPEED_INCREASE = 9;</code>
      */
-    INCREASE_OIL_PRODUCTION(8, 9),
+    SPEED_INCREASE(8, 9),
     /**
-     * <code>INCREASE_GEM_PRODUCTION = 10;</code>
+     * <code>INCREASE_HOSPITAL_QUEUE = 10;</code>
      */
-    INCREASE_GEM_PRODUCTION(9, 10),
+    INCREASE_HOSPITAL_QUEUE(9, 10),
     /**
-     * <code>INCREASE_ATTACK = 11;</code>
+     * <code>INCREASE_ENHANCE_QUEUE = 11;</code>
      */
-    INCREASE_ATTACK(10, 11),
+    INCREASE_ENHANCE_QUEUE(10, 11),
     /**
-     * <code>INCREASE_HP = 12;</code>
+     * <code>NUMBER_OF_HOSPITALS = 12;</code>
      */
-    INCREASE_HP(11, 12),
+    NUMBER_OF_HOSPITALS(11, 12),
     /**
-     * <code>UNLOCK_MINOR_POTION = 13;</code>
+     * <code>CONSTRUCTION = 13;</code>
      */
-    UNLOCK_MINOR_POTION(12, 13),
+    CONSTRUCTION(12, 13),
     /**
-     * <code>UNLOCK_CHILL_ANTIDOTE = 14;</code>
+     * <code>ITEM_PRODUCTION_SPEED = 14;</code>
      */
-    UNLOCK_CHILL_ANTIDOTE(13, 14),
+    ITEM_PRODUCTION_SPEED(13, 14),
     /**
-     * <code>UNLOCK_POISON_ANTIDOTE = 15;</code>
+     * <code>ITEM_PRODUCTION_COST = 15;</code>
      */
-    UNLOCK_POISON_ANTIDOTE(14, 15),
+    ITEM_PRODUCTION_COST(14, 15),
     /**
-     * <code>UNLOCK_LOLLIPOP_HAMMER = 16;</code>
+     * <code>RESOURCE_PRODUCTION = 16;</code>
      */
-    UNLOCK_LOLLIPOP_HAMMER(15, 16),
+    RESOURCE_PRODUCTION(15, 16),
     /**
-     * <code>UNLOCK_PUTTY = 17;</code>
+     * <code>RESOURCE_STORAGE = 17;</code>
      */
-    UNLOCK_PUTTY(16, 17),
+    RESOURCE_STORAGE(16, 17),
     /**
-     * <code>UNLOCK_SHUFFLE = 18;</code>
+     * <code>UNLOCK_ITEM = 18;</code>
      */
-    UNLOCK_SHUFFLE(17, 18),
+    UNLOCK_ITEM(17, 18),
     /**
-     * <code>UNLOCK_CLOUDS = 19;</code>
+     * <code>UNLOCK_OBSTACLE = 19;</code>
      */
-    UNLOCK_CLOUDS(18, 19),
-    /**
-     * <code>UNLOCK_LOCKS = 20;</code>
-     */
-    UNLOCK_LOCKS(19, 20),
-    /**
-     * <code>UNLOCK_HOLES = 21;</code>
-     */
-    UNLOCK_HOLES(20, 21),
-    /**
-     * <code>UNLOCK_VINES = 22;</code>
-     */
-    UNLOCK_VINES(21, 22),
+    UNLOCK_OBSTACLE(18, 19),
     ;
 
     /**
@@ -108,89 +96,77 @@ public final class ResearchsProto {
      */
     public static final int NO_RESEARCH_VALUE = 1;
     /**
-     * <code>COST = 2;</code>
+     * <code>HEALING_COST = 2;</code>
      */
-    public static final int COST_VALUE = 2;
+    public static final int HEALING_COST_VALUE = 2;
     /**
-     * <code>SPEED = 3;</code>
+     * <code>HEALING_SPEED = 3;</code>
      */
-    public static final int SPEED_VALUE = 3;
+    public static final int HEALING_SPEED_VALUE = 3;
     /**
-     * <code>INCREASE_QUEUE_SIZE = 4;</code>
+     * <code>ENHANCE_COST = 4;</code>
      */
-    public static final int INCREASE_QUEUE_SIZE_VALUE = 4;
+    public static final int ENHANCE_COST_VALUE = 4;
     /**
-     * <code>INCREASE_NUM_CAN_BUILD = 5;</code>
+     * <code>XP_BONUS = 5;</code>
      */
-    public static final int INCREASE_NUM_CAN_BUILD_VALUE = 5;
+    public static final int XP_BONUS_VALUE = 5;
     /**
-     * <code>XP_BONUS = 6;</code>
+     * <code>DECREASE_ENHANCE_TIME = 6;</code>
      */
-    public static final int XP_BONUS_VALUE = 6;
+    public static final int DECREASE_ENHANCE_TIME_VALUE = 6;
     /**
-     * <code>INCREASE_CONSTRUCTION_TIME = 7;</code>
+     * <code>ATTACK_INCREASE = 7;</code>
      */
-    public static final int INCREASE_CONSTRUCTION_TIME_VALUE = 7;
+    public static final int ATTACK_INCREASE_VALUE = 7;
     /**
-     * <code>INCREASE_CASH_PRODUCTION = 8;</code>
+     * <code>HP_INCREASE = 8;</code>
      */
-    public static final int INCREASE_CASH_PRODUCTION_VALUE = 8;
+    public static final int HP_INCREASE_VALUE = 8;
     /**
-     * <code>INCREASE_OIL_PRODUCTION = 9;</code>
+     * <code>SPEED_INCREASE = 9;</code>
      */
-    public static final int INCREASE_OIL_PRODUCTION_VALUE = 9;
+    public static final int SPEED_INCREASE_VALUE = 9;
     /**
-     * <code>INCREASE_GEM_PRODUCTION = 10;</code>
+     * <code>INCREASE_HOSPITAL_QUEUE = 10;</code>
      */
-    public static final int INCREASE_GEM_PRODUCTION_VALUE = 10;
+    public static final int INCREASE_HOSPITAL_QUEUE_VALUE = 10;
     /**
-     * <code>INCREASE_ATTACK = 11;</code>
+     * <code>INCREASE_ENHANCE_QUEUE = 11;</code>
      */
-    public static final int INCREASE_ATTACK_VALUE = 11;
+    public static final int INCREASE_ENHANCE_QUEUE_VALUE = 11;
     /**
-     * <code>INCREASE_HP = 12;</code>
+     * <code>NUMBER_OF_HOSPITALS = 12;</code>
      */
-    public static final int INCREASE_HP_VALUE = 12;
+    public static final int NUMBER_OF_HOSPITALS_VALUE = 12;
     /**
-     * <code>UNLOCK_MINOR_POTION = 13;</code>
+     * <code>CONSTRUCTION = 13;</code>
      */
-    public static final int UNLOCK_MINOR_POTION_VALUE = 13;
+    public static final int CONSTRUCTION_VALUE = 13;
     /**
-     * <code>UNLOCK_CHILL_ANTIDOTE = 14;</code>
+     * <code>ITEM_PRODUCTION_SPEED = 14;</code>
      */
-    public static final int UNLOCK_CHILL_ANTIDOTE_VALUE = 14;
+    public static final int ITEM_PRODUCTION_SPEED_VALUE = 14;
     /**
-     * <code>UNLOCK_POISON_ANTIDOTE = 15;</code>
+     * <code>ITEM_PRODUCTION_COST = 15;</code>
      */
-    public static final int UNLOCK_POISON_ANTIDOTE_VALUE = 15;
+    public static final int ITEM_PRODUCTION_COST_VALUE = 15;
     /**
-     * <code>UNLOCK_LOLLIPOP_HAMMER = 16;</code>
+     * <code>RESOURCE_PRODUCTION = 16;</code>
      */
-    public static final int UNLOCK_LOLLIPOP_HAMMER_VALUE = 16;
+    public static final int RESOURCE_PRODUCTION_VALUE = 16;
     /**
-     * <code>UNLOCK_PUTTY = 17;</code>
+     * <code>RESOURCE_STORAGE = 17;</code>
      */
-    public static final int UNLOCK_PUTTY_VALUE = 17;
+    public static final int RESOURCE_STORAGE_VALUE = 17;
     /**
-     * <code>UNLOCK_SHUFFLE = 18;</code>
+     * <code>UNLOCK_ITEM = 18;</code>
      */
-    public static final int UNLOCK_SHUFFLE_VALUE = 18;
+    public static final int UNLOCK_ITEM_VALUE = 18;
     /**
-     * <code>UNLOCK_CLOUDS = 19;</code>
+     * <code>UNLOCK_OBSTACLE = 19;</code>
      */
-    public static final int UNLOCK_CLOUDS_VALUE = 19;
-    /**
-     * <code>UNLOCK_LOCKS = 20;</code>
-     */
-    public static final int UNLOCK_LOCKS_VALUE = 20;
-    /**
-     * <code>UNLOCK_HOLES = 21;</code>
-     */
-    public static final int UNLOCK_HOLES_VALUE = 21;
-    /**
-     * <code>UNLOCK_VINES = 22;</code>
-     */
-    public static final int UNLOCK_VINES_VALUE = 22;
+    public static final int UNLOCK_OBSTACLE_VALUE = 19;
 
 
     public final int getNumber() { return value; }
@@ -198,27 +174,24 @@ public final class ResearchsProto {
     public static ResearchType valueOf(int value) {
       switch (value) {
         case 1: return NO_RESEARCH;
-        case 2: return COST;
-        case 3: return SPEED;
-        case 4: return INCREASE_QUEUE_SIZE;
-        case 5: return INCREASE_NUM_CAN_BUILD;
-        case 6: return XP_BONUS;
-        case 7: return INCREASE_CONSTRUCTION_TIME;
-        case 8: return INCREASE_CASH_PRODUCTION;
-        case 9: return INCREASE_OIL_PRODUCTION;
-        case 10: return INCREASE_GEM_PRODUCTION;
-        case 11: return INCREASE_ATTACK;
-        case 12: return INCREASE_HP;
-        case 13: return UNLOCK_MINOR_POTION;
-        case 14: return UNLOCK_CHILL_ANTIDOTE;
-        case 15: return UNLOCK_POISON_ANTIDOTE;
-        case 16: return UNLOCK_LOLLIPOP_HAMMER;
-        case 17: return UNLOCK_PUTTY;
-        case 18: return UNLOCK_SHUFFLE;
-        case 19: return UNLOCK_CLOUDS;
-        case 20: return UNLOCK_LOCKS;
-        case 21: return UNLOCK_HOLES;
-        case 22: return UNLOCK_VINES;
+        case 2: return HEALING_COST;
+        case 3: return HEALING_SPEED;
+        case 4: return ENHANCE_COST;
+        case 5: return XP_BONUS;
+        case 6: return DECREASE_ENHANCE_TIME;
+        case 7: return ATTACK_INCREASE;
+        case 8: return HP_INCREASE;
+        case 9: return SPEED_INCREASE;
+        case 10: return INCREASE_HOSPITAL_QUEUE;
+        case 11: return INCREASE_ENHANCE_QUEUE;
+        case 12: return NUMBER_OF_HOSPITALS;
+        case 13: return CONSTRUCTION;
+        case 14: return ITEM_PRODUCTION_SPEED;
+        case 15: return ITEM_PRODUCTION_COST;
+        case 16: return RESOURCE_PRODUCTION;
+        case 17: return RESOURCE_STORAGE;
+        case 18: return UNLOCK_ITEM;
+        case 19: return UNLOCK_OBSTACLE;
         default: return null;
       }
     }
@@ -4377,23 +4350,21 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\360\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004" +
-      "COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCREASE_QUEUE_SIZE",
-      "\020\004\022\032\n\026INCREASE_NUM_CAN_BUILD\020\005\022\014\n\010XP_BON" +
-      "US\020\006\022\036\n\032INCREASE_CONSTRUCTION_TIME\020\007\022\034\n\030" +
-      "INCREASE_CASH_PRODUCTION\020\010\022\033\n\027INCREASE_O" +
-      "IL_PRODUCTION\020\t\022\033\n\027INCREASE_GEM_PRODUCTI" +
-      "ON\020\n\022\023\n\017INCREASE_ATTACK\020\013\022\017\n\013INCREASE_HP" +
-      "\020\014\022\027\n\023UNLOCK_MINOR_POTION\020\r\022\031\n\025UNLOCK_CH" +
-      "ILL_ANTIDOTE\020\016\022\032\n\026UNLOCK_POISON_ANTIDOTE" +
-      "\020\017\022\032\n\026UNLOCK_LOLLIPOP_HAMMER\020\020\022\020\n\014UNLOCK" +
-      "_PUTTY\020\021\022\022\n\016UNLOCK_SHUFFLE\020\022\022\021\n\rUNLOCK_C" +
-      "LOUDS\020\023\022\020\n\014UNLOCK_LOCKS\020\024\022\020\n\014UNLOCK_HOLE",
-      "S\020\025\022\020\n\014UNLOCK_VINES\020\026*|\n\016ResearchDomain\022" +
-      "\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVEL" +
-      "UP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS" +
-      "\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B\020B\016Researchs" +
-      "Proto"
+      "(\010*\247\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\020\n\014" +
+      "HEALING_COST\020\002\022\021\n\rHEALING_SPEED\020\003\022\020\n\014ENH",
+      "ANCE_COST\020\004\022\014\n\010XP_BONUS\020\005\022\031\n\025DECREASE_EN" +
+      "HANCE_TIME\020\006\022\023\n\017ATTACK_INCREASE\020\007\022\017\n\013HP_" +
+      "INCREASE\020\010\022\022\n\016SPEED_INCREASE\020\t\022\033\n\027INCREA" +
+      "SE_HOSPITAL_QUEUE\020\n\022\032\n\026INCREASE_ENHANCE_" +
+      "QUEUE\020\013\022\027\n\023NUMBER_OF_HOSPITALS\020\014\022\020\n\014CONS" +
+      "TRUCTION\020\r\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n" +
+      "\024ITEM_PRODUCTION_COST\020\017\022\027\n\023RESOURCE_PROD" +
+      "UCTION\020\020\022\024\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK" +
+      "_ITEM\020\022\022\023\n\017UNLOCK_OBSTACLE\020\023*|\n\016Research" +
+      "Domain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013",
+      "\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t" +
+      "\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B\020B\016Re" +
+      "searchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
