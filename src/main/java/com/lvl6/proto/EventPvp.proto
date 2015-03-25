@@ -2,8 +2,9 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "Battle.proto";
-import "BattleItem.proto";
+//import "BattleItem.proto";
 import "MonsterStuff.proto";
+//import "Research.proto";
 import "Structure.proto";
 import "User.proto";
 

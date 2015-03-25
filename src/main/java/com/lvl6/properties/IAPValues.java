@@ -28,9 +28,9 @@ public class IAPValues {
 	public static final String STARTERPACK = Globals.APPLE_BUNDLE_ID()
 			+ ".starterpack";
 	public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID()
-			+ ".moneytree";
+			+ ".moneytree1";
 	public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID()
-			+ ".moneytreenosale";
+			+ ".moneytreenosale1";
 
 	public static final String PACKAGE1IMG = "pilegems.png";
 	public static final String PACKAGE2IMG = "baggems.png";

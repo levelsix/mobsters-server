@@ -18,6 +18,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
+import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.Builder;
@@ -32,6 +33,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
@@ -50,6 +52,7 @@ public class RetrieveUserMonsterTeamAction {
 	private HazelcastPvpUtil hazelcastPvpUtil;
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -61,7 +64,9 @@ public class RetrieveUserMonsterTeamAction {
 			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
 			HazelcastPvpUtil hazelcastPvpUtil,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
-			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
+			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil)
+	{
 		super();
 		this.retrieverUserId = retrieverUserId;
 		this.userUuids = userUuids;
@@ -73,19 +78,20 @@ public class RetrieveUserMonsterTeamAction {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
 	//	static class RetrieveUserMonsterTeamResource {
-	//		
-	//		
+	//
+	//
 	//		public RetrieveUserMonsterTeamResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public RetrieveUserMonsterTeamResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
@@ -102,6 +108,7 @@ public class RetrieveUserMonsterTeamAction {
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
 	private Map<String, Integer> allButRetrieverUserIdToMsfuMonsterDropId;
 	private Map<String, List<PvpBoardObstacleForUser>> allButRetrieverUserIdToPvpBoardObstacles;
+	private Map<String, List<ResearchForUser>> allButRetrieverUserIdToUserResearch;
 
 	private List<String> allUsersIdsExceptRetriever;
 	private List<User> allUsersExceptRetriever;
@@ -249,6 +256,9 @@ public class RetrieveUserMonsterTeamAction {
 				.getPvpBoardObstacleForUserIds(userIdsExceptRetriever);
 		log.info("allButRetrieverUserIdToPvpBoardObstacles={}",
 				allButRetrieverUserIdToPvpBoardObstacles);
+
+		allButRetrieverUserIdToUserResearch = researchForUserRetrieveUtil
+				.getResearchForUserIds(userIdsExceptRetriever);
 	}
 
 	private void getPvpInfo() {
@@ -285,7 +295,7 @@ public class RetrieveUserMonsterTeamAction {
 				userIdsSansPvpUser);
 		List<String> userUuidStrs = new ArrayList<String>();
 		userUuidStrs.addAll(userIdsSansPvpUser);
-		//case if the retriever doesn't have a PvpUser, caller function already adds the id 
+		//case if the retriever doesn't have a PvpUser, caller function already adds the id
 		//		if (null == this.retrieverPu) {
 		//			userUuidStrs.add(retrieverUserId);
 		//		}
@@ -507,6 +517,10 @@ public class RetrieveUserMonsterTeamAction {
 
 	public Map<String, List<PvpBoardObstacleForUser>> getAllButRetrieverUserIdToPvpBoardObstacles() {
 		return allButRetrieverUserIdToPvpBoardObstacles;
+	}
+
+	public Map<String, List<ResearchForUser>> getAllButRetrieverUserIdToUserResearch() {
+		return allButRetrieverUserIdToUserResearch;
 	}
 
 }

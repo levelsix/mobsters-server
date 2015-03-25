@@ -38,6 +38,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
@@ -84,6 +85,9 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	@Autowired
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+
+	@Autowired
+	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
 	@Autowired
 	private InsertUtil insertUtil;
@@ -223,7 +227,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				monsterForUserRetrieveUtil, clanMemberTeamDonationRetrieveUtil,
 				monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 				pvpLeagueForUserRetrieveUtil,
-				pvpBoardObstacleForUserRetrieveUtil);
+				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil);
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		rumta.execute(resBuilder);
@@ -244,7 +248,8 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				rumta.getAllButRetrieverUserIdToCmtd(),
 				rumta.getAllButRetrieverUserIdToMsfu(),
 				rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
-				rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
+				rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
+				rumta.getAllButRetrieverUserIdToUserResearch());
 
 		//not every user will have pvp board obstacles
 		//		assertNotNull(rumta.getAllButRetrieverUserIdToPvpBoardObstacles());

@@ -3424,30 +3424,29 @@ public final class BattleItemsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020BattleItem.proto\022\016com.lvl6.proto\032\026Shar" +
-      "edEnumConfig.proto\032\017Structure.proto\"i\n\023U" +
-      "serBattleItemProto\022\030\n\020userBattleItemId\030\001" +
-      " \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030\003" +
-      " \001(\005\022\020\n\010quantity\030\004 \001(\005\"\212\003\n\017BattleItemPro" +
-      "to\022\024\n\014battleItemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017" +
-      "\n\007imgName\030\003 \001(\t\0226\n\016battleItemType\030\004 \001(\0162" +
-      "\036.com.lvl6.proto.BattleItemType\022>\n\022battl" +
-      "eItemCategory\030\005 \001(\0162\".com.lvl6.proto.Bat" +
-      "tleItemCategory\0228\n\022createResourceType\030\006 ",
-      "\001(\0162\034.com.lvl6.proto.ResourceType\022\022\n\ncre" +
-      "ateCost\030\007 \001(\005\022\023\n\013description\030\010 \001(\t\022\023\n\013po" +
-      "werAmount\030\t \001(\005\022\020\n\010priority\030\013 \001(\005\022\027\n\017min" +
-      "utesToCreate\030\014 \001(\005\022\027\n\017inBattleGemCost\030\r " +
-      "\001(\005\022\016\n\006amount\030\016 \001(\005\"\207\001\n\033BattleItemQueueF" +
-      "orUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUui" +
-      "d\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expecte" +
-      "dStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002*\222\001" +
-      "\n\016BattleItemType\022\020\n\014MINOR_POTION\020\001\022\022\n\016CH" +
-      "ILL_ANTIDOTE\020\002\022\023\n\017POISON_ANTIDOTE\020\003\022\016\n\nO",
-      "RB_HAMMER\020\004\022\r\n\tHAND_SWAP\020\005\022\021\n\rBOARD_SHUF" +
-      "FLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NONE\020\010*,\n\022BattleItem" +
-      "Category\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Batt" +
-      "leItemsProto"
+      "\n\020BattleItem.proto\022\016com.lvl6.proto\032\017Stru" +
+      "cture.proto\"i\n\023UserBattleItemProto\022\030\n\020us" +
+      "erBattleItemId\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024" +
+      "\n\014battleItemId\030\003 \001(\005\022\020\n\010quantity\030\004 \001(\005\"\212" +
+      "\003\n\017BattleItemProto\022\024\n\014battleItemId\030\001 \001(\005" +
+      "\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\0226\n\016battl" +
+      "eItemType\030\004 \001(\0162\036.com.lvl6.proto.BattleI" +
+      "temType\022>\n\022battleItemCategory\030\005 \001(\0162\".co" +
+      "m.lvl6.proto.BattleItemCategory\0228\n\022creat" +
+      "eResourceType\030\006 \001(\0162\034.com.lvl6.proto.Res",
+      "ourceType\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013descrip" +
+      "tion\030\010 \001(\t\022\023\n\013powerAmount\030\t \001(\005\022\020\n\010prior" +
+      "ity\030\013 \001(\005\022\027\n\017minutesToCreate\030\014 \001(\005\022\027\n\017in" +
+      "BattleGemCost\030\r \001(\005\022\016\n\006amount\030\016 \001(\005\"\207\001\n\033" +
+      "BattleItemQueueForUserProto\022\020\n\010priority\030" +
+      "\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030" +
+      "\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022\023\n\013elap" +
+      "sedTime\030\005 \001(\002*\222\001\n\016BattleItemType\022\020\n\014MINO" +
+      "R_POTION\020\001\022\022\n\016CHILL_ANTIDOTE\020\002\022\023\n\017POISON" +
+      "_ANTIDOTE\020\003\022\016\n\nORB_HAMMER\020\004\022\r\n\tHAND_SWAP",
+      "\020\005\022\021\n\rBOARD_SHUFFLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NONE" +
+      "\020\010*,\n\022BattleItemCategory\022\n\n\006POTION\020\001\022\n\n\006" +
+      "PUZZLE\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3460,7 +3459,6 @@ public final class BattleItemsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_UserBattleItemProto_descriptor =
@@ -3481,7 +3479,6 @@ public final class BattleItemsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
         new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
   }
 

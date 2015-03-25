@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -61,6 +62,9 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+
+	@Autowired
+	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
 	public RetrieveUserMonsterTeamController() {
 		numAllocatedThreads = 4;
@@ -136,7 +140,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					clanMemberTeamDonationRetrieveUtil,
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
-					pvpBoardObstacleForUserRetrieveUtil);
+					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(
@@ -155,7 +159,8 @@ public class RetrieveUserMonsterTeamController extends EventController {
 								rumta.getAllButRetrieverUserIdToCmtd(),
 								rumta.getAllButRetrieverUserIdToMsfu(),
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
-								rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
+								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
+								rumta.getAllButRetrieverUserIdToUserResearch());
 
 				log.info("ppList={}", ppList);
 				resBuilder.addAllUserMonsterTeam(ppList);
@@ -187,7 +192,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			}
 
 			//		} finally {
-			//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 

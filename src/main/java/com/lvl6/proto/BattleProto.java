@@ -297,6 +297,30 @@ public final class BattleProto {
      */
     com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getUserBoardObstaclesOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> 
+        getUserResearchList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    int getUserResearchCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpProto}
@@ -426,6 +450,14 @@ public final class BattleProto {
               userBoardObstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto.PARSER, extensionRegistry));
               break;
             }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.UserResearchProto>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              userResearch_.add(input.readMessage(com.lvl6.proto.ResearchsProto.UserResearchProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -439,6 +471,9 @@ public final class BattleProto {
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           userBoardObstacles_ = java.util.Collections.unmodifiableList(userBoardObstacles_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -759,6 +794,41 @@ public final class BattleProto {
       return userBoardObstacles_.get(index);
     }
 
+    public static final int USERRESEARCH_FIELD_NUMBER = 11;
+    private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearch_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> getUserResearchList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    public int getUserResearchCount() {
+      return userResearch_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index) {
+      return userResearch_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index) {
+      return userResearch_.get(index);
+    }
+
     private void initFields() {
       defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       defenderMonsters_ = java.util.Collections.emptyList();
@@ -769,6 +839,7 @@ public final class BattleProto {
       cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       monsterIdDropped_ = 0;
       userBoardObstacles_ = java.util.Collections.emptyList();
+      userResearch_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -809,6 +880,9 @@ public final class BattleProto {
       }
       for (int i = 0; i < userBoardObstacles_.size(); i++) {
         output.writeMessage(10, userBoardObstacles_.get(i));
+      }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        output.writeMessage(11, userResearch_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -854,6 +928,10 @@ public final class BattleProto {
       for (int i = 0; i < userBoardObstacles_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, userBoardObstacles_.get(i));
+      }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, userResearch_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -969,6 +1047,7 @@ public final class BattleProto {
           getPvpLeagueStatsFieldBuilder();
           getCmtdFieldBuilder();
           getUserBoardObstaclesFieldBuilder();
+          getUserResearchFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1014,6 +1093,12 @@ public final class BattleProto {
           bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           userBoardObstaclesBuilder_.clear();
+        }
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          userResearchBuilder_.clear();
         }
         return this;
       }
@@ -1100,6 +1185,15 @@ public final class BattleProto {
           result.userBoardObstacles_ = userBoardObstacles_;
         } else {
           result.userBoardObstacles_ = userBoardObstaclesBuilder_.build();
+        }
+        if (userResearchBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.userResearch_ = userResearch_;
+        } else {
+          result.userResearch_ = userResearchBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1189,6 +1283,32 @@ public final class BattleProto {
                    getUserBoardObstaclesFieldBuilder() : null;
             } else {
               userBoardObstaclesBuilder_.addAllMessages(other.userBoardObstacles_);
+            }
+          }
+        }
+        if (userResearchBuilder_ == null) {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearch_.isEmpty()) {
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureUserResearchIsMutable();
+              userResearch_.addAll(other.userResearch_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearchBuilder_.isEmpty()) {
+              userResearchBuilder_.dispose();
+              userResearchBuilder_ = null;
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              userResearchBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserResearchFieldBuilder() : null;
+            } else {
+              userResearchBuilder_.addAllMessages(other.userResearch_);
             }
           }
         }
@@ -2442,6 +2562,246 @@ public final class BattleProto {
           userBoardObstacles_ = null;
         }
         return userBoardObstaclesBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearch_ =
+        java.util.Collections.emptyList();
+      private void ensureUserResearchIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.UserResearchProto>(userResearch_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> userResearchBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> getUserResearchList() {
+        if (userResearchBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        } else {
+          return userResearchBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public int getUserResearchCount() {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.size();
+        } else {
+          return userResearchBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);
+        } else {
+          return userResearchBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder addUserResearch(com.lvl6.proto.ResearchsProto.UserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder addUserResearch(
+          com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder addAllUserResearch(
+          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.UserResearchProto> values) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userResearch_);
+          onChanged();
+        } else {
+          userResearchBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder clearUserResearch() {
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          userResearchBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public Builder removeUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.remove(index);
+          onChanged();
+        } else {
+          userResearchBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder getUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
+          int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);  } else {
+          return userResearchBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
+           getUserResearchOrBuilderList() {
+        if (userResearchBuilder_ != null) {
+          return userResearchBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder addUserResearchBuilder() {
+        return getUserResearchFieldBuilder().addBuilder(
+            com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder addUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 11;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto.Builder> 
+           getUserResearchBuilderList() {
+        return getUserResearchFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
+          getUserResearchFieldBuilder() {
+        if (userResearchBuilder_ == null) {
+          userResearchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder>(
+                  userResearch_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          userResearch_ = null;
+        }
+        return userResearchBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpProto)
@@ -9817,53 +10177,55 @@ public final class BattleProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\017Structure.proto\032\nUser.proto\"" +
-      "\260\003\n\010PvpProto\022;\n\010defender\030\001 \001(\0132).com.lvl" +
-      "6.proto.MinimumUserProtoWithLevel\0229\n\020def" +
-      "enderMonsters\030\003 \003(\0132\037.com.lvl6.proto.Pvp" +
-      "MonsterProto\022\037\n\027prospectiveCashWinnings\030" +
-      "\004 \001(\005\022\036\n\026prospectiveOilWinnings\030\005 \001(\005\022:\n" +
-      "\016pvpLeagueStats\030\006 \001(\0132\".com.lvl6.proto.U" +
-      "serPvpLeagueProto\022\023\n\013defenderMsg\030\007 \001(\t\0229" +
-      "\n\004cmtd\030\010 \001(\0132+.com.lvl6.proto.ClanMember",
-      "TeamDonationProto\022\030\n\020monsterIdDropped\030\t " +
-      "\001(\005\022E\n\022userBoardObstacles\030\n \003(\0132).com.lv" +
-      "l6.proto.UserPvpBoardObstacleProto\"m\n\017Pv" +
-      "pMonsterProto\022@\n\017defenderMonster\030\001 \001(\0132\'" +
-      ".com.lvl6.proto.MinimumUserMonsterProto\022" +
-      "\030\n\020monsterIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistory" +
-      "Proto\022\025\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker" +
-      "\030\001 \001(\0132\035.com.lvl6.proto.FullUserProto\022:\n" +
-      "\021attackersMonsters\030\002 \003(\0132\037.com.lvl6.prot" +
-      "o.PvpMonsterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032",
-      "\n\022defenderCashChange\030\004 \001(\021\022\031\n\021defenderOi" +
-      "lChange\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n" +
-      "\027prospectiveCashWinnings\030\007 \001(\005\022\036\n\026prospe" +
-      "ctiveOilWinnings\030\010 \001(\005\022:\n\016attackerBefore" +
-      "\030\n \001(\0132\".com.lvl6.proto.UserPvpLeaguePro" +
-      "to\0229\n\rattackerAfter\030\013 \001(\0132\".com.lvl6.pro" +
-      "to.UserPvpLeagueProto\022:\n\016defenderBefore\030" +
-      "\014 \001(\0132\".com.lvl6.proto.UserPvpLeagueProt" +
-      "o\0229\n\rdefenderAfter\030\r \001(\0132\".com.lvl6.prot" +
-      "o.UserPvpLeagueProto\022/\n\010defender\030\016 \001(\0132\035",
-      ".com.lvl6.proto.FullUserProto\022\032\n\022attacke" +
-      "rCashChange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020" +
-      " \001(\005\022\023\n\013clanAvenged\030\021 \001(\010\"^\n\016PvpLeaguePr" +
-      "oto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(" +
-      "\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(" +
-      "\t\"\250\002\n\022PvpClanAvengeProto\022\026\n\016clanAvengeUu" +
-      "id\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lv" +
-      "l6.proto.PvpUserClanAvengeProto\022;\n\010attac" +
-      "ker\030\003 \001(\0132).com.lvl6.proto.MinimumUserPr" +
-      "otoWithLevel\0222\n\010defender\030\004 \001(\0132 .com.lvl",
-      "6.proto.MinimumUserProto\022\025\n\rbattleEndTim" +
-      "e\030\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020de" +
-      "fenderClanUuid\030\007 \001(\t\"h\n\026PvpUserClanAveng" +
-      "eProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001" +
-      "(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime" +
-      "\030\004 \001(\003*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001" +
-      "\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB" +
-      "\013BattleProto"
+      "tuff.proto\032\016Research.proto\032\017Structure.pr" +
+      "oto\032\nUser.proto\"\351\003\n\010PvpProto\022;\n\010defender" +
+      "\030\001 \001(\0132).com.lvl6.proto.MinimumUserProto" +
+      "WithLevel\0229\n\020defenderMonsters\030\003 \003(\0132\037.co" +
+      "m.lvl6.proto.PvpMonsterProto\022\037\n\027prospect" +
+      "iveCashWinnings\030\004 \001(\005\022\036\n\026prospectiveOilW" +
+      "innings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006 \001(\0132\"." +
+      "com.lvl6.proto.UserPvpLeagueProto\022\023\n\013def" +
+      "enderMsg\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.com.lvl6.",
+      "proto.ClanMemberTeamDonationProto\022\030\n\020mon" +
+      "sterIdDropped\030\t \001(\005\022E\n\022userBoardObstacle" +
+      "s\030\n \003(\0132).com.lvl6.proto.UserPvpBoardObs" +
+      "tacleProto\0227\n\014userResearch\030\013 \003(\0132!.com.l" +
+      "vl6.proto.UserResearchProto\"m\n\017PvpMonste" +
+      "rProto\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lv" +
+      "l6.proto.MinimumUserMonsterProto\022\030\n\020mons" +
+      "terIdDropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025" +
+      "\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132" +
+      "\035.com.lvl6.proto.FullUserProto\022:\n\021attack",
+      "ersMonsters\030\002 \003(\0132\037.com.lvl6.proto.PvpMo" +
+      "nsterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defen" +
+      "derCashChange\030\004 \001(\021\022\031\n\021defenderOilChange" +
+      "\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027prospe" +
+      "ctiveCashWinnings\030\007 \001(\005\022\036\n\026prospectiveOi" +
+      "lWinnings\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132" +
+      "\".com.lvl6.proto.UserPvpLeagueProto\0229\n\ra" +
+      "ttackerAfter\030\013 \001(\0132\".com.lvl6.proto.User" +
+      "PvpLeagueProto\022:\n\016defenderBefore\030\014 \001(\0132\"" +
+      ".com.lvl6.proto.UserPvpLeagueProto\0229\n\rde",
+      "fenderAfter\030\r \001(\0132\".com.lvl6.proto.UserP" +
+      "vpLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com.lv" +
+      "l6.proto.FullUserProto\022\032\n\022attackerCashCh" +
+      "ange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n" +
+      "\013clanAvenged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010" +
+      "leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\tim" +
+      "gPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\250\002\n\022P" +
+      "vpClanAvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(" +
+      "\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lvl6.prot" +
+      "o.PvpUserClanAvengeProto\022;\n\010attacker\030\003 \001",
+      "(\0132).com.lvl6.proto.MinimumUserProtoWith" +
+      "Level\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003" +
+      "\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderC" +
+      "lanUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022" +
+      "\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016c" +
+      "lanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*" +
+      "E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEF" +
+      "ENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013Battle" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9877,6 +10239,7 @@ public final class BattleProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.ResearchsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -9885,7 +10248,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", "UserBoardObstacles", });
+        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", "UserBoardObstacles", "UserResearch", });
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new
@@ -9917,6 +10280,7 @@ public final class BattleProto {
         internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
         new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.ResearchsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

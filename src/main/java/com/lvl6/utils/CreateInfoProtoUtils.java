@@ -361,7 +361,7 @@ public class CreateInfoProtoUtils {
 	/*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(
 		  User u, PvpLeagueForUser plfu) {
 	MinimumUserProtoWithLevel mup = createMinimumUserProtoWithLevelFromUser(u);
-	MinimumUserProtoWithBattleHistory.Builder mupwbhb = MinimumUserProtoWithBattleHistory.newBuilder(); 
+	MinimumUserProtoWithBattleHistory.Builder mupwbhb = MinimumUserProtoWithBattleHistory.newBuilder();
 	mupwbhb.setMinUserProtoWithLevel(mup);
 
 	int battlesWon = plfu.getAttacksWon() + plfu.getDefensesWon();
@@ -379,7 +379,8 @@ public class CreateInfoProtoUtils {
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
-			List<PvpBoardObstacleForUser> boardObstacles) {
+			List<PvpBoardObstacleForUser> boardObstacles,
+			List<ResearchForUser> rfuList) {
 
 		MinimumUserProtoWithLevel defenderProto = createMinimumUserProtoWithLevel(
 				defender, clan, null);
@@ -389,7 +390,7 @@ public class CreateInfoProtoUtils {
 		return createPvpProto(userId, plfu, pu, userMonsters,
 				userMonsterIdToDropped, prospectiveCashWinnings,
 				prospectiveOilWinnings, defenderProto, msg, cmtd, msfu,
-				msfuMonsterIdDropped, boardObstacles);
+				msfuMonsterIdDropped, boardObstacles, rfuList);
 	}
 
 	public static PvpProto createPvpProto(String defenderId,
@@ -400,7 +401,8 @@ public class CreateInfoProtoUtils {
 			MinimumUserProtoWithLevel defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
-			List<PvpBoardObstacleForUser> boardObstacles) {
+			List<PvpBoardObstacleForUser> boardObstacles,
+			List<ResearchForUser> rfuList) {
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 
 		Collection<PvpMonsterProto> defenderMonsters = createPvpMonsterProto(
@@ -439,6 +441,11 @@ public class CreateInfoProtoUtils {
 		if (null != boardObstacles && !boardObstacles.isEmpty()) {
 			List<UserPvpBoardObstacleProto> upbops = createUserPvpBoardObstacleProto(boardObstacles);
 			ppb.addAllUserBoardObstacles(upbops);
+		}
+
+		if (null != rfuList && !rfuList.isEmpty()) {
+			Collection<UserResearchProto> urpList = createUserResearchProto(rfuList);
+			ppb.addAllUserResearch(urpList);
 		}
 
 		return ppb.build();
@@ -526,7 +533,7 @@ public class CreateInfoProtoUtils {
 	//			pmpb.setMonsterIdDropped(monsterIdDropped);
 	//		}
 	//		PvpMonsterProto pmp = pmpb.build();
-	//		
+	//
 	//		return pmp;
 	//
 	//	}
@@ -580,7 +587,8 @@ public class CreateInfoProtoUtils {
 			Map<String, ClanMemberTeamDonation> userIdToCmtd,
 			Map<String, MonsterSnapshotForUser> userIdToMsfu,
 			Map<String, Integer> userIdToMsfuMonsterIdDropped,
-			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles) {
+			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles,
+			Map<String, List<ResearchForUser>> userIdToRfuList) {
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
 		for (User u : queuedOpponents) {
@@ -627,10 +635,15 @@ public class CreateInfoProtoUtils {
 				boardObstacles = userIdToPvpBoardObstacles.get(userId);
 			}
 
+			List<ResearchForUser> rfuList = null;
+			if (userIdToRfuList.containsKey(userId)) {
+				rfuList = userIdToRfuList.get(userId);
+			}
+
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 					userMonsterIdToDropped, prospectiveCashWinnings,
 					prospectiveOilWinnings, cmtd, msfu, msfuMonsterIdDropped,
-					boardObstacles);
+					boardObstacles, rfuList);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
@@ -1239,7 +1252,7 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(time);
 		pcppb.setContent(p.getContent());
-		
+
 		if(translatedMessage != null) {
 			for(TranslateLanguages tl : translatedMessage.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
@@ -1288,7 +1301,7 @@ public class CreateInfoProtoUtils {
 	//createMinimumProtoFromUser calls ClanRetrieveUtils, so a db read, if user has a clan
 	//to prevent this, all clans that will be used should be passed in, hence clanIdsToClans,
 	//clanIdsToUserIdSet. Not all users will have a clan, hence clanlessUserIds
-	//privateChatPostIds is used by StartupController to pick out a subset of 
+	//privateChatPostIds is used by StartupController to pick out a subset of
 	//postIdsToPrivateChatPosts; does not need to be set.
 	public static List<PrivateChatPostProto> createPrivateChatPostProtoList(
 			Map<String, Clan> clanIdsToClans,
@@ -1346,7 +1359,7 @@ public class CreateInfoProtoUtils {
 				.newBuilder();
 		gcmpb.setSender(createMinimumUserProtoWithLevel(user, clan, null));
 		gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
-		
+
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 
@@ -1361,7 +1374,7 @@ public class CreateInfoProtoUtils {
 //				gcmpb.addTranslatedContent(ttpb.build());
 //			}
 //		}
-		
+
 //		gcmpb.setContent(p.getContent());
 		return gcmpb.build();
 	}
@@ -1455,7 +1468,7 @@ public class CreateInfoProtoUtils {
 	//		builder.setImgId(ce.getImgGood());
 	//
 	//		try {
-	//			StructOrientation so = StructOrientation.valueOf(ce.getOrientation()); 
+	//			StructOrientation so = StructOrientation.valueOf(ce.getOrientation());
 	//			builder.setOrientation(so);
 	//		} catch (Exception e) {
 	//			log.error(String.format(
@@ -2422,7 +2435,7 @@ public class CreateInfoProtoUtils {
 			mlipb.setSecsToEnhancePerFeederExponent(info.getSecondsToEnhancePerFeederExponent());
 			mlipb.setStrength(info.getStrength());
 			mlipb.setStrengthExponent(info.getStrengthExponent());
-			
+
 			lvlInfoProtos.add(mlipb.build());
 		}
 
@@ -3098,7 +3111,7 @@ public class CreateInfoProtoUtils {
 			List<ResearchPropertyProto> rppList = createResearchPropertyProto(researchProperties);
 			rpb.addAllProperties(rppList);
 		}
-		
+
 		rpb.setPriority(r.getPriority());
 		rpb.setTier(r.getTier());
 		rpb.setStrength(r.getStrength());
@@ -4089,7 +4102,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/*
-	public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
+	public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm,
 	  int cashReward, int oilReward, boolean pieceDropped,
 	  Map<Integer, Integer> tsmIdToItemId) {
 	int tsmMonsterId = tsm.getMonsterId();
@@ -4097,7 +4110,7 @@ public class CreateInfoProtoUtils {
 	TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
 	bldr.setTsmId(tsm.getId());
 	bldr.setMonsterId(tsmMonsterId);
-	String tsmMonsterType = tsm.getMonsterType(); 
+	String tsmMonsterType = tsm.getMonsterType();
 	try {
 		MonsterType mt = MonsterType.valueOf(tsmMonsterType);
 		bldr.setMonsterType(mt);
@@ -4116,7 +4129,7 @@ public class CreateInfoProtoUtils {
 		bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 	}
 
-	int defensiveSkillId = tsm.getDefensiveSkillId(); 
+	int defensiveSkillId = tsm.getDefensiveSkillId();
 	if ( defensiveSkillId > 0 ) {
 		bldr.setDefensiveSkillId(defensiveSkillId);
 	}
@@ -4128,7 +4141,7 @@ public class CreateInfoProtoUtils {
 
 	int tsmId = tsm.getId();
 	if (tsmIdToItemId.containsKey(tsmId)) {
-	  //if multiple identical monsters spawned, each one should have a 
+	  //if multiple identical monsters spawned, each one should have a
 	  //corresponding item id that it drops, could be -1. (-1 means no item drop)
 	  int itemId = tsmIdToItemId.get(tsmId);
 
@@ -4450,7 +4463,7 @@ public class CreateInfoProtoUtils {
 	//			.setPrizeImageName(r.getPrizeImageName());
 	//
 	//		ColorProto.Builder clrB = ColorProto.newBuilder().setBlue(r.getBlue())
-	//			.setGreen(r.getGreen()).setRed(r.getRed()); 
+	//			.setGreen(r.getGreen()).setRed(r.getRed());
 	//
 	//		b.setTitleColor(clrB.build());
 	//		return b.build();
@@ -4759,7 +4772,7 @@ public class CreateInfoProtoUtils {
 			userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
 		}
 
-		//construct the minimum user protos for the users that have clans 
+		//construct the minimum user protos for the users that have clans
 		if (null == clanIdsToClans) {
 			return;
 		}
@@ -4786,7 +4799,7 @@ public class CreateInfoProtoUtils {
 			}
 			Clan c = clanIdsToClans.get(clanId);
 
-			//create minimum user protos for users associated with clan                       
+			//create minimum user protos for users associated with clan
 			for (String userId : clanIdsToUserIdSet.get(clanId)) {
 				User u = userIdsToUsers.get(userId);
 				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(

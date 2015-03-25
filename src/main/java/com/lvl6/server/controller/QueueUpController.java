@@ -36,6 +36,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -82,6 +83,9 @@ public class QueueUpController extends EventController {
 
 	@Autowired
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+
+	@Autowired
+	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 
 	//	@Autowired
 	//	protected PvpUtil pvpUtil;
@@ -179,7 +183,7 @@ public class QueueUpController extends EventController {
 
 			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//no need to update client since no currency or elo update
-				//UPDATE CLIENT 
+				//UPDATE CLIENT
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				//				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 				//					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -237,7 +241,7 @@ public class QueueUpController extends EventController {
 	//	}
 	//
 	//	private boolean hasEnoughCash(Builder resBuilder, User u, int gemsSpent, int cashChange) {
-	//		int userCash = u.getCash(); 
+	//		int userCash = u.getCash();
 	//		//positive 'cashChange' means refund, negative means charge user
 	//		int cost = -1 * cashChange;
 	//
@@ -265,7 +269,8 @@ public class QueueUpController extends EventController {
 					clanMemberTeamDonationRetrieveUtil,
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
-					pvpBoardObstacleForUserRetrieveUtil);
+					pvpBoardObstacleForUserRetrieveUtil,
+					researchForUserRetrieveUtil);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
@@ -286,7 +291,8 @@ public class QueueUpController extends EventController {
 								rumta.getAllButRetrieverUserIdToCmtd(),
 								rumta.getAllButRetrieverUserIdToMsfu(),
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
-								rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
+								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
+								rumta.getAllButRetrieverUserIdToUserResearch());
 
 				log.info("ppList={}", ppList);
 				//user should see real people before fake ones
@@ -411,31 +417,31 @@ public class QueueUpController extends EventController {
 		//		User defender = null;
 
 		//jedis, redis stuff
-		//		//now having elo range, figure out the offset 
+		//		//now having elo range, figure out the offset
 		//		//could make a range call and do stuff after but eh
 		//		int offset = 0;
 		//		int limit = ControllerConstants.PVP__NUM_ENEMIES_LIMIT;
-		//		
+		//
 		//		Set<Tuple> prospectiveDefenders = getPvpUtil().getEloTopN(minElo, maxElo,
 		//				offset, limit);
-		//		
+		//
 		//		//go through them and select the one that has not been seen yet
 		//		for (Tuple t : prospectiveDefenders) {
 		//			int userId = Integer.valueOf(t.getElement());
 		//			int elo = (int) t.getScore();
-		//			
+		//
 		//			if (!seenUserIds.contains(userId)) {
 		//				//we have a winner!
 		//				defender = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 		//			}
-		//		
-		//		
+		//
+		//
 		//		}
 		//use hazelcast distributed map to get the defenders, limit the amount
 		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil
 			.retrievePvpUsers(minElo, maxElo, clientDate, numNeeded,
-				seenUserIds); 
+				seenUserIds);
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
@@ -473,7 +479,7 @@ public class QueueUpController extends EventController {
 			userIdToProspectiveCashReward.put(userId,
 				potentialResult.getUnsignedCashAttackerWins());
 
-			userIdToProspectiveOilReward.put(userId, 
+			userIdToProspectiveOilReward.put(userId,
 				potentialResult.getUnsignedOilAttackerWins());
 		}
 	}*/
