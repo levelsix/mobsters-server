@@ -1387,7 +1387,7 @@ public class CreateInfoProtoUtils {
 
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
-//		gcmpb.setContent(content);
+		gcmpb.setContent(content);
 
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
@@ -1400,11 +1400,6 @@ public class CreateInfoProtoUtils {
 				ttpb.setLanguage(tl);
 				ttpb.setText(translatedMap.get(tl));
 				gcmpb.addTranslatedContent(ttpb.build());
-				log.info("translatedMap string: " + translatedMap.get(tl));
-				if(tl.toString().equals("CHINESE_TRADITIONAL")) {
-					gcmpb.setContent(translatedMap.get(tl));
-				}
-
 			}
 		}
 
