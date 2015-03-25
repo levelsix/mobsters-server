@@ -166,25 +166,23 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 				
-				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(Language.CHINESE_TRADITIONAL, censoredChatMessage);
-				String translationOfCensoredChatMessage= "";
-				for(TranslateLanguages tl : translateMap.keySet()) {
-					translationOfCensoredChatMessage = translateMap.get(tl);
-					log.info("translated censored msg: " + translationOfCensoredChatMessage);
-				}
-				chatProto.setChatMessage(translationOfCensoredChatMessage);
+				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, censoredChatMessage);				
+					
+				chatProto.setTranslations(CreateInfoProtoUtils
+					.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
+							censoredChatMessage, user.isAdmin(), null, translateMap));	
+
+
 				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
-				if (scope == GroupChatScope.GLOBAL) {
-					chatProto.setIsAdmin(user.isAdmin());
-					
-				}
+
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
-						user.isAdmin(), timeOfPost.getTime(), user.getLevel());
+						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
+						censoredChatMessage);
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
@@ -213,7 +211,7 @@ public class SendGroupChatController extends EventController {
 	protected void sendChatMessage(String senderId,
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
 			boolean isForClan, String clanId, boolean isAdmin, long time,
-			int level) {
+			int level, String censoredChatMessage) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(chatProto.build());
@@ -225,7 +223,7 @@ public class SendGroupChatController extends EventController {
 			//add new message to front of list
 			chatMessages.add(0, CreateInfoProtoUtils
 					.createGroupChatMessageProto(time, chatProto.getSender(),
-							chatProto.getChatMessage(), isAdmin, null, null));
+							censoredChatMessage, isAdmin, null, null));
 			//remove older messages
 			try {
 				while (chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {

@@ -113,7 +113,6 @@ public class MessagingUtil {
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
-		chatProto.setIsAdmin(true);
 		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
 				1, timeOfPost.getTime());
 	}
