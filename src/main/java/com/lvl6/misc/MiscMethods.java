@@ -1942,7 +1942,8 @@ public class MiscMethods {
 		try {
 			if(language != null) {
 				translatedText = Translate.execute(text, language);
-				returnMap.put(TranslateLanguages.valueOf(language.toString()), translatedText);
+				TranslateLanguages tl2 = convertFromLanguageToEnum(language);
+				returnMap.put(tl2, translatedText);
 			}
 			else {
 				for(Language language2 : listOfLanguages) {
