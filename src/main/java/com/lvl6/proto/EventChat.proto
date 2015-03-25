@@ -46,8 +46,9 @@ message SendGroupChatResponseProto {
 message ReceivedGroupChatResponseProto {
 	optional MinimumUserProtoWithLevel sender = 1;
 	optional GroupChatScope scope = 2 [default = CLAN];
-	optional GroupChatMessageProto translations = 3;
+	optional GroupChatMessageProto message = 3;
 	optional string chatMessage = 4 [deprecated = true];
+	optional bool isAdmin = 5 [deprecated = true];
 }
 
 //------------------------------------------------------------------------------------
@@ -107,19 +108,20 @@ message TranslateSelectMessagesRequestProto {
 	optional MinimumUserProto sender = 1; //person receiving msgs
 	optional string otherUserUuid = 2;
 	optional TranslateLanguages language = 3;
-	repeated PrivateChatPostRequestProto messagesToBeTranslated = 4;
+	repeated PrivateChatPostProto messagesToBeTranslated = 4;
 
 }
 
 message TranslateSelectMessagesResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional string originalMessage = 2;
+	repeated string originalMessages = 2;
 	repeated TranslatedTextProto messagesTranslated = 3;
 	optional TranslateSelectMessagesStatus status = 4;
 
 	enum TranslateSelectMessagesStatus {
 		FAIL_OTHER = 1;
-		SUCCESS = 2;
+		FAIL_NOT_VALID_LANGUAGE = 2;
+		SUCCESS = 3;
 	}
 }
 

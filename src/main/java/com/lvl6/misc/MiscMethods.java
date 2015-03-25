@@ -1989,5 +1989,28 @@ public class MiscMethods {
 			return tl;	
 		}
 	}
+
+	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {
+		if(tl.toString().equals("ARABIC")) {
+			return Language.ARABIC;
+		}
+		else if(tl.toString().equals("ENGLISH")) {
+			return Language.ENGLISH;
+		}
+		else if(tl.toString().equals("FRENCH")) {
+			return Language.FRENCH;
+		}
+		else if(tl.toString().equals("GERMAN")) {
+			return Language.GERMAN;
+		}
+		else if(tl.toString().equals("SPANISH")) {
+			return Language.SPANISH;
+		}
+		else return null;
+	}
+		
+	
+	
+	
 	
 }

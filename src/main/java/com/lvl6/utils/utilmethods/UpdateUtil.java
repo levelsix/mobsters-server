@@ -237,5 +237,8 @@ public interface UpdateUtil {
 	
 	public abstract boolean updateUserBattleItems(String userId,
 			List<BattleItemForUser> updateList);
+	
+	public abstract boolean updateUserTranslationSetting(String recipientId, 
+			String senderId, String newLanguage);
 
 }
