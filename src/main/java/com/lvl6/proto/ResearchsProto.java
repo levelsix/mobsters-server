@@ -62,9 +62,9 @@ public final class ResearchsProto {
      */
     INCREASE_HP(11, 12),
     /**
-     * <code>MINOR_POTION = 13;</code>
+     * <code>UNLOCK_MINOR_POTION = 13;</code>
      */
-    MINOR_POTION(12, 13),
+    UNLOCK_MINOR_POTION(12, 13),
     /**
      * <code>UNLOCK_CHILL_ANTIDOTE = 14;</code>
      */
@@ -152,9 +152,9 @@ public final class ResearchsProto {
      */
     public static final int INCREASE_HP_VALUE = 12;
     /**
-     * <code>MINOR_POTION = 13;</code>
+     * <code>UNLOCK_MINOR_POTION = 13;</code>
      */
-    public static final int MINOR_POTION_VALUE = 13;
+    public static final int UNLOCK_MINOR_POTION_VALUE = 13;
     /**
      * <code>UNLOCK_CHILL_ANTIDOTE = 14;</code>
      */
@@ -209,7 +209,7 @@ public final class ResearchsProto {
         case 10: return INCREASE_GEM_PRODUCTION;
         case 11: return INCREASE_ATTACK;
         case 12: return INCREASE_HP;
-        case 13: return MINOR_POTION;
+        case 13: return UNLOCK_MINOR_POTION;
         case 14: return UNLOCK_CHILL_ANTIDOTE;
         case 15: return UNLOCK_POISON_ANTIDOTE;
         case 16: return UNLOCK_LOLLIPOP_HAMMER;
@@ -4377,22 +4377,23 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\351\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004" +
+      "(\010*\360\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\010\n\004" +
       "COST\020\002\022\t\n\005SPEED\020\003\022\027\n\023INCREASE_QUEUE_SIZE",
       "\020\004\022\032\n\026INCREASE_NUM_CAN_BUILD\020\005\022\014\n\010XP_BON" +
       "US\020\006\022\036\n\032INCREASE_CONSTRUCTION_TIME\020\007\022\034\n\030" +
       "INCREASE_CASH_PRODUCTION\020\010\022\033\n\027INCREASE_O" +
       "IL_PRODUCTION\020\t\022\033\n\027INCREASE_GEM_PRODUCTI" +
       "ON\020\n\022\023\n\017INCREASE_ATTACK\020\013\022\017\n\013INCREASE_HP" +
-      "\020\014\022\020\n\014MINOR_POTION\020\r\022\031\n\025UNLOCK_CHILL_ANT" +
-      "IDOTE\020\016\022\032\n\026UNLOCK_POISON_ANTIDOTE\020\017\022\032\n\026U" +
-      "NLOCK_LOLLIPOP_HAMMER\020\020\022\020\n\014UNLOCK_PUTTY\020" +
-      "\021\022\022\n\016UNLOCK_SHUFFLE\020\022\022\021\n\rUNLOCK_CLOUDS\020\023" +
-      "\022\020\n\014UNLOCK_LOCKS\020\024\022\020\n\014UNLOCK_HOLES\020\025\022\020\n\014",
-      "UNLOCK_VINES\020\026*|\n\016ResearchDomain\022\r\n\tNO_D" +
-      "OMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n" +
-      "\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS\020\006\022\027\n\023T" +
-      "RAPS_AND_OBSTACLES\020\007B\020B\016ResearchsProto"
+      "\020\014\022\027\n\023UNLOCK_MINOR_POTION\020\r\022\031\n\025UNLOCK_CH" +
+      "ILL_ANTIDOTE\020\016\022\032\n\026UNLOCK_POISON_ANTIDOTE" +
+      "\020\017\022\032\n\026UNLOCK_LOLLIPOP_HAMMER\020\020\022\020\n\014UNLOCK" +
+      "_PUTTY\020\021\022\022\n\016UNLOCK_SHUFFLE\020\022\022\021\n\rUNLOCK_C" +
+      "LOUDS\020\023\022\020\n\014UNLOCK_LOCKS\020\024\022\020\n\014UNLOCK_HOLE",
+      "S\020\025\022\020\n\014UNLOCK_VINES\020\026*|\n\016ResearchDomain\022" +
+      "\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013\n\007LEVEL" +
+      "UP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS" +
+      "\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B\020B\016Researchs" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

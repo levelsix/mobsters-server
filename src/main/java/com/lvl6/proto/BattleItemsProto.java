@@ -14,9 +14,9 @@ public final class BattleItemsProto {
   public enum BattleItemType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>HEALING_POTION = 1;</code>
+     * <code>MINOR_POTION = 1;</code>
      */
-    HEALING_POTION(0, 1),
+    MINOR_POTION(0, 1),
     /**
      * <code>CHILL_ANTIDOTE = 2;</code>
      */
@@ -48,9 +48,9 @@ public final class BattleItemsProto {
     ;
 
     /**
-     * <code>HEALING_POTION = 1;</code>
+     * <code>MINOR_POTION = 1;</code>
      */
-    public static final int HEALING_POTION_VALUE = 1;
+    public static final int MINOR_POTION_VALUE = 1;
     /**
      * <code>CHILL_ANTIDOTE = 2;</code>
      */
@@ -85,7 +85,7 @@ public final class BattleItemsProto {
 
     public static BattleItemType valueOf(int value) {
       switch (value) {
-        case 1: return HEALING_POTION;
+        case 1: return MINOR_POTION;
         case 2: return CHILL_ANTIDOTE;
         case 3: return POISON_ANTIDOTE;
         case 4: return ORB_HAMMER;
@@ -1609,7 +1609,7 @@ public final class BattleItemsProto {
       battleItemId_ = 0;
       name_ = "";
       imgName_ = "";
-      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
+      battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
       battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
       createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       createCost_ = 0;
@@ -1856,7 +1856,7 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
         bitField0_ = (bitField0_ & ~0x00000008);
         battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -2228,7 +2228,7 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
+      private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
       /**
        * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
        */
@@ -2258,7 +2258,7 @@ public final class BattleItemsProto {
        */
       public Builder clearBattleItemType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
+        battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.MINOR_POTION;
         onChanged();
         return this;
       }
@@ -3441,13 +3441,13 @@ public final class BattleItemsProto {
       "\001(\005\022\016\n\006amount\030\016 \001(\005\"\207\001\n\033BattleItemQueueF" +
       "orUserProto\022\020\n\010priority\030\001 \001(\005\022\020\n\010userUui" +
       "d\030\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\031\n\021expecte" +
-      "dStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002*\224\001" +
-      "\n\016BattleItemType\022\022\n\016HEALING_POTION\020\001\022\022\n\016" +
-      "CHILL_ANTIDOTE\020\002\022\023\n\017POISON_ANTIDOTE\020\003\022\016\n",
-      "\nORB_HAMMER\020\004\022\r\n\tHAND_SWAP\020\005\022\021\n\rBOARD_SH" +
-      "UFFLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NONE\020\010*,\n\022BattleIt" +
-      "emCategory\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Ba" +
-      "ttleItemsProto"
+      "dStartTime\030\004 \001(\003\022\023\n\013elapsedTime\030\005 \001(\002*\222\001" +
+      "\n\016BattleItemType\022\020\n\014MINOR_POTION\020\001\022\022\n\016CH" +
+      "ILL_ANTIDOTE\020\002\022\023\n\017POISON_ANTIDOTE\020\003\022\016\n\nO",
+      "RB_HAMMER\020\004\022\r\n\tHAND_SWAP\020\005\022\021\n\rBOARD_SHUF" +
+      "FLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NONE\020\010*,\n\022BattleItem" +
+      "Category\022\n\n\006POTION\020\001\022\n\n\006PUZZLE\020\002B\022B\020Batt" +
+      "leItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

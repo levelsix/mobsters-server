@@ -167,7 +167,11 @@ public class SendGroupChatController extends EventController {
 						.newBuilder();
 				
 				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(Language.CHINESE_TRADITIONAL, censoredChatMessage);
-				String translationOfCensoredChatMessage = translateMap.get(TranslateLanguages.CHINESE_TRADITIONAL);  
+				String translationOfCensoredChatMessage= "";
+				for(TranslateLanguages tl : translateMap.keySet()) {
+					translationOfCensoredChatMessage = translateMap.get(tl);
+					log.info("translated censored msg: " + translationOfCensoredChatMessage);
+				}
 				chatProto.setChatMessage(translationOfCensoredChatMessage);
 				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
