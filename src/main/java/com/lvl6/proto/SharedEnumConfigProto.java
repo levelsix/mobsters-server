@@ -665,6 +665,14 @@ public final class SharedEnumConfigProto {
      * <code>TASK = 5;</code>
      */
     TASK(4, 5),
+    /**
+     * <code>BATTLE_ITEM = 6;</code>
+     */
+    BATTLE_ITEM(5, 6),
+    /**
+     * <code>BOARD_OBSTACLE = 7;</code>
+     */
+    BOARD_OBSTACLE(6, 7),
     ;
 
     /**
@@ -687,6 +695,14 @@ public final class SharedEnumConfigProto {
      * <code>TASK = 5;</code>
      */
     public static final int TASK_VALUE = 5;
+    /**
+     * <code>BATTLE_ITEM = 6;</code>
+     */
+    public static final int BATTLE_ITEM_VALUE = 6;
+    /**
+     * <code>BOARD_OBSTACLE = 7;</code>
+     */
+    public static final int BOARD_OBSTACLE_VALUE = 7;
 
 
     public final int getNumber() { return value; }
@@ -698,6 +714,8 @@ public final class SharedEnumConfigProto {
         case 3: return RESEARCH;
         case 4: return SKILL;
         case 5: return TASK;
+        case 6: return BATTLE_ITEM;
+        case 7: return BOARD_OBSTACLE;
         default: return null;
       }
     }
@@ -772,10 +790,11 @@ public final class SharedEnumConfigProto {
       "NI_JOB\020\005\022\020\n\014ENHANCE_TIME\020\006\022\023\n\017REMOVE_OBS" +
       "TACLE\020\007\022\023\n\017COMBINE_MONSTER\020\010\022\032\n\026ENTER_PE" +
       "RSISTENT_EVENT\020\t\022\027\n\023PERFORMING_RESEARCH\020" +
-      "\n\022\026\n\022CREATE_BATTLE_ITEM\020\013*I\n\010GameType\022\013\n" +
+      "\n\022\026\n\022CREATE_BATTLE_ITEM\020\013*n\n\010GameType\022\013\n" +
       "\007NO_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022" +
-      "\t\n\005SKILL\020\004\022\010\n\004TASK\020\005B\027B\025SharedEnumConfig" +
-      "Proto"
+      "\t\n\005SKILL\020\004\022\010\n\004TASK\020\005\022\017\n\013BATTLE_ITEM\020\006\022\022\n" +
+      "\016BOARD_OBSTACLE\020\007B\027B\025SharedEnumConfigPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

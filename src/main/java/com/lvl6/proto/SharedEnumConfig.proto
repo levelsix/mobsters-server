@@ -66,6 +66,8 @@ enum GameType {
 	RESEARCH = 3;
 	SKILL = 4;
 	TASK = 5;
+	BATTLE_ITEM = 6;
+	BOARD_OBSTACLE = 7;
 }
 
 // the ResourceType enum in Structure.proto, should be in here
