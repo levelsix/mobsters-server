@@ -62,9 +62,9 @@ public final class ResearchsProto {
      */
     NUMBER_OF_HOSPITALS(11, 12),
     /**
-     * <code>CONSTRUCTION = 13;</code>
+     * <code>INCREASE_CONSTRUCTION_SPEED = 13;</code>
      */
-    CONSTRUCTION(12, 13),
+    INCREASE_CONSTRUCTION_SPEED(12, 13),
     /**
      * <code>ITEM_PRODUCTION_SPEED = 14;</code>
      */
@@ -140,9 +140,9 @@ public final class ResearchsProto {
      */
     public static final int NUMBER_OF_HOSPITALS_VALUE = 12;
     /**
-     * <code>CONSTRUCTION = 13;</code>
+     * <code>INCREASE_CONSTRUCTION_SPEED = 13;</code>
      */
-    public static final int CONSTRUCTION_VALUE = 13;
+    public static final int INCREASE_CONSTRUCTION_SPEED_VALUE = 13;
     /**
      * <code>ITEM_PRODUCTION_SPEED = 14;</code>
      */
@@ -185,7 +185,7 @@ public final class ResearchsProto {
         case 10: return INCREASE_HOSPITAL_QUEUE;
         case 11: return INCREASE_ENHANCE_QUEUE;
         case 12: return NUMBER_OF_HOSPITALS;
-        case 13: return CONSTRUCTION;
+        case 13: return INCREASE_CONSTRUCTION_SPEED;
         case 14: return ITEM_PRODUCTION_SPEED;
         case 15: return ITEM_PRODUCTION_COST;
         case 16: return RESOURCE_PRODUCTION;
@@ -4350,21 +4350,21 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\247\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\020\n\014" +
+      "(\010*\266\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\020\n\014" +
       "HEALING_COST\020\002\022\021\n\rHEALING_SPEED\020\003\022\020\n\014ENH",
       "ANCE_COST\020\004\022\014\n\010XP_BONUS\020\005\022\031\n\025DECREASE_EN" +
       "HANCE_TIME\020\006\022\023\n\017ATTACK_INCREASE\020\007\022\017\n\013HP_" +
       "INCREASE\020\010\022\022\n\016SPEED_INCREASE\020\t\022\033\n\027INCREA" +
       "SE_HOSPITAL_QUEUE\020\n\022\032\n\026INCREASE_ENHANCE_" +
-      "QUEUE\020\013\022\027\n\023NUMBER_OF_HOSPITALS\020\014\022\020\n\014CONS" +
-      "TRUCTION\020\r\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n" +
-      "\024ITEM_PRODUCTION_COST\020\017\022\027\n\023RESOURCE_PROD" +
-      "UCTION\020\020\022\024\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK" +
-      "_ITEM\020\022\022\023\n\017UNLOCK_OBSTACLE\020\023*|\n\016Research" +
-      "Domain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013RESTORATIVE\020\002\022\013",
-      "\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020\004\022\n\n\006BATTLE\020\005\022\t" +
-      "\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B\020B\016Re" +
-      "searchsProto"
+      "QUEUE\020\013\022\027\n\023NUMBER_OF_HOSPITALS\020\014\022\037\n\033INCR" +
+      "EASE_CONSTRUCTION_SPEED\020\r\022\031\n\025ITEM_PRODUC" +
+      "TION_SPEED\020\016\022\030\n\024ITEM_PRODUCTION_COST\020\017\022\027" +
+      "\n\023RESOURCE_PRODUCTION\020\020\022\024\n\020RESOURCE_STOR" +
+      "AGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n\017UNLOCK_OBSTACL" +
+      "E\020\023*|\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013",
+      "RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020" +
+      "\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OB" +
+      "STACLES\020\007B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
