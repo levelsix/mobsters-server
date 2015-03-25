@@ -3,7 +3,12 @@ package com.lvl6.retrieveutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -72,6 +78,42 @@ public class ResearchForUserRetrieveUtils {
 			//			DBConnection.get().close(rs, null, conn);
 		}
 		return userResearch.get(0);
+	}
+
+	public Map<String, List<ResearchForUser>> getResearchForUserIds(
+			Collection<String> userIds) {
+		Object[] values = userIds.toArray();
+		int amount = userIds.size();
+		List<String> questionMarks = Collections.nCopies(amount, "?");
+		String questionMarksStr = StringUtils.csvList(questionMarks);
+
+		String query = String.format("select * from %s where %s in (%s)",
+				TABLE_NAME, DBConstants.RESEARCH_FOR_USER__USER_ID,
+				questionMarksStr);
+
+		log.info("query={}, values={}", query, values);
+
+		Map<String, List<ResearchForUser>> userIdToUserResearch = new HashMap<String, List<ResearchForUser>>();
+		try {
+			List<ResearchForUser> userResearch = this.jdbcTemplate
+					.query(query, values, rowMapper);
+
+			for (ResearchForUser rfu : userResearch) {
+				String userId = rfu.getUserId();
+
+				//base case when initially populating for a user
+				if (!userIdToUserResearch.containsKey(userId)) {
+					userIdToUserResearch.put(userId,
+							new ArrayList<ResearchForUser>());
+				}
+				List<ResearchForUser> obstacles = userIdToUserResearch
+						.get(userId);
+				obstacles.add(rfu);
+			}
+		} catch (Exception e) {
+			log.error("ResearchForUser retrieve db error.", e);
+		}
+		return userIdToUserResearch;
 	}
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
