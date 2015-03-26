@@ -2206,13 +2206,7 @@ public class CreateInfoProtoUtils {
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards)
 	{
-		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
-		umepb.setMiniEventId(mefu.getMiniEventId());
-		umepb.setUserUuid(mefu.getUserId());
-		umepb.setUserLvl(mefu.getUserLvl());
-		umepb.setTierOneRedeemed(mefu.isTierOneRedeemed());
-		umepb.setTierTwoRedeemed(mefu.isTierTwoRedeemed());
-		umepb.setTierThreeRedeemed(mefu.isTierThreeRedeemed());
+		UserMiniEventProto.Builder umepb = createUserMiniEventProto(mefu);
 
 		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
 				leaderboardRewards);
@@ -2220,6 +2214,18 @@ public class CreateInfoProtoUtils {
 		umepb.setMiniEvent(mep);
 
 		return umepb.build();
+	}
+
+	public static UserMiniEventProto.Builder createUserMiniEventProto(
+			MiniEventForUser mefu) {
+		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
+		umepb.setMiniEventId(mefu.getMiniEventId());
+		umepb.setUserUuid(mefu.getUserId());
+		umepb.setUserLvl(mefu.getUserLvl());
+		umepb.setTierOneRedeemed(mefu.isTierOneRedeemed());
+		umepb.setTierTwoRedeemed(mefu.isTierTwoRedeemed());
+		umepb.setTierThreeRedeemed(mefu.isTierThreeRedeemed());
+		return umepb;
 	}
 
 	public static MiniEventProto createMiniEventProto(MiniEvent me,

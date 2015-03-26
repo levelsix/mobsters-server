@@ -974,7 +974,7 @@ public class DBConstants {
 	public static final String MINI_EVENT__START_TIME = "start_time";
 	public static final String MINI_EVENT__END_TIME = "end_time";
 	public static final String MINI_EVENT__NAME = "name";
-	public static final String MINI_EVENT__DESC = "desc";
+	public static final String MINI_EVENT__DESCRIPTION = "description";
 	public static final String MINI_EVENT__IMG = "img";
 
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__ID = GENERIC__ID;
@@ -989,7 +989,7 @@ public class DBConstants {
 	public static final String MINI_EVENT_GOAL__MINI_EVENT_ID = "mini_event_id";
 	public static final String MINI_EVENT_GOAL__TYPE = "type";
 	public static final String MINI_EVENT_GOAL__AMT = "amt";
-	public static final String MINI_EVENT_GOAL__DESC = "desc";
+	public static final String MINI_EVENT_GOAL__DESCRIPTION = "description";
 	public static final String MINI_EVENT_GOAL__PTS_REWARD = "pts_reward";
 
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__ID = GENERIC__ID;
