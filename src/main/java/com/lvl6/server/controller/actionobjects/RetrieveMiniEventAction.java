@@ -107,23 +107,59 @@ public class RetrieveMiniEventAction {
 			return false;
 		}
 
-		return true;
+
+		mefu = miniEventForUserRetrieveUtil
+				.getSpecificUserMiniEvent(userId);
+		//make sure that the user has redeemed eligible rewards
+		if (null == mefu) {
+			return true;
+		}
+
+		return verifyRewardsCollected();
+	}
+
+	private boolean verifyRewardsCollected() {
+		int miniEventId = mefu.getMiniEventId();
+		int curLvl = u.getLevel();
+
+		MiniEventForPlayerLvl mefpl = MiniEventForPlayerLvlRetrieveUtils
+				.getMiniEventForPlayerLvl(miniEventId, curLvl);
+
+		int curPts = mefu.getPtsEarned();
+		int tierOne = mefpl.getTierOneMinPts();
+		int tierTwo = mefpl.getTierTwoMinPts();
+		int tierThree = mefpl.getTierThreeMinPts();
+
+		if (curPts < tierOne)
+		{
+			//if user didn't get into TierOne, then user eligible to start new event
+			return true;
+		} else if (curPts >= tierOne && curPts < tierTwo) {
+			return mefu.isTierOneRedeemed();
+
+		} else if (curPts >= tierTwo && curPts < tierThree) {
+			return mefu.isTierTwoRedeemed();
+
+		} else if (curPts >= tierThree) {
+			return mefu.isTierThreeRedeemed();
+		}
+
+		return false;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 
-		mefu = miniEventForUserRetrieveUtil
-				.getSpecificUserMiniEvent(userId);
 
 		curActiveMiniEvent = null;
 		if (null == mefu) {
 			curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
-		} else {
-			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
+//		} else {
+//			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
 		}
 
 		if (null == curActiveMiniEvent) {
-			return false;
+			log.info("no currently active MiniEvent");
+			return true;
 		}
 
 		int meId = curActiveMiniEvent.getId();

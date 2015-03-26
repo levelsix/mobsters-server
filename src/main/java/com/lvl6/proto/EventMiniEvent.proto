@@ -11,7 +11,7 @@ option java_outer_classname = "EventMiniEventProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 //------------------------------------------------------------------------------------------
-
+//updates the user's current MiniEvent, or creates one if nonexistent
 message RetrieveMiniEventRequestProto {
 	optional MinimumUserProto sender = 1;
 }

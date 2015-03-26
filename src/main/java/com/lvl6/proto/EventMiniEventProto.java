@@ -27,6 +27,11 @@ public final class EventMiniEventProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventRequestProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   *updates the user's current MiniEvent, or creates one if nonexistent
+   * </pre>
    */
   public static final class RetrieveMiniEventRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -263,6 +268,11 @@ public final class EventMiniEventProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventRequestProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     *updates the user's current MiniEvent, or creates one if nonexistent
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
