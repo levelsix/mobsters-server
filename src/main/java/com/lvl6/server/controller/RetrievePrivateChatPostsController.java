@@ -15,10 +15,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrievePrivateChatPostsRequestEvent;
 import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
+import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.TranslatedText;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
@@ -31,7 +33,9 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -70,6 +74,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String otherUserId = reqProto.getOtherUserUuid();
+		TranslateLanguages translateLanguage = reqProto.getLanguage();
 
 		RetrievePrivateChatPostsResponseProto.Builder resBuilder = RetrievePrivateChatPostsResponseProto
 				.newBuilder();
@@ -126,6 +131,32 @@ public class RetrievePrivateChatPostsController extends EventController {
 						Map<String, MinimumUserProtoWithLevel> userIdsToMups = generateUserIdsToMupsWithLevel(
 								usersByIds, userId, senderProto, otherUserId);
 
+						List<String> chatIds = new ArrayList<String>();
+						for(PrivateChatPost pcp : recentPrivateChatPosts) {
+							chatIds.add(pcp.getId());
+						}
+						
+						Map<String, List<ChatTranslations>> chatIdsToTranslations = 
+								ChatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
+						
+						//this map holds the correct translation based on language sent
+						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
+						List<String> chatIdsToBeTranslated = new ArrayList<String>();
+						
+						for(String chatId : chatIdsToTranslations.keySet()) {
+							List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
+							for(ChatTranslations ct : chatTranslationsList) {
+								//maybe can do ==? idk this seems safer just in case
+								if(ct.getTranslateLanguage().toString().equals(translateLanguage.toString())) {
+									returnMap.put(chatId, ct);
+								}
+							}
+							//if we did not already have a translation
+							if(!returnMap.containsKey(chatId)) {
+								chatIdsToBeTranslated.add(chatId);
+							}
+						}
+
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
 							String posterId = pwp.getPosterId();
@@ -135,13 +166,20 @@ public class RetrievePrivateChatPostsController extends EventController {
 									.get(posterId);
 							String content = pwp.getContent();
 							boolean isAdmin = false;
-							TranslatedText tt = pwp.getTranslatedText();
-							Map<TranslateLanguages, String> translatedMap = new HashMap<TranslateLanguages, String>();
-							translatedMap.put(TranslateLanguages.valueOf(tt.getLanguage()), tt.getText());	
-
+							Map<TranslateLanguages, String> translateMap = new HashMap<TranslateLanguages, String>();
+							
+							String chatId = pwp.getId();
+							if(returnMap.containsKey(chatId)) {
+								translateMap.put(returnMap.get(chatId).getTranslateLanguage(), returnMap.get(chatId).getText());
+							}
+							else {
+								Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
+								translateMap = MiscMethods.translate(language, pwp.getContent());
+							}
+							
 							GroupChatMessageProto gcmp = CreateInfoProtoUtils
 									.createGroupChatMessageProto(time, user,
-											content, isAdmin, pwp.getId(), translatedMap);
+											content, isAdmin, pwp.getId(), translateMap);
 							resBuilder.addPosts(gcmp);
 						}
 					}

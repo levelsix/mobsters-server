@@ -5789,6 +5789,15 @@ public final class EventChatProto {
      * </pre>
      */
     @java.lang.Deprecated int getBeforePrivateChatId();
+
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+     */
+    boolean hasLanguage();
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+     */
+    com.lvl6.proto.ChatProto.TranslateLanguages getLanguage();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrievePrivateChatPostsRequestProto}
@@ -5864,6 +5873,17 @@ public final class EventChatProto {
             case 24: {
               bitField0_ |= 0x00000004;
               beforePrivateChatId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.ChatProto.TranslateLanguages value = com.lvl6.proto.ChatProto.TranslateLanguages.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                language_ = value;
+              }
               break;
             }
           }
@@ -5996,10 +6016,26 @@ public final class EventChatProto {
       return beforePrivateChatId_;
     }
 
+    public static final int LANGUAGE_FIELD_NUMBER = 4;
+    private com.lvl6.proto.ChatProto.TranslateLanguages language_;
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+     */
+    public boolean hasLanguage() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+     */
+    public com.lvl6.proto.ChatProto.TranslateLanguages getLanguage() {
+      return language_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       otherUserUuid_ = "";
       beforePrivateChatId_ = 0;
+      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6023,6 +6059,9 @@ public final class EventChatProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, beforePrivateChatId_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, language_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -6043,6 +6082,10 @@ public final class EventChatProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, beforePrivateChatId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, language_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6172,6 +6215,8 @@ public final class EventChatProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         beforePrivateChatId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6216,6 +6261,10 @@ public final class EventChatProto {
           to_bitField0_ |= 0x00000004;
         }
         result.beforePrivateChatId_ = beforePrivateChatId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.language_ = language_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6242,6 +6291,9 @@ public final class EventChatProto {
         }
         if (other.hasBeforePrivateChatId()) {
           setBeforePrivateChatId(other.getBeforePrivateChatId());
+        }
+        if (other.hasLanguage()) {
+          setLanguage(other.getLanguage());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6514,6 +6566,41 @@ public final class EventChatProto {
       @java.lang.Deprecated public Builder clearBeforePrivateChatId() {
         bitField0_ = (bitField0_ & ~0x00000004);
         beforePrivateChatId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+       */
+      public boolean hasLanguage() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+       */
+      public com.lvl6.proto.ChatProto.TranslateLanguages getLanguage() {
+        return language_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+       */
+      public Builder setLanguage(com.lvl6.proto.ChatProto.TranslateLanguages value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        language_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
+       */
+      public Builder clearLanguage() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
         onChanged();
         return this;
       }
@@ -10331,36 +10418,37 @@ public final class EventChatProto {
       "\0132$.com.lvl6.proto.PrivateChatPostProto\"" +
       "i\n\025PrivateChatPostStatus\022\013\n\007SUCCESS\020\001\022\023\n" +
       "\017NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003\022\016" +
-      "\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\220\001\n$RetrieveP" +
+      "\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\306\001\n$RetrieveP" +
       "rivateChatPostsRequestProto\0220\n\006sender\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
       "\rotherUserUuid\030\002 \001(\t\022\037\n\023beforePrivateCha" +
-      "tId\030\003 \001(\005B\002\030\001\"\346\002\n%RetrievePrivateChatPos" +
-      "tsResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\0224\n\005posts\030\002 \003(\013",
-      "2%.com.lvl6.proto.GroupChatMessageProto\022" +
-      "\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\022d\n\006stat" +
-      "us\030\004 \001(\0162T.com.lvl6.proto.RetrievePrivat" +
-      "eChatPostsResponseProto.RetrievePrivateC" +
-      "hatPostsStatus\022\025\n\rotherUserUuid\030\005 \001(\t\"7\n" +
-      "\036RetrievePrivateChatPostsStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\010\n\004FAIL\020\002\"\352\001\n#TranslateSelectMessag" +
-      "esRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\025\n\rotherUserUui" +
-      "d\030\002 \001(\t\0224\n\010language\030\003 \001(\0162\".com.lvl6.pro",
-      "to.TranslateLanguages\022D\n\026messagesToBeTra" +
-      "nslated\030\004 \003(\0132$.com.lvl6.proto.PrivateCh" +
-      "atPostProto\"\362\002\n$TranslateSelectMessagesR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\030\n\020originalMessag" +
-      "es\030\002 \003(\t\022?\n\022messagesTranslated\030\003 \003(\0132#.c" +
-      "om.lvl6.proto.TranslatedTextProto\022b\n\006sta" +
-      "tus\030\004 \001(\0162R.com.lvl6.proto.TranslateSele" +
-      "ctMessagesResponseProto.TranslateSelectM" +
-      "essagesStatus\"Y\n\035TranslateSelectMessages",
-      "Status\022\016\n\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID" +
-      "_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatPro" +
-      "to"
+      "tId\030\003 \001(\005B\002\030\001\0224\n\010language\030\004 \001(\0162\".com.lv" +
+      "l6.proto.TranslateLanguages\"\346\002\n%Retrieve" +
+      "PrivateChatPostsResponseProto\0220\n\006sender\030",
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "4\n\005posts\030\002 \003(\0132%.com.lvl6.proto.GroupCha" +
+      "tMessageProto\022\037\n\023beforePrivateChatId\030\003 \001" +
+      "(\005B\002\030\001\022d\n\006status\030\004 \001(\0162T.com.lvl6.proto." +
+      "RetrievePrivateChatPostsResponseProto.Re" +
+      "trievePrivateChatPostsStatus\022\025\n\rotherUse" +
+      "rUuid\030\005 \001(\t\"7\n\036RetrievePrivateChatPostsS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\352\001\n#Transla" +
+      "teSelectMessagesRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\025",
+      "\n\rotherUserUuid\030\002 \001(\t\0224\n\010language\030\003 \001(\0162" +
+      "\".com.lvl6.proto.TranslateLanguages\022D\n\026m" +
+      "essagesToBeTranslated\030\004 \003(\0132$.com.lvl6.p" +
+      "roto.PrivateChatPostProto\"\362\002\n$TranslateS" +
+      "electMessagesResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
+      "originalMessages\030\002 \003(\t\022?\n\022messagesTransl" +
+      "ated\030\003 \003(\0132#.com.lvl6.proto.TranslatedTe" +
+      "xtProto\022b\n\006status\030\004 \001(\0162R.com.lvl6.proto" +
+      ".TranslateSelectMessagesResponseProto.Tr",
+      "anslateSelectMessagesStatus\"Y\n\035Translate" +
+      "SelectMessagesStatus\022\016\n\nFAIL_OTHER\020\001\022\033\n\027" +
+      "FAIL_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020" +
+      "B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10423,7 +10511,7 @@ public final class EventChatProto {
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "OtherUserUuid", "BeforePrivateChatId", });
+        new java.lang.String[] { "Sender", "OtherUserUuid", "BeforePrivateChatId", "Language", });
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsResponseProto_fieldAccessorTable = new

@@ -84,6 +84,7 @@ message RetrievePrivateChatPostsRequestProto {
 	//if this is not set then return most recent ones
 	//switch to UUIDs makes this obsolete; consider date
 	optional int32 beforePrivateChatId = 3 [deprecated = true];
+	optional TranslateLanguages language = 4;
 	
 }
 
