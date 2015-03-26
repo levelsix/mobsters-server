@@ -96,8 +96,8 @@ public class MiniEventTierRewardRetrieveUtils {
 							idToMiniEventTierRewardTemp.put(metr.getId(), metr);
 
 							int miniEventForPlayerLvlId = metr.getMiniEventForPlayerLvlId();
-							if (!mefplIdToReward.containsKey(miniEventForPlayerLvlId)) {
-								mefplIdToReward.put(miniEventForPlayerLvlId,
+							if (!mefplIdToRewardTemp.containsKey(miniEventForPlayerLvlId)) {
+								mefplIdToRewardTemp.put(miniEventForPlayerLvlId,
 										new ArrayList<MiniEventTierReward>());
 							}
 
@@ -107,6 +107,7 @@ public class MiniEventTierRewardRetrieveUtils {
 
 						}
 						idToMiniEventTierReward = idToMiniEventTierRewardTemp;
+						mefplIdToReward = mefplIdToRewardTemp;
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 

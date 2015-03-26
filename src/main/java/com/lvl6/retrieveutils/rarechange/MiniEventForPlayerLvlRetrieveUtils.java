@@ -76,6 +76,11 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 			int miniEventId, int playerLvl)
 	{
 		if (null == miniEventIdToOrderedMefpl) {
+			log.warn("no ordered MiniEventForPlayerLvl, reloading");
+			setStaticIdsToMiniEventForPlayerLvls();
+		}
+
+		if (null == miniEventIdToOrderedMefpl) {
 			log.warn("no ordered MiniEventForPlayerLvl");
 			return null;
 		}

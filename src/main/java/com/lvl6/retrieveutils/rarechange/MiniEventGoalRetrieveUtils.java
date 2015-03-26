@@ -138,7 +138,7 @@ public class MiniEventGoalRetrieveUtils {
 		}
 
 		int amt = rs.getInt(DBConstants.MINI_EVENT_GOAL__AMT);
-		String desc = rs.getString(DBConstants.MINI_EVENT_GOAL__DESC);
+		String desc = rs.getString(DBConstants.MINI_EVENT_GOAL__DESCRIPTION);
 		int ptsReward = rs.getInt(DBConstants.MINI_EVENT_GOAL__PTS_REWARD);
 
 		MiniEventGoal me = new MiniEventGoal(

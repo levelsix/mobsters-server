@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MiniEventForUser implements Serializable {
 
-	private static final long serialVersionUID = 4018518400954334659L;
+	private static final long serialVersionUID = -6082954916684935677L;
 
 	private String userId;
 	private int miniEventId;
@@ -16,6 +16,17 @@ public class MiniEventForUser implements Serializable {
 
 	public MiniEventForUser() {
 		super();
+	}
+
+	public MiniEventForUser(MiniEventForUser mefu) {
+		super();
+		this.userId = mefu.getUserId();
+		this.miniEventId = mefu.getMiniEventId();
+		this.userLvl = mefu.getUserLvl();
+		this.ptsEarned = mefu.getPtsEarned();
+		this.tierOneRedeemed = mefu.isTierOneRedeemed();
+		this.tierTwoRedeemed = mefu.isTierTwoRedeemed();
+		this.tierThreeRedeemed = mefu.isTierThreeRedeemed();
 	}
 
 	public String getUserId() {
