@@ -56,9 +56,15 @@ public class MiniEventRetrieveUtils {
 	public static MiniEvent getCurrentlyActiveMiniEvent( Date now )
 	{
 		if (null == miniEventTree) {
+			log.warn("no MiniEvent tree created");
+			reload();
+		}
+
+		if (null == miniEventTree) {
 			log.warn("no miniEvents are currently active");
 			return null;
 		}
+
 		MiniEvent me = new MiniEvent();
 		me.setId(0);
 		me.setEndTime(now);

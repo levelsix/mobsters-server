@@ -2251,6 +2251,7 @@ public class CreateInfoProtoUtils {
 		umepb.setMiniEventId(mefu.getMiniEventId());
 		umepb.setUserUuid(mefu.getUserId());
 		umepb.setUserLvl(mefu.getUserLvl());
+		umepb.setPtsEarned(mefu.getPtsEarned());
 		umepb.setTierOneRedeemed(mefu.isTierOneRedeemed());
 		umepb.setTierTwoRedeemed(mefu.isTierTwoRedeemed());
 		umepb.setTierThreeRedeemed(mefu.isTierThreeRedeemed());
