@@ -23,6 +23,10 @@ message RewardProto {
 	enum RewardType {
 		NO_REWARD = 1;
 		ITEM = 2;
+		GEMS = 3;
+		CASH = 4;
+		OIL = 5;
+		MONSTER = 6;
 	}
 	
 }
