@@ -88,19 +88,26 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 		event.read(bb);
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			if (event instanceof PreDatabaseRequestEvent) {
-				String udid = ((PreDatabaseRequestEvent) event).getUdid();
-				messagingUtil.sendMaintanenceModeMessageUdid(
-						getApplicationMode().getMessageForUsers(), udid);
-			} else {
-				String playerId = event.getPlayerId();
-				messagingUtil.sendMaintanenceModeMessageUdid(
-						getApplicationMode().getMessageForUsers(), playerId);
-			}
-		} else {
-			updatePlayerToServerMaps(event);
-			ec.handleEvent(event);
+			//if(check isAdmin here) {
+				//is an admin so do nothing
+			//}else {
+				//not an admin so send maintenance message and return
+				if (event instanceof PreDatabaseRequestEvent) {
+					String udid = ((PreDatabaseRequestEvent) event).getUdid();
+					messagingUtil.sendMaintanenceModeMessageUdid(
+							getApplicationMode().getMessageForUsers(), udid);
+				} else {
+					String playerId = event.getPlayerId();
+					messagingUtil.sendMaintanenceModeMessageUdid(
+							getApplicationMode().getMessageForUsers(), playerId);
+				}
+				return;
+			//}
 		}
+		
+		updatePlayerToServerMaps(event);
+		ec.handleEvent(event);
+		
 	}
 
 	@Override
