@@ -32,15 +32,35 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 
 	private static final class MefplComparator implements Comparator<MiniEventForPlayerLvl>
 	{
+		//have to define max level, but want it to be unbounded
+//		@Override
+//		public int compare(MiniEventForPlayerLvl o1, MiniEventForPlayerLvl o2)
+//		{
+//			int lvlMax1 = o1.getPlayerLvlMax();
+//			int lvlMax2 = o2.getPlayerLvlMax();
+//
+//			if (lvlMax1 < lvlMax2) {
+//				return -1;
+//			} else if (lvlMax1 > lvlMax2) {
+//				return 1;
+//			} else if (o1.getId() < o2.getId()) {
+//				return -1;
+//			} else if (o1.getId() > o2.getId()) {
+//				return 1;
+//			} else {
+//				return 0;
+//			}
+//		}
+
 		@Override
 		public int compare(MiniEventForPlayerLvl o1, MiniEventForPlayerLvl o2)
 		{
-			int lvlMax1 = o1.getPlayerLvlMax();
-			int lvlMax2 = o2.getPlayerLvlMax();
+			int lvlMin1 = o1.getPlayerLvlMin();
+			int lvlMin2 = o2.getPlayerLvlMin();
 
-			if (lvlMax1 < lvlMax2) {
+			if (lvlMin1 < lvlMin2) {
 				return -1;
-			} else if (lvlMax1 > lvlMax2) {
+			} else if (lvlMin1 > lvlMin2) {
 				return 1;
 			} else if (o1.getId() < o2.getId()) {
 				return -1;
@@ -51,6 +71,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 			}
 
 		}
+
 	}
 
 	public static Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
