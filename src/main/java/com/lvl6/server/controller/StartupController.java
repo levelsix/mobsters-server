@@ -1602,7 +1602,7 @@ public class StartupController extends EventController {
 		rmea.execute(rmeaResBuilder);
 		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
 				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-
+		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
 
 		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 				null != rmea.getCurActiveMiniEvent())
