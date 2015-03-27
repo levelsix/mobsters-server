@@ -36,13 +36,13 @@ public final class SalesProto {
         getSalesPackageNameBytes();
 
     /**
-     * <code>optional int32 price = 3;</code>
+     * <code>optional int64 price = 3;</code>
      */
     boolean hasPrice();
     /**
-     * <code>optional int32 price = 3;</code>
+     * <code>optional int64 price = 3;</code>
      */
-    int getPrice();
+    long getPrice();
 
     /**
      * <code>optional string uuid = 4;</code>
@@ -171,7 +171,7 @@ public final class SalesProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              price_ = input.readInt32();
+              price_ = input.readInt64();
               break;
             }
             case 34: {
@@ -300,17 +300,17 @@ public final class SalesProto {
     }
 
     public static final int PRICE_FIELD_NUMBER = 3;
-    private int price_;
+    private long price_;
     /**
-     * <code>optional int32 price = 3;</code>
+     * <code>optional int64 price = 3;</code>
      */
     public boolean hasPrice() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 price = 3;</code>
+     * <code>optional int64 price = 3;</code>
      */
-    public int getPrice() {
+    public long getPrice() {
       return price_;
     }
 
@@ -429,7 +429,7 @@ public final class SalesProto {
     private void initFields() {
       salesPackageId_ = 0;
       salesPackageName_ = "";
-      price_ = 0;
+      price_ = 0L;
       uuid_ = "";
       sip_ = java.util.Collections.emptyList();
       sdip_ = java.util.Collections.emptyList();
@@ -454,7 +454,7 @@ public final class SalesProto {
         output.writeBytes(2, getSalesPackageNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, price_);
+        output.writeInt64(3, price_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getUuidBytes());
@@ -484,7 +484,7 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, price_);
+          .computeInt64Size(3, price_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -621,7 +621,7 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         salesPackageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        price_ = 0;
+        price_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
         uuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -918,34 +918,34 @@ public final class SalesProto {
         return this;
       }
 
-      private int price_ ;
+      private long price_ ;
       /**
-       * <code>optional int32 price = 3;</code>
+       * <code>optional int64 price = 3;</code>
        */
       public boolean hasPrice() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 price = 3;</code>
+       * <code>optional int64 price = 3;</code>
        */
-      public int getPrice() {
+      public long getPrice() {
         return price_;
       }
       /**
-       * <code>optional int32 price = 3;</code>
+       * <code>optional int64 price = 3;</code>
        */
-      public Builder setPrice(int value) {
+      public Builder setPrice(long value) {
         bitField0_ |= 0x00000004;
         price_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 price = 3;</code>
+       * <code>optional int64 price = 3;</code>
        */
       public Builder clearPrice() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        price_ = 0;
+        price_ = 0L;
         onChanged();
         return this;
       }
@@ -3274,7 +3274,7 @@ public final class SalesProto {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\026SharedEnu" +
       "mConfig.proto\032\nUser.proto\"\304\001\n\021SalesPacka" +
       "geProto\022\026\n\016salesPackageId\030\001 \001(\005\022\030\n\020sales" +
-      "PackageName\030\002 \001(\t\022\r\n\005price\030\003 \001(\005\022\014\n\004uuid" +
+      "PackageName\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid" +
       "\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.Sal" +
       "esItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.pro" +
       "to.SalesDisplayItemProto\"\242\001\n\016SalesItemPr" +

@@ -104,7 +104,7 @@ public class SalesPackageRetrieveUtils {
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_PACKAGE__ID);
 		String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
-		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
+		double price = rs.getFloat(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
 		Date timeStart = null;
 		Date timeEnd = null;

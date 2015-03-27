@@ -501,6 +501,8 @@ public class UserRetrieveUtils2 {
 				log.error("last_purchase_time null...?", e);
 			}
 			
+			boolean salesJumpTwoTiers = rs.getBoolean(DBConstants.USER__SALES_JUMP_TWO_TIERS);
+			
 			long totalStrength = rs.getLong(DBConstants.USER__TOTAL_STRENGTH);
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
@@ -516,9 +518,8 @@ public class UserRetrieveUtils2 {
 					avatarMonsterId, lastFreeBoosterPackTime, numClanHelps,
 					lastSecretGiftCollectTime, pvpDefendingMessage,
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
-					salesValue, lastPurchaseTime);
-					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
-					totalStrength);
+					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength);
+					
 			return user;
 		}
 

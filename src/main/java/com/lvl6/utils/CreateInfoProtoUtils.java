@@ -5259,7 +5259,7 @@ public class CreateInfoProtoUtils {
 			b.setSalesPackageName(str);
 		}
 
-		b.setPrice(sp.getPrice());
+		b.setPrice((long)sp.getPrice());
 
 		str = sp.getUuid();
 		if (null != str && !str.isEmpty()) {

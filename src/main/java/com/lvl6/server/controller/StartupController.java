@@ -193,6 +193,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -248,6 +249,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected UpdateUtil updateUtil;
 	
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -1640,26 +1644,50 @@ public class StartupController extends EventController {
 	}
 	
 	private void setSalesForUser(Builder resBuilder, User user) {
+		//update user jump two tier's value
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		Date now = new Date();
+		if(salesJumpTwoTiers) {
+			Date lastPurchaseTime = user.getLastPurchaseTime();
+			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+			if(diffInDays > 5) {
+				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+				salesJumpTwoTiers = false;
+			}
+		}
+		
 		Map<Integer, SalesPackage> idsToSalesPackages = SalesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = SalesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = SalesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		int userSalesValue = user.getSalesValue();
-		Date lastPurchaseTime = user.getLastPurchaseTime();
-		
-		//TODO: arin's formula
-		int currentSalesValue = 9001;
-		
-		int newMinPrice = 9999;
-		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
-			int price = idsToSalesPackages.get(salesPackageId).getPrice();
-			if(price > currentSalesValue) {
-				if(price < newMinPrice) {
-					newMinPrice = price;
-				}
-			}
+		double newMinPrice = 0.0;
+
+		//arin's formula
+		if(userSalesValue == 0) {
+			newMinPrice = 4.99;
 		}
+		else if(userSalesValue == 1) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 19.99;
+			}
+			else newMinPrice = 9.99;
+		}
+		else if(userSalesValue == 2) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 49.99;
+			}
+			else newMinPrice = 19.99;
+		}
+		else if(userSalesValue == 3) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 99.99;
+			}
+			else newMinPrice = 49.99;
+		}
+		else newMinPrice = 99.99;
+		
 		
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {

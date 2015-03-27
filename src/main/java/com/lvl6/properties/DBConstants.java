@@ -806,6 +806,7 @@ public class DBConstants {
 	public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
 	public static final String USER__SALES_VALUE = "sales_value";
 	public static final String USER__SALES_LAST_PURCHASE_TIME = "sales_last_purchase_time";
+	public static final String USER__SALES_JUMP_TWO_TIERS = "sales_jump_two_tiers";
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/

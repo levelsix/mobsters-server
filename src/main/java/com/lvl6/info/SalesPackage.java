@@ -4,18 +4,7 @@ import java.util.Date;
 
 public class SalesPackage {
 	
-	public SalesPackage() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	public SalesPackage(int id, String name, double price, String uuid,
-			Date timeStart, Date timeEnd, int predId) {
-=======
-public class SalesPackage {
-	
-	public SalesPackage(int id, String name, int price, String uuid) {
->>>>>>> created protos and stuff for sales
-	public SalesPackage(int id, String name, int price, String uuid,
 			Date timeStart, Date timeEnd, int predId) {
 		super();
 		this.id = id;
@@ -34,49 +23,7 @@ public class SalesPackage {
 
 	private int id;
 	private String name;
-<<<<<<< HEAD
 	private double price;
-	private String uuid;
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public double getPrice() {
-		return price;
-	}
-	
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	@Override
-	public String toString() {
-		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
-				+ ", uuid=" + uuid + "]";
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-=======
-	private int price;
 	private String uuid;
 	private Date timeStart;
 	private Date timeEnd;
@@ -94,10 +41,11 @@ public class SalesPackage {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPrice() {
+
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getUuid() {

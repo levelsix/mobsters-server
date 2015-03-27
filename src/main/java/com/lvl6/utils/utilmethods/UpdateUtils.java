@@ -1879,6 +1879,24 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
+	public boolean updateUserSalesValue(String userId, int newSalesValue, Date now) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams
+				.put(DBConstants.USER__ID, userId);
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
+		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams,
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
+		
+	@Override
 	public boolean updateUserBattleItems(String userId,
 			List<BattleItemForUser> updateList) {
 		String tableName = DBConstants.TABLE_BATTLE_ITEM_FOR_USER;
@@ -1924,6 +1942,27 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return true;
 	}
+		
+	
+	@Override
+	public boolean updateUserSalesJumpTwoTiers(String userId, boolean jumpTwoTiers) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams
+				.put(DBConstants.USER__ID, userId);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__SALES_JUMP_TWO_TIERS, jumpTwoTiers);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams,
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
+
+		
 	
 	@Override
 	public boolean updateUserTranslationSetting(String recipientId, 

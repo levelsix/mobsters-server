@@ -297,9 +297,34 @@ public class InAppPurchaseAction {
 	
 	private boolean userSalesValueMatchesSalesPackage() {
 		int salesValue = user.getSalesValue();
-		int price = Integer.parseInt(packageName.replaceAll("SALE", ""));
-		if(salesValue < price) {
-			return true;
+		Date lastPurchaseTime = user.getLastPurchaseTime();
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		String price = (packageName.replaceAll("SALE", ""));
+		if(salesValue == 0) {
+			if(price.equals("4.99"))
+				return true;
+		}
+		else if(salesValue == 1) {
+			if(!salesJumpTwoTiers && price.equals("9.99"))
+				return true;
+			else if(salesJumpTwoTiers && price.equals("19.99"))
+				return true;
+		}
+		else if(salesValue == 2) {
+			if(!salesJumpTwoTiers && price.equals("19.99"))
+				return true;
+			else if(salesJumpTwoTiers && price.equals("49.99"))
+				return true;
+		}
+		else if(salesValue == 3) {
+			if(!salesJumpTwoTiers && price.equals("49.99"))
+				return true;
+			else if(salesJumpTwoTiers && price.equals("99.99"))
+				return true;
+		}
+		else if(salesValue == 4) {
+			if(price.equals("99.99"))
+				return true;
 		}
 		else {
 			log.error("the sale user is trying to buy has a price of: "
@@ -307,6 +332,7 @@ public class InAppPurchaseAction {
 			return false;
 			
 		}
+		return false;
 		
 	}
 
@@ -333,6 +359,7 @@ public class InAppPurchaseAction {
 				processMoneyTreePurchase(resBuilder);
 			} else if (isSalesPackage) {
 				processSalesPackagePurchase(resBuilder);
+				updateUserSalesValueAndLastPurchaseTime();
 			}
 			else {
 				processPurchase(resBuilder);
@@ -347,6 +374,25 @@ public class InAppPurchaseAction {
 		}
 
 		return success;
+	}
+	
+	private void updateUserSalesValueAndLastPurchaseTime() {
+		int salesValue = user.getSalesValue();
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		
+		if(salesValue == 0) {
+			salesValue = 1;
+		}
+		else if(salesValue > 3) {
+			salesValue = 5;
+		}
+		else if(salesJumpTwoTiers) {
+			salesValue += 2;
+		}
+		else {
+			salesValue += 1;
+		}
+		updateUtil.updateUserSalesValue(userId, salesValue, now);
 	}
 
 	private void processStarterPackPurchase(Builder resBuilder) {
@@ -560,10 +606,10 @@ public class InAppPurchaseAction {
 				log.info("!!!!!!!!!mfusop={}", mfusop);
 				//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
 				if (!completeUserMonsters.isEmpty()) {
-					List<String> monsterForUserIds = InsertUtils.get()
+					List<String> monsterForUserIds = insertUtil
 							.insertIntoMonsterForUserReturnIds(userId,
 									completeUserMonsters, mfusop, now);
-					List<FullUserMonsterProto> newOrUpdated = MiscMethods
+					List<FullUserMonsterProto> newOrUpdated = miscMethods
 							.createFullUserMonsterProtos(monsterForUserIds,
 									completeUserMonsters);
 
@@ -577,7 +623,7 @@ public class InAppPurchaseAction {
 				//this is if the user did not buy a complete monster, UPDATE DB
 				if (!monsterIdToNumPieces.isEmpty()) {
 					//assume things just work while updating user monsters
-					List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 							.updateUserMonsters(userId, monsterIdToNumPieces, null,
 									mfusop, now);
 
@@ -593,7 +639,7 @@ public class InAppPurchaseAction {
 						itemsUserReceives, itemForUserRetrieveUtil, updateUtil);
 				 
 				if (null != ifuList && !ifuList.isEmpty()) {
-					List<UserItemProto> uipList = CreateInfoProtoUtils
+					List<UserItemProto> uipList = createInfoProtoUtils
 							.createUserItemProtosFromUserItems(ifuList);
 					resBuilder.addAllUpdatedUserItems(uipList);
 				}
@@ -705,7 +751,15 @@ public class InAppPurchaseAction {
 
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemChange) {
-			reasonsForChanges.put(gems,
+			if(isStarterPack) {
+				reasonsForChanges.put(gems,
+						ControllerConstants.UCHRFC__IN_APP_PURCHASE_STARTER_PACK);
+			}
+			else if(isSalesPackage) {
+				reasonsForChanges.put(gems,
+						ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
+			}
+			else reasonsForChanges.put(gems,
 					ControllerConstants.UCHRFC__IN_APP_PURCHASE);
 		} else {
 			reasonsForChanges.put(gems,
