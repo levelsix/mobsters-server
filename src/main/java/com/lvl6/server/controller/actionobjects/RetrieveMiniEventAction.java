@@ -151,12 +151,13 @@ public class RetrieveMiniEventAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 
 
-		curActiveMiniEvent = null;
-		if (null == mefu) {
-			curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+//		curActiveMiniEvent = null;
+//		if (null == mefu) {
+		//don't care if the user has an existing MiniEvent
+		curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
 //		} else {
 //			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
-		}
+//		}
 
 		log.info("this is the currently active mini event: {}", curActiveMiniEvent);
 
