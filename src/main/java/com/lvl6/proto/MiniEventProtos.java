@@ -2141,12 +2141,52 @@ public final class MiniEventProtos {
        * <code>NO_GOAL = 1;</code>
        */
       NO_GOAL(0, 1),
+      /**
+       * <code>HEAL_HP = 2;</code>
+       */
+      HEAL_HP(1, 2),
+      /**
+       * <code>ENHANCE_TOON_XP = 3;</code>
+       */
+      ENHANCE_TOON_XP(2, 3),
+      /**
+       * <code>USE_CASH_UPGRADING_BUILDING = 4;</code>
+       */
+      USE_CASH_UPGRADING_BUILDING(3, 4),
+      /**
+       * <code>USE_OIL_UPGRADING_BUILDING = 5;</code>
+       */
+      USE_OIL_UPGRADING_BUILDING(4, 5),
+      /**
+       * <code>CAPTURE_SCIENTIST = 6;</code>
+       */
+      CAPTURE_SCIENTIST(5, 6),
       ;
 
       /**
        * <code>NO_GOAL = 1;</code>
        */
       public static final int NO_GOAL_VALUE = 1;
+      /**
+       * <code>HEAL_HP = 2;</code>
+       */
+      public static final int HEAL_HP_VALUE = 2;
+      /**
+       * <code>ENHANCE_TOON_XP = 3;</code>
+       */
+      public static final int ENHANCE_TOON_XP_VALUE = 3;
+      /**
+       * <code>USE_CASH_UPGRADING_BUILDING = 4;</code>
+       */
+      public static final int USE_CASH_UPGRADING_BUILDING_VALUE = 4;
+      /**
+       * <code>USE_OIL_UPGRADING_BUILDING = 5;</code>
+       */
+      public static final int USE_OIL_UPGRADING_BUILDING_VALUE = 5;
+      /**
+       * <code>CAPTURE_SCIENTIST = 6;</code>
+       */
+      public static final int CAPTURE_SCIENTIST_VALUE = 6;
 
 
       public final int getNumber() { return value; }
@@ -2154,6 +2194,11 @@ public final class MiniEventProtos {
       public static MiniEventGoalType valueOf(int value) {
         switch (value) {
           case 1: return NO_GOAL;
+          case 2: return HEAL_HP;
+          case 3: return ENHANCE_TOON_XP;
+          case 4: return USE_CASH_UPGRADING_BUILDING;
+          case 5: return USE_OIL_UPGRADING_BUILDING;
+          case 6: return CAPTURE_SCIENTIST;
           default: return null;
         }
       }
@@ -6749,30 +6794,33 @@ public final class MiniEventProtos {
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
       "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\"\356\001\n\022MiniEventGoalProto\022\027\n\017miniEventGo",
+      "(\t\"\351\002\n\022MiniEventGoalProto\022\027\n\017miniEventGo",
       "alId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022O\n\010goalT" +
       "ype\030\003 \001(\01624.com.lvl6.proto.MiniEventGoal" +
       "Proto.MiniEventGoalType:\007NO_GOAL\022\017\n\007goal" +
       "Amt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(\t\022\024\n\014pointsGai" +
-      "ned\030\006 \001(\005\" \n\021MiniEventGoalType\022\013\n\007NO_GOA" +
-      "L\020\001\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007" +
-      "mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014pl" +
-      "ayerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025" +
-      "\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006" +
-      " \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards",
-      "\030\010 \003(\0132(.com.lvl6.proto.MiniEventTierRew" +
-      "ardProto\"^\n\030MiniEventTierRewardProto\022\016\n\006" +
-      "metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardI" +
-      "d\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLea" +
-      "derboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013m" +
-      "iniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021le" +
-      "aderboardMinPos\030\004 \001(\005\"\337\001\n\022UserMiniEventP" +
-      "roto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 " +
-      "\001(\t\022\017\n\007userLvl\030\003 \001(\005\022\021\n\tptsEarned\030\004 \001(\005\022" +
-      "\027\n\017tierOneRedeemed\030\005 \001(\010\022\027\n\017tierTwoRedee",
-      "med\030\006 \001(\010\022\031\n\021tierThreeRedeemed\030\007 \001(\010\0221\n\t" +
-      "miniEvent\030\010 \001(\0132\036.com.lvl6.proto.MiniEve" +
-      "ntProtoB\021B\017MiniEventProtos"
+      "ned\030\006 \001(\005\"\232\001\n\021MiniEventGoalType\022\013\n\007NO_GO" +
+      "AL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHANCE_TOON_XP\020\003\022\037" +
+      "\n\033USE_CASH_UPGRADING_BUILDING\020\004\022\036\n\032USE_O" +
+      "IL_UPGRADING_BUILDING\020\005\022\025\n\021CAPTURE_SCIEN" +
+      "TIST\020\006\"\362\001\n\034MiniEventForPlayerLevelProto\022" +
+      "\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n",
+      "\014playerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(" +
+      "\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPt" +
+      "s\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewa" +
+      "rds\030\010 \003(\0132(.com.lvl6.proto.MiniEventTier" +
+      "RewardProto\"^\n\030MiniEventTierRewardProto\022" +
+      "\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewa" +
+      "rdId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEvent" +
+      "LeaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023" +
+      "\n\013miniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n" +
+      "\021leaderboardMinPos\030\004 \001(\005\"\337\001\n\022UserMiniEve",
+      "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
+      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\021\n\tptsEarned\030\004 \001" +
+      "(\005\022\027\n\017tierOneRedeemed\030\005 \001(\010\022\027\n\017tierTwoRe" +
+      "deemed\030\006 \001(\010\022\031\n\021tierThreeRedeemed\030\007 \001(\010\022" +
+      "1\n\tminiEvent\030\010 \001(\0132\036.com.lvl6.proto.Mini" +
+      "EventProtoB\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

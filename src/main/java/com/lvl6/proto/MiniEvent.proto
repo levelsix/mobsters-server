@@ -33,6 +33,11 @@ message MiniEventGoalProto {
 	
 	enum MiniEventGoalType {
 		NO_GOAL = 1;
+		HEAL_HP = 2;
+		ENHANCE_TOON_XP = 3;
+		USE_CASH_UPGRADING_BUILDING = 4;
+		USE_OIL_UPGRADING_BUILDING = 5;
+		CAPTURE_SCIENTIST = 6;
 	} 
 }
 
