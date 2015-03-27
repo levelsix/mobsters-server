@@ -103,14 +103,14 @@ public class RetrieveMiniEventController extends EventController {
 					insertUtil);
 
 			rmea.execute(resBuilder);
+			log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+					MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
 
 			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 					null != rmea.getCurActiveMiniEvent())
 			{
 				//get UserMiniEvent info and create the proto to set into resBuilder
 				//TODO: Consider protofying MiniEvent stuff
-				log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-						MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
 				UserMiniEventProto umep = CreateInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
