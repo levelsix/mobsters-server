@@ -20,6 +20,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -103,9 +104,13 @@ public class RetrieveMiniEventController extends EventController {
 
 			rmea.execute(resBuilder);
 
-			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS)) {
+			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+					null != rmea.getCurActiveMiniEvent())
+			{
 				//get UserMiniEvent info and create the proto to set into resBuilder
 				//TODO: Consider protofying MiniEvent stuff
+				log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+						MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
 				UserMiniEventProto umep = CreateInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),

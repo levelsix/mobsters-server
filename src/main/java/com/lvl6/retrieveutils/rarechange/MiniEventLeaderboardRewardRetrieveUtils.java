@@ -43,7 +43,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		}
 		MiniEventLeaderboardReward ep = idToReward.get(id);
 		if (null == ep) {
-			log.error("No MiniEventLeaderboardReward for id={}", id);
+			log.warn("No MiniEventLeaderboardReward for id={}", id);
 		}
 		return ep;
 	}
@@ -56,7 +56,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		}
 
 		if (!miniEventIdToRewards.containsKey(miniEventId)) {
-			log.error("No MiniEventLeaderboardRewards for miniEventId={}", miniEventId);
+			log.warn("No MiniEventLeaderboardRewards for miniEventId={}", miniEventId);
 			return new ArrayList<MiniEventLeaderboardReward>();
 		}
 
