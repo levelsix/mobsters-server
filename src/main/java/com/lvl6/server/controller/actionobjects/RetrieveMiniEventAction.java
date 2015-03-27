@@ -157,6 +157,8 @@ public class RetrieveMiniEventAction {
 //			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
 		}
 
+		log.info("this is the currently active mini event: {}", curActiveMiniEvent);
+
 		if (null == curActiveMiniEvent) {
 			log.info("no currently active MiniEvent");
 			return true;

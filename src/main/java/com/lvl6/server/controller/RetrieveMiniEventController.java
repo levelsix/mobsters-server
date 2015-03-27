@@ -120,6 +120,7 @@ public class RetrieveMiniEventController extends EventController {
 			}
 
 			RetrieveMiniEventResponseProto resProto = resBuilder.build();
+			log.info("resProto for MiniEvent={}", resProto);
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
