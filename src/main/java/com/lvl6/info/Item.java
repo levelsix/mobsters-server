@@ -14,6 +14,7 @@ public class Item implements Serializable {
 	private int amount;
 	private float secretGiftChance;
 	private boolean alwaysDisplayToUser;
+	private String gameType;
 
 	//variable to assist in randomly selecting this Item
 	private float normalizedSecretGiftProbability;
@@ -24,7 +25,7 @@ public class Item implements Serializable {
 
 	public Item(int id, String name, String imgName, String itemType,
 			int staticDataId, int amount, float secretGiftChance,
-			boolean alwaysDisplayToUser) {
+			boolean alwaysDisplayToUser, String gameType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -35,6 +36,15 @@ public class Item implements Serializable {
 		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 		this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
+		this.gameType = gameType;
+	}
+
+	public String getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
 	}
 
 	public int getId() {
@@ -116,7 +126,8 @@ public class Item implements Serializable {
 				+ ", itemType=" + itemType + ", staticDataId=" + staticDataId
 				+ ", amount=" + amount + ", secretGiftChance="
 				+ secretGiftChance + ", alwaysDisplayToUser="
-				+ alwaysDisplayToUser + ", normalizedSecretGiftProbability="
+				+ alwaysDisplayToUser + ", gameType=" + gameType
+				+ ", normalizedSecretGiftProbability="
 				+ normalizedSecretGiftProbability + "]";
 	}
 

@@ -862,6 +862,15 @@ public final class ItemsProto {
      * <code>optional bool alwaysDisplayToUser = 8;</code>
      */
     boolean getAlwaysDisplayToUser();
+
+    /**
+     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     */
+    boolean hasGameType();
+    /**
+     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.GameType getGameType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemProto}
@@ -961,6 +970,17 @@ public final class ItemsProto {
             case 64: {
               bitField0_ |= 0x00000080;
               alwaysDisplayToUser_ = input.readBool();
+              break;
+            }
+            case 72: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.GameType value = com.lvl6.proto.SharedEnumConfigProto.GameType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(9, rawValue);
+              } else {
+                bitField0_ |= 0x00000100;
+                gameType_ = value;
+              }
               break;
             }
           }
@@ -1185,6 +1205,21 @@ public final class ItemsProto {
       return alwaysDisplayToUser_;
     }
 
+    public static final int GAMETYPE_FIELD_NUMBER = 9;
+    private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_;
+    /**
+     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     */
+    public boolean hasGameType() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.GameType getGameType() {
+      return gameType_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       name_ = "";
@@ -1194,6 +1229,7 @@ public final class ItemsProto {
       amount_ = 0;
       secretGiftChance_ = 0F;
       alwaysDisplayToUser_ = false;
+      gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1231,6 +1267,9 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBool(8, alwaysDisplayToUser_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeEnum(9, gameType_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1272,6 +1311,10 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(8, alwaysDisplayToUser_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(9, gameType_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1406,6 +1449,8 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
+        gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -1466,6 +1511,10 @@ public final class ItemsProto {
           to_bitField0_ |= 0x00000080;
         }
         result.alwaysDisplayToUser_ = alwaysDisplayToUser_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.gameType_ = gameType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1509,6 +1558,9 @@ public final class ItemsProto {
         }
         if (other.hasAlwaysDisplayToUser()) {
           setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
+        }
+        if (other.hasGameType()) {
+          setGameType(other.getGameType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1896,6 +1948,41 @@ public final class ItemsProto {
       public Builder clearAlwaysDisplayToUser() {
         bitField0_ = (bitField0_ & ~0x00000080);
         alwaysDisplayToUser_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+      /**
+       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       */
+      public boolean hasGameType() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.GameType getGameType() {
+        return gameType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       */
+      public Builder setGameType(com.lvl6.proto.SharedEnumConfigProto.GameType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        gameType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       */
+      public Builder clearGameType() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
         onChanged();
         return this;
       }
@@ -3913,22 +4000,23 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-      "\005\"\303\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\005\"\357\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
-      "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\"" +
-      "\261\001\n\022UserItemUsageProto\022\021\n\tusageUuid\030\001 \001(" +
-      "\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013t",
-      "imeOfEntry\030\004 \001(\003\022\024\n\014userDataUuid\030\005 \001(\t\022;" +
-      "\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto.Game" +
-      "ActionType:\007NO_HELP\"}\n\027UserItemSecretGif" +
-      "tProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001" +
-      "(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006itemId" +
-      "\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*T\n\010ItemType\022\020" +
-      "\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_C" +
-      "ASH\020\003\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\nItem" +
-      "sProto"
+      "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\022" +
+      "*\n\010gameType\030\t \001(\0162\030.com.lvl6.proto.GameT" +
+      "ype\"\261\001\n\022UserItemUsageProto\022\021\n\tusageUuid\030",
+      "\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022" +
+      "\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataUuid\030\005 \001" +
+      "(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto." +
+      "GameActionType:\007NO_HELP\"}\n\027UserItemSecre" +
+      "tGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid" +
+      "\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006it" +
+      "emId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*T\n\010ItemTy" +
+      "pe\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tIT" +
+      "EM_CASH\020\003\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\n" +
+      "ItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3954,7 +4042,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "GameType", });
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new

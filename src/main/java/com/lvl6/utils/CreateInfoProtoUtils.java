@@ -2070,6 +2070,18 @@ public class CreateInfoProtoUtils {
 		ipb.setSecretGiftChance(item.getSecretGiftChance());
 		ipb.setAlwaysDisplayToUser(item.isAlwaysDisplayToUser());
 
+		str = item.getGameType();
+		if(null != str) {
+			try {
+				GameType gt = GameType.valueOf(str);
+				ipb.setGameType(gt);
+			} catch (Exception e) {
+				log.error(String.format(
+						"can't create enum type. gameType=%s. item=%s", str,
+						item), e);
+			}
+		}
+
 		return ipb.build();
 	}
 
