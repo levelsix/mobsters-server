@@ -1564,7 +1564,9 @@ public class StartupController extends EventController {
 
 		rmea.execute(rmeaResBuilder);
 
-		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS)) {
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+				null != rmea.getCurActiveMiniEvent())
+		{
 			//get UserMiniEvent info and create the proto to set into resBuilder
 			//TODO: Consider protofying MiniEvent stuff
 			UserMiniEventProto umep = CreateInfoProtoUtils
