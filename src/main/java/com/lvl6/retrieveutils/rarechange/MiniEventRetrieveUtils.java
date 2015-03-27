@@ -77,7 +77,7 @@ public class MiniEventRetrieveUtils {
 
 	public static Map<Integer, MiniEvent> getAllIdsToMiniEvents() {
 		if (null == idToMiniEvent) {
-			setStaticIdsToMiniEvents();
+			reload();
 		}
 
 		return idToMiniEvent;
@@ -85,7 +85,7 @@ public class MiniEventRetrieveUtils {
 
 	public static MiniEvent getMiniEventById(int id) {
 		if (null == idToMiniEvent) {
-			setStaticIdsToMiniEvents();
+			reload();
 		}
 		MiniEvent ep = idToMiniEvent.get(id);
 		if (null == ep) {
