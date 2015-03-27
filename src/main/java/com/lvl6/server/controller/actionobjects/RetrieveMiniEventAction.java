@@ -191,8 +191,9 @@ public class RetrieveMiniEventAction {
 				MiniEventLeaderboardRewardRetrieveUtils
 				.getRewardsForMiniEventId(meId);
 		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
-			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
-			return false;
+//			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
+//			return false;
+			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 		}
 
 		if (null == mefu) {
