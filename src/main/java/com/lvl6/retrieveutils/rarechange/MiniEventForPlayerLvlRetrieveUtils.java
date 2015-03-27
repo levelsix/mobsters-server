@@ -118,9 +118,9 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 
 		MiniEventForPlayerLvl curLvl = new MiniEventForPlayerLvl();
 		curLvl.setId(0);
-		curLvl.setPlayerLvlMax(playerLvl);
+		curLvl.setPlayerLvlMin(playerLvl);
 
-		MiniEventForPlayerLvl mefpl = orderedMefpl.ceiling(curLvl);
+		MiniEventForPlayerLvl mefpl = orderedMefpl.floor(curLvl);
 
 		if (null == mefpl) {
 			log.warn("no MiniEventForPlayerLvl for eventId={}, lvl={}",

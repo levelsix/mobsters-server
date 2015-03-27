@@ -144,6 +144,7 @@ public class RetrieveMiniEventAction {
 			return mefu.isTierThreeRedeemed();
 		}
 
+		log.error("user trying to get a new event when he hasn't redeemed his rewards");
 		return false;
 	}
 
