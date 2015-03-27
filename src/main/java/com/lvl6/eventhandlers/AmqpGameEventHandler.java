@@ -11,11 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hazelcast.core.IMap;
 import com.lvl6.events.PreDatabaseRequestEvent;
 import com.lvl6.events.RequestEvent;
+import com.lvl6.info.User;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.Attachment;
 import com.lvl6.utils.ConnectedPlayer;
@@ -29,6 +32,9 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
+	
+	@Autowired
+	UserRetrieveUtils2 userRetrieveUtils;
 
 	public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
@@ -88,21 +94,22 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 		event.read(bb);
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			//if(check isAdmin here) {
-				//is an admin so do nothing
-			//}else {
+			String playerId = event.getPlayerId();
+			User user = userRetrieveUtils.getUserById(playerId);
+			if(user.isAdmin()) {
+				
+			}else {
 				//not an admin so send maintenance message and return
 				if (event instanceof PreDatabaseRequestEvent) {
 					String udid = ((PreDatabaseRequestEvent) event).getUdid();
 					messagingUtil.sendMaintanenceModeMessageUdid(
 							getApplicationMode().getMessageForUsers(), udid);
 				} else {
-					String playerId = event.getPlayerId();
 					messagingUtil.sendMaintanenceModeMessageUdid(
 							getApplicationMode().getMessageForUsers(), playerId);
 				}
 				return;
-			//}
+			}
 		}
 		
 		updatePlayerToServerMaps(event);
