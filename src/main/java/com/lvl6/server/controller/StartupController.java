@@ -156,6 +156,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -1599,6 +1600,9 @@ public class StartupController extends EventController {
 				insertUtil);
 
 		rmea.execute(rmeaResBuilder);
+		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+
 
 		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 				null != rmea.getCurActiveMiniEvent())
