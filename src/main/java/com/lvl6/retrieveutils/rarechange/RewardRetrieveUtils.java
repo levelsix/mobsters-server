@@ -26,7 +26,7 @@ public class RewardRetrieveUtils {
 
 	private static Map<Integer, Reward> idToReward;
 
-	public static Map<Integer, Reward> getAllIdsToRewards() {
+	public static Map<Integer, Reward> getRewardIdsToRewards() {
 		if (null == idToReward) {
 			setStaticIdsToRewards();
 		}
