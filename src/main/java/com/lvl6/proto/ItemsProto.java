@@ -864,13 +864,18 @@ public final class ItemsProto {
     boolean getAlwaysDisplayToUser();
 
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     * <code>optional string shortName = 9;</code>
      */
-    boolean hasGameType();
+    boolean hasShortName();
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     * <code>optional string shortName = 9;</code>
      */
-    com.lvl6.proto.SharedEnumConfigProto.GameType getGameType();
+    java.lang.String getShortName();
+    /**
+     * <code>optional string shortName = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getShortNameBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemProto}
@@ -972,15 +977,10 @@ public final class ItemsProto {
               alwaysDisplayToUser_ = input.readBool();
               break;
             }
-            case 72: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.GameType value = com.lvl6.proto.SharedEnumConfigProto.GameType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(9, rawValue);
-              } else {
-                bitField0_ |= 0x00000100;
-                gameType_ = value;
-              }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              shortName_ = bs;
               break;
             }
           }
@@ -1205,19 +1205,46 @@ public final class ItemsProto {
       return alwaysDisplayToUser_;
     }
 
-    public static final int GAMETYPE_FIELD_NUMBER = 9;
-    private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_;
+    public static final int SHORTNAME_FIELD_NUMBER = 9;
+    private java.lang.Object shortName_;
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     * <code>optional string shortName = 9;</code>
      */
-    public boolean hasGameType() {
+    public boolean hasShortName() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+     * <code>optional string shortName = 9;</code>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.GameType getGameType() {
-      return gameType_;
+    public java.lang.String getShortName() {
+      java.lang.Object ref = shortName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          shortName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string shortName = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getShortNameBytes() {
+      java.lang.Object ref = shortName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        shortName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
@@ -1229,7 +1256,7 @@ public final class ItemsProto {
       amount_ = 0;
       secretGiftChance_ = 0F;
       alwaysDisplayToUser_ = false;
-      gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+      shortName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1269,7 +1296,7 @@ public final class ItemsProto {
         output.writeBool(8, alwaysDisplayToUser_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeEnum(9, gameType_.getNumber());
+        output.writeBytes(9, getShortNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1314,7 +1341,7 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(9, gameType_.getNumber());
+          .computeBytesSize(9, getShortNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1449,7 +1476,7 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
-        gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+        shortName_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
@@ -1514,7 +1541,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.gameType_ = gameType_;
+        result.shortName_ = shortName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1559,8 +1586,10 @@ public final class ItemsProto {
         if (other.hasAlwaysDisplayToUser()) {
           setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
         }
-        if (other.hasGameType()) {
-          setGameType(other.getGameType());
+        if (other.hasShortName()) {
+          bitField0_ |= 0x00000100;
+          shortName_ = other.shortName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1952,37 +1981,78 @@ public final class ItemsProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.GameType gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+      private java.lang.Object shortName_ = "";
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       * <code>optional string shortName = 9;</code>
        */
-      public boolean hasGameType() {
+      public boolean hasShortName() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       * <code>optional string shortName = 9;</code>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.GameType getGameType() {
-        return gameType_;
+      public java.lang.String getShortName() {
+        java.lang.Object ref = shortName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            shortName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       * <code>optional string shortName = 9;</code>
        */
-      public Builder setGameType(com.lvl6.proto.SharedEnumConfigProto.GameType value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public com.google.protobuf.ByteString
+          getShortNameBytes() {
+        java.lang.Object ref = shortName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          shortName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
         }
-        bitField0_ |= 0x00000100;
-        gameType_ = value;
+      }
+      /**
+       * <code>optional string shortName = 9;</code>
+       */
+      public Builder setShortName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        shortName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType gameType = 9;</code>
+       * <code>optional string shortName = 9;</code>
        */
-      public Builder clearGameType() {
+      public Builder clearShortName() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        gameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+        shortName_ = getDefaultInstance().getShortName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string shortName = 9;</code>
+       */
+      public Builder setShortNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        shortName_ = value;
         onChanged();
         return this;
       }
@@ -4000,23 +4070,22 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-      "\005\"\357\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\005\"\326\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
       "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\022" +
-      "*\n\010gameType\030\t \001(\0162\030.com.lvl6.proto.GameT" +
-      "ype\"\261\001\n\022UserItemUsageProto\022\021\n\tusageUuid\030",
-      "\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022" +
-      "\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataUuid\030\005 \001" +
-      "(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto." +
-      "GameActionType:\007NO_HELP\"}\n\027UserItemSecre" +
-      "tGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid" +
-      "\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006it" +
-      "emId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*T\n\010ItemTy" +
-      "pe\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tIT" +
-      "EM_CASH\020\003\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\n" +
-      "ItemsProto"
+      "\021\n\tshortName\030\t \001(\t\"\261\001\n\022UserItemUsageProt" +
+      "o\022\021\n\tusageUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016",
+      "\n\006itemId\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014u" +
+      "serDataUuid\030\005 \001(\t\022;\n\nactionType\030\006 \001(\0162\036." +
+      "com.lvl6.proto.GameActionType:\007NO_HELP\"}" +
+      "\n\027UserItemSecretGiftProto\022\020\n\010uisgUuid\030\001 " +
+      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsTillCollect" +
+      "ion\030\003 \001(\005\022\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030" +
+      "\005 \001(\003*T\n\010ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010I" +
+      "TEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_UP\020\004\022\013" +
+      "\n\007BUILDER\020\005B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4042,7 +4111,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "GameType", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "ShortName", });
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new

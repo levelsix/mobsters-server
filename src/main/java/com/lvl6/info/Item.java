@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = -1293698119576984508L;
+	private static final long serialVersionUID = 3895046328659290460L;
 
 	private int id;
 	private String name;
+	private String shortName;
 	private String imgName;
 	private String itemType;
 	private int staticDataId;
@@ -23,20 +24,24 @@ public class Item implements Serializable {
 		super();
 	}
 
-	public Item(int id, String name, String imgName, String itemType,
-			int staticDataId, int amount, float secretGiftChance,
-			boolean alwaysDisplayToUser, String gameType) {
+	public Item(int id, String name, String shortName, String imgName,
+			String itemType, int staticDataId, int amount,
+			float secretGiftChance, boolean alwaysDisplayToUser,
+			String gameType)
+ 	{
 		super();
 		this.id = id;
 		this.name = name;
+		this.shortName = shortName;
 		this.imgName = imgName;
 		this.itemType = itemType;
 		this.staticDataId = staticDataId;
 		this.amount = amount;
 		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
-		this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 		this.gameType = gameType;
+
+		//this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
 
 	public String getGameType() {
@@ -120,15 +125,24 @@ public class Item implements Serializable {
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 	}
 
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", imgName=" + imgName
 				+ ", itemType=" + itemType + ", staticDataId=" + staticDataId
 				+ ", amount=" + amount + ", secretGiftChance="
 				+ secretGiftChance + ", alwaysDisplayToUser="
-				+ alwaysDisplayToUser + ", gameType=" + gameType
+				+ alwaysDisplayToUser + ", shortName=" + shortName
 				+ ", normalizedSecretGiftProbability="
-				+ normalizedSecretGiftProbability + "]";
+				+ normalizedSecretGiftProbability
+				+ ", gameType=" + gameType + "]";
 	}
 
 }

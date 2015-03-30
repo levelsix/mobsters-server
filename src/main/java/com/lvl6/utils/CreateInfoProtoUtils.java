@@ -2064,6 +2064,11 @@ public class CreateInfoProtoUtils {
 			ipb.setName(str);
 		}
 
+		str = item.getShortName();
+		if (null != str) {
+			ipb.setShortName(str);
+		}
+
 		str = item.getImgName();
 		if (null != str) {
 			ipb.setImgName(str);
@@ -2102,7 +2107,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static List<UserItemProto> createUserItemProtosFromUserItems(
-			List<ItemForUser> ifuCollection) {
+			Collection<ItemForUser> ifuCollection)
+	{
 
 		List<UserItemProto> userItems = new ArrayList<UserItemProto>();
 
@@ -2678,7 +2684,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(
-			MonsterForUser mfu) {
+			MonsterForUser mfu)
+	{
 		FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
 		fumpb.setUserMonsterUuid(mfu.getId());
 		fumpb.setUserUuid(mfu.getUserId());
