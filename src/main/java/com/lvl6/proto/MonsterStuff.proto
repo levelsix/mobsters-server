@@ -126,6 +126,8 @@ message MinimumUserMonsterProto {
 	
 	optional int32 offensiveSkillId = 3;
 	optional int32 defensiveSkillId = 4;
+	
+	optional string teamSlotNum = 5;
 }
 
 //------------------------------------------------------------------------------------------
