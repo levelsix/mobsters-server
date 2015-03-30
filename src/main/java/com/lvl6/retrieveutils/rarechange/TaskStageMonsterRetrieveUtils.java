@@ -184,7 +184,7 @@ public class TaskStageMonsterRetrieveUtils {
 			//incorporating nonskill logic, calculating the monsters that can drop
 			if (tsm.getPuzzlePieceDropRate() <= 0F) {
 				//only care about the ones that can drop
-				log.info("tsm drops no monster. {}", tsm);
+//				log.info("tsm drops no monster. {}", tsm);
 				continue;
 			}
 

@@ -108,7 +108,6 @@ public class StructureMoneyTreeRetrieveUtils {
 		;
 		String entireFakeIAPProductId = Globals.APPLE_BUNDLE_ID() + "."
 				+ fakeIAPProductId;
-		log.info(entireIAPProductId);
 
 		StructureMoneyTree smt = new StructureMoneyTree(structId,
 				productionRate, capacity, daysOfDuration, daysForRenewal,
