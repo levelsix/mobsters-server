@@ -968,6 +968,7 @@ public class DBConstants {
 	public static final String ITEM__AMOUNT = "amount";
 	public static final String ITEM__SECRET_GIFT_CHANCE = "secret_gift_chance";
 	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
+	public static final String ITEM__SHORT_NAME = "short_name";
 	public static final String ITEM__GAME_TYPE = "game_type";
 
 	public static final String MINI_EVENT__ID = GENERIC__ID;

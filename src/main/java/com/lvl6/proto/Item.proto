@@ -29,6 +29,7 @@ message ItemProto {
 	optional float secretGiftChance = 7;
 	optional bool alwaysDisplayToUser = 8;
 	optional GameType gameType = 9;
+	optional string shortName = 10;
 }
 
 //------------------------------------------------------------------------------------------

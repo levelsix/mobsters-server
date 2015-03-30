@@ -154,7 +154,7 @@ public class ItemRetrieveUtils {
 			return;
 		}
 		//using a TreeSet to hold the items, so that it is easier
-		//to select an Item at random to reward a user. 
+		//to select an Item at random to reward a user.
 
 		TreeSet<Item> christmasTreeTemp = new TreeSet<Item>(comparator);
 
@@ -198,6 +198,7 @@ public class ItemRetrieveUtils {
 	private static Item convertRSRowToItem(ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.ITEM__ID);
 		String name = rs.getString(DBConstants.ITEM__NAME);
+		String shortName = rs.getString(DBConstants.ITEM__SHORT_NAME);
 		String imgName = rs.getString(DBConstants.ITEM__IMG_NAME);
 		String itemType = rs.getString(DBConstants.ITEM__ITEM_TYPE);
 
@@ -218,7 +219,7 @@ public class ItemRetrieveUtils {
 		String gameType = rs.getString(DBConstants.ITEM__GAME_TYPE);
 		
 
-		Item item = new Item(id, name, imgName, itemType, staticDataId, amount,
+		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId, amount,
 				secretGiftChance, alwaysDisplayToUser, gameType);
 		return item;
 	}
