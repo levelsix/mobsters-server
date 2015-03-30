@@ -658,6 +658,7 @@ public class StaticDataContainer {
 		Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils
 				.getItemIdsToItems();
 
+		log.info("itemIdsToItems={}", itemIdsToItems);
 		if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
 			log.warn("no items");
 			return;
