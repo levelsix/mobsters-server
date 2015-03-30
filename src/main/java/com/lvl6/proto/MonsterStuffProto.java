@@ -8308,18 +8308,13 @@ public final class MonsterStuffProto {
     int getDefensiveSkillId();
 
     /**
-     * <code>optional string teamSlotNum = 5;</code>
+     * <code>optional int32 teamSlotNum = 5;</code>
      */
     boolean hasTeamSlotNum();
     /**
-     * <code>optional string teamSlotNum = 5;</code>
+     * <code>optional int32 teamSlotNum = 5;</code>
      */
-    java.lang.String getTeamSlotNum();
-    /**
-     * <code>optional string teamSlotNum = 5;</code>
-     */
-    com.google.protobuf.ByteString
-        getTeamSlotNumBytes();
+    int getTeamSlotNum();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserMonsterProto}
@@ -8393,10 +8388,9 @@ public final class MonsterStuffProto {
               defensiveSkillId_ = input.readInt32();
               break;
             }
-            case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 40: {
               bitField0_ |= 0x00000010;
-              teamSlotNum_ = bs;
+              teamSlotNum_ = input.readInt32();
               break;
             }
           }
@@ -8500,45 +8494,18 @@ public final class MonsterStuffProto {
     }
 
     public static final int TEAMSLOTNUM_FIELD_NUMBER = 5;
-    private java.lang.Object teamSlotNum_;
+    private int teamSlotNum_;
     /**
-     * <code>optional string teamSlotNum = 5;</code>
+     * <code>optional int32 teamSlotNum = 5;</code>
      */
     public boolean hasTeamSlotNum() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional string teamSlotNum = 5;</code>
+     * <code>optional int32 teamSlotNum = 5;</code>
      */
-    public java.lang.String getTeamSlotNum() {
-      java.lang.Object ref = teamSlotNum_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          teamSlotNum_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string teamSlotNum = 5;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTeamSlotNumBytes() {
-      java.lang.Object ref = teamSlotNum_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        teamSlotNum_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getTeamSlotNum() {
+      return teamSlotNum_;
     }
 
     private void initFields() {
@@ -8546,7 +8513,7 @@ public final class MonsterStuffProto {
       monsterLvl_ = 0;
       offensiveSkillId_ = 0;
       defensiveSkillId_ = 0;
-      teamSlotNum_ = "";
+      teamSlotNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8574,7 +8541,7 @@ public final class MonsterStuffProto {
         output.writeInt32(4, defensiveSkillId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getTeamSlotNumBytes());
+        output.writeInt32(5, teamSlotNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8603,7 +8570,7 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getTeamSlotNumBytes());
+          .computeInt32Size(5, teamSlotNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8730,7 +8697,7 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         defensiveSkillId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        teamSlotNum_ = "";
+        teamSlotNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -8809,9 +8776,7 @@ public final class MonsterStuffProto {
           setDefensiveSkillId(other.getDefensiveSkillId());
         }
         if (other.hasTeamSlotNum()) {
-          bitField0_ |= 0x00000010;
-          teamSlotNum_ = other.teamSlotNum_;
-          onChanged();
+          setTeamSlotNum(other.getTeamSlotNum());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8968,78 +8933,34 @@ public final class MonsterStuffProto {
         return this;
       }
 
-      private java.lang.Object teamSlotNum_ = "";
+      private int teamSlotNum_ ;
       /**
-       * <code>optional string teamSlotNum = 5;</code>
+       * <code>optional int32 teamSlotNum = 5;</code>
        */
       public boolean hasTeamSlotNum() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional string teamSlotNum = 5;</code>
+       * <code>optional int32 teamSlotNum = 5;</code>
        */
-      public java.lang.String getTeamSlotNum() {
-        java.lang.Object ref = teamSlotNum_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            teamSlotNum_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getTeamSlotNum() {
+        return teamSlotNum_;
       }
       /**
-       * <code>optional string teamSlotNum = 5;</code>
+       * <code>optional int32 teamSlotNum = 5;</code>
        */
-      public com.google.protobuf.ByteString
-          getTeamSlotNumBytes() {
-        java.lang.Object ref = teamSlotNum_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          teamSlotNum_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string teamSlotNum = 5;</code>
-       */
-      public Builder setTeamSlotNum(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+      public Builder setTeamSlotNum(int value) {
+        bitField0_ |= 0x00000010;
         teamSlotNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string teamSlotNum = 5;</code>
+       * <code>optional int32 teamSlotNum = 5;</code>
        */
       public Builder clearTeamSlotNum() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        teamSlotNum_ = getDefaultInstance().getTeamSlotNum();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string teamSlotNum = 5;</code>
-       */
-      public Builder setTeamSlotNumBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        teamSlotNum_ = value;
+        teamSlotNum_ = 0;
         onChanged();
         return this;
       }
@@ -20197,7 +20118,7 @@ public final class MonsterStuffProto {
       "mUserMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\n" +
       "monsterLvl\030\002 \001(\005\022\030\n\020offensiveSkillId\030\003 \001" +
       "(\005\022\030\n\020defensiveSkillId\030\004 \001(\005\022\023\n\013teamSlot" +
-      "Num\030\005 \001(\t\"\300\001\n\027UserMonsterHealingProto\022\020\n" +
+      "Num\030\005 \001(\005\"\300\001\n\027UserMonsterHealingProto\022\020\n" +
       "\010userUuid\030\001 \001(\t\022\027\n\017userMonsterUuid\030\002 \001(\t" +
       "\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\036\n\026userHospit" +
       "alStructUuid\030\004 \001(\t\022\026\n\016healthProgress\030\005 \001" +
