@@ -5632,6 +5632,30 @@ public final class MiniEventProtos {
      * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder getMiniEventOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> 
+        getGoalsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getGoals(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    int getGoalsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+        getGoalsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getGoalsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserMiniEventProto}
@@ -5729,6 +5753,14 @@ public final class MiniEventProtos {
               bitField0_ |= 0x00000040;
               break;
             }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                goals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              goals_.add(input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5737,6 +5769,9 @@ public final class MiniEventProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          goals_ = java.util.Collections.unmodifiableList(goals_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -5915,6 +5950,41 @@ public final class MiniEventProtos {
       return miniEvent_;
     }
 
+    public static final int GOALS_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> goals_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> getGoalsList() {
+      return goals_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+        getGoalsOrBuilderList() {
+      return goals_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    public int getGoalsCount() {
+      return goals_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getGoals(int index) {
+      return goals_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+     */
+    public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getGoalsOrBuilder(
+        int index) {
+      return goals_.get(index);
+    }
+
     private void initFields() {
       miniEventId_ = 0;
       userUuid_ = "";
@@ -5923,6 +5993,7 @@ public final class MiniEventProtos {
       tierTwoRedeemed_ = false;
       tierThreeRedeemed_ = false;
       miniEvent_ = com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance();
+      goals_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5957,6 +6028,9 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(7, miniEvent_);
+      }
+      for (int i = 0; i < goals_.size(); i++) {
+        output.writeMessage(8, goals_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5994,6 +6068,10 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, miniEvent_);
+      }
+      for (int i = 0; i < goals_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, goals_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6105,6 +6183,7 @@ public final class MiniEventProtos {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getMiniEventFieldBuilder();
+          getGoalsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6131,6 +6210,12 @@ public final class MiniEventProtos {
           miniEventBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (goalsBuilder_ == null) {
+          goals_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          goalsBuilder_.clear();
+        }
         return this;
       }
 
@@ -6191,6 +6276,15 @@ public final class MiniEventProtos {
         } else {
           result.miniEvent_ = miniEventBuilder_.build();
         }
+        if (goalsBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            goals_ = java.util.Collections.unmodifiableList(goals_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.goals_ = goals_;
+        } else {
+          result.goals_ = goalsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6229,6 +6323,32 @@ public final class MiniEventProtos {
         }
         if (other.hasMiniEvent()) {
           mergeMiniEvent(other.getMiniEvent());
+        }
+        if (goalsBuilder_ == null) {
+          if (!other.goals_.isEmpty()) {
+            if (goals_.isEmpty()) {
+              goals_ = other.goals_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureGoalsIsMutable();
+              goals_.addAll(other.goals_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.goals_.isEmpty()) {
+            if (goalsBuilder_.isEmpty()) {
+              goalsBuilder_.dispose();
+              goalsBuilder_ = null;
+              goals_ = other.goals_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              goalsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGoalsFieldBuilder() : null;
+            } else {
+              goalsBuilder_.addAllMessages(other.goals_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6623,6 +6743,246 @@ public final class MiniEventProtos {
           miniEvent_ = null;
         }
         return miniEventBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> goals_ =
+        java.util.Collections.emptyList();
+      private void ensureGoalsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          goals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>(goals_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> goalsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> getGoalsList() {
+        if (goalsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(goals_);
+        } else {
+          return goalsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public int getGoalsCount() {
+        if (goalsBuilder_ == null) {
+          return goals_.size();
+        } else {
+          return goalsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getGoals(int index) {
+        if (goalsBuilder_ == null) {
+          return goals_.get(index);
+        } else {
+          return goalsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder setGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (goalsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGoalsIsMutable();
+          goals_.set(index, value);
+          onChanged();
+        } else {
+          goalsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder setGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (goalsBuilder_ == null) {
+          ensureGoalsIsMutable();
+          goals_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          goalsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder addGoals(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (goalsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGoalsIsMutable();
+          goals_.add(value);
+          onChanged();
+        } else {
+          goalsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder addGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (goalsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGoalsIsMutable();
+          goals_.add(index, value);
+          onChanged();
+        } else {
+          goalsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder addGoals(
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (goalsBuilder_ == null) {
+          ensureGoalsIsMutable();
+          goals_.add(builderForValue.build());
+          onChanged();
+        } else {
+          goalsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder addGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (goalsBuilder_ == null) {
+          ensureGoalsIsMutable();
+          goals_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          goalsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder addAllGoals(
+          java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> values) {
+        if (goalsBuilder_ == null) {
+          ensureGoalsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, goals_);
+          onChanged();
+        } else {
+          goalsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder clearGoals() {
+        if (goalsBuilder_ == null) {
+          goals_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          goalsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public Builder removeGoals(int index) {
+        if (goalsBuilder_ == null) {
+          ensureGoalsIsMutable();
+          goals_.remove(index);
+          onChanged();
+        } else {
+          goalsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder getGoalsBuilder(
+          int index) {
+        return getGoalsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getGoalsOrBuilder(
+          int index) {
+        if (goalsBuilder_ == null) {
+          return goals_.get(index);  } else {
+          return goalsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+           getGoalsOrBuilderList() {
+        if (goalsBuilder_ != null) {
+          return goalsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(goals_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder addGoalsBuilder() {
+        return getGoalsFieldBuilder().addBuilder(
+            com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder addGoalsBuilder(
+          int index) {
+        return getGoalsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
+       */
+      public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder> 
+           getGoalsBuilderList() {
+        return getGoalsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+          getGoalsFieldBuilder() {
+        if (goalsBuilder_ == null) {
+          goalsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder>(
+                  goals_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          goals_ = null;
+        }
+        return goalsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniEventProto)
@@ -7341,15 +7701,16 @@ public final class MiniEventProtos {
       "rdId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEvent" +
       "LeaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023" +
       "\n\013miniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n" +
-      "\021leaderboardMinPos\030\004 \001(\005\"\314\001\n\022UserMiniEve",
+      "\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEve",
       "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
       "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeem" +
       "ed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tie" +
       "rThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132" +
-      "\036.com.lvl6.proto.MiniEventProto\"U\n\026UserM" +
-      "iniEventGoalProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017m" +
-      "iniEventGoalId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021" +
-      "B\017MiniEventProtos"
+      "\036.com.lvl6.proto.MiniEventProto\0225\n\005goals" +
+      "\030\010 \003(\0132&.com.lvl6.proto.UserMiniEventGoa" +
+      "lProto\"U\n\026UserMiniEventGoalProto\022\020\n\010user" +
+      "Uuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010p" +
+      "rogress\030\003 \001(\005B\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7398,7 +7759,7 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", });
+        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", "Goals", });
     internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable = new
