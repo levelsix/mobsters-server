@@ -21,8 +21,8 @@ public class PvpBattleOutcome {
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 
-	public static final int CASH__MIN_REWARD = 200;
-	public static final int OIL__MIN_REWARD = 200;
+	public static final int CASH__MIN_REWARD = 100;
+	public static final int OIL__MIN_REWARD = 100;
 
 	private String attackerId;
 	private double attackerElo;
@@ -93,7 +93,7 @@ public class PvpBattleOutcome {
 	//ELO SECTION
 	/*
 	Lower Score = min(winner score, loser score)
-	
+
 	Match Score = ( CND( Winner's Score - Loser's Score, Mean, Standard Deviation ) - Offset ) x Scale
 	Mean = Lower Score x [Scoring Curve Bias]
 			Recommended Scoring Curve Bias: 0.0%
