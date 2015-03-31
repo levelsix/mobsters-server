@@ -139,6 +139,8 @@ message StartupResponseProto {
 	repeated BattleItemQueueForUserProto battleItemQueue = 48;
 	repeated UserBattleItemProto battleItem = 49;	
 	repeated UserResearchProto userResearchs = 50;
+	
+	optional DefaultLanguagesProto userDefaultLanguages = 51;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

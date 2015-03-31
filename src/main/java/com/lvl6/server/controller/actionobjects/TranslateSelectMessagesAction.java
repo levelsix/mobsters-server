@@ -1,6 +1,5 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslatedText;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
-import com.lvl6.proto.ChatProto.TranslatedTextProto;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -27,18 +27,21 @@ public class TranslateSelectMessagesAction {
 	private String senderUserId;
 	private TranslateLanguages languageEnum;
 	private List<PrivateChatPost> listOfPrivateChatPosts;
+	private ChatType chatType;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
+	
 
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
-			List<PrivateChatPost> listOfPrivateChatPosts, InsertUtil insertUtil,
-			UpdateUtil updateUtil) {
+			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
+			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.recipientUserId = recipientUserId;
 		this.senderUserId = senderUserId;
 		this.languageEnum = languageEnum;
 		this.listOfPrivateChatPosts = listOfPrivateChatPosts;
+		this.chatType = chatType;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -46,8 +49,8 @@ public class TranslateSelectMessagesAction {
 	private User recipientUser;
 	private User senderUser;
 	private Language language;
-	private List<String> originalMessages;
-	private List<TranslatedTextProto> messagesTranslated;
+	private Map<String, PrivateChatPost> privateChatPostMap;
+	
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
@@ -80,38 +83,54 @@ public class TranslateSelectMessagesAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		boolean successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, languageEnum.toString());
-
+		boolean successfulUpdate = false;
+		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
+			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, languageEnum.toString());
+		}
+		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
+			successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
+					languageEnum.toString(), chatType.toString());
+		}
+		
 		if (!successfulUpdate) {
 			log.error("failed to update user language setting");
 			return false;
 		}
 
+		privateChatPostMap = new HashMap<String, PrivateChatPost>();
 		Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
-		originalMessages = new ArrayList<String>();
 		for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 			String message = pcp.getContent();
-			originalMessages.add(message);
 			chatIdsToTranslations.put(pcp.getId(), message);
 			Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(language, message);
-			messagesTranslated = new ArrayList<TranslatedTextProto>();
 
 			for(TranslateLanguages tl : translatedMessage.keySet()) {
-				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-				ttpb.setLanguage(tl);
-				ttpb.setText(translatedMessage.get(tl));
-				messagesTranslated.add(ttpb.build());
+				TranslatedText tt = new TranslatedText();
+				tt.setLanguage(tl.toString());
+				tt.setText(translatedMessage.get(tl));
+				pcp.setTranslatedText(tt);
 			}
+			privateChatPostMap.put(pcp.getId(), pcp);
 
 		}
 
 		boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
-				chatIdsToTranslations, language);
+				listOfPrivateChatPosts);
 
 		if(successfulTranslationInsertion) {
 			return true;
 		}
 		else return false;
+	}
+
+	
+	public Map<String, PrivateChatPost> getPrivateChatPostMap() {
+		return privateChatPostMap;
+	}
+
+	public void setPrivateChatPostMap(
+			Map<String, PrivateChatPost> privateChatPostMap) {
+		this.privateChatPostMap = privateChatPostMap;
 	}
 
 	public static Logger getLog() {
@@ -193,22 +212,6 @@ public class TranslateSelectMessagesAction {
 
 	public void setLanguage(Language language) {
 		this.language = language;
-	}
-
-	public List<String> getOriginalMessages() {
-		return originalMessages;
-	}
-
-	public void setOriginalMessages(List<String> originalMessages) {
-		this.originalMessages = originalMessages;
-	}
-
-	public List<TranslatedTextProto> getMessagesTranslated() {
-		return messagesTranslated;
-	}
-
-	public void setMessagesTranslated(List<TranslatedTextProto> messagesTranslated) {
-		this.messagesTranslated = messagesTranslated;
 	}
 
 

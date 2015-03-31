@@ -28,6 +28,7 @@ import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
@@ -325,5 +326,5 @@ public interface InsertUtil {
 			MonsterEnhanceHistory meh);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
-			Map<String, String> chatIdToTranslations, Language language);
+			List<PrivateChatPost> listOfPrivateChatPosts);
 }

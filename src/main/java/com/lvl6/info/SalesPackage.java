@@ -1,8 +1,15 @@
 package com.lvl6.info;
 
+import java.util.Date;
+
 public class SalesPackage {
 	
-	public SalesPackage(int id, String name, int price, String uuid) {
+	public SalesPackage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public SalesPackage(int id, String name, double price, String uuid,
+			Date timeStart, Date timeEnd, int predId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -14,7 +21,7 @@ public class SalesPackage {
 
 	private int id;
 	private String name;
-	private int price;
+	private double price;
 	private String uuid;
 	
 	public int getId() {
@@ -33,11 +40,11 @@ public class SalesPackage {
 		this.name = name;
 	}
 	
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

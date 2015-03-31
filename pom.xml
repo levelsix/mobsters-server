@@ -250,7 +250,7 @@
 						<include>**/test/*.java</include>
 					</includes>
 				</configuration>
-			</plugin>
+			</plugin>		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -775,6 +775,44 @@
 				<artifactId>microsoft-translator-java-api</artifactId>
 				<version>0.6.2</version>
 			</dependency>
+<!--     		<dependency> -->
+<!--         		<groupid>junit</groupId> -->
+<!--         		<artifactid>junit</artifactId> -->
+<!--         		<version>4.11</version> -->
+<!--         		<scope>test</scope> -->
+<!--         		<type>jar</type> -->
+<!--     		</dependency> -->
+    		<dependency>
+        		<groupId>org.mockito</groupId>
+        		<artifactId>mockito-core</artifactId>
+        		<version>1.9.5</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-api-mockito</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<!-- Required for PowerMockRule -->
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4-rule-agent</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+			</dependency>
+			<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-classloading-xstream</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -1005,10 +1043,28 @@
 			</dependency> -->
 		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-http</artifactId> 
 			</dependency> -->
+
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>2.0.3-beta</version>
+			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4-rule-agent</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-classloading-xstream</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.memetix</groupId>

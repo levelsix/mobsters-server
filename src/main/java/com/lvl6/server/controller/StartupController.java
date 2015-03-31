@@ -51,6 +51,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -61,6 +62,7 @@ import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
@@ -70,7 +72,10 @@ import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
+import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -143,6 +148,7 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -231,6 +237,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
@@ -645,6 +654,9 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+			setDefaultLanguagesForUser(resBuilder, playerId);
+			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
+
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1539,6 +1551,25 @@ public class StartupController extends EventController {
 
 			resBuilder.addAllBattleItem(biqfupList);
 		}
+	}
+	
+	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
+		List<PrivateChatPost> pcpList = privateChatPostRetrieveUtils.
+				getUserPrivateChatPost(userId);
+		Map<String, TranslationSettingsForUser> tsfuMap = translationSettingsForUserRetrieveUtil.
+				getSenderIdToUserTranslationSettingsForUser(userId);
+		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
+				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
+
+		DefaultLanguagesProto dlp = null;
+		if(pcpList != null && !pcpList.isEmpty()) {
+			if(tsfuMap != null && !tsfuMap.isEmpty()) {
+				dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
+						TranslateLanguages.valueOf(tsfu.getLanguage()), pcpList, tsfuMap);
+			}
+		}
+		
+		resBuilder.setUserDefaultLanguages(dlp);
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,

@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.properties.DBConstants;
 
@@ -39,6 +40,28 @@ public class PrivateChatPostRetrieveUtils2 {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	//the ones where user is recipient
+	public List<PrivateChatPost> getUserPrivateChatPost(String userId) {
+		log.debug(String.format("retrieving user private chat posts for userId %s",
+				userId));
+
+		Object[] values = { userId };
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID);
+
+		List<PrivateChatPost> userPrivateChatPosts = null;
+		try {
+			userPrivateChatPosts = this.jdbcTemplate.query(query, values, rowMapper);
+
+		} catch (Exception e) {
+			log.error("battle item for user retrieve db error.", e);
+			userPrivateChatPosts = new ArrayList<PrivateChatPost>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return userPrivateChatPosts;
+	}
+	
 	public List<PrivateChatPost> getPrivateChatPostsBetweenUsersBeforePostId(
 			int limit, String userOne, String userTwo) {
 		log.info(String

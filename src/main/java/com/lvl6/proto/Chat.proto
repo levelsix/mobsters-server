@@ -68,5 +68,24 @@ message TranslatedTextProto {
 
 }
 
+//-------------------------------------------------------------------------------------
+
+message DefaultLanguagesProto {
+	optional TranslateLanguages globalDefaultLanguage = 1;
+	repeated PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;
+
+}
+
+//-------------------------------------------------------------------------------------
+
+message PrivateChatDefaultLanguageProto {
+	optional string privateChatPostUuid = 1;
+	optional TranslateLanguages defaultLanguage = 2;
+
+}
+
+	
+
+
 
 

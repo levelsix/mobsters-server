@@ -3,7 +3,6 @@ package com.lvl6.retrieveutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.utilmethods.StringUtils;
+import com.lvl6.proto.ChatProto.ChatType;
 
 @Component
 @DependsOn("gameServer")
@@ -39,13 +38,35 @@ public class TranslationSettingsForUserRetrieveUtil {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public List<TranslationSettingsForUser> getUserTranslationSettingssForUser(String userId) {
-		log.debug(String.format("retrieving user translation settings for userId %s",
+	public TranslationSettingsForUser getUserTranslationSettingsForUserGlobal(String userId) {
+		log.debug(String.format("retrieving user translation settings for global userId %s",
 				userId));
 
-		Object[] values = { userId };
+		Object[] values = { userId, "PRIVATE_CHAT"};
+		String query = String.format("select * from %s where %s=? and %s=?", TABLE_NAME,
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID, 
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE);
+
+		List<TranslationSettingsForUser> userTranslationSettingss = null;
+		try {
+			userTranslationSettingss = this.jdbcTemplate.query(query, values, rowMapper);
+
+		} catch (Exception e) {
+			log.error("translation settings for user retrieve db error.", e);
+			userTranslationSettingss = new ArrayList<TranslationSettingsForUser>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return userTranslationSettingss.get(0);
+	}
+	
+	public List<TranslationSettingsForUser> getUserTranslationSettingsForUser(String recipientUserId) {
+		log.debug(String.format("retrieving user translation settings for userId %s",
+				recipientUserId));
+
+		Object[] values = { recipientUserId };
 		String query = String.format("select * from %s where %s=?", TABLE_NAME,
-				DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID);
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID);
 
 		List<TranslationSettingsForUser> userTranslationSettingss = null;
 		try {
@@ -61,7 +82,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 	}
 
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
-	public Map<String, TranslationSettingsForUser> getTranslationSettingsIdsToUserTranslationSettingsForUser(
+	public Map<String, TranslationSettingsForUser> getSenderIdToUserTranslationSettingsForUser(
 			String userId) {
 		log.debug("retrieving map of translation settings to id for userId "
 				+ userId);
@@ -69,11 +90,11 @@ public class TranslationSettingsForUserRetrieveUtil {
 		Map<String, TranslationSettingsForUser> translationSettingsIdToTranslationSettingsForUser = new HashMap<String, TranslationSettingsForUser>();
 		try {
 
-			List<TranslationSettingsForUser> bifuList = getUserTranslationSettingssForUser(userId);
+			List<TranslationSettingsForUser> bifuList = getUserTranslationSettingsForUser(userId);
 
 			for (TranslationSettingsForUser bifu : bifuList) {
-				String translationSettingsId = bifu.getId();
-				translationSettingsIdToTranslationSettingsForUser.put(translationSettingsId, bifu);
+				String senderUserId = bifu.getSenderUserId();
+				translationSettingsIdToTranslationSettingsForUser.put(senderUserId, bifu);
 			}
 
 		} catch (Exception e) {
@@ -118,12 +139,12 @@ public class TranslationSettingsForUserRetrieveUtil {
 	}
 	
 	public TranslationSettingsForUser getSpecificUserGlobalTranslationSettings(String recipientUserId,
-			String chatType) {
+			ChatType chatType) {
 		log.debug(
 				"retrieving translation settings with recipientUserId={}, chatType={}",
 				recipientUserId, chatType);
 
-		Object[] values = { recipientUserId, chatType };
+		Object[] values = { recipientUserId, chatType.toString() };
 		String query = String.format("select * from %s where %s=? and %s=?",
 				TABLE_NAME, DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE);

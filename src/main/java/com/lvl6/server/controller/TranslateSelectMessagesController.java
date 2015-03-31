@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -15,6 +16,8 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TranslateSelectMessagesRequestEvent;
 import com.lvl6.events.response.TranslateSelectMessagesResponseEvent;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslatedText;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
@@ -82,10 +85,13 @@ public class TranslateSelectMessagesController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String recipientUserId = senderProto.getUserUuid();
-		String senderUserId = reqProto.getOtherUserUuid();
+		String senderUserId = null;
+		if(reqProto.hasOtherUserUuid()) {
+			senderUserId = reqProto.getOtherUserUuid();
+		}
+		ChatType ct = reqProto.getChatType();
 		
 		TranslateLanguages language = reqProto.getLanguage();
-		
 		List<PrivateChatPostProto> listOfPrivateChatProtos = reqProto.getMessagesToBeTranslatedList();
 		List<PrivateChatPost> listOfPrivateChatPosts = convertFromProtos(listOfPrivateChatProtos);
 		
@@ -100,8 +106,11 @@ public class TranslateSelectMessagesController extends EventController {
 		boolean invalidUuids = true;
 		try {
 			recipientUserUuid = UUID.fromString(recipientUserId);
-			senderUserUuid = UUID.fromString(senderUserId);
-
+			
+			if(senderUserId != null) {
+				senderUserUuid = UUID.fromString(senderUserId);
+			}
+			
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect recipientUserId=%s or senderUserId=%s",
@@ -125,21 +134,17 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, insertUtil, updateUtil);
+					senderUserId, language, listOfPrivateChatPosts, ct, insertUtil, updateUtil);
 
 			tsma.execute(resBuilder);
 
-			List<String> originalMessages;
-			List<TranslatedTextProto> messagesTranslated;
-			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				originalMessages = tsma.getOriginalMessages();
-				messagesTranslated = tsma.getMessagesTranslated();
+			Map<String, PrivateChatPost> privateChatPostMap;
+			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatType.PRIVATE_CHAT)) {
+				privateChatPostMap = tsma.getPrivateChatPostMap();
 				
-				if (null != originalMessages) {
-					resBuilder.addAllOriginalMessages(originalMessages);
-				}
-				if (null != messagesTranslated) {
-					resBuilder.addAllMessagesTranslated(messagesTranslated);
+				if (null != privateChatPostMap) {
+					resBuilder.addAllMessagesTranslated(createNewPrivateChatPostProtoWithTranslations(
+							listOfPrivateChatProtos, privateChatPostMap));
 				}
 			}
 			TranslateSelectMessagesResponseProto resProto = resBuilder.build();
@@ -182,6 +187,29 @@ public class TranslateSelectMessagesController extends EventController {
 		}
 		return returnList;
 	}
+	
+	private List<PrivateChatPostProto> createNewPrivateChatPostProtoWithTranslations(
+			List<PrivateChatPostProto> list, Map<String, PrivateChatPost> privateChatPostMap) {
+		
+		List<PrivateChatPostProto> returnList = new ArrayList<PrivateChatPostProto>();
+		for(PrivateChatPostProto pcpp : list) {
+			PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
+			String id = pcpp.getPrivateChatPostUuid();
+			pcppb.setPrivateChatPostUuid(id);
+			pcppb.setPoster(pcpp.getPoster());
+			pcppb.setRecipient(pcpp.getRecipient());
+			pcppb.setTimeOfPost(pcpp.getTimeOfPost());
+			pcppb.setContent(pcpp.getContent());
+			TranslatedText tt = privateChatPostMap.get(id).getTranslatedText();
+			TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+			ttpb.setLanguage(TranslateLanguages.valueOf(tt.getLanguage()));
+			ttpb.setText(tt.getText());
+			pcppb.setTranslatedContent(ttpb.build());
+			returnList.add(pcppb.build());
+		}
+		return returnList;
+	}
+	
 
 	public Locker getLocker() {
 		return locker;

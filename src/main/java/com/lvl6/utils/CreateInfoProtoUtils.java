@@ -107,6 +107,7 @@ import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
@@ -133,7 +134,9 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
+import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
@@ -1264,6 +1267,7 @@ public class CreateInfoProtoUtils {
 
 		return pcppb.build();
 	}
+	
 
 	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
@@ -1360,7 +1364,7 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(createMinimumUserProtoWithLevel(user, clan, null));
 		gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
 
-		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
+//		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 
 		gcmpb.setContent(p.getContent());
@@ -1409,6 +1413,26 @@ public class CreateInfoProtoUtils {
 			gcmpb.setChatUuid(chatId);
 		}
 		return gcmpb.build();
+	}
+	
+	public static DefaultLanguagesProto createDefaultLanguagesProto(TranslateLanguages globalLanguage, 
+			List<PrivateChatPost> pcpList, Map<String, TranslationSettingsForUser> tsfuMap) {
+		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
+		dlpb.setGlobalDefaultLanguage(globalLanguage);
+		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
+		
+		for(PrivateChatPost pcp : pcpList) {
+			String senderUserId = pcp.getPosterId();
+			TranslationSettingsForUser tsfu = tsfuMap.get(senderUserId);
+			PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
+			pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
+			pcdlpb.setPrivateChatPostUuid(pcp.getId());
+			pcdlpList.add(pcdlpb.build());
+		}
+		
+		dlpb.addAllPrivateDefaultLanguage(pcdlpList);
+		return dlpb.build();
+		
 	}
 
 

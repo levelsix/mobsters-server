@@ -18,7 +18,6 @@ import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
-import com.lvl6.info.TranslatedText;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;

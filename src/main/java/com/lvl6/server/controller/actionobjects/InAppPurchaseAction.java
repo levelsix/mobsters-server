@@ -15,6 +15,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.SalesItem;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
@@ -34,7 +35,6 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class InAppPurchaseAction {
@@ -310,7 +310,7 @@ public class InAppPurchaseAction {
 		log.info("!!!!!!!!!mfusop={}", mfusop);
 		//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
 		if (!completeUserMonsters.isEmpty()) {
-			List<String> monsterForUserIds = InsertUtils.get()
+			List<String> monsterForUserIds = insertUtil
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
 			List<FullUserMonsterProto> newOrUpdated = MiscMethods
@@ -450,6 +450,160 @@ public class InAppPurchaseAction {
 	//	    }
 	//	    return ifuList;
 	//	}
+	
+//	private void processSalesPackagePurchase(Builder resBuilder) {
+//		Map<Integer, SalesPackage> idsToSalesPackage = SalesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+//		for(Integer salesPackageId : idsToSalesPackage.keySet()) {
+//			SalesPackage sp = idsToSalesPackage.get(salesPackageId);
+//			if(sp.getUuid().equals(uuid)) {
+//				Map<Integer, SalesItem> idToSalesItem = SalesItemRetrieveUtils
+//						.getSalesItemIdsToSalesItemsForSalesPackageId(salesPackageId);
+//				if (null == idToSalesItem || idToSalesItem.isEmpty()) {
+//					throw new RuntimeException(String.format(
+//							"no sales package for salesPackageId=%s", salesPackageId));
+//				}
+//
+//				//TODO: clean up this copy paste of PurchaseBoosterPackController logic
+//				List<SalesItem> itemsUserReceives = new ArrayList<SalesItem>();
+//				itemsUserReceives.addAll(idToSalesItem.values());
+//				boolean legit = MiscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+//				if (!legit) {
+//					throw new RuntimeException(String.format(
+//							"illegal monster in sales item for salespackageId=%s",
+//							salesPackageId));
+//				}
+//				gemChange = MiscMethods.determineGemRewardForSale(itemsUserReceives);
+//
+//				
+//				//booster packs can give out gems, so  reuse processPurchase logic
+//				processPurchase(resBuilder);
+//
+//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+//				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
+//				//sop = source of pieces
+//				
+//				String mfusop = MiscMethods.createUpdateUserMonsterArgumentsForSales(userId,
+//						sp.getId(), itemsUserReceives, monsterIdToNumPieces,
+//						completeUserMonsters, now);
+//
+//				log.info("!!!!!!!!!mfusop={}", mfusop);
+//				//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
+//				if (!completeUserMonsters.isEmpty()) {
+//					List<String> monsterForUserIds = insertUtil
+//							.insertIntoMonsterForUserReturnIds(userId,
+//									completeUserMonsters, mfusop, now);
+//					List<FullUserMonsterProto> newOrUpdated = MiscMethods
+//							.createFullUserMonsterProtos(monsterForUserIds,
+//									completeUserMonsters);
+//
+//					String preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
+//					log.info("{} monster(s) newOrUpdated: {} \t sPackId={}",
+//							new Object[] { preface, newOrUpdated, sp.getId() });
+//					//set the builder that will be sent to the client
+//					resBuilder.addAllUpdatedOrNew(newOrUpdated);
+//				}
+//
+//				//this is if the user did not buy a complete monster, UPDATE DB
+//				if (!monsterIdToNumPieces.isEmpty()) {
+//					//assume things just work while updating user monsters
+//					List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+//							.updateUserMonsters(userId, monsterIdToNumPieces, null,
+//									mfusop, now);
+//
+//					String preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
+//					log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
+//							new Object[] { preface, newOrUpdated, sp.getId() });
+//					//set the builder that will be sent to the client
+//					resBuilder.addAllUpdatedOrNew(newOrUpdated);
+//				}
+//
+//				//item reward
+//				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId, 
+//						itemsUserReceives, itemForUserRetrieveUtil, updateUtil);
+//				 
+//				if (null != ifuList && !ifuList.isEmpty()) {
+//					List<UserItemProto> uipList = CreateInfoProtoUtils
+//							.createUserItemProtosFromUserItems(ifuList);
+//					resBuilder.addAllUpdatedUserItems(uipList);
+//				}
+//			}
+//		}
+//		
+//	}
+	
+	private List<ItemForUser> awardSalesItemItemRewards(String userId,
+			List<SalesItem> itemsUserReceives,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			UpdateUtil updateUtil) {
+		List<ItemForUser> ifuList = calculateSalesItemItemRewards(userId, 
+				itemsUserReceives, itemForUserRetrieveUtil);
+
+		log.info("ifuList={}", ifuList);
+		if (null != ifuList && !ifuList.isEmpty()) {
+			int numUpdated = updateUtil.updateItemForUser(ifuList);
+			log.info("items numUpdated={}", numUpdated);
+			return ifuList;
+		} else {
+			return null;
+		}
+
+	}
+	
+	private List<ItemForUser> calculateSalesItemItemRewards(
+			String userId, List<SalesItem> itemsUserReceives,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+
+		for (SalesItem si : itemsUserReceives) {
+			int itemId = si.getItemId();
+			int itemQuantity = si.getItemQuantity();
+
+			if (itemId <= 0 || itemQuantity <= 0) {
+				continue;
+			}
+
+			//user could have gotten multiple of the same BoosterItem
+			int newQuantity = itemQuantity;
+			if (itemIdToQuantity.containsKey(itemId)) {
+				newQuantity += itemIdToQuantity.get(itemId);
+			}
+			itemIdToQuantity.put(itemId, newQuantity);
+		}
+
+		return calculateItemRewards(userId, itemForUserRetrieveUtil,
+				itemIdToQuantity);
+	}
+
+	private List<ItemForUser> calculateItemRewards(String userId,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			Map<Integer, Integer> itemIdToQuantity) {
+		List<ItemForUser> ifuList = null;
+		if (!itemIdToQuantity.isEmpty()) {
+			//aggregate rewarded items with user's current items
+			Map<Integer, ItemForUser> itemIdToIfu = itemForUserRetrieveUtil
+					.getSpecificOrAllItemForUserMap(userId,
+							itemIdToQuantity.keySet());
+
+			for (Integer itemId : itemIdToQuantity.keySet()) {
+				int newQuantity = itemIdToQuantity.get(itemId);
+
+				ItemForUser ifu = null;
+				if (itemIdToIfu.containsKey(itemId)) {
+					ifu = itemIdToIfu.get(itemId);
+				} else {
+					//user might not have the item
+					ifu = new ItemForUser(userId, itemId, 0);
+					itemIdToIfu.put(itemId, ifu);
+				}
+
+				newQuantity += ifu.getQuantity();
+				ifu.setQuantity(newQuantity);
+			}
+
+			ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+		}
+		return ifuList;
+	}
 
 	private void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();

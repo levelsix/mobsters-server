@@ -38,6 +38,7 @@ import com.lvl6.info.MonsterEnhanceHistory;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
@@ -874,7 +875,9 @@ public class InsertUtils implements InsertUtil {
 		String id = randomUUID();
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID, id);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID, receiverId);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, senderId);
+		if(senderId != null) {
+			insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, senderId);
+		}
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, language);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE, chatType);
 		
@@ -2620,13 +2623,13 @@ public class InsertUtils implements InsertUtil {
 	
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
-			Map<String, String> chatIdToTranslations, Language language) {
-		if(chatIdToTranslations == null) {
+			List<PrivateChatPost> listOfPrivateChatPosts) {
+		if(listOfPrivateChatPosts == null) {
 			log.error("map containing ids to translations is null");
 		}
 		
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
-		int size = chatIdToTranslations.size();
+		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		
 		List<String> idList = new ArrayList<String>();
@@ -2636,12 +2639,12 @@ public class InsertUtils implements InsertUtil {
 		List<String> textList = new ArrayList<String>();
 
 		try {
-			for(String chatId : chatIdToTranslations.keySet()) {
+			for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 				idList.add(randomUUID());
 				chatTypeList.add(ChatType.PRIVATE_CHAT.toString());
-				chatIdList.add(chatId);
-				languageList.add(language.getName(Language.ENGLISH));
-				textList.add(chatIdToTranslations.get(chatId));
+				chatIdList.add(pcp.getId());
+				languageList.add(pcp.getTranslatedText().getLanguage());
+				textList.add(pcp.getTranslatedText().getText());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
