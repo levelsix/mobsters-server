@@ -2543,6 +2543,8 @@ public class CreateInfoProtoUtils {
 			mumpb.setDefensiveSkillId(defaultDefSkillId);
 		}
 
+		mumpb.setTeamSlotNum(mfu.getTeamSlotNum());
+
 		return mumpb.build();
 	}
 
@@ -2604,20 +2606,22 @@ public class CreateInfoProtoUtils {
 			mumpb.setDefensiveSkillId(defaultDefSkillId);
 		}
 
+		mumpb.setTeamSlotNum(msfu.getTeamSlotNum());
+
 		return mumpb.build();
 	}
 
-	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
-			Collection<MonsterForUser> userMonsters) {
-		List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
-
-		for (MonsterForUser mfu : userMonsters) {
-			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
-			returnList.add(mump);
-		}
-
-		return returnList;
-	}
+//	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
+//			Collection<MonsterForUser> userMonsters) {
+//		List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
+//
+//		for (MonsterForUser mfu : userMonsters) {
+//			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+//			returnList.add(mump);
+//		}
+//
+//		return returnList;
+//	}
 
 	public static List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
 			List<MonsterForPvp> mfpList) {
