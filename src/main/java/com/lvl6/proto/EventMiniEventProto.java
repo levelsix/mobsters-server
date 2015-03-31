@@ -1410,29 +1410,28 @@ public final class EventMiniEventProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    boolean hasUpdatedUserMiniEvent();
+    java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> 
+        getUpdatedGoalsList();
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent();
+    com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getUpdatedGoals(int index);
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder();
+    int getUpdatedGoalsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+        getUpdatedGoalsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+     */
+    com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getUpdatedGoalsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateMiniEventRequestProto}
@@ -1504,16 +1503,11 @@ public final class EventMiniEventProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = updatedUserMiniEvent_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                updatedGoals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>();
+                mutable_bitField0_ |= 0x00000002;
               }
-              updatedUserMiniEvent_ = input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(updatedUserMiniEvent_);
-                updatedUserMiniEvent_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
+              updatedGoals_.add(input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1524,6 +1518,9 @@ public final class EventMiniEventProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          updatedGoals_ = java.util.Collections.unmodifiableList(updatedGoals_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1577,42 +1574,44 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    public static final int UPDATEDUSERMINIEVENT_FIELD_NUMBER = 2;
-    private com.lvl6.proto.MiniEventProtos.UserMiniEventProto updatedUserMiniEvent_;
+    public static final int UPDATEDGOALS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> updatedGoals_;
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    public boolean hasUpdatedUserMiniEvent() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> getUpdatedGoalsList() {
+      return updatedGoals_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    public com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent() {
-      return updatedUserMiniEvent_;
+    public java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+        getUpdatedGoalsOrBuilderList() {
+      return updatedGoals_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-     *
-     * <pre>
-     *what the UserMiniEvent in the database will be
-     * </pre>
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
-    public com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder() {
-      return updatedUserMiniEvent_;
+    public int getUpdatedGoalsCount() {
+      return updatedGoals_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+     */
+    public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getUpdatedGoals(int index) {
+      return updatedGoals_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+     */
+    public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getUpdatedGoalsOrBuilder(
+        int index) {
+      return updatedGoals_.get(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
+      updatedGoals_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1630,8 +1629,8 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, updatedUserMiniEvent_);
+      for (int i = 0; i < updatedGoals_.size(); i++) {
+        output.writeMessage(2, updatedGoals_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1646,9 +1645,9 @@ public final class EventMiniEventProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      for (int i = 0; i < updatedGoals_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, updatedUserMiniEvent_);
+          .computeMessageSize(2, updatedGoals_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1764,7 +1763,7 @@ public final class EventMiniEventProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getUpdatedUserMiniEventFieldBuilder();
+          getUpdatedGoalsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1779,12 +1778,12 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
+        if (updatedGoalsBuilder_ == null) {
+          updatedGoals_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          updatedUserMiniEventBuilder_.clear();
+          updatedGoalsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1821,13 +1820,14 @@ public final class EventMiniEventProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (updatedUserMiniEventBuilder_ == null) {
-          result.updatedUserMiniEvent_ = updatedUserMiniEvent_;
+        if (updatedGoalsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            updatedGoals_ = java.util.Collections.unmodifiableList(updatedGoals_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.updatedGoals_ = updatedGoals_;
         } else {
-          result.updatedUserMiniEvent_ = updatedUserMiniEventBuilder_.build();
+          result.updatedGoals_ = updatedGoalsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1848,8 +1848,31 @@ public final class EventMiniEventProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUpdatedUserMiniEvent()) {
-          mergeUpdatedUserMiniEvent(other.getUpdatedUserMiniEvent());
+        if (updatedGoalsBuilder_ == null) {
+          if (!other.updatedGoals_.isEmpty()) {
+            if (updatedGoals_.isEmpty()) {
+              updatedGoals_ = other.updatedGoals_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUpdatedGoalsIsMutable();
+              updatedGoals_.addAll(other.updatedGoals_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedGoals_.isEmpty()) {
+            if (updatedGoalsBuilder_.isEmpty()) {
+              updatedGoalsBuilder_.dispose();
+              updatedGoalsBuilder_ = null;
+              updatedGoals_ = other.updatedGoals_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              updatedGoalsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedGoalsFieldBuilder() : null;
+            } else {
+              updatedGoalsBuilder_.addAllMessages(other.updatedGoals_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1994,156 +2017,244 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.MiniEventProtos.UserMiniEventProto updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> updatedUserMiniEventBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
-       */
-      public boolean hasUpdatedUserMiniEvent() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> updatedGoals_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedGoalsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          updatedGoals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>(updatedGoals_);
+          bitField0_ |= 0x00000002;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> updatedGoalsBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          return updatedUserMiniEvent_;
+      public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> getUpdatedGoalsList() {
+        if (updatedGoalsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedGoals_);
         } else {
-          return updatedUserMiniEventBuilder_.getMessage();
+          return updatedGoalsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public Builder setUpdatedUserMiniEvent(com.lvl6.proto.MiniEventProtos.UserMiniEventProto value) {
-        if (updatedUserMiniEventBuilder_ == null) {
+      public int getUpdatedGoalsCount() {
+        if (updatedGoalsBuilder_ == null) {
+          return updatedGoals_.size();
+        } else {
+          return updatedGoalsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getUpdatedGoals(int index) {
+        if (updatedGoalsBuilder_ == null) {
+          return updatedGoals_.get(index);
+        } else {
+          return updatedGoalsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public Builder setUpdatedGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (updatedGoalsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          updatedUserMiniEvent_ = value;
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.set(index, value);
           onChanged();
         } else {
-          updatedUserMiniEventBuilder_.setMessage(value);
+          updatedGoalsBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public Builder setUpdatedUserMiniEvent(
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder builderForValue) {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = builderForValue.build();
+      public Builder setUpdatedGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (updatedGoalsBuilder_ == null) {
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.set(index, builderForValue.build());
           onChanged();
         } else {
-          updatedUserMiniEventBuilder_.setMessage(builderForValue.build());
+          updatedGoalsBuilder_.setMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public Builder mergeUpdatedUserMiniEvent(com.lvl6.proto.MiniEventProtos.UserMiniEventProto value) {
-        if (updatedUserMiniEventBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              updatedUserMiniEvent_ != com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance()) {
-            updatedUserMiniEvent_ =
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto.newBuilder(updatedUserMiniEvent_).mergeFrom(value).buildPartial();
-          } else {
-            updatedUserMiniEvent_ = value;
+      public Builder addUpdatedGoals(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (updatedGoalsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.add(value);
           onChanged();
         } else {
-          updatedUserMiniEventBuilder_.mergeFrom(value);
+          updatedGoalsBuilder_.addMessage(value);
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public Builder clearUpdatedUserMiniEvent() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
+      public Builder addUpdatedGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto value) {
+        if (updatedGoalsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.add(index, value);
           onChanged();
         } else {
-          updatedUserMiniEventBuilder_.clear();
+          updatedGoalsBuilder_.addMessage(index, value);
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder getUpdatedUserMiniEventBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getUpdatedUserMiniEventFieldBuilder().getBuilder();
+      public Builder addUpdatedGoals(
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (updatedGoalsBuilder_ == null) {
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedGoalsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder() {
-        if (updatedUserMiniEventBuilder_ != null) {
-          return updatedUserMiniEventBuilder_.getMessageOrBuilder();
+      public Builder addUpdatedGoals(
+          int index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder builderForValue) {
+        if (updatedGoalsBuilder_ == null) {
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.add(index, builderForValue.build());
+          onChanged();
         } else {
-          return updatedUserMiniEvent_;
+          updatedGoalsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public Builder addAllUpdatedGoals(
+          java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> values) {
+        if (updatedGoalsBuilder_ == null) {
+          ensureUpdatedGoalsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedGoals_);
+          onChanged();
+        } else {
+          updatedGoalsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public Builder clearUpdatedGoals() {
+        if (updatedGoalsBuilder_ == null) {
+          updatedGoals_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          updatedGoalsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public Builder removeUpdatedGoals(int index) {
+        if (updatedGoalsBuilder_ == null) {
+          ensureUpdatedGoalsIsMutable();
+          updatedGoals_.remove(index);
+          onChanged();
+        } else {
+          updatedGoalsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder getUpdatedGoalsBuilder(
+          int index) {
+        return getUpdatedGoalsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getUpdatedGoalsOrBuilder(
+          int index) {
+        if (updatedGoalsBuilder_ == null) {
+          return updatedGoals_.get(index);  } else {
+          return updatedGoalsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 2;</code>
-       *
-       * <pre>
-       *what the UserMiniEvent in the database will be
-       * </pre>
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> 
-          getUpdatedUserMiniEventFieldBuilder() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder>(
-                  getUpdatedUserMiniEvent(),
+      public java.util.List<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+           getUpdatedGoalsOrBuilderList() {
+        if (updatedGoalsBuilder_ != null) {
+          return updatedGoalsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedGoals_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder addUpdatedGoalsBuilder() {
+        return getUpdatedGoalsFieldBuilder().addBuilder(
+            com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder addUpdatedGoalsBuilder(
+          int index) {
+        return getUpdatedGoalsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder> 
+           getUpdatedGoalsBuilderList() {
+        return getUpdatedGoalsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder> 
+          getUpdatedGoalsFieldBuilder() {
+        if (updatedGoalsBuilder_ == null) {
+          updatedGoalsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder>(
+                  updatedGoals_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          updatedUserMiniEvent_ = null;
+          updatedGoals_ = null;
         }
-        return updatedUserMiniEventBuilder_;
+        return updatedGoalsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateMiniEventRequestProto)
@@ -5024,33 +5135,33 @@ public final class EventMiniEventProto {
       " \001(\0162F.com.lvl6.proto.RetrieveMiniEventR" +
       "esponseProto.RetrieveMiniEventStatus\"6\n\027",
       "RetrieveMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"\221\001\n\033UpdateMiniEventRequestP" +
+      "FAIL_OTHER\020\002\"\215\001\n\033UpdateMiniEventRequestP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022@\n\024updatedUserMiniEvent\030\002" +
-      " \001(\0132\".com.lvl6.proto.UserMiniEventProto" +
-      "\"\234\002\n\034UpdateMiniEventResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Upd" +
-      "ateMiniEventResponseProto.UpdateMiniEven" +
-      "tStatus\022@\n\024updatedUserMiniEvent\030\003 \001(\0132\".",
-      "com.lvl6.proto.UserMiniEventProto\"4\n\025Upd" +
-      "ateMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"\230\002\n!RedeemMiniEventRewardRequest" +
-      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
-      "inimumUserProtoWithMaxResources\022R\n\014tierR" +
-      "edeemed\030\002 \001(\0162<.com.lvl6.proto.RedeemMin" +
-      "iEventRewardRequestProto.RewardTier\022\017\n\007m" +
-      "efplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"8\n\nRewa" +
-      "rdTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO\020\002\022\016\n\nTI" +
-      "ER_THREE\020\003\"\254\002\n\"RedeemMiniEventRewardResp",
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022j\n\006status\030\002 \001(\0162N.co" +
-      "m.lvl6.proto.RedeemMiniEventRewardRespon" +
-      "seProto.RedeemMiniEventRewardStatus:\nFAI" +
-      "L_OTHER\022,\n\007rewards\030\003 \003(\0132\033.com.lvl6.prot" +
-      "o.RewardProto\":\n\033RedeemMiniEventRewardSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\025B\023Eve" +
-      "ntMiniEventProto"
+      "nimumUserProto\022<\n\014updatedGoals\030\002 \003(\0132&.c" +
+      "om.lvl6.proto.UserMiniEventGoalProto\"\234\002\n" +
+      "\034UpdateMiniEventResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.UpdateM" +
+      "iniEventResponseProto.UpdateMiniEventSta" +
+      "tus\022@\n\024updatedUserMiniEvent\030\003 \001(\0132\".com.",
+      "lvl6.proto.UserMiniEventProto\"4\n\025UpdateM" +
+      "iniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002\"\230\002\n!RedeemMiniEventRewardRequestProt" +
+      "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
+      "umUserProtoWithMaxResources\022R\n\014tierRedee" +
+      "med\030\002 \001(\0162<.com.lvl6.proto.RedeemMiniEve" +
+      "ntRewardRequestProto.RewardTier\022\017\n\007mefpl" +
+      "Id\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"8\n\nRewardTi" +
+      "er\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO\020\002\022\016\n\nTIER_T" +
+      "HREE\020\003\"\254\002\n\"RedeemMiniEventRewardResponse",
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022j\n\006status\030\002 \001(\0162N.com.lv" +
+      "l6.proto.RedeemMiniEventRewardResponsePr" +
+      "oto.RedeemMiniEventRewardStatus:\nFAIL_OT" +
+      "HER\022,\n\007rewards\030\003 \003(\0132\033.com.lvl6.proto.Re" +
+      "wardProto\":\n\033RedeemMiniEventRewardStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\025B\023EventMi" +
+      "niEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5084,7 +5195,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UpdatedUserMiniEvent", });
+        new java.lang.String[] { "Sender", "UpdatedGoals", });
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable = new

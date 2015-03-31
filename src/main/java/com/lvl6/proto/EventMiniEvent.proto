@@ -31,8 +31,7 @@ message RetrieveMiniEventResponseProto {
 //------------------------------------------------------------------------------------------
 message UpdateMiniEventRequestProto {
 	optional MinimumUserProto sender = 1;
-	//what the UserMiniEvent in the database will be
-	optional UserMiniEventProto updatedUserMiniEvent = 2;
+	repeated UserMiniEventGoalProto updatedGoals = 2;
 }
 
 message UpdateMiniEventResponseProto {

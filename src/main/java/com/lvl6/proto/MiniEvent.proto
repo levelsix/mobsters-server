@@ -85,13 +85,19 @@ message UserMiniEventProto {
     optional string userUuid = 2;
     //what the user's level is when mini event starts
 	optional int32 userLvl = 3; 
-	//points earned
-	optional int32 ptsEarned = 4;
-	optional bool tierOneRedeemed = 5;
-	optional bool tierTwoRedeemed = 6;
-	optional bool tierThreeRedeemed = 7;
+	optional bool tierOneRedeemed = 4;
+	optional bool tierTwoRedeemed = 5;
+	optional bool tierThreeRedeemed = 6;
 	
-	optional MiniEventProto miniEvent = 8;
+	optional MiniEventProto miniEvent = 7;
+}
+
+//------------------------------------------------------------------------------------------
+
+message UserMiniEventGoalProto {
+	optional string userUuid = 1;
+	optional int32 miniEventGoalId = 2;
+	optional int32 progress = 3;
 }
 
 //------------------------------------------------------------------------------------------
