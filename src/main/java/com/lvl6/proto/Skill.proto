@@ -156,7 +156,7 @@ enum SideEffectType {
 	BUFF_TAKE_AIM = 20;
 	NERF_CHILL = 21;
 	BUFF_FLAME_STRIKE = 22;
-	
+	NERF_POISON_ICON = 23;
 }
 enum SideEffectTraitType {
 	NO_TRAIT = 1;
