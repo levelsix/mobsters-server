@@ -7950,48 +7950,57 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     */
+    boolean hasChatType();
+    /**
+     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     */
+    com.lvl6.proto.ChatProto.ChatType getChatType();
+
+    /**
+     * <code>optional string otherUserUuid = 3;</code>
      */
     boolean hasOtherUserUuid();
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional string otherUserUuid = 3;</code>
      */
     java.lang.String getOtherUserUuid();
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional string otherUserUuid = 3;</code>
      */
     com.google.protobuf.ByteString
         getOtherUserUuidBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
      */
     boolean hasLanguage();
     /**
-     * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getLanguage();
 
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> 
         getMessagesToBeTranslatedList();
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesToBeTranslated(int index);
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     int getMessagesToBeTranslatedCount();
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
         getMessagesToBeTranslatedOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesToBeTranslatedOrBuilder(
         int index);
@@ -8061,27 +8070,38 @@ public final class EventChatProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 18: {
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.ChatProto.ChatType value = com.lvl6.proto.ChatProto.ChatType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                chatType_ = value;
+              }
+              break;
+            }
+            case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               otherUserUuid_ = bs;
               break;
             }
-            case 24: {
+            case 32: {
               int rawValue = input.readEnum();
               com.lvl6.proto.ChatProto.TranslateLanguages value = com.lvl6.proto.ChatProto.TranslateLanguages.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000008;
                 language_ = value;
               }
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 messagesToBeTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               messagesToBeTranslated_.add(input.readMessage(com.lvl6.proto.ChatProto.PrivateChatPostProto.PARSER, extensionRegistry));
               break;
@@ -8094,7 +8114,7 @@ public final class EventChatProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           messagesToBeTranslated_ = java.util.Collections.unmodifiableList(messagesToBeTranslated_);
         }
         this.unknownFields = unknownFields.build();
@@ -8162,16 +8182,31 @@ public final class EventChatProto {
       return sender_;
     }
 
-    public static final int OTHERUSERUUID_FIELD_NUMBER = 2;
-    private java.lang.Object otherUserUuid_;
+    public static final int CHATTYPE_FIELD_NUMBER = 2;
+    private com.lvl6.proto.ChatProto.ChatType chatType_;
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
      */
-    public boolean hasOtherUserUuid() {
+    public boolean hasChatType() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     */
+    public com.lvl6.proto.ChatProto.ChatType getChatType() {
+      return chatType_;
+    }
+
+    public static final int OTHERUSERUUID_FIELD_NUMBER = 3;
+    private java.lang.Object otherUserUuid_;
+    /**
+     * <code>optional string otherUserUuid = 3;</code>
+     */
+    public boolean hasOtherUserUuid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string otherUserUuid = 3;</code>
      */
     public java.lang.String getOtherUserUuid() {
       java.lang.Object ref = otherUserUuid_;
@@ -8188,7 +8223,7 @@ public final class EventChatProto {
       }
     }
     /**
-     * <code>optional string otherUserUuid = 2;</code>
+     * <code>optional string otherUserUuid = 3;</code>
      */
     public com.google.protobuf.ByteString
         getOtherUserUuidBytes() {
@@ -8204,50 +8239,50 @@ public final class EventChatProto {
       }
     }
 
-    public static final int LANGUAGE_FIELD_NUMBER = 3;
+    public static final int LANGUAGE_FIELD_NUMBER = 4;
     private com.lvl6.proto.ChatProto.TranslateLanguages language_;
     /**
-     * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
      */
     public boolean hasLanguage() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+     * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
      */
     public com.lvl6.proto.ChatProto.TranslateLanguages getLanguage() {
       return language_;
     }
 
-    public static final int MESSAGESTOBETRANSLATED_FIELD_NUMBER = 4;
+    public static final int MESSAGESTOBETRANSLATED_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> messagesToBeTranslated_;
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> getMessagesToBeTranslatedList() {
       return messagesToBeTranslated_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     public java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
         getMessagesToBeTranslatedOrBuilderList() {
       return messagesToBeTranslated_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     public int getMessagesToBeTranslatedCount() {
       return messagesToBeTranslated_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     public com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesToBeTranslated(int index) {
       return messagesToBeTranslated_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
      */
     public com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesToBeTranslatedOrBuilder(
         int index) {
@@ -8256,6 +8291,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
       otherUserUuid_ = "";
       language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       messagesToBeTranslated_ = java.util.Collections.emptyList();
@@ -8277,13 +8313,16 @@ public final class EventChatProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getOtherUserUuidBytes());
+        output.writeEnum(2, chatType_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, language_.getNumber());
+        output.writeBytes(3, getOtherUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, language_.getNumber());
       }
       for (int i = 0; i < messagesToBeTranslated_.size(); i++) {
-        output.writeMessage(4, messagesToBeTranslated_.get(i));
+        output.writeMessage(5, messagesToBeTranslated_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8300,15 +8339,19 @@ public final class EventChatProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getOtherUserUuidBytes());
+          .computeEnumSize(2, chatType_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, language_.getNumber());
+          .computeBytesSize(3, getOtherUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, language_.getNumber());
       }
       for (int i = 0; i < messagesToBeTranslated_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, messagesToBeTranslated_.get(i));
+          .computeMessageSize(5, messagesToBeTranslated_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8435,13 +8478,15 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        otherUserUuid_ = "";
+        chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
         bitField0_ = (bitField0_ & ~0x00000002);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        otherUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (messagesToBeTranslatedBuilder_ == null) {
           messagesToBeTranslated_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           messagesToBeTranslatedBuilder_.clear();
         }
@@ -8484,15 +8529,19 @@ public final class EventChatProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.otherUserUuid_ = otherUserUuid_;
+        result.chatType_ = chatType_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.otherUserUuid_ = otherUserUuid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.language_ = language_;
         if (messagesToBeTranslatedBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             messagesToBeTranslated_ = java.util.Collections.unmodifiableList(messagesToBeTranslated_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.messagesToBeTranslated_ = messagesToBeTranslated_;
         } else {
@@ -8517,8 +8566,11 @@ public final class EventChatProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
+        if (other.hasChatType()) {
+          setChatType(other.getChatType());
+        }
         if (other.hasOtherUserUuid()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           otherUserUuid_ = other.otherUserUuid_;
           onChanged();
         }
@@ -8529,7 +8581,7 @@ public final class EventChatProto {
           if (!other.messagesToBeTranslated_.isEmpty()) {
             if (messagesToBeTranslated_.isEmpty()) {
               messagesToBeTranslated_ = other.messagesToBeTranslated_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureMessagesToBeTranslatedIsMutable();
               messagesToBeTranslated_.addAll(other.messagesToBeTranslated_);
@@ -8542,7 +8594,7 @@ public final class EventChatProto {
               messagesToBeTranslatedBuilder_.dispose();
               messagesToBeTranslatedBuilder_ = null;
               messagesToBeTranslated_ = other.messagesToBeTranslated_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               messagesToBeTranslatedBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMessagesToBeTranslatedFieldBuilder() : null;
@@ -8730,15 +8782,50 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private java.lang.Object otherUserUuid_ = "";
+      private com.lvl6.proto.ChatProto.ChatType chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
        */
-      public boolean hasOtherUserUuid() {
+      public boolean hasChatType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       */
+      public com.lvl6.proto.ChatProto.ChatType getChatType() {
+        return chatType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       */
+      public Builder setChatType(com.lvl6.proto.ChatProto.ChatType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        chatType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       */
+      public Builder clearChatType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object otherUserUuid_ = "";
+      /**
+       * <code>optional string otherUserUuid = 3;</code>
+       */
+      public boolean hasOtherUserUuid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string otherUserUuid = 3;</code>
        */
       public java.lang.String getOtherUserUuid() {
         java.lang.Object ref = otherUserUuid_;
@@ -8755,7 +8842,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional string otherUserUuid = 3;</code>
        */
       public com.google.protobuf.ByteString
           getOtherUserUuidBytes() {
@@ -8771,36 +8858,36 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional string otherUserUuid = 3;</code>
        */
       public Builder setOtherUserUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         otherUserUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional string otherUserUuid = 3;</code>
        */
       public Builder clearOtherUserUuid() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         otherUserUuid_ = getDefaultInstance().getOtherUserUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string otherUserUuid = 2;</code>
+       * <code>optional string otherUserUuid = 3;</code>
        */
       public Builder setOtherUserUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         otherUserUuid_ = value;
         onChanged();
         return this;
@@ -8808,34 +8895,34 @@ public final class EventChatProto {
 
       private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       /**
-       * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
       public boolean hasLanguage() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
       public com.lvl6.proto.ChatProto.TranslateLanguages getLanguage() {
         return language_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
       public Builder setLanguage(com.lvl6.proto.ChatProto.TranslateLanguages value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         language_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateLanguages language = 3;</code>
+       * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
       public Builder clearLanguage() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
         onChanged();
         return this;
@@ -8844,9 +8931,9 @@ public final class EventChatProto {
       private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> messagesToBeTranslated_ =
         java.util.Collections.emptyList();
       private void ensureMessagesToBeTranslatedIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           messagesToBeTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>(messagesToBeTranslated_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -8854,7 +8941,7 @@ public final class EventChatProto {
           com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> messagesToBeTranslatedBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> getMessagesToBeTranslatedList() {
         if (messagesToBeTranslatedBuilder_ == null) {
@@ -8864,7 +8951,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public int getMessagesToBeTranslatedCount() {
         if (messagesToBeTranslatedBuilder_ == null) {
@@ -8874,7 +8961,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesToBeTranslated(int index) {
         if (messagesToBeTranslatedBuilder_ == null) {
@@ -8884,7 +8971,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder setMessagesToBeTranslated(
           int index, com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
@@ -8901,7 +8988,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder setMessagesToBeTranslated(
           int index, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
@@ -8915,7 +9002,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder addMessagesToBeTranslated(com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
         if (messagesToBeTranslatedBuilder_ == null) {
@@ -8931,7 +9018,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder addMessagesToBeTranslated(
           int index, com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
@@ -8948,7 +9035,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder addMessagesToBeTranslated(
           com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
@@ -8962,7 +9049,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder addMessagesToBeTranslated(
           int index, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
@@ -8976,7 +9063,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder addAllMessagesToBeTranslated(
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.PrivateChatPostProto> values) {
@@ -8991,12 +9078,12 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder clearMessagesToBeTranslated() {
         if (messagesToBeTranslatedBuilder_ == null) {
           messagesToBeTranslated_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           messagesToBeTranslatedBuilder_.clear();
@@ -9004,7 +9091,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public Builder removeMessagesToBeTranslated(int index) {
         if (messagesToBeTranslatedBuilder_ == null) {
@@ -9017,14 +9104,14 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder getMessagesToBeTranslatedBuilder(
           int index) {
         return getMessagesToBeTranslatedFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesToBeTranslatedOrBuilder(
           int index) {
@@ -9034,7 +9121,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
            getMessagesToBeTranslatedOrBuilderList() {
@@ -9045,14 +9132,14 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder addMessagesToBeTranslatedBuilder() {
         return getMessagesToBeTranslatedFieldBuilder().addBuilder(
             com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder addMessagesToBeTranslatedBuilder(
           int index) {
@@ -9060,7 +9147,7 @@ public final class EventChatProto {
             index, com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 4;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesToBeTranslated = 5;</code>
        */
       public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder> 
            getMessagesToBeTranslatedBuilderList() {
@@ -9073,7 +9160,7 @@ public final class EventChatProto {
           messagesToBeTranslatedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder>(
                   messagesToBeTranslated_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           messagesToBeTranslated_ = null;
@@ -9110,54 +9197,35 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated string originalMessages = 2;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getOriginalMessagesList();
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    int getOriginalMessagesCount();
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    java.lang.String getOriginalMessages(int index);
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getOriginalMessagesBytes(int index);
-
-    /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
-     */
-    java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> 
+    java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> 
         getMessagesTranslatedList();
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    com.lvl6.proto.ChatProto.TranslatedTextProto getMessagesTranslated(int index);
+    com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesTranslated(int index);
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
     int getMessagesTranslatedCount();
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
         getMessagesTranslatedOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getMessagesTranslatedOrBuilder(
+    com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesTranslatedOrBuilder(
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
      */
     com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus();
   }
@@ -9227,27 +9295,18 @@ public final class EventChatProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                originalMessages_ = new com.google.protobuf.LazyStringArrayList();
+                messagesTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              originalMessages_.add(bs);
+              messagesTranslated_.add(input.readMessage(com.lvl6.proto.ChatProto.PrivateChatPostProto.PARSER, extensionRegistry));
               break;
             }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                messagesTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              messagesTranslated_.add(input.readMessage(com.lvl6.proto.ChatProto.TranslatedTextProto.PARSER, extensionRegistry));
-              break;
-            }
-            case 32: {
+            case 24: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus value = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
+                unknownFields.mergeVarintField(3, rawValue);
               } else {
                 bitField0_ |= 0x00000002;
                 status_ = value;
@@ -9263,9 +9322,6 @@ public final class EventChatProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          originalMessages_ = originalMessages_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           messagesTranslated_ = java.util.Collections.unmodifiableList(messagesTranslated_);
         }
         this.unknownFields = unknownFields.build();
@@ -9412,80 +9468,51 @@ public final class EventChatProto {
       return sender_;
     }
 
-    public static final int ORIGINALMESSAGES_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList originalMessages_;
+    public static final int MESSAGESTRANSLATED_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> messagesTranslated_;
     /**
-     * <code>repeated string originalMessages = 2;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getOriginalMessagesList() {
-      return originalMessages_;
-    }
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    public int getOriginalMessagesCount() {
-      return originalMessages_.size();
-    }
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    public java.lang.String getOriginalMessages(int index) {
-      return originalMessages_.get(index);
-    }
-    /**
-     * <code>repeated string originalMessages = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getOriginalMessagesBytes(int index) {
-      return originalMessages_.getByteString(index);
-    }
-
-    public static final int MESSAGESTRANSLATED_FIELD_NUMBER = 3;
-    private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> messagesTranslated_;
-    /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
-     */
-    public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> getMessagesTranslatedList() {
+    public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> getMessagesTranslatedList() {
       return messagesTranslated_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
         getMessagesTranslatedOrBuilderList() {
       return messagesTranslated_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
     public int getMessagesTranslatedCount() {
       return messagesTranslated_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    public com.lvl6.proto.ChatProto.TranslatedTextProto getMessagesTranslated(int index) {
+    public com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesTranslated(int index) {
       return messagesTranslated_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+     * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
      */
-    public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getMessagesTranslatedOrBuilder(
+    public com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesTranslatedOrBuilder(
         int index) {
       return messagesTranslated_.get(index);
     }
 
-    public static final int STATUS_FIELD_NUMBER = 4;
+    public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
      */
     public com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus() {
       return status_;
@@ -9493,7 +9520,6 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      originalMessages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       messagesTranslated_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
     }
@@ -9513,14 +9539,11 @@ public final class EventChatProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < originalMessages_.size(); i++) {
-        output.writeBytes(2, originalMessages_.getByteString(i));
-      }
       for (int i = 0; i < messagesTranslated_.size(); i++) {
-        output.writeMessage(3, messagesTranslated_.get(i));
+        output.writeMessage(2, messagesTranslated_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(4, status_.getNumber());
+        output.writeEnum(3, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -9535,22 +9558,13 @@ public final class EventChatProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < originalMessages_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(originalMessages_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getOriginalMessagesList().size();
-      }
       for (int i = 0; i < messagesTranslated_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, messagesTranslated_.get(i));
+          .computeMessageSize(2, messagesTranslated_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, status_.getNumber());
+          .computeEnumSize(3, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9677,16 +9691,14 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        originalMessages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
         if (messagesTranslatedBuilder_ == null) {
           messagesTranslated_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           messagesTranslatedBuilder_.clear();
         }
         status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -9723,21 +9735,16 @@ public final class EventChatProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          originalMessages_ = originalMessages_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.originalMessages_ = originalMessages_;
         if (messagesTranslatedBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             messagesTranslated_ = java.util.Collections.unmodifiableList(messagesTranslated_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.messagesTranslated_ = messagesTranslated_;
         } else {
           result.messagesTranslated_ = messagesTranslatedBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
@@ -9760,21 +9767,11 @@ public final class EventChatProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.originalMessages_.isEmpty()) {
-          if (originalMessages_.isEmpty()) {
-            originalMessages_ = other.originalMessages_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureOriginalMessagesIsMutable();
-            originalMessages_.addAll(other.originalMessages_);
-          }
-          onChanged();
-        }
         if (messagesTranslatedBuilder_ == null) {
           if (!other.messagesTranslated_.isEmpty()) {
             if (messagesTranslated_.isEmpty()) {
               messagesTranslated_ = other.messagesTranslated_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureMessagesTranslatedIsMutable();
               messagesTranslated_.addAll(other.messagesTranslated_);
@@ -9787,7 +9784,7 @@ public final class EventChatProto {
               messagesTranslatedBuilder_.dispose();
               messagesTranslatedBuilder_ = null;
               messagesTranslated_ = other.messagesTranslated_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               messagesTranslatedBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMessagesTranslatedFieldBuilder() : null;
@@ -9942,115 +9939,22 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.google.protobuf.LazyStringList originalMessages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureOriginalMessagesIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          originalMessages_ = new com.google.protobuf.LazyStringArrayList(originalMessages_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getOriginalMessagesList() {
-        return originalMessages_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public int getOriginalMessagesCount() {
-        return originalMessages_.size();
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public java.lang.String getOriginalMessages(int index) {
-        return originalMessages_.get(index);
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getOriginalMessagesBytes(int index) {
-        return originalMessages_.getByteString(index);
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public Builder setOriginalMessages(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureOriginalMessagesIsMutable();
-        originalMessages_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public Builder addOriginalMessages(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureOriginalMessagesIsMutable();
-        originalMessages_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public Builder addAllOriginalMessages(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureOriginalMessagesIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, originalMessages_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public Builder clearOriginalMessages() {
-        originalMessages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string originalMessages = 2;</code>
-       */
-      public Builder addOriginalMessagesBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureOriginalMessagesIsMutable();
-        originalMessages_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> messagesTranslated_ =
+      private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> messagesTranslated_ =
         java.util.Collections.emptyList();
       private void ensureMessagesTranslatedIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          messagesTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>(messagesTranslated_);
-          bitField0_ |= 0x00000004;
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          messagesTranslated_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>(messagesTranslated_);
+          bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> messagesTranslatedBuilder_;
+          com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> messagesTranslatedBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> getMessagesTranslatedList() {
+      public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> getMessagesTranslatedList() {
         if (messagesTranslatedBuilder_ == null) {
           return java.util.Collections.unmodifiableList(messagesTranslated_);
         } else {
@@ -10058,7 +9962,7 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public int getMessagesTranslatedCount() {
         if (messagesTranslatedBuilder_ == null) {
@@ -10068,9 +9972,9 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto getMessagesTranslated(int index) {
+      public com.lvl6.proto.ChatProto.PrivateChatPostProto getMessagesTranslated(int index) {
         if (messagesTranslatedBuilder_ == null) {
           return messagesTranslated_.get(index);
         } else {
@@ -10078,10 +9982,10 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder setMessagesTranslated(
-          int index, com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+          int index, com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
         if (messagesTranslatedBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10095,10 +9999,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder setMessagesTranslated(
-          int index, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
+          int index, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
         if (messagesTranslatedBuilder_ == null) {
           ensureMessagesTranslatedIsMutable();
           messagesTranslated_.set(index, builderForValue.build());
@@ -10109,9 +10013,9 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public Builder addMessagesTranslated(com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+      public Builder addMessagesTranslated(com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
         if (messagesTranslatedBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10125,10 +10029,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder addMessagesTranslated(
-          int index, com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+          int index, com.lvl6.proto.ChatProto.PrivateChatPostProto value) {
         if (messagesTranslatedBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10142,10 +10046,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder addMessagesTranslated(
-          com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
+          com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
         if (messagesTranslatedBuilder_ == null) {
           ensureMessagesTranslatedIsMutable();
           messagesTranslated_.add(builderForValue.build());
@@ -10156,10 +10060,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder addMessagesTranslated(
-          int index, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
+          int index, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder builderForValue) {
         if (messagesTranslatedBuilder_ == null) {
           ensureMessagesTranslatedIsMutable();
           messagesTranslated_.add(index, builderForValue.build());
@@ -10170,10 +10074,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder addAllMessagesTranslated(
-          java.lang.Iterable<? extends com.lvl6.proto.ChatProto.TranslatedTextProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.ChatProto.PrivateChatPostProto> values) {
         if (messagesTranslatedBuilder_ == null) {
           ensureMessagesTranslatedIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -10185,12 +10089,12 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder clearMessagesTranslated() {
         if (messagesTranslatedBuilder_ == null) {
           messagesTranslated_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           messagesTranslatedBuilder_.clear();
@@ -10198,7 +10102,7 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
       public Builder removeMessagesTranslated(int index) {
         if (messagesTranslatedBuilder_ == null) {
@@ -10211,16 +10115,16 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder getMessagesTranslatedBuilder(
+      public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder getMessagesTranslatedBuilder(
           int index) {
         return getMessagesTranslatedFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getMessagesTranslatedOrBuilder(
+      public com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getMessagesTranslatedOrBuilder(
           int index) {
         if (messagesTranslatedBuilder_ == null) {
           return messagesTranslated_.get(index);  } else {
@@ -10228,9 +10132,9 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
            getMessagesTranslatedOrBuilderList() {
         if (messagesTranslatedBuilder_ != null) {
           return messagesTranslatedBuilder_.getMessageOrBuilderList();
@@ -10239,35 +10143,35 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder addMessagesTranslatedBuilder() {
+      public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder addMessagesTranslatedBuilder() {
         return getMessagesTranslatedFieldBuilder().addBuilder(
-            com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance());
+            com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder addMessagesTranslatedBuilder(
+      public com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder addMessagesTranslatedBuilder(
           int index) {
         return getMessagesTranslatedFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance());
+            index, com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.TranslatedTextProto messagesTranslated = 3;</code>
+       * <code>repeated .com.lvl6.proto.PrivateChatPostProto messagesTranslated = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto.Builder> 
+      public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder> 
            getMessagesTranslatedBuilderList() {
         return getMessagesTranslatedFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+          com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder> 
           getMessagesTranslatedFieldBuilder() {
         if (messagesTranslatedBuilder_ == null) {
           messagesTranslatedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder>(
+              com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder>(
                   messagesTranslated_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           messagesTranslated_ = null;
@@ -10277,34 +10181,34 @@ public final class EventChatProto {
 
       private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
        */
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
        */
       public com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
        */
       public Builder setStatus(com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         status_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
        */
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
         onChanged();
         return this;
@@ -10432,23 +10336,23 @@ public final class EventChatProto {
       "RetrievePrivateChatPostsResponseProto.Re" +
       "trievePrivateChatPostsStatus\022\025\n\rotherUse" +
       "rUuid\030\005 \001(\t\"7\n\036RetrievePrivateChatPostsS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\352\001\n#Transla" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\226\002\n#Transla" +
       "teSelectMessagesRequestProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\025",
-      "\n\rotherUserUuid\030\002 \001(\t\0224\n\010language\030\003 \001(\0162" +
-      "\".com.lvl6.proto.TranslateLanguages\022D\n\026m" +
-      "essagesToBeTranslated\030\004 \003(\0132$.com.lvl6.p" +
-      "roto.PrivateChatPostProto\"\362\002\n$TranslateS" +
-      "electMessagesResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
-      "originalMessages\030\002 \003(\t\022?\n\022messagesTransl" +
-      "ated\030\003 \003(\0132#.com.lvl6.proto.TranslatedTe" +
-      "xtProto\022b\n\006status\030\004 \001(\0162R.com.lvl6.proto" +
-      ".TranslateSelectMessagesResponseProto.Tr",
-      "anslateSelectMessagesStatus\"Y\n\035Translate" +
-      "SelectMessagesStatus\022\016\n\nFAIL_OTHER\020\001\022\033\n\027" +
-      "FAIL_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020" +
-      "B\016EventChatProto"
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022*",
+      "\n\010chatType\030\002 \001(\0162\030.com.lvl6.proto.ChatTy" +
+      "pe\022\025\n\rotherUserUuid\030\003 \001(\t\0224\n\010language\030\004 " +
+      "\001(\0162\".com.lvl6.proto.TranslateLanguages\022" +
+      "D\n\026messagesToBeTranslated\030\005 \003(\0132$.com.lv" +
+      "l6.proto.PrivateChatPostProto\"\331\002\n$Transl" +
+      "ateSelectMessagesResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022@\n\022messagesTranslated\030\002 \003(\0132$.com.lvl6." +
+      "proto.PrivateChatPostProto\022b\n\006status\030\003 \001" +
+      "(\0162R.com.lvl6.proto.TranslateSelectMessa",
+      "gesResponseProto.TranslateSelectMessages" +
+      "Status\"Y\n\035TranslateSelectMessagesStatus\022" +
+      "\016\n\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID_LANGUA" +
+      "GE\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10523,13 +10427,13 @@ public final class EventChatProto {
     internal_static_com_lvl6_proto_TranslateSelectMessagesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TranslateSelectMessagesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "OtherUserUuid", "Language", "MessagesToBeTranslated", });
+        new java.lang.String[] { "Sender", "ChatType", "OtherUserUuid", "Language", "MessagesToBeTranslated", });
     internal_static_com_lvl6_proto_TranslateSelectMessagesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_TranslateSelectMessagesResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TranslateSelectMessagesResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "OriginalMessages", "MessagesTranslated", "Status", });
+        new java.lang.String[] { "Sender", "MessagesTranslated", "Status", });
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

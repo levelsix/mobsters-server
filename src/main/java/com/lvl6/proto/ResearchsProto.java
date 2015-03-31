@@ -18,37 +18,37 @@ public final class ResearchsProto {
      */
     NO_RESEARCH(0, 1),
     /**
-     * <code>HEALING_COST = 2;</code>
+     * <code>HP_INCREASE = 2;</code>
      */
-    HEALING_COST(1, 2),
+    HP_INCREASE(1, 2),
     /**
-     * <code>HEALING_SPEED = 3;</code>
+     * <code>ATTACK_INCREASE = 3;</code>
      */
-    HEALING_SPEED(2, 3),
+    ATTACK_INCREASE(2, 3),
     /**
-     * <code>ENHANCE_COST = 4;</code>
+     * <code>SPEED_INCREASE = 4;</code>
      */
-    ENHANCE_COST(3, 4),
+    SPEED_INCREASE(3, 4),
     /**
-     * <code>XP_BONUS = 5;</code>
+     * <code>HEALING_COST = 5;</code>
      */
-    XP_BONUS(4, 5),
+    HEALING_COST(4, 5),
     /**
-     * <code>DECREASE_ENHANCE_TIME = 6;</code>
+     * <code>HEALING_SPEED = 6;</code>
      */
-    DECREASE_ENHANCE_TIME(5, 6),
+    HEALING_SPEED(5, 6),
     /**
-     * <code>ATTACK_INCREASE = 7;</code>
+     * <code>ENHANCE_COST = 7;</code>
      */
-    ATTACK_INCREASE(6, 7),
+    ENHANCE_COST(6, 7),
     /**
-     * <code>HP_INCREASE = 8;</code>
+     * <code>DECREASE_ENHANCE_TIME = 8;</code>
      */
-    HP_INCREASE(7, 8),
+    DECREASE_ENHANCE_TIME(7, 8),
     /**
-     * <code>SPEED_INCREASE = 9;</code>
+     * <code>XP_BONUS = 9;</code>
      */
-    SPEED_INCREASE(8, 9),
+    XP_BONUS(8, 9),
     /**
      * <code>INCREASE_HOSPITAL_QUEUE = 10;</code>
      */
@@ -96,37 +96,37 @@ public final class ResearchsProto {
      */
     public static final int NO_RESEARCH_VALUE = 1;
     /**
-     * <code>HEALING_COST = 2;</code>
+     * <code>HP_INCREASE = 2;</code>
      */
-    public static final int HEALING_COST_VALUE = 2;
+    public static final int HP_INCREASE_VALUE = 2;
     /**
-     * <code>HEALING_SPEED = 3;</code>
+     * <code>ATTACK_INCREASE = 3;</code>
      */
-    public static final int HEALING_SPEED_VALUE = 3;
+    public static final int ATTACK_INCREASE_VALUE = 3;
     /**
-     * <code>ENHANCE_COST = 4;</code>
+     * <code>SPEED_INCREASE = 4;</code>
      */
-    public static final int ENHANCE_COST_VALUE = 4;
+    public static final int SPEED_INCREASE_VALUE = 4;
     /**
-     * <code>XP_BONUS = 5;</code>
+     * <code>HEALING_COST = 5;</code>
      */
-    public static final int XP_BONUS_VALUE = 5;
+    public static final int HEALING_COST_VALUE = 5;
     /**
-     * <code>DECREASE_ENHANCE_TIME = 6;</code>
+     * <code>HEALING_SPEED = 6;</code>
      */
-    public static final int DECREASE_ENHANCE_TIME_VALUE = 6;
+    public static final int HEALING_SPEED_VALUE = 6;
     /**
-     * <code>ATTACK_INCREASE = 7;</code>
+     * <code>ENHANCE_COST = 7;</code>
      */
-    public static final int ATTACK_INCREASE_VALUE = 7;
+    public static final int ENHANCE_COST_VALUE = 7;
     /**
-     * <code>HP_INCREASE = 8;</code>
+     * <code>DECREASE_ENHANCE_TIME = 8;</code>
      */
-    public static final int HP_INCREASE_VALUE = 8;
+    public static final int DECREASE_ENHANCE_TIME_VALUE = 8;
     /**
-     * <code>SPEED_INCREASE = 9;</code>
+     * <code>XP_BONUS = 9;</code>
      */
-    public static final int SPEED_INCREASE_VALUE = 9;
+    public static final int XP_BONUS_VALUE = 9;
     /**
      * <code>INCREASE_HOSPITAL_QUEUE = 10;</code>
      */
@@ -174,14 +174,14 @@ public final class ResearchsProto {
     public static ResearchType valueOf(int value) {
       switch (value) {
         case 1: return NO_RESEARCH;
-        case 2: return HEALING_COST;
-        case 3: return HEALING_SPEED;
-        case 4: return ENHANCE_COST;
-        case 5: return XP_BONUS;
-        case 6: return DECREASE_ENHANCE_TIME;
-        case 7: return ATTACK_INCREASE;
-        case 8: return HP_INCREASE;
-        case 9: return SPEED_INCREASE;
+        case 2: return HP_INCREASE;
+        case 3: return ATTACK_INCREASE;
+        case 4: return SPEED_INCREASE;
+        case 5: return HEALING_COST;
+        case 6: return HEALING_SPEED;
+        case 7: return ENHANCE_COST;
+        case 8: return DECREASE_ENHANCE_TIME;
+        case 9: return XP_BONUS;
         case 10: return INCREASE_HOSPITAL_QUEUE;
         case 11: return INCREASE_ENHANCE_QUEUE;
         case 12: return NUMBER_OF_HOSPITALS;
@@ -4350,11 +4350,11 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\266\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\020\n\014" +
-      "HEALING_COST\020\002\022\021\n\rHEALING_SPEED\020\003\022\020\n\014ENH",
-      "ANCE_COST\020\004\022\014\n\010XP_BONUS\020\005\022\031\n\025DECREASE_EN" +
-      "HANCE_TIME\020\006\022\023\n\017ATTACK_INCREASE\020\007\022\017\n\013HP_" +
-      "INCREASE\020\010\022\022\n\016SPEED_INCREASE\020\t\022\033\n\027INCREA" +
+      "(\010*\266\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\017\n\013" +
+      "HP_INCREASE\020\002\022\023\n\017ATTACK_INCREASE\020\003\022\022\n\016SP",
+      "EED_INCREASE\020\004\022\020\n\014HEALING_COST\020\005\022\021\n\rHEAL" +
+      "ING_SPEED\020\006\022\020\n\014ENHANCE_COST\020\007\022\031\n\025DECREAS" +
+      "E_ENHANCE_TIME\020\010\022\014\n\010XP_BONUS\020\t\022\033\n\027INCREA" +
       "SE_HOSPITAL_QUEUE\020\n\022\032\n\026INCREASE_ENHANCE_" +
       "QUEUE\020\013\022\027\n\023NUMBER_OF_HOSPITALS\020\014\022\037\n\033INCR" +
       "EASE_CONSTRUCTION_SPEED\020\r\022\031\n\025ITEM_PRODUC" +
