@@ -669,6 +669,7 @@ public class StaticDataContainer {
 					.createItemProtoFromItem(i);
 			sdpb.addItems(itemProto);
 		}
+		log.info("itemProtos={}", sdpb.getItemsList());
 
 	}
 
