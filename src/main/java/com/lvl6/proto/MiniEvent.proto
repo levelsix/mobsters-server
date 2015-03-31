@@ -90,6 +90,7 @@ message UserMiniEventProto {
 	optional bool tierThreeRedeemed = 6;
 	
 	optional MiniEventProto miniEvent = 7;
+	repeated UserMiniEventGoalProto goals = 8;
 }
 
 //------------------------------------------------------------------------------------------

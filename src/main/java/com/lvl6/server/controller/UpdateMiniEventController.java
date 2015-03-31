@@ -54,7 +54,7 @@ public class UpdateMiniEventController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		UserMiniEventProto umep = reqProto.getUpdatedUserMiniEvent();
+		UserMiniEventProto umep = null;// reqProto.getUpdatedUserMiniEvent();
 
 		UpdateMiniEventResponseProto.Builder resBuilder = UpdateMiniEventResponseProto
 				.newBuilder();
@@ -131,7 +131,7 @@ public class UpdateMiniEventController extends EventController {
 		mefu.setUserId(umep.getUserUuid());
 		mefu.setMiniEventId(umep.getMiniEventId());
 		mefu.setUserLvl(umep.getUserLvl());
-		mefu.setPtsEarned(umep.getPtsEarned());
+		//mefu.setPtsEarned(umep.getPtsEarned());
 		mefu.setTierOneRedeemed(umep.getTierOneRedeemed());
 		mefu.setTierTwoRedeemed(umep.getTierTwoRedeemed());
 		mefu.setTierThreeRedeemed(umep.getTierThreeRedeemed());

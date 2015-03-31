@@ -20,17 +20,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.events.request.RetrieveMiniEventRequestEvent;
-import com.lvl6.events.request.UpdateMiniEventRequestEvent;
 import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
-import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType;
-import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
@@ -487,44 +484,44 @@ public class MiniEventTest extends TestCase {
 
 	}
 
-	@Test
-	public void testUpdateMiniEvent() {
-		String userId = user.getId();
-
-		//hopefully this creates an existing mini_event_for_user
-		testRetrieveMiniEvent();
-
-		MiniEventForUser mefu = miniEventForUserRetrieveUtil
-				.getSpecificUserMiniEvent(userId);
-		assertNotNull(mefu);
-
-		MiniEventForUser updatedMefu = new MiniEventForUser(mefu);
-		updatedMefu.setPtsEarned(mefu.getPtsEarned() + 1);
-
-		//construct the request proto
-		UpdateMiniEventRequestProto.Builder umerpb = UpdateMiniEventRequestProto
-				.newBuilder();
-		umerpb.setSender(mup);
-
-		UserMiniEventProto updatedUmep = CreateInfoProtoUtils
-				.createUserMiniEventProto(updatedMefu)
-				.build();
-		umerpb.setUpdatedUserMiniEvent(updatedUmep);
-
-		//construct the request event
-		UpdateMiniEventRequestEvent umere = new UpdateMiniEventRequestEvent();
-		umere.setUpdateMiniEventRequestProto(umerpb.build());
-		umere.setTag(1);
-
-		//process the request event
-		updateMiniEventController.handleEvent(umere);
-
-		//check to make sure that the MiniEventForUser is updated
-		MiniEventForUser upToDateMefu = miniEventForUserRetrieveUtil
-				.getSpecificUserMiniEvent(userId);
-		assertEquals(updatedMefu.getPtsEarned(), upToDateMefu.getPtsEarned());
-
-	}
+//	@Test
+//	public void testUpdateMiniEvent() {
+//		String userId = user.getId();
+//
+//		//hopefully this creates an existing mini_event_for_user
+//		testRetrieveMiniEvent();
+//
+//		MiniEventForUser mefu = miniEventForUserRetrieveUtil
+//				.getSpecificUserMiniEvent(userId);
+//		assertNotNull(mefu);
+//
+//		MiniEventForUser updatedMefu = new MiniEventForUser(mefu);
+//		updatedMefu.setPtsEarned(mefu.getPtsEarned() + 1);
+//
+//		//construct the request proto
+//		UpdateMiniEventRequestProto.Builder umerpb = UpdateMiniEventRequestProto
+//				.newBuilder();
+//		umerpb.setSender(mup);
+//
+//		UserMiniEventProto updatedUmep = CreateInfoProtoUtils
+//				.createUserMiniEventProto(updatedMefu)
+//				.build();
+//		umerpb.setUpdatedUserMiniEvent(updatedUmep);
+//
+//		//construct the request event
+//		UpdateMiniEventRequestEvent umere = new UpdateMiniEventRequestEvent();
+//		umere.setUpdateMiniEventRequestProto(umerpb.build());
+//		umere.setTag(1);
+//
+//		//process the request event
+//		updateMiniEventController.handleEvent(umere);
+//
+//		//check to make sure that the MiniEventForUser is updated
+//		MiniEventForUser upToDateMefu = miniEventForUserRetrieveUtil
+//				.getSpecificUserMiniEvent(userId);
+//		assertEquals(updatedMefu.getPtsEarned(), upToDateMefu.getPtsEarned());
+//
+//	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
