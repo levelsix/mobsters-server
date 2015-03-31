@@ -5594,59 +5594,42 @@ public final class MiniEventProtos {
     int getUserLvl();
 
     /**
-     * <code>optional int32 ptsEarned = 4;</code>
-     *
-     * <pre>
-     *points earned
-     * </pre>
-     */
-    boolean hasPtsEarned();
-    /**
-     * <code>optional int32 ptsEarned = 4;</code>
-     *
-     * <pre>
-     *points earned
-     * </pre>
-     */
-    int getPtsEarned();
-
-    /**
-     * <code>optional bool tierOneRedeemed = 5;</code>
+     * <code>optional bool tierOneRedeemed = 4;</code>
      */
     boolean hasTierOneRedeemed();
     /**
-     * <code>optional bool tierOneRedeemed = 5;</code>
+     * <code>optional bool tierOneRedeemed = 4;</code>
      */
     boolean getTierOneRedeemed();
 
     /**
-     * <code>optional bool tierTwoRedeemed = 6;</code>
+     * <code>optional bool tierTwoRedeemed = 5;</code>
      */
     boolean hasTierTwoRedeemed();
     /**
-     * <code>optional bool tierTwoRedeemed = 6;</code>
+     * <code>optional bool tierTwoRedeemed = 5;</code>
      */
     boolean getTierTwoRedeemed();
 
     /**
-     * <code>optional bool tierThreeRedeemed = 7;</code>
+     * <code>optional bool tierThreeRedeemed = 6;</code>
      */
     boolean hasTierThreeRedeemed();
     /**
-     * <code>optional bool tierThreeRedeemed = 7;</code>
+     * <code>optional bool tierThreeRedeemed = 6;</code>
      */
     boolean getTierThreeRedeemed();
 
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     boolean hasMiniEvent();
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     com.lvl6.proto.MiniEventProtos.MiniEventProto getMiniEvent();
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder getMiniEventOrBuilder();
   }
@@ -5720,27 +5703,22 @@ public final class MiniEventProtos {
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              ptsEarned_ = input.readInt32();
+              tierOneRedeemed_ = input.readBool();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              tierOneRedeemed_ = input.readBool();
+              tierTwoRedeemed_ = input.readBool();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              tierTwoRedeemed_ = input.readBool();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
               tierThreeRedeemed_ = input.readBool();
               break;
             }
-            case 66: {
+            case 58: {
               com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
                 subBuilder = miniEvent_.toBuilder();
               }
               miniEvent_ = input.readMessage(com.lvl6.proto.MiniEventProtos.MiniEventProto.PARSER, extensionRegistry);
@@ -5748,7 +5726,7 @@ public final class MiniEventProtos {
                 subBuilder.mergeFrom(miniEvent_);
                 miniEvent_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000040;
               break;
             }
           }
@@ -5871,90 +5849,67 @@ public final class MiniEventProtos {
       return userLvl_;
     }
 
-    public static final int PTSEARNED_FIELD_NUMBER = 4;
-    private int ptsEarned_;
+    public static final int TIERONEREDEEMED_FIELD_NUMBER = 4;
+    private boolean tierOneRedeemed_;
     /**
-     * <code>optional int32 ptsEarned = 4;</code>
-     *
-     * <pre>
-     *points earned
-     * </pre>
+     * <code>optional bool tierOneRedeemed = 4;</code>
      */
-    public boolean hasPtsEarned() {
+    public boolean hasTierOneRedeemed() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 ptsEarned = 4;</code>
-     *
-     * <pre>
-     *points earned
-     * </pre>
-     */
-    public int getPtsEarned() {
-      return ptsEarned_;
-    }
-
-    public static final int TIERONEREDEEMED_FIELD_NUMBER = 5;
-    private boolean tierOneRedeemed_;
-    /**
-     * <code>optional bool tierOneRedeemed = 5;</code>
-     */
-    public boolean hasTierOneRedeemed() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bool tierOneRedeemed = 5;</code>
+     * <code>optional bool tierOneRedeemed = 4;</code>
      */
     public boolean getTierOneRedeemed() {
       return tierOneRedeemed_;
     }
 
-    public static final int TIERTWOREDEEMED_FIELD_NUMBER = 6;
+    public static final int TIERTWOREDEEMED_FIELD_NUMBER = 5;
     private boolean tierTwoRedeemed_;
     /**
-     * <code>optional bool tierTwoRedeemed = 6;</code>
+     * <code>optional bool tierTwoRedeemed = 5;</code>
      */
     public boolean hasTierTwoRedeemed() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional bool tierTwoRedeemed = 6;</code>
+     * <code>optional bool tierTwoRedeemed = 5;</code>
      */
     public boolean getTierTwoRedeemed() {
       return tierTwoRedeemed_;
     }
 
-    public static final int TIERTHREEREDEEMED_FIELD_NUMBER = 7;
+    public static final int TIERTHREEREDEEMED_FIELD_NUMBER = 6;
     private boolean tierThreeRedeemed_;
     /**
-     * <code>optional bool tierThreeRedeemed = 7;</code>
+     * <code>optional bool tierThreeRedeemed = 6;</code>
      */
     public boolean hasTierThreeRedeemed() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional bool tierThreeRedeemed = 7;</code>
+     * <code>optional bool tierThreeRedeemed = 6;</code>
      */
     public boolean getTierThreeRedeemed() {
       return tierThreeRedeemed_;
     }
 
-    public static final int MINIEVENT_FIELD_NUMBER = 8;
+    public static final int MINIEVENT_FIELD_NUMBER = 7;
     private com.lvl6.proto.MiniEventProtos.MiniEventProto miniEvent_;
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     public boolean hasMiniEvent() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     public com.lvl6.proto.MiniEventProtos.MiniEventProto getMiniEvent() {
       return miniEvent_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+     * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     public com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder getMiniEventOrBuilder() {
       return miniEvent_;
@@ -5964,7 +5919,6 @@ public final class MiniEventProtos {
       miniEventId_ = 0;
       userUuid_ = "";
       userLvl_ = 0;
-      ptsEarned_ = 0;
       tierOneRedeemed_ = false;
       tierTwoRedeemed_ = false;
       tierThreeRedeemed_ = false;
@@ -5993,19 +5947,16 @@ public final class MiniEventProtos {
         output.writeInt32(3, userLvl_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, ptsEarned_);
+        output.writeBool(4, tierOneRedeemed_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, tierOneRedeemed_);
+        output.writeBool(5, tierTwoRedeemed_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBool(6, tierTwoRedeemed_);
+        output.writeBool(6, tierThreeRedeemed_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(7, tierThreeRedeemed_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeMessage(8, miniEvent_);
+        output.writeMessage(7, miniEvent_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6030,23 +5981,19 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, ptsEarned_);
+          .computeBoolSize(4, tierOneRedeemed_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, tierOneRedeemed_);
+          .computeBoolSize(5, tierTwoRedeemed_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, tierTwoRedeemed_);
+          .computeBoolSize(6, tierThreeRedeemed_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, tierThreeRedeemed_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, miniEvent_);
+          .computeMessageSize(7, miniEvent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6172,20 +6119,18 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         userLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        ptsEarned_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         tierOneRedeemed_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         tierTwoRedeemed_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         tierThreeRedeemed_ = false;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (miniEventBuilder_ == null) {
           miniEvent_ = com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance();
         } else {
           miniEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -6229,21 +6174,17 @@ public final class MiniEventProtos {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.ptsEarned_ = ptsEarned_;
+        result.tierOneRedeemed_ = tierOneRedeemed_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.tierOneRedeemed_ = tierOneRedeemed_;
+        result.tierTwoRedeemed_ = tierTwoRedeemed_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.tierTwoRedeemed_ = tierTwoRedeemed_;
+        result.tierThreeRedeemed_ = tierThreeRedeemed_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
-        }
-        result.tierThreeRedeemed_ = tierThreeRedeemed_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
         }
         if (miniEventBuilder_ == null) {
           result.miniEvent_ = miniEvent_;
@@ -6276,9 +6217,6 @@ public final class MiniEventProtos {
         }
         if (other.hasUserLvl()) {
           setUserLvl(other.getUserLvl());
-        }
-        if (other.hasPtsEarned()) {
-          setPtsEarned(other.getPtsEarned());
         }
         if (other.hasTierOneRedeemed()) {
           setTierOneRedeemed(other.getTierOneRedeemed());
@@ -6475,81 +6413,33 @@ public final class MiniEventProtos {
         return this;
       }
 
-      private int ptsEarned_ ;
+      private boolean tierOneRedeemed_ ;
       /**
-       * <code>optional int32 ptsEarned = 4;</code>
-       *
-       * <pre>
-       *points earned
-       * </pre>
+       * <code>optional bool tierOneRedeemed = 4;</code>
        */
-      public boolean hasPtsEarned() {
+      public boolean hasTierOneRedeemed() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 ptsEarned = 4;</code>
-       *
-       * <pre>
-       *points earned
-       * </pre>
-       */
-      public int getPtsEarned() {
-        return ptsEarned_;
-      }
-      /**
-       * <code>optional int32 ptsEarned = 4;</code>
-       *
-       * <pre>
-       *points earned
-       * </pre>
-       */
-      public Builder setPtsEarned(int value) {
-        bitField0_ |= 0x00000008;
-        ptsEarned_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 ptsEarned = 4;</code>
-       *
-       * <pre>
-       *points earned
-       * </pre>
-       */
-      public Builder clearPtsEarned() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        ptsEarned_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private boolean tierOneRedeemed_ ;
-      /**
-       * <code>optional bool tierOneRedeemed = 5;</code>
-       */
-      public boolean hasTierOneRedeemed() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bool tierOneRedeemed = 5;</code>
+       * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public boolean getTierOneRedeemed() {
         return tierOneRedeemed_;
       }
       /**
-       * <code>optional bool tierOneRedeemed = 5;</code>
+       * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public Builder setTierOneRedeemed(boolean value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         tierOneRedeemed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool tierOneRedeemed = 5;</code>
+       * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public Builder clearTierOneRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         tierOneRedeemed_ = false;
         onChanged();
         return this;
@@ -6557,31 +6447,31 @@ public final class MiniEventProtos {
 
       private boolean tierTwoRedeemed_ ;
       /**
-       * <code>optional bool tierTwoRedeemed = 6;</code>
+       * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public boolean hasTierTwoRedeemed() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional bool tierTwoRedeemed = 6;</code>
+       * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public boolean getTierTwoRedeemed() {
         return tierTwoRedeemed_;
       }
       /**
-       * <code>optional bool tierTwoRedeemed = 6;</code>
+       * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public Builder setTierTwoRedeemed(boolean value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         tierTwoRedeemed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool tierTwoRedeemed = 6;</code>
+       * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public Builder clearTierTwoRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         tierTwoRedeemed_ = false;
         onChanged();
         return this;
@@ -6589,31 +6479,31 @@ public final class MiniEventProtos {
 
       private boolean tierThreeRedeemed_ ;
       /**
-       * <code>optional bool tierThreeRedeemed = 7;</code>
+       * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public boolean hasTierThreeRedeemed() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional bool tierThreeRedeemed = 7;</code>
+       * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public boolean getTierThreeRedeemed() {
         return tierThreeRedeemed_;
       }
       /**
-       * <code>optional bool tierThreeRedeemed = 7;</code>
+       * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public Builder setTierThreeRedeemed(boolean value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         tierThreeRedeemed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool tierThreeRedeemed = 7;</code>
+       * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public Builder clearTierThreeRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         tierThreeRedeemed_ = false;
         onChanged();
         return this;
@@ -6623,13 +6513,13 @@ public final class MiniEventProtos {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.MiniEventProto, com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder> miniEventBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public boolean hasMiniEvent() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public com.lvl6.proto.MiniEventProtos.MiniEventProto getMiniEvent() {
         if (miniEventBuilder_ == null) {
@@ -6639,7 +6529,7 @@ public final class MiniEventProtos {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public Builder setMiniEvent(com.lvl6.proto.MiniEventProtos.MiniEventProto value) {
         if (miniEventBuilder_ == null) {
@@ -6651,11 +6541,11 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public Builder setMiniEvent(
           com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder builderForValue) {
@@ -6665,15 +6555,15 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public Builder mergeMiniEvent(com.lvl6.proto.MiniEventProtos.MiniEventProto value) {
         if (miniEventBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
               miniEvent_ != com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance()) {
             miniEvent_ =
               com.lvl6.proto.MiniEventProtos.MiniEventProto.newBuilder(miniEvent_).mergeFrom(value).buildPartial();
@@ -6684,11 +6574,11 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public Builder clearMiniEvent() {
         if (miniEventBuilder_ == null) {
@@ -6697,19 +6587,19 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder getMiniEventBuilder() {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return getMiniEventFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder getMiniEventOrBuilder() {
         if (miniEventBuilder_ != null) {
@@ -6719,7 +6609,7 @@ public final class MiniEventProtos {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 8;</code>
+       * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.MiniEventProto, com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder> 
@@ -6744,6 +6634,638 @@ public final class MiniEventProtos {
     }
 
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniEventProto)
+  }
+
+  public interface UserMiniEventGoalProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniEventGoalProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 miniEventGoalId = 2;</code>
+     */
+    boolean hasMiniEventGoalId();
+    /**
+     * <code>optional int32 miniEventGoalId = 2;</code>
+     */
+    int getMiniEventGoalId();
+
+    /**
+     * <code>optional int32 progress = 3;</code>
+     */
+    boolean hasProgress();
+    /**
+     * <code>optional int32 progress = 3;</code>
+     */
+    int getProgress();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserMiniEventGoalProto}
+   */
+  public static final class UserMiniEventGoalProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniEventGoalProto)
+      UserMiniEventGoalProtoOrBuilder {
+    // Use UserMiniEventGoalProto.newBuilder() to construct.
+    private UserMiniEventGoalProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserMiniEventGoalProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserMiniEventGoalProto defaultInstance;
+    public static UserMiniEventGoalProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserMiniEventGoalProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserMiniEventGoalProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userUuid_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              miniEventGoalId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              progress_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.class, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserMiniEventGoalProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserMiniEventGoalProto>() {
+      public UserMiniEventGoalProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserMiniEventGoalProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserMiniEventGoalProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MINIEVENTGOALID_FIELD_NUMBER = 2;
+    private int miniEventGoalId_;
+    /**
+     * <code>optional int32 miniEventGoalId = 2;</code>
+     */
+    public boolean hasMiniEventGoalId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 miniEventGoalId = 2;</code>
+     */
+    public int getMiniEventGoalId() {
+      return miniEventGoalId_;
+    }
+
+    public static final int PROGRESS_FIELD_NUMBER = 3;
+    private int progress_;
+    /**
+     * <code>optional int32 progress = 3;</code>
+     */
+    public boolean hasProgress() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 progress = 3;</code>
+     */
+    public int getProgress() {
+      return progress_;
+    }
+
+    private void initFields() {
+      userUuid_ = "";
+      miniEventGoalId_ = 0;
+      progress_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, miniEventGoalId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, progress_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, miniEventGoalId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, progress_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserMiniEventGoalProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniEventGoalProto)
+        com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.class, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        miniEventGoalId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        progress_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
+      }
+
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto build() {
+        com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto buildPartial() {
+        com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto result = new com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.miniEventGoalId_ = miniEventGoalId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.progress_ = progress_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto) {
+          return mergeFrom((com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto other) {
+        if (other == com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.getDefaultInstance()) return this;
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasMiniEventGoalId()) {
+          setMiniEventGoalId(other.getMiniEventGoalId());
+        }
+        if (other.hasProgress()) {
+          setProgress(other.getProgress());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int miniEventGoalId_ ;
+      /**
+       * <code>optional int32 miniEventGoalId = 2;</code>
+       */
+      public boolean hasMiniEventGoalId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 miniEventGoalId = 2;</code>
+       */
+      public int getMiniEventGoalId() {
+        return miniEventGoalId_;
+      }
+      /**
+       * <code>optional int32 miniEventGoalId = 2;</code>
+       */
+      public Builder setMiniEventGoalId(int value) {
+        bitField0_ |= 0x00000002;
+        miniEventGoalId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 miniEventGoalId = 2;</code>
+       */
+      public Builder clearMiniEventGoalId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        miniEventGoalId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int progress_ ;
+      /**
+       * <code>optional int32 progress = 3;</code>
+       */
+      public boolean hasProgress() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 progress = 3;</code>
+       */
+      public int getProgress() {
+        return progress_;
+      }
+      /**
+       * <code>optional int32 progress = 3;</code>
+       */
+      public Builder setProgress(int value) {
+        bitField0_ |= 0x00000004;
+        progress_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 progress = 3;</code>
+       */
+      public Builder clearProgress() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        progress_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniEventGoalProto)
+    }
+
+    static {
+      defaultInstance = new UserMiniEventGoalProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniEventGoalProto)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -6776,6 +7298,11 @@ public final class MiniEventProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6814,13 +7341,15 @@ public final class MiniEventProtos {
       "rdId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEvent" +
       "LeaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023" +
       "\n\013miniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n" +
-      "\021leaderboardMinPos\030\004 \001(\005\"\337\001\n\022UserMiniEve",
+      "\021leaderboardMinPos\030\004 \001(\005\"\314\001\n\022UserMiniEve",
       "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
-      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\021\n\tptsEarned\030\004 \001" +
-      "(\005\022\027\n\017tierOneRedeemed\030\005 \001(\010\022\027\n\017tierTwoRe" +
-      "deemed\030\006 \001(\010\022\031\n\021tierThreeRedeemed\030\007 \001(\010\022" +
-      "1\n\tminiEvent\030\010 \001(\0132\036.com.lvl6.proto.Mini" +
-      "EventProtoB\021B\017MiniEventProtos"
+      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeem" +
+      "ed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tie" +
+      "rThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132" +
+      "\036.com.lvl6.proto.MiniEventProto\"U\n\026UserM" +
+      "iniEventGoalProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017m" +
+      "iniEventGoalId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021" +
+      "B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6869,7 +7398,13 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "PtsEarned", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", });
+        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", });
+    internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor,
+        new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
