@@ -803,27 +803,27 @@ public final class RewardsProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
     java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
-        getUpdatedOrNewList();
+        getUpdatedOrNewMonstersList();
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index);
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNewMonsters(int index);
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    int getUpdatedOrNewCount();
+    int getUpdatedOrNewMonstersCount();
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
     java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getUpdatedOrNewOrBuilderList();
+        getUpdatedOrNewMonstersOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewMonstersOrBuilder(
         int index);
 
     /**
@@ -936,10 +936,10 @@ public final class RewardsProto {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
+                updatedOrNewMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              updatedOrNew_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
+              updatedOrNewMonsters_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
               break;
             }
             case 18: {
@@ -974,7 +974,7 @@ public final class RewardsProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+          updatedOrNewMonsters_ = java.util.Collections.unmodifiableList(updatedOrNewMonsters_);
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
@@ -1011,39 +1011,39 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
-    public static final int UPDATEDORNEW_FIELD_NUMBER = 1;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
+    public static final int UPDATEDORNEWMONSTERS_FIELD_NUMBER = 1;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNewMonsters_;
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
-      return updatedOrNew_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewMonstersList() {
+      return updatedOrNewMonsters_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
     public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getUpdatedOrNewOrBuilderList() {
-      return updatedOrNew_;
+        getUpdatedOrNewMonstersOrBuilderList() {
+      return updatedOrNewMonsters_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    public int getUpdatedOrNewCount() {
-      return updatedOrNew_.size();
+    public int getUpdatedOrNewMonstersCount() {
+      return updatedOrNewMonsters_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
-      return updatedOrNew_.get(index);
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNewMonsters(int index) {
+      return updatedOrNewMonsters_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewMonstersOrBuilder(
         int index) {
-      return updatedOrNew_.get(index);
+      return updatedOrNewMonsters_.get(index);
     }
 
     public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 2;
@@ -1127,7 +1127,7 @@ public final class RewardsProto {
     }
 
     private void initFields() {
-      updatedOrNew_ = java.util.Collections.emptyList();
+      updatedOrNewMonsters_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
       gems_ = 0;
       cash_ = 0;
@@ -1146,8 +1146,8 @@ public final class RewardsProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < updatedOrNew_.size(); i++) {
-        output.writeMessage(1, updatedOrNew_.get(i));
+      for (int i = 0; i < updatedOrNewMonsters_.size(); i++) {
+        output.writeMessage(1, updatedOrNewMonsters_.get(i));
       }
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         output.writeMessage(2, updatedUserItems_.get(i));
@@ -1170,9 +1170,9 @@ public final class RewardsProto {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < updatedOrNew_.size(); i++) {
+      for (int i = 0; i < updatedOrNewMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, updatedOrNew_.get(i));
+          .computeMessageSize(1, updatedOrNewMonsters_.get(i));
       }
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -1304,7 +1304,7 @@ public final class RewardsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getUpdatedOrNewFieldBuilder();
+          getUpdatedOrNewMonstersFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
         }
       }
@@ -1314,11 +1314,11 @@ public final class RewardsProto {
 
       public Builder clear() {
         super.clear();
-        if (updatedOrNewBuilder_ == null) {
-          updatedOrNew_ = java.util.Collections.emptyList();
+        if (updatedOrNewMonstersBuilder_ == null) {
+          updatedOrNewMonsters_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          updatedOrNewBuilder_.clear();
+          updatedOrNewMonstersBuilder_.clear();
         }
         if (updatedUserItemsBuilder_ == null) {
           updatedUserItems_ = java.util.Collections.emptyList();
@@ -1360,14 +1360,14 @@ public final class RewardsProto {
         com.lvl6.proto.RewardsProto.UserRewardProto result = new com.lvl6.proto.RewardsProto.UserRewardProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (updatedOrNewBuilder_ == null) {
+        if (updatedOrNewMonstersBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+            updatedOrNewMonsters_ = java.util.Collections.unmodifiableList(updatedOrNewMonsters_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.updatedOrNew_ = updatedOrNew_;
+          result.updatedOrNewMonsters_ = updatedOrNewMonsters_;
         } else {
-          result.updatedOrNew_ = updatedOrNewBuilder_.build();
+          result.updatedOrNewMonsters_ = updatedOrNewMonstersBuilder_.build();
         }
         if (updatedUserItemsBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -1406,29 +1406,29 @@ public final class RewardsProto {
 
       public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserRewardProto other) {
         if (other == com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance()) return this;
-        if (updatedOrNewBuilder_ == null) {
-          if (!other.updatedOrNew_.isEmpty()) {
-            if (updatedOrNew_.isEmpty()) {
-              updatedOrNew_ = other.updatedOrNew_;
+        if (updatedOrNewMonstersBuilder_ == null) {
+          if (!other.updatedOrNewMonsters_.isEmpty()) {
+            if (updatedOrNewMonsters_.isEmpty()) {
+              updatedOrNewMonsters_ = other.updatedOrNewMonsters_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureUpdatedOrNewIsMutable();
-              updatedOrNew_.addAll(other.updatedOrNew_);
+              ensureUpdatedOrNewMonstersIsMutable();
+              updatedOrNewMonsters_.addAll(other.updatedOrNewMonsters_);
             }
             onChanged();
           }
         } else {
-          if (!other.updatedOrNew_.isEmpty()) {
-            if (updatedOrNewBuilder_.isEmpty()) {
-              updatedOrNewBuilder_.dispose();
-              updatedOrNewBuilder_ = null;
-              updatedOrNew_ = other.updatedOrNew_;
+          if (!other.updatedOrNewMonsters_.isEmpty()) {
+            if (updatedOrNewMonstersBuilder_.isEmpty()) {
+              updatedOrNewMonstersBuilder_.dispose();
+              updatedOrNewMonstersBuilder_ = null;
+              updatedOrNewMonsters_ = other.updatedOrNewMonsters_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              updatedOrNewBuilder_ = 
+              updatedOrNewMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUpdatedOrNewFieldBuilder() : null;
+                   getUpdatedOrNewMonstersFieldBuilder() : null;
             } else {
-              updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
+              updatedOrNewMonstersBuilder_.addAllMessages(other.updatedOrNewMonsters_);
             }
           }
         }
@@ -1494,244 +1494,244 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNewMonsters_ =
         java.util.Collections.emptyList();
-      private void ensureUpdatedOrNewIsMutable() {
+      private void ensureUpdatedOrNewMonstersIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNew_);
+          updatedOrNewMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNewMonsters_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewBuilder_;
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewMonstersBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
-        if (updatedOrNewBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(updatedOrNew_);
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewMonstersList() {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedOrNewMonsters_);
         } else {
-          return updatedOrNewBuilder_.getMessageList();
+          return updatedOrNewMonstersBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public int getUpdatedOrNewCount() {
-        if (updatedOrNewBuilder_ == null) {
-          return updatedOrNew_.size();
+      public int getUpdatedOrNewMonstersCount() {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          return updatedOrNewMonsters_.size();
         } else {
-          return updatedOrNewBuilder_.getCount();
+          return updatedOrNewMonstersBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
-        if (updatedOrNewBuilder_ == null) {
-          return updatedOrNew_.get(index);
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNewMonsters(int index) {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          return updatedOrNewMonsters_.get(index);
         } else {
-          return updatedOrNewBuilder_.getMessage(index);
+          return updatedOrNewMonstersBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder setUpdatedOrNew(
+      public Builder setUpdatedOrNewMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (updatedOrNewBuilder_ == null) {
+        if (updatedOrNewMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.set(index, value);
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.set(index, value);
           onChanged();
         } else {
-          updatedOrNewBuilder_.setMessage(index, value);
+          updatedOrNewMonstersBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder setUpdatedOrNew(
+      public Builder setUpdatedOrNewMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (updatedOrNewBuilder_ == null) {
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.set(index, builderForValue.build());
+        if (updatedOrNewMonstersBuilder_ == null) {
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.set(index, builderForValue.build());
           onChanged();
         } else {
-          updatedOrNewBuilder_.setMessage(index, builderForValue.build());
+          updatedOrNewMonstersBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder addUpdatedOrNew(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (updatedOrNewBuilder_ == null) {
+      public Builder addUpdatedOrNewMonsters(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.add(value);
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.add(value);
           onChanged();
         } else {
-          updatedOrNewBuilder_.addMessage(value);
+          updatedOrNewMonstersBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder addUpdatedOrNew(
+      public Builder addUpdatedOrNewMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (updatedOrNewBuilder_ == null) {
+        if (updatedOrNewMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.add(index, value);
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.add(index, value);
           onChanged();
         } else {
-          updatedOrNewBuilder_.addMessage(index, value);
+          updatedOrNewMonstersBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder addUpdatedOrNew(
+      public Builder addUpdatedOrNewMonsters(
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (updatedOrNewBuilder_ == null) {
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.add(builderForValue.build());
+        if (updatedOrNewMonstersBuilder_ == null) {
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.add(builderForValue.build());
           onChanged();
         } else {
-          updatedOrNewBuilder_.addMessage(builderForValue.build());
+          updatedOrNewMonstersBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder addUpdatedOrNew(
+      public Builder addUpdatedOrNewMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (updatedOrNewBuilder_ == null) {
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.add(index, builderForValue.build());
+        if (updatedOrNewMonstersBuilder_ == null) {
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.add(index, builderForValue.build());
           onChanged();
         } else {
-          updatedOrNewBuilder_.addMessage(index, builderForValue.build());
+          updatedOrNewMonstersBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder addAllUpdatedOrNew(
+      public Builder addAllUpdatedOrNewMonsters(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
-        if (updatedOrNewBuilder_ == null) {
-          ensureUpdatedOrNewIsMutable();
+        if (updatedOrNewMonstersBuilder_ == null) {
+          ensureUpdatedOrNewMonstersIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedOrNew_);
+              values, updatedOrNewMonsters_);
           onChanged();
         } else {
-          updatedOrNewBuilder_.addAllMessages(values);
+          updatedOrNewMonstersBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder clearUpdatedOrNew() {
-        if (updatedOrNewBuilder_ == null) {
-          updatedOrNew_ = java.util.Collections.emptyList();
+      public Builder clearUpdatedOrNewMonsters() {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          updatedOrNewMonsters_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          updatedOrNewBuilder_.clear();
+          updatedOrNewMonstersBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public Builder removeUpdatedOrNew(int index) {
-        if (updatedOrNewBuilder_ == null) {
-          ensureUpdatedOrNewIsMutable();
-          updatedOrNew_.remove(index);
+      public Builder removeUpdatedOrNewMonsters(int index) {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          ensureUpdatedOrNewMonstersIsMutable();
+          updatedOrNewMonsters_.remove(index);
           onChanged();
         } else {
-          updatedOrNewBuilder_.remove(index);
+          updatedOrNewMonstersBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewMonstersBuilder(
           int index) {
-        return getUpdatedOrNewFieldBuilder().getBuilder(index);
+        return getUpdatedOrNewMonstersFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewMonstersOrBuilder(
           int index) {
-        if (updatedOrNewBuilder_ == null) {
-          return updatedOrNew_.get(index);  } else {
-          return updatedOrNewBuilder_.getMessageOrBuilder(index);
+        if (updatedOrNewMonstersBuilder_ == null) {
+          return updatedOrNewMonsters_.get(index);  } else {
+          return updatedOrNewMonstersBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
       public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-           getUpdatedOrNewOrBuilderList() {
-        if (updatedOrNewBuilder_ != null) {
-          return updatedOrNewBuilder_.getMessageOrBuilderList();
+           getUpdatedOrNewMonstersOrBuilderList() {
+        if (updatedOrNewMonstersBuilder_ != null) {
+          return updatedOrNewMonstersBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(updatedOrNew_);
+          return java.util.Collections.unmodifiableList(updatedOrNewMonsters_);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder() {
-        return getUpdatedOrNewFieldBuilder().addBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewMonstersBuilder() {
+        return getUpdatedOrNewMonstersFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewMonstersBuilder(
           int index) {
-        return getUpdatedOrNewFieldBuilder().addBuilder(
+        return getUpdatedOrNewMonstersFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 1;</code>
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
        */
       public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
-           getUpdatedOrNewBuilderList() {
-        return getUpdatedOrNewFieldBuilder().getBuilderList();
+           getUpdatedOrNewMonstersBuilderList() {
+        return getUpdatedOrNewMonstersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-          getUpdatedOrNewFieldBuilder() {
-        if (updatedOrNewBuilder_ == null) {
-          updatedOrNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getUpdatedOrNewMonstersFieldBuilder() {
+        if (updatedOrNewMonstersBuilder_ == null) {
+          updatedOrNewMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  updatedOrNew_,
+                  updatedOrNewMonsters_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
-          updatedOrNew_ = null;
+          updatedOrNewMonsters_ = null;
         }
-        return updatedOrNewBuilder_;
+        return updatedOrNewMonstersBuilder_;
       }
 
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
@@ -2106,12 +2106,12 @@ public final class RewardsProto {
       "\n\003typ\030\003 \001(\0162&.com.lvl6.proto.RewardProto" +
       ".RewardType\022\013\n\003amt\030\004 \001(\005\"O\n\nRewardType\022\r" +
       "\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CAS" +
-      "H\020\004\022\007\n\003OIL\020\005\022\013\n\007MONSTER\020\006\"\257\001\n\017UserReward" +
-      "Proto\022:\n\014updatedOrNew\030\001 \003(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\0227\n\020updatedUser" +
-      "Items\030\002 \003(\0132\035.com.lvl6.proto.UserItemPro",
-      "to\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 " +
-      "\001(\005B\016B\014RewardsProto"
+      "H\020\004\022\007\n\003OIL\020\005\022\013\n\007MONSTER\020\006\"\267\001\n\017UserReward" +
+      "Proto\022B\n\024updatedOrNewMonsters\030\001 \003(\0132$.co" +
+      "m.lvl6.proto.FullUserMonsterProto\0227\n\020upd" +
+      "atedUserItems\030\002 \003(\0132\035.com.lvl6.proto.Use",
+      "rItemProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013" +
+      "\n\003oil\030\005 \001(\005B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2138,7 +2138,7 @@ public final class RewardsProto {
     internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserRewardProto_descriptor,
-        new java.lang.String[] { "UpdatedOrNew", "UpdatedUserItems", "Gems", "Cash", "Oil", });
+        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
   }

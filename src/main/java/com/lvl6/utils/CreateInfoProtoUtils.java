@@ -216,6 +216,7 @@ import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -3505,6 +3506,28 @@ public class CreateInfoProtoUtils {
 		return rpb.build();
 	}
 
+	public static UserRewardProto createUserRewardProto(
+			Collection<ItemForUser> newOrUpdatedIfu,
+			Collection<FullUserMonsterProto> fumpList,
+			int gems, int cash, int oil)
+	{
+		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
+
+		if (null != fumpList && !fumpList.isEmpty()) {
+			urp.addAllUpdatedOrNewMonsters(fumpList);
+		}
+
+		if (null != newOrUpdatedIfu && !newOrUpdatedIfu.isEmpty()) {
+			Collection<UserItemProto> userItems = createUserItemProtosFromUserItems(newOrUpdatedIfu);
+			urp.addAllUpdatedUserItems(userItems);
+		}
+
+		urp.setGems(gems);
+		urp.setCash(cash);
+		urp.setOil(oil);
+
+		return urp.build();
+	}
 
 	/** Skill.proto ***************************************************/
 	public static SkillProto createSkillProtoFromSkill(Skill s,

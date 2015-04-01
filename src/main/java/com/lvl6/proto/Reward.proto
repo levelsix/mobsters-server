@@ -20,6 +20,10 @@ message RewardProto {
 	optional RewardType typ = 3;
 	optional int32 amt = 4;
 	
+	//NOTE: if RewardType is MONSTER, then amt is repurposed to:
+	//amt = 0 means only one piece is given
+	//amt > 0 means one monster with a lvl equal to 'amt' is given  
+	
 	enum RewardType {
 		NO_REWARD = 1;
 		ITEM = 2;
@@ -34,7 +38,7 @@ message RewardProto {
 //------------------------------------------------------------------------------------------
 //there is no analog of this in the db/server
 message UserRewardProto {
-	repeated FullUserMonsterProto updatedOrNew = 1;
+	repeated FullUserMonsterProto updatedOrNewMonsters = 1;
 	repeated UserItemProto updatedUserItems = 2;
 	optional int32 gems = 3;
 	optional int32 cash = 4;
