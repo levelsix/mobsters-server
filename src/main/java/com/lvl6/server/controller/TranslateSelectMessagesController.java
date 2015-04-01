@@ -85,10 +85,9 @@ public class TranslateSelectMessagesController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String recipientUserId = senderProto.getUserUuid();
-		String senderUserId = null;
-		if(reqProto.hasOtherUserUuid()) {
-			senderUserId = reqProto.getOtherUserUuid();
-		}
+		//this guy sent the msgs 
+		String senderUserId = reqProto.getOtherUserUuid();
+		
 		ChatType ct = reqProto.getChatType();
 		
 		TranslateLanguages language = reqProto.getLanguage();
@@ -107,7 +106,7 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 			recipientUserUuid = UUID.fromString(recipientUserId);
 			
-			if(senderUserId != null) {
+			if(senderUserId != null && !senderUserId.isEmpty()) {
 				senderUserUuid = UUID.fromString(senderUserId);
 			}
 			

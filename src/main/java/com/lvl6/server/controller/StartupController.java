@@ -1571,11 +1571,10 @@ public class StartupController extends EventController {
 			}
 		}
 
+		//if there's no default languages, they havent ever been set
 		if (null != dlp) {
 			resBuilder.setUserDefaultLanguages(dlp);
-		} else {
-			log.error("ERRRRRRRRROOOOOOOOOORRRR!!!!!!!!!!!! CAN THIS BE NULL BYRON???");
-		}
+		} 
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
