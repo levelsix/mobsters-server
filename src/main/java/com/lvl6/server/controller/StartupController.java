@@ -128,6 +128,7 @@ import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
@@ -150,7 +151,6 @@ import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -170,6 +170,7 @@ import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -341,7 +342,13 @@ public class StartupController extends EventController {
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
 	@Autowired
+	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
+
+	@Autowired
 	protected InsertUtil insertUtil;
+
+	@Autowired
+	protected DeleteUtil deleteUtil;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -1561,12 +1568,12 @@ public class StartupController extends EventController {
 
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 				userId, now, userRetrieveUtils, miniEventForUserRetrieveUtil,
-				insertUtil);
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
 
 		rmea.execute(rmeaResBuilder);
-		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
 
 		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 				null != rmea.getCurActiveMiniEvent())
@@ -1576,6 +1583,7 @@ public class StartupController extends EventController {
 			UserMiniEventProto umep = CreateInfoProtoUtils
 					.createUserMiniEventProto(
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getMegfus(),
 							rmea.getLvlEntered(), rmea.getRewards(),
 							rmea.getGoals(), rmea.getLeaderboardRewards());
 			resBuilder.setUserMiniEvent(umep);
@@ -2659,12 +2667,29 @@ public class StartupController extends EventController {
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 	}
 
+	public MiniEventGoalForUserRetrieveUtil getMiniEventGoalForUserRetrieveUtil() {
+		return miniEventGoalForUserRetrieveUtil;
+	}
+
+	public void setMiniEventGoalForUserRetrieveUtil(
+			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil) {
+		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
 	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
+	}
+
+	public DeleteUtil getDeleteUtil() {
+		return deleteUtil;
+	}
+
+	public void setDeleteUtil(DeleteUtil deleteUtil) {
+		this.deleteUtil = deleteUtil;
 	}
 
 }

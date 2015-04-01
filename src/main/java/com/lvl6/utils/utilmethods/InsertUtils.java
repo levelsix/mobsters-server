@@ -518,9 +518,9 @@ public class InsertUtils implements InsertUtil {
 		}
 		return wallPostId;
 	}
-	
+
 //	@Override
-//	public boolean insertTranslatedText(ChatType chatType, String chatId, 
+//	public boolean insertTranslatedText(ChatType chatType, String chatId,
 //			Map<TranslateLanguages, String> translatedTextMap) {
 //		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 //		int numRows = translatedTextMap.size();
@@ -540,16 +540,16 @@ public class InsertUtils implements InsertUtil {
 //			languageList.add(languageString);
 //			translatedList.add(translatedTextMap.get(language));
 //		}
-//		
+//
 //		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, ids);
 //		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypes);
 //		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIds);
 //		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
 //		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, translatedList);
-//		
+//
 //		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 //				tableName, insertParams, numRows);
-//		
+//
 //		if(numInserted == numRows) {
 //			return true;
 //		}
@@ -849,45 +849,45 @@ public class InsertUtils implements InsertUtil {
 			TranslateLanguages language, String message) {
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
-		
+
 		String id = randomUUID();
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, id);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatType.toString());
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatId);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, language.toString());
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, message);
-		
+
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
 		if (numChanged != 1) {
 			id = null;
 		}
 		return id;
-		
+
 	}
-	
+
 	@Override
-	public boolean insertTranslateSettings(String receiverId, String senderId, 
+	public boolean insertTranslateSettings(String receiverId, String senderId,
 			String language, String chatType) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
-		
+
 		String id = randomUUID();
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID, id);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID, receiverId);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, senderId);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, language);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE, chatType);
-		
+
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
 		if (numChanged != 1) {
 			return false;
 		}
 		return true;
-		
+
 	}
-	
+
 	//returns the id
 	@Override
 	public String insertIntoUserTaskReturnId(String userId, int taskId,
@@ -2618,18 +2618,18 @@ public class InsertUtils implements InsertUtil {
 			return false;
 
 	}
-	
+
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
 			Map<String, String> chatIdToTranslations, Language language) {
 		if(chatIdToTranslations == null) {
 			log.error("map containing ids to translations is null");
 		}
-		
+
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = chatIdToTranslations.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-		
+
 		List<String> idList = new ArrayList<String>();
 		List<String> chatTypeList = new ArrayList<String>();
 		List<String> chatIdList = new ArrayList<String>();
@@ -2649,7 +2649,7 @@ public class InsertUtils implements InsertUtil {
 			log.error("error converting language to string");
 			e.printStackTrace();
 		}
-		
+
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, idList);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypeList);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIdList);
@@ -2664,8 +2664,8 @@ public class InsertUtils implements InsertUtil {
 		} else
 			return false;
 	}
-	
-	
+
+
 
 	@Override
 	public boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu)
@@ -2680,8 +2680,6 @@ public class InsertUtils implements InsertUtil {
 				mefu.getMiniEventId());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_LVL,
 				mefu.getUserLvl());
-		newRow.put(DBConstants.MINI_EVENT_FOR_USER__PTS_EARNED,
-				mefu.getPtsEarned());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED,
 				mefu.isTierOneRedeemed());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED,
@@ -2693,7 +2691,6 @@ public class InsertUtils implements InsertUtil {
 		Set<String> replaceTheseColumns = new HashSet<String>();
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__USER_LVL);
-		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__PTS_EARNED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);

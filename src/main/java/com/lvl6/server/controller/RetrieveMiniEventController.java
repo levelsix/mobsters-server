@@ -19,10 +19,12 @@ import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -43,7 +45,13 @@ public class RetrieveMiniEventController extends EventController {
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
 	@Autowired
+	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
+
+	@Autowired
 	protected InsertUtil insertUtil;
+
+	@Autowired
+	protected DeleteUtil deleteUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -100,7 +108,7 @@ public class RetrieveMiniEventController extends EventController {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 					userId, now, userRetrieveUtil, miniEventForUserRetrieveUtil,
-					insertUtil);
+					miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
 
 			rmea.execute(resBuilder);
 			log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
@@ -114,6 +122,7 @@ public class RetrieveMiniEventController extends EventController {
 				UserMiniEventProto umep = CreateInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+								rmea.getMegfus(),
 								rmea.getLvlEntered(), rmea.getRewards(),
 								rmea.getGoals(), rmea.getLeaderboardRewards());
 				resBuilder.setUserMiniEvent(umep);
@@ -165,12 +174,29 @@ public class RetrieveMiniEventController extends EventController {
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 	}
 
+	public MiniEventGoalForUserRetrieveUtil getMiniEventGoalForUserRetrieveUtil() {
+		return miniEventGoalForUserRetrieveUtil;
+	}
+
+	public void setMiniEventGoalForUserRetrieveUtil(
+			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil) {
+		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
 	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
+	}
+
+	public DeleteUtil getDeleteUtil() {
+		return deleteUtil;
+	}
+
+	public void setDeleteUtil(DeleteUtil deleteUtil) {
+		this.deleteUtil = deleteUtil;
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.lvl6.utils.utilmethods;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,9 +10,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.properties.DBConstants;
@@ -648,4 +645,21 @@ public class DeleteUtils implements DeleteUtil {
 				values);
 		return numDeleted;
 	}
+
+	@Override
+	public int deleteMiniEventGoalForUser(String userId)
+	{
+		String tableName = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
+
+		String query = String.format(
+				"DELETE FROM %s WHERE %s=?",
+				tableName, DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID);
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(userId);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
+
 }

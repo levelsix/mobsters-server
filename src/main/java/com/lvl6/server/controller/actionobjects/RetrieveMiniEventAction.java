@@ -2,6 +2,8 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,18 +12,21 @@ import com.lvl6.info.MiniEvent;
 import com.lvl6.info.MiniEventForPlayerLvl;
 import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventGoal;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetrieveMiniEventAction {
@@ -32,18 +37,23 @@ public class RetrieveMiniEventAction {
 	private Date now;
 	protected UserRetrieveUtils2 userRetrieveUtil;
 	private MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
+	private MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 	private InsertUtil insertUtil;
+	private DeleteUtil deleteUtil;
 
 	public RetrieveMiniEventAction(String userId, Date now,
 			UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
-			InsertUtil insertUtil) {
+			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil,
+			InsertUtil insertUtil, DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.now = now;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
+		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
+		this.deleteUtil = deleteUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -64,6 +74,8 @@ public class RetrieveMiniEventAction {
 	private MiniEvent curActiveMiniEvent;
 	private MiniEventForPlayerLvl lvlEntered;
 	private MiniEventForUser mefu;
+	private Collection<MiniEventGoalForUser> megfus;
+	private boolean allRewardsCollected;
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
@@ -115,17 +127,28 @@ public class RetrieveMiniEventAction {
 			return true;
 		}
 
-		return verifyRewardsCollected();
+		int miniEventId = mefu.getMiniEventId();
+		Collection<MiniEventGoal> goals = MiniEventGoalRetrieveUtils
+				.getGoalsForMiniEventId(miniEventId);
+		if (null == goals || goals.isEmpty()) {
+			log.error("MiniEvent with id has no goals. UserMiniEvent={}", mefu);
+			return false;
+		}
+
+		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(userId);
+
+		allRewardsCollected = verifyRewardsCollected(goals);
+		return allRewardsCollected;
 	}
 
-	private boolean verifyRewardsCollected() {
+	private boolean verifyRewardsCollected(Collection<MiniEventGoal> goals) {
 		int miniEventId = mefu.getMiniEventId();
 		int curLvl = u.getLevel();
 
 		MiniEventForPlayerLvl mefpl = MiniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(miniEventId, curLvl);
 
-		int curPts = mefu.getPtsEarned();
+		int curPts = calculateCurrentPts(goals);
 		int tierOne = mefpl.getTierOneMinPts();
 		int tierTwo = mefpl.getTierTwoMinPts();
 		int tierThree = mefpl.getTierThreeMinPts();
@@ -148,8 +171,42 @@ public class RetrieveMiniEventAction {
 		return false;
 	}
 
-	private boolean writeChangesToDB(Builder resBuilder) {
+	private int calculateCurrentPts(Collection<MiniEventGoal> goals) {
 
+		Map<Integer, MiniEventGoal> goalIdToGoal = new HashMap<Integer, MiniEventGoal>();
+		for (MiniEventGoal meg : goals)
+		{
+			goalIdToGoal.put(meg.getId(), meg);
+		}
+
+		int totalPts = 0;
+		for (MiniEventGoalForUser megfu : megfus)
+		{
+			int goalId = megfu.getMiniEventGoalId();
+			if (!goalIdToGoal.containsKey(goalId)) {
+				log.error("MiniEventGoalForUser with nonexisting MiniEventGoal. {}", megfu);
+				continue;
+			}
+
+			MiniEventGoal meg = goalIdToGoal.get(goalId);
+			int pts = meg.getPtsReward();
+
+			int amtNeededForPts = meg.getAmt();
+			int multiplier = megfu.getProgress() / amtNeededForPts;
+
+			int curPts = pts * multiplier;
+			totalPts += curPts;
+
+			log.info("MiniEventGoal, MiniEventGoalForUser, pts. {}, {}, {}",
+					new Object[] { meg, megfu, curPts } );
+		}
+
+		return totalPts;
+	}
+
+	private boolean writeChangesToDB(Builder resBuilder)
+	{
+		//NOTE: user has redeemed all his rewards for this MiniEvent
 
 //		curActiveMiniEvent = null;
 //		if (null == mefu) {
@@ -200,21 +257,29 @@ public class RetrieveMiniEventAction {
 			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 		}
 
-		if (null == mefu) {
-			//create a MiniEvent for this user, most likely the first one for him
+		boolean success = null != mefu;
+
+		boolean createOrUpdate = null == mefu || meId != mefu.getMiniEventId();
+		if ( createOrUpdate ) {
 			mefu = new MiniEventForUser();
 			mefu.setUserId(userId);
-			mefu.setMiniEventId(curActiveMiniEvent.getId());
+			mefu.setMiniEventId(meId);
 			mefu.setUserLvl(userLvl);
-			mefu.setPtsEarned(0);
 			mefu.setTierOneRedeemed(false);
 			mefu.setTierTwoRedeemed(false);
 			mefu.setTierThreeRedeemed(false);
-
-			return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
+			success = insertUtil.insertIntoUpdateMiniEventForUser(mefu);
 		}
 
-		return true;
+		//only execute if user is updating, not if inserting
+		if (success && null != mefu && meId != mefu.getMiniEventId()) {
+			//user redeemed all his rewards, and there is a different MiniEventId
+			//from the one the user has. delete his progress for the other goals
+			int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
+			log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
+		}
+
+		return success;
 	}
 
 	public User getU() {
@@ -247,6 +312,14 @@ public class RetrieveMiniEventAction {
 
 	public void setMefu(MiniEventForUser mefu) {
 		this.mefu = mefu;
+	}
+
+	public Collection<MiniEventGoalForUser> getMegfus() {
+		return megfus;
+	}
+
+	public void setMegfus(Collection<MiniEventGoalForUser> megfus) {
+		this.megfus = megfus;
 	}
 
 	public Collection<MiniEventTierReward> getRewards() {
