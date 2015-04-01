@@ -59,6 +59,7 @@ import com.lvl6.info.MiniEvent;
 import com.lvl6.info.MiniEventForPlayerLvl;
 import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventGoal;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.MiniJob;
@@ -180,6 +181,7 @@ import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType;
 import com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProto;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
@@ -2236,7 +2238,7 @@ public class CreateInfoProtoUtils {
 
 	/** MiniEvent.proto ********************************************/
 	public static UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
-			MiniEvent me,
+			MiniEvent me, Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards)
@@ -2245,14 +2247,22 @@ public class CreateInfoProtoUtils {
 
 		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
 				leaderboardRewards);
-
 		umepb.setMiniEvent(mep);
+
+		if (null != megfus && !megfus.isEmpty())
+		{
+			Collection<UserMiniEventGoalProto> umegps =
+					createUserMiniEventGoalProto(megfus);
+			umepb.addAllGoals(umegps);
+		}
+
 
 		return umepb.build();
 	}
 
 	public static UserMiniEventProto.Builder createUserMiniEventProto(
-			MiniEventForUser mefu) {
+			MiniEventForUser mefu)
+	{
 		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
 		umepb.setMiniEventId(mefu.getMiniEventId());
 		umepb.setUserUuid(mefu.getUserId());
@@ -2438,6 +2448,35 @@ public class CreateInfoProtoUtils {
 		melrpb.setLeaderboardMinPos(melr.getLeaderboardPos());
 
 		return melrpb.build();
+	}
+
+	private static Collection<UserMiniEventGoalProto> createUserMiniEventGoalProto(
+			Collection<MiniEventGoalForUser> megfus)
+	{
+		Collection<UserMiniEventGoalProto> goalProtos =
+				new ArrayList<UserMiniEventGoalProto>();
+		if (null == megfus || megfus.isEmpty())
+		{
+			return goalProtos;
+		}
+
+		for (MiniEventGoalForUser megfu : megfus) {
+			UserMiniEventGoalProto umegp = createUserMiniEventGoalProto(megfu);
+			goalProtos.add(umegp);
+		}
+
+		return goalProtos;
+	}
+
+	private static UserMiniEventGoalProto createUserMiniEventGoalProto(
+			MiniEventGoalForUser megfu)
+	{
+		UserMiniEventGoalProto.Builder umegpb = UserMiniEventGoalProto.newBuilder();
+		umegpb.setUserUuid(megfu.getUserId());
+		umegpb.setMiniEventGoalId(megfu.getMiniEventGoalId());
+		umegpb.setProgress(megfu.getProgress());
+
+		return umegpb.build();
 	}
 
 	/** MiniJobConfig.proto ********************************************/

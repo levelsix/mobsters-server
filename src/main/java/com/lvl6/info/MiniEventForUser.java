@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 public class MiniEventForUser implements Serializable {
 
-	private static final long serialVersionUID = -6082954916684935677L;
+	private static final long serialVersionUID = 6757617535032512427L;
 
 	private String userId;
 	private int miniEventId;
 	private int userLvl;
-	private int ptsEarned;
 	private boolean tierOneRedeemed;
 	private boolean tierTwoRedeemed;
 	private boolean tierThreeRedeemed;
@@ -23,7 +22,6 @@ public class MiniEventForUser implements Serializable {
 		this.userId = mefu.getUserId();
 		this.miniEventId = mefu.getMiniEventId();
 		this.userLvl = mefu.getUserLvl();
-		this.ptsEarned = mefu.getPtsEarned();
 		this.tierOneRedeemed = mefu.isTierOneRedeemed();
 		this.tierTwoRedeemed = mefu.isTierTwoRedeemed();
 		this.tierThreeRedeemed = mefu.isTierThreeRedeemed();
@@ -53,14 +51,6 @@ public class MiniEventForUser implements Serializable {
 		this.userLvl = userLvl;
 	}
 
-	public int getPtsEarned() {
-		return ptsEarned;
-	}
-
-	public void setPtsEarned(int ptsEarned) {
-		this.ptsEarned = ptsEarned;
-	}
-
 	public boolean isTierOneRedeemed() {
 		return tierOneRedeemed;
 	}
@@ -88,9 +78,8 @@ public class MiniEventForUser implements Serializable {
 	@Override
 	public String toString() {
 		return "MiniEventForUser [userId=" + userId + ", miniEventId="
-				+ miniEventId + ", userLvl=" + userLvl + ", ptsEarned="
-				+ ptsEarned + ", tierOneRedeemed=" + tierOneRedeemed
-				+ ", tierTwoRedeemed=" + tierTwoRedeemed
+				+ miniEventId + ", userLvl=" + userLvl + ", tierOneRedeemed="
+				+ tierOneRedeemed + ", tierTwoRedeemed=" + tierTwoRedeemed
 				+ ", tierThreeRedeemed=" + tierThreeRedeemed + "]";
 	}
 

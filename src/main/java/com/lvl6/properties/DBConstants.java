@@ -60,6 +60,7 @@ public class DBConstants {
 	public static final String TABLE_MINI_EVENT_FOR_PLAYER_LVL_CONFIG = "mini_event_for_player_lvl_config";
 	public static final String TABLE_MINI_EVENT_FOR_USER = "mini_event_for_user";
 	public static final String TABLE_MINI_EVENT_GOAL_CONFIG = "mini_event_goal_config";
+	public static final String TABLE_MINI_EVENT_GOAL_FOR_USER = "mini_event_goal_for_user";
 	public static final String TABLE_MINI_EVENT_LEADERBOARD_REWARD_CONFIG = "mini_event_leaderboard_reward_config";
 	public static final String TABLE_MINI_EVENT_TIER_REWARD_CONFIG = "mini_event_tier_reward_config";
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
@@ -286,7 +287,7 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID = "crsm_id";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_DMG_DONE = "crsm_dmg_done";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_END_TIME = "crsm_end_time";
-	
+
 	//translations of chats
 	public static final String CHAT_TRANSLATIONS__ID = GENERIC__ID;
 	public static final String CHAT_TRANSLATIONS__CHAT_TYPE = "chat_type";
@@ -414,10 +415,14 @@ public class DBConstants {
 	public static final String MINI_EVENT_FOR_USER__USER_ID = "user_id";
 	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_ID = "mini_event_id";
 	public static final String MINI_EVENT_FOR_USER__USER_LVL = "user_lvl";
-	public static final String MINI_EVENT_FOR_USER__PTS_EARNED = "pts_earned";
 	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED = "tier_one_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED = "tier_two_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED = "tier_three_redeemed";
+
+	/*MINI EVENT GOAL FOR USER*/
+	public static final String MINI_EVENT_GOAL_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID = "mini_event_goal_id";
+	public static final String MINI_EVENT_GOAL_FOR_USER__PROGRESS = "progress";
 
 	/*MINI TASK FOR USER*/
 	public static final String MINI_JOB_FOR_USER__ID = GENERIC__ID;
@@ -743,7 +748,7 @@ public class DBConstants {
 	public static final String TOURNAMENT_REWARD__BLUE = "blue";
 	public static final String TOURNAMENT_REWARD__GREEN = "green";
 	public static final String TOURNAMENT_REWARD__RED = "red";
-	
+
 	/*USER TRANSLATION SETTINGS*/
 	public static final String TRANSLATION_SETTINGS_FOR_USER__ID = GENERIC__ID;
 	public static final String TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
@@ -1101,7 +1106,7 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__PVP_DROP_RATE = "pvp_drop_rate";
 	public static final String MONSTER_LEVEL_INFO__STRENGTH = "strength";
 	public static final String MONSTER_LEVEL_INFO__STRENGTH_EXPONENT = "strength_exponent";
-	
+
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";
 	public static final String OBSTACLE__REMOVAL_COST_TYPE = "removal_cost_type";
