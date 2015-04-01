@@ -1071,7 +1071,7 @@ public class StartupController extends EventController {
 		}
 
 		String defenderId = battle.getDefenderId();
-		int eloDefenderWins = battle.getDefenderLoseEloChange();
+		int eloDefenderWins = battle.getDefenderWinEloChange();
 
 		//user has unfinished battle, reward defender and penalize attacker
 		penalizeUserForLeavingGameWhileInPvp(userId, user, plfu, defenderId,
