@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -11,11 +13,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMiniEventRequestEvent;
 import com.lvl6.events.response.UpdateMiniEventResponseEvent;
-import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus;
-import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
@@ -54,7 +56,7 @@ public class UpdateMiniEventController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		UserMiniEventProto umep = null;// reqProto.getUpdatedUserMiniEvent();
+		List<UserMiniEventGoalProto> umegpList = reqProto.getUpdatedGoalsList();
 
 		UpdateMiniEventResponseProto.Builder resBuilder = UpdateMiniEventResponseProto
 				.newBuilder();
@@ -64,13 +66,16 @@ public class UpdateMiniEventController extends EventController {
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);
-			UUID.fromString(umep.getUserUuid());
+
+			for (UserMiniEventGoalProto umegp : umegpList) {
+				UUID.fromString(umegp.getUserUuid());
+			}
 
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
 					"UUID error. incorrect userId=%s, umep=%s",
-					userId, umep), e);
+					userId, umegpList), e);
 			invalidUuids = true;
 		}
 
@@ -87,16 +92,12 @@ public class UpdateMiniEventController extends EventController {
 
 		server.lockPlayer(userId, this.getClass().getSimpleName());
 		try {
-			MiniEventForUser mefu = javafyUserMiniEventProto(umep);
+			List<MiniEventGoalForUser> megfuList = javafyUserMiniEventProto(umegpList);
 
 			UpdateMiniEventAction rmea = new UpdateMiniEventAction(
-					userId, mefu, insertUtil);
+					userId, megfuList, insertUtil);
 
 			rmea.execute(resBuilder);
-
-			if (resBuilder.getStatus().equals(UpdateMiniEventStatus.SUCCESS)) {
-				resBuilder.setUpdatedUserMiniEvent(umep);
-			}
 
 			UpdateMiniEventResponseProto resProto = resBuilder.build();
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
@@ -126,17 +127,22 @@ public class UpdateMiniEventController extends EventController {
 		}
 	}
 
-	private MiniEventForUser javafyUserMiniEventProto(UserMiniEventProto umep) {
-		MiniEventForUser mefu = new MiniEventForUser();
-		mefu.setUserId(umep.getUserUuid());
-		mefu.setMiniEventId(umep.getMiniEventId());
-		mefu.setUserLvl(umep.getUserLvl());
-		//mefu.setPtsEarned(umep.getPtsEarned());
-		mefu.setTierOneRedeemed(umep.getTierOneRedeemed());
-		mefu.setTierTwoRedeemed(umep.getTierTwoRedeemed());
-		mefu.setTierThreeRedeemed(umep.getTierThreeRedeemed());
+	private List<MiniEventGoalForUser> javafyUserMiniEventProto(
+			List<UserMiniEventGoalProto> umegpList)
+	{
+		List<MiniEventGoalForUser> megfuList = new ArrayList<MiniEventGoalForUser>();
 
-		return mefu;
+		for (UserMiniEventGoalProto umegp : umegpList) {
+
+			MiniEventGoalForUser megfu = new MiniEventGoalForUser();
+			megfu.setUserId(umegp.getUserUuid());
+			megfu.setMiniEventGoalId(umegp.getMiniEventGoalId());
+			megfu.setProgress(umegp.getProgress());
+
+			megfuList.add(megfu);
+		}
+
+		return megfuList;
 	}
 
 	public InsertUtil getInsertUtil() {

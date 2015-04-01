@@ -33,6 +33,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -2694,6 +2695,40 @@ public class InsertUtils implements InsertUtil {
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
+
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
+		if (numUpdated > 0) {
+			return true;
+		} else {
+			log.error("numUpdated={}", numUpdated);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean insertIntoUpdateMiniEventGoalForUser(
+			Collection<MiniEventGoalForUser> megfuList)
+	{
+
+		String tableName = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		for (MiniEventGoalForUser megfu : megfuList) {
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID,
+					megfu.getUserId());
+			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID,
+					megfu.getMiniEventGoalId());
+			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__PROGRESS,
+					megfu.getProgress());
+
+			newRows.add(newRow);
+		}
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__PROGRESS);
 
 		int numUpdated = DBConnection.get()
 				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,

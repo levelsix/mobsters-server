@@ -2293,19 +2293,6 @@ public final class EventMiniEventProto {
      * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
      */
     com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus getStatus();
-
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    boolean hasUpdatedUserMiniEvent();
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent();
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateMiniEventResponseProto}
@@ -2381,19 +2368,6 @@ public final class EventMiniEventProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = updatedUserMiniEvent_.toBuilder();
-              }
-              updatedUserMiniEvent_ = input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(updatedUserMiniEvent_);
-                updatedUserMiniEvent_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -2554,31 +2528,9 @@ public final class EventMiniEventProto {
       return status_;
     }
 
-    public static final int UPDATEDUSERMINIEVENT_FIELD_NUMBER = 3;
-    private com.lvl6.proto.MiniEventProtos.UserMiniEventProto updatedUserMiniEvent_;
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    public boolean hasUpdatedUserMiniEvent() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    public com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent() {
-      return updatedUserMiniEvent_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-     */
-    public com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder() {
-      return updatedUserMiniEvent_;
-    }
-
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
-      updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2599,9 +2551,6 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, updatedUserMiniEvent_);
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2618,10 +2567,6 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, updatedUserMiniEvent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2733,7 +2678,6 @@ public final class EventMiniEventProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getUpdatedUserMiniEventFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2750,12 +2694,6 @@ public final class EventMiniEventProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
-        } else {
-          updatedUserMiniEventBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -2796,14 +2734,6 @@ public final class EventMiniEventProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (updatedUserMiniEventBuilder_ == null) {
-          result.updatedUserMiniEvent_ = updatedUserMiniEvent_;
-        } else {
-          result.updatedUserMiniEvent_ = updatedUserMiniEventBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2825,9 +2755,6 @@ public final class EventMiniEventProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
-        }
-        if (other.hasUpdatedUserMiniEvent()) {
-          mergeUpdatedUserMiniEvent(other.getUpdatedUserMiniEvent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3005,122 +2932,6 @@ public final class EventMiniEventProto {
         status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
         onChanged();
         return this;
-      }
-
-      private com.lvl6.proto.MiniEventProtos.UserMiniEventProto updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> updatedUserMiniEventBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public boolean hasUpdatedUserMiniEvent() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProto getUpdatedUserMiniEvent() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          return updatedUserMiniEvent_;
-        } else {
-          return updatedUserMiniEventBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public Builder setUpdatedUserMiniEvent(com.lvl6.proto.MiniEventProtos.UserMiniEventProto value) {
-        if (updatedUserMiniEventBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          updatedUserMiniEvent_ = value;
-          onChanged();
-        } else {
-          updatedUserMiniEventBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public Builder setUpdatedUserMiniEvent(
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder builderForValue) {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = builderForValue.build();
-          onChanged();
-        } else {
-          updatedUserMiniEventBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public Builder mergeUpdatedUserMiniEvent(com.lvl6.proto.MiniEventProtos.UserMiniEventProto value) {
-        if (updatedUserMiniEventBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              updatedUserMiniEvent_ != com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance()) {
-            updatedUserMiniEvent_ =
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto.newBuilder(updatedUserMiniEvent_).mergeFrom(value).buildPartial();
-          } else {
-            updatedUserMiniEvent_ = value;
-          }
-          onChanged();
-        } else {
-          updatedUserMiniEventBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public Builder clearUpdatedUserMiniEvent() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
-          onChanged();
-        } else {
-          updatedUserMiniEventBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder getUpdatedUserMiniEventBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getUpdatedUserMiniEventFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      public com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUpdatedUserMiniEventOrBuilder() {
-        if (updatedUserMiniEventBuilder_ != null) {
-          return updatedUserMiniEventBuilder_.getMessageOrBuilder();
-        } else {
-          return updatedUserMiniEvent_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.UserMiniEventProto updatedUserMiniEvent = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> 
-          getUpdatedUserMiniEventFieldBuilder() {
-        if (updatedUserMiniEventBuilder_ == null) {
-          updatedUserMiniEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder>(
-                  getUpdatedUserMiniEvent(),
-                  getParentForChildren(),
-                  isClean());
-          updatedUserMiniEvent_ = null;
-        }
-        return updatedUserMiniEventBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateMiniEventResponseProto)
@@ -5138,30 +4949,28 @@ public final class EventMiniEventProto {
       "FAIL_OTHER\020\002\"\215\001\n\033UpdateMiniEventRequestP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022<\n\014updatedGoals\030\002 \003(\0132&.c" +
-      "om.lvl6.proto.UserMiniEventGoalProto\"\234\002\n" +
+      "om.lvl6.proto.UserMiniEventGoalProto\"\332\001\n" +
       "\034UpdateMiniEventResponseProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
       "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.UpdateM" +
       "iniEventResponseProto.UpdateMiniEventSta" +
-      "tus\022@\n\024updatedUserMiniEvent\030\003 \001(\0132\".com.",
-      "lvl6.proto.UserMiniEventProto\"4\n\025UpdateM" +
-      "iniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002\"\230\002\n!RedeemMiniEventRewardRequestProt" +
-      "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
-      "umUserProtoWithMaxResources\022R\n\014tierRedee" +
-      "med\030\002 \001(\0162<.com.lvl6.proto.RedeemMiniEve" +
-      "ntRewardRequestProto.RewardTier\022\017\n\007mefpl" +
-      "Id\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"8\n\nRewardTi" +
-      "er\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO\020\002\022\016\n\nTIER_T" +
-      "HREE\020\003\"\254\002\n\"RedeemMiniEventRewardResponse",
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022j\n\006status\030\002 \001(\0162N.com.lv" +
-      "l6.proto.RedeemMiniEventRewardResponsePr" +
-      "oto.RedeemMiniEventRewardStatus:\nFAIL_OT" +
-      "HER\022,\n\007rewards\030\003 \003(\0132\033.com.lvl6.proto.Re" +
-      "wardProto\":\n\033RedeemMiniEventRewardStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\025B\023EventMi" +
-      "niEventProto"
+      "tus\"4\n\025UpdateMiniEventStatus\022\013\n\007SUCCESS\020",
+      "\001\022\016\n\nFAIL_OTHER\020\002\"\230\002\n!RedeemMiniEventRew" +
+      "ardRequestProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
+      "l6.proto.MinimumUserProtoWithMaxResource" +
+      "s\022R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto" +
+      ".RedeemMiniEventRewardRequestProto.Rewar" +
+      "dTier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001" +
+      "(\003\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_T" +
+      "WO\020\002\022\016\n\nTIER_THREE\020\003\"\254\002\n\"RedeemMiniEvent" +
+      "RewardResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022j\n\006status\030",
+      "\002 \001(\0162N.com.lvl6.proto.RedeemMiniEventRe" +
+      "wardResponseProto.RedeemMiniEventRewardS" +
+      "tatus:\nFAIL_OTHER\022,\n\007rewards\030\003 \003(\0132\033.com" +
+      ".lvl6.proto.RewardProto\":\n\033RedeemMiniEve" +
+      "ntRewardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002B\025B\023EventMiniEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5201,7 +5010,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedUserMiniEvent", });
+        new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_fieldAccessorTable = new
