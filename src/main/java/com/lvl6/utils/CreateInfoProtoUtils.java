@@ -134,6 +134,7 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
@@ -1416,18 +1417,22 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static DefaultLanguagesProto createDefaultLanguagesProto(TranslateLanguages globalLanguage, 
-			List<PrivateChatPost> pcpList, Map<String, TranslationSettingsForUser> tsfuMap) {
+			List<PrivateChatPost> pcpList, Map<String, TranslationSettingsForUser> tsfuMap, 
+			List<TranslationSettingsForUser> tsfuList) {
 		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
-		dlpb.setGlobalDefaultLanguage(globalLanguage);
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 		
-		for(PrivateChatPost pcp : pcpList) {
-			String senderUserId = pcp.getPosterId();
-			TranslationSettingsForUser tsfu = tsfuMap.get(senderUserId);
-			PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
-			pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
-			pcdlpb.setPrivateChatPostUuid(pcp.getId());
-			pcdlpList.add(pcdlpb.build());
+		for(TranslationSettingsForUser tsfu : tsfuList) {
+			if(tsfu.getChatType().equals(ChatType.GLOBAL_CHAT)) {
+				dlpb.setGlobalDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
+			}
+			else if(tsfu.getChatType().equals(ChatType.PRIVATE_CHAT)) {
+				PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
+				pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
+				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
+				pcdlpb.setSenderUserId(tsfu.getSenderUserId());
+				pcdlpList.add(pcdlpb.build());
+			}	
 		}
 		
 		dlpb.addAllPrivateDefaultLanguage(pcdlpList);

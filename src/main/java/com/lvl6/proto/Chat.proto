@@ -58,6 +58,7 @@ enum TranslateLanguages {
 	GERMAN = 4;
 	SPANISH = 5;
 	RUSSIAN = 6;
+	NO_TRANSLATION = 7;
 }
 
 //-------------------------------------------------------------------------------------
@@ -79,8 +80,9 @@ message DefaultLanguagesProto {
 //-------------------------------------------------------------------------------------
 
 message PrivateChatDefaultLanguageProto {
-	optional string privateChatPostUuid = 1;
-	optional TranslateLanguages defaultLanguage = 2;
+	optional string recipientUserId = 1;
+	optional string senderUserId = 2;
+	optional TranslateLanguages defaultLanguage = 3;
 
 }
 

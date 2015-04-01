@@ -1556,6 +1556,8 @@ public class StartupController extends EventController {
 	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
 		List<PrivateChatPost> pcpList = privateChatPostRetrieveUtils.
 				getUserPrivateChatPost(userId);
+		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+				getUserTranslationSettingsForUser(userId);
 		Map<String, TranslationSettingsForUser> tsfuMap = translationSettingsForUserRetrieveUtil.
 				getSenderIdToUserTranslationSettingsForUser(userId);
 		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
@@ -1565,7 +1567,7 @@ public class StartupController extends EventController {
 		if(pcpList != null && !pcpList.isEmpty()) {
 			if(tsfuMap != null && !tsfuMap.isEmpty()) {
 				dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
-						TranslateLanguages.valueOf(tsfu.getLanguage()), pcpList, tsfuMap);
+						TranslateLanguages.valueOf(tsfu.getLanguage()), pcpList, tsfuMap, tsfuList);
 			}
 		}
 
