@@ -23,6 +23,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -327,6 +328,9 @@ public interface InsertUtil {
 			MonsterEnhanceHistory meh);
 
 	public abstract boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu);
+
+	public abstract boolean insertIntoUpdateMiniEventGoalForUser(
+			Collection<MiniEventGoalForUser> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
 			List<PrivateChatPost> listOfPrivateChatPosts);

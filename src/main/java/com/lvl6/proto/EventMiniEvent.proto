@@ -37,7 +37,6 @@ message UpdateMiniEventRequestProto {
 message UpdateMiniEventResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional UpdateMiniEventStatus status = 2;
-	optional UserMiniEventProto updatedUserMiniEvent = 3;
 	
 	enum UpdateMiniEventStatus {
 		SUCCESS = 1;
