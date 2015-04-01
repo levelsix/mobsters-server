@@ -237,7 +237,7 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
@@ -543,7 +543,7 @@ public class StartupController extends EventController {
 		//log.info("user after change user login via db. user=" + user);
 	}
 
-	//priority of user returned is 
+	//priority of user returned is
 	//user with specified fbId
 	//user with specified udid
 	//null
@@ -1335,9 +1335,9 @@ public class StartupController extends EventController {
 				attackerId, attackerElo, defenderId, defenderPu.getElo(),
 				defender.getCash(), defender.getOil());
 
-			userIdToCashStolen.put(defenderId, 
+			userIdToCashStolen.put(defenderId,
 				potentialResult.getUnsignedCashAttackerWins());
-			userIdToOilStolen.put(defenderId, 
+			userIdToOilStolen.put(defenderId,
 				potentialResult.getUnsignedOilAttackerWins());
 		}
 	}
@@ -1552,7 +1552,7 @@ public class StartupController extends EventController {
 			resBuilder.addAllBattleItem(biqfupList);
 		}
 	}
-	
+
 	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
 		List<PrivateChatPost> pcpList = privateChatPostRetrieveUtils.
 				getUserPrivateChatPost(userId);
@@ -1568,8 +1568,12 @@ public class StartupController extends EventController {
 						TranslateLanguages.valueOf(tsfu.getLanguage()), pcpList, tsfuMap);
 			}
 		}
-		
-		resBuilder.setUserDefaultLanguages(dlp);
+
+		if (null != dlp) {
+			resBuilder.setUserDefaultLanguages(dlp);
+		} else {
+			log.error("ERRRRRRRRROOOOOOOOOORRRR!!!!!!!!!!!! CAN THIS BE NULL BYRON???");
+		}
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
@@ -1614,7 +1618,7 @@ public class StartupController extends EventController {
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 		/*NOTE: DB CALL*/
-		//TODO: when retrieving clan info, and user's current teams, maybe query for 
+		//TODO: when retrieving clan info, and user's current teams, maybe query for
 		//these monsters as well
 		Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
 				.getSpecificUserMonsters(userMonsterIds);
@@ -1663,7 +1667,7 @@ public class StartupController extends EventController {
 	}
 
 	//  private void setAllBosses(Builder resBuilder, UserType type) {
-	//    Map<Integer, Monster> bossIdsToBosses = 
+	//    Map<Integer, Monster> bossIdsToBosses =
 	//        MonsterRetrieveUtils.getBossIdsToBosses();
 	//
 	//    for (Monster b : bossIdsToBosses.values()) {
