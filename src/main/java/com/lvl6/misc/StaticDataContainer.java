@@ -32,6 +32,7 @@ import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
+import com.lvl6.info.Reward;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
@@ -66,6 +67,7 @@ import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
+import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -112,6 +114,7 @@ import com.lvl6.retrieveutils.rarechange.PrerequisiteRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -188,6 +191,7 @@ public class StaticDataContainer {
 		setBoards(sdpb);
 		setResearch(sdpb);
 		setBattleItem(sdpb);
+		setRewards(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -654,6 +658,7 @@ public class StaticDataContainer {
 		Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils
 				.getItemIdsToItems();
 
+//		log.info("itemIdsToItems={}", itemIdsToItems);
 		if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
 			log.warn("no items");
 			return;
@@ -664,6 +669,7 @@ public class StaticDataContainer {
 					.createItemProtoFromItem(i);
 			sdpb.addItems(itemProto);
 		}
+//		log.info("itemProtos={}", sdpb.getItemsList());
 
 	}
 
@@ -855,6 +861,25 @@ public class StaticDataContainer {
 					.createBattleItemProtoFromBattleItem(bi);
 
 			sdpb.addBattleItem(bip);
+		}
+	}
+
+	private static void setRewards(Builder sdpb) {
+		Map<Integer, Reward> idsToReward = RewardRetrieveUtils
+				.getRewardIdsToRewards();
+
+		if (null == idsToReward || idsToReward.isEmpty()) {
+			log.warn("setReward() no Reward");
+			return;
+		}
+
+		for (Integer battleItemId : idsToReward.keySet()) {
+			Reward r = idsToReward.get(battleItemId);
+
+			RewardProto rp = CreateInfoProtoUtils
+					.createRewardProto(r);
+
+			sdpb.addReward(rp);
 		}
 	}
 

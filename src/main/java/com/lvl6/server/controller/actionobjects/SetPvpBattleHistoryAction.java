@@ -142,7 +142,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	}
 
 	private void setGotAttackedProtos(StartUpResource useMe) {
-		log.info("setting gotAttackedPvpProtos");
+		log.info("setting gotAttackedPvpProtos, attackerIds={}", attackerIds);
 		Map<String, User> idsToAttackers = useMe.getUserIdsToUsers(attackerIds);
 		//		log.info(String.format(
 		//			"idsToAttackers=%s", idsToAttackers));
@@ -272,7 +272,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//optional int64 battleEndTime = 9; //defined above
 
 		//for the attacker/defender
-		//need the prev and cur rank 
+		//need the prev and cur rank
 		//need the prev and cur league
 		//optional UserPvpLeagueProto attackerBefore = 10; //before the battle
 		//optional UserPvpLeagueProto attackerAfter = 11; //after the battle

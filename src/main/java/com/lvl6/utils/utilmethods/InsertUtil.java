@@ -22,6 +22,8 @@ import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.MiniEventForUser;
+import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -53,8 +55,8 @@ public interface InsertUtil {
 	//	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 	//			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
 
-	//	public abstract int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
-	//			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
+	//	public abstract int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId,
+	//			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage,
 	//			Timestamp startTimeOfEnhancement);
 
 	public abstract int insertUserQuest(String userId, int questId);
@@ -324,6 +326,11 @@ public interface InsertUtil {
 
 	public abstract boolean insertMonsterEnhanceHistory(
 			MonsterEnhanceHistory meh);
+
+	public abstract boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu);
+
+	public abstract boolean insertIntoUpdateMiniEventGoalForUser(
+			Collection<MiniEventGoalForUser> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
 			List<PrivateChatPost> listOfPrivateChatPosts);

@@ -90,6 +90,11 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -103,6 +108,7 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
@@ -239,7 +245,7 @@ public class MiscMethods {
 	}
 
 	//purpose of this method is to discover if the booster items that contain
-	//monsters as rewards, if the monster ids are valid 
+	//monsters as rewards, if the monster ids are valid
 	public static boolean checkIfMonstersExist(
 			List<BoosterItem> itemsUserReceives) {
 		boolean monstersExist = true;
@@ -318,7 +324,7 @@ public class MiscMethods {
 		return sb.toString();
 	}
 
-	//TODO: move to CreateInfoProtoUtils	
+	//TODO: move to CreateInfoProtoUtils
 	public static List<FullUserMonsterProto> createFullUserMonsterProtos(
 			List<String> userMonsterIds, List<MonsterForUser> mfuList) {
 		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
@@ -646,7 +652,7 @@ public class MiscMethods {
 		//        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
 		//        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
 
-		//SET TOURNAMENT CONSTANTS HERE 
+		//SET TOURNAMENT CONSTANTS HERE
 
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
@@ -848,7 +854,7 @@ public class MiscMethods {
 		//        .setNumHoursToShowAfterEventEnd(ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END)
 		//        .build();
 		//    cb = cb.setLeaderboardConstants(lec);
-		//    
+		//
 		//    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
 		//        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
 		//        .build();
@@ -927,7 +933,7 @@ public class MiscMethods {
 	//		}
 	//
 	//		//get all the rewards for all the current leaderboard events
-	//		Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
+	//		Map<Integer, List<TournamentEventReward>> eventIdsToRewards =
 	//			TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
 	//
 	//		//create the protos
@@ -952,7 +958,7 @@ public class MiscMethods {
 		BoosterItemRetrieveUtils.reload();
 		BoosterPackRetrieveUtils.reload();
 		//    CityBossRetrieveUtils.reload();
-		//		CityElementsRetrieveUtils.reload(); 
+		//		CityElementsRetrieveUtils.reload();
 		//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
@@ -969,6 +975,11 @@ public class MiscMethods {
 		ItemRetrieveUtils.reload();
 		//		LockBoxEventRetrieveUtils.reload();
 		//    MonsterForPvpRetrieveUtils.staticReload();
+		MiniEventRetrieveUtils.reload();
+		MiniEventForPlayerLvlRetrieveUtils.reload();
+		MiniEventGoalRetrieveUtils.reload();
+		MiniEventLeaderboardRewardRetrieveUtils.reload();
+		MiniEventTierRewardRetrieveUtils.reload();
 		MiniJobRetrieveUtils.reload();
 		MonsterBattleDialogueRetrieveUtils.reload();
 		MonsterLevelInfoRetrieveUtils.reload();
@@ -982,6 +993,7 @@ public class MiscMethods {
 		QuestRetrieveUtils.reload();
 		ResearchRetrieveUtils.reload();
 		ResearchPropertyRetrieveUtils.reload();
+		RewardRetrieveUtils.reload();
 		SkillRetrieveUtils.reload();
 		SkillPropertyRetrieveUtils.reload();
 		SkillSideEffectRetrieveUtils.reload();
@@ -1015,7 +1027,7 @@ public class MiscMethods {
 	//  //returns the clan towers that changed
 	//  public static void sendClanTowerWarNotEnoughMembersNotification(
 	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
-	//      List<Integer> towersOwned, Clan aClan, TaskExecutor executor, 
+	//      List<Integer> towersOwned, Clan aClan, TaskExecutor executor,
 	//      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
 	//
 	//    if(null != clanTowerIdsToClanTowers && !clanTowerIdsToClanTowers.isEmpty()) {
@@ -1023,7 +1035,7 @@ public class MiscMethods {
 	//      List<Notification> notificationsToSend = new ArrayList<Notification>();
 	//      //make notifications for the towers the clan was attacking
 	//      boolean attackerWon = false;
-	//      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers, 
+	//      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers,
 	//          notificationsToSend, attackerWon, onlinePlayers, server);
 	//
 	//      //make notifications for the towers the clan owned
@@ -1040,7 +1052,7 @@ public class MiscMethods {
 	//    return;
 	//  }
 
-	//  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
+	//  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds,
 	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
 	//      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
 	//
@@ -1100,8 +1112,8 @@ public class MiscMethods {
 		server.writeAPNSNotificationOrEvent(aNotification);
 	}
 
-	//Simple (inefficient) word by word censor. If a word appears in 
-	//a blacklist then that word is replaced by a number of asterisks 
+	//Simple (inefficient) word by word censor. If a word appears in
+	//a blacklist then that word is replaced by a number of asterisks
 	//equal to the word's length, e.g. fuck => ****
 	//Not sure whether to use String or StringBuilder, so going with latter.
 	public static String censorUserInput(String userContent) {
@@ -1350,7 +1362,7 @@ public class MiscMethods {
 
 	//  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
 	//    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
-	//    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
+	//    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL
 	//        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
 	//
 	//    return currentEnhancementLevel >= maxEnhancementLevel;
@@ -1380,8 +1392,8 @@ public class MiscMethods {
 	//  private static List<Integer> getRaritiesCollected(
 	//      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
 	//    List<Integer> raritiesCollected = new ArrayList<Integer>();
-	//    
-	//    Map<Integer, Equipment> equipIdsToEquips = 
+	//
+	//    Map<Integer, Equipment> equipIdsToEquips =
 	//        EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
 	//    int rarityOne = 0;
 	//    int rarityTwo = 0;
@@ -1414,7 +1426,7 @@ public class MiscMethods {
 	//    raritiesCollected.add(rarityThree);
 	//    return raritiesCollected;
 	//  }
-	//  
+	//
 	//  private static boolean isRarityOne(Rarity equipRarity) {
 	//    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
 	//      return true;
@@ -1422,7 +1434,7 @@ public class MiscMethods {
 	//      return false;
 	//    }
 	//  }
-	//  
+	//
 	//  private static boolean isRarityTwo(Rarity equipRarity) {
 	//    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
 	//      return true;
@@ -1430,7 +1442,7 @@ public class MiscMethods {
 	//      return false;
 	//    }
 	//  }
-	//  
+	//
 	//  private static boolean isRarityThree(Rarity equipRarity) {
 	//    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
 	//      return true;
@@ -1438,7 +1450,7 @@ public class MiscMethods {
 	//      return false;
 	//    }
 	//  }
-	//  
+	//
 	//csi: comma separated ints
 	public static List<Integer> unCsvStringIntoIntList(String csi) {
 		List<Integer> ints = new ArrayList<Integer>();
@@ -1483,8 +1495,8 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//populates ids, quantitiesInStock; determines the remaining booster items the user can get
-	//  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
+	//  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems,
+	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
 	//    //max number randon number can go
 	//    int sumQuantitiesInStock = 0;
@@ -1524,7 +1536,7 @@ public class MiscMethods {
 
 	//  /*cut out from purchase booster pack controller*/
 	//  //no arguments are modified
-	//  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+	//  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//    //return value
@@ -1533,23 +1545,23 @@ public class MiscMethods {
 	//      return returnValue;
 	//    } else if (3 != amountUserWantsToPurchase) {
 	//      log.error("unexpected error: buying " + amountUserWantsToPurchase + " more equips instead of 3.");
-	//      return returnValue; 
+	//      return returnValue;
 	//    } else if (0 != (sumOfQuantitiesInStock % 3)) {
 	//      log.error("unexpected error: num remaining equips, " + sumOfQuantitiesInStock
 	//          + ", for this chest is not a multiple of 3");
 	//      return returnValue;
 	//    }
-	//    
+	//
 	//    Map<Integer, Equipment> allEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
 	//    Set<EquipType> receivedEquipTypes = new HashSet<EquipType>();
-	//    
+	//
 	//    //loop through equips user can get; select one weapon, one armor, one amulet
 	//    for (int boosterItemId : boosterItemIdsUserCanGet) {
 	//      BoosterItem bi = allBoosterItemIdsToBoosterItems.get(boosterItemId);
 	//      int equipId = bi.getEquipId();
 	//      Equipment equip = allEquips.get(equipId);
 	//      EquipType eType = equip.getType();
-	//      
+	//
 	//      if (receivedEquipTypes.contains(eType)) {
 	//        //user already got this equip type
 	//        continue;
@@ -1559,10 +1571,10 @@ public class MiscMethods {
 	//        receivedEquipTypes.add(eType);
 	//      }
 	//    }
-	//    
+	//
 	//    if (3 != returnValue.size()) {
 	//      log.error("unexpected error: user did not receive one type of each equip."
-	//          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue) 
+	//          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue)
 	//          + ". Chest either intialized improperly or code assigns equips incorrectly.");
 	//      return new ArrayList<BoosterItem>();
 	//    }
@@ -1571,7 +1583,7 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//no arguments are modified
-	//	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+	//	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//		//return value
@@ -1628,20 +1640,20 @@ public class MiscMethods {
 	//    List<Integer> equipIds = new ArrayList<Integer>();
 	//    List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
 	//    List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
-	//    
+	//
 	//    for(BoosterItem bi : itemsUserReceives) {
 	//      int equipId = bi.getEquipId();
 	//      equipIds.add(equipId);
 	//    }
-	//    
+	//
 	//    return InsertUtils.get().insertUserEquips(userId, equipIds, levels,
 	//        enhancement, now, reason);
 	//  }
 	/*cut out from purchase booster pack controller*/
-	//  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
-	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
+	//  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives,
+	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected,
 	//      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
-	//    
+	//
 	//    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
 	//    int numCollectedBeforeReset = 0;
 	//
@@ -1652,9 +1664,9 @@ public class MiscMethods {
 	//      if (!beforeReset) {
 	//        BoosterItem received = itemsUserReceives.get(i);
 	//        int boosterItemId = received.getId();
-	//        
+	//
 	//        //default quantity user gets if user has no quantity of specific boosterItem
-	//        int newQuantity = 1; 
+	//        int newQuantity = 1;
 	//        if(newBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
 	//          newQuantity = newBoosterItemIdsToNumCollected.get(boosterItemId) + 1;
 	//        }
@@ -1664,7 +1676,7 @@ public class MiscMethods {
 	//        numCollectedBeforeReset++;
 	//      }
 	//    }
-	//    
+	//
 	//    //loop through newBoosterItemIdsToNumCollected and make sure the quantities
 	//    //collected is itemsUserReceives.size() amount more than boosterItemIdsToNumCollected
 	//    int changeInCollectedQuantity = 0;
@@ -1686,7 +1698,7 @@ public class MiscMethods {
 	//    }
 	//
 	//    recordBoosterItemsThatReset(changedBoosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, resetOccurred);
-	//    
+	//
 	//    return UpdateUtils.get().updateUserBoosterItemsForOneUser(userId, changedBoosterItemIdsToNumCollected);
 	//  }
 	/*cut out from purchase booster pack controller*/
@@ -1869,10 +1881,10 @@ public class MiscMethods {
 			sdpb.addAvailableQuests(fqp);
 		}
 	}
-	//	
+	//
 	//	private static void setStaticData(StaticDataProto.Builder sdpb) {
 	//		StaticDataProto staticData = StaticDataContainer.getStaticData();
-	//		
+	//
 	//		if (null == staticData) {
 	//			log.error("NO STATIC DATA!!!");
 	//			return;

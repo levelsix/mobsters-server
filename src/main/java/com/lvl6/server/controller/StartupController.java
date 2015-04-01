@@ -80,6 +80,8 @@ import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto;
@@ -91,6 +93,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
+import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -129,6 +132,8 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
@@ -158,6 +163,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
+import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
@@ -170,6 +176,7 @@ import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -341,7 +348,16 @@ public class StartupController extends EventController {
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 
 	@Autowired
+	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
+
+	@Autowired
+	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
+
+	@Autowired
 	protected InsertUtil insertUtil;
+
+	@Autowired
+	protected DeleteUtil deleteUtil;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -656,6 +672,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setDefaultLanguagesForUser(resBuilder, playerId);
 			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
+			setMiniEventForUser(resBuilder, user, playerId, nowDate);
+			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
 
 			//db request for user monsters
@@ -1577,6 +1595,37 @@ public class StartupController extends EventController {
 		} 
 	}
 
+	private void setMiniEventForUser(
+			Builder resBuilder, User u, String userId, Date now)
+	{
+		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
+				RetrieveMiniEventResponseProto.newBuilder();
+
+		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+				userId, now, userRetrieveUtils, miniEventForUserRetrieveUtil,
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+
+		rmea.execute(rmeaResBuilder);
+//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+				null != rmea.getCurActiveMiniEvent())
+		{
+			//get UserMiniEvent info and create the proto to set into resBuilder
+			//TODO: Consider protofying MiniEvent stuff
+			UserMiniEventProto umep = CreateInfoProtoUtils
+					.createUserMiniEventProto(
+							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getMegfus(),
+							rmea.getLvlEntered(), rmea.getRewards(),
+							rmea.getGoals(), rmea.getLeaderboardRewards());
+			resBuilder.setUserMiniEvent(umep);
+		}
+
+	}
+
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
 			Timestamp now) {
 		Date nowDate = new Date(now.getTime());
@@ -2393,6 +2442,24 @@ public class StartupController extends EventController {
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
+	public BattleItemQueueForUserRetrieveUtil getBattleItemQueueForUserRetrieveUtil() {
+		return battleItemQueueForUserRetrieveUtil;
+	}
+
+	public void setBattleItemQueueForUserRetrieveUtil(
+			BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil) {
+		this.battleItemQueueForUserRetrieveUtil = battleItemQueueForUserRetrieveUtil;
+	}
+
+	public BattleItemForUserRetrieveUtil getBattleItemForUserRetrieveUtil() {
+		return battleItemForUserRetrieveUtil;
+	}
+
+	public void setBattleItemForUserRetrieveUtil(
+			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil) {
+		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
+	}
+
 	public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
 		return questForUserRetrieveUtils;
 	}
@@ -2626,12 +2693,38 @@ public class StartupController extends EventController {
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
 	}
 
+	public MiniEventForUserRetrieveUtil getMiniEventForUserRetrieveUtil() {
+		return miniEventForUserRetrieveUtil;
+	}
+
+	public void setMiniEventForUserRetrieveUtil(
+			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil) {
+		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
+	}
+
+	public MiniEventGoalForUserRetrieveUtil getMiniEventGoalForUserRetrieveUtil() {
+		return miniEventGoalForUserRetrieveUtil;
+	}
+
+	public void setMiniEventGoalForUserRetrieveUtil(
+			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil) {
+		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
 
 	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
+	}
+
+	public DeleteUtil getDeleteUtil() {
+		return deleteUtil;
+	}
+
+	public void setDeleteUtil(DeleteUtil deleteUtil) {
+		this.deleteUtil = deleteUtil;
 	}
 
 }

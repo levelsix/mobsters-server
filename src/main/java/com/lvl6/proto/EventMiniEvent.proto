@@ -1,0 +1,78 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "MiniEvent.proto";
+import "Reward.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventMiniEventProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//------------------------------------------------------------------------------------------
+//updates the user's current MiniEvent, or creates one if nonexistent
+message RetrieveMiniEventRequestProto {
+	optional MinimumUserProto sender = 1;
+}
+
+message RetrieveMiniEventResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UserMiniEventProto userMiniEvent = 2;
+	
+	optional RetrieveMiniEventStatus status = 3;
+	
+	enum RetrieveMiniEventStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+message UpdateMiniEventRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserMiniEventGoalProto updatedGoals = 2;
+}
+
+message UpdateMiniEventResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UpdateMiniEventStatus status = 2;
+	
+	enum UpdateMiniEventStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message RedeemMiniEventRewardRequestProto {
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	
+	//the tier that is being redeemed
+	optional RewardTier tierRedeemed = 2;
+	//MiniEventForPlayerLevelProto.mefplId
+	optional int32 mefplId = 3;
+	
+	optional int64 clientTime = 4;
+	
+	enum RewardTier {
+		TIER_ONE = 1;
+		TIER_TWO = 2;
+		TIER_THREE = 3;
+	}
+}
+																						//DONE
+message RedeemMiniEventRewardResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
+     repeated RewardProto rewards = 3;
+     
+
+     enum RedeemMiniEventRewardStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
