@@ -172,7 +172,7 @@ public class SendGroupChatController extends EventController {
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
-				 * 
+				 *
 				 * @Override public void run() {
 				 * sendChatMessageToConnectedPlayers(chatProto, event.getTag(),
 				 * timeOfPost.getTime(), scope == GroupChatScope.CLAN,
@@ -259,7 +259,7 @@ public class SendGroupChatController extends EventController {
 			//update clan cache
 			Clan c = clanRetrieveUtil.getClanWithId(clanId);
 			int clanSize = ClanSearch.penalizedClanSize;
-			Date lastChatTime = null;
+			Date lastChatTime = ControllerConstants.INCEPTION_DATE;
 
 			if (!c.isRequestToJoinRequired()) {
 				//people can join clan freely
