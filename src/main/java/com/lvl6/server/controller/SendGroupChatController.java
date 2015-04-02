@@ -175,14 +175,21 @@ public class SendGroupChatController extends EventController {
 				chatProto.setScope(scope);
 				
 				log.info(censoredChatMessage);
-				chatProto.setMessage(CreateInfoProtoUtils
+				
+				GroupChatMessageProto gcmp = CreateInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap));	
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap);
+				log.info("gcmp" + gcmp);
+				
+				chatProto.setMessage(gcmp);	
 
+				
+				
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
 						censoredChatMessage);
+				
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
