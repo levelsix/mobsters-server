@@ -38,7 +38,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public TranslationSettingsForUser getUserTranslationSettingsForUserGlobal(String userId) {
+	public List<TranslationSettingsForUser> getUserTranslationSettingsForUserGlobal(String userId) {
 		log.debug(String.format("retrieving user translation settings for global userId %s",
 				userId));
 
@@ -57,7 +57,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
 		}
-		return userTranslationSettingss.get(0);
+		return userTranslationSettingss;
 	}
 	
 	public List<TranslationSettingsForUser> getUserTranslationSettingsForUser(String recipientUserId) {

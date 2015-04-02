@@ -27,6 +27,7 @@ import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Transl
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
@@ -56,6 +57,9 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
+	
+	@Autowired
+	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -85,10 +89,9 @@ public class TranslateSelectMessagesController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String recipientUserId = senderProto.getUserUuid();
-		String senderUserId = null;
-		if(reqProto.hasOtherUserUuid()) {
-			senderUserId = reqProto.getOtherUserUuid();
-		}
+		//this guy sent the msgs 
+		String senderUserId = reqProto.getOtherUserUuid();
+		
 		ChatType ct = reqProto.getChatType();
 		
 		TranslateLanguages language = reqProto.getLanguage();
@@ -107,7 +110,7 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 			recipientUserUuid = UUID.fromString(recipientUserId);
 			
-			if(senderUserId != null) {
+			if(senderUserId != null && !senderUserId.isEmpty()) {
 				senderUserUuid = UUID.fromString(senderUserId);
 			}
 			
@@ -134,7 +137,8 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, ct, insertUtil, updateUtil);
+					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil, 
+					insertUtil, updateUtil);
 
 			tsma.execute(resBuilder);
 
