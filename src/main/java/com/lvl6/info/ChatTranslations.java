@@ -5,6 +5,10 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 
 public class ChatTranslations {
 	
+	public ChatTranslations() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private String id;
 	private ChatType chatType;
 	private String chatId;
