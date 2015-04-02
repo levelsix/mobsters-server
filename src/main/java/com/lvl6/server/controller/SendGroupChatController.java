@@ -176,8 +176,8 @@ public class SendGroupChatController extends EventController {
 				
 				log.info(censoredChatMessage);
 				chatProto.setMessage(CreateInfoProtoUtils
-						.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
-								censoredChatMessage, user.isAdmin(), null, translateMap));	
+						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap));	
 
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
