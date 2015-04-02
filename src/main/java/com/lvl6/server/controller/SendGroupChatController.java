@@ -182,7 +182,7 @@ public class SendGroupChatController extends EventController {
 
 				log.info("chatproto: {}", chatProto);
 				ReceivedGroupChatResponseProto rgcr = chatProto.build();
-				log.info("chatproto: {}", rgcr);
+				log.info("rgcrp :  {}", rgcr);
 				
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
