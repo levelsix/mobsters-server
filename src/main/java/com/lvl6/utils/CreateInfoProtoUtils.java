@@ -1406,6 +1406,7 @@ public class CreateInfoProtoUtils {
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap) {
+
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
 
@@ -1426,12 +1427,11 @@ public class CreateInfoProtoUtils {
 				gcmpb.addTranslatedContent(ttpb.build());
 			}
 		}
-
-		gcmpb.setIsAdmin(isAdmin);
-
+		
 		if (chatId != null) {
 			gcmpb.setChatUuid(chatId);
 		}
+		
 		return gcmpb.build();
 	}
 	

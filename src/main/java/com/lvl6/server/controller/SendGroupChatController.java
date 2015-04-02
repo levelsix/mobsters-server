@@ -25,11 +25,9 @@ import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendGroupChatResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
-import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.GroupChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
@@ -51,7 +49,6 @@ import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -168,21 +165,30 @@ public class SendGroupChatController extends EventController {
 				
 				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, censoredChatMessage);				
 					
-				chatProto.setMessage(CreateInfoProtoUtils
-					.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
-							censoredChatMessage, user.isAdmin(), null, translateMap));	
-
-
 				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
+				
+				log.info(censoredChatMessage);
+				
+				GroupChatMessageProto gcmp = CreateInfoProtoUtils
+						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap);
+				log.info("gcmp" + gcmp);
+				
+				chatProto.setMessage(gcmp);	
 
+				log.info("chatproto: {}", chatProto);
+				ReceivedGroupChatResponseProto rgcr = chatProto.build();
+				log.info("rgcrp :  {}", rgcr);
+				
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage);
+						censoredChatMessage, rgcr);
+				
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
@@ -211,10 +217,10 @@ public class SendGroupChatController extends EventController {
 	protected void sendChatMessage(String senderId,
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
 			boolean isForClan, String clanId, boolean isAdmin, long time,
-			int level, String censoredChatMessage) {
+			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
-		ce.setReceivedGroupChatResponseProto(chatProto.build());
+		ce.setReceivedGroupChatResponseProto(rgcr);
 		if (isForClan) {
 			log.info("Sending event to clan " + clanId);
 			eventWriter.handleClanEvent(ce, clanId);
