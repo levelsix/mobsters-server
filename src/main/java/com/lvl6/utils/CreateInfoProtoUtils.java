@@ -1393,6 +1393,7 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
+		log.info("just set content");
 
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
@@ -1407,12 +1408,12 @@ public class CreateInfoProtoUtils {
 				gcmpb.addTranslatedContent(ttpb.build());
 			}
 		}
-
-		gcmpb.setIsAdmin(isAdmin);
-
+		
 		if (chatId != null) {
 			gcmpb.setChatUuid(chatId);
 		}
+		
+		log.info("about to build");
 		return gcmpb.build();
 	}
 	
