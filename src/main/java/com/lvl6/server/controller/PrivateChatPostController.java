@@ -171,9 +171,16 @@ public class PrivateChatPostController extends EventController {
 					if(settingForRecipient == null) {
 						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
 								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT);
-						insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
-								ChatType.PRIVATE_CHAT.toString());
-						recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
+						if(globalChatSettingsForRecipient != null) {
+							insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
+									ChatType.PRIVATE_CHAT.toString());
+							recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
+						}
+						else {
+							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
+									ChatType.PRIVATE_CHAT.toString());
+							recipientLanguageString = TranslateLanguages.ENGLISH.toString();
+						}
 					}
 					else {
 						recipientLanguageString = settingForRecipient.getLanguage();
