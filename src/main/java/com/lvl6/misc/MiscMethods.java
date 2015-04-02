@@ -1960,36 +1960,35 @@ public class MiscMethods {
 	} 
 
 	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
+		TranslateLanguages tl = null;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
-				TranslateLanguages tl = TranslateLanguages.ARABIC;
-				return tl;
+				tl = TranslateLanguages.ARABIC;
 			}
 			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("ENGLISH")) {
-				TranslateLanguages tl = TranslateLanguages.ENGLISH;
-				return tl;		
+				tl = TranslateLanguages.ENGLISH;
 			}
 			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("FRENCH")) {
-				TranslateLanguages tl = TranslateLanguages.FRENCH;
-				return tl;	
+				tl = TranslateLanguages.FRENCH;
 			}
 			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("GERMAN")) {
-				TranslateLanguages tl = TranslateLanguages.GERMAN;
-				return tl;	
+				tl = TranslateLanguages.GERMAN;
 			}
 			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("RUSSIAN")) {
-				TranslateLanguages tl = TranslateLanguages.RUSSIAN;
-				return tl;	
+				tl = TranslateLanguages.RUSSIAN;
+			}
+			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("SPANISH")){
+				tl = TranslateLanguages.SPANISH;
 			}
 			else {
-				TranslateLanguages tl = TranslateLanguages.SPANISH;
-				return tl;	
+				tl = TranslateLanguages.NO_TRANSLATION;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return tl;
+
 	}
 
 	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {

@@ -66,6 +66,10 @@ public class ChatTranslationsRetrieveUtils {
 	}
 	
 	public static void addChatTranslationToMap(ChatTranslations ct) {
+		if (chatTranslationsIdsToChatTranslationss == null) {
+			setStaticChatTranslationsIdsToChatTranslationss();
+		}
+		
 		chatTranslationsIdsToChatTranslationss.put(ct.getId(), ct);
 		if(chatIdsToChatTranslations.containsKey(ct.getChatId())) {
 			List<ChatTranslations> list = chatIdsToChatTranslations.get(ct.getChatId());

@@ -21,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -50,9 +51,9 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
-import com.memetix.mst.language.Language;
 
 public class InsertUtils implements InsertUtil {
 
@@ -856,6 +857,15 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatId);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, language.toString());
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, message);
+		
+		//adding to the cached table
+		ChatTranslations ct = new ChatTranslations();
+		ct.setId(id);
+		ct.setChatId(chatId);
+		ct.setChatType(chatType);
+		ct.setTranslateLanguage(language);
+		ct.setText(message);
+		ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
 		
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
@@ -2640,11 +2650,23 @@ public class InsertUtils implements InsertUtil {
 
 		try {
 			for(PrivateChatPost pcp : listOfPrivateChatPosts) {
-				idList.add(randomUUID());
+				String id = randomUUID();
+				String chatId = pcp.getId();
+				idList.add(id);
 				chatTypeList.add(ChatType.PRIVATE_CHAT.toString());
-				chatIdList.add(pcp.getId());
+				chatIdList.add(chatId);
 				languageList.add(pcp.getTranslatedText().getLanguage());
 				textList.add(pcp.getTranslatedText().getText());
+
+				//adding to the cached table
+				ChatTranslations ct = new ChatTranslations();
+				ct.setId(id);
+				ct.setChatId(chatId);
+				ct.setChatType(ChatType.PRIVATE_CHAT);
+				ct.setTranslateLanguage(TranslateLanguages.
+						valueOf(pcp.getTranslatedText().getLanguage()));
+				ct.setText(pcp.getTranslatedText().getText());
+				ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
