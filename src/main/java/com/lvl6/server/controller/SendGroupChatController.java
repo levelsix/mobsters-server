@@ -170,19 +170,12 @@ public class SendGroupChatController extends EventController {
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
-				
-				log.info(censoredChatMessage);
-				
+								
 				GroupChatMessageProto gcmp = CreateInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap);
-				log.info("gcmp" + gcmp);
-				
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap);				
 				chatProto.setMessage(gcmp);	
-
-				log.info("chatproto: {}", chatProto);
 				ReceivedGroupChatResponseProto rgcr = chatProto.build();
-				log.info("rgcrp :  {}", rgcr);
 				
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
