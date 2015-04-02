@@ -168,16 +168,15 @@ public class SendGroupChatController extends EventController {
 				
 				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, censoredChatMessage);				
 					
-				chatProto.setMessage(CreateInfoProtoUtils
-					.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
-							censoredChatMessage, user.isAdmin(), null, translateMap));	
-
-
 				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
+				
+				chatProto.setMessage(CreateInfoProtoUtils
+						.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
+								censoredChatMessage, user.isAdmin(), null, translateMap));	
 
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
