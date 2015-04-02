@@ -92,8 +92,13 @@ public class TranslateSelectMessagesController extends EventController {
 		
 		TranslateLanguages language = reqProto.getLanguage();
 		List<PrivateChatPostProto> listOfPrivateChatProtos = reqProto.getMessagesToBeTranslatedList();
-		List<PrivateChatPost> listOfPrivateChatPosts = convertFromProtos(listOfPrivateChatProtos);
+		List<PrivateChatPost> listOfPrivateChatPosts = new ArrayList<PrivateChatPost>();
 		
+		if(listOfPrivateChatProtos != null && !listOfPrivateChatProtos.isEmpty()) {
+			listOfPrivateChatPosts = convertFromProtos(listOfPrivateChatProtos);
+		}
+		
+
 		//values to send to client
 		TranslateSelectMessagesResponseProto.Builder resBuilder = TranslateSelectMessagesResponseProto
 				.newBuilder();
