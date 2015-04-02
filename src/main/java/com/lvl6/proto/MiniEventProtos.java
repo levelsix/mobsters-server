@@ -141,6 +141,20 @@ public final class MiniEventProtos {
      */
     com.google.protobuf.ByteString
         getImgBytes();
+
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    boolean hasIcon();
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    java.lang.String getIcon();
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getIconBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniEventProto}
@@ -254,6 +268,12 @@ public final class MiniEventProtos {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
               img_ = bs;
+              break;
+            }
+            case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              icon_ = bs;
               break;
             }
           }
@@ -564,6 +584,48 @@ public final class MiniEventProtos {
       }
     }
 
+    public static final int ICON_FIELD_NUMBER = 10;
+    private java.lang.Object icon_;
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    public boolean hasIcon() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    public java.lang.String getIcon() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icon_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string icon = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIconBytes() {
+      java.lang.Object ref = icon_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        icon_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       miniEventId_ = 0;
       miniEventStartTime_ = 0L;
@@ -574,6 +636,7 @@ public final class MiniEventProtos {
       name_ = "";
       desc_ = "";
       img_ = "";
+      icon_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -614,6 +677,9 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(9, getImgBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(10, getIconBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -659,6 +725,10 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getImgBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getIconBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -810,6 +880,8 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000080);
         img_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        icon_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -888,6 +960,10 @@ public final class MiniEventProtos {
           to_bitField0_ |= 0x00000040;
         }
         result.img_ = img_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.icon_ = icon_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -981,6 +1057,11 @@ public final class MiniEventProtos {
         if (other.hasImg()) {
           bitField0_ |= 0x00000100;
           img_ = other.img_;
+          onChanged();
+        }
+        if (other.hasIcon()) {
+          bitField0_ |= 0x00000200;
+          icon_ = other.icon_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -1926,6 +2007,82 @@ public final class MiniEventProtos {
   }
   bitField0_ |= 0x00000100;
         img_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object icon_ = "";
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public boolean hasIcon() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public java.lang.String getIcon() {
+        java.lang.Object ref = icon_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icon_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIconBytes() {
+        java.lang.Object ref = icon_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          icon_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public Builder setIcon(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        icon_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public Builder clearIcon() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        icon_ = getDefaultInstance().getIcon();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public Builder setIconBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        icon_ = value;
         onChanged();
         return this;
       }
@@ -7672,7 +7829,7 @@ public final class MiniEventProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017MiniEvent.proto\022\016com.lvl6.proto\"\306\002\n\016Mi" +
+      "\n\017MiniEvent.proto\022\016com.lvl6.proto\"\324\002\n\016Mi" +
       "niEventProto\022\023\n\013miniEventId\030\001 \001(\005\022\032\n\022min" +
       "iEventStartTime\030\002 \001(\003\022\030\n\020miniEventEndTim" +
       "e\030\003 \001(\003\022@\n\nlvlEntered\030\004 \001(\0132,.com.lvl6.p" +
@@ -7681,36 +7838,37 @@ public final class MiniEventProtos {
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
       "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\"\351\002\n\022MiniEventGoalProto\022\027\n\017miniEventGo",
-      "alId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022O\n\010goalT" +
-      "ype\030\003 \001(\01624.com.lvl6.proto.MiniEventGoal" +
-      "Proto.MiniEventGoalType:\007NO_GOAL\022\017\n\007goal" +
-      "Amt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(\t\022\024\n\014pointsGai" +
-      "ned\030\006 \001(\005\"\232\001\n\021MiniEventGoalType\022\013\n\007NO_GO" +
-      "AL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHANCE_TOON_XP\020\003\022\037" +
-      "\n\033USE_CASH_UPGRADING_BUILDING\020\004\022\036\n\032USE_O" +
-      "IL_UPGRADING_BUILDING\020\005\022\025\n\021CAPTURE_SCIEN" +
-      "TIST\020\006\"\362\001\n\034MiniEventForPlayerLevelProto\022" +
-      "\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n",
-      "\014playerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(" +
-      "\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPt" +
-      "s\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewa" +
-      "rds\030\010 \003(\0132(.com.lvl6.proto.MiniEventTier" +
-      "RewardProto\"^\n\030MiniEventTierRewardProto\022" +
-      "\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewa" +
-      "rdId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEvent" +
-      "LeaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023" +
-      "\n\013miniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n" +
-      "\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEve",
-      "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
-      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeem" +
-      "ed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tie" +
-      "rThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132" +
-      "\036.com.lvl6.proto.MiniEventProto\0225\n\005goals" +
-      "\030\010 \003(\0132&.com.lvl6.proto.UserMiniEventGoa" +
-      "lProto\"U\n\026UserMiniEventGoalProto\022\020\n\010user" +
-      "Uuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010p" +
-      "rogress\030\003 \001(\005B\021B\017MiniEventProtos"
+      "(\t\022\014\n\004icon\030\n \001(\t\"\351\002\n\022MiniEventGoalProto\022",
+      "\027\n\017miniEventGoalId\030\001 \001(\005\022\023\n\013miniEventId\030" +
+      "\002 \001(\005\022O\n\010goalType\030\003 \001(\01624.com.lvl6.proto" +
+      ".MiniEventGoalProto.MiniEventGoalType:\007N" +
+      "O_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(" +
+      "\t\022\024\n\014pointsGained\030\006 \001(\005\"\232\001\n\021MiniEventGoa" +
+      "lType\022\013\n\007NO_GOAL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHAN" +
+      "CE_TOON_XP\020\003\022\037\n\033USE_CASH_UPGRADING_BUILD" +
+      "ING\020\004\022\036\n\032USE_OIL_UPGRADING_BUILDING\020\005\022\025\n" +
+      "\021CAPTURE_SCIENTIST\020\006\"\362\001\n\034MiniEventForPla" +
+      "yerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEv",
+      "entId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pla" +
+      "yerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025" +
+      "\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts" +
+      "\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.proto" +
+      ".MiniEventTierRewardProto\"^\n\030MiniEventTi" +
+      "erRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId" +
+      "\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(" +
+      "\005\"s\n\037MiniEventLeaderboardRewardProto\022\016\n\006" +
+      "melrId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\020\n\010rew" +
+      "ardId\030\003 \001(\005\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\203",
+      "\002\n\022UserMiniEventProto\022\023\n\013miniEventId\030\001 \001" +
+      "(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n" +
+      "\017tierOneRedeemed\030\004 \001(\010\022\027\n\017tierTwoRedeeme" +
+      "d\030\005 \001(\010\022\031\n\021tierThreeRedeemed\030\006 \001(\010\0221\n\tmi" +
+      "niEvent\030\007 \001(\0132\036.com.lvl6.proto.MiniEvent" +
+      "Proto\0225\n\005goals\030\010 \003(\0132&.com.lvl6.proto.Us" +
+      "erMiniEventGoalProto\"U\n\026UserMiniEventGoa" +
+      "lProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017miniEventGoa" +
+      "lId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021B\017MiniEvent" +
+      "Protos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7729,7 +7887,7 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_MiniEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", "Name", "Desc", "Img", });
+        new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", "Name", "Desc", "Img", "Icon", });
     internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new

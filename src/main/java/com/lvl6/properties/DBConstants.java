@@ -982,6 +982,7 @@ public class DBConstants {
 	public static final String MINI_EVENT__NAME = "name";
 	public static final String MINI_EVENT__DESCRIPTION = "description";
 	public static final String MINI_EVENT__IMG = "img";
+	public static final String MINI_EVENT__ICON = "icon";
 
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__ID = GENERIC__ID;
 	public static final String MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID = "mini_event_id";

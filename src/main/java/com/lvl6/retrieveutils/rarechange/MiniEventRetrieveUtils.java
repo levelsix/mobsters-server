@@ -170,9 +170,10 @@ public class MiniEventRetrieveUtils {
 		String name = rs.getString(DBConstants.MINI_EVENT__NAME);
 		String desc = rs.getString(DBConstants.MINI_EVENT__DESCRIPTION);
 		String img = rs.getString(DBConstants.MINI_EVENT__IMG);
+		String icon = rs.getString(DBConstants.MINI_EVENT__ICON);
 
 		MiniEvent me = new MiniEvent(id, startDate, endDate,
-				name, desc, img);
+				name, desc, img, icon);
 		return me;
 	}
 }

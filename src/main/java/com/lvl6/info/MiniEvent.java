@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class MiniEvent implements Serializable {
 
-	private static final long serialVersionUID = -2474490230347808486L;
+	private static final long serialVersionUID = 5373914858026496963L;
 
 	private int id;
 	private Date startTime;
@@ -13,13 +13,14 @@ public class MiniEvent implements Serializable {
 	private String name;
 	private String desc;
 	private String img;
+	private String icon;
 
 	public MiniEvent() {
 		super();
 	}
 
 	public MiniEvent(int id, Date startTime, Date endTime, String name,
-			String desc, String img) {
+			String desc, String img, String icon) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
@@ -27,6 +28,7 @@ public class MiniEvent implements Serializable {
 		this.name = name;
 		this.desc = desc;
 		this.img = img;
+		this.icon = icon;
 	}
 
 	public int getId() {
@@ -77,11 +79,19 @@ public class MiniEvent implements Serializable {
 		this.img = img;
 	}
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	@Override
 	public String toString() {
 		return "MiniEvent [id=" + id + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", name=" + name + ", desc=" + desc
-				+ ", img=" + img + "]";
+				+ ", img=" + img + ", icon=" + icon + "]";
 	}
 
 }
