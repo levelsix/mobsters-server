@@ -56,7 +56,8 @@ public class StructureResearchHouseRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						HashMap<Integer, StructureResearchHouse> structIdsToStructsTemp = new HashMap<Integer, StructureResearchHouse>();
+						HashMap<Integer, StructureResearchHouse> structIdsToStructsTemp = 
+								new HashMap<Integer, StructureResearchHouse>();
 						while (rs.next()) {
 							StructureResearchHouse struct = convertRSRowToResearchHouse(rs);
 							if (struct != null)
@@ -88,7 +89,9 @@ public class StructureResearchHouseRetrieveUtils {
 			ResultSet rs) throws SQLException {
 		int structId = rs
 				.getInt(DBConstants.STRUCTURE_RESEARCH_HOUSE__STRUCT_ID);
-		StructureResearchHouse srh = new StructureResearchHouse(structId);
+		float researchSpeedMultiplier = rs.getFloat(DBConstants.
+				STRUCTURE_RESEARCH_HOUSE__RESEARCH_SPEED_MULTIPLIER);
+		StructureResearchHouse srh = new StructureResearchHouse(structId, researchSpeedMultiplier);
 		return srh;
 	}
 }
