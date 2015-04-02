@@ -177,7 +177,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 							Map<TranslateLanguages, String> translateMap = new HashMap<TranslateLanguages, String>();
 							
 							String chatId = pwp.getId();
-							if(translateLanguage != null) {
+							if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
 								if(returnMap.containsKey(chatId)) {
 									translateMap.put(returnMap.get(chatId).getTranslateLanguage(), returnMap.get(chatId).getText());
 								}
