@@ -57,9 +57,26 @@ public class ChatTranslationsRetrieveUtils {
 		Map<String, List<ChatTranslations>> chatTranslationsMap = new HashMap<String, List<ChatTranslations>>();
 		
 		for(String chatId : chatIds) {
-			chatTranslationsMap.put(chatId, chatIdsToChatTranslations.get(chatId));
+			if(chatTranslationsMap.containsKey(chatId)) {
+				chatTranslationsMap.put(chatId, chatIdsToChatTranslations.get(chatId));
+			}
+			
 		}
 		return chatTranslationsMap;
+	}
+	
+	public static void addChatTranslationToMap(ChatTranslations ct) {
+		chatTranslationsIdsToChatTranslationss.put(ct.getId(), ct);
+		if(chatIdsToChatTranslations.containsKey(ct.getChatId())) {
+			List<ChatTranslations> list = chatIdsToChatTranslations.get(ct.getChatId());
+			list.add(ct);
+		}
+		else {
+			List<ChatTranslations> newList = new ArrayList<ChatTranslations>();
+			newList.add(ct);
+			chatIdsToChatTranslations.put(ct.getChatId(), newList);
+		}
+
 	}
 
 	private static void setStaticChatTranslationsIdsToChatTranslationss() {
