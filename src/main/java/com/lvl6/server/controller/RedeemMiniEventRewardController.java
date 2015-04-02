@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,16 +14,23 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniEventRewardRequestEvent;
 import com.lvl6.events.response.RedeemMiniEventRewardResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
+import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -71,6 +80,8 @@ public class RedeemMiniEventRewardController extends EventController {
 		RewardTier rt = reqProto.getTierRedeemed();
 		int mefplId = reqProto.getMefplId();
 		Date clientTime = new Date(reqProto.getClientTime());
+		int maxCash = senderProtoMaxResources.getMaxCash();
+		int maxOil = senderProtoMaxResources.getMaxOil();
 
 		RedeemMiniEventRewardResponseProto.Builder resBuilder = RedeemMiniEventRewardResponseProto
 				.newBuilder();
@@ -103,14 +114,25 @@ public class RedeemMiniEventRewardController extends EventController {
 		server.lockPlayer(userId, this.getClass().getSimpleName());
 		try {
 
-			RedeemMiniEventRewardAction rmea = new RedeemMiniEventRewardAction(
-					userId, mefplId, rt, clientTime, mefuRetrieveUtil,
-					itemForUserRetrieveUtil, insertUtil, updateUtil);
+			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
+					userId, maxCash, maxOil, mefplId, rt, clientTime,
+					mefuRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
 
-			rmea.execute(resBuilder);
+			rmera.execute(resBuilder);
 
-			if (resBuilder.getStatus().equals(RedeemMiniEventRewardStatus.SUCCESS)) {
+			boolean success = resBuilder.getStatus().equals(RedeemMiniEventRewardStatus.SUCCESS);
+			if (success) {
+				Collection<ItemForUser> nuOrUpdatedItems = rmera.getNuOrUpdatedItems();
+				Collection<FullUserMonsterProto> fumpList = rmera.getNuOrUpdatedMonsters();
+				int gemsGained = rmera.getGemsGained();
+				int cashGained = rmera.getCashGained();
+				int oilGained = rmera.getOilGained();
+
+
 				//TODO: protofy the rewards
+				UserRewardProto urp = CreateInfoProtoUtils.createUserRewardProto(
+						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+				resBuilder.setRewards(urp);
 			}
 
 			RedeemMiniEventRewardResponseProto resProto = resBuilder.build();
@@ -119,6 +141,22 @@ public class RedeemMiniEventRewardController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniEventRewardResponseProto(resProto);
 			server.writeEvent(resEvent);
+
+			if (success && rmera.isAwardedResources()) {
+				User u = rmera.getUser();
+
+				if (null != u) {
+					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+									u, null, null);
+					resEventUpdate.setTag(event.getTag());
+					server.writeEvent(resEventUpdate);
+
+					writeToCurrencyHistory(userId, clientTime, rmera);
+				} else {
+					log.warn("unable to update client's user.");
+				}
+			}
 
 		} catch (Exception e) {
 			log.error("exception in RedeemMiniEventRewardController processEvent",
@@ -139,6 +177,16 @@ public class RedeemMiniEventRewardController extends EventController {
 		} finally {
 			server.unlockPlayer(userId, this.getClass().getSimpleName());
 		}
+	}
+
+	private void writeToCurrencyHistory(String userId, Date date,
+			RedeemMiniEventRewardAction rmera)
+	{
+		Timestamp timestamp = new Timestamp(date.getTime());
+		MiscMethods.writeToUserCurrencyOneUser(userId, timestamp,
+				rmera.getCurrencyDeltas(), rmera.getPreviousCurrencies(),
+				rmera.getCurrentCurrencies(), rmera.getReasons(),
+				rmera.getDetails());
 	}
 
 	public MiniEventForUserRetrieveUtil getMefuRetrieveUtil() {

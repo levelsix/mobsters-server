@@ -19,7 +19,7 @@ public class ControllerConstants {
 	public static final Date INCEPTION_DATE = new DateTime(2014, 12, 4, 0, 0)
 			.toDate();
 
-	//includes oil and cash, 1 gem per 1000 resource? 
+	//includes oil and cash, 1 gem per 1000 resource?
 	public static final float GEMS_PER_RESOURCE = 0.001F;
 	public static final float GEMS_PER_DOLLAR = 10f;//client doesn't need this
 	public static final float MINUTES_PER_GEM = 10f;
@@ -110,6 +110,7 @@ public class ControllerConstants {
 	public static final String MFUSOP__PVP = "pvp";
 	public static final String MFUSOP__QUEST = "questId";
 	public static final String MFUSOP__REDEEM_ITEM = "redeem itemId";
+	public static final String MFUSOP__REDEEM_MINI_EVENT_REWARD = "redeem miniEventRewardId";
 	public static final String MFUSOP__USER_CREATE = "user create";
 
 	//MFUDR = monster_for_user_delete_reasons
@@ -134,7 +135,7 @@ public class ControllerConstants {
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30;
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
 	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
-	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
+	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
 	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
 	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
@@ -432,7 +433,7 @@ public class ControllerConstants {
 	//EARN FREE DIAMONDS
 	public static final int EARN_FREE_DIAMONDS__FB_CONNECT_REWARD = 10;
 
-	//USER CREATE 
+	//USER CREATE
 	public static final int USER_CREATE__START_LEVEL = 1;
 	public static final int USER_CREATE__MIN_NAME_LENGTH = 1;
 	public static final int USER_CREATE__MAX_NAME_LENGTH = 15;

@@ -8,6 +8,9 @@ public class Reward implements Serializable {
 
 	private int id;
 	private int staticDataId;
+	//NOTE: if RewardType is MONSTER, then amt is repurposed to:
+	//amt = 0 means only one piece is given
+	//amt > 0 means one monster with a lvl equal to 'amt' is given
 	private String type;
 	private int amt;
 

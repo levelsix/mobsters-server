@@ -140,7 +140,7 @@ public class MonsterStuffUtils {
 		//  	log.info("existing=" + existing + "\t ids=" + ids);
 
 		List<String> copyIds = new ArrayList<String>(ids);
-		// remove the invalid ids from ids client sent 
+		// remove the invalid ids from ids client sent
 		// (modifying argument so calling function doesn't have to do it)
 		ids.retainAll(existing);
 
@@ -212,7 +212,7 @@ public class MonsterStuffUtils {
 	// ASSUMPTION: WHATEVER MONSTER ID EXISTS IN  monsterIdToIncompleteUserMonster
 	// THERE IS A CORRESPONDING ENTRY IN monsterIdToQuantity
 	// returns the remaining quantities for each monster id after "completing"
-	// a user_monster 
+	// a user_monster
 	// ALSO MODIFIES the monsters in monsterIdToIncompleteUserMonster
 	//monsterIdToQuantity will not be modified
 	public static Map<Integer, Integer> completeMonstersFromQuantities(
@@ -234,7 +234,7 @@ public class MonsterStuffUtils {
 		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
 				.getMonstersForMonsterIds(incompleteMonsterIds);
 
-		//for each incomplete user monster, try to complete it with the 
+		//for each incomplete user monster, try to complete it with the
 		//available quantity in the monsterIdToQuantity map,
 		//monsterIdToIncompleteUserMonster will be modified
 		for (int monsterId : incompleteMonsterIds) {
@@ -287,7 +287,7 @@ public class MonsterStuffUtils {
 
 		int updatedExistingPieces = existingNumPieces + numPiecesAvailable;
 
-		//two scenarios: 
+		//two scenarios:
 		//1) there are pieces remaining after trying to complete monsterForUser
 		//2) no pieces remaining after trying to complete monsterForUser
 		if (updatedExistingPieces > numPiecesForCompletion) {
@@ -427,7 +427,7 @@ public class MonsterStuffUtils {
 
 			} else {
 				//this happens only when there isn't enough pieces left to make a whole
-				//monster 
+				//monster
 				numPieces = quantity;
 			}
 
@@ -479,6 +479,7 @@ public class MonsterStuffUtils {
 		return returnList;
 	}
 
+	//TODO: move this into AwardRewardAction
 	//METHOD TO REWARD A USER WITH SOME MONSTERS
 	public static List<FullUserMonsterProto> updateUserMonsters(String userId,
 			Map<Integer, Integer> monsterIdToNumPieces,
@@ -553,7 +554,7 @@ public class MonsterStuffUtils {
 		}
 
 		//for all the monster pieces the user will receive, see if he already has any
-		//retrieve all of user's incomplete monsters that have these monster ids 
+		//retrieve all of user's incomplete monsters that have these monster ids
 		monsterIdsToIncompletes.putAll(RetrieveUtils
 				.monsterForUserRetrieveUtils()
 				.getPieceDeficientIncompleteMonstersWithUserAndMonsterIds(
@@ -750,7 +751,7 @@ public class MonsterStuffUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param userMonsters
 	 * @return map(userMonsterId -> monsterId or -1 if no drop)
 	 */
@@ -803,7 +804,7 @@ public class MonsterStuffUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param userMonsters
 	 * @return monsterId or -1 if no drop
 	 */
