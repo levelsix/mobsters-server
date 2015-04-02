@@ -11,9 +11,23 @@ option java_outer_classname = "EventMiniEventProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 //------------------------------------------------------------------------------------------
-//updates the user's current MiniEvent, or creates one if nonexistent
+//updates the user's current MiniEvent, creates one if nonexistent, or returns user's current MiniEvent
 message RetrieveMiniEventRequestProto {
 	optional MinimumUserProto sender = 1;
+	
+	//false means:
+	//a) user has no MiniEvent, then a new one will be created (if possible)
+	//b) user has a MiniEvent, then information about this MiniEvent is returned
+	//true means:
+	//a) user has no MiniEvent, then a new one will be created (if possible)
+	//b) user has a MiniEvent
+	//	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+	//	2) user redeemed all possible rewards
+	//		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+	//		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+	//			one) there is no active MiniEvent, then no MiniEvent info is returned
+	//			two) there is an active MiniEvent, then a new one will be created	 
+	optional bool replaceExistingUserMiniEvent = 2;
 }
 
 message RetrieveMiniEventResponseProto {
