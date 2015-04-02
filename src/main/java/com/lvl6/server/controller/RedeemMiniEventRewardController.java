@@ -29,6 +29,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -44,6 +45,9 @@ public class RedeemMiniEventRewardController extends EventController {
 	public RedeemMiniEventRewardController() {
 		numAllocatedThreads = 4;
 	}
+
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
 	protected MiniEventForUserRetrieveUtil mefuRetrieveUtil;
@@ -115,8 +119,9 @@ public class RedeemMiniEventRewardController extends EventController {
 		try {
 
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
-					userId, maxCash, maxOil, mefplId, rt, clientTime,
-					mefuRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil);
+					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
+					userRetrieveUtil, mefuRetrieveUtil, itemForUserRetrieveUtil,
+					insertUtil, updateUtil);
 
 			rmera.execute(resBuilder);
 
