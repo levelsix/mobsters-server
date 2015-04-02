@@ -132,8 +132,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 								usersByIds, userId, senderProto, otherUserId);
 
 						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
+						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
 
 						if(translateLanguage != null) {
+<<<<<<< HEAD
 
 							List<String> chatIds = new ArrayList<String>();
 							for(PrivateChatPost pcp : recentPrivateChatPosts) {
@@ -141,6 +143,8 @@ public class RetrievePrivateChatPostsController extends EventController {
 							}
 
 							Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
+=======
+>>>>>>> 5093dc8... slight edit to when language not set for private chat
 							chatIdsToTranslations = 
 									ChatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
 
