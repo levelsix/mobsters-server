@@ -1950,6 +1950,32 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
+			String chatType, String language) {
+		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
+		
+		log.info("updating language setting for global user=%s from senderuser=%s", 
+				recipientId);
+		
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
+				recipientId);
+		conditionParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE,
+				chatType);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, 
+				language);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				tableName, null, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
 
 	
 	

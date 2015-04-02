@@ -9,12 +9,14 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.TranslatedText;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -28,6 +30,7 @@ public class TranslateSelectMessagesAction {
 	private TranslateLanguages languageEnum;
 	private List<PrivateChatPost> listOfPrivateChatPosts;
 	private ChatType chatType;
+	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	
@@ -35,6 +38,7 @@ public class TranslateSelectMessagesAction {
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
 			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.recipientUserId = recipientUserId;
@@ -42,6 +46,7 @@ public class TranslateSelectMessagesAction {
 		this.languageEnum = languageEnum;
 		this.listOfPrivateChatPosts = listOfPrivateChatPosts;
 		this.chatType = chatType;
+		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -85,11 +90,21 @@ public class TranslateSelectMessagesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
-			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, languageEnum.toString());
+			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, 
+					languageEnum.toString());
 		}
 		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
-			successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
-					languageEnum.toString(), chatType.toString());
+			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUserGlobal(recipientUserId);
+			if(tsfuList.isEmpty()) {
+
+				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
+						languageEnum.toString(), chatType.toString());
+			}
+			else {
+				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId, 
+						chatType.toString(), languageEnum.toString()) ;
+			}
 		}
 		
 		if (!successfulUpdate) {
