@@ -1989,7 +1989,7 @@ public class MiscMethods {
 				TranslateLanguages tl = TranslateLanguages.GERMAN;
 				return tl;	
 			}
-			else if(language.getName(Language.RUSSIAN).equalsIgnoreCase("RUSSIAN")) {
+			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("RUSSIAN")) {
 				TranslateLanguages tl = TranslateLanguages.RUSSIAN;
 				return tl;	
 			}
