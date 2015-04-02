@@ -1248,6 +1248,7 @@ public class DBConstants {
 	public static final String STRUCTURE_PVP_BOARD__POWER_LIMIT = "power_limit";
 
 	public static final String STRUCTURE_RESEARCH_HOUSE__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_RESEARCH_HOUSE__RESEARCH_SPEED_MULTIPLIER = "research_speed_multiplier";
 
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";

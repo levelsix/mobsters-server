@@ -2,12 +2,22 @@ package com.lvl6.info;
 
 public class StructureResearchHouse {
 
-	public StructureResearchHouse(int structId) {
+	private int structId;
+	private float researchSpeedMultiplier;
+
+	public StructureResearchHouse(int structId, float researchSpeedMultiplier) {
 		super();
 		this.structId = structId;
+		this.researchSpeedMultiplier = researchSpeedMultiplier;
 	}
 
-	private int structId;
+	public float getResearchSpeedMultiplier() {
+		return researchSpeedMultiplier;
+	}
+
+	public void setResearchSpeedMultiplier(float researchSpeedMultiplier) {
+		this.researchSpeedMultiplier = researchSpeedMultiplier;
+	}
 
 	public int getStructId() {
 		return structId;
@@ -19,7 +29,8 @@ public class StructureResearchHouse {
 
 	@Override
 	public String toString() {
-		return "StructureResearchHouse [structId=" + structId + "]";
+		return "StructureResearchHouse [structId=" + structId
+				+ ", researchSpeedMultiplier=" + researchSpeedMultiplier + "]";
 	}
 
 }

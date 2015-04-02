@@ -110,6 +110,7 @@ message MoneyTreeProto {
 
 message ResearchHouseProto {	
 	optional StructureInfoProto structInfo = 1;
+	optional float researchSpeedMultiplier = 2;
 }
 
 //------------------------------------------------------------------------------------------

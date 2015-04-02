@@ -253,21 +253,21 @@ public final class ResearchsProto {
      */
     NO_DOMAIN(0, 1),
     /**
-     * <code>RESTORATIVE = 2;</code>
+     * <code>HEALING = 2;</code>
      */
-    RESTORATIVE(1, 2),
+    HEALING(1, 2),
     /**
-     * <code>LEVELUP = 3;</code>
+     * <code>ENHANCING = 3;</code>
      */
-    LEVELUP(2, 3),
+    ENHANCING(2, 3),
     /**
-     * <code>RESOURCES = 4;</code>
+     * <code>BATTLE = 4;</code>
      */
-    RESOURCES(3, 4),
+    BATTLE(3, 4),
     /**
-     * <code>BATTLE = 5;</code>
+     * <code>RESOURCES = 5;</code>
      */
-    BATTLE(4, 5),
+    RESOURCES(4, 5),
     /**
      * <code>ITEMS = 6;</code>
      */
@@ -283,21 +283,21 @@ public final class ResearchsProto {
      */
     public static final int NO_DOMAIN_VALUE = 1;
     /**
-     * <code>RESTORATIVE = 2;</code>
+     * <code>HEALING = 2;</code>
      */
-    public static final int RESTORATIVE_VALUE = 2;
+    public static final int HEALING_VALUE = 2;
     /**
-     * <code>LEVELUP = 3;</code>
+     * <code>ENHANCING = 3;</code>
      */
-    public static final int LEVELUP_VALUE = 3;
+    public static final int ENHANCING_VALUE = 3;
     /**
-     * <code>RESOURCES = 4;</code>
+     * <code>BATTLE = 4;</code>
      */
-    public static final int RESOURCES_VALUE = 4;
+    public static final int BATTLE_VALUE = 4;
     /**
-     * <code>BATTLE = 5;</code>
+     * <code>RESOURCES = 5;</code>
      */
-    public static final int BATTLE_VALUE = 5;
+    public static final int RESOURCES_VALUE = 5;
     /**
      * <code>ITEMS = 6;</code>
      */
@@ -313,10 +313,10 @@ public final class ResearchsProto {
     public static ResearchDomain valueOf(int value) {
       switch (value) {
         case 1: return NO_DOMAIN;
-        case 2: return RESTORATIVE;
-        case 3: return LEVELUP;
-        case 4: return RESOURCES;
-        case 5: return BATTLE;
+        case 2: return HEALING;
+        case 3: return ENHANCING;
+        case 4: return BATTLE;
+        case 5: return RESOURCES;
         case 6: return ITEMS;
         case 7: return TRAPS_AND_OBSTACLES;
         default: return null;
@@ -4361,10 +4361,10 @@ public final class ResearchsProto {
       "TION_SPEED\020\016\022\030\n\024ITEM_PRODUCTION_COST\020\017\022\027" +
       "\n\023RESOURCE_PRODUCTION\020\020\022\024\n\020RESOURCE_STOR" +
       "AGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n\017UNLOCK_OBSTACL" +
-      "E\020\023*|\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\017\n\013",
-      "RESTORATIVE\020\002\022\013\n\007LEVELUP\020\003\022\r\n\tRESOURCES\020" +
-      "\004\022\n\n\006BATTLE\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OB" +
-      "STACLES\020\007B\020B\016ResearchsProto"
+      "E\020\023*z\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\013\n\007",
+      "HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTLE\020\004\022\r\n\t" +
+      "RESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBST" +
+      "ACLES\020\007B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
