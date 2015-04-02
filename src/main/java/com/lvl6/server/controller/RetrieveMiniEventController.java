@@ -72,7 +72,6 @@ public class RetrieveMiniEventController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		boolean replaceExistingUserMiniEvent = reqProto.getReplaceExistingUserMiniEvent();
 		Date now = new Date();
 
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
@@ -107,7 +106,7 @@ public class RetrieveMiniEventController extends EventController {
 		try {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-					userId, now, replaceExistingUserMiniEvent, userRetrieveUtil,
+					userId, now, userRetrieveUtil,
 					miniEventForUserRetrieveUtil, miniEventGoalForUserRetrieveUtil,
 					insertUtil, deleteUtil);
 
