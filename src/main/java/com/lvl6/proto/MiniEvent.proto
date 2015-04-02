@@ -18,7 +18,7 @@ message MiniEventProto {
      optional string name = 7;
      optional string desc = 8;
      optional string img = 9;
-     
+     optional string icon = 10;
 }
 
 //------------------------------------------------------------------------------------------

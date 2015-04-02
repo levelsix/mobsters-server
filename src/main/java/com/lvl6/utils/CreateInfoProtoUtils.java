@@ -2318,6 +2318,10 @@ public class CreateInfoProtoUtils {
 			mepb.setImg(str);
 		}
 
+		str = me.getIcon();
+		if (null != str) {
+			mepb.setIcon(str);
+		}
 
 		return mepb.build();
 	}
