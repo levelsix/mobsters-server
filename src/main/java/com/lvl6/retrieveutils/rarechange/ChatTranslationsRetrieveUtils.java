@@ -57,7 +57,7 @@ public class ChatTranslationsRetrieveUtils {
 		Map<String, List<ChatTranslations>> chatTranslationsMap = new HashMap<String, List<ChatTranslations>>();
 		
 		for(String chatId : chatIds) {
-			if(chatTranslationsMap.containsKey(chatId)) {
+			if(chatIdsToChatTranslations.containsKey(chatId)) {
 				chatTranslationsMap.put(chatId, chatIdsToChatTranslations.get(chatId));
 			}
 			
