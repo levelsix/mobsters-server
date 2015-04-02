@@ -1391,7 +1391,9 @@ public class CreateInfoProtoUtils {
 				.newBuilder();
 
 		gcmpb.setSender(user);
+		log.info("fail here?");
 		gcmpb.setTimeOfChat(time);
+		log.info(" or fail here?");
 		gcmpb.setContent(content);
 		log.info("just set content");
 
