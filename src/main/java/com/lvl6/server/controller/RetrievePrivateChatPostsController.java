@@ -136,9 +136,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 						}
 						
 						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
+						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
 
 						if(translateLanguage != null) {
-							Map<String, List<ChatTranslations>> chatIdsToTranslations = 
+							chatIdsToTranslations = 
 									ChatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
 
 							//this map holds the correct translation based on language sent
