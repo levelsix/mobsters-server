@@ -84,10 +84,10 @@ enum ResearchType {
 
 enum ResearchDomain {
 	NO_DOMAIN = 1;
-	RESTORATIVE = 2;
-	LEVELUP = 3;
-	RESOURCES = 4;
-	BATTLE = 5;
+	HEALING = 2;
+	ENHANCING = 3;
+	BATTLE = 4;
+	RESOURCES = 5;
 	ITEMS = 6;
 	TRAPS_AND_OBSTACLES = 7;
 	
