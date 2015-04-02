@@ -24,13 +24,52 @@ public final class EventMiniEventProto {
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+     *
+     * <pre>
+     *false means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent, then information about this MiniEvent is returned
+     *true means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent
+     *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+     *	2) user redeemed all possible rewards
+     *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+     *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+     *			one) there is no active MiniEvent, then no MiniEvent info is returned
+     *			two) there is an active MiniEvent, then a new one will be created	 
+     * </pre>
+     */
+    boolean hasReplaceExistingUserMiniEvent();
+    /**
+     * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+     *
+     * <pre>
+     *false means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent, then information about this MiniEvent is returned
+     *true means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent
+     *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+     *	2) user redeemed all possible rewards
+     *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+     *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+     *			one) there is no active MiniEvent, then no MiniEvent info is returned
+     *			two) there is an active MiniEvent, then a new one will be created	 
+     * </pre>
+     */
+    boolean getReplaceExistingUserMiniEvent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventRequestProto}
    *
    * <pre>
    *------------------------------------------------------------------------------------------
-   *updates the user's current MiniEvent, or creates one if nonexistent
+   *updates the user's current MiniEvent, creates one if nonexistent, or returns user's current MiniEvent
    * </pre>
    */
   public static final class RetrieveMiniEventRequestProto extends
@@ -95,6 +134,11 @@ public final class EventMiniEventProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              replaceExistingUserMiniEvent_ = input.readBool();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -156,8 +200,54 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
+    public static final int REPLACEEXISTINGUSERMINIEVENT_FIELD_NUMBER = 2;
+    private boolean replaceExistingUserMiniEvent_;
+    /**
+     * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+     *
+     * <pre>
+     *false means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent, then information about this MiniEvent is returned
+     *true means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent
+     *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+     *	2) user redeemed all possible rewards
+     *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+     *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+     *			one) there is no active MiniEvent, then no MiniEvent info is returned
+     *			two) there is an active MiniEvent, then a new one will be created	 
+     * </pre>
+     */
+    public boolean hasReplaceExistingUserMiniEvent() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+     *
+     * <pre>
+     *false means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent, then information about this MiniEvent is returned
+     *true means:
+     *a) user has no MiniEvent, then a new one will be created (if possible)
+     *b) user has a MiniEvent
+     *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+     *	2) user redeemed all possible rewards
+     *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+     *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+     *			one) there is no active MiniEvent, then no MiniEvent info is returned
+     *			two) there is an active MiniEvent, then a new one will be created	 
+     * </pre>
+     */
+    public boolean getReplaceExistingUserMiniEvent() {
+      return replaceExistingUserMiniEvent_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      replaceExistingUserMiniEvent_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -175,6 +265,9 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, replaceExistingUserMiniEvent_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -187,6 +280,10 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, replaceExistingUserMiniEvent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -271,7 +368,7 @@ public final class EventMiniEventProto {
      *
      * <pre>
      *------------------------------------------------------------------------------------------
-     *updates the user's current MiniEvent, or creates one if nonexistent
+     *updates the user's current MiniEvent, creates one if nonexistent, or returns user's current MiniEvent
      * </pre>
      */
     public static final class Builder extends
@@ -317,6 +414,8 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        replaceExistingUserMiniEvent_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -353,6 +452,10 @@ public final class EventMiniEventProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.replaceExistingUserMiniEvent_ = replaceExistingUserMiniEvent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -371,6 +474,9 @@ public final class EventMiniEventProto {
         if (other == com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (other.hasReplaceExistingUserMiniEvent()) {
+          setReplaceExistingUserMiniEvent(other.getReplaceExistingUserMiniEvent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -513,6 +619,98 @@ public final class EventMiniEventProto {
           sender_ = null;
         }
         return senderBuilder_;
+      }
+
+      private boolean replaceExistingUserMiniEvent_ ;
+      /**
+       * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+       *
+       * <pre>
+       *false means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent, then information about this MiniEvent is returned
+       *true means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent
+       *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+       *	2) user redeemed all possible rewards
+       *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+       *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+       *			one) there is no active MiniEvent, then no MiniEvent info is returned
+       *			two) there is an active MiniEvent, then a new one will be created	 
+       * </pre>
+       */
+      public boolean hasReplaceExistingUserMiniEvent() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+       *
+       * <pre>
+       *false means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent, then information about this MiniEvent is returned
+       *true means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent
+       *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+       *	2) user redeemed all possible rewards
+       *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+       *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+       *			one) there is no active MiniEvent, then no MiniEvent info is returned
+       *			two) there is an active MiniEvent, then a new one will be created	 
+       * </pre>
+       */
+      public boolean getReplaceExistingUserMiniEvent() {
+        return replaceExistingUserMiniEvent_;
+      }
+      /**
+       * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+       *
+       * <pre>
+       *false means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent, then information about this MiniEvent is returned
+       *true means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent
+       *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+       *	2) user redeemed all possible rewards
+       *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+       *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+       *			one) there is no active MiniEvent, then no MiniEvent info is returned
+       *			two) there is an active MiniEvent, then a new one will be created	 
+       * </pre>
+       */
+      public Builder setReplaceExistingUserMiniEvent(boolean value) {
+        bitField0_ |= 0x00000002;
+        replaceExistingUserMiniEvent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool replaceExistingUserMiniEvent = 2;</code>
+       *
+       * <pre>
+       *false means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent, then information about this MiniEvent is returned
+       *true means:
+       *a) user has no MiniEvent, then a new one will be created (if possible)
+       *b) user has a MiniEvent
+       *	1) user didn't redeem all possible rewards, then FAIL_OTHER is returned and no other info is returned
+       *	2) user redeemed all possible rewards
+       *		i) user's MiniEvent equals currently active MiniEvent, then information about this MiniEvent is returned
+       *		ii) user's MiniEvent doesn't equal currently active MiniEvent,
+       *			one) there is no active MiniEvent, then no MiniEvent info is returned
+       *			two) there is an active MiniEvent, then a new one will be created	 
+       * </pre>
+       */
+      public Builder clearReplaceExistingUserMiniEvent() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        replaceExistingUserMiniEvent_ = false;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveMiniEventRequestProto)
@@ -4766,40 +4964,41 @@ public final class EventMiniEventProto {
     java.lang.String[] descriptorData = {
       "\n\024EventMiniEvent.proto\022\016com.lvl6.proto\032\017" +
       "MiniEvent.proto\032\014Reward.proto\032\nUser.prot" +
-      "o\"Q\n\035RetrieveMiniEventRequestProto\0220\n\006se" +
+      "o\"w\n\035RetrieveMiniEventRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\"\235\002\n\036RetrieveMiniEventResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0229\n\ruserMiniEvent\030\002 \001(\0132\".com.l" +
-      "vl6.proto.UserMiniEventProto\022V\n\006status\030\003" +
-      " \001(\0162F.com.lvl6.proto.RetrieveMiniEventR" +
-      "esponseProto.RetrieveMiniEventStatus\"6\n\027",
-      "RetrieveMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"\215\001\n\033UpdateMiniEventRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022<\n\014updatedGoals\030\002 \003(\0132&.c" +
-      "om.lvl6.proto.UserMiniEventGoalProto\"\332\001\n" +
-      "\034UpdateMiniEventResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.UpdateM" +
-      "iniEventResponseProto.UpdateMiniEventSta" +
-      "tus\"4\n\025UpdateMiniEventStatus\022\013\n\007SUCCESS\020",
-      "\001\022\016\n\nFAIL_OTHER\020\002\"\230\002\n!RedeemMiniEventRew" +
-      "ardRequestProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
-      "l6.proto.MinimumUserProtoWithMaxResource" +
-      "s\022R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto" +
-      ".RedeemMiniEventRewardRequestProto.Rewar" +
-      "dTier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001" +
-      "(\003\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_T" +
-      "WO\020\002\022\016\n\nTIER_THREE\020\003\"\260\002\n\"RedeemMiniEvent" +
-      "RewardResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022j\n\006status\030",
-      "\002 \001(\0162N.com.lvl6.proto.RedeemMiniEventRe" +
-      "wardResponseProto.RedeemMiniEventRewardS" +
-      "tatus:\nFAIL_OTHER\0220\n\007rewards\030\003 \001(\0132\037.com" +
-      ".lvl6.proto.UserRewardProto\":\n\033RedeemMin" +
-      "iEventRewardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002B\025B\023EventMiniEventProto"
+      "roto\022$\n\034replaceExistingUserMiniEvent\030\002 \001" +
+      "(\010\"\235\002\n\036RetrieveMiniEventResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0229\n\ruserMiniEvent\030\002 \001(\0132\".com.lvl" +
+      "6.proto.UserMiniEventProto\022V\n\006status\030\003 \001" +
+      "(\0162F.com.lvl6.proto.RetrieveMiniEventRes",
+      "ponseProto.RetrieveMiniEventStatus\"6\n\027Re" +
+      "trieveMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
+      "IL_OTHER\020\002\"\215\001\n\033UpdateMiniEventRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022<\n\014updatedGoals\030\002 \003(\0132&.com" +
+      ".lvl6.proto.UserMiniEventGoalProto\"\332\001\n\034U" +
+      "pdateMiniEventResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022R\n" +
+      "\006status\030\002 \001(\0162B.com.lvl6.proto.UpdateMin" +
+      "iEventResponseProto.UpdateMiniEventStatu",
+      "s\"4\n\025UpdateMiniEventStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\016\n\nFAIL_OTHER\020\002\"\230\002\n!RedeemMiniEventRewar" +
+      "dRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6" +
+      ".proto.MinimumUserProtoWithMaxResources\022" +
+      "R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto.R" +
+      "edeemMiniEventRewardRequestProto.RewardT" +
+      "ier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003" +
+      "\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO" +
+      "\020\002\022\016\n\nTIER_THREE\020\003\"\260\002\n\"RedeemMiniEventRe" +
+      "wardResponseProto\0220\n\006sender\030\001 \001(\0132 .com.",
+      "lvl6.proto.MinimumUserProto\022j\n\006status\030\002 " +
+      "\001(\0162N.com.lvl6.proto.RedeemMiniEventRewa" +
+      "rdResponseProto.RedeemMiniEventRewardSta" +
+      "tus:\nFAIL_OTHER\0220\n\007rewards\030\003 \001(\0132\037.com.l" +
+      "vl6.proto.UserRewardProto\":\n\033RedeemMiniE" +
+      "ventRewardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
+      "HER\020\002B\025B\023EventMiniEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4821,7 +5020,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor,
-        new java.lang.String[] { "Sender", });
+        new java.lang.String[] { "Sender", "ReplaceExistingUserMiniEvent", });
     internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_fieldAccessorTable = new

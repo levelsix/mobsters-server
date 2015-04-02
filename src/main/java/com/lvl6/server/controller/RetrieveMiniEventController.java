@@ -21,7 +21,6 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -73,6 +72,7 @@ public class RetrieveMiniEventController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
+		boolean replaceExistingUserMiniEvent = reqProto.getReplaceExistingUserMiniEvent();
 		Date now = new Date();
 
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
@@ -107,12 +107,11 @@ public class RetrieveMiniEventController extends EventController {
 		try {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-					userId, now, userRetrieveUtil, miniEventForUserRetrieveUtil,
-					miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+					userId, now, replaceExistingUserMiniEvent, userRetrieveUtil,
+					miniEventForUserRetrieveUtil, miniEventGoalForUserRetrieveUtil,
+					insertUtil, deleteUtil);
 
 			rmea.execute(resBuilder);
-			log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-					MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
 
 			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 					null != rmea.getCurActiveMiniEvent())

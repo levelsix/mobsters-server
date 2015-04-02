@@ -35,6 +35,7 @@ public class RetrieveMiniEventAction {
 
 	private String userId;
 	private Date now;
+	private boolean replaceExistingUserMiniEvent;
 	protected UserRetrieveUtils2 userRetrieveUtil;
 	private MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 	private MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
@@ -42,13 +43,14 @@ public class RetrieveMiniEventAction {
 	private DeleteUtil deleteUtil;
 
 	public RetrieveMiniEventAction(String userId, Date now,
-			UserRetrieveUtils2 userRetrieveUtil,
+			boolean replaceExistingUserMiniEvent, UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
 			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil,
 			InsertUtil insertUtil, DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.now = now;
+		this.replaceExistingUserMiniEvent = replaceExistingUserMiniEvent;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
@@ -122,7 +124,6 @@ public class RetrieveMiniEventAction {
 
 		mefu = miniEventForUserRetrieveUtil
 				.getSpecificUserMiniEvent(userId);
-		//make sure that the user has redeemed eligible rewards
 		if (null == mefu) {
 			return true;
 		}
@@ -137,8 +138,18 @@ public class RetrieveMiniEventAction {
 
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(userId);
 
-		allRewardsCollected = verifyRewardsCollected(goals);
-		return allRewardsCollected;
+		if (replaceExistingUserMiniEvent) {
+			//make sure that the user has redeemed eligible rewards
+			allRewardsCollected = verifyRewardsCollected(goals);
+
+			if (!allRewardsCollected) {
+				log.error("user has uncollected MiniEvent. {}", mefu);
+			}
+
+			return allRewardsCollected;
+		}
+
+		return true;
 	}
 
 	private boolean verifyRewardsCollected(Collection<MiniEventGoal> goals) {
@@ -206,18 +217,17 @@ public class RetrieveMiniEventAction {
 
 	private boolean writeChangesToDB(Builder resBuilder)
 	{
-		//NOTE: user has redeemed all his rewards for this MiniEvent
+		if (null == mefu) {
+			return processNonexistentUserMiniEvent();
+		} else {
+			return processExistingUserMiniEvent();
+		}
 
-//		curActiveMiniEvent = null;
-//		if (null == mefu) {
-		//don't care if the user has an existing MiniEvent
+	}
+
+	private boolean processNonexistentUserMiniEvent()
+	{
 		curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
-//		} else {
-//			curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(mefu.getMiniEventId());
-//		}
-
-		log.info("this is the currently active mini event: {}", curActiveMiniEvent);
-
 		if (null == curActiveMiniEvent) {
 			log.info("no currently active MiniEvent");
 			return true;
@@ -225,6 +235,25 @@ public class RetrieveMiniEventAction {
 
 		int meId = curActiveMiniEvent.getId();
 		int userLvl = u.getLevel();
+		log.info("this is the currently active MiniEvent: {}", curActiveMiniEvent);
+
+		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
+
+		if (!success) {
+			log.warn("unable to continue processNonexistentUserMiniEvent()");
+			return success;
+		}
+
+		success = insertUpdateUserMiniEvent(meId, userLvl);
+		if (!success) {
+			log.warn("unable to create a new MiniEvent for the user.");
+		}
+
+		return success;
+	}
+
+	private boolean retrieveMiniEventRelatedData(int meId, int userLvl)
+	{
 		lvlEntered = MiniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(meId, userLvl);
 
@@ -257,26 +286,96 @@ public class RetrieveMiniEventAction {
 			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 		}
 
-		boolean success = null != mefu;
+		return true;
+	}
 
-		boolean createOrUpdate = null == mefu || meId != mefu.getMiniEventId();
-		if ( createOrUpdate ) {
-			mefu = new MiniEventForUser();
-			mefu.setUserId(userId);
-			mefu.setMiniEventId(meId);
-			mefu.setUserLvl(userLvl);
-			mefu.setTierOneRedeemed(false);
-			mefu.setTierTwoRedeemed(false);
-			mefu.setTierThreeRedeemed(false);
-			success = insertUtil.insertIntoUpdateMiniEventForUser(mefu);
+	private boolean insertUpdateUserMiniEvent(int meId, int userLvl)
+	{
+		//in case the user has remnants from previous MiniEvents
+		int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
+		log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
+
+		//active MiniEvent going on and user doesn't have one so create one
+		generateNewMiniEvent(meId, userLvl);
+
+		return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
+	}
+
+	private void generateNewMiniEvent(int meId, int userLvl) {
+		mefu = new MiniEventForUser();
+		mefu.setUserId(userId);
+		mefu.setMiniEventId(meId);
+		mefu.setUserLvl(userLvl);
+		mefu.setTierOneRedeemed(false);
+		mefu.setTierTwoRedeemed(false);
+		mefu.setTierThreeRedeemed(false);
+	}
+
+	private boolean processExistingUserMiniEvent()
+	{
+		//two cases
+		if (!replaceExistingUserMiniEvent) {
+			return retrieveCurrentUserMiniEvent();
 		}
 
-		//only execute if user is updating, not if inserting
-		if (success && null != mefu && meId != mefu.getMiniEventId()) {
-			//user redeemed all his rewards, and there is a different MiniEventId
-			//from the one the user has. delete his progress for the other goals
-			int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
-			log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
+		return replaceCurrentUserMiniEvent();
+	}
+
+	private boolean retrieveCurrentUserMiniEvent()
+	{
+		int meId = mefu.getMiniEventId();
+		curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(meId);
+
+		if (null == curActiveMiniEvent) {
+			//uncommon case because someone would have to delete the MiniEvent
+			log.error("MiniEvent no longer exists. {}. Giving user new one",
+					curActiveMiniEvent);
+			return processNonexistentUserMiniEvent();
+		}
+
+		//common case: MiniEvent exists
+		int userLvl = u.getLevel();
+		log.info("user's current MiniEvent: {}", curActiveMiniEvent);
+
+		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
+		if (!success) {
+			log.info("issue retrieving MiniEvent data regarding user's MiniEvent. {}",
+					curActiveMiniEvent);
+		}
+
+		return success;
+	}
+
+	private boolean replaceCurrentUserMiniEvent()
+	{
+		int meId = mefu.getMiniEventId();
+		curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+
+		if (null == curActiveMiniEvent) {
+			//NOTE: reaching here means, user has collected all the rewards he can
+			//since there is no active MiniEvent, act as if the user doesn't have one
+			log.info("client wants new UserMiniEvent; no active MiniEvent");
+			mefu = null;
+			return true;
+		}
+
+		int curActiveMeId = curActiveMiniEvent.getId();
+		int userLvl = u.getLevel();
+		if (meId == curActiveMeId) {
+			log.info("can't replace UserMiniEvent since the same MiniEvent is still ongoing");
+			return retrieveMiniEventRelatedData(meId, userLvl);
+		}
+
+
+		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
+		if (!success) {
+			log.warn("unable to continue replaceCurrentUserMiniEvent()");
+			return success;
+		}
+
+		success = insertUpdateUserMiniEvent(meId, userLvl);
+		if (!success) {
+			log.warn("unable to replace MiniEvent for the user.");
 		}
 
 		return success;

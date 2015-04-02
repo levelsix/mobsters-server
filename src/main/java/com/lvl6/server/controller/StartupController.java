@@ -1598,11 +1598,13 @@ public class StartupController extends EventController {
 	private void setMiniEventForUser(
 			Builder resBuilder, User u, String userId, Date now)
 	{
+		boolean replaceExistingUserMiniEvent = false;
 		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
 				RetrieveMiniEventResponseProto.newBuilder();
 
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-				userId, now, userRetrieveUtils, miniEventForUserRetrieveUtil,
+				userId, now, replaceExistingUserMiniEvent, userRetrieveUtils,
+				miniEventForUserRetrieveUtil,
 				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
 
 		rmea.execute(rmeaResBuilder);
