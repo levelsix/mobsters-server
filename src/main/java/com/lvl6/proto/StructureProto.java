@@ -5692,6 +5692,15 @@ public final class StructureProto {
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional float researchSpeedMultiplier = 2;</code>
+     */
+    boolean hasResearchSpeedMultiplier();
+    /**
+     * <code>optional float researchSpeedMultiplier = 2;</code>
+     */
+    float getResearchSpeedMultiplier();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ResearchHouseProto}
@@ -5758,6 +5767,11 @@ public final class StructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 21: {
+              bitField0_ |= 0x00000002;
+              researchSpeedMultiplier_ = input.readFloat();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5819,8 +5833,24 @@ public final class StructureProto {
       return structInfo_;
     }
 
+    public static final int RESEARCHSPEEDMULTIPLIER_FIELD_NUMBER = 2;
+    private float researchSpeedMultiplier_;
+    /**
+     * <code>optional float researchSpeedMultiplier = 2;</code>
+     */
+    public boolean hasResearchSpeedMultiplier() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional float researchSpeedMultiplier = 2;</code>
+     */
+    public float getResearchSpeedMultiplier() {
+      return researchSpeedMultiplier_;
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      researchSpeedMultiplier_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5838,6 +5868,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, structInfo_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeFloat(2, researchSpeedMultiplier_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5850,6 +5883,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, researchSpeedMultiplier_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5975,6 +6012,8 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        researchSpeedMultiplier_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -6011,6 +6050,10 @@ public final class StructureProto {
         } else {
           result.structInfo_ = structInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.researchSpeedMultiplier_ = researchSpeedMultiplier_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6029,6 +6072,9 @@ public final class StructureProto {
         if (other == com.lvl6.proto.StructureProto.ResearchHouseProto.getDefaultInstance()) return this;
         if (other.hasStructInfo()) {
           mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasResearchSpeedMultiplier()) {
+          setResearchSpeedMultiplier(other.getResearchSpeedMultiplier());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6171,6 +6217,38 @@ public final class StructureProto {
           structInfo_ = null;
         }
         return structInfoBuilder_;
+      }
+
+      private float researchSpeedMultiplier_ ;
+      /**
+       * <code>optional float researchSpeedMultiplier = 2;</code>
+       */
+      public boolean hasResearchSpeedMultiplier() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional float researchSpeedMultiplier = 2;</code>
+       */
+      public float getResearchSpeedMultiplier() {
+        return researchSpeedMultiplier_;
+      }
+      /**
+       * <code>optional float researchSpeedMultiplier = 2;</code>
+       */
+      public Builder setResearchSpeedMultiplier(float value) {
+        bitField0_ |= 0x00000002;
+        researchSpeedMultiplier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float researchSpeedMultiplier = 2;</code>
+       */
+      public Builder clearResearchSpeedMultiplier() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        researchSpeedMultiplier_ = 0F;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ResearchHouseProto)
@@ -21797,91 +21875,92 @@ public final class StructureProto {
       "ctureInfoProto\022\026\n\016productionRate\030\002 \001(\002\022\020" +
       "\n\010capacity\030\003 \001(\005\022\026\n\016daysOfDuration\030\004 \001(\005" +
       "\022\026\n\016daysForRenewal\030\005 \001(\005\022\024\n\014iapProductId" +
-      "\030\006 \001(\t\022\030\n\020fakeIAPProductId\030\007 \001(\t\"L\n\022Rese" +
+      "\030\006 \001(\t\022\030\n\020fakeIAPProductId\030\007 \001(\t\"m\n\022Rese" +
       "archHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
-      ".lvl6.proto.StructureInfoProto\"\232\001\n\rHospi" +
-      "talProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
-      "proto.StructureInfoProto\022\021\n\tqueueSize\030\002 ",
-      "\001(\005\022\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secs" +
-      "ToFullyHealMultiplier\030\004 \001(\002\"o\n\010LabProto\022" +
-      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\030\n\020po" +
-      "intsMultiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\022" +
-      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005" +
-      "\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGem" +
-      "sRequired\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030" +
-      "\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuff",
-      "ix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo" +
-      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
-      "to\022 \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n\026" +
-      "numResourceOneStorages\030\003 \001(\005\022 \n\030numResou" +
-      "rceTwoGenerators\030\004 \001(\005\022\036\n\026numResourceTwo" +
-      "Storages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\r" +
-      "numResidences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010" +
-      " \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCos" +
-      "t\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016num" +
-      "EvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto",
-      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
-      "ructureInfoProto\022\031\n\021generatedJobLimit\030\002 " +
-      "\001(\005\022!\n\031hoursBetweenJobGeneration\030\003 \001(\005\"\236" +
-      "\002\n\026FullUserStructureProto\022\026\n\016userStructU" +
-      "uid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030" +
-      "\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchase" +
-      "Time\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordi" +
-      "nates\030\007 \001(\0132\037.com.lvl6.proto.CoordinateP" +
-      "roto\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.pro" +
-      "to.StructOrientation\022\031\n\021fbInviteStructLv",
-      "l\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n" +
-      "\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010struc" +
-      "tId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6" +
-      ".proto.CoordinateProto\"\342\002\n\rObstacleProto" +
-      "\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017re" +
-      "movalCostType\030\003 \001(\0162\034.com.lvl6.proto.Res" +
-      "ourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemo" +
-      "ve\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022" +
-      "\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffs" +
-      "et\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceT",
-      "oAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024" +
-      "shadowVerticalOffset\030\r \001(\002\022\037\n\027shadowHori" +
-      "zontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleP" +
-      "roto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002" +
+      ".lvl6.proto.StructureInfoProto\022\037\n\027resear" +
+      "chSpeedMultiplier\030\002 \001(\002\"\232\001\n\rHospitalProt" +
+      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S",
+      "tructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\033\n\017" +
+      "healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secsToFully" +
+      "HealMultiplier\030\004 \001(\002\"o\n\010LabProto\0226\n\nstru" +
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\030\n\020pointsMul" +
+      "tiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstru" +
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024num" +
+      "BonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequir" +
+      "ed\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026",
+      "\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001(" +
+      "\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001(\0132" +
+      "\".com.lvl6.proto.StructureInfoProto\022 \n\030n" +
+      "umResourceOneGenerators\030\002 \001(\005\022\036\n\026numReso" +
+      "urceOneStorages\030\003 \001(\005\022 \n\030numResourceTwoG" +
+      "enerators\030\004 \001(\005\022\036\n\026numResourceTwoStorage" +
+      "s\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResi" +
+      "dences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n" +
+      "\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005" +
+      "\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCham",
+      "bers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nstr" +
+      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
+      "InfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n\031" +
+      "hoursBetweenJobGeneration\030\003 \001(\005\"\236\002\n\026Full" +
+      "UserStructureProto\022\026\n\016userStructUuid\030\001 \001" +
+      "(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022\025" +
+      "\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 " +
+      "\001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007" +
       " \001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n" +
-      "\013orientation\030\005 \001(\0162!.com.lvl6.proto.Stru" +
-      "ctOrientation\"\333\001\n\021UserObstacleProto\022\030\n\020u" +
-      "serObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022" +
-      "\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\013" +
-      "2\037.com.lvl6.proto.CoordinateProto\0226\n\013ori",
-      "entation\030\005 \001(\0162!.com.lvl6.proto.StructOr" +
-      "ientation\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017" +
-      "EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".co" +
-      "m.lvl6.proto.StructureInfoProto\0228\n\017quali" +
-      "tyUnlocked\030\002 \001(\0162\027.com.lvl6.proto.Qualit" +
-      "y:\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017Te" +
-      "amCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
-      "lvl6.proto.StructureInfoProto\022\025\n\rteamCos" +
-      "tLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstruc" +
-      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn",
-      "foProto\022!\n\031maxHelpersPerSolicitation\030\002 \001" +
-      "(\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005\"h\n\022Pv" +
-      "pBoardHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\022\032\n\022pvpB" +
-      "oardPowerLimit\030\002 \001(\005\"\240\001\n\025PvpBoardObstacl" +
-      "eProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
-      "\0227\n\014obstacleType\030\003 \001(\0162!.com.lvl6.proto." +
-      "BoardObstacleType\022\020\n\010powerAmt\030\004 \001(\005\022\032\n\022i" +
-      "nitiallyAvailable\030\005 \001(\010\"}\n\031UserPvpBoardO" +
-      "bstacleProto\022\036\n\026userPvpBoardObstacleId\030\001",
-      " \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001" +
-      "(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026Battle" +
-      "ItemFactoryProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\022\022\n\npowe" +
-      "rLimit\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOU" +
-      "RCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MO" +
-      "NSTER\020\024*G\n\021StructOrientation\022\022\n\016NO_ORIEN" +
-      "TATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002" +
-      "*2\n\021BoardObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK" +
-      "\020\002\022\010\n\004HOLE\020\003B\020B\016StructureProto"
+      "\013orientation\030\010 \001(\0162!.com.lvl6.proto.Stru",
+      "ctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(\005" +
+      "\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(" +
+      "\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 \001" +
+      "(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nobs" +
+      "tacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCo" +
+      "stType\030\003 \001(\0162\034.com.lvl6.proto.ResourceTy" +
+      "pe\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(" +
+      "\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgN" +
+      "ame\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001(",
+      "\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppear" +
+      "\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowV" +
+      "erticalOffset\030\r \001(\002\022\037\n\027shadowHorizontalO" +
+      "fffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n" +
+      "\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037." +
+      "com.lvl6.proto.CoordinateProto\0226\n\013orient" +
+      "ation\030\005 \001(\0162!.com.lvl6.proto.StructOrien" +
+      "tation\"\333\001\n\021UserObstacleProto\022\030\n\020userObst" +
+      "acleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobst" +
+      "acleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.",
+      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
+      "n\030\005 \001(\0162!.com.lvl6.proto.StructOrientati" +
+      "on\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCham" +
+      "berProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
+      "proto.StructureInfoProto\0228\n\017qualityUnloc" +
+      "ked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COMM" +
+      "ON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCente" +
+      "rProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
+      "oto.StructureInfoProto\022\025\n\rteamCostLimit\030" +
+      "\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030\001",
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026t" +
+      "eamDonationPowerLimit\030\003 \001(\005\"h\n\022PvpBoardH" +
+      "ouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
+      ".proto.StructureInfoProto\022\032\n\022pvpBoardPow" +
+      "erLimit\030\002 \001(\005\"\240\001\n\025PvpBoardObstacleProto\022" +
+      "\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014obs" +
+      "tacleType\030\003 \001(\0162!.com.lvl6.proto.BoardOb" +
+      "stacleType\022\020\n\010powerAmt\030\004 \001(\005\022\032\n\022initiall" +
+      "yAvailable\030\005 \001(\010\"}\n\031UserPvpBoardObstacle",
+      "Proto\022\036\n\026userPvpBoardObstacleId\030\001 \001(\005\022\020\n" +
+      "\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014\n\004p" +
+      "osX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026BattleItemFac" +
+      "toryProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
+      ".proto.StructureInfoProto\022\022\n\npowerLimit\030" +
+      "\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022\010" +
+      "\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024" +
+      "*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION\020" +
+      "\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*2\n\021Boa" +
+      "rdObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004H",
+      "OLE\020\003B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21925,7 +22004,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_ResearchHouseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ResearchHouseProto_descriptor,
-        new java.lang.String[] { "StructInfo", });
+        new java.lang.String[] { "StructInfo", "ResearchSpeedMultiplier", });
     internal_static_com_lvl6_proto_HospitalProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new

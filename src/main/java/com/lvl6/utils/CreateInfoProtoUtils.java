@@ -3885,6 +3885,7 @@ public class CreateInfoProtoUtils {
 		ResearchHouseProto.Builder rhpb = ResearchHouseProto.newBuilder();
 
 		rhpb.setStructInfo(sip);
+		rhpb.setResearchSpeedMultiplier(srh.getResearchSpeedMultiplier());
 		return rhpb.build();
 	}
 
