@@ -134,11 +134,34 @@ public class RedeemMiniEventRewardAction {
 		//check to see there are rewards
 		miniEventTierRewards = MiniEventTierRewardRetrieveUtils
 				.getMiniEventTierReward(mefplId);
+		log.info("all MiniEventTierRewards: {}", miniEventTierRewards);
 
 		if (null == miniEventTierRewards || miniEventTierRewards.isEmpty()) {
 			log.error("no rewards for MiniEventForPlayerLvl: {}", me);
 			return false;
 		}
+
+		//need to filter out the rewards of a certain tier lvl
+		int rewardTier = 1;
+
+		if (RewardTier.TIER_ONE.equals(rt)) {
+			rewardTier = 1;
+		} else if (RewardTier.TIER_TWO.equals(rt)) {
+			rewardTier = 2;
+		} else {
+			rewardTier = 3;
+		}
+
+		Collection<MiniEventTierReward> miniEventTierRewardsTemp =
+				new ArrayList<MiniEventTierReward>();
+		for (MiniEventTierReward metr : miniEventTierRewards)
+		{
+			if (metr.getRewardTier() == rewardTier)
+			{
+				miniEventTierRewardsTemp.add(metr);
+			}
+		}
+		miniEventTierRewards = miniEventTierRewardsTemp;
 
 		mefu = mefuRetrieveUtil.getSpecificUserMiniEvent(userId);
 		if (null == mefu) {
@@ -174,6 +197,8 @@ public class RedeemMiniEventRewardAction {
 			sb.append(" ");
 			sb.append(metr.getId());
 		}
+
+		log.info("MiniEventTierRewards awarded: {}", miniEventTierRewards);
 
 		//award the Rewards to the user
 		//TODO: Figure out how to only set the necessary arguments
