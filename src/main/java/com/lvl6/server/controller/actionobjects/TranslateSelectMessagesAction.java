@@ -131,6 +131,8 @@ public class TranslateSelectMessagesAction {
 
 		boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
 				listOfPrivateChatPosts);
+		
+		
 
 		if(successfulTranslationInsertion) {
 			return true;
