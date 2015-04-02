@@ -174,6 +174,7 @@ public class SendGroupChatController extends EventController {
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
 				
+				log.info(censoredChatMessage);
 				chatProto.setMessage(CreateInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), chatProto.getSender(),
 								censoredChatMessage, user.isAdmin(), null, translateMap));	
