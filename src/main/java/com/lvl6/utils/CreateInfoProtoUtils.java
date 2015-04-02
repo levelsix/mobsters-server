@@ -1406,8 +1406,11 @@ public class CreateInfoProtoUtils {
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap) {
+		log.info("WTF");
+
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
+		log.info("fuck this");
 
 		gcmpb.setSender(user);
 		log.info("fail here?");
