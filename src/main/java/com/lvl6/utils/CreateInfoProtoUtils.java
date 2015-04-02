@@ -1387,18 +1387,13 @@ public class CreateInfoProtoUtils {
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap) {
-		log.info("WTF");
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
-		log.info("fuck this");
 
 		gcmpb.setSender(user);
-		log.info("fail here?");
 		gcmpb.setTimeOfChat(time);
-		log.info(" or fail here?");
 		gcmpb.setContent(content);
-		log.info("just set content");
 
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
@@ -1418,7 +1413,6 @@ public class CreateInfoProtoUtils {
 			gcmpb.setChatUuid(chatId);
 		}
 		
-		log.info("about to build");
 		return gcmpb.build();
 	}
 	
