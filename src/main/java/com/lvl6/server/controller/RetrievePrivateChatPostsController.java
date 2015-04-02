@@ -132,6 +132,11 @@ public class RetrievePrivateChatPostsController extends EventController {
 						//for not hitting the db for every private chat post
 						Map<String, MinimumUserProtoWithLevel> userIdsToMups = generateUserIdsToMupsWithLevel(
 								usersByIds, userId, senderProto, otherUserId);
+						
+						List<String> chatIds = new ArrayList<String>();
+						for(PrivateChatPost pcp : recentPrivateChatPosts) {
+							chatIds.add(pcp.getId());
+						}
 
 						List<String> chatIds = new ArrayList<String>();
 						for(PrivateChatPost pcp : recentPrivateChatPosts) {
