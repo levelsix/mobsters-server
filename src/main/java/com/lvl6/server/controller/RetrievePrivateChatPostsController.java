@@ -73,7 +73,8 @@ public class RetrievePrivateChatPostsController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String otherUserId = reqProto.getOtherUserUuid();
-		TranslateLanguages translateLanguage = reqProto.getLanguage();
+		TranslateLanguages translateLanguage = null;
+		translateLanguage = reqProto.getLanguage();
 
 		RetrievePrivateChatPostsResponseProto.Builder resBuilder = RetrievePrivateChatPostsResponseProto
 				.newBuilder();
