@@ -1933,12 +1933,11 @@ public class MiscMethods {
 		
 		List<Language> listOfLanguages = new ArrayList<Language>();
 		listOfLanguages.add(Language.ARABIC);
-		listOfLanguages.add(Language.CHINESE_SIMPLIFIED);
-		listOfLanguages.add(Language.CHINESE_TRADITIONAL);
 		listOfLanguages.add(Language.ENGLISH);
 		listOfLanguages.add(Language.FRENCH);
 		listOfLanguages.add(Language.GERMAN);
 		listOfLanguages.add(Language.SPANISH);
+		listOfLanguages.add(Language.RUSSIAN);
 
 		try {
 			if(language != null) {
@@ -1962,20 +1961,24 @@ public class MiscMethods {
 
 	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
 		try {
-			if(language.getName(Language.ENGLISH).equals("ARABIC")) {
+			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
 				TranslateLanguages tl = TranslateLanguages.ARABIC;
 				return tl;
 			}
-			else if(language.getName(Language.ENGLISH).equals("ENGLISH")) {
+			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("ENGLISH")) {
 				TranslateLanguages tl = TranslateLanguages.ENGLISH;
 				return tl;		
 			}
-			else if(language.getName(Language.ENGLISH).equals("FRENCH")) {
+			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("FRENCH")) {
 				TranslateLanguages tl = TranslateLanguages.FRENCH;
 				return tl;	
 			}
-			else if(language.getName(Language.ENGLISH).equals("GERMAN")) {
+			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("GERMAN")) {
 				TranslateLanguages tl = TranslateLanguages.GERMAN;
+				return tl;	
+			}
+			else if(language.getName(Language.RUSSIAN).equalsIgnoreCase("RUSSIAN")) {
+				TranslateLanguages tl = TranslateLanguages.RUSSIAN;
 				return tl;	
 			}
 			else {
@@ -2004,6 +2007,9 @@ public class MiscMethods {
 		}
 		else if(tl.toString().equals("SPANISH")) {
 			return Language.SPANISH;
+		}
+		else if(tl.toString().equals("RUSSIAN")) {
+			return Language.RUSSIAN;
 		}
 		else return null;
 	}
