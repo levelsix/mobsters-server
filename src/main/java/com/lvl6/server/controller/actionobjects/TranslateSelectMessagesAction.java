@@ -78,6 +78,11 @@ public class TranslateSelectMessagesAction {
 
 
 	private boolean verifySemantics(Builder resBuilder) {
+		if(languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
+			log.info("no translation");
+			return true;
+		}
+		
 		language = MiscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
@@ -112,32 +117,36 @@ public class TranslateSelectMessagesAction {
 			return false;
 		}
 
-		privateChatPostMap = new HashMap<String, PrivateChatPost>();
-		Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
-		for(PrivateChatPost pcp : listOfPrivateChatPosts) {
-			String message = pcp.getContent();
-			chatIdsToTranslations.put(pcp.getId(), message);
-			Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(language, message);
+		if(!languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
+			privateChatPostMap = new HashMap<String, PrivateChatPost>();
+			Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
+			for(PrivateChatPost pcp : listOfPrivateChatPosts) {
+				String message = pcp.getContent();
+				chatIdsToTranslations.put(pcp.getId(), message);
+				Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(language, message);
 
-			for(TranslateLanguages tl : translatedMessage.keySet()) {
-				TranslatedText tt = new TranslatedText();
-				tt.setLanguage(tl.toString());
-				tt.setText(translatedMessage.get(tl));
-				pcp.setTranslatedText(tt);
+				for(TranslateLanguages tl : translatedMessage.keySet()) {
+					TranslatedText tt = new TranslatedText();
+					tt.setLanguage(tl.toString());
+					tt.setText(translatedMessage.get(tl));
+					pcp.setTranslatedText(tt);
+				}
+				privateChatPostMap.put(pcp.getId(), pcp);
+
 			}
-			privateChatPostMap.put(pcp.getId(), pcp);
 
+			boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
+					listOfPrivateChatPosts);
+
+
+
+			if(successfulTranslationInsertion) {
+				return true;
+			}
+			else return false;
 		}
-
-		boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
-				listOfPrivateChatPosts);
 		
-		
-
-		if(successfulTranslationInsertion) {
-			return true;
-		}
-		else return false;
+		return successfulUpdate;
 	}
 
 	
