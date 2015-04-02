@@ -1586,6 +1586,10 @@ public class StartupController extends EventController {
 						TranslateLanguages.valueOf(tsfu.getLanguage()), tsfuList);
 			}
 		}
+		else {
+			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
+					TranslateLanguages.ENGLISH, tsfuList);
+		}
 
 		//if there's no default languages, they havent ever been set
 		if (null != dlp) {
