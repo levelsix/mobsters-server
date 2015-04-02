@@ -157,6 +157,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 			if (null != bifuList && !bifuList.isEmpty()) {
 				userTranslationSettings = bifuList.get(0);
 			}
+			else return null;
 
 		} catch (Exception e) {
 			log.error(
