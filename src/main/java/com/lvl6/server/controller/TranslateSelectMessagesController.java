@@ -143,7 +143,7 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, ct, 
+					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil,
 					insertUtil, updateUtil);
 
 			tsma.execute(resBuilder);
