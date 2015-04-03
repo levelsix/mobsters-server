@@ -1418,7 +1418,7 @@ public class CreateInfoProtoUtils {
 
 		if(!turnOffTranslation) {
 			if(translatedMap == null) {
-				translatedMap = MiscMethods.translate(null, content);
+				translatedMap = MiscMethods.translate(null, null, content);
 			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();

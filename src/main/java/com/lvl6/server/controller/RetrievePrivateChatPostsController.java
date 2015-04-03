@@ -154,7 +154,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
 								for(ChatTranslations ct : chatTranslationsList) {
 									//maybe can do ==? idk this seems safer just in case
-									if(ct.getTranslateLanguage().toString().equals(translateLanguage.toString())) {
+									if(ct.getTranslateLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
 										returnMap.put(chatId, ct);
 									}
 								}
@@ -183,7 +183,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								}
 								else {
 									Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
-									translateMap = MiscMethods.translate(language, pwp.getContent());
+									translateMap = MiscMethods.translate(null, language, pwp.getContent());
 								}
 
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils

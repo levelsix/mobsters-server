@@ -755,6 +755,7 @@ public class DBConstants {
 	public static final String TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID = "sender_user_id";
 	public static final String TRANSLATION_SETTINGS_FOR_USER__LANGUAGE = "language";
 	public static final String TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE = "chat_type";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON = "translations_on";
 
 	/*USER TABLE*/
 	public static final String USER__ID = GENERIC__ID;

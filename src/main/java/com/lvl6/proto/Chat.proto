@@ -83,7 +83,7 @@ message PrivateChatDefaultLanguageProto {
 	optional string recipientUserId = 1;
 	optional string senderUserId = 2;
 	optional TranslateLanguages defaultLanguage = 3;
-
+	optional bool translateOn = 4;
 }
 
 	

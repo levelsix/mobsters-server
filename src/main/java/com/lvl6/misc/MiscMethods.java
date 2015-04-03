@@ -1936,7 +1936,8 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 	
-	public static Map<TranslateLanguages, String> translate(Language language, String text) {
+	public static Map<TranslateLanguages, String> translate(Language sourceLanguage, 
+			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
 		
@@ -1952,14 +1953,20 @@ public class MiscMethods {
 		listOfLanguages.add(Language.RUSSIAN);
 
 		try {
-			if(language != null) {
-				translatedText = Translate.execute(text, language);
-				TranslateLanguages tl2 = convertFromLanguageToEnum(language);
+			if(recipientLanguage != null) {
+				if(sourceLanguage == null) {
+					translatedText = Translate.execute(text, recipientLanguage);
+				}
+				else translatedText = Translate.execute(text, sourceLanguage, recipientLanguage);
+				TranslateLanguages tl2 = convertFromLanguageToEnum(recipientLanguage);
 				returnMap.put(tl2, translatedText);
 			}
 			else {
 				for(Language language2 : listOfLanguages) {
-					translatedText = Translate.execute(text, language2);
+					if(sourceLanguage == null) {
+						translatedText = Translate.execute(text, language2);
+					}
+					else translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
 				}	
@@ -2004,22 +2011,22 @@ public class MiscMethods {
 	}
 
 	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {
-		if(tl.toString().equals("ARABIC")) {
+		if(tl.toString().equalsIgnoreCase("ARABIC")) {
 			return Language.ARABIC;
 		}
-		else if(tl.toString().equals("ENGLISH")) {
+		else if(tl.toString().equalsIgnoreCase("ENGLISH")) {
 			return Language.ENGLISH;
 		}
-		else if(tl.toString().equals("FRENCH")) {
+		else if(tl.toString().equalsIgnoreCase("FRENCH")) {
 			return Language.FRENCH;
 		}
-		else if(tl.toString().equals("GERMAN")) {
+		else if(tl.toString().equalsIgnoreCase("GERMAN")) {
 			return Language.GERMAN;
 		}
-		else if(tl.toString().equals("SPANISH")) {
+		else if(tl.toString().equalsIgnoreCase("SPANISH")) {
 			return Language.SPANISH;
 		}
-		else if(tl.toString().equals("RUSSIAN")) {
+		else if(tl.toString().equalsIgnoreCase("RUSSIAN")) {
 			return Language.RUSSIAN;
 		}
 		else return null;

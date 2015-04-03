@@ -28,6 +28,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
@@ -161,12 +162,17 @@ public class PrivateChatPostController extends EventController {
 					boolean translationRequired = true;
 					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
 							getSpecificUserTranslationSettings(recipientId, posterId);
+					TranslationSettingsForUser settingForPoster = translationSettingsForUserRetrieveUtil.
+							getSpecificUserTranslationSettings(posterId, recipientId);
 					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
 
 					Language recipientLanguage;
+					Language posterLanguage = null;
 					String recipientLanguageString = "";
+					String posterLanguageString = "";
 					TranslatedText tt = new TranslatedText();
-					
+
+
 					//get recipient's language setting
 					if(settingForRecipient == null) {
 						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
@@ -183,17 +189,44 @@ public class PrivateChatPostController extends EventController {
 						}
 					}
 					else {
+						translationRequired = settingForRecipient.isTranslationsOn();
 						recipientLanguageString = settingForRecipient.getLanguage();
 					}
-					recipientLanguage = Language.valueOf(recipientLanguageString);
 					
+					recipientLanguage = Language.valueOf(recipientLanguageString);
+
+					//checking if user even wants stuff translated
+					if(translationRequired) {
+						//get poster's language setting, if translationrequired still
+						if(settingForPoster == null) {
+							TranslationSettingsForUser globalChatSettingsForPoster = translationSettingsForUserRetrieveUtil.
+									getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
+							if(globalChatSettingsForPoster != null) {
+								insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(), 
+										ChatType.PRIVATE_CHAT.toString());
+								posterLanguageString = globalChatSettingsForPoster.getLanguage();
+							}
+							else {
+								insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
+										ChatType.PRIVATE_CHAT.toString());
+								posterLanguageString = TranslateLanguages.ENGLISH.toString();
+							}
+						}
+						else {
+							posterLanguageString = settingForPoster.getLanguage();
+						}
+						posterLanguage = Language.valueOf(posterLanguageString);
+					}
+
 					//detect the language of msg, if it matches language setting of recipient, dont translate anything
-					Language detectedLanguage = MiscMethods.detectedLanguage(censoredContent);
-					if(recipientLanguageString.equalsIgnoreCase(detectedLanguage.getName(Language.ENGLISH))) {
+					//					Language detectedLanguage = MiscMethods.detectedLanguage(censoredContent);
+					//instead of using microsoft detect, which is ass, infer from the sender's default language setting
+
+					if(recipientLanguageString.equalsIgnoreCase(posterLanguageString)) {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = MiscMethods.translate(recipientLanguage, censoredContent);
+						translatedMessage = MiscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
 						
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
@@ -255,6 +288,13 @@ public class PrivateChatPostController extends EventController {
 										recipientClan, null);
 					}
 					resBuilder.setPost(pcpp);
+					
+					PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
+					pcdlpb.setRecipientUserId(recipientId);
+					pcdlpb.setSenderUserId(posterId);
+					pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(recipientLanguageString));
+					pcdlpb.setTranslateOn(translationRequired);
+					resBuilder.setTranslationSetting(pcdlpb.build());
 
 					// send to recipient of the private chat post
 					PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(
