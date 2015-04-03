@@ -22,6 +22,7 @@ import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.Red
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -33,28 +34,33 @@ public class RedeemMiniEventRewardAction {
 	}.getClass().getEnclosingClass());
 
 	private String userId;
+	private User user;
 	private int maxCash;
 	private int maxOil;
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
+	private UserRetrieveUtils2 userRetrieveUtil;
 	private MiniEventForUserRetrieveUtil mefuRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 
-	public RedeemMiniEventRewardAction(String userId, int maxCash,
-			int maxOil, int mefplId, RewardTier rt, Date clientTime,
+	public RedeemMiniEventRewardAction(String userId, User user,
+			int maxCash, int maxOil, int mefplId, RewardTier rt,
+			Date clientTime, UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
+		this.user = user;
 		this.maxCash = maxCash;
 		this.maxOil = maxOil;
 		this.mefplId = mefplId;
 		this.rt = rt;
 		this.clientTime = clientTime;
+		this.userRetrieveUtil = userRetrieveUtil;
 		this.mefuRetrieveUtil = mefuRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
@@ -128,11 +134,34 @@ public class RedeemMiniEventRewardAction {
 		//check to see there are rewards
 		miniEventTierRewards = MiniEventTierRewardRetrieveUtils
 				.getMiniEventTierReward(mefplId);
+		log.info("all MiniEventTierRewards: {}", miniEventTierRewards);
 
 		if (null == miniEventTierRewards || miniEventTierRewards.isEmpty()) {
 			log.error("no rewards for MiniEventForPlayerLvl: {}", me);
 			return false;
 		}
+
+		//need to filter out the rewards of a certain tier lvl
+		int rewardTier = 1;
+
+		if (RewardTier.TIER_ONE.equals(rt)) {
+			rewardTier = 1;
+		} else if (RewardTier.TIER_TWO.equals(rt)) {
+			rewardTier = 2;
+		} else {
+			rewardTier = 3;
+		}
+
+		Collection<MiniEventTierReward> miniEventTierRewardsTemp =
+				new ArrayList<MiniEventTierReward>();
+		for (MiniEventTierReward metr : miniEventTierRewards)
+		{
+			if (metr.getRewardTier() == rewardTier)
+			{
+				miniEventTierRewardsTemp.add(metr);
+			}
+		}
+		miniEventTierRewards = miniEventTierRewardsTemp;
 
 		mefu = mefuRetrieveUtil.getSpecificUserMiniEvent(userId);
 		if (null == mefu) {
@@ -169,11 +198,14 @@ public class RedeemMiniEventRewardAction {
 			sb.append(metr.getId());
 		}
 
+		log.info("MiniEventTierRewards awarded: {}", miniEventTierRewards);
+
 		//award the Rewards to the user
 		//TODO: Figure out how to only set the necessary arguments
 		awardedResources = false;
-		ara = new AwardRewardAction(userId, maxCash, maxOil,
-				clientTime, sb.toString(), rewards, itemForUserRetrieveUtil,
+		ara = new AwardRewardAction(userId, user, maxCash, maxOil,
+				clientTime, sb.toString(), rewards,
+				userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil);
 
 		boolean awardedRewards = ara.execute();

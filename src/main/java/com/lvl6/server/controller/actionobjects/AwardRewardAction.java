@@ -17,6 +17,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -26,27 +27,33 @@ public class AwardRewardAction {
 	}.getClass().getEnclosingClass());
 
 	private String userId;
+	private User u;
 	private int maxCash;
 	private int maxOil;
 	private Date now;
 	private String awardReason;
 	private Collection<Reward> rewards;
+	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
-	public AwardRewardAction(String userId, int maxCash, int maxOil,
-			Date now, String awardReason, Collection<Reward> rewards,
+	public AwardRewardAction(String userId, User u, int maxCash,
+			int maxOil, Date now, String awardReason,
+			Collection<Reward> rewards,
+			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
+		this.u = u;
 		this.maxCash = maxCash;
 		this.maxOil = maxOil;
 		this.now = now;
 		this.awardReason = awardReason;
 		this.rewards = rewards;
+		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
@@ -64,18 +71,6 @@ public class AwardRewardAction {
 	//	public RetrieveMiniEventResource execute() {
 	//
 	//	}
-
-	//optional settable state
-	private User u;
-
-	public User getU() {
-		return u;
-	}
-
-	public void setU(User u) {
-		this.u = u;
-	}
-
 
 	//derived state
 	private List<ItemForUser> nuOrUpdatedItems;
@@ -323,6 +318,9 @@ public class AwardRewardAction {
 
 		if ( awardResources ) {
 			prevCurrencies = new HashMap<String, Integer>();
+			if (null == u) {
+				u = userRetrieveUtil.getUserById(userId);
+			}
 		}
 
 		if ( awardGems ) {
@@ -436,6 +434,13 @@ public class AwardRewardAction {
 		return success;
 	}
 
+	public User getU() {
+		return u;
+	}
+
+	public void setU(User u) {
+		this.u = u;
+	}
 
 	public List<ItemForUser> getNuOrUpdatedItems() {
 		return nuOrUpdatedItems;
