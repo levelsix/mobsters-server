@@ -188,7 +188,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap);
+												content, isAdmin, pwp.getId(), translateMap, null);
 								resBuilder.addPosts(gcmp);
 							}
 							else {

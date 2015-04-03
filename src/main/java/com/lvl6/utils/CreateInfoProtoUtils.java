@@ -29,6 +29,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.CepfuRaidStageHistory;
+import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -279,6 +280,7 @@ import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -1299,6 +1301,24 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
+		
+		List<String> chatIds = new ArrayList<String>();
+		chatIds.add(p.getId());
+		Map<String, List<ChatTranslations>> chatTranslationMap = ChatTranslationsRetrieveUtils.
+				getChatTranslationsForSpecificChatIds(chatIds);
+		
+		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+		
+		for(String chatId : chatTranslationMap.keySet()) {
+			List<ChatTranslations> list = chatTranslationMap.get(chatId);
+			for(ChatTranslations ct : list) {
+				ttpb.setLanguage(ct.getTranslateLanguage());
+				ttpb.setText(ct.getText());
+			}
+			pcppb.setTranslatedContent(ttpb.build());
+		}
+		
+		
 		return pcppb.build();
 	}
 
@@ -1405,7 +1425,8 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
-			String chatId, Map<TranslateLanguages, String> translatedMap) {
+			String chatId, Map<TranslateLanguages, String> translatedMap, 
+			TranslateLanguages contentLanguage) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
@@ -1413,7 +1434,11 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
-
+		
+		if(contentLanguage != null) {
+			gcmpb.setContentLanguage(contentLanguage);
+		}
+		
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation) {

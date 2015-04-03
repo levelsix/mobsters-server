@@ -2157,6 +2157,23 @@ public final class ChatProto {
     long getTimeOfChat();
 
     /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+     *
+     * <pre>
+     *the language of original content
+     * </pre>
+     */
+    boolean hasContentLanguage();
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+     *
+     * <pre>
+     *the language of original content
+     * </pre>
+     */
+    com.lvl6.proto.ChatProto.TranslateLanguages getContentLanguage();
+
+    /**
      * <code>optional string content = 3;</code>
      */
     boolean hasContent();
@@ -2289,27 +2306,38 @@ public final class ChatProto {
             }
             case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               content_ = bs;
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 translatedContent_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               translatedContent_.add(input.readMessage(com.lvl6.proto.ChatProto.TranslatedTextProto.PARSER, extensionRegistry));
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               isAdmin_ = input.readBool();
               break;
             }
             case 50: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               chatUuid_ = bs;
+              break;
+            }
+            case 56: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.ChatProto.TranslateLanguages value = com.lvl6.proto.ChatProto.TranslateLanguages.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(7, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                contentLanguage_ = value;
+              }
               break;
             }
           }
@@ -2320,7 +2348,7 @@ public final class ChatProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           translatedContent_ = java.util.Collections.unmodifiableList(translatedContent_);
         }
         this.unknownFields = unknownFields.build();
@@ -2391,13 +2419,36 @@ public final class ChatProto {
       return timeOfChat_;
     }
 
+    public static final int CONTENTLANGUAGE_FIELD_NUMBER = 7;
+    private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_;
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+     *
+     * <pre>
+     *the language of original content
+     * </pre>
+     */
+    public boolean hasContentLanguage() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+     *
+     * <pre>
+     *the language of original content
+     * </pre>
+     */
+    public com.lvl6.proto.ChatProto.TranslateLanguages getContentLanguage() {
+      return contentLanguage_;
+    }
+
     public static final int CONTENT_FIELD_NUMBER = 3;
     private java.lang.Object content_;
     /**
      * <code>optional string content = 3;</code>
      */
     public boolean hasContent() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string content = 3;</code>
@@ -2474,7 +2525,7 @@ public final class ChatProto {
      * <code>optional bool isAdmin = 5;</code>
      */
     public boolean hasIsAdmin() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional bool isAdmin = 5;</code>
@@ -2489,7 +2540,7 @@ public final class ChatProto {
      * <code>optional string chatUuid = 6;</code>
      */
     public boolean hasChatUuid() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string chatUuid = 6;</code>
@@ -2528,6 +2579,7 @@ public final class ChatProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       timeOfChat_ = 0L;
+      contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       content_ = "";
       translatedContent_ = java.util.Collections.emptyList();
       isAdmin_ = false;
@@ -2552,17 +2604,20 @@ public final class ChatProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, timeOfChat_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(3, getContentBytes());
       }
       for (int i = 0; i < translatedContent_.size(); i++) {
         output.writeMessage(4, translatedContent_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(5, isAdmin_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getChatUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(7, contentLanguage_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2581,7 +2636,7 @@ public final class ChatProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, timeOfChat_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getContentBytes());
       }
@@ -2589,13 +2644,17 @@ public final class ChatProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, translatedContent_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, isAdmin_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getChatUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, contentLanguage_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2724,18 +2783,20 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         timeOfChat_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        content_ = "";
+        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
         bitField0_ = (bitField0_ & ~0x00000004);
+        content_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (translatedContentBuilder_ == null) {
           translatedContent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           translatedContentBuilder_.clear();
         }
         isAdmin_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        chatUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        chatUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2779,22 +2840,26 @@ public final class ChatProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.contentLanguage_ = contentLanguage_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.content_ = content_;
         if (translatedContentBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             translatedContent_ = java.util.Collections.unmodifiableList(translatedContent_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.translatedContent_ = translatedContent_;
         } else {
           result.translatedContent_ = translatedContentBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.isAdmin_ = isAdmin_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.isAdmin_ = isAdmin_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.chatUuid_ = chatUuid_;
         result.bitField0_ = to_bitField0_;
@@ -2819,8 +2884,11 @@ public final class ChatProto {
         if (other.hasTimeOfChat()) {
           setTimeOfChat(other.getTimeOfChat());
         }
+        if (other.hasContentLanguage()) {
+          setContentLanguage(other.getContentLanguage());
+        }
         if (other.hasContent()) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
           content_ = other.content_;
           onChanged();
         }
@@ -2828,7 +2896,7 @@ public final class ChatProto {
           if (!other.translatedContent_.isEmpty()) {
             if (translatedContent_.isEmpty()) {
               translatedContent_ = other.translatedContent_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureTranslatedContentIsMutable();
               translatedContent_.addAll(other.translatedContent_);
@@ -2841,7 +2909,7 @@ public final class ChatProto {
               translatedContentBuilder_.dispose();
               translatedContentBuilder_ = null;
               translatedContent_ = other.translatedContent_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               translatedContentBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTranslatedContentFieldBuilder() : null;
@@ -2854,7 +2922,7 @@ public final class ChatProto {
           setIsAdmin(other.getIsAdmin());
         }
         if (other.hasChatUuid()) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
           chatUuid_ = other.chatUuid_;
           onChanged();
         }
@@ -3033,12 +3101,63 @@ public final class ChatProto {
         return this;
       }
 
+      private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+       *
+       * <pre>
+       *the language of original content
+       * </pre>
+       */
+      public boolean hasContentLanguage() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+       *
+       * <pre>
+       *the language of original content
+       * </pre>
+       */
+      public com.lvl6.proto.ChatProto.TranslateLanguages getContentLanguage() {
+        return contentLanguage_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+       *
+       * <pre>
+       *the language of original content
+       * </pre>
+       */
+      public Builder setContentLanguage(com.lvl6.proto.ChatProto.TranslateLanguages value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        contentLanguage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
+       *
+       * <pre>
+       *the language of original content
+       * </pre>
+       */
+      public Builder clearContentLanguage() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object content_ = "";
       /**
        * <code>optional string content = 3;</code>
        */
       public boolean hasContent() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string content = 3;</code>
@@ -3081,7 +3200,7 @@ public final class ChatProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         content_ = value;
         onChanged();
         return this;
@@ -3090,7 +3209,7 @@ public final class ChatProto {
        * <code>optional string content = 3;</code>
        */
       public Builder clearContent() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         content_ = getDefaultInstance().getContent();
         onChanged();
         return this;
@@ -3103,7 +3222,7 @@ public final class ChatProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         content_ = value;
         onChanged();
         return this;
@@ -3112,9 +3231,9 @@ public final class ChatProto {
       private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_ =
         java.util.Collections.emptyList();
       private void ensureTranslatedContentIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           translatedContent_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>(translatedContent_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -3264,7 +3383,7 @@ public final class ChatProto {
       public Builder clearTranslatedContent() {
         if (translatedContentBuilder_ == null) {
           translatedContent_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           translatedContentBuilder_.clear();
@@ -3341,7 +3460,7 @@ public final class ChatProto {
           translatedContentBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder>(
                   translatedContent_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           translatedContent_ = null;
@@ -3354,7 +3473,7 @@ public final class ChatProto {
        * <code>optional bool isAdmin = 5;</code>
        */
       public boolean hasIsAdmin() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional bool isAdmin = 5;</code>
@@ -3366,7 +3485,7 @@ public final class ChatProto {
        * <code>optional bool isAdmin = 5;</code>
        */
       public Builder setIsAdmin(boolean value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         isAdmin_ = value;
         onChanged();
         return this;
@@ -3375,7 +3494,7 @@ public final class ChatProto {
        * <code>optional bool isAdmin = 5;</code>
        */
       public Builder clearIsAdmin() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         isAdmin_ = false;
         onChanged();
         return this;
@@ -3386,7 +3505,7 @@ public final class ChatProto {
        * <code>optional string chatUuid = 6;</code>
        */
       public boolean hasChatUuid() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string chatUuid = 6;</code>
@@ -3429,7 +3548,7 @@ public final class ChatProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         chatUuid_ = value;
         onChanged();
         return this;
@@ -3438,7 +3557,7 @@ public final class ChatProto {
        * <code>optional string chatUuid = 6;</code>
        */
       public Builder clearChatUuid() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         chatUuid_ = getDefaultInstance().getChatUuid();
         onChanged();
         return this;
@@ -3451,7 +3570,7 @@ public final class ChatProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         chatUuid_ = value;
         onChanged();
         return this;
@@ -4067,6 +4186,15 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProtoOrBuilder getPrivateDefaultLanguageOrBuilder(
         int index);
+
+    /**
+     * <code>optional bool translateOn = 3;</code>
+     */
+    boolean hasTranslateOn();
+    /**
+     * <code>optional bool translateOn = 3;</code>
+     */
+    boolean getTranslateOn();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DefaultLanguagesProto}
@@ -4137,6 +4265,11 @@ public final class ChatProto {
                 mutable_bitField0_ |= 0x00000002;
               }
               privateDefaultLanguage_.add(input.readMessage(com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              translateOn_ = input.readBool();
               break;
             }
           }
@@ -4232,9 +4365,25 @@ public final class ChatProto {
       return privateDefaultLanguage_.get(index);
     }
 
+    public static final int TRANSLATEON_FIELD_NUMBER = 3;
+    private boolean translateOn_;
+    /**
+     * <code>optional bool translateOn = 3;</code>
+     */
+    public boolean hasTranslateOn() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bool translateOn = 3;</code>
+     */
+    public boolean getTranslateOn() {
+      return translateOn_;
+    }
+
     private void initFields() {
       globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       privateDefaultLanguage_ = java.util.Collections.emptyList();
+      translateOn_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4255,6 +4404,9 @@ public final class ChatProto {
       for (int i = 0; i < privateDefaultLanguage_.size(); i++) {
         output.writeMessage(2, privateDefaultLanguage_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(3, translateOn_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4271,6 +4423,10 @@ public final class ChatProto {
       for (int i = 0; i < privateDefaultLanguage_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, privateDefaultLanguage_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, translateOn_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4398,6 +4554,8 @@ public final class ChatProto {
         } else {
           privateDefaultLanguageBuilder_.clear();
         }
+        translateOn_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4439,6 +4597,10 @@ public final class ChatProto {
         } else {
           result.privateDefaultLanguage_ = privateDefaultLanguageBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.translateOn_ = translateOn_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4483,6 +4645,9 @@ public final class ChatProto {
               privateDefaultLanguageBuilder_.addAllMessages(other.privateDefaultLanguage_);
             }
           }
+        }
+        if (other.hasTranslateOn()) {
+          setTranslateOn(other.getTranslateOn());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4784,6 +4949,38 @@ public final class ChatProto {
           privateDefaultLanguage_ = null;
         }
         return privateDefaultLanguageBuilder_;
+      }
+
+      private boolean translateOn_ ;
+      /**
+       * <code>optional bool translateOn = 3;</code>
+       */
+      public boolean hasTranslateOn() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool translateOn = 3;</code>
+       */
+      public boolean getTranslateOn() {
+        return translateOn_;
+      }
+      /**
+       * <code>optional bool translateOn = 3;</code>
+       */
+      public Builder setTranslateOn(boolean value) {
+        bitField0_ |= 0x00000004;
+        translateOn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool translateOn = 3;</code>
+       */
+      public Builder clearTranslateOn() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        translateOn_ = false;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.DefaultLanguagesProto)
@@ -5643,28 +5840,31 @@ public final class ChatProto {
       "ontent\030\005 \001(\t\022>\n\021translatedContent\030\006 \001(\0132" +
       "#.com.lvl6.proto.TranslatedTextProto\"6\n\n" +
       "ColorProto\022\013\n\003red\030\001 \001(\005\022\r\n\005green\030\002 \001(\005\022\014" +
-      "\n\004blue\030\003 \001(\005\"\332\001\n\025GroupChatMessageProto\0229",
+      "\n\004blue\030\003 \001(\005\"\227\002\n\025GroupChatMessageProto\0229",
       "\n\006sender\030\001 \001(\0132).com.lvl6.proto.MinimumU" +
-      "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022\017\n" +
-      "\007content\030\003 \001(\t\022>\n\021translatedContent\030\004 \003(" +
-      "\0132#.com.lvl6.proto.TranslatedTextProto\022\017" +
-      "\n\007isAdmin\030\005 \001(\010\022\020\n\010chatUuid\030\006 \001(\t\"Y\n\023Tra" +
-      "nslatedTextProto\0224\n\010language\030\001 \001(\0162\".com" +
-      ".lvl6.proto.TranslateLanguages\022\014\n\004text\030\002" +
-      " \001(\t\"\253\001\n\025DefaultLanguagesProto\022A\n\025global" +
-      "DefaultLanguage\030\001 \001(\0162\".com.lvl6.proto.T" +
-      "ranslateLanguages\022O\n\026privateDefaultLangu",
-      "age\030\002 \003(\0132/.com.lvl6.proto.PrivateChatDe" +
-      "faultLanguageProto\"\242\001\n\037PrivateChatDefaul" +
-      "tLanguageProto\022\027\n\017recipientUserId\030\001 \001(\t\022" +
-      "\024\n\014senderUserId\030\002 \001(\t\022;\n\017defaultLanguage" +
-      "\030\003 \001(\0162\".com.lvl6.proto.TranslateLanguag" +
-      "es\022\023\n\013translateOn\030\004 \001(\010*&\n\016GroupChatScop" +
-      "e\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatType\022\017\n\013G" +
-      "LOBAL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s\n\022Transl" +
-      "ateLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n" +
-      "\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RU",
-      "SSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
+      "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022;\n" +
+      "\017contentLanguage\030\007 \001(\0162\".com.lvl6.proto." +
+      "TranslateLanguages\022\017\n\007content\030\003 \001(\t\022>\n\021t" +
+      "ranslatedContent\030\004 \003(\0132#.com.lvl6.proto." +
+      "TranslatedTextProto\022\017\n\007isAdmin\030\005 \001(\010\022\020\n\010" +
+      "chatUuid\030\006 \001(\t\"Y\n\023TranslatedTextProto\0224\n" +
+      "\010language\030\001 \001(\0162\".com.lvl6.proto.Transla" +
+      "teLanguages\022\014\n\004text\030\002 \001(\t\"\300\001\n\025DefaultLan" +
+      "guagesProto\022A\n\025globalDefaultLanguage\030\001 \001",
+      "(\0162\".com.lvl6.proto.TranslateLanguages\022O" +
+      "\n\026privateDefaultLanguage\030\002 \003(\0132/.com.lvl" +
+      "6.proto.PrivateChatDefaultLanguageProto\022" +
+      "\023\n\013translateOn\030\003 \001(\010\"\242\001\n\037PrivateChatDefa" +
+      "ultLanguageProto\022\027\n\017recipientUserId\030\001 \001(" +
+      "\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017defaultLangua" +
+      "ge\030\003 \001(\0162\".com.lvl6.proto.TranslateLangu" +
+      "ages\022\023\n\013translateOn\030\004 \001(\010*&\n\016GroupChatSc" +
+      "ope\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatType\022\017\n" +
+      "\013GLOBAL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s\n\022Tran",
+      "slateLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022" +
+      "\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007" +
+      "RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5696,7 +5896,7 @@ public final class ChatProto {
     internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor,
-        new java.lang.String[] { "Sender", "TimeOfChat", "Content", "TranslatedContent", "IsAdmin", "ChatUuid", });
+        new java.lang.String[] { "Sender", "TimeOfChat", "ContentLanguage", "Content", "TranslatedContent", "IsAdmin", "ChatUuid", });
     internal_static_com_lvl6_proto_TranslatedTextProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_TranslatedTextProto_fieldAccessorTable = new
@@ -5708,7 +5908,7 @@ public final class ChatProto {
     internal_static_com_lvl6_proto_DefaultLanguagesProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor,
-        new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", });
+        new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", "TranslateOn", });
     internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_fieldAccessorTable = new

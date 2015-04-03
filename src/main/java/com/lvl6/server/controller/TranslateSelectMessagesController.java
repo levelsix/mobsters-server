@@ -91,6 +91,7 @@ public class TranslateSelectMessagesController extends EventController {
 		String recipientUserId = senderProto.getUserUuid();
 		//this guy sent the msgs 
 		String senderUserId = reqProto.getOtherUserUuid();
+		boolean translateOn = reqProto.getTranslateOn();
 		
 		ChatType ct = reqProto.getChatType();
 		
@@ -142,7 +143,7 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil, 
+					senderUserId, language, listOfPrivateChatPosts, ct, 
 					insertUtil, updateUtil);
 
 			tsma.execute(resBuilder);
