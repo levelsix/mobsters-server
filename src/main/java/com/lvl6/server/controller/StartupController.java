@@ -691,9 +691,22 @@ public class StartupController extends EventController {
 			// For creating the full user
 			fillMe.addUserId(user.getId());
 
+			//get translationsettingforuser list of the player to check for defaults
+			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUser(playerId);
+			boolean tsfuListIsNull = false;
+			
+			if(tsfuList == null) {
+				insertUtil.insertTranslateSettings(playerId, null, 
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
+						ChatType.GLOBAL_CHAT.toString(), 
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+				tsfuListIsNull = true;
+			}
+			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils());
+					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
@@ -740,6 +753,12 @@ public class StartupController extends EventController {
 
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
+			
+			//set this proto after executing privatechatprotos
+			setDefaultLanguagesForUser(resBuilder, playerId, tsfuList);
+			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
+
+			
 			sfesa.execute(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			spbha.execute(fillMe);

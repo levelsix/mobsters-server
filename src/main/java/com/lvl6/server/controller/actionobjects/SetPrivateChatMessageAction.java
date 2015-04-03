@@ -14,10 +14,12 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class SetPrivateChatMessageAction implements StartUpAction {
 
@@ -28,14 +30,19 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final User user;
 	private final String userId;
 	private final PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
-
+	private final boolean tsfuListIsNull;
+	protected final InsertUtil insertUtil;
+	
 	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
-			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
+			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
+			boolean tsfuListIsNull, InsertUtil insertUtil) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+		this.tsfuListIsNull = tsfuListIsNull;
+		this.insertUtil = insertUtil;
 	}
 
 	private Set<String> userIds;
@@ -179,6 +186,21 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		//			clanIdsToClans, clanIdsToUserIdSet, userIdsToUsers, clanlessUserUserIds, privateChatPostIds,
 		//			postIdsToPrivateChatPosts));
 
+		//if no global default, set the private chat's defaults as english
+		if(tsfuListIsNull) {
+			for(String id : privateChatPostIds) {
+				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
+				if(pcp.getRecipientId().equalsIgnoreCase(userId)) {
+					insertUtil.insertTranslateSettings(pcp.getRecipientId(), pcp.getPosterId(),
+							ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
+							ChatType.PRIVATE_CHAT.toString(), ControllerConstants.
+							TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+				}
+				
+			}
+		}
+		
+		
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();
 		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());
