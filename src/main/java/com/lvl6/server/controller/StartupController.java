@@ -162,7 +162,6 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
-<<<<<<< Updated upstream
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
