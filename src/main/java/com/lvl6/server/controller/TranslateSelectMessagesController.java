@@ -214,7 +214,7 @@ public class TranslateSelectMessagesController extends EventController {
 			TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
 			ttpb.setLanguage(TranslateLanguages.valueOf(tt.getLanguage()));
 			ttpb.setText(tt.getText());
-			pcppb.setTranslatedContent(ttpb.build());
+			pcppb.addTranslatedContent(ttpb.build());
 			returnList.add(pcppb.build());
 		}
 		return returnList;

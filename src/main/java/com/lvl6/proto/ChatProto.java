@@ -367,17 +367,28 @@ public final class ChatProto {
         getContentBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
-    boolean hasTranslatedContent();
+    java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> 
+        getTranslatedContentList();
     /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
-    com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent();
+    com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent(int index);
     /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
-    com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder();
+    int getTranslatedContentCount();
+    /**
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+        getTranslatedContentOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     */
+    com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PrivateChatPostProto}
@@ -475,16 +486,11 @@ public final class ChatProto {
               break;
             }
             case 50: {
-              com.lvl6.proto.ChatProto.TranslatedTextProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = translatedContent_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                translatedContent_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>();
+                mutable_bitField0_ |= 0x00000020;
               }
-              translatedContent_ = input.readMessage(com.lvl6.proto.ChatProto.TranslatedTextProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(translatedContent_);
-                translatedContent_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000020;
+              translatedContent_.add(input.readMessage(com.lvl6.proto.ChatProto.TranslatedTextProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -495,6 +501,9 @@ public final class ChatProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          translatedContent_ = java.util.Collections.unmodifiableList(translatedContent_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -669,24 +678,38 @@ public final class ChatProto {
     }
 
     public static final int TRANSLATEDCONTENT_FIELD_NUMBER = 6;
-    private com.lvl6.proto.ChatProto.TranslatedTextProto translatedContent_;
+    private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_;
     /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
-    public boolean hasTranslatedContent() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
-     */
-    public com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent() {
+    public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> getTranslatedContentList() {
       return translatedContent_;
     }
     /**
-     * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
-    public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+        getTranslatedContentOrBuilderList() {
       return translatedContent_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     */
+    public int getTranslatedContentCount() {
+      return translatedContent_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     */
+    public com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent(int index) {
+      return translatedContent_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+     */
+    public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder(
+        int index) {
+      return translatedContent_.get(index);
     }
 
     private void initFields() {
@@ -695,7 +718,7 @@ public final class ChatProto {
       recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       timeOfPost_ = 0L;
       content_ = "";
-      translatedContent_ = com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance();
+      translatedContent_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -725,8 +748,8 @@ public final class ChatProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getContentBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(6, translatedContent_);
+      for (int i = 0; i < translatedContent_.size(); i++) {
+        output.writeMessage(6, translatedContent_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -757,9 +780,9 @@ public final class ChatProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getContentBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      for (int i = 0; i < translatedContent_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, translatedContent_);
+          .computeMessageSize(6, translatedContent_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -900,11 +923,11 @@ public final class ChatProto {
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
         if (translatedContentBuilder_ == null) {
-          translatedContent_ = com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance();
+          translatedContent_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           translatedContentBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -961,10 +984,11 @@ public final class ChatProto {
           to_bitField0_ |= 0x00000010;
         }
         result.content_ = content_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
         if (translatedContentBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            translatedContent_ = java.util.Collections.unmodifiableList(translatedContent_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
           result.translatedContent_ = translatedContent_;
         } else {
           result.translatedContent_ = translatedContentBuilder_.build();
@@ -1004,8 +1028,31 @@ public final class ChatProto {
           content_ = other.content_;
           onChanged();
         }
-        if (other.hasTranslatedContent()) {
-          mergeTranslatedContent(other.getTranslatedContent());
+        if (translatedContentBuilder_ == null) {
+          if (!other.translatedContent_.isEmpty()) {
+            if (translatedContent_.isEmpty()) {
+              translatedContent_ = other.translatedContent_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureTranslatedContentIsMutable();
+              translatedContent_.addAll(other.translatedContent_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.translatedContent_.isEmpty()) {
+            if (translatedContentBuilder_.isEmpty()) {
+              translatedContentBuilder_.dispose();
+              translatedContentBuilder_ = null;
+              translatedContent_ = other.translatedContent_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              translatedContentBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getTranslatedContentFieldBuilder() : null;
+            } else {
+              translatedContentBuilder_.addAllMessages(other.translatedContent_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1450,115 +1497,239 @@ public final class ChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslatedTextProto translatedContent_ = com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> translatedContentBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
-       */
-      public boolean hasTranslatedContent() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+      private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_ =
+        java.util.Collections.emptyList();
+      private void ensureTranslatedContentIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          translatedContent_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.TranslatedTextProto>(translatedContent_);
+          bitField0_ |= 0x00000020;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> translatedContentBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent() {
+      public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> getTranslatedContentList() {
         if (translatedContentBuilder_ == null) {
-          return translatedContent_;
+          return java.util.Collections.unmodifiableList(translatedContent_);
         } else {
-          return translatedContentBuilder_.getMessage();
+          return translatedContentBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      public Builder setTranslatedContent(com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+      public int getTranslatedContentCount() {
+        if (translatedContentBuilder_ == null) {
+          return translatedContent_.size();
+        } else {
+          return translatedContentBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public com.lvl6.proto.ChatProto.TranslatedTextProto getTranslatedContent(int index) {
+        if (translatedContentBuilder_ == null) {
+          return translatedContent_.get(index);
+        } else {
+          return translatedContentBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public Builder setTranslatedContent(
+          int index, com.lvl6.proto.ChatProto.TranslatedTextProto value) {
         if (translatedContentBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          translatedContent_ = value;
+          ensureTranslatedContentIsMutable();
+          translatedContent_.set(index, value);
           onChanged();
         } else {
-          translatedContentBuilder_.setMessage(value);
+          translatedContentBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
       public Builder setTranslatedContent(
+          int index, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
+        if (translatedContentBuilder_ == null) {
+          ensureTranslatedContentIsMutable();
+          translatedContent_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          translatedContentBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public Builder addTranslatedContent(com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+        if (translatedContentBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTranslatedContentIsMutable();
+          translatedContent_.add(value);
+          onChanged();
+        } else {
+          translatedContentBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public Builder addTranslatedContent(
+          int index, com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+        if (translatedContentBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTranslatedContentIsMutable();
+          translatedContent_.add(index, value);
+          onChanged();
+        } else {
+          translatedContentBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public Builder addTranslatedContent(
           com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
         if (translatedContentBuilder_ == null) {
-          translatedContent_ = builderForValue.build();
+          ensureTranslatedContentIsMutable();
+          translatedContent_.add(builderForValue.build());
           onChanged();
         } else {
-          translatedContentBuilder_.setMessage(builderForValue.build());
+          translatedContentBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      public Builder mergeTranslatedContent(com.lvl6.proto.ChatProto.TranslatedTextProto value) {
+      public Builder addTranslatedContent(
+          int index, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder builderForValue) {
         if (translatedContentBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
-              translatedContent_ != com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance()) {
-            translatedContent_ =
-              com.lvl6.proto.ChatProto.TranslatedTextProto.newBuilder(translatedContent_).mergeFrom(value).buildPartial();
-          } else {
-            translatedContent_ = value;
-          }
+          ensureTranslatedContentIsMutable();
+          translatedContent_.add(index, builderForValue.build());
           onChanged();
         } else {
-          translatedContentBuilder_.mergeFrom(value);
+          translatedContentBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public Builder addAllTranslatedContent(
+          java.lang.Iterable<? extends com.lvl6.proto.ChatProto.TranslatedTextProto> values) {
+        if (translatedContentBuilder_ == null) {
+          ensureTranslatedContentIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, translatedContent_);
+          onChanged();
+        } else {
+          translatedContentBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
       public Builder clearTranslatedContent() {
         if (translatedContentBuilder_ == null) {
-          translatedContent_ = com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance();
+          translatedContent_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           translatedContentBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder getTranslatedContentBuilder() {
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return getTranslatedContentFieldBuilder().getBuilder();
+      public Builder removeTranslatedContent(int index) {
+        if (translatedContentBuilder_ == null) {
+          ensureTranslatedContentIsMutable();
+          translatedContent_.remove(index);
+          onChanged();
+        } else {
+          translatedContentBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder() {
-        if (translatedContentBuilder_ != null) {
-          return translatedContentBuilder_.getMessageOrBuilder();
-        } else {
-          return translatedContent_;
+      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder getTranslatedContentBuilder(
+          int index) {
+        return getTranslatedContentFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder(
+          int index) {
+        if (translatedContentBuilder_ == null) {
+          return translatedContent_.get(index);  } else {
+          return translatedContentBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
+           getTranslatedContentOrBuilderList() {
+        if (translatedContentBuilder_ != null) {
+          return translatedContentBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(translatedContent_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder addTranslatedContentBuilder() {
+        return getTranslatedContentFieldBuilder().addBuilder(
+            com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public com.lvl6.proto.ChatProto.TranslatedTextProto.Builder addTranslatedContentBuilder(
+          int index) {
+        return getTranslatedContentFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ChatProto.TranslatedTextProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
+       */
+      public java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto.Builder> 
+           getTranslatedContentBuilderList() {
+        return getTranslatedContentFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder> 
           getTranslatedContentFieldBuilder() {
         if (translatedContentBuilder_ == null) {
-          translatedContentBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          translatedContentBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.TranslatedTextProto, com.lvl6.proto.ChatProto.TranslatedTextProto.Builder, com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder>(
-                  getTranslatedContent(),
+                  translatedContent_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           translatedContent_ = null;
@@ -5837,7 +6008,7 @@ public final class ChatProto {
       "6.proto.MinimumUserProtoWithLevel\022<\n\trec" +
       "ipient\030\003 \001(\0132).com.lvl6.proto.MinimumUse" +
       "rProtoWithLevel\022\022\n\ntimeOfPost\030\004 \001(\003\022\017\n\007c" +
-      "ontent\030\005 \001(\t\022>\n\021translatedContent\030\006 \001(\0132" +
+      "ontent\030\005 \001(\t\022>\n\021translatedContent\030\006 \003(\0132" +
       "#.com.lvl6.proto.TranslatedTextProto\"6\n\n" +
       "ColorProto\022\013\n\003red\030\001 \001(\005\022\r\n\005green\030\002 \001(\005\022\014" +
       "\n\004blue\030\003 \001(\005\"\227\002\n\025GroupChatMessageProto\0229",
