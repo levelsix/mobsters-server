@@ -5842,6 +5842,7 @@ public final class ChatProto {
       "ColorProto\022\013\n\003red\030\001 \001(\005\022\r\n\005green\030\002 \001(\005\022\014" +
       "\n\004blue\030\003 \001(\005\"\227\002\n\025GroupChatMessageProto\0229",
       "\n\006sender\030\001 \001(\0132).com.lvl6.proto.MinimumU" +
+<<<<<<< HEAD
       "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022;\n" +
       "\017contentLanguage\030\007 \001(\0162\".com.lvl6.proto." +
       "TranslateLanguages\022\017\n\007content\030\003 \001(\t\022>\n\021t" +
@@ -5865,6 +5866,28 @@ public final class ChatProto {
       "\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007" +
       "RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatPro" +
       "to"
+=======
+      "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022\017\n" +
+      "\007content\030\003 \001(\t\022>\n\021translatedContent\030\004 \003(" +
+      "\0132#.com.lvl6.proto.TranslatedTextProto\022\017" +
+      "\n\007isAdmin\030\005 \001(\010\022\020\n\010chatUuid\030\006 \001(\t\"Y\n\023Tra" +
+      "nslatedTextProto\0224\n\010language\030\001 \001(\0162\".com" +
+      ".lvl6.proto.TranslateLanguages\022\014\n\004text\030\002" +
+      " \001(\t\"\253\001\n\025DefaultLanguagesProto\022A\n\025global" +
+      "DefaultLanguage\030\001 \001(\0162\".com.lvl6.proto.T" +
+      "ranslateLanguages\022O\n\026privateDefaultLangu",
+      "age\030\002 \003(\0132/.com.lvl6.proto.PrivateChatDe" +
+      "faultLanguageProto\"\242\001\n\037PrivateChatDefaul" +
+      "tLanguageProto\022\027\n\017recipientUserId\030\001 \001(\t\022" +
+      "\024\n\014senderUserId\030\002 \001(\t\022;\n\017defaultLanguage" +
+      "\030\003 \001(\0162\".com.lvl6.proto.TranslateLanguag" +
+      "es\022\023\n\013translateOn\030\004 \001(\010*&\n\016GroupChatScop" +
+      "e\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatType\022\017\n\013G" +
+      "LOBAL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s\n\022Transl" +
+      "ateLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n" +
+      "\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RU",
+      "SSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
+>>>>>>> cherry pick commit # ec5eebd32ccc6cc3d1c7ba199a75375b22efb865 from master with mini events
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
