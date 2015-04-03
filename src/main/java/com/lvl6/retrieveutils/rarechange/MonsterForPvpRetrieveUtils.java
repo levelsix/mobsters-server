@@ -63,9 +63,12 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 		int randomIndex = (int)(Math.random()*range);
 		
 		Set<MonsterForPvp> returnMonsters = new HashSet<MonsterForPvp>();
-		returnMonsters.add((MonsterForPvp)monsterArray[randomIndex]);
-		//log.info("users:" + monsters);
-
+		
+		if(range != 0) {
+			returnMonsters.add((MonsterForPvp)monsterArray[randomIndex]);
+			//log.info("users:" + monsters);
+		}
+		
 		return returnMonsters;
 	}
 
