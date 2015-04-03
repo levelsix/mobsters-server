@@ -137,7 +137,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 						for(PrivateChatPost pcp : recentPrivateChatPosts) {
 							chatIds.add(pcp.getId());
 						}
-						
+
 						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
 						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
 
@@ -190,14 +190,12 @@ public class RetrievePrivateChatPostsController extends EventController {
 										.createGroupChatMessageProto(time, user,
 												content, isAdmin, pwp.getId(), translateMap, null);
 								resBuilder.addPosts(gcmp);
-							}
-							else {
+							} else {
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, null);
+												content, isAdmin, pwp.getId(), null, null);
 								resBuilder.addPosts(gcmp);
 							}
-							
 						}
 					}
 				}
