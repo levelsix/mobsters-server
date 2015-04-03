@@ -1283,7 +1283,7 @@ public class CreateInfoProtoUtils {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
 				ttpb.setLanguage(tl);
 				ttpb.setText(translatedMessage.get(tl));
-				pcppb.setTranslatedContent(ttpb.build());
+				pcppb.addTranslatedContent(ttpb.build());
 			}
 		}
 
@@ -1314,11 +1314,9 @@ public class CreateInfoProtoUtils {
 			for(ChatTranslations ct : list) {
 				ttpb.setLanguage(ct.getTranslateLanguage());
 				ttpb.setText(ct.getText());
+				pcppb.addTranslatedContent(ttpb.build());
 			}
-			pcppb.setTranslatedContent(ttpb.build());
 		}
-		
-		
 		return pcppb.build();
 	}
 
