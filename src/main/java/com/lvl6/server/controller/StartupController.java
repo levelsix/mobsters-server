@@ -670,8 +670,6 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-			setDefaultLanguagesForUser(resBuilder, playerId);
-			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -691,9 +689,13 @@ public class StartupController extends EventController {
 			// For creating the full user
 			fillMe.addUserId(user.getId());
 
+			//get translationsettingforuser list of the player to check for defaults
+			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUser(playerId);
+			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils());
+					getPrivateChatPostRetrieveUtils(), tsfuList);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
@@ -740,6 +742,12 @@ public class StartupController extends EventController {
 
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
+			
+			//set this proto after executing privatechatprotos
+			setDefaultLanguagesForUser(resBuilder, playerId);
+			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
+
+			
 			sfesa.execute(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			spbha.execute(fillMe);
@@ -1571,10 +1579,16 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
+	private void checkIfGlobalLanguageDefaultsSet(String userId) {
+		
+		
+		
+		
+	}
+	
+	private void setDefaultLanguagesForUser(Builder resBuilder, String userId, 
+			List<TranslationSettingsForUser> tsfuList) {
 
-		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-				getUserTranslationSettingsForUser(userId);
 		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
 		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
 
@@ -1584,6 +1598,16 @@ public class StartupController extends EventController {
 
 		if(tsfuList != null && !tsfuList.isEmpty()) {
 			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
+		}
+		else {
+			//insert defaults for global chat
+			insertUtil.insertTranslateSettings(userId, null, 
+					ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
+					ChatType.GLOBAL_CHAT.toString(), 
+					ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+						
+			
+			
 		}
 
 		//if there's no default languages, they havent ever been set

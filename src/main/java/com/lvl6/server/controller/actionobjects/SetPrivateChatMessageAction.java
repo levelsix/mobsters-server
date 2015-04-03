@@ -10,8 +10,10 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -28,14 +30,17 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final User user;
 	private final String userId;
 	private final PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
-
+	private final List<TranslationSettingsForUser> tsfuList;
+	
 	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
-			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
+			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
+			List<TranslationSettingsForUser> tsfuList) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+		this.tsfuList = tsfuList;
 	}
 
 	private Set<String> userIds;
@@ -186,7 +191,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 				.createPrivateChatPostProtoList(clanIdsToClans,
 						clanIdsToUserIdSet, userIdsToUsers,
 						clanlessUserUserIds, privateChatPostIds,
-						postIdsToPrivateChatPosts);
+						postIdsToPrivateChatPosts, tsfuList);
 
 		resBuilder.addAllPcpp(pcppList);
 	}

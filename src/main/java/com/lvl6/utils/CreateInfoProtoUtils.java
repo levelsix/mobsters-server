@@ -1350,7 +1350,8 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
 			List<String> privateChatPostIds,
-			Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
+			Map<String, PrivateChatPost> postIdsToPrivateChatPosts,
+			List<TranslationSettingsForUser> tsfuList) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();

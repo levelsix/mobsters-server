@@ -69,6 +69,7 @@ public class ControllerConstants {
 	public static final float[] CLAN_HELP__PERCENT_REMOVED = { 0.01F, 0.01F,
 			0.01F, 0.01F, 0.01F, 0.01F, 0.01F };
 
+	
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 
@@ -210,6 +211,9 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
 
+	public static final String TRANSLATION_SETTINGS__DEFAULT_LANGUAGE = "ENGLISH";
+	public static final boolean TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON = false;
+	
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
 	//the monster id that is used in tutorial
