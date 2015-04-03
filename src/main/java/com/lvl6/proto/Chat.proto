@@ -75,7 +75,7 @@ message TranslatedTextProto {
 message DefaultLanguagesProto {
 	optional TranslateLanguages globalDefaultLanguage = 1;
 	repeated PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;
-	optional bool translateOn = 3;
+	optional bool globalTranslateOn = 3;
 
 }
 
