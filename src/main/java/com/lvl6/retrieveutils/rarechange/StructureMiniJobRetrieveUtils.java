@@ -27,7 +27,7 @@ public class StructureMiniJobRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_MINI_JOB_CONFIG;
 
-	public static Map<Integer, StructureMiniJob> getStructIdsToMiniJobs() {
+	public Map<Integer, StructureMiniJob> getStructIdsToMiniJobs() {
 		log.debug("retrieving all StructureMiniJob data");
 		if (structIdsToMiniJobs == null) {
 			setStaticStructIdsToMiniJobs();
@@ -35,7 +35,7 @@ public class StructureMiniJobRetrieveUtils {
 		return structIdsToMiniJobs;
 	}
 
-	public static StructureMiniJob getMiniJobForStructId(int structId) {
+	public StructureMiniJob getMiniJobForStructId(int structId) {
 		log.debug("retrieve StructureMiniJob for structId " + structId);
 		if (structIdsToMiniJobs == null) {
 			setStaticStructIdsToMiniJobs();
@@ -43,7 +43,7 @@ public class StructureMiniJobRetrieveUtils {
 		return structIdsToMiniJobs.get(structId);
 	}
 
-	public static StructureMiniJob getPredecessorMiniJobForStructId(int structId) {
+	public StructureMiniJob getPredecessorMiniJobForStructId(int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToMiniJobs == null) {
 			setStaticStructIdsToMiniJobs();
@@ -59,7 +59,7 @@ public class StructureMiniJobRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToMiniJobs() {
+	private void setStaticStructIdsToMiniJobs() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -93,14 +93,14 @@ public class StructureMiniJobRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToMiniJobs();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureMiniJob convertRSRowToMiniJob(ResultSet rs)
+	private StructureMiniJob convertRSRowToMiniJob(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_MINI_JOB__STRUCT_ID);
 		int generatedJobLimit = rs

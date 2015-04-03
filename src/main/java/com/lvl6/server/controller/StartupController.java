@@ -162,6 +162,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
+<<<<<<< Updated upstream
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
@@ -174,6 +175,7 @@ import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -214,9 +216,21 @@ public class StartupController extends EventController {
 	public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
 		this.chatMessages = chatMessages;
 	}
+	
+	@Autowired
+	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
+
+	@Autowired
+	protected QuestRetrieveUtils questRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
+	
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
 
 	@Autowired
 	protected Locker locker;
@@ -226,7 +240,7 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected Globals globals;
-
+	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
@@ -271,6 +285,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
+	
+	@Autowired
+	protected SecretGiftUtils secretGiftUtils;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
@@ -346,6 +363,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
@@ -717,7 +737,7 @@ public class StartupController extends EventController {
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
-					hazelcastPvpUtil);
+					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
@@ -841,7 +861,7 @@ public class StartupController extends EventController {
 		Set<Integer> questIds = new HashSet<Integer>();
 		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
-		Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils
+		Map<Integer, Quest> questIdToQuests = questRetrieveUtils
 				.getQuestIdsToQuests();
 		for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
 			int questId = uq.getQuestId();
@@ -884,7 +904,7 @@ public class StartupController extends EventController {
 
 	private void setNoticesToPlayers(Builder resBuilder) {
 		/*NOTE: DB CALL*/
-		List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
+		List<String> notices = startupStuffRetrieveUtils.getAllActiveAlerts();
 		if (null != notices) {
 			for (String notice : notices) {
 				resBuilder.addNoticesToPlayers(notice);
@@ -900,7 +920,7 @@ public class StartupController extends EventController {
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
 			for (MonsterForUser mfu : userMonsters) {
-				FullUserMonsterProto fump = CreateInfoProtoUtils
+				FullUserMonsterProto fump = createInfoProtoUtils
 						.createFullUserMonsterProtoFromUserMonster(mfu);
 				resBuilder.addUsersMonsters(fump);
 			}
@@ -1158,9 +1178,9 @@ public class StartupController extends EventController {
 
 			//update hazelcast map and ready arguments for pvp battle history
 			int attackerCurElo = attackerPlfu.getElo() + eloAttackerLoses;
-			attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+			attackerCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 					attackerCurElo, attackerPrevLeague);
-			attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+			attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(
 					attackerCurElo, attackerCurLeague);
 
 			int attacksLost = attackerPlfu.getAttacksLost() + 1;
@@ -1191,9 +1211,9 @@ public class StartupController extends EventController {
 				defenderPrevRank = defenderPlfu.getRank();
 				//update hazelcast map and ready arguments for pvp battle history
 				int defenderCurElo = defenderEloBefore + eloDefenderWins;
-				defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+				defenderCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 						defenderCurElo, defenderPrevLeague);
-				defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+				defenderCurRank = pvpLeagueRetrieveUtils.getRankForElo(
 						defenderCurElo, defenderCurLeague);
 
 				int defensesWon = defenderPlfu.getDefensesWon() + 1;
@@ -1282,7 +1302,7 @@ public class StartupController extends EventController {
 			for (Integer stageNum : stageNumToTsfu.keySet()) {
 				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
 
-				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
 						taskId, stageNum, monsters);
 				resBuilder.addCurTaskStages(tsp);
 			}
@@ -1464,7 +1484,7 @@ public class StartupController extends EventController {
 
 		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
 				miniJobIdToUserMiniJobs.values());
-		List<UserMiniJobProto> umjpList = CreateInfoProtoUtils
+		List<UserMiniJobProto> umjpList = createInfoProtoUtils
 				.createUserMiniJobProtos(mjfuList, null);
 
 		resBuilder.addAllUserMiniJobProtos(umjpList);
@@ -1528,7 +1548,7 @@ public class StartupController extends EventController {
 	//need to enforce 2 gift minimum
 	private void giveGifts(String userId, long now,
 			Collection<ItemSecretGiftForUser> gifts, int numGifts) {
-		List<ItemSecretGiftForUser> giftList = RedeemSecretGiftAction
+		List<ItemSecretGiftForUser> giftList = secretGiftUtils
 				.calculateGiftsForUser(userId, numGifts, now);
 
 		List<String> ids = insertUtil
@@ -1681,7 +1701,7 @@ public class StartupController extends EventController {
 			return;
 		}
 
-		List<String> userMonsterIds = MonsterStuffUtils
+		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 		/*NOTE: DB CALL*/
@@ -1691,7 +1711,7 @@ public class StartupController extends EventController {
 				.getSpecificUserMonsters(userMonsterIds);
 
 		for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-			PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+			PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
 					.createPersistentClanEventUserInfoProto(cepfu,
 							idsToUserMonsters, null);
 			resBuilder.addCurRaidClanUserInfo(pceuip);

@@ -81,6 +81,10 @@ public class RetrieveClanInfoController extends EventController {
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public RetrieveClanInfoController() {
 		numAllocatedThreads = 8;
@@ -306,7 +310,7 @@ public class RetrieveClanInfoController extends EventController {
 				if (userIdsToMonsterTeams.containsKey(userId)) {
 					List<MonsterForUser> monsterTeam = userIdsToMonsterTeams
 							.get(userId);
-					List<FullUserMonsterProto> proto = CreateInfoProtoUtils
+					List<FullUserMonsterProto> proto = createInfoProtoUtils
 							.createFullUserMonsterProtoList(monsterTeam);
 
 					//create the user monster team proto via the builder

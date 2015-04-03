@@ -53,6 +53,7 @@ public class RetrieveUserMonsterTeamAction {
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	private MonsterStuffUtils monsterStuffUtils;
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -65,7 +66,8 @@ public class RetrieveUserMonsterTeamAction {
 			HazelcastPvpUtil hazelcastPvpUtil,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil)
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
+			MonsterStuffUtils monsterStuffUtils)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -79,6 +81,7 @@ public class RetrieveUserMonsterTeamAction {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -166,7 +169,7 @@ public class RetrieveUserMonsterTeamAction {
 
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
-		allButRetrieverUserIdToUserMonsterIdToDroppedId = MonsterStuffUtils
+		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
 				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters);
 
 		//calculate the PvpBattleOutcome
@@ -245,7 +248,7 @@ public class RetrieveUserMonsterTeamAction {
 
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
-			allButRetrieverUserIdToMsfuMonsterDropId = MonsterStuffUtils
+			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
 					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();

@@ -27,7 +27,7 @@ public class StructureHospitalRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_HOSPITAL_CONFIG;
 
-	public static Map<Integer, StructureHospital> getStructIdsToHospitals() {
+	public Map<Integer, StructureHospital> getStructIdsToHospitals() {
 		log.debug("retrieving all structs data");
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
@@ -35,7 +35,7 @@ public class StructureHospitalRetrieveUtils {
 		return structIdsToHospitals;
 	}
 
-	public static StructureHospital getHospitalForStructId(int structId) {
+	public StructureHospital getHospitalForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
@@ -43,7 +43,7 @@ public class StructureHospitalRetrieveUtils {
 		return structIdsToHospitals.get(structId);
 	}
 
-	public static StructureHospital getUpgradedHospitalForStructId(int structId) {
+	public StructureHospital getUpgradedHospitalForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
@@ -59,7 +59,7 @@ public class StructureHospitalRetrieveUtils {
 		return null;
 	}
 
-	public static StructureHospital getPredecessorHospitalForStructId(
+	public StructureHospital getPredecessorHospitalForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
@@ -76,7 +76,7 @@ public class StructureHospitalRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToHospitals() {
+	private void setStaticStructIdsToHospitals() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -110,14 +110,14 @@ public class StructureHospitalRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToHospitals();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureHospital convertRSRowToHospital(ResultSet rs)
+	private StructureHospital convertRSRowToHospital(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__STRUCT_ID);
 		int queueSize = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__QUEUE_SIZE);

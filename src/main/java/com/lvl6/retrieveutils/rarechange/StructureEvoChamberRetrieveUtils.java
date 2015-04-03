@@ -27,7 +27,7 @@ public class StructureEvoChamberRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER_CONFIG;
 
-	public static Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
+	public Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
 		log.debug("retrieving all structs data");
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
@@ -35,7 +35,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return structIdsToEvoChambers;
 	}
 
-	public static StructureEvoChamber getEvoChamberForStructId(int structId) {
+	public StructureEvoChamber getEvoChamberForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
@@ -43,7 +43,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return structIdsToEvoChambers.get(structId);
 	}
 
-	public static StructureEvoChamber getUpgradedEvoChamberForStructId(
+	public StructureEvoChamber getUpgradedEvoChamberForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
@@ -60,7 +60,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return null;
 	}
 
-	public static StructureEvoChamber getPredecessorEvoChamberForStructId(
+	public StructureEvoChamber getPredecessorEvoChamberForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
@@ -77,7 +77,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToEvoChambers() {
+	private void setStaticStructIdsToEvoChambers() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -111,14 +111,14 @@ public class StructureEvoChamberRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToEvoChambers();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs)
+	private StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_EVO__STRUCT_ID);
 		String qualityUnlocked = rs

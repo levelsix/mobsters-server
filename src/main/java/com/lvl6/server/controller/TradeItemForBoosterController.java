@@ -66,10 +66,22 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
+	
+	@Autowired
+	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+	
 	@Autowired
 	protected UpdateUtil updateUtil;
 
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new TradeItemForBoosterRequestEvent();
@@ -123,7 +135,7 @@ public class TradeItemForBoosterController extends EventController {
 		try {
 			User aUser = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
-			Item itm = ItemRetrieveUtils.getItemForId(itemId);
+			Item itm = itemRetrieveUtils.getItemForId(itemId);
 			//TODO: Consider writing currency history and other history
 
 			List<ItemForUser> ifuContainer = new ArrayList<ItemForUser>();
@@ -142,7 +154,7 @@ public class TradeItemForBoosterController extends EventController {
 				boosterPackId = boosterPackIdContainer.get(0);
 
 				ifu = ifuContainer.get(0);
-				Map<Integer, BoosterItem> idsToBoosterItems = BoosterItemRetrieveUtils
+				Map<Integer, BoosterItem> idsToBoosterItems = boosterItemRetrieveUtils
 						.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
 				previousGems = aUser.getGems();
@@ -242,7 +254,7 @@ public class TradeItemForBoosterController extends EventController {
 			return false;
 		}
 		int boosterPackId = itm.getStaticDataId();
-		BoosterPack aPack = BoosterPackRetrieveUtils
+		BoosterPack aPack = boosterPackRetrieveUtils
 				.getBoosterPackForBoosterPackId(boosterPackId);
 		if (null == aPack) {
 			log.error("no BoosterPack for id={}", boosterPackId);
@@ -263,7 +275,7 @@ public class TradeItemForBoosterController extends EventController {
 			riggedContainer.add(false);
 		}
 
-		Map<Integer, BoosterItem> idsToBoosterItems = BoosterItemRetrieveUtils
+		Map<Integer, BoosterItem> idsToBoosterItems = boosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
 		if (null == idsToBoosterItems || idsToBoosterItems.isEmpty()) {
@@ -355,7 +367,7 @@ public class TradeItemForBoosterController extends EventController {
 		//this is if the user did not buy a complete monster, UPDATE DB
 		if (!monsterIdToNumPieces.isEmpty()) {
 			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
 							mfusop, now);
 
@@ -442,7 +454,7 @@ public class TradeItemForBoosterController extends EventController {
 		}
 		BoosterItem bi = itemsUserReceives.get(0);
 
-		List<String> userMonsterIds = MonsterStuffUtils
+		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
 		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(

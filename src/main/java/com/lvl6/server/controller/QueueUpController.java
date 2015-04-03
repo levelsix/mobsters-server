@@ -44,6 +44,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.QueueUpAction;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -86,6 +87,19 @@ public class QueueUpController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	//	@Autowired
 	//	protected PvpUtil pvpUtil;
@@ -270,7 +284,8 @@ public class QueueUpController extends EventController {
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil,
-					researchForUserRetrieveUtil);
+					researchForUserRetrieveUtil,
+					monsterStuffUtils);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
@@ -278,7 +293,7 @@ public class QueueUpController extends EventController {
 
 			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
-				List<PvpProto> ppList = CreateInfoProtoUtils
+				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
 								rumta.getUserIdToClan(),
@@ -533,7 +548,7 @@ public class QueueUpController extends EventController {
 
 		//it's important that monsterIdsDropped be in the same order
 		//as mfpList
-		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId,
+		PvpProto fakeUser = createInfoProtoUtils.createFakePvpProto(userId,
 				randomName, lvl, avgElo, prospectiveCashWinnings,
 				prospectiveOilWinnings, mfpList, monsterIdsDropped, setElo);
 		return fakeUser;
@@ -567,12 +582,12 @@ public class QueueUpController extends EventController {
 			int monsterId = mfp.getMonsterId();
 			int monserLvl = mfp.getMonsterLvl();
 
-			boolean monsterDropped = MonsterLevelInfoRetrieveUtils
+			boolean monsterDropped = monsterLevelInfoRetrieveUtils
 					.didPvpMonsterDrop(monsterId, monserLvl);
 
 			int monsterDropId = ControllerConstants.NOT_SET;
 
-			Monster mon = MonsterRetrieveUtils
+			Monster mon = monsterRetrieveUtils
 					.getMonsterForMonsterId(monsterId);
 			if (monsterDropped) {
 				monsterDropId = mon.getPvpMonsterDropId();

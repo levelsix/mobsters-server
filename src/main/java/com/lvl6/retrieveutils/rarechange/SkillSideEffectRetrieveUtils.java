@@ -26,7 +26,7 @@ public class SkillSideEffectRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_SIDE_EFFECT_CONFIG;
 
-	public static Map<Integer, SkillSideEffect> getIdsToSkillSideEffects() {
+	public Map<Integer, SkillSideEffect> getIdsToSkillSideEffects() {
 		log.debug("retrieving all SkillSideEffects data map");
 		if (null == idsToSkillSideEffects) {
 			setStaticIdsToSkillSideEffects();
@@ -34,7 +34,7 @@ public class SkillSideEffectRetrieveUtils {
 		return idsToSkillSideEffects;
 	}
 
-	public static SkillSideEffect getSkillSideEffectForId(int skillSideEffectId) {
+	public SkillSideEffect getSkillSideEffectForId(int skillSideEffectId) {
 		log.debug(String.format("retrieve skill data for skill=%s",
 				skillSideEffectId));
 		if (null == idsToSkillSideEffects) {
@@ -43,7 +43,7 @@ public class SkillSideEffectRetrieveUtils {
 		return idsToSkillSideEffects.get(skillSideEffectId);
 	}
 
-	private static void setStaticIdsToSkillSideEffects() {
+	private void setStaticIdsToSkillSideEffects() {
 		log.debug("setting static map of skillSideEffectIds to skillSideEffects");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -83,14 +83,14 @@ public class SkillSideEffectRetrieveUtils {
 		idsToSkillSideEffects = idsToSkillSideEffectsTemp;
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToSkillSideEffects();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static SkillSideEffect convertRSRowToSkillSideEffect(ResultSet rs)
+	private SkillSideEffect convertRSRowToSkillSideEffect(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__ID);
 		String name = rs.getString(DBConstants.SKILL_SIDE_EFFECT__NAME);

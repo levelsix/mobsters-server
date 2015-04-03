@@ -46,6 +46,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public CombineUserMonsterPiecesController() {
 		numAllocatedThreads = 4;
@@ -209,7 +212,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			userMonsterIds.addAll(idsToUserMonsters.keySet());
 		}
 
-		List<String> wholeUserMonsterIds = MonsterStuffUtils
+		List<String> wholeUserMonsterIds = monsterStuffUtils
 				.getWholeButNotCombinedUserMonsters(idsToUserMonsters);
 		if (wholeUserMonsterIds.size() != userMonsterIds.size()) {
 			log.warn("client trying to combine already combined or incomplete monsters."

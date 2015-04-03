@@ -198,7 +198,31 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 public class CreateInfoProtoUtils {
 
 	@Autowired
-	InsertUtil insertUtil;
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+	
+	@Autowired
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+	
+	@Autowired
+	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
+	
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
+	
+	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+	
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
+	
+	@Autowired
+	protected QuestJobRetrieveUtils questJobRetrieveUtils;
 	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
@@ -303,7 +327,7 @@ public class CreateInfoProtoUtils {
 	return mupwbhb.build();
 	}*/
 
-	public static PvpProto createPvpProto(User defender, Clan clan,
+	public PvpProto createPvpProto(User defender, Clan clan,
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
@@ -324,7 +348,7 @@ public class CreateInfoProtoUtils {
 				msfuMonsterIdDropped, boardObstacles, rfuList);
 	}
 
-	public static PvpProto createPvpProto(String defenderId,
+	public PvpProto createPvpProto(String defenderId,
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
@@ -382,7 +406,7 @@ public class CreateInfoProtoUtils {
 		return ppb.build();
 	}
 
-	public static Collection<PvpMonsterProto> createPvpMonsterProto(
+	public Collection<PvpMonsterProto> createPvpMonsterProto(
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped) {
 		List<PvpMonsterProto> pmpList = new ArrayList<PvpMonsterProto>();
@@ -415,7 +439,7 @@ public class CreateInfoProtoUtils {
 		return pmpb.build();
 	}
 
-	private static Collection<PvpMonsterProto> createPvpMonsterProto(
+	private Collection<PvpMonsterProto> createPvpMonsterProto(
 			List<MonsterForPvp> mfpList, List<Integer> monsterIdsDropped) {
 		Collection<PvpMonsterProto> pmpList = new ArrayList<PvpMonsterProto>();
 		for (int i = 0; i < mfpList.size(); i++) {
@@ -470,7 +494,7 @@ public class CreateInfoProtoUtils {
 	//	}
 
 	//this is used to create fake users for PvpProtos
-	public static PvpProto createFakePvpProto(String userId, String name,
+	public PvpProto createFakePvpProto(String userId, String name,
 			int lvl, int elo, int prospectiveCashWinnings,
 			int prospectiveOilWinnings, List<MonsterForPvp> mfpList,
 			List<Integer> monsterIdsDropped, boolean setElo) {
@@ -507,7 +531,7 @@ public class CreateInfoProtoUtils {
 		return ppb.build();
 	}
 
-	public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
+	public List<PvpProto> createPvpProtos(List<User> queuedOpponents,
 			Map<String, Clan> userIdToClan,
 			Map<String, PvpLeagueForUser> userIdToLeagueInfo,
 			Map<String, PvpUser> userIdToPvpUser,
@@ -580,7 +604,7 @@ public class CreateInfoProtoUtils {
 		return pvpProtoList;
 	}
 
-	public static PvpHistoryProto createGotAttackedPvpHistoryProto(
+	public PvpHistoryProto createGotAttackedPvpHistoryProto(
 			User attacker, Clan c, PvpBattleHistory info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
@@ -601,7 +625,7 @@ public class CreateInfoProtoUtils {
 		return phpb.build();
 	}
 
-	public static List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
+	public List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
 			List<PvpBattleHistory> historyList,
 			Map<String, User> attackerIdsToAttackers,
 			Map<String, Clan> attackerIdsToClans,
@@ -794,14 +818,14 @@ public class CreateInfoProtoUtils {
 		return uplpb.build();
 	}
 
-	public static UserPvpLeagueProto createFakeUserPvpLeagueProto(
+	public UserPvpLeagueProto createFakeUserPvpLeagueProto(
 			String userId, int elo, boolean setElo) {
 		UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 		//uplpb.setUserUuid(userId);
 
-		int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, 0);
+		int leagueId = pvpLeagueRetrieveUtils.getLeagueIdForElo(elo, 0);
 		uplpb.setLeagueId(leagueId);
-		int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
+		int rank = pvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
 		uplpb.setRank(rank);
 
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
@@ -1593,7 +1617,7 @@ public class CreateInfoProtoUtils {
 		return mupfc;
 	}
 
-	public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
+	public ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
 		ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
 		int clanRaidId = clanRaid.getId();
 		crpb.setClanRaidId(clanRaidId);
@@ -1639,7 +1663,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//create the clan raid stage protos
-		Map<Integer, ClanRaidStage> stages = ClanRaidStageRetrieveUtils
+		Map<Integer, ClanRaidStage> stages = clanRaidStageRetrieveUtils
 				.getClanRaidStagesForClanRaidId(clanRaidId);
 		for (ClanRaidStage crs : stages.values()) {
 			ClanRaidStageProto crsp = createClanRaidStageProto(crs);
@@ -1649,7 +1673,7 @@ public class CreateInfoProtoUtils {
 		return crpb.build();
 	}
 
-	public static ClanRaidStageProto createClanRaidStageProto(ClanRaidStage crs) {
+	public ClanRaidStageProto createClanRaidStageProto(ClanRaidStage crs) {
 		ClanRaidStageProto.Builder crspb = ClanRaidStageProto.newBuilder();
 		int clanRaidStageId = crs.getId();
 		crspb.setClanRaidStageId(clanRaidStageId);
@@ -1663,7 +1687,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//create the monster protos in order
-		Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = ClanRaidStageMonsterRetrieveUtils
+		Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = clanRaidStageMonsterRetrieveUtils
 				.getMonsterNumsToMonstersForStageId(clanRaidStageId);
 
 		if (!monsterNumToCrsm.isEmpty()) {
@@ -1681,7 +1705,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//create the reward protos
-		Map<Integer, ClanRaidStageReward> possibleRewards = ClanRaidStageRewardRetrieveUtils
+		Map<Integer, ClanRaidStageReward> possibleRewards = clanRaidStageRewardRetrieveUtils
 				.getClanRaidStageRewardsForClanRaidStageId(clanRaidStageId);
 		for (ClanRaidStageReward crsr : possibleRewards.values()) {
 			ClanRaidStageRewardProto crsrp = createClanRaidStageRewardProto(crsr);
@@ -1763,7 +1787,7 @@ public class CreateInfoProtoUtils {
 		return pcecipb.build();
 	}
 
-	public static PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
+	public PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
 			ClanEventPersistentForUser cepfu,
 			Map<String, MonsterForUser> idsToUserMonsters,
 			List<FullUserMonsterProto> fumpList) {
@@ -2493,7 +2517,7 @@ public class CreateInfoProtoUtils {
 		return umjpb.build();
 	}
 
-	public static List<UserMiniJobProto> createUserMiniJobProtos(
+	public List<UserMiniJobProto> createUserMiniJobProtos(
 			List<MiniJobForUser> mjfuList,
 			Map<Integer, MiniJob> miniJobIdToMiniJob) {
 		List<UserMiniJobProto> umjpList = new ArrayList<UserMiniJobProto>();
@@ -2504,7 +2528,7 @@ public class CreateInfoProtoUtils {
 			MiniJob mj = null;
 			if (null == miniJobIdToMiniJob
 					|| !miniJobIdToMiniJob.containsKey(miniJobId)) {
-				mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+				mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 			} else {
 				mj = miniJobIdToMiniJob.get(miniJobId);
 			}
@@ -2722,7 +2746,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//set userMonster skill (if absent) to monster skill
-		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu
+		Monster monzter = monsterRetrieveUtils.getMonsterForMonsterId(mfu
 				.getMonsterId());
 		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
 		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
@@ -2737,7 +2761,7 @@ public class CreateInfoProtoUtils {
 		return fumpb.build();
 	}
 
-	public static List<FullUserMonsterProto> createFullUserMonsterProtoList(
+	public List<FullUserMonsterProto> createFullUserMonsterProtoList(
 			List<MonsterForUser> userMonsters) {
 		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
 
@@ -2751,7 +2775,7 @@ public class CreateInfoProtoUtils {
 		return protos;
 	}
 
-	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+	public MinimumUserMonsterProto createMinimumUserMonsterProto(
 			MonsterForUser mfu) {
 		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto
 				.newBuilder();
@@ -2769,7 +2793,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//set userMonster skill (if absent) to monster skill
-		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu
+		Monster monzter = monsterRetrieveUtils.getMonsterForMonsterId(mfu
 				.getMonsterId());
 		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
 		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
@@ -2786,7 +2810,7 @@ public class CreateInfoProtoUtils {
 		return mumpb.build();
 	}
 
-	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+	public MinimumUserMonsterProto createMinimumUserMonsterProto(
 			MonsterForPvp mfp) {
 		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto
 				.newBuilder();
@@ -2799,7 +2823,7 @@ public class CreateInfoProtoUtils {
 		mumpb.setMonsterLvl(lvl);
 
 		//set userMonster skill (if absent) to monster skill
-		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(id);
+		Monster monzter = monsterRetrieveUtils.getMonsterForMonsterId(id);
 		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
 		if (defaultOffensiveSkillId > 0) {
 			mumpb.setOffensiveSkillId(defaultOffensiveSkillId);
@@ -2813,7 +2837,7 @@ public class CreateInfoProtoUtils {
 		return mumpb.build();
 	}
 
-	public static MinimumUserMonsterProto createMinimumUserMonsterProto(
+	public MinimumUserMonsterProto createMinimumUserMonsterProto(
 			MonsterSnapshotForUser msfu) {
 		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto
 				.newBuilder();
@@ -2832,7 +2856,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		//set userMonster skill (if absent) to monster skill
-		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(msfu
+		Monster monzter = monsterRetrieveUtils.getMonsterForMonsterId(msfu
 				.getMonsterId());
 		int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
 		if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
@@ -2861,7 +2885,7 @@ public class CreateInfoProtoUtils {
 //		return returnList;
 //	}
 
-	public static List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
+	public List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
 			List<MonsterForPvp> mfpList) {
 		List<MinimumUserMonsterProto> mumpList = new ArrayList<MinimumUserMonsterProto>();
 
@@ -2923,7 +2947,7 @@ public class CreateInfoProtoUtils {
 		return ueipb.build();
 	}
 
-	public static UserCurrentMonsterTeamProto createUserCurrentMonsterTeamProto(
+	public UserCurrentMonsterTeamProto createUserCurrentMonsterTeamProto(
 			String userId, List<MonsterForUser> curTeam) {
 		UserCurrentMonsterTeamProto.Builder ucmtpb = UserCurrentMonsterTeamProto
 				.newBuilder();
@@ -3065,7 +3089,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Quest.proto ****************************************************/
-	public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
+	public FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
 		//SET THE BUILDER
 		FullQuestProto.Builder builder = FullQuestProto.newBuilder();
 		builder.setQuestId(quest.getId());
@@ -3151,8 +3175,8 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static List<QuestJobProto> createQuestJobProto(int questId) {
-		Map<Integer, QuestJob> questJobIdsForQuestId = QuestJobRetrieveUtils
+	public List<QuestJobProto> createQuestJobProto(int questId) {
+		Map<Integer, QuestJob> questJobIdsForQuestId = questJobRetrieveUtils
 				.getQuestJobsForQuestId(questId);
 		if (null == questJobIdsForQuestId) {
 			return new ArrayList<QuestJobProto>();
@@ -4245,7 +4269,7 @@ public class CreateInfoProtoUtils {
 
 	//going by stage number instead of id, maybe because it's human friendly
 	//when looking at the db
-	public static TaskStageProto createTaskStageProto(int taskId, int stageNum,
+	public TaskStageProto createTaskStageProto(int taskId, int stageNum,
 			List<TaskStageForUser> monsters) {
 		TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
 
@@ -4263,7 +4287,7 @@ public class CreateInfoProtoUtils {
 		return tspb.build();
 	}
 
-	public static FullTaskProto createFullTaskProtoFromTask(Task task) {
+	public FullTaskProto createFullTaskProtoFromTask(Task task) {
 		String name = task.getGoodName();
 		String description = task.getDescription();
 		int taskId = task.getId();
@@ -4314,7 +4338,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	private static void setDetails(int taskId,
+	private void setDetails(int taskId,
 			com.lvl6.proto.TaskProto.FullTaskProto.Builder builder) {
 		Set<Integer> stageIds = TaskStageRetrieveUtils
 				.getTaskStageIdsForTaskId(taskId);
@@ -4324,11 +4348,11 @@ public class CreateInfoProtoUtils {
 		Set<String> qualitiesStrForTask = new HashSet<String>();
 		for (int stageId : stageIds) {
 
-			Set<Integer> stageMonsterIds = TaskStageMonsterRetrieveUtils
+			Set<Integer> stageMonsterIds = taskStageMonsterRetrieveUtils
 					.getDroppableMonsterIdsForTaskStageId(stageId);
 			monsterIdsForTask.addAll(stageMonsterIds);
 
-			Set<String> stageQualities = TaskStageMonsterRetrieveUtils
+			Set<String> stageQualities = taskStageMonsterRetrieveUtils
 					.getDroppableQualitiesForTaskStageId(stageId);
 			qualitiesStrForTask.addAll(stageQualities);
 		}
@@ -4458,17 +4482,17 @@ public class CreateInfoProtoUtils {
 	}
 	 */
 
-	public static TaskStageMonsterProto createTaskStageMonsterProto(
+	public TaskStageMonsterProto createTaskStageMonsterProto(
 			TaskStageForUser tsfu) {
 		int tsmId = tsfu.getTaskStageMonsterId();
-		TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
+		TaskStageMonster tsm = taskStageMonsterRetrieveUtils
 				.getTaskStageMonsterForId(tsmId);
 
 		int tsmMonsterId = tsm.getMonsterId();
 		boolean didPieceDrop = tsfu.isMonsterPieceDropped();
 		//check if monster id exists
 		if (didPieceDrop) {
-			Monster mon = MonsterRetrieveUtils
+			Monster mon = monsterRetrieveUtils
 					.getMonsterForMonsterId(tsmMonsterId);
 			if (null == mon) {
 				throw new RuntimeException(
@@ -4498,7 +4522,7 @@ public class CreateInfoProtoUtils {
 		int itemId = tsfu.getItemIdDropped();
 		if (itemId > 0) {
 			//check if item exists
-			Item item = ItemRetrieveUtils.getItemForId(itemId);
+			Item item = itemRetrieveUtils.getItemForId(itemId);
 			if (null == item) {
 				throw new RuntimeException(String.format(
 						"nonexistent itemId for userTask=%s", tsfu));

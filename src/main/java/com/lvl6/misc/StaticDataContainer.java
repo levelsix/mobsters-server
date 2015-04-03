@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Achievement;
@@ -147,13 +148,16 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //	snapshot of all static data.
 @Component
 public class StaticDataContainer {
+	
+	@Autowired
+	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	private static StaticDataProto.Builder staticDataBuilder = null;
 
-	public static StaticDataProto getStaticData() {
+	public StaticDataProto getStaticData() {
 		if (null == staticDataBuilder) {
 			setStaticData();
 		}
@@ -165,11 +169,11 @@ public class StaticDataContainer {
 		return staticDataBuilder.build();
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticData();
 	}
 
-	private static void setStaticData() {
+	private void setStaticData() {
 		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
 		//		setPlayerCityExpansions(sdpb);
 		//		setCities(sdpb);
@@ -719,8 +723,8 @@ public class StaticDataContainer {
 		}
 	}
 
-	private static void setAchievementStuff(Builder sdpb) {
-		Map<Integer, Achievement> achievementIdsToAchievements = AchievementRetrieveUtils
+	private void setAchievementStuff(Builder sdpb) {
+		Map<Integer, Achievement> achievementIdsToAchievements = achievementRetrieveUtils
 				.getAchievementIdsToAchievements();
 		if (null == achievementIdsToAchievements
 				|| achievementIdsToAchievements.isEmpty()) {

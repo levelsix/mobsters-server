@@ -50,13 +50,13 @@ public class PerformResearchController extends EventController {
 	protected ResearchForUserRetrieveUtils researchForUserRetrieveUtils;
 
 	@Autowired
-	protected ResearchRetrieveUtils researchRetrieveUtils;
-
-	@Autowired
 	protected UpdateUtil updateUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
+	
+	@Autowired
+	protected ResearchRetrieveUtils researchRetrieveUtils;
 
 	public PerformResearchController() {
 		numAllocatedThreads = 4;
@@ -143,7 +143,7 @@ public class PerformResearchController extends EventController {
 			PerformResearchAction pra = new PerformResearchAction(userId,
 					userRetrieveUtils, researchId, userResearchUuid, gemsCost,
 					resourceCost, resourceType, nowTimestamp, insertUtil,
-					updateUtil, researchForUserRetrieveUtils);
+					updateUtil, researchForUserRetrieveUtils, researchRetrieveUtils);
 
 			pra.execute(resBuilder);
 

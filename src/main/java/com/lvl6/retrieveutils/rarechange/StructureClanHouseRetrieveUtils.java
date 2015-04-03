@@ -27,7 +27,7 @@ public class StructureClanHouseRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_CLAN_HOUSE_CONFIG;
 
-	public static Map<Integer, StructureClanHouse> getStructIdsToClanHouses() {
+	public Map<Integer, StructureClanHouse> getStructIdsToClanHouses() {
 		log.debug("retrieving all structs data");
 		if (structIdsToClanHouses == null) {
 			setStaticStructIdsToClanHouses();
@@ -35,7 +35,7 @@ public class StructureClanHouseRetrieveUtils {
 		return structIdsToClanHouses;
 	}
 
-	public static StructureClanHouse getClanHouseForStructId(int structId) {
+	public StructureClanHouse getClanHouseForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToClanHouses == null) {
 			setStaticStructIdsToClanHouses();
@@ -43,7 +43,7 @@ public class StructureClanHouseRetrieveUtils {
 		return structIdsToClanHouses.get(structId);
 	}
 
-	public static StructureClanHouse getUpgradedClanHouseForStructId(
+	public StructureClanHouse getUpgradedClanHouseForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToClanHouses == null) {
@@ -60,7 +60,7 @@ public class StructureClanHouseRetrieveUtils {
 		return null;
 	}
 
-	public static StructureClanHouse getPredecessorClanHouseForStructId(
+	public StructureClanHouse getPredecessorClanHouseForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToClanHouses == null) {
@@ -77,7 +77,7 @@ public class StructureClanHouseRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToClanHouses() {
+	private void setStaticStructIdsToClanHouses() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -111,14 +111,14 @@ public class StructureClanHouseRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToClanHouses();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureClanHouse convertRSRowToClanHouse(ResultSet rs)
+	private StructureClanHouse convertRSRowToClanHouse(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__STRUCT_ID);
 		int maxHelpersPerSolicitation = rs

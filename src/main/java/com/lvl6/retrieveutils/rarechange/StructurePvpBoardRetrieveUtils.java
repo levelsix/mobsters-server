@@ -27,7 +27,7 @@ public class StructurePvpBoardRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_PVP_BOARD_CONFIG;
 
-	public static Map<Integer, StructurePvpBoard> getStructIdsToPvpBoards() {
+	public Map<Integer, StructurePvpBoard> getStructIdsToPvpBoards() {
 		log.debug("retrieving all structs data");
 		if (structIdsToPvpBoards == null) {
 			setStaticStructIdsToPvpBoards();
@@ -35,7 +35,7 @@ public class StructurePvpBoardRetrieveUtils {
 		return structIdsToPvpBoards;
 	}
 
-	public static StructurePvpBoard getPvpBoardForStructId(int structId) {
+	public StructurePvpBoard getPvpBoardForStructId(int structId) {
 		log.debug("retrieve struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
 			setStaticStructIdsToPvpBoards();
@@ -43,7 +43,7 @@ public class StructurePvpBoardRetrieveUtils {
 		return structIdsToPvpBoards.get(structId);
 	}
 
-	public static StructurePvpBoard getUpgradedPvpBoardForStructId(int structId) {
+	public StructurePvpBoard getUpgradedPvpBoardForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
 			setStaticStructIdsToPvpBoards();
@@ -59,7 +59,7 @@ public class StructurePvpBoardRetrieveUtils {
 		return null;
 	}
 
-	public static StructurePvpBoard getPredecessorPvpBoardForStructId(
+	public StructurePvpBoard getPredecessorPvpBoardForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId {}", structId);
 		if (structIdsToPvpBoards == null) {
@@ -76,7 +76,7 @@ public class StructurePvpBoardRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToPvpBoards() {
+	private void setStaticStructIdsToPvpBoards() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -110,14 +110,14 @@ public class StructurePvpBoardRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToPvpBoards();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructurePvpBoard convertRSRowToPvpBoard(ResultSet rs)
+	private StructurePvpBoard convertRSRowToPvpBoard(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_PVP_BOARD__STRUCT_ID);
 		int powerLimit = rs

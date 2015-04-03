@@ -34,6 +34,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -62,6 +64,15 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+
+	@Autowired
+	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -129,8 +140,9 @@ public class PurchaseBoosterPackController extends EventController {
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
-					timeUtils, userRetrieveUtils, itemForUserRetrieveUtil,
-					updateUtil);
+					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils, 
+					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
+					monsterStuffUtils, updateUtil);
 
 			pbpa.execute(resBuilder);
 
@@ -262,7 +274,7 @@ public class PurchaseBoosterPackController extends EventController {
 		}
 		BoosterItem bi = itemsUserReceives.get(0);
 
-		List<String> userMonsterIds = MonsterStuffUtils
+		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
 		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(

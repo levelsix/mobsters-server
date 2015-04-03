@@ -66,6 +66,15 @@ public class UserCreateController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
 
 	public UserCreateController() {
 		numAllocatedThreads = 3;
@@ -402,9 +411,9 @@ public class UserCreateController extends EventController {
 			int monsterId = monsterIds.get(i);
 			int teamSlotNum = i + 1;
 
-			Monster monzter = MonsterRetrieveUtils
+			Monster monzter = monsterRetrieveUtils
 					.getMonsterForMonsterId(monsterId);
-			Map<Integer, MonsterLevelInfo> info = MonsterLevelInfoRetrieveUtils
+			Map<Integer, MonsterLevelInfo> info = monsterLevelInfoRetrieveUtils
 					.getMonsterLevelInfoForMonsterId(monsterId);
 
 			List<Integer> lvls = new ArrayList<Integer>(info.keySet());
@@ -430,7 +439,7 @@ public class UserCreateController extends EventController {
 	private void writePvpStuff(String userId, Timestamp createTime) {
 		int elo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 		int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
-		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils
+		List<PvpLeague> pvpLeagueList = pvpLeagueRetrieveUtils
 				.getLeaguesForElo(elo);
 		if (pvpLeagueList.size() > 1) {
 			log.error("there are multiple leagues for initial elo: " + elo
@@ -441,7 +450,7 @@ public class UserCreateController extends EventController {
 			pvpLeagueId = pvpLeagueList.get(0).getId();
 		}
 
-		int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
+		int rank = pvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
 
 		Date createDate = new Date(createTime.getTime());
 		Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,

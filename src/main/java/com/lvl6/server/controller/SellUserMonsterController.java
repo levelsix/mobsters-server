@@ -51,6 +51,9 @@ public class SellUserMonsterController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -81,7 +84,7 @@ public class SellUserMonsterController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto
 				.getSalesList();
-		Map<String, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
+		Map<String, Integer> userMonsterIdsToCashAmounts = monsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
 		Set<String> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
 		List<String> userMonsterIds = new ArrayList<String>(userMonsterIdsSet);

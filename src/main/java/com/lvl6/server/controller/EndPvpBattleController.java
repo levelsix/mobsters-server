@@ -88,6 +88,16 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public EndPvpBattleController() {
 		numAllocatedThreads = 7;
@@ -482,7 +492,7 @@ public class EndPvpBattleController extends EventController {
 
 		String mfusop = ControllerConstants.MFUSOP__PVP;
 
-		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+		List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 				.updateUserMonsters(userId, monsterIdToNumPieces, null, mfusop,
 						currentDate);
 
@@ -768,9 +778,9 @@ public class EndPvpBattleController extends EventController {
 		}
 
 		int curElo = prevElo + attackerEloChange;
-		int attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+		int attackerCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 				curElo, attackerPrevLeague);
-		int attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(curElo,
+		int attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(curElo,
 				attackerCurLeague);
 
 		//don't update his shields and elo
@@ -916,9 +926,9 @@ public class EndPvpBattleController extends EventController {
 		Date inBattleShieldEndTime = defenderShieldEndTime;
 
 		int curElo = prevElo + defenderEloChange;
-		int curPvpLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
+		int curPvpLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
 				prevPvpLeague);
-		int curRank = PvpLeagueRetrieveUtils
+		int curRank = pvpLeagueRetrieveUtils
 				.getRankForElo(curElo, curPvpLeague);
 
 		//update pvp stuff: elo most likely changed, shields might have if attackerWon
@@ -1164,7 +1174,7 @@ public class EndPvpBattleController extends EventController {
 		Map<String, List<MonsterForUser>> userIdsToUserMonsters = calculateAttackerMonsters(attackerId);
 
 		//need the drop rates
-		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = MonsterStuffUtils
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
 				.calculatePvpDrops(userIdsToUserMonsters);
 
 		//need to calculate the resources defender can steal
@@ -1180,7 +1190,7 @@ public class EndPvpBattleController extends EventController {
 
 		//this PvpHistoryProto contains information for a person who
 		//is going to attack
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 				.createGotAttackedPvpHistoryProto(gotAttackedHistoryList,
 						idsToAttackers, attackerIdsToClans,
 						userIdsToUserMonsters,

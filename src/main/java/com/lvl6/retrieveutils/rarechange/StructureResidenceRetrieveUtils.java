@@ -27,7 +27,7 @@ public class StructureResidenceRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESIDENCE_CONFIG;
 
-	public static Map<Integer, StructureResidence> getStructIdsToResidences() {
+	public Map<Integer, StructureResidence> getStructIdsToResidences() {
 		log.debug("retrieving all structs data");
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
@@ -35,7 +35,7 @@ public class StructureResidenceRetrieveUtils {
 		return structIdsToResidences;
 	}
 
-	public static StructureResidence getResidenceForStructId(int structId) {
+	public StructureResidence getResidenceForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
@@ -43,7 +43,7 @@ public class StructureResidenceRetrieveUtils {
 		return structIdsToResidences.get(structId);
 	}
 
-	public static StructureResidence getUpgradedResidenceForStructId(
+	public StructureResidence getUpgradedResidenceForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToResidences == null) {
@@ -60,7 +60,7 @@ public class StructureResidenceRetrieveUtils {
 		return null;
 	}
 
-	public static StructureResidence getPredecessorResidenceForStructId(
+	public StructureResidence getPredecessorResidenceForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToResidences == null) {
@@ -77,7 +77,7 @@ public class StructureResidenceRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToResidences() {
+	private void setStaticStructIdsToResidences() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -111,14 +111,14 @@ public class StructureResidenceRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToResidences();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureResidence convertRSRowToResidence(ResultSet rs)
+	private StructureResidence convertRSRowToResidence(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__STRUCT_ID);
 		int numMonsterSlots = rs

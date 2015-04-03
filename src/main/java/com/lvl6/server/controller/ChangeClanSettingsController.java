@@ -253,7 +253,7 @@ public class ChangeClanSettingsController extends EventController {
 		}
 
 		if (isChangeIcon) {
-			ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
+			ClanIcon ci = clanIconRetrieveUtils.getClanIconForId(iconId);
 			if (null == ci) {
 				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
 				log.warn(String.format("no clan icon with id=%s", iconId));

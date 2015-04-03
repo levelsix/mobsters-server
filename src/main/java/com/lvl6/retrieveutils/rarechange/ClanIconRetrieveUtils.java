@@ -28,14 +28,14 @@ public class ClanIconRetrieveUtils {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-	public static Map<Integer, ClanIcon> getClanIconIdsToClanIcons() {
+	public Map<Integer, ClanIcon> getClanIconIdsToClanIcons() {
 		if (null == clanIconIdsToClanIcons) {
 			setStaticClanIconIdsToClanIcons();
 		}
 		return clanIconIdsToClanIcons;
 	}
 
-	public static ClanIcon getClanIconForId(int id) {
+	public ClanIcon getClanIconForId(int id) {
 		if (null == clanIconIdsToClanIcons) {
 			setStaticClanIconIdsToClanIcons();
 		}
@@ -47,7 +47,7 @@ public class ClanIconRetrieveUtils {
 		return clanIconIdsToClanIcons.get(id);
 	}
 
-	public static Map<Integer, ClanIcon> getClanIconsForIds(
+	public Map<Integer, ClanIcon> getClanIconsForIds(
 			Collection<Integer> ids) {
 		if (null == clanIconIdsToClanIcons) {
 			setStaticClanIconIdsToClanIcons();
@@ -61,7 +61,7 @@ public class ClanIconRetrieveUtils {
 		return returnMap;
 	}
 
-	private static void setStaticClanIconIdsToClanIcons() {
+	private void setStaticClanIconIdsToClanIcons() {
 		log.debug("setting static map of clanIcon ids to clanIcons");
 
 		Random rand = new Random();
@@ -100,14 +100,14 @@ public class ClanIconRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticClanIconIdsToClanIcons();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ClanIcon convertRSRowToClanIcon(ResultSet rs, Random rand)
+	private ClanIcon convertRSRowToClanIcon(ResultSet rs, Random rand)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.CLAN_ICON__ID);
 		String imgName = rs.getString(DBConstants.CLAN_ICON__IMG_NAME);

@@ -42,6 +42,9 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public FulfillTeamDonationSolicitationController() {
 		numAllocatedThreads = 4;
@@ -71,7 +74,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		ClanMemberTeamDonationProto solicitationProto = reqProto
 				.getSolicitation();
 
-		MonsterSnapshotForUser msfu = MonsterStuffUtils
+		MonsterSnapshotForUser msfu = monsterStuffUtils
 				.javafyFullUserMonsterProto(fump);
 		String solicitorId = null;
 		ClanMemberTeamDonation cmtd = ClanStuffUtils

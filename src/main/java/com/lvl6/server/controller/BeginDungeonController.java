@@ -63,10 +63,25 @@ public class BeginDungeonController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
 	protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
+	
+	@Autowired
+	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
+	
+	@Autowired
+	protected QuestJobRetrieveUtils questJobRetrieveUtils;
 
 	public BeginDungeonController() {
 		numAllocatedThreads = 8;
@@ -327,7 +342,7 @@ public class BeginDungeonController extends EventController {
 			monsterPieceDropped.add(dropped);
 			itemIdDropped.add(tsfu.getItemIdDropped());
 
-			TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
+			TaskStageMonster tsm = taskStageMonsterRetrieveUtils
 					.getTaskStageMonsterForId(tsmId);
 			monsterIdDrops.add(tsm.getMonsterIdDrop());
 			monsterDropLvls.add(tsm.getMonsterDropLvl());
@@ -430,7 +445,7 @@ public class BeginDungeonController extends EventController {
 
 		Random rand = ControllerConstants.RAND;
 		//quest monster items are dropped based on QUEST JOB IDS not quest ids
-		List<Integer> questJobIds = QuestJobRetrieveUtils
+		List<Integer> questJobIds = questJobRetrieveUtils
 				.getQuestJobIdsForQuestIds(questIds);
 
 		//for each stage, calculate the monster(s) the user will face and
@@ -470,7 +485,7 @@ public class BeginDungeonController extends EventController {
 			List<TaskStageMonster> spawnedTaskStageMonsters) {
 
 		//select one monster, at random. This is the ONE monster for this stage
-		List<TaskStageMonster> possibleMonsters = TaskStageMonsterRetrieveUtils
+		List<TaskStageMonster> possibleMonsters = taskStageMonsterRetrieveUtils
 				.getMonstersForTaskStageId(tsId);
 		List<TaskStageMonster> copyTaskStageMonsters = new ArrayList<TaskStageMonster>(
 				possibleMonsters);
@@ -478,7 +493,7 @@ public class BeginDungeonController extends EventController {
 		int size = copyTaskStageMonsters.size();
 		int quantityWanted = quantity;
 		//sum up chance to appear, and need to normalize all the probabilities
-		float sumOfProbabilities = MonsterStuffUtils
+		float sumOfProbabilities = monsterStuffUtils
 				.sumProbabilities(copyTaskStageMonsters);
 
 		for (int i = 0; i < size; i++) {
@@ -644,7 +659,7 @@ public class BeginDungeonController extends EventController {
 		//create the proto
 		for (Integer stageNum : stageNumList) {
 			List<TaskStageForUser> tsfu = stageNumToStages.get(stageNum);
-			TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+			TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
 					taskId, stageNum, tsfu);
 
 			//return to sender
@@ -662,7 +677,7 @@ public class BeginDungeonController extends EventController {
 		int monsterId = tsm.getMonsterId();
 		for (int questJobId : questJobIds) {
 
-			QuestJobMonsterItem qjmi = QuestJobMonsterItemRetrieveUtils
+			QuestJobMonsterItem qjmi = questJobMonsterItemRetrieveUtils
 					.getItemForQuestJobAndMonsterId(questJobId, monsterId);
 			log.info(String.format("QuestJobMonsterItem=%s", qjmi));
 

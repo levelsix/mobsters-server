@@ -67,9 +67,15 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public RedeemMiniJobController() {
 		numAllocatedThreads = 4;
@@ -229,7 +235,7 @@ public class RedeemMiniJobController extends EventController {
 
 		//sanity check
 		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 		if (null == mj) {
 			log.error("no MiniJob exists with id=" + miniJobId
 					+ "\t invalid MiniJobForUser=" + mjfu);
@@ -237,7 +243,7 @@ public class RedeemMiniJobController extends EventController {
 			return false;
 		}
 
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				umchpList, userMonsterIdToExpectedHealth);
 
 		Map<String, MonsterForUser> mfuIdsToUserMonsters = getMonsterForUserRetrieveUtils()
@@ -271,7 +277,7 @@ public class RedeemMiniJobController extends EventController {
 			Map<String, Integer> currencyChange,
 			Map<String, Integer> previousCurrency) {
 		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 
 		int prevGems = user.getGems();
 		int prevCash = user.getCash();
@@ -317,7 +323,7 @@ public class RedeemMiniJobController extends EventController {
 
 			log.info("rewarding user with {monsterId->amount}: {}",
 					monsterIdToNumPieces);
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
 							mfusop, now);
 			FullUserMonsterProto fump = newOrUpdated.get(0);

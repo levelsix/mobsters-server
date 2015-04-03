@@ -64,6 +64,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -104,7 +107,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		int maxOil = senderResourcesProto.getMaxOil();
 
-		Map<String, UserEnhancementItemProto> newMap = MonsterStuffUtils
+		Map<String, UserEnhancementItemProto> newMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 
 		//set some values to send to the client (the response proto)
@@ -284,7 +287,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			}
 
 			//retain only the userMonsters in newMap that are not in evolutions
-			Set<String> idsInEvolutions = MonsterStuffUtils
+			Set<String> idsInEvolutions = monsterStuffUtils
 					.getUserMonsterIdsUsedInEvolution(evolution, null);
 			if (!Collections.disjoint(idsInEvolutions, newMapIds)) {
 				log.error("some monsters are evolving. evolving={}, newMap={}",
@@ -445,7 +448,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		//	  		uId, protoUpdateMap);
 		//		log.info(String.format("updateMap=%s", updateMap));
 		//		
-		List<MonsterEnhancingForUser> newMap = MonsterStuffUtils
+		List<MonsterEnhancingForUser> newMap = monsterStuffUtils
 				.convertToMonsterEnhancingForUser(uId, protoNewMap);
 		log.info(String.format("newMap=%s", newMap));
 

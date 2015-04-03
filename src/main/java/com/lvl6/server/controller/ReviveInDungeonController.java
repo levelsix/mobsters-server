@@ -48,6 +48,9 @@ public class ReviveInDungeonController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public ReviveInDungeonController() {
 		numAllocatedThreads = 4;
@@ -193,7 +196,7 @@ public class ReviveInDungeonController extends EventController {
 		//    }
 
 		//extract the ids so it's easier to get userMonsters from db
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				reviveMeProtoList, userMonsterIdToExpectedHealth);
 		Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);

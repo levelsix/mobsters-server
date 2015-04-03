@@ -33,7 +33,7 @@ public class QuestRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_QUEST_CONFIG;
 
-	public static Map<Integer, Quest> getQuestIdsToQuests() {
+	public Map<Integer, Quest> getQuestIdsToQuests() {
 		log.debug("retrieving all quest data");
 		if (questIdsToQuests == null) {
 			setStaticQuestIdsToQuests();
@@ -41,7 +41,7 @@ public class QuestRetrieveUtils {
 		return questIdsToQuests;
 	}
 
-	public static Quest getQuestForQuestId(int questId) {
+	public Quest getQuestForQuestId(int questId) {
 		log.debug("retrieving quest with questId " + questId);
 		if (questIdsToQuests == null) {
 			setStaticQuestIdsToQuests();
@@ -49,7 +49,7 @@ public class QuestRetrieveUtils {
 		return questIdsToQuests.get(questId);
 	}
 
-	public static QuestGraph getQuestGraph() {
+	public QuestGraph getQuestGraph() {
 		log.debug("retrieving quest graph");
 		if (questGraph == null) {
 			setStaticQuestGraph();
@@ -57,7 +57,7 @@ public class QuestRetrieveUtils {
 		return questGraph;
 	}
 
-	private static void setStaticQuestIdsToQuests() {
+	private void setStaticQuestIdsToQuests() {
 		log.debug("setting static map of questIds to quests");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -90,7 +90,7 @@ public class QuestRetrieveUtils {
 		}
 	}
 
-	private static void setStaticQuestGraph() {
+	private void setStaticQuestGraph() {
 		log.debug("setting static quest graph");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -125,7 +125,7 @@ public class QuestRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		//setStaticCityIdsToQuests();
 		setStaticQuestGraph();
 		setStaticQuestIdsToQuests();
@@ -134,7 +134,7 @@ public class QuestRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
+	private Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
 		String delimiter = ",";
 
 		int id = rs.getInt(DBConstants.QUEST__ID);

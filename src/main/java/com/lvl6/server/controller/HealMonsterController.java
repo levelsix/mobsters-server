@@ -68,6 +68,9 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public HealMonsterController() {
 		numAllocatedThreads = 4;
@@ -105,18 +108,18 @@ public class HealMonsterController extends EventController {
 		int gemsForSpeedup = reqProto.getGemsForSpeedup();
 		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 		Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				umchpList, userMonsterIdToExpectedHealth);
 
 		int gemCost = gemCostForHealing + gemsForSpeedup;//reqProto.getTotalGemCost();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
 		int maxCash = senderResourcesProto.getMaxCash();
 
-		Map<String, UserMonsterHealingProto> deleteMap = MonsterStuffUtils
+		Map<String, UserMonsterHealingProto> deleteMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
-		Map<String, UserMonsterHealingProto> updateMap = MonsterStuffUtils
+		Map<String, UserMonsterHealingProto> updateMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
-		Map<String, UserMonsterHealingProto> newMap = MonsterStuffUtils
+		Map<String, UserMonsterHealingProto> newMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhNew);
 
 		log.info(String
@@ -306,32 +309,32 @@ public class HealMonsterController extends EventController {
 		boolean keepThingsInDomain = true;
 		boolean keepThingsNotInDomain = false;
 		Set<String> alreadyHealingIds = alreadyHealing.keySet();
-		MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap,
+		monsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap,
 				keepThingsInDomain, keepThingsNotInDomain);
-		MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap,
+		monsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are in the db
 		Set<String> existingIds = existingUserMonsters.keySet();
-		MonsterStuffUtils.retainValidMonsters(existingIds, newMap,
+		monsterStuffUtils.retainValidMonsters(existingIds, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are not in enhancing
 		keepThingsInDomain = false;
 		keepThingsNotInDomain = true;
 		Set<String> alreadyEnhancingIds = alreadyEnhancing.keySet();
-		MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap,
+		monsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are not in evolutions
-		Set<String> idsInEvolutions = MonsterStuffUtils
+		Set<String> idsInEvolutions = monsterStuffUtils
 				.getUserMonsterIdsUsedInEvolution(evolution, null);
-		MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
+		monsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//FROM HealMonsterWaitTimeComplete CONTROLLER
 		//modify healedUp to contain only those that exist
-		MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
+		monsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
 
 		return true;
 	}
@@ -431,9 +434,9 @@ public class HealMonsterController extends EventController {
 		}
 
 		//convert protos to java counterparts
-		List<MonsterHealingForUser> updateList = MonsterStuffUtils
+		List<MonsterHealingForUser> updateList = monsterStuffUtils
 				.convertToMonsterHealingForUser(uId, protoUpdateMap);
-		List<MonsterHealingForUser> newList = MonsterStuffUtils
+		List<MonsterHealingForUser> newList = monsterStuffUtils
 				.convertToMonsterHealingForUser(uId, protoNewMap);
 
 		List<MonsterHealingForUser> updateAndNew = new ArrayList<MonsterHealingForUser>();

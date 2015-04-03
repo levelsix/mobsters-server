@@ -49,14 +49,19 @@ public class InAppPurchaseAction {
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
+	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+	private MonsterStuffUtils monsterStuffUtils;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
+	
 
 	public InAppPurchaseAction(String userId, User user,
 			JSONObject receiptFromApple, String iapProductId, Date now,
 			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
+			BoosterItemRetrieveUtils boosterItemRetrieveUtils, 
+			MonsterStuffUtils monsterStuffUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
@@ -67,6 +72,8 @@ public class InAppPurchaseAction {
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.structureForUserRetrieveUtils2 = structureForUserRetrieveUtils2;
+		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
+		this.monsterStuffUtils = monsterStuffUtils;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -280,7 +287,7 @@ public class InAppPurchaseAction {
 
 	private void processStarterPackPurchase(Builder resBuilder) {
 		int boosterPackId = ControllerConstants.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
-		Map<Integer, BoosterItem> idToBoosterItem = BoosterItemRetrieveUtils
+		Map<Integer, BoosterItem> idToBoosterItem = boosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 		if (null == idToBoosterItem || idToBoosterItem.isEmpty()) {
 			throw new RuntimeException(String.format(
@@ -327,7 +334,7 @@ public class InAppPurchaseAction {
 		//this is if the user did not buy a complete monster, UPDATE DB
 		if (!monsterIdToNumPieces.isEmpty()) {
 			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
 							mfusop, now);
 

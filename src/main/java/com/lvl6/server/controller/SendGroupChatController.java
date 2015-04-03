@@ -66,6 +66,9 @@ public class SendGroupChatController extends EventController {
 	protected EventWriter eventWriter;
 
 	@Autowired
+	BannedUserRetrieveUtils bannedUserRetrieveUtils;
+	
+	@Autowired
 	protected Locker locker;
 
 	@Autowired
@@ -329,7 +332,7 @@ public class SendGroupChatController extends EventController {
 			return false;
 		}
 
-		Set<Integer> banned = BannedUserRetrieveUtils.getAllBannedUsers();
+		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (banned.contains(user.getId())) {
 			resBuilder.setStatus(SendGroupChatStatus.BANNED);
 			log.warn("banned user tried to send a post. user=" + user);

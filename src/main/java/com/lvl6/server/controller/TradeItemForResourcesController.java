@@ -26,6 +26,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -42,10 +43,13 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
-	UserRetrieveUtils2 userRetrieveUtil;
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -112,7 +116,7 @@ public class TradeItemForResourcesController extends EventController {
 
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
-					itemForUserRetrieveUtil, userRetrieveUtil,
+					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
 					UpdateUtils.get());
 
 			tifsua.execute(resBuilder);

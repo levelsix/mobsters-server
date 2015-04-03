@@ -31,6 +31,7 @@ public class TradeItemForResourcesAction {
 	private int maxCash;
 	private int maxOil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private ItemRetrieveUtils itemRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private UpdateUtil updateUtil;
 
@@ -38,6 +39,7 @@ public class TradeItemForResourcesAction {
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,
 			int maxCash, int maxOil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			ItemRetrieveUtils itemRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil, UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
@@ -46,6 +48,7 @@ public class TradeItemForResourcesAction {
 		this.maxCash = maxCash;
 		this.maxOil = maxOil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.itemRetrieveUtils = itemRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -130,7 +133,7 @@ public class TradeItemForResourcesAction {
 			itemIdToQuantityUsed.put(itemId, quantity);
 
 			//aggregate the amount of resources to give user
-			Item item = ItemRetrieveUtils.getItemForId(itemId);
+			Item item = itemRetrieveUtils.getItemForId(itemId);
 
 			String itemType = item.getItemType();
 			int amount = item.getAmount();

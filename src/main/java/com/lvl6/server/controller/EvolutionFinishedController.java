@@ -62,6 +62,16 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public EvolutionFinishedController() {
 		numAllocatedThreads = 3;
@@ -162,7 +172,7 @@ public class EvolutionFinishedController extends EventController {
 						existingUserMonsters);
 
 				MonsterForUser evolvedMfu = evolvedUserMonster.get(0);
-				FullUserMonsterProto fump = CreateInfoProtoUtils
+				FullUserMonsterProto fump = createInfoProtoUtils
 						.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
 				resBuilder.setEvolvedMonster(fump);
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
@@ -340,12 +350,12 @@ public class EvolutionFinishedController extends EventController {
 			String uMonsterIdOne, Map<String, MonsterForUser> idsToUserMonsters) {
 		MonsterForUser unevolvedMonster = idsToUserMonsters.get(uMonsterIdOne);
 		int monsterId = unevolvedMonster.getMonsterId();
-		Monster evolvedMonster = MonsterRetrieveUtils
+		Monster evolvedMonster = monsterRetrieveUtils
 				.getEvolvedFormForMonster(monsterId);
 		int numPieces = evolvedMonster.getNumPuzzlePieces();
 		boolean hasAllPieces = true;
 		boolean isComplete = true;
-		MonsterForUser mfu = MonsterStuffUtils.createNewUserMonster(uId,
+		MonsterForUser mfu = monsterStuffUtils.createNewUserMonster(uId,
 				numPieces, evolvedMonster, now, hasAllPieces, isComplete);
 
 		return mfu;

@@ -36,13 +36,15 @@ public class PerformResearchAction {
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	private ResearchRetrieveUtils researchRetrieveUtils;
 
 	public PerformResearchAction(String userId,
 			UserRetrieveUtils2 userRetrieveUtils, int researchId,
 			String userResearchUuid, int gemsCost, int resourceCost,
 			ResourceType resourceType, Date now, InsertUtil insertUtil,
 			UpdateUtil updateUtil,
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
+			ResearchRetrieveUtils researchRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.userRetrieveUtils = userRetrieveUtils;
@@ -55,6 +57,7 @@ public class PerformResearchAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+		this.researchRetrieveUtils = researchRetrieveUtils;
 	}
 
 	private User user;
@@ -121,7 +124,7 @@ public class PerformResearchAction {
 	}
 
 	private boolean verifyResearch(Builder resBuilder) {
-		research = ResearchRetrieveUtils.getResearchForId(researchId);
+		research = researchRetrieveUtils.getResearchForId(researchId);
 		if (null == research) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error("no research for id: " + researchId);

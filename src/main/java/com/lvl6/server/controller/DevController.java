@@ -48,6 +48,9 @@ public class DevController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -167,7 +170,7 @@ public class DevController extends EventController {
 					Collections.singletonMap(1, quantity));
 
 			String mfusop = "cheater, cheater, pumpkin eater";
-			List<FullUserMonsterProto> reward = MonsterStuffUtils
+			List<FullUserMonsterProto> reward = monsterStuffUtils
 					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity,
 							mfusop, new Date());
 			resBuilder.addAllFump(reward);

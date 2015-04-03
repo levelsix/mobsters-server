@@ -45,6 +45,12 @@ public class SpawnMiniJobController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	//	@Autowired
 	//	protected Locker locker;
@@ -109,7 +115,7 @@ public class SpawnMiniJobController extends EventController {
 		//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			User user = getUserRetrieveUtils().getUserById(userId);
-			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
+			Map<Integer, MiniJob> miniJobIdToMiniJob = miniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
 
 			boolean legit = checkLegitRequest(resBuilder, userId, user,
@@ -130,7 +136,7 @@ public class SpawnMiniJobController extends EventController {
 
 			if (success) {
 				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
-				List<UserMiniJobProto> userMiniJobProtos = CreateInfoProtoUtils
+				List<UserMiniJobProto> userMiniJobProtos = createInfoProtoUtils
 						.createUserMiniJobProtos(spawnedUserMiniJobs,
 								miniJobIdToMiniJob);
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
@@ -203,7 +209,7 @@ public class SpawnMiniJobController extends EventController {
 			return spawnedMiniJobs;
 		}
 
-		float probabilitySum = MiniJobRetrieveUtils
+		float probabilitySum = miniJobRetrieveUtils
 				.getMiniJobProbabilitySumForStructId(structId);
 		Random rand = new Random();
 		log.info("probabilitySum=" + probabilitySum);

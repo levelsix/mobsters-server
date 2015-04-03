@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Dialogue;
@@ -27,6 +28,9 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class TaskStageMonsterRetrieveUtils {
 
+	@Autowired
+	MonsterRetrieveUtils monsterRetrieveUtils;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -39,7 +43,7 @@ public class TaskStageMonsterRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER_CONFIG;
 
-	public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
+	public Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
 		log.debug("retrieving all task stage monster data map");
 		if (null == taskStageIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();
@@ -51,7 +55,7 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageIdsToTaskStageMonsters;
 	}
 
-	public static TaskStageMonster getTaskStageMonsterForId(int tsmId) {
+	public TaskStageMonster getTaskStageMonsterForId(int tsmId) {
 		log.debug("retrieve task stage monster for id={}", tsmId);
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();
@@ -67,7 +71,7 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageMonsterIdsToTaskStageMonsters.get(tsmId);
 	}
 
-	public static Set<Integer> getDroppableMonsterIdsForTaskStageId(
+	public Set<Integer> getDroppableMonsterIdsForTaskStageId(
 			int taskStageId) {
 		log.debug("retrieve stage monster data for stage {}", taskStageId);
 		if (null == taskStageIdsToDroppableMonsterIds) {
@@ -85,7 +89,7 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageIdsToDroppableMonsterIds.get(taskStageId);
 	}
 
-	public static Set<String> getDroppableQualitiesForTaskStageId(
+	public Set<String> getDroppableQualitiesForTaskStageId(
 			int taskStageId) {
 		log.debug("retrieve stage monster quality data for stage {}",
 				taskStageId);
@@ -104,7 +108,7 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageIdsToDroppableRarities.get(taskStageId);
 	}
 
-	public static List<TaskStageMonster> getMonstersForTaskStageId(
+	public List<TaskStageMonster> getMonstersForTaskStageId(
 			int taskStageId) {
 		log.debug("retrieve task stage monster data for stage {}", taskStageId);
 		if (null == taskStageIdsToTaskStageMonsters) {
@@ -123,7 +127,7 @@ public class TaskStageMonsterRetrieveUtils {
 		return taskStageIdsToTaskStageMonsters.get(taskStageId);
 	}
 
-	public static Map<Integer, TaskStageMonster> getTaskStageMonstersForIds(
+	public Map<Integer, TaskStageMonster> getTaskStageMonstersForIds(
 			Collection<Integer> ids) {
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
 			setStaticTaskStageIdsToTaskStageMonster();
@@ -142,13 +146,13 @@ public class TaskStageMonsterRetrieveUtils {
 		return returnMap;
 	}
 
-	private static void reassignSkills() {
+	private void reassignSkills() {
 
 		if (null == taskStageMonsterIdsToTaskStageMonsters) {
 			return;
 		}
 
-		Map<Integer, Monster> idToMonster = MonsterRetrieveUtils
+		Map<Integer, Monster> idToMonster = monsterRetrieveUtils
 				.getMonsterIdsToMonsters();
 		if (null == idToMonster) {
 			return;
@@ -212,7 +216,7 @@ public class TaskStageMonsterRetrieveUtils {
 		taskStageIdsToDroppableRarities = taskStageIdsToRaritiesTemp;
 	}
 
-	private static void setStaticTaskStageIdsToTaskStageMonster() {
+	private void setStaticTaskStageIdsToTaskStageMonster() {
 		log.debug("setting static map of taskStage and taskStageMonster Ids to monsterIds");
 
 		reassignedSkills = false;
@@ -268,7 +272,7 @@ public class TaskStageMonsterRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticTaskStageIdsToTaskStageMonster();
 		reassignSkills();
 	}
@@ -276,7 +280,7 @@ public class TaskStageMonsterRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static TaskStageMonster convertRSRowToTaskStageMonster(
+	private TaskStageMonster convertRSRowToTaskStageMonster(
 			ResultSet rs, Random rand) throws SQLException {
 		int id = rs.getInt(DBConstants.TASK_STAGE_MONSTER__ID);
 		int stageId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__TASK_STAGE_ID);

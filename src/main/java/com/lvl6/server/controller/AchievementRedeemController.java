@@ -43,6 +43,9 @@ public class AchievementRedeemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
@@ -205,7 +208,7 @@ public class AchievementRedeemController extends EventController {
 				"user achievements redeemed. numUpdated=%s, achievementId=%s",
 				numUpdated, achievementId));
 
-		Achievement achievement = AchievementRetrieveUtils
+		Achievement achievement = achievementRetrieveUtils
 				.getAchievementForAchievementId(achievementId);
 		int gemReward = achievement.getGemReward();
 		int gemsGained = Math.max(0, gemReward);

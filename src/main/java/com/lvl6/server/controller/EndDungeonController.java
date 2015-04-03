@@ -81,6 +81,12 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
 
 	public EndDungeonController() {
 		numAllocatedThreads = 4;
@@ -211,7 +217,7 @@ public class EndDungeonController extends EventController {
 					mfusopB.append(" ");
 					mfusopB.append(taskForUserId);
 					String mfusop = mfusopB.toString();
-					List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 							.updateUserMonsters(userId, monsterIdToNumPieces,
 									monsterIdToLvlToQuantity, mfusop,
 									currentDate);
@@ -511,7 +517,7 @@ public class EndDungeonController extends EventController {
 			monsterPieceDropped.add(dropped);
 			itemIdDropped.add(tsfu.getItemIdDropped());
 
-			TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
+			TaskStageMonster tsm = taskStageMonsterRetrieveUtils
 					.getTaskStageMonsterForId(tsmId);
 			monsterIdDrops.add(tsm.getMonsterIdDrop());
 			monsterDropLvls.add(tsm.getMonsterDropLvl());
@@ -553,7 +559,7 @@ public class EndDungeonController extends EventController {
 		//retrieve those task stage monsters. aggregate the quantities by monster id
 		//assume different task stage monsters can be the same monster
 		Collection<Integer> tsmIds = tsmIdToQuantity.keySet();
-		Map<Integer, TaskStageMonster> monstersThatDropped = TaskStageMonsterRetrieveUtils
+		Map<Integer, TaskStageMonster> monstersThatDropped = taskStageMonsterRetrieveUtils
 				.getTaskStageMonstersForIds(tsmIds);
 
 		for (int tsmId : tsmIds) {

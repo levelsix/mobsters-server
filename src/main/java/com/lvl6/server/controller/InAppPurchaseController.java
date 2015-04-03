@@ -34,9 +34,11 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -73,6 +75,12 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+	
+	@Autowired
+	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
@@ -263,7 +271,7 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
 					receiptFromApple, packageName, now, iapHistoryRetrieveUtil,
 					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
-					insertUtil, updateUtil);
+					boosterItemRetrieveUtils, monsterStuffUtils, insertUtil, updateUtil);
 
 			iapa.execute(resBuilder);
 
@@ -285,7 +293,7 @@ public class InAppPurchaseController extends EventController {
 
 	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(
 			String iapProductId) {
-		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		log.info(structIdsToMoneyTrees.toString());
 

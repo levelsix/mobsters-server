@@ -37,13 +37,17 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	private final ClanRetrieveUtils2 clanRetrieveUtils;
 	private final HazelcastPvpUtil hazelcastPvpUtil;
+	private final MonsterStuffUtils monsterStuffUtils;
+	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
 			PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil,
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
 			ClanRetrieveUtils2 clanRetrieveUtils,
-			HazelcastPvpUtil hazelcastPvpUtil) {
+			HazelcastPvpUtil hazelcastPvpUtil,
+			MonsterStuffUtils monsterStuffUtils,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -51,6 +55,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 		this.clanRetrieveUtils = clanRetrieveUtils;
+		this.monsterStuffUtils = monsterStuffUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -153,7 +159,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//		log.info(String.format(
 		//			"history monster teams=%s", userIdsToUserMonsters));
 
-		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = MonsterStuffUtils
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
 				.calculatePvpDrops(userIdsToUserMonsters);
 
 		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
@@ -167,7 +173,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 				.getUserIdsToClans(attackerIds);
 
 		//create PvpHistory for battles where this user got attacked
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 				.createGotAttackedPvpHistoryProto(gotAttackedHistoryList,
 						idsToAttackers, attackerIdsToClans,
 						userIdsToUserMonsters,

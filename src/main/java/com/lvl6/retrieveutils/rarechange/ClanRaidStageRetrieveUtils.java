@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,9 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ClanRaidStageRetrieveUtils {
 
+	@Autowired
+	ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -32,7 +36,7 @@ public class ClanRaidStageRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_CONFIG;
 
-	public static int getClanRaidStageHealthForCrsId(int crsId) {
+	public int getClanRaidStageHealthForCrsId(int crsId) {
 		log.debug("retrieving stage health for crsId=" + crsId);
 
 		if (null == clanRaidStageIdsToClanRaidStages) {
@@ -50,7 +54,7 @@ public class ClanRaidStageRetrieveUtils {
 
 	}
 
-	public static Map<Integer, Map<Integer, ClanRaidStage>> getClanRaidIdsToClanRaidStageIdsToClanRaidStages() {
+	public Map<Integer, Map<Integer, ClanRaidStage>> getClanRaidIdsToClanRaidStageIdsToClanRaidStages() {
 		log.debug("retrieving all clan raid stage data map");
 		if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
 			setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
@@ -58,14 +62,14 @@ public class ClanRaidStageRetrieveUtils {
 		return clanRaidIdsToClanRaidStageIdsToClanRaidStages;
 	}
 
-	public static Map<Integer, ClanRaidStage> getClanRaidStageIdsToStages() {
+	public Map<Integer, ClanRaidStage> getClanRaidStageIdsToStages() {
 		if (null == clanRaidStageIdsToClanRaidStages) {
 			setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
 		}
 		return clanRaidStageIdsToClanRaidStages;
 	}
 
-	public static ClanRaidStage getClanRaidStageForClanRaidStageId(
+	public ClanRaidStage getClanRaidStageForClanRaidStageId(
 			int clanRaidStageId) {
 		if (null == clanRaidStageIdsToClanRaidStages) {
 			setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
@@ -81,7 +85,7 @@ public class ClanRaidStageRetrieveUtils {
 
 	}
 
-	public static Map<Integer, ClanRaidStage> getClanRaidStagesForClanRaidId(
+	public Map<Integer, ClanRaidStage> getClanRaidStagesForClanRaidId(
 			int clanRaidId) {
 		log.debug("retrieve clan raid stage data for clanRaidId " + clanRaidId);
 		if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
@@ -98,7 +102,7 @@ public class ClanRaidStageRetrieveUtils {
 		}
 	}
 
-	public static ClanRaidStage getFirstStageForClanRaid(int clanRaidId) {
+	public ClanRaidStage getFirstStageForClanRaid(int clanRaidId) {
 		log.debug("retrieving the first clan raid stage for clanRaidId="
 				+ clanRaidId);
 		if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
@@ -126,7 +130,7 @@ public class ClanRaidStageRetrieveUtils {
 		return crs;
 	}
 
-	public static ClanRaidStage getNextStageForClanRaidStageId(
+	public ClanRaidStage getNextStageForClanRaidStageId(
 			int clanRaidStageId, int clanRaidId) {
 		log.debug("retrieving the clan raid stage after clanRaidStageId="
 				+ clanRaidStageId);
@@ -159,7 +163,7 @@ public class ClanRaidStageRetrieveUtils {
 		return stageNumToCrs.get(stageNumOfNextStage);
 	}
 
-	private static void setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages() {
+	private void setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages() {
 		log.debug("setting static map of clanRaidIds to stages");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -230,19 +234,19 @@ public class ClanRaidStageRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
 		setStageHealths();
 	}
 
-	public static void setStageHealths() {
+	public void setStageHealths() {
 		log.debug("setting the stage health attribute in clan raid stages");
-		ClanRaidStageMonsterRetrieveUtils.reload();
+		clanRaidStageMonsterRetrieveUtils.reload();
 
 		for (Integer crsId : clanRaidStageIdsToClanRaidStages.keySet()) {
 			ClanRaidStage crs = clanRaidStageIdsToClanRaidStages.get(crsId);
 
-			Map<Integer, ClanRaidStageMonster> crsmIdToCrsm = ClanRaidStageMonsterRetrieveUtils
+			Map<Integer, ClanRaidStageMonster> crsmIdToCrsm = clanRaidStageMonsterRetrieveUtils
 					.getClanRaidStageMonstersForClanRaidStageId(crsId);
 
 			int stageHealth = 0;
@@ -256,7 +260,7 @@ public class ClanRaidStageRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ClanRaidStage convertRSRowToClanRaidStage(ResultSet rs)
+	private ClanRaidStage convertRSRowToClanRaidStage(ResultSet rs)
 			throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);

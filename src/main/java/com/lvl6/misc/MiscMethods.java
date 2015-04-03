@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -148,6 +149,9 @@ import com.memetix.mst.translate.Translate;
 
 
 public class MiscMethods {
+	
+	@Autowired
+	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	private static final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
@@ -946,9 +950,9 @@ public class MiscMethods {
 	//		return protos;
 	//	}
 
-	public static void reloadAllRareChangeStaticData() {
+	public void reloadAllRareChangeStaticData() {
 		log.info("Reloading rare change static data");
-		AchievementRetrieveUtils.reload();
+		achievementRetrieveUtils.reload();
 		BannedUserRetrieveUtils.reload();
 		BattleItemRetrieveUtils.reload();
 		BoardRetrieveUtils.reload();

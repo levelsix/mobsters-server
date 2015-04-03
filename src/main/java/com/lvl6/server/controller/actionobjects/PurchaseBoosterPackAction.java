@@ -42,13 +42,19 @@ public class PurchaseBoosterPackAction {
 	private boolean freeBoosterPack;
 	private TimeUtils timeUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
+	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private MonsterStuffUtils monsterStuffUtils;
 	private UpdateUtil updateUtil;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
 			TimeUtils timeUtil, UserRetrieveUtils2 userRetrieveUtil,
+			BoosterPackRetrieveUtils boosterPackRetrieveUtils,
+			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			MonsterStuffUtils monsterStuffUtils,
 			UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
@@ -58,7 +64,10 @@ public class PurchaseBoosterPackAction {
 		this.freeBoosterPack = freeBoosterPack;
 		this.timeUtil = timeUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
+		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
+		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
 		this.updateUtil = updateUtil;
 	}
 
@@ -161,7 +170,7 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils
+		boosterItemIdsToBoosterItems = boosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackIdPurchased);
 
 		if (null == boosterItemIdsToBoosterItems
@@ -191,7 +200,7 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean verifyBoosterPack(Builder resBuilder, int bpId) {
-		aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
+		aPack = boosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
 
 		if (null == aPack) {
 			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -289,7 +298,7 @@ public class PurchaseBoosterPackAction {
 		//this is if the user did not buy a complete monster, UPDATE DB
 		if (!monsterIdToNumPieces.isEmpty()) {
 			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
 							mfusop, now);
 

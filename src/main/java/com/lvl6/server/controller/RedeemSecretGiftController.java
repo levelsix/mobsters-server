@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
+import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -53,6 +54,9 @@ public class RedeemSecretGiftController extends EventController {
 
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected SecretGiftUtils secretGiftUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -112,7 +116,7 @@ public class RedeemSecretGiftController extends EventController {
 			//
 			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(userId,
 					idsRedeemed, clientTime, itemSecretGiftForUserRetrieveUtil,
-					userRetrieveUtil, itemForUserRetrieveUtil,
+					userRetrieveUtil, itemForUserRetrieveUtil, secretGiftUtils,
 					DeleteUtils.get(), UpdateUtils.get(), InsertUtils.get());
 
 			rsga.execute(resBuilder);

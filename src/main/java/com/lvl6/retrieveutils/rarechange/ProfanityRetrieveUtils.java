@@ -25,7 +25,7 @@ public class ProfanityRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PROFANITY_CONFIG;
 
-	public static Set<String> getAllProfanity() {
+	public Set<String> getAllProfanity() {
 		log.debug("retrieving all profanity placed in a set");
 		if (oneWordProfanity == null) {
 			setStaticProfanity();
@@ -33,7 +33,7 @@ public class ProfanityRetrieveUtils {
 		return oneWordProfanity;
 	}
 
-	private static void setStaticProfanity() {
+	private void setStaticProfanity() {
 		log.debug("setting static Set of profanity");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -66,14 +66,14 @@ public class ProfanityRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticProfanity();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static String convertRSRowToProfanity(ResultSet rs)
+	private String convertRSRowToProfanity(ResultSet rs)
 			throws SQLException {
 		String profanityTerm = rs.getString(DBConstants.PROFANITY__TERM);
 

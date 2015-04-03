@@ -113,6 +113,13 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public RequestJoinClanController() {
 		numAllocatedThreads = 4;
@@ -256,7 +263,7 @@ public class RequestJoinClanController extends EventController {
 				//get user's current monster team
 				Map<String, List<MonsterForUser>> userIdToTeam = getMonsterForUserRetrieveUtils()
 						.getUserIdsToMonsterTeamForUserIds(userIds);
-				UserCurrentMonsterTeamProto curTeamProto = CreateInfoProtoUtils
+				UserCurrentMonsterTeamProto curTeamProto = createInfoProtoUtils
 						.createUserCurrentMonsterTeamProto(userId,
 								userIdToTeam.get(userId));
 				resBuilder.setRequesterMonsters(curTeamProto);
@@ -506,14 +513,14 @@ public class RequestJoinClanController extends EventController {
 		//send to the user the current clan raid details for all the users
 		if (!userIdToCepfu.isEmpty()) {
 			//whenever server has this information send it to the clients
-			List<String> userMonsterIds = MonsterStuffUtils
+			List<String> userMonsterIds = monsterStuffUtils
 					.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 			Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
 					.getSpecificUserMonsters(userMonsterIds);
 
 			for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-				PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+				PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
 						.createPersistentClanEventUserInfoProto(cepfu,
 								idsToUserMonsters, null);
 				resBuilder.addClanUsersDetails(pceuip);

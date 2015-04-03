@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -65,6 +66,13 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	
+	@Autowired
+	private MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public RetrieveUserMonsterTeamController() {
 		numAllocatedThreads = 4;
@@ -140,13 +148,14 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					clanMemberTeamDonationRetrieveUtil,
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
-					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil);
+					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
+					monsterStuffUtils);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(
 					RetrieveUserMonsterTeamStatus.SUCCESS)) {
 				//TODO: replace QueueUp and Avenge controller logic with this
-				List<PvpProto> ppList = CreateInfoProtoUtils
+				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
 								rumta.getUserIdToClan(),

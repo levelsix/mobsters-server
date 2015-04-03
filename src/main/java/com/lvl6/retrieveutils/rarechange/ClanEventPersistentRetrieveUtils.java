@@ -38,7 +38,7 @@ public class ClanEventPersistentRetrieveUtils {
 	private static Map<Integer, ClanEventPersistent> eventIdToEvent;
 
 	//clan raids overlap so more than one can be active at the moment
-	public static Map<Integer, ClanEventPersistent> getActiveClanEventIdsToEvents(
+	public Map<Integer, ClanEventPersistent> getActiveClanEventIdsToEvents(
 			Date curDate, TimeUtils timeUtils) {
 		log.debug("retrieving data for current persistent clan event");
 		if (null == eventIdToEvent) {
@@ -110,7 +110,7 @@ public class ClanEventPersistentRetrieveUtils {
 	//so the day offset should be 6, so the return value should be -6
 	//formula:
 	// {[(curDayOfWeekPst - eventDayOfWeek) + 7] % 7} * -1
-	private static int calculateEventStartDayOffset(int curDayOfWeekPst,
+	private int calculateEventStartDayOffset(int curDayOfWeekPst,
 			int eventDayOfWeek) {
 		int dayDiff = curDayOfWeekPst - eventDayOfWeek;
 		dayDiff = dayDiff + 7;
@@ -120,7 +120,7 @@ public class ClanEventPersistentRetrieveUtils {
 		return dayDiff;
 	}
 
-	public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
+	public Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
@@ -128,7 +128,7 @@ public class ClanEventPersistentRetrieveUtils {
 		return eventIdToEvent;
 	}
 
-	public static ClanEventPersistent getEventById(int id) {
+	public ClanEventPersistent getEventById(int id) {
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
@@ -139,12 +139,12 @@ public class ClanEventPersistentRetrieveUtils {
 		return ep;
 	}
 
-	public static void reload() {
+	public void reload() {
 		daysSet = new HashSet<String>(Arrays.asList(days));
 		setStaticEventIdsToEvents();
 	}
 
-	private static void setStaticEventIdsToEvents() {
+	private void setStaticEventIdsToEvents() {
 		log.debug("setting static map of id to ClanEventPersistent");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -177,7 +177,7 @@ public class ClanEventPersistentRetrieveUtils {
 		}
 	}
 
-	private static ClanEventPersistent convertRSRowToClanEventPersistent(
+	private ClanEventPersistent convertRSRowToClanEventPersistent(
 			ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__ID);
 		String dayOfWeek = rs
