@@ -5854,19 +5854,6 @@ public final class ChatProto {
       "(\0162\".com.lvl6.proto.TranslateLanguages\022O" +
       "\n\026privateDefaultLanguage\030\002 \003(\0132/.com.lvl" +
       "6.proto.PrivateChatDefaultLanguageProto\022" +
-<<<<<<< HEAD
-      "\023\n\013translateOn\030\003 \001(\010\"\242\001\n\037PrivateChatDefa" +
-      "ultLanguageProto\022\027\n\017recipientUserId\030\001 \001(" +
-      "\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017defaultLangua" +
-      "ge\030\003 \001(\0162\".com.lvl6.proto.TranslateLangu" +
-      "ages\022\023\n\013translateOn\030\004 \001(\010*&\n\016GroupChatSc" +
-      "ope\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatType\022\017\n" +
-      "\013GLOBAL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s\n\022Tran",
-      "slateLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022" +
-      "\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007" +
-      "RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatPro" +
-      "to"
-=======
       "\031\n\021globalTranslateOn\030\003 \001(\010\"\242\001\n\037PrivateCh" +
       "atDefaultLanguageProto\022\027\n\017recipientUserI" +
       "d\030\001 \001(\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017default" +
@@ -5878,7 +5865,6 @@ public final class ChatProto {
       "ISH\020\002\022\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH" +
       "\020\005\022\013\n\007RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tC" +
       "hatProto"
->>>>>>> c80fdf0... added translateOn to startup and receiving translateOn in translateselectmessages
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
