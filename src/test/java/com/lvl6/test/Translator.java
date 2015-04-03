@@ -54,9 +54,8 @@ public class Translator {
 		Detect.setClientId(pClientId);
 		Detect.setClientSecret(secretId);
 		
-		Language detelctedLanguage = Detect.execute("hello this is chicken omlette flower");
-		Language detected = Detect.execute("hola");
-		System.out.println(detected.getName(Language.ENGLISH));
+		Language detelctedLanguage = Detect.execute("hi");
+		System.out.println("hi is" + detelctedLanguage.getName(Language.ENGLISH));
 		
 		
 		

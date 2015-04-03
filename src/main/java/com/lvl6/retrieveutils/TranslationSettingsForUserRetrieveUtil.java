@@ -190,6 +190,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 			tsfu.setLanguage(rs
 					.getString(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE));
 			tsfu.setChatType(rs.getString(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE));
+			tsfu.setTranslationsOn(rs.getBoolean(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON));
 
 			return tsfu;
 		}

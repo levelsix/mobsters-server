@@ -183,7 +183,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								}
 								else {
 									Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
-									translateMap = MiscMethods.translate(language, pwp.getContent());
+									translateMap = MiscMethods.translate(null, language, pwp.getContent());
 								}
 
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils

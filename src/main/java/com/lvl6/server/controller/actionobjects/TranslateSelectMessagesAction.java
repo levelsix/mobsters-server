@@ -109,7 +109,7 @@ public class TranslateSelectMessagesAction {
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 					String message = pcp.getContent();
 					chatIdsToTranslations.put(pcp.getId(), message);
-					Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(language, message);
+					Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(null, language, message);
 
 					for(TranslateLanguages tl : translatedMessage.keySet()) {
 						TranslatedText tt = new TranslatedText();
