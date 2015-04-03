@@ -1575,20 +1575,15 @@ public class StartupController extends EventController {
 
 		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 				getUserTranslationSettingsForUser(userId);
-		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
-				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
+		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
+		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
 
+		log.info("tsfuList: " + tsfuList);
+		
 		DefaultLanguagesProto dlp = null;
 
-		if(tsfu != null) {
-			if(tsfuList != null && !tsfuList.isEmpty()) {
-				dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
-						TranslateLanguages.valueOf(tsfu.getLanguage()), tsfu.isTranslationsOn(), tsfuList);
-			}
-		}
-		else {
-			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
-					TranslateLanguages.ENGLISH, true, tsfuList);
+		if(tsfuList != null && !tsfuList.isEmpty()) {
+			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
 		}
 
 		//if there's no default languages, they havent ever been set
