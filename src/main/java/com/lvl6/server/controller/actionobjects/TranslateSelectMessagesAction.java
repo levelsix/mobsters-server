@@ -15,6 +15,7 @@ import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -28,6 +29,7 @@ public class TranslateSelectMessagesAction {
 	private TranslateLanguages languageEnum;
 	private List<PrivateChatPost> listOfPrivateChatPosts;
 	private ChatType chatType;
+//	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	
@@ -35,6 +37,7 @@ public class TranslateSelectMessagesAction {
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
 			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
+//			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.recipientUserId = recipientUserId;
@@ -42,6 +45,7 @@ public class TranslateSelectMessagesAction {
 		this.languageEnum = languageEnum;
 		this.listOfPrivateChatPosts = listOfPrivateChatPosts;
 		this.chatType = chatType;
+//		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}

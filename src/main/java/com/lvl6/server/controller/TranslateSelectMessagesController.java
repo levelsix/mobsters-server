@@ -27,6 +27,7 @@ import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Transl
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
@@ -56,6 +57,9 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
+	
+	@Autowired
+	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -87,6 +91,7 @@ public class TranslateSelectMessagesController extends EventController {
 		String recipientUserId = senderProto.getUserUuid();
 		//this guy sent the msgs 
 		String senderUserId = reqProto.getOtherUserUuid();
+		boolean translateOn = reqProto.getTranslateOn();
 		
 		ChatType ct = reqProto.getChatType();
 		
@@ -138,7 +143,8 @@ public class TranslateSelectMessagesController extends EventController {
 		try {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, ct, insertUtil, updateUtil);
+					senderUserId, language, listOfPrivateChatPosts, ct, 
+					insertUtil, updateUtil);
 
 			tsma.execute(resBuilder);
 

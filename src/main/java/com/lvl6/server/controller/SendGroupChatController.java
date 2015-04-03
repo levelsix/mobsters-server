@@ -108,6 +108,7 @@ public class SendGroupChatController extends EventController {
 		final GroupChatScope scope = reqProto.getScope();
 		String chatMessage = reqProto.getChatMessage();
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
+		TranslateLanguages globalLanguage = reqProto.getGlobalLanguage();
 
 		SendGroupChatResponseProto.Builder resBuilder = SendGroupChatResponseProto
 				.newBuilder();
@@ -173,7 +174,7 @@ public class SendGroupChatController extends EventController {
 				
 				GroupChatMessageProto gcmp = CreateInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap);
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
 				
 				chatProto.setMessage(gcmp);	
 
@@ -182,7 +183,7 @@ public class SendGroupChatController extends EventController {
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcr);
+						censoredChatMessage, rgcr, globalLanguage);
 				
 				// send messages in background so sending player can unlock
 				/*
@@ -212,7 +213,8 @@ public class SendGroupChatController extends EventController {
 	protected void sendChatMessage(String senderId,
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
 			boolean isForClan, String clanId, boolean isAdmin, long time,
-			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr) {
+			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr,
+			TranslateLanguages globalLanguage) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
@@ -224,7 +226,7 @@ public class SendGroupChatController extends EventController {
 			//add new message to front of list
 			chatMessages.add(0, CreateInfoProtoUtils
 					.createGroupChatMessageProto(time, chatProto.getSender(),
-							censoredChatMessage, isAdmin, null, null));
+							censoredChatMessage, isAdmin, null, null, globalLanguage));
 			//remove older messages
 			try {
 				while (chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {

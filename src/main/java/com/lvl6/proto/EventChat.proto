@@ -29,6 +29,7 @@ message SendGroupChatRequestProto {
 	optional GroupChatScope scope = 2 [default = CLAN];
 	optional string chatMessage = 3;
 	optional int64 clientTime = 4;
+	optional TranslateLanguages globalLanguage = 5; 
 }
 
 message SendGroupChatResponseProto {
