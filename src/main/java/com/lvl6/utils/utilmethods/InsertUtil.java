@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -41,6 +43,7 @@ import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.memetix.mst.language.Language;
+
 
 public interface InsertUtil {
 

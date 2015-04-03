@@ -692,10 +692,19 @@ public class StartupController extends EventController {
 			//get translationsettingforuser list of the player to check for defaults
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 					getUserTranslationSettingsForUser(playerId);
+			boolean tsfuListIsNull = false;
+			
+			if(tsfuList == null) {
+				insertUtil.insertTranslateSettings(playerId, null, 
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
+						ChatType.GLOBAL_CHAT.toString(), 
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+				tsfuListIsNull = true;
+			}
 			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuList);
+					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
@@ -744,7 +753,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			
 			//set this proto after executing privatechatprotos
-			setDefaultLanguagesForUser(resBuilder, playerId);
+			setDefaultLanguagesForUser(resBuilder, playerId, tsfuList);
 			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 
 			
@@ -1598,16 +1607,6 @@ public class StartupController extends EventController {
 
 		if(tsfuList != null && !tsfuList.isEmpty()) {
 			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
-		}
-		else {
-			//insert defaults for global chat
-			insertUtil.insertTranslateSettings(userId, null, 
-					ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
-					ChatType.GLOBAL_CHAT.toString(), 
-					ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
-						
-			
-			
 		}
 
 		//if there's no default languages, they havent ever been set

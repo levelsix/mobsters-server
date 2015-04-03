@@ -13,113 +13,12 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
-import com.lvl6.info.Achievement;
-import com.lvl6.info.AchievementForUser;
-import com.lvl6.info.AnimatedSpriteOffset;
-import com.lvl6.info.BattleItem;
-import com.lvl6.info.BattleItemForUser;
-import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.Board;
-import com.lvl6.info.BoardObstacle;
-import com.lvl6.info.BoardProperty;
-import com.lvl6.info.BoosterDisplayItem;
-import com.lvl6.info.BoosterItem;
-import com.lvl6.info.BoosterPack;
-import com.lvl6.info.CepfuRaidHistory;
-import com.lvl6.info.CepfuRaidStageHistory;
-import com.lvl6.info.ChatTranslations;
-import com.lvl6.info.Clan;
-import com.lvl6.info.ClanAvenge;
-import com.lvl6.info.ClanAvengeUser;
-import com.lvl6.info.ClanChatPost;
-import com.lvl6.info.ClanEventPersistent;
-import com.lvl6.info.ClanEventPersistentForClan;
-import com.lvl6.info.ClanEventPersistentForUser;
-import com.lvl6.info.ClanEventPersistentUserReward;
-import com.lvl6.info.ClanHelp;
-import com.lvl6.info.ClanIcon;
-import com.lvl6.info.ClanInvite;
-import com.lvl6.info.ClanMemberTeamDonation;
-import com.lvl6.info.ClanRaid;
-import com.lvl6.info.ClanRaidStage;
-import com.lvl6.info.ClanRaidStageMonster;
-import com.lvl6.info.ClanRaidStageReward;
-import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Dialogue;
-import com.lvl6.info.EventPersistent;
-import com.lvl6.info.EventPersistentForUser;
-import com.lvl6.info.FileDownload;
-import com.lvl6.info.GoldSale;
-import com.lvl6.info.Item;
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.ItemForUserUsage;
-import com.lvl6.info.ItemSecretGiftForUser;
-import com.lvl6.info.MiniEvent;
-import com.lvl6.info.MiniEventForPlayerLvl;
-import com.lvl6.info.MiniEventForUser;
-import com.lvl6.info.MiniEventGoal;
-import com.lvl6.info.MiniEventGoalForUser;
-import com.lvl6.info.MiniEventLeaderboardReward;
-import com.lvl6.info.MiniEventTierReward;
-import com.lvl6.info.MiniJob;
-import com.lvl6.info.MiniJobForUser;
-import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterBattleDialogue;
-import com.lvl6.info.MonsterEnhancingForUser;
-import com.lvl6.info.MonsterEvolvingForUser;
-import com.lvl6.info.MonsterForPvp;
-import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.MonsterLevelInfo;
-import com.lvl6.info.MonsterSnapshotForUser;
-import com.lvl6.info.Obstacle;
-import com.lvl6.info.ObstacleForUser;
-import com.lvl6.info.Prerequisite;
-import com.lvl6.info.PrivateChatPost;
-import com.lvl6.info.PvpBattleHistory;
-import com.lvl6.info.PvpBoardObstacleForUser;
-import com.lvl6.info.PvpLeague;
-import com.lvl6.info.PvpLeagueForUser;
-import com.lvl6.info.Quest;
-import com.lvl6.info.QuestForUser;
-import com.lvl6.info.QuestJob;
-import com.lvl6.info.QuestJobForUser;
-import com.lvl6.info.Research;
-import com.lvl6.info.ResearchForUser;
-import com.lvl6.info.ResearchProperty;
-import com.lvl6.info.Reward;
-import com.lvl6.info.Skill;
-import com.lvl6.info.SkillProperty;
-import com.lvl6.info.SkillSideEffect;
-import com.lvl6.info.Structure;
-import com.lvl6.info.StructureBattleItemFactory;
-import com.lvl6.info.StructureClanHouse;
-import com.lvl6.info.StructureEvoChamber;
-import com.lvl6.info.StructureForUser;
-import com.lvl6.info.StructureHospital;
-import com.lvl6.info.StructureLab;
-import com.lvl6.info.StructureMiniJob;
-import com.lvl6.info.StructureMoneyTree;
-import com.lvl6.info.StructurePvpBoard;
-import com.lvl6.info.StructureResearchHouse;
-import com.lvl6.info.StructureResidence;
-import com.lvl6.info.StructureResourceGenerator;
-import com.lvl6.info.StructureResourceStorage;
-import com.lvl6.info.StructureTeamCenter;
-import com.lvl6.info.StructureTownHall;
-import com.lvl6.info.Task;
-import com.lvl6.info.TaskForUserClientState;
-import com.lvl6.info.TaskForUserOngoing;
-import com.lvl6.info.TaskMapElement;
-import com.lvl6.info.TaskStage;
-import com.lvl6.info.TaskStageForUser;
-import com.lvl6.info.TaskStageMonster;
-import com.lvl6.info.TranslationSettingsForUser;
-import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
-import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -292,11 +191,18 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
+@Component
+@DependsOn("gameServer")
 public class CreateInfoProtoUtils {
 
+	@Autowired
+	InsertUtil insertUtil;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
 
 	/** Achievement.proto ***************************************************/
 	public static AchievementProto createAchievementProto(Achievement a) {
@@ -1350,8 +1256,7 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
 			List<String> privateChatPostIds,
-			Map<String, PrivateChatPost> postIdsToPrivateChatPosts,
-			List<TranslationSettingsForUser> tsfuList) {
+			Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();
