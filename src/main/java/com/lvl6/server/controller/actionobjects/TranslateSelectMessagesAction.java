@@ -31,6 +31,8 @@ public class TranslateSelectMessagesAction {
 	private List<PrivateChatPost> listOfPrivateChatPosts;
 	private ChatType chatType;
 	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	private boolean translateOn;
+//	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	
