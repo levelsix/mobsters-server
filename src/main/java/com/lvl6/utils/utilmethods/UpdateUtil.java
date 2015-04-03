@@ -239,9 +239,9 @@ public interface UpdateUtil {
 			List<BattleItemForUser> updateList);
 	
 	public abstract boolean updateUserTranslationSetting(String recipientId, 
-			String senderId, String newLanguage);
+			String senderId, String newLanguage, boolean translateOn);
 	
 	public abstract boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
-			String chatType, String language);
+			String chatType, String language, boolean translateOn);
 
 }

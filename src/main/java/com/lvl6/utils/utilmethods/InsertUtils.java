@@ -298,7 +298,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.RESEARCH_FOR_USER__TIME_PURCHASED,
 				timeOfPurchase);
 		insertParams
-				.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, isComplete);
+		.put(DBConstants.RESEARCH_FOR_USER__IS_COMPLETE, isComplete);
 
 		int numChanged = DBConnection.get().insertIntoTableBasic(tablename,
 				insertParams);
@@ -522,42 +522,42 @@ public class InsertUtils implements InsertUtil {
 		return wallPostId;
 	}
 
-//	@Override
-//	public boolean insertTranslatedText(ChatType chatType, String chatId,
-//			Map<TranslateLanguages, String> translatedTextMap) {
-//		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-//		int numRows = translatedTextMap.size();
-//		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
-//
-//		List<String> ids = new ArrayList<String>();
-//		List<String> chatTypes = new ArrayList<String>();
-//		List<String> chatIds = new ArrayList<String>();
-//		List<String> languageList = new ArrayList<String>();
-//		List<String> translatedList = new ArrayList<String>();
-//		for (TranslateLanguages language : translatedTextMap.keySet()) {
-//			ids.add(randomUUID());
-//			String chatTypeString = chatType.toString();
-//			chatTypes.add(chatTypeString);
-//			chatIds.add(chatId);
-//			String languageString = language.toString();
-//			languageList.add(languageString);
-//			translatedList.add(translatedTextMap.get(language));
-//		}
-//
-//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, ids);
-//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypes);
-//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIds);
-//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
-//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, translatedList);
-//
-//		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-//				tableName, insertParams, numRows);
-//
-//		if(numInserted == numRows) {
-//			return true;
-//		}
-//		else return false;
-//	}
+	//	@Override
+	//	public boolean insertTranslatedText(ChatType chatType, String chatId,
+	//			Map<TranslateLanguages, String> translatedTextMap) {
+	//		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+	//		int numRows = translatedTextMap.size();
+	//		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
+	//
+	//		List<String> ids = new ArrayList<String>();
+	//		List<String> chatTypes = new ArrayList<String>();
+	//		List<String> chatIds = new ArrayList<String>();
+	//		List<String> languageList = new ArrayList<String>();
+	//		List<String> translatedList = new ArrayList<String>();
+	//		for (TranslateLanguages language : translatedTextMap.keySet()) {
+	//			ids.add(randomUUID());
+	//			String chatTypeString = chatType.toString();
+	//			chatTypes.add(chatTypeString);
+	//			chatIds.add(chatId);
+	//			String languageString = language.toString();
+	//			languageList.add(languageString);
+	//			translatedList.add(translatedTextMap.get(language));
+	//		}
+	//
+	//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, ids);
+	//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypes);
+	//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIds);
+	//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
+	//		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, translatedList);
+	//
+	//		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+	//				tableName, insertParams, numRows);
+	//
+	//		if(numInserted == numRows) {
+	//			return true;
+	//		}
+	//		else return false;
+	//	}
 
 	@Override
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId,
@@ -572,7 +572,7 @@ public class InsertUtils implements InsertUtil {
 				DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID,
 				leaderboardEventId);
 		insertParams
-				.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
+		.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
 		//as long as there is an existing row, setting these three values doesn't matter
 		//this is here just for the initial insert
 		insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_WON,
@@ -774,8 +774,8 @@ public class InsertUtils implements InsertUtil {
 
 			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
 			insertParams
-					.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
-							userMonsterIdsStr);
+			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
+					userMonsterIdsStr);
 		} else if (gemReward > 0) {
 			insertParams.put(
 					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
@@ -835,7 +835,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID,
 				recipientIds);
 		insertParams
-				.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, contents);
+		.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, contents);
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
 				timeOfPosts);
 
@@ -859,7 +859,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatId);
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, language.toString());
 		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, message);
-		
+
 		//adding to the cached table
 		ChatTranslations ct = new ChatTranslations();
 		ct.setId(id);
@@ -868,7 +868,7 @@ public class InsertUtils implements InsertUtil {
 		ct.setTranslateLanguage(language);
 		ct.setText(message);
 		ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
-		
+
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
 		if (numChanged != 1) {
@@ -880,18 +880,22 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertTranslateSettings(String receiverId, String senderId,
-			String language, String chatType) {
+			String language, String chatType, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 
 		String id = randomUUID();
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID, id);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID, receiverId);
+
 		if(senderId != null) {
 			insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, senderId);
 		}
+
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, language);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE, chatType);
+
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, translateOn);
 
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
@@ -937,7 +941,7 @@ public class InsertUtils implements InsertUtil {
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 
 		insertParams
-				.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
+		.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
 		insertParams.put(DBConstants.TASK_HISTORY__USER_ID, userId);
 		insertParams.put(DBConstants.TASK_HISTORY__TASK_ID, taskId);
 		insertParams.put(DBConstants.TASK_HISTORY__EXP_GAINED, expGained);
@@ -1043,7 +1047,7 @@ public class InsertUtils implements InsertUtil {
 
 	  return numInserted;
 	}
-	*/
+	 */
 
 	@Override
 	public List<String> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList) {
@@ -1111,7 +1115,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE,
 				monsterTypes);
 		insertParams
-				.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
+		.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
 		insertParams.put(DBConstants.TASK_STAGE_HISTORY__CASH_GAINED,
 				cashGained);
 		insertParams.put(DBConstants.TASK_STAGE_HISTORY__OIL_GAINED, oilGained);
@@ -1134,9 +1138,9 @@ public class InsertUtils implements InsertUtil {
 
 	/*
 	 * README!!!!!!!!!!!!!!!
-	* assumptions: all the entries at index i across all the lists,
-	* they make up the values for one row to insert into the table
-	*/
+	 * assumptions: all the entries at index i across all the lists,
+	 * they make up the values for one row to insert into the table
+	 */
 	@Override
 	public List<String> insertIntoMonsterForUserReturnIds(String userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces,
@@ -1242,7 +1246,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID,
 				monsterForUserIds);
 		insertParams
-				.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIds);
+		.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIds);
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID,
 				monsterIds);
 		insertParams.put(
@@ -1330,8 +1334,8 @@ public class InsertUtils implements InsertUtil {
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 		insertParams
-				.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
-						catalystUserMonsterId);
+		.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
+				catalystUserMonsterId);
 		insertParams.put(
 				DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE,
 				userMonsterIdOne);
@@ -1339,7 +1343,7 @@ public class InsertUtils implements InsertUtil {
 				DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_TWO,
 				userMOnsterIdTwo);
 		insertParams
-				.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID, userId);
+		.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID, userId);
 		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__START_TIME,
 				startTime);
 
@@ -1357,7 +1361,7 @@ public class InsertUtils implements InsertUtil {
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 		insertParams
-				.put(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+		.put(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
 		insertParams.put(
 				DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID,
 				eventId);
@@ -1448,8 +1452,8 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID,
 				clanId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_EVENT_PERSISTENT_ID,
-						clanEventPersistentId);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentId);
 		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CR_ID,
 				clanRaidId);
 		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID,
@@ -1460,8 +1464,8 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID,
 				clanRaidStageMonsterId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
-						stageMonsterStartTime);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
+				stageMonsterStartTime);
 
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName,
 				insertParams);
@@ -1491,29 +1495,29 @@ public class InsertUtils implements InsertUtil {
 		if (userMonsterIds.size() >= 1) {
 			String userMonsterId = userMonsterIds.get(0);
 			insertParams
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE,
+					userMonsterId);
 			absoluteUpdates
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE,
+					userMonsterId);
 		}
 		if (userMonsterIds.size() >= 2) {
 			String userMonsterId = userMonsterIds.get(1);
 			insertParams
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO,
+					userMonsterId);
 			absoluteUpdates
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO,
+					userMonsterId);
 		}
 		if (userMonsterIds.size() >= 3) {
 			String userMonsterId = userMonsterIds.get(2);
 			insertParams
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE,
+					userMonsterId);
 			absoluteUpdates
-					.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE,
-							userMonsterId);
+			.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE,
+					userMonsterId);
 		}
 
 		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(
@@ -1534,26 +1538,26 @@ public class InsertUtils implements InsertUtil {
 				DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CLAN_ID,
 				clanId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__TIME_OF_ENTRY,
-						timeOfEntry);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__TIME_OF_ENTRY,
+				timeOfEntry);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CLAN_EVENT_PERSISTENT_ID,
-						clanEventPersistentId);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CR_ID,
-						crId);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CR_ID,
+				crId);
 		insertParams.put(
 				DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CRS_ID,
 				crsId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_START_TIME,
-						stageStartTime);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_START_TIME,
+				stageStartTime);
 		insertParams.put(
 				DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CRSM_ID,
 				crsmId);
 		insertParams
-				.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_MONSTER_START_TIME,
-						stageMonsterStartTime);
+		.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_MONSTER_START_TIME,
+				stageMonsterStartTime);
 		insertParams.put(
 				DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__WON, won);
 
@@ -1726,8 +1730,8 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_ID,
 				clanIdList);
 		insertParams
-				.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_EVENT_PERSISTENT_ID,
-						clanEventPersistentIdList);
+		.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentIdList);
 		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRS_ID,
 				crsIdList);
 		insertParams.put(DBConstants.CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID,
@@ -2372,7 +2376,7 @@ public class InsertUtils implements InsertUtil {
 		}
 		Set<String> replaceTheseColumns = new HashSet<String>();
 		replaceTheseColumns
-				.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID);
+		.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID);
 		replaceTheseColumns.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_X);
 		replaceTheseColumns.add(DBConstants.PVP_BOARD_OBSTACLE_FOR_USER__POS_Y);
 
@@ -2408,9 +2412,9 @@ public class InsertUtils implements InsertUtil {
 		}
 		Set<String> replaceTheseColumns = new HashSet<String>();
 		replaceTheseColumns
-				.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
+		.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME);
 		replaceTheseColumns
-				.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME);
+		.add(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME);
 
 		int numUpdated = DBConnection.get()
 				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,

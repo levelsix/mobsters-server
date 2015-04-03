@@ -179,12 +179,12 @@ public class PrivateChatPostController extends EventController {
 								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT);
 						if(globalChatSettingsForRecipient != null) {
 							insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
-									ChatType.PRIVATE_CHAT.toString());
+									ChatType.PRIVATE_CHAT.toString(), true);
 							recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
 						}
 						else {
 							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
-									ChatType.PRIVATE_CHAT.toString());
+									ChatType.PRIVATE_CHAT.toString(), true);
 							recipientLanguageString = TranslateLanguages.ENGLISH.toString();
 						}
 					}
@@ -203,12 +203,12 @@ public class PrivateChatPostController extends EventController {
 									getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
 							if(globalChatSettingsForPoster != null) {
 								insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(), 
-										ChatType.PRIVATE_CHAT.toString());
+										ChatType.PRIVATE_CHAT.toString(), true);
 								posterLanguageString = globalChatSettingsForPoster.getLanguage();
 							}
 							else {
 								insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
-										ChatType.PRIVATE_CHAT.toString());
+										ChatType.PRIVATE_CHAT.toString(), true);
 								posterLanguageString = TranslateLanguages.ENGLISH.toString();
 							}
 						}

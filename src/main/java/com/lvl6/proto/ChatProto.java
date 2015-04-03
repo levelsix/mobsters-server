@@ -4188,13 +4188,13 @@ public final class ChatProto {
         int index);
 
     /**
-     * <code>optional bool translateOn = 3;</code>
+     * <code>optional bool globalTranslateOn = 3;</code>
      */
-    boolean hasTranslateOn();
+    boolean hasGlobalTranslateOn();
     /**
-     * <code>optional bool translateOn = 3;</code>
+     * <code>optional bool globalTranslateOn = 3;</code>
      */
-    boolean getTranslateOn();
+    boolean getGlobalTranslateOn();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DefaultLanguagesProto}
@@ -4269,7 +4269,7 @@ public final class ChatProto {
             }
             case 24: {
               bitField0_ |= 0x00000002;
-              translateOn_ = input.readBool();
+              globalTranslateOn_ = input.readBool();
               break;
             }
           }
@@ -4365,25 +4365,25 @@ public final class ChatProto {
       return privateDefaultLanguage_.get(index);
     }
 
-    public static final int TRANSLATEON_FIELD_NUMBER = 3;
-    private boolean translateOn_;
+    public static final int GLOBALTRANSLATEON_FIELD_NUMBER = 3;
+    private boolean globalTranslateOn_;
     /**
-     * <code>optional bool translateOn = 3;</code>
+     * <code>optional bool globalTranslateOn = 3;</code>
      */
-    public boolean hasTranslateOn() {
+    public boolean hasGlobalTranslateOn() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional bool translateOn = 3;</code>
+     * <code>optional bool globalTranslateOn = 3;</code>
      */
-    public boolean getTranslateOn() {
-      return translateOn_;
+    public boolean getGlobalTranslateOn() {
+      return globalTranslateOn_;
     }
 
     private void initFields() {
       globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       privateDefaultLanguage_ = java.util.Collections.emptyList();
-      translateOn_ = false;
+      globalTranslateOn_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4405,7 +4405,7 @@ public final class ChatProto {
         output.writeMessage(2, privateDefaultLanguage_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBool(3, translateOn_);
+        output.writeBool(3, globalTranslateOn_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4426,7 +4426,7 @@ public final class ChatProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, translateOn_);
+          .computeBoolSize(3, globalTranslateOn_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4554,7 +4554,7 @@ public final class ChatProto {
         } else {
           privateDefaultLanguageBuilder_.clear();
         }
-        translateOn_ = false;
+        globalTranslateOn_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -4600,7 +4600,7 @@ public final class ChatProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.translateOn_ = translateOn_;
+        result.globalTranslateOn_ = globalTranslateOn_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4646,8 +4646,8 @@ public final class ChatProto {
             }
           }
         }
-        if (other.hasTranslateOn()) {
-          setTranslateOn(other.getTranslateOn());
+        if (other.hasGlobalTranslateOn()) {
+          setGlobalTranslateOn(other.getGlobalTranslateOn());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4951,34 +4951,34 @@ public final class ChatProto {
         return privateDefaultLanguageBuilder_;
       }
 
-      private boolean translateOn_ ;
+      private boolean globalTranslateOn_ ;
       /**
-       * <code>optional bool translateOn = 3;</code>
+       * <code>optional bool globalTranslateOn = 3;</code>
        */
-      public boolean hasTranslateOn() {
+      public boolean hasGlobalTranslateOn() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional bool translateOn = 3;</code>
+       * <code>optional bool globalTranslateOn = 3;</code>
        */
-      public boolean getTranslateOn() {
-        return translateOn_;
+      public boolean getGlobalTranslateOn() {
+        return globalTranslateOn_;
       }
       /**
-       * <code>optional bool translateOn = 3;</code>
+       * <code>optional bool globalTranslateOn = 3;</code>
        */
-      public Builder setTranslateOn(boolean value) {
+      public Builder setGlobalTranslateOn(boolean value) {
         bitField0_ |= 0x00000004;
-        translateOn_ = value;
+        globalTranslateOn_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool translateOn = 3;</code>
+       * <code>optional bool globalTranslateOn = 3;</code>
        */
-      public Builder clearTranslateOn() {
+      public Builder clearGlobalTranslateOn() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        translateOn_ = false;
+        globalTranslateOn_ = false;
         onChanged();
         return this;
       }
@@ -5849,11 +5849,12 @@ public final class ChatProto {
       "TranslatedTextProto\022\017\n\007isAdmin\030\005 \001(\010\022\020\n\010" +
       "chatUuid\030\006 \001(\t\"Y\n\023TranslatedTextProto\0224\n" +
       "\010language\030\001 \001(\0162\".com.lvl6.proto.Transla" +
-      "teLanguages\022\014\n\004text\030\002 \001(\t\"\300\001\n\025DefaultLan" +
+      "teLanguages\022\014\n\004text\030\002 \001(\t\"\306\001\n\025DefaultLan" +
       "guagesProto\022A\n\025globalDefaultLanguage\030\001 \001",
       "(\0162\".com.lvl6.proto.TranslateLanguages\022O" +
       "\n\026privateDefaultLanguage\030\002 \003(\0132/.com.lvl" +
       "6.proto.PrivateChatDefaultLanguageProto\022" +
+<<<<<<< HEAD
       "\023\n\013translateOn\030\003 \001(\010\"\242\001\n\037PrivateChatDefa" +
       "ultLanguageProto\022\027\n\017recipientUserId\030\001 \001(" +
       "\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017defaultLangua" +
@@ -5865,6 +5866,19 @@ public final class ChatProto {
       "\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007" +
       "RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatPro" +
       "to"
+=======
+      "\031\n\021globalTranslateOn\030\003 \001(\010\"\242\001\n\037PrivateCh" +
+      "atDefaultLanguageProto\022\027\n\017recipientUserI" +
+      "d\030\001 \001(\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017default" +
+      "Language\030\003 \001(\0162\".com.lvl6.proto.Translat" +
+      "eLanguages\022\023\n\013translateOn\030\004 \001(\010*&\n\016Group" +
+      "ChatScope\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatT" +
+      "ype\022\017\n\013GLOBAL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s",
+      "\n\022TranslateLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGL" +
+      "ISH\020\002\022\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH" +
+      "\020\005\022\013\n\007RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tC" +
+      "hatProto"
+>>>>>>> c80fdf0... added translateOn to startup and receiving translateOn in translateselectmessages
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5908,7 +5922,7 @@ public final class ChatProto {
     internal_static_com_lvl6_proto_DefaultLanguagesProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor,
-        new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", "TranslateOn", });
+        new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", "GlobalTranslateOn", });
     internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_fieldAccessorTable = new

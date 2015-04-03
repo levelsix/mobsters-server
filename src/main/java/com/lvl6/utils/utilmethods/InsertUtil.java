@@ -164,7 +164,7 @@ public interface InsertUtil {
 			TranslateLanguages language, String message);
 	
 	public abstract boolean insertTranslateSettings(String receiverId, String senderId, 
-			String language, String chatType);
+			String language, String chatType, boolean translateOn);
 
 	public abstract String insertIntoUserTaskReturnId(String userId,
 			int taskId, int expGained, int cashGained, int oilGained,
