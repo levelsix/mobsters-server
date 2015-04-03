@@ -10654,6 +10654,9 @@ public final class EventChatProto {
       "\005scope\030\002 \001(\0162\036.com.lvl6.proto.GroupChatS" +
       "cope:\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclien",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
       "tTime\030\004 \001(\003\022:\n\016globalLanguage\030\005 \001(\0162\".co" +
       "m.lvl6.proto.TranslateLanguages\"\354\001\n\032Send" +
       "GroupChatResponseProto\0220\n\006sender\030\001 \001(\0132 " +
@@ -10712,6 +10715,7 @@ public final class EventChatProto {
       "atus\"Y\n\035TranslateSelectMessagesStatus\022\016\n" +
       "\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID_LANGUAGE" +
       "\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatProto"
+<<<<<<< HEAD
 =======
       "tTime\030\004 \001(\003\"\354\001\n\032SendGroupChatResponsePro" +
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
@@ -10771,6 +10775,8 @@ public final class EventChatProto {
       "L_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016E" +
       "ventChatProto"
 >>>>>>> cherry pick commit # ec5eebd32ccc6cc3d1c7ba199a75375b22efb865 from master with mini events
+=======
+>>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

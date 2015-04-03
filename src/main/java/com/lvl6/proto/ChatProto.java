@@ -5843,6 +5843,9 @@ public final class ChatProto {
       "\n\004blue\030\003 \001(\005\"\227\002\n\025GroupChatMessageProto\0229",
       "\n\006sender\030\001 \001(\0132).com.lvl6.proto.MinimumU" +
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
       "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022;\n" +
       "\017contentLanguage\030\007 \001(\0162\".com.lvl6.proto." +
       "TranslateLanguages\022\017\n\007content\030\003 \001(\t\022>\n\021t" +
@@ -5866,6 +5869,7 @@ public final class ChatProto {
       "\n\n\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007" +
       "RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatPro" +
       "to"
+<<<<<<< HEAD
 =======
       "serProtoWithLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022\017\n" +
       "\007content\030\003 \001(\t\022>\n\021translatedContent\030\004 \003(" +
@@ -5888,6 +5892,8 @@ public final class ChatProto {
       "\006FRENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RU",
       "SSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
 >>>>>>> cherry pick commit # ec5eebd32ccc6cc3d1c7ba199a75375b22efb865 from master with mini events
+=======
+>>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
