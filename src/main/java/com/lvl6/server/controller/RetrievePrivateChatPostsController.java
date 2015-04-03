@@ -137,11 +137,6 @@ public class RetrievePrivateChatPostsController extends EventController {
 						for(PrivateChatPost pcp : recentPrivateChatPosts) {
 							chatIds.add(pcp.getId());
 						}
-
-						List<String> chatIds = new ArrayList<String>();
-						for(PrivateChatPost pcp : recentPrivateChatPosts) {
-							chatIds.add(pcp.getId());
-						}
 						
 						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
 						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();

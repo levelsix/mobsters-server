@@ -1461,11 +1461,12 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static DefaultLanguagesProto createDefaultLanguagesProto(TranslateLanguages globalLanguage, 
-			List<TranslationSettingsForUser> tsfuList) {
+			boolean globalTranslateOn, List<TranslationSettingsForUser> tsfuList) {
 		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 		
 		dlpb.setGlobalDefaultLanguage(globalLanguage);
+		dlpb.setGlobalTranslateOn(globalTranslateOn);
 		
 		for(TranslationSettingsForUser tsfu : tsfuList) {
 			if(tsfu.getChatType().equalsIgnoreCase(ChatType.PRIVATE_CHAT.toString())) {
@@ -1473,6 +1474,7 @@ public class CreateInfoProtoUtils {
 				pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
 				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
 				pcdlpb.setSenderUserId(tsfu.getSenderUserId());
+				pcdlpb.setTranslateOn(tsfu.isTranslationsOn());
 				pcdlpList.add(pcdlpb.build());
 			}	
 		}

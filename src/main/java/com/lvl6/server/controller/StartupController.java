@@ -1583,12 +1583,12 @@ public class StartupController extends EventController {
 		if(tsfu != null) {
 			if(tsfuList != null && !tsfuList.isEmpty()) {
 				dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
-						TranslateLanguages.valueOf(tsfu.getLanguage()), tsfuList);
+						TranslateLanguages.valueOf(tsfu.getLanguage()), tsfu.isTranslationsOn(), tsfuList);
 			}
 		}
 		else {
 			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(
-					TranslateLanguages.ENGLISH, tsfuList);
+					TranslateLanguages.ENGLISH, true, tsfuList);
 		}
 
 		//if there's no default languages, they havent ever been set

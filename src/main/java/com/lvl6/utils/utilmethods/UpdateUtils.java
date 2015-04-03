@@ -1927,7 +1927,7 @@ public class UpdateUtils implements UpdateUtil {
 	
 	@Override
 	public boolean updateUserTranslationSetting(String recipientId, 
-			String senderId, String newLanguage) {
+			String senderId, String newLanguage, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 		
 		log.info("updating language setting for user=%s from senderuser=%s", 
@@ -1942,6 +1942,8 @@ public class UpdateUtils implements UpdateUtil {
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, 
 				newLanguage);
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, 
+				translateOn);
 
 		int numUpdated = DBConnection.get().updateTableRows(
 				tableName, null, absoluteParams, conditionParams, "and");
@@ -1953,7 +1955,7 @@ public class UpdateUtils implements UpdateUtil {
 	
 	@Override
 	public boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
-			String chatType, String language) {
+			String chatType, String language, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 		
 		log.info("updating language setting for global user=%s from senderuser=%s", 
@@ -1968,6 +1970,8 @@ public class UpdateUtils implements UpdateUtil {
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, 
 				language);
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, 
+				translateOn);
 
 		int numUpdated = DBConnection.get().updateTableRows(
 				tableName, null, absoluteParams, conditionParams, "and");

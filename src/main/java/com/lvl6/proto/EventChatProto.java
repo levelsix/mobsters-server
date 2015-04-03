@@ -10653,10 +10653,6 @@ public final class EventChatProto {
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\0223\n" +
       "\005scope\030\002 \001(\0162\036.com.lvl6.proto.GroupChatS" +
       "cope:\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclien",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
       "tTime\030\004 \001(\003\022:\n\016globalLanguage\030\005 \001(\0162\".co" +
       "m.lvl6.proto.TranslateLanguages\"\354\001\n\032Send" +
       "GroupChatResponseProto\0220\n\006sender\030\001 \001(\0132 " +
@@ -10715,68 +10711,6 @@ public final class EventChatProto {
       "atus\"Y\n\035TranslateSelectMessagesStatus\022\016\n" +
       "\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID_LANGUAGE" +
       "\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatProto"
-<<<<<<< HEAD
-=======
-      "tTime\030\004 \001(\003\"\354\001\n\032SendGroupChatResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6." +
-      "proto.SendGroupChatResponseProto.SendGro" +
-      "upChatStatus\"L\n\023SendGroupChatStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\014\n\010TOO_LONG\020\002\022\016\n\nOTHER_FAIL\020\003\022\n" +
-      "\n\006BANNED\020\004\"\366\001\n\036ReceivedGroupChatResponse" +
-      "Proto\0229\n\006sender\030\001 \001(\0132).com.lvl6.proto.M" +
-      "inimumUserProtoWithLevel\0223\n\005scope\030\002 \001(\0162" +
-      "\036.com.lvl6.proto.GroupChatScope:\004CLAN\0226\n",
-      "\007message\030\003 \001(\0132%.com.lvl6.proto.GroupCha" +
-      "tMessageProto\022\027\n\013chatMessage\030\004 \001(\tB\002\030\001\022\023" +
-      "\n\007isAdmin\030\005 \001(\010B\002\030\001\"w\n\033PrivateChatPostRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\025\n\rrecipientUuid\030\002 " +
-      "\001(\t\022\017\n\007content\030\003 \001(\t\"\220\003\n\034PrivateChatPost" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022R\n\006status\030\002 \001(\0162" +
-      "B.com.lvl6.proto.PrivateChatPostResponse" +
-      "Proto.PrivateChatPostStatus\0222\n\004post\030\003 \001(",
-      "\0132$.com.lvl6.proto.PrivateChatPostProto\022" +
-      "K\n\022translationSetting\030\004 \001(\0132/.com.lvl6.p" +
-      "roto.PrivateChatDefaultLanguageProto\"i\n\025" +
-      "PrivateChatPostStatus\022\013\n\007SUCCESS\020\001\022\023\n\017NO" +
-      "_CONTENT_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003\022\016\n\nO" +
-      "THER_FAIL\020\004\022\n\n\006BANNED\020\005\"\306\001\n$RetrievePriv" +
-      "ateChatPostsRequestProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\025\n\rot" +
-      "herUserUuid\030\002 \001(\t\022\037\n\023beforePrivateChatId" +
-      "\030\003 \001(\005B\002\030\001\0224\n\010language\030\004 \001(\0162\".com.lvl6.",
-      "proto.TranslateLanguages\"\346\002\n%RetrievePri" +
-      "vateChatPostsResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\0224\n\005" +
-      "posts\030\002 \003(\0132%.com.lvl6.proto.GroupChatMe" +
-      "ssageProto\022\037\n\023beforePrivateChatId\030\003 \001(\005B" +
-      "\002\030\001\022d\n\006status\030\004 \001(\0162T.com.lvl6.proto.Ret" +
-      "rievePrivateChatPostsResponseProto.Retri" +
-      "evePrivateChatPostsStatus\022\025\n\rotherUserUu" +
-      "id\030\005 \001(\t\"7\n\036RetrievePrivateChatPostsStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\253\002\n#TranslateS",
-      "electMessagesRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022*\n\010c" +
-      "hatType\030\002 \001(\0162\030.com.lvl6.proto.ChatType\022" +
-      "\025\n\rotherUserUuid\030\003 \001(\t\0224\n\010language\030\004 \001(\016" +
-      "2\".com.lvl6.proto.TranslateLanguages\022D\n\026" +
-      "messagesToBeTranslated\030\005 \003(\0132$.com.lvl6." +
-      "proto.PrivateChatPostProto\022\023\n\013translateO" +
-      "n\030\006 \001(\010\"\331\002\n$TranslateSelectMessagesRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022@\n\022messagesTranslated",
-      "\030\002 \003(\0132$.com.lvl6.proto.PrivateChatPostP" +
-      "roto\022b\n\006status\030\003 \001(\0162R.com.lvl6.proto.Tr" +
-      "anslateSelectMessagesResponseProto.Trans" +
-      "lateSelectMessagesStatus\"Y\n\035TranslateSel" +
-      "ectMessagesStatus\022\016\n\nFAIL_OTHER\020\001\022\033\n\027FAI" +
-      "L_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016E" +
-      "ventChatProto"
->>>>>>> cherry pick commit # ec5eebd32ccc6cc3d1c7ba199a75375b22efb865 from master with mini events
-=======
->>>>>>> added language to groupchatmsgproto and fixed startup privatechatprotos containing translations
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

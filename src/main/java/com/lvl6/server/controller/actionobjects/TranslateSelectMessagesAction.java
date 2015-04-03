@@ -32,7 +32,6 @@ public class TranslateSelectMessagesAction {
 	private ChatType chatType;
 	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	private boolean translateOn;
-//	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	
@@ -98,7 +97,7 @@ public class TranslateSelectMessagesAction {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
 			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, 
-					languageEnum.toString());
+					languageEnum.toString(), translateOn);
 		}
 		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
@@ -106,11 +105,11 @@ public class TranslateSelectMessagesAction {
 			if(tsfuList.isEmpty()) {
 
 				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
-						languageEnum.toString(), chatType.toString());
+						languageEnum.toString(), chatType.toString(), translateOn);
 			}
 			else {
 				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId, 
-						chatType.toString(), languageEnum.toString()) ;
+						chatType.toString(), languageEnum.toString(), translateOn) ;
 			}
 		}
 		
