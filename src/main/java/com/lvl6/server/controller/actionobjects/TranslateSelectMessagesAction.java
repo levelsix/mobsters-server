@@ -40,7 +40,7 @@ public class TranslateSelectMessagesAction {
 			String senderUserId, TranslateLanguages languageEnum,
 			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil) {
 		super();
 		this.recipientUserId = recipientUserId;
 		this.senderUserId = senderUserId;
@@ -48,6 +48,7 @@ public class TranslateSelectMessagesAction {
 		this.listOfPrivateChatPosts = listOfPrivateChatPosts;
 		this.chatType = chatType;
 		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
+		this.translateOn = translateOn;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
