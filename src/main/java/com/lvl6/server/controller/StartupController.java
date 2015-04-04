@@ -1122,27 +1122,31 @@ public class StartupController extends EventController {
 		//NOTE: this lock ordering might result in a temp deadlock
 		//doesn't reeeally matter if can't penalize defender...
 
+		
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
-		try {
-			defenderUuid = UUID.fromString(defenderId);
 
-			invalidUuids = false;
-		} catch (Exception e) {
-			log.error(String.format("UUID error. incorrect defenderId=%s",
-					defenderId), e);
-			invalidUuids = true;
-		}
+		if(defenderId == null || defenderId.equalsIgnoreCase("")) {
+			try {
+				defenderUuid = UUID.fromString(defenderId);
 
-		//UUID checks
-		if (invalidUuids) {
-			return;
-		}
+				invalidUuids = false;
+			} catch (Exception e) {
+				log.error(String.format("UUID error. incorrect defenderId=%s",
+						defenderId), e);
+				invalidUuids = true;
+			}
 
-		//only lock real users
-		if (null != defenderUuid) {
-			getLocker().lockPlayer(defenderUuid,
-					this.getClass().getSimpleName());
+			//UUID checks
+			if (invalidUuids) {
+				return;
+			}
+
+			//only lock real users
+			if (null != defenderUuid) {
+				getLocker().lockPlayer(defenderUuid,
+						this.getClass().getSimpleName());
+			}
 		}
 		try {
 			int attackerEloBefore = attackerPlfu.getElo();
