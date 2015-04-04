@@ -58,6 +58,7 @@ message PrivateChatPostRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string recipientUuid = 2;
 	optional string content = 3;
+	optional TranslateLanguages contentLanguage = 4;
 }
 
 																						//DONE
@@ -66,6 +67,7 @@ message PrivateChatPostResponseProto {
      optional PrivateChatPostStatus status = 2;
 	 optional PrivateChatPostProto post = 3;
 	 optional PrivateChatDefaultLanguageProto translationSetting = 4;
+	 optional bool translationRequired = 5; //if true, a translation was performed
 	
      enum PrivateChatPostStatus {
      	SUCCESS = 1;
