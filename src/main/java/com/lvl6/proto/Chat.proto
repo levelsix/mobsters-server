@@ -13,6 +13,7 @@ message PrivateChatPostProto {
 	optional MinimumUserProtoWithLevel recipient = 3;
 	optional int64 timeOfPost = 4;
 	optional string content = 5;
+	optional TranslateLanguages originalContentLanguage = 7; 
 	repeated TranslatedTextProto translatedContent = 6; 
 }
 

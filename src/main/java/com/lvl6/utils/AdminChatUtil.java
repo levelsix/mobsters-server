@@ -189,7 +189,7 @@ public class AdminChatUtil {
 		User recipient = users.get(recipientId);
 		PrivateChatPostProto pcpp = CreateInfoProtoUtils
 				.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster,
-						null, recipient, null, null);
+						null, recipient, null, null, null);
 		resBuilder.setPost(pcpp);
 
 		// send to recipient of the private chat post
