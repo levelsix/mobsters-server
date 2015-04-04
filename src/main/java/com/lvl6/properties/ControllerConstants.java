@@ -209,7 +209,10 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
-
+	
+	public static final String TRANSLATION_SETTINGS__DEFAULT_LANGUAGE = "ENGLISH";
+	public static final boolean TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON = false;
+	
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
 	//the monster id that is used in tutorial

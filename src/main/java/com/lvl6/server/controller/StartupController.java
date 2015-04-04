@@ -670,8 +670,6 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-			setDefaultLanguagesForUser(resBuilder, playerId);
-			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -1590,10 +1588,9 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
+	private void setDefaultLanguagesForUser(Builder resBuilder, String userId, 
+			List<TranslationSettingsForUser> tsfuList) {
 
-		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-				getUserTranslationSettingsForUser(userId);
 		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
 		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
 
