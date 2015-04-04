@@ -67,7 +67,7 @@ message PrivateChatPostResponseProto {
      optional PrivateChatPostStatus status = 2;
 	 optional PrivateChatPostProto post = 3;
 	 optional PrivateChatDefaultLanguageProto translationSetting = 4;
-	 optional bool translationRequired = 5; //if true, a translation was performed
+	 optional TranslateLanguages originalContentLanguage = 5; //if true, a translation was performed
 	
      enum PrivateChatPostStatus {
      	SUCCESS = 1;
