@@ -280,16 +280,15 @@ public class PrivateChatPostController extends EventController {
 						pcpp = CreateInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
-										recipientClan, translatedMessage);
+										recipientClan, translatedMessage, contentLanguage);
 						
 					}
 					else {
 						pcpp = CreateInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
-										recipientClan, null);
+										recipientClan, null, contentLanguage);
 					}
-					resBuilder.setOriginalContentLanguage(contentLanguage);
 					resBuilder.setPost(pcpp);
 					
 					PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
