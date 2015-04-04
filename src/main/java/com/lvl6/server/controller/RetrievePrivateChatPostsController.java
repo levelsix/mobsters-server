@@ -188,12 +188,12 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, null);
+												content, isAdmin, pwp.getId(), translateMap, translateLanguage);
 								resBuilder.addPosts(gcmp);
 							} else {
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), null, null);
+												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.NO_TRANSLATION);
 								resBuilder.addPosts(gcmp);
 							}
 						}
