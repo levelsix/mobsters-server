@@ -92,6 +92,7 @@ public class PrivateChatPostController extends EventController {
 		String posterId = senderProto.getUserUuid();
 		String recipientId = reqProto.getRecipientUuid();
 		String content = (reqProto.hasContent()) ? reqProto.getContent() : "";
+		TranslateLanguages contentLanguage = reqProto.getContentLanguage();
 
 		// to client
 		PrivateChatPostResponseProto.Builder resBuilder = PrivateChatPostResponseProto
@@ -162,8 +163,8 @@ public class PrivateChatPostController extends EventController {
 					boolean translationRequired = true;
 					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
 							getSpecificUserTranslationSettings(recipientId, posterId);
-					TranslationSettingsForUser settingForPoster = translationSettingsForUserRetrieveUtil.
-							getSpecificUserTranslationSettings(posterId, recipientId);
+//					TranslationSettingsForUser settingForPoster = translationSettingsForUserRetrieveUtil.
+//							getSpecificUserTranslationSettings(posterId, recipientId);
 					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
 
 					Language recipientLanguage;
@@ -198,7 +199,7 @@ public class PrivateChatPostController extends EventController {
 					//checking if user even wants stuff translated
 					if(translationRequired) {
 						//get poster's language setting, if translationrequired still
-						if(settingForPoster == null) {
+						if(contentLanguage == null) {
 							TranslationSettingsForUser globalChatSettingsForPoster = translationSettingsForUserRetrieveUtil.
 									getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
 							if(globalChatSettingsForPoster != null) {
@@ -213,7 +214,7 @@ public class PrivateChatPostController extends EventController {
 							}
 						}
 						else {
-							posterLanguageString = settingForPoster.getLanguage();
+							posterLanguageString = contentLanguage.toString();
 						}
 						posterLanguage = Language.valueOf(posterLanguageString);
 					}
@@ -280,6 +281,7 @@ public class PrivateChatPostController extends EventController {
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, translatedMessage);
+						
 					}
 					else {
 						pcpp = CreateInfoProtoUtils
@@ -287,6 +289,7 @@ public class PrivateChatPostController extends EventController {
 										poster, posterClan, recipient,
 										recipientClan, null);
 					}
+					resBuilder.setTranslationRequired(translationRequired);
 					resBuilder.setPost(pcpp);
 					
 					PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();

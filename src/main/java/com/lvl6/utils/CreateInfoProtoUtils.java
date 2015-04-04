@@ -1183,6 +1183,7 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(time);
 		pcppb.setContent(p.getContent());
+		
 
 		if(translatedMessage != null) {
 			for(TranslateLanguages tl : translatedMessage.keySet()) {
