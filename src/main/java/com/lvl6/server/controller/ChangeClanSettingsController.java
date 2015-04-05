@@ -48,6 +48,9 @@ public class ChangeClanSettingsController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -281,11 +284,11 @@ public class ChangeClanSettingsController extends EventController {
 		Map<String, Integer> clanIdToSize = userClanRetrieveUtil
 				.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 
-		resBuilder.setMinClan(CreateInfoProtoUtils
+		resBuilder.setMinClan(createInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 
 		int size = clanIdToSize.get(clanId);
-		resBuilder.setFullClan(CreateInfoProtoUtils
+		resBuilder.setFullClan(createInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 
 		clanSizeContainer.add(size);

@@ -301,7 +301,7 @@ public class RetrieveClanInfoController extends EventController {
 				//might be better if just got all user's battle wons from db
 				//instead of one by one from hazelcast 
 				int battlesWon = getBattlesWonForUser(userId);
-				MinimumUserProtoForClans minUser = CreateInfoProtoUtils
+				MinimumUserProtoForClans minUser = createInfoProtoUtils
 						.createMinimumUserProtoForClans(u, c, uc.getStatus(),
 								clanRaidContribution, battlesWon, uchc);
 				resBuilder.addMembers(minUser);
@@ -362,7 +362,7 @@ public class RetrieveClanInfoController extends EventController {
 		for (Clan c : clanList) {
 			String clanId = c.getId();
 			int size = clanIdsToSizes.get(clanId);
-			resBuilder.addClanInfo(CreateInfoProtoUtils
+			resBuilder.addClanInfo(createInfoProtoUtils
 					.createFullClanProtoWithClanSize(c, size));
 		}
 	}

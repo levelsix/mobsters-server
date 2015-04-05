@@ -33,6 +33,8 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final boolean tsfuListIsNull;
 	protected final InsertUtil insertUtil;
 	
+	private final CreateInfoProtoUtils createInfoProtoUtils;
+
 	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
 			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
@@ -43,6 +45,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 		this.tsfuListIsNull = tsfuListIsNull;
 		this.insertUtil = insertUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	private Set<String> userIds;
@@ -204,7 +207,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();
 		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());
-		List<PrivateChatPostProto> pcppList = CreateInfoProtoUtils
+		List<PrivateChatPostProto> pcppList = createInfoProtoUtils
 				.createPrivateChatPostProtoList(clanIdsToClans,
 						clanIdsToUserIdSet, userIdsToUsers,
 						clanlessUserUserIds, privateChatPostIds,

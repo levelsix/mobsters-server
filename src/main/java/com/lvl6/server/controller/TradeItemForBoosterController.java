@@ -62,6 +62,12 @@ public class TradeItemForBoosterController extends EventController {
 	}
 
 	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
@@ -161,18 +167,18 @@ public class TradeItemForBoosterController extends EventController {
 
 				int numBoosterItemsUserWants = 1;
 				log.info("determining the booster items the user receives.");
-				itemsUserReceives = MiscMethods
+				itemsUserReceives = miscMethods
 						.determineBoosterItemsUserReceives(
 								numBoosterItemsUserWants, idsToBoosterItems);
 
-				legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
+				legit = miscMethods.checkIfMonstersExist(itemsUserReceives);
 			}
 
 			int gemReward = 0;
 			boolean successful = false;
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
-				gemReward = MiscMethods.determineGemReward(itemsUserReceives);
+				gemReward = miscMethods.determineGemReward(itemsUserReceives);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
@@ -183,7 +189,7 @@ public class TradeItemForBoosterController extends EventController {
 				//assume user only receives 1 item. NEED TO LET CLIENT KNOW THE PRIZE
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
-					BoosterItemProto bip = CreateInfoProtoUtils
+					BoosterItemProto bip = createInfoProtoUtils
 							.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
@@ -199,7 +205,7 @@ public class TradeItemForBoosterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -341,7 +347,7 @@ public class TradeItemForBoosterController extends EventController {
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId,
+		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
 				bPackId, itemsUserReceives, monsterIdToNumPieces,
 				completeUserMonsters, now);
 		mfusop = String.format("%s=%s, %s",
@@ -354,7 +360,7 @@ public class TradeItemForBoosterController extends EventController {
 			List<String> monsterForUserIds = InsertUtils.get()
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = MiscMethods
+			List<FullUserMonsterProto> newOrUpdated = miscMethods
 					.createFullUserMonsterProtos(monsterForUserIds,
 							completeUserMonsters);
 
@@ -392,7 +398,7 @@ public class TradeItemForBoosterController extends EventController {
 		if (null != ifuList && !ifuList.isEmpty()) {
 			numUpdated = updateUtil.updateItemForUser(ifuList);
 			log.info("items numUpdated={}", numUpdated);
-			List<UserItemProto> uipList = CreateInfoProtoUtils
+			List<UserItemProto> uipList = createInfoProtoUtils
 					.createUserItemProtosFromUserItems(ifuList);
 			resBuilder.addAllUpdatedUserItems(uipList);
 		}
@@ -423,7 +429,7 @@ public class TradeItemForBoosterController extends EventController {
 			detailSb.append(" gemReward=");
 			detailSb.append(gemReward);
 		}
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
 
 		Map<String, Integer> money = new HashMap<String, Integer>();
@@ -440,7 +446,7 @@ public class TradeItemForBoosterController extends EventController {
 		details.put(gems, detailSb.toString());
 
 		log.info("DETAILS=" + detailSb.toString());
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, money,
+		miscMethods.writeToUserCurrencyOneUser(userId, date, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 	}

@@ -43,6 +43,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	public void setServerMessagesTemplate(RabbitTemplate serverMessagesTemplate) {
 		this.serverMessagesTemplate = serverMessagesTemplate;
 	}
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Resource
 	protected ApplicationMode appMode;
@@ -209,7 +211,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			while (playas.hasNext()) {
 				String playa = playas.next();
 
-				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true,
+				StaticDataProto sdp = miscMethods.getAllStaticData(playa, true,
 						qfuRetrieveUtils);
 				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(
 						playa);

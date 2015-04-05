@@ -47,6 +47,9 @@ public class SpawnMiniJobController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
 	
 	@Autowired
@@ -151,7 +154,7 @@ public class SpawnMiniJobController extends EventController {
 			if (success) {
 				//modified the user, the last obstacle removed time
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());

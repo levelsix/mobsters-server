@@ -75,6 +75,12 @@ public class UserCreateController extends EventController {
 	
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected TaskRetrieveUtils taskRetrieveUtils;
 
 	public UserCreateController() {
 		numAllocatedThreads = 3;
@@ -372,12 +378,12 @@ public class UserCreateController extends EventController {
 
 		int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
 		int assetIdOne = ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON;
-		int taskIdOne = TaskRetrieveUtils.getTaskIdForCityElement(cityId,
+		int taskIdOne = taskRetrieveUtils.getTaskIdForCityElement(cityId,
 				assetIdOne);
 		taskIdList.add(taskIdOne);
 
 		int assetIdTwo = ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON;
-		int taskIdTwo = TaskRetrieveUtils.getTaskIdForCityElement(cityId,
+		int taskIdTwo = taskRetrieveUtils.getTaskIdForCityElement(cityId,
 				assetIdTwo);
 		taskIdList.add(taskIdTwo);
 
@@ -504,7 +510,7 @@ public class UserCreateController extends EventController {
 	//      try {
 	//        int previousSilver = referrer.getCash();
 	//        
-	//        int coinsGivenToReferrer = MiscMethods.calculateCoinsGivenToReferrer(referrer);
+	//        int coinsGivenToReferrer = miscMethods.calculateCoinsGivenToReferrer(referrer);
 	//        if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
 	//          log.error("problem with rewarding the referrer " + referrer + " with this many coins: " + coinsGivenToReferrer);
 	//        } else {
@@ -538,9 +544,9 @@ public class UserCreateController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gemsStr = MiscMethods.gems;
-		String cashStr = MiscMethods.cash;
-		String oilStr = MiscMethods.oil;
+		String gemsStr = miscMethods.gems;
+		String cashStr = miscMethods.cash;
+		String oilStr = miscMethods.oil;
 
 		previousCurrency.put(gemsStr, 0);
 		previousCurrency.put(cashStr, 0);
@@ -555,7 +561,7 @@ public class UserCreateController extends EventController {
 		detailsMap.put(cashStr, "");
 		detailsMap.put(oilStr, "");
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, createTime,
+		miscMethods.writeToUserCurrencyOneUser(userId, createTime,
 				currentCurrency, previousCurrency, currentCurrency,
 				reasonsForChanges, detailsMap);
 
@@ -569,14 +575,14 @@ public class UserCreateController extends EventController {
 		//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
 		//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
 		//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		//    String silver = MiscMethods.cash;
+		//    String silver = miscMethods.cash;
 		//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
 		//    
 		//    goldSilverChange.put(silver, coinChange);
 		//    previousGoldSilver.put(silver, previousSilver);
 		//    reasonsForChanges.put(silver, reasonForChange);
 		//    
-		//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+		//    miscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 		//        previousGoldSilver, reasonsForChanges);
 	}
 

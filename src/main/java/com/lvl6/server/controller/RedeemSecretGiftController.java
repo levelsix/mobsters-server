@@ -48,9 +48,15 @@ public class RedeemSecretGiftController extends EventController {
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -123,7 +129,7 @@ public class RedeemSecretGiftController extends EventController {
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				Collection<ItemSecretGiftForUser> nuGifts = rsga.getGifts();
-				Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+				Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 						.createUserItemSecretGiftProto(nuGifts);
 				log.info(String.format("setting nuGifts: %s,\t protos: %s",
 						nuGifts, nuGiftsProtos));
@@ -141,7 +147,7 @@ public class RedeemSecretGiftController extends EventController {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = rsga.getUser();
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());

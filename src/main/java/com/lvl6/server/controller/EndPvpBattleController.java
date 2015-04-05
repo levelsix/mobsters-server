@@ -97,6 +97,9 @@ public class EndPvpBattleController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 
 	public EndPvpBattleController() {
@@ -237,7 +240,7 @@ public class EndPvpBattleController extends EventController {
 				//it is possible that the defender has a shield, most likely via
 				//buying it, and less likely locks didn't work, regardless, the
 				//user can have a shield
-				resBuilder.setStatsBefore(CreateInfoProtoUtils
+				resBuilder.setStatsBefore(createInfoProtoUtils
 						.createUserPvpLeagueProto(attackerId, attackerPlfu,
 								null, false));
 				//attackerPlfu is modified
@@ -247,7 +250,7 @@ public class EndPvpBattleController extends EventController {
 						attackerAttacked, attackerWon, nuPvpDmgMultiplier,
 						attackerMaxOil, attackerMaxCash, changeMap,
 						previousCurrencyMap, monsterDropIds, resBuilder);
-				resBuilder.setStatsAfter(CreateInfoProtoUtils
+				resBuilder.setStatsAfter(createInfoProtoUtils
 						.createUserPvpLeagueProto(attackerId, attackerPlfu,
 								null, false));
 			}
@@ -262,7 +265,7 @@ public class EndPvpBattleController extends EventController {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
 					//Note: no protos for fake defenders are created
-					historyProtoList = CreateInfoProtoUtils
+					historyProtoList = createInfoProtoUtils
 							.createAttackedOthersPvpHistoryProto(attackerId,
 									users,
 									Collections.singletonList(battleJustEnded));
@@ -300,7 +303,7 @@ public class EndPvpBattleController extends EventController {
 					server.writeEvent(resEventDefender);
 				}
 				//regardless of whether the attacker won, his elo will change
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								attacker, attackerPlfu, null);
 				resEventUpdate.setTag(event.getTag());
@@ -308,7 +311,7 @@ public class EndPvpBattleController extends EventController {
 
 				//defender's elo and resources changed only if attacker won, and defender is real
 				if (attackerWon && null != defender) {
-					UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
+					UpdateClientUserResponseEvent resEventUpdateDefender = miscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, defenderPlfu, null);
 					resEventUpdate.setTag(event.getTag());
@@ -457,13 +460,13 @@ public class EndPvpBattleController extends EventController {
 
 			//user currency stuff
 			Map<String, Integer> attackerChangeMap = new HashMap<String, Integer>();
-			attackerChangeMap.put(MiscMethods.cash, attackerCashChange);
-			attackerChangeMap.put(MiscMethods.oil, attackerOilChange);
+			attackerChangeMap.put(miscMethods.cash, attackerCashChange);
+			attackerChangeMap.put(miscMethods.oil, attackerOilChange);
 			changeMap.put(attackerId, attackerChangeMap);
 
 			Map<String, Integer> attackerPreviousCurrency = new HashMap<String, Integer>();
-			attackerPreviousCurrency.put(MiscMethods.cash, previousCash);
-			attackerPreviousCurrency.put(MiscMethods.oil, previousOil);
+			attackerPreviousCurrency.put(miscMethods.cash, previousCash);
+			attackerPreviousCurrency.put(miscMethods.oil, previousOil);
 			previousCurrencyMap.put(attackerId, attackerPreviousCurrency);
 
 			awardMonsters(resBuilder, attackerId, monsterDropIds, clientDate);
@@ -553,7 +556,7 @@ public class EndPvpBattleController extends EventController {
 		//figure out the amount he gains and then subtract, the extra cash he had
 		int userCash = user.getCash();
 		int amountOverMax = calculateAmountOverMaxResource(user, userCash,
-				maxCash, MiscMethods.cash);
+				maxCash, miscMethods.cash);
 		log.info(String.format("calculateMaxCashChange amount over max=%s",
 				amountOverMax));
 
@@ -608,7 +611,7 @@ public class EndPvpBattleController extends EventController {
 		//figure out the amount he gains and then subtract, the extra oil he had
 		int userOil = user.getOil();
 		int amountOverMax = calculateAmountOverMaxResource(user, userOil,
-				maxOil, MiscMethods.oil);
+				maxOil, miscMethods.oil);
 		log.info(String.format("calculateMaxOilChange amount over max=%s",
 				amountOverMax));
 
@@ -863,13 +866,13 @@ public class EndPvpBattleController extends EventController {
 
 		//user currency stuff
 		Map<String, Integer> defenderChangeMap = new HashMap<String, Integer>();
-		defenderChangeMap.put(MiscMethods.cash, defenderCashChange);
-		defenderChangeMap.put(MiscMethods.oil, defenderOilChange);
+		defenderChangeMap.put(miscMethods.cash, defenderCashChange);
+		defenderChangeMap.put(miscMethods.oil, defenderOilChange);
 		changeMap.put(defenderId, defenderChangeMap);
 
 		Map<String, Integer> defenderPreviousCurrency = new HashMap<String, Integer>();
-		defenderPreviousCurrency.put(MiscMethods.cash, previousCash);
-		defenderPreviousCurrency.put(MiscMethods.oil, previousOil);
+		defenderPreviousCurrency.put(miscMethods.cash, previousCash);
+		defenderPreviousCurrency.put(miscMethods.oil, previousOil);
 		previousCurrencyMap.put(defenderId, defenderPreviousCurrency);
 	}
 
@@ -1053,8 +1056,8 @@ public class EndPvpBattleController extends EventController {
 		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
 		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
 		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
-		String oil = MiscMethods.oil;
-		String cash = MiscMethods.cash;
+		String oil = miscMethods.oil;
+		String cash = miscMethods.cash;
 
 		//reasons
 		Map<String, String> reasonMap = new HashMap<String, String>();
@@ -1123,7 +1126,7 @@ public class EndPvpBattleController extends EventController {
 			userIds.add(defenderId);
 		}
 
-		MiscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
+		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 

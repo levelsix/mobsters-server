@@ -198,6 +198,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 public class CreateInfoProtoUtils {
 
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
 	
 	@Autowired
@@ -222,6 +225,9 @@ public class CreateInfoProtoUtils {
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
 	
 	@Autowired
+	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+	
+	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
 	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -229,7 +235,7 @@ public class CreateInfoProtoUtils {
 	
 
 	/** Achievement.proto ***************************************************/
-	public static AchievementProto createAchievementProto(Achievement a) {
+	public AchievementProto createAchievementProto(Achievement a) {
 		AchievementProto.Builder ab = AchievementProto.newBuilder();
 
 		ab.setAchievementId(a.getId());
@@ -300,7 +306,7 @@ public class CreateInfoProtoUtils {
 		return ab.build();
 	}
 
-	public static UserAchievementProto createUserAchievementProto(
+	public UserAchievementProto createUserAchievementProto(
 			AchievementForUser afu) {
 		UserAchievementProto.Builder uapb = UserAchievementProto.newBuilder();
 
@@ -423,7 +429,7 @@ public class CreateInfoProtoUtils {
 		return pmpList;
 	}
 
-	private static PvpMonsterProto createPvpMonsterProto(
+	private PvpMonsterProto createPvpMonsterProto(
 			Map<String, Integer> userMonsterIdToDropped, String userMonsterId,
 			MinimumUserMonsterProto mump) {
 		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
@@ -454,7 +460,7 @@ public class CreateInfoProtoUtils {
 		return pmpList;
 	}
 
-	private static PvpMonsterProto createPvpMonsterProto(
+	private PvpMonsterProto createPvpMonsterProto(
 			MinimumUserMonsterProto mump, Integer monsterIdDropped) {
 		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
 		pmpb.setDefenderMonster(mump);
@@ -466,7 +472,7 @@ public class CreateInfoProtoUtils {
 		return pmp;
 	}
 
-	public static MinimumUserProtoWithMaxResources createMinimumUserProtoWithMaxResources(
+	public MinimumUserProtoWithMaxResources createMinimumUserProtoWithMaxResources(
 			MinimumUserProto mup, int maxCash, int maxOil) {
 		MinimumUserProtoWithMaxResources.Builder mupwmrb = MinimumUserProtoWithMaxResources
 				.newBuilder();
@@ -663,7 +669,7 @@ public class CreateInfoProtoUtils {
 		return phpList;
 	}
 
-	public static List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
+	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
 			List<PvpBattleHistory> historyList) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
@@ -690,7 +696,7 @@ public class CreateInfoProtoUtils {
 		return phpList;
 	}
 
-	public static PvpHistoryProto createAttackedOthersPvpHistoryProto(
+	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
 			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info) {
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		phpb.setAttacker(fup);
@@ -700,7 +706,7 @@ public class CreateInfoProtoUtils {
 		return phpb.build();
 	}
 
-	private static void modifyPvpHistoryProto(Builder phpb,
+	private void modifyPvpHistoryProto(Builder phpb,
 			PvpBattleHistory info) {
 		phpb.setAttackerWon(info.isAttackerWon());
 
@@ -741,7 +747,7 @@ public class CreateInfoProtoUtils {
 		phpb.setClanAvenged(info.isClanAvenged());
 	}
 
-	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
+	public PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
 		PvpLeagueProto.Builder plpb = PvpLeagueProto.newBuilder();
 
 		plpb.setLeagueId(pl.getId());
@@ -764,7 +770,7 @@ public class CreateInfoProtoUtils {
 		return plpb.build();
 	}
 
-	public static UserPvpLeagueProto createUserPvpLeagueProto(String userId,
+	public UserPvpLeagueProto createUserPvpLeagueProto(String userId,
 			PvpLeagueForUser plfu, PvpUser pu, boolean setElo) {
 		UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 		uplpb.setUserUuid(userId);
@@ -804,7 +810,7 @@ public class CreateInfoProtoUtils {
 		return uplpb.build();
 	}
 
-	public static UserPvpLeagueProto createUserPvpLeagueProto(String userId,
+	public UserPvpLeagueProto createUserPvpLeagueProto(String userId,
 			int pvpLeagueId, int rank, int elo, boolean setElo) {
 		UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 		uplpb.setUserUuid(userId);
@@ -837,7 +843,7 @@ public class CreateInfoProtoUtils {
 		return uplpb.build();
 	}
 
-	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+	public List<PvpClanAvengeProto> createPvpClanAvengeProto(
 			List<ClanAvenge> retaliations,
 			Map<String, List<ClanAvengeUser>> clanAvengeIdToClanAvengeUser,
 			Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans) {
@@ -861,7 +867,7 @@ public class CreateInfoProtoUtils {
 		return pcapList;
 	}
 
-	public static PvpClanAvengeProto createPvpClanAvengeProto(ClanAvenge ca,
+	public PvpClanAvengeProto createPvpClanAvengeProto(ClanAvenge ca,
 			List<ClanAvengeUser> cauList,
 			Map<String, MinimumUserProtoWithLevel> userIdToMupwl) {
 		String attackerId = ca.getAttackerId();
@@ -894,7 +900,7 @@ public class CreateInfoProtoUtils {
 		return pcapb.build();
 	}
 
-	public static List<PvpUserClanAvengeProto> createPvpUserClanAvengeProto(
+	public List<PvpUserClanAvengeProto> createPvpUserClanAvengeProto(
 			List<ClanAvengeUser> cauList) {
 		List<PvpUserClanAvengeProto> pucapList = new ArrayList<PvpUserClanAvengeProto>();
 
@@ -906,7 +912,7 @@ public class CreateInfoProtoUtils {
 		return pucapList;
 	}
 
-	public static PvpUserClanAvengeProto createPvpUserClanAvengeProto(
+	public PvpUserClanAvengeProto createPvpUserClanAvengeProto(
 			ClanAvengeUser cau) {
 		PvpUserClanAvengeProto.Builder pucapb = PvpUserClanAvengeProto
 				.newBuilder();
@@ -921,7 +927,7 @@ public class CreateInfoProtoUtils {
 		return pucapb.build();
 	}
 
-	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+	public List<PvpClanAvengeProto> createPvpClanAvengeProto(
 			List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
 			String clanUuid,
 			Map<String, MinimumUserProtoWithLevel> attackerIdsToMupwls) {
@@ -940,7 +946,7 @@ public class CreateInfoProtoUtils {
 		return pcapList;
 	}
 
-	public static PvpClanAvengeProto createPvpClanAvengeProto(
+	public PvpClanAvengeProto createPvpClanAvengeProto(
 			MinimumUserProtoWithLevel attacker, MinimumUserProto defender,
 			String defenderClanUuid, ClanAvenge ca) {
 		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
@@ -960,7 +966,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	//battle item queue proto
-	public static BattleItemQueueForUserProto createBattleItemQueueForUserProto(
+	public BattleItemQueueForUserProto createBattleItemQueueForUserProto(
 			BattleItemQueueForUser biqfu) {
 		BattleItemQueueForUserProto.Builder biqfupb = BattleItemQueueForUserProto
 				.newBuilder();
@@ -973,7 +979,7 @@ public class CreateInfoProtoUtils {
 		return biqfupb.build();
 	}
 
-	public static List<BattleItemQueueForUserProto> createBattleItemQueueForUserProtoList(
+	public List<BattleItemQueueForUserProto> createBattleItemQueueForUserProtoList(
 			List<BattleItemQueueForUser> biqfuList) {
 		List<BattleItemQueueForUserProto> biqfupList = new ArrayList<BattleItemQueueForUserProto>();
 		for (BattleItemQueueForUser biqfu : biqfuList) {
@@ -990,7 +996,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Board.proto ****************************************/
-	public static BoardLayoutProto createBoardLayoutProto(Board b,
+	public BoardLayoutProto createBoardLayoutProto(Board b,
 			Collection<BoardProperty> boardProperties) {
 		BoardLayoutProto.Builder blpb = BoardLayoutProto.newBuilder();
 
@@ -1023,7 +1029,7 @@ public class CreateInfoProtoUtils {
 		return blpb.build();
 	}
 
-	public static List<BoardPropertyProto> createBoardPropertyProto(
+	public List<BoardPropertyProto> createBoardPropertyProto(
 			Collection<BoardProperty> bpCollection) {
 		List<BoardPropertyProto> retVal = new ArrayList<BoardPropertyProto>();
 		for (BoardProperty bp : bpCollection) {
@@ -1035,7 +1041,7 @@ public class CreateInfoProtoUtils {
 		return retVal;
 	}
 
-	public static BoardPropertyProto createBoardPropertyProto(BoardProperty bp) {
+	public BoardPropertyProto createBoardPropertyProto(BoardProperty bp) {
 		BoardPropertyProto.Builder blpb = BoardPropertyProto.newBuilder();
 
 		blpb.setBoardPropertyId(bp.getId());
@@ -1073,7 +1079,7 @@ public class CreateInfoProtoUtils {
 	//        .setTimeOfPurchase(d.getTime()).build();
 	//  }
 
-	public static BoosterPackProto createBoosterPackProto(BoosterPack bp,
+	public BoosterPackProto createBoosterPackProto(BoosterPack bp,
 			Collection<BoosterItem> biList,
 			Collection<BoosterDisplayItem> bdiList) {
 		BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
@@ -1142,7 +1148,7 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static BoosterItemProto createBoosterItemProto(BoosterItem bi) {
+	public BoosterItemProto createBoosterItemProto(BoosterItem bi) {
 		BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
 		b.setBoosterItemId(bi.getId());
 		b.setBoosterPackId(bi.getBoosterPackId());
@@ -1159,7 +1165,7 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static BoosterDisplayItemProto createBoosterDisplayItemProto(
+	public BoosterDisplayItemProto createBoosterDisplayItemProto(
 			BoosterDisplayItem bdi) {
 		BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto
 				.newBuilder();
@@ -1189,7 +1195,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Chat.proto *****************************************************/
-	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost(
+	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost(
 			PrivateChatPost p, User poster, Clan posterClan, User recipient,
 			Clan recipientClan, Map<TranslateLanguages, String> translatedMessage,
 			TranslateLanguages contentLanguage) {
@@ -1226,7 +1232,7 @@ public class CreateInfoProtoUtils {
 	}
 	
 
-	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
+	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
 			MinimumUserProtoWithLevel mupwlRecipient) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
@@ -1255,7 +1261,7 @@ public class CreateInfoProtoUtils {
 		return pcppb.build();
 	}
 
-	public static List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos(
+	public List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos(
 			List<PrivateChatPost> pList,
 			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls) {
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
@@ -1280,7 +1286,7 @@ public class CreateInfoProtoUtils {
 	//clanIdsToUserIdSet. Not all users will have a clan, hence clanlessUserIds
 	//privateChatPostIds is used by StartupController to pick out a subset of
 	//postIdsToPrivateChatPosts; does not need to be set.
-	public static List<PrivateChatPostProto> createPrivateChatPostProtoList(
+	public List<PrivateChatPostProto> createPrivateChatPostProtoList(
 			Map<String, Clan> clanIdsToClans,
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
@@ -1330,7 +1336,7 @@ public class CreateInfoProtoUtils {
 		return pcppList;
 	}
 
-	public static GroupChatMessageProto createGroupChatMessageProtoFromClanChatPost(
+	public GroupChatMessageProto createGroupChatMessageProtoFromClanChatPost(
 			ClanChatPost p, User user, Clan clan) {
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
@@ -1356,7 +1362,7 @@ public class CreateInfoProtoUtils {
 		return gcmpb.build();
 	}
 
-	public static GroupChatMessageProto createGroupChatMessageProto(long time,
+	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap, 
 			TranslateLanguages contentLanguage) {
@@ -1521,7 +1527,7 @@ public class CreateInfoProtoUtils {
 	//	}
 
 	/** Clan.proto *****************************************************/
-	public static FullClanProto createFullClanProtoFromClan(Clan c) {
+	public FullClanProto createFullClanProtoFromClan(Clan c) {
 		//    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
 		FullClanProto.Builder fcpb = FullClanProto.newBuilder();
 		fcpb.setClanUuid(c.getId());
@@ -1535,7 +1541,7 @@ public class CreateInfoProtoUtils {
 		return fcpb.build();
 	}
 
-	public static FullUserClanProto createFullUserClanProtoFromUserClan(
+	public FullUserClanProto createFullUserClanProtoFromUserClan(
 			UserClan uc) {
 		FullUserClanProto.Builder fucpb = FullUserClanProto.newBuilder();
 		fucpb.setClanUuid(uc.getClanId());
@@ -1558,7 +1564,7 @@ public class CreateInfoProtoUtils {
 		return fucpb.build();
 	}
 
-	public static FullClanProtoWithClanSize createFullClanProtoWithClanSize(
+	public FullClanProtoWithClanSize createFullClanProtoWithClanSize(
 			Clan c, int size) {
 		FullClanProto clan = createFullClanProtoFromClan(c);
 
@@ -1566,7 +1572,7 @@ public class CreateInfoProtoUtils {
 				.setClanSize(size).build();
 	}
 
-	public static MinimumUserProtoForClans createMinimumUserProtoForClans(
+	public MinimumUserProtoForClans createMinimumUserProtoForClans(
 			User u, Clan clan, String userClanStatus,
 			float clanRaidContribution, int battlesWon, UserClanHelpCount uchc) {
 		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u,
@@ -1595,7 +1601,7 @@ public class CreateInfoProtoUtils {
 		return mupfc;
 	}
 
-	public static MinimumUserProtoForClans createMinimumUserProtoForClans(
+	public MinimumUserProtoForClans createMinimumUserProtoForClans(
 			User u, Clan clan, UserClanStatus userClanStatus,
 			float clanRaidContribution, int battlesWon, UserClanHelpCount uchc) {
 		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u,
@@ -1715,7 +1721,7 @@ public class CreateInfoProtoUtils {
 		return crspb.build();
 	}
 
-	public static ClanRaidStageMonsterProto createClanRaidStageMonsterProto(
+	public ClanRaidStageMonsterProto createClanRaidStageMonsterProto(
 			ClanRaidStageMonster crsm) {
 		ClanRaidStageMonsterProto.Builder crsmpb = ClanRaidStageMonsterProto
 				.newBuilder();
@@ -1728,7 +1734,7 @@ public class CreateInfoProtoUtils {
 		return crsmpb.build();
 	}
 
-	public static ClanRaidStageRewardProto createClanRaidStageRewardProto(
+	public ClanRaidStageRewardProto createClanRaidStageRewardProto(
 			ClanRaidStageReward crsr) {
 		ClanRaidStageRewardProto.Builder crsrpb = ClanRaidStageRewardProto
 				.newBuilder();
@@ -1742,7 +1748,7 @@ public class CreateInfoProtoUtils {
 		return crsrpb.build();
 	}
 
-	public static PersistentClanEventProto createPersistentClanEventProto(
+	public PersistentClanEventProto createPersistentClanEventProto(
 			ClanEventPersistent cep) {
 		PersistentClanEventProto.Builder pcepb = PersistentClanEventProto
 				.newBuilder();
@@ -1764,7 +1770,7 @@ public class CreateInfoProtoUtils {
 		return pcepb.build();
 	}
 
-	public static PersistentClanEventClanInfoProto createPersistentClanEventClanInfoProto(
+	public PersistentClanEventClanInfoProto createPersistentClanEventClanInfoProto(
 			ClanEventPersistentForClan cepfc) {
 		PersistentClanEventClanInfoProto.Builder pcecipb = PersistentClanEventClanInfoProto
 				.newBuilder();
@@ -1837,7 +1843,7 @@ public class CreateInfoProtoUtils {
 		return pceuipb.build();
 	}
 
-	public static PersistentClanEventUserRewardProto createPersistentClanEventUserRewardProto(
+	public PersistentClanEventUserRewardProto createPersistentClanEventUserRewardProto(
 			ClanEventPersistentUserReward reward) {
 		PersistentClanEventUserRewardProto.Builder pceurpb = PersistentClanEventUserRewardProto
 				.newBuilder();
@@ -1878,7 +1884,7 @@ public class CreateInfoProtoUtils {
 		return pceurpb.build();
 	}
 
-	public static PersistentClanEventRaidStageHistoryProto createPersistentClanEventRaidStageHistoryProto(
+	public PersistentClanEventRaidStageHistoryProto createPersistentClanEventRaidStageHistoryProto(
 			CepfuRaidStageHistory cepfursh,
 			Collection<ClanEventPersistentUserReward> rewards) {
 		PersistentClanEventRaidStageHistoryProto.Builder pcershpb = PersistentClanEventRaidStageHistoryProto
@@ -1905,7 +1911,7 @@ public class CreateInfoProtoUtils {
 		return pcershpb.build();
 	}
 
-	public static PersistentClanEventRaidHistoryProto createPersistentClanEventRaidHistoryProto(
+	public PersistentClanEventRaidHistoryProto createPersistentClanEventRaidHistoryProto(
 			CepfuRaidHistory cepfurh) {
 		PersistentClanEventRaidHistoryProto.Builder pcerhpb = PersistentClanEventRaidHistoryProto
 				.newBuilder();
@@ -1916,7 +1922,7 @@ public class CreateInfoProtoUtils {
 		return pcerhpb.build();
 	}
 
-	public static ClanIconProto createClanIconProtoFromClanIcon(ClanIcon ci) {
+	public ClanIconProto createClanIconProtoFromClanIcon(ClanIcon ci) {
 		ClanIconProto.Builder cipb = ClanIconProto.newBuilder();
 
 		int id = ci.getId();
@@ -1932,7 +1938,7 @@ public class CreateInfoProtoUtils {
 		return cipb.build();
 	}
 
-	public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch,
+	public ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch,
 			User u, Clan c, MinimumUserProto mup) {
 		ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
 		chpb.setClanHelpUuid(ch.getId());
@@ -1971,7 +1977,7 @@ public class CreateInfoProtoUtils {
 		return chpb.build();
 	}
 
-	public static ClanInviteProto createClanInviteProto(ClanInvite invite) {
+	public ClanInviteProto createClanInviteProto(ClanInvite invite) {
 		ClanInviteProto.Builder cipb = ClanInviteProto.newBuilder();
 		cipb.setInviteUuid(invite.getId());
 		cipb.setUserUuid(invite.getUserId());
@@ -1982,7 +1988,7 @@ public class CreateInfoProtoUtils {
 		return cipb.build();
 	}
 
-	public static ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
+	public ClanMemberTeamDonationProto createClanMemberTeamDonationProto(
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			MinimumUserProto solicitor, MinimumUserProto donatorProto) {
 		ClanMemberTeamDonationProto.Builder cmtdpb = ClanMemberTeamDonationProto
@@ -2012,7 +2018,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** InAppPurchase.proto ********************************************/
-	public static GoldSaleProto createGoldSaleProtoFromGoldSale(GoldSale sale) {
+	public GoldSaleProto createGoldSaleProtoFromGoldSale(GoldSale sale) {
 		GoldSaleProto.Builder b = GoldSaleProto.newBuilder()
 				.setSaleId(sale.getId())
 				.setStartDate(sale.getStartDate().getTime())
@@ -2046,7 +2052,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Item.proto ***************************************************/
-	public static ItemProto createItemProtoFromItem(Item item) {
+	public ItemProto createItemProtoFromItem(Item item) {
 		ItemProto.Builder ipb = ItemProto.newBuilder();
 
 		ipb.setItemId(item.getId());
@@ -2098,9 +2104,8 @@ public class CreateInfoProtoUtils {
 		return ipb.build();
 	}
 
-	public static List<UserItemProto> createUserItemProtosFromUserItems(
-			Collection<ItemForUser> ifuCollection)
-	{
+	public List<UserItemProto> createUserItemProtosFromUserItems(
+			List<ItemForUser> ifuCollection) {
 
 		List<UserItemProto> userItems = new ArrayList<UserItemProto>();
 
@@ -2110,7 +2115,7 @@ public class CreateInfoProtoUtils {
 		return userItems;
 	}
 
-	public static UserItemProto createUserItemProtoFromUserItem(ItemForUser ifu) {
+	public UserItemProto createUserItemProtoFromUserItem(ItemForUser ifu) {
 		UserItemProto.Builder uipb = UserItemProto.newBuilder();
 
 		uipb.setItemId(ifu.getItemId());
@@ -2120,7 +2125,7 @@ public class CreateInfoProtoUtils {
 		return uipb.build();
 	}
 
-	public static UserItemProto createUserItemProto(String userId, int itemId,
+	public UserItemProto createUserItemProto(String userId, int itemId,
 			int quantity) {
 		UserItemProto.Builder uipb = UserItemProto.newBuilder();
 
@@ -2131,7 +2136,7 @@ public class CreateInfoProtoUtils {
 		return uipb.build();
 	}
 
-	public static List<UserItemUsageProto> createUserItemUsageProto(
+	public List<UserItemUsageProto> createUserItemUsageProto(
 			List<ItemForUserUsage> ifuuList) {
 		List<UserItemUsageProto> protos = new ArrayList<UserItemUsageProto>();
 
@@ -2143,7 +2148,7 @@ public class CreateInfoProtoUtils {
 		return protos;
 	}
 
-	public static UserItemUsageProto createUserItemUsageProto(
+	public UserItemUsageProto createUserItemUsageProto(
 			ItemForUserUsage ifuu) {
 		UserItemUsageProto.Builder uiupb = UserItemUsageProto.newBuilder();
 		uiupb.setUsageUuid(ifuu.getId());
@@ -2169,7 +2174,7 @@ public class CreateInfoProtoUtils {
 		return uiupb.build();
 	}
 
-	public static Collection<UserItemSecretGiftProto> createUserItemSecretGiftProto(
+	public Collection<UserItemSecretGiftProto> createUserItemSecretGiftProto(
 			Collection<ItemSecretGiftForUser> secretGifts) {
 		Collection<UserItemSecretGiftProto> gifs = new ArrayList<UserItemSecretGiftProto>();
 		if (null == secretGifts || secretGifts.isEmpty()) {
@@ -2182,7 +2187,7 @@ public class CreateInfoProtoUtils {
 		return gifs;
 	}
 
-	public static UserItemSecretGiftProto createUserItemSecretGiftProto(
+	public UserItemSecretGiftProto createUserItemSecretGiftProto(
 			ItemSecretGiftForUser secretGift) {
 		UserItemSecretGiftProto.Builder uisgpb = UserItemSecretGiftProto
 				.newBuilder();
@@ -2445,7 +2450,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MiniJobConfig.proto ********************************************/
-	public static MiniJobProto createMiniJobProto(MiniJob mj) {
+	public MiniJobProto createMiniJobProto(MiniJob mj) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
 
 		mjpb.setMiniJobId(mj.getId());
@@ -2487,7 +2492,7 @@ public class CreateInfoProtoUtils {
 		return mjpb.build();
 	}
 
-	public static UserMiniJobProto createUserMiniJobProto(MiniJobForUser mjfu,
+	public UserMiniJobProto createUserMiniJobProto(MiniJobForUser mjfu,
 			MiniJob mj) {
 		UserMiniJobProto.Builder umjpb = UserMiniJobProto.newBuilder();
 
@@ -2541,7 +2546,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MonsterStuff.proto ********************************************/
-	public static MonsterProto createMonsterProto(Monster aMonster,
+	public MonsterProto createMonsterProto(Monster aMonster,
 			Map<Integer, MonsterLevelInfo> levelToInfo) {
 		MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
@@ -2661,7 +2666,7 @@ public class CreateInfoProtoUtils {
 		return mpb.build();
 	}
 
-	public static List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
+	public List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
 			Map<Integer, MonsterLevelInfo> lvlToInfo) {
 
 		if (null == lvlToInfo || lvlToInfo.isEmpty()) {
@@ -2715,9 +2720,8 @@ public class CreateInfoProtoUtils {
 		return lvlInfoProtos;
 	}
 
-	public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(
-			MonsterForUser mfu)
-	{
+	public FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(
+			MonsterForUser mfu) {
 		FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
 		fumpb.setUserMonsterUuid(mfu.getId());
 		fumpb.setUserUuid(mfu.getUserId());
@@ -2897,7 +2901,7 @@ public class CreateInfoProtoUtils {
 		return mumpList;
 	}
 
-	public static UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
+	public UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
 			MonsterHealingForUser mhfu) {
 		UserMonsterHealingProto.Builder umhpb = UserMonsterHealingProto
 				.newBuilder();
@@ -2917,7 +2921,7 @@ public class CreateInfoProtoUtils {
 		return umhpb.build();
 	}
 
-	public static UserEnhancementProto createUserEnhancementProtoFromObj(
+	public UserEnhancementProto createUserEnhancementProtoFromObj(
 			String userId, UserEnhancementItemProto baseMonster,
 			List<UserEnhancementItemProto> feeders) {
 
@@ -2930,7 +2934,7 @@ public class CreateInfoProtoUtils {
 		return uepb.build();
 	}
 
-	public static UserEnhancementItemProto createUserEnhancementItemProtoFromObj(
+	public UserEnhancementItemProto createUserEnhancementItemProtoFromObj(
 			MonsterEnhancingForUser mefu) {
 
 		UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto
@@ -2959,7 +2963,7 @@ public class CreateInfoProtoUtils {
 		return ucmtpb.build();
 	}
 
-	public static UserMonsterEvolutionProto createUserEvolutionProtoFromEvolution(
+	public UserMonsterEvolutionProto createUserEvolutionProtoFromEvolution(
 			MonsterEvolvingForUser mefu) {
 		UserMonsterEvolutionProto.Builder uepb = UserMonsterEvolutionProto
 				.newBuilder();
@@ -2982,7 +2986,7 @@ public class CreateInfoProtoUtils {
 		return uepb.build();
 	}
 
-	public static MonsterBattleDialogueProto createMonsterBattleDialogueProto(
+	public MonsterBattleDialogueProto createMonsterBattleDialogueProto(
 			MonsterBattleDialogue mbd) {
 		MonsterBattleDialogueProto.Builder mbdpb = MonsterBattleDialogueProto
 				.newBuilder();
@@ -3004,7 +3008,7 @@ public class CreateInfoProtoUtils {
 		return mbdpb.build();
 	}
 
-	public static UserMonsterCurrentHealthProto createUserMonsterCurrentHealthProto(
+	public UserMonsterCurrentHealthProto createUserMonsterCurrentHealthProto(
 			MonsterForUser mfu) {
 		UserMonsterCurrentHealthProto.Builder umchpb = UserMonsterCurrentHealthProto
 				.newBuilder();
@@ -3015,7 +3019,7 @@ public class CreateInfoProtoUtils {
 		return umchpb.build();
 	}
 
-	public static UserMonsterSnapshotProto createUserMonsterSnapshotProto(
+	public  UserMonsterSnapshotProto createUserMonsterSnapshotProto(
 			MonsterSnapshotForUser msfu, MinimumUserProto ownerProto) {
 		UserMonsterSnapshotProto.Builder usmpb = UserMonsterSnapshotProto
 				.newBuilder();
@@ -3051,7 +3055,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Prerequisite.proto ****************************************************/
-	public static PrereqProto createPrerequisiteProto(Prerequisite prereq) {
+	public PrereqProto createPrerequisiteProto(Prerequisite prereq) {
 		PrereqProto.Builder ppb = PrereqProto.newBuilder();
 		ppb.setPrereqId(prereq.getId());
 
@@ -3194,7 +3198,7 @@ public class CreateInfoProtoUtils {
 		return qjpList;
 	}
 
-	public static QuestJobProto createQuestJobProto(QuestJob qj) {
+	public QuestJobProto createQuestJobProto(QuestJob qj) {
 		QuestJobProto.Builder qjpb = QuestJobProto.newBuilder();
 
 		qjpb.setQuestJobId(qj.getId());
@@ -3225,7 +3229,7 @@ public class CreateInfoProtoUtils {
 		return qjpb.build();
 	}
 
-	public static DialogueProto createDialogueProtoFromDialogue(Dialogue d) {
+	public DialogueProto createDialogueProtoFromDialogue(Dialogue d) {
 
 		DialogueProto.Builder dp = DialogueProto.newBuilder();
 		if (d == null) {
@@ -3246,7 +3250,7 @@ public class CreateInfoProtoUtils {
 		return dp.build();
 	}
 
-	public static List<FullUserQuestProto> createFullUserQuestDataLarges(
+	public List<FullUserQuestProto> createFullUserQuestDataLarges(
 			List<QuestForUser> userQuests,
 			Map<Integer, Quest> questIdsToQuests,
 			Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs) {
@@ -3281,7 +3285,7 @@ public class CreateInfoProtoUtils {
 		return fullUserQuestDataLargeProtos;
 	}
 
-	public static List<UserQuestJobProto> createUserQuestJobProto(int questId,
+	public List<UserQuestJobProto> createUserQuestJobProto(int questId,
 			Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs) {
 		List<UserQuestJobProto> userQuestJobProtoList = new ArrayList<UserQuestJobProto>();
 
@@ -3301,7 +3305,7 @@ public class CreateInfoProtoUtils {
 		return userQuestJobProtoList;
 	}
 
-	public static UserQuestJobProto createUserJobProto(QuestJobForUser qjfu) {
+	public UserQuestJobProto createUserJobProto(QuestJobForUser qjfu) {
 		UserQuestJobProto.Builder uqjpb = UserQuestJobProto.newBuilder();
 
 		uqjpb.setQuestId(qjfu.getQuestId());
@@ -3313,7 +3317,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Research.proto ****************************************/
-	public static ResearchProto createResearchProto(Research r,
+	public ResearchProto createResearchProto(Research r,
 			Collection<ResearchProperty> researchProperties) {
 		ResearchProto.Builder rpb = ResearchProto.newBuilder();
 
@@ -3397,7 +3401,7 @@ public class CreateInfoProtoUtils {
 		return rpb.build();
 	}
 
-	public static List<ResearchPropertyProto> createResearchPropertyProto(
+	public List<ResearchPropertyProto> createResearchPropertyProto(
 			Collection<ResearchProperty> rpCollection) {
 		List<ResearchPropertyProto> retVal = new ArrayList<ResearchPropertyProto>();
 		for (ResearchProperty bp : rpCollection) {
@@ -3409,7 +3413,7 @@ public class CreateInfoProtoUtils {
 		return retVal;
 	}
 
-	public static ResearchPropertyProto createResearchPropertyProto(
+	public ResearchPropertyProto createResearchPropertyProto(
 			ResearchProperty rp) {
 		ResearchPropertyProto.Builder rppb = ResearchPropertyProto.newBuilder();
 
@@ -3426,7 +3430,7 @@ public class CreateInfoProtoUtils {
 		return rppb.build();
 	}
 
-	public static Collection<UserResearchProto> createUserResearchProto(
+	public Collection<UserResearchProto> createUserResearchProto(
 			Collection<ResearchForUser> userResearchs) {
 		List<UserResearchProto> urpList = new ArrayList<UserResearchProto>();
 		for (ResearchForUser rfu : userResearchs) {
@@ -3436,7 +3440,7 @@ public class CreateInfoProtoUtils {
 		return urpList;
 	}
 
-	public static UserResearchProto createUserResearchProto(ResearchForUser rfu) {
+	public UserResearchProto createUserResearchProto(ResearchForUser rfu) {
 		UserResearchProto.Builder urpb = UserResearchProto.newBuilder();
 		urpb.setUserResearchUuid(rfu.getId());
 		urpb.setResearchId(rfu.getResearchId());
@@ -3494,7 +3498,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Skill.proto ***************************************************/
-	public static SkillProto createSkillProtoFromSkill(Skill s,
+	public SkillProto createSkillProtoFromSkill(Skill s,
 			Map<Integer, SkillProperty> skillPropertyIdToProperty) {
 		SkillProto.Builder spb = SkillProto.newBuilder();
 		spb.setSkillId(s.getId());
@@ -3582,7 +3586,7 @@ public class CreateInfoProtoUtils {
 		return spb.build();
 	}
 
-	public static SkillPropertyProto createSkillPropertyProtoFromSkillProperty(
+	public SkillPropertyProto createSkillPropertyProtoFromSkillProperty(
 			SkillProperty property) {
 		SkillPropertyProto.Builder sppb = SkillPropertyProto.newBuilder();
 		sppb.setSkillPropertyId(property.getId());
@@ -3598,7 +3602,7 @@ public class CreateInfoProtoUtils {
 		return sppb.build();
 	}
 
-	public static SkillSideEffectProto createSkillSideEffectProto(
+	public SkillSideEffectProto createSkillSideEffectProto(
 			SkillSideEffect sse) {
 		SkillSideEffectProto.Builder ssepb = SkillSideEffectProto.newBuilder();
 		ssepb.setSkillSideEffectId(sse.getId());
@@ -3695,7 +3699,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Structure.proto ************************************************/
-	public static StructureInfoProto createStructureInfoProtoFromStructure(
+	public StructureInfoProto createStructureInfoProtoFromStructure(
 			Structure s) {
 		StructureInfoProto.Builder builder = StructureInfoProto.newBuilder();
 		builder.setStructId(s.getId());
@@ -3768,7 +3772,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static ResourceGeneratorProto createResourceGeneratorProto(
+	public ResourceGeneratorProto createResourceGeneratorProto(
 			Structure s, StructureInfoProto sip, StructureResourceGenerator srg) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3794,7 +3798,7 @@ public class CreateInfoProtoUtils {
 		return rgpb.build();
 	}
 
-	public static MoneyTreeProto createMoneyTreeProtoFromStructureMoneyTree(
+	public MoneyTreeProto createMoneyTreeProtoFromStructureMoneyTree(
 			Structure s, StructureInfoProto sip, StructureMoneyTree smt) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3813,7 +3817,7 @@ public class CreateInfoProtoUtils {
 		return mtpb.build();
 	}
 
-	public static ResearchHouseProto createResearchHouseProtoFromStructureResearchHouse(
+	public ResearchHouseProto createResearchHouseProtoFromStructureResearchHouse(
 			Structure s, StructureInfoProto sip, StructureResearchHouse srh) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3826,7 +3830,7 @@ public class CreateInfoProtoUtils {
 		return rhpb.build();
 	}
 
-	public static ResourceStorageProto createResourceStorageProto(Structure s,
+	public ResourceStorageProto createResourceStorageProto(Structure s,
 			StructureInfoProto sip, StructureResourceStorage srs) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3849,7 +3853,7 @@ public class CreateInfoProtoUtils {
 		return rspb.build();
 	}
 
-	public static HospitalProto createHospitalProto(Structure s,
+	public HospitalProto createHospitalProto(Structure s,
 			StructureInfoProto sip, StructureHospital sh) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3864,7 +3868,7 @@ public class CreateInfoProtoUtils {
 		return hpb.build();
 	}
 
-	public static LabProto createLabProto(Structure s, StructureInfoProto sip,
+	public LabProto createLabProto(Structure s, StructureInfoProto sip,
 			StructureLab sl) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3878,7 +3882,7 @@ public class CreateInfoProtoUtils {
 		return lpb.build();
 	}
 
-	public static ResidenceProto createResidenceProto(Structure s,
+	public ResidenceProto createResidenceProto(Structure s,
 			StructureInfoProto sip, StructureResidence sr) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3902,7 +3906,7 @@ public class CreateInfoProtoUtils {
 		return rpb.build();
 	}
 
-	public static TownHallProto createTownHallProto(Structure s,
+	public TownHallProto createTownHallProto(Structure s,
 			StructureInfoProto sip, StructureTownHall sth) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3925,7 +3929,7 @@ public class CreateInfoProtoUtils {
 		return thpb.build();
 	}
 
-	public static MiniJobCenterProto createMiniJobCenterProto(Structure s,
+	public MiniJobCenterProto createMiniJobCenterProto(Structure s,
 			StructureInfoProto sip, StructureMiniJob miniJobCenter) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -3940,7 +3944,7 @@ public class CreateInfoProtoUtils {
 		return smjcpb.build();
 	}
 
-	public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(
+	public FullUserStructureProto createFullUserStructureProtoFromUserstruct(
 			StructureForUser userStruct) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto
 				.newBuilder();
@@ -3974,7 +3978,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static CoordinateProto createCoordinateProtoFromCoordinatePair(
+	public CoordinateProto createCoordinateProtoFromCoordinatePair(
 			CoordinatePair cp) {
 		CoordinateProto.Builder cpb = CoordinateProto.newBuilder();
 		cpb.setX(cp.getX());
@@ -3983,19 +3987,18 @@ public class CreateInfoProtoUtils {
 		return cpb.build();
 	}
 
-	public static TutorialStructProto createTutorialStructProto(int structId,
+	public TutorialStructProto createTutorialStructProto(int structId,
 			float posX, float posY) {
 		TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
 
 		tspb.setStructId(structId);
 		CoordinatePair cp = new CoordinatePair(posX, posY);
-		CoordinateProto cpp = CreateInfoProtoUtils
-				.createCoordinateProtoFromCoordinatePair(cp);
+		CoordinateProto cpp = createCoordinateProtoFromCoordinatePair(cp);
 		tspb.setCoordinate(cpp);
 		return tspb.build();
 	}
 
-	public static ObstacleProto createObstacleProtoFromObstacle(Obstacle o) {
+	public ObstacleProto createObstacleProtoFromObstacle(Obstacle o) {
 		ObstacleProto.Builder ob = ObstacleProto.newBuilder();
 
 		ob.setObstacleId(o.getId());
@@ -4044,7 +4047,7 @@ public class CreateInfoProtoUtils {
 		return ob.build();
 	}
 
-	public static MinimumObstacleProto createMinimumObstacleProto(
+	public MinimumObstacleProto createMinimumObstacleProto(
 			int obstacleId, float posX, float posY, int orientation) {
 
 		MinimumObstacleProto.Builder mopb = MinimumObstacleProto.newBuilder();
@@ -4068,7 +4071,7 @@ public class CreateInfoProtoUtils {
 		return mopb.build();
 	}
 
-	public static UserObstacleProto createUserObstacleProto(ObstacleForUser ofu) {
+	public UserObstacleProto createUserObstacleProto(ObstacleForUser ofu) {
 		UserObstacleProto.Builder uopb = UserObstacleProto.newBuilder();
 		uopb.setUserObstacleUuid(ofu.getId());
 		uopb.setUserUuid(ofu.getUserId());
@@ -4100,7 +4103,7 @@ public class CreateInfoProtoUtils {
 		return uopb.build();
 	}
 
-	public static EvoChamberProto createEvoChamberProto(Structure s,
+	public EvoChamberProto createEvoChamberProto(Structure s,
 			StructureInfoProto sip, StructureEvoChamber sec) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -4124,7 +4127,7 @@ public class CreateInfoProtoUtils {
 		return ecpb.build();
 	}
 
-	public static TeamCenterProto createTeamCenterProto(Structure s,
+	public TeamCenterProto createTeamCenterProto(Structure s,
 			StructureInfoProto sip, StructureTeamCenter sec) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -4137,7 +4140,7 @@ public class CreateInfoProtoUtils {
 		return tcpb.build();
 	}
 
-	public static ClanHouseProto createClanHouseProto(Structure s,
+	public ClanHouseProto createClanHouseProto(Structure s,
 			StructureInfoProto sip, StructureClanHouse sch) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -4151,7 +4154,7 @@ public class CreateInfoProtoUtils {
 		return chpb.build();
 	}
 
-	public static PvpBoardHouseProto createPvpBoardHouseProto(Structure s,
+	public PvpBoardHouseProto createPvpBoardHouseProto(Structure s,
 			StructureInfoProto sip, StructurePvpBoard spb) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -4164,7 +4167,7 @@ public class CreateInfoProtoUtils {
 		return chpb.build();
 	}
 
-	public static PvpBoardObstacleProto createPvpBoardObstacleProto(
+	public PvpBoardObstacleProto createPvpBoardObstacleProto(
 			BoardObstacle bo) {
 		PvpBoardObstacleProto.Builder pbopb = PvpBoardObstacleProto
 				.newBuilder();
@@ -4193,7 +4196,7 @@ public class CreateInfoProtoUtils {
 		return pbopb.build();
 	}
 
-	public static List<UserPvpBoardObstacleProto> createUserPvpBoardObstacleProto(
+	public List<UserPvpBoardObstacleProto> createUserPvpBoardObstacleProto(
 			List<PvpBoardObstacleForUser> boardObstacles) {
 		List<UserPvpBoardObstacleProto> upbopList = new ArrayList<UserPvpBoardObstacleProto>();
 		for (PvpBoardObstacleForUser pbofu : boardObstacles) {
@@ -4203,7 +4206,7 @@ public class CreateInfoProtoUtils {
 		return upbopList;
 	}
 
-	public static UserPvpBoardObstacleProto createUserPvpBoardObstacleProto(
+	public UserPvpBoardObstacleProto createUserPvpBoardObstacleProto(
 			PvpBoardObstacleForUser pbofu) {
 		UserPvpBoardObstacleProto.Builder upopb = UserPvpBoardObstacleProto
 				.newBuilder();
@@ -4215,7 +4218,7 @@ public class CreateInfoProtoUtils {
 		return upopb.build();
 	}
 
-	public static BattleItemFactoryProto createBattleItemFactoryProto(
+	public BattleItemFactoryProto createBattleItemFactoryProto(
 			Structure s, StructureInfoProto sip, StructureBattleItemFactory sbif) {
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
@@ -4273,7 +4276,7 @@ public class CreateInfoProtoUtils {
 			List<TaskStageForUser> monsters) {
 		TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
 
-		TaskStage ts = TaskStageRetrieveUtils.getTaskStageForTaskStageId(
+		TaskStage ts = taskStageRetrieveUtils.getTaskStageForTaskStageId(
 				taskId, stageNum);
 		int taskStageId = ts.getId();
 		tspb.setStageId(taskStageId);
@@ -4340,7 +4343,7 @@ public class CreateInfoProtoUtils {
 
 	private void setDetails(int taskId,
 			com.lvl6.proto.TaskProto.FullTaskProto.Builder builder) {
-		Set<Integer> stageIds = TaskStageRetrieveUtils
+		Set<Integer> stageIds = taskStageRetrieveUtils
 				.getTaskStageIdsForTaskId(taskId);
 		//aggregating all the monsterIds and rarities for a task
 
@@ -4371,7 +4374,7 @@ public class CreateInfoProtoUtils {
 		builder.addAllRarities(qualitiesForTask);
 	}
 
-	public static MinimumUserTaskProto createMinimumUserTaskProto(
+	public MinimumUserTaskProto createMinimumUserTaskProto(
 			String userId, TaskForUserOngoing aTaskForUser,
 			TaskForUserClientState tfucs) {
 		MinimumUserTaskProto.Builder mutpb = MinimumUserTaskProto.newBuilder();
@@ -4405,7 +4408,7 @@ public class CreateInfoProtoUtils {
 		return mutpb.build();
 	}
 
-	public static List<UserTaskCompletedProto> createUserTaskCompletedProto(
+	public List<UserTaskCompletedProto> createUserTaskCompletedProto(
 			List<UserTaskCompleted> utcList) {
 		List<UserTaskCompletedProto> retVal = new ArrayList<UserTaskCompletedProto>();
 		for (UserTaskCompleted utc : utcList) {
@@ -4415,7 +4418,7 @@ public class CreateInfoProtoUtils {
 		return retVal;
 	}
 
-	public static UserTaskCompletedProto createUserTaskCompletedProto(
+	public UserTaskCompletedProto createUserTaskCompletedProto(
 			UserTaskCompleted utc) {
 		UserTaskCompletedProto.Builder utcpb = UserTaskCompletedProto
 				.newBuilder();
@@ -4557,7 +4560,7 @@ public class CreateInfoProtoUtils {
 		return bldr.build();
 	}
 
-	public static PersistentEventProto createPersistentEventProtoFromEvent(
+	public PersistentEventProto createPersistentEventProtoFromEvent(
 			EventPersistent event) {
 		PersistentEventProto.Builder pepb = PersistentEventProto.newBuilder();
 
@@ -4603,7 +4606,7 @@ public class CreateInfoProtoUtils {
 		return pepb.build();
 	}
 
-	public static UserPersistentEventProto createUserPersistentEventProto(
+	public UserPersistentEventProto createUserPersistentEventProto(
 			EventPersistentForUser epfu) {
 		UserPersistentEventProto.Builder upepb = UserPersistentEventProto
 				.newBuilder();
@@ -4619,7 +4622,7 @@ public class CreateInfoProtoUtils {
 		return upepb.build();
 	}
 
-	public static TaskMapElementProto createTaskMapElementProto(
+	public TaskMapElementProto createTaskMapElementProto(
 			TaskMapElement tme) {
 		TaskMapElementProto.Builder tmepb = TaskMapElementProto.newBuilder();
 		tmepb.setMapElementId(tme.getId());
@@ -4668,7 +4671,7 @@ public class CreateInfoProtoUtils {
 
 	/** FileDownloadProto *********************************************/
 
-	public static FileDownloadConstantProto createFileDownloadProtoFromFileDownload(
+	public FileDownloadConstantProto createFileDownloadProtoFromFileDownload(
 			FileDownload fd) {
 		FileDownloadConstantProto.Builder fdpb = FileDownloadConstantProto
 				.newBuilder();
@@ -4682,7 +4685,7 @@ public class CreateInfoProtoUtils {
 
 	/** BattleItemProto *********************************************/
 
-	public static BattleItemProto createBattleItemProtoFromBattleItem(
+	public BattleItemProto createBattleItemProtoFromBattleItem(
 			BattleItem bi) {
 		BattleItemProto.Builder bipb = BattleItemProto.newBuilder();
 		bipb.setBattleItemId(bi.getId());
@@ -4740,7 +4743,7 @@ public class CreateInfoProtoUtils {
 		return bipb.build();
 	}
 
-	public static List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList(
+	public List<UserBattleItemProto> convertBattleItemForUserListToBattleItemForUserProtoList(
 			List<BattleItemForUser> bifuList) {
 		List<UserBattleItemProto> returnList = new ArrayList<UserBattleItemProto>();
 		for (BattleItemForUser bifu : bifuList) {
@@ -4750,7 +4753,7 @@ public class CreateInfoProtoUtils {
 		return returnList;
 	}
 
-	public static UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(
+	public UserBattleItemProto createUserBattleItemProtoFromBattleItemForUser(
 			BattleItemForUser bifu) {
 		UserBattleItemProto.Builder ubipb = UserBattleItemProto.newBuilder();
 		ubipb.setUserBattleItemId(bifu.getId());
@@ -4806,7 +4809,7 @@ public class CreateInfoProtoUtils {
 	}*/
 
 	/** User.proto *****************************************************/
-	public static MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
+	public MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
 		MinimumClanProto.Builder mcpb = MinimumClanProto.newBuilder();
 		mcpb.setClanUuid(c.getId());
 		mcpb.setName(c.getName());
@@ -4829,7 +4832,7 @@ public class CreateInfoProtoUtils {
 	//    return builder.build();
 	//  }
 
-	public static MinimumUserProto createMinimumUserProtoFromUserAndClan(
+	public MinimumUserProto createMinimumUserProtoFromUserAndClan(
 			User u, Clan c) {
 		MinimumUserProto.Builder builder = MinimumUserProto.newBuilder();
 
@@ -4845,7 +4848,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevel(
+	public MinimumUserProtoWithLevel createMinimumUserProtoWithLevel(
 			User u, Clan c, MinimumUserProto mup) {
 
 		if (null == mup) {
@@ -4860,7 +4863,7 @@ public class CreateInfoProtoUtils {
 		return mupWithLevel.build();
 	}
 
-	public static MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookId(
+	public MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookId(
 			User u, Clan c) {
 		MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u, c);
 		MinimumUserProtoWithFacebookId.Builder b = MinimumUserProtoWithFacebookId
@@ -4874,7 +4877,7 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(
+	public UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(
 			UserFacebookInviteForSlot invite, User inviter, Clan inviterClan,
 			MinimumUserProtoWithFacebookId inviterProto) {
 		UserFacebookInviteForSlotProto.Builder inviteProtoBuilder = UserFacebookInviteForSlotProto
@@ -4915,7 +4918,7 @@ public class CreateInfoProtoUtils {
 		return inviteProtoBuilder.build();
 	}
 
-	public static FullUserProto createFullUserProtoFromUser(User u,
+	public FullUserProto createFullUserProtoFromUser(User u,
 			PvpLeagueForUser plfu, Clan c) {
 		FullUserProto.Builder builder = FullUserProto.newBuilder();
 		String userId = u.getId();
@@ -5021,7 +5024,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static MinimumUserProtoWithLevel createMinimumUserProto(
+	public MinimumUserProtoWithLevel createMinimumUserProto(
 			FullUserProto fup) {
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
 		String str = fup.getUserUuid();
@@ -5052,7 +5055,7 @@ public class CreateInfoProtoUtils {
 		return mupwlb.build();
 	}
 
-	public static Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
+	public Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
 			Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans) {
 		Map<String, MinimumUserProtoWithLevel> userIdToMupwl = new HashMap<String, MinimumUserProtoWithLevel>();
 		for (User u : userIdsToUsers.values()) {
@@ -5073,7 +5076,7 @@ public class CreateInfoProtoUtils {
 	//        .setRecruitTime(r.getTimeOfReferral().getTime()).setCoinsGivenToReferrer(r.getCoinsGivenToReferrer()).build();
 	//  }
 
-	public static AnimatedSpriteOffsetProto createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(
+	public AnimatedSpriteOffsetProto createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(
 			AnimatedSpriteOffset aso) {
 		return AnimatedSpriteOffsetProto
 				.newBuilder()
@@ -5083,7 +5086,7 @@ public class CreateInfoProtoUtils {
 				.build();
 	}
 
-	public static void createMinimumUserProtosFromClannedAndClanlessUsers(
+	public void createMinimumUserProtosFromClannedAndClanlessUsers(
 			Map<String, Clan> clanIdsToClans,
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			List<String> clanlessUserIds,

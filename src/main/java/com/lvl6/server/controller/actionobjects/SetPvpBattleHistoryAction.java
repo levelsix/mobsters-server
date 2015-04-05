@@ -289,7 +289,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		Map<String, User> idsToUsers = useMe.getUserIdsToUsers(userIds);
 
 		//create PvpHistory for battles where this user attacked others
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 				.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
 						attackedOthersHistoryList);
 

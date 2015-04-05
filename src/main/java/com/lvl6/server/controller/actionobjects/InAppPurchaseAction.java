@@ -51,8 +51,11 @@ public class InAppPurchaseAction {
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 	private MonsterStuffUtils monsterStuffUtils;
+	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
+	private CreateInfoProtoUtils createInfoProtoUtils;
+	private MiscMethods miscMethods;
 	
 
 	public InAppPurchaseAction(String userId, User user,
@@ -62,7 +65,10 @@ public class InAppPurchaseAction {
 			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
 			BoosterItemRetrieveUtils boosterItemRetrieveUtils, 
 			MonsterStuffUtils monsterStuffUtils,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			CreateInfoProtoUtils createInfoProtoUtils,
+			MiscMethods miscMethods) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -74,8 +80,11 @@ public class InAppPurchaseAction {
 		this.structureForUserRetrieveUtils2 = structureForUserRetrieveUtils2;
 		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
 		this.monsterStuffUtils = monsterStuffUtils;
+		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
+		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -216,7 +225,7 @@ public class InAppPurchaseAction {
 	}
 
 	private void getStructureMoneyTreeForIAPProductId() {
-		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		log.info("structIdsToMoneyTrees: {}", structIdsToMoneyTrees);
 
@@ -229,7 +238,7 @@ public class InAppPurchaseAction {
 	}
 
 	private boolean userOwnsOneMoneyTreeMax() {
-		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = StructureMoneyTreeRetrieveUtils
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
 				.getUserStructsForUser(userId);
@@ -297,20 +306,20 @@ public class InAppPurchaseAction {
 		//TODO: clean up this copy paste of PurchaseBoosterPackController logic
 		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 		itemsUserReceives.addAll(idToBoosterItem.values());
-		boolean legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
+		boolean legit = miscMethods.checkIfMonstersExist(itemsUserReceives);
 		if (!legit) {
 			throw new RuntimeException(String.format(
 					"illegal monster in starter pack for boosterPackId=%s",
 					boosterPackId));
 		}
-		gemChange = MiscMethods.determineGemReward(itemsUserReceives);
+		gemChange = miscMethods.determineGemReward(itemsUserReceives);
 		//booster packs can give out gems, so  reuse processPurchase logic
 		processPurchase(resBuilder);
 
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId,
+		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
 				boosterPackId, itemsUserReceives, monsterIdToNumPieces,
 				completeUserMonsters, now);
 
@@ -320,7 +329,7 @@ public class InAppPurchaseAction {
 			List<String> monsterForUserIds = insertUtil
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = MiscMethods
+			List<FullUserMonsterProto> newOrUpdated = miscMethods
 					.createFullUserMonsterProtos(monsterForUserIds,
 							completeUserMonsters);
 
@@ -351,7 +360,7 @@ public class InAppPurchaseAction {
 						itemForUserRetrieveUtil, updateUtil);
 		//		log.info("ifuList={}", ifuList);
 		if (null != ifuList && !ifuList.isEmpty()) {
-			List<UserItemProto> uipList = CreateInfoProtoUtils
+			List<UserItemProto> uipList = createInfoProtoUtils
 					.createUserItemProtosFromUserItems(ifuList);
 			resBuilder.addAllUpdatedUserItems(uipList);
 		}
@@ -400,7 +409,7 @@ public class InAppPurchaseAction {
 		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
 
 		if (null != sfu) {
-			FullUserStructureProto fusp = CreateInfoProtoUtils
+			FullUserStructureProto fusp = createInfoProtoUtils
 					.createFullUserStructureProtoFromUserstruct(sfu);
 			fuspList.add(fusp);
 			resBuilder.addAllUpdatedMoneyTree(fuspList);
@@ -473,13 +482,13 @@ public class InAppPurchaseAction {
 //				//TODO: clean up this copy paste of PurchaseBoosterPackController logic
 //				List<SalesItem> itemsUserReceives = new ArrayList<SalesItem>();
 //				itemsUserReceives.addAll(idToSalesItem.values());
-//				boolean legit = MiscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+//				boolean legit = miscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
 //				if (!legit) {
 //					throw new RuntimeException(String.format(
 //							"illegal monster in sales item for salespackageId=%s",
 //							salesPackageId));
 //				}
-//				gemChange = MiscMethods.determineGemRewardForSale(itemsUserReceives);
+//				gemChange = miscMethods.determineGemRewardForSale(itemsUserReceives);
 //
 //				
 //				//booster packs can give out gems, so  reuse processPurchase logic
@@ -489,7 +498,7 @@ public class InAppPurchaseAction {
 //				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 //				//sop = source of pieces
 //				
-//				String mfusop = MiscMethods.createUpdateUserMonsterArgumentsForSales(userId,
+//				String mfusop = miscMethods.createUpdateUserMonsterArgumentsForSales(userId,
 //						sp.getId(), itemsUserReceives, monsterIdToNumPieces,
 //						completeUserMonsters, now);
 //
@@ -499,7 +508,7 @@ public class InAppPurchaseAction {
 //					List<String> monsterForUserIds = insertUtil
 //							.insertIntoMonsterForUserReturnIds(userId,
 //									completeUserMonsters, mfusop, now);
-//					List<FullUserMonsterProto> newOrUpdated = MiscMethods
+//					List<FullUserMonsterProto> newOrUpdated = miscMethods
 //							.createFullUserMonsterProtos(monsterForUserIds,
 //									completeUserMonsters);
 //
@@ -616,7 +625,7 @@ public class InAppPurchaseAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (gemChange != 0) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			prevCurrencies.put(miscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
 			user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
 		}
@@ -625,7 +634,7 @@ public class InAppPurchaseAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

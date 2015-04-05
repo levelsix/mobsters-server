@@ -32,13 +32,15 @@ public class CompleteBattleItemAction {
 	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected DeleteUtil deleteUtil;
+	private MiscMethods miscMethods;
 
 	public CompleteBattleItemAction(
 			String userId,
 			List<BattleItemQueueForUser> completedList,//completed queue items
 			int gemsForSpeedUp, UserRetrieveUtils2 userRetrieveUtil,
 			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
-			InsertUtil insertUtil, DeleteUtil deleteUtil) {
+			InsertUtil insertUtil, DeleteUtil deleteUtil,
+			MiscMethods miscMethods) {
 		super();
 		this.userId = userId;
 		this.completedList = completedList;
@@ -47,6 +49,7 @@ public class CompleteBattleItemAction {
 		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.deleteUtil = deleteUtil;
+		this.miscMethods = miscMethods;
 	}
 
 	private User user;
@@ -129,7 +132,7 @@ public class CompleteBattleItemAction {
 
 		//update currency
 		if (gemsForSpeedUp > 0) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			prevCurrencies.put(miscMethods.gems, user.getGems());
 			gemsChange = -1 * (gemsForSpeedUp);
 		}
 
@@ -185,7 +188,7 @@ public class CompleteBattleItemAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

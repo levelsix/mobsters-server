@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,9 @@ public class StructurePvpBoardRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructurePvpBoard> structIdsToPvpBoards;
 
@@ -48,7 +52,7 @@ public class StructurePvpBoardRetrieveUtils {
 		if (structIdsToPvpBoards == null) {
 			setStaticStructIdsToPvpBoards();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -65,7 +69,7 @@ public class StructurePvpBoardRetrieveUtils {
 		if (structIdsToPvpBoards == null) {
 			setStaticStructIdsToPvpBoards();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();

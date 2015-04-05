@@ -56,6 +56,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 	@Autowired
 	protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
@@ -198,7 +201,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -423,10 +426,10 @@ public class SubmitMonsterEnhancementController extends EventController {
 			} else {
 				//everything went well
 				if (0 != oilChange) {
-					money.put(MiscMethods.oil, oilChange);
+					money.put(miscMethods.oil, oilChange);
 				}
 				if (0 != gemsSpent) {
-					money.put(MiscMethods.gems, gemChange);
+					money.put(miscMethods.gems, gemChange);
 				}
 			}
 		}
@@ -518,8 +521,8 @@ public class SubmitMonsterEnhancementController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__ENHANCING;
-		String oil = MiscMethods.oil;
-		String gems = MiscMethods.gems;
+		String oil = miscMethods.oil;
+		String gems = miscMethods.gems;
 
 		previousCurrency.put(oil, previousOil);
 		previousCurrency.put(gems, previousGems);
@@ -531,7 +534,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		detailsMap.put(oil, detailsSb.toString());
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

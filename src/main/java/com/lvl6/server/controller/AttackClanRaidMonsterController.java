@@ -70,10 +70,19 @@ public class AttackClanRaidMonsterController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected ClanStuffUtils clanStuffUtils;
+
+	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ClanEventUtil clanEventUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtil;
@@ -99,8 +108,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public AttackClanRaidMonsterController() {
 		numAllocatedThreads = 4;
@@ -213,7 +221,7 @@ public class AttackClanRaidMonsterController extends EventController {
 				if (!clanEventList.isEmpty()) {
 					clanEvent = clanEventList.get(0);
 				}
-				ClanEventPersistentForClan clanEventClientSent = ClanStuffUtils
+				ClanEventPersistentForClan clanEventClientSent = clanStuffUtils
 						.createClanEventPersistentForClan(eventDetails);
 
 				//clanevent MIGHT BE MODIFIED (this will always be sent to the client)
@@ -313,7 +321,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		ClanEventPersistentForClan raidStartedByClan = clanEventPersistentForClanRetrieveUtil
 				.getPersistentEventForClanId(clanId);
 
-		ClanEventPersistentForClan eventClientSent = ClanStuffUtils
+		ClanEventPersistentForClan eventClientSent = clanStuffUtils
 				.createClanEventPersistentForClan(eventDetails);
 
 		//still want to deduct user's monsters' healths
@@ -867,13 +875,13 @@ public class AttackClanRaidMonsterController extends EventController {
 		//TODO: FIGURE OUT IF CURRENCY CALCULATION IS OK (right now just truncating the value) 
 		//create the userOilReward maybe
 		int userOilReward = (int) ((reward.getOilDrop()) * userCrsContribution);
-		createClanEventPersistentUserReward(MiscMethods.OIL, userOilReward,
+		createClanEventPersistentUserReward(miscMethods.OIL, userOilReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,
 				userId, userRewards);
 
 		//create the userOilReward maybe  	
 		int userCashReward = (int) ((reward.getCashDrop()) * userCrsContribution);
-		createClanEventPersistentUserReward(MiscMethods.CASH, userCashReward,
+		createClanEventPersistentUserReward(miscMethods.CASH, userCashReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,
 				userId, userRewards);
 
@@ -891,7 +899,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			//user gets the monster reward
 			staticDataId = monsterId;
 			int quantity = 1;
-			createClanEventPersistentUserReward(MiscMethods.MONSTER,
+			createClanEventPersistentUserReward(miscMethods.MONSTER,
 					staticDataId, quantity, crsId, crsStartDate, crsEndDate,
 					clanEventId, userId, userRewards);
 		}
@@ -922,7 +930,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		if (!clanEventList.isEmpty()) {
 			ClanEventPersistentForClan cepfc = clanEventList.get(0);
 			if (null != cepfc) {
-				PersistentClanEventClanInfoProto updatedEventDetails = CreateInfoProtoUtils
+				PersistentClanEventClanInfoProto updatedEventDetails = createInfoProtoUtils
 						.createPersistentClanEventClanInfoProto(cepfc);
 				resBuilder.setEventDetails(updatedEventDetails);
 			}
@@ -965,7 +973,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		resBuilder.setCrsId(crsId);
 
 		for (ClanEventPersistentUserReward reward : allRewards) {
-			PersistentClanEventUserRewardProto rewardProto = CreateInfoProtoUtils
+			PersistentClanEventUserRewardProto rewardProto = createInfoProtoUtils
 					.createPersistentClanEventUserRewardProto(reward);
 			resBuilder.addAllRewards(rewardProto);
 		}

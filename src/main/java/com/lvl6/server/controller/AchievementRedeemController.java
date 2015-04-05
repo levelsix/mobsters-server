@@ -45,6 +45,9 @@ public class AchievementRedeemController extends EventController {
 	protected Locker locker;
 	
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	@Autowired
@@ -138,14 +141,14 @@ public class AchievementRedeemController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
 				Map<String, Integer> previousCurrency = Collections
-						.singletonMap(MiscMethods.gems, previousGems);
+						.singletonMap(miscMethods.gems, previousGems);
 				writeToUserCurrencyHistory(user, userId, achievementId,
 						currencyChange, previousCurrency, now);
 			}
@@ -227,7 +230,7 @@ public class AchievementRedeemController extends EventController {
 		} else {
 			//things worked
 			if (0 != gemsGained) {
-				currencyChange.put(MiscMethods.gems, gemsGained);
+				currencyChange.put(miscMethods.gems, gemsGained);
 			}
 		}
 		return true;
@@ -240,7 +243,7 @@ public class AchievementRedeemController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		String reason = ControllerConstants.UCHRFC__QUEST_REDEEM;
 		StringBuilder detailsSb = new StringBuilder();
@@ -252,7 +255,7 @@ public class AchievementRedeemController extends EventController {
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, details);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

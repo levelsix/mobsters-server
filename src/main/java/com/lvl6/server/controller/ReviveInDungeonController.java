@@ -42,6 +42,9 @@ public class ReviveInDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -147,7 +150,7 @@ public class ReviveInDungeonController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -245,7 +248,7 @@ public class ReviveInDungeonController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(MiscMethods.gems, gemsSpent);
+				currencyChange.put(miscMethods.gems, gemsSpent);
 			}
 		}
 
@@ -309,14 +312,14 @@ public class ReviveInDungeonController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__REVIVE_IN_DUNGEON;
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		previousCurrency.put(gems, previousGems);
 		currentCurrency.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

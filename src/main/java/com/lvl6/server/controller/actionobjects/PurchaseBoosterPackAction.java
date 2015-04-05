@@ -47,6 +47,7 @@ public class PurchaseBoosterPackAction {
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	private UpdateUtil updateUtil;
+	private MiscMethods miscMethods;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -55,7 +56,7 @@ public class PurchaseBoosterPackAction {
 			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			UpdateUtil updateUtil) {
+			UpdateUtil updateUtil, MiscMethods miscMethods) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -69,6 +70,7 @@ public class PurchaseBoosterPackAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.updateUtil = updateUtil;
+		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -241,14 +243,14 @@ public class PurchaseBoosterPackAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (!freeBoosterPack) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			prevCurrencies.put(miscMethods.gems, user.getGems());
 		}
 
 		int numBoosterItemsUserWants = 1;
-		itemsUserReceives = MiscMethods.determineBoosterItemsUserReceives(
+		itemsUserReceives = miscMethods.determineBoosterItemsUserReceives(
 				numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
 
-		boolean legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
+		boolean legit = miscMethods.checkIfMonstersExist(itemsUserReceives);
 
 		if (!legit) {
 			log.error("illegal to verify booster items, {}", itemsUserReceives);
@@ -271,7 +273,7 @@ public class PurchaseBoosterPackAction {
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId,
+		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
 				boosterPackIdPurchased, itemsUserReceives,
 				monsterIdToNumPieces, completeUserMonsters, now);
 
@@ -283,7 +285,7 @@ public class PurchaseBoosterPackAction {
 			List<String> monsterForUserIds = InsertUtils.get()
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = MiscMethods
+			List<FullUserMonsterProto> newOrUpdated = miscMethods
 					.createFullUserMonsterProtos(monsterForUserIds,
 							completeUserMonsters);
 
@@ -316,7 +318,7 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private void updateUserCurrency() {
-		gemReward = MiscMethods.determineGemReward(itemsUserReceives);
+		gemReward = miscMethods.determineGemReward(itemsUserReceives);
 
 		gemChange = -1 * gemPrice;
 		if (freeBoosterPack) {
@@ -407,7 +409,7 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

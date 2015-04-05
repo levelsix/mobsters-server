@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,9 @@ public class QuestRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	//private static Map<Integer, List<Quest>> cityIdToQuests;
 	private static Map<Integer, Quest> questIdsToQuests;
@@ -145,7 +149,7 @@ public class QuestRetrieveUtils {
 
 		String acceptDialogueBlob = rs
 				.getString(DBConstants.QUEST__ACCEPT_DIALOGUE);
-		Dialogue acceptDialogue = MiscMethods
+		Dialogue acceptDialogue = miscMethods
 				.createDialogue(acceptDialogueBlob);
 
 		//    String questType = rs.getString(DBConstants.);
@@ -164,7 +168,7 @@ public class QuestRetrieveUtils {
 				.getString(DBConstants.QUEST__QUESTS_REQUIRED_FOR_THIS);
 		List<Integer> questsRequiredForThis = new ArrayList<Integer>();
 		if (questsRequiredForThisString != null) {
-			MiscMethods.explodeIntoInts(questsRequiredForThisString, delimiter,
+			miscMethods.explodeIntoInts(questsRequiredForThisString, delimiter,
 					questsRequiredForThis);
 		}
 

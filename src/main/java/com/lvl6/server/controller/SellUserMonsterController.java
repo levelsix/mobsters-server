@@ -53,6 +53,9 @@ public class SellUserMonsterController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
@@ -162,7 +165,7 @@ public class SellUserMonsterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -242,7 +245,7 @@ public class SellUserMonsterController extends EventController {
 		boolean success = true;
 
 		// sum up the monies and give it to the user
-		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
+		int sum = miscMethods.sumMapValues(userMonsterIdsToCashAmounts);
 		int curCash = Math.min(aUser.getCash(), maxCash); //in case user's cash is more than maxCash
 		int maxCashUserCanGain = maxCash - curCash;
 		sum = Math.min(sum, maxCashUserCanGain);
@@ -255,7 +258,7 @@ public class SellUserMonsterController extends EventController {
 								sum, userMonsterIdsToCashAmounts));
 				return false;
 			} else {
-				currencyChange.put(MiscMethods.cash, sum);
+				currencyChange.put(miscMethods.cash, sum);
 			}
 		}
 
@@ -326,14 +329,14 @@ public class SellUserMonsterController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS;
-		String cash = MiscMethods.cash;
+		String cash = miscMethods.cash;
 
 		previousCurrency.put(cash, previousCash);
 		currentCurrency.put(cash, aUser.getCash());
 		reasonsForChanges.put(cash, reason);
 		detailsMap.put(cash, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, aDate, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, aDate, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

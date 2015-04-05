@@ -45,8 +45,15 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
+	
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -249,7 +256,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 		User aUser = usersByIds.get(userId);
 		User otherUser = usersByIds.get(otherUserId);
 
-		MinimumUserProtoWithLevel mup1 = CreateInfoProtoUtils
+		MinimumUserProtoWithLevel mup1 = createInfoProtoUtils
 				.createMinimumUserProtoWithLevel(aUser, null, userMup);
 		userIdsToMups.put(userId, mup1);
 
@@ -259,7 +266,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 					otherUser.getClanId());
 		}
 
-		MinimumUserProtoWithLevel mup2 = CreateInfoProtoUtils
+		MinimumUserProtoWithLevel mup2 = createInfoProtoUtils
 				.createMinimumUserProtoWithLevel(otherUser, otherUserClan, null);
 		userIdsToMups.put(otherUserId, mup2);
 

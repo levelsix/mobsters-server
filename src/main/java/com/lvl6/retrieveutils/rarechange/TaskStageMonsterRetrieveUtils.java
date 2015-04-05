@@ -33,6 +33,9 @@ public class TaskStageMonsterRetrieveUtils {
 	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
 	private static Map<Integer, Set<Integer>> taskStageIdsToDroppableMonsterIds;
@@ -355,11 +358,11 @@ public class TaskStageMonsterRetrieveUtils {
 
 		Dialogue initD = null;
 		if (null != initDialogue && !initDialogue.isEmpty()) {
-			initD = MiscMethods.createDialogue(initDialogue);
+			initD = miscMethods.createDialogue(initDialogue);
 		}
 		Dialogue defaultD = null;
 		if (null != defaultDialogue && !defaultDialogue.isEmpty()) {
-			defaultD = MiscMethods.createDialogue(defaultDialogue);
+			defaultD = miscMethods.createDialogue(defaultDialogue);
 		}
 
 		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId,

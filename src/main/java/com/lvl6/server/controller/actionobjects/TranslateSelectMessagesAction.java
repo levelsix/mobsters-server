@@ -34,6 +34,7 @@ public class TranslateSelectMessagesAction {
 	private boolean translateOn;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
+	private MiscMethods miscMethods;
 	
 
 	public TranslateSelectMessagesAction(String recipientUserId,
@@ -51,6 +52,7 @@ public class TranslateSelectMessagesAction {
 		this.translateOn = translateOn;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.miscMethods = miscMethods;
 	}
 
 	private User recipientUser;

@@ -53,6 +53,9 @@ public abstract class EventController extends Wrap {
 		transactionTemplate = new TransactionTemplate(transactionManager);
 		this.transactionManager = transactionManager;
 	}
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	//SHOULD REALLY PHASE THIS OUT---------------------------------------------------------
 	@Autowired
@@ -118,8 +121,8 @@ public abstract class EventController extends Wrap {
 		Timer.Context context = timer.time();
 		try {
 			final RequestEvent reqEvent = (RequestEvent) event;
-			MiscMethods.setMDCProperties(null, reqEvent.getPlayerId(),
-					MiscMethods.getIPOfPlayer(server, reqEvent.getPlayerId(),
+			miscMethods.setMDCProperties(null, reqEvent.getPlayerId(),
+					miscMethods.getIPOfPlayer(server, reqEvent.getPlayerId(),
 							null));
 			log.info("Received event: {}", event.getClass().getSimpleName());
 
@@ -148,7 +151,7 @@ public abstract class EventController extends Wrap {
 						Globals.NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING);
 			}
 
-			MiscMethods.purgeMDCProperties();
+			miscMethods.purgeMDCProperties();
 		} finally {
 			context.stop();
 		}

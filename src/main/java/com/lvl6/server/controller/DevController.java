@@ -47,6 +47,12 @@ public class DevController extends EventController {
 	}
 
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	
 	@Autowired
@@ -126,7 +132,7 @@ public class DevController extends EventController {
 			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
-			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+			UpdateClientUserResponseEvent resEventUpdate = miscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
@@ -211,7 +217,7 @@ public class DevController extends EventController {
 			ItemForUser ifu = (itemForUserRetrieveUtil
 					.getSpecificOrAllItemForUser(userId,
 							Collections.singleton(staticDataId))).get(0);
-			UserItemProto uip = CreateInfoProtoUtils
+			UserItemProto uip = createInfoProtoUtils
 					.createUserItemProtoFromUserItem(ifu);
 			resBuilder.setUip(uip);
 			break;

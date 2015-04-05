@@ -30,6 +30,8 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -44,12 +46,21 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
+	
+	@Autowired
+	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+	
+	@Autowired
+	protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -138,7 +149,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureAction rcfnsa = new RetrieveCurrencyFromNormStructureAction(
 					userId, maxCash, maxOil, duplicates,
 					userStructIdsToStructRetrievals, userRetrieveUtil,
-					userStructRetrieveUtil, updateUtil);
+					userStructRetrieveUtil, structureMoneyTreeRetrieveUtils, 
+					structureResourceGeneratorRetrieveUtils, updateUtil,
+					miscMethods);
 
 			rcfnsa.execute(resBuilder);
 
@@ -153,7 +166,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 					.equals(resBuilder.getStatus())) {
 				User user = rcfnsa.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -220,7 +233,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			RetrieveCurrencyFromNormStructureAction rcfnsa) {
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
 				rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
 				rcfnsa.getDetails());

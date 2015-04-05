@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,9 @@ public class TaskRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	private static Map<Integer, List<Task>> cityIdsToTasks;
 	private static Map<Integer, Task> taskIdsToTasks;
@@ -34,7 +38,7 @@ public class TaskRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
-	public static int getTaskIdForCityElement(int cityId, int assetId) {
+	public int getTaskIdForCityElement(int cityId, int assetId) {
 		log.debug("retrieving task id for city element, cityId=" + cityId
 				+ " assetId=" + assetId);
 		if (null == cityIdsToTasks) {
@@ -61,7 +65,7 @@ public class TaskRetrieveUtils {
 
 	//RETRIEVE QUERIES*********************************************************************
 
-	public static Map<Integer, Task> getTaskIdsToTasks() {
+	public Map<Integer, Task> getTaskIdsToTasks() {
 		log.debug("retrieving all tasks data map");
 		if (taskIdsToTasks == null) {
 			setStaticTaskIdsToTasks();
@@ -69,7 +73,7 @@ public class TaskRetrieveUtils {
 		return taskIdsToTasks;
 	}
 
-	public static Task getTaskForTaskId(int taskId) {
+	public Task getTaskForTaskId(int taskId) {
 		log.debug("retrieve task data for task " + taskId);
 		if (taskIdsToTasks == null) {
 			setStaticTaskIdsToTasks();
@@ -77,7 +81,7 @@ public class TaskRetrieveUtils {
 		return taskIdsToTasks.get(taskId);
 	}
 
-	public static Map<Integer, Task> getTasksForTaskIds(List<Integer> ids) {
+	public Map<Integer, Task> getTasksForTaskIds(List<Integer> ids) {
 		log.debug("retrieve task data for taskids " + ids);
 		if (taskIdsToTasks == null) {
 			setStaticTaskIdsToTasks();
@@ -89,7 +93,7 @@ public class TaskRetrieveUtils {
 		return toreturn;
 	}
 
-	public static List<Task> getAllTasksForCityId(int cityId) {
+	public List<Task> getAllTasksForCityId(int cityId) {
 		log.debug("retrieving all tasks for cityId " + cityId);
 		if (cityIdsToTasks == null) {
 			setStaticCityIdsToTasks();
@@ -97,7 +101,7 @@ public class TaskRetrieveUtils {
 		return cityIdsToTasks.get(cityId);
 	}
 
-	public static Set<Integer> getAllTaskIdsForCityId(int cityId) {
+	public Set<Integer> getAllTaskIdsForCityId(int cityId) {
 		log.debug("retrieving all taskIds for cityId=" + cityId);
 		if (cityIdsToTasks == null) {
 			setStaticCityIdsToTasks();
@@ -117,7 +121,7 @@ public class TaskRetrieveUtils {
 		return retVal;
 	}
 
-	public static int getCityIdForTask(int taskId) {
+	public int getCityIdForTask(int taskId) {
 		if (cityIdsToTasks == null) {
 			setStaticCityIdsToTasks();
 		}
@@ -131,7 +135,7 @@ public class TaskRetrieveUtils {
 		return cityId;
 	}
 
-	private static void setStaticCityIdsToTasks() {
+	private void setStaticCityIdsToTasks() {
 		log.debug("setting static map of cityId to tasks");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -169,7 +173,7 @@ public class TaskRetrieveUtils {
 		}
 	}
 
-	private static void setStaticTaskIdsToTasks() {
+	private void setStaticTaskIdsToTasks() {
 		log.debug("setting static map of taskIds to tasks");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -202,7 +206,7 @@ public class TaskRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticCityIdsToTasks();
 		setStaticTaskIdsToTasks();
 	}
@@ -210,7 +214,7 @@ public class TaskRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Task convertRSRowToTask(ResultSet rs) throws SQLException {
+	private Task convertRSRowToTask(ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.TASK__ID);
 		String goodName = rs.getString(DBConstants.TASK__GOOD_NAME);
 		String description = rs.getString(DBConstants.TASK__DESCRIPTION);
@@ -233,7 +237,7 @@ public class TaskRetrieveUtils {
 
 		Dialogue initD = null;
 		if (null != initDefeatedD && !initDefeatedD.isEmpty()) {
-			initD = MiscMethods.createDialogue(initDefeatedD);
+			initD = miscMethods.createDialogue(initDefeatedD);
 		}
 
 		Task task = new Task(id, goodName, description, cityId,

@@ -55,6 +55,9 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
@@ -212,7 +215,7 @@ public class HealMonsterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -405,17 +408,17 @@ public class HealMonsterController extends EventController {
 			} else {
 				//things went ok
 				if (0 != cashChange) {
-					moneyForHealing.put(MiscMethods.cash, cashChange);
-					changeMap.put(MiscMethods.cash, cashChange);
+					moneyForHealing.put(miscMethods.cash, cashChange);
+					changeMap.put(miscMethods.cash, cashChange);
 				}
 				if (0 != gemCostForHealing) {
-					moneyForHealing.put(MiscMethods.gems, gemCostForHealing);
+					moneyForHealing.put(miscMethods.gems, gemCostForHealing);
 				}
 				if (0 != gemsForSpeedup) {
-					moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
+					moneyForSpeedup.put(miscMethods.gems, gemsForSpeedup);
 				}
 				if (0 != gemCost) {
-					changeMap.put(MiscMethods.gems, gemChange);
+					changeMap.put(miscMethods.gems, gemChange);
 				}
 
 			}
@@ -505,8 +508,8 @@ public class HealMonsterController extends EventController {
 		StringBuilder reasonForChange = new StringBuilder();
 		reasonForChange
 				.append(ControllerConstants.UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING);
-		String gems = MiscMethods.gems;
-		String cash = MiscMethods.cash;
+		String gems = miscMethods.gems;
+		String cash = miscMethods.cash;
 
 		StringBuilder detailSb = new StringBuilder();
 		if (!moneyForHealing.isEmpty()) {
@@ -557,7 +560,7 @@ public class HealMonsterController extends EventController {
 		details.put(gems, detailSb.toString());
 		details.put(cash, detailSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 

@@ -28,16 +28,19 @@ public class SetClanRetaliationsAction implements StartUpAction {
 	private final String userId;
 	private final ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
 	private final ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetClanRetaliationsAction(ClanDataProto.Builder cdpBuilder,
 			User user, String userId,
 			ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
-			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil) {
+			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -121,7 +124,7 @@ public class SetClanRetaliationsAction implements StartUpAction {
 		Map<String, Clan> userIdsToClans = useMe
 				.getUserIdsToClans(userIdsToUsers.keySet());
 
-		List<PvpClanAvengeProto> pcapList = CreateInfoProtoUtils
+		List<PvpClanAvengeProto> pcapList = createInfoProtoUtils
 				.createPvpClanAvengeProto(clanAvenges,
 						clanAvengeIdToClanAvenge, userIdsToUsers,
 						userIdsToClans);

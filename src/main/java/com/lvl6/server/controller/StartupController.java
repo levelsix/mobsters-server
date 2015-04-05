@@ -217,13 +217,13 @@ public class StartupController extends EventController {
 	}
 	
 	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
 
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
@@ -236,6 +236,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected Globals globals;
@@ -406,8 +409,8 @@ public class StartupController extends EventController {
 				: null;
 
 		String playerId = null;
-		MiscMethods.setMDCProperties(udid, null,
-				MiscMethods.getIPOfPlayer(server, null, udid));
+		miscMethods.setMDCProperties(udid, null,
+				miscMethods.getIPOfPlayer(server, null, udid));
 		log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
 
 		VersionNumberProto version = null;
@@ -729,7 +732,8 @@ public class StartupController extends EventController {
 
 			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(
 					resBuilder, user, playerId,
-					getUserFacebookInviteForSlotRetrieveUtils());
+					getUserFacebookInviteForSlotRetrieveUtils(), 
+					getCreateInfoProtoUtils());
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 
@@ -743,24 +747,25 @@ public class StartupController extends EventController {
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-					user, getClanChatPostRetrieveUtils());
+					user, getClanChatPostRetrieveUtils(), 
+					getCreateInfoProtoUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 
 			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
-					playerId, clanHelpRetrieveUtil);
+					playerId, clanHelpRetrieveUtil, getCreateInfoProtoUtils());
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
 			SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
 					cdpb, user, playerId, clanAvengeRetrieveUtil,
-					clanAvengeUserRetrieveUtil);
+					clanAvengeUserRetrieveUtil, getCreateInfoProtoUtils());
 			scra.setUp(fillMe);
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 
 			SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
 					cdpb, user, playerId, clanMemberTeamDonationRetrieveUtil,
-					monsterSnapshotForUserRetrieveUtil);
+					monsterSnapshotForUserRetrieveUtil, getCreateInfoProtoUtils());
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 
@@ -806,7 +811,7 @@ public class StartupController extends EventController {
 			if (user.getClanId() != null) {
 				clan = fillMe.getClanIdsToClans().get(user.getClanId());
 			}
-			FullUserProto fup = CreateInfoProtoUtils
+			FullUserProto fup = createInfoProtoUtils
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
@@ -818,6 +823,14 @@ public class StartupController extends EventController {
 					this.getClass().getSimpleName());
 			log.info("{}ms at unlock", stopWatch.getTime());
 		}
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	private void forceLogOutOthers(StopWatch stopWatch, String udid,
@@ -881,7 +894,7 @@ public class StartupController extends EventController {
 				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
 
 		//generate the user quests
-		List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
+		List<FullUserQuestProto> currentUserQuests = createInfoProtoUtils
 				.createFullUserQuestDataLarges(inProgressQuests,
 						questIdToQuests, questIdToUserQuestJobs);
 		resBuilder.addAllUserQuests(currentUserQuests);
@@ -896,7 +909,7 @@ public class StartupController extends EventController {
 		List<UserClan> userClans = getUserClanRetrieveUtils()
 				.getUserClansRelatedToUser(userId);
 		for (UserClan uc : userClans) {
-			resBuilder.addUserClanInfo(CreateInfoProtoUtils
+			resBuilder.addUserClanInfo(createInfoProtoUtils
 					.createFullUserClanProtoFromUserClan(uc));
 		}
 	}
@@ -934,7 +947,7 @@ public class StartupController extends EventController {
 			Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing
 					.values();
 			for (MonsterHealingForUser mhfu : healingMonsters) {
-				UserMonsterHealingProto umhp = CreateInfoProtoUtils
+				UserMonsterHealingProto umhp = createInfoProtoUtils
 						.createUserMonsterHealingProtoFromObj(mhfu);
 				resBuilder.addMonstersHealing(umhp);
 			}
@@ -953,7 +966,7 @@ public class StartupController extends EventController {
 			List<String> feederUserMonsterIds = new ArrayList<String>();
 			List<UserEnhancementItemProto> feederProtos = new ArrayList<UserEnhancementItemProto>();
 			for (MonsterEnhancingForUser mefu : enhancingMonsters) {
-				UserEnhancementItemProto ueip = CreateInfoProtoUtils
+				UserEnhancementItemProto ueip = createInfoProtoUtils
 						.createUserEnhancementItemProtoFromObj(mefu);
 
 				//TODO: if user has no monsters with null start time
@@ -979,7 +992,7 @@ public class StartupController extends EventController {
 						enhancingMonsters);
 				deleteOrphanedEnhancements(userId, feederUserMonsterIds);
 			} else {
-				UserEnhancementProto uep = CreateInfoProtoUtils
+				UserEnhancementProto uep = createInfoProtoUtils
 						.createUserEnhancementProtoFromObj(userId, baseMonster,
 								feederProtos);
 
@@ -994,7 +1007,7 @@ public class StartupController extends EventController {
 		if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
 
 			for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
-				UserMonsterEvolutionProto uep = CreateInfoProtoUtils
+				UserMonsterEvolutionProto uep = createInfoProtoUtils
 						.createUserEvolutionProtoFromEvolution(mefu);
 
 				//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
@@ -1047,7 +1060,7 @@ public class StartupController extends EventController {
 		/*NOTE: DB CALL*/
 		List<UserTaskCompleted> utcList = taskForUserCompletedRetrieveUtils
 				.getAllCompletedTasksForUser(userId);
-		List<UserTaskCompletedProto> utcpList = CreateInfoProtoUtils
+		List<UserTaskCompletedProto> utcpList = createInfoProtoUtils
 				.createUserTaskCompletedProto(utcList);
 		resBuilder.addAllCompletedTasks(utcpList);
 
@@ -1073,7 +1086,7 @@ public class StartupController extends EventController {
 				.getUserPersistentEventForUserId(userId);
 
 		for (EventPersistentForUser epfu : events) {
-			UserPersistentEventProto upep = CreateInfoProtoUtils
+			UserPersistentEventProto upep = createInfoProtoUtils
 					.createUserPersistentEventProto(epfu);
 			resBuilder.addUserEvents(upep);
 		}
@@ -1084,7 +1097,7 @@ public class StartupController extends EventController {
 		List<PvpBoardObstacleForUser> boList = pvpBoardObstacleForUserRetrieveUtil
 				.getPvpBoardObstacleForUserId(userId);
 		for (PvpBoardObstacleForUser pbofu : boList) {
-			UserPvpBoardObstacleProto upbop = CreateInfoProtoUtils
+			UserPvpBoardObstacleProto upbop = createInfoProtoUtils
 					.createUserPvpBoardObstacleProto(pbofu);
 			resBuilder.addUserPvpBoardObstacles(upbop);
 		}
@@ -1269,7 +1282,7 @@ public class StartupController extends EventController {
 	private void setOngoingTask(Builder resBuilder, String userId,
 			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		try {
-			MinimumUserTaskProto mutp = CreateInfoProtoUtils
+			MinimumUserTaskProto mutp = createInfoProtoUtils
 					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
 			resBuilder.setCurTask(mutp);
 
@@ -1315,7 +1328,7 @@ public class StartupController extends EventController {
 
 	private void setAllStaticData(Builder resBuilder, String userId,
 			boolean userIdSet) {
-		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet,
+		StaticDataProto sdp = miscMethods.getAllStaticData(userId, userIdSet,
 				getQuestForUserRetrieveUtils());
 
 		resBuilder.setStaticDataStuffProto(sdp);
@@ -1361,7 +1374,7 @@ public class StartupController extends EventController {
 			idsToAttackers, attackerIdsToProspectiveCashWinnings,
 			attackerIdsToProspectiveOilWinnings);
 
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
 				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
@@ -1466,7 +1479,7 @@ public class StartupController extends EventController {
 						null);
 
 		for (AchievementForUser afu : achievementIdToUserAchievements.values()) {
-			UserAchievementProto uap = CreateInfoProtoUtils
+			UserAchievementProto uap = createInfoProtoUtils
 					.createUserAchievementProto(afu);
 			resBuilder.addUserAchievements(uap);
 		}
@@ -1495,7 +1508,7 @@ public class StartupController extends EventController {
 				.getSpecificOrAllItemForUserMap(userId, null);
 
 		if (!itemIdToUserItems.isEmpty()) {
-			List<UserItemProto> uipList = CreateInfoProtoUtils
+			List<UserItemProto> uipList = createInfoProtoUtils
 					.createUserItemProtosFromUserItems(new ArrayList<ItemForUser>(
 							itemIdToUserItems.values()));
 
@@ -1507,7 +1520,7 @@ public class StartupController extends EventController {
 				.getItemForUserUsage(userId, null);
 
 		for (ItemForUserUsage ifuu : itemsUsed) {
-			UserItemUsageProto uiup = CreateInfoProtoUtils
+			UserItemUsageProto uiup = createInfoProtoUtils
 					.createUserItemUsageProto(ifuu);
 			resBuilder.addItemsInUse(uiup);
 		}
@@ -1539,7 +1552,7 @@ public class StartupController extends EventController {
 			giveGifts(userId, now, gifts, numGifts);
 		}
 
-		Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+		Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 				.createUserItemSecretGiftProto(gifts);
 		resBuilder.addAllGifts(nuGiftsProtos);
 	}
@@ -1578,7 +1591,7 @@ public class StartupController extends EventController {
 				.getAllResearchForUser(userId);
 
 		if (null != userResearchs && !userResearchs.isEmpty()) {
-			Collection<UserResearchProto> urpList = CreateInfoProtoUtils
+			Collection<UserResearchProto> urpList = createInfoProtoUtils
 					.createUserResearchProto(userResearchs);
 
 			resBuilder.addAllUserResearchs(urpList);
@@ -1589,7 +1602,7 @@ public class StartupController extends EventController {
 		List<BattleItemQueueForUser> biqfuList = battleItemQueueForUserRetrieveUtil
 				.getUserBattleItemQueuesForUser(userId);
 		if (null != biqfuList && !biqfuList.isEmpty()) {
-			Collection<BattleItemQueueForUserProto> biqfupList = CreateInfoProtoUtils
+			Collection<BattleItemQueueForUserProto> biqfupList = createInfoProtoUtils
 					.createBattleItemQueueForUserProtoList(biqfuList);
 
 			resBuilder.addAllBattleItemQueue(biqfupList);
@@ -1600,7 +1613,7 @@ public class StartupController extends EventController {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);
 		if (null != bifuList && !bifuList.isEmpty()) {
-			Collection<UserBattleItemProto> biqfupList = CreateInfoProtoUtils
+			Collection<UserBattleItemProto> biqfupList = createInfoProtoUtils
 					.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
 
 			resBuilder.addAllBattleItem(biqfupList);
@@ -1682,7 +1695,7 @@ public class StartupController extends EventController {
 			return;
 		}
 
-		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+		PersistentClanEventClanInfoProto pcecip = createInfoProtoUtils
 				.createPersistentClanEventClanInfoProto(cepfc);
 		resBuilder.setCurRaidClanInfo(pcecip);
 
@@ -1744,7 +1757,7 @@ public class StartupController extends EventController {
 				rewards = timesToUserRewards.get(aDate);
 			}
 
-			PersistentClanEventRaidStageHistoryProto stageProto = CreateInfoProtoUtils
+			PersistentClanEventRaidStageHistoryProto stageProto = createInfoProtoUtils
 					.createPersistentClanEventRaidStageHistoryProto(cepfursh,
 							rewards);
 
@@ -1758,14 +1771,14 @@ public class StartupController extends EventController {
 	//
 	//    for (Monster b : bossIdsToBosses.values()) {
 	//      FullBossProto fbp =
-	//          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
+	//          createInfoProtoUtils.createFullBossProtoFromBoss(type, b);
 	//      resBuilder.addBosses(fbp);
 	//    }
 	//  }
 
 	// retrieve's the active leaderboard event prizes and rewards for the events
 	//  private void setLeaderboardEventStuff(StartupResponseProto.Builder resBuilder) {
-	//    resBuilder.addAllLeaderboardEvents(MiscMethods.currentTournamentEventProtos());
+	//    resBuilder.addAllLeaderboardEvents(miscMethods.currentTournamentEventProtos());
 	//  }
 
 	private void sendOfferChartInstall(Date installTime, String advertiserId) {
@@ -1933,7 +1946,7 @@ public class StartupController extends EventController {
 	//    long dateLastMillis = dateLastAwarded.getTime();
 	//    boolean awardedInThePast = nowDateMillis > dateLastMillis;
 	//
-	//    int dayDiff = MiscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
+	//    int dayDiff = miscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
 	//    // log.info("dateLastAwarded=" + dateLastAwarded + ", nowDate=" +
 	//    // nowDate + ", day difference=" + dayDiff);
 	//    if (1 < dayDiff && awardedInThePast) {
@@ -2017,9 +2030,9 @@ public class StartupController extends EventController {
 	//    String key = "";
 	//    int value = ControllerConstants.NOT_SET;
 	//
-	//    String silver = MiscMethods.silver;
-	//    String gold = MiscMethods.gold;
-	//    String boosterPackIdString = MiscMethods.boosterPackId;
+	//    String silver = miscMethods.silver;
+	//    String gold = miscMethods.gold;
+	//    String boosterPackIdString = miscMethods.boosterPackId;
 	//
 	//    // mimicking fall through in switch statement, setting reward user just
 	//    // got
@@ -2029,7 +2042,7 @@ public class StartupController extends EventController {
 	//      // need equip id
 	//      key = boosterPackIdString;
 	//      List<Integer> boosterPackIds = reward.getDayFiveBoosterPackIds();
-	//      value = MiscMethods.getRandomIntFromList(boosterPackIds);
+	//      value = miscMethods.getRandomIntFromList(boosterPackIds);
 	//    }
 	//    if (4 == numConsecutiveDaysPlayed) {
 	//      key = silver;
@@ -2071,7 +2084,7 @@ public class StartupController extends EventController {
 		//      List<Long> userEquipIds = new ArrayList<Long>();
 		//
 		//      // actually selecting equips
-		//      boolean resetOccurred = MiscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
+		//      boolean resetOccurred = miscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
 		//          boosterItemIdsToNumCollected, numBoosterItemsUserWants, aUser, aPack, itemsUserReceives,
 		//          collectedBeforeReset);
 		//      newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>(boosterItemIdsToNumCollected);
@@ -2081,7 +2094,7 @@ public class StartupController extends EventController {
 		//      if (successful) {
 		//        //exclude from daily limit check in PurchaseBoosterPackController
 		//        boolean excludeFromLimitCheck = true;
-		//        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
+		//        miscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
 		//            numBoosterItemsUserWants, now, itemsUserReceives, excludeFromLimitCheck,
 		//            userEquipIds);
 		//        equipId = getEquipId(numBoosterItemsUserWants, itemsUserReceives);
@@ -2096,7 +2109,7 @@ public class StartupController extends EventController {
 	//  private int getEquipId(int numBoosterItemsUserWants, List<BoosterItem> itemsUserReceives) {
 	//    if (1 != numBoosterItemsUserWants) {
 	//      log.error("unexpected error: trying to buy more than one equip from booster pack. boosterItems="
-	//          + MiscMethods.shallowListToString(itemsUserReceives));
+	//          + miscMethods.shallowListToString(itemsUserReceives));
 	//      return ControllerConstants.NOT_SET;
 	//    }
 	//    BoosterItem bi = itemsUserReceives.get(0);
@@ -2110,19 +2123,19 @@ public class StartupController extends EventController {
 			List<Boolean> collectedBeforeReset, boolean resetOccurred,
 			Timestamp now, List<Long> userEquipIdsForHistoryTable) {
 		//    int userId = aUser.getId();
-		//    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
+		//    List<Long> userEquipIds = miscMethods.insertNewUserEquips(userId,
 		//        itemsUserReceives, now, ControllerConstants.UER__DAILY_BONUS_REWARD);
 		//    if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
 		//      log.error("unexpected error: failed to insert equip for user. boosteritems="
-		//          + MiscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
+		//          + miscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
 		//      return false;
 		//    }
 		//
-		//    if (!MiscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
+		//    if (!miscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
 		//        boosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, userId, resetOccurred)) {
 		//      // failed to update user_booster_items
 		//      log.error("unexpected error: failed to update user_booster_items for userId: " + userId
-		//          + " attempting to delete equips given: " + MiscMethods.shallowListToString(userEquipIds));
+		//          + " attempting to delete equips given: " + miscMethods.shallowListToString(userEquipIds));
 		//      DeleteUtils.get().deleteUserEquips(userEquipIds);
 		//      return false;
 		//    }
@@ -2154,7 +2167,7 @@ public class StartupController extends EventController {
 
 		int previousSilver = aUser.getCash();
 		int previousGold = aUser.getGems();
-		if (key.equals(MiscMethods.boosterPackId)) {
+		if (key.equals(miscMethods.boosterPackId)) {
 			// since user got a booster pack id as reward, need to "buy it" for
 			// him
 			int numBoosterItemsUserWants = 1;
@@ -2167,7 +2180,7 @@ public class StartupController extends EventController {
 				return false;
 			}
 		}
-		if (key.equals(MiscMethods.cash)) {
+		if (key.equals(miscMethods.cash)) {
 			if (!aUser.updateRelativeCashNaive(value)) {
 				log.error("unexpected error: could not give silver bonus of "
 						+ value + " to user " + aUser);
@@ -2177,7 +2190,7 @@ public class StartupController extends EventController {
 						currentDayReward);
 			}
 		}
-		if (key.equals(MiscMethods.gems)) {
+		if (key.equals(miscMethods.gems)) {
 			if (!aUser.updateRelativeGemsNaive(value, 0)) {
 				log.error("unexpected error: could not give silver bonus of "
 						+ value + " to user " + aUser);
@@ -2199,9 +2212,9 @@ public class StartupController extends EventController {
 		//    boolean isCoins = false;
 		//    int boosterPackIdRewarded = ControllerConstants.NOT_SET;
 		//
-		//    String boosterPackId = MiscMethods.boosterPackId;
-		//    String silver = MiscMethods.silver;
-		//    String gold = MiscMethods.gold;
+		//    String boosterPackId = miscMethods.boosterPackId;
+		//    String silver = miscMethods.silver;
+		//    String gold = miscMethods.gold;
 		//    if (rewardForUser.containsKey(boosterPackId)) {
 		//      boosterPackIdRewarded = rewardForUser.get(boosterPackId);
 		//    }
@@ -2243,7 +2256,7 @@ public class StartupController extends EventController {
 	//      Map<Integer, BoosterItem> biMap = BoosterItemRetrieveUtils
 	//          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 	//      Collection<BoosterItem> biList = biMap.values();
-	//      BoosterPackProto aBoosterPackProto = CreateInfoProtoUtils.createBoosterPackProto(bp, biList);
+	//      BoosterPackProto aBoosterPackProto = createInfoProtoUtils.createBoosterPackProto(bp, biList);
 	//      dbib.setBoosterPack(aBoosterPackProto);
 	//
 	//      // log.info("setting 5th consecutive day reward");
@@ -2316,10 +2329,10 @@ public class StartupController extends EventController {
 
 	private void setConstants(Builder startupBuilder,
 			StartupStatus startupStatus) {
-		startupBuilder.setStartupConstants(MiscMethods
+		startupBuilder.setStartupConstants(miscMethods
 				.createStartupConstantsProto(globals));
 		if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
-			TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+			TutorialConstants tc = miscMethods.createTutorialConstantsProto();
 			startupBuilder.setTutorialConstants(tc);
 		}
 	}
@@ -2327,8 +2340,8 @@ public class StartupController extends EventController {
 	//TODO: FIX THIS
 	public void writeToUserCurrencyHistory(User aUser, String goldSilver,
 			int previousMoney, Map<String, Integer> goldSilverChange) {
-		//String cash = MiscMethods.cash;
-		//String gems = MiscMethods.gems;
+		//String cash = miscMethods.cash;
+		//String gems = miscMethods.gems;
 
 		//    Timestamp date = new Timestamp((new Date()).getTime());
 		//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
@@ -2343,7 +2356,7 @@ public class StartupController extends EventController {
 		//      reasonsForChanges.put(gems, reasonForChange);
 		//    }
 		//
-		//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+		//    miscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 		//        previousGoldSilver, reasonsForChanges);
 	}
 

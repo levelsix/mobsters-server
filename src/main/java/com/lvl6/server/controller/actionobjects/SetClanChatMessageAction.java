@@ -25,12 +25,15 @@ public class SetClanChatMessageAction implements StartUpAction {
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
 	private final ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetClanChatMessageAction(ClanDataProto.Builder cdpBuilder,
-			User user, ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+			User user, ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -89,7 +92,7 @@ public class SetClanChatMessageAction implements StartUpAction {
 				c = clanIdsToClans.get(clanId);
 			}
 
-			GroupChatMessageProto gcmp = CreateInfoProtoUtils
+			GroupChatMessageProto gcmp = createInfoProtoUtils
 					.createGroupChatMessageProtoFromClanChatPost(pwp, u, c);
 
 			cdpBuilder.addClanChats(gcmp);

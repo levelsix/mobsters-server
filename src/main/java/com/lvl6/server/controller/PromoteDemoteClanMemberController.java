@@ -41,9 +41,15 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected ClanStuffUtils clanStuffUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -161,7 +167,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 				resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
 				User victim = users.get(victimId);
 				Clan victimClan = getClanRetrieveUtils().getClanWithId(clanId);
-				MinimumUserProto mup = CreateInfoProtoUtils
+				MinimumUserProto mup = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(victim,
 								victimClan);
 				resBuilder.setVictim(mup);
@@ -239,7 +245,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 				.getStatus());
 		UserClanStatus second = UserClanStatus.valueOf(victim.getStatus());
 		if (UserClanStatus.CAPTAIN.equals(first)
-				|| !ClanStuffUtils
+				|| !clanStuffUtils
 						.firstUserClanStatusAboveSecond(first, second)) {
 			log.error("user not authorized to promote or demote otherUser. clanStatus of user="
 					+ first + "\t clanStatus of other user=" + second);
@@ -247,7 +253,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 					.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
 			return false;
 		}
-		if (!ClanStuffUtils.firstUserClanStatusAboveSecond(first,
+		if (!clanStuffUtils.firstUserClanStatusAboveSecond(first,
 				newUserClanStatus)) {
 			log.error("user not authorized to promote or demote otherUser. clanStatus of user="
 					+ first

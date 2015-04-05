@@ -43,6 +43,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
@@ -140,7 +143,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 			if (successful && gemCost > 0) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -275,7 +278,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 								gemChange, userMonsterIds));
 				return false;
 			} else {
-				money.put(MiscMethods.gems, gemChange);
+				money.put(miscMethods.gems, gemChange);
 			}
 		}
 
@@ -296,7 +299,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			return;
 		}
 		String userId = aUser.getId();
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_COMBINING_MONSTER;
 
 		Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
@@ -308,7 +311,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 		currentCurrencies.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reasonForChange);
 		detailsList.put(gems, "userMonsterIds=" + userMonsterIds);
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				detailsList);
 

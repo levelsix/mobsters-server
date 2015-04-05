@@ -39,6 +39,7 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -54,6 +55,12 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -81,6 +88,7 @@ public class InAppPurchaseController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
 
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
@@ -227,7 +235,7 @@ public class InAppPurchaseController extends EventController {
 			}*/
 
 			//null PvpLeagueFromUser means will pull from hazelcast instead
-			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+			UpdateClientUserResponseEvent resEventUpdate = miscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							user, null, null);
 			resEventUpdate.setTag(event.getTag());
@@ -271,7 +279,9 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
 					receiptFromApple, packageName, now, iapHistoryRetrieveUtil,
 					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
-					boosterItemRetrieveUtils, monsterStuffUtils, insertUtil, updateUtil);
+					boosterItemRetrieveUtils, monsterStuffUtils, 
+					structureMoneyTreeRetrieveUtils, insertUtil, updateUtil, 
+					createInfoProtoUtils, miscMethods);
 
 			iapa.execute(resBuilder);
 
@@ -389,7 +399,7 @@ public class InAppPurchaseController extends EventController {
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			InAppPurchaseAction iapa) {
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
 				iapa.getCurrentCurrencies(), iapa.getReasons(),
 				iapa.getDetails());

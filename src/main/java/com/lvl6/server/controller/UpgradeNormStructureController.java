@@ -48,6 +48,12 @@ public class UpgradeNormStructureController extends EventController {
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
+	
+	@Autowired
+	protected StructureRetrieveUtils structureRetrieveUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	public UpgradeNormStructureController() {
 		numAllocatedThreads = 4;
@@ -115,9 +121,9 @@ public class UpgradeNormStructureController extends EventController {
 					.getSpecificUserStruct(userStructId);
 
 			if (userStruct != null) {
-				currentStruct = StructureRetrieveUtils
+				currentStruct = structureRetrieveUtils
 						.getStructForStructId(userStruct.getStructId());
-				nextLevelStruct = StructureRetrieveUtils
+				nextLevelStruct = structureRetrieveUtils
 						.getUpgradedStructForStructId(userStruct.getStructId());
 			}
 			int previousCash = 0;
@@ -142,7 +148,7 @@ public class UpgradeNormStructureController extends EventController {
 				writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent,
 						resourceChange, rt, timeOfUpgrade, money);
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -295,13 +301,13 @@ public class UpgradeNormStructureController extends EventController {
 							gemChange, cashChange, oilChange, num));
 		} else {//things went ok
 			if (0 != gemChange) {
-				money.put(MiscMethods.gems, gemChange);
+				money.put(miscMethods.gems, gemChange);
 			}
 			if (0 != cashChange) {
-				money.put(MiscMethods.cash, cashChange);
+				money.put(miscMethods.cash, cashChange);
 			}
 			if (0 != oilChange) {
-				money.put(MiscMethods.oil, oilChange);
+				money.put(miscMethods.oil, oilChange);
 			}
 		}
 
@@ -331,9 +337,9 @@ public class UpgradeNormStructureController extends EventController {
 		String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> details = new HashMap<String, String>();
-		String gems = MiscMethods.gems;
-		String oil = MiscMethods.oil;
-		String cash = MiscMethods.cash;
+		String gems = miscMethods.gems;
+		String oil = miscMethods.oil;
+		String cash = miscMethods.cash;
 
 		previousCurrencies.put(cash, previousCash);
 		previousCurrencies.put(oil, previousOil);
@@ -351,7 +357,7 @@ public class UpgradeNormStructureController extends EventController {
 		details.put(oil, structDetails);
 		details.put(gems, structDetails);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
+		miscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 	}

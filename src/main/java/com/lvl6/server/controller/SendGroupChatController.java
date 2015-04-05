@@ -64,6 +64,12 @@ public class SendGroupChatController extends EventController {
 
 	@Resource
 	protected EventWriter eventWriter;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
@@ -154,12 +160,12 @@ public class SendGroupChatController extends EventController {
 
 			if (legitSend) {
 				log.info("Group chat message is legit... sending to group");
-				String censoredChatMessage = MiscMethods
+				String censoredChatMessage = miscMethods
 						.censorUserInput(chatMessage);
 				writeChangesToDB(user, scope, censoredChatMessage, timeOfPost);
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -227,7 +233,7 @@ public class SendGroupChatController extends EventController {
 		} else {
 			log.info("Sending global chat ");
 			//add new message to front of list
-			chatMessages.add(0, CreateInfoProtoUtils
+			chatMessages.add(0, createInfoProtoUtils
 					.createGroupChatMessageProto(time, chatProto.getSender(),
 							censoredChatMessage, isAdmin, null, null, globalLanguage));
 			//remove older messages

@@ -55,12 +55,18 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -142,7 +148,7 @@ public class PurchaseBoosterPackController extends EventController {
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
 					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils, 
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
-					monsterStuffUtils, updateUtil);
+					monsterStuffUtils, updateUtil, miscMethods);
 
 			pbpa.execute(resBuilder);
 
@@ -153,7 +159,7 @@ public class PurchaseBoosterPackController extends EventController {
 						.getItemsUserReceives();
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
-					BoosterItemProto bip = CreateInfoProtoUtils
+					BoosterItemProto bip = createInfoProtoUtils
 							.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
@@ -163,7 +169,7 @@ public class PurchaseBoosterPackController extends EventController {
 				if (null != ifuList && !ifuList.isEmpty()) {
 					int numUpdated = updateUtil.updateItemForUser(ifuList);
 					log.info("items numUpdated={}", numUpdated);
-					List<UserItemProto> uipList = CreateInfoProtoUtils
+					List<UserItemProto> uipList = createInfoProtoUtils
 							.createUserItemProtosFromUserItems(ifuList);
 					resBuilder.addAllUpdatedUserItems(uipList);
 				}
@@ -180,7 +186,7 @@ public class PurchaseBoosterPackController extends EventController {
 			if (PurchaseBoosterPackStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								pbpa.getUser(), null, null);
 
@@ -259,7 +265,7 @@ public class PurchaseBoosterPackController extends EventController {
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			PurchaseBoosterPackAction pbpa) {
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				pbpa.getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
 				pbpa.getCurrentCurrencies(), pbpa.getReasons(),
 				pbpa.getDetails());

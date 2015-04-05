@@ -58,6 +58,12 @@ public class PrivateChatPostController extends EventController {
 	protected AdminChatUtil adminChatUtil;
 	
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
 
 	@Autowired
@@ -146,7 +152,7 @@ public class PrivateChatPostController extends EventController {
 			if (legitPost) {
 				// record in db
 				Timestamp timeOfPost = new Timestamp(new Date().getTime());
-				String censoredContent = MiscMethods.censorUserInput(content);
+				String censoredContent = miscMethods.censorUserInput(content);
 				String privateChatPostId = insertUtils
 						.insertIntoPrivateChatPosts(posterId, recipientId,
 								censoredContent, timeOfPost, contentLanguage.toString());
@@ -231,7 +237,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = MiscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
+						translatedMessage = miscMethods.translate(recipientLanguage, censoredContent);
 						
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
@@ -288,14 +294,14 @@ public class PrivateChatPostController extends EventController {
 					PrivateChatPostProto pcpp;
 					
 					if(translationRequired) {
-						pcpp = CreateInfoProtoUtils
+						pcpp = createInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, translatedMessage, contentLanguage);
 						
 					}
 					else {
-						pcpp = CreateInfoProtoUtils
+						pcpp = createInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, null, contentLanguage);

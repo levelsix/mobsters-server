@@ -137,7 +137,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 					clan = clanIdToClan.get(user.getClanId());
 				}
 
-				resBuilder.addRequestedUsers(CreateInfoProtoUtils
+				resBuilder.addRequestedUsers(createInfoProtoUtils
 						.createFullUserProtoFromUser(user, plfu, clan));
 
 			}

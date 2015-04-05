@@ -53,6 +53,9 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -186,7 +189,7 @@ public class EvolutionFinishedController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -301,10 +304,10 @@ public class EvolutionFinishedController extends EventController {
 			} else {
 				//everything went well
 				if (0 != oilChange) {
-					money.put(MiscMethods.oil, oilChange);
+					money.put(miscMethods.oil, oilChange);
 				}
 				if (0 != gemsSpent) {
-					money.put(MiscMethods.gems, gemChange);
+					money.put(miscMethods.gems, gemChange);
 				}
 			}
 		}
@@ -382,7 +385,7 @@ public class EvolutionFinishedController extends EventController {
 		if (moneyChange.isEmpty()) {
 			return;
 		}
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		Timestamp date = new Timestamp((now.getTime()));
 		String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
@@ -416,7 +419,7 @@ public class EvolutionFinishedController extends EventController {
 		changeReasonsMap.put(gems, reasonForChange);
 		detailsMap.put(gems, detailSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 	}

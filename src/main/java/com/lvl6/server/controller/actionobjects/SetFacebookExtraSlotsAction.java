@@ -27,16 +27,19 @@ public class SetFacebookExtraSlotsAction implements StartUpAction {
 	private final User user;
 	private final String userId;
 	private final UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetFacebookExtraSlotsAction(
 			StartupResponseProto.Builder resBuilder,
 			User user,
 			String userId,
-			UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+			UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -94,7 +97,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction {
 				inviterClan = clanIdsToClans.get(clanId);
 			}
 
-			UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+			UserFacebookInviteForSlotProto inviteProto = createInfoProtoUtils
 					.createUserFacebookInviteForSlotProtoFromInvite(invite,
 							inviter, inviterClan, inviterProto);
 
@@ -108,10 +111,10 @@ public class SetFacebookExtraSlotsAction implements StartUpAction {
 		}
 
 		//send all the invites where this user is the one inviting
-		MinimumUserProtoWithFacebookId thisUserProto = CreateInfoProtoUtils
+		MinimumUserProtoWithFacebookId thisUserProto = createInfoProtoUtils
 				.createMinimumUserProtoWithFacebookId(user, userClan);
 		for (UserFacebookInviteForSlot invite : idsToInvitesFromMe.values()) {
-			UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+			UserFacebookInviteForSlotProto inviteProto = createInfoProtoUtils
 					.createUserFacebookInviteForSlotProtoFromInvite(invite,
 							user, userClan, thisUserProto);
 			resBuilder.addInvitesFromMeForSlots(inviteProto);

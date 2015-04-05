@@ -71,6 +71,9 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
@@ -206,14 +209,14 @@ public class RequestJoinClanController extends EventController {
 				//setting minimum user proto for clans based on clan join type
 				if (requestToJoinRequired) {
 					//clan raid contribution stuff
-					MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+					MinimumUserProtoForClans mupfc = createInfoProtoUtils
 							.createMinimumUserProtoForClans(user, null,
 									UserClanStatus.REQUESTING, 0F, battlesWon,
 									null);
 					resBuilder.setRequester(mupfc);
 				} else {
 					//clan raid contribution stuff
-					MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+					MinimumUserProtoForClans mupfc = createInfoProtoUtils
 							.createMinimumUserProtoForClans(user, clan,
 									UserClanStatus.MEMBER, 0F, battlesWon, null);
 					resBuilder.setRequester(mupfc);
@@ -238,7 +241,7 @@ public class RequestJoinClanController extends EventController {
 						fillMe, clanHelpRetrieveUtil, clanAvengeRetrieveUtil,
 						clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils,
 						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil);
+						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 				cdp = scdpa.execute();
 
 				//update clan cache
@@ -275,7 +278,7 @@ public class RequestJoinClanController extends EventController {
 
 				if (!requestToJoinRequired) {
 					//null PvpLeagueFromUser means will pull from hazelcast instead
-					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+					UpdateClientUserResponseEvent resEventUpdate = miscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									user, null, clan);
 					resEventUpdate.setTag(event.getTag());
@@ -470,7 +473,7 @@ public class RequestJoinClanController extends EventController {
 			//TODO: Maybe exclude the guy who joined from receiving the notification?
 			aNote.setAsUserJoinedClan(level, requester);
 		}
-		MiscMethods.writeNotificationToUser(aNote, server, clanOwnerId);
+		miscMethods.writeNotificationToUser(aNote, server, clanOwnerId);
 
 		//    GeneralNotificationResponseProto.Builder notificationProto =
 		//        aNote.generateNotificationBuilder();
@@ -484,10 +487,10 @@ public class RequestJoinClanController extends EventController {
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 			List<Integer> clanSizeList) {
 
-		resBuilder.setMinClan(CreateInfoProtoUtils
+		resBuilder.setMinClan(createInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 		int size = clanSizeList.get(0);
-		resBuilder.setFullClan(CreateInfoProtoUtils
+		resBuilder.setFullClan(createInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 	}
 
@@ -502,7 +505,7 @@ public class RequestJoinClanController extends EventController {
 
 		//send to the user the current clan raid details for the clan
 		if (null != cepfc) {
-			PersistentClanEventClanInfoProto updatedEventDetails = CreateInfoProtoUtils
+			PersistentClanEventClanInfoProto updatedEventDetails = createInfoProtoUtils
 					.createPersistentClanEventClanInfoProto(cepfc);
 			resBuilder.setEventDetails(updatedEventDetails);
 		}

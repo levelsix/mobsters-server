@@ -42,6 +42,9 @@ public class SolicitClanHelpController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
@@ -150,7 +153,7 @@ public class SolicitClanHelpController extends EventController {
 			} else {
 				//only write to clan if success
 				for (ClanHelp ch : clanHelpContainer) {
-					ClanHelpProto chp = CreateInfoProtoUtils
+					ClanHelpProto chp = createInfoProtoUtils
 							.createClanHelpProtoFromClanHelp(ch, user, null,
 									senderProto);
 					resBuilder.addHelpProto(chp);

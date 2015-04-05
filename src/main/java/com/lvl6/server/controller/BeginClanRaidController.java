@@ -195,7 +195,7 @@ public class BeginClanRaidController extends EventController {
 			if (success) {
 				if (!setMonsterTeamForRaid) {
 					ClanEventPersistentForClan cepfc = clanInfoList.get(0);
-					PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
+					PersistentClanEventClanInfoProto eventDetails = createInfoProtoUtils
 							.createPersistentClanEventClanInfoProto(cepfc);
 					resBuilder.setEventDetails(eventDetails);
 				}
