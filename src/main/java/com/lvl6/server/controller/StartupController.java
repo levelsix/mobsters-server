@@ -694,7 +694,7 @@ public class StartupController extends EventController {
 					getUserTranslationSettingsForUser(playerId);
 			boolean tsfuListIsNull = false;
 			
-			if(tsfuList == null) {
+			if(tsfuList == null || tsfuList.isEmpty()) {
 				insertUtil.insertTranslateSettings(playerId, null, 
 						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
 						ChatType.GLOBAL_CHAT.toString(), 
