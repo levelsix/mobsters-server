@@ -140,17 +140,17 @@ public class MiscMethods {
 
 	private final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
-	public final String cash = "cash";
-	public final String gems = "gems";
-	public final String oil = "oil";
-	public final String boosterPackId = "boosterPackId";
+	public static final String cash = "cash";
+	public static final String gems = "gems";
+	public static final String oil = "oil";
+	public static final String boosterPackId = "boosterPackId";
 	
-	private String pClientId = "ToonSquad";
-	private String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+	private static String pClientId = "ToonSquad";
+	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
-	public final String CASH = "CASH";
-	public final String OIL = "OIL";
-	public final String MONSTER = "MONSTER";
+	public static final String CASH = "CASH";
+	public static final String OIL = "OIL";
+	public static final String MONSTER = "MONSTER";
 
 	//METHODS FOR CAPPING USER RESOURCE
 	public int capResourceGain(int currentAmt, int delta, int maxAmt) {
@@ -1849,7 +1849,7 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 	
-	public static Map<TranslateLanguages, String> translate(Language sourceLanguage, 
+	public Map<TranslateLanguages, String> translate(Language sourceLanguage, 
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
@@ -1892,6 +1892,7 @@ public class MiscMethods {
 	} 
 
 	private TranslateLanguages convertFromLanguageToEnum(Language language) {
+		TranslateLanguages tl = null;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
 				tl = TranslateLanguages.ARABIC;

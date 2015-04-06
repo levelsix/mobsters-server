@@ -237,7 +237,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = miscMethods.translate(recipientLanguage, censoredContent);
+						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
 						
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;

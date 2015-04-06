@@ -195,16 +195,16 @@ public class RetrievePrivateChatPostsController extends EventController {
 								}
 								else {
 									Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
-									translateMap = MiscMethods.translate(null, language, pwp.getContent());
+									translateMap = miscMethods.translate(null, language, pwp.getContent());
 								}
 
-								GroupChatMessageProto gcmp = CreateInfoProtoUtils
+								GroupChatMessageProto gcmp = createInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
 												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);
 							}
 							else {
-								GroupChatMessageProto gcmp = CreateInfoProtoUtils
+								GroupChatMessageProto gcmp = createInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
 												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);

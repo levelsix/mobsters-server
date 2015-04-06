@@ -1051,7 +1051,7 @@ public class StaticDataContainer {
 		}
 	}
 
-	private static void setRewards(Builder sdpb) {
+	private void setRewards(Builder sdpb) {
 		Map<Integer, Reward> idsToReward = RewardRetrieveUtils
 				.getRewardIdsToRewards();
 
@@ -1063,7 +1063,7 @@ public class StaticDataContainer {
 		for (Integer battleItemId : idsToReward.keySet()) {
 			Reward r = idsToReward.get(battleItemId);
 
-			RewardProto rp = CreateInfoProtoUtils
+			RewardProto rp = createInfoProtoUtils
 					.createRewardProto(r);
 
 			sdpb.addReward(rp);

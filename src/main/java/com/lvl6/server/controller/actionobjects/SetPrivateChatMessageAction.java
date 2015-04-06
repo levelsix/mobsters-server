@@ -33,12 +33,14 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final boolean tsfuListIsNull;
 	protected final InsertUtil insertUtil;
 	
+	
 	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
 			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
-			boolean tsfuListIsNull, InsertUtil insertUtil) {
+			boolean tsfuListIsNull, InsertUtil insertUtil,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;

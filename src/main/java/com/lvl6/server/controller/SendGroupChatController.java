@@ -173,15 +173,15 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 				
-				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, null, censoredChatMessage);				
+				Map<TranslateLanguages, String> translateMap = miscMethods.translate(null, null, censoredChatMessage);				
 					
-				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
+				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
 				
-				GroupChatMessageProto gcmp = CreateInfoProtoUtils
+				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
 				

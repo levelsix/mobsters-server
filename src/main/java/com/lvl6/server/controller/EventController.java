@@ -20,6 +20,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.GameServer;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.Wrap;
 
@@ -56,6 +57,9 @@ public abstract class EventController extends Wrap {
 	
 	@Autowired
 	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	//SHOULD REALLY PHASE THIS OUT---------------------------------------------------------
 	@Autowired

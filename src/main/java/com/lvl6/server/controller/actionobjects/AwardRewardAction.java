@@ -37,6 +37,7 @@ public class AwardRewardAction {
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private MonsterStuffUtils monsterStuffUtils;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
 	public AwardRewardAction(String userId, User u, int maxCash,
@@ -44,7 +45,8 @@ public class AwardRewardAction {
 			Collection<Reward> rewards,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			MonsterStuffUtils monsterStuffUtils) {
 		super();
 		this.userId = userId;
 		this.u = u;
@@ -57,6 +59,7 @@ public class AwardRewardAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -419,7 +422,7 @@ public class AwardRewardAction {
 		boolean success = false;
 		try {
 			//TODO: DON'T PROTO THE MONSTERS, leave it to the caller of this class
-			nuOrUpdatedMonsters = MonsterStuffUtils.updateUserMonsters(
+			nuOrUpdatedMonsters = monsterStuffUtils.updateUserMonsters(
 					userId, monsterIdToQuantity, monsterIdToLvlToQuantity,
 					awardReason, now);
 			success = true;

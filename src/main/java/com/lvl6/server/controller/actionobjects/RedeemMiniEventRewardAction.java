@@ -26,6 +26,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -45,13 +46,15 @@ public class RedeemMiniEventRewardAction {
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private MonsterStuffUtils monsterStuffUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
 			Date clientTime, UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			MonsterStuffUtils monsterStuffUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -65,6 +68,7 @@ public class RedeemMiniEventRewardAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -206,7 +210,7 @@ public class RedeemMiniEventRewardAction {
 		ara = new AwardRewardAction(userId, user, maxCash, maxOil,
 				clientTime, sb.toString(), rewards,
 				userRetrieveUtil, itemForUserRetrieveUtil,
-				insertUtil, updateUtil);
+				insertUtil, updateUtil, monsterStuffUtils);
 
 		boolean awardedRewards = ara.execute();
 

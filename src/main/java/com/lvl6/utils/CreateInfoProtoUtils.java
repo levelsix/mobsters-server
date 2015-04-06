@@ -1382,7 +1382,7 @@ public class CreateInfoProtoUtils {
 
 		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
 			if(translatedMap == null) {
-				translatedMap = MiscMethods.translate(null, null, content);
+				translatedMap = miscMethods.translate(null, null, content);
 			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
@@ -3452,7 +3452,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Reward.proto ***************************************************/
-	public static RewardProto createRewardProto(Reward r)
+	public RewardProto createRewardProto(Reward r)
 	{
 		RewardProto.Builder rpb = RewardProto.newBuilder();
 
@@ -3474,7 +3474,7 @@ public class CreateInfoProtoUtils {
 		return rpb.build();
 	}
 
-	public static UserRewardProto createUserRewardProto(
+	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
 			int gems, int cash, int oil)
@@ -3486,7 +3486,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		if (null != newOrUpdatedIfu && !newOrUpdatedIfu.isEmpty()) {
-			Collection<UserItemProto> userItems = createUserItemProtosFromUserItems(newOrUpdatedIfu);
+			Collection<UserItemProto> userItems = createUserItemProtosFromUserItems((List)newOrUpdatedIfu);
 			urp.addAllUpdatedUserItems(userItems);
 		}
 
