@@ -753,7 +753,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			
 			//set this proto after executing privatechatprotos
-			setDefaultLanguagesForUser(resBuilder, playerId, tsfuList);
+			setDefaultLanguagesForUser(resBuilder, playerId);
 			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 
 			
@@ -1592,19 +1592,15 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void checkIfGlobalLanguageDefaultsSet(String userId) {
-		
-		
-		
-		
-	}
 	
-	private void setDefaultLanguagesForUser(Builder resBuilder, String userId, 
-			List<TranslationSettingsForUser> tsfuList) {
+	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
 
 		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
 		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
 
+		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+				getUserTranslationSettingsForUser(userId);
+		
 		log.info("tsfuList: " + tsfuList);
 		
 		DefaultLanguagesProto dlp = null;
