@@ -134,10 +134,11 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 
 	private void processPostsSent() {
 		//go through the posts user sent
+
 		for (String pcpId : postsUserSent.keySet()) {
 			PrivateChatPost postUserSent = postsUserSent.get(pcpId);
 			String recipientId = postUserSent.getRecipientId();
-
+			
 			//determine the latest post between other recipientId and specific user
 			if (!userIdsToPrivateChatPostIds.containsKey(recipientId)) {
 				//didn't see this user id yet, record it
@@ -145,17 +146,24 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 
 			} else {
 				//recipientId sent something to specific user, choose the latest one
-				String postIdUserReceived = userIdsToPrivateChatPostIds
-						.get(recipientId);
-				//postsUserReceived can't be null here
-				PrivateChatPost postUserReceived = postsUserReceived
-						.get(postIdUserReceived);
+				if(userIdsToPrivateChatPostIds.containsKey(recipientId)) {
+					String postIdUserReceived = userIdsToPrivateChatPostIds
+							.get(recipientId);
+					//postsUserReceived can't be null here
+					if(postsUserReceived.containsKey(postIdUserReceived)) {
+						PrivateChatPost postUserReceived = postsUserReceived
+								.get(postIdUserReceived);
 
-				Date newDate = postUserSent.getTimeOfPost();
-				Date existingDate = postUserReceived.getTimeOfPost();
-				if (newDate.getTime() > existingDate.getTime()) {
-					//since postUserSent's time is later, choose this post for recipientId
-					userIdsToPrivateChatPostIds.put(recipientId, pcpId);
+						Date newDate = postUserSent.getTimeOfPost();
+
+						Date existingDate = postUserReceived.getTimeOfPost();
+						if (newDate.getTime() > existingDate.getTime()) {
+							//since postUserSent's time is later, choose this post for recipientId
+							userIdsToPrivateChatPostIds.put(recipientId, pcpId);
+						}
+					}
+					//do nothing, this is related to the issue andrew had, where a
+					//msg came in at the exact same time
 				}
 			}
 		}
