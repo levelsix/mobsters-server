@@ -5062,6 +5062,19 @@ public final class EventChatProto {
      * <code>optional .com.lvl6.proto.PrivateChatDefaultLanguageProto translationSetting = 4;</code>
      */
     com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProtoOrBuilder getTranslationSettingOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    boolean hasAdminMessage();
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    com.lvl6.proto.ChatProto.GroupChatMessageProto getAdminMessage();
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getAdminMessageOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PrivateChatPostResponseProto}
@@ -5167,6 +5180,19 @@ public final class EventChatProto {
                 translationSetting_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = adminMessage_.toBuilder();
+              }
+              adminMessage_ = input.readMessage(com.lvl6.proto.ChatProto.GroupChatMessageProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(adminMessage_);
+                adminMessage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -5396,11 +5422,33 @@ public final class EventChatProto {
       return translationSetting_;
     }
 
+    public static final int ADMINMESSAGE_FIELD_NUMBER = 5;
+    private com.lvl6.proto.ChatProto.GroupChatMessageProto adminMessage_;
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    public boolean hasAdminMessage() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    public com.lvl6.proto.ChatProto.GroupChatMessageProto getAdminMessage() {
+      return adminMessage_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+     */
+    public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getAdminMessageOrBuilder() {
+      return adminMessage_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
       post_ = com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance();
       translationSetting_ = com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto.getDefaultInstance();
+      adminMessage_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5427,6 +5475,9 @@ public final class EventChatProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, translationSetting_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, adminMessage_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5451,6 +5502,10 @@ public final class EventChatProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, translationSetting_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, adminMessage_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5568,6 +5623,7 @@ public final class EventChatProto {
           getSenderFieldBuilder();
           getPostFieldBuilder();
           getTranslationSettingFieldBuilder();
+          getAdminMessageFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5596,6 +5652,12 @@ public final class EventChatProto {
           translationSettingBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (adminMessageBuilder_ == null) {
+          adminMessage_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
+        } else {
+          adminMessageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -5652,6 +5714,14 @@ public final class EventChatProto {
         } else {
           result.translationSetting_ = translationSettingBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (adminMessageBuilder_ == null) {
+          result.adminMessage_ = adminMessage_;
+        } else {
+          result.adminMessage_ = adminMessageBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5679,6 +5749,9 @@ public final class EventChatProto {
         }
         if (other.hasTranslationSetting()) {
           mergeTranslationSetting(other.getTranslationSetting());
+        }
+        if (other.hasAdminMessage()) {
+          mergeAdminMessage(other.getAdminMessage());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6088,6 +6161,122 @@ public final class EventChatProto {
           translationSetting_ = null;
         }
         return translationSettingBuilder_;
+      }
+
+      private com.lvl6.proto.ChatProto.GroupChatMessageProto adminMessage_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> adminMessageBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public boolean hasAdminMessage() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public com.lvl6.proto.ChatProto.GroupChatMessageProto getAdminMessage() {
+        if (adminMessageBuilder_ == null) {
+          return adminMessage_;
+        } else {
+          return adminMessageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public Builder setAdminMessage(com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
+        if (adminMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          adminMessage_ = value;
+          onChanged();
+        } else {
+          adminMessageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public Builder setAdminMessage(
+          com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder builderForValue) {
+        if (adminMessageBuilder_ == null) {
+          adminMessage_ = builderForValue.build();
+          onChanged();
+        } else {
+          adminMessageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public Builder mergeAdminMessage(com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
+        if (adminMessageBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              adminMessage_ != com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance()) {
+            adminMessage_ =
+              com.lvl6.proto.ChatProto.GroupChatMessageProto.newBuilder(adminMessage_).mergeFrom(value).buildPartial();
+          } else {
+            adminMessage_ = value;
+          }
+          onChanged();
+        } else {
+          adminMessageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public Builder clearAdminMessage() {
+        if (adminMessageBuilder_ == null) {
+          adminMessage_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
+          onChanged();
+        } else {
+          adminMessageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder getAdminMessageBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getAdminMessageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getAdminMessageOrBuilder() {
+        if (adminMessageBuilder_ != null) {
+          return adminMessageBuilder_.getMessageOrBuilder();
+        } else {
+          return adminMessage_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GroupChatMessageProto adminMessage = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
+          getAdminMessageFieldBuilder() {
+        if (adminMessageBuilder_ == null) {
+          adminMessageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder>(
+                  getAdminMessage(),
+                  getParentForChildren(),
+                  isClean());
+          adminMessage_ = null;
+        }
+        return adminMessageBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PrivateChatPostResponseProto)
@@ -10758,48 +10947,49 @@ public final class EventChatProto {
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
       "o\022\025\n\rrecipientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(" +
       "\t\022;\n\017contentLanguage\030\004 \001(\0162\".com.lvl6.pr" +
-      "oto.TranslateLanguages\"\220\003\n\034PrivateChatPo" +
+      "oto.TranslateLanguages\"\315\003\n\034PrivateChatPo" +
       "stResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv",
       "l6.proto.MinimumUserProto\022R\n\006status\030\002 \001(" +
       "\0162B.com.lvl6.proto.PrivateChatPostRespon" +
       "seProto.PrivateChatPostStatus\0222\n\004post\030\003 " +
       "\001(\0132$.com.lvl6.proto.PrivateChatPostProt" +
       "o\022K\n\022translationSetting\030\004 \001(\0132/.com.lvl6" +
-      ".proto.PrivateChatDefaultLanguageProto\"i" +
-      "\n\025PrivateChatPostStatus\022\013\n\007SUCCESS\020\001\022\023\n\017" +
-      "NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003\022\016\n" +
-      "\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\306\001\n$RetrievePr" +
-      "ivateChatPostsRequestProto\0220\n\006sender\030\001 \001",
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\r" +
-      "otherUserUuid\030\002 \001(\t\022\037\n\023beforePrivateChat" +
-      "Id\030\003 \001(\005B\002\030\001\0224\n\010language\030\004 \001(\0162\".com.lvl" +
-      "6.proto.TranslateLanguages\"\346\002\n%RetrieveP" +
-      "rivateChatPostsResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0224" +
-      "\n\005posts\030\002 \003(\0132%.com.lvl6.proto.GroupChat" +
-      "MessageProto\022\037\n\023beforePrivateChatId\030\003 \001(" +
-      "\005B\002\030\001\022d\n\006status\030\004 \001(\0162T.com.lvl6.proto.R" +
-      "etrievePrivateChatPostsResponseProto.Ret",
-      "rievePrivateChatPostsStatus\022\025\n\rotherUser" +
-      "Uuid\030\005 \001(\t\"7\n\036RetrievePrivateChatPostsSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\253\002\n#Translat" +
-      "eSelectMessagesRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022*\n" +
-      "\010chatType\030\002 \001(\0162\030.com.lvl6.proto.ChatTyp" +
-      "e\022\025\n\rotherUserUuid\030\003 \001(\t\0224\n\010language\030\004 \001" +
-      "(\0162\".com.lvl6.proto.TranslateLanguages\022D" +
-      "\n\026messagesToBeTranslated\030\005 \003(\0132$.com.lvl" +
-      "6.proto.PrivateChatPostProto\022\023\n\013translat",
-      "eOn\030\006 \001(\010\"\331\002\n$TranslateSelectMessagesRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022@\n\022messagesTranslat" +
-      "ed\030\002 \003(\0132$.com.lvl6.proto.PrivateChatPos" +
-      "tProto\022b\n\006status\030\003 \001(\0162R.com.lvl6.proto." +
-      "TranslateSelectMessagesResponseProto.Tra" +
-      "nslateSelectMessagesStatus\"Y\n\035TranslateS" +
-      "electMessagesStatus\022\016\n\nFAIL_OTHER\020\001\022\033\n\027F" +
-      "AIL_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020B" +
-      "\016EventChatProto"
+      ".proto.PrivateChatDefaultLanguageProto\022;" +
+      "\n\014adminMessage\030\005 \001(\0132%.com.lvl6.proto.Gr" +
+      "oupChatMessageProto\"i\n\025PrivateChatPostSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022" +
+      "\n\016POST_TOO_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BA",
+      "NNED\020\005\"\306\001\n$RetrievePrivateChatPostsReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\025\n\rotherUserUuid\030\002 \001(\t" +
+      "\022\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010lan" +
+      "guage\030\004 \001(\0162\".com.lvl6.proto.TranslateLa" +
+      "nguages\"\346\002\n%RetrievePrivateChatPostsResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\0224\n\005posts\030\002 \003(\0132%.com" +
+      ".lvl6.proto.GroupChatMessageProto\022\037\n\023bef" +
+      "orePrivateChatId\030\003 \001(\005B\002\030\001\022d\n\006status\030\004 \001",
+      "(\0162T.com.lvl6.proto.RetrievePrivateChatP" +
+      "ostsResponseProto.RetrievePrivateChatPos" +
+      "tsStatus\022\025\n\rotherUserUuid\030\005 \001(\t\"7\n\036Retri" +
+      "evePrivateChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010" +
+      "\n\004FAIL\020\002\"\253\002\n#TranslateSelectMessagesRequ" +
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022*\n\010chatType\030\002 \001(\0162\030.c" +
+      "om.lvl6.proto.ChatType\022\025\n\rotherUserUuid\030" +
+      "\003 \001(\t\0224\n\010language\030\004 \001(\0162\".com.lvl6.proto" +
+      ".TranslateLanguages\022D\n\026messagesToBeTrans",
+      "lated\030\005 \003(\0132$.com.lvl6.proto.PrivateChat" +
+      "PostProto\022\023\n\013translateOn\030\006 \001(\010\"\331\002\n$Trans" +
+      "lateSelectMessagesResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022@\n\022messagesTranslated\030\002 \003(\0132$.com.lvl6" +
+      ".proto.PrivateChatPostProto\022b\n\006status\030\003 " +
+      "\001(\0162R.com.lvl6.proto.TranslateSelectMess" +
+      "agesResponseProto.TranslateSelectMessage" +
+      "sStatus\"Y\n\035TranslateSelectMessagesStatus" +
+      "\022\016\n\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID_LANGU",
+      "AGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10856,7 +11046,7 @@ public final class EventChatProto {
     internal_static_com_lvl6_proto_PrivateChatPostResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PrivateChatPostResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "Post", "TranslationSetting", });
+        new java.lang.String[] { "Sender", "Status", "Post", "TranslationSetting", "AdminMessage", });
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_RetrievePrivateChatPostsRequestProto_fieldAccessorTable = new

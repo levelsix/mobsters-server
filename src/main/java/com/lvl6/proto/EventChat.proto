@@ -68,6 +68,7 @@ message PrivateChatPostResponseProto {
      optional PrivateChatPostStatus status = 2;
 	 optional PrivateChatPostProto post = 3;
 	 optional PrivateChatDefaultLanguageProto translationSetting = 4;
+	 optional GroupChatMessageProto adminMessage = 5;
 	
      enum PrivateChatPostStatus {
      	SUCCESS = 1;

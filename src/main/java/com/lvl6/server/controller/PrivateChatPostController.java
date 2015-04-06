@@ -243,6 +243,10 @@ public class PrivateChatPostController extends EventController {
 								new Date(), censoredContent);
 						acp.setUsername(users.get(posterId).getName());
 						adminChatUtil.sendAdminChatEmail(acp);
+						
+						
+						
+						
 					}
 					PrivateChatPost pwp = new PrivateChatPost(
 							privateChatPostId, posterId, recipientId,
