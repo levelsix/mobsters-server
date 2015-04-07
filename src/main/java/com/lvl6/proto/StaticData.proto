@@ -94,9 +94,8 @@ message StaticDataProto {
 	
 	//repeated ResearchHouseProto allResearchHouses = 41; defined above
 	//repeated BattleItemFactoryProto allBattleItemFactorys = 42; defined above
-	repeated BattleItemProto battleItem = 43;
 	
-	repeated RewardProto reward = 44;
+	repeated RewardProto reward = 45;
 	
 	
 }

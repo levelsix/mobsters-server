@@ -145,6 +145,9 @@ message StartupResponseProto {
 
 	optional UserMiniEventProto userMiniEvent = 52;
 
+	optional DefaultLanguagesProto userDefaultLanguages = 53;
+	
+
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 

@@ -15,10 +15,7 @@ public class SalesPackage {
 		this.timeEnd = timeEnd;
 		this.predId = predId;
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> created protos and stuff for sales
 	private static final long serialVersionUID = 1549953377153488834L;
 
 	private int id;

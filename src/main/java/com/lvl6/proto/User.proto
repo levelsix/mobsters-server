@@ -127,7 +127,7 @@ message FullUserProto {
 	optional float salesValue = 58;
 	optional int64 salesLastPurchaseTime = 59;
 
-	optional int64 totalStrength = 58;
+	optional int64 totalStrength = 60;
 	
 	
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this

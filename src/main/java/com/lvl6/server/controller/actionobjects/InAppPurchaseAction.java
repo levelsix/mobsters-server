@@ -583,7 +583,7 @@ public class InAppPurchaseAction {
 				//TODO: clean up this copy paste of PurchaseBoosterPackController logic
 				List<SalesItem> itemsUserReceives = new ArrayList<SalesItem>();
 				itemsUserReceives.addAll(idToSalesItem.values());
-				boolean legit = MiscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+				boolean legit = miscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
 				if (!legit) {
 					throw new RuntimeException(String.format(
 							"illegal monster in sales item for salespackageId=%s",
@@ -599,7 +599,7 @@ public class InAppPurchaseAction {
 				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 				//sop = source of pieces
 				
-				String mfusop = MiscMethods.createUpdateUserMonsterArgumentsForSales(userId,
+				String mfusop = miscMethods.createUpdateUserMonsterArgumentsForSales(userId,
 						sp.getId(), itemsUserReceives, monsterIdToNumPieces,
 						completeUserMonsters, now);
 

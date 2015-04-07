@@ -145,7 +145,7 @@ public class MiscMethods {
 	@Autowired
 	protected StaticDataContainer staticDataContainer;
 
-	private final Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
 	public static final String cash = "cash";
 	public static final String gems = "gems";
@@ -263,11 +263,11 @@ public class MiscMethods {
 		return monstersExist;
 	}
 	
-	public static boolean checkIfMonstersExistInSalesItem(
+	public boolean checkIfMonstersExistInSalesItem(
 			List<SalesItem> itemsUserReceives) {
 		boolean monstersExist = true;
 
-		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
 				.getMonsterIdsToMonsters();
 		for (SalesItem si : itemsUserReceives) {
 			int monsterId = si.getMonsterId();
@@ -351,7 +351,7 @@ public class MiscMethods {
 		return sb.toString();
 	}
 	
-	public static String createUpdateUserMonsterArgumentsForSales(String userId,
+	public String createUpdateUserMonsterArgumentsForSales(String userId,
 			int salesPackageId, List<SalesItem> salesItems,
 			Map<Integer, Integer> monsterIdsToNumPieces,
 			List<MonsterForUser> completeUserMonsters, Date now) {
@@ -373,9 +373,9 @@ public class MiscMethods {
 			if (item.getMonsterLevel() > 0) {
 				//create a "complete" user monster
 				int monsterQuantity = item.getMonsterQuantity();
-				Monster monzter = MonsterRetrieveUtils
+				Monster monzter = monsterRetrieveUtils
 						.getMonsterForMonsterId(monsterId);
-				List<MonsterForUser> monstersCreated = MonsterStuffUtils
+				List<MonsterForUser> monstersCreated = monsterStuffUtils
 						.createLeveledMonsterForUserFromQuantity(userId, monzter, 
 								monsterQuantity, now, item.getMonsterLevel());
 				log.info("monster for users just created" + monstersCreated);

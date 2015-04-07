@@ -5809,15 +5809,6 @@ public final class UserProto {
     long getLastTeamDonationSolicitation();
 
     /**
-<<<<<<< HEAD
-     * <code>optional int64 totalStrength = 58;</code>
-     */
-    boolean hasTotalStrength();
-    /**
-     * <code>optional int64 totalStrength = 58;</code>
-     */
-    long getTotalStrength();
-=======
      * <code>optional float salesValue = 58;</code>
      */
     boolean hasSalesValue();
@@ -5834,7 +5825,15 @@ public final class UserProto {
      * <code>optional int64 salesLastPurchaseTime = 59;</code>
      */
     long getSalesLastPurchaseTime();
->>>>>>> added columns to full user proto
+
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    boolean hasTotalStrength();
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    long getTotalStrength();
 
     /**
      * <code>optional string udidForHistory = 46;</code>
@@ -6064,11 +6063,7 @@ public final class UserProto {
             }
             case 106: {
               com.google.protobuf.ByteString bs = input.readBytes();
-<<<<<<< HEAD
-              bitField1_ |= 0x00000200;
-=======
-              bitField1_ |= 0x00000400;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000800;
               udid_ = bs;
               break;
             }
@@ -6084,20 +6079,12 @@ public final class UserProto {
             }
             case 130: {
               com.google.protobuf.ByteString bs = input.readBytes();
-<<<<<<< HEAD
-              bitField1_ |= 0x00000002;
-=======
-              bitField1_ |= 0x00000004;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000008;
               deviceToken_ = bs;
               break;
             }
             case 144: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000004;
-=======
-              bitField1_ |= 0x00000008;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000010;
               numBadges_ = input.readInt32();
               break;
             }
@@ -6107,11 +6094,7 @@ public final class UserProto {
               break;
             }
             case 160: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000008;
-=======
-              bitField1_ |= 0x00000010;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000020;
               createTime_ = input.readInt64();
               break;
             }
@@ -6121,11 +6104,7 @@ public final class UserProto {
               break;
             }
             case 176: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000010;
-=======
-              bitField1_ |= 0x00000020;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000040;
               apsalarId_ = input.readInt32();
               break;
             }
@@ -6135,11 +6114,7 @@ public final class UserProto {
               break;
             }
             case 192: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000020;
-=======
-              bitField1_ |= 0x00000040;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000080;
               numConsecutiveDaysPlayed_ = input.readInt32();
               break;
             }
@@ -6157,21 +6132,13 @@ public final class UserProto {
               break;
             }
             case 208: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000040;
-=======
-              bitField1_ |= 0x00000080;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000100;
               lastWallPostNotificationTime_ = input.readInt64();
               break;
             }
             case 218: {
               com.google.protobuf.ByteString bs = input.readBytes();
-<<<<<<< HEAD
-              bitField1_ |= 0x00000080;
-=======
-              bitField1_ |= 0x00000100;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000200;
               kabamNaid_ = bs;
               break;
             }
@@ -6202,11 +6169,7 @@ public final class UserProto {
               break;
             }
             case 352: {
-<<<<<<< HEAD
-              bitField1_ |= 0x00000100;
-=======
-              bitField1_ |= 0x00000200;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000400;
               fbIdSetOnUserCreate_ = input.readBool();
               break;
             }
@@ -6218,11 +6181,7 @@ public final class UserProto {
             }
             case 370: {
               com.google.protobuf.ByteString bs = input.readBytes();
-<<<<<<< HEAD
-              bitField1_ |= 0x00000001;
-=======
-              bitField1_ |= 0x00000002;
->>>>>>> added columns to full user proto
+              bitField1_ |= 0x00000004;
               udidForHistory_ = bs;
               break;
             }
@@ -6285,11 +6244,6 @@ public final class UserProto {
               lastTeamDonationSolicitation_ = input.readInt64();
               break;
             }
-<<<<<<< HEAD
-            case 464: {
-              bitField0_ |= 0x80000000;
-              totalStrength_ = input.readInt64();
-=======
             case 469: {
               bitField0_ |= 0x80000000;
               salesValue_ = input.readFloat();
@@ -6298,7 +6252,11 @@ public final class UserProto {
             case 472: {
               bitField1_ |= 0x00000001;
               salesLastPurchaseTime_ = input.readInt64();
->>>>>>> added columns to full user proto
+              break;
+            }
+            case 480: {
+              bitField1_ |= 0x00000002;
+              totalStrength_ = input.readInt64();
               break;
             }
           }
@@ -7079,21 +7037,6 @@ public final class UserProto {
       return lastTeamDonationSolicitation_;
     }
 
-<<<<<<< HEAD
-    public static final int TOTALSTRENGTH_FIELD_NUMBER = 58;
-    private long totalStrength_;
-    /**
-     * <code>optional int64 totalStrength = 58;</code>
-     */
-    public boolean hasTotalStrength() {
-      return ((bitField0_ & 0x80000000) == 0x80000000);
-    }
-    /**
-     * <code>optional int64 totalStrength = 58;</code>
-     */
-    public long getTotalStrength() {
-      return totalStrength_;
-=======
     public static final int SALESVALUE_FIELD_NUMBER = 58;
     private float salesValue_;
     /**
@@ -7122,7 +7065,21 @@ public final class UserProto {
      */
     public long getSalesLastPurchaseTime() {
       return salesLastPurchaseTime_;
->>>>>>> added columns to full user proto
+    }
+
+    public static final int TOTALSTRENGTH_FIELD_NUMBER = 60;
+    private long totalStrength_;
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    public boolean hasTotalStrength() {
+      return ((bitField1_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    public long getTotalStrength() {
+      return totalStrength_;
     }
 
     public static final int UDIDFORHISTORY_FIELD_NUMBER = 46;
@@ -7136,11 +7093,7 @@ public final class UserProto {
      * </pre>
      */
     public boolean hasUdidForHistory() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000001) == 0x00000001);
-=======
-      return ((bitField1_ & 0x00000002) == 0x00000002);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string udidForHistory = 46;</code>
@@ -7192,11 +7145,7 @@ public final class UserProto {
      * <code>optional string deviceToken = 16;</code>
      */
     public boolean hasDeviceToken() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000002) == 0x00000002);
-=======
-      return ((bitField1_ & 0x00000004) == 0x00000004);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string deviceToken = 16;</code>
@@ -7238,11 +7187,7 @@ public final class UserProto {
      * <code>optional int32 numBadges = 18;</code>
      */
     public boolean hasNumBadges() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000004) == 0x00000004);
-=======
-      return ((bitField1_ & 0x00000008) == 0x00000008);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int32 numBadges = 18;</code>
@@ -7257,11 +7202,7 @@ public final class UserProto {
      * <code>optional int64 createTime = 20;</code>
      */
     public boolean hasCreateTime() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000008) == 0x00000008);
-=======
-      return ((bitField1_ & 0x00000010) == 0x00000010);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int64 createTime = 20;</code>
@@ -7276,11 +7217,7 @@ public final class UserProto {
      * <code>optional int32 apsalarId = 22;</code>
      */
     public boolean hasApsalarId() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000010) == 0x00000010);
-=======
-      return ((bitField1_ & 0x00000020) == 0x00000020);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int32 apsalarId = 22;</code>
@@ -7295,11 +7232,7 @@ public final class UserProto {
      * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
      */
     public boolean hasNumConsecutiveDaysPlayed() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000020) == 0x00000020);
-=======
-      return ((bitField1_ & 0x00000040) == 0x00000040);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
@@ -7314,11 +7247,7 @@ public final class UserProto {
      * <code>optional int64 lastWallPostNotificationTime = 26;</code>
      */
     public boolean hasLastWallPostNotificationTime() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000040) == 0x00000040);
-=======
-      return ((bitField1_ & 0x00000080) == 0x00000080);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int64 lastWallPostNotificationTime = 26;</code>
@@ -7333,11 +7262,7 @@ public final class UserProto {
      * <code>optional string kabamNaid = 27;</code>
      */
     public boolean hasKabamNaid() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000080) == 0x00000080);
-=======
-      return ((bitField1_ & 0x00000100) == 0x00000100);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string kabamNaid = 27;</code>
@@ -7379,11 +7304,7 @@ public final class UserProto {
      * <code>optional bool fbIdSetOnUserCreate = 44;</code>
      */
     public boolean hasFbIdSetOnUserCreate() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000100) == 0x00000100);
-=======
-      return ((bitField1_ & 0x00000200) == 0x00000200);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional bool fbIdSetOnUserCreate = 44;</code>
@@ -7398,11 +7319,7 @@ public final class UserProto {
      * <code>optional string udid = 13;</code>
      */
     public boolean hasUdid() {
-<<<<<<< HEAD
-      return ((bitField1_ & 0x00000200) == 0x00000200);
-=======
-      return ((bitField1_ & 0x00000400) == 0x00000400);
->>>>>>> added columns to full user proto
+      return ((bitField1_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional string udid = 13;</code>
@@ -7470,12 +7387,9 @@ public final class UserProto {
       lastSecretGiftCollectTime_ = 0L;
       pvpDefendingMessage_ = "";
       lastTeamDonationSolicitation_ = 0L;
-<<<<<<< HEAD
-      totalStrength_ = 0L;
-=======
       salesValue_ = 0F;
       salesLastPurchaseTime_ = 0L;
->>>>>>> added columns to full user proto
+      totalStrength_ = 0L;
       udidForHistory_ = "";
       deviceToken_ = "";
       numBadges_ = 0;
@@ -7527,11 +7441,7 @@ public final class UserProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(12, numReferrals_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
-=======
-      if (((bitField1_ & 0x00000400) == 0x00000400)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         output.writeBytes(13, getUdidBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
@@ -7540,63 +7450,37 @@ public final class UserProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt64(15, lastLogoutTime_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(16, getDeviceTokenBytes());
-      }
-      if (((bitField1_ & 0x00000004) == 0x00000004)) {
-=======
-      if (((bitField1_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(16, getDeviceTokenBytes());
-      }
       if (((bitField1_ & 0x00000008) == 0x00000008)) {
->>>>>>> added columns to full user proto
+        output.writeBytes(16, getDeviceTokenBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(18, numBadges_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBool(19, isFake_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000008) == 0x00000008)) {
-=======
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000020) == 0x00000020)) {
         output.writeInt64(20, createTime_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeBool(21, isAdmin_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
-=======
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(22, apsalarId_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt32(23, numCoinsRetrievedFromStructs_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
-=======
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(24, numConsecutiveDaysPlayed_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeMessage(25, clan_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
-        output.writeInt64(26, lastWallPostNotificationTime_);
-      }
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
-=======
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
-        output.writeInt64(26, lastWallPostNotificationTime_);
-      }
       if (((bitField1_ & 0x00000100) == 0x00000100)) {
->>>>>>> added columns to full user proto
+        output.writeInt64(26, lastWallPostNotificationTime_);
+      }
+      if (((bitField1_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(27, getKabamNaidBytes());
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
@@ -7614,21 +7498,13 @@ public final class UserProto {
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeInt32(43, numOilRetrievedFromStructs_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000100) == 0x00000100)) {
-=======
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000400) == 0x00000400)) {
         output.writeBool(44, fbIdSetOnUserCreate_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         output.writeBytes(45, getGameCenterIdBytes());
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
-=======
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(46, getUdidForHistoryBytes());
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
@@ -7662,14 +7538,13 @@ public final class UserProto {
         output.writeInt64(57, lastTeamDonationSolicitation_);
       }
       if (((bitField0_ & 0x80000000) == 0x80000000)) {
-<<<<<<< HEAD
-        output.writeInt64(58, totalStrength_);
-=======
         output.writeFloat(58, salesValue_);
       }
       if (((bitField1_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(59, salesLastPurchaseTime_);
->>>>>>> added columns to full user proto
+      }
+      if (((bitField1_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(60, totalStrength_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7716,11 +7591,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, numReferrals_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
-=======
-      if (((bitField1_ & 0x00000400) == 0x00000400)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getUdidBytes());
       }
@@ -7732,19 +7603,11 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(15, lastLogoutTime_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(16, getDeviceTokenBytes());
-      }
-      if (((bitField1_ & 0x00000004) == 0x00000004)) {
-=======
-      if (((bitField1_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(16, getDeviceTokenBytes());
-      }
       if (((bitField1_ & 0x00000008) == 0x00000008)) {
->>>>>>> added columns to full user proto
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(16, getDeviceTokenBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(18, numBadges_);
       }
@@ -7752,11 +7615,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(19, isFake_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000008) == 0x00000008)) {
-=======
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(20, createTime_);
       }
@@ -7764,11 +7623,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(21, isAdmin_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
-=======
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, apsalarId_);
       }
@@ -7776,11 +7631,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(23, numCoinsRetrievedFromStructs_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
-=======
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(24, numConsecutiveDaysPlayed_);
       }
@@ -7788,19 +7639,11 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(25, clan_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(26, lastWallPostNotificationTime_);
-      }
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
-=======
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(26, lastWallPostNotificationTime_);
-      }
       if (((bitField1_ & 0x00000100) == 0x00000100)) {
->>>>>>> added columns to full user proto
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(26, lastWallPostNotificationTime_);
+      }
+      if (((bitField1_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(27, getKabamNaidBytes());
       }
@@ -7824,11 +7667,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(43, numOilRetrievedFromStructs_);
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000100) == 0x00000100)) {
-=======
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(44, fbIdSetOnUserCreate_);
       }
@@ -7836,11 +7675,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(45, getGameCenterIdBytes());
       }
-<<<<<<< HEAD
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
-=======
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
->>>>>>> added columns to full user proto
+      if (((bitField1_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(46, getUdidForHistoryBytes());
       }
@@ -7886,15 +7721,15 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x80000000) == 0x80000000)) {
         size += com.google.protobuf.CodedOutputStream
-<<<<<<< HEAD
-          .computeInt64Size(58, totalStrength_);
-=======
           .computeFloatSize(58, salesValue_);
       }
       if (((bitField1_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(59, salesLastPurchaseTime_);
->>>>>>> added columns to full user proto
+      }
+      if (((bitField1_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(60, totalStrength_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8085,55 +7920,32 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x20000000);
         lastTeamDonationSolicitation_ = 0L;
         bitField0_ = (bitField0_ & ~0x40000000);
-<<<<<<< HEAD
-        totalStrength_ = 0L;
-        bitField0_ = (bitField0_ & ~0x80000000);
-        udidForHistory_ = "";
-        bitField1_ = (bitField1_ & ~0x00000001);
-        deviceToken_ = "";
-        bitField1_ = (bitField1_ & ~0x00000002);
-        numBadges_ = 0;
-        bitField1_ = (bitField1_ & ~0x00000004);
-        createTime_ = 0L;
-        bitField1_ = (bitField1_ & ~0x00000008);
-        apsalarId_ = 0;
-        bitField1_ = (bitField1_ & ~0x00000010);
-        numConsecutiveDaysPlayed_ = 0;
-        bitField1_ = (bitField1_ & ~0x00000020);
-        lastWallPostNotificationTime_ = 0L;
-        bitField1_ = (bitField1_ & ~0x00000040);
-        kabamNaid_ = "";
-        bitField1_ = (bitField1_ & ~0x00000080);
-        fbIdSetOnUserCreate_ = false;
-        bitField1_ = (bitField1_ & ~0x00000100);
-        udid_ = "";
-        bitField1_ = (bitField1_ & ~0x00000200);
-=======
         salesValue_ = 0F;
         bitField0_ = (bitField0_ & ~0x80000000);
         salesLastPurchaseTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000001);
-        udidForHistory_ = "";
+        totalStrength_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000002);
-        deviceToken_ = "";
+        udidForHistory_ = "";
         bitField1_ = (bitField1_ & ~0x00000004);
-        numBadges_ = 0;
+        deviceToken_ = "";
         bitField1_ = (bitField1_ & ~0x00000008);
-        createTime_ = 0L;
+        numBadges_ = 0;
         bitField1_ = (bitField1_ & ~0x00000010);
-        apsalarId_ = 0;
+        createTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000020);
-        numConsecutiveDaysPlayed_ = 0;
+        apsalarId_ = 0;
         bitField1_ = (bitField1_ & ~0x00000040);
-        lastWallPostNotificationTime_ = 0L;
+        numConsecutiveDaysPlayed_ = 0;
         bitField1_ = (bitField1_ & ~0x00000080);
-        kabamNaid_ = "";
+        lastWallPostNotificationTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000100);
-        fbIdSetOnUserCreate_ = false;
+        kabamNaid_ = "";
         bitField1_ = (bitField1_ & ~0x00000200);
-        udid_ = "";
+        fbIdSetOnUserCreate_ = false;
         bitField1_ = (bitField1_ & ~0x00000400);
->>>>>>> added columns to full user proto
+        udid_ = "";
+        bitField1_ = (bitField1_ & ~0x00000800);
         return this;
       }
 
@@ -8299,48 +8111,6 @@ public final class UserProto {
         if (((from_bitField0_ & 0x80000000) == 0x80000000)) {
           to_bitField0_ |= 0x80000000;
         }
-<<<<<<< HEAD
-        result.totalStrength_ = totalStrength_;
-        if (((from_bitField1_ & 0x00000001) == 0x00000001)) {
-          to_bitField1_ |= 0x00000001;
-        }
-        result.udidForHistory_ = udidForHistory_;
-        if (((from_bitField1_ & 0x00000002) == 0x00000002)) {
-          to_bitField1_ |= 0x00000002;
-        }
-        result.deviceToken_ = deviceToken_;
-        if (((from_bitField1_ & 0x00000004) == 0x00000004)) {
-          to_bitField1_ |= 0x00000004;
-        }
-        result.numBadges_ = numBadges_;
-        if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
-          to_bitField1_ |= 0x00000008;
-        }
-        result.createTime_ = createTime_;
-        if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
-          to_bitField1_ |= 0x00000010;
-        }
-        result.apsalarId_ = apsalarId_;
-        if (((from_bitField1_ & 0x00000020) == 0x00000020)) {
-          to_bitField1_ |= 0x00000020;
-        }
-        result.numConsecutiveDaysPlayed_ = numConsecutiveDaysPlayed_;
-        if (((from_bitField1_ & 0x00000040) == 0x00000040)) {
-          to_bitField1_ |= 0x00000040;
-        }
-        result.lastWallPostNotificationTime_ = lastWallPostNotificationTime_;
-        if (((from_bitField1_ & 0x00000080) == 0x00000080)) {
-          to_bitField1_ |= 0x00000080;
-        }
-        result.kabamNaid_ = kabamNaid_;
-        if (((from_bitField1_ & 0x00000100) == 0x00000100)) {
-          to_bitField1_ |= 0x00000100;
-        }
-        result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
-        if (((from_bitField1_ & 0x00000200) == 0x00000200)) {
-          to_bitField1_ |= 0x00000200;
-        }
-=======
         result.salesValue_ = salesValue_;
         if (((from_bitField1_ & 0x00000001) == 0x00000001)) {
           to_bitField1_ |= 0x00000001;
@@ -8349,43 +8119,46 @@ public final class UserProto {
         if (((from_bitField1_ & 0x00000002) == 0x00000002)) {
           to_bitField1_ |= 0x00000002;
         }
-        result.udidForHistory_ = udidForHistory_;
+        result.totalStrength_ = totalStrength_;
         if (((from_bitField1_ & 0x00000004) == 0x00000004)) {
           to_bitField1_ |= 0x00000004;
         }
-        result.deviceToken_ = deviceToken_;
+        result.udidForHistory_ = udidForHistory_;
         if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
           to_bitField1_ |= 0x00000008;
         }
-        result.numBadges_ = numBadges_;
+        result.deviceToken_ = deviceToken_;
         if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
           to_bitField1_ |= 0x00000010;
         }
-        result.createTime_ = createTime_;
+        result.numBadges_ = numBadges_;
         if (((from_bitField1_ & 0x00000020) == 0x00000020)) {
           to_bitField1_ |= 0x00000020;
         }
-        result.apsalarId_ = apsalarId_;
+        result.createTime_ = createTime_;
         if (((from_bitField1_ & 0x00000040) == 0x00000040)) {
           to_bitField1_ |= 0x00000040;
         }
-        result.numConsecutiveDaysPlayed_ = numConsecutiveDaysPlayed_;
+        result.apsalarId_ = apsalarId_;
         if (((from_bitField1_ & 0x00000080) == 0x00000080)) {
           to_bitField1_ |= 0x00000080;
         }
-        result.lastWallPostNotificationTime_ = lastWallPostNotificationTime_;
+        result.numConsecutiveDaysPlayed_ = numConsecutiveDaysPlayed_;
         if (((from_bitField1_ & 0x00000100) == 0x00000100)) {
           to_bitField1_ |= 0x00000100;
         }
-        result.kabamNaid_ = kabamNaid_;
+        result.lastWallPostNotificationTime_ = lastWallPostNotificationTime_;
         if (((from_bitField1_ & 0x00000200) == 0x00000200)) {
           to_bitField1_ |= 0x00000200;
         }
-        result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
+        result.kabamNaid_ = kabamNaid_;
         if (((from_bitField1_ & 0x00000400) == 0x00000400)) {
           to_bitField1_ |= 0x00000400;
         }
->>>>>>> added columns to full user proto
+        result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
+        if (((from_bitField1_ & 0x00000800) == 0x00000800)) {
+          to_bitField1_ |= 0x00000800;
+        }
         result.udid_ = udid_;
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
@@ -8509,31 +8282,22 @@ public final class UserProto {
         if (other.hasLastTeamDonationSolicitation()) {
           setLastTeamDonationSolicitation(other.getLastTeamDonationSolicitation());
         }
-<<<<<<< HEAD
-        if (other.hasTotalStrength()) {
-          setTotalStrength(other.getTotalStrength());
-        }
-        if (other.hasUdidForHistory()) {
-          bitField1_ |= 0x00000001;
-=======
         if (other.hasSalesValue()) {
           setSalesValue(other.getSalesValue());
         }
         if (other.hasSalesLastPurchaseTime()) {
           setSalesLastPurchaseTime(other.getSalesLastPurchaseTime());
         }
+        if (other.hasTotalStrength()) {
+          setTotalStrength(other.getTotalStrength());
+        }
         if (other.hasUdidForHistory()) {
-          bitField1_ |= 0x00000002;
->>>>>>> added columns to full user proto
+          bitField1_ |= 0x00000004;
           udidForHistory_ = other.udidForHistory_;
           onChanged();
         }
         if (other.hasDeviceToken()) {
-<<<<<<< HEAD
-          bitField1_ |= 0x00000002;
-=======
-          bitField1_ |= 0x00000004;
->>>>>>> added columns to full user proto
+          bitField1_ |= 0x00000008;
           deviceToken_ = other.deviceToken_;
           onChanged();
         }
@@ -8553,11 +8317,7 @@ public final class UserProto {
           setLastWallPostNotificationTime(other.getLastWallPostNotificationTime());
         }
         if (other.hasKabamNaid()) {
-<<<<<<< HEAD
-          bitField1_ |= 0x00000080;
-=======
-          bitField1_ |= 0x00000100;
->>>>>>> added columns to full user proto
+          bitField1_ |= 0x00000200;
           kabamNaid_ = other.kabamNaid_;
           onChanged();
         }
@@ -8565,11 +8325,7 @@ public final class UserProto {
           setFbIdSetOnUserCreate(other.getFbIdSetOnUserCreate());
         }
         if (other.hasUdid()) {
-<<<<<<< HEAD
-          bitField1_ |= 0x00000200;
-=======
-          bitField1_ |= 0x00000400;
->>>>>>> added columns to full user proto
+          bitField1_ |= 0x00000800;
           udid_ = other.udid_;
           onChanged();
         }
@@ -10233,27 +9989,6 @@ public final class UserProto {
         return this;
       }
 
-<<<<<<< HEAD
-      private long totalStrength_ ;
-      /**
-       * <code>optional int64 totalStrength = 58;</code>
-       */
-      public boolean hasTotalStrength() {
-        return ((bitField0_ & 0x80000000) == 0x80000000);
-      }
-      /**
-       * <code>optional int64 totalStrength = 58;</code>
-       */
-      public long getTotalStrength() {
-        return totalStrength_;
-      }
-      /**
-       * <code>optional int64 totalStrength = 58;</code>
-       */
-      public Builder setTotalStrength(long value) {
-        bitField0_ |= 0x80000000;
-        totalStrength_ = value;
-=======
       private float salesValue_ ;
       /**
        * <code>optional float salesValue = 58;</code>
@@ -10273,18 +10008,10 @@ public final class UserProto {
       public Builder setSalesValue(float value) {
         bitField0_ |= 0x80000000;
         salesValue_ = value;
->>>>>>> added columns to full user proto
         onChanged();
         return this;
       }
       /**
-<<<<<<< HEAD
-       * <code>optional int64 totalStrength = 58;</code>
-       */
-      public Builder clearTotalStrength() {
-        bitField0_ = (bitField0_ & ~0x80000000);
-        totalStrength_ = 0L;
-=======
        * <code>optional float salesValue = 58;</code>
        */
       public Builder clearSalesValue() {
@@ -10322,7 +10049,38 @@ public final class UserProto {
       public Builder clearSalesLastPurchaseTime() {
         bitField1_ = (bitField1_ & ~0x00000001);
         salesLastPurchaseTime_ = 0L;
->>>>>>> added columns to full user proto
+        onChanged();
+        return this;
+      }
+
+      private long totalStrength_ ;
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public boolean hasTotalStrength() {
+        return ((bitField1_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public long getTotalStrength() {
+        return totalStrength_;
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public Builder setTotalStrength(long value) {
+        bitField1_ |= 0x00000002;
+        totalStrength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public Builder clearTotalStrength() {
+        bitField1_ = (bitField1_ & ~0x00000002);
+        totalStrength_ = 0L;
         onChanged();
         return this;
       }
@@ -10337,11 +10095,7 @@ public final class UserProto {
        * </pre>
        */
       public boolean hasUdidForHistory() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000001) == 0x00000001);
-=======
-        return ((bitField1_ & 0x00000002) == 0x00000002);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string udidForHistory = 46;</code>
@@ -10399,11 +10153,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000001;
-=======
-  bitField1_ |= 0x00000002;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000004;
         udidForHistory_ = value;
         onChanged();
         return this;
@@ -10417,11 +10167,7 @@ public final class UserProto {
        * </pre>
        */
       public Builder clearUdidForHistory() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000001);
-=======
-        bitField1_ = (bitField1_ & ~0x00000002);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000004);
         udidForHistory_ = getDefaultInstance().getUdidForHistory();
         onChanged();
         return this;
@@ -10439,11 +10185,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000001;
-=======
-  bitField1_ |= 0x00000002;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000004;
         udidForHistory_ = value;
         onChanged();
         return this;
@@ -10454,11 +10196,7 @@ public final class UserProto {
        * <code>optional string deviceToken = 16;</code>
        */
       public boolean hasDeviceToken() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000002) == 0x00000002);
-=======
-        return ((bitField1_ & 0x00000004) == 0x00000004);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string deviceToken = 16;</code>
@@ -10501,11 +10239,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000002;
-=======
-  bitField1_ |= 0x00000004;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000008;
         deviceToken_ = value;
         onChanged();
         return this;
@@ -10514,11 +10248,7 @@ public final class UserProto {
        * <code>optional string deviceToken = 16;</code>
        */
       public Builder clearDeviceToken() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000002);
-=======
-        bitField1_ = (bitField1_ & ~0x00000004);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000008);
         deviceToken_ = getDefaultInstance().getDeviceToken();
         onChanged();
         return this;
@@ -10531,11 +10261,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000002;
-=======
-  bitField1_ |= 0x00000004;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000008;
         deviceToken_ = value;
         onChanged();
         return this;
@@ -10546,11 +10272,7 @@ public final class UserProto {
        * <code>optional int32 numBadges = 18;</code>
        */
       public boolean hasNumBadges() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000004) == 0x00000004);
-=======
-        return ((bitField1_ & 0x00000008) == 0x00000008);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int32 numBadges = 18;</code>
@@ -10562,11 +10284,7 @@ public final class UserProto {
        * <code>optional int32 numBadges = 18;</code>
        */
       public Builder setNumBadges(int value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000004;
-=======
-        bitField1_ |= 0x00000008;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000010;
         numBadges_ = value;
         onChanged();
         return this;
@@ -10575,11 +10293,7 @@ public final class UserProto {
        * <code>optional int32 numBadges = 18;</code>
        */
       public Builder clearNumBadges() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000004);
-=======
-        bitField1_ = (bitField1_ & ~0x00000008);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000010);
         numBadges_ = 0;
         onChanged();
         return this;
@@ -10590,11 +10304,7 @@ public final class UserProto {
        * <code>optional int64 createTime = 20;</code>
        */
       public boolean hasCreateTime() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000008) == 0x00000008);
-=======
-        return ((bitField1_ & 0x00000010) == 0x00000010);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 createTime = 20;</code>
@@ -10606,11 +10316,7 @@ public final class UserProto {
        * <code>optional int64 createTime = 20;</code>
        */
       public Builder setCreateTime(long value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000008;
-=======
-        bitField1_ |= 0x00000010;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000020;
         createTime_ = value;
         onChanged();
         return this;
@@ -10619,11 +10325,7 @@ public final class UserProto {
        * <code>optional int64 createTime = 20;</code>
        */
       public Builder clearCreateTime() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000008);
-=======
-        bitField1_ = (bitField1_ & ~0x00000010);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000020);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -10634,11 +10336,7 @@ public final class UserProto {
        * <code>optional int32 apsalarId = 22;</code>
        */
       public boolean hasApsalarId() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000010) == 0x00000010);
-=======
-        return ((bitField1_ & 0x00000020) == 0x00000020);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int32 apsalarId = 22;</code>
@@ -10650,11 +10348,7 @@ public final class UserProto {
        * <code>optional int32 apsalarId = 22;</code>
        */
       public Builder setApsalarId(int value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000010;
-=======
-        bitField1_ |= 0x00000020;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000040;
         apsalarId_ = value;
         onChanged();
         return this;
@@ -10663,11 +10357,7 @@ public final class UserProto {
        * <code>optional int32 apsalarId = 22;</code>
        */
       public Builder clearApsalarId() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000010);
-=======
-        bitField1_ = (bitField1_ & ~0x00000020);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000040);
         apsalarId_ = 0;
         onChanged();
         return this;
@@ -10678,11 +10368,7 @@ public final class UserProto {
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public boolean hasNumConsecutiveDaysPlayed() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000020) == 0x00000020);
-=======
-        return ((bitField1_ & 0x00000040) == 0x00000040);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
@@ -10694,11 +10380,7 @@ public final class UserProto {
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public Builder setNumConsecutiveDaysPlayed(int value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000020;
-=======
-        bitField1_ |= 0x00000040;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000080;
         numConsecutiveDaysPlayed_ = value;
         onChanged();
         return this;
@@ -10707,11 +10389,7 @@ public final class UserProto {
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public Builder clearNumConsecutiveDaysPlayed() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000020);
-=======
-        bitField1_ = (bitField1_ & ~0x00000040);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000080);
         numConsecutiveDaysPlayed_ = 0;
         onChanged();
         return this;
@@ -10722,11 +10400,7 @@ public final class UserProto {
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public boolean hasLastWallPostNotificationTime() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000040) == 0x00000040);
-=======
-        return ((bitField1_ & 0x00000080) == 0x00000080);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
@@ -10738,11 +10412,7 @@ public final class UserProto {
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public Builder setLastWallPostNotificationTime(long value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000040;
-=======
-        bitField1_ |= 0x00000080;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000100;
         lastWallPostNotificationTime_ = value;
         onChanged();
         return this;
@@ -10751,11 +10421,7 @@ public final class UserProto {
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public Builder clearLastWallPostNotificationTime() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000040);
-=======
-        bitField1_ = (bitField1_ & ~0x00000080);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000100);
         lastWallPostNotificationTime_ = 0L;
         onChanged();
         return this;
@@ -10766,11 +10432,7 @@ public final class UserProto {
        * <code>optional string kabamNaid = 27;</code>
        */
       public boolean hasKabamNaid() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000080) == 0x00000080);
-=======
-        return ((bitField1_ & 0x00000100) == 0x00000100);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string kabamNaid = 27;</code>
@@ -10813,11 +10475,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000080;
-=======
-  bitField1_ |= 0x00000100;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000200;
         kabamNaid_ = value;
         onChanged();
         return this;
@@ -10826,11 +10484,7 @@ public final class UserProto {
        * <code>optional string kabamNaid = 27;</code>
        */
       public Builder clearKabamNaid() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000080);
-=======
-        bitField1_ = (bitField1_ & ~0x00000100);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000200);
         kabamNaid_ = getDefaultInstance().getKabamNaid();
         onChanged();
         return this;
@@ -10843,11 +10497,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000080;
-=======
-  bitField1_ |= 0x00000100;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000200;
         kabamNaid_ = value;
         onChanged();
         return this;
@@ -10858,11 +10508,7 @@ public final class UserProto {
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public boolean hasFbIdSetOnUserCreate() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000100) == 0x00000100);
-=======
-        return ((bitField1_ & 0x00000200) == 0x00000200);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
@@ -10874,11 +10520,7 @@ public final class UserProto {
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public Builder setFbIdSetOnUserCreate(boolean value) {
-<<<<<<< HEAD
-        bitField1_ |= 0x00000100;
-=======
-        bitField1_ |= 0x00000200;
->>>>>>> added columns to full user proto
+        bitField1_ |= 0x00000400;
         fbIdSetOnUserCreate_ = value;
         onChanged();
         return this;
@@ -10887,11 +10529,7 @@ public final class UserProto {
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public Builder clearFbIdSetOnUserCreate() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000100);
-=======
-        bitField1_ = (bitField1_ & ~0x00000200);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000400);
         fbIdSetOnUserCreate_ = false;
         onChanged();
         return this;
@@ -10902,11 +10540,7 @@ public final class UserProto {
        * <code>optional string udid = 13;</code>
        */
       public boolean hasUdid() {
-<<<<<<< HEAD
-        return ((bitField1_ & 0x00000200) == 0x00000200);
-=======
-        return ((bitField1_ & 0x00000400) == 0x00000400);
->>>>>>> added columns to full user proto
+        return ((bitField1_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional string udid = 13;</code>
@@ -10949,11 +10583,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000200;
-=======
-  bitField1_ |= 0x00000400;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000800;
         udid_ = value;
         onChanged();
         return this;
@@ -10962,11 +10592,7 @@ public final class UserProto {
        * <code>optional string udid = 13;</code>
        */
       public Builder clearUdid() {
-<<<<<<< HEAD
-        bitField1_ = (bitField1_ & ~0x00000200);
-=======
-        bitField1_ = (bitField1_ & ~0x00000400);
->>>>>>> added columns to full user proto
+        bitField1_ = (bitField1_ & ~0x00000800);
         udid_ = getDefaultInstance().getUdid();
         onChanged();
         return this;
@@ -10979,11 +10605,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-<<<<<<< HEAD
-  bitField1_ |= 0x00000200;
-=======
-  bitField1_ |= 0x00000400;
->>>>>>> added columns to full user proto
+  bitField1_ |= 0x00000800;
         udid_ = value;
         onChanged();
         return this;
@@ -12645,11 +12267,7 @@ public final class UserProto {
       "bookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014t",
       "imeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022" +
       "\026\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007" +
-<<<<<<< HEAD
-      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\306\010\n\rFullUserP" +
-=======
-      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\342\010\n\rFullUserP" +
->>>>>>> added columns to full user proto
+      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\371\010\n\rFullUserP" +
       "roto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
       "level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022" +
       "\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016task" +
@@ -12670,38 +12288,21 @@ public final class UserProto {
       "osterPackTime\0304 \001(\003\022\024\n\014numClanHelps\0305 \001(" +
       "\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003\022\033\n\023" +
       "pvpDefendingMessage\0308 \001(\t\022$\n\034lastTeamDon" +
-<<<<<<< HEAD
-      "ationSolicitation\0309 \001(\003\022\025\n\rtotalStrength" +
-      "\030: \001(\003\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013device" +
-      "Token\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreate" +
-      "Time\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numCons" +
-      "ecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostN" +
-      "otificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t" +
-      "\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid\030\r ",
-      "\001(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005level" +
-      "\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\261\001\n\022U" +
-      "serPvpLeagueProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010l" +
-      "eagueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005" +
-      "\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(" +
-      "\005\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n\024monsterDmgMu" +
-      "ltiplier\030\010 \001(\002B\013B\tUserProto"
-=======
       "ationSolicitation\0309 \001(\003\022\022\n\nsalesValue\030: " +
-      "\001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\026\n\016ud" +
-      "idForHistory\030. \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022" +
-      "\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021" +
-      "\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutiveDaysP" +
-      "layed\030\030 \001(\005\022$\n\034lastWallPostNotificationT" +
-      "ime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSetO",
-      "nUserCreate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030Stati" +
-      "cUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022re" +
-      "quiredExperience\030\002 \001(\005\"\261\001\n\022UserPvpLeague" +
-      "Proto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010leagueId\030\002 \001(" +
-      "\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesW" +
-      "on\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005\022\025\n\rshieldE" +
-      "ndTime\030\007 \001(\003\022\034\n\024monsterDmgMultiplier\030\010 \001" +
-      "(\002B\013B\tUserProto"
->>>>>>> added columns to full user proto
+      "\001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\025\n\rto" +
+      "talStrength\030< \001(\003\022\026\n\016udidForHistory\030. \001(" +
+      "\t\022\023\n\013deviceToken\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(" +
+      "\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005" +
+      "\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034la" +
+      "stWallPostNotificationTime\030\032 \001(\003\022\021\n\tkaba",
+      "mNaid\030\033 \001(\t\022\033\n\023fbIdSetOnUserCreate\030, \001(\010" +
+      "\022\014\n\004udid\030\r \001(\t\"E\n\030StaticUserLevelInfoPro" +
+      "to\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExperience\030" +
+      "\002 \001(\005\"\261\001\n\022UserPvpLeagueProto\022\020\n\010userUuid" +
+      "\030\001 \001(\t\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013" +
+      "\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battl" +
+      "esLost\030\006 \001(\005\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n\024m" +
+      "onsterDmgMultiplier\030\010 \001(\002B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12756,11 +12357,7 @@ public final class UserProto {
     internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserProto_descriptor,
-<<<<<<< HEAD
-        new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "TotalStrength", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
-=======
-        new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
->>>>>>> added columns to full user proto
+        new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "TotalStrength", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new

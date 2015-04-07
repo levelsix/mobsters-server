@@ -32,52 +32,10 @@ public class SalesItem {
 	private int gemReward;
 
 
+
 	public int getId() {
 		return id;
 	}
-<<<<<<< HEAD
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public int getSalesPackageId() {
-		return salesPackageId;
-	}
-	
-	public void setSalesPackageId(int salesPackageId) {
-		this.salesPackageId = salesPackageId;
-	}
-	
-	public int getMonsterId() {
-		return monsterId;
-	}
-	
-	public void setMonsterId(int monsterId) {
-		this.monsterId = monsterId;
-	}
-	
-	public int getMonsterQuantity() {
-		return monsterQuantity;
-	}
-	
-	public void setMonsterQuantity(int monsterQuantity) {
-		this.monsterQuantity = monsterQuantity;
-	}
-	
-	public int getItemId() {
-		return itemId;
-	}
-	
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	
-	public int getItemQuantity() {
-		return itemQuantity;
-	}
-	
-=======
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -108,11 +66,9 @@ public class SalesItem {
 	public int getItemQuantity() {
 		return itemQuantity;
 	}
->>>>>>> created protos and stuff for sales
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
-
 	@Override
 	public String toString() {
 		return "SalesItem [id=" + id + ", salesPackageId=" + salesPackageId
@@ -134,10 +90,5 @@ public class SalesItem {
 		this.monsterLevel = monsterLevel;
 	}
 
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> created protos and stuff for sales
 
 }
