@@ -271,6 +271,7 @@ public class ReloadAllRareChangeStaticData {
 		//		LockBoxEventRetrieveUtils.reload();
 		//    MonsterForPvpRetrieveUtils.staticReload();
 		miniJobRetrieveUtils.reload();
+		
 		monsterBattleDialogueRetrieveUtils.reload();
 		monsterLevelInfoRetrieveUtils.reload();
 		monsterRetrieveUtils.reload();
