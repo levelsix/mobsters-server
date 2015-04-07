@@ -191,7 +191,6 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -2095,11 +2094,11 @@ public class CreateInfoProtoUtils {
 		ipb.setSecretGiftChance(item.getSecretGiftChance());
 		ipb.setAlwaysDisplayToUser(item.isAlwaysDisplayToUser());
 
-		str = item.getActionGameType();
+		str = item.getGameActionType();
 		if(null != str) {
 			try {
-				GameType gt = GameType.valueOf(str);
-				ipb.setActionGameType(gt);
+				GameActionType gat = GameActionType.valueOf(str);
+				ipb.setGameActionType(gat);
 			} catch (Exception e) {
 				log.error(String.format(
 						"can't create enum type. gameType=%s. item=%s", str,

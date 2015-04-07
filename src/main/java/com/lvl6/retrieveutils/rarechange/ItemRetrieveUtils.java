@@ -27,9 +27,9 @@ public class ItemRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	private final ItemSecretGiftComparator comparator = new ItemSecretGiftComparator();
+	private static final ItemSecretGiftComparator comparator = new ItemSecretGiftComparator();
 
-	private final class ItemSecretGiftComparator implements
+	private static final class ItemSecretGiftComparator implements
 			Comparator<Item> {
 		@Override
 		public int compare(Item o1, Item o2) {
