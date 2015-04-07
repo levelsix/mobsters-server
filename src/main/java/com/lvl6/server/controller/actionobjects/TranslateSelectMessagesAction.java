@@ -17,6 +17,7 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -35,13 +36,16 @@ public class TranslateSelectMessagesAction {
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
+	private ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 	
 
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
 			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
-			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil) {
+			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil,
+			MiscMethods miscMethods,
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		super();
 		this.recipientUserId = recipientUserId;
 		this.senderUserId = senderUserId;
@@ -53,6 +57,7 @@ public class TranslateSelectMessagesAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.miscMethods = miscMethods;
+		this.chatTranslationsRetrieveUtils = chatTranslationsRetrieveUtils;
 	}
 
 	private User recipientUser;
@@ -87,7 +92,7 @@ public class TranslateSelectMessagesAction {
 			return true;
 		}
 		
-		language = MiscMethods.convertFromEnumToLanguage(languageEnum);
+		language = miscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
 			log.error("not valid language for TranslationLanguage: " + languageEnum);
@@ -140,7 +145,7 @@ public class TranslateSelectMessagesAction {
 				}
 				
 				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
-						listOfPrivateChatPosts);
+						listOfPrivateChatPosts, chatTranslationsRetrieveUtils);
 				
 				if(successfulTranslationInsertion) {
 					return true;

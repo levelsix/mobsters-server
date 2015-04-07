@@ -57,6 +57,9 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 
 	public RetrievePrivateChatPostsController() {
 		numAllocatedThreads = 5;
@@ -150,7 +153,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 						if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
 							chatIdsToTranslations = 
-									ChatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
+									chatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
 
 							//this map holds the correct translation based on language sent
 							List<String> chatIdsToBeTranslated = new ArrayList<String>();
@@ -194,7 +197,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 									translateMap.put(returnMap.get(chatId).getTranslateLanguage(), returnMap.get(chatId).getText());
 								}
 								else {
-									Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
+									Language language = miscMethods.convertFromEnumToLanguage(translateLanguage);
 									translateMap = miscMethods.translate(null, language, pwp.getContent());
 								}
 

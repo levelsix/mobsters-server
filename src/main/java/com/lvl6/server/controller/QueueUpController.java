@@ -99,6 +99,9 @@ public class QueueUpController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 
 	//	@Autowired
@@ -183,7 +186,7 @@ public class QueueUpController extends EventController {
 
 			QueueUpAction qua = new QueueUpAction(attackerId, uniqSeenUserIds,
 					clientDate, pvpLeagueForUserRetrieveUtil, hazelcastPvpUtil,
-					monsterForPvpRetrieveUtil, timeUtil);
+					monsterForPvpRetrieveUtil, timeUtil, serverToggleRetrieveUtils);
 
 			//update the user, and his shield
 			qua.execute(resBuilder);
@@ -503,9 +506,9 @@ public class QueueUpController extends EventController {
 			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
-		boolean setElo = ServerToggleRetrieveUtils
+		boolean setElo = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
-		boolean displayBotElo = ServerToggleRetrieveUtils
+		boolean displayBotElo = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {

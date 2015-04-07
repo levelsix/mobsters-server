@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -42,7 +40,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
-import com.memetix.mst.language.Language;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 
 
 public interface InsertUtil {
@@ -164,7 +162,8 @@ public interface InsertUtil {
 			List<String> contents, List<Date> timeOfPosts);
 	
 	public abstract String insertIntoChatTranslations(ChatType chatType, String chatId,
-			TranslateLanguages language, String message);
+			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils 
+			chatTranslationsRetrieveUtils);
 	
 	public abstract boolean insertTranslateSettings(String receiverId, String senderId, 
 			String language, String chatType, boolean translateOn);
@@ -336,5 +335,6 @@ public interface InsertUtil {
 			Collection<MiniEventGoalForUser> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts);
+			List<PrivateChatPost> listOfPrivateChatPosts, 
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
 }

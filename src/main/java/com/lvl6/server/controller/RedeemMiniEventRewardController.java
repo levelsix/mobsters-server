@@ -29,6 +29,9 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -62,6 +65,15 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
+	
+	@Autowired
+	protected  MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;;
+	
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -123,7 +135,8 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
 					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
 					userRetrieveUtil, mefuRetrieveUtil, itemForUserRetrieveUtil,
-					insertUtil, updateUtil, monsterStuffUtils);
+					insertUtil, updateUtil, monsterStuffUtils, miniEventForPlayerLvlRetrieveUtils,
+					miniEventTierRewardRetrieveUtils, rewardRetrieveUtils);
 
 			rmera.execute(resBuilder);
 

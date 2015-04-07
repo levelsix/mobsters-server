@@ -230,6 +230,12 @@ public class CreateInfoProtoUtils {
 	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
 	
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 	
@@ -1245,7 +1251,7 @@ public class CreateInfoProtoUtils {
 		
 		List<String> chatIds = new ArrayList<String>();
 		chatIds.add(p.getId());
-		Map<String, List<ChatTranslations>> chatTranslationMap = ChatTranslationsRetrieveUtils.
+		Map<String, List<ChatTranslations>> chatTranslationMap = chatTranslationsRetrieveUtils.
 				getChatTranslationsForSpecificChatIds(chatIds);
 		
 		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
@@ -1378,7 +1384,7 @@ public class CreateInfoProtoUtils {
 			gcmpb.setContentLanguage(contentLanguage);
 		}
 		
-		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
+		boolean turnOffTranslation = serverToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
 			if(translatedMap == null) {
@@ -1399,7 +1405,7 @@ public class CreateInfoProtoUtils {
 		return gcmpb.build();
 	}
 	
-	public static DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
+	public DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
 		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 
@@ -2203,7 +2209,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MiniEvent.proto ********************************************/
-	public static UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
+	public UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
 			MiniEvent me, Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
@@ -2226,7 +2232,7 @@ public class CreateInfoProtoUtils {
 		return umepb.build();
 	}
 
-	public static UserMiniEventProto.Builder createUserMiniEventProto(
+	public UserMiniEventProto.Builder createUserMiniEventProto(
 			MiniEventForUser mefu)
 	{
 		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
@@ -2239,7 +2245,7 @@ public class CreateInfoProtoUtils {
 		return umepb;
 	}
 
-	public static MiniEventProto createMiniEventProto(MiniEvent me,
+	public MiniEventProto createMiniEventProto(MiniEvent me,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards)
@@ -2291,7 +2297,7 @@ public class CreateInfoProtoUtils {
 		return mepb.build();
 	}
 
-	public static MiniEventForPlayerLevelProto createMiniEventForPlayerLevelProto(
+	public MiniEventForPlayerLevelProto createMiniEventForPlayerLevelProto(
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards)
 	{
 		MiniEventForPlayerLevelProto.Builder mefplpb =
@@ -2307,7 +2313,7 @@ public class CreateInfoProtoUtils {
 		return mefplpb.build();
 	}
 
-	private static MiniEventForPlayerLevelProto.Builder createMiniEventForPlayerLevelProto(
+	private MiniEventForPlayerLevelProto.Builder createMiniEventForPlayerLevelProto(
 			MiniEventForPlayerLvl mefpl) {
 		MiniEventForPlayerLevelProto.Builder mefplpb =
 				MiniEventForPlayerLevelProto.newBuilder();
@@ -2321,7 +2327,7 @@ public class CreateInfoProtoUtils {
 		return mefplpb;
 	}
 
-	public static Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
+	public Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
 			Collection<MiniEventTierReward> metrs)
 	{
 		Collection<MiniEventTierRewardProto> rewardProtos =
@@ -2335,7 +2341,7 @@ public class CreateInfoProtoUtils {
 		return rewardProtos;
 	}
 
-	private static MiniEventTierRewardProto createMiniEventTierRewardProto(
+	private MiniEventTierRewardProto createMiniEventTierRewardProto(
 			MiniEventTierReward metr)
 	{
 		MiniEventTierRewardProto.Builder metrpb =
@@ -2349,7 +2355,7 @@ public class CreateInfoProtoUtils {
 		return metrpb.build();
 	}
 
-	private static Collection<MiniEventGoalProto> createMiniEventGoalProto(
+	private Collection<MiniEventGoalProto> createMiniEventGoalProto(
 			Collection<MiniEventGoal> goals)
 	{
 		Collection<MiniEventGoalProto> goalProtos = new ArrayList<MiniEventGoalProto>();
@@ -2363,7 +2369,7 @@ public class CreateInfoProtoUtils {
 		return goalProtos;
 	}
 
-	private static MiniEventGoalProto createMiniEventGoalProto(MiniEventGoal meg) {
+	private MiniEventGoalProto createMiniEventGoalProto(MiniEventGoal meg) {
 		MiniEventGoalProto.Builder megpb = MiniEventGoalProto.newBuilder();
 		megpb.setMiniEventGoalId(meg.getId());
 		megpb.setMiniEventId(meg.getMiniEventId());
@@ -2391,7 +2397,7 @@ public class CreateInfoProtoUtils {
 		return megpb.build();
 	}
 
-	private static Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
+	private Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
 			Collection<MiniEventLeaderboardReward> rewards)
 	{
 		Collection<MiniEventLeaderboardRewardProto> rewardProtos =
@@ -2407,7 +2413,7 @@ public class CreateInfoProtoUtils {
 		return rewardProtos;
 	}
 
-	private static MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
+	private MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
 			MiniEventLeaderboardReward melr)
 	{
 		MiniEventLeaderboardRewardProto.Builder melrpb =
@@ -2420,7 +2426,7 @@ public class CreateInfoProtoUtils {
 		return melrpb.build();
 	}
 
-	private static Collection<UserMiniEventGoalProto> createUserMiniEventGoalProto(
+	private Collection<UserMiniEventGoalProto> createUserMiniEventGoalProto(
 			Collection<MiniEventGoalForUser> megfus)
 	{
 		Collection<UserMiniEventGoalProto> goalProtos =
@@ -2438,7 +2444,7 @@ public class CreateInfoProtoUtils {
 		return goalProtos;
 	}
 
-	private static UserMiniEventGoalProto createUserMiniEventGoalProto(
+	private UserMiniEventGoalProto createUserMiniEventGoalProto(
 			MiniEventGoalForUser megfu)
 	{
 		UserMiniEventGoalProto.Builder umegpb = UserMiniEventGoalProto.newBuilder();

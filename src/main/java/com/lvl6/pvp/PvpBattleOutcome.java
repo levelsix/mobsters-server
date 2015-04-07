@@ -3,6 +3,7 @@ package com.lvl6.pvp;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -11,6 +12,9 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 public class PvpBattleOutcome {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	private static double SCORING_CURVE_BIAS = 0D;
 	private static double SCORING_CURVE_LINEARITY = 0.15D;
@@ -57,7 +61,7 @@ public class PvpBattleOutcome {
 	private double lowerElo;
 
 	private void setLoggingBoolean() {
-		loggingOn = ServerToggleRetrieveUtils
+		loggingOn = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_PVP_BATTLE_OUTCOME_DETAILS);
 	}
 

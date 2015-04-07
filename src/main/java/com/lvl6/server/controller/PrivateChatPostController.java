@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -74,6 +75,9 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 	
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
@@ -241,7 +245,8 @@ public class PrivateChatPostController extends EventController {
 						
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
-							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl));
+							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl),
+									chatTranslationsRetrieveUtils);
 							tt.setLanguage(recipientLanguage.toString());
 							tt.setText(translatedMessage.get(tl));
 						}

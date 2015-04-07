@@ -136,6 +136,9 @@ public class MiscMethods {
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
 	
 	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
+	@Autowired
 	protected StaticDataContainer staticDataContainer;
 
 	private final Logger log = LoggerFactory
@@ -200,7 +203,7 @@ public class MiscMethods {
 		float unnormalizedProbabilitySoFar = 0f;
 		float randFloat = rand.nextFloat();
 
-		boolean logBoosterItemDetails = ServerToggleRetrieveUtils
+		boolean logBoosterItemDetails = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS);
 		if (logBoosterItemDetails) {
 			log.info(
@@ -739,7 +742,7 @@ public class MiscMethods {
 		pcb.setRequestClanToAvengeTimeLimitMins(ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS);
 		cb.setPvpConstant(pcb.build());
 
-		boolean displayQuality = ServerToggleRetrieveUtils
+		boolean displayQuality = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TASK_DISPLAY_RARITY);
 		cb.setDisplayRarity(displayQuality);
 
@@ -1923,7 +1926,7 @@ public class MiscMethods {
 
 	}
 
-	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {
+	public Language convertFromEnumToLanguage(TranslateLanguages tl) {
 		if(tl.toString().equalsIgnoreCase("ARABIC")) {
 			return Language.ARABIC;
 		}

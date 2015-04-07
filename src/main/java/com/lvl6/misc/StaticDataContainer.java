@@ -263,6 +263,9 @@ public class StaticDataContainer {
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 	
 	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
+	
+	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
 	
 	@Autowired
@@ -1051,8 +1054,9 @@ public class StaticDataContainer {
 		}
 	}
 
+
 	private void setRewards(Builder sdpb) {
-		Map<Integer, Reward> idsToReward = RewardRetrieveUtils
+		Map<Integer, Reward> idsToReward = rewardRetrieveUtils
 				.getRewardIdsToRewards();
 
 		if (null == idsToReward || idsToReward.isEmpty()) {

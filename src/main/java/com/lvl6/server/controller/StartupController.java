@@ -157,6 +157,11 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -380,6 +385,21 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -1635,7 +1655,7 @@ public class StartupController extends EventController {
 		DefaultLanguagesProto dlp = null;
 
 		if(tsfuList != null && !tsfuList.isEmpty()) {
-			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
+			dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
 		}
 
 		//if there's no default languages, they havent ever been set
@@ -1650,10 +1670,14 @@ public class StartupController extends EventController {
 		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
 				RetrieveMiniEventResponseProto.newBuilder();
 
+		
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 				userId, now, userRetrieveUtils,
 				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
+				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils, 
+				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils, 
+				miniEventLeaderboardRewardRetrieveUtils);
 
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
@@ -1665,7 +1689,7 @@ public class StartupController extends EventController {
 		{
 			//get UserMiniEvent info and create the proto to set into resBuilder
 			//TODO: Consider protofying MiniEvent stuff
-			UserMiniEventProto umep = CreateInfoProtoUtils
+			UserMiniEventProto umep = createInfoProtoUtils
 					.createUserMiniEventProto(
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),

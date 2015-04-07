@@ -66,7 +66,7 @@ public class InsertUtils implements InsertUtil {
 		return (InsertUtil) AppContext.getApplicationContext().getBean(
 				"insertUtils");
 	}
-
+	
 	private JdbcTemplate jdbcTemplate;
 
 	private String randomUUID() {
@@ -851,7 +851,7 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public String insertIntoChatTranslations(ChatType chatType, String chatId,
-			TranslateLanguages language, String message) {
+			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
 
@@ -869,7 +869,7 @@ public class InsertUtils implements InsertUtil {
 		ct.setChatType(chatType);
 		ct.setTranslateLanguage(language);
 		ct.setText(message);
-		ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
+		chatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
 
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				tableName, insertParams);
@@ -2641,7 +2641,8 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts) {
+			List<PrivateChatPost> listOfPrivateChatPosts, 
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		if(listOfPrivateChatPosts == null) {
 			log.error("map containing ids to translations is null");
 		}
@@ -2674,7 +2675,7 @@ public class InsertUtils implements InsertUtil {
 				ct.setTranslateLanguage(TranslateLanguages.
 						valueOf(pcp.getTranslatedText().getLanguage()));
 				ct.setText(pcp.getTranslatedText().getText());
-				ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
+				chatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

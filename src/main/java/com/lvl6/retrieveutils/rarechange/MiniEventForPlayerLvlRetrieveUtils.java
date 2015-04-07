@@ -75,7 +75,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 
 	}
 
-	public static Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
+	public Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
 		}
@@ -83,7 +83,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return idToMiniEventForPlayerLvl;
 	}
 
-	public static MiniEventForPlayerLvl getMiniEventForPlayerLvlById(int id) {
+	public MiniEventForPlayerLvl getMiniEventForPlayerLvlById(int id) {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
 		}
@@ -94,7 +94,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return ep;
 	}
 
-	public static MiniEventForPlayerLvl getMiniEventForPlayerLvl(
+	public MiniEventForPlayerLvl getMiniEventForPlayerLvl(
 			int miniEventId, int playerLvl)
 	{
 		if (null == miniEventIdToOrderedMefpl) {
@@ -130,12 +130,12 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return mefpl;
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToMiniEventForPlayerLvls();
 		setOrderedMiniEventForPlayerLvls();
 	}
 
-	private static void setStaticIdsToMiniEventForPlayerLvls() {
+	private void setStaticIdsToMiniEventForPlayerLvls() {
 		log.debug("setting static map of id to MiniEventForPlayerLvl");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -168,7 +168,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		}
 	}
 
-	private static void setOrderedMiniEventForPlayerLvls()
+	private void setOrderedMiniEventForPlayerLvls()
 	{
 		if (null == idToMiniEventForPlayerLvl)
 		{
@@ -201,7 +201,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 
 	}
 
-	private static MiniEventForPlayerLvl convertRSRowToMiniEventForPlayerLvl(ResultSet rs)
+	private MiniEventForPlayerLvl convertRSRowToMiniEventForPlayerLvl(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT_FOR_PLAYER_LVL__ID);
 		int miniEventId = rs.getInt(DBConstants.MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID);

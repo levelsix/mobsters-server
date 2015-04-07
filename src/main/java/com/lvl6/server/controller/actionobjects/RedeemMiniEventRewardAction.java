@@ -47,6 +47,9 @@ public class RedeemMiniEventRewardAction {
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	private MonsterStuffUtils monsterStuffUtils;
+	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
@@ -54,7 +57,10 @@ public class RedeemMiniEventRewardAction {
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
-			MonsterStuffUtils monsterStuffUtils) {
+			MonsterStuffUtils monsterStuffUtils,
+			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
+			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -69,6 +75,9 @@ public class RedeemMiniEventRewardAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
+		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
+		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -127,7 +136,7 @@ public class RedeemMiniEventRewardAction {
 
 	private boolean verifySemantics(Builder resBuilder) {
 		//check to make sure the MiniEventForPlayerLvl exists
-		MiniEventForPlayerLvl me = MiniEventForPlayerLvlRetrieveUtils
+		MiniEventForPlayerLvl me = miniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvlById(mefplId);
 
 		if (null == me) {
@@ -136,7 +145,7 @@ public class RedeemMiniEventRewardAction {
 		}
 
 		//check to see there are rewards
-		miniEventTierRewards = MiniEventTierRewardRetrieveUtils
+		miniEventTierRewards = miniEventTierRewardRetrieveUtils
 				.getMiniEventTierReward(mefplId);
 		log.info("all MiniEventTierRewards: {}", miniEventTierRewards);
 
@@ -194,7 +203,7 @@ public class RedeemMiniEventRewardAction {
 		sb.append(ControllerConstants.MFUSOP__REDEEM_MINI_EVENT_REWARD);
 		for (MiniEventTierReward metr : miniEventTierRewards) {
 			int rewardId = metr.getRewardId();
-			Reward r = RewardRetrieveUtils.getRewardById(rewardId);
+			Reward r = rewardRetrieveUtils.getRewardById(rewardId);
 
 			rewards.add(r);
 
