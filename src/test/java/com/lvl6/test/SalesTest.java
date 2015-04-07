@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-//package com.lvl6.test;
+
 //
 //import static org.mockito.Matchers.any;
 //import static org.mockito.Mockito.mock;
@@ -243,7 +242,6 @@
 //	
 //	
 //}
-=======
 package com.lvl6.test;
 
 import static org.mockito.Matchers.any;
@@ -487,4 +485,3 @@ public class SalesTest {
 	
 	
 }
->>>>>>> test changes
