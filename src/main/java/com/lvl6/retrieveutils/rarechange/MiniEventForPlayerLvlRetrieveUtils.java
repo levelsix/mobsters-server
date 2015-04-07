@@ -78,6 +78,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 	public Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
+	        setOrderedMiniEventForPlayerLvls();
 		}
 
 		return idToMiniEventForPlayerLvl;
@@ -86,6 +87,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 	public MiniEventForPlayerLvl getMiniEventForPlayerLvlById(int id) {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
+	        setOrderedMiniEventForPlayerLvls();
 		}
 		MiniEventForPlayerLvl ep = idToMiniEventForPlayerLvl.get(id);
 		if (null == ep) {
@@ -100,6 +102,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		if (null == miniEventIdToOrderedMefpl) {
 			log.warn("no ordered MiniEventForPlayerLvl, reloading");
 			setStaticIdsToMiniEventForPlayerLvls();
+	        setOrderedMiniEventForPlayerLvls();
 		}
 
 		if (null == miniEventIdToOrderedMefpl) {
