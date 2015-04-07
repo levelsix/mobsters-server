@@ -210,4 +210,23 @@ message UpdateClientTaskStateResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+
+message UpdateUserStrengthRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 updatedStrength = 2;
+
+}
+
+message UpdateUserStrengthResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UpdateUserStrengthStatus status = 2;
+	
+	enum UpdateUserStrengthStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
 	

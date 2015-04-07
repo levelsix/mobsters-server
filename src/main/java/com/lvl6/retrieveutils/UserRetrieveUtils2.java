@@ -488,6 +488,8 @@ public class UserRetrieveUtils2 {
 
 			boolean boughtRiggedBoosterPack = rs
 					.getBoolean(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
+			
+			long totalStrength = rs.getLong(DBConstants.USER__TOTAL_STRENGTH);
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -501,7 +503,8 @@ public class UserRetrieveUtils2 {
 					numObstaclesRemoved, lastMiniJobGeneratedTime,
 					avatarMonsterId, lastFreeBoosterPackTime, numClanHelps,
 					lastSecretGiftCollectTime, pvpDefendingMessage,
-					lastTeamDonateSolicitation, boughtRiggedBoosterPack);
+					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
+					totalStrength);
 			return user;
 		}
 

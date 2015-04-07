@@ -56,6 +56,7 @@ public class User implements Serializable {
 	private String pvpDefendingMessage;
 	private Date lastTeamDonateSolicitation;
 	private boolean boughtRiggedBoosterPack;
+	private long totalStrength;
 
 	public User() {
 		super();
@@ -75,7 +76,8 @@ public class User implements Serializable {
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
-			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack) {
+			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack, 
+			long totalStrength) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -118,6 +120,15 @@ public class User implements Serializable {
 		this.pvpDefendingMessage = pvpDefendingMessage;
 		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
+		this.totalStrength = totalStrength;
+	}
+
+	public long getTotalStrength() {
+		return totalStrength;
+	}
+
+	public void setTotalStrength(long totalStrength) {
+		this.totalStrength = totalStrength;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1465,8 +1476,9 @@ public class User implements Serializable {
 				+ ", clanHelps=" + clanHelps + ", lastSecretGiftCollectTime="
 				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
 				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
-				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack"
-				+ boughtRiggedBoosterPack + "]";
+				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
+				+ boughtRiggedBoosterPack + ", totalStrength=" + totalStrength
+				+ "]";
 	}
 
 }
