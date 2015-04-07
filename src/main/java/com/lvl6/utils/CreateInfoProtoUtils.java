@@ -2493,6 +2493,11 @@ public class CreateInfoProtoUtils {
 		if (null != str) {
 			megpb.setGoalDesc(str);
 		}
+		
+		str = meg.getActionDescription();
+		if(null != str) {
+			megpb.setActionDescription(str);
+		}
 
 		megpb.setPointsGained(meg.getPtsReward());
 		return megpb.build();
