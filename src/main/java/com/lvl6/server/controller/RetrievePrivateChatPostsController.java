@@ -170,6 +170,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 							String posterId = pwp.getPosterId();
 							String contentLanguage = pwp.getContentLanguage();
 
+							if(contentLanguage == null || contentLanguage.isEmpty()) {
+								contentLanguage = "ENGLISH";
+							}
+							
 							long time = pwp.getTimeOfPost().getTime();
 							MinimumUserProtoWithLevel user = userIdsToMups
 									.get(posterId);
