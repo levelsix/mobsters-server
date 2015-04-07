@@ -1981,7 +1981,29 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	
+	@Override
+	public boolean updateUserStrength(String userId, long updatedStrength) {
+		String tableName = DBConstants.TABLE_USER;
+		
+		log.info("updating user strength, user={} and strength ={}", 
+				userId, updatedStrength);
+		
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID,
+				userId);
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__TOTAL_STRENGTH, 
+				updatedStrength);
+		
+		int numUpdated = DBConnection.get().updateTableRows(
+				tableName, null, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
+
 	
 	
 	

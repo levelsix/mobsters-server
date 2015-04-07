@@ -243,5 +243,7 @@ public interface UpdateUtil {
 	
 	public abstract boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
 			String chatType, String language, boolean translateOn);
+	
+	public abstract boolean updateUserStrength(String userId, long updatedStrength);
 
 }
