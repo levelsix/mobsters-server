@@ -1613,6 +1613,7 @@ public final class StaticDataStuffProto {
               salesPackage_.add(input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry));
               break;
             }
+<<<<<<< HEAD
             case 362: {
               if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
                 reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
@@ -1621,6 +1622,8 @@ public final class StaticDataStuffProto {
               reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
               break;
             }
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1752,9 +1755,12 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
           salesPackage_ = java.util.Collections.unmodifiableList(salesPackage_);
         }
+<<<<<<< HEAD
         if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
           reward_ = java.util.Collections.unmodifiableList(reward_);
         }
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -3647,9 +3653,12 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < salesPackage_.size(); i++) {
         output.writeMessage(44, salesPackage_.get(i));
       }
+<<<<<<< HEAD
       for (int i = 0; i < reward_.size(); i++) {
         output.writeMessage(45, reward_.get(i));
       }
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
       getUnknownFields().writeTo(output);
     }
 
@@ -3831,10 +3840,13 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(44, salesPackage_.get(i));
       }
+<<<<<<< HEAD
       for (int i = 0; i < reward_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(45, reward_.get(i));
       }
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -16744,6 +16756,7 @@ public final class StaticDataStuffProto {
       "f.proto\032\nCity.proto\032\nClan.proto\032\nItem.pr" +
       "oto\032\022MonsterStuff.proto\032\022Prerequisite.pr" +
       "oto\032\013Quest.proto\032\016Research.proto\032\013Sales." +
+<<<<<<< HEAD
       "proto\032\014Reward.proto\032\013Skill.proto\032\017Struct" +
       "ure.proto\032\nTask.proto\032\nUser.proto\"\231\023\n\017St" +
       "aticDataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
@@ -16808,6 +16821,71 @@ public final class StaticDataStuffProto {
       "tos\030( \003(\0132%.com.lvl6.proto.PvpBoardObsta" +
       "cleProto\022+\n\006reward\030- \003(\0132\033.com.lvl6.prot" +
       "o.RewardProtoB\026B\024StaticDataStuffProto"
+=======
+      "proto\032\013Skill.proto\032\017Structure.proto\032\nTas" +
+      "k.proto\032\nUser.proto\"\354\022\n\017StaticDataProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022>\n\016expansionCosts\030\002 \003(\0132&.com.",
+      "lvl6.proto.CityExpansionCostProto\0220\n\tall" +
+      "Cities\030\003 \003(\0132\035.com.lvl6.proto.FullCityPr" +
+      "oto\022/\n\010allTasks\030\004 \003(\0132\035.com.lvl6.proto.F" +
+      "ullTaskProto\022?\n\022allTaskMapElements\030\034 \003(\013" +
+      "2#.com.lvl6.proto.TaskMapElementProto\0221\n" +
+      "\013allMonsters\030\005 \003(\0132\034.com.lvl6.proto.Mons" +
+      "terProto\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto." +
+      "StaticUserLevelInfoProto\0228\n\020inProgressQu" +
+      "ests\030\007 \003(\0132\036.com.lvl6.proto.FullQuestPro" +
+      "to\0228\n\020unredeemedQuests\030\010 \003(\0132\036.com.lvl6.",
+      "proto.FullQuestProto\0227\n\017availableQuests\030" +
+      "\t \003(\0132\036.com.lvl6.proto.FullQuestProto\0226\n" +
+      "\014boosterPacks\030\013 \003(\0132 .com.lvl6.proto.Boo" +
+      "sterPackProto\0225\n\013starterPack\030$ \001(\0132 .com" +
+      ".lvl6.proto.BoosterPackProto\022=\n\rallGener" +
+      "ators\030\014 \003(\0132&.com.lvl6.proto.ResourceGen" +
+      "eratorProto\0229\n\013allStorages\030\r \003(\0132$.com.l" +
+      "vl6.proto.ResourceStorageProto\0223\n\014allHos" +
+      "pitals\030\016 \003(\0132\035.com.lvl6.proto.HospitalPr" +
+      "oto\0225\n\rallResidences\030\017 \003(\0132\036.com.lvl6.pr",
+      "oto.ResidenceProto\0223\n\014allTownHalls\030\020 \003(\013" +
+      "2\035.com.lvl6.proto.TownHallProto\022)\n\007allLa" +
+      "bs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\022=\n\021al" +
+      "lMiniJobCenters\030\033 \003(\0132\".com.lvl6.proto.M" +
+      "iniJobCenterProto\0227\n\016allEvoChambers\030\035 \003(" +
+      "\0132\037.com.lvl6.proto.EvoChamberProto\0227\n\016al" +
+      "lTeamCenters\030\036 \003(\0132\037.com.lvl6.proto.Team" +
+      "CenterProto\0225\n\rallClanHouses\030  \003(\0132\036.com" +
+      ".lvl6.proto.ClanHouseProto\0225\n\rallMoneyTr" +
+      "ees\030& \003(\0132\036.com.lvl6.proto.MoneyTreeProt",
+      "o\022=\n\021allPvpBoardHouses\030\' \003(\0132\".com.lvl6." +
+      "proto.PvpBoardHouseProto\022=\n\021allResearchH" +
+      "ouses\030) \003(\0132\".com.lvl6.proto.ResearchHou" +
+      "seProto\022E\n\025allBattleItemFactorys\030* \003(\0132&" +
+      ".com.lvl6.proto.BattleItemFactoryProto\022>" +
+      "\n\020persistentEvents\030\022 \003(\0132$.com.lvl6.prot" +
+      "o.PersistentEventProto\0228\n\004mbds\030\023 \003(\0132*.c" +
+      "om.lvl6.proto.MonsterBattleDialogueProto" +
+      "\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.proto.ClanRai" +
+      "dProto\022F\n\024persistentClanEvents\030\025 \003(\0132(.c",
+      "om.lvl6.proto.PersistentClanEventProto\022(" +
+      "\n\005items\030\026 \003(\0132\031.com.lvl6.proto.ItemProto" +
+      "\0220\n\tobstacles\030\027 \003(\0132\035.com.lvl6.proto.Obs" +
+      "tacleProto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6" +
+      ".proto.ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036." +
+      "com.lvl6.proto.PvpLeagueProto\0226\n\014achieve" +
+      "ments\030\032 \003(\0132 .com.lvl6.proto.Achievement" +
+      "Proto\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.S" +
+      "killProto\0229\n\013sideEffects\030% \003(\0132$.com.lvl" +
+      "6.proto.SkillSideEffectProto\022,\n\007prereqs\030",
+      "! \003(\0132\033.com.lvl6.proto.PrereqProto\0220\n\006bo" +
+      "ards\030\" \003(\0132 .com.lvl6.proto.BoardLayoutP" +
+      "roto\022/\n\010research\030# \003(\0132\035.com.lvl6.proto." +
+      "ResearchProto\0223\n\nbattleItem\030+ \003(\0132\037.com." +
+      "lvl6.proto.BattleItemProto\0227\n\014salesPacka" +
+      "ge\030, \003(\0132!.com.lvl6.proto.SalesPackagePr" +
+      "oto\022E\n\026pvpBoardObstacleProtos\030( \003(\0132%.co" +
+      "m.lvl6.proto.PvpBoardObstacleProtoB\026B\024St" +
+      "aticDataStuffProto"
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16833,7 +16911,10 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.ResearchsProto.getDescriptor(),
           com.lvl6.proto.SalesProto.getDescriptor(),
+<<<<<<< HEAD
           com.lvl6.proto.RewardsProto.getDescriptor(),
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
           com.lvl6.proto.SkillsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
@@ -16844,7 +16925,11 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
+<<<<<<< HEAD
         new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "SalesPackage", "PvpBoardObstacleProtos", "Reward", });
+=======
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "SalesPackage", "PvpBoardObstacleProtos", });
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();
@@ -16858,7 +16943,10 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.ResearchsProto.getDescriptor();
     com.lvl6.proto.SalesProto.getDescriptor();
+<<<<<<< HEAD
     com.lvl6.proto.RewardsProto.getDescriptor();
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
     com.lvl6.proto.SkillsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.TaskProto.getDescriptor();

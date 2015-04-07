@@ -1883,6 +1883,10 @@ public class UpdateUtils implements UpdateUtil {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams
 				.put(DBConstants.USER__ID, userId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
 		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
@@ -1895,6 +1899,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+<<<<<<< HEAD
 		
 	@Override
 	public boolean updateUserBattleItems(String userId,
@@ -1943,6 +1948,8 @@ public class UpdateUtils implements UpdateUtil {
 		return true;
 	}
 		
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	
 	@Override
 	public boolean updateUserSalesJumpTwoTiers(String userId, boolean jumpTwoTiers) {
@@ -1961,6 +1968,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+<<<<<<< HEAD
 
 		
 	
@@ -2042,6 +2050,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 	
 	

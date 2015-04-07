@@ -91,7 +91,10 @@ import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+<<<<<<< HEAD
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -263,11 +266,19 @@ public class MiscMethods {
 		return monstersExist;
 	}
 	
+<<<<<<< HEAD
 	public boolean checkIfMonstersExistInSalesItem(
 			List<SalesItem> itemsUserReceives) {
 		boolean monstersExist = true;
 
 		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
+=======
+	public static boolean checkIfMonstersExistInSalesItem(
+			List<SalesItem> itemsUserReceives) {
+		boolean monstersExist = true;
+
+		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 				.getMonsterIdsToMonsters();
 		for (SalesItem si : itemsUserReceives) {
 			int monsterId = si.getMonsterId();
@@ -348,6 +359,56 @@ public class MiscMethods {
 		}
 
 		log.info(sb.toString());
+<<<<<<< HEAD
+=======
+		return sb.toString();
+	}
+	
+	public static String createUpdateUserMonsterArgumentsForSales(String userId,
+			int salesPackageId, List<SalesItem> salesItems,
+			Map<Integer, Integer> monsterIdsToNumPieces,
+			List<MonsterForUser> completeUserMonsters, Date now) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(ControllerConstants.MFUSOP__SALES_PACKAGE);
+		sb.append(" ");
+		sb.append(salesPackageId);
+		sb.append(" salesItemMonsterIds ");
+
+		List<Integer> salesItemIds = new ArrayList<Integer>();
+		for (SalesItem item : salesItems) {
+			Integer id = item.getId();
+			Integer monsterId = item.getMonsterId();
+
+			//only keep track of the sales item ids that are a monster reward
+			if (monsterId <= 0) {
+				continue;
+			}
+			if (item.getMonsterLevel() > 0) {
+				//create a "complete" user monster
+				int monsterQuantity = item.getMonsterQuantity();
+				Monster monzter = MonsterRetrieveUtils
+						.getMonsterForMonsterId(monsterId);
+				List<MonsterForUser> monstersCreated = MonsterStuffUtils
+						.createLeveledMonsterForUserFromQuantity(userId, monzter, 
+								monsterQuantity, now, item.getMonsterLevel());
+				log.info("monster for users just created" + monstersCreated);
+
+				//return this monster in the argument list completeUserMonsters, so caller
+				//can use it
+				completeUserMonsters.addAll(monstersCreated);
+
+
+			} else {
+				monsterIdsToNumPieces.put(item.getMonsterId(), item.getMonsterQuantity());
+			}
+			salesItemIds.add(id);
+		}
+		if (!salesItemIds.isEmpty()) {
+			String salesItemIdsStr = StringUtils.csvList(salesItemIds);
+			sb.append(salesItemIdsStr);
+		}
+
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 		return sb.toString();
 	}
 	
@@ -1020,7 +1081,84 @@ public class MiscMethods {
 	//		return protos;
 	//	}
 
+<<<<<<< HEAD
 
+=======
+	public static void reloadAllRareChangeStaticData() {
+		log.info("Reloading rare change static data");
+		AchievementRetrieveUtils.reload();
+		BannedUserRetrieveUtils.reload();
+		BattleItemRetrieveUtils.reload();
+		BoardRetrieveUtils.reload();
+		BoardObstacleRetrieveUtils.reload();
+		BoardPropertyRetrieveUtils.reload();
+		BoosterDisplayItemRetrieveUtils.reload();
+		BoosterItemRetrieveUtils.reload();
+		BoosterPackRetrieveUtils.reload();
+		//    CityBossRetrieveUtils.reload();
+		//		CityElementsRetrieveUtils.reload(); 
+		//		CityRetrieveUtils.reload();
+		//    ClanBossRetrieveUtils.reload();
+		//    ClanBossRewardRetrieveUtils.reload();
+		ClanIconRetrieveUtils.reload();
+		ClanEventPersistentRetrieveUtils.reload();
+		ClanRaidRetrieveUtils.reload();
+		ClanRaidStageRetrieveUtils.reload();
+		ClanRaidStageMonsterRetrieveUtils.reload();
+		ClanRaidStageRewardRetrieveUtils.reload();
+		EventPersistentRetrieveUtils.reload();
+		FileDownloadRetrieveUtils.reload();
+		//		ExpansionCostRetrieveUtils.reload();
+		GoldSaleRetrieveUtils.reload();
+		ItemRetrieveUtils.reload();
+		//		LockBoxEventRetrieveUtils.reload();
+		//    MonsterForPvpRetrieveUtils.staticReload();
+		MiniJobRetrieveUtils.reload();
+		MonsterBattleDialogueRetrieveUtils.reload();
+		MonsterLevelInfoRetrieveUtils.reload();
+		MonsterRetrieveUtils.reload();
+		ObstacleRetrieveUtils.reload();
+		PrerequisiteRetrieveUtils.reload();
+		ProfanityRetrieveUtils.reload();
+		PvpLeagueRetrieveUtils.reload();
+		QuestJobRetrieveUtils.reload();
+		QuestJobMonsterItemRetrieveUtils.reload();
+		QuestRetrieveUtils.reload();
+		ResearchRetrieveUtils.reload();
+		ResearchPropertyRetrieveUtils.reload();
+		SalesDisplayItemRetrieveUtils.reload();
+		SalesItemRetrieveUtils.reload();
+		SalesPackageRetrieveUtils.reload();
+		SkillRetrieveUtils.reload();
+		SkillPropertyRetrieveUtils.reload();
+		SkillSideEffectRetrieveUtils.reload();
+		StartupStuffRetrieveUtils.reload();
+		StaticUserLevelInfoRetrieveUtils.reload();
+		StructureBattleItemFactoryRetrieveUtils.reload();
+		StructureClanHouseRetrieveUtils.reload();
+		StructureEvoChamberRetrieveUtils.reload();
+		StructureHospitalRetrieveUtils.reload();
+		StructureLabRetrieveUtils.reload();
+		StructureMiniJobRetrieveUtils.reload();
+		StructureMoneyTreeRetrieveUtils.reload();
+		StructurePvpBoardRetrieveUtils.reload();
+		StructureResearchHouseRetrieveUtils.reload();
+		StructureResidenceRetrieveUtils.reload();
+		StructureResourceGeneratorRetrieveUtils.reload();
+		StructureResourceStorageRetrieveUtils.reload();
+		StructureRetrieveUtils.reload();
+		StructureTeamCenterRetrieveUtils.reload();
+		StructureTownHallRetrieveUtils.reload();
+		TaskMapElementRetrieveUtils.reload();
+		TaskRetrieveUtils.reload();
+		TaskStageMonsterRetrieveUtils.reload();
+		TaskStageRetrieveUtils.reload();
+		//		TournamentEventRetrieveUtils.reload();
+		//		TournamentEventRewardRetrieveUtils.reload();
+
+		StaticDataContainer.reload();
+	}
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 	//  //returns the clan towers that changed
 	//  public void sendClanTowerWarNotEnoughMembersNotification(

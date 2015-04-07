@@ -32,7 +32,10 @@ public class SalesItem {
 	private int gemReward;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	public int getId() {
 		return id;
 	}
@@ -69,6 +72,10 @@ public class SalesItem {
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	@Override
 	public String toString() {
 		return "SalesItem [id=" + id + ", salesPackageId=" + salesPackageId
@@ -91,4 +98,8 @@ public class SalesItem {
 	}
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 }

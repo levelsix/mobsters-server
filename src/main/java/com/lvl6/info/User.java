@@ -59,7 +59,10 @@ public class User implements Serializable {
 	private int salesValue;
 	private Date lastPurchaseTime;
 	private boolean salesJumpTwoTiers;
+<<<<<<< HEAD
 	private long totalStrength;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 	public User() {
 		super();
@@ -80,9 +83,13 @@ public class User implements Serializable {
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
+<<<<<<< HEAD
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
 			long totalStrength) {
 			
+=======
+			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers) {
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 		super();
 		this.id = id;
 		this.name = name;
@@ -128,7 +135,10 @@ public class User implements Serializable {
 		this.salesValue = salesValue;
 		this.lastPurchaseTime = lastPurchaseTime;
 		this.salesJumpTwoTiers = salesJumpTwoTiers;
+<<<<<<< HEAD
 		this.totalStrength = totalStrength;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	}
 
 	public boolean isSalesJumpTwoTiers() {
@@ -137,6 +147,7 @@ public class User implements Serializable {
 
 	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
 		this.salesJumpTwoTiers = salesJumpTwoTiers;
+<<<<<<< HEAD
 	}
 
 	public long getTotalStrength() {
@@ -145,6 +156,8 @@ public class User implements Serializable {
 
 	public void setTotalStrength(long totalStrength) {
 		this.totalStrength = totalStrength;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1497,8 +1510,12 @@ public class User implements Serializable {
 				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
 				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
 				+ ", lastPurchaseTime=" + lastPurchaseTime
+<<<<<<< HEAD
 				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
 				+ ", totalStrength=" + totalStrength + "]";
+=======
+				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers + "]";
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	}
 
 	public int getSalesValue() {

@@ -252,9 +252,12 @@ public class StartupController extends EventController {
 	
 	@Autowired
 	protected UpdateUtil updateUtil;
+<<<<<<< HEAD
 	
 	@Autowired
 	protected MiscMethods miscMethods;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 	@Autowired
 	protected Globals globals;
@@ -725,9 +728,12 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
+<<<<<<< HEAD
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table

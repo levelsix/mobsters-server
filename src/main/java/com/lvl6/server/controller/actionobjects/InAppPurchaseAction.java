@@ -583,7 +583,11 @@ public class InAppPurchaseAction {
 				//TODO: clean up this copy paste of PurchaseBoosterPackController logic
 				List<SalesItem> itemsUserReceives = new ArrayList<SalesItem>();
 				itemsUserReceives.addAll(idToSalesItem.values());
+<<<<<<< HEAD
 				boolean legit = miscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+=======
+				boolean legit = MiscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 				if (!legit) {
 					throw new RuntimeException(String.format(
 							"illegal monster in sales item for salespackageId=%s",
@@ -599,17 +603,28 @@ public class InAppPurchaseAction {
 				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 				//sop = source of pieces
 				
+<<<<<<< HEAD
 				String mfusop = miscMethods.createUpdateUserMonsterArgumentsForSales(userId,
+=======
+				String mfusop = MiscMethods.createUpdateUserMonsterArgumentsForSales(userId,
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 						sp.getId(), itemsUserReceives, monsterIdToNumPieces,
 						completeUserMonsters, now);
 
 				log.info("!!!!!!!!!mfusop={}", mfusop);
 				//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
 				if (!completeUserMonsters.isEmpty()) {
+<<<<<<< HEAD
 					List<String> monsterForUserIds = insertUtil
 							.insertIntoMonsterForUserReturnIds(userId,
 									completeUserMonsters, mfusop, now);
 					List<FullUserMonsterProto> newOrUpdated = miscMethods
+=======
+					List<String> monsterForUserIds = InsertUtils.get()
+							.insertIntoMonsterForUserReturnIds(userId,
+									completeUserMonsters, mfusop, now);
+					List<FullUserMonsterProto> newOrUpdated = MiscMethods
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 							.createFullUserMonsterProtos(monsterForUserIds,
 									completeUserMonsters);
 
@@ -623,7 +638,11 @@ public class InAppPurchaseAction {
 				//this is if the user did not buy a complete monster, UPDATE DB
 				if (!monsterIdToNumPieces.isEmpty()) {
 					//assume things just work while updating user monsters
+<<<<<<< HEAD
 					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+=======
+					List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 							.updateUserMonsters(userId, monsterIdToNumPieces, null,
 									mfusop, now);
 
@@ -639,7 +658,11 @@ public class InAppPurchaseAction {
 						itemsUserReceives, itemForUserRetrieveUtil, updateUtil);
 				 
 				if (null != ifuList && !ifuList.isEmpty()) {
+<<<<<<< HEAD
 					List<UserItemProto> uipList = createInfoProtoUtils
+=======
+					List<UserItemProto> uipList = CreateInfoProtoUtils
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 							.createUserItemProtosFromUserItems(ifuList);
 					resBuilder.addAllUpdatedUserItems(uipList);
 				}

@@ -33,7 +33,10 @@ import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
+<<<<<<< HEAD
 import com.lvl6.info.Reward;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
@@ -71,7 +74,10 @@ import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
+<<<<<<< HEAD
 import com.lvl6.proto.RewardsProto.RewardProto;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
@@ -130,7 +136,10 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+<<<<<<< HEAD
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -1102,6 +1111,7 @@ public class StaticDataContainer {
 					.createSalesPackageProto(sp, items, displayItems);			
 		}
 	}
+<<<<<<< HEAD
 
 
 	private void setRewards(Builder sdpb) {
@@ -1122,5 +1132,7 @@ public class StaticDataContainer {
 			sdpb.addReward(rp);
 		}
 	}
+=======
+>>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 }
