@@ -1647,7 +1647,6 @@ public class StartupController extends EventController {
 	private void setSalesForUser(Builder resBuilder, User user) {
 		//update user jump two tier's value
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-		Date now = new Date();
 		if(salesJumpTwoTiers) {
 			Date lastPurchaseTime = user.getLastPurchaseTime();
 			if(lastPurchaseTime == null) {
@@ -1655,6 +1654,7 @@ public class StartupController extends EventController {
 				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
 				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
 			}
+			Date now = new Date();
 			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
 			if(diffInDays > 5) {
 				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
