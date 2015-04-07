@@ -1227,8 +1227,8 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__NAME = "name";
 	public static final String SALES_PACKAGE__PRICE = "price";
 	public static final String SALES_PACKAGE__UUID = "uuid";
-	public static final String SALES_PACKAGE__START_TIME = "start_time";
-	public static final String SALES_PACKAGE__END_TIME = "end_time";
+	public static final String SALES_PACKAGE__START_TIME = "time_start";
+	public static final String SALES_PACKAGE__END_TIME = "time_end";
 	public static final String SALES_PACKAGE__PRED_ID = "pred_id";
 	
 

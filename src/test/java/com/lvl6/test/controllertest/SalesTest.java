@@ -1,4 +1,4 @@
-package com.lvl6.test.ControllerTests;
+package com.lvl6.test.controllertest;
 
 import static org.junit.Assert.*;
 

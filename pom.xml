@@ -770,11 +770,6 @@
 				<artifactId>httpclient</artifactId>
 				<version>4.2.1</version>
 			</dependency>
-			<dependency>
-				<groupId>com.memetix</groupId>
-				<artifactId>microsoft-translator-java-api</artifactId>
-				<version>0.6.2</version>
-			</dependency>
 <!--     		<dependency> -->
 <!--         		<groupid>junit</groupId> -->
 <!--         		<artifactid>junit</artifactId> -->
@@ -791,26 +786,31 @@
     		<dependency>
         		<groupId>org.powermock</groupId>
         		<artifactId>powermock-module-junit4</artifactId>
-        		<version>1.5.1</version>
+        		<version>1.5.4</version>
         		<scope>test</scope>
     		</dependency>
     		<dependency>
         		<groupId>org.powermock</groupId>
         		<artifactId>powermock-api-mockito</artifactId>
-        		<version>1.5.1</version>
+        		<version>1.5.4</version>
         		<scope>test</scope>
     		</dependency>
     		<!-- Required for PowerMockRule -->
     		<dependency>
         		<groupId>org.powermock</groupId>
         		<artifactId>powermock-module-junit4-rule-agent</artifactId>
-        		<version>1.5.1</version>
+        		<version>1.5.4</version>
         		<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-javaagent</artifactId>
+				<version>1.6.2</version>
 			</dependency>
 			<dependency>
         		<groupId>org.powermock</groupId>
         		<artifactId>powermock-classloading-xstream</artifactId>
-        		<version>1.5.1</version>
+        		<version>1.5.4</version>
         		<scope>test</scope>
 			</dependency>
 		</dependencies>
@@ -1053,23 +1053,26 @@
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4-rule-agent</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-classloading-xstream</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.memetix</groupId>
-			<artifactId>microsoft-translator-java-api</artifactId>
-			<version>0.6.2</version>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-javaagent</artifactId>
 		</dependency>
 	</dependencies>
 

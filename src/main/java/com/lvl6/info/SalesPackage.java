@@ -4,6 +4,10 @@ import java.util.Date;
 
 public class SalesPackage {
 	
+	public SalesPackage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public SalesPackage(int id, String name, double price, String uuid,
 			Date timeStart, Date timeEnd, int predId) {
 		super();
