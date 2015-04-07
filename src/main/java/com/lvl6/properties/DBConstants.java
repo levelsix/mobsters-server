@@ -102,10 +102,7 @@ public class DBConstants {
 	public static final String TABLE_SALES_DISPLAY_ITEM_CONFIG = "sales_display_item_config";
 	public static final String TABLE_SALES_ITEM_CONFIG = "sales_item_config";
 	public static final String TABLE_SALES_PACKAGE_CONFIG = "sales_package_config";	
-<<<<<<< HEAD
 	public static final String TABLE_REWARD_CONFIG = "reward_config";
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
@@ -810,10 +807,8 @@ public class DBConstants {
 	public static final String USER__SALES_VALUE = "sales_value";
 	public static final String USER__SALES_LAST_PURCHASE_TIME = "sales_last_purchase_time";
 	public static final String USER__SALES_JUMP_TWO_TIERS = "sales_jump_two_tiers";
-<<<<<<< HEAD
+
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -1233,23 +1228,15 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__NAME = "name";
 	public static final String SALES_PACKAGE__PRICE = "price";
 	public static final String SALES_PACKAGE__UUID = "uuid";
-<<<<<<< HEAD
 	public static final String SALES_PACKAGE__START_TIME = "time_start";
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
 	public static final String SALES_PACKAGE__PRED_ID = "pred_id";
 	
-
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";
 	public static final String REWARD__TYPE ="type";
 	public static final String REWARD__AMT = "amt";
 
-=======
-	public static final String SALES_PACKAGE__START_TIME = "start_time";
-	public static final String SALES_PACKAGE__END_TIME = "end_time";
-	public static final String SALES_PACKAGE__PRED_ID = "pred_id";
-	
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
 	public static final String SERVER_TOGGLE__NAME = "name";
 	public static final String SERVER_TOGGLE__ON = "on";

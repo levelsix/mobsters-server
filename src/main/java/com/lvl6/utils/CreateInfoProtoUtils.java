@@ -215,12 +215,10 @@ import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
-<<<<<<< HEAD
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
+
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;

@@ -813,6 +813,11 @@
         		<version>1.5.4</version>
         		<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.memetix</groupId>
+				<artifactId>microsoft-translator-java-api</artifactId>
+				<version>0.6.2</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -1073,6 +1078,11 @@
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-javaagent</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.memetix</groupId>
+			<artifactId>microsoft-translator-java-api</artifactId>
+			<version>0.6.2</version>
 		</dependency>
 	</dependencies>
 

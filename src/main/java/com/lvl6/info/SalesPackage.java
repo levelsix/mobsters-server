@@ -3,14 +3,12 @@ package com.lvl6.info;
 import java.util.Date;
 
 public class SalesPackage {
-	
-<<<<<<< HEAD
+
 	public SalesPackage() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
+
 	public SalesPackage(int id, String name, double price, String uuid,
 			Date timeStart, Date timeEnd, int predId) {
 		super();
@@ -22,10 +20,7 @@ public class SalesPackage {
 		this.timeEnd = timeEnd;
 		this.predId = predId;
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 	private static final long serialVersionUID = 1549953377153488834L;
 
 	private int id;

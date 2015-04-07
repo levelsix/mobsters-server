@@ -502,11 +502,8 @@ public class UserRetrieveUtils2 {
 			}
 			
 			boolean salesJumpTwoTiers = rs.getBoolean(DBConstants.USER__SALES_JUMP_TWO_TIERS);
-<<<<<<< HEAD
 			
 			long totalStrength = rs.getLong(DBConstants.USER__TOTAL_STRENGTH);
-=======
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -521,12 +518,8 @@ public class UserRetrieveUtils2 {
 					avatarMonsterId, lastFreeBoosterPackTime, numClanHelps,
 					lastSecretGiftCollectTime, pvpDefendingMessage,
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
-<<<<<<< HEAD
 					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength);
 					
-=======
-					salesValue, lastPurchaseTime, salesJumpTwoTiers);
->>>>>>> d735b6a62f536b42e8bf5dd47b958cf6a43e1bc9
 			return user;
 		}
 
