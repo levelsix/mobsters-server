@@ -2042,6 +2042,27 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	public boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts) {
+		String tableName = DBConstants.TABLE_USER;
+		
+		log.info("updating user sales last purchasetime for user={}", 
+				userId);
+		
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID,
+				userId);
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, 
+				ts);
+		
+		int numUpdated = DBConnection.get().updateTableRows(
+				tableName, null, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+	}
 
 	
 	

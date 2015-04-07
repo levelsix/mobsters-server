@@ -1650,6 +1650,10 @@ public class StartupController extends EventController {
 		Date now = new Date();
 		if(salesJumpTwoTiers) {
 			Date lastPurchaseTime = user.getLastPurchaseTime();
+			if(lastPurchaseTime == null) {
+				Timestamp ts = new Timestamp(new Date().getTime());
+				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+			}
 			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
 			if(diffInDays > 5) {
 				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
@@ -1663,6 +1667,7 @@ public class StartupController extends EventController {
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = SalesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		int userSalesValue = user.getSalesValue();
+		
 		double newMinPrice = 0.0;
 
 		//arin's formula
