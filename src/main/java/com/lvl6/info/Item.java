@@ -15,7 +15,7 @@ public class Item implements Serializable {
 	private int amount;
 	private float secretGiftChance;
 	private boolean alwaysDisplayToUser;
-	private String gameType;
+	private String actionGameType;
 
 	//variable to assist in randomly selecting this Item
 	private float normalizedSecretGiftProbability;
@@ -27,7 +27,7 @@ public class Item implements Serializable {
 	public Item(int id, String name, String shortName, String imgName,
 			String itemType, int staticDataId, int amount,
 			float secretGiftChance, boolean alwaysDisplayToUser,
-			String gameType)
+			String actionGameType)
  	{
 		super();
 		this.id = id;
@@ -39,17 +39,19 @@ public class Item implements Serializable {
 		this.amount = amount;
 		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
-		this.gameType = gameType;
+		this.actionGameType = actionGameType;
 
 		//this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
 
-	public String getGameType() {
-		return gameType;
+
+
+	public String getActionGameType() {
+		return actionGameType;
 	}
 
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
+	public void setActionGameType(String actionGameType) {
+		this.actionGameType = actionGameType;
 	}
 
 	public int getId() {
@@ -135,14 +137,14 @@ public class Item implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", imgName=" + imgName
-				+ ", itemType=" + itemType + ", staticDataId=" + staticDataId
-				+ ", amount=" + amount + ", secretGiftChance="
-				+ secretGiftChance + ", alwaysDisplayToUser="
-				+ alwaysDisplayToUser + ", shortName=" + shortName
+		return "Item [id=" + id + ", name=" + name + ", shortName=" + shortName
+				+ ", imgName=" + imgName + ", itemType=" + itemType
+				+ ", staticDataId=" + staticDataId + ", amount=" + amount
+				+ ", secretGiftChance=" + secretGiftChance
+				+ ", alwaysDisplayToUser=" + alwaysDisplayToUser
+				+ ", actionGameType=" + actionGameType
 				+ ", normalizedSecretGiftProbability="
-				+ normalizedSecretGiftProbability
-				+ ", gameType=" + gameType + "]";
+				+ normalizedSecretGiftProbability + "]";
 	}
 
 }
