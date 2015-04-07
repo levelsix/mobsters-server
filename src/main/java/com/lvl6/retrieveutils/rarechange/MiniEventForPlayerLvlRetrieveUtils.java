@@ -62,13 +62,14 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 				return -1;
 			} else if (lvlMin1 > lvlMin2) {
 				return 1;
-			} else if (o1.getId() < o2.getId()) {
-				return -1;
-			} else if (o1.getId() > o2.getId()) {
-				return 1;
-			} else {
-				return 0;
+			} else if (o1.getId() != 0 && o2.getId() != 0) {
+			    if (o1.getId() < o2.getId()) {
+			        return -1;
+	            } else if (o1.getId() > o2.getId()) {
+	                return 1;
+	            } 
 			}
+            return 0;
 
 		}
 
