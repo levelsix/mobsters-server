@@ -801,6 +801,7 @@ public class DBConstants {
 	public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
 	public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
 	public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
+	public static final String USER__TOTAL_STRENGTH = "total_strength";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
