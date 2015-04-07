@@ -5024,7 +5024,10 @@ public class CreateInfoProtoUtils {
 		if (u.isFake()) {
 
 		}
-
+		
+		long totalStrength = u.getTotalStrength();
+		builder.setTotalStrength(totalStrength);
+		
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
