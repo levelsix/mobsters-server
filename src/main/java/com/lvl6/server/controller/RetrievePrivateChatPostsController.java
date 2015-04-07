@@ -168,6 +168,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
 							String posterId = pwp.getPosterId();
+							String contentLanguage = pwp.getContentLanguage();
 
 							long time = pwp.getTimeOfPost().getTime();
 							MinimumUserProtoWithLevel user = userIdsToMups
@@ -188,12 +189,12 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, translateLanguage);
+												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);
 							} else {
 								GroupChatMessageProto gcmp = CreateInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.NO_TRANSLATION);
+												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);
 							}
 						}

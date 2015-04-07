@@ -157,7 +157,7 @@ public interface InsertUtil {
 			List<String> userMonsterIds);
 
 	public abstract String insertIntoPrivateChatPosts(String posterId,
-			String recipientId, String content, Timestamp timeOfPost);
+			String recipientId, String content, Timestamp timeOfPost, String contentLanguage);
 
 	public abstract List<String> insertIntoPrivateChatPosts(
 			List<String> posterIds, List<String> recipientIds,

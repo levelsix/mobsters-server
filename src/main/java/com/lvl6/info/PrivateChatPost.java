@@ -12,7 +12,25 @@ public class PrivateChatPost implements Serializable {
 	protected String recipientId;
 	protected Date timeOfPost;
 	protected String content;
+	protected String contentLanguage;
 	protected TranslatedText translatedText;
+
+
+	public PrivateChatPost() {
+		super();
+	}
+
+	public PrivateChatPost(String id, String posterId, String recipientId,
+			Date timeOfPost, String content, TranslatedText translatedText, 
+			String contentLanguage) {
+		super();
+		this.id = id;
+		this.posterId = posterId;
+		this.recipientId = recipientId;
+		this.timeOfPost = timeOfPost;
+		this.content = content;
+		this.contentLanguage = contentLanguage;
+	}
 
 	public TranslatedText getTranslatedText() {
 		return translatedText;
@@ -22,19 +40,12 @@ public class PrivateChatPost implements Serializable {
 		this.translatedText = translatedText;
 	}
 
-	public PrivateChatPost() {
-		super();
+	public String getContentLanguage() {
+		return contentLanguage;
 	}
 
-	public PrivateChatPost(String id, String posterId, String recipientId,
-			Date timeOfPost, String content, TranslatedText translatedText) {
-		super();
-		this.id = id;
-		this.posterId = posterId;
-		this.recipientId = recipientId;
-		this.timeOfPost = timeOfPost;
-		this.content = content;
-		this.translatedText = translatedText;
+	public void setContentLanguage(String contentLanguage) {
+		this.contentLanguage = contentLanguage;
 	}
 
 	public String getId() {
@@ -81,7 +92,7 @@ public class PrivateChatPost implements Serializable {
 	public String toString() {
 		return "PrivateChatPost [id=" + id + ", posterId=" + posterId
 				+ ", recipientId=" + recipientId + ", timeOfPost=" + timeOfPost
-				+ ", content=" + content + ", translatedText=" + translatedText
-				+ "]";
+				+ ", content=" + content + ", contentLanguage="
+				+ contentLanguage + ", translatedText=" + translatedText + "]";
 	}
 }

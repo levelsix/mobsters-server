@@ -217,6 +217,8 @@ public class PrivateChatPostRetrieveUtils2 {
 			}
 			pcp.setContent(rs
 					.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT));
+			
+			pcp.setContentLanguage(rs.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE));
 
 			return pcp;
 		}

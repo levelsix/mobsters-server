@@ -158,7 +158,7 @@ public class AdminChatUtil {
 		String censoredContent = MiscMethods.censorUserInput(msg.getContent());
 		String privateChatPostId = insertUtils.insertIntoPrivateChatPosts(
 				posterId, recipientId, censoredContent, new Timestamp(msg
-						.getTimeOfPost().getTime()));
+						.getTimeOfPost().getTime()), ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
 		List<String> userIds = new ArrayList<String>();
 		userIds.add(posterId);
 		userIds.add(recipientId);
@@ -184,7 +184,7 @@ public class AdminChatUtil {
 		//		} else {
 
 		PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId,
-				recipientId, timeOfPost, censoredContent, null);
+				recipientId, timeOfPost, censoredContent, null, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
 		User poster = users.get(posterId);
 		User recipient = users.get(recipientId);
 		PrivateChatPostProto pcpp = CreateInfoProtoUtils

@@ -145,7 +145,7 @@ public class PrivateChatPostController extends EventController {
 				String censoredContent = MiscMethods.censorUserInput(content);
 				String privateChatPostId = insertUtils
 						.insertIntoPrivateChatPosts(posterId, recipientId,
-								censoredContent, timeOfPost);
+								censoredContent, timeOfPost, contentLanguage.toString());
 				if (privateChatPostId == null) {
 					legitPost = false;
 					resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
@@ -250,7 +250,7 @@ public class PrivateChatPostController extends EventController {
 					}
 					PrivateChatPost pwp = new PrivateChatPost(
 							privateChatPostId, posterId, recipientId,
-							timeOfPost, censoredContent, tt);
+							timeOfPost, censoredContent, tt, contentLanguage.toString());
 					User poster = users.get(posterId);
 					User recipient = users.get(recipientId);
 
