@@ -216,11 +216,11 @@ public class ItemRetrieveUtils {
 				.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
 		boolean alwaysDisplayToUser = rs
 				.getBoolean(DBConstants.ITEM__ALWAYS_DISPLAY_TO_USER);
-		String gameType = rs.getString(DBConstants.ITEM__GAME_TYPE);
+		String actionGameType = rs.getString(DBConstants.ITEM__ACTION_GAME_TYPE);
 		
 
 		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId, amount,
-				secretGiftChance, alwaysDisplayToUser, gameType);
+				secretGiftChance, alwaysDisplayToUser, actionGameType);
 		return item;
 	}
 }
