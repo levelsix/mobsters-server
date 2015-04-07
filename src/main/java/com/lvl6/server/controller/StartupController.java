@@ -1651,7 +1651,8 @@ public class StartupController extends EventController {
 		if(salesJumpTwoTiers) {
 			Date lastPurchaseTime = user.getLastPurchaseTime();
 			if(lastPurchaseTime == null) {
-				Timestamp ts = new Timestamp(new Date().getTime());
+				lastPurchaseTime = new Date();
+				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
 				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
 			}
 			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
