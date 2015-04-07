@@ -87,21 +87,21 @@ public class QueueUpController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 
 	//	@Autowired
@@ -186,7 +186,7 @@ public class QueueUpController extends EventController {
 
 			QueueUpAction qua = new QueueUpAction(attackerId, uniqSeenUserIds,
 					clientDate, pvpLeagueForUserRetrieveUtil, hazelcastPvpUtil,
-					monsterForPvpRetrieveUtil, timeUtil, serverToggleRetrieveUtils);
+					monsterForPvpRetrieveUtil, timeUtil, serverToggleRetrieveUtil);
 
 			//update the user, and his shield
 			qua.execute(resBuilder);
@@ -288,7 +288,7 @@ public class QueueUpController extends EventController {
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil,
 					researchForUserRetrieveUtil,
-					monsterStuffUtils);
+					monsterStuffUtils, serverToggleRetrieveUtil);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
@@ -506,9 +506,9 @@ public class QueueUpController extends EventController {
 			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
-		boolean setElo = serverToggleRetrieveUtils
+		boolean setElo = serverToggleRetrieveUtil
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
-		boolean displayBotElo = serverToggleRetrieveUtils
+		boolean displayBotElo = serverToggleRetrieveUtil
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
@@ -688,6 +688,57 @@ public class QueueUpController extends EventController {
 	public void setPvpBoardObstacleForUserRetrieveUtil(
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
+	}
+
+	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
+		return researchForUserRetrieveUtil;
+	}
+
+	public void setResearchForUserRetrieveUtil(
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
+		return monsterRetrieveUtils;
+	}
+
+	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
+		this.monsterRetrieveUtils = monsterRetrieveUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.info.User;
 import com.lvl6.pvp.PvpBattleOutcome;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
@@ -19,6 +20,8 @@ public class EloFunctionsTest extends TestCase {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
 	public static final int CASH__DEFENDER = 2000;
 	public static final int OIL_DEFENDER = 10000;
 
@@ -26,11 +29,11 @@ public class EloFunctionsTest extends TestCase {
 	//	@Test
 	//	public void testMatchMaking() {
 	//		double elo = getAttackerElo();
-	//		
+	//
 	//		log.info(String.format(
 	//			"testing computing suitable elo range for elo=%f",
 	//			elo));
-	//		
+	//
 	//		//pulled from a Dash's excel spreadsheet and files
 	//		//randVal = [Max Range] x Player's Score x ICND( Random( 0.1, 0.9 ), [Bias], 0.608 )
 	//		//computedElo = player score + randVal
@@ -42,15 +45,15 @@ public class EloFunctionsTest extends TestCase {
 	//		double expectedElo = elo + expectedEloAddend;
 	//
 	//		double generatedElo = PvpUtil2.getProspectiveOpponentElo(randVar, elo);
-	//		
+	//
 	//		//bounded generatedElo between expectedElo because of potential rounding differences
-	//		//could have just chosen +/- 1 or any other number 
+	//		//could have just chosen +/- 1 or any other number
 	//		double expectedMax = Math.max(expectedElo * 1.001D, expectedElo + 2);
 	//		double expectedMin = Math.min(expectedElo * 0.999D, expectedElo - 2);
 	//		assertTrue(String.format(
-	//			"Not equal/similar values. expectedElo=%f, generatedElo=%f", expectedElo, generatedElo), 
+	//			"Not equal/similar values. expectedElo=%f, generatedElo=%f", expectedElo, generatedElo),
 	//			generatedElo <= expectedMax && generatedElo >= expectedMin);
-	//		
+	//
 	//	}
 
 	@Test
@@ -67,13 +70,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloHigh(), defender);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
 		int eloWon = betterOpponent.getUnsignedEloAttackerWins();
 		assertTrue("Expected elo won: unsigned elo. Actual: " + eloWon,
 				eloWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloLow(), defender);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
 		int eloWonNotMuch = worseOpponent.getUnsignedEloAttackerWins();
 		assertTrue("Expected elo won: unsigned elo. Actual: " + eloWonNotMuch,
 				eloWonNotMuch >= 0);
@@ -94,7 +97,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedEloWonNotMuch = 13;
 
 		//bounded generatedElo between expectedElo because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedEloWonNotMuchMax = Math.max(
 				(int) (expectedEloWonNotMuch * 1.001D),
 				expectedEloWonNotMuch + 2);
@@ -123,14 +126,14 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloHigh(), defender);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
 		int eloLostNotMuch = betterOpponent.getUnsignedEloAttackerLoses();
 		assertTrue(
 				"Expected elo lost: unsigned elo. Actual: " + eloLostNotMuch,
 				eloLostNotMuch >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloLow(), defender);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
 		int eloLost = worseOpponent.getUnsignedEloAttackerLoses();
 		assertTrue("Expected elo lost: unsigned elo. Actual: " + eloLost,
 				eloLost >= 0);
@@ -152,7 +155,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedEloLost = 37;
 
 		//bounded generatedElo between expectedElo because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedEloWonNotMuchMax = Math.max(
 				(int) (expectedEloLost * 1.001D), expectedEloLost + 2);
 		int expectedEloWonNotMuchMin = Math.min(
@@ -181,13 +184,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloHigh(), defender);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
 		int cashWon = betterOpponent.getUnsignedCashAttackerWins();
 		assertTrue("Expected cash won: unsigned cash. Actual: " + cashWon,
 				cashWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloLow(), defender);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
 		int cashWonNotMuch = worseOpponent.getUnsignedCashAttackerWins();
 		assertTrue("Expected cash won: unsigned cash. Actual: "
 				+ cashWonNotMuch, cashWonNotMuch >= 0);
@@ -202,7 +205,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedCashWon = 473;
 
 		//bounded generatedElo between expectedElo because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedCashWonMax = Math.max((int) (expectedCashWon * 1.001D),
 				expectedCashWon + 2);
 		int expectedCashWonMin = Math.min((int) (expectedCashWon * 0.999D),
@@ -217,7 +220,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedCashWonNotMuch = 152;
 
 		//bounded generatedCash between expectedCash because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedCashWonNotMuchMax = Math.max(
 				(int) (expectedCashWonNotMuch * 1.001D), expectedCashWon + 2);
 		int expectedCashWonNotMuchMin = Math.min(
@@ -246,13 +249,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloHigh(), defender);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
 		int oilWon = betterOpponent.getUnsignedOilAttackerWins();
 		assertTrue("Expected oil won: unsigned oil. Actual: " + oilWon,
 				oilWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				getDefenderEloLow(), defender);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
 		int oilWonNotMuch = worseOpponent.getUnsignedOilAttackerWins();
 		assertTrue("Expected oil won: unsigned oil. Actual: " + oilWonNotMuch,
 				oilWonNotMuch >= 0);
@@ -267,7 +270,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedOilWon = 2364;
 
 		//bounded generatedOil between expectedOil because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedOilWonMax = Math.max((int) (expectedOilWon * 1.001D),
 				expectedOilWon + 2);
 		int expectedOilWonMin = Math.min((int) (expectedOilWon * 0.999D),
@@ -282,7 +285,7 @@ public class EloFunctionsTest extends TestCase {
 		int expectedOilWonNotMuch = 757;
 
 		//bounded generatedOil between expectedOil because of potential rounding differences
-		//could have just chosen +/- 1 or any other number 
+		//could have just chosen +/- 1 or any other number
 		int expectedOilWonNotMuchMax = Math.max(
 				(int) (expectedOilWonNotMuch * 1.001D), expectedOilWon + 2);
 		int expectedOilWonNotMuchMin = Math.min(
@@ -306,7 +309,7 @@ public class EloFunctionsTest extends TestCase {
 		return "2";
 	}
 
-	//defender elo values based on xcel spreadsheet by Dash  
+	//defender elo values based on xcel spreadsheet by Dash
 	protected int getDefenderEloHigh() {
 		return 1488;
 	}
@@ -314,6 +317,15 @@ public class EloFunctionsTest extends TestCase {
 	//defender elo values based on xcel spreadsheet by Dash
 	protected int getDefenderEloLow() {
 		return 1000;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 	}
 
 }

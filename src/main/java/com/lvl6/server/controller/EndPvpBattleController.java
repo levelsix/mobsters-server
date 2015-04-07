@@ -47,6 +47,7 @@ import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -88,19 +89,22 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	public EndPvpBattleController() {
 		numAllocatedThreads = 7;
@@ -839,7 +843,7 @@ public class EndPvpBattleController extends EventController {
 				defender.getOil(), oilStolen, defenderWon);
 		boolean displayToDefender = true;
 
-		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
+		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and
 		//the history for this battle should have the display_to_defender set to false;
 		Date shieldEndTime = defenderPlfu.getShieldEndTime();
 		//	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
@@ -965,7 +969,7 @@ public class EndPvpBattleController extends EventController {
 				defenderPlfu));
 	}
 
-	//new method created so as to reduce clutter in calling method 
+	//new method created so as to reduce clutter in calling method
 	private void writePvpBattleHistory(String attackerId,
 			int attackerEloBefore, String defenderId, int defenderEloBefore,
 			int attackerPrevLeague, int attackerCurLeague,
@@ -1182,7 +1186,7 @@ public class EndPvpBattleController extends EventController {
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,
-				defenderElo, attackerElo, attacker);
+				defenderElo, attacker, attackerElo, serverToggleRetrieveUtil);
 
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 				.singletonMap(attackerId,
@@ -1386,6 +1390,48 @@ public class EndPvpBattleController extends EventController {
 	public void setMonsterForUserRetrieveUtil(
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtils() {
+		return pvpLeagueRetrieveUtils;
+	}
+
+	public void setPvpLeagueRetrieveUtils(
+			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils) {
+		this.pvpLeagueRetrieveUtils = pvpLeagueRetrieveUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
 	}
 
 }
