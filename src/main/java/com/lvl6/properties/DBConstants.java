@@ -838,7 +838,8 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID = "recipient_id";
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
-
+	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
+	
 	/*USER SESSIONS*/
 	public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
 	public static final String USER_SESSIONS__LOGIN_TIME = "login_time";

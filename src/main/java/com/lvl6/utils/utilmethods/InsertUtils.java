@@ -793,7 +793,7 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public String insertIntoPrivateChatPosts(String posterId,
-			String recipientId, String content, Timestamp timeOfPost) {
+			String recipientId, String content, Timestamp timeOfPost, String contentLanguage) {
 		String wallPostId = randomUUID();
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -805,6 +805,8 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
 				timeOfPost);
+		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE,
+				contentLanguage);
 
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_USER_PRIVATE_CHAT_POST, insertParams);
