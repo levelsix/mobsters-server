@@ -25,6 +25,11 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -123,6 +128,21 @@ public class ReloadAllRareChangeStaticData {
 	
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
 	
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
@@ -271,7 +291,11 @@ public class ReloadAllRareChangeStaticData {
 		//		LockBoxEventRetrieveUtils.reload();
 		//    MonsterForPvpRetrieveUtils.staticReload();
 		miniJobRetrieveUtils.reload();
-		
+		miniEventForPlayerLvlRetrieveUtils.reload();
+		miniEventGoalRetrieveUtils.reload();
+		miniEventLeaderboardRewardRetrieveUtils.reload();
+		miniEventRetrieveUtils.reload();
+		miniEventTierRewardRetrieveUtils.reload();
 		monsterBattleDialogueRetrieveUtils.reload();
 		monsterLevelInfoRetrieveUtils.reload();
 		monsterRetrieveUtils.reload();
