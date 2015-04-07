@@ -246,8 +246,9 @@ public class PrivateChatPostController extends EventController {
 						adminChatUtil.sendAdminChatEmail(acp);
 						
 						GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
-						gcmpb.setContent(value)
-						resBuilder.setAdminMessage(value);
+						//this is where you create the translated admin messages
+//						gcmpb.setContent(value)
+//						resBuilder.setAdminMessage(value);
 						
 						
 					}
