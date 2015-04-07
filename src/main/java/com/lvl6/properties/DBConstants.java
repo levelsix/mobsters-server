@@ -999,6 +999,7 @@ public class DBConstants {
 	public static final String MINI_EVENT_GOAL__AMT = "amt";
 	public static final String MINI_EVENT_GOAL__DESCRIPTION = "description";
 	public static final String MINI_EVENT_GOAL__PTS_REWARD = "pts_reward";
+	public static final String MINI_EVENT_GOAL__ACTION_DESCRIPTION = "action_description";
 
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__ID = GENERIC__ID;
 	public static final String MINI_EVENT_LEADERBOARD_REWARD__MINI_EVENT_ID = "mini_event_id";

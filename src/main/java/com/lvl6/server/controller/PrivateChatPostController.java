@@ -28,6 +28,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
@@ -243,6 +244,12 @@ public class PrivateChatPostController extends EventController {
 								new Date(), censoredContent);
 						acp.setUsername(users.get(posterId).getName());
 						adminChatUtil.sendAdminChatEmail(acp);
+						
+						GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
+						gcmpb.setContent(value)
+						resBuilder.setAdminMessage(value);
+						
+						
 					}
 					PrivateChatPost pwp = new PrivateChatPost(
 							privateChatPostId, posterId, recipientId,
