@@ -168,6 +168,8 @@ public interface InsertUtil {
 	
 	public abstract boolean insertTranslateSettings(String receiverId, String senderId, 
 			String language, String chatType, boolean translateOn);
+	
+	public abstract boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats);
 
 	public abstract String insertIntoUserTaskReturnId(String userId,
 			int taskId, int expGained, int cashGained, int oilGained,

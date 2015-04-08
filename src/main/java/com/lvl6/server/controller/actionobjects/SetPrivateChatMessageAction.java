@@ -196,19 +196,23 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		//			postIdsToPrivateChatPosts));
 
 		//if no global default, set the private chat's defaults as english
+		Map<String, String> pairsOfChats = new HashMap<String, String>();
+		boolean successfulInserts = true;
+		
 		if(tsfuListIsNull) {
 			for(String id : privateChatPostIds) {
 				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
-				if(pcp.getRecipientId().equalsIgnoreCase(userId)) {
-					insertUtil.insertTranslateSettings(pcp.getRecipientId(), pcp.getPosterId(),
-							ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
-							ChatType.PRIVATE_CHAT.toString(), ControllerConstants.
-							TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+				if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
+					pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
 				}
 				
 			}
+			successfulInserts = insertUtil.insertMultipleDefaultTranslateSettings(pairsOfChats);
 		}
 		
+		if(!successfulInserts) {
+			log.error("something messed up inserting all the default translate settings for userId {}", userId);
+		}
 		
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();

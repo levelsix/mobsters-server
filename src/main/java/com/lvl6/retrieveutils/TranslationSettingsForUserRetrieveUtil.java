@@ -80,7 +80,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 		}
 		return userTranslationSettingss;
 	}
-
+	
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
 	public Map<String, TranslationSettingsForUser> getSenderIdToUserTranslationSettingsForUser(
 			String userId) {
