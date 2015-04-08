@@ -10947,6 +10947,7 @@ public final class EventChatProto {
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
       "o\022\025\n\rrecipientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(" +
 <<<<<<< HEAD
+<<<<<<< HEAD
       "\t\022;\n\017contentLanguage\030\004 \001(\0162\".com.lvl6.pr" +
       "oto.TranslateLanguages\"\315\003\n\034PrivateChatPo" +
       "stResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv",
@@ -10992,6 +10993,8 @@ public final class EventChatProto {
       "\022\016\n\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VALID_LANGU",
       "AGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChatProto"
 =======
+=======
+>>>>>>> 37dc84c... change to privatechatpost to save translation entry
       "\t\022D\n\017contentLanguage\030\004 \001(\0162\".com.lvl6.pr" +
       "oto.TranslateLanguages:\007ENGLISH\"\220\003\n\034Priv" +
       "ateChatPostResponseProto\0220\n\006sender\030\001 \001(\013",
@@ -11035,6 +11038,9 @@ public final class EventChatProto {
       "ranslateSelectMessagesStatus\022\016\n\nFAIL_OTH" +
       "ER\020\001\022\033\n\027FAIL_NOT_VALID_LANGUAGE\020\002\022\013\n\007SUC" +
       "CESS\020\003B\020B\016EventChatProto"
+<<<<<<< HEAD
+>>>>>>> 37dc84c... change to privatechatpost to save translation entry
+=======
 >>>>>>> 37dc84c... change to privatechatpost to save translation entry
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
