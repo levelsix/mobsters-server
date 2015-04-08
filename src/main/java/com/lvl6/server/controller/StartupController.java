@@ -51,7 +51,6 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -78,7 +77,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -174,7 +172,6 @@ import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
@@ -411,7 +408,16 @@ public class StartupController extends EventController {
 	
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+	
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -1662,10 +1668,10 @@ public class StartupController extends EventController {
 			}
 		}
 		
-		Map<Integer, SalesPackage> idsToSalesPackages = SalesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = SalesItemRetrieveUtils
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = SalesDisplayItemRetrieveUtils
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		int userSalesValue = user.getSalesValue();
 		
