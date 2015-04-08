@@ -13,8 +13,6 @@ public class PvpBattleOutcome {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 	
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	private static double SCORING_CURVE_BIAS = 0D;
 	private static double SCORING_CURVE_LINEARITY = 0.15D;
@@ -36,9 +34,10 @@ public class PvpBattleOutcome {
 	private double defenderElo;
 	private double defenderCash;
 	private double defenderOil;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public PvpBattleOutcome(User attacker, int attackerElo, int defenderElo,
-			User defender) {
+			User defender, ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
 		super();
 		this.attacker = attacker;
 		this.defender = defender;
@@ -48,6 +47,7 @@ public class PvpBattleOutcome {
 		this.defenderElo = defenderElo;
 		this.defenderCash = defender.getCash();
 		this.defenderOil = defender.getOil();
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 
 		setLoggingBoolean();
 	}

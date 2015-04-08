@@ -28,7 +28,7 @@ public class SalesPackageRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SALES_PACKAGE_CONFIG;
 
-	public static Map<Integer, SalesPackage> getSalesPackageIdsToSalesPackages() {
+	public Map<Integer, SalesPackage> getSalesPackageIdsToSalesPackages() {
 		log.debug("retrieving all sales packs data map");
 		if (salesPackageIdsToSalesPackages == null) {
 			setStaticSalesPackageIdsToSalesPackages();
@@ -50,7 +50,21 @@ public class SalesPackageRetrieveUtils {
 	//    return returnValue;
 	//  }
 
-	public static SalesPackage getSalesPackageForSalesPackageId(int salesPackageId) {
+	public Map<String, SalesPackage> getSalesPackageNamesToSalesPackages() {
+		log.debug("retrieving all sales packs data map");
+		if (salesPackageIdsToSalesPackages == null) {
+			setStaticSalesPackageIdsToSalesPackages();
+		}
+		
+		Map<String, SalesPackage> returnMap = new HashMap<String, SalesPackage>();
+		for(Integer i : salesPackageIdsToSalesPackages.keySet()) {
+			SalesPackage sp = salesPackageIdsToSalesPackages.get(i);
+			returnMap.put(sp.getName(), sp);
+		}
+		return returnMap;
+	}
+	
+	public SalesPackage getSalesPackageForSalesPackageId(int salesPackageId) {
 		log.debug("retrieve sales pack data for sales pack "
 				+ salesPackageId);
 		if (salesPackageIdsToSalesPackages == null) {
@@ -59,7 +73,7 @@ public class SalesPackageRetrieveUtils {
 		return salesPackageIdsToSalesPackages.get(salesPackageId);
 	}
 
-	private static void setStaticSalesPackageIdsToSalesPackages() {
+	private void setStaticSalesPackageIdsToSalesPackages() {
 		log.debug("setting static map of salesPackageIds to salesPackages");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -93,14 +107,14 @@ public class SalesPackageRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticSalesPackageIdsToSalesPackages();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static SalesPackage convertRSRowToSalesPackage(ResultSet rs)
+	private SalesPackage convertRSRowToSalesPackage(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_PACKAGE__ID);
 		String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);

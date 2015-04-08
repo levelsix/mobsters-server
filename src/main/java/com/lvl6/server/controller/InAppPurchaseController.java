@@ -35,6 +35,8 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
@@ -85,6 +87,12 @@ public class InAppPurchaseController extends EventController {
 	
 	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+	
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
@@ -287,7 +295,8 @@ public class InAppPurchaseController extends EventController {
 					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
 					boosterItemRetrieveUtils, monsterStuffUtils, 
 					structureMoneyTreeRetrieveUtils, insertUtil, updateUtil, 
-					createInfoProtoUtils, miscMethods);
+					createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+					salesItemRetrieveUtils);
 
 			iapa.execute(resBuilder);
 

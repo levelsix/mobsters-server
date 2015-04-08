@@ -23,6 +23,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -39,6 +40,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final HazelcastPvpUtil hazelcastPvpUtil;
 	private final MonsterStuffUtils monsterStuffUtils;
 	private final CreateInfoProtoUtils createInfoProtoUtils;
+	private final ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
@@ -47,7 +49,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			ClanRetrieveUtils2 clanRetrieveUtils,
 			HazelcastPvpUtil hazelcastPvpUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+			CreateInfoProtoUtils createInfoProtoUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -57,6 +60,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 	}
 
 	//derived state
@@ -264,7 +268,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
 
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
-					attackerElo, defenderPu.getElo(), defender);
+					attackerElo, defenderPu.getElo(), defender, serverToggleRetrieveUtils);
 
 			userIdToCashStolen.put(defenderId,
 					potentialResult.getUnsignedCashAttackerWins());

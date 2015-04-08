@@ -19,6 +19,7 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -39,13 +40,15 @@ public class BeginPvpBattleAction {
 	private TimeUtils timeUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public BeginPvpBattleAction(String attackerId, String defenderId,
 			int defenderElo, Date clientDate, boolean exactingRevenge,
 			Timestamp previousBattleEndTime,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			HazelcastPvpUtil hazelcastPvpUtil, TimeUtils timeUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -58,6 +61,7 @@ public class BeginPvpBattleAction {
 		this.timeUtil = timeUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -241,7 +245,7 @@ public class BeginPvpBattleAction {
 		user.setOil(0);
 		user.setId(defenderId);
 		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo,
-				defenderElo, user);
+				defenderElo, user, serverToggleRetrieveUtils);
 
 		attackerWins(defenderElo, results);
 		attackerLoses(attackerElo, results);

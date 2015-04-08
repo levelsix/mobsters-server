@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
 public class RetrieveUserMonsterTeamAction {
@@ -54,6 +55,8 @@ public class RetrieveUserMonsterTeamAction {
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -67,7 +70,8 @@ public class RetrieveUserMonsterTeamAction {
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
-			MonsterStuffUtils monsterStuffUtils)
+			MonsterStuffUtils monsterStuffUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -82,6 +86,7 @@ public class RetrieveUserMonsterTeamAction {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -195,7 +200,7 @@ public class RetrieveUserMonsterTeamAction {
 
 			User u = userIdToUser.get(userId);
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-					retrieveUser, retrieverElo, pu.getElo(), u);
+					retrieveUser, retrieverElo, pu.getElo(), u, serverToggleRetrieveUtils);
 
 			allButRetrieverUserIdToCashLost.put(userId,
 					potentialResult.getUnsignedCashAttackerWins());

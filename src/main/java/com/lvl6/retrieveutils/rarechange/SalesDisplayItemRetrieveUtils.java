@@ -30,7 +30,7 @@ public class SalesDisplayItemRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SALES_DISPLAY_ITEM_CONFIG;
 
-	public static Map<Integer, SalesDisplayItem> getSalesDisplayItemIdsToSalesDisplayItems() {
+	public Map<Integer, SalesDisplayItem> getSalesDisplayItemIdsToSalesDisplayItems() {
 		log.debug("retrieving all SalesDisplayItems data map");
 		if (salesDisplayItemIdsToSalesDisplayItems == null) {
 			setStaticSalesDisplayItemIdsToSalesDisplayItems();
@@ -38,14 +38,14 @@ public class SalesDisplayItemRetrieveUtils {
 		return salesDisplayItemIdsToSalesDisplayItems;
 	}
 
-	public static Map<Integer, Map<Integer, SalesDisplayItem>> getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds() {
+	public Map<Integer, Map<Integer, SalesDisplayItem>> getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds() {
 		if (null == salesDisplayItemIdsToSalesDisplayItemsForSalesPackIds) {
 			setStaticSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		}
 		return salesDisplayItemIdsToSalesDisplayItemsForSalesPackIds;
 	}
 
-	public static Map<Integer, SalesDisplayItem> getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackId(
+	public Map<Integer, SalesDisplayItem> getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackId(
 			int salesPackId) {
 		try {
 			log.debug("retrieve salesPack data for salesPack "
@@ -80,7 +80,7 @@ public class SalesDisplayItemRetrieveUtils {
 		return null;
 	}
 
-	public static SalesDisplayItem getSalesDisplayItemForSalesDisplayItemId(
+	public SalesDisplayItem getSalesDisplayItemForSalesDisplayItemId(
 			int salesDisplayItemId) {
 		log.debug("retrieve salesDisplayItem data for salesDisplayItem "
 				+ salesDisplayItemId);
@@ -91,7 +91,7 @@ public class SalesDisplayItemRetrieveUtils {
 				.get(salesDisplayItemId);
 	}
 
-	public static void setStaticSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds() {
+	public void setStaticSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds() {
 		try {
 			log.debug("setting static map of salesPackId to (salesDisplayItemIds to salesDisplayItems) ");
 			if (salesDisplayItemIdsToSalesDisplayItems == null) {
@@ -121,7 +121,7 @@ public class SalesDisplayItemRetrieveUtils {
 		}
 	}
 
-	private static void setStaticSalesDisplayItemIdsToSalesDisplayItems() {
+	private void setStaticSalesDisplayItemIdsToSalesDisplayItems() {
 		log.debug("setting static map of salesDisplayItemIds to salesDisplayItems");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -156,7 +156,7 @@ public class SalesDisplayItemRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticSalesDisplayItemIdsToSalesDisplayItems();
 		setStaticSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 	}
@@ -164,7 +164,7 @@ public class SalesDisplayItemRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static SalesDisplayItem convertRSRowToSalesDisplayItem(
+	private SalesDisplayItem convertRSRowToSalesDisplayItem(
 			ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_DISPLAY_ITEM__ID);
 		int salesPackageId = rs

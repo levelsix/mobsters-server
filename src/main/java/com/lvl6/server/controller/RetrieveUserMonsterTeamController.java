@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -72,6 +73,9 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 
 	public RetrieveUserMonsterTeamController() {
@@ -149,7 +153,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-					monsterStuffUtils);
+					monsterStuffUtils, serverToggleRetrieveUtils);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(

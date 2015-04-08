@@ -276,6 +276,15 @@ public class StaticDataContainer {
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 	
 	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+	
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
 	
 	@Autowired
@@ -346,6 +355,8 @@ public class StaticDataContainer {
 	
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+	
+	
 
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -1065,24 +1076,20 @@ public class StaticDataContainer {
 		}
 	}
 	
-	private static void setSales(Builder sdpb) {
-		Map<Integer, SalesPackage> idsToSalesPackages = SalesPackageRetrieveUtils
+	private void setSales(Builder sdpb) {
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
 				.getSalesPackageIdsToSalesPackages();
-		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = SalesItemRetrieveUtils
+		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = SalesDisplayItemRetrieveUtils
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 
 		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
 			//get the sales items associated with this booster pack
-			Map<Integer, SalesItem> itemIdsToItems = salesPackageIdToItemIdsToSalesItems
+			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
 					.get(salesPackageId);
-			Collection<SalesItem> items = null;
-			if (null != itemIdsToItems) {
-				items = itemIdsToItems.values();
-			}
 			
 			//get the booster display items for this booster pack
 			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
@@ -1102,7 +1109,7 @@ public class StaticDataContainer {
 			}
 			
 			SalesPackageProto spProto = CreateInfoProtoUtils
-					.createSalesPackageProto(sp, items, displayItems);			
+					.createSalesPackageProto(sp, salesItemList, displayItems);			
 		}
 	}
 

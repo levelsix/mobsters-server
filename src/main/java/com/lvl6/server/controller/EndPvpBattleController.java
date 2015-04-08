@@ -47,6 +47,7 @@ import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -97,6 +98,9 @@ public class EndPvpBattleController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 	
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -1182,7 +1186,7 @@ public class EndPvpBattleController extends EventController {
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,
-				defenderElo, attackerElo, attacker);
+				defenderElo, attackerElo, attacker, serverToggleRetrieveUtils);
 
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 				.singletonMap(attackerId,

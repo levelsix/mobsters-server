@@ -21,6 +21,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BeginPvpBattleAction;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -51,6 +52,9 @@ public class BeginPvpBattleController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public BeginPvpBattleController() {
 		numAllocatedThreads = 7;
@@ -126,7 +130,8 @@ public class BeginPvpBattleController extends EventController {
 			BeginPvpBattleAction bpa = new BeginPvpBattleAction(attackerId,
 					enemyUserId, enemyElo, curDate, exactingRevenge,
 					previousBattleEndTime, pvpLeagueForUserRetrieveUtil,
-					hazelcastPvpUtil, timeUtil, insertUtil, updateUtil);
+					hazelcastPvpUtil, timeUtil, insertUtil, updateUtil, 
+					serverToggleRetrieveUtils);
 
 			bpa.execute(resBuilder);
 

@@ -1,9 +1,14 @@
 package com.lvl6.properties;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 
 public class IAPValues {
 
@@ -153,15 +158,6 @@ public class IAPValues {
 
 	public static boolean packageIsMoneyTree(String packageName) {
 		if (packageName.equals(MONEYTREE)) {
-			return true;
-		}
-		return false;
-	}
-
-	public static boolean packageIsSalesPackage(String packageName) {
-		if ((packageName.equals(SALE5)) || (packageName.equals(SALE10)) ||
-				(packageName.equals(SALE20)) || (packageName.equals(SALE50))
-				|| (packageName.equals(SALE100))) {
 			return true;
 		}
 		return false;

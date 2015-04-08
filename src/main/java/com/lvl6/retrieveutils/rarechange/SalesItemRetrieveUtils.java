@@ -26,11 +26,11 @@ public class SalesItemRetrieveUtils {
 
 	private static Map<Integer, SalesItem> salesItemIdsToSalesItems;
 	//key:sales pack id --> value:(key: sales item id --> value: sales item)
-	private static Map<Integer, Map<Integer, SalesItem>> salesItemIdsToSalesItemsForSalesPackIds;
+	private static Map<Integer, List<SalesItem>> salesItemIdsToSalesItemsForSalesPackIds;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SALES_ITEM_CONFIG;
 
-	public static Map<Integer, SalesItem> getSalesItemIdsToSalesItems() {
+	public Map<Integer, SalesItem> getSalesItemIdsToSalesItems() {
 		log.debug("retrieving all SalesItems data map");
 		if (salesItemIdsToSalesItems == null) {
 			setStaticSalesItemIdsToSalesItems();
@@ -38,14 +38,14 @@ public class SalesItemRetrieveUtils {
 		return salesItemIdsToSalesItems;
 	}
 
-	public static Map<Integer, Map<Integer, SalesItem>> getSalesItemIdsToSalesItemsForSalesPackIds() {
+	public Map<Integer, List<SalesItem>> getSalesItemIdsToSalesItemsForSalesPackIds() {
 		if (null == salesItemIdsToSalesItemsForSalesPackIds) {
 			setStaticSalesItemIdsToSalesItemsForSalesPackIds();
 		}
 		return salesItemIdsToSalesItemsForSalesPackIds;
 	}
 
-	public static Map<Integer, SalesItem> getSalesItemIdsToSalesItemsForSalesPackageId(
+	public List<SalesItem> getSalesItemsForSalesPackageId(
 			int salesPackId) {
 		try {
 			log.debug("retrieve salesPack data for salesPack "
@@ -54,7 +54,6 @@ public class SalesItemRetrieveUtils {
 				setStaticSalesItemIdsToSalesItems();
 			}
 			if (salesItemIdsToSalesItemsForSalesPackIds == null) {
-				salesItemIdsToSalesItemsForSalesPackIds = new HashMap<Integer, Map<Integer, SalesItem>>();
 				setStaticSalesItemIdsToSalesItemsForSalesPackIds();
 			}
 
@@ -68,7 +67,7 @@ public class SalesItemRetrieveUtils {
 		return null;
 	}
 
-	public static SalesItem getSalesItemForSalesItemId(int salesItemId) {
+	public SalesItem getSalesItemForSalesItemId(int salesItemId) {
 		log.debug("retrieve salesItem data for salesItem " + salesItemId);
 		if (salesItemIdsToSalesItems == null) {
 			setStaticSalesItemIdsToSalesItems();
@@ -76,28 +75,28 @@ public class SalesItemRetrieveUtils {
 		return salesItemIdsToSalesItems.get(salesItemId);
 	}
 
-	public static void setStaticSalesItemIdsToSalesItemsForSalesPackIds() {
+	public void setStaticSalesItemIdsToSalesItemsForSalesPackIds() {
 		try {
 			log.debug("setting static map of salesPackId to (salesItemIds to salesItems) ");
 			if (salesItemIdsToSalesItems == null) {
 				setStaticSalesItemIdsToSalesItems();
 			}
 
-			salesItemIdsToSalesItemsForSalesPackIds = new HashMap<Integer, Map<Integer, SalesItem>>();
-			List<SalesItem> bis = new ArrayList<SalesItem>(
+			salesItemIdsToSalesItemsForSalesPackIds = new HashMap<Integer, List<SalesItem>>();
+			List<SalesItem> sis = new ArrayList<SalesItem>(
 					salesItemIdsToSalesItems.values());
-			for (SalesItem bi : bis) {
-				int packId = bi.getSalesPackageId();
+			for (SalesItem si : sis) {
+				int packId = si.getSalesPackageId();
 				if (!salesItemIdsToSalesItemsForSalesPackIds
 						.containsKey(packId)) {
-					Map<Integer, SalesItem> bItemIdToBItem = new HashMap<Integer, SalesItem>();
+					List<SalesItem> sItemList = new ArrayList<SalesItem>();
 					salesItemIdsToSalesItemsForSalesPackIds.put(packId,
-							bItemIdToBItem);
+							sItemList);
 				}
 				//each itemId is unique (autoincrementing in the table)
-				Map<Integer, SalesItem> itemIdToItem = salesItemIdsToSalesItemsForSalesPackIds
+				List<SalesItem> sItemList = salesItemIdsToSalesItemsForSalesPackIds
 						.get(packId);
-				itemIdToItem.put(bi.getId(), bi);
+				sItemList.add(si);
 			}
 		} catch (Exception e) {
 			log.error(
@@ -106,7 +105,7 @@ public class SalesItemRetrieveUtils {
 		}
 	}
 
-	private static void setStaticSalesItemIdsToSalesItems() {
+	private void setStaticSalesItemIdsToSalesItems() {
 		log.debug("setting static map of salesItemIds to salesItems");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -140,7 +139,7 @@ public class SalesItemRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticSalesItemIdsToSalesItems();
 		setStaticSalesItemIdsToSalesItemsForSalesPackIds();
 	}
@@ -148,7 +147,7 @@ public class SalesItemRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static SalesItem convertRSRowToSalesItem(ResultSet rs)
+	private SalesItem convertRSRowToSalesItem(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_ITEM__ID);
 		int salesPackageId = rs

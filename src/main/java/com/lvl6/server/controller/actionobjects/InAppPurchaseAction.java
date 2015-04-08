@@ -2,11 +2,13 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +62,13 @@ public class InAppPurchaseAction {
 	protected UpdateUtil updateUtil;
 	private CreateInfoProtoUtils createInfoProtoUtils;
 	private MiscMethods miscMethods;
+	private SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	private SalesItemRetrieveUtils salesItemRetrieveUtils;
 	
+	public InAppPurchaseAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public InAppPurchaseAction(String userId, User user,
 			JSONObject receiptFromApple, String iapProductId, Date now,
@@ -72,7 +80,9 @@ public class InAppPurchaseAction {
 			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			MiscMethods miscMethods) {
+			MiscMethods miscMethods,
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils,
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -90,6 +100,8 @@ public class InAppPurchaseAction {
 		this.updateUtil = updateUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.miscMethods = miscMethods;
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -110,6 +122,8 @@ public class InAppPurchaseAction {
 	boolean isMoneyTree;
 	boolean isSalesPackage;
 	private String packageName;
+	private SalesPackage salesPackage;
+	private double salesPackagePrice;
 	private int gemChange;
 	private StructureMoneyTree smt;
 
@@ -144,17 +158,17 @@ public class InAppPurchaseAction {
 
 	}
 
-	private boolean verifySyntax(Builder resBuilder) {
+	public boolean verifySyntax(Builder resBuilder) {
 
 		return true;
 	}
 
-	private boolean verifySemantics(Builder resBuilder) {
+	public boolean verifySemantics(Builder resBuilder) {
 		boolean success1 = false;
 		boolean success2 = false;
 		boolean success3 = false;
 		success1 = verifyStarterPack(resBuilder);
-		success2 = verifyMoneyTree(resBuilder);
+//		success2 = verifyMoneyTree(resBuilder);
 		success3 = verifySalesPackage(resBuilder);
 		
 		if (!success1 && !success2 && !success3) {
@@ -163,7 +177,7 @@ public class InAppPurchaseAction {
 			return true;
 	}
 
-	private boolean verifyStarterPack(Builder resBuilder) {
+	public boolean verifyStarterPack(Builder resBuilder) {
 		boolean success = true;
 		try {
 			String transactionId = receiptFromApple
@@ -195,7 +209,7 @@ public class InAppPurchaseAction {
 		return success;
 	}
 
-	private boolean verifyMoneyTree(Builder resBuilder) {
+	public boolean verifyMoneyTree(Builder resBuilder) {
 		boolean success = true;
 		try {
 			String transactionId = receiptFromApple
@@ -232,38 +246,52 @@ public class InAppPurchaseAction {
 		return success;
 	}
 	
-	private boolean verifySalesPackage(Builder resBuilder) {
-		boolean success = true;
-		try {
-			String transactionId = receiptFromApple
-					.getString(IAPValues.TRANSACTION_ID);
-
-			long transactionIdLong = Long.parseLong(transactionId);
-			if (iapHistoryRetrieveUtil
-					.checkIfDuplicateTransaction(transactionIdLong)) {
+	public boolean verifySalesPackage(Builder resBuilder) {
+		boolean duplicateReceipt = true;
+			duplicateReceipt = checkIfDuplicateReceipt();
+			
+			if(duplicateReceipt) {
 				resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
-				log.error("duplicate receipt from user {}", user);
-				success = false;
 			}
 
-			isSalesPackage = IAPValues.packageIsSalesPackage(packageName);
+			Map<String, SalesPackage> salesPackageNamesToSalesPackages = 
+					salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+			isSalesPackage = packageIsSalesPackage(packageName, salesPackageNamesToSalesPackages);
 
-			if (success && isSalesPackage && userSalesValueMatchesSalesPackage()) {
+			if (!(duplicateReceipt && isSalesPackage && userSalesValueMatchesSalesPackage())) {
 				log.error("user should be buying more expensive sales package! {}, {}",
 						packageName, user);
-				success = false;
+				return false;
 			}
-		} catch (Exception e) {
-			log.error(
-					String.format(
-							"error verifying InAppPurchase request. receiptFromApple={}",
-							receiptFromApple), e);
-			success = false;
+		
+		log.info("sales package verified");
+		salesPackage = salesPackageNamesToSalesPackages.get(packageName);
+		
+		return true;
+	}
+	
+	public boolean checkIfDuplicateReceipt() { //returns true if duplicate
+		String transactionId = null;
+		try {
+			transactionId = receiptFromApple
+					.getString(IAPValues.TRANSACTION_ID);
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		} catch (JSONException e) {
+			log.error(String.format("error verifying InAppPurchase request. "
+					+ "receiptFromApple={}", receiptFromApple), e);
+			e.printStackTrace();
 		}
-		return success;
+
+		long transactionIdLong = Long.parseLong(transactionId);
+		if (iapHistoryRetrieveUtil
+				.checkIfDuplicateTransaction(transactionIdLong)) {
+			log.error("duplicate receipt from user {}", user);
+			return true;
+		}
+		else return false;
 	}
 
-	private void getStructureMoneyTreeForIAPProductId() {
+	public void getStructureMoneyTreeForIAPProductId() {
 		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		log.info("structIdsToMoneyTrees: {}", structIdsToMoneyTrees);
@@ -276,7 +304,7 @@ public class InAppPurchaseAction {
 		}
 	}
 
-	private boolean userOwnsOneMoneyTreeMax() {
+	public boolean userOwnsOneMoneyTreeMax() {
 		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
@@ -295,40 +323,52 @@ public class InAppPurchaseAction {
 		return hasMoneyTree;
 	}
 	
-	private boolean userSalesValueMatchesSalesPackage() {
+	public boolean packageIsSalesPackage(String packageName, 
+			Map<String, SalesPackage> salesPackageNamesToSalesPackages) {
+		
+		for(String name : salesPackageNamesToSalesPackages.keySet()) {
+			if(name.equalsIgnoreCase(packageName)) {
+				return true;
+			}
+		}
+		log.error("packagename {} does not exist in table of sales packages",
+				packageName);
+		return false;
+	}
+	
+	public boolean userSalesValueMatchesSalesPackage() {
 		int salesValue = user.getSalesValue();
-		Date lastPurchaseTime = user.getLastPurchaseTime();
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-		String price = (packageName.replaceAll("SALE", ""));
+		salesPackagePrice = salesPackage.getPrice();
 		if(salesValue == 0) {
-			if(price.equals("4.99"))
+			if(salesPackagePrice == 4.99)
 				return true;
 		}
 		else if(salesValue == 1) {
-			if(!salesJumpTwoTiers && price.equals("9.99"))
+			if(!salesJumpTwoTiers && salesPackagePrice == 9.99)
 				return true;
-			else if(salesJumpTwoTiers && price.equals("19.99"))
+			else if(salesJumpTwoTiers && salesPackagePrice == 19.99)
 				return true;
 		}
 		else if(salesValue == 2) {
-			if(!salesJumpTwoTiers && price.equals("19.99"))
+			if(!salesJumpTwoTiers && salesPackagePrice == 19.99)
 				return true;
-			else if(salesJumpTwoTiers && price.equals("49.99"))
+			else if(salesJumpTwoTiers && salesPackagePrice == 49.99)
 				return true;
 		}
 		else if(salesValue == 3) {
-			if(!salesJumpTwoTiers && price.equals("49.99"))
+			if(!salesJumpTwoTiers && salesPackagePrice == 49.99)
 				return true;
-			else if(salesJumpTwoTiers && price.equals("99.99"))
+			else if(salesJumpTwoTiers && salesPackagePrice == 99.99)
 				return true;
 		}
-		else if(salesValue == 4) {
-			if(price.equals("99.99"))
+		else if(salesValue >= 4) {
+			if(salesPackagePrice == 99.99)
 				return true;
 		}
 		else {
 			log.error("the sale user is trying to buy has a price of: "
-					+ price + "but his salesValue is " + salesValue);
+					+ salesPackagePrice + "but his salesValue is " + salesValue);
 			return false;
 			
 		}
@@ -336,14 +376,21 @@ public class InAppPurchaseAction {
 		
 	}
 
-	private boolean writeChangesToDB(Builder resBuilder) {
+	public boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
 		try {
-
-			double realLifeCashCost = IAPValues
-					.getCashSpentForPackageName(packageName);
-
-			gemChange = IAPValues.getDiamondsForPackageName(packageName);
+			
+			double realLifeCashCost;
+			if(isSalesPackage) {
+				realLifeCashCost = salesPackagePrice;
+				Map<Integer, List<SalesItem>> salesItemIdsToSalesItemsForSalesPackIds = 
+						salesItemRetrieveUtils.getSalesItemIdsToSalesItemsForSalesPackIds();
+				gemChange = getDiamondsForSalesPackage(salesPackage.getId(), salesItemIdsToSalesItemsForSalesPackIds);
+			}
+			else {
+				realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
+				gemChange = IAPValues.getDiamondsForPackageName(packageName);
+			}
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
 					user, realLifeCashCost)) {
@@ -376,7 +423,23 @@ public class InAppPurchaseAction {
 		return success;
 	}
 	
-	private void updateUserSalesValueAndLastPurchaseTime() {
+	public int getDiamondsForSalesPackage(int salesPackageId, Map<Integer, List<SalesItem>>
+			salesItemIdsToSalesItemsForSalesPackIds) {
+		int totalGems = 0;
+		
+		for(Integer salesPackId : salesItemIdsToSalesItemsForSalesPackIds.keySet()) {
+			if(salesPackId == salesPackageId) {
+				List<SalesItem> innerList = salesItemIdsToSalesItemsForSalesPackIds.
+						get(salesPackId);
+				for(SalesItem si : innerList) {
+					totalGems += si.getGemReward();
+				}	
+			}
+		}
+		return totalGems;
+	}
+	
+	public boolean updateUserSalesValueAndLastPurchaseTime() {
 		int salesValue = user.getSalesValue();
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 		
@@ -392,10 +455,14 @@ public class InAppPurchaseAction {
 		else {
 			salesValue += 1;
 		}
-		updateUtil.updateUserSalesValue(userId, salesValue, now);
+		if(salesValue < 1 || salesValue > 5) {
+			log.info("invalid sales value {}", salesValue);
+			return false;
+		}
+		return updateUtil.updateUserSalesValue(userId, salesValue, now);
 	}
 
-	private void processStarterPackPurchase(Builder resBuilder) {
+	public void processStarterPackPurchase(Builder resBuilder) {
 		int boosterPackId = ControllerConstants.IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID;
 		Map<Integer, BoosterItem> idToBoosterItem = boosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
@@ -467,7 +534,7 @@ public class InAppPurchaseAction {
 		}
 	}
 
-	private void processMoneyTreePurchase(Builder resBuilder) {
+	public void processMoneyTreePurchase(Builder resBuilder) {
 
 		//assumed to only contain one money tree max for now
 		List<StructureForUser> listOfUsersMoneyTree = structureForUserRetrieveUtils2
@@ -568,29 +635,24 @@ public class InAppPurchaseAction {
 	//	    return ifuList;
 	//	}
 	
-	private void processSalesPackagePurchase(Builder resBuilder) {
-		Map<Integer, SalesPackage> idsToSalesPackage = SalesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+	public void processSalesPackagePurchase(Builder resBuilder) {
+		Map<Integer, SalesPackage> idsToSalesPackage = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 		for(Integer salesPackageId : idsToSalesPackage.keySet()) {
 			SalesPackage sp = idsToSalesPackage.get(salesPackageId);
 			if(sp.getUuid().equals(uuid)) {
-				Map<Integer, SalesItem> idToSalesItem = SalesItemRetrieveUtils
-						.getSalesItemIdsToSalesItemsForSalesPackageId(salesPackageId);
-				if (null == idToSalesItem || idToSalesItem.isEmpty()) {
+				List<SalesItem> salesItemList = salesItemRetrieveUtils
+						.getSalesItemsForSalesPackageId(salesPackageId);
+				if (null == salesItemList || salesItemList.isEmpty()) {
 					throw new RuntimeException(String.format(
 							"no sales package for salesPackageId=%s", salesPackageId));
 				}
 
-				//TODO: clean up this copy paste of PurchaseBoosterPackController logic
-				List<SalesItem> itemsUserReceives = new ArrayList<SalesItem>();
-				itemsUserReceives.addAll(idToSalesItem.values());
-				boolean legit = miscMethods.checkIfMonstersExistInSalesItem(itemsUserReceives);
+				boolean legit = miscMethods.checkIfMonstersExistInSalesItem(salesItemList);
 				if (!legit) {
 					throw new RuntimeException(String.format(
 							"illegal monster in sales item for salespackageId=%s",
 							salesPackageId));
 				}
-				gemChange = MiscMethods.determineGemRewardForSale(itemsUserReceives);
-
 				
 				//booster packs can give out gems, so  reuse processPurchase logic
 				processPurchase(resBuilder);
@@ -600,7 +662,7 @@ public class InAppPurchaseAction {
 				//sop = source of pieces
 				
 				String mfusop = miscMethods.createUpdateUserMonsterArgumentsForSales(userId,
-						sp.getId(), itemsUserReceives, monsterIdToNumPieces,
+						sp.getId(), salesItemList, monsterIdToNumPieces,
 						completeUserMonsters, now);
 
 				log.info("!!!!!!!!!mfusop={}", mfusop);
@@ -636,7 +698,7 @@ public class InAppPurchaseAction {
 
 				//item reward
 				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId, 
-						itemsUserReceives, itemForUserRetrieveUtil, updateUtil);
+						salesItemList, itemForUserRetrieveUtil, updateUtil);
 				 
 				if (null != ifuList && !ifuList.isEmpty()) {
 					List<UserItemProto> uipList = createInfoProtoUtils
@@ -648,7 +710,7 @@ public class InAppPurchaseAction {
 		
 	}
 	
-	private List<ItemForUser> awardSalesItemItemRewards(String userId,
+	public List<ItemForUser> awardSalesItemItemRewards(String userId,
 			List<SalesItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			UpdateUtil updateUtil) {
@@ -666,7 +728,7 @@ public class InAppPurchaseAction {
 
 	}
 	
-	private List<ItemForUser> calculateSalesItemItemRewards(
+	public List<ItemForUser> calculateSalesItemItemRewards(
 			String userId, List<SalesItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
@@ -691,7 +753,7 @@ public class InAppPurchaseAction {
 				itemIdToQuantity);
 	}
 
-	private List<ItemForUser> calculateItemRewards(String userId,
+	public List<ItemForUser> calculateItemRewards(String userId,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			Map<Integer, Integer> itemIdToQuantity) {
 		List<ItemForUser> ifuList = null;
@@ -722,7 +784,7 @@ public class InAppPurchaseAction {
 		return ifuList;
 	}
 
-	private void processPurchase(Builder resBuilder) {
+	public void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (gemChange != 0) {
@@ -741,7 +803,7 @@ public class InAppPurchaseAction {
 		prepCurrencyHistory();
 	}
 
-	private void prepCurrencyHistory() {
+	public void prepCurrencyHistory() {
 		String gems = miscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
@@ -792,5 +854,250 @@ public class InAppPurchaseAction {
 	public Map<String, String> getDetails() {
 		return details;
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public JSONObject getReceiptFromApple() {
+		return receiptFromApple;
+	}
+
+	public void setReceiptFromApple(JSONObject receiptFromApple) {
+		this.receiptFromApple = receiptFromApple;
+	}
+
+	public String getIapProductId() {
+		return iapProductId;
+	}
+
+	public void setIapProductId(String iapProductId) {
+		this.iapProductId = iapProductId;
+	}
+
+	public Date getNow() {
+		return now;
+	}
+
+	public void setNow(Date now) {
+		this.now = now;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
+		return iapHistoryRetrieveUtil;
+	}
+
+	public void setIapHistoryRetrieveUtil(
+			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
+		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils2() {
+		return structureForUserRetrieveUtils2;
+	}
+
+	public void setStructureForUserRetrieveUtils2(
+			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2) {
+		this.structureForUserRetrieveUtils2 = structureForUserRetrieveUtils2;
+	}
+
+	public BoosterItemRetrieveUtils getBoosterItemRetrieveUtils() {
+		return boosterItemRetrieveUtils;
+	}
+
+	public void setBoosterItemRetrieveUtils(
+			BoosterItemRetrieveUtils boosterItemRetrieveUtils) {
+		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public StructureMoneyTreeRetrieveUtils getStructureMoneyTreeRetrieveUtils() {
+		return structureMoneyTreeRetrieveUtils;
+	}
+
+	public void setStructureMoneyTreeRetrieveUtils(
+			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils) {
+		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+		return salesPackageRetrieveUtils;
+	}
+
+	public void setSalesPackageRetrieveUtils(
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+	}
+
+	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
+		return salesItemRetrieveUtils;
+	}
+
+	public void setSalesItemRetrieveUtils(
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
+	}
+
+	public boolean isStarterPack() {
+		return isStarterPack;
+	}
+
+	public void setStarterPack(boolean isStarterPack) {
+		this.isStarterPack = isStarterPack;
+	}
+
+	public boolean isMoneyTree() {
+		return isMoneyTree;
+	}
+
+	public void setMoneyTree(boolean isMoneyTree) {
+		this.isMoneyTree = isMoneyTree;
+	}
+
+	public boolean isSalesPackage() {
+		return isSalesPackage;
+	}
+
+	public void setSalesPackage(boolean isSalesPackage) {
+		this.isSalesPackage = isSalesPackage;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public SalesPackage getSalesPackage() {
+		return salesPackage;
+	}
+
+	public void setSalesPackage(SalesPackage salesPackage) {
+		this.salesPackage = salesPackage;
+	}
+
+	public double getSalesPackagePrice() {
+		return salesPackagePrice;
+	}
+
+	public void setSalesPackagePrice(double salesPackagePrice) {
+		this.salesPackagePrice = salesPackagePrice;
+	}
+
+	public int getGemChange() {
+		return gemChange;
+	}
+
+	public void setGemChange(int gemChange) {
+		this.gemChange = gemChange;
+	}
+
+	public StructureMoneyTree getSmt() {
+		return smt;
+	}
+
+	public void setSmt(StructureMoneyTree smt) {
+		this.smt = smt;
+	}
+
+	public Map<String, Integer> getPrevCurrencies() {
+		return prevCurrencies;
+	}
+
+	public void setPrevCurrencies(Map<String, Integer> prevCurrencies) {
+		this.prevCurrencies = prevCurrencies;
+	}
+
+	public Map<String, Integer> getCurCurrencies() {
+		return curCurrencies;
+	}
+
+	public void setCurCurrencies(Map<String, Integer> curCurrencies) {
+		this.curCurrencies = curCurrencies;
+	}
+
+	public Map<String, String> getReasonsForChanges() {
+		return reasonsForChanges;
+	}
+
+	public void setReasonsForChanges(Map<String, String> reasonsForChanges) {
+		this.reasonsForChanges = reasonsForChanges;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setCurrencyDeltas(Map<String, Integer> currencyDeltas) {
+		this.currencyDeltas = currencyDeltas;
+	}
+
+	public void setDetails(Map<String, String> details) {
+		this.details = details;
+	}
+	
+	
 
 }

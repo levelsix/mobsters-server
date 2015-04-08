@@ -169,6 +169,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
@@ -240,6 +241,9 @@ public class StartupController extends EventController {
 	
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	@Autowired
 	protected Locker locker;
@@ -781,7 +785,8 @@ public class StartupController extends EventController {
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
-					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils);
+					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
+					serverToggleRetrieveUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
@@ -1669,7 +1674,7 @@ public class StartupController extends EventController {
 		}
 		
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
@@ -1707,12 +1712,8 @@ public class StartupController extends EventController {
 				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
 				//get the sales items associated with this booster pack
-				Map<Integer, SalesItem> itemIdsToItems = salesPackageIdToItemIdsToSalesItems
+				List<SalesItem> salesItemsList = salesPackageIdToItemIdsToSalesItems
 						.get(salesPackageId);
-				Collection<SalesItem> items = null;
-				if (null != itemIdsToItems) {
-					items = itemIdsToItems.values();
-				}
 				
 				//get the booster display items for this booster pack
 				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
@@ -1732,7 +1733,7 @@ public class StartupController extends EventController {
 				}
 				
 				SalesPackageProto spProto = CreateInfoProtoUtils
-						.createSalesPackageProto(sp, items, displayItems);			
+						.createSalesPackageProto(sp, salesItemsList, displayItems);			
 				resBuilder.addSalesPackages(spProto);
 			}
 		}	
