@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
@@ -56,6 +57,7 @@ public class RetrieveUserMonsterTeamAction {
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 
 	public RetrieveUserMonsterTeamAction(
@@ -71,7 +73,8 @@ public class RetrieveUserMonsterTeamAction {
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils)
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -87,6 +90,7 @@ public class RetrieveUserMonsterTeamAction {
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -175,7 +179,8 @@ public class RetrieveUserMonsterTeamAction {
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
 		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters);
+				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters, 
+						monsterLevelInfoRetrieveUtils);
 
 		//calculate the PvpBattleOutcome
 		StartUpResource sup = new StartUpResource(userRetrieveUtil,
@@ -254,7 +259,8 @@ public class RetrieveUserMonsterTeamAction {
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
-					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu);
+					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu, 
+							monsterLevelInfoRetrieveUtils);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
 		}

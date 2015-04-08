@@ -102,6 +102,8 @@ public class QueueUpController extends EventController {
 	
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
+
 
 
 	//	@Autowired
@@ -288,7 +290,8 @@ public class QueueUpController extends EventController {
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil,
 					researchForUserRetrieveUtil,
-					monsterStuffUtils, serverToggleRetrieveUtils);
+					monsterStuffUtils, serverToggleRetrieveUtils,
+					monsterLevelInfoRetrieveUtils);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();

@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
@@ -101,6 +102,9 @@ public class EndPvpBattleController extends EventController {
 	
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -501,7 +505,7 @@ public class EndPvpBattleController extends EventController {
 
 		List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 				.updateUserMonsters(userId, monsterIdToNumPieces, null, mfusop,
-						currentDate);
+						currentDate, monsterLevelInfoRetrieveUtils);
 
 		resBuilder.addAllUpdatedOrNew(newOrUpdated);
 	}
@@ -1182,7 +1186,7 @@ public class EndPvpBattleController extends EventController {
 
 		//need the drop rates
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters);
+				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils);
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,

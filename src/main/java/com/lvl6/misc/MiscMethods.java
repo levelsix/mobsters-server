@@ -262,28 +262,6 @@ public class MiscMethods {
 		}
 		return monstersExist;
 	}
-	
-
-	public boolean checkIfMonstersExistInSalesItem(
-			List<SalesItem> itemsUserReceives) {
-		boolean monstersExist = true;
-
-		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
-				.getMonsterIdsToMonsters();
-		for (SalesItem si : itemsUserReceives) {
-			int monsterId = si.getMonsterId();
-
-			if (0 == monsterId) {
-				//this sales item does not contain a monster reward
-				continue;
-			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
-				log.error("This sales item contains nonexistent monsterId. item="
-						+ si);
-				monstersExist = false;
-			}
-		}
-		return monstersExist;
-	}
 
 	public int determineGemReward(List<BoosterItem> boosterItems) {
 		int gemReward = 0;
@@ -307,7 +285,8 @@ public class MiscMethods {
 	public String createUpdateUserMonsterArguments(String userId,
 			int boosterPackId, List<BoosterItem> boosterItems,
 			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now) {
+			List<MonsterForUser> completeUserMonsters, Date now, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
 		sb.append(" ");
@@ -332,7 +311,7 @@ public class MiscMethods {
 				MonsterForUser newUserMonster = monsterStuffUtils
 						.createNewUserMonster(userId,
 								monzter.getNumPuzzlePieces(), monzter, now,
-								hasAllPieces, isComplete);
+								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
 
 				//return this monster in the argument list completeUserMonsters, so caller
 				//can use it
@@ -352,54 +331,6 @@ public class MiscMethods {
 		return sb.toString();
 	}
 	
-	public String createUpdateUserMonsterArgumentsForSales(String userId,
-			int salesPackageId, List<SalesItem> salesItems,
-			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(ControllerConstants.MFUSOP__SALES_PACKAGE);
-		sb.append(" ");
-		sb.append(salesPackageId);
-		sb.append(" salesItemMonsterIds ");
-
-		List<Integer> salesItemIds = new ArrayList<Integer>();
-		for (SalesItem item : salesItems) {
-			Integer id = item.getId();
-			Integer monsterId = item.getMonsterId();
-
-			//only keep track of the sales item ids that are a monster reward
-			if (monsterId <= 0) {
-				continue;
-			}
-			if (item.getMonsterLevel() > 0) {
-				//create a "complete" user monster
-				int monsterQuantity = item.getMonsterQuantity();
-				Monster monzter = monsterRetrieveUtils
-						.getMonsterForMonsterId(monsterId);
-				List<MonsterForUser> monstersCreated = monsterStuffUtils
-						.createLeveledMonsterForUserFromQuantity(userId, monzter, 
-								monsterQuantity, now, item.getMonsterLevel());
-				log.info("monster for users just created" + monstersCreated);
-
-				//return this monster in the argument list completeUserMonsters, so caller
-				//can use it
-				completeUserMonsters.addAll(monstersCreated);
-
-
-			} else {
-				monsterIdsToNumPieces.put(item.getMonsterId(), item.getMonsterQuantity());
-			}
-			salesItemIds.add(id);
-		}
-		if (!salesItemIds.isEmpty()) {
-			String salesItemIdsStr = StringUtils.csvList(salesItemIds);
-			sb.append(salesItemIdsStr);
-		}
-
-		return sb.toString();
-	}
-	
-
 
 	//TODO: move to createInfoProtoUtils	
 	public List<FullUserMonsterProto> createFullUserMonsterProtos(

@@ -164,6 +164,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
@@ -226,6 +227,9 @@ public class StartupController extends EventController {
 	public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
 		this.chatMessages = chatMessages;
 	}
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
@@ -786,7 +790,7 @@ public class StartupController extends EventController {
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
-					serverToggleRetrieveUtils);
+					serverToggleRetrieveUtils, monsterLevelInfoRetrieveUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 

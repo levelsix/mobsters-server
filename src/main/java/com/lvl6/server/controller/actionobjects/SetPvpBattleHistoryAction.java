@@ -23,6 +23,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -41,6 +42,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final MonsterStuffUtils monsterStuffUtils;
 	private final CreateInfoProtoUtils createInfoProtoUtils;
 	private final ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
@@ -50,7 +52,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			HazelcastPvpUtil hazelcastPvpUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -61,6 +64,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//derived state
@@ -164,7 +168,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//			"history monster teams=%s", userIdsToUserMonsters));
 
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters);
+				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils);
 
 		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
 		attackerIdsToProspectiveOilWinnings = new HashMap<String, Integer>();

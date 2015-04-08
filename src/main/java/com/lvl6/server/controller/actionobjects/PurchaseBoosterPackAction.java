@@ -25,6 +25,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -48,6 +49,7 @@ public class PurchaseBoosterPackAction {
 	private MonsterStuffUtils monsterStuffUtils;
 	private UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -56,7 +58,8 @@ public class PurchaseBoosterPackAction {
 			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			UpdateUtil updateUtil, MiscMethods miscMethods) {
+			UpdateUtil updateUtil, MiscMethods miscMethods,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -71,6 +74,7 @@ public class PurchaseBoosterPackAction {
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.updateUtil = updateUtil;
 		this.miscMethods = miscMethods;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -275,7 +279,7 @@ public class PurchaseBoosterPackAction {
 		//sop = source of pieces
 		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
 				boosterPackIdPurchased, itemsUserReceives,
-				monsterIdToNumPieces, completeUserMonsters, now);
+				monsterIdToNumPieces, completeUserMonsters, now, monsterLevelInfoRetrieveUtils);
 
 		log.info("!!!!!!!!!mfusop={}", mfusop);
 
@@ -302,7 +306,7 @@ public class PurchaseBoosterPackAction {
 			//assume things just work while updating user monsters
 			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now);
+							mfusop, now, monsterLevelInfoRetrieveUtils);
 
 			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
 			log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",

@@ -157,7 +157,12 @@ public class SalesItemRetrieveUtils {
 		monsterId = rs.getInt(DBConstants.SALES_ITEM__MONSTER_ID);
 		
 		int monsterLevel = 0;
-		monsterLevel = rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
+		
+		rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
+		if(rs.wasNull()) {
+			monsterLevel = -1;
+		}
+		else monsterLevel = rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
 		
 		int monsterQuantity = 0;
 		monsterQuantity = rs.getInt(DBConstants.SALES_ITEM__MONSTER_QUANTITY);
