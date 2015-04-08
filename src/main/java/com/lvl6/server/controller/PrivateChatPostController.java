@@ -199,25 +199,21 @@ public class PrivateChatPostController extends EventController {
 					//checking if user even wants stuff translated
 					if(translationRequired) {
 						//get poster's language setting, if translationrequired still
-						if(contentLanguage == null) {
-							TranslationSettingsForUser globalChatSettingsForPoster = translationSettingsForUserRetrieveUtil.
-									getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
-							if(globalChatSettingsForPoster != null) {
-								insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(), 
-										ChatType.PRIVATE_CHAT.toString(), true);
-								posterLanguageString = globalChatSettingsForPoster.getLanguage();
-							}
-							else {
-								insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
-										ChatType.PRIVATE_CHAT.toString(), true);
-								posterLanguageString = TranslateLanguages.ENGLISH.toString();
-							}
+						TranslationSettingsForUser globalChatSettingsForPoster = translationSettingsForUserRetrieveUtil.
+								getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
+						if(globalChatSettingsForPoster != null) {
+							insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(), 
+									ChatType.PRIVATE_CHAT.toString(), true);
+							posterLanguageString = globalChatSettingsForPoster.getLanguage();
 						}
 						else {
-							posterLanguageString = contentLanguage.toString();
+							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
+									ChatType.PRIVATE_CHAT.toString(), true);
+							posterLanguageString = TranslateLanguages.ENGLISH.toString();
 						}
-						posterLanguage = Language.valueOf(posterLanguageString);
 					}
+					posterLanguage = Language.valueOf(posterLanguageString);
+					
 
 					//detect the language of msg, if it matches language setting of recipient, dont translate anything
 					//					Language detectedLanguage = MiscMethods.detectedLanguage(censoredContent);

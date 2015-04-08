@@ -51,7 +51,6 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -75,7 +74,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -162,7 +160,6 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
@@ -358,7 +355,31 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+	
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -1580,6 +1601,33 @@ public class StartupController extends EventController {
 			resBuilder.addAllBattleItemQueue(biqfupList);
 		}
 	}
+	
+	private void setSalesForUser(Builder resBuilder, User user) {
+		//update user jump two tier's value
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		if(salesJumpTwoTiers) {
+			Date lastPurchaseTime = user.getLastPurchaseTime();
+			if(lastPurchaseTime == null) {
+				lastPurchaseTime = new Date();
+				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+			}
+			Date now = new Date();
+			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+			if(diffInDays > 5) {
+				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+				salesJumpTwoTiers = false;
+			}
+		}
+		
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+		int userSalesValue = user.getSalesValue();
+		
+		double newMinPrice = 0.0;
 
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
