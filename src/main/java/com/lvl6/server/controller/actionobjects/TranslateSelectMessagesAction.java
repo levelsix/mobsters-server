@@ -104,10 +104,6 @@ public class TranslateSelectMessagesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
-			log.info("recipientUserId {}", recipientUserId);
-			log.info("senderUserId {}", senderUserId);
-			log.info("languageEnum {}", languageEnum.toString());
-			log.info("translateOn {}", translateOn);
 
 			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId,
 					languageEnum.toString(), translateOn);
