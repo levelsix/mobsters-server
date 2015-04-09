@@ -177,8 +177,8 @@ public class PrivateChatPostController extends EventController {
 					boolean translationRequired = true;
 					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
 							getSpecificUserTranslationSettings(recipientId, posterId);
-//					TranslationSettingsForUser settingForPoster = translationSettingsForUserRetrieveUtil.
-//							getSpecificUserTranslationSettings(posterId, recipientId);
+					TranslationSettingsForUser settingForPoster = translationSettingsForUserRetrieveUtil.
+							getSpecificUserTranslationSettings(posterId, recipientId);
 					Map<TranslateLanguages, String> translatedMessage = new HashMap<TranslateLanguages, String>();
 
 					Language recipientLanguage;
@@ -187,6 +187,10 @@ public class PrivateChatPostController extends EventController {
 					String posterLanguageString = "";
 					TranslatedText tt = new TranslatedText();
 
+					if(settingForPoster == null) {
+						insertUtils.insertTranslateSettings(posterId, recipientId, contentLanguage.toString(),
+								ChatType.PRIVATE_CHAT.toString(), true);
+					}
 
 					//get recipient's language setting
 					if(settingForRecipient == null) {

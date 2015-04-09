@@ -1418,9 +1418,6 @@ public class CreateInfoProtoUtils {
 				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
 				pcdlpb.setSenderUserId(tsfu.getSenderUserId());
 				pcdlpb.setTranslateOn(tsfu.isTranslationsOn());
-				if(tsfu.getReceiverUserId().equals("39ce5b60-4e31-4183-9615-2b899e756cf1") && tsfu.getSenderUserId().equals("43734c61-ef28-4fc1-b53d-f800d5ded869")) {
-					log.info("TRANSLATE ON IS " + tsfu.isTranslationsOn());
-				}
 				PrivateChatDefaultLanguageProto lala = pcdlpb.build();
 				pcdlpList.add(lala);
 			}

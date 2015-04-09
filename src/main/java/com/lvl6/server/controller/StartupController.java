@@ -1757,6 +1757,11 @@ public class StartupController extends EventController {
 		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 				getUserTranslationSettingsForUser(userId);
 
+		List<TranslationSettingsForUser> tsfuListWhenPoster = translationSettingsForUserRetrieveUtil.
+				getUserTranslationSettingsForUserWhenPoster(userId);
+
+		tsfuList.addAll(tsfuListWhenPoster);
+
 		log.info("tsfuList: " + tsfuList);
 
 		DefaultLanguagesProto dlp = null;
