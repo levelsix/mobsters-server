@@ -35,6 +35,10 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
@@ -87,7 +91,19 @@ public class InAppPurchaseController extends EventController {
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 	
 	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+	
+	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
 	
 
 	public InAppPurchaseController() {
@@ -119,7 +135,13 @@ public class InAppPurchaseController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String receipt = reqProto.getReceipt();
-
+		boolean hasUuid = reqProto.hasUuid();
+		String uuid = null;	
+		
+		if(hasUuid) {
+			uuid = reqProto.getUuid();
+		}
+		
 		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -204,7 +226,7 @@ public class InAppPurchaseController extends EventController {
 			JSONObject receiptFromApple = null;
 			if (response.getInt(IAPValues.STATUS) == 0) {
 				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-				writeChangesToDb(userId, resBuilder, user, receiptFromApple);
+				writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid);
 			} else {
 				log.error(
 						"problem with in-app purchase that client sent, with receipt {}",
@@ -268,7 +290,7 @@ public class InAppPurchaseController extends EventController {
 
 	private void writeChangesToDb(String userId,
 			InAppPurchaseResponseProto.Builder resBuilder, User user,
-			JSONObject receiptFromApple) {
+			JSONObject receiptFromApple, String uuid) {
 		try {
 			String packageName = receiptFromApple
 					.getString(IAPValues.PRODUCT_ID);
@@ -277,11 +299,13 @@ public class InAppPurchaseController extends EventController {
 
 			Date now = new Date();
 			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
-					receiptFromApple, packageName, now, iapHistoryRetrieveUtil,
+					receiptFromApple, packageName, now, uuid, iapHistoryRetrieveUtil,
 					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
 					boosterItemRetrieveUtils, monsterStuffUtils, 
 					structureMoneyTreeRetrieveUtils, insertUtil, updateUtil, 
-					createInfoProtoUtils, miscMethods);
+					createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+					salesItemRetrieveUtils, monsterRetrieveUtils,
+					monsterLevelInfoRetrieveUtils);
 
 			iapa.execute(resBuilder);
 

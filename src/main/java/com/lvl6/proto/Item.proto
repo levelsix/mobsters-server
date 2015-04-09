@@ -71,5 +71,3 @@ message UserItemSecretGiftProto {
 	optional int64 createTime = 5;
 }
 
-
-

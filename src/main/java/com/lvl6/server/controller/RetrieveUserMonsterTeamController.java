@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -75,7 +76,11 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
 
 	public RetrieveUserMonsterTeamController() {
 		numAllocatedThreads = 4;
@@ -152,7 +157,8 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-					monsterStuffUtils, serverToggleRetrieveUtil);
+					monsterStuffUtils, serverToggleRetrieveUtil,
+					monsterLevelInfoRetrieveUtils);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(
@@ -309,6 +315,15 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	public void setServerToggleRetrieveUtil(
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 }

@@ -11,6 +11,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 public class PvpBattleOutcome {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
 
 	private static double SCORING_CURVE_BIAS = 0D;
 	private static double SCORING_CURVE_LINEARITY = 0.15D;
@@ -32,7 +33,7 @@ public class PvpBattleOutcome {
 	private double defenderElo;
 	private double defenderCash;
 	private double defenderOil;
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public PvpBattleOutcome(User attacker, int attackerElo,
 			User defender, int defenderElo,

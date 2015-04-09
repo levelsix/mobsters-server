@@ -34,6 +34,10 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Reward;
+
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
@@ -69,6 +73,8 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
+
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -127,6 +133,10 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -266,6 +276,15 @@ public class StaticDataContainer {
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 	
 	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+	
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+	
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
 	
 	@Autowired
@@ -336,6 +355,8 @@ public class StaticDataContainer {
 	
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+	
+	
 
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -382,6 +403,7 @@ public class StaticDataContainer {
 		setResearch(sdpb);
 		setBattleItem(sdpb);
 		setRewards(sdpb);
+		setSales(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1053,6 +1075,43 @@ public class StaticDataContainer {
 			sdpb.addBattleItem(bip);
 		}
 	}
+	
+	private void setSales(Builder sdpb) {
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
+				.getSalesPackageIdsToSalesPackages();
+		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+
+		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
+			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+
+			//get the sales items associated with this booster pack
+			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
+					.get(salesPackageId);
+			
+			//get the booster display items for this booster pack
+			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+					.get(salesPackageId);
+			Collection<SalesDisplayItem> displayItems = null;
+			if (null != displayIdsToDisplayItems) {
+				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+				Collections.sort(displayItemIds);
+
+				displayItems = new ArrayList<SalesDisplayItem>();
+
+				for (Integer displayItemId : displayItemIds) {
+					displayItems.add(displayIdsToDisplayItems
+							.get(displayItemId));
+				}
+			}
+			
+			SalesPackageProto spProto = CreateInfoProtoUtils
+					.createSalesPackageProto(sp, salesItemList, displayItems);			
+		}
+	}
 
 
 	private void setRewards(Builder sdpb) {
@@ -1073,5 +1132,6 @@ public class StaticDataContainer {
 			sdpb.addReward(rp);
 		}
 	}
+
 
 }

@@ -18,6 +18,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -38,6 +39,7 @@ public class AwardRewardAction {
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	private MonsterStuffUtils monsterStuffUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
 	public AwardRewardAction(String userId, User u, int maxCash,
@@ -46,7 +48,8 @@ public class AwardRewardAction {
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
-			MonsterStuffUtils monsterStuffUtils) {
+			MonsterStuffUtils monsterStuffUtils,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.u = u;
@@ -60,6 +63,7 @@ public class AwardRewardAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -424,7 +428,7 @@ public class AwardRewardAction {
 			//TODO: DON'T PROTO THE MONSTERS, leave it to the caller of this class
 			nuOrUpdatedMonsters = monsterStuffUtils.updateUserMonsters(
 					userId, monsterIdToQuantity, monsterIdToLvlToQuantity,
-					awardReason, now);
+					awardReason, now, monsterLevelInfoRetrieveUtils);
 			success = true;
 		} catch (Exception e) {
 			log.error(

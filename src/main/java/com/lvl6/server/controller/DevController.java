@@ -30,6 +30,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -57,6 +58,9 @@ public class DevController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -178,7 +182,7 @@ public class DevController extends EventController {
 			String mfusop = "cheater, cheater, pumpkin eater";
 			List<FullUserMonsterProto> reward = monsterStuffUtils
 					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity,
-							mfusop, new Date());
+							mfusop, new Date(), monsterLevelInfoRetrieveUtils);
 			resBuilder.addAllFump(reward);
 			break;
 

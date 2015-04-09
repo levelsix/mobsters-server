@@ -41,6 +41,7 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -76,6 +77,9 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
@@ -328,7 +332,7 @@ public class RedeemMiniJobController extends EventController {
 					monsterIdToNumPieces);
 			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now);
+							mfusop, now, monsterLevelInfoRetrieveUtils);
 			FullUserMonsterProto fump = newOrUpdated.get(0);
 			resBuilder.setFump(fump);
 		}

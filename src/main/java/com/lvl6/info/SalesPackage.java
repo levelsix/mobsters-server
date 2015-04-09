@@ -3,11 +3,12 @@ package com.lvl6.info;
 import java.util.Date;
 
 public class SalesPackage {
-	
+
 	public SalesPackage() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public SalesPackage(int id, String name, double price, String uuid,
 			Date timeStart, Date timeEnd, int predId) {
 		super();
@@ -15,6 +16,9 @@ public class SalesPackage {
 		this.name = name;
 		this.price = price;
 		this.uuid = uuid;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.predId = predId;
 	}
 
 	private static final long serialVersionUID = 1549953377153488834L;
@@ -23,43 +27,62 @@ public class SalesPackage {
 	private String name;
 	private double price;
 	private String uuid;
+	private Date timeStart;
+	private Date timeEnd;
+	private int predId;
 	
 	public int getId() {
 		return id;
 	}
-	
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 	public String getName() {
 		return name;
 	}
-	
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public double getPrice() {
 		return price;
 	}
-	
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-	@Override
-	public String toString() {
-		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
-				+ ", uuid=" + uuid + "]";
-	}
-
 	public String getUuid() {
 		return uuid;
 	}
-
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
+	
+	@Override
+	public String toString() {
+		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
+				+ ", uuid=" + uuid + ", timeStart=" + timeStart + ", timeEnd="
+				+ timeEnd + ", predId=" + predId + "]";
+	}
+	
+	public Date getTimeStart() {
+		return timeStart;
+	}
+	public void setTimeStart(Date timeStart) {
+		this.timeStart = timeStart;
+	}
+	public Date getTimeEnd() {
+		return timeEnd;
+	}
+	public void setTimeEnd(Date timeEnd) {
+		this.timeEnd = timeEnd;
+	}
+	public int getPredId() {
+		return predId;
+	}
+	public void setPredId(int predId) {
+		this.predId = predId;
+	}
+	
+	
 
 }

@@ -112,7 +112,7 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -144,14 +144,14 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
+//			server.writeEvent(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
 				sendGeneralNotification(user.getName(), clanName);
 
@@ -165,7 +165,7 @@ public class CreateClanController extends EventController {
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+//				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}

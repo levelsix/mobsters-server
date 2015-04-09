@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -87,6 +88,10 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
 	
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -349,7 +354,7 @@ public class TradeItemForBoosterController extends EventController {
 		//sop = source of pieces
 		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
 				bPackId, itemsUserReceives, monsterIdToNumPieces,
-				completeUserMonsters, now);
+				completeUserMonsters, now, monsterLevelInfoRetrieveUtils);
 		mfusop = String.format("%s=%s, %s",
 				ControllerConstants.MFUSOP__REDEEM_ITEM, itemId, mfusop);
 
@@ -375,7 +380,7 @@ public class TradeItemForBoosterController extends EventController {
 			//assume things just work while updating user monsters
 			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now);
+							mfusop, now, monsterLevelInfoRetrieveUtils);
 
 			log.info("YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)! monster(s)= newOrUpdated"
 					+ newOrUpdated + "\t bpackId=" + bPackId);

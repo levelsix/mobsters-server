@@ -18,6 +18,104 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
+import com.lvl6.info.Achievement;
+import com.lvl6.info.AchievementForUser;
+import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.BattleItem;
+import com.lvl6.info.BattleItemForUser;
+import com.lvl6.info.BattleItemQueueForUser;
+import com.lvl6.info.Board;
+import com.lvl6.info.BoardObstacle;
+import com.lvl6.info.BoardProperty;
+import com.lvl6.info.BoosterDisplayItem;
+import com.lvl6.info.BoosterItem;
+import com.lvl6.info.BoosterPack;
+import com.lvl6.info.CepfuRaidHistory;
+import com.lvl6.info.CepfuRaidStageHistory;
+import com.lvl6.info.Clan;
+import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
+import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanEventPersistentForClan;
+import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanHelp;
+import com.lvl6.info.ClanIcon;
+import com.lvl6.info.ClanInvite;
+import com.lvl6.info.ClanMemberTeamDonation;
+import com.lvl6.info.ClanRaid;
+import com.lvl6.info.ClanRaidStage;
+import com.lvl6.info.ClanRaidStageMonster;
+import com.lvl6.info.ClanRaidStageReward;
+import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.Dialogue;
+import com.lvl6.info.EventPersistent;
+import com.lvl6.info.EventPersistentForUser;
+import com.lvl6.info.FileDownload;
+import com.lvl6.info.GoldSale;
+import com.lvl6.info.Item;
+import com.lvl6.info.ItemForUser;
+import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.MiniJob;
+import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterBattleDialogue;
+import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
+import com.lvl6.info.MonsterForPvp;
+import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.MonsterSnapshotForUser;
+import com.lvl6.info.Obstacle;
+import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.Prerequisite;
+import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.PvpBattleHistory;
+import com.lvl6.info.PvpBoardObstacleForUser;
+import com.lvl6.info.PvpLeague;
+import com.lvl6.info.PvpLeagueForUser;
+import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.QuestJob;
+import com.lvl6.info.QuestJobForUser;
+import com.lvl6.info.Research;
+import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.ResearchProperty;
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
+import com.lvl6.info.Skill;
+import com.lvl6.info.SkillProperty;
+import com.lvl6.info.SkillSideEffect;
+import com.lvl6.info.Structure;
+import com.lvl6.info.StructureBattleItemFactory;
+import com.lvl6.info.StructureClanHouse;
+import com.lvl6.info.StructureEvoChamber;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureHospital;
+import com.lvl6.info.StructureLab;
+import com.lvl6.info.StructureMiniJob;
+import com.lvl6.info.StructureMoneyTree;
+import com.lvl6.info.StructurePvpBoard;
+import com.lvl6.info.StructureResearchHouse;
+import com.lvl6.info.StructureResidence;
+import com.lvl6.info.StructureResourceGenerator;
+import com.lvl6.info.StructureResourceStorage;
+import com.lvl6.info.StructureTeamCenter;
+import com.lvl6.info.StructureTownHall;
+import com.lvl6.info.Task;
+import com.lvl6.info.TaskForUserClientState;
+import com.lvl6.info.TaskForUserOngoing;
+import com.lvl6.info.TaskMapElement;
+import com.lvl6.info.TaskStage;
+import com.lvl6.info.TaskStageForUser;
+import com.lvl6.info.TaskStageMonster;
+import com.lvl6.info.User;
+import com.lvl6.info.UserClan;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -114,9 +212,13 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
+import com.lvl6.proto.SalesProto.SalesItemProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -2390,6 +2492,11 @@ public class CreateInfoProtoUtils {
 		str = meg.getDesc();
 		if (null != str) {
 			megpb.setGoalDesc(str);
+		}
+		
+		str = meg.getActionDescription();
+		if(null != str) {
+			megpb.setActionDescription(str);
 		}
 
 		megpb.setPointsGained(meg.getPtsReward());
@@ -5144,5 +5251,68 @@ public class CreateInfoProtoUtils {
 			}
 		}
 	}
+	
+	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
+	
+	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
+			Collection<SalesItem> siList,
+			Collection<SalesDisplayItem> sdiList) {
+		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
+		b.setSalesPackageId(sp.getId());
+
+		String str = sp.getName();
+		if (null != str && !str.isEmpty()) {
+			b.setSalesPackageName(str);
+		}
+
+		b.setPrice((long)sp.getPrice());
+
+		str = sp.getUuid();
+		if (null != str && !str.isEmpty()) {
+			b.setUuid(str);
+		}
+
+		if (siList != null) {
+			for (SalesItem si : siList) {
+				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
+				b.addSip(sip);
+			}
+		}
+
+		if (null != sdiList) {
+			for (SalesDisplayItem sdi : sdiList) {
+				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
+				b.addSdip(sdip);
+			}
+		}
+
+		return b.build();
+	}
+	
+	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
+		sipb.setSalesItemId(si.getId());
+		sipb.setSalesPackageId(si.getSalesPackageId());
+		sipb.setMonsterId(si.getMonsterId());
+		sipb.setMonsterQuantity(si.getMonsterQuantity());
+		sipb.setItemId(si.getItemId());
+		sipb.setItemQuantity(si.getItemQuantity());
+		
+		return sipb.build();
+	}
+	
+	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
+		sdipb.setSalesItemId(sdi.getId());
+		sdipb.setSalesPackageId(sdi.getSalesPackageId());
+		sdipb.setMonsterId(sdi.getMonsterId());
+		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
+		sdipb.setItemId(sdi.getItemId());
+		sdipb.setItemQuantity(sdi.getItemQuantity());
+		
+		return sdipb.build();
+	}
+	
+	
 
 }

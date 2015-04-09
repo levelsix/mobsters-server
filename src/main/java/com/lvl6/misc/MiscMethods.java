@@ -39,6 +39,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.SalesItem;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -91,6 +92,9 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -141,7 +145,7 @@ public class MiscMethods {
 	@Autowired
 	protected StaticDataContainer staticDataContainer;
 
-	private final Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
 	public static final String cash = "cash";
 	public static final String gems = "gems";
@@ -267,12 +271,22 @@ public class MiscMethods {
 
 		return gemReward;
 	}
+	
+	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
+		int gemReward = 0;
+		for (SalesItem si : saleItems) {
+			gemReward += si.getGemReward();
+		}
+
+		return gemReward;
+	}
 
 	//monsterIdsToNumPieces or completeUserMonsters will be populated
 	public String createUpdateUserMonsterArguments(String userId,
 			int boosterPackId, List<BoosterItem> boosterItems,
 			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now) {
+			List<MonsterForUser> completeUserMonsters, Date now, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
 		sb.append(" ");
@@ -297,7 +311,7 @@ public class MiscMethods {
 				MonsterForUser newUserMonster = monsterStuffUtils
 						.createNewUserMonster(userId,
 								monzter.getNumPuzzlePieces(), monzter, now,
-								hasAllPieces, isComplete);
+								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
 
 				//return this monster in the argument list completeUserMonsters, so caller
 				//can use it
@@ -313,8 +327,10 @@ public class MiscMethods {
 			sb.append(boosterItemIdsStr);
 		}
 
+		log.info(sb.toString());
 		return sb.toString();
 	}
+	
 
 	//TODO: move to createInfoProtoUtils	
 	public List<FullUserMonsterProto> createFullUserMonsterProtos(

@@ -1,9 +1,14 @@
 package com.lvl6.properties;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 
 public class IAPValues {
 
@@ -30,7 +35,17 @@ public class IAPValues {
 	public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID()
 			+ ".moneytree1";
 	public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID()
-			+ ".moneytreenosale1";
+			+ ".moneytreenosale";
+	public static final String SALE5 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale5";
+	public static final String SALE10 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale10";
+	public static final String SALE20 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale20";
+	public static final String SALE50 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale50";
+	public static final String SALE100 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale100";
 
 	public static final String PACKAGE1IMG = "pilegems.png";
 	public static final String PACKAGE2IMG = "baggems.png";
@@ -147,7 +162,7 @@ public class IAPValues {
 		}
 		return false;
 	}
-
+	
 	public static InAppPurchasePackageType getPackageType(String packageName) {
 		if (packageName.equals(PACKAGE1)) {
 			return InAppPurchasePackageType.GEMS;

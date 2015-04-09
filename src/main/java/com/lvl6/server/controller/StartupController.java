@@ -58,6 +58,9 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
@@ -101,6 +104,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -160,8 +164,12 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -184,6 +192,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -220,6 +229,9 @@ public class StartupController extends EventController {
 	}
 
 	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
+	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
@@ -239,6 +251,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
+
+	@Autowired
+	protected UpdateUtil updateUtil;
 
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -401,6 +416,15 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -713,6 +737,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+			setSalesForUser(resBuilder, user);
+			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -763,7 +789,7 @@ public class StartupController extends EventController {
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
-					serverToggleRetrieveUtil);
+					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
@@ -1624,6 +1650,90 @@ public class StartupController extends EventController {
 					.createBattleItemQueueForUserProtoList(biqfuList);
 
 			resBuilder.addAllBattleItemQueue(biqfupList);
+		}
+	}
+
+	private void setSalesForUser(Builder resBuilder, User user) {
+		//update user jump two tier's value
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		if(salesJumpTwoTiers) {
+			Date lastPurchaseTime = user.getLastPurchaseTime();
+			if(lastPurchaseTime == null) {
+				lastPurchaseTime = new Date();
+				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+			}
+			Date now = new Date();
+			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+			if(diffInDays > 5) {
+				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+				salesJumpTwoTiers = false;
+			}
+		}
+
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+		int userSalesValue = user.getSalesValue();
+
+		double newMinPrice = 0.0;
+
+		//arin's formula
+		if(userSalesValue == 0) {
+			newMinPrice = 4.99;
+		}
+		else if(userSalesValue == 1) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 19.99;
+			}
+			else newMinPrice = 9.99;
+		}
+		else if(userSalesValue == 2) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 49.99;
+			}
+			else newMinPrice = 19.99;
+		}
+		else if(userSalesValue == 3) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 99.99;
+			}
+			else newMinPrice = 49.99;
+		}
+		else newMinPrice = 99.99;
+
+
+		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
+			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
+				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+
+				//get the sales items associated with this booster pack
+				List<SalesItem> salesItemsList = salesPackageIdToItemIdsToSalesItems
+						.get(salesPackageId);
+
+				//get the booster display items for this booster pack
+				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+						.get(salesPackageId);
+				Collection<SalesDisplayItem> displayItems = null;
+				if (null != displayIdsToDisplayItems) {
+					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+					Collections.sort(displayItemIds);
+
+					displayItems = new ArrayList<SalesDisplayItem>();
+
+					for (Integer displayItemId : displayItemIds) {
+						displayItems.add(displayIdsToDisplayItems
+								.get(displayItemId));
+					}
+				}
+
+				SalesPackageProto spProto = CreateInfoProtoUtils
+						.createSalesPackageProto(sp, salesItemsList, displayItems);
+				resBuilder.addSalesPackages(spProto);
+			}
 		}
 	}
 
@@ -2917,6 +3027,50 @@ public class StartupController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+		return salesPackageRetrieveUtils;
+	}
+
+	public void setSalesPackageRetrieveUtils(
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+	}
+
+	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
+		return salesItemRetrieveUtils;
+	}
+
+	public void setSalesItemRetrieveUtils(
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
+	}
+
+	public SalesDisplayItemRetrieveUtils getSalesDisplayItemRetrieveUtils() {
+		return salesDisplayItemRetrieveUtils;
+	}
+
+	public void setSalesDisplayItemRetrieveUtils(
+			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils) {
+		this.salesDisplayItemRetrieveUtils = salesDisplayItemRetrieveUtils;
 	}
 
 }

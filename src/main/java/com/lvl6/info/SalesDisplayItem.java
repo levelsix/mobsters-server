@@ -20,54 +20,8 @@ public class SalesDisplayItem {
 	private int monsterQuantity;
 	private int itemId;
 	private int itemQuantity;
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public int getSalesPackageId() {
-		return salesPackageId;
-	}
-	
-	public void setSalesPackageId(int salesPackageId) {
-		this.salesPackageId = salesPackageId;
-	}
-	
-	public int getMonsterId() {
-		return monsterId;
-	}
-	
-	public void setMonsterId(int monsterId) {
-		this.monsterId = monsterId;
-	}
-	
-	public int getMonsterQuantity() {
-		return monsterQuantity;
-	}
-	
-	public void setMonsterQuantity(int monsterQuantity) {
-		this.monsterQuantity = monsterQuantity;
-	}
-	
-	public int getItemId() {
-		return itemId;
-	}
-	
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	
-	public int getItemQuantity() {
-		return itemQuantity;
-	}
-	
-	public void setItemQuantity(int itemQuantity) {
-		this.itemQuantity = itemQuantity;
-	}
+
+
 
 	@Override
 	public String toString() {
@@ -76,7 +30,78 @@ public class SalesDisplayItem {
 				+ ", monsterQuantity=" + monsterQuantity + ", itemId=" + itemId
 				+ ", itemQuantity=" + itemQuantity + "]";
 	}
-	
-	
-	
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public int getSalesPackageId() {
+		return salesPackageId;
+	}
+
+
+
+	public void setSalesPackageId(int salesPackageId) {
+		this.salesPackageId = salesPackageId;
+	}
+
+
+
+	public int getMonsterId() {
+		return monsterId;
+	}
+
+
+
+	public void setMonsterId(int monsterId) {
+		this.monsterId = monsterId;
+	}
+
+
+
+	public int getMonsterQuantity() {
+		return monsterQuantity;
+	}
+
+
+
+	public void setMonsterQuantity(int monsterQuantity) {
+		this.monsterQuantity = monsterQuantity;
+	}
+
+
+
+	public int getItemId() {
+		return itemId;
+	}
+
+
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+
+
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+
 }

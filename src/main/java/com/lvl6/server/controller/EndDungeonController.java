@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskComplete
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -96,6 +97,9 @@ public class EndDungeonController extends EventController {
 	
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -232,7 +236,7 @@ public class EndDungeonController extends EventController {
 					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 							.updateUserMonsters(userId, monsterIdToNumPieces,
 									monsterIdToLvlToQuantity, mfusop,
-									currentDate);
+									currentDate, monsterLevelInfoRetrieveUtils);
 
 					awardOneTimeItem(resBuilder, userId, itemId, taskId, tme);
 

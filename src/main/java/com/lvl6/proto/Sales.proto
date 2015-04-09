@@ -1,0 +1,47 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+//import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "SalesProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message SalesPackageProto {
+	optional int32 salesPackageId = 1;
+	optional string salesPackageName = 2;
+	optional int64 price = 3;
+	optional string uuid = 4;
+	repeated SalesItemProto sip = 5;
+	repeated SalesDisplayItemProto sdip = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message SalesItemProto {
+	optional int32 salesItemId = 1;
+	optional int32 salesPackageId = 2;
+	optional int32 monsterId = 3;
+	optional int32 monsterQuantity = 4;
+	optional int32 itemId = 5;
+	optional int32 itemQuantity = 6;
+	optional int32 gemReward = 7;
+}
+
+//------------------------------------------------------------------------------------------
+
+message SalesDisplayItemProto {
+	optional int32 salesItemId = 1;
+	optional int32 salesPackageId = 2;
+	optional int32 monsterId = 3;
+	optional int32 monsterQuantity = 4;
+	optional int32 itemId = 5;
+	optional int32 itemQuantity = 6;
+	optional int32 gemReward = 7;
+	
+}

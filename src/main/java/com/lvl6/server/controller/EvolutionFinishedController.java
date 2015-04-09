@@ -37,6 +37,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -74,6 +75,9 @@ public class EvolutionFinishedController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 
 	public EvolutionFinishedController() {
@@ -359,7 +363,8 @@ public class EvolutionFinishedController extends EventController {
 		boolean hasAllPieces = true;
 		boolean isComplete = true;
 		MonsterForUser mfu = monsterStuffUtils.createNewUserMonster(uId,
-				numPieces, evolvedMonster, now, hasAllPieces, isComplete);
+				numPieces, evolvedMonster, now, hasAllPieces, isComplete, 
+				monsterLevelInfoRetrieveUtils);
 
 		return mfu;
 	}

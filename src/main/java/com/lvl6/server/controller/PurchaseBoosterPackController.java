@@ -36,6 +36,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -79,6 +80,9 @@ public class PurchaseBoosterPackController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -148,7 +152,7 @@ public class PurchaseBoosterPackController extends EventController {
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
 					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils, 
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
-					monsterStuffUtils, updateUtil, miscMethods);
+					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils);
 
 			pbpa.execute(resBuilder);
 
