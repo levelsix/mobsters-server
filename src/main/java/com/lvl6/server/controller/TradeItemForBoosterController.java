@@ -43,7 +43,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -64,35 +65,38 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
-	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new TradeItemForBoosterRequestEvent();
@@ -176,14 +180,14 @@ public class TradeItemForBoosterController extends EventController {
 						.determineBoosterItemsUserReceives(
 								numBoosterItemsUserWants, idsToBoosterItems);
 
-				legit = miscMethods.checkIfMonstersExist(itemsUserReceives);
+				legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
 			}
 
 			int gemReward = 0;
 			boolean successful = false;
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
-				gemReward = miscMethods.determineGemReward(itemsUserReceives);
+				gemReward = BoosterItemUtils.determineGemReward(itemsUserReceives);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
@@ -242,7 +246,7 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 
@@ -352,9 +356,10 @@ public class TradeItemForBoosterController extends EventController {
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = miscMethods.createUpdateUserMonsterArguments(userId,
+		String mfusop = BoosterItemUtils.createUpdateUserMonsterArguments(userId,
 				bPackId, itemsUserReceives, monsterIdToNumPieces,
-				completeUserMonsters, now, monsterLevelInfoRetrieveUtils);
+				completeUserMonsters, now, monsterLevelInfoRetrieveUtils,
+				monsterRetrieveUtils, monsterStuffUtils);
 		mfusop = String.format("%s=%s, %s",
 				ControllerConstants.MFUSOP__REDEEM_ITEM, itemId, mfusop);
 
@@ -396,7 +401,7 @@ public class TradeItemForBoosterController extends EventController {
 		//	      return false;
 		//	    }
 		//item reward
-		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+		List<ItemForUser> ifuList = BoosterItemUtils
 				.calculateBoosterItemItemRewards(userId, itemsUserReceives,
 						itemForUserRetrieveUtil);
 		log.info("ifuList={}", ifuList);

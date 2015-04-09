@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,9 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
-import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
@@ -31,6 +28,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -58,6 +56,7 @@ public class InAppPurchaseSalesAction {
 	private SalesItemRetrieveUtils salesItemRetrieveUtils;
 	private MonsterRetrieveUtils monsterRetrieveUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private SalesPackage salesPackage;
 
 	public InAppPurchaseSalesAction() {
 		super();
@@ -75,7 +74,8 @@ public class InAppPurchaseSalesAction {
 			SalesPackageRetrieveUtils salesPackageRetrieveUtils,
 			SalesItemRetrieveUtils salesItemRetrieveUtils,
 			MonsterRetrieveUtils monsterRetrieveUtils,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			SalesPackage salesPackage) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -93,17 +93,13 @@ public class InAppPurchaseSalesAction {
 		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.salesPackage = salesPackage;
 	}
 
 	//derived state
-	boolean isStarterPack;
-	boolean isMoneyTree;
-	boolean isSalesPackage;
 	private String packageName;
-	private SalesPackage salesPackage;
 	private double salesPackagePrice;
 	private int gemChange;
-	private StructureMoneyTree smt;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -145,63 +141,21 @@ public class InAppPurchaseSalesAction {
 		return verifySalesPackage(resBuilder);
 	}
 
-
 	public boolean verifySalesPackage(Builder resBuilder) {
 		boolean duplicateReceipt = true;
-		duplicateReceipt = checkIfDuplicateReceipt();
+		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		Map<String, SalesPackage> salesPackageNamesToSalesPackages = 
-				salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
-		isSalesPackage = packageIsSalesPackage(packageName, salesPackageNamesToSalesPackages);
-
-		if (!(duplicateReceipt && isSalesPackage && userSalesValueMatchesSalesPackage())) {
+		if (!(duplicateReceipt && userSalesValueMatchesSalesPackage())) {
 			log.error("user should be buying more expensive sales package! {}, {}",
 					packageName, user);
 			return false;
 		}
 
-		log.info("sales package verified");
-		salesPackage = salesPackageNamesToSalesPackages.get(packageName);
-
 		return true;
-	}
-
-	public boolean checkIfDuplicateReceipt() { //returns true if duplicate
-		String transactionId = null;
-		try {
-			transactionId = receiptFromApple
-					.getString(IAPValues.TRANSACTION_ID);
-			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
-		} catch (JSONException e) {
-			log.error(String.format("error verifying InAppPurchase request. "
-					+ "receiptFromApple={}", receiptFromApple), e);
-			e.printStackTrace();
-		}
-
-		long transactionIdLong = Long.parseLong(transactionId);
-		if (iapHistoryRetrieveUtil
-				.checkIfDuplicateTransaction(transactionIdLong)) {
-			log.error("duplicate receipt from user {}", user);
-			return true;
-		}
-		else return false;
-	}
-
-	public boolean packageIsSalesPackage(String packageName, 
-			Map<String, SalesPackage> salesPackageNamesToSalesPackages) {
-
-		for(String name : salesPackageNamesToSalesPackages.keySet()) {
-			if(name.equalsIgnoreCase(packageName)) {
-				return true;
-			}
-		}
-		log.error("packagename {} does not exist in table of sales packages",
-				packageName);
-		return false;
 	}
 
 	public boolean userSalesValueMatchesSalesPackage() {
@@ -247,7 +201,7 @@ public class InAppPurchaseSalesAction {
 	public boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
 		try {
-			Map<Integer, List<SalesItem>> salesItemIdsToSalesItemsForSalesPackIds = 
+			Map<Integer, List<SalesItem>> salesItemIdsToSalesItemsForSalesPackIds =
 					salesItemRetrieveUtils.getSalesItemIdsToSalesItemsForSalesPackIds();
 			gemChange = getDiamondsForSalesPackage(salesPackage.getId(), salesItemIdsToSalesItemsForSalesPackIds);
 
@@ -283,7 +237,7 @@ public class InAppPurchaseSalesAction {
 						get(salesPackId);
 				for(SalesItem si : innerList) {
 					totalGems += si.getGemReward();
-				}	
+				}
 			}
 		}
 		return totalGems;
@@ -351,7 +305,7 @@ public class InAppPurchaseSalesAction {
 				}
 
 				//item reward
-				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId, 
+				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId,
 						salesItemList, itemForUserRetrieveUtil, updateUtil);
 
 				if (null != ifuList && !ifuList.isEmpty()) {
@@ -384,7 +338,7 @@ public class InAppPurchaseSalesAction {
 		}
 		return monstersExist;
 	}
-	
+
 	public String createUpdateUserMonsterArgumentsForSales(String userId,
 			int salesPackageId, List<SalesItem> salesItems,
 			Map<Integer, Integer> monsterIdsToNumPieces,
@@ -404,14 +358,14 @@ public class InAppPurchaseSalesAction {
 			if (monsterId < 0) {
 				continue;
 			}
-			
+
 			if (item.getMonsterLevel() > 0) {
 				//create a "complete" user monster
 				int monsterQuantity = item.getMonsterQuantity();
 				Monster monzter = monsterRetrieveUtils
 						.getMonsterForMonsterId(monsterId);
 				List<MonsterForUser> monstersCreated = monsterStuffUtils
-						.createLeveledMonsterForUserFromQuantity(userId, monzter, 
+						.createLeveledMonsterForUserFromQuantity(userId, monzter,
 								monsterQuantity, now, item.getMonsterLevel(),
 								monsterLevelInfoRetrieveUtils);
 				log.info("monster for users just created" + monstersCreated);
@@ -433,11 +387,23 @@ public class InAppPurchaseSalesAction {
 		return sb.toString();
 	}
 
-	public List<ItemForUser> awardSalesItemItemRewards(String userId,
+	public void processPurchase(Builder resBuilder) {
+		prevCurrencies = new HashMap<String, Integer>();
+
+		if (gemChange != 0) {
+
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			resBuilder.setDiamondsGained(gemChange);
+			user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
+		}
+		prepCurrencyHistory();
+	}
+
+	public static List<ItemForUser> awardSalesItemItemRewards(String userId,
 			List<SalesItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			UpdateUtil updateUtil) {
-		List<ItemForUser> ifuList = calculateSalesItemItemRewards(userId, 
+		List<ItemForUser> ifuList = calculateSalesItemItemRewards(userId,
 				itemsUserReceives, itemForUserRetrieveUtil);
 
 		log.info("ifuList={}", ifuList);
@@ -451,7 +417,7 @@ public class InAppPurchaseSalesAction {
 
 	}
 
-	public List<ItemForUser> calculateSalesItemItemRewards(
+	public static List<ItemForUser> calculateSalesItemItemRewards(
 			String userId, List<SalesItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
@@ -476,7 +442,7 @@ public class InAppPurchaseSalesAction {
 				itemIdToQuantity);
 	}
 
-	public List<ItemForUser> calculateItemRewards(String userId,
+	public static List<ItemForUser> calculateItemRewards(String userId,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			Map<Integer, Integer> itemIdToQuantity) {
 		List<ItemForUser> ifuList = null;
@@ -507,25 +473,7 @@ public class InAppPurchaseSalesAction {
 		return ifuList;
 	}
 
-	public void processPurchase(Builder resBuilder) {
-		prevCurrencies = new HashMap<String, Integer>();
 
-		if (gemChange != 0) {
-			if(isStarterPack) {
-				prevCurrencies.put(MiscMethods.gems, user.getGems());
-				resBuilder.setDiamondsGained(gemChange);
-				user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
-			}
-			else if(isSalesPackage) {
-				prevCurrencies.put(MiscMethods.gems, user.getGems());
-				resBuilder.setDiamondsGained(gemChange);
-				user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
-			}
-		}
-
-		prepCurrencyHistory();
-	}
-	
 	public boolean updateUserSalesValueAndLastPurchaseTime() {
 		int salesValue = user.getSalesValue();
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
@@ -559,25 +507,14 @@ public class InAppPurchaseSalesAction {
 
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemChange) {
-			if(isStarterPack) {
-				reasonsForChanges.put(gems,
-						ControllerConstants.UCHRFC__IN_APP_PURCHASE_STARTER_PACK);
-			}
-			else if(isSalesPackage) {
-				reasonsForChanges.put(gems,
-						ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
-			}
-			else reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__IN_APP_PURCHASE);
-		} else {
 			reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__IN_APP_PURCHASE_MONEY_TREE);
+					ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
 		}
 		details = new HashMap<String, String>();
 		details.put(gems, packageName);
 	}
 
-	
+
 	public String getUserId() {
 		return userId;
 	}
@@ -702,30 +639,6 @@ public class InAppPurchaseSalesAction {
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
 	}
 
-	public boolean isStarterPack() {
-		return isStarterPack;
-	}
-
-	public void setStarterPack(boolean isStarterPack) {
-		this.isStarterPack = isStarterPack;
-	}
-
-	public boolean isMoneyTree() {
-		return isMoneyTree;
-	}
-
-	public void setMoneyTree(boolean isMoneyTree) {
-		this.isMoneyTree = isMoneyTree;
-	}
-
-	public boolean isSalesPackage() {
-		return isSalesPackage;
-	}
-
-	public void setSalesPackage(boolean isSalesPackage) {
-		this.isSalesPackage = isSalesPackage;
-	}
-
 	public String getPackageName() {
 		return packageName;
 	}
@@ -756,14 +669,6 @@ public class InAppPurchaseSalesAction {
 
 	public void setGemChange(int gemChange) {
 		this.gemChange = gemChange;
-	}
-
-	public StructureMoneyTree getSmt() {
-		return smt;
-	}
-
-	public void setSmt(StructureMoneyTree smt) {
-		this.smt = smt;
 	}
 
 	public Map<String, Integer> getCurrencyDeltas() {
@@ -814,6 +719,6 @@ public class InAppPurchaseSalesAction {
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
-	
-	
+
+
 }
