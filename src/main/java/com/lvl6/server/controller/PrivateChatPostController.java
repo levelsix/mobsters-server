@@ -57,13 +57,13 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected AdminChatUtil adminChatUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
 
@@ -75,10 +75,10 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
-	
+
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
@@ -172,7 +172,7 @@ public class PrivateChatPostController extends EventController {
 							+ ", censoredContent="
 							+ censoredContent + ", timeOfPost=" + timeOfPost);
 				} else {
-					
+
 					//check the language settings between the two
 					boolean translationRequired = true;
 					TranslationSettingsForUser settingForRecipient = translationSettingsForUserRetrieveUtil.
@@ -193,12 +193,12 @@ public class PrivateChatPostController extends EventController {
 						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
 								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT);
 						if(globalChatSettingsForRecipient != null) {
-							insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(), 
+							insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(),
 									ChatType.PRIVATE_CHAT.toString(), true);
 							recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
 						}
 						else {
-							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
+							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(),
 									ChatType.PRIVATE_CHAT.toString(), true);
 							recipientLanguageString = TranslateLanguages.ENGLISH.toString();
 						}
@@ -207,7 +207,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = settingForRecipient.isTranslationsOn();
 						recipientLanguageString = settingForRecipient.getLanguage();
 					}
-					
+
 					recipientLanguage = Language.valueOf(recipientLanguageString);
 
 					//checking if user even wants stuff translated
@@ -216,18 +216,18 @@ public class PrivateChatPostController extends EventController {
 						TranslationSettingsForUser globalChatSettingsForPoster = translationSettingsForUserRetrieveUtil.
 								getSpecificUserGlobalTranslationSettings(posterId, ChatType.GLOBAL_CHAT);
 						if(globalChatSettingsForPoster != null) {
-							insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(), 
+							insertUtils.insertTranslateSettings(posterId, recipientId, globalChatSettingsForPoster.getLanguage(),
 									ChatType.PRIVATE_CHAT.toString(), true);
 							posterLanguageString = globalChatSettingsForPoster.getLanguage();
 						}
 						else {
-							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(), 
+							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(),
 									ChatType.PRIVATE_CHAT.toString(), true);
 							posterLanguageString = TranslateLanguages.ENGLISH.toString();
 						}
 					}
 					posterLanguage = Language.valueOf(posterLanguageString);
-					
+
 
 					//detect the language of msg, if it matches language setting of recipient, dont translate anything
 					//					Language detectedLanguage = MiscMethods.detectedLanguage(censoredContent);
@@ -238,7 +238,7 @@ public class PrivateChatPostController extends EventController {
 					}
 					else {
 						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
-						
+
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
 							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl),
@@ -247,20 +247,20 @@ public class PrivateChatPostController extends EventController {
 							tt.setText(translatedMessage.get(tl));
 						}
 					}
-					
+
 					if (recipientId == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID) {
 						AdminChatPost acp = new AdminChatPost(
 								privateChatPostId, posterId, recipientId,
 								new Date(), censoredContent);
 						acp.setUsername(users.get(posterId).getName());
 						adminChatUtil.sendAdminChatEmail(acp);
-						
+
 						GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
 						//this is where you create the translated admin messages
 //						gcmpb.setContent(value)
 //						resBuilder.setAdminMessage(value);
-						
-						
+
+
 					}
 					PrivateChatPost pwp = new PrivateChatPost(
 							privateChatPostId, posterId, recipientId,
@@ -291,15 +291,15 @@ public class PrivateChatPostController extends EventController {
 							recipientClan = clanIdsToClans.get(recipientClanId);
 						}
 					}
-					
+
 					PrivateChatPostProto pcpp;
-					
+
 					if(translationRequired) {
 						pcpp = createInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, translatedMessage, contentLanguage);
-						
+
 					}
 					else {
 						pcpp = createInfoProtoUtils
@@ -308,7 +308,7 @@ public class PrivateChatPostController extends EventController {
 										recipientClan, null, contentLanguage);
 					}
 					resBuilder.setPost(pcpp);
-					
+
 					PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
 					pcdlpb.setRecipientUserId(recipientId);
 					pcdlpb.setSenderUserId(posterId);

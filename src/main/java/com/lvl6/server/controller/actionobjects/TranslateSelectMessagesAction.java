@@ -37,7 +37,7 @@ public class TranslateSelectMessagesAction {
 	protected UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
 	private ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
-	
+
 
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
@@ -64,7 +64,7 @@ public class TranslateSelectMessagesAction {
 	private User senderUser;
 	private Language language;
 	private Map<String, PrivateChatPost> privateChatPostMap;
-	
+
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
@@ -91,7 +91,7 @@ public class TranslateSelectMessagesAction {
 			log.info("no translation");
 			return true;
 		}
-		
+
 		language = miscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
@@ -104,7 +104,12 @@ public class TranslateSelectMessagesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
-			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, 
+			log.info("recipientUserId {}", recipientUserId);
+			log.info("senderUserId {}", senderUserId);
+			log.info("languageEnum {}", languageEnum.toString());
+			log.info("translateOn {}", translateOn);
+
+			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId,
 					languageEnum.toString(), translateOn);
 		}
 		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
@@ -112,15 +117,15 @@ public class TranslateSelectMessagesAction {
 					getUserTranslationSettingsForUserGlobal(recipientUserId);
 			if(tsfuList.isEmpty()) {
 
-				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
+				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId,
 						languageEnum.toString(), chatType.toString(), translateOn);
 			}
 			else {
-				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId, 
+				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId,
 						chatType.toString(), languageEnum.toString(), translateOn) ;
 			}
 		}
-		
+
 		if (!successfulUpdate) {
 			log.error("failed to update user language setting");
 			return false;
@@ -143,10 +148,10 @@ public class TranslateSelectMessagesAction {
 					}
 					privateChatPostMap.put(pcp.getId(), pcp);
 				}
-				
+
 				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
 						listOfPrivateChatPosts, chatTranslationsRetrieveUtils);
-				
+
 				if(successfulTranslationInsertion) {
 					return true;
 				}
