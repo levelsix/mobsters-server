@@ -1,26 +1,37 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class InAppPurchaseAction {
+public class InAppPurchaseMoneyTreeAction {
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -30,23 +41,28 @@ public class InAppPurchaseAction {
 	private Date now;
 	private String uuid;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
+	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	private CreateInfoProtoUtils createInfoProtoUtils;
 	private MiscMethods miscMethods;
+	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
-
-	public InAppPurchaseAction() {
+	public InAppPurchaseMoneyTreeAction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InAppPurchaseAction(String userId, User user,
+	public InAppPurchaseMoneyTreeAction(String userId, User user,
 			JSONObject receiptFromApple, Date now,
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			MiscMethods miscMethods) {
+			MiscMethods miscMethods,
+			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
+			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -54,28 +70,24 @@ public class InAppPurchaseAction {
 		this.now = now;
 		this.uuid = uuid;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.miscMethods = miscMethods;
+		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
+		this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
 	}
 
-	//	//encapsulates the return value from this Action Object
-	//	static class InAppPurchaseResource {
-	//
-	//
-	//		public InAppPurchaseResource() {
-	//
-	//		}
-	//	}
-	//
-	//	public InAppPurchaseResource execute() {
-	//
-	//	}
-
 	//derived state
+	private int boosterPackId;
+	boolean isStarterPack;
+	boolean isMoneyTree;
+	boolean isSalesPackage;
 	private String packageName;
+	private double salesPackagePrice;
 	private int gemChange;
+	private StructureMoneyTree smt;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -114,10 +126,10 @@ public class InAppPurchaseAction {
 	}
 
 	public boolean verifySemantics(Builder resBuilder) {
-		return verifyPurchase(resBuilder);
+		return verifyStarterPack(resBuilder);
 	}
 
-	public boolean verifyPurchase(Builder resBuilder) {
+	public boolean verifyStarterPack(Builder resBuilder) {
 		boolean duplicateReceipt = true;
 		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
@@ -125,7 +137,7 @@ public class InAppPurchaseAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		if (duplicateReceipt) {
+		if (!(duplicateReceipt && userOwnsOneMoneyTreeMax())) {
 			log.error("user trying to buy the starter pack again! {}, {}",
 					packageName, user);
 			return false;
@@ -133,14 +145,32 @@ public class InAppPurchaseAction {
 		return true;
 	}
 
+	public boolean userOwnsOneMoneyTreeMax() {
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = structureMoneyTreeRetrieveUtils
+				.getStructIdsToMoneyTrees();
+		List<StructureForUser> sfuList = structureForUserRetrieveUtils
+				.getUserStructsForUser(userId);
+		boolean hasMoneyTree = false;
+
+		for (StructureForUser sfu : sfuList) {
+			int structId = sfu.getStructId();
+			for (Integer ids : structIdsToMoneyTreesMap.keySet()) {
+				if (structId == ids) {
+					hasMoneyTree = true;
+				}
+			}
+		}
+
+		return hasMoneyTree;
+	}
+
 	public boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
 		try {
-
 			double realLifeCashCost;
 			realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 
-			gemChange = IAPValues.getDiamondsForPackageName(packageName);
+			gemChange = 0;
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
 					user, realLifeCashCost)) {
@@ -149,8 +179,7 @@ public class InAppPurchaseAction {
 						receiptFromApple.toString(4), user);
 				success = false;
 			}
-
-			processPurchase(resBuilder);
+			processMoneyTreePurchase(resBuilder);
 
 		} catch (Exception e) {
 			log.error(
@@ -159,72 +188,57 @@ public class InAppPurchaseAction {
 							receiptFromApple), e);
 			success = false;
 		}
-
 		return success;
 	}
 
-	//	private List<ItemForUser> calculateItemRewards(
-	//		String userId,
-	//		List<BoosterItem> itemsUserReceives )
-	//	{
-	//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-	//
-	//		for (BoosterItem bi : itemsUserReceives) {
-	//			int itemId = bi.getItemId();
-	//			int itemQuantity = bi.getItemQuantity();
-	//
-	//			if (itemId <= 0 || itemQuantity <= 0) {
-	//				continue;
-	//			}
-	//
-	//			//user could have gotten multiple of the same BoosterItem
-	//			int newQuantity = itemQuantity;
-	//			if (itemIdToQuantity.containsKey(itemId))
-	//			{
-	//				newQuantity += itemIdToQuantity.get(itemId);
-	//			}
-	//			itemIdToQuantity.put(itemId, newQuantity);
-	//		}
-	//
-	//		List<ItemForUser> ifuList = null;
-	//	    if (!itemIdToQuantity.isEmpty()) {
-	//	    	//aggregate rewarded items with user's current items
-	//	    	Map<Integer, ItemForUser> itemIdToIfu =
-	//	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	//	    			itemIdToQuantity.keySet());
-	//
-	//	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	//	    		int newQuantity = itemIdToQuantity.get(itemId);
-	//
-	//	    		ItemForUser ifu = null;
-	//	    		if (itemIdToIfu.containsKey(itemId)){
-	//	    			ifu = itemIdToIfu.get(itemId);
-	//	    		} else {
-	//	    			//user might not have the item
-	//	    			ifu = new ItemForUser(userId, itemId, 0);
-	//	    			itemIdToIfu.put(itemId, ifu);
-	//	    		}
-	//
-	//	    		newQuantity += ifu.getQuantity();
-	//	    		ifu.setQuantity(newQuantity);
-	//	    	}
-	//
-	//	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	//	    }
-	//	    return ifuList;
-	//	}
+	public void processMoneyTreePurchase(Builder resBuilder) {
 
+		//assumed to only contain one money tree max for now
+		List<StructureForUser> listOfUsersMoneyTree = structureForUserRetrieveUtils
+				.getMoneyTreeForUserList(userId, null);
+		String userStructId = "";
+		Timestamp purchaseTime = new Timestamp(now.getTime());
+		CoordinatePair cp = new CoordinatePair(0, 0);
 
-	public void processPurchase(Builder resBuilder) {
-		prevCurrencies = new HashMap<String, Integer>();
+		if (listOfUsersMoneyTree.isEmpty()) {
+			Timestamp lastRetrievedTime = purchaseTime;
+			boolean isComplete = true;
 
-		if (gemChange != 0) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
-			resBuilder.setDiamondsGained(gemChange);
-			user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
+			userStructId = insertUtil.insertUserStruct(userId,
+					smt.getStructId(), cp, purchaseTime, lastRetrievedTime,
+					isComplete);
+
+		} else {
+			userStructId = listOfUsersMoneyTree.get(0).getId();
+			boolean success = updateUtil
+					.updatePurchaseTimeRetrieveTimeForMoneyTree(userStructId,
+							purchaseTime);
+			if (!success) {
+				throw new RuntimeException(
+						String.format("failed to update purchase time of money tree for user"
+								+ userId));
+			}
+		}
+		if (userStructId.equals("")) {
+			throw new RuntimeException(
+					String.format("failed to add money tree to table for user"
+							+ userId));
 		}
 
 		prepCurrencyHistory();
+
+		StructureForUser sfu = new StructureForUser(userStructId, userId,
+				smt.getStructId(), purchaseTime, cp, purchaseTime, true,
+				"POSITION_1", 0);
+
+		List<FullUserStructureProto> fuspList = new ArrayList<FullUserStructureProto>();
+
+		if (null != sfu) {
+			FullUserStructureProto fusp = createInfoProtoUtils
+					.createFullUserStructureProtoFromUserstruct(sfu);
+			fuspList.add(fusp);
+			resBuilder.addAllUpdatedMoneyTree(fuspList);
+		}
 	}
 
 	public void prepCurrencyHistory() {
@@ -237,35 +251,13 @@ public class InAppPurchaseAction {
 
 		reasonsForChanges = new HashMap<String, String>();
 		reasonsForChanges.put(gems,
-				ControllerConstants.UCHRFC__IN_APP_PURCHASE);
+				ControllerConstants.UCHRFC__IN_APP_PURCHASE_STARTER_PACK);
 
 		details = new HashMap<String, String>();
 		details.put(gems, packageName);
+
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public Map<String, Integer> getCurrencyDeltas() {
-		return currencyDeltas;
-	}
-
-	public Map<String, Integer> getPreviousCurrencies() {
-		return prevCurrencies;
-	}
-
-	public Map<String, Integer> getCurrentCurrencies() {
-		return curCurrencies;
-	}
-
-	public Map<String, String> getReasons() {
-		return reasonsForChanges;
-	}
-
-	public Map<String, String> getDetails() {
-		return details;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -273,6 +265,14 @@ public class InAppPurchaseAction {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public JSONObject getReceiptFromApple() {
@@ -308,6 +308,15 @@ public class InAppPurchaseAction {
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 	}
 
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
@@ -340,6 +349,30 @@ public class InAppPurchaseAction {
 		this.miscMethods = miscMethods;
 	}
 
+	public boolean isStarterPack() {
+		return isStarterPack;
+	}
+
+	public void setStarterPack(boolean isStarterPack) {
+		this.isStarterPack = isStarterPack;
+	}
+
+	public boolean isMoneyTree() {
+		return isMoneyTree;
+	}
+
+	public void setMoneyTree(boolean isMoneyTree) {
+		this.isMoneyTree = isMoneyTree;
+	}
+
+	public boolean isSalesPackage() {
+		return isSalesPackage;
+	}
+
+	public void setSalesPackage(boolean isSalesPackage) {
+		this.isSalesPackage = isSalesPackage;
+	}
+
 	public String getPackageName() {
 		return packageName;
 	}
@@ -348,12 +381,36 @@ public class InAppPurchaseAction {
 		this.packageName = packageName;
 	}
 
+	public double getSalesPackagePrice() {
+		return salesPackagePrice;
+	}
+
+	public void setSalesPackagePrice(double salesPackagePrice) {
+		this.salesPackagePrice = salesPackagePrice;
+	}
+
 	public int getGemChange() {
 		return gemChange;
 	}
 
 	public void setGemChange(int gemChange) {
 		this.gemChange = gemChange;
+	}
+
+	public StructureMoneyTree getSmt() {
+		return smt;
+	}
+
+	public void setSmt(StructureMoneyTree smt) {
+		this.smt = smt;
+	}
+
+	public Map<String, Integer> getCurrencyDeltas() {
+		return currencyDeltas;
+	}
+
+	public void setCurrencyDeltas(Map<String, Integer> currencyDeltas) {
+		this.currencyDeltas = currencyDeltas;
 	}
 
 	public Map<String, Integer> getPrevCurrencies() {
@@ -380,16 +437,13 @@ public class InAppPurchaseAction {
 		this.reasonsForChanges = reasonsForChanges;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public void setCurrencyDeltas(Map<String, Integer> currencyDeltas) {
-		this.currencyDeltas = currencyDeltas;
+	public Map<String, String> getDetails() {
+		return details;
 	}
 
 	public void setDetails(Map<String, String> details) {
 		this.details = details;
 	}
+
 
 }

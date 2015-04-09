@@ -34,7 +34,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.FileDownload;
-import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
@@ -76,25 +75,9 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -104,44 +87,43 @@ import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
 import com.memetix.mst.detect.Detect;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
 @Component
 public class MiscMethods {
-	
+
 	@Autowired
 	protected AchievementRetrieveUtils achievementRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected ProfanityRetrieveUtils profanityRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestUtils questUtils;
-	
+
 	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+
 	@Autowired
 	protected StaticDataContainer staticDataContainer;
 
@@ -151,7 +133,7 @@ public class MiscMethods {
 	public static final String gems = "gems";
 	public static final String oil = "oil";
 	public static final String boosterPackId = "boosterPackId";
-	
+
 	private static String pClientId = "ToonSquad";
 	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
@@ -241,37 +223,8 @@ public class MiscMethods {
 	}
 
 	//purpose of this method is to discover if the booster items that contain
-	//monsters as rewards, if the monster ids are valid 
-	public boolean checkIfMonstersExist(
-			List<BoosterItem> itemsUserReceives) {
-		boolean monstersExist = true;
+	//monsters as rewards, if the monster ids are valid
 
-		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
-				.getMonsterIdsToMonsters();
-		for (BoosterItem bi : itemsUserReceives) {
-			int monsterId = bi.getMonsterId();
-
-			if (0 == monsterId) {
-				//this booster item does not contain a monster reward
-				continue;
-			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
-				log.error("This booster item contains nonexistent monsterId. item="
-						+ bi);
-				monstersExist = false;
-			}
-		}
-		return monstersExist;
-	}
-
-	public int determineGemReward(List<BoosterItem> boosterItems) {
-		int gemReward = 0;
-		for (BoosterItem bi : boosterItems) {
-			gemReward += bi.getGemReward();
-		}
-
-		return gemReward;
-	}
-	
 	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
 		int gemReward = 0;
 		for (SalesItem si : saleItems) {
@@ -281,58 +234,7 @@ public class MiscMethods {
 		return gemReward;
 	}
 
-	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public String createUpdateUserMonsterArguments(String userId,
-			int boosterPackId, List<BoosterItem> boosterItems,
-			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now, 
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-		sb.append(" ");
-		sb.append(boosterPackId);
-		sb.append(" boosterItemIds ");
-
-		List<Integer> boosterItemIds = new ArrayList<Integer>();
-		for (BoosterItem item : boosterItems) {
-			Integer id = item.getId();
-			Integer monsterId = item.getMonsterId();
-
-			//only keep track of the booster item ids that are a monster reward
-			if (monsterId <= 0) {
-				continue;
-			}
-			if (item.isComplete()) {
-				//create a "complete" user monster
-				boolean hasAllPieces = true;
-				boolean isComplete = true;
-				Monster monzter = monsterRetrieveUtils
-						.getMonsterForMonsterId(monsterId);
-				MonsterForUser newUserMonster = monsterStuffUtils
-						.createNewUserMonster(userId,
-								monzter.getNumPuzzlePieces(), monzter, now,
-								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
-
-				//return this monster in the argument list completeUserMonsters, so caller
-				//can use it
-				completeUserMonsters.add(newUserMonster);
-
-			} else {
-				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
-			}
-			boosterItemIds.add(id);
-		}
-		if (!boosterItemIds.isEmpty()) {
-			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-			sb.append(boosterItemIdsStr);
-		}
-
-		log.info(sb.toString());
-		return sb.toString();
-	}
-	
-
-	//TODO: move to createInfoProtoUtils	
+	//TODO: move to createInfoProtoUtils
 	public List<FullUserMonsterProto> createFullUserMonsterProtos(
 			List<String> userMonsterIds, List<MonsterForUser> mfuList) {
 		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
@@ -787,7 +689,7 @@ public class MiscMethods {
 			}
 
 		}
-		
+
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		//set more properties above
@@ -984,7 +886,7 @@ public class MiscMethods {
 	//    return;
 	//  }
 
-	//  private void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
+	//  private void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds,
 	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
 	//      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
 	//
@@ -1358,7 +1260,7 @@ public class MiscMethods {
 	//    raritiesCollected.add(rarityThree);
 	//    return raritiesCollected;
 	//  }
-	//  
+	//
 	//  private boolean isRarityOne(Rarity equipRarity) {
 	//    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
 	//      return true;
@@ -1366,7 +1268,7 @@ public class MiscMethods {
 	//      return false;
 	//    }
 	//  }
-	//  
+	//
 	//  private boolean isRarityTwo(Rarity equipRarity) {
 	//    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
 	//      return true;
@@ -1374,7 +1276,7 @@ public class MiscMethods {
 	//      return false;
 	//    }
 	//  }
-	//  
+	//
 	//  private boolean isRarityThree(Rarity equipRarity) {
 	//    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
 	//      return true;
@@ -1427,8 +1329,8 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//populates ids, quantitiesInStock; determines the remaining booster items the user can get
-	//  private int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
+	//  private int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems,
+	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
 	//    //max number randon number can go
 	//    int sumQuantitiesInStock = 0;
@@ -1468,7 +1370,7 @@ public class MiscMethods {
 
 	//  /*cut out from purchase booster pack controller*/
 	//  //no arguments are modified
-	//  private List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+	//  private List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//    //return value
@@ -1515,7 +1417,7 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//no arguments are modified
-	//	private List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+	//	private List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//		//return value
@@ -1582,8 +1484,8 @@ public class MiscMethods {
 	//        enhancement, now, reason);
 	//  }
 	/*cut out from purchase booster pack controller*/
-	//  public boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
-	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
+	//  public boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives,
+	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected,
 	//      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
 	//
 	//    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
@@ -1813,7 +1715,7 @@ public class MiscMethods {
 			sdpb.addAvailableQuests(fqp);
 		}
 	}
-	//	
+	//
 	//	private void setStaticData(StaticDataProto.Builder sdpb) {
 	//		StaticDataProto staticData = StaticDataContainer.getStaticData();
 	//
@@ -1867,15 +1769,15 @@ public class MiscMethods {
 	//		sdpb.addAllRaids(staticData.getRaidsList());
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
-	
-	public Map<TranslateLanguages, String> translate(Language sourceLanguage, 
+
+	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
-		
+
 		String translatedText = "";
 		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
-		
+
 		List<Language> listOfLanguages = new ArrayList<Language>();
 		listOfLanguages.add(Language.ARABIC);
 		listOfLanguages.add(Language.ENGLISH);
@@ -1901,14 +1803,14 @@ public class MiscMethods {
 					else translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
-				}	
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		return returnMap;
-	} 
+	}
 
 	private TranslateLanguages convertFromLanguageToEnum(Language language) {
 		TranslateLanguages tl = null;
@@ -1963,12 +1865,12 @@ public class MiscMethods {
 		}
 		else return null;
 	}
-		
+
 	public Language detectedLanguage(String text) {
 		Detect.setClientId(pClientId);
         Detect.setClientSecret(secretId);
         Language detectedLanguage = null;
-        
+
         try {
 			detectedLanguage = Detect.execute(text);
 		} catch (Exception e) {
@@ -1978,7 +1880,7 @@ public class MiscMethods {
 		}
         return detectedLanguage;
 	}
-	
-	
-	
+
+
+
 }
