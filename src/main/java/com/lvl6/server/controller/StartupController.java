@@ -1647,7 +1647,7 @@ public class StartupController extends EventController {
 		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
 
 		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-				getUserTranslationSettingsForUserForStartup(userId);
+				getUserTranslationSettingsForUser(userId);
 
 		log.info("tsfuList: " + tsfuList);
 		
