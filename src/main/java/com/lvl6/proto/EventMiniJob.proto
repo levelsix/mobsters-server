@@ -3,6 +3,7 @@
 
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -126,7 +127,7 @@ message RefreshMiniJobResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserMiniJobProto miniJobs = 2;
 	
-	optional RetreshMiniJobStatus status = 3;
+	optional RefreshMiniJobStatus status = 3;
 	
 	enum RefreshMiniJobStatus {
 		SUCCESS = 1;
