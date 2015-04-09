@@ -43,7 +43,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
+import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -59,7 +59,7 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
@@ -71,16 +71,16 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
@@ -378,10 +378,10 @@ public class RedeemMiniJobController extends EventController {
 			//    		itemIdReward, itemRewardQuantity);
 			//    	int numUpdated = updateUtil.updateItemForUser(
 			//    		userId, itemIdReward, itemRewardQuantity);
-			//    	
-			//    	
-			//    	String preface = "rewarding user with more items."; 
-			//    	log.info( 
+			//
+			//
+			//    	String preface = "rewarding user with more items.";
+			//    	log.info(
 			//    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
 			//    		new Object[] { preface, itemIdReward, itemRewardQuantity,
 			//    			numUpdated});
@@ -395,7 +395,7 @@ public class RedeemMiniJobController extends EventController {
 			itemIdToQuantity.put(secondItemIdReward, newQuantity);
 		}
 
-		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+		List<ItemForUser> ifuList = BoosterItemUtils
 				.calculateItemRewards(userId, itemForUserRetrieveUtil,
 						itemIdToQuantity);
 		return ifuList;
