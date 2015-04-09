@@ -227,13 +227,13 @@ public class StartupController extends EventController {
 	public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
 		this.chatMessages = chatMessages;
 	}
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
 
@@ -242,28 +242,25 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected Globals globals;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
@@ -308,7 +305,7 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected SecretGiftUtils secretGiftUtils;
 
@@ -386,7 +383,7 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
@@ -397,35 +394,38 @@ public class StartupController extends EventController {
 	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 
 	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
+	@Autowired
 	protected InsertUtil insertUtil;
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
-	
+
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -743,7 +743,6 @@ public class StartupController extends EventController {
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
 
-
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
 			log.info("{}ms at clanRaidStuff", stopWatch.getTime());
@@ -763,25 +762,25 @@ public class StartupController extends EventController {
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 					getUserTranslationSettingsForUser(playerId);
 			boolean tsfuListIsNull = false;
-			
+
 			if(tsfuList == null || tsfuList.isEmpty()) {
-				insertUtil.insertTranslateSettings(playerId, null, 
-						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
-						ChatType.GLOBAL_CHAT.toString(), 
+				insertUtil.insertTranslateSettings(playerId, null,
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
+						ChatType.GLOBAL_CHAT.toString(),
 						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 				tsfuListIsNull = true;
 			}
-			
+
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil, 
+					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
 					getCreateInfoProtoUtils());
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
 			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(
 					resBuilder, user, playerId,
-					getUserFacebookInviteForSlotRetrieveUtils(), 
+					getUserFacebookInviteForSlotRetrieveUtils(),
 					getCreateInfoProtoUtils());
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
@@ -790,14 +789,14 @@ public class StartupController extends EventController {
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
-					serverToggleRetrieveUtils, monsterLevelInfoRetrieveUtils);
+					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-					user, getClanChatPostRetrieveUtils(), 
+					user, getClanChatPostRetrieveUtils(),
 					getCreateInfoProtoUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
@@ -825,12 +824,12 @@ public class StartupController extends EventController {
 
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
-			
+
 			//set this proto after executing privatechatprotos
 			setDefaultLanguagesForUser(resBuilder, playerId);
 			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 
-			
+
 			sfesa.execute(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			spbha.execute(fillMe);
@@ -873,14 +872,6 @@ public class StartupController extends EventController {
 					this.getClass().getSimpleName());
 			log.info("{}ms at unlock", stopWatch.getTime());
 		}
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	private void forceLogOutOthers(StopWatch stopWatch, String udid,
@@ -1206,9 +1197,12 @@ public class StartupController extends EventController {
 
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
-		try {
-			defenderUuid = UUID.fromString(defenderId);
 
+		try {
+			if(defenderId != null && !defenderId.equalsIgnoreCase("")) {
+				defenderUuid = UUID.fromString(defenderId);
+
+			}
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect defenderId=%s",
@@ -1658,7 +1652,7 @@ public class StartupController extends EventController {
 			resBuilder.addAllBattleItemQueue(biqfupList);
 		}
 	}
-	
+
 	private void setSalesForUser(Builder resBuilder, User user) {
 		//update user jump two tier's value
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
@@ -1676,14 +1670,14 @@ public class StartupController extends EventController {
 				salesJumpTwoTiers = false;
 			}
 		}
-		
+
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		int userSalesValue = user.getSalesValue();
-		
+
 		double newMinPrice = 0.0;
 
 		//arin's formula
@@ -1709,8 +1703,8 @@ public class StartupController extends EventController {
 			else newMinPrice = 49.99;
 		}
 		else newMinPrice = 99.99;
-		
-		
+
+
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
 				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
@@ -1718,7 +1712,7 @@ public class StartupController extends EventController {
 				//get the sales items associated with this booster pack
 				List<SalesItem> salesItemsList = salesPackageIdToItemIdsToSalesItems
 						.get(salesPackageId);
-				
+
 				//get the booster display items for this booster pack
 				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
 						.get(salesPackageId);
@@ -1735,14 +1729,14 @@ public class StartupController extends EventController {
 								.get(displayItemId));
 					}
 				}
-				
+
 				SalesPackageProto spProto = CreateInfoProtoUtils
-						.createSalesPackageProto(sp, salesItemsList, displayItems);			
+						.createSalesPackageProto(sp, salesItemsList, displayItems);
 				resBuilder.addSalesPackages(spProto);
 			}
-		}	
+		}
 	}
-	
+
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);
@@ -1754,7 +1748,7 @@ public class StartupController extends EventController {
 		}
 	}
 
-	
+
 	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
 
 		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
@@ -1762,9 +1756,9 @@ public class StartupController extends EventController {
 
 		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 				getUserTranslationSettingsForUser(userId);
-		
+
 		log.info("tsfuList: " + tsfuList);
-		
+
 		DefaultLanguagesProto dlp = null;
 
 		if(tsfuList != null && !tsfuList.isEmpty()) {
@@ -1774,7 +1768,7 @@ public class StartupController extends EventController {
 		//if there's no default languages, they havent ever been set
 		if (null != dlp) {
 			resBuilder.setUserDefaultLanguages(dlp);
-		} 
+		}
 	}
 
 	private void setMiniEventForUser(
@@ -1783,13 +1777,13 @@ public class StartupController extends EventController {
 		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
 				RetrieveMiniEventResponseProto.newBuilder();
 
-		
+
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 				userId, now, userRetrieveUtils,
 				miniEventForUserRetrieveUtil,
 				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
-				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils, 
-				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils, 
+				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
+				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
 				miniEventLeaderboardRewardRetrieveUtils);
 
 		rmea.execute(rmeaResBuilder);
@@ -2898,6 +2892,127 @@ public class StartupController extends EventController {
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
 	}
 
+	public TranslationSettingsForUserRetrieveUtil getTranslationSettingsForUserRetrieveUtil() {
+		return translationSettingsForUserRetrieveUtil;
+	}
+
+	public void setTranslationSettingsForUserRetrieveUtil(
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
+		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public StartupStuffRetrieveUtils getStartupStuffRetrieveUtils() {
+		return startupStuffRetrieveUtils;
+	}
+
+	public void setStartupStuffRetrieveUtils(
+			StartupStuffRetrieveUtils startupStuffRetrieveUtils) {
+		this.startupStuffRetrieveUtils = startupStuffRetrieveUtils;
+	}
+
+	public QuestRetrieveUtils getQuestRetrieveUtils() {
+		return questRetrieveUtils;
+	}
+
+	public void setQuestRetrieveUtils(QuestRetrieveUtils questRetrieveUtils) {
+		this.questRetrieveUtils = questRetrieveUtils;
+	}
+
+	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtils() {
+		return pvpLeagueRetrieveUtils;
+	}
+
+	public void setPvpLeagueRetrieveUtils(
+			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils) {
+		this.pvpLeagueRetrieveUtils = pvpLeagueRetrieveUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public SecretGiftUtils getSecretGiftUtils() {
+		return secretGiftUtils;
+	}
+
+	public void setSecretGiftUtils(SecretGiftUtils secretGiftUtils) {
+		this.secretGiftUtils = secretGiftUtils;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public MiniEventGoalRetrieveUtils getMiniEventGoalRetrieveUtils() {
+		return miniEventGoalRetrieveUtils;
+	}
+
+	public void setMiniEventGoalRetrieveUtils(
+			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils) {
+		this.miniEventGoalRetrieveUtils = miniEventGoalRetrieveUtils;
+	}
+
+	public MiniEventForPlayerLvlRetrieveUtils getMiniEventForPlayerLvlRetrieveUtils() {
+		return miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public void setMiniEventForPlayerLvlRetrieveUtils(
+			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils) {
+		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public MiniEventRetrieveUtils getMiniEventRetrieveUtils() {
+		return miniEventRetrieveUtils;
+	}
+
+	public void setMiniEventRetrieveUtils(
+			MiniEventRetrieveUtils miniEventRetrieveUtils) {
+		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
+	}
+
+	public MiniEventTierRewardRetrieveUtils getMiniEventTierRewardRetrieveUtils() {
+		return miniEventTierRewardRetrieveUtils;
+	}
+
+	public void setMiniEventTierRewardRetrieveUtils(
+			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils) {
+		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
+	}
+
+	public MiniEventLeaderboardRewardRetrieveUtils getMiniEventLeaderboardRewardRetrieveUtils() {
+		return miniEventLeaderboardRewardRetrieveUtils;
+	}
+
+	public void setMiniEventLeaderboardRewardRetrieveUtils(
+			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils) {
+		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
@@ -2912,6 +3027,50 @@ public class StartupController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+		return salesPackageRetrieveUtils;
+	}
+
+	public void setSalesPackageRetrieveUtils(
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+	}
+
+	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
+		return salesItemRetrieveUtils;
+	}
+
+	public void setSalesItemRetrieveUtils(
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
+	}
+
+	public SalesDisplayItemRetrieveUtils getSalesDisplayItemRetrieveUtils() {
+		return salesDisplayItemRetrieveUtils;
+	}
+
+	public void setSalesDisplayItemRetrieveUtils(
+			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils) {
+		this.salesDisplayItemRetrieveUtils = salesDisplayItemRetrieveUtils;
 	}
 
 }

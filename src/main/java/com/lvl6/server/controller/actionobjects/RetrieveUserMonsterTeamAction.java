@@ -56,9 +56,8 @@ public class RetrieveUserMonsterTeamAction {
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -73,7 +72,7 @@ public class RetrieveUserMonsterTeamAction {
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
 	{
 		super();
@@ -89,7 +88,7 @@ public class RetrieveUserMonsterTeamAction {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
-		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
@@ -205,7 +204,8 @@ public class RetrieveUserMonsterTeamAction {
 
 			User u = userIdToUser.get(userId);
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-					retrieveUser, retrieverElo, pu.getElo(), u, serverToggleRetrieveUtils);
+					retrieveUser, retrieverElo, u, pu.getElo(),
+					serverToggleRetrieveUtil);
 
 			allButRetrieverUserIdToCashLost.put(userId,
 					potentialResult.getUnsignedCashAttackerWins());

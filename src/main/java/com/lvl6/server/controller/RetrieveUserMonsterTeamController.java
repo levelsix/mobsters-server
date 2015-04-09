@@ -68,16 +68,16 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	
+
 	@Autowired
 	private MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
@@ -157,7 +157,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-					monsterStuffUtils, serverToggleRetrieveUtils,
+					monsterStuffUtils, serverToggleRetrieveUtil,
 					monsterLevelInfoRetrieveUtils);
 
 			rumta.execute(resBuilder);
@@ -281,6 +281,49 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	public void setPvpBoardObstacleForUserRetrieveUtil(
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
+	}
+
+	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
+		return researchForUserRetrieveUtil;
+	}
+
+	public void setResearchForUserRetrieveUtil(
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 }

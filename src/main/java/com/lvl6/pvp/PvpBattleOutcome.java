@@ -3,7 +3,6 @@ package com.lvl6.pvp;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -26,9 +25,9 @@ public class PvpBattleOutcome {
 	public static final int CASH__MIN_REWARD = 100;
 	public static final int OIL__MIN_REWARD = 100;
 
+	private User attacker;
 	private String attackerId;
 	private double attackerElo;
-	private User attacker;
 	private User defender;
 	private String defenderId;
 	private double defenderElo;
@@ -36,13 +35,15 @@ public class PvpBattleOutcome {
 	private double defenderOil;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
-	public PvpBattleOutcome(User attacker, int attackerElo, int defenderElo,
-			User defender, ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
+	public PvpBattleOutcome(User attacker, int attackerElo,
+			User defender, int defenderElo,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils)
+	{
 		super();
 		this.attacker = attacker;
-		this.defender = defender;
 		this.attackerId = attacker.getId();
 		this.attackerElo = attackerElo;
+		this.defender = defender;
 		this.defenderId = defender.getId();
 		this.defenderElo = defenderElo;
 		this.defenderCash = defender.getCash();

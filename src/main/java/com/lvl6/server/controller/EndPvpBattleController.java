@@ -90,22 +90,22 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
 	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -468,13 +468,13 @@ public class EndPvpBattleController extends EventController {
 
 			//user currency stuff
 			Map<String, Integer> attackerChangeMap = new HashMap<String, Integer>();
-			attackerChangeMap.put(miscMethods.cash, attackerCashChange);
-			attackerChangeMap.put(miscMethods.oil, attackerOilChange);
+			attackerChangeMap.put(MiscMethods.cash, attackerCashChange);
+			attackerChangeMap.put(MiscMethods.oil, attackerOilChange);
 			changeMap.put(attackerId, attackerChangeMap);
 
 			Map<String, Integer> attackerPreviousCurrency = new HashMap<String, Integer>();
-			attackerPreviousCurrency.put(miscMethods.cash, previousCash);
-			attackerPreviousCurrency.put(miscMethods.oil, previousOil);
+			attackerPreviousCurrency.put(MiscMethods.cash, previousCash);
+			attackerPreviousCurrency.put(MiscMethods.oil, previousOil);
 			previousCurrencyMap.put(attackerId, attackerPreviousCurrency);
 
 			awardMonsters(resBuilder, attackerId, monsterDropIds, clientDate);
@@ -505,7 +505,7 @@ public class EndPvpBattleController extends EventController {
 
 		List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 				.updateUserMonsters(userId, monsterIdToNumPieces, null, mfusop,
-						currentDate, monsterLevelInfoRetrieveUtils);
+						currentDate, monsterLevelInfoRetrieveUtil);
 
 		resBuilder.addAllUpdatedOrNew(newOrUpdated);
 	}
@@ -564,7 +564,7 @@ public class EndPvpBattleController extends EventController {
 		//figure out the amount he gains and then subtract, the extra cash he had
 		int userCash = user.getCash();
 		int amountOverMax = calculateAmountOverMaxResource(user, userCash,
-				maxCash, miscMethods.cash);
+				maxCash, MiscMethods.cash);
 		log.info(String.format("calculateMaxCashChange amount over max=%s",
 				amountOverMax));
 
@@ -619,7 +619,7 @@ public class EndPvpBattleController extends EventController {
 		//figure out the amount he gains and then subtract, the extra oil he had
 		int userOil = user.getOil();
 		int amountOverMax = calculateAmountOverMaxResource(user, userOil,
-				maxOil, miscMethods.oil);
+				maxOil, MiscMethods.oil);
 		log.info(String.format("calculateMaxOilChange amount over max=%s",
 				amountOverMax));
 
@@ -847,7 +847,7 @@ public class EndPvpBattleController extends EventController {
 				defender.getOil(), oilStolen, defenderWon);
 		boolean displayToDefender = true;
 
-		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
+		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and
 		//the history for this battle should have the display_to_defender set to false;
 		Date shieldEndTime = defenderPlfu.getShieldEndTime();
 		//	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
@@ -874,13 +874,13 @@ public class EndPvpBattleController extends EventController {
 
 		//user currency stuff
 		Map<String, Integer> defenderChangeMap = new HashMap<String, Integer>();
-		defenderChangeMap.put(miscMethods.cash, defenderCashChange);
-		defenderChangeMap.put(miscMethods.oil, defenderOilChange);
+		defenderChangeMap.put(MiscMethods.cash, defenderCashChange);
+		defenderChangeMap.put(MiscMethods.oil, defenderOilChange);
 		changeMap.put(defenderId, defenderChangeMap);
 
 		Map<String, Integer> defenderPreviousCurrency = new HashMap<String, Integer>();
-		defenderPreviousCurrency.put(miscMethods.cash, previousCash);
-		defenderPreviousCurrency.put(miscMethods.oil, previousOil);
+		defenderPreviousCurrency.put(MiscMethods.cash, previousCash);
+		defenderPreviousCurrency.put(MiscMethods.oil, previousOil);
 		previousCurrencyMap.put(defenderId, defenderPreviousCurrency);
 	}
 
@@ -973,7 +973,7 @@ public class EndPvpBattleController extends EventController {
 				defenderPlfu));
 	}
 
-	//new method created so as to reduce clutter in calling method 
+	//new method created so as to reduce clutter in calling method
 	private void writePvpBattleHistory(String attackerId,
 			int attackerEloBefore, String defenderId, int defenderEloBefore,
 			int attackerPrevLeague, int attackerCurLeague,
@@ -1064,8 +1064,8 @@ public class EndPvpBattleController extends EventController {
 		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
 		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
 		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
-		String oil = miscMethods.oil;
-		String cash = miscMethods.cash;
+		String oil = MiscMethods.oil;
+		String cash = MiscMethods.cash;
 
 		//reasons
 		Map<String, String> reasonMap = new HashMap<String, String>();
@@ -1186,11 +1186,11 @@ public class EndPvpBattleController extends EventController {
 
 		//need the drop rates
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils);
+				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtil);
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,
-				defenderElo, attackerElo, attacker, serverToggleRetrieveUtils);
+				defenderElo, attacker, attackerElo, serverToggleRetrieveUtil);
 
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 				.singletonMap(attackerId,
@@ -1394,6 +1394,57 @@ public class EndPvpBattleController extends EventController {
 	public void setMonsterForUserRetrieveUtil(
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtils() {
+		return pvpLeagueRetrieveUtils;
+	}
+
+	public void setPvpLeagueRetrieveUtils(
+			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils) {
+		this.pvpLeagueRetrieveUtils = pvpLeagueRetrieveUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtil() {
+		return monsterLevelInfoRetrieveUtil;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtil(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil) {
+		this.monsterLevelInfoRetrieveUtil = monsterLevelInfoRetrieveUtil;
 	}
 
 }

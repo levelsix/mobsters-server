@@ -41,7 +41,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final HazelcastPvpUtil hazelcastPvpUtil;
 	private final MonsterStuffUtils monsterStuffUtils;
 	private final CreateInfoProtoUtils createInfoProtoUtils;
-	private final ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private final ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
@@ -52,7 +52,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			HazelcastPvpUtil hazelcastPvpUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		this.resBuilder = resBuilder;
 		this.user = user;
@@ -63,7 +63,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
-		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
@@ -272,7 +272,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
 
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
-					attackerElo, defenderPu.getElo(), defender, serverToggleRetrieveUtils);
+					attackerElo, defender, defenderPu.getElo(),
+					serverToggleRetrieveUtil);
 
 			userIdToCashStolen.put(defenderId,
 					potentialResult.getUnsignedCashAttackerWins());
@@ -304,4 +305,5 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		resBuilder.addAllRecentNBattles(historyProtoList);
 
 	}
+
 }

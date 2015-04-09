@@ -52,9 +52,9 @@ public class BeginPvpBattleController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	public BeginPvpBattleController() {
 		numAllocatedThreads = 7;
@@ -130,8 +130,8 @@ public class BeginPvpBattleController extends EventController {
 			BeginPvpBattleAction bpa = new BeginPvpBattleAction(attackerId,
 					enemyUserId, enemyElo, curDate, exactingRevenge,
 					previousBattleEndTime, pvpLeagueForUserRetrieveUtil,
-					hazelcastPvpUtil, timeUtil, insertUtil, updateUtil, 
-					serverToggleRetrieveUtils);
+					hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
+					serverToggleRetrieveUtil);
 
 			bpa.execute(resBuilder);
 
@@ -210,6 +210,15 @@ public class BeginPvpBattleController extends EventController {
 
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 	}
 
 }
