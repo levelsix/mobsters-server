@@ -119,7 +119,7 @@ message RefreshMiniJobRequestProto {
 	//if itemId is set these two don't need to be, vice versa
 	optional int32 gemsSpent = 5;
 	optional Quality minQualitySpawned = 6;
-	
+	optional int64 clientTime = 7;
 }
 
 
