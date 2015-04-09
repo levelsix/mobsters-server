@@ -117,6 +117,9 @@ import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
+import com.lvl6.proto.SalesProto.SalesItemProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -198,11 +201,47 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 public class CreateInfoProtoUtils {
 
 	@Autowired
-	InsertUtil insertUtil;
-	
+	protected MiscMethods miscMethods;
+
+	@Autowired
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+
+	@Autowired
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+
+	@Autowired
+	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
+
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
+
+	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
+
+	@Autowired
+	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+
+	@Autowired
+	protected QuestJobRetrieveUtils questJobRetrieveUtils;
+
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
+
 
 	/** Achievement.proto ***************************************************/
 	public static AchievementProto createAchievementProto(Achievement a) {
@@ -1200,9 +1239,9 @@ public class CreateInfoProtoUtils {
 
 		return pcppb.build();
 	}
-	
 
-	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
+
+	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
 			MinimumUserProtoWithLevel mupwlRecipient) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
@@ -1212,14 +1251,14 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
-		
+
 		List<String> chatIds = new ArrayList<String>();
 		chatIds.add(p.getId());
 		Map<String, List<ChatTranslations>> chatTranslationMap = ChatTranslationsRetrieveUtils.
 				getChatTranslationsForSpecificChatIds(chatIds);
-		
+
 		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-		
+
 		for(String chatId : chatTranslationMap.keySet()) {
 			List<ChatTranslations> list = chatTranslationMap.get(chatId);
 			for(ChatTranslations ct : list) {
@@ -1334,7 +1373,7 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
-			String chatId, Map<TranslateLanguages, String> translatedMap, 
+			String chatId, Map<TranslateLanguages, String> translatedMap,
 			TranslateLanguages contentLanguage) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
@@ -1343,7 +1382,7 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
-		
+
 		if(contentLanguage != null) {
 			gcmpb.setContentLanguage(contentLanguage);
 		}
@@ -1361,15 +1400,15 @@ public class CreateInfoProtoUtils {
 				gcmpb.addTranslatedContent(ttpb.build());
 			}
 		}
-		
+
 		if (chatId != null) {
 			gcmpb.setChatUuid(chatId);
 		}
-		
+
 		return gcmpb.build();
 	}
-	
-	public static DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
+
+	public DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
 		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 
@@ -1380,6 +1419,9 @@ public class CreateInfoProtoUtils {
 				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
 				pcdlpb.setSenderUserId(tsfu.getSenderUserId());
 				pcdlpb.setTranslateOn(tsfu.isTranslationsOn());
+				if(tsfu.getReceiverUserId().equals("39ce5b60-4e31-4183-9615-2b899e756cf1") && tsfu.getSenderUserId().equals("43734c61-ef28-4fc1-b53d-f800d5ded869")) {
+					log.info("TRANSLATE ON IS " + tsfu.isTranslationsOn());
+				}
 				PrivateChatDefaultLanguageProto lala = pcdlpb.build();
 				pcdlpList.add(lala);
 			}
@@ -1389,10 +1431,10 @@ public class CreateInfoProtoUtils {
 				log.info("global translateon: " + tsfu.isTranslationsOn());
 			}
 		}
-		
+
 		dlpb.addAllPrivateDefaultLanguage(pcdlpList);
 		return dlpb.build();
-		
+
 	}
 
 
@@ -2356,6 +2398,11 @@ public class CreateInfoProtoUtils {
 		str = meg.getDesc();
 		if (null != str) {
 			megpb.setGoalDesc(str);
+		}
+
+		str = meg.getActionDescription();
+		if(null != str) {
+			megpb.setActionDescription(str);
 		}
 
 		megpb.setPointsGained(meg.getPtsReward());
@@ -4991,10 +5038,10 @@ public class CreateInfoProtoUtils {
 		if (u.isFake()) {
 
 		}
-		
+
 		long totalStrength = u.getTotalStrength();
 		builder.setTotalStrength(totalStrength);
-		
+
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
@@ -5112,5 +5159,68 @@ public class CreateInfoProtoUtils {
 			}
 		}
 	}
+
+	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
+
+	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
+			Collection<SalesItem> siList,
+			Collection<SalesDisplayItem> sdiList) {
+		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
+		b.setSalesPackageId(sp.getId());
+
+		String str = sp.getName();
+		if (null != str && !str.isEmpty()) {
+			b.setSalesPackageName(str);
+		}
+
+		b.setPrice((long)sp.getPrice());
+
+		str = sp.getUuid();
+		if (null != str && !str.isEmpty()) {
+			b.setUuid(str);
+		}
+
+		if (siList != null) {
+			for (SalesItem si : siList) {
+				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
+				b.addSip(sip);
+			}
+		}
+
+		if (null != sdiList) {
+			for (SalesDisplayItem sdi : sdiList) {
+				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
+				b.addSdip(sdip);
+			}
+		}
+
+		return b.build();
+	}
+
+	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
+		sipb.setSalesItemId(si.getId());
+		sipb.setSalesPackageId(si.getSalesPackageId());
+		sipb.setMonsterId(si.getMonsterId());
+		sipb.setMonsterQuantity(si.getMonsterQuantity());
+		sipb.setItemId(si.getItemId());
+		sipb.setItemQuantity(si.getItemQuantity());
+
+		return sipb.build();
+	}
+
+	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
+		sdipb.setSalesItemId(sdi.getId());
+		sdipb.setSalesPackageId(sdi.getSalesPackageId());
+		sdipb.setMonsterId(sdi.getMonsterId());
+		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
+		sdipb.setItemId(sdi.getItemId());
+		sdipb.setItemQuantity(sdi.getItemQuantity());
+
+		return sdipb.build();
+	}
+
+
 
 }
