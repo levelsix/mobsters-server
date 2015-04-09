@@ -41,6 +41,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
@@ -102,6 +103,9 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	@Autowired
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
+	@Autowired
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
 
 	@Autowired
 	private InsertUtil insertUtil;
@@ -242,7 +246,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 				pvpLeagueForUserRetrieveUtil,
 				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-				monsterStuffUtil, serverToggleRetrieveUtil);
+				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil);
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		rumta.execute(resBuilder);
@@ -434,6 +438,15 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 	public void setServerToggleRetrieveUtil(
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtil() {
+		return monsterLevelInfoRetrieveUtil;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtil(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil) {
+		this.monsterLevelInfoRetrieveUtil = monsterLevelInfoRetrieveUtil;
 	}
 
 	public JdbcTemplate getJdbcTemplate() {
