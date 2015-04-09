@@ -81,13 +81,13 @@ public class TranslationSettingsForUserRetrieveUtil {
 		return userTranslationSettingss;
 	}
 
-	public List<TranslationSettingsForUser> getUserTranslationSettingsForUserWhenPoster(String posterUserId) {
+	public List<TranslationSettingsForUser> getUserTranslationSettingsForUserForStartup(String userId) {
 		log.debug(String.format("retrieving user translation settings for userId %s",
-				posterUserId));
+				userId));
 
-		Object[] values = { posterUserId };
-		String query = String.format("select * from %s where %s=?", TABLE_NAME,
-				DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID);
+		Object[] values = { userId, userId };
+		String query = String.format("select * from %s where %s=? and %s=?", TABLE_NAME,
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID);
 
 		List<TranslationSettingsForUser> userTranslationSettingss = null;
 		try {
