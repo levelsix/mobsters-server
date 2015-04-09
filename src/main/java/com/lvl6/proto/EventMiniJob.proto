@@ -106,3 +106,32 @@ message RedeemMiniJobResponseProto {
           FAIL_MINI_JOB_INCOMPLETE = 4;
      }
 }
+
+//------------------------------------------------------------------------------------------
+
+message RefreshMiniJobRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string deleteUserMiniJobIds = 2;
+	optional int32 itemId = 3;
+	optional int32 numToSpawn = 4;
+	
+	//if itemId is set these two don't need to be, vice versa
+	optional int32 gemsSpent = 5;
+	optional Quality minQualitySpawned = 6;
+	
+}
+
+
+message RefreshMiniJobResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserMiniJobProto miniJobs = 2;
+	
+	optional RetreshMiniJobStatus status = 3;
+	
+	enum RefreshMiniJobStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_INSUFFICIENT_ITEMS = 3;
+		FAIL_OTHER = 4;
+	}
+}
