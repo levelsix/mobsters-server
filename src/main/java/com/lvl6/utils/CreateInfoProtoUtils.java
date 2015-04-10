@@ -182,6 +182,7 @@ import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -1242,7 +1243,8 @@ public class CreateInfoProtoUtils {
 
 	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
-			MinimumUserProtoWithLevel mupwlRecipient) {
+			MinimumUserProtoWithLevel mupwlRecipient,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
 
 		pcppb.setPrivateChatPostUuid(p.getId());
@@ -1250,6 +1252,15 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
+
+		if(p.getContentLanguage() != null) {
+			pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(p.getContentLanguage()));
+		}
+		else {
+			List<TranslationSettingsForUser> tsfu = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUserGlobal(p.getPosterId());
+			pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(tsfu.get(0).getLanguage()));
+		}
 
 		List<String> chatIds = new ArrayList<String>();
 		chatIds.add(p.getId());
@@ -1271,7 +1282,8 @@ public class CreateInfoProtoUtils {
 
 	public List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos(
 			List<PrivateChatPost> pList,
-			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls) {
+			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 
 		for (PrivateChatPost pcp : pList) {
@@ -1281,7 +1293,7 @@ public class CreateInfoProtoUtils {
 					.getRecipientId());
 
 			PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-					pcp, mupwlPoster, mupwlRecipient);
+					pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 
 			pcppList.add(pcpp);
 		}
@@ -1299,7 +1311,8 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
 			List<String> privateChatPostIds,
-			Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
+			Map<String, PrivateChatPost> postIdsToPrivateChatPosts,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();
@@ -1323,7 +1336,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient);
+						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		} else {
@@ -1336,7 +1349,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient);
+						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		}
