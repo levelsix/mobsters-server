@@ -1260,7 +1260,10 @@ public class CreateInfoProtoUtils {
 		else {
 			List<TranslationSettingsForUser> tsfu = translationSettingsForUserRetrieveUtil.
 					getUserTranslationSettingsForUserGlobal(p.getPosterId());
-			pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(tsfu.get(0).getLanguage()));
+			if(tsfu == null || tsfu.isEmpty()) {
+				pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE));
+			}
+			else pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(tsfu.get(0).getLanguage()));
 		}
 
 		List<String> chatIds = new ArrayList<String>();
