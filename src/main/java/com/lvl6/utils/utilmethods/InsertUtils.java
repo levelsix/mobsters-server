@@ -908,7 +908,7 @@ public class InsertUtils implements InsertUtil {
 		return true;
 
 	}
-	
+
 	@Override
 	public boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats) {
 		String tablename = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
@@ -931,7 +931,7 @@ public class InsertUtils implements InsertUtil {
 			chatType.add(ChatType.PRIVATE_CHAT.toString());
 			translationsOn.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 		}
-		
+
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID,
 				ids);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
@@ -951,7 +951,7 @@ public class InsertUtils implements InsertUtil {
 		if(numInserted == numRows)
 			return true;
 		else return false;
-		
+
 	}
 
 
@@ -2688,7 +2688,8 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts) {
+			List<PrivateChatPost> listOfPrivateChatPosts,
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		if(listOfPrivateChatPosts == null) {
 			log.error("map containing ids to translations is null");
 		}

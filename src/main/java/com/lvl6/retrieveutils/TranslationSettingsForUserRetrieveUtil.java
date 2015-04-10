@@ -28,7 +28,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private final String TABLE_NAME = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
+	private final static String TABLE_NAME = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 	private static final UserTranslationSettingsForClientMapper rowMapper = new UserTranslationSettingsForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 

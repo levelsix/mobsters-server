@@ -17,6 +17,7 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -86,7 +87,7 @@ public class TranslateSelectMessagesAction {
 			log.info("no translation");
 			return true;
 		}
-		
+
 		language = MiscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
@@ -129,7 +130,7 @@ public class TranslateSelectMessagesAction {
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 					String message = pcp.getContent();
 					chatIdsToTranslations.put(pcp.getId(), message);
-					Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(null, language, message);
+					Map<TranslateLanguages, String> translatedMessage = miscMethods.translate(null, language, message);
 
 					for(TranslateLanguages tl : translatedMessage.keySet()) {
 						TranslatedText tt = new TranslatedText();

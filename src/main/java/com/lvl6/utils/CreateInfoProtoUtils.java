@@ -117,9 +117,6 @@ import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
-import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
-import com.lvl6.proto.SalesProto.SalesItemProto;
-import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -195,7 +192,6 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -1242,7 +1238,7 @@ public class CreateInfoProtoUtils {
 	}
 
 
-	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
+	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
 			MinimumUserProtoWithLevel mupwlRecipient,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
@@ -1402,7 +1398,7 @@ public class CreateInfoProtoUtils {
 		if(contentLanguage != null) {
 			gcmpb.setContentLanguage(contentLanguage);
 		}
-		
+
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
@@ -2414,10 +2410,10 @@ public class CreateInfoProtoUtils {
 			megpb.setGoalDesc(str);
 		}
 
-		str = meg.getActionDescription();
-		if(null != str) {
-			megpb.setActionDescription(str);
-		}
+//		str = meg.getActionDescription();
+//		if(null != str) {
+//			megpb.setActionDescription(str);
+//		}
 
 		megpb.setPointsGained(meg.getPtsReward());
 		return megpb.build();
@@ -5176,65 +5172,65 @@ public class CreateInfoProtoUtils {
 
 	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
 
-	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
-			Collection<SalesItem> siList,
-			Collection<SalesDisplayItem> sdiList) {
-		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
-		b.setSalesPackageId(sp.getId());
-
-		String str = sp.getName();
-		if (null != str && !str.isEmpty()) {
-			b.setSalesPackageName(str);
-		}
-
-		b.setPrice((long)sp.getPrice());
-
-		str = sp.getUuid();
-		if (null != str && !str.isEmpty()) {
-			b.setUuid(str);
-		}
-
-		if (siList != null) {
-			for (SalesItem si : siList) {
-				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
-				b.addSip(sip);
-			}
-		}
-
-		if (null != sdiList) {
-			for (SalesDisplayItem sdi : sdiList) {
-				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
-				b.addSdip(sdip);
-			}
-		}
-
-		return b.build();
-	}
-
-	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
-		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
-		sipb.setSalesItemId(si.getId());
-		sipb.setSalesPackageId(si.getSalesPackageId());
-		sipb.setMonsterId(si.getMonsterId());
-		sipb.setMonsterQuantity(si.getMonsterQuantity());
-		sipb.setItemId(si.getItemId());
-		sipb.setItemQuantity(si.getItemQuantity());
-
-		return sipb.build();
-	}
-
-	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
-		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
-		sdipb.setSalesItemId(sdi.getId());
-		sdipb.setSalesPackageId(sdi.getSalesPackageId());
-		sdipb.setMonsterId(sdi.getMonsterId());
-		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
-		sdipb.setItemId(sdi.getItemId());
-		sdipb.setItemQuantity(sdi.getItemQuantity());
-
-		return sdipb.build();
-	}
-
+//	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
+//			Collection<SalesItem> siList,
+//			Collection<SalesDisplayItem> sdiList) {
+//		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
+//		b.setSalesPackageId(sp.getId());
+//
+//		String str = sp.getName();
+//		if (null != str && !str.isEmpty()) {
+//			b.setSalesPackageName(str);
+//		}
+//
+//		b.setPrice((long)sp.getPrice());
+//
+//		str = sp.getUuid();
+//		if (null != str && !str.isEmpty()) {
+//			b.setUuid(str);
+//		}
+//
+//		if (siList != null) {
+//			for (SalesItem si : siList) {
+//				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
+//				b.addSip(sip);
+//			}
+//		}
+//
+//		if (null != sdiList) {
+//			for (SalesDisplayItem sdi : sdiList) {
+//				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
+//				b.addSdip(sdip);
+//			}
+//		}
+//
+//		return b.build();
+//	}
+//
+//	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+//		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
+//		sipb.setSalesItemId(si.getId());
+//		sipb.setSalesPackageId(si.getSalesPackageId());
+//		sipb.setMonsterId(si.getMonsterId());
+//		sipb.setMonsterQuantity(si.getMonsterQuantity());
+//		sipb.setItemId(si.getItemId());
+//		sipb.setItemQuantity(si.getItemQuantity());
+//
+//		return sipb.build();
+//	}
+//
+//	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+//		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
+//		sdipb.setSalesItemId(sdi.getId());
+//		sdipb.setSalesPackageId(sdi.getSalesPackageId());
+//		sdipb.setMonsterId(sdi.getMonsterId());
+//		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
+//		sdipb.setItemId(sdi.getItemId());
+//		sdipb.setItemQuantity(sdi.getItemQuantity());
+//
+//		return sdipb.build();
+//	}
+//
 
 
 }
