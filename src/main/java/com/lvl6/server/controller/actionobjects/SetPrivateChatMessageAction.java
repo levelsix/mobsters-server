@@ -202,20 +202,27 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		Map<String, String> pairsOfChats = new HashMap<String, String>();
 		boolean successfulInserts = true;
 
-		if(tsfuList.size() == 1 ) {
-			for(String id : privateChatPostIds) {
-				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
-				if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
-					pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
-				}
-				else if(pcp.getPosterId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getRecipientId())) {
-					pairsOfChats.put(pcp.getRecipientId(), pcp.getPosterId());
-
-				}
+		for(String id : privateChatPostIds) {
+			PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
+			if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
+				pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
+			}
+			else if(pcp.getPosterId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getRecipientId())) {
+				pairsOfChats.put(pcp.getRecipientId(), pcp.getPosterId());
 
 			}
-			successfulInserts = insertUtil.insertMultipleDefaultTranslateSettings(pairsOfChats);
+
 		}
+		for(TranslationSettingsForUser tsfu : tsfuList) {
+			String receiverId = tsfu.getReceiverUserId();
+			String senderId = tsfu.getSenderUserId();
+
+			if(pairsOfChats.containsKey(senderId)) {
+				pairsOfChats.remove(senderId);
+			}
+		}
+
+		successfulInserts = insertUtil.insertMultipleDefaultTranslateSettings(pairsOfChats);
 
 		if(!successfulInserts) {
 			log.error("something messed up inserting all the default translate settings for userId {}", userId);

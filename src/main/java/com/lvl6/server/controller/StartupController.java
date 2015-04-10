@@ -771,11 +771,14 @@ public class StartupController extends EventController {
 				tsfuListIsNull = true;
 			}
 
+			List<TranslationSettingsForUser> updatedTsfuList = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUser(playerId);
+
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
 					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
 					getCreateInfoProtoUtils(), translationSettingsForUserRetrieveUtil,
-					tsfuList);
+					updatedTsfuList);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
