@@ -1653,64 +1653,25 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setSalesForUser(Builder resBuilder, User user) {
-		//update user jump two tier's value
-		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-		if(salesJumpTwoTiers) {
-			Date lastPurchaseTime = user.getLastPurchaseTime();
-			if(lastPurchaseTime == null) {
-				lastPurchaseTime = new Date();
-				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
-				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-			}
-			Date now = new Date();
-			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
-			if(diffInDays > 5) {
-				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
-				salesJumpTwoTiers = false;
-			}
-		}
+	public void setSalesForUser(Builder resBuilder, User user) {
+
+		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
 				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 		int userSalesValue = user.getSalesValue();
 
-		double newMinPrice = 0.0;
-
-		//arin's formula
-		if(userSalesValue == 0) {
-			newMinPrice = 4.99;
-		}
-		else if(userSalesValue == 1) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 19.99;
-			}
-			else newMinPrice = 9.99;
-		}
-		else if(userSalesValue == 2) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 49.99;
-			}
-			else newMinPrice = 19.99;
-		}
-		else if(userSalesValue == 3) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 99.99;
-			}
-			else newMinPrice = 49.99;
-		}
-		else newMinPrice = 99.99;
-
+		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
 
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
 				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
 				//get the sales items associated with this booster pack
-				List<SalesItem> salesItemsList = salesPackageIdToItemIdsToSalesItems
+				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
 						.get(salesPackageId);
 
 				//get the booster display items for this booster pack
@@ -1735,6 +1696,57 @@ public class StartupController extends EventController {
 				resBuilder.addSalesPackages(spProto);
 			}
 		}
+	}
+
+	public boolean updateUserSalesJumpTwoTiers(User user) {
+		//update user jump two tier's value
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		if(salesJumpTwoTiers) {
+			Date lastPurchaseTime = user.getLastPurchaseTime();
+			if(lastPurchaseTime == null) {
+				lastPurchaseTime = new Date();
+				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+			}
+			Date now = new Date();
+			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+			if(diffInDays > 5) {
+				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+				salesJumpTwoTiers = false;
+			}
+		}
+		return salesJumpTwoTiers;
+	}
+
+	public int priceForSalesPackToBeShown(int userSalesValue, boolean salesJumpTwoTiers) {
+
+		int newMinPrice = 0;
+
+		//arin's formula
+		if(userSalesValue == 0) {
+			newMinPrice = 5;
+		}
+		else if(userSalesValue == 1) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 20;
+			}
+			else newMinPrice = 10;
+		}
+		else if(userSalesValue == 2) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 50;
+			}
+			else newMinPrice = 20;
+		}
+		else if(userSalesValue == 3) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 100;
+			}
+			else newMinPrice = 50;
+		}
+		else newMinPrice = 100;
+
+		return newMinPrice;
 	}
 
 	private void setBattleItemForUser(Builder resBuilder, String userId) {

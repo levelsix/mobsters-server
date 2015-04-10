@@ -46,7 +46,7 @@ public class SalesPackageRetrieveUtils {
 	//      SalesPackage aPack = salesPackageIdsToSalesPackages.get(id);
 	//      returnValue.put(id, aPack);
 	//    }
-	//    
+	//
 	//    return returnValue;
 	//  }
 
@@ -55,7 +55,7 @@ public class SalesPackageRetrieveUtils {
 		if (salesPackageIdsToSalesPackages == null) {
 			setStaticSalesPackageIdsToSalesPackages();
 		}
-		
+
 		Map<String, SalesPackage> returnMap = new HashMap<String, SalesPackage>();
 		for(Integer i : salesPackageIdsToSalesPackages.keySet()) {
 			SalesPackage sp = salesPackageIdsToSalesPackages.get(i);
@@ -63,7 +63,7 @@ public class SalesPackageRetrieveUtils {
 		}
 		return returnMap;
 	}
-	
+
 	public SalesPackage getSalesPackageForSalesPackageId(int salesPackageId) {
 		log.debug("retrieve sales pack data for sales pack "
 				+ salesPackageId);
@@ -118,12 +118,12 @@ public class SalesPackageRetrieveUtils {
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_PACKAGE__ID);
 		String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
-		double price = rs.getFloat(DBConstants.SALES_PACKAGE__PRICE);
+		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
 		Date timeStart = null;
 		Date timeEnd = null;
 		Timestamp ts = null;
-		
+
 		try {
 			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__START_TIME);
 			if (!rs.wasNull()) {
@@ -132,7 +132,7 @@ public class SalesPackageRetrieveUtils {
 		} catch (Exception e) {
 			log.error("last_purchase_time null...?", e);
 		}
-		
+
 		try {
 			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__END_TIME);
 			if (!rs.wasNull()) {
@@ -141,7 +141,7 @@ public class SalesPackageRetrieveUtils {
 		} catch (Exception e) {
 			log.error("last_purchase_time null...?", e);
 		}
-		
+
 		int predId = rs.getInt(DBConstants.SALES_PACKAGE__PRED_ID);
 
 		SalesPackage salesPackage = new SalesPackage(id, name, price, uuid, timeStart, timeEnd, predId);

@@ -1,4 +1,4 @@
-package com.lvl6.test.mocktests;
+package com.lvl6.test.controller.unittests;
 //package com.lvl6.test.MockTests;
 //
 //import static org.junit.Assert.assertEquals;

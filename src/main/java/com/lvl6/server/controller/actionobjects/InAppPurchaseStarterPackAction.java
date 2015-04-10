@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -91,13 +90,8 @@ public class InAppPurchaseStarterPackAction {
 
 	//derived state
 	private int boosterPackId;
-	boolean isStarterPack;
-	boolean isMoneyTree;
-	boolean isSalesPackage;
 	private String packageName;
-	private double salesPackagePrice;
 	private int gemChange;
-	private StructureMoneyTree smt;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -267,7 +261,7 @@ public class InAppPurchaseStarterPackAction {
 		if (gemChange != 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
-			user.updateRelativeDiamondsBeginnerSale(gemChange, isStarterPack);
+			user.updateRelativeDiamondsBeginnerSale(gemChange, true);
 		}
 
 		prepCurrencyHistory();
@@ -398,30 +392,6 @@ public class InAppPurchaseStarterPackAction {
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
 	}
 
-	public boolean isStarterPack() {
-		return isStarterPack;
-	}
-
-	public void setStarterPack(boolean isStarterPack) {
-		this.isStarterPack = isStarterPack;
-	}
-
-	public boolean isMoneyTree() {
-		return isMoneyTree;
-	}
-
-	public void setMoneyTree(boolean isMoneyTree) {
-		this.isMoneyTree = isMoneyTree;
-	}
-
-	public boolean isSalesPackage() {
-		return isSalesPackage;
-	}
-
-	public void setSalesPackage(boolean isSalesPackage) {
-		this.isSalesPackage = isSalesPackage;
-	}
-
 	public String getPackageName() {
 		return packageName;
 	}
@@ -430,28 +400,12 @@ public class InAppPurchaseStarterPackAction {
 		this.packageName = packageName;
 	}
 
-	public double getSalesPackagePrice() {
-		return salesPackagePrice;
-	}
-
-	public void setSalesPackagePrice(double salesPackagePrice) {
-		this.salesPackagePrice = salesPackagePrice;
-	}
-
 	public int getGemChange() {
 		return gemChange;
 	}
 
 	public void setGemChange(int gemChange) {
 		this.gemChange = gemChange;
-	}
-
-	public StructureMoneyTree getSmt() {
-		return smt;
-	}
-
-	public void setSmt(StructureMoneyTree smt) {
-		this.smt = smt;
 	}
 
 	public Map<String, Integer> getCurrencyDeltas() {

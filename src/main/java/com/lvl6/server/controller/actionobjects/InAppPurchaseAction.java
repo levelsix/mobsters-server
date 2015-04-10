@@ -60,19 +60,6 @@ public class InAppPurchaseAction {
 		this.miscMethods = miscMethods;
 	}
 
-	//	//encapsulates the return value from this Action Object
-	//	static class InAppPurchaseResource {
-	//
-	//
-	//		public InAppPurchaseResource() {
-	//
-	//		}
-	//	}
-	//
-	//	public InAppPurchaseResource execute() {
-	//
-	//	}
-
 	//derived state
 	private String packageName;
 	private int gemChange;
@@ -162,58 +149,6 @@ public class InAppPurchaseAction {
 
 		return success;
 	}
-
-	//	private List<ItemForUser> calculateItemRewards(
-	//		String userId,
-	//		List<BoosterItem> itemsUserReceives )
-	//	{
-	//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-	//
-	//		for (BoosterItem bi : itemsUserReceives) {
-	//			int itemId = bi.getItemId();
-	//			int itemQuantity = bi.getItemQuantity();
-	//
-	//			if (itemId <= 0 || itemQuantity <= 0) {
-	//				continue;
-	//			}
-	//
-	//			//user could have gotten multiple of the same BoosterItem
-	//			int newQuantity = itemQuantity;
-	//			if (itemIdToQuantity.containsKey(itemId))
-	//			{
-	//				newQuantity += itemIdToQuantity.get(itemId);
-	//			}
-	//			itemIdToQuantity.put(itemId, newQuantity);
-	//		}
-	//
-	//		List<ItemForUser> ifuList = null;
-	//	    if (!itemIdToQuantity.isEmpty()) {
-	//	    	//aggregate rewarded items with user's current items
-	//	    	Map<Integer, ItemForUser> itemIdToIfu =
-	//	    		itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId,
-	//	    			itemIdToQuantity.keySet());
-	//
-	//	    	for (Integer itemId : itemIdToQuantity.keySet()) {
-	//	    		int newQuantity = itemIdToQuantity.get(itemId);
-	//
-	//	    		ItemForUser ifu = null;
-	//	    		if (itemIdToIfu.containsKey(itemId)){
-	//	    			ifu = itemIdToIfu.get(itemId);
-	//	    		} else {
-	//	    			//user might not have the item
-	//	    			ifu = new ItemForUser(userId, itemId, 0);
-	//	    			itemIdToIfu.put(itemId, ifu);
-	//	    		}
-	//
-	//	    		newQuantity += ifu.getQuantity();
-	//	    		ifu.setQuantity(newQuantity);
-	//	    	}
-	//
-	//	    	ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
-	//	    }
-	//	    return ifuList;
-	//	}
-
 
 	public void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();

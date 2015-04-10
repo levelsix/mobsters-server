@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -97,7 +98,6 @@ public class InAppPurchaseSalesAction {
 	}
 
 	//derived state
-	private String packageName;
 	private double salesPackagePrice;
 	private int gemChange;
 
@@ -149,13 +149,25 @@ public class InAppPurchaseSalesAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		if (!(duplicateReceipt && userSalesValueMatchesSalesPackage())) {
-			log.error("user should be buying more expensive sales package! {}, {}",
-					packageName, user);
+		if (duplicateReceipt || !userSalesValueMatchesSalesPackage() || !saleIsWithinTimeConstraints()) {
+			log.error("user should be buying more expensive sales package! {}",
+					 user);
 			return false;
 		}
 
 		return true;
+	}
+
+	public boolean saleIsWithinTimeConstraints() {
+		Date saleStartTime = salesPackage.getTimeStart();
+		Date saleEndTime = salesPackage.getTimeEnd();
+
+		if((now.getTime() - saleStartTime.getTime() > 0) && (saleEndTime.getTime() - now.getTime() > 0)) {
+			return true;
+		}
+		log.error("sale didn't begin or is over, sale start time is {}, end time is {}",
+				new Timestamp(saleStartTime.getTime()), new Timestamp(saleEndTime.getTime()) );
+		return false;
 	}
 
 	public boolean userSalesValueMatchesSalesPackage() {
@@ -163,29 +175,29 @@ public class InAppPurchaseSalesAction {
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 		salesPackagePrice = salesPackage.getPrice();
 		if(salesValue == 0) {
-			if(salesPackagePrice == 4.99)
+			if(salesPackagePrice == 5)
 				return true;
 		}
 		else if(salesValue == 1) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 9.99)
+			if(!salesJumpTwoTiers && salesPackagePrice == 10)
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 19.99)
+			else if(salesJumpTwoTiers && salesPackagePrice == 20)
 				return true;
 		}
 		else if(salesValue == 2) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 19.99)
+			if(!salesJumpTwoTiers && salesPackagePrice == 20)
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 49.99)
+			else if(salesJumpTwoTiers && salesPackagePrice == 50)
 				return true;
 		}
 		else if(salesValue == 3) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 49.99)
+			if(!salesJumpTwoTiers && salesPackagePrice == 50)
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 99.99)
+			else if(salesJumpTwoTiers && salesPackagePrice == 100)
 				return true;
 		}
 		else if(salesValue >= 4) {
-			if(salesPackagePrice == 99.99)
+			if(salesPackagePrice == 100)
 				return true;
 		}
 		else {
@@ -194,6 +206,8 @@ public class InAppPurchaseSalesAction {
 			return false;
 
 		}
+		log.error("the sale user is trying to buy has a price of: "
+				+ salesPackagePrice + "but his salesValue is " + salesValue);
 		return false;
 
 	}
@@ -355,7 +369,7 @@ public class InAppPurchaseSalesAction {
 			Integer monsterId = item.getMonsterId();
 
 			//only keep track of the sales item ids that are a monster reward
-			if (monsterId < 0) {
+			if (monsterId <= 0) {
 				continue;
 			}
 
@@ -511,7 +525,7 @@ public class InAppPurchaseSalesAction {
 					ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
 		}
 		details = new HashMap<String, String>();
-		details.put(gems, packageName);
+		details.put(gems, "buying sales pack with uuid " + uuid);
 	}
 
 
@@ -637,14 +651,6 @@ public class InAppPurchaseSalesAction {
 
 	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
-	}
-
-	public String getPackageName() {
-		return packageName;
-	}
-
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
 	}
 
 	public SalesPackage getSalesPackage() {

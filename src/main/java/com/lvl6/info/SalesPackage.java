@@ -9,7 +9,7 @@ public class SalesPackage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalesPackage(int id, String name, double price, String uuid,
+	public SalesPackage(int id, String name, int price, String uuid,
 			Date timeStart, Date timeEnd, int predId) {
 		super();
 		this.id = id;
@@ -25,12 +25,12 @@ public class SalesPackage {
 
 	private int id;
 	private String name;
-	private double price;
+	private int price;
 	private String uuid;
 	private Date timeStart;
 	private Date timeEnd;
 	private int predId;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -47,7 +47,7 @@ public class SalesPackage {
 	public double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getUuid() {
@@ -56,14 +56,14 @@ public class SalesPackage {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
 				+ ", uuid=" + uuid + ", timeStart=" + timeStart + ", timeEnd="
 				+ timeEnd + ", predId=" + predId + "]";
 	}
-	
+
 	public Date getTimeStart() {
 		return timeStart;
 	}
@@ -82,7 +82,7 @@ public class SalesPackage {
 	public void setPredId(int predId) {
 		this.predId = predId;
 	}
-	
-	
+
+
 
 }

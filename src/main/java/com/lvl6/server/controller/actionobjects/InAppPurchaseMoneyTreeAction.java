@@ -49,6 +49,24 @@ public class InAppPurchaseMoneyTreeAction {
 	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
+	public StructureMoneyTreeRetrieveUtils getStructureMoneyTreeRetrieveUtils() {
+		return structureMoneyTreeRetrieveUtils;
+	}
+
+	public void setStructureMoneyTreeRetrieveUtils(
+			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils) {
+		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
+	}
+
+	public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils() {
+		return structureForUserRetrieveUtils;
+	}
+
+	public void setStructureForUserRetrieveUtils(
+			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+		this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
+	}
+
 	public InAppPurchaseMoneyTreeAction() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -80,12 +98,7 @@ public class InAppPurchaseMoneyTreeAction {
 	}
 
 	//derived state
-	private int boosterPackId;
-	boolean isStarterPack;
-	boolean isMoneyTree;
-	boolean isSalesPackage;
 	private String packageName;
-	private double salesPackagePrice;
 	private int gemChange;
 	private StructureMoneyTree smt;
 
@@ -126,10 +139,10 @@ public class InAppPurchaseMoneyTreeAction {
 	}
 
 	public boolean verifySemantics(Builder resBuilder) {
-		return verifyStarterPack(resBuilder);
+		return verifyMoneyTree(resBuilder);
 	}
 
-	public boolean verifyStarterPack(Builder resBuilder) {
+	public boolean verifyMoneyTree(Builder resBuilder) {
 		boolean duplicateReceipt = true;
 		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
@@ -150,18 +163,24 @@ public class InAppPurchaseMoneyTreeAction {
 				.getStructIdsToMoneyTrees();
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils
 				.getUserStructsForUser(userId);
-		boolean hasMoneyTree = false;
+		int numOfMoneyTrees = 0;
 
 		for (StructureForUser sfu : sfuList) {
 			int structId = sfu.getStructId();
 			for (Integer ids : structIdsToMoneyTreesMap.keySet()) {
 				if (structId == ids) {
-					hasMoneyTree = true;
+					numOfMoneyTrees++;
 				}
 			}
 		}
 
-		return hasMoneyTree;
+		if(numOfMoneyTrees <= 1) {
+			return true;
+		}
+		else {
+			log.info("num of trees: " + numOfMoneyTrees);
+			return false;
+		}
 	}
 
 	public boolean writeChangesToDB(Builder resBuilder) {
@@ -349,44 +368,12 @@ public class InAppPurchaseMoneyTreeAction {
 		this.miscMethods = miscMethods;
 	}
 
-	public boolean isStarterPack() {
-		return isStarterPack;
-	}
-
-	public void setStarterPack(boolean isStarterPack) {
-		this.isStarterPack = isStarterPack;
-	}
-
-	public boolean isMoneyTree() {
-		return isMoneyTree;
-	}
-
-	public void setMoneyTree(boolean isMoneyTree) {
-		this.isMoneyTree = isMoneyTree;
-	}
-
-	public boolean isSalesPackage() {
-		return isSalesPackage;
-	}
-
-	public void setSalesPackage(boolean isSalesPackage) {
-		this.isSalesPackage = isSalesPackage;
-	}
-
 	public String getPackageName() {
 		return packageName;
 	}
 
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
-	}
-
-	public double getSalesPackagePrice() {
-		return salesPackagePrice;
-	}
-
-	public void setSalesPackagePrice(double salesPackagePrice) {
-		this.salesPackagePrice = salesPackagePrice;
 	}
 
 	public int getGemChange() {

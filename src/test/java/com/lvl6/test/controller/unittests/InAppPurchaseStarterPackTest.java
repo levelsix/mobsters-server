@@ -1,4 +1,4 @@
-package com.lvl6.test.mocktests;
+package com.lvl6.test.controller.unittests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,7 +36,7 @@ import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class InAppPurchaseStarterPackUnitTests {
+public class InAppPurchaseStarterPackTest {
 
 	private static User mockedUser;
 	private static UpdateUtil mockedUpdateUtil;
@@ -111,37 +111,37 @@ public class InAppPurchaseStarterPackUnitTests {
 		iapa.setUser(mockedUser);
 
 		when(mockedUser.getSalesValue()).thenReturn(0);
-		sp.setPrice(4.99);
+		sp.setPrice(5);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(1);
-		sp.setPrice(19.99);
+		sp.setPrice(20);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(2);
-		sp.setPrice(49.99);
+		sp.setPrice(50);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(3);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(4);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(5);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(6);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
@@ -150,37 +150,37 @@ public class InAppPurchaseStarterPackUnitTests {
 		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(false);
 
 		when(mockedUser.getSalesValue()).thenReturn(0);
-		sp.setPrice(4.99);
+		sp.setPrice(5);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(1);
-		sp.setPrice(9.99);
+		sp.setPrice(10);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(2);
-		sp.setPrice(19.99);
+		sp.setPrice(20);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(3);
-		sp.setPrice(49.99);
+		sp.setPrice(50);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(4);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(5);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 
 		when(mockedUser.getSalesValue()).thenReturn(6);
-		sp.setPrice(99.99);
+		sp.setPrice(100);
 		iapa.setSalesPackage(sp);
 		assertTrue(iapa.userSalesValueMatchesSalesPackage());
 	}

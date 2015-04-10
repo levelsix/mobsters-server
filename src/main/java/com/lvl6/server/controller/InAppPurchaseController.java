@@ -316,14 +316,36 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
 			if(IAPValues.packageIsStarterPack(packageName)) {
-				isStarterPack = true;
-				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-						boosterItemRetrieveUtils, monsterRetrieveUtils,
-						monsterLevelInfoRetrieveUtils);
+//				isStarterPack = true;
+//				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+//						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+//						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+//						boosterItemRetrieveUtils, monsterRetrieveUtils,
+//						monsterLevelInfoRetrieveUtils);
+//
+//				iapspa.execute(resBuilder);
 
-				iapspa.execute(resBuilder);
+				//for testing
+				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+
+				for(String name : salesPackageNamesToSalesPackages.keySet()) {
+					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
+					if(sp.getUuid().equals(uuid)) {
+						salesPackage = sp;
+						log.info("found sales pack");
+					}
+				}
+
+				isSalesPack = true;
+				iapsa = new InAppPurchaseSalesAction(userId,
+						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+						salesPackage);
+
+				iapsa.execute(resBuilder);
 			}
 			else if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
@@ -334,7 +356,7 @@ public class InAppPurchaseController extends EventController {
 
 				iapmta.execute(resBuilder);
 			}
-			else if(packageIsSalesPackage(packageName)) {
+			else if(packageIsSalesPackage(packageName, uuid)) {
 				isSalesPack = true;
 				iapsa = new InAppPurchaseSalesAction(userId,
 						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
@@ -380,13 +402,14 @@ public class InAppPurchaseController extends EventController {
 		}
 	}
 
-	public boolean packageIsSalesPackage(String packageName) {
+	public boolean packageIsSalesPackage(String packageName, String uuid) {
 		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
 				salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
 
 		for(String name : salesPackageNamesToSalesPackages.keySet()) {
-			if(name.equalsIgnoreCase(packageName)) {
-				salesPackage = salesPackageNamesToSalesPackages.get(packageName);
+			SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
+			if(name.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+				salesPackage = sp;
 				return true;
 			}
 		}
