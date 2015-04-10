@@ -210,7 +210,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		Map<String, String> pairsOfChats = new HashMap<String, String>();
 		boolean successfulInserts = true;
 
-		if(tsfuListIsNull || tsfuList.size() == 1 ) {
+		if(tsfuList.size() == 1 ) {
 			for(String id : privateChatPostIds) {
 				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
 				if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
