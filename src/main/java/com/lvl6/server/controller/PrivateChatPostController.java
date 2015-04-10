@@ -58,8 +58,8 @@ public class PrivateChatPostController extends EventController {
 	@Autowired
 	protected AdminChatUtil adminChatUtil;
 
-	@Autowired
-	protected MiscMethods miscMethods;
+//	@Autowired
+//	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;

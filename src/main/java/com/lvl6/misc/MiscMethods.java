@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.stereotype.Component;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -146,7 +147,7 @@ import com.memetix.mst.detect.Detect;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
-
+@Component
 public class MiscMethods {
 
 	private static final Logger log = LoggerFactory
@@ -155,7 +156,7 @@ public class MiscMethods {
 	public static final String gems = "gems";
 	public static final String oil = "oil";
 	public static final String boosterPackId = "boosterPackId";
-	
+
 	private static String pClientId = "ToonSquad";
 	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
@@ -779,7 +780,7 @@ public class MiscMethods {
 			}
 
 		}
-		
+
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		//set more properties above
@@ -1935,15 +1936,15 @@ public class MiscMethods {
 	//		sdpb.addAllRaids(staticData.getRaidsList());
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
-	
-	public static Map<TranslateLanguages, String> translate(Language sourceLanguage, 
+
+	public static Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
-		
+
 		String translatedText = "";
 		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
-		
+
 		List<Language> listOfLanguages = new ArrayList<Language>();
 		listOfLanguages.add(Language.ARABIC);
 		listOfLanguages.add(Language.ENGLISH);
@@ -1969,14 +1970,14 @@ public class MiscMethods {
 					else translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
-				}	
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		return returnMap;
-	} 
+	}
 
 	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
 		TranslateLanguages tl = null;
@@ -2031,12 +2032,12 @@ public class MiscMethods {
 		}
 		else return null;
 	}
-		
+
 	public static Language detectedLanguage(String text) {
 		Detect.setClientId(pClientId);
         Detect.setClientSecret(secretId);
         Language detectedLanguage = null;
-        
+
         try {
 			detectedLanguage = Detect.execute(text);
 		} catch (Exception e) {
@@ -2046,7 +2047,7 @@ public class MiscMethods {
 		}
         return detectedLanguage;
 	}
-	
-	
-	
+
+
+
 }
