@@ -45,11 +45,21 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+
+	@Autowired
+	protected MiscMethods miscMethods;
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
 
 	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 
 	public RetrievePrivateChatPostsController() {
 		numAllocatedThreads = 5;
@@ -71,7 +81,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 				.getRetrievePrivateChatPostsRequestProto();
 
 		log.info(""+ reqProto);
-		
+
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String otherUserId = reqProto.getOtherUserUuid();
@@ -132,7 +142,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 						//for not hitting the db for every private chat post
 						Map<String, MinimumUserProtoWithLevel> userIdsToMups = generateUserIdsToMupsWithLevel(
 								usersByIds, userId, senderProto, otherUserId);
-						
+
 						List<String> chatIds = new ArrayList<String>();
 						for(PrivateChatPost pcp : recentPrivateChatPosts) {
 							chatIds.add(pcp.getId());
@@ -149,7 +159,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 							List<String> chatIdsToBeTranslated = new ArrayList<String>();
 
 							log.info("{}", chatIdsToTranslations);
-							
+
 							for(String chatId : chatIdsToTranslations.keySet()) {
 								List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
 								for(ChatTranslations ct : chatTranslationsList) {
@@ -167,13 +177,14 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
+							log.info("private chat post id: " + pwp.getId());
 							String posterId = pwp.getPosterId();
 							String contentLanguage = pwp.getContentLanguage();
 
 							if(contentLanguage == null || contentLanguage.isEmpty()) {
 								contentLanguage = "ENGLISH";
 							}
-							
+
 							long time = pwp.getTimeOfPost().getTime();
 							MinimumUserProtoWithLevel user = userIdsToMups
 									.get(posterId);
@@ -191,7 +202,8 @@ public class RetrievePrivateChatPostsController extends EventController {
 									translateMap = MiscMethods.translate(null, language, pwp.getContent());
 								}
 
-								GroupChatMessageProto gcmp = CreateInfoProtoUtils
+								log.info("private chat post content language: " + contentLanguage);
+								GroupChatMessageProto gcmp = createInfoProtoUtils
 										.createGroupChatMessageProto(time, user,
 												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);
@@ -201,6 +213,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
 								resBuilder.addPosts(gcmp);
 							}
+
 						}
 					}
 				}
