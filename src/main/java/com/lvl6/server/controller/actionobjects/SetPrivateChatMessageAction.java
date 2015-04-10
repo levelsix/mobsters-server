@@ -210,7 +210,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		Map<String, String> pairsOfChats = new HashMap<String, String>();
 		boolean successfulInserts = true;
 
-		for(String id : privateChatPostIds) {
+		for(String id : postIdsToPrivateChatPosts.keySet()) {
 			PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
 			if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
 				pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
@@ -221,8 +221,8 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 			}
 
 		}
+
 		for(TranslationSettingsForUser tsfu : tsfuList) {
-			String receiverId = tsfu.getReceiverUserId();
 			String senderId = tsfu.getSenderUserId();
 
 			if(pairsOfChats.containsKey(senderId)) {
