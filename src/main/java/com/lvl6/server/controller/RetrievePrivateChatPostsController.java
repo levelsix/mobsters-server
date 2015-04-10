@@ -18,6 +18,7 @@ import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -31,6 +32,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -60,6 +62,9 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	public RetrievePrivateChatPostsController() {
 		numAllocatedThreads = 5;
@@ -182,7 +187,9 @@ public class RetrievePrivateChatPostsController extends EventController {
 							String contentLanguage = pwp.getContentLanguage();
 
 							if(contentLanguage == null || contentLanguage.isEmpty()) {
-								contentLanguage = "ENGLISH";
+								List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
+										getUserTranslationSettingsForUserGlobal(posterId);
+								contentLanguage = tsfuList.get(0).getLanguage();
 							}
 
 							long time = pwp.getTimeOfPost().getTime();
