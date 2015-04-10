@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -34,6 +35,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final boolean tsfuListIsNull;
 	protected final InsertUtil insertUtil;
 	private final TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	private List<TranslationSettingsForUser> tsfuList;
 
 	private final CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -42,7 +44,8 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
 			boolean tsfuListIsNull, InsertUtil insertUtil,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
+			List<TranslationSettingsForUser> tsfuList) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -51,6 +54,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		this.insertUtil = insertUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
+		this.tsfuList = tsfuList;
 	}
 
 	private Set<String> userIds;
@@ -198,11 +202,15 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		Map<String, String> pairsOfChats = new HashMap<String, String>();
 		boolean successfulInserts = true;
 
-		if(tsfuListIsNull) {
+		if(tsfuListIsNull || tsfuList.size() == 1 ) {
 			for(String id : privateChatPostIds) {
 				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
 				if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
 					pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
+				}
+				else if(pcp.getPosterId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getRecipientId())) {
+					pairsOfChats.put(pcp.getRecipientId(), pcp.getPosterId());
+
 				}
 
 			}
