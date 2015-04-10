@@ -15,10 +15,10 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -33,17 +33,24 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 	private final PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
 	private final boolean tsfuListIsNull;
 	protected final InsertUtil insertUtil;
-	
+	private final TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+
+	private final CreateInfoProtoUtils createInfoProtoUtils;
+
 	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
 			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
-			boolean tsfuListIsNull, InsertUtil insertUtil) {
+			boolean tsfuListIsNull, InsertUtil insertUtil,
+			CreateInfoProtoUtils createInfoProtoUtils,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 		this.tsfuListIsNull = tsfuListIsNull;
 		this.insertUtil = insertUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
+		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
 	}
 
 	private Set<String> userIds;
@@ -198,22 +205,22 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		//if no global default, set the private chat's defaults as english
 		Map<String, String> pairsOfChats = new HashMap<String, String>();
 		boolean successfulInserts = true;
-		
+
 		if(tsfuListIsNull) {
 			for(String id : privateChatPostIds) {
 				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(id);
 				if(pcp.getRecipientId().equalsIgnoreCase(userId) && !pairsOfChats.containsKey(pcp.getPosterId())) {
 					pairsOfChats.put(pcp.getPosterId(), pcp.getRecipientId());
 				}
-				
+
 			}
 			successfulInserts = insertUtil.insertMultipleDefaultTranslateSettings(pairsOfChats);
 		}
-		
+
 		if(!successfulInserts) {
 			log.error("something messed up inserting all the default translate settings for userId {}", userId);
 		}
-		
+
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();
 		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());
@@ -221,7 +228,8 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 				.createPrivateChatPostProtoList(clanIdsToClans,
 						clanIdsToUserIdSet, userIdsToUsers,
 						clanlessUserUserIds, privateChatPostIds,
-						postIdsToPrivateChatPosts);
+						postIdsToPrivateChatPosts,
+						translationSettingsForUserRetrieveUtil);
 
 		resBuilder.addAllPcpp(pcppList);
 	}

@@ -725,7 +725,8 @@ public class StartupController extends EventController {
 			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil);
+					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
+					getCreateInfoProtoUtils(), translationSettingsForUserRetrieveUtil);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
