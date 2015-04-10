@@ -189,7 +189,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 							if(contentLanguage == null || contentLanguage.isEmpty()) {
 								List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 										getUserTranslationSettingsForUserGlobal(posterId);
-								contentLanguage = tsfuList.get(0).getLanguage();
+								if(tsfuList == null || tsfuList.isEmpty()) {
+									contentLanguage = ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE;
+								}
+								else contentLanguage = tsfuList.get(0).getLanguage();
 							}
 
 							long time = pwp.getTimeOfPost().getTime();
