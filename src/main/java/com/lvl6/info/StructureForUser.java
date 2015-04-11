@@ -3,24 +3,22 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-
 public class StructureForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 9028602340046219872L;
-	
+
 	private String id;
 	private String userId;
 	private int structId;
 	private Date lastRetrieved;
 	private CoordinatePair coordinates;
-//	private int level;
+	//	private int level;
 	private Date purchaseTime;
 	private boolean isComplete;
 	private String orientation;
 	private int fbInviteStructLvl;
-	
-	public StructureForUser()
-	{
+
+	public StructureForUser() {
 		super();
 	}
 

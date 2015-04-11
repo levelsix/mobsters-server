@@ -9,8 +9,7 @@ import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
-public class SetDefendingMsgAction
-{
+public class SetDefendingMsgAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -18,11 +17,8 @@ public class SetDefendingMsgAction
 	private String msg;
 	private UserRetrieveUtils2 userRetrieveUtil;
 
-	public SetDefendingMsgAction(
-		String userId,
-		String msg,
-		UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public SetDefendingMsgAction(String userId, String msg,
+			UserRetrieveUtils2 userRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.msg = msg;
@@ -50,7 +46,6 @@ public class SetDefendingMsgAction
 	//	private Map<String, Integer> curCurrencies;
 	//	private Map<String, String> reasonsForChanges;
 	//	private Map<String, String> details;
-
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
@@ -80,9 +75,7 @@ public class SetDefendingMsgAction
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (null == msg) {
-			log.error(String.format(
-				"invalid msg for defendingStatus=%s.",
-				msg));
+			log.error(String.format("invalid msg for defendingStatus=%s.", msg));
 			return false;
 		}
 
@@ -92,8 +85,7 @@ public class SetDefendingMsgAction
 	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			log.error(String.format(
-				"no user with id=%s", userId));
+			log.error(String.format("no user with id=%s", userId));
 			return false;
 		}
 
@@ -116,7 +108,7 @@ public class SetDefendingMsgAction
 
 		String censoredMsg = MiscMethods.censorUserInput(msg);
 		log.info("old msg={} \t censoredMsg={},", msg, censoredMsg);
-		
+
 		//update the user saying he got the gifts
 		user.updateDefendingMsg(censoredMsg);
 

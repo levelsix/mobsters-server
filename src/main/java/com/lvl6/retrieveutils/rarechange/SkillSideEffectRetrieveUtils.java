@@ -15,9 +15,12 @@ import com.lvl6.info.SkillSideEffect;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class SkillSideEffectRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class SkillSideEffectRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, SkillSideEffect> idsToSkillSideEffects;
 
@@ -32,8 +35,8 @@ import com.lvl6.utils.DBConnection;
 	}
 
 	public static SkillSideEffect getSkillSideEffectForId(int skillSideEffectId) {
-		log.debug(String.format(
-			"retrieve skill data for skill=%s", skillSideEffectId));
+		log.debug(String.format("retrieve skill data for skill=%s",
+				skillSideEffectId));
 		if (null == idsToSkillSideEffects) {
 			setStaticIdsToSkillSideEffects();
 		}
@@ -45,8 +48,7 @@ import com.lvl6.utils.DBConnection;
 
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
-		Map<Integer, SkillSideEffect> idsToSkillSideEffectsTemp =
-			new HashMap<Integer, SkillSideEffect>();
+		Map<Integer, SkillSideEffect> idsToSkillSideEffectsTemp = new HashMap<Integer, SkillSideEffect>();
 		try {
 			if (conn != null) {
 				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
@@ -56,21 +58,22 @@ import com.lvl6.utils.DBConnection;
 						rs.last();
 						rs.beforeFirst();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							SkillSideEffect skillSideEffect = convertRSRowToSkillSideEffect(rs);
 							if (skillSideEffect == null) {
 								continue;
 							}
 
 							int skillSideEffectId = skillSideEffect.getId();
-							idsToSkillSideEffectsTemp.put(skillSideEffectId, skillSideEffect);
+							idsToSkillSideEffectsTemp.put(skillSideEffectId,
+									skillSideEffect);
 						}
 
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("skill retrieve db error.", e);
@@ -87,48 +90,55 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static SkillSideEffect convertRSRowToSkillSideEffect(ResultSet rs) throws SQLException {
+	private static SkillSideEffect convertRSRowToSkillSideEffect(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__ID);
 		String name = rs.getString(DBConstants.SKILL_SIDE_EFFECT__NAME);
 		String desc = rs.getString(DBConstants.SKILL_SIDE_EFFECT__DESC);
 		String type = rs.getString(DBConstants.SKILL_SIDE_EFFECT__TYPE);
-		String traitType = rs.getString(DBConstants.SKILL_SIDE_EFFECT__TRAIT_TYPE);
+		String traitType = rs
+				.getString(DBConstants.SKILL_SIDE_EFFECT__TRAIT_TYPE);
 		String imgName = rs.getString(DBConstants.SKILL_SIDE_EFFECT__IMG_NAME);
-		int imgPixelOffsetX = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_X);
-		int imgPixelOffsetY = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_Y);
-		String iconImgName = rs.getString(DBConstants.SKILL_SIDE_EFFECT__ICON_IMG_NAME);
+		int imgPixelOffsetX = rs
+				.getInt(DBConstants.SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_X);
+		int imgPixelOffsetY = rs
+				.getInt(DBConstants.SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_Y);
+		String iconImgName = rs
+				.getString(DBConstants.SKILL_SIDE_EFFECT__ICON_IMG_NAME);
 		String pfxName = rs.getString(DBConstants.SKILL_SIDE_EFFECT__PFX_NAME);
-		String pfxColor = rs.getString(DBConstants.SKILL_SIDE_EFFECT__PFX_COLOR);
-		String positionType = rs.getString(DBConstants.SKILL_SIDE_EFFECT__POSITION_TYPE);
-		int pfxPixelOffsetX = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_X);
-		int pfxPixelOffsetY = rs.getInt(DBConstants.SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_Y);		
-		String blendMode = rs.getString(DBConstants.SKILL_SIDE_EFFECT__BLEND_MODE);
-		
+		String pfxColor = rs
+				.getString(DBConstants.SKILL_SIDE_EFFECT__PFX_COLOR);
+		String positionType = rs
+				.getString(DBConstants.SKILL_SIDE_EFFECT__POSITION_TYPE);
+		int pfxPixelOffsetX = rs
+				.getInt(DBConstants.SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_X);
+		int pfxPixelOffsetY = rs
+				.getInt(DBConstants.SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_Y);
+		String blendMode = rs
+				.getString(DBConstants.SKILL_SIDE_EFFECT__BLEND_MODE);
+
 		if (null != type) {
-	    	String newType = type.trim().toUpperCase();
-	    	if (!type.equals(newType)) {
-	    		log.error(String.format(
-	    			"type incorrect: %s, id=%s",
-	    			type, id));
-	    		type = newType;
-	    	}
-	    }
-		
+			String newType = type.trim().toUpperCase();
+			if (!type.equals(newType)) {
+				log.error(String.format("type incorrect: %s, id=%s", type, id));
+				type = newType;
+			}
+		}
+
 		if (null != traitType) {
-	    	String newTraitType = traitType.trim().toUpperCase();
-	    	if (!traitType.equals(newTraitType)) {
-	    		log.error(String.format(
-	    			"traitType incorrect: %s, id=%s",
-	    			traitType, id));
-	    		traitType = newTraitType;
-	    	}
-	    }
-		
+			String newTraitType = traitType.trim().toUpperCase();
+			if (!traitType.equals(newTraitType)) {
+				log.error(String.format("traitType incorrect: %s, id=%s",
+						traitType, id));
+				traitType = newTraitType;
+			}
+		}
+
 		SkillSideEffect skillSideEffect = new SkillSideEffect(id, name, desc,
-			type, traitType, imgName, imgPixelOffsetX, imgPixelOffsetY,
-			iconImgName, pfxName, pfxColor, positionType, pfxPixelOffsetX,
-			pfxPixelOffsetY, blendMode);
+				type, traitType, imgName, imgPixelOffsetX, imgPixelOffsetY,
+				iconImgName, pfxName, pfxColor, positionType, pfxPixelOffsetX,
+				pfxPixelOffsetY, blendMode);
 		return skillSideEffect;
 	}
-	
+
 }

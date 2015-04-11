@@ -15,9 +15,12 @@ import com.lvl6.info.ResearchProperty;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class ResearchPropertyRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class ResearchPropertyRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, Map<Integer, ResearchProperty>> researchIdsToIdsToResearchProperties;
 	private static Map<Integer, ResearchProperty> researchPropertyIdsToResearchProperties;
@@ -32,21 +35,25 @@ import com.lvl6.utils.DBConnection;
 		return researchIdsToIdsToResearchProperties;
 	}
 
-	public static ResearchProperty getResearchPropertyForResearchPropertyId(int researchPropertyId) {
+	public static ResearchProperty getResearchPropertyForResearchPropertyId(
+			int researchPropertyId) {
 		if (null == researchPropertyIdsToResearchProperties) {
-			setStaticResearchIdsToIdsToResearchProperties();      
+			setStaticResearchIdsToIdsToResearchProperties();
 		}
-		if (!researchPropertyIdsToResearchProperties.containsKey(researchPropertyId)) {
+		if (!researchPropertyIdsToResearchProperties
+				.containsKey(researchPropertyId)) {
 			log.warn(String.format(
-				"no researchProperty for researchPropertyId=%s", researchPropertyId));
+					"no researchProperty for researchPropertyId=%s",
+					researchPropertyId));
 			return null;
 		}
-		return researchPropertyIdsToResearchProperties.get(researchPropertyId); 
+		return researchPropertyIdsToResearchProperties.get(researchPropertyId);
 	}
 
-	public static Map<Integer, ResearchProperty> getResearchPropertiesForResearchId(int researchId) {
-		log.debug(String.format(
-			"retrieve research data for research=%s", researchId));
+	public static Map<Integer, ResearchProperty> getResearchPropertiesForResearchId(
+			int researchId) {
+		log.debug(String.format("retrieve research data for research=%s",
+				researchId));
 		if (null == researchIdsToIdsToResearchProperties) {
 			setStaticResearchIdsToIdsToResearchProperties();
 		}
@@ -66,12 +73,12 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Map<Integer, ResearchProperty>> researchIdsToIdsToResearchPropertiesTemp =
-							new HashMap<Integer, Map<Integer, ResearchProperty>>();
-						Map<Integer, ResearchProperty> researchPropertyIdsToResearchPropertiesTemp =
-							new HashMap<Integer, ResearchProperty>();
+						//<researchId, <researchPropertyId, researchProperty>>
+						Map<Integer, Map<Integer, ResearchProperty>> researchIdsToIdsToResearchPropertiesTemp = new HashMap<Integer, Map<Integer, ResearchProperty>>();
+						//<researchPropertyId, researchProperty>
+						Map<Integer, ResearchProperty> researchPropertyIdsToResearchPropertiesTemp = new HashMap<Integer, ResearchProperty>();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							ResearchProperty researchProperty = convertRSRowToResearchProperty(rs);
 							if (researchProperty == null) {
 								continue;
@@ -80,18 +87,23 @@ import com.lvl6.utils.DBConnection;
 							int researchId = researchProperty.getResearchId();
 							//base case, no key with research id exists, so create map with
 							//key: research id, to value: another map
-							if (!researchIdsToIdsToResearchPropertiesTemp.containsKey(researchId)) {
-								researchIdsToIdsToResearchPropertiesTemp.put(researchId, new HashMap<Integer, ResearchProperty>());
+							if (!researchIdsToIdsToResearchPropertiesTemp
+									.containsKey(researchId)) {
+								researchIdsToIdsToResearchPropertiesTemp
+										.put(researchId,
+												new HashMap<Integer, ResearchProperty>());
 							}
 
 							//get map of researchProperties related to current research id
 							//stick researchProperty into the map of ResearchProperty ids to ResearchProperty objects
-							Map<Integer, ResearchProperty> idsToResearchProperties =
-								researchIdsToIdsToResearchPropertiesTemp.get(researchId);
+							Map<Integer, ResearchProperty> idsToResearchProperties = researchIdsToIdsToResearchPropertiesTemp
+									.get(researchId);
 
 							int researchPropertyId = researchProperty.getId();
-							idsToResearchProperties.put(researchPropertyId, researchProperty);
-							researchPropertyIdsToResearchPropertiesTemp.put(researchPropertyId, researchProperty);
+							idsToResearchProperties.put(researchPropertyId,
+									researchProperty);
+							researchPropertyIdsToResearchPropertiesTemp.put(
+									researchPropertyId, researchProperty);
 						}
 						researchIdsToIdsToResearchProperties = researchIdsToIdsToResearchPropertiesTemp;
 						researchPropertyIdsToResearchProperties = researchPropertyIdsToResearchPropertiesTemp;
@@ -100,7 +112,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("ResearchProperty retrieve db error.", e);
@@ -116,13 +128,15 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ResearchProperty convertRSRowToResearchProperty(ResultSet rs) throws SQLException {
+	private static ResearchProperty convertRSRowToResearchProperty(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.RESEARCH_PROPERTY__ID);
 		String name = rs.getString(DBConstants.RESEARCH_PROPERTY__NAME);
 		float value = rs.getFloat(DBConstants.RESEARCH_PROPERTY__VALUE);
 		int researchId = rs.getInt(DBConstants.RESEARCH_PROPERTY__RESEARCH_ID);
-		
-		ResearchProperty researchProperty = new ResearchProperty(id, name, value, researchId);
+
+		ResearchProperty researchProperty = new ResearchProperty(id, name,
+				value, researchId);
 
 		return researchProperty;
 	}

@@ -13,8 +13,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //shared logic between controllers where a user leaves a lcan
-public class ExitClanAction
-{
+public class ExitClanAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -25,16 +24,10 @@ public class ExitClanAction
 	private TimeUtils timeUtil;
 	private UpdateUtil updateUtil;
 	private ClanSearch cs;
-	
-	public ExitClanAction(
-		String userId,
-		String clanId,
-		int clanSize,
-		Date lastChatPost,
-		TimeUtils timeUtil,
-		UpdateUtil updateUtil,
-		ClanSearch cs)
-	{
+
+	public ExitClanAction(String userId, String clanId, int clanSize,
+			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
+			ClanSearch cs) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -52,19 +45,19 @@ public class ExitClanAction
 
 		//mark pvp_history ten days ago to have clan_avenged = true 
 		Date now = new Date();
-		int minutes = -10 *
-			ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS;
+		int minutes = -10
+				* ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS;
 
-		Date battleEndDate = timeUtil.createDateAddMinutes(
-			now, minutes);
+		Date battleEndDate = timeUtil.createDateAddMinutes(now, minutes);
 		Timestamp battleEndTime = new Timestamp(battleEndDate.getTime());
 
-		numUpdated = UpdateUtils.get().updateRecentPvpBattleHistoryClanRetaliated(
-			userId, battleEndTime);
-		    
+		numUpdated = UpdateUtils.get()
+				.updateRecentPvpBattleHistoryClanRetaliated(userId,
+						battleEndTime);
+
 		log.info("num PvpBattleHistory clan_avenged marked as true: {}",
-			numUpdated);
-		
+				numUpdated);
+
 		//exiting a clan can delete clan if the user who left is owner
 		//so only update clan search rank if clan contains members
 		if (clanSize > 0) {

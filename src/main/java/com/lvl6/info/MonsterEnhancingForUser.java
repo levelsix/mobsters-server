@@ -6,22 +6,20 @@ import java.util.Date;
 public class MonsterEnhancingForUser implements Serializable {
 
 	private static final long serialVersionUID = 594202380800243118L;
-	
+
 	private String userId;
 	private String monsterForUserId;
 	private Date expectedStartTime;
-//	private Date queuedTime;
+	//	private Date queuedTime;
 	private int enhancingCost;
 	private boolean enhancingComplete;
-  
-	public MonsterEnhancingForUser()
-	{
+
+	public MonsterEnhancingForUser() {
 		super();
 	}
 
 	public MonsterEnhancingForUser(String userId, String monsterForUserId,
-		Date expectedStartTime, int enhancingCost, boolean enhancingComplete)
-	{
+			Date expectedStartTime, int enhancingCost, boolean enhancingComplete) {
 		super();
 		this.userId = userId;
 		this.monsterForUserId = monsterForUserId;
@@ -62,30 +60,21 @@ public class MonsterEnhancingForUser implements Serializable {
 		this.enhancingCost = enhancingCost;
 	}
 
-	public boolean isEnhancingComplete()
-	{
+	public boolean isEnhancingComplete() {
 		return enhancingComplete;
 	}
 
-	public void setEnhancingComplete( boolean enhancingComplete )
-	{
+	public void setEnhancingComplete(boolean enhancingComplete) {
 		this.enhancingComplete = enhancingComplete;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "MonsterEnhancingForUser [userId="
-			+ userId
-			+ ", monsterForUserId="
-			+ monsterForUserId
-			+ ", expectedStartTime="
-			+ expectedStartTime
-			+ ", enhancingCost="
-			+ enhancingCost
-			+ ", enhancingComplete="
-			+ enhancingComplete
-			+ "]";
+	public String toString() {
+		return "MonsterEnhancingForUser [userId=" + userId
+				+ ", monsterForUserId=" + monsterForUserId
+				+ ", expectedStartTime=" + expectedStartTime
+				+ ", enhancingCost=" + enhancingCost + ", enhancingComplete="
+				+ enhancingComplete + "]";
 	}
-	
+
 }

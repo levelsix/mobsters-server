@@ -26,8 +26,9 @@ import com.lvl6.server.EventWriter;
 
 @Component
 public class MessagingUtil {
-	private static final Logger log = LoggerFactory.getLogger(MessagingUtil.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(MessagingUtil.class);
+
 	@Autowired
 	EventWriter eventWriter;
 
@@ -49,22 +50,27 @@ public class MessagingUtil {
 	public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
 		this.chatMessages = chatMessages;
 	}
-	
+
 	public MinimumUserProto getAlexUserProto() {
-		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex, null);
+		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
+				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		return CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex,
+				null);
 	}
-	
+
 	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
-		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return CreateInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null, null);
+		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
+				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		return CreateInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null,
+				null);
 	}
-	
-	
+
 	public void sendMaintanenceModeMessageUdid(String message, String udid) {
-		log.info("Sending maintenance mode message: \"{}\" to player {}", message, udid);
+		log.info("Sending maintenance mode message: \"{}\" to player {}",
+				message, udid);
 		//send admin message
-		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
+		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
+				.newBuilder();
 		samrp.setMessage(message);
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent("");
@@ -72,53 +78,60 @@ public class MessagingUtil {
 		eventWriter.processPreDBResponseEvent(ev, udid);
 	}
 
-	
 	public void sendMaintanenceModeMessage(String message, String playerId) {
-		log.info("Sending maintenance mode message: \"{}\" to player {}", message, playerId);
+		log.info("Sending maintenance mode message: \"{}\" to player {}",
+				message, playerId);
 		//send admin message
-		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
+		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
+				.newBuilder();
 		samrp.setMessage(message);
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(playerId);
+		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
+				playerId);
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.handleEvent(ev);
 	}
-	
-	
-	
+
 	public void sendAdminMessage(String message) {
 		log.info("Sending admin message: {}", message);
 		//send admin message
-		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
+		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
+				.newBuilder();
 		samrp.setMessage(message);
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(samrp.getSenderUuid());
+		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
+				samrp.getSenderUuid());
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.processGlobalChatResponseEvent(ev);
 		//send regular global chat
 		log.info("Sending admin message global chat");
-		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto.newBuilder();
+		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
+				.newBuilder();
 		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
 		final GroupChatScope scope = GroupChatScope.GLOBAL;
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
-		chatProto.setIsAdmin(true);
-		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto, 1, timeOfPost.getTime());
+		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
+				1, timeOfPost.getTime());
 	}
-	
-	protected void sendChatMessage(String senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
-		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(senderId);
+
+	protected void sendChatMessage(String senderId,
+			ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
+		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
+				senderId);
 		ce.setReceivedGroupChatResponseProto(chatProto.build());
 		ce.setTag(tag);
 		log.info("Sending global chat ");
 		//add new message to front of list
-		chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(time, chatProto.getSender(), chatProto.getChatMessage(), true, null));
+		chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(
+				time, chatProto.getSender(), chatProto.getChatMessage(), true,
+				null, null, null));
 		eventWriter.processGlobalChatResponseEvent(ce);
 	}
-	
+
 	public void sendGlobalMessage(ResponseEvent re) {
-	  eventWriter.processGlobalChatResponseEvent(re);
+		eventWriter.processGlobalChatResponseEvent(re);
 	}
 }

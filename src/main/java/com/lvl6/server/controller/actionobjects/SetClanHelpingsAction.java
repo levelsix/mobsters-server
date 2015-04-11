@@ -16,8 +16,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanHelpingsAction implements StartUpAction
-{
+public class SetClanHelpingsAction implements StartUpAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -25,83 +24,79 @@ public class SetClanHelpingsAction implements StartUpAction
 	private final User user;
 	private final String userId;
 	private final ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-	
-	public SetClanHelpingsAction(
-		ClanDataProto.Builder cdpBuilder, User user,
-		String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil)
-	{
+
+	public SetClanHelpingsAction(ClanDataProto.Builder cdpBuilder, User user,
+			String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil) {
 		super();
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
 	}
-	
+
 	//derived state
 	private Map<String, List<ClanHelp>> allSolicitations;
-	
+
 	//Extracted from Startup
 	@Override
-	public void setUp(StartUpResource fillMe)
-	{
-		allSolicitations = clanHelpRetrieveUtil
-			.getUserIdToClanHelp(
-				user.getClanId(),
-				userId);
+	public void setUp(StartUpResource fillMe) {
+		allSolicitations = clanHelpRetrieveUtil.getUserIdToClanHelp(
+				user.getClanId(), userId);
 		log.info(String.format("allSolicitations=%s", allSolicitations));
-		
 
 		if (null == allSolicitations || allSolicitations.isEmpty()) {
 			return;
 		}
 		fillMe.addUserId(allSolicitations.keySet());
-		
+
 	}
 
 	@Override
-	public void execute( StartUpResource useMe )
-	{
+	public void execute(StartUpResource useMe) {
 		if (null == allSolicitations || allSolicitations.isEmpty()) {
 			return;
 		}
-		Map<String, User> solicitors = useMe.getUserIdsToUsers(allSolicitations.keySet());
-		
+		Map<String, User> solicitors = useMe.getUserIdsToUsers(allSolicitations
+				.keySet());
+
 		if (null == solicitors || solicitors.isEmpty()) {
 			return;
 		}
-		
+
 		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans();
-		
+
 		//convert all solicitors into MinimumUserProtos
 		Map<String, MinimumUserProto> mupSolicitors = new HashMap<String, MinimumUserProto>();
 		for (String solicitorId : solicitors.keySet()) {
 			User moocher = solicitors.get(solicitorId);
 			String clanId = moocher.getClanId();
 			Clan c = null;
-			
+
 			if (clanIdsToClans.containsKey(solicitorId)) {
 				c = clanIdsToClans.get(clanId);
 			}
-			
-			MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(moocher, c);
+
+			MinimumUserProto mup = CreateInfoProtoUtils
+					.createMinimumUserProtoFromUserAndClan(moocher, c);
 			mupSolicitors.put(solicitorId, mup);
 		}
 
 		for (String solicitorId : allSolicitations.keySet()) {
 			List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
 
-			User solicitor = solicitors.get( solicitorId );
-			MinimumUserProto mup = mupSolicitors.get( solicitorId );
+			User solicitor = solicitors.get(solicitorId);
+			MinimumUserProto mup = mupSolicitors.get(solicitorId);
 
 			for (ClanHelp aid : solicitations) {
-				
+
 				//null for clan since mup exists and mup has clan in it
 				ClanHelpProto chp = CreateInfoProtoUtils
-					.createClanHelpProtoFromClanHelp(aid, solicitor, null, mup);
+						.createClanHelpProtoFromClanHelp(aid, solicitor, null,
+								mup);
 
 				cdpBuilder.addClanHelpings(chp);
 			}
 		}
 	}
-	
+
 }

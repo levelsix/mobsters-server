@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent {
 
-  private RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto;
-  
-  public RetrieveUserMonsterTeamResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_RETRIEVE_USER_MONSTER_TEAM_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = retrieveUserMonsterTeamResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto;
 
-  public void setRetrieveUserMonsterTeamResponseProto(RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto) {
-    this.retrieveUserMonsterTeamResponseProto = retrieveUserMonsterTeamResponseProto;
-  }
+	public RetrieveUserMonsterTeamResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_RETRIEVE_USER_MONSTER_TEAM_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = retrieveUserMonsterTeamResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setRetrieveUserMonsterTeamResponseProto(
+			RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto) {
+		this.retrieveUserMonsterTeamResponseProto = retrieveUserMonsterTeamResponseProto;
+	}
 
 }

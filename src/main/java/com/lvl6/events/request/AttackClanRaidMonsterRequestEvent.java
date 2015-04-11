@@ -12,32 +12,34 @@ import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto;
 
 public class AttackClanRaidMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private AttackClanRaidMonsterRequestProto attackClanRaidMonsterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      attackClanRaidMonsterRequestProto = AttackClanRaidMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = attackClanRaidMonsterRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("AttackClanRaidMonsterRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public AttackClanRaidMonsterRequestProto getAttackClanRaidMonsterRequestProto() {
-    return attackClanRaidMonsterRequestProto;
-  }
+	private AttackClanRaidMonsterRequestProto attackClanRaidMonsterRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "AttackClanRaidMonsterRequestEvent [attackClanRaidMonsterRequestProto="
-		  + attackClanRaidMonsterRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			attackClanRaidMonsterRequestProto = AttackClanRaidMonsterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = attackClanRaidMonsterRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("AttackClanRaidMonsterRequest exception", e);
+		}
+	}
+
+	public AttackClanRaidMonsterRequestProto getAttackClanRaidMonsterRequestProto() {
+		return attackClanRaidMonsterRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "AttackClanRaidMonsterRequestEvent [attackClanRaidMonsterRequestProto="
+				+ attackClanRaidMonsterRequestProto + "]";
+	}
 
 }

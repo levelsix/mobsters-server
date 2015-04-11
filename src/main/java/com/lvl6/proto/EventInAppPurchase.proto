@@ -40,6 +40,8 @@ message InAppPurchaseResponseProto {
 	
 	repeated UserItemProto updatedUserItems = 9;
 	
+	repeated FullUserStructureProto updatedMoneyTree = 10;
+		
 	enum InAppPurchaseStatus {
 		SUCCESS = 1;
 		FAIL = 2;

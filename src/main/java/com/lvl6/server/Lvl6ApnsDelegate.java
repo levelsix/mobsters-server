@@ -9,9 +9,9 @@ import com.notnoop.apns.DeliveryError;
 
 public class Lvl6ApnsDelegate implements ApnsDelegate {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(Lvl6ApnsDelegate.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(Lvl6ApnsDelegate.class);
+
 	@Override
 	public void cacheLengthExceeded(int arg0) {
 		log.error("Notnoop cache length exceeded: {}", arg0);

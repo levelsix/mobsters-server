@@ -11,16 +11,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hazelcast.core.IMap;
 import com.lvl6.events.PreDatabaseRequestEvent;
 import com.lvl6.events.RequestEvent;
+import com.lvl6.info.User;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.Attachment;
 import com.lvl6.utils.ConnectedPlayer;
 
-public class AmqpGameEventHandler extends AbstractGameEventHandler implements MessageListener {
+public class AmqpGameEventHandler extends AbstractGameEventHandler implements
+		MessageListener {
 
 	static Logger log = LoggerFactory.getLogger(GameEventHandler.class);
 
@@ -28,12 +32,16 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
+	
+	@Autowired
+	UserRetrieveUtils2 userRetrieveUtils;
 
 	public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
-	public void setPlayersByPlayerId(IMap<String, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(
+			IMap<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
@@ -44,35 +52,41 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		return playersPreDatabaseByUDID;
 	}
 
-	public void setPlayersPreDatabaseByUDID(IMap<String, ConnectedPlayer> playersPreDatabaseByUDID) {
+	public void setPlayersPreDatabaseByUDID(
+			IMap<String, ConnectedPlayer> playersPreDatabaseByUDID) {
 		this.playersPreDatabaseByUDID = playersPreDatabaseByUDID;
 	}
 
 	@Override
 	public void onMessage(Message msg) {
 		try {
-		if (msg != null) {
-			log.debug("Received message", msg.getMessageProperties().getMessageId());
-			Attachment attachment = new Attachment();
-			byte[] payload = (byte[]) msg.getBody();
-			attachment.readBuff = ByteBuffer.wrap(payload);
-			while (attachment.eventReady()) {
-				processAttachment(attachment);
-				attachment.reset();
+			if (msg != null) {
+				log.debug("Received message", msg.getMessageProperties()
+						.getMessageId());
+				Attachment attachment = new Attachment();
+				byte[] payload = msg.getBody();
+				attachment.readBuff = ByteBuffer.wrap(payload);
+				while (attachment.eventReady()) {
+					processAttachment(attachment);
+					attachment.reset();
+				}
+			} else {
+				throw new RuntimeException(
+						"Message was null or missing headers");
 			}
-		} else {
-			throw new RuntimeException("Message was null or missing headers");
-		}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error("Error processing amqp message", e);
 		}
 	}
 
 	protected void processAttachment(Attachment attachment) {
-		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload, attachment.payloadSize));
-		EventController ec = getServer().getEventControllerByEventType(attachment.eventType);
+		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload,
+				attachment.payloadSize));
+		EventController ec = getServer().getEventControllerByEventType(
+				attachment.eventType);
 		if (ec == null) {
-			log.error("No event controller found in controllerMap for {}", attachment.eventType);
+			log.error("No event controller found in controllerMap for {}",
+					attachment.eventType);
 			return;
 		}
 		RequestEvent event = ec.createRequestEvent();
@@ -80,22 +94,32 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		event.read(bb);
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			if(event instanceof PreDatabaseRequestEvent) {
-				String udid = ((PreDatabaseRequestEvent) event).getUdid();
-				messagingUtil.sendMaintanenceModeMessageUdid(getApplicationMode().getMessageForUsers(), udid);
+			String playerId = event.getPlayerId();
+			User user = userRetrieveUtils.getUserById(playerId);
+			if(user.isAdmin()) {
+				
 			}else {
-				String playerId = event.getPlayerId();
-				messagingUtil.sendMaintanenceModeMessageUdid(getApplicationMode().getMessageForUsers(), playerId);
+				//not an admin so send maintenance message and return
+				if (event instanceof PreDatabaseRequestEvent) {
+					String udid = ((PreDatabaseRequestEvent) event).getUdid();
+					messagingUtil.sendMaintanenceModeMessageUdid(
+							getApplicationMode().getMessageForUsers(), udid);
+				} else {
+					messagingUtil.sendMaintanenceModeMessageUdid(
+							getApplicationMode().getMessageForUsers(), playerId);
+				}
+				return;
 			}
-		} else {
-			updatePlayerToServerMaps(event);
-			ec.handleEvent(event);
 		}
+		
+		updatePlayerToServerMaps(event);
+		ec.handleEvent(event);
+		
 	}
 
 	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event, String ip_connection_id,
-			EventProtocolRequest eventType) {
+	protected void delegateEvent(byte[] bytes, RequestEvent event,
+			String ip_connection_id, EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
 			log.error("the event type is < 0");
 			return;
@@ -109,7 +133,8 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 	}
 
 	protected void updatePlayerToServerMaps(RequestEvent event) {
-		log.debug("Updating player to server maps for player: " + event.getPlayerId());
+		log.debug("Updating player to server maps for player: "
+				+ event.getPlayerId());
 		if (playersByPlayerId.containsKey(event.getPlayerId())) {
 			ConnectedPlayer p = playersByPlayerId.get(event.getPlayerId());
 			if (p != null) {
@@ -120,7 +145,8 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 				p.setIp_connection_id("amqp");
 				p.setServerHostName(server.serverId());
 				// }
-				playersByPlayerId.put(event.getPlayerId(), p, DEFAULT_TTL, TimeUnit.MINUTES);
+				playersByPlayerId.put(event.getPlayerId(), p, DEFAULT_TTL,
+						TimeUnit.MINUTES);
 			} else {
 				addNewConnection(event);
 			}
@@ -136,16 +162,19 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		newp.setServerHostName(server.serverId());
 		if (event instanceof PreDatabaseRequestEvent) {
 			newp.setUdid(((PreDatabaseRequestEvent) event).getUdid());
-			getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
+			getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp,
+					DEFAULT_TTL, TimeUnit.MINUTES);
 			log.info("New player with UdId: " + newp.getUdid());
-		} else if (event.getPlayerId() != null && !event.getPlayerId().equals("")) {
-            log.info("Player logged on: " + event.getPlayerId());
-            newp.setPlayerId(event.getPlayerId());
-            playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
-        } else {
-        	log.error(String.format(
-        		"playerId not set for RequestEvent: %s", event));
-        }
+		} else if (event.getPlayerId() != null
+				&& !event.getPlayerId().equals("")) {
+			log.info("Player logged on: " + event.getPlayerId());
+			newp.setPlayerId(event.getPlayerId());
+			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL,
+					TimeUnit.MINUTES);
+		} else {
+			log.error(String.format("playerId not set for RequestEvent: %s",
+					event));
+		}
 	}
 
 }

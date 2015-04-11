@@ -4483,22 +4483,40 @@ public final class MonsterStuffProto {
     float getEnhanceCostExponent();
 
     /**
-     * <code>optional float enhanceExpPerSecond = 22;</code>
+     * <code>optional float secsToEnhancePerFeeder = 22;</code>
      */
-    boolean hasEnhanceExpPerSecond();
+    boolean hasSecsToEnhancePerFeeder();
     /**
-     * <code>optional float enhanceExpPerSecond = 22;</code>
+     * <code>optional float secsToEnhancePerFeeder = 22;</code>
      */
-    float getEnhanceExpPerSecond();
+    float getSecsToEnhancePerFeeder();
 
     /**
-     * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+     * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
      */
-    boolean hasEnhanceExpPerSecondExponent();
+    boolean hasSecsToEnhancePerFeederExponent();
     /**
-     * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+     * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
      */
-    float getEnhanceExpPerSecondExponent();
+    float getSecsToEnhancePerFeederExponent();
+
+    /**
+     * <code>optional int32 strength = 26;</code>
+     */
+    boolean hasStrength();
+    /**
+     * <code>optional int32 strength = 26;</code>
+     */
+    int getStrength();
+
+    /**
+     * <code>optional float strengthExponent = 27;</code>
+     */
+    boolean hasStrengthExponent();
+    /**
+     * <code>optional float strengthExponent = 27;</code>
+     */
+    float getStrengthExponent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MonsterLevelInfoProto}
@@ -4659,12 +4677,12 @@ public final class MonsterStuffProto {
             }
             case 181: {
               bitField0_ |= 0x00800000;
-              enhanceExpPerSecond_ = input.readFloat();
+              secsToEnhancePerFeeder_ = input.readFloat();
               break;
             }
             case 189: {
               bitField0_ |= 0x01000000;
-              enhanceExpPerSecondExponent_ = input.readFloat();
+              secsToEnhancePerFeederExponent_ = input.readFloat();
               break;
             }
             case 197: {
@@ -4675,6 +4693,16 @@ public final class MonsterStuffProto {
             case 205: {
               bitField0_ |= 0x00100000;
               secsToFullyHealExponent_ = input.readFloat();
+              break;
+            }
+            case 208: {
+              bitField0_ |= 0x02000000;
+              strength_ = input.readInt32();
+              break;
+            }
+            case 221: {
+              bitField0_ |= 0x04000000;
+              strengthExponent_ = input.readFloat();
               break;
             }
           }
@@ -5078,34 +5106,64 @@ public final class MonsterStuffProto {
       return enhanceCostExponent_;
     }
 
-    public static final int ENHANCEEXPPERSECOND_FIELD_NUMBER = 22;
-    private float enhanceExpPerSecond_;
+    public static final int SECSTOENHANCEPERFEEDER_FIELD_NUMBER = 22;
+    private float secsToEnhancePerFeeder_;
     /**
-     * <code>optional float enhanceExpPerSecond = 22;</code>
+     * <code>optional float secsToEnhancePerFeeder = 22;</code>
      */
-    public boolean hasEnhanceExpPerSecond() {
+    public boolean hasSecsToEnhancePerFeeder() {
       return ((bitField0_ & 0x00800000) == 0x00800000);
     }
     /**
-     * <code>optional float enhanceExpPerSecond = 22;</code>
+     * <code>optional float secsToEnhancePerFeeder = 22;</code>
      */
-    public float getEnhanceExpPerSecond() {
-      return enhanceExpPerSecond_;
+    public float getSecsToEnhancePerFeeder() {
+      return secsToEnhancePerFeeder_;
     }
 
-    public static final int ENHANCEEXPPERSECONDEXPONENT_FIELD_NUMBER = 23;
-    private float enhanceExpPerSecondExponent_;
+    public static final int SECSTOENHANCEPERFEEDEREXPONENT_FIELD_NUMBER = 23;
+    private float secsToEnhancePerFeederExponent_;
     /**
-     * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+     * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
      */
-    public boolean hasEnhanceExpPerSecondExponent() {
+    public boolean hasSecsToEnhancePerFeederExponent() {
       return ((bitField0_ & 0x01000000) == 0x01000000);
     }
     /**
-     * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+     * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
      */
-    public float getEnhanceExpPerSecondExponent() {
-      return enhanceExpPerSecondExponent_;
+    public float getSecsToEnhancePerFeederExponent() {
+      return secsToEnhancePerFeederExponent_;
+    }
+
+    public static final int STRENGTH_FIELD_NUMBER = 26;
+    private int strength_;
+    /**
+     * <code>optional int32 strength = 26;</code>
+     */
+    public boolean hasStrength() {
+      return ((bitField0_ & 0x02000000) == 0x02000000);
+    }
+    /**
+     * <code>optional int32 strength = 26;</code>
+     */
+    public int getStrength() {
+      return strength_;
+    }
+
+    public static final int STRENGTHEXPONENT_FIELD_NUMBER = 27;
+    private float strengthExponent_;
+    /**
+     * <code>optional float strengthExponent = 27;</code>
+     */
+    public boolean hasStrengthExponent() {
+      return ((bitField0_ & 0x04000000) == 0x04000000);
+    }
+    /**
+     * <code>optional float strengthExponent = 27;</code>
+     */
+    public float getStrengthExponent() {
+      return strengthExponent_;
     }
 
     private void initFields() {
@@ -5132,8 +5190,10 @@ public final class MonsterStuffProto {
       secsToFullyHealExponent_ = 0F;
       enhanceCostPerFeeder_ = 0;
       enhanceCostExponent_ = 0F;
-      enhanceExpPerSecond_ = 0F;
-      enhanceExpPerSecondExponent_ = 0F;
+      secsToEnhancePerFeeder_ = 0F;
+      secsToEnhancePerFeederExponent_ = 0F;
+      strength_ = 0;
+      strengthExponent_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5212,16 +5272,22 @@ public final class MonsterStuffProto {
         output.writeFloat(21, enhanceCostExponent_);
       }
       if (((bitField0_ & 0x00800000) == 0x00800000)) {
-        output.writeFloat(22, enhanceExpPerSecond_);
+        output.writeFloat(22, secsToEnhancePerFeeder_);
       }
       if (((bitField0_ & 0x01000000) == 0x01000000)) {
-        output.writeFloat(23, enhanceExpPerSecondExponent_);
+        output.writeFloat(23, secsToEnhancePerFeederExponent_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeFloat(24, costToFullyHealExponent_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         output.writeFloat(25, secsToFullyHealExponent_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        output.writeInt32(26, strength_);
+      }
+      if (((bitField0_ & 0x04000000) == 0x04000000)) {
+        output.writeFloat(27, strengthExponent_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5318,11 +5384,11 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00800000) == 0x00800000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(22, enhanceExpPerSecond_);
+          .computeFloatSize(22, secsToEnhancePerFeeder_);
       }
       if (((bitField0_ & 0x01000000) == 0x01000000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(23, enhanceExpPerSecondExponent_);
+          .computeFloatSize(23, secsToEnhancePerFeederExponent_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5331,6 +5397,14 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(25, secsToFullyHealExponent_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(26, strength_);
+      }
+      if (((bitField0_ & 0x04000000) == 0x04000000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(27, strengthExponent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5495,10 +5569,14 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00200000);
         enhanceCostExponent_ = 0F;
         bitField0_ = (bitField0_ & ~0x00400000);
-        enhanceExpPerSecond_ = 0F;
+        secsToEnhancePerFeeder_ = 0F;
         bitField0_ = (bitField0_ & ~0x00800000);
-        enhanceExpPerSecondExponent_ = 0F;
+        secsToEnhancePerFeederExponent_ = 0F;
         bitField0_ = (bitField0_ & ~0x01000000);
+        strength_ = 0;
+        bitField0_ = (bitField0_ & ~0x02000000);
+        strengthExponent_ = 0F;
+        bitField0_ = (bitField0_ & ~0x04000000);
         return this;
       }
 
@@ -5622,11 +5700,19 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
           to_bitField0_ |= 0x00800000;
         }
-        result.enhanceExpPerSecond_ = enhanceExpPerSecond_;
+        result.secsToEnhancePerFeeder_ = secsToEnhancePerFeeder_;
         if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
           to_bitField0_ |= 0x01000000;
         }
-        result.enhanceExpPerSecondExponent_ = enhanceExpPerSecondExponent_;
+        result.secsToEnhancePerFeederExponent_ = secsToEnhancePerFeederExponent_;
+        if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
+          to_bitField0_ |= 0x02000000;
+        }
+        result.strength_ = strength_;
+        if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
+          to_bitField0_ |= 0x04000000;
+        }
+        result.strengthExponent_ = strengthExponent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5712,11 +5798,17 @@ public final class MonsterStuffProto {
         if (other.hasEnhanceCostExponent()) {
           setEnhanceCostExponent(other.getEnhanceCostExponent());
         }
-        if (other.hasEnhanceExpPerSecond()) {
-          setEnhanceExpPerSecond(other.getEnhanceExpPerSecond());
+        if (other.hasSecsToEnhancePerFeeder()) {
+          setSecsToEnhancePerFeeder(other.getSecsToEnhancePerFeeder());
         }
-        if (other.hasEnhanceExpPerSecondExponent()) {
-          setEnhanceExpPerSecondExponent(other.getEnhanceExpPerSecondExponent());
+        if (other.hasSecsToEnhancePerFeederExponent()) {
+          setSecsToEnhancePerFeederExponent(other.getSecsToEnhancePerFeederExponent());
+        }
+        if (other.hasStrength()) {
+          setStrength(other.getStrength());
+        }
+        if (other.hasStrengthExponent()) {
+          setStrengthExponent(other.getStrengthExponent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6513,66 +6605,130 @@ public final class MonsterStuffProto {
         return this;
       }
 
-      private float enhanceExpPerSecond_ ;
+      private float secsToEnhancePerFeeder_ ;
       /**
-       * <code>optional float enhanceExpPerSecond = 22;</code>
+       * <code>optional float secsToEnhancePerFeeder = 22;</code>
        */
-      public boolean hasEnhanceExpPerSecond() {
+      public boolean hasSecsToEnhancePerFeeder() {
         return ((bitField0_ & 0x00800000) == 0x00800000);
       }
       /**
-       * <code>optional float enhanceExpPerSecond = 22;</code>
+       * <code>optional float secsToEnhancePerFeeder = 22;</code>
        */
-      public float getEnhanceExpPerSecond() {
-        return enhanceExpPerSecond_;
+      public float getSecsToEnhancePerFeeder() {
+        return secsToEnhancePerFeeder_;
       }
       /**
-       * <code>optional float enhanceExpPerSecond = 22;</code>
+       * <code>optional float secsToEnhancePerFeeder = 22;</code>
        */
-      public Builder setEnhanceExpPerSecond(float value) {
+      public Builder setSecsToEnhancePerFeeder(float value) {
         bitField0_ |= 0x00800000;
-        enhanceExpPerSecond_ = value;
+        secsToEnhancePerFeeder_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float enhanceExpPerSecond = 22;</code>
+       * <code>optional float secsToEnhancePerFeeder = 22;</code>
        */
-      public Builder clearEnhanceExpPerSecond() {
+      public Builder clearSecsToEnhancePerFeeder() {
         bitField0_ = (bitField0_ & ~0x00800000);
-        enhanceExpPerSecond_ = 0F;
+        secsToEnhancePerFeeder_ = 0F;
         onChanged();
         return this;
       }
 
-      private float enhanceExpPerSecondExponent_ ;
+      private float secsToEnhancePerFeederExponent_ ;
       /**
-       * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+       * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
        */
-      public boolean hasEnhanceExpPerSecondExponent() {
+      public boolean hasSecsToEnhancePerFeederExponent() {
         return ((bitField0_ & 0x01000000) == 0x01000000);
       }
       /**
-       * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+       * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
        */
-      public float getEnhanceExpPerSecondExponent() {
-        return enhanceExpPerSecondExponent_;
+      public float getSecsToEnhancePerFeederExponent() {
+        return secsToEnhancePerFeederExponent_;
       }
       /**
-       * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+       * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
        */
-      public Builder setEnhanceExpPerSecondExponent(float value) {
+      public Builder setSecsToEnhancePerFeederExponent(float value) {
         bitField0_ |= 0x01000000;
-        enhanceExpPerSecondExponent_ = value;
+        secsToEnhancePerFeederExponent_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float enhanceExpPerSecondExponent = 23;</code>
+       * <code>optional float secsToEnhancePerFeederExponent = 23;</code>
        */
-      public Builder clearEnhanceExpPerSecondExponent() {
+      public Builder clearSecsToEnhancePerFeederExponent() {
         bitField0_ = (bitField0_ & ~0x01000000);
-        enhanceExpPerSecondExponent_ = 0F;
+        secsToEnhancePerFeederExponent_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private int strength_ ;
+      /**
+       * <code>optional int32 strength = 26;</code>
+       */
+      public boolean hasStrength() {
+        return ((bitField0_ & 0x02000000) == 0x02000000);
+      }
+      /**
+       * <code>optional int32 strength = 26;</code>
+       */
+      public int getStrength() {
+        return strength_;
+      }
+      /**
+       * <code>optional int32 strength = 26;</code>
+       */
+      public Builder setStrength(int value) {
+        bitField0_ |= 0x02000000;
+        strength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 strength = 26;</code>
+       */
+      public Builder clearStrength() {
+        bitField0_ = (bitField0_ & ~0x02000000);
+        strength_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float strengthExponent_ ;
+      /**
+       * <code>optional float strengthExponent = 27;</code>
+       */
+      public boolean hasStrengthExponent() {
+        return ((bitField0_ & 0x04000000) == 0x04000000);
+      }
+      /**
+       * <code>optional float strengthExponent = 27;</code>
+       */
+      public float getStrengthExponent() {
+        return strengthExponent_;
+      }
+      /**
+       * <code>optional float strengthExponent = 27;</code>
+       */
+      public Builder setStrengthExponent(float value) {
+        bitField0_ |= 0x04000000;
+        strengthExponent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float strengthExponent = 27;</code>
+       */
+      public Builder clearStrengthExponent() {
+        bitField0_ = (bitField0_ & ~0x04000000);
+        strengthExponent_ = 0F;
         onChanged();
         return this;
       }
@@ -8132,6 +8288,33 @@ public final class MonsterStuffProto {
      * <code>optional int32 monsterLvl = 2;</code>
      */
     int getMonsterLvl();
+
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    boolean hasOffensiveSkillId();
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    int getOffensiveSkillId();
+
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    boolean hasDefensiveSkillId();
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    int getDefensiveSkillId();
+
+    /**
+     * <code>optional int32 teamSlotNum = 5;</code>
+     */
+    boolean hasTeamSlotNum();
+    /**
+     * <code>optional int32 teamSlotNum = 5;</code>
+     */
+    int getTeamSlotNum();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserMonsterProto}
@@ -8193,6 +8376,21 @@ public final class MonsterStuffProto {
             case 16: {
               bitField0_ |= 0x00000002;
               monsterLvl_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              offensiveSkillId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              defensiveSkillId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              teamSlotNum_ = input.readInt32();
               break;
             }
           }
@@ -8265,9 +8463,57 @@ public final class MonsterStuffProto {
       return monsterLvl_;
     }
 
+    public static final int OFFENSIVESKILLID_FIELD_NUMBER = 3;
+    private int offensiveSkillId_;
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    public boolean hasOffensiveSkillId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 offensiveSkillId = 3;</code>
+     */
+    public int getOffensiveSkillId() {
+      return offensiveSkillId_;
+    }
+
+    public static final int DEFENSIVESKILLID_FIELD_NUMBER = 4;
+    private int defensiveSkillId_;
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    public boolean hasDefensiveSkillId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 defensiveSkillId = 4;</code>
+     */
+    public int getDefensiveSkillId() {
+      return defensiveSkillId_;
+    }
+
+    public static final int TEAMSLOTNUM_FIELD_NUMBER = 5;
+    private int teamSlotNum_;
+    /**
+     * <code>optional int32 teamSlotNum = 5;</code>
+     */
+    public boolean hasTeamSlotNum() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 teamSlotNum = 5;</code>
+     */
+    public int getTeamSlotNum() {
+      return teamSlotNum_;
+    }
+
     private void initFields() {
       monsterId_ = 0;
       monsterLvl_ = 0;
+      offensiveSkillId_ = 0;
+      defensiveSkillId_ = 0;
+      teamSlotNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8288,6 +8534,15 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, monsterLvl_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, offensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, defensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, teamSlotNum_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8304,6 +8559,18 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, monsterLvl_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, offensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, defensiveSkillId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, teamSlotNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8426,6 +8693,12 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         monsterLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        offensiveSkillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        defensiveSkillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        teamSlotNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -8462,6 +8735,18 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000002;
         }
         result.monsterLvl_ = monsterLvl_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.offensiveSkillId_ = offensiveSkillId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.defensiveSkillId_ = defensiveSkillId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.teamSlotNum_ = teamSlotNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8483,6 +8768,15 @@ public final class MonsterStuffProto {
         }
         if (other.hasMonsterLvl()) {
           setMonsterLvl(other.getMonsterLvl());
+        }
+        if (other.hasOffensiveSkillId()) {
+          setOffensiveSkillId(other.getOffensiveSkillId());
+        }
+        if (other.hasDefensiveSkillId()) {
+          setDefensiveSkillId(other.getDefensiveSkillId());
+        }
+        if (other.hasTeamSlotNum()) {
+          setTeamSlotNum(other.getTeamSlotNum());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8571,6 +8865,102 @@ public final class MonsterStuffProto {
       public Builder clearMonsterLvl() {
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterLvl_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int offensiveSkillId_ ;
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public boolean hasOffensiveSkillId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public int getOffensiveSkillId() {
+        return offensiveSkillId_;
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public Builder setOffensiveSkillId(int value) {
+        bitField0_ |= 0x00000004;
+        offensiveSkillId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 offensiveSkillId = 3;</code>
+       */
+      public Builder clearOffensiveSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        offensiveSkillId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int defensiveSkillId_ ;
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public boolean hasDefensiveSkillId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public int getDefensiveSkillId() {
+        return defensiveSkillId_;
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public Builder setDefensiveSkillId(int value) {
+        bitField0_ |= 0x00000008;
+        defensiveSkillId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 defensiveSkillId = 4;</code>
+       */
+      public Builder clearDefensiveSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        defensiveSkillId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int teamSlotNum_ ;
+      /**
+       * <code>optional int32 teamSlotNum = 5;</code>
+       */
+      public boolean hasTeamSlotNum() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 teamSlotNum = 5;</code>
+       */
+      public int getTeamSlotNum() {
+        return teamSlotNum_;
+      }
+      /**
+       * <code>optional int32 teamSlotNum = 5;</code>
+       */
+      public Builder setTeamSlotNum(int value) {
+        bitField0_ |= 0x00000010;
+        teamSlotNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 teamSlotNum = 5;</code>
+       */
+      public Builder clearTeamSlotNum() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        teamSlotNum_ = 0;
         onChanged();
         return this;
       }
@@ -19700,7 +20090,7 @@ public final class MonsterStuffProto {
       "\033 \001(\005\022\031\n\021shadowScaleFactor\030\035 \001(\002\022\034\n\024base" +
       "OffensiveSkillId\030\036 \001(\005\022\034\n\024baseDefensiveS" +
       "killId\030\037 \001(\005\"8\n\rAnimationType\022\020\n\014NO_ANIM" +
-      "ATION\020\003\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\325\004\n\025Monst" +
+      "ATION\020\003\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\207\005\n\025Monst" +
       "erLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(" +
       "\005\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeederEx",
       "p\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001" +
@@ -19714,67 +20104,70 @@ public final class MonsterStuffProto {
       "t\030\030 \001(\002\022\027\n\017secsToFullyHeal\030\023 \001(\005\022\037\n\027secs" +
       "ToFullyHealExponent\030\031 \001(\002\022\034\n\024enhanceCost",
       "PerFeeder\030\024 \001(\005\022\033\n\023enhanceCostExponent\030\025" +
-      " \001(\002\022\033\n\023enhanceExpPerSecond\030\026 \001(\002\022#\n\033enh" +
-      "anceExpPerSecondExponent\030\027 \001(\002\"\262\002\n\024FullU" +
-      "serMonsterProto\022\027\n\017userMonsterUuid\030\001 \001(\t" +
-      "\022\020\n\010userUuid\030\002 \001(\t\022\021\n\tmonsterId\030\003 \001(\005\022\022\n" +
-      "\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n" +
-      "\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022" +
-      "\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineStartTime\030" +
-      "\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\022\023\n\013isRestrict" +
-      "d\030\014 \001(\010\022\030\n\020offensiveSkillId\030\r \001(\005\022\030\n\020def",
-      "ensiveSkillId\030\016 \001(\005\"@\n\027MinimumUserMonste" +
-      "rProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030" +
-      "\002 \001(\005\"\300\001\n\027UserMonsterHealingProto\022\020\n\010use" +
-      "rUuid\030\001 \001(\t\022\027\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020" +
-      "queuedTimeMillis\030\003 \001(\003\022\036\n\026userHospitalSt" +
-      "ructUuid\030\004 \001(\t\022\026\n\016healthProgress\030\005 \001(\002\022\020" +
-      "\n\010priority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002" +
-      "\"O\n\035UserMonsterCurrentHealthProto\022\027\n\017use" +
-      "rMonsterUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(" +
-      "\005\"\242\001\n\024UserEnhancementProto\022\020\n\010userUuid\030\001",
-      " \001(\t\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.pro" +
-      "to.UserEnhancementItemProto\0229\n\007feeders\030\003" +
-      " \003(\0132(.com.lvl6.proto.UserEnhancementIte" +
-      "mProto\"\206\001\n\030UserEnhancementItemProto\022\027\n\017u" +
-      "serMonsterUuid\030\001 \001(\t\022\037\n\027expectedStartTim" +
-      "eMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021" +
-      "enhancingComplete\030\004 \001(\010\"|\n\032UserMonsterCu" +
-      "rrentExpProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032" +
-      "\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpectedLe" +
-      "vel\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033Minimum",
-      "UserMonsterSellProto\022\027\n\017userMonsterUuid\030" +
-      "\001 \001(\t\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCurrent" +
-      "MonsterTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013cu" +
-      "rrentTeam\030\002 \003(\0132$.com.lvl6.proto.FullUse" +
-      "rMonsterProto\"i\n\031UserMonsterEvolutionPro" +
-      "to\022\037\n\027catalystUserMonsterUuid\030\001 \001(\t\022\030\n\020u" +
-      "serMonsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003" +
-      "\"\337\001\n\032MonsterBattleDialogueProto\022\021\n\tmonst" +
-      "erId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.l" +
-      "vl6.proto.MonsterBattleDialogueProto.Dia",
-      "logueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabili" +
-      "tyUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DI" +
-      "ALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001\"\324\003\n\030UserMonst" +
-      "erSnapshotProto\022\024\n\014snapshotUuid\030\001 \001(\t\022\026\n" +
-      "\016timeOfCreation\030\002 \001(\003\022C\n\004type\030\003 \001(\01625.co" +
-      "m.lvl6.proto.UserMonsterSnapshotProto.Sn" +
-      "apshotType\022\031\n\021relevantTableUuid\030\004 \001(\t\022\032\n" +
-      "\022monsterForUserUuid\030\005 \001(\t\022.\n\004user\030\006 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\021\n\tmon" +
-      "sterId\030\007 \001(\005\022\022\n\ncurrentExp\030\010 \001(\005\022\022\n\ncurr",
-      "entLvl\030\t \001(\005\022\021\n\tcurrentHp\030\n \001(\005\022\023\n\013teamS" +
-      "lotNum\030\013 \001(\005\022\030\n\020offensiveSkillId\030\014 \001(\005\022\030" +
-      "\n\020defensiveSkillId\030\r \001(\005\"G\n\014SnapshotType" +
-      "\022\022\n\016NO_DONATE_TYPE\020\001\022\017\n\013TEAM_DONATE\020\002\022\022\n" +
-      "\016ENHANCE_DONATE\020\003\"\220\002\n\033ClanMemberTeamDona" +
-      "tionProto\022\024\n\014donationUuid\030\001 \001(\t\0223\n\tsolic" +
-      "itor\030\002 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021powerAvailabil" +
-      "ity\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001(\010\022\013\n\003msg\030\006 " +
-      "\001(\t\022\032\n\022timeOfSolicitation\030\007 \001(\003\022;\n\tdonat",
-      "ions\030\010 \003(\0132(.com.lvl6.proto.UserMonsterS" +
-      "napshotProtoB\023B\021MonsterStuffProto"
+      " \001(\002\022\036\n\026secsToEnhancePerFeeder\030\026 \001(\002\022&\n\036" +
+      "secsToEnhancePerFeederExponent\030\027 \001(\002\022\020\n\010" +
+      "strength\030\032 \001(\005\022\030\n\020strengthExponent\030\033 \001(\002" +
+      "\"\262\002\n\024FullUserMonsterProto\022\027\n\017userMonster" +
+      "Uuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\021\n\tmonsterI" +
+      "d\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLv" +
+      "l\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPie" +
+      "ces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combine" +
+      "StartTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\022\023\n\013",
+      "isRestrictd\030\014 \001(\010\022\030\n\020offensiveSkillId\030\r " +
+      "\001(\005\022\030\n\020defensiveSkillId\030\016 \001(\005\"\211\001\n\027Minimu" +
+      "mUserMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\n" +
+      "monsterLvl\030\002 \001(\005\022\030\n\020offensiveSkillId\030\003 \001" +
+      "(\005\022\030\n\020defensiveSkillId\030\004 \001(\005\022\023\n\013teamSlot" +
+      "Num\030\005 \001(\005\"\300\001\n\027UserMonsterHealingProto\022\020\n" +
+      "\010userUuid\030\001 \001(\t\022\027\n\017userMonsterUuid\030\002 \001(\t" +
+      "\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\036\n\026userHospit" +
+      "alStructUuid\030\004 \001(\t\022\026\n\016healthProgress\030\005 \001" +
+      "(\002\022\020\n\010priority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007",
+      " \001(\002\"O\n\035UserMonsterCurrentHealthProto\022\027\n" +
+      "\017userMonsterUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030" +
+      "\002 \001(\005\"\242\001\n\024UserEnhancementProto\022\020\n\010userUu" +
+      "id\030\001 \001(\t\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6" +
+      ".proto.UserEnhancementItemProto\0229\n\007feede" +
+      "rs\030\003 \003(\0132(.com.lvl6.proto.UserEnhancemen" +
+      "tItemProto\"\206\001\n\030UserEnhancementItemProto\022" +
+      "\027\n\017userMonsterUuid\030\001 \001(\t\022\037\n\027expectedStar" +
+      "tTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005" +
+      "\022\031\n\021enhancingComplete\030\004 \001(\010\"|\n\032UserMonst",
+      "erCurrentExpProto\022\027\n\017userMonsterUuid\030\001 \001" +
+      "(\t\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpect" +
+      "edLevel\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033Min" +
+      "imumUserMonsterSellProto\022\027\n\017userMonsterU" +
+      "uid\030\001 \001(\t\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCur" +
+      "rentMonsterTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229" +
+      "\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Ful" +
+      "lUserMonsterProto\"i\n\031UserMonsterEvolutio" +
+      "nProto\022\037\n\027catalystUserMonsterUuid\030\001 \001(\t\022" +
+      "\030\n\020userMonsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003",
+      " \001(\003\"\337\001\n\032MonsterBattleDialogueProto\022\021\n\tm" +
+      "onsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.c" +
+      "om.lvl6.proto.MonsterBattleDialogueProto" +
+      ".DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022proba" +
+      "bilityUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013N" +
+      "O_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001\"\324\003\n\030UserM" +
+      "onsterSnapshotProto\022\024\n\014snapshotUuid\030\001 \001(" +
+      "\t\022\026\n\016timeOfCreation\030\002 \001(\003\022C\n\004type\030\003 \001(\0162" +
+      "5.com.lvl6.proto.UserMonsterSnapshotProt" +
+      "o.SnapshotType\022\031\n\021relevantTableUuid\030\004 \001(",
+      "\t\022\032\n\022monsterForUserUuid\030\005 \001(\t\022.\n\004user\030\006 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
+      "\tmonsterId\030\007 \001(\005\022\022\n\ncurrentExp\030\010 \001(\005\022\022\n\n" +
+      "currentLvl\030\t \001(\005\022\021\n\tcurrentHp\030\n \001(\005\022\023\n\013t" +
+      "eamSlotNum\030\013 \001(\005\022\030\n\020offensiveSkillId\030\014 \001" +
+      "(\005\022\030\n\020defensiveSkillId\030\r \001(\005\"G\n\014Snapshot" +
+      "Type\022\022\n\016NO_DONATE_TYPE\020\001\022\017\n\013TEAM_DONATE\020" +
+      "\002\022\022\n\016ENHANCE_DONATE\020\003\"\220\002\n\033ClanMemberTeam" +
+      "DonationProto\022\024\n\014donationUuid\030\001 \001(\t\0223\n\ts" +
+      "olicitor\030\002 \001(\0132 .com.lvl6.proto.MinimumU",
+      "serProto\022\020\n\010clanUuid\030\003 \001(\t\022\031\n\021powerAvail" +
+      "ability\030\004 \001(\005\022\023\n\013isFulfilled\030\005 \001(\010\022\013\n\003ms" +
+      "g\030\006 \001(\t\022\032\n\022timeOfSolicitation\030\007 \001(\003\022;\n\td" +
+      "onations\030\010 \003(\0132(.com.lvl6.proto.UserMons" +
+      "terSnapshotProtoB\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -19801,7 +20194,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor,
-        new java.lang.String[] { "Lvl", "Hp", "CurLvlRequiredExp", "FeederExp", "FireDmg", "GrassDmg", "WaterDmg", "LightningDmg", "DarknessDmg", "RockDmg", "Speed", "HpExponentBase", "DmgExponentBase", "ExpLvlDivisor", "ExpLvlExponent", "SellAmount", "TeamCost", "CostToFullyHeal", "CostToFullyHealExponent", "SecsToFullyHeal", "SecsToFullyHealExponent", "EnhanceCostPerFeeder", "EnhanceCostExponent", "EnhanceExpPerSecond", "EnhanceExpPerSecondExponent", });
+        new java.lang.String[] { "Lvl", "Hp", "CurLvlRequiredExp", "FeederExp", "FireDmg", "GrassDmg", "WaterDmg", "LightningDmg", "DarknessDmg", "RockDmg", "Speed", "HpExponentBase", "DmgExponentBase", "ExpLvlDivisor", "ExpLvlExponent", "SellAmount", "TeamCost", "CostToFullyHeal", "CostToFullyHealExponent", "SecsToFullyHeal", "SecsToFullyHealExponent", "EnhanceCostPerFeeder", "EnhanceCostExponent", "SecsToEnhancePerFeeder", "SecsToEnhancePerFeederExponent", "Strength", "StrengthExponent", });
     internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
@@ -19813,7 +20206,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor,
-        new java.lang.String[] { "MonsterId", "MonsterLvl", });
+        new java.lang.String[] { "MonsterId", "MonsterLvl", "OffensiveSkillId", "DefensiveSkillId", "TeamSlotNum", });
     internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new

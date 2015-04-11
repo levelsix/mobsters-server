@@ -1,6 +1,8 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "MonsterStuff.proto";
+import "Research.proto";
+import "Structure.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -46,6 +48,11 @@ message PvpProto {
 	//ClanMemberTeamDonationProto.donation
 	optional ClanMemberTeamDonationProto cmtd = 8;
 	optional int32 monsterIdDropped = 9;
+	
+	//will be empty/not-set if fake player
+	repeated UserPvpBoardObstacleProto userBoardObstacles = 10;
+	
+	repeated UserResearchProto userResearch = 11;
 }
 
 message PvpMonsterProto {
@@ -134,3 +141,12 @@ message PvpUserClanAvengeProto {
 }
 
 ///atm, this file is used by EventPvp.proto
+
+
+	
+
+
+
+
+
+

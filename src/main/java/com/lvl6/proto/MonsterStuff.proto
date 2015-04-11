@@ -90,8 +90,10 @@ message MonsterLevelInfoProto {
 	optional float secsToFullyHealExponent = 25;
 	optional int32 enhanceCostPerFeeder = 20;
 	optional float enhanceCostExponent = 21;
-	optional float enhanceExpPerSecond = 22;
-	optional float enhanceExpPerSecondExponent = 23;
+	optional float secsToEnhancePerFeeder = 22;
+	optional float secsToEnhancePerFeederExponent = 23;
+	optional int32 strength = 26;
+	optional float strengthExponent = 27;
 	
 	// placed above
 	//optional int32 costToFullyHealExponent = 24;
@@ -121,6 +123,11 @@ message FullUserMonsterProto {
 message MinimumUserMonsterProto {
 	optional int32 monsterId = 1;
 	optional int32 monsterLvl = 2;
+	
+	optional int32 offensiveSkillId = 3;
+	optional int32 defensiveSkillId = 4;
+	
+	optional int32 teamSlotNum = 5;
 }
 
 //------------------------------------------------------------------------------------------

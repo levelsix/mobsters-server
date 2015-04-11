@@ -12,37 +12,40 @@ import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto;
 
 public class ObstacleRemovalCompleteRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private ObstacleRemovalCompleteRequestProto obstacleRemovalCompleteRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      obstacleRemovalCompleteRequestProto = ObstacleRemovalCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = obstacleRemovalCompleteRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("ObstacleRemovalCompleteRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public ObstacleRemovalCompleteRequestProto getObstacleRemovalCompleteRequestProto() {
-    return obstacleRemovalCompleteRequestProto;
-  }
-  //added for testing purposes
-  public void setObstacleRemovalCompleteRequestProto(
-		  ObstacleRemovalCompleteRequestProto obstacleRemovalCompleteRequestProto) {
-	  this.obstacleRemovalCompleteRequestProto = obstacleRemovalCompleteRequestProto;
-  }
+	private ObstacleRemovalCompleteRequestProto obstacleRemovalCompleteRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "ObstacleRemovalCompleteRequestEvent [obstacleRemovalCompleteRequestProto="
-		  + obstacleRemovalCompleteRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			obstacleRemovalCompleteRequestProto = ObstacleRemovalCompleteRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = obstacleRemovalCompleteRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("ObstacleRemovalCompleteRequest exception", e);
+		}
+	}
+
+	public ObstacleRemovalCompleteRequestProto getObstacleRemovalCompleteRequestProto() {
+		return obstacleRemovalCompleteRequestProto;
+	}
+
+	//added for testing purposes
+	public void setObstacleRemovalCompleteRequestProto(
+			ObstacleRemovalCompleteRequestProto obstacleRemovalCompleteRequestProto) {
+		this.obstacleRemovalCompleteRequestProto = obstacleRemovalCompleteRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "ObstacleRemovalCompleteRequestEvent [obstacleRemovalCompleteRequestProto="
+				+ obstacleRemovalCompleteRequestProto + "]";
+	}
 
 }

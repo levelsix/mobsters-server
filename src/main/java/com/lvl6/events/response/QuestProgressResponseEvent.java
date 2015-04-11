@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QuestProgressResponseEvent extends NormalResponseEvent {
 
-  private QuestProgressResponseProto questProgressResponseProto;
-  
-  public QuestProgressResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_QUEST_PROGRESS_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = questProgressResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private QuestProgressResponseProto questProgressResponseProto;
 
-  public void setQuestProgressResponseProto(QuestProgressResponseProto questProgressResponseProto) {
-    this.questProgressResponseProto = questProgressResponseProto;
-  }
+	public QuestProgressResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_QUEST_PROGRESS_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = questProgressResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setQuestProgressResponseProto(
+			QuestProgressResponseProto questProgressResponseProto) {
+		this.questProgressResponseProto = questProgressResponseProto;
+	}
 
 }

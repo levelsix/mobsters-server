@@ -28,15 +28,18 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class UpdateMonsterHealthController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class UpdateMonsterHealthController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
-  
-  @Autowired
-  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public UpdateMonsterHealthController() {
 		numAllocatedThreads = 4;
@@ -54,7 +57,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent)event).getUpdateMonsterHealthRequestProto();
+		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
+				.getUpdateMonsterHealthRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
 		//get values sent from the client (the request proto)
@@ -63,17 +67,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Timestamp curTime = new Timestamp(reqProto.getClientTime());
 		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 
-		boolean isUpdateTaskStageForUser = reqProto.getIsUpdateTaskStageForUser();
+		boolean isUpdateTaskStageForUser = reqProto
+				.getIsUpdateTaskStageForUser();
 		int nuTaskStageId = reqProto.getNuTaskStageId();
 
-    String userTaskId = null;
-    if (reqProto.hasUserTaskUuid() && !reqProto.getUserTaskUuid().isEmpty()) {
-      userTaskId = reqProto.getUserTaskUuid();
-    }
+		String userTaskId = null;
+		if (reqProto.hasUserTaskUuid() && !reqProto.getUserTaskUuid().isEmpty()) {
+			userTaskId = reqProto.getUserTaskUuid();
+		}
 
 		//make monsterPieceDropped to false in db
 		String droplessTsfuId = null;
-		if (reqProto.hasDroplessTsfuUuid() && !reqProto.getDroplessTsfuUuid().isEmpty()) {
+		if (reqProto.hasDroplessTsfuUuid()
+				&& !reqProto.getDroplessTsfuUuid().isEmpty()) {
 			droplessTsfuId = reqProto.getDroplessTsfuUuid();
 		}
 
@@ -81,7 +87,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		float nuPvpDmgMultiplier = reqProto.getNuPvpDmgMultiplier();
 
 		//set some values to send to the client (the response proto)
-		UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
+		UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
 
@@ -91,9 +98,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
-			
+
 			if (userTaskUuid != null) {
-	      userTaskUuid = UUID.fromString(userTaskId);
+				userTaskUuid = UUID.fromString(userTaskId);
 			}
 
 			if (droplessTsfuId != null) {
@@ -102,16 +109,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-					"UUID error. incorrect userId=%s, userTaskId=%s, droplessTsfuId=%s",
-					userId, userTaskId, droplessTsfuId), e);
+			log.error(
+					String.format(
+							"UUID error. incorrect userId=%s, userTaskId=%s, droplessTsfuId=%s",
+							userId, userTaskId, droplessTsfuId), e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER);
-			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(userId);
+			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -122,13 +131,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		try {
 			Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
 
-			boolean legit = checkLegit(resBuilder, userId, umchpList, 
+			boolean legit = checkLegit(resBuilder, userId, umchpList,
 					isUpdateTaskStageForUser, userMonsterIdToExpectedHealth);
 
 			boolean successful = false;
-			if(legit) {
-				successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth,
-						userTaskId, isUpdateTaskStageForUser, nuTaskStageId,
+			if (legit) {
+				successful = writeChangesToDb(userId, curTime,
+						userMonsterIdToExpectedHealth, userTaskId,
+						isUpdateTaskStageForUser, nuTaskStageId,
 						droplessTsfuId, changeDmgMultipier, nuPvpDmgMultiplier);
 			}
 
@@ -136,28 +146,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
 			}
 
-			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(userId);
+			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
-			log.error("exception in UpdateMonsterHealthController processEvent", e);
+			log.error(
+					"exception in UpdateMonsterHealthController processEvent",
+					e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER);
-				UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(userId);
+				UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in UpdateMonsterHealthController processEvent", e);
+				log.error(
+						"exception2 in UpdateMonsterHealthController processEvent",
+						e);
 			}
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
-
 
 	/*
 	 * Return true if user request is valid; false otherwise and set the
@@ -169,10 +184,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			boolean isUpdateTaskStageForUser,
 			Map<String, Integer> userMonsterIdToExpectedHealth) {
 
-		boolean isUmchpListEmpty = (null == umchpList || umchpList.isEmpty());  
+		boolean isUmchpListEmpty = (null == umchpList || umchpList.isEmpty());
 		if (isUmchpListEmpty && !isUpdateTaskStageForUser) {
-			log.error("client error: no user monsters sent. and is not updating" +
-					" user's current task stage id");
+			log.error("client error: no user monsters sent. and is not updating"
+					+ " user's current task stage id");
 			return false;
 		} else if (isUmchpListEmpty && isUpdateTaskStageForUser) {
 			log.info("just updating user's current task stage id");
@@ -180,20 +195,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		if (!isUmchpListEmpty) {
 			//extract the ids so it's easier to get userMonsters from db
-			List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+			List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+					umchpList, userMonsterIdToExpectedHealth);
 			Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
 					.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 
 			if (null == userMonsters || userMonsters.isEmpty()) {
-				log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);
+				log.error("unexpected error: userMonsterIds don't exist. ids="
+						+ userMonsterIds);
 				return false;
 			}
 
 			//see if the user has the equips
 			if (userMonsters.size() != umchpList.size()) {
-				log.error("unexpected error: mismatch between user equips client sent and " +
-						"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
-						userMonsters + "\t continuing the processing");
+				log.error("unexpected error: mismatch between user equips client sent and "
+						+ "what is in the db. clientUserMonsterIds="
+						+ userMonsterIds
+						+ "\t inDb="
+						+ userMonsters
+						+ "\t continuing the processing");
 			}
 		}
 
@@ -201,51 +221,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
 	}
 
-	private boolean writeChangesToDb(String uId, Timestamp clientTime, 
-			Map<String, Integer> userMonsterIdToExpectedHealth, String userTaskId,
-			boolean isUpdateTaskStageForUser, int nuTaskStageId,
-			String droplessTsfuId, boolean changeDmgMultipier, float nuPvpDmgMultiplier)
-	{
+	private boolean writeChangesToDb(String uId, Timestamp clientTime,
+			Map<String, Integer> userMonsterIdToExpectedHealth,
+			String userTaskId, boolean isUpdateTaskStageForUser,
+			int nuTaskStageId, String droplessTsfuId,
+			boolean changeDmgMultipier, float nuPvpDmgMultiplier) {
 		//replace existing health for these user monsters with new values 
 		if (!userMonsterIdToExpectedHealth.isEmpty()) {
 			log.info("updating user's monsters' healths");
-			int numUpdated = UpdateUtils.get()
-					.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-			log.info(String.format(
-					"numUpdated=%s", numUpdated));
+			int numUpdated = UpdateUtils.get().updateUserMonstersHealth(
+					userMonsterIdToExpectedHealth);
+			log.info(String.format("numUpdated=%s", numUpdated));
 
 			//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
 			//so returns 2 if one row was updated, 1 if inserted
 			if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
-				log.warn("unexpected error: more than user monsters were" +
-						" updated. actual numUpdated=" + numUpdated +
-						"expected: userMonsterIdToExpectedHealth=" +
-						userMonsterIdToExpectedHealth);
+				log.warn("unexpected error: more than user monsters were"
+						+ " updated. actual numUpdated=" + numUpdated
+						+ "expected: userMonsterIdToExpectedHealth="
+						+ userMonsterIdToExpectedHealth);
 			}
 		}
 
 		if (isUpdateTaskStageForUser) {
-			int numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId, nuTaskStageId);
-			log.info(String.format(
-					"task for user numUpdated=%s", numUpdated));
+			int numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId,
+					nuTaskStageId);
+			log.info(String.format("task for user numUpdated=%s", numUpdated));
 		}
 
 		if (droplessTsfuId != null) {
 			int numUpdated = UpdateUtils.get()
 					.updateTaskStageForUserNoMonsterDrop(droplessTsfuId);
-			log.info(String.format(
-					"task stage for user numUpdated=%s", numUpdated));
+			log.info(String.format("task stage for user numUpdated=%s",
+					numUpdated));
 		}
 
 		if (changeDmgMultipier) {
-			int numUpdated = UpdateUtils.get().updatePvpMonsterDmgMultiplier(uId, nuPvpDmgMultiplier);
-			log.info(String.format(
-					"pvp league for user numUpdated=%s", numUpdated));
+			int numUpdated = UpdateUtils.get().updatePvpMonsterDmgMultiplier(
+					uId, nuPvpDmgMultiplier);
+			log.info(String.format("pvp league for user numUpdated=%s",
+					numUpdated));
 		}
 
 		return true;
 	}
-
 
 	public Locker getLocker() {
 		return locker;
@@ -255,13 +274,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.locker = locker;
 	}
 
-  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
-    return monsterForUserRetrieveUtils;
-  }
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+		return monsterForUserRetrieveUtils;
+	}
 
-  public void setMonsterForUserRetrieveUtils(
-      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
-    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-  }
+	public void setMonsterForUserRetrieveUtils(
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
 
 }

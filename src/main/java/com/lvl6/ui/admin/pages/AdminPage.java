@@ -30,8 +30,10 @@ public class AdminPage extends TemplatePage {
 
 	public AdminPage() {
 		super();
-		if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		if (SecurityContextHolder.getContext() != null
+				&& SecurityContextHolder.getContext().getAuthentication() != null) {
+			String user = SecurityContextHolder.getContext()
+					.getAuthentication().getName();
 			log.info("Loading Admin Page for: {}", user);
 		} else {
 			log.info("Loading Admin Page");
@@ -47,74 +49,78 @@ public class AdminPage extends TemplatePage {
 		//setupGraphs();
 		add(abstractAjaxTimerBehavior);
 	}
-	
+
 	private void setMaintenanceMode() {
 		add(maintenanceForm);
 	}
-	
-	protected MaintenanceModeForm maintenanceForm = new MaintenanceModeForm("maintenanceForm") {
+
+	protected MaintenanceModeForm maintenanceForm = new MaintenanceModeForm(
+			"maintenanceForm") {
 		private static final long serialVersionUID = 1L;
+
 		@Override
 		protected void onSubmit() {
 			super.onSubmit();
 			log.info("Setting maintenance mode");
-			ServerAdmin admin = AppContext.getApplicationContext().getBean(ServerAdmin.class);
-			admin.setApplicationMode(getModelObject().isMaintenanceMode(), getModelObject().getMessageForUsers());
+			ServerAdmin admin = AppContext.getApplicationContext().getBean(
+					ServerAdmin.class);
+			admin.setApplicationMode(getModelObject().isMaintenanceMode(),
+					getModelObject().getMessageForUsers());
 		}
 	};
-	
+
 	private void setIsSandbox() {
-		add(new Label("isSandbox", "Sandbox: "+Globals.IS_SANDBOX()));
+		add(new Label("isSandbox", "Sandbox: " + Globals.IS_SANDBOX()));
 	}
-	
-	
+
 	private void setTools() {
 		add(new ReloadStaticDataLink("reloadStaticDataLink"));
 		add(new ReloadLeaderboardLink("reloadLeaderboardLink"));
-//		add(new ReloadRecommendedClansLink("reloadRecommendedClansLink"));
+		//		add(new ReloadRecommendedClansLink("reloadRecommendedClansLink"));
 	}
 
 	protected void setStats() {
 		add(new StatsPanelDynamic("statsPanel"));
 	}
-	
+
 	protected void setTopSpenders() {
 		add(new TopSpendersPanel("topSpenders"));
 	}
-	
-	protected void setRecentPurchases(){
+
+	protected void setRecentPurchases() {
 		add(new RecentPurchasesPanel("recentPurchases"));
 	}
-	
-	
+
 	protected void setContactAdmins() {
-		final TextField<String> message = new TextField<String>("message", new Model<String>());
+		final TextField<String> message = new TextField<String>("message",
+				new Model<String>());
 		Form<String> contact = new Form<String>("contactAdmins") {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-/*				DevOps devops = AppContext.getApplicationContext().getBean(DevOps.class);
-				devops.sendAlertToAdmins(message.getModelObject());
-				message.setModelObject("Message sent");*/
+				/*				DevOps devops = AppContext.getApplicationContext().getBean(DevOps.class);
+								devops.sendAlertToAdmins(message.getModelObject());
+								message.setModelObject("Message sent");*/
 			}
 		};
 		contact.add(message);
 		contact.setOutputMarkupId(true);
 		add(contact);
 	}
-	
-	
-	
 
 	protected void setSendAdminMessage() {
-		final TextField<String> message = new TextField<String>("adminMessageToClients", new Model<String>());
+		final TextField<String> message = new TextField<String>(
+				"adminMessageToClients", new Model<String>());
 		Form<String> contact = new Form<String>("adminMessageForm") {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-				MessagingUtil util = AppContext.getApplicationContext().getBean(MessagingUtil.class);
+				MessagingUtil util = AppContext.getApplicationContext()
+						.getBean(MessagingUtil.class);
 				util.sendAdminMessage(message.getModelObject());
 				message.setModelObject("Admin message sent");
 			}
@@ -123,25 +129,21 @@ public class AdminPage extends TemplatePage {
 		contact.setOutputMarkupId(true);
 		add(contact);
 	}
-	
-	
-	
+
 	protected void setupGraphs() {
-		BookmarkablePageLink<StatsGraphsPage> link = new BookmarkablePageLink<StatsGraphsPage>("statsGraphs", StatsGraphsPage.class);
+		BookmarkablePageLink<StatsGraphsPage> link = new BookmarkablePageLink<StatsGraphsPage>(
+				"statsGraphs", StatsGraphsPage.class);
 		add(link);
 	}
-	
 
-	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(Duration.seconds(90))
-	{
+	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(
+			Duration.seconds(90)) {
 		private static final long serialVersionUID = 5721917435743521271L;
 
 		@Override
-		protected void onTimer(AjaxRequestTarget target)
-		{
+		protected void onTimer(AjaxRequestTarget target) {
 			setResponsePage(AdminPage.class);
 		}
 	};
-	
 
 }

@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ChangeClanSettingsResponseEvent extends NormalResponseEvent {
 
-  private ChangeClanSettingsResponseProto changeClanSettingsResponseProto;
-  
-  public ChangeClanSettingsResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_CHANGE_CLAN_SETTINGS_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = changeClanSettingsResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private ChangeClanSettingsResponseProto changeClanSettingsResponseProto;
 
-  public void setChangeClanSettingsResponseProto(ChangeClanSettingsResponseProto changeClanSettingsResponseProto) {
-    this.changeClanSettingsResponseProto = changeClanSettingsResponseProto;
-  }
+	public ChangeClanSettingsResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_CHANGE_CLAN_SETTINGS_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = changeClanSettingsResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setChangeClanSettingsResponseProto(
+			ChangeClanSettingsResponseProto changeClanSettingsResponseProto) {
+		this.changeClanSettingsResponseProto = changeClanSettingsResponseProto;
+	}
 
 }

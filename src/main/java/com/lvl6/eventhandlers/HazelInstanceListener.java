@@ -6,24 +6,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
- 
+
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.DistributedObject;
 import com.hazelcast.core.DistributedObjectEvent;
 import com.hazelcast.core.DistributedObjectListener;
 
-public class HazelInstanceListener implements DistributedObjectListener, InitializingBean {
+public class HazelInstanceListener implements DistributedObjectListener,
+		InitializingBean {
 
 	Logger log = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	protected HazelcastInstance hazel;
 
 	@Autowired
 	protected Map<String, DistributedObject> instances;
-	
-	
-	
+
 	public HazelcastInstance getHazel() {
 		return hazel;
 	}
@@ -63,20 +62,28 @@ public class HazelInstanceListener implements DistributedObjectListener, Initial
 		getHazel().addInstanceListener(this);
 	}
 	 */
-	
+
 	@Override
 	public void distributedObjectCreated(DistributedObjectEvent instanceEvent) {
-		log.info("Created hazel instance: {} type: {}", instanceEvent.getDistributedObject().getName(),  instanceEvent.getEventType().name());
-		if(instanceEvent != null) {
-			getInstances().put(instanceEvent.getDistributedObject().getName(), instanceEvent.getDistributedObject());
+		log.info("Created hazel instance: {} type: {}", instanceEvent
+				.getDistributedObject().getName(), instanceEvent.getEventType()
+				.name());
+		if (instanceEvent != null) {
+			getInstances().put(instanceEvent.getDistributedObject().getName(),
+					instanceEvent.getDistributedObject());
 		}
 	}
 
 	@Override
 	public void distributedObjectDestroyed(DistributedObjectEvent instanceEvent) {
-		log.info("Destroyed hazel instance: {} type: {}", instanceEvent.getDistributedObject().getName(), instanceEvent.getEventType().name() );
-		if(instanceEvent != null && getInstances().containsKey(instanceEvent.getDistributedObject().getName())) {
-			getInstances().remove(instanceEvent.getDistributedObject().getName());
+		log.info("Destroyed hazel instance: {} type: {}", instanceEvent
+				.getDistributedObject().getName(), instanceEvent.getEventType()
+				.name());
+		if (instanceEvent != null
+				&& getInstances().containsKey(
+						instanceEvent.getDistributedObject().getName())) {
+			getInstances().remove(
+					instanceEvent.getDistributedObject().getName());
 		}
 	}
 

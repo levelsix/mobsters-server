@@ -1,0 +1,73 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Structure.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "BattleItemsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//------------------------------------------------------------------------------------------
+
+message UserBattleItemProto {
+	optional string userBattleItemId = 1;
+	optional string userUuid = 2;
+	optional int32 battleItemId = 3;
+	optional int32 quantity = 4;
+}
+
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemProto {
+	optional int32 battleItemId = 1;
+	optional string name = 2;
+	optional string imgName = 3;
+	optional BattleItemType battleItemType = 4;
+	optional BattleItemCategory battleItemCategory = 5;
+	optional ResourceType createResourceType = 6;
+	optional int32 createCost = 7;
+	optional string description = 8;
+	optional int32 powerAmount = 9;	
+	optional int32 priority = 11;
+	optional int32 minutesToCreate = 12;
+	optional int32 inBattleGemCost = 13;
+	optional int32 amount = 14;
+}
+
+
+//------------------------------------------------------------------------------------------
+
+enum BattleItemType {
+	HEALING_POTION = 1;
+	CHILL_ANTIDOTE = 2;
+	POISON_ANTIDOTE = 3;
+	ORB_HAMMER = 4;
+	HAND_SWAP = 5;
+	BOARD_SHUFFLE = 6;
+	PUTTY = 7;
+	NONE = 8;
+	
+}
+
+enum BattleItemCategory {
+	POTION = 1;
+	PUZZLE = 2;
+
+
+
+}
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemQueueForUserProto {
+	optional int32 priority = 1;
+	optional string userUuid = 2;
+	optional int32 battleItemId = 3;
+	optional int64 expectedStartTime = 4;
+	optional float elapsedTime = 5;	
+}
+
+	
+

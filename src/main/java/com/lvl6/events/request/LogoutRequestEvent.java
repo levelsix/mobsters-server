@@ -12,32 +12,33 @@ import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 
 public class LogoutRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private LogoutRequestProto logoutRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      logoutRequestProto = LogoutRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = logoutRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("LogoutRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public LogoutRequestProto getLogoutRequestProto() {
-    return logoutRequestProto;
-  }
+	private LogoutRequestProto logoutRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "LogoutRequestEvent [logoutRequestProto="
-		  + logoutRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			logoutRequestProto = LogoutRequestProto.parseFrom(ByteString
+					.copyFrom(buff));
+			playerId = logoutRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("LogoutRequest exception", e);
+		}
+	}
+
+	public LogoutRequestProto getLogoutRequestProto() {
+		return logoutRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "LogoutRequestEvent [logoutRequestProto=" + logoutRequestProto
+				+ "]";
+	}
+
 }

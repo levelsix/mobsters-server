@@ -9,22 +9,23 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent {
 
-  private PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto;
-  
-  public PromoteDemoteClanMemberResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = promoteDemoteClanMemberResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto;
 
-  public void setPromoteDemoteClanMemberResponseProto(PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto) {
-    this.promoteDemoteClanMemberResponseProto = promoteDemoteClanMemberResponseProto;
-  }
+	public PromoteDemoteClanMemberResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
+	}
+
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = promoteDemoteClanMemberResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setPromoteDemoteClanMemberResponseProto(
+			PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto) {
+		this.promoteDemoteClanMemberResponseProto = promoteDemoteClanMemberResponseProto;
+	}
 
 }

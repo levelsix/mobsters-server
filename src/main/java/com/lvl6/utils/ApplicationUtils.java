@@ -1,6 +1,5 @@
 package com.lvl6.utils;
 
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -16,17 +15,15 @@ import com.lvl6.ui.admin.components.ApplicationStats;
 public class ApplicationUtils {
 
 	private static Logger log = LoggerFactory.getLogger(ApplicationUtils.class);
-	
+
 	@Resource(name = "playersByPlayerId")
 	protected IMap<Integer, ConnectedPlayer> players;
-	
+
 	@Resource
 	protected StatisticsRetrieveUtil statsUtil;
-	
+
 	@Resource
 	protected UserRetrieveUtils2 usersUtil;
-	
-	
 
 	protected IMap<Integer, ConnectedPlayer> getPlayers() {
 		return players;
@@ -45,7 +42,7 @@ public class ApplicationUtils {
 		stats.setLoggedInThisWeek(statsUtil.countLoginsThisWeek());
 		stats.setSumOfDiamondsInWorld(statsUtil.sumOfDiamondsInWorld());
 		stats.setSumOfInAppPurchases(statsUtil.sumOfInAppPurchases());
-		Double appleTx = stats.getSumOfInAppPurchases()*.7;
+		Double appleTx = stats.getSumOfInAppPurchases() * .7;
 		stats.setAfterAppleTax(appleTx.longValue());
 		stats.setSumOfSilverInWorld(statsUtil.sumOfSilverInWorld());
 		stats.setTotalInAppPurchases(statsUtil.countInAppPurchases());

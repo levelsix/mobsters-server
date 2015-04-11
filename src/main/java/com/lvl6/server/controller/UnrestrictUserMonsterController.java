@@ -24,13 +24,16 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class UnrestrictUserMonsterController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class UnrestrictUserMonsterController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
@@ -50,7 +53,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		UnrestrictUserMonsterRequestProto reqProto = ((UnrestrictUserMonsterRequestEvent)event)
+		UnrestrictUserMonsterRequestProto reqProto = ((UnrestrictUserMonsterRequestEvent) event)
 				.getUnrestrictUserMonsterRequestProto();
 
 		//get values sent from the client (the request proto)
@@ -59,7 +62,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<String> userMonsterIdList = reqProto.getUserMonsterUuidsList();
 
 		//set some values to send to the client (the response proto)
-		UnrestrictUserMonsterResponseProto.Builder resBuilder = UnrestrictUserMonsterResponseProto.newBuilder();
+		UnrestrictUserMonsterResponseProto.Builder resBuilder = UnrestrictUserMonsterResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER); //default
 
@@ -86,7 +90,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER);
-			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(userId);
+			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUnrestrictUserMonsterResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -99,12 +104,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			//make sure it exists
 			Map<String, MonsterForUser> mfuMap = getMonsterForUserRetrieveUtils()
-					.getSpecificOrAllRestrictedUserMonstersForUser(userId, userMonsterIdList);
+					.getSpecificOrAllRestrictedUserMonstersForUser(userId,
+							userMonsterIdList);
 
-			boolean legit = checkLegit(resBuilder, userId, userMonsterIdList, mfuMap);
+			boolean legit = checkLegit(resBuilder, userId, userMonsterIdList,
+					mfuMap);
 
 			boolean successful = false;
-			if(legit) {
+			if (legit) {
 				successful = writeChangesToDb(userId, userMonsterIdList);
 			}
 
@@ -112,7 +119,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resBuilder.setStatus(UnrestrictUserMonsterStatus.SUCCESS);
 			}
 
-			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(userId);
+			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUnrestrictUserMonsterResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -122,22 +130,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//      resEventUpdate.setTag(event.getTag());
 			//      server.writeEvent(resEventUpdate);
 		} catch (Exception e) {
-			log.error("exception in UnrestrictUserMonsterController processEvent", e);
+			log.error(
+					"exception in UnrestrictUserMonsterController processEvent",
+					e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER);
-				UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(userId);
+				UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUnrestrictUserMonsterResponseProto(resBuilder.build());
+				resEvent.setUnrestrictUserMonsterResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in UnrestrictUserMonsterController processEvent", e);
+				log.error(
+						"exception2 in UnrestrictUserMonsterController processEvent",
+						e);
 			}
 		} finally {
 			//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
-
 
 	/*
 	 * Return true if user request is valid; false otherwise and set the
@@ -157,15 +170,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private boolean writeChangesToDb(String uId, List<String> userMonsterIdList) { 
+	private boolean writeChangesToDb(String uId, List<String> userMonsterIdList) {
 
-		int numUpdated = UpdateUtils.get().updateUnrestrictUserMonsters(
-				uId, userMonsterIdList);
+		int numUpdated = UpdateUtils.get().updateUnrestrictUserMonsters(uId,
+				userMonsterIdList);
 
 		if (numUpdated == 0) {
-			log.warn(String.format(
-					"user monsters not updated. actual numUpdated=%d, expected: >0, userMonsterIdList=%s",
-					numUpdated, userMonsterIdList));
+			log.warn(String
+					.format("user monsters not updated. actual numUpdated=%d, expected: >0, userMonsterIdList=%s",
+							numUpdated, userMonsterIdList));
 		}
 		return true;
 	}
@@ -178,13 +191,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.locker = locker;
 	}
 
-  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
-    return monsterForUserRetrieveUtils;
-  }
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+		return monsterForUserRetrieveUtils;
+	}
 
-  public void setMonsterForUserRetrieveUtils(
-      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
-    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-  }
+	public void setMonsterForUserRetrieveUtils(
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
 
 }

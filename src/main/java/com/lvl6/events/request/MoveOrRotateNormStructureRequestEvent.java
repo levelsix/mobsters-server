@@ -12,32 +12,34 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 
 public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private MoveOrRotateNormStructureRequestProto moveOrRotateNormStructureRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      moveOrRotateNormStructureRequestProto = MoveOrRotateNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = moveOrRotateNormStructureRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("MoveOrRotateNormStructureRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public MoveOrRotateNormStructureRequestProto getMoveOrRotateNormStructureRequestProto() {
-    return moveOrRotateNormStructureRequestProto;
-  }
+	private MoveOrRotateNormStructureRequestProto moveOrRotateNormStructureRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "MoveOrRotateNormStructureRequestEvent [moveOrRotateNormStructureRequestProto="
-		  + moveOrRotateNormStructureRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			moveOrRotateNormStructureRequestProto = MoveOrRotateNormStructureRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = moveOrRotateNormStructureRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("MoveOrRotateNormStructureRequest exception", e);
+		}
+	}
+
+	public MoveOrRotateNormStructureRequestProto getMoveOrRotateNormStructureRequestProto() {
+		return moveOrRotateNormStructureRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "MoveOrRotateNormStructureRequestEvent [moveOrRotateNormStructureRequestProto="
+				+ moveOrRotateNormStructureRequestProto + "]";
+	}
+
 }

@@ -12,32 +12,34 @@ import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 
 public class PurchaseBoosterPackRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private PurchaseBoosterPackRequestProto purchaseBoosterPackRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      purchaseBoosterPackRequestProto = PurchaseBoosterPackRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseBoosterPackRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("PurchaseBoosterPackRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public PurchaseBoosterPackRequestProto getPurchaseBoosterPackRequestProto() {
-    return purchaseBoosterPackRequestProto;
-  }
+	private PurchaseBoosterPackRequestProto purchaseBoosterPackRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "PurchaseBoosterPackRequestEvent [purchaseBoosterPackRequestProto="
-		  + purchaseBoosterPackRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			purchaseBoosterPackRequestProto = PurchaseBoosterPackRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = purchaseBoosterPackRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("PurchaseBoosterPackRequest exception", e);
+		}
+	}
+
+	public PurchaseBoosterPackRequestProto getPurchaseBoosterPackRequestProto() {
+		return purchaseBoosterPackRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseBoosterPackRequestEvent [purchaseBoosterPackRequestProto="
+				+ purchaseBoosterPackRequestProto + "]";
+	}
+
 }

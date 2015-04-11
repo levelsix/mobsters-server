@@ -87,14 +87,15 @@
 		<server.ip>0.0.0.0</server.ip>
 		<server.port>10001</server.port>
 
-		<globals.addAllFbFriends>false</globals.addAllFbFriends>
+		<globals.addAllFbFriends>true</globals.addAllFbFriends>
 		<globals.isSandbox>true</globals.isSandbox>
+		<globals.allowCheats>true</globals.allowCheats>
 		<globals.iddictionOn>false</globals.iddictionOn>
 		<globals.kabamEnabled>true</globals.kabamEnabled>
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>
 		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/toonsquadapuzzlerpgbattlegamefortango]]></globals.appStoreUrl>
 		<globals.appleBundleId>com.scopely.mobsquad</globals.appleBundleId>
-		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
+		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=931559502&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
 
 		<!-- deprecated -->
@@ -102,8 +103,8 @@
 		<!-- -->
 
 		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
-		<lvl6.application.version.majorNumber>1</lvl6.application.version.majorNumber>
-		<lvl6.application.version.minorNumber>10</lvl6.application.version.minorNumber>
+		<lvl6.application.version.majorNumber>3</lvl6.application.version.majorNumber>
+		<lvl6.application.version.minorNumber>0</lvl6.application.version.minorNumber>
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
@@ -112,7 +113,7 @@
 		<apns.cert.password>robashen123</apns.cert.password>
 
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
-		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
+		<lvl6.server.log.location>/var/log/tomcat8/mobsters</lvl6.server.log.location>
 		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
 		<lvl6.cassandra.keyspace>Logs</lvl6.cassandra.keyspace>
 		<lvl6.cassandra.stats.keyspace>stats</lvl6.cassandra.stats.keyspace>
@@ -153,11 +154,17 @@
 		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
-		<amqp.client.messages.queue>clientMessages1.1</amqp.client.messages.queue>
-		<!-- <amqp.client.messages.routing.key>messagesFromPlayers1.1</amqp.client.messages.routing.key> -->
-		<amqp.client.messages.bindings><![CDATA[
+		<amqp.client.messages.queue>clientMessages1.4</amqp.client.messages.queue>
+		<!-- <amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
+		]]></amqp.client.messages.bindings> -->
+		<amqp.client.messages.bindings><![CDATA[
+		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.1" />
+		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.2" />
+		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.3" />
+		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.4" />
 		]]></amqp.client.messages.bindings>
 
 
@@ -286,7 +293,7 @@
 						<include>**/test/*.java</include>
 					</includes>
 				</configuration>
-			</plugin>
+			</plugin>		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -489,7 +496,7 @@
 			<dependency>
 				<groupId>com.amazonaws</groupId>
 				<artifactId>aws-java-sdk</artifactId>
-				<version>1.9.9</version>
+				<version>1.9.22</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.integration</groupId>
@@ -697,6 +704,11 @@
 				<version>4.10</version>
 			</dependency>
 			<dependency>
+    			<groupId>org.mockito</groupId>
+    			<artifactId>mockito-core</artifactId>
+    			<version>2.0.3-beta</version>
+			</dependency>
+			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>12.0</version>
@@ -800,6 +812,49 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>4.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.memetix</groupId>
+				<artifactId>microsoft-translator-java-api</artifactId>
+				<version>0.6.2</version>
+			</dependency>
+<!--     		<dependency> -->
+<!--         		<groupid>junit</groupId> -->
+<!--         		<artifactid>junit</artifactId> -->
+<!--         		<version>4.11</version> -->
+<!--         		<scope>test</scope> -->
+<!--         		<type>jar</type> -->
+<!--     		</dependency> -->
+    		<dependency>
+        		<groupId>org.mockito</groupId>
+        		<artifactId>mockito-core</artifactId>
+        		<version>1.9.5</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-api-mockito</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<!-- Required for PowerMockRule -->
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4-rule-agent</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
+			</dependency>
+			<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-classloading-xstream</artifactId>
+        		<version>1.5.1</version>
+        		<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -1031,6 +1086,34 @@
 			</dependency> -->
 		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-http</artifactId> 
 			</dependency> -->
+
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4-rule-agent</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-classloading-xstream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.memetix</groupId>
+			<artifactId>microsoft-translator-java-api</artifactId>
+			<version>0.6.2</version>
+		</dependency>
 	</dependencies>
 
 </project>

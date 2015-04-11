@@ -30,9 +30,12 @@ import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class TradeItemForResourcesController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class TradeItemForResourcesController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public TradeItemForResourcesController() {
 		numAllocatedThreads = 1;
@@ -43,7 +46,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new TradeItemForResourcesRequestEvent();
@@ -56,7 +59,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent)event).getTradeItemForResourcesRequestProto();
+		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent) event)
+				.getTradeItemForResourcesRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -69,8 +73,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
 
 		Timestamp date = new Timestamp(reqProto.getClientTime());
-		
-		TradeItemForResourcesResponseProto.Builder resBuilder = TradeItemForResourcesResponseProto.newBuilder();
+
+		TradeItemForResourcesResponseProto.Builder resBuilder = TradeItemForResourcesResponseProto
+				.newBuilder();
 		resBuilder.setSender(mupMaxResources);
 		resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
 
@@ -81,23 +86,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
-			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(userId);
+			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForResourcesResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+				.getSimpleName());
 		try {
 			List<ItemForUser> nuUserItems = null;
 			if (null != nuUserItemsProtos && !nuUserItemsProtos.isEmpty()) {
@@ -105,72 +111,77 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
-				userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
-				itemForUserRetrieveUtil, userRetrieveUtil, UpdateUtils.get());
+					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
+					itemForUserRetrieveUtil, userRetrieveUtil,
+					UpdateUtils.get());
 
 			tifsua.execute(resBuilder);
 
 			TradeItemForResourcesResponseProto resProto = resBuilder.build();
-			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(senderProto.getUserUuid());
+			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForResourcesResponseProto(resProto);
 			server.writeEvent(resEvent);
 
-			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder.getStatus()))
-			{
+			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
+					.getStatus())) {
 				User user = tifsua.getUser();
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
-				
+
 				writeToCurrencyHistory(userId, date, tifsua);
 			}
-			
+
 		} catch (Exception e) {
-			log.error("exception in TradeItemForResourcesController processEvent", e);
+			log.error(
+					"exception in TradeItemForResourcesController processEvent",
+					e);
 			try {
 				resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
-				TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(userId);
+				TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForResourcesResponseProto(resBuilder.build());
+				resEvent.setTradeItemForResourcesResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in TradeItemForResourcesController processEvent", e);
+				log.error(
+						"exception2 in TradeItemForResourcesController processEvent",
+						e);
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 		}
 	}
-	
-	private void writeToCurrencyHistory(String userId, Timestamp date,
-		TradeItemForResourcesAction tifsua)
-	{
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
-			tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
-    		tifsua.getCurrentCurrencies(), tifsua.getReasons(),
-    		tifsua.getDetails());
-	}
-	
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+			TradeItemForResourcesAction tifsua) {
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
+				tifsua.getCurrentCurrencies(), tifsua.getReasons(),
+				tifsua.getDetails());
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 

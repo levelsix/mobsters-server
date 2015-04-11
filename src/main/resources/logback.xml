@@ -58,7 +58,7 @@
 	<appender name="stash"
 		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
 		<!-- remoteHost and port are optional (default values shown) -->
-		<remoteHost>logsinternal.lvl6.com</remoteHost>
+		<remoteHost>logs.lvl6.com</remoteHost>
 		<port>4560</port>
 
 		<!-- encoder is required -->

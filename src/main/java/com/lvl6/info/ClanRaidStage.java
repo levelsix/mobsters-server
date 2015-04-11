@@ -11,11 +11,11 @@ public class ClanRaidStage implements Serializable {
 	private int durationMinutes;
 	private int stageNum;
 	private String name;
-	
+
 	//sum of all monster healths for this stage
 	//not actually a column in the table
 	private int stageHealth;
-	
+
 	public ClanRaidStage(int id, int clanRaidId, int durationMinutes,
 			int stageNum, String name) {
 		super();
@@ -65,7 +65,7 @@ public class ClanRaidStage implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getStageHealth() {
 		return stageHealth;
 	}
@@ -77,8 +77,9 @@ public class ClanRaidStage implements Serializable {
 	@Override
 	public String toString() {
 		return "ClanRaidStage [id=" + id + ", clanRaidId=" + clanRaidId
-				+ ", durationMinutes=" + durationMinutes + ", stageNum=" + stageNum
-				+ ", name=" + name + ", stageHealth=" + stageHealth + "]";
+				+ ", durationMinutes=" + durationMinutes + ", stageNum="
+				+ stageNum + ", name=" + name + ", stageHealth=" + stageHealth
+				+ "]";
 	}
 
 }

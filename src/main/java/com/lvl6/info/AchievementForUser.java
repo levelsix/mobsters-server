@@ -3,15 +3,15 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class AchievementForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 7248765501021436117L;
-	
+
 	private String userId;
 	private int achievementId;
 	private int progress;
 	private boolean isComplete;
 	private boolean isRedeemed;
-	
+
 	public AchievementForUser() {
 		super();
 	}

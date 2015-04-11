@@ -41,45 +41,43 @@ public class GameEventRecorder implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		setupStorage();
-		
+
 	}
 
-	public void persistEvent(String userId, Integer eventType,	byte[] eventBytes) {
+	public void persistEvent(String userId, Integer eventType, byte[] eventBytes) {
 		if (userId != null && !userId.equals("") && eventBytes != null) {
 			try {
 				log.info("Persisting event for user: {}", userId);
 				jdbc.update(
 						"insert into load_testing_events (user_id, log_time, event_type, event_bytes) values (?,?,?,?)",
-						userId, 
-						new Timestamp(new Date().getTime()), 
-						eventType,
+						userId, new Timestamp(new Date().getTime()), eventType,
 						eventBytes);
 			} catch (Exception e) {
 				log.error("Error persisting event:", e);
 			}
 		}
 	}
-	
-	public List<Integer> testUsers = Arrays.asList(11683, 11684, 11685, 11686, 11687);
-	
-	public List<LoadTestEvent> getEventsForUser(Integer userId) {
-		return jdbc.query("select * from load_testing_events where userId = "+userId+" order by log_time", new RowMapper<LoadTestEvent>(){
 
-			@Override
-			public LoadTestEvent mapRow(ResultSet rs, int rowNum)
-					throws SQLException {
-				LoadTestEvent lte = new LoadTestEvent();
-				lte.setEvent(rs.getBytes("event_bytes"));
-				lte.setEventTime(rs.getTimestamp("log_time"));
-				lte.setEventType(rs.getInt("event_type"));
-				lte.setUserId(rs.getInt("user_id"));
-				return lte;
-			}
-			
-		});
+	public List<Integer> testUsers = Arrays.asList(11683, 11684, 11685, 11686,
+			11687);
+
+	public List<LoadTestEvent> getEventsForUser(Integer userId) {
+		return jdbc.query("select * from load_testing_events where userId = "
+				+ userId + " order by log_time",
+				new RowMapper<LoadTestEvent>() {
+
+					@Override
+					public LoadTestEvent mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						LoadTestEvent lte = new LoadTestEvent();
+						lte.setEvent(rs.getBytes("event_bytes"));
+						lte.setEventTime(rs.getTimestamp("log_time"));
+						lte.setEventType(rs.getInt("event_type"));
+						lte.setUserId(rs.getInt("user_id"));
+						return lte;
+					}
+
+				});
 	}
-	
-	
-	
-	
+
 }

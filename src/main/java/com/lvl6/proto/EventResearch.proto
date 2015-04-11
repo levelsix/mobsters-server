@@ -1,0 +1,64 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Structure.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventResearchProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+//server will check money stuff, similar to enhancing
+//client will need to check that the user can build the structure:
+//meets town hall requirement, structure limit, can only build one thing
+
+message PerformResearchRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 researchId = 2;  		//research to start researching
+	optional string userResearchUuid = 3; 	//set if user upgrading existing research
+	optional int64 clientTime = 4;
+	optional int32 gemsCost = 5;
+	
+	//positive means refund, negative means charge user (will always be negative)
+	optional sint32 resourceCost = 6; 
+	optional ResourceType resourceType = 7 [default = CASH];
+}
+
+message PerformResearchResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional PerformResearchStatus status = 2;
+    optional string userResearchUuid = 3;
+	
+	enum PerformResearchStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_CASH = 3;
+		FAIL_INSUFFICIENT_GEMS = 4;
+		FAIL_INSUFFICIENT_OIL = 5;
+	}
+}
+
+
+//------------------------------------------------------------------------------------------
+
+message FinishPerformingResearchRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string userResearchUuid = 2;
+	optional int32 gemsCost = 3;
+}
+																						//DONE
+message FinishPerformingResearchResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional FinishPerformingResearchStatus status = 2;
+     
+     enum FinishPerformingResearchStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     	FAIL_NOT_ENOUGH_GEMS = 3;
+     }
+}
+
+
+
+

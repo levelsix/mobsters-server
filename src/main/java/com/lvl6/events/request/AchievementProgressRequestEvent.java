@@ -11,38 +11,40 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto;
 
 public class AchievementProgressRequestEvent extends RequestEvent {
-	
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private AchievementProgressRequestProto achievementProgressRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      achievementProgressRequestProto = AchievementProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = achievementProgressRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("AchievementProgressRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public AchievementProgressRequestProto getAchievementProgressRequestProto() {
-	  return achievementProgressRequestProto;
-  }
+	private AchievementProgressRequestProto achievementProgressRequestProto;
 
-  public void setAchievementProgressRequestProto(
-		  AchievementProgressRequestProto achievementProgressRequestProto) {
-	  this.achievementProgressRequestProto = achievementProgressRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			achievementProgressRequestProto = AchievementProgressRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = achievementProgressRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("AchievementProgressRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "AchievementProgressRequestEvent [achievementProgressRequestProto="
-		  + achievementProgressRequestProto
-		  + "]";
-  }
+	public AchievementProgressRequestProto getAchievementProgressRequestProto() {
+		return achievementProgressRequestProto;
+	}
+
+	public void setAchievementProgressRequestProto(
+			AchievementProgressRequestProto achievementProgressRequestProto) {
+		this.achievementProgressRequestProto = achievementProgressRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "AchievementProgressRequestEvent [achievementProgressRequestProto="
+				+ achievementProgressRequestProto + "]";
+	}
 
 }

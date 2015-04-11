@@ -511,13 +511,17 @@ public final class SharedEnumConfigProto {
      */
     ENTER_PERSISTENT_EVENT(8, 9),
     /**
-     * <code>GAME_ACTION_TYPE_RESEARCH = 10;</code>
+     * <code>PERFORMING_RESEARCH = 10;</code>
      *
      * <pre>
      *all enums not in "message" share namespace 
      * </pre>
      */
-    GAME_ACTION_TYPE_RESEARCH(9, 10),
+    PERFORMING_RESEARCH(9, 10),
+    /**
+     * <code>CREATE_BATTLE_ITEM = 11;</code>
+     */
+    CREATE_BATTLE_ITEM(10, 11),
     ;
 
     /**
@@ -557,13 +561,17 @@ public final class SharedEnumConfigProto {
      */
     public static final int ENTER_PERSISTENT_EVENT_VALUE = 9;
     /**
-     * <code>GAME_ACTION_TYPE_RESEARCH = 10;</code>
+     * <code>PERFORMING_RESEARCH = 10;</code>
      *
      * <pre>
      *all enums not in "message" share namespace 
      * </pre>
      */
-    public static final int GAME_ACTION_TYPE_RESEARCH_VALUE = 10;
+    public static final int PERFORMING_RESEARCH_VALUE = 10;
+    /**
+     * <code>CREATE_BATTLE_ITEM = 11;</code>
+     */
+    public static final int CREATE_BATTLE_ITEM_VALUE = 11;
 
 
     public final int getNumber() { return value; }
@@ -579,7 +587,8 @@ public final class SharedEnumConfigProto {
         case 7: return REMOVE_OBSTACLE;
         case 8: return COMBINE_MONSTER;
         case 9: return ENTER_PERSISTENT_EVENT;
-        case 10: return GAME_ACTION_TYPE_RESEARCH;
+        case 10: return PERFORMING_RESEARCH;
+        case 11: return CREATE_BATTLE_ITEM;
         default: return null;
       }
     }
@@ -656,6 +665,14 @@ public final class SharedEnumConfigProto {
      * <code>TASK = 5;</code>
      */
     TASK(4, 5),
+    /**
+     * <code>BATTLE_ITEM = 6;</code>
+     */
+    BATTLE_ITEM(5, 6),
+    /**
+     * <code>BOARD_OBSTACLE = 7;</code>
+     */
+    BOARD_OBSTACLE(6, 7),
     ;
 
     /**
@@ -678,6 +695,14 @@ public final class SharedEnumConfigProto {
      * <code>TASK = 5;</code>
      */
     public static final int TASK_VALUE = 5;
+    /**
+     * <code>BATTLE_ITEM = 6;</code>
+     */
+    public static final int BATTLE_ITEM_VALUE = 6;
+    /**
+     * <code>BOARD_OBSTACLE = 7;</code>
+     */
+    public static final int BOARD_OBSTACLE_VALUE = 7;
 
 
     public final int getNumber() { return value; }
@@ -689,6 +714,8 @@ public final class SharedEnumConfigProto {
         case 3: return RESEARCH;
         case 4: return SKILL;
         case 5: return TASK;
+        case 6: return BATTLE_ITEM;
+        case 7: return BOARD_OBSTACLE;
         default: return null;
       }
     }
@@ -758,14 +785,16 @@ public final class SharedEnumConfigProto {
       "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
-      "*\314\001\n\016GameActionType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGR",
+      "*\336\001\n\016GameActionType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGR",
       "ADE_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MI" +
       "NI_JOB\020\005\022\020\n\014ENHANCE_TIME\020\006\022\023\n\017REMOVE_OBS" +
       "TACLE\020\007\022\023\n\017COMBINE_MONSTER\020\010\022\032\n\026ENTER_PE" +
-      "RSISTENT_EVENT\020\t\022\035\n\031GAME_ACTION_TYPE_RES" +
-      "EARCH\020\n*I\n\010GameType\022\013\n\007NO_TYPE\020\001\022\r\n\tSTRU" +
-      "CTURE\020\002\022\014\n\010RESEARCH\020\003\022\t\n\005SKILL\020\004\022\010\n\004TASK" +
-      "\020\005B\027B\025SharedEnumConfigProto"
+      "RSISTENT_EVENT\020\t\022\027\n\023PERFORMING_RESEARCH\020" +
+      "\n\022\026\n\022CREATE_BATTLE_ITEM\020\013*n\n\010GameType\022\013\n" +
+      "\007NO_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022" +
+      "\t\n\005SKILL\020\004\022\010\n\004TASK\020\005\022\017\n\013BATTLE_ITEM\020\006\022\022\n" +
+      "\016BOARD_OBSTACLE\020\007B\027B\025SharedEnumConfigPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

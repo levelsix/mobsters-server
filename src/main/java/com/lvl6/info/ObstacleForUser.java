@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ObstacleForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = -2897503606027274504L;
-	
+
 	private String id;
 	private String userId;
 	private int obstacleId;
@@ -14,13 +14,13 @@ public class ObstacleForUser implements Serializable {
 	private int ycoord;
 	private Date removalTime;
 	private String orientation;
-	
+
 	public ObstacleForUser() {
 		super();
 	}
 
-	public ObstacleForUser(String id, String userId, int obstacleId, int xcoord,
-			int ycoord, Date removalTime, String orientation) {
+	public ObstacleForUser(String id, String userId, int obstacleId,
+			int xcoord, int ycoord, Date removalTime, String orientation) {
 		super();
 		this.id = id;
 		this.userId = userId;

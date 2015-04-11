@@ -6,12 +6,12 @@ import java.util.Random;
 public class QuestJobMonsterItem implements Serializable {
 
 	private static final long serialVersionUID = 9159046998370704510L;
-	
+
 	private int questJobId;
 	private int monsterId;
 	private int itemId;
 	private float itemDropRate;
-	
+
 	//convenience object
 	private Random rand;
 
@@ -28,11 +28,11 @@ public class QuestJobMonsterItem implements Serializable {
 	public Random getRand() {
 		return rand;
 	}
-	
+
 	public void setRand(Random rand) {
 		this.rand = rand;
 	}
-	
+
 	public boolean didItemDrop() {
 		float randFloat = getRand().nextFloat();
 
@@ -42,9 +42,9 @@ public class QuestJobMonsterItem implements Serializable {
 			return false;
 		}
 	}
-	
+
 	//end covenience methods--------------------------------------------------------
-	
+
 	public int getQuestJobId() {
 		return questJobId;
 	}
@@ -83,5 +83,5 @@ public class QuestJobMonsterItem implements Serializable {
 				+ monsterId + ", itemId=" + itemId + ", itemDropRate="
 				+ itemDropRate + ", rand=" + rand + "]";
 	}
-	
+
 }

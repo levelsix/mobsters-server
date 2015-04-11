@@ -3,9 +3,9 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class BoosterItem implements Serializable {
-	
+
 	private static final long serialVersionUID = 2455005376363185782L;
-	
+
 	private int id;
 	private int boosterPackId;
 	private int monsterId;
@@ -17,10 +17,10 @@ public class BoosterItem implements Serializable {
 	private float chanceToAppear;
 	private int itemId;
 	private int itemQuantity;
-  
+
 	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,
-			boolean isComplete, boolean isSpecial, int gemReward, int cashReward,
-			float chanceToAppear, int itemId, int itemQuantity) {
+			boolean isComplete, boolean isSpecial, int gemReward,
+			int cashReward, float chanceToAppear, int itemId, int itemQuantity) {
 		super();
 		this.id = id;
 		this.boosterPackId = boosterPackId;
@@ -107,52 +107,30 @@ public class BoosterItem implements Serializable {
 		this.chanceToAppear = chanceToAppear;
 	}
 
-	public int getItemId()
-	{
+	public int getItemId() {
 		return itemId;
 	}
 
-	public void setItemId( int itemId )
-	{
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public int getItemQuantity()
-	{
+	public int getItemQuantity() {
 		return itemQuantity;
 	}
 
-	public void setItemQuantity( int itemQuantity )
-	{
+	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "BoosterItem [id="
-			+ id
-			+ ", boosterPackId="
-			+ boosterPackId
-			+ ", monsterId="
-			+ monsterId
-			+ ", numPieces="
-			+ numPieces
-			+ ", isComplete="
-			+ isComplete
-			+ ", isSpecial="
-			+ isSpecial
-			+ ", gemReward="
-			+ gemReward
-			+ ", cashReward="
-			+ cashReward
-			+ ", chanceToAppear="
-			+ chanceToAppear
-			+ ", itemId="
-			+ itemId
-			+ ", itemQuantity="
-			+ itemQuantity
-			+ "]";
+	public String toString() {
+		return "BoosterItem [id=" + id + ", boosterPackId=" + boosterPackId
+				+ ", monsterId=" + monsterId + ", numPieces=" + numPieces
+				+ ", isComplete=" + isComplete + ", isSpecial=" + isSpecial
+				+ ", gemReward=" + gemReward + ", cashReward=" + cashReward
+				+ ", chanceToAppear=" + chanceToAppear + ", itemId=" + itemId
+				+ ", itemQuantity=" + itemQuantity + "]";
 	}
 
 }

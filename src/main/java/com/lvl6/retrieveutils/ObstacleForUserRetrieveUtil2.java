@@ -24,11 +24,12 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
-@Component 
+@Component
 public class ObstacleForUserRetrieveUtil2 {
-	private static Logger log = LoggerFactory.getLogger(ObstacleForUserRetrieveUtil2.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE_FOR_USER; 
+	private static Logger log = LoggerFactory
+			.getLogger(ObstacleForUserRetrieveUtil2.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE_FOR_USER;
 	private static final UserObstacleForClientMapper rowMapper = new UserObstacleForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -37,18 +38,19 @@ public class ObstacleForUserRetrieveUtil2 {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
 	public ObstacleForUser getUserObstacleForId(String ofuId) {
 		ObstacleForUser ofu = null;
 		try {
-			List<String> columnsToSelected = UserObstacleForClientMapper.getColumnsSelected();
-			
+			List<String> columnsToSelected = UserObstacleForClientMapper
+					.getColumnsSelected();
+
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
@@ -59,29 +61,32 @@ public class ObstacleForUserRetrieveUtil2 {
 			List<Object> values = new ArrayList<Object>();
 			boolean preparedStatement = true;
 
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					columnsToSelected, TABLE_NAME, equalityConditions, conditionDelimiter,
-					values, preparedStatement);
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, conditionDelimiter,
+							values, preparedStatement);
 
-			log.info(String.format(
-				"query=%s, values=%s",
-				query, values));
+			log.info(String.format("query=%s, values=%s", query, values));
 
-			ofu = this.jdbcTemplate.queryForObject(query, values.toArray(), rowMapper);
+			ofu = this.jdbcTemplate.queryForObject(query, values.toArray(),
+					rowMapper);
 		} catch (Exception e) {
-			log.error(String.format("could not retrieve user obstacle for id=%s", ofuId), e);
+			log.error(String.format(
+					"could not retrieve user obstacle for id=%s", ofuId), e);
 		}
-		
+
 		return ofu;
 	}
-	
+
 	public List<ObstacleForUser> getUserObstacleForUser(String userId) {
 		List<ObstacleForUser> ofuList = null;
 		try {
-			List<String> columnsToSelected = UserObstacleForClientMapper.getColumnsSelected();
-			
+			List<String> columnsToSelected = UserObstacleForClientMapper
+					.getColumnsSelected();
+
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);
+			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__USER_ID,
+					userId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
 			//query db, "values" is not used 
@@ -90,29 +95,31 @@ public class ObstacleForUserRetrieveUtil2 {
 			List<Object> values = new ArrayList<Object>();
 			boolean preparedStatement = true;
 
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					columnsToSelected, TABLE_NAME, equalityConditions, conditionDelimiter,
-					values, preparedStatement);
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, conditionDelimiter,
+							values, preparedStatement);
 
+			log.info(String.format("query=%s, values=%s", query, values));
 
-			log.info(String.format(
-				"query=%s, values=%s",
-				query, values));
-
-			ofuList = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
+			ofuList = this.jdbcTemplate.query(query, values.toArray(),
+					rowMapper);
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve user obstacle for userId=%s", userId), e);
+					"could not retrieve user obstacle for userId=%s", userId),
+					e);
 			ofuList = new ArrayList<ObstacleForUser>();
 		}
-		
+
 		return ofuList;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -127,43 +134,50 @@ public class ObstacleForUserRetrieveUtil2 {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserObstacleForClientMapper implements RowMapper<ObstacleForUser> {
+	private static final class UserObstacleForClientMapper implements
+			RowMapper<ObstacleForUser> {
 
 		private static List<String> columnsSelected;
 
-		public ObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public ObstacleForUser mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			ObstacleForUser ofu = new ObstacleForUser();
 			ofu.setId(rs.getString(DBConstants.OBSTACLE_FOR_USER__ID));
 			ofu.setUserId(rs.getString(DBConstants.OBSTACLE_FOR_USER__USER_ID));
-			ofu.setObstacleId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID));
+			ofu.setObstacleId(rs
+					.getInt(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID));
 			ofu.setXcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__XCOORD));
 			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
 			try {
-				Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
+				Timestamp time = rs
+						.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
 				if (null != time && !rs.wasNull()) {
 					Date date = new Date(time.getTime());
 					ofu.setRemovalTime(date);
 				}
 			} catch (Exception e) {
 				log.error(String.format(
-					"maybe obstacle removal time is invalid, ofu=%s", ofu), e);
+						"maybe obstacle removal time is invalid, ofu=%s", ofu),
+						e);
 			}
-			String orientation = rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
-				
+			String orientation = rs
+					.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
+
 			if (null != orientation) {
-		    	String newOrientation = orientation.trim().toUpperCase();
-		    	if (!orientation.equals(newOrientation)) {
-		    		log.error(String.format(
-		    			"orientation incorrect: %s, ofu=%s",
-		    			orientation, ofu));
-		    		orientation = newOrientation;
-		    	}
-		    }
-				
+				String newOrientation = orientation.trim().toUpperCase();
+				if (!orientation.equals(newOrientation)) {
+					log.error(String.format(
+							"orientation incorrect: %s, ofu=%s", orientation,
+							ofu));
+					orientation = newOrientation;
+				}
+			}
+
 			ofu.setOrientation(orientation);
-			
+
 			return ofu;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
@@ -173,10 +187,11 @@ public class ObstacleForUserRetrieveUtil2 {
 				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID);
 				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__XCOORD);
 				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__YCOORD);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
+				columnsSelected
+						.add(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
 				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

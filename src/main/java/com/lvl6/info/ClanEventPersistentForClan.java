@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClanEventPersistentForClan implements Serializable {
-	
+
 	private static final long serialVersionUID = -3252664752834957657L;
-	
+
 	private String clanId;
 	private int clanEventPersistentId; //not really needed, but oh well
 	private int crId; //clan raid id
@@ -14,9 +14,8 @@ public class ClanEventPersistentForClan implements Serializable {
 	private Date stageStartTime; // refers to time clan started a daily event
 	private int crsmId; //clan raid stage monster id
 	private Date stageMonsterStartTime; //differentiate attacks across different stage monsters
-  
-	public ClanEventPersistentForClan()
-	{
+
+	public ClanEventPersistentForClan() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -93,26 +92,22 @@ public class ClanEventPersistentForClan implements Serializable {
 	@Override
 	public String toString() {
 		return "ClanEventPersistentForClan [clanId=" + clanId
-				+ ", clanEventPersistentId=" + clanEventPersistentId + ", crId=" + crId
-				+ ", crsId=" + crsId + ", stageStartTime=" + stageStartTime
-				+ ", crsmId=" + crsmId + ", stageMonsterStartTime="
-				+ stageMonsterStartTime + "]";
+				+ ", clanEventPersistentId=" + clanEventPersistentId
+				+ ", crId=" + crId + ", crsId=" + crsId + ", stageStartTime="
+				+ stageStartTime + ", crsmId=" + crsmId
+				+ ", stageMonsterStartTime=" + stageMonsterStartTime + "]";
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-			* result
-			+ ((clanId == null) ? 0 : clanId.hashCode());
+		result = prime * result + ((clanId == null) ? 0 : clanId.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals( Object obj )
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)

@@ -1,8 +1,5 @@
 package com.lvl6.retrieveutils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -21,17 +18,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.google.protobuf.ByteString;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component 
+@Component
 public class TaskForUserClientStateRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(TaskForUserClientStateRetrieveUtil.class);
-	
-	private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE; 
+	private static Logger log = LoggerFactory
+			.getLogger(TaskForUserClientStateRetrieveUtil.class);
+
+	private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
 	private static final UserTaskClientStateForClientMapper rowMapper = new UserTaskClientStateForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -40,51 +37,47 @@ public class TaskForUserClientStateRetrieveUtil {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
 	//CONTROLLER LOGIC******************************************************************
-	
+
 	//RETRIEVE QUERIES*********************************************************************
-	public TaskForUserClientState getTaskForUserClientState( String userId )
-	{
+	public TaskForUserClientState getTaskForUserClientState(String userId) {
 		Object[] values = { userId };
-		List<String> questions = Collections.nCopies(
-			1, "?");
+		List<String> questions = Collections.nCopies(1, "?");
 		String questionMarks = StringUtils.implode(questions, ",");
-		
-		String query = String.format(
-			"select * from %s where %s in (%s)",
-			TABLE_NAME,
-			DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
-			questionMarks);
-		
+
+		String query = String.format("select * from %s where %s in (%s)",
+				TABLE_NAME, DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
+				questionMarks);
+
 		TaskForUserClientState tfucs = null;
 		log.info("getSpecificOrAllItemIdToItemForUserId() query={}", query);
 		try {
-			List<TaskForUserClientState> tfucsList = this.jdbcTemplate.query(query, values, rowMapper);
-			
-			if (null != tfucsList && !tfucsList.isEmpty())
-			{
+			List<TaskForUserClientState> tfucsList = this.jdbcTemplate.query(
+					query, values, rowMapper);
+
+			if (null != tfucsList && !tfucsList.isEmpty()) {
 				tfucs = tfucsList.get(0);
 			}
-			
+
 		} catch (Exception e) {
-			log.error(
-				String.format(
+			log.error(String.format(
 					"could not retrieve TaskForUserClientState for userId=%s",
-					userId),
-				e);
+					userId), e);
 		}
-		
+
 		return tfucs;
 	}
-	
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+
+	public void setQueryConstructionUtil(
+			QueryConstructionUtil queryConstructionUtil) {
 		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
@@ -99,25 +92,32 @@ public class TaskForUserClientStateRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserTaskClientStateForClientMapper implements RowMapper<TaskForUserClientState> {
+	private static final class UserTaskClientStateForClientMapper implements
+			RowMapper<TaskForUserClientState> {
 
 		private static List<String> columnsSelected;
 
-		public TaskForUserClientState mapRow(ResultSet rs, int rowNum) throws SQLException {
+		@Override
+		public TaskForUserClientState mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
 			TaskForUserClientState tfucs = new TaskForUserClientState();
-			tfucs.setUserId(rs.getString(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID));
-			tfucs.setClientState(rs.getBytes(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE));
-			
+			tfucs.setUserId(rs
+					.getString(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID));
+			tfucs.setClientState(rs
+					.getBytes(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE));
+
 			return tfucs;
-		}        
+		}
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID);
-				columnsSelected.add(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
+				columnsSelected
+						.add(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID);
+				columnsSelected
+						.add(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
 			}
 			return columnsSelected;
 		}
-	} 	
+	}
 }

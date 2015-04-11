@@ -6,25 +6,20 @@ import java.util.Date;
 public class MonsterEvolvingForUser implements Serializable {
 
 	private static final long serialVersionUID = 1035260911472628399L;
-	
+
 	private String catalystMonsterForUserId;
 	private String monsterForUserIdOne;
 	private String monsterForUserIdTwo;
 	private String userId;
 	private Date startTime;
-	
-	public MonsterEvolvingForUser()
-	{
+
+	public MonsterEvolvingForUser() {
 		super();
 	}
 
-	public MonsterEvolvingForUser(
-		String catalystMonsterForUserId,
-		String monsterForUserIdOne,
-		String monsterForUserIdTwo,
-		String userId,
-		Date startTime )
-	{
+	public MonsterEvolvingForUser(String catalystMonsterForUserId,
+			String monsterForUserIdOne, String monsterForUserIdTwo,
+			String userId, Date startTime) {
 		super();
 		this.catalystMonsterForUserId = catalystMonsterForUserId;
 		this.monsterForUserIdOne = monsterForUserIdOne;
@@ -33,53 +28,43 @@ public class MonsterEvolvingForUser implements Serializable {
 		this.startTime = startTime;
 	}
 
-	public String getCatalystMonsterForUserId()
-	{
+	public String getCatalystMonsterForUserId() {
 		return catalystMonsterForUserId;
 	}
 
-	public void setCatalystMonsterForUserId( String catalystMonsterForUserId )
-	{
+	public void setCatalystMonsterForUserId(String catalystMonsterForUserId) {
 		this.catalystMonsterForUserId = catalystMonsterForUserId;
 	}
 
-	public String getMonsterForUserIdOne()
-	{
+	public String getMonsterForUserIdOne() {
 		return monsterForUserIdOne;
 	}
 
-	public void setMonsterForUserIdOne( String monsterForUserIdOne )
-	{
+	public void setMonsterForUserIdOne(String monsterForUserIdOne) {
 		this.monsterForUserIdOne = monsterForUserIdOne;
 	}
 
-	public String getMonsterForUserIdTwo()
-	{
+	public String getMonsterForUserIdTwo() {
 		return monsterForUserIdTwo;
 	}
 
-	public void setMonsterForUserIdTwo( String monsterForUserIdTwo )
-	{
+	public void setMonsterForUserIdTwo(String monsterForUserIdTwo) {
 		this.monsterForUserIdTwo = monsterForUserIdTwo;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public Date getStartTime()
-	{
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime( Date startTime )
-	{
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
@@ -87,8 +72,9 @@ public class MonsterEvolvingForUser implements Serializable {
 	public String toString() {
 		return "MonsterEvolvingForUser [catalystMonsterForUserId="
 				+ catalystMonsterForUserId + ", monsterForUserIdOne="
-				+ monsterForUserIdOne + ", monsterForUserIdTwo=" + monsterForUserIdTwo
-				+ ", userId=" + userId + ", startTime=" + startTime + "]";
+				+ monsterForUserIdOne + ", monsterForUserIdTwo="
+				+ monsterForUserIdTwo + ", userId=" + userId + ", startTime="
+				+ startTime + "]";
 	}
-  
+
 }

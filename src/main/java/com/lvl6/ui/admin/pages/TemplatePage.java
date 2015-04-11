@@ -14,8 +14,5 @@ public class TemplatePage extends WebPage {
 	public TemplatePage() {
 		super();
 	}
-	
-	
-	
 
 }

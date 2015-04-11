@@ -9,14 +9,15 @@ import com.lvl6.utils.Wrap;
 
 public abstract class EventWriter extends Wrap {
 
-	
 	private static Logger log = LoggerFactory.getLogger(EventWriter.class);
+
 	public EventWriter() {
 		super();
 	}
 
 	public abstract void processGlobalChatResponseEvent(ResponseEvent event);
 
+	@Override
 	public void handleClanEvent(ResponseEvent event, String clanId) {
 		try {
 			processClanResponseEvent(event, clanId);
@@ -24,8 +25,12 @@ public abstract class EventWriter extends Wrap {
 			log.error("Error handling clan event: " + event, e);
 		}
 	}
-	public abstract void processClanResponseEvent(ResponseEvent event, String clanId);
-	
+
+	@Override
+	public abstract void processClanResponseEvent(ResponseEvent event,
+			String clanId);
+
+	@Override
 	public void handleEvent(GameEvent event) {
 		try {
 			processEvent(event);
@@ -33,11 +38,15 @@ public abstract class EventWriter extends Wrap {
 			log.error("Error handling event: {}", event, e);
 		}
 	}
+
+	@Override
 	protected abstract void processEvent(GameEvent event) throws Exception;
-	
-	public abstract void processPreDBResponseEvent(ResponseEvent event, String udid);
-	
-	public abstract void processPreDBFacebookEvent(ResponseEvent event, String fbId);
+
+	public abstract void processPreDBResponseEvent(ResponseEvent event,
+			String udid);
+
+	public abstract void processPreDBFacebookEvent(ResponseEvent event,
+			String fbId);
 	//public abstract void sendAdminMessage(String message);
-	
+
 }

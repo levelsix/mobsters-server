@@ -12,32 +12,34 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 
 public class InviteFbFriendsForSlotsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private InviteFbFriendsForSlotsRequestProto inviteFbFriendsForSlotsRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      inviteFbFriendsForSlotsRequestProto = InviteFbFriendsForSlotsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = inviteFbFriendsForSlotsRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("InviteFbFriendsForSlotsRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public InviteFbFriendsForSlotsRequestProto getInviteFbFriendsForSlotsRequestProto() {
-    return inviteFbFriendsForSlotsRequestProto;
-  }
+	private InviteFbFriendsForSlotsRequestProto inviteFbFriendsForSlotsRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "InviteFbFriendsForSlotsRequestEvent [inviteFbFriendsForSlotsRequestProto="
-		  + inviteFbFriendsForSlotsRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			inviteFbFriendsForSlotsRequestProto = InviteFbFriendsForSlotsRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = inviteFbFriendsForSlotsRequestProto.getSender()
+					.getMinUserProto().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("InviteFbFriendsForSlotsRequest exception", e);
+		}
+	}
+
+	public InviteFbFriendsForSlotsRequestProto getInviteFbFriendsForSlotsRequestProto() {
+		return inviteFbFriendsForSlotsRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "InviteFbFriendsForSlotsRequestEvent [inviteFbFriendsForSlotsRequestProto="
+				+ inviteFbFriendsForSlotsRequestProto + "]";
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.lvl6.server.controller.utils;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,8 @@ import com.lvl6.server.Locker;
 @Component
 public class ClanEventUtil implements InitializingBean {
 
-	private static final Logger log = LoggerFactory.getLogger(ClanEventUtil.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(ClanEventUtil.class);
 
 	@Autowired
 	protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtil;
@@ -28,11 +28,11 @@ public class ClanEventUtil implements InitializingBean {
 	public IMap<String, Boolean> getInitializationFlagsMap() {
 		return initializationFlagsMap;
 	}
+
 	public void setInitializationFlagsMap(
 			IMap<String, Boolean> initializationFlagsMap) {
 		this.initializationFlagsMap = initializationFlagsMap;
 	}
-
 
 	//need to put this in spring-hazelcast.xml
 	//distributed map that is seen across all our servers
@@ -42,34 +42,35 @@ public class ClanEventUtil implements InitializingBean {
 	public IMap<String, Integer> getClanRaidMonsterDmgMap() {
 		return clanRaidMonsterDmgMap;
 	}
-	public void setClanRaidMonsterDmgMap(IMap<String, Integer> clanRaidMonsterDmgMap) {
+
+	public void setClanRaidMonsterDmgMap(
+			IMap<String, Integer> clanRaidMonsterDmgMap) {
 		this.clanRaidMonsterDmgMap = clanRaidMonsterDmgMap;
 	}
+
 	//refers to IMap name above
-	private final String clanRaidMonsterDmgMapName = "clanRaidMonsterDmgMap"; 
-	
+	private final String clanRaidMonsterDmgMapName = "clanRaidMonsterDmgMap";
+
 	@Autowired
 	protected Locker locker;
 
-
-
 	/**
 	 * @param clanId
-	 * @return returns 0 if no entry for clanId exists, otherwise returns value stored.
+	 * @return returns 0 if no entry for clanId exists, otherwise returns value
+	 *         stored.
 	 */
 	public int getCrsmDmgForClanId(String clanIdStr) {
-//		String clanIdStr = clanId.toString();
+		//		String clanIdStr = clanId.toString();
 
 		if (!clanRaidMonsterDmgMap.containsKey(clanIdStr)) {
-			log.info(String.format(
-				"no crsmDmg for clanId=%s, returning 0",
-				clanIdStr));
+			log.info(String.format("no crsmDmg for clanId=%s, returning 0",
+					clanIdStr));
 			return 0;
 		}
 
 		int curCrsmDmg = clanRaidMonsterDmgMap.get(clanIdStr);
 		log.info(String.format("crsmDmg exists for clanId=%s, dmg=%s",
-			clanIdStr, curCrsmDmg));
+				clanIdStr, curCrsmDmg));
 		return curCrsmDmg;
 	}
 
@@ -77,25 +78,25 @@ public class ClanEventUtil implements InitializingBean {
 	/**
 	 * @param clanId
 	 * @param crsmDmgDelta
-	 * @param replaceCrsmDmg If false then perform relative update. Otherwise, replace
-	 * 		existing damage with crsmDmgDelta
+	 * @param replaceCrsmDmg If false then perform relative update. Otherwise,
+	 *            replace existing damage with crsmDmgDelta
 	 */
 	public void updateClanIdCrsmDmg(String clanIdStr, Integer crsmDmgDelta,
 			boolean replaceCrsmDmg) {
-//		String clanIdStr = clanId.toString();
+		//		String clanIdStr = clanId.toString();
 
 		if (replaceCrsmDmg) {
 			log.info(String.format(
-				"replacing clan's crsmDmg. clanId=%s, dmg=%s",
-				clanIdStr, crsmDmgDelta));
+					"replacing clan's crsmDmg. clanId=%s, dmg=%s", clanIdStr,
+					crsmDmgDelta));
 			clanRaidMonsterDmgMap.put(clanIdStr, crsmDmgDelta);
 			return;
 		}
 
 		if (!clanRaidMonsterDmgMap.containsKey(clanIdStr)) {
 			log.info(String.format(
-				"updating clan's crsmDmg. clanId=%s, dmg=%s",
-				clanIdStr, crsmDmgDelta));
+					"updating clan's crsmDmg. clanId=%s, dmg=%s", clanIdStr,
+					crsmDmgDelta));
 			clanRaidMonsterDmgMap.put(clanIdStr, crsmDmgDelta);
 			return;
 
@@ -103,9 +104,9 @@ public class ClanEventUtil implements InitializingBean {
 			int curCrsmDmg = clanRaidMonsterDmgMap.get(clanIdStr);
 			int newCrsmDmg = curCrsmDmg + crsmDmgDelta;
 
-			log.info(String.format(
-				"adding to clan's crsmDmg. clanId=%s, dmg=%s, curCrsmDmg=%s, newCrsmDmg=%s",
-				clanIdStr, crsmDmgDelta, curCrsmDmg, newCrsmDmg));
+			log.info(String
+					.format("adding to clan's crsmDmg. clanId=%s, dmg=%s, curCrsmDmg=%s, newCrsmDmg=%s",
+							clanIdStr, crsmDmgDelta, curCrsmDmg, newCrsmDmg));
 			clanRaidMonsterDmgMap.put(clanIdStr, newCrsmDmg);
 			return;
 		}
@@ -113,19 +114,13 @@ public class ClanEventUtil implements InitializingBean {
 	}
 
 	public void deleteCrsmDmgForClanId(String clanId) {
-		log.info(String.format(
-			"deleting crsm dmg for clanId=%s", clanId));
+		log.info(String.format("deleting crsm dmg for clanId=%s", clanId));
 		String clanIdStr = clanId.toString();
 		if (clanRaidMonsterDmgMap.containsKey(clanIdStr)) {
 			clanRaidMonsterDmgMap.remove(clanIdStr);
-			log.info(String.format(
-				"removed crsmDmg for clanId=%s", clanIdStr));
+			log.info(String.format("removed crsmDmg for clanId=%s", clanIdStr));
 		}
 	}
-
-
-
-
 
 	//SETUP STUFF
 	//REQUIRED INITIALIZING BEAN STUFF
@@ -135,14 +130,16 @@ public class ClanEventUtil implements InitializingBean {
 	}
 
 	protected void setupClanRaidMonsterDmgMap() {
-		
-		boolean gotLock = getLocker().lockHazelcastMap(clanRaidMonsterDmgMapName);
+
+		boolean gotLock = getLocker().lockHazelcastMap(
+				clanRaidMonsterDmgMapName);
 		try {
 			if (gotLock) {
 				boolean clanRaidMonsterDmgMapInitialized = false;
-				if (initializationFlagsMap.containsKey(clanRaidMonsterDmgMapName)) {
-					clanRaidMonsterDmgMapInitialized =
-							initializationFlagsMap.get(clanRaidMonsterDmgMapName);
+				if (initializationFlagsMap
+						.containsKey(clanRaidMonsterDmgMapName)) {
+					clanRaidMonsterDmgMapInitialized = initializationFlagsMap
+							.get(clanRaidMonsterDmgMapName);
 				}
 
 				if (!clanRaidMonsterDmgMapInitialized) {
@@ -153,11 +150,11 @@ public class ClanEventUtil implements InitializingBean {
 				}
 
 			} else {
-				log.warn("not initializing clanRaidMonsterDmgMap. didn't get lock for " +
-						clanRaidMonsterDmgMapName);
+				log.warn("not initializing clanRaidMonsterDmgMap. didn't get lock for "
+						+ clanRaidMonsterDmgMapName);
 			}
 
-		} catch(Exception e) {
+		} catch (Exception e) {
 			log.error("failed to initialize clanRaidMonsterDmgMap", e);
 		} finally {
 
@@ -167,7 +164,7 @@ public class ClanEventUtil implements InitializingBean {
 		}
 
 	}
-	
+
 	protected void initializeClanRaidMonsterDmgMap() {
 		//now we have all clans' crsmDmgs, put them into the clanRaidMonsterDmgMap IMap
 		List<String> clanIds = null;
@@ -177,7 +174,8 @@ public class ClanEventUtil implements InitializingBean {
 		populateClanRaidMonsterDmgMap(clanIdsToCrsmDmgs);
 	}
 
-	protected void populateClanRaidMonsterDmgMap(Map<String, Integer> clanIdsToCrsmDmgs) {
+	protected void populateClanRaidMonsterDmgMap(
+			Map<String, Integer> clanIdsToCrsmDmgs) {
 		//go through all the clans, and store them into the hazelcast distributed map
 		for (String clanId : clanIdsToCrsmDmgs.keySet()) {
 			String userId = clanId.toString();
@@ -186,13 +184,13 @@ public class ClanEventUtil implements InitializingBean {
 			clanRaidMonsterDmgMap.put(userId, crsmDmg);
 		}
 	}
-	
-	
+
 	public Locker getLocker() {
 		return locker;
 	}
+
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
-	
+
 }

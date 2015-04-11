@@ -12,32 +12,34 @@ import com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProto;
 
 public class SolicitTeamDonationRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private SolicitTeamDonationRequestProto solicitTeamDonationRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      solicitTeamDonationRequestProto = SolicitTeamDonationRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = solicitTeamDonationRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("SolicitTeamDonationRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public SolicitTeamDonationRequestProto getSolicitTeamDonationRequestProto() {
-    return solicitTeamDonationRequestProto;
-  }
+	private SolicitTeamDonationRequestProto solicitTeamDonationRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "SolicitTeamDonationRequestEvent [solicitTeamDonationRequestProto="
-		  + solicitTeamDonationRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			solicitTeamDonationRequestProto = SolicitTeamDonationRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = solicitTeamDonationRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("SolicitTeamDonationRequest exception", e);
+		}
+	}
+
+	public SolicitTeamDonationRequestProto getSolicitTeamDonationRequestProto() {
+		return solicitTeamDonationRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "SolicitTeamDonationRequestEvent [solicitTeamDonationRequestProto="
+				+ solicitTeamDonationRequestProto + "]";
+	}
+
 }

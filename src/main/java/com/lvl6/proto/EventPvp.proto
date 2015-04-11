@@ -3,6 +3,8 @@
 
 import "Battle.proto";
 import "MonsterStuff.proto";
+//import "Research.proto";
+import "Structure.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -14,14 +16,8 @@ option java_outer_classname = "EventPvpProto";
 ///atm, the necessary non event protos for pvp are in Battle.proto
 
 
-
-// A real or a fake player will be returned by this event.
-// SOME BACKGROUND: 
-// All people that can be attacked will be offline people. The opposite is not true though.
-// All people that can be attacked will not have an active shield.
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
-	optional int32 attackerElo = 2;
 
 	/* an EventUser.proto UpdateUserCurrencyEvent will be used instead of this stuff
 	//if user needs, say, five more cash, then user can spend gems to replace
@@ -55,11 +51,6 @@ message QueueUpResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-// Whenever an offline user comes in (StartupRequest) this user will be removed from the
-//	potentialPvpUsers collection.	
-// Whenever someone logs out, the user will be placed into the collection if he qualifies
-//	to be attacked.
-
 message BeginPvpBattleRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 senderElo = 2;
@@ -173,3 +164,23 @@ message SetDefendingMsgResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message CustomizePvpBoardObstacleRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserPvpBoardObstacleProto nuOrUpdatedObstacles = 2;
+	repeated int32 removeUpboIds = 3;
+	
+}
+
+message CustomizePvpBoardObstacleResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional CustomizePvpBoardObstacleStatus status = 2;
+	
+	enum CustomizePvpBoardObstacleStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}  
+}
+

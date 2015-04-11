@@ -11,38 +11,39 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
 
 public class QuestProgressRequestEvent extends RequestEvent {
-	
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private QuestProgressRequestProto questProgressRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      questProgressRequestProto = QuestProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = questProgressRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("QuestProgressRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public QuestProgressRequestProto getQuestProgressRequestProto() {
-    return questProgressRequestProto;
-  }
+	private QuestProgressRequestProto questProgressRequestProto;
 
-  public void setQuestProgressRequestProto( QuestProgressRequestProto questProgressRequestProto )
-  {
-	  this.questProgressRequestProto = questProgressRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			questProgressRequestProto = QuestProgressRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = questProgressRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("QuestProgressRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "QuestProgressRequestEvent [questProgressRequestProto="
-		  + questProgressRequestProto
-		  + "]";
-  }
-  
+	public QuestProgressRequestProto getQuestProgressRequestProto() {
+		return questProgressRequestProto;
+	}
+
+	public void setQuestProgressRequestProto(
+			QuestProgressRequestProto questProgressRequestProto) {
+		this.questProgressRequestProto = questProgressRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestProgressRequestEvent [questProgressRequestProto="
+				+ questProgressRequestProto + "]";
+	}
+
 }

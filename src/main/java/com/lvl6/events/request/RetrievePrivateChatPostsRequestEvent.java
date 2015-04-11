@@ -10,34 +10,36 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProto;
 
-public class RetrievePrivateChatPostsRequestEvent extends RequestEvent{
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RetrievePrivateChatPostsRequestProto retrievePrivateChatPostsRequestProto;
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */ 
-  @Override
-  public void read(ByteBuffer buff) {
-    try {
-      retrievePrivateChatPostsRequestProto = RetrievePrivateChatPostsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrievePrivateChatPostsRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RetrievePrivateChatPostsRequest exception", e);
-    }
-  }
+public class RetrievePrivateChatPostsRequestEvent extends RequestEvent {
 
-  public RetrievePrivateChatPostsRequestProto getRetrievePrivateChatPostsRequestProto() {
-    return retrievePrivateChatPostsRequestProto;
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Override
-  public String toString()
-  {
-	  return "RetrievePrivateChatPostsRequestEvent [retrievePrivateChatPostsRequestProto="
-		  + retrievePrivateChatPostsRequestProto
-		  + "]";
-  }
-  
+	private RetrievePrivateChatPostsRequestProto retrievePrivateChatPostsRequestProto;
+
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			retrievePrivateChatPostsRequestProto = RetrievePrivateChatPostsRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = retrievePrivateChatPostsRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RetrievePrivateChatPostsRequest exception", e);
+		}
+	}
+
+	public RetrievePrivateChatPostsRequestProto getRetrievePrivateChatPostsRequestProto() {
+		return retrievePrivateChatPostsRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "RetrievePrivateChatPostsRequestEvent [retrievePrivateChatPostsRequestProto="
+				+ retrievePrivateChatPostsRequestProto + "]";
+	}
+
 }//RetrievePrivateChatPostsRequestProto

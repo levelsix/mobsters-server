@@ -29,6 +29,7 @@ message SendGroupChatRequestProto {
 	optional GroupChatScope scope = 2 [default = CLAN];
 	optional string chatMessage = 3;
 	optional int64 clientTime = 4;
+	optional TranslateLanguages globalLanguage = 5; 
 }
 
 message SendGroupChatResponseProto {
@@ -45,9 +46,10 @@ message SendGroupChatResponseProto {
 
 message ReceivedGroupChatResponseProto {
 	optional MinimumUserProtoWithLevel sender = 1;
-	optional string chatMessage = 2;
-	optional GroupChatScope scope = 3 [default = CLAN];
-	optional bool isAdmin = 4;
+	optional GroupChatScope scope = 2 [default = CLAN];
+	optional GroupChatMessageProto message = 3;
+	optional string chatMessage = 4 [deprecated = true];
+	optional bool isAdmin = 5 [deprecated = true];
 }
 
 //------------------------------------------------------------------------------------
@@ -56,6 +58,8 @@ message PrivateChatPostRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string recipientUuid = 2;
 	optional string content = 3;
+	optional TranslateLanguages contentLanguage = 4 [default = ENGLISH]; 
+
 }
 
 																						//DONE
@@ -63,6 +67,8 @@ message PrivateChatPostResponseProto {
 	 optional MinimumUserProto sender = 1;
      optional PrivateChatPostStatus status = 2;
 	 optional PrivateChatPostProto post = 3;
+	 optional PrivateChatDefaultLanguageProto translationSetting = 4;
+	 optional GroupChatMessageProto adminMessage = 5;
 	
      enum PrivateChatPostStatus {
      	SUCCESS = 1;
@@ -83,6 +89,7 @@ message RetrievePrivateChatPostsRequestProto {
 	//if this is not set then return most recent ones
 	//switch to UUIDs makes this obsolete; consider date
 	optional int32 beforePrivateChatId = 3 [deprecated = true];
+	optional TranslateLanguages language = 4;
 	
 }
 
@@ -102,4 +109,29 @@ message RetrievePrivateChatPostsResponseProto {
 }
 
 //------------------------------------------------------------------------------------
+
+message TranslateSelectMessagesRequestProto {
+	optional MinimumUserProto sender = 1; //person receiving msgs
+	optional ChatType chatType = 2;
+	optional string otherUserUuid = 3;
+	optional TranslateLanguages language = 4;
+	repeated PrivateChatPostProto messagesToBeTranslated = 5;
+	optional bool translateOn = 6;
+
+}
+
+message TranslateSelectMessagesResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated PrivateChatPostProto messagesTranslated = 2;
+	optional TranslateSelectMessagesStatus status = 3;
+
+	enum TranslateSelectMessagesStatus {
+		FAIL_OTHER = 1;
+		FAIL_NOT_VALID_LANGUAGE = 2;
+		SUCCESS = 3;
+	}
+}
+
+
+
 

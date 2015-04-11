@@ -15,23 +15,23 @@ public class StatsGraphsPage extends TemplatePage {
 
 	public StatsGraphsPage(PageParameters params) {
 		super(params);
-		if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		if (SecurityContextHolder.getContext() != null
+				&& SecurityContextHolder.getContext().getAuthentication() != null) {
+			String user = SecurityContextHolder.getContext()
+					.getAuthentication().getName();
 			log.info("Loading Stats Page for: {}", user);
 		} else {
 			log.info("Loading Stats Page");
 		}
 		String statsField = params.get(STATS_FIELD_ARG).toString();
 		setupGraphs(statsField);
-		
+
 	}
-		
-	
+
 	protected void setupGraphs(String statsField) {
-		StatsGraphsPanel statsGraphs = new StatsGraphsPanel("statsGraphs", statsField);
+		StatsGraphsPanel statsGraphs = new StatsGraphsPanel("statsGraphs",
+				statsField);
 		add(statsGraphs);
 	}
-	
-	
 
 }

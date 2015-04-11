@@ -56,7 +56,8 @@ enum GameActionType {
 	REMOVE_OBSTACLE = 7;
 	COMBINE_MONSTER = 8;
 	ENTER_PERSISTENT_EVENT = 9;
-	GAME_ACTION_TYPE_RESEARCH = 10; //all enums not in "message" share namespace 
+	PERFORMING_RESEARCH = 10; //all enums not in "message" share namespace 
+	CREATE_BATTLE_ITEM = 11;
 }
 
 enum GameType {
@@ -65,6 +66,8 @@ enum GameType {
 	RESEARCH = 3;
 	SKILL = 4;
 	TASK = 5;
+	BATTLE_ITEM = 6;
+	BOARD_OBSTACLE = 7;
 }
 
 // the ResourceType enum in Structure.proto, should be in here

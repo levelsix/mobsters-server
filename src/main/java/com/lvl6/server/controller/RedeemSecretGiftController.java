@@ -34,9 +34,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class RedeemSecretGiftController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class RedeemSecretGiftController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	public RedeemSecretGiftController() {
 		numAllocatedThreads = 1;
@@ -47,7 +50,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -63,7 +66,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent)event).getRedeemSecretGiftRequestProto();
+		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
+				.getRedeemSecretGiftRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -72,7 +76,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		List<String> idsRedeemed = reqProto.getUisgUuidList();
 
-		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto.newBuilder();
+		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto
+				.newBuilder();
 		resBuilder.setMup(senderProto);
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
 
@@ -84,8 +89,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, itemIdsRedeemed=%s",
-				userId, idsRedeemed), e);
+					"UUID error. incorrect userId=%s, itemIdsRedeemed=%s",
+					userId, idsRedeemed), e);
 			invalidUuids = true;
 		}
 
@@ -93,49 +98,48 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
 			resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
-			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(userId);
+			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+				.getSimpleName());
 		try {
-//
-			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(
-				userId, idsRedeemed, clientTime,
-				itemSecretGiftForUserRetrieveUtil, userRetrieveUtil,
-				itemForUserRetrieveUtil, DeleteUtils.get(), UpdateUtils.get(),
-				InsertUtils.get());
+			//
+			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(userId,
+					idsRedeemed, clientTime, itemSecretGiftForUserRetrieveUtil,
+					userRetrieveUtil, itemForUserRetrieveUtil,
+					DeleteUtils.get(), UpdateUtils.get(), InsertUtils.get());
 
 			rsga.execute(resBuilder);
 
-			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus()))
-			{
+			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				Collection<ItemSecretGiftForUser> nuGifts = rsga.getGifts();
 				Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
-					.createUserItemSecretGiftProto(nuGifts);
-				log.info(String.format(
-					"setting nuGifts: %s,\t protos: %s",
-					nuGifts, nuGiftsProtos));
+						.createUserItemSecretGiftProto(nuGifts);
+				log.info(String.format("setting nuGifts: %s,\t protos: %s",
+						nuGifts, nuGiftsProtos));
 				resBuilder.addAllNuGifts(nuGiftsProtos);
 			}
-			
+
 			RedeemSecretGiftResponseProto resProto = resBuilder.build();
-			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
+			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemSecretGiftResponseProto(resProto);
 			server.writeEvent(resEvent);
-			
-			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus()))
-			{
+
+			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = rsga.getUser();
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-						u, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								u, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 			}
@@ -144,46 +148,46 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.error("exception in RedeemSecretGiftController processEvent", e);
 			try {
 				resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
-				RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(userId);
+				RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in RedeemSecretGiftController processEvent", e);
+				log.error(
+						"exception2 in RedeemSecretGiftController processEvent",
+						e);
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 		}
 	}
 
-	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
-	{
+	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil() {
 		return itemSecretGiftForUserRetrieveUtil;
 	}
 
-	public void setItemSecretGiftForUserRetrieveUtil( ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
-	{
+	public void setItemSecretGiftForUserRetrieveUtil(
+			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil) {
 		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
 	}
 
-	public UserRetrieveUtils2 getUserRetrieveUtil()
-	{
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
 		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
-	{
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
-	{
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
-	{
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 

@@ -12,32 +12,33 @@ import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 
 public class LeaveClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private LeaveClanRequestProto leaveClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      leaveClanRequestProto = LeaveClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = leaveClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("LeaveClanRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public LeaveClanRequestProto getLeaveClanRequestProto() {
-    return leaveClanRequestProto;
-  }
+	private LeaveClanRequestProto leaveClanRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "LeaveClanRequestEvent [leaveClanRequestProto="
-		  + leaveClanRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			leaveClanRequestProto = LeaveClanRequestProto.parseFrom(ByteString
+					.copyFrom(buff));
+			playerId = leaveClanRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("LeaveClanRequest exception", e);
+		}
+	}
+
+	public LeaveClanRequestProto getLeaveClanRequestProto() {
+		return leaveClanRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "LeaveClanRequestEvent [leaveClanRequestProto="
+				+ leaveClanRequestProto + "]";
+	}
+
 }

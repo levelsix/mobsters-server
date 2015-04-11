@@ -12,32 +12,33 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 
 public class ReviveInDungeonRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  private ReviveInDungeonRequestProto reviveInDungeonRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      reviveInDungeonRequestProto = ReviveInDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = reviveInDungeonRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("ReviveInDungeonRequest exception", e);
-    }
-  }
+	private ReviveInDungeonRequestProto reviveInDungeonRequestProto;
 
-  public ReviveInDungeonRequestProto getReviveInDungeonRequestProto() {
-    return reviveInDungeonRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			reviveInDungeonRequestProto = ReviveInDungeonRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = reviveInDungeonRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("ReviveInDungeonRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "ReviveInDungeonRequestEvent [reviveInDungeonRequestProto="
-		  + reviveInDungeonRequestProto
-		  + "]";
-  }
-  
+	public ReviveInDungeonRequestProto getReviveInDungeonRequestProto() {
+		return reviveInDungeonRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviveInDungeonRequestEvent [reviveInDungeonRequestProto="
+				+ reviveInDungeonRequestProto + "]";
+	}
+
 }

@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
 
-  private CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto;
-  
-  public CombineUserMonsterPiecesResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_COMBINE_USER_MONSTER_PIECES_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = combineMonsterPiecesResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto;
 
-  public void setCombineUserMonsterPiecesResponseProto(CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto) {
-    this.combineMonsterPiecesResponseProto = combineMonsterPiecesResponseProto;
-  }
+	public CombineUserMonsterPiecesResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_COMBINE_USER_MONSTER_PIECES_EVENT;
+	}
 
-  public CombineUserMonsterPiecesResponseProto getCombineUserMonsterPiecesResponseProto() {   //because APNS required
-    return combineMonsterPiecesResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = combineMonsterPiecesResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setCombineUserMonsterPiecesResponseProto(
+			CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto) {
+		this.combineMonsterPiecesResponseProto = combineMonsterPiecesResponseProto;
+	}
+
+	public CombineUserMonsterPiecesResponseProto getCombineUserMonsterPiecesResponseProto() {   //because APNS required
+		return combineMonsterPiecesResponseProto;
+	}
+
 }

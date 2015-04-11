@@ -14,18 +14,18 @@ public class SendAdminMessageForm extends Form<AdminChatPost> {
 		super(id, new CompoundPropertyModel<AdminChatPost>(message));
 		setup();
 	}
-	
+
 	protected void setup() {
-		TextField<String> content =new TextField<String>("content");
+		TextField<String> content = new TextField<String>("content");
 		content.setOutputMarkupId(true);
 		add(content);
 	}
 
-
 	@Override
 	protected void onSubmit() {
 		super.onSubmit();
-		AdminChatUtil acu = AppContext.getApplicationContext().getBean(AdminChatUtil.class);
+		AdminChatUtil acu = AppContext.getApplicationContext().getBean(
+				AdminChatUtil.class);
 		acu.sendAdminChatMessage(getModelObject());
 	}
 

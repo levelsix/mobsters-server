@@ -11,27 +11,24 @@ public class TopSpendersPanel extends Panel {
 		super(id);
 		setupPanel();
 	}
-	
-	
+
 	protected TopSpendersModel model = new TopSpendersModel();
-	protected TopSpendersListView list = new TopSpendersListView("topSpendersList", model);
-	
-	
-	protected void  setupPanel() {
+	protected TopSpendersListView list = new TopSpendersListView(
+			"topSpendersList", model);
+
+	protected void setupPanel() {
 		add(list);
 	}
-	
-	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(Duration.seconds(300))
-	{
+
+	AbstractAjaxTimerBehavior abstractAjaxTimerBehavior = new AbstractAjaxTimerBehavior(
+			Duration.seconds(300)) {
 		private static final long serialVersionUID = 5721917435743521271L;
 
 		@Override
-		protected void onTimer(AjaxRequestTarget target)
-		{
+		protected void onTimer(AjaxRequestTarget target) {
 			setupPanel();
 		}
 	};
-
 
 	private static final long serialVersionUID = -2625835646085053890L;
 

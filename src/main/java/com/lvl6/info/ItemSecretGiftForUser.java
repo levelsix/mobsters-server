@@ -6,24 +6,19 @@ import java.util.Date;
 public class ItemSecretGiftForUser implements Serializable {
 
 	private static final long serialVersionUID = 1041342557855321616L;
-	
+
 	private String id;
 	private String userId;
 	private int itemId;
 	private int secsTillCollection;
 	private Date createTime;
-	
+
 	public ItemSecretGiftForUser() {
 		super();
 	}
 
-	public ItemSecretGiftForUser(
-		String id,
-		String userId,
-		int itemId,
-		int secsTillCollection,
-		Date createTime )
-	{
+	public ItemSecretGiftForUser(String id, String userId, int itemId,
+			int secsTillCollection, Date createTime) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -32,70 +27,51 @@ public class ItemSecretGiftForUser implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public int getItemId()
-	{
+	public int getItemId() {
 		return itemId;
 	}
 
-	public void setItemId( int itemId )
-	{
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public int getSecsTillCollection()
-	{
+	public int getSecsTillCollection() {
 		return secsTillCollection;
 	}
 
-	public void setSecsTillCollection( int secsTillCollection )
-	{
+	public void setSecsTillCollection(int secsTillCollection) {
 		this.secsTillCollection = secsTillCollection;
 	}
 
-	public Date getCreateTime()
-	{
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime( Date createTime )
-	{
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "ItemSecretGiftForUser [id="
-			+ id
-			+ ", userId="
-			+ userId
-			+ ", itemId="
-			+ itemId
-			+ ", minsTillCollection="
-			+ secsTillCollection
-			+ ", createTime="
-			+ createTime
-			+ "]";
+	public String toString() {
+		return "ItemSecretGiftForUser [id=" + id + ", userId=" + userId
+				+ ", itemId=" + itemId + ", minsTillCollection="
+				+ secsTillCollection + ", createTime=" + createTime + "]";
 	}
-	
+
 }

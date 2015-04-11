@@ -12,32 +12,38 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProt
 
 public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
+	private ApproveOrRejectRequestToJoinClanRequestProto approveOrRejectRequestToJoinClanRequestProto;
+
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			approveOrRejectRequestToJoinClanRequestProto = ApproveOrRejectRequestToJoinClanRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = approveOrRejectRequestToJoinClanRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("ApproveOrRejectRequestToJoinClanRequest exception", e);
+		}
+	}
+
+	public ApproveOrRejectRequestToJoinClanRequestProto getApproveOrRejectRequestToJoinClanRequestProto() {
+		return approveOrRejectRequestToJoinClanRequestProto;
+	}
 	
-  private ApproveOrRejectRequestToJoinClanRequestProto approveOrRejectRequestToJoinClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      approveOrRejectRequestToJoinClanRequestProto = ApproveOrRejectRequestToJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = approveOrRejectRequestToJoinClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("ApproveOrRejectRequestToJoinClanRequest exception", e);
-    }
-  }
+	public void setApproveOrRejectRequestToJoinClanRequestProto(ApproveOrRejectRequestToJoinClanRequestProto aorrtjcrp) {
+		this.approveOrRejectRequestToJoinClanRequestProto = aorrtjcrp;
+	}
 
-  public ApproveOrRejectRequestToJoinClanRequestProto getApproveOrRejectRequestToJoinClanRequestProto() {
-    return approveOrRejectRequestToJoinClanRequestProto;
-  }
-
-  @Override
-  public String toString()
-  {
-	  return "ApproveOrRejectRequestToJoinClanRequestEvent [approveOrRejectRequestToJoinClanRequestProto="
-		  + approveOrRejectRequestToJoinClanRequestProto
-		  + "]";
-  }
+	@Override
+	public String toString() {
+		return "ApproveOrRejectRequestToJoinClanRequestEvent [approveOrRejectRequestToJoinClanRequestProto="
+				+ approveOrRejectRequestToJoinClanRequestProto + "]";
+	}
 
 }

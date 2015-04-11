@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class ClanIcon implements Serializable {
 
 	private static final long serialVersionUID = -3648830914482901288L;
-	
+
 	private int id;
 	private String imgName;
 	private boolean isAvailable;
-	
-	
+
 	public ClanIcon() {
 		super();
 	}
@@ -51,5 +50,5 @@ public class ClanIcon implements Serializable {
 		return "ClanIcon [id=" + id + ", imgName=" + imgName + ", isAvailable="
 				+ isAvailable + "]";
 	}
-	
+
 }

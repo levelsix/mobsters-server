@@ -37,7 +37,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	public AddMonsterToBattleTeamController() {
 		numAllocatedThreads = 4;
 	}
@@ -71,28 +71,26 @@ public class AddMonsterToBattleTeamController extends EventController {
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
-		
+
 		try {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER);
+		if (invalidUuids) {
+			resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER);
 			AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder
-					.build());
+			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+			return;
+		}
+
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 
@@ -148,8 +146,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid,
-					this.getClass().getSimpleName());
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
@@ -157,15 +154,16 @@ public class AddMonsterToBattleTeamController extends EventController {
 	 * Return true if user request is valid; false otherwise and set the builder
 	 * status to the appropriate value.
 	 */
-	private boolean checkLegit(Builder resBuilder, String userId, int teamSlotNum,
-		String userMonsterId, Map<String, MonsterForUser> idsToMonsters) { // ,
+	private boolean checkLegit(Builder resBuilder, String userId,
+			int teamSlotNum, String userMonsterId,
+			Map<String, MonsterForUser> idsToMonsters) { // ,
 		// Map<Long, MonsterEnhancingForUser> inEnhancing,
 		// Map<Long, MonsterHealingForUser> inHealing) {
 
 		if (!idsToMonsters.containsKey(userMonsterId)) {
 			log.error(String.format(
-				"no monster_for_user exists with id=%s, and userId=%s",
-				userMonsterId, userId));
+					"no monster_for_user exists with id=%s, and userId=%s",
+					userMonsterId, userId));
 			return false;
 		}
 		MonsterForUser mfu = idsToMonsters.get(userMonsterId);
@@ -210,9 +208,9 @@ public class AddMonsterToBattleTeamController extends EventController {
 		// (batch it)
 		for (MonsterForUser mfu : idsToMonsters.values()) {
 			if (mfu.getTeamSlotNum() == teamSlotNum) {
-				log.warn(String.format(
-					"more than one monster sharing team slot. userMonster=%s",
-					mfu));
+				log.warn(String
+						.format("more than one monster sharing team slot. userMonster=%s",
+								mfu));
 				userMonsterIds.add(mfu.getId());
 			}
 		}
@@ -230,8 +228,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 	}
 
 	private boolean writeChangesToDb(String uId, int teamSlotNum,
-		String userMonsterId, MonsterForUser mfu)
-	{
+			String userMonsterId, MonsterForUser mfu) {
 		int numUpdated = UpdateUtils.get().updateUserMonsterTeamSlotNum(
 				userMonsterId, teamSlotNum);
 
@@ -252,14 +249,12 @@ public class AddMonsterToBattleTeamController extends EventController {
 		this.locker = locker;
 	}
 
-	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
-	{
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil() {
 		return monsterForUserRetrieveUtil;
 	}
 
 	public void setMonsterForUserRetrieveUtil(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
-	{
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 

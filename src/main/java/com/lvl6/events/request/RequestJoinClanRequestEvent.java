@@ -12,32 +12,37 @@ import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 
 public class RequestJoinClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
+	private RequestJoinClanRequestProto requestJoinClanRequestProto;
+
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			requestJoinClanRequestProto = RequestJoinClanRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = requestJoinClanRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RequestJoinClanRequest exception", e);
+		}
+	}
+
+	public RequestJoinClanRequestProto getRequestJoinClanRequestProto() {
+		return requestJoinClanRequestProto;
+	}
 	
-  private RequestJoinClanRequestProto requestJoinClanRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      requestJoinClanRequestProto = RequestJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = requestJoinClanRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RequestJoinClanRequest exception", e);
-    }
-  }
+	public void setRequestJoinClanRequestProto(RequestJoinClanRequestProto rjcrp) {
+		this.requestJoinClanRequestProto = rjcrp;
+	}
 
-  public RequestJoinClanRequestProto getRequestJoinClanRequestProto() {
-    return requestJoinClanRequestProto;
-  }
+	@Override
+	public String toString() {
+		return "RequestJoinClanRequestEvent [requestJoinClanRequestProto="
+				+ requestJoinClanRequestProto + "]";
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "RequestJoinClanRequestEvent [requestJoinClanRequestProto="
-		  + requestJoinClanRequestProto
-		  + "]";
-  }
-  
 }

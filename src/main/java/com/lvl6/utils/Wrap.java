@@ -12,8 +12,8 @@ import com.newrelic.api.agent.Trace;
 public abstract class Wrap {
 	// log4j logger
 
-
 	private static final Logger log = LoggerFactory.getLogger(Wrap.class);
+
 	public final void initWrap(int numWorkers) {
 
 	}
@@ -22,15 +22,16 @@ public abstract class Wrap {
 
 	}
 
-	
-	@Trace (dispatcher=true)
+	@Trace(dispatcher = true)
 	public void handleEvent(GameEvent event) {
 		try {
-			NewRelic.setTransactionName("EventController", getClass().getSimpleName());
+			NewRelic.setTransactionName("EventController", getClass()
+					.getSimpleName());
 			StopWatch timer = new StopWatch();
 			timer.start();
 			processEvent(event);
-			NewRelic.recordResponseTimeMetric(getClass().getSimpleName(), timer.getNanoTime());
+			NewRelic.recordResponseTimeMetric(getClass().getSimpleName(),
+					timer.getNanoTime());
 		} catch (Exception e) {
 			log.error("Error handling event: {}", event, e);
 		}
@@ -47,6 +48,6 @@ public abstract class Wrap {
 	protected abstract void processEvent(GameEvent event) throws Exception;
 
 	public void processClanResponseEvent(ResponseEvent event, String clanId) {
-		
+
 	}
 }

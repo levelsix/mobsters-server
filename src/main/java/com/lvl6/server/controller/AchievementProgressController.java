@@ -30,9 +30,12 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.AchievementStuffUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component @DependsOn("gameServer") public class AchievementProgressController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class AchievementProgressController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected AchievementStuffUtil achievementStuffUtil;
@@ -62,8 +65,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent)event).getAchievementProgressRequestProto();
-		
+		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
+				.getAchievementProgressRequestProto();
+
 		log.info(String.format("reqProto=%s", reqProto));
 
 		//get stuff client sent
@@ -72,70 +76,73 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		List<UserAchievementProto> uapList = reqProto.getUapListList();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 
-		Map<Integer, UserAchievementProto> achievementIdsToUap =
-				getAchievementStuffUtil().achievementIdsToUap(uapList);
-		
+		Map<Integer, UserAchievementProto> achievementIdsToUap = getAchievementStuffUtil()
+				.achievementIdsToUap(uapList);
+
 		//set stuff to send to the client
-		AchievementProgressResponseProto.Builder resBuilder = AchievementProgressResponseProto.newBuilder();
+		AchievementProgressResponseProto.Builder resBuilder = AchievementProgressResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
-		
+
 		try {
 			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
-			log.error(String.format(
-				"UUID error. incorrect userId=%s",
-				userId), e);
+			log.error(String.format("UUID error. incorrect userId=%s", userId),
+					e);
 		}
-		
+
 		//UUID checks
-	    if (invalidUuids) {
-	    	resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
-			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(userId);
-	      	resEvent.setTag(event.getTag());
-	      	resEvent.setAchievementProgressResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
-	    	return;
-	    }
-		
+		if (invalidUuids) {
+			resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
+			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setAchievementProgressResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
+
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
-			
+
 			//achievementIdsToUap might be modified
 			boolean legitProgress = checkLegitProgress(resBuilder, userId,
 					uapList, achievementIdsToUap);
 
 			boolean success = false;
 			if (legitProgress) {
-				success = writeChangesToDB(userId, clientTime, achievementIdsToUap);
+				success = writeChangesToDB(userId, clientTime,
+						achievementIdsToUap);
 			}
 
 			if (success) {
 				resBuilder.setStatus(AchievementProgressStatus.SUCCESS);
 			}
 
-			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(senderProto.getUserUuid());
+			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());  
+			resEvent.setAchievementProgressResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in AchievementProgress processEvent", e);
 			resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
-			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(userId);
-	      	resEvent.setTag(event.getTag());
-	      	resEvent.setAchievementProgressResponseProto(resBuilder.build());
-	      	server.writeEvent(resEvent);
+			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setAchievementProgressResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
-
 
 	//achievementIdsToUap might be modified
 	private boolean checkLegitProgress(Builder resBuilder, String userId,
@@ -144,11 +151,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		//make sure the quest, relating to the user_quest updated, exists
 		if (null == uapList || uapList.isEmpty()) {
-			log.error(String.format(
-				"parameter passed in is null. uapList=%s", uapList));
+			log.error(String.format("parameter passed in is null. uapList=%s",
+					uapList));
 			return false;
 		}
-		
+
 		filterOutInvalidAchievements(achievementIdsToUap);
 		filterOutCompletedAchievements(userId, achievementIdsToUap);
 
@@ -160,7 +167,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		Set<Integer> achievementIds = new HashSet<Integer>(
 				achievementIdsToUap.keySet());
-		
+
 		//filter out the invalid achievements
 		Set<Integer> validAchievementIds = AchievementRetrieveUtils
 				.getAchievementIds();
@@ -173,27 +180,24 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			}
 			//filtering out invalid achievements
 			UserAchievementProto uap = achievementIdsToUap.get(achievementId);
-			log.error(String.format(
-				"removing invalid achievement client sent: %s, valid ids are: %s",
-				uap, validAchievementIds));
-			
+			log.error(String
+					.format("removing invalid achievement client sent: %s, valid ids are: %s",
+							uap, validAchievementIds));
+
 			achievementIdsToUap.remove(achievementId);
 		}
 	}
-	
+
 	private void filterOutCompletedAchievements(String userId,
 			Map<Integer, UserAchievementProto> achievementIdsToUap) {
-		
 
 		Set<Integer> achievementIds = new HashSet<Integer>(
 				achievementIdsToUap.keySet());
-		
-		//get all the achievements, for this user, that the client sent
-		Map<Integer, AchievementForUser> achievementIdToUserAchievements =
-				getAchievementForUserRetrieveUtil()
-				.getSpecificOrAllAchievementIdToAchievementForUserId(
-						userId, achievementIds);
 
+		//get all the achievements, for this user, that the client sent
+		Map<Integer, AchievementForUser> achievementIdToUserAchievements = getAchievementForUserRetrieveUtil()
+				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
+						achievementIds);
 
 		for (Integer achievementId : achievementIds) {
 			if (!achievementIdToUserAchievements.containsKey(achievementId)) {
@@ -208,9 +212,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			if (afu.isComplete()) {
 				UserAchievementProto uap = achievementIdsToUap
 						.get(achievementId);
-				log.warn(String.format(
-					"client updating completed achievement: %s, with new values: %s, %s",
-					afu, uap, " removing this requested update"));
+				log.warn(String
+						.format("client updating completed achievement: %s, with new values: %s, %s",
+								afu, uap, " removing this requested update"));
 				achievementIdsToUap.remove(achievementId);
 				continue;
 			}
@@ -225,29 +229,28 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.warn("writeChangesToDB() no achievements to update");
 			return true;
 		}
-		
+
 		//transform UserAchievementProto into AchievementForUser objects
-		Map<Integer, AchievementForUser> achievementIdToAfu =
-				getAchievementStuffUtil()
+		Map<Integer, AchievementForUser> achievementIdToAfu = getAchievementStuffUtil()
 				.javafyUserAchievementProto(achievementIdsToUap);
-		
-//		log.info("writeChangesToDB() achievementIdToAfu" +
-//				achievementIdToAfu);
+
+		//		log.info("writeChangesToDB() achievementIdToAfu" +
+		//				achievementIdToAfu);
 
 		int numUpdated = getUpdateUtil().updateUserAchievement(userId,
 				clientTime, achievementIdToAfu);
-		
+
 		log.info("writeChangesToDB() numUpdated=" + numUpdated);
-		
+
 		return true;
 	}
-
 
 	public AchievementStuffUtil getAchievementStuffUtil() {
 		return achievementStuffUtil;
 	}
 
-	public void setAchievementStuffUtil(AchievementStuffUtil achievementStuffUtil) {
+	public void setAchievementStuffUtil(
+			AchievementStuffUtil achievementStuffUtil) {
 		this.achievementStuffUtil = achievementStuffUtil;
 	}
 
@@ -275,6 +278,5 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
 	}
-
 
 }

@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,455 +18,245 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.StructureForUser;
-import com.lvl6.info.StructureResourceGenerator;
+import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
-import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.utilmethods.UpdateUtils;
+import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
-  @Component @DependsOn("gameServer") public class RetrieveCurrencyFromNormStructureController extends EventController{
+@Component
+@DependsOn("gameServer")
+public class RetrieveCurrencyFromNormStructureController extends
+		EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
-  
-  @Autowired
-  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
+	@Autowired
+	protected Locker locker;
 
-  public RetrieveCurrencyFromNormStructureController() {
-    numAllocatedThreads = 14;
-  }
-  
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new RetrieveCurrencyFromNormStructureRequestEvent();
-  }
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT;
-  }
+	@Autowired
+	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
-    log.info(String.format("reqProto=%s", reqProto));
-    //get stuff client sent
-    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
-    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    String userId = senderProto.getUserUuid();
-    List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
-    Timestamp curTime = new Timestamp((new Date()).getTime());
-    int maxCash = senderResourcesProto.getMaxCash();
-    int maxOil = senderResourcesProto.getMaxOil();
-    
-    Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
-    Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
-    List<String> duplicates = new ArrayList<String>();
-    //create map from ids to times and check for duplicates
-    getIdsAndTimes(structRetrievals, duplicates,
-    		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
-    
-    List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
-    
-    RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
-    		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
-    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-    resBuilder.setSender(senderResourcesProto);
+	@Autowired
+	protected UpdateUtil updateUtil;
 
-    UUID userUuid = null;
-    UUID userStructUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
+	public RetrieveCurrencyFromNormStructureController() {
+		numAllocatedThreads = 8;
+	}
 
-      if (userStructIds != null) {
-        for (String userStructId : userStructIds) {
-          userStructUuid = UUID.fromString(userStructId);
-        }
-      }
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new RetrieveCurrencyFromNormStructureRequestEvent();
+	}
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s, userStructIds=%s",
-          userId, userStructIds), e);
-      invalidUuids = true;
-    }
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT;
+	}
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent) event)
+				.getRetrieveCurrencyFromNormStructureRequestProto();
+		log.info("reqProto={}", reqProto);
+		//get stuff client sent
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
+				.getSender();
+		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
+		String userId = senderProto.getUserUuid();
+		List<StructRetrieval> structRetrievals = reqProto
+				.getStructRetrievalsList();
+		Timestamp curTime = new Timestamp((new Date()).getTime());
+		int maxCash = senderResourcesProto.getMaxCash();
+		int maxOil = senderResourcesProto.getMaxOil();
 
-    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
-    try {
-      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
-      int previousCash = 0;
-      int previousOil = 0;
-      
-      Map<String, StructureForUser> userStructIdsToUserStructs = 
-      		getUserStructIdsToUserStructs(userId, userStructIds);
-      Map<String, StructureResourceGenerator> userStructIdsToGenerators =
-      		getUserStructIdsToResourceGenerators(userStructIdsToUserStructs.values());
-      
-      //this will contain the amount user collects
-      Map<String, Integer> resourcesGained = new HashMap<String, Integer>();
-      //userStructIdsToTimesOfRetrieval and userStructIdsToUserStructs will be
-      //modified to contain only the valid user structs user can retrieve currency from
-      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user, userStructIds,
-      		userStructIdsToUserStructs, userStructIdsToGenerators, duplicates,
-      		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected, resourcesGained);
-      
-      int cashGain = 0;
-      int oilGain = 0;
-      Map<String, Integer> currencyChange = new HashMap<String, Integer>();
-      boolean successful = false;
-      if (legitRetrieval) {
-      	cashGain = resourcesGained.get(MiscMethods.cash);
-        previousCash = user.getCash();
-        oilGain = resourcesGained.get(MiscMethods.oil);
-        previousOil = user.getOil();
-        
-        successful = writeChangesToDb(user, cashGain, oilGain,
-        		userStructIdsToUserStructs, userStructIdsToTimesOfRetrieval,
-        		userStructIdsToAmountCollected, maxCash, maxOil,
-        		currencyChange);
-      }
-      if (successful) {
-      	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
-      }
+		//		Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
+		//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
+		//create map from ids to times and check for duplicates
+		//		getIdsAndTimes(structRetrievals, duplicates,
+		//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
 
-      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
-      resEvent.setTag(event.getTag());
-      resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());  
-      server.writeEvent(resEvent);
-      
-      if (legitRetrieval) {
-    	  //null PvpLeagueFromUser means will pull from hazelcast instead
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-        
-        writeToUserCurrencyHistory(user, previousCash, previousOil,
-        		curTime, userStructIdsToUserStructs, userStructIdsToGenerators,
-        		userStructIdsToTimesOfRetrieval,
-        		userStructIdsToAmountCollected, currencyChange);
-      }
-    } catch (Exception e) {
-      log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
-      //don't let the client hang
-      try {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-        RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
-        resEvent.setTag(event.getTag());
-        resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
-        server.writeEvent(resEvent);
-      } catch (Exception e2) {
-        log.error("exception2 in RetrieveCurrencyFromNormStructureController processEvent", e);
-      }
-    } finally {
-      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
-    }
-  }
+		//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
 
-  //separate the duplicate ids from the unique ones
-  private void getIdsAndTimes(List<StructRetrieval> srList,  List<String> duplicates,
-  		Map<String, Timestamp> structIdsToTimesOfRetrieval,
-  		Map<String, Integer> structIdsToAmountCollected) {
-    if (srList.isEmpty()) {
-      log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
-      return;
-    }
-    
-    for(StructRetrieval sr : srList) {
-      String key = sr.getUserStructUuid();
-      Timestamp value = new Timestamp(sr.getTimeOfRetrieval());
-      int amount = sr.getAmountCollected();
-      
-      if(structIdsToTimesOfRetrieval.containsKey(key)) {
-        duplicates.add(key);
-      } else {
-        structIdsToTimesOfRetrieval.put(key, value);
-        structIdsToAmountCollected.put(key, amount);
-      }
-    }
-  }
-  
-  //retrieve these user structs from the db and put them in a map
-  private Map<String, StructureForUser> getUserStructIdsToUserStructs(String userId,
-  		List<String> userStructIds) {
-    Map<String, StructureForUser> returnValue = new HashMap<String, StructureForUser>();
-    if(null == userStructIds || userStructIds.isEmpty()) {
-      log.error("no user struct ids!");
-      return returnValue;
-    }
-    
-    List<StructureForUser> userStructList = getUserStructRetrieveUtils()
-        .getSpecificOrAllUserStructsForUser(userId, userStructIds);
-    for(StructureForUser us : userStructList) {
-      if(null != us) {
-        returnValue.put(us.getId(), us);
-      } else {
-    	  String preface = "could not retrieve one of the user structs.";
-        log.error(String.format(
-        	"%s userStructIds to retrieve=%s. user structs retrieved=%s. Will continue processing.",
-            preface, userStructIds, userStructList));
-      }
-    }
-    return returnValue;
-  }
-  
-  //link up a user struct id with the structure object
-  private Map<String, StructureResourceGenerator> getUserStructIdsToResourceGenerators(
-  		Collection<StructureForUser> userStructs) {
-    Map<String, StructureResourceGenerator> returnValue =
-    		new HashMap<String, StructureResourceGenerator>();
-    Map<Integer, StructureResourceGenerator> structIdsToStructs = 
-    		StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
-    
-    if(null == userStructs || userStructs.isEmpty()) {
-      log.error("There are no user structs.");
-    }
-    
-    for(StructureForUser us : userStructs) {
-      int structId = us.getStructId();
-      String userStructId = us.getId();
-      
-      StructureResourceGenerator s = structIdsToStructs.get(structId);
-      if(null != s) {
-        returnValue.put(userStructId, s);
-      } else {
-        log.error(String.format(
-        	"structure with id %s does not exist, therefore UserStruct is invalid:%s",
-        	structId, us));
-      }
-    }
-    
-    return returnValue;
-  }
-  
-  private boolean checkLegitRetrieval(Builder resBuilder, User user,
-  		List<String> userStructIds, 
-      Map<String, StructureForUser> userStructIdsToUserStructs,
-      Map<String, StructureResourceGenerator> userStructIdsToGenerators,
-      List<String> duplicates,
-      Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
-      Map<String, Integer> userStructIdsToAmountCollected,
-      Map<String, Integer> resourcesGained) {
+		List<String> duplicates = new ArrayList<String>();
+		Map<String, StructureRetrieval> userStructIdsToStructRetrievals = getStructureRetrievalMap(
+				structRetrievals, duplicates);
 
-    String userId = user.getId();
-    
-    if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
-        || userStructIdsToGenerators.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { 
-      log.error("user is null, or no struct ids, user structs, structures, or retrieval times . user=" +
-        user + "\t userStructIds=" + userStructIds + "\t structIdsToUserStructs=" +
-        userStructIdsToUserStructs + "\t userStructIdsToGenerators=" + userStructIdsToGenerators +
-        "\t userStructIdsToRetrievalTimes=" + userStructIdsToTimesOfRetrieval);
-      return false;
-    }
-    if (!duplicates.isEmpty()) {
-      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-      log.warn(String.format(
-    	  "duplicate struct ids in request. ids=%s", duplicates));
-    }
+		RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder = RetrieveCurrencyFromNormStructureResponseProto
+				.newBuilder();
+		resBuilder
+				.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+		resBuilder.setSender(senderResourcesProto);
 
-    //go through the userStructIds the user sent, checking which structs can be
-    //retrieved
-    int cash = 0;
-    int oil = 0;
-    for (String id : userStructIds) {
-      StructureForUser userStruct = userStructIdsToUserStructs.get(id);
-      StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
-      
-      if (null == userStruct || !userId.equals(userStruct.getUserId()) || !userStruct.isComplete()) {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-        log.error("(will continue processing) struct owner is not user, or struct" +
-        		" is not complete yet. userStruct=" + userStruct);
-        //remove invalid user structure
-        userStructIdsToUserStructs.remove(id);
-        userStructIdsToTimesOfRetrieval.remove(id);
-        userStructIdsToAmountCollected.remove(id);
-        continue;
-      }
-      
-      String type = struct.getResourceTypeGenerated();
-      ResourceType rt = ResourceType.valueOf(type);
-      if (ResourceType.CASH.equals(rt)) {
-      	cash += userStructIdsToAmountCollected.get(id);
-      } else if (ResourceType.OIL.equals(rt)) {
-      	oil += userStructIdsToAmountCollected.get(id);
-      } else {
-      	log.error("(will continue processing) unknown resource type: " + rt);
-      	//remove invalid user structure
-        userStructIdsToUserStructs.remove(id);
-        userStructIdsToTimesOfRetrieval.remove(id);
-        userStructIdsToAmountCollected.remove(id);
-      }
-    }
-    //return to the caller the amount of money the user can collect 
-    resourcesGained.put(MiscMethods.cash, cash);
-    resourcesGained.put(MiscMethods.oil, oil);
-    
-    return true;
-  }
-  
-  private boolean writeChangesToDb(User user, int cashGain, int oilGain,
-  		Map<String, StructureForUser> userStructIdsToUserStructs,
-  		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<String, Integer> userStructIdsToAmountCollected, int maxCash,
-  		int maxOil, Map<String, Integer> currencyChange) {
-  	//capping how much the user can gain of a certain resource
-  	int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
-  	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
-  	cashGain = Math.min(maxCashUserCanGain, cashGain);
-  			
-  	int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil
-  	int maxOilUserCanGain = maxOil - curOil;
-  	oilGain = Math.min(maxOilUserCanGain, oilGain);
-  	
-  	if (cashGain <= 0 && oilGain <= 0)
-  	{
-  		log.error(String.format(
-  			"cash and oil both invalid. cash=%s \t oil=%s",
-  			cashGain, oilGain) );
-  		return false;
-  	}
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
 
-  	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain))
-  	{
-  		log.error(String.format(
-  			"can't update user stats after retrieving %s cash \t %s oil.",
-  			cashGain, oilGain) );
-  		return false;
+			for (String userStructId : userStructIdsToStructRetrievals.keySet()) {
+				UUID.fromString(userStructId);
+			}
 
-  	} else {
-  		if (0 != oilGain) {
-  			currencyChange.put(MiscMethods.oil, oilGain);
-  		}
-  		if (0 != cashGain) {
-  			currencyChange.put(MiscMethods.cash, cashGain);
-  		}
-  	}
-  	
-    if (!UpdateUtils.get().updateUserStructsLastRetrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
-      log.error(String.format(
-    	  "problem updating user structs last retrieved for userStructIds %s", 
-          userStructIdsToTimesOfRetrieval));
-      return false;
-    }
-    return true;
-  }
-  
-  public void writeToUserCurrencyHistory(User aUser, int previousCash,
-  		int previousOil, Timestamp curTime,
-  		Map<String, StructureForUser> userStructIdsToUserStructs,
-  		Map<String, StructureResourceGenerator> userStructIdsToGenerators,
-  		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<String, Integer> userStructIdsToAmountCollected,
-  		Map<String, Integer> currencyChange) {
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s, userStructIds=%s",
+					userId, structRetrievals), e);
+			invalidUuids = true;
+		}
 
-    String userId = aUser.getId();
-    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
-    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    Map<String, String> details = new HashMap<String, String>();
-    String cash = MiscMethods.cash;
-    String oil = MiscMethods.oil;
-    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
-    StringBuilder cashDetailSb = new StringBuilder();
-    cashDetailSb.append("(userStructId,time,amount)=");
-    StringBuilder oilDetailSb = new StringBuilder();
-    oilDetailSb.append("(userStructId,time,amount)=");
-    
-    //being descriptive, separating cash stuff from oil stuff
-    for(String id : userStructIdsToAmountCollected.keySet()) {
-      StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
-      Timestamp t = userStructIdsToTimesOfRetrieval.get(id);
-      int amount = userStructIdsToAmountCollected.get(id);
-      
-      String type = struct.getResourceTypeGenerated();
-      ResourceType rt = ResourceType.valueOf(type);
-      if (ResourceType.CASH.equals(rt)) {
-      	cashDetailSb.append("(");
-      	cashDetailSb.append(id);
-      	cashDetailSb.append(",");
-      	cashDetailSb.append(t);
-      	cashDetailSb.append(",");
-      	cashDetailSb.append(amount);
-      	cashDetailSb.append(")");
-      	
-      } else if (ResourceType.OIL.equals(rt)) {
-      	oilDetailSb.append("(");
-      	oilDetailSb.append(id);
-      	oilDetailSb.append(",");
-      	oilDetailSb.append(t);
-      	oilDetailSb.append(",");
-      	oilDetailSb.append(amount);
-      	oilDetailSb.append(")");
-      }
-    }
-    
-    previousCurrencies.put(cash, previousCash);
-    previousCurrencies.put(oil, previousOil);
-    currentCurrencies.put(cash, aUser.getCash());
-    currentCurrencies.put(oil, aUser.getOil());
-    reasonsForChanges.put(cash, reasonForChange);
-    reasonsForChanges.put(oil, reasonForChange);
-    details.put(cash, cashDetailSb.toString());
-    details.put(oil, oilDetailSb.toString());
-    
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
-    		previousCurrencies, currentCurrencies, reasonsForChanges, details);
-  }
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder
+					.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+					.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-  public Locker getLocker() {
-	  return locker;
-  }
+		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
 
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+			RetrieveCurrencyFromNormStructureAction rcfnsa = new RetrieveCurrencyFromNormStructureAction(
+					userId, maxCash, maxOil, duplicates,
+					userStructIdsToStructRetrievals, userRetrieveUtil,
+					userStructRetrieveUtil, updateUtil);
 
-  public UserRetrieveUtils2 getUserRetrieveUtils() {
-    return userRetrieveUtils;
-  }
+			rcfnsa.execute(resBuilder);
 
-  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-    this.userRetrieveUtils = userRetrieveUtils;
-  }
+			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+					.build());
+			server.writeEvent(resEvent);
 
-  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
-    return userStructRetrieveUtils;
-  }
+			if (RetrieveCurrencyFromNormStructureStatus.SUCCESS
+					.equals(resBuilder.getStatus())) {
+				User user = rcfnsa.getUser();
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
 
-  public void setUserStructRetrieveUtils(
-      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
-    this.userStructRetrieveUtils = userStructRetrieveUtils;
-  }
+				writeToCurrencyHistory(userId, curTime, rcfnsa);
+			}
+		} catch (Exception e) {
+			log.error(
+					"exception in RetrieveCurrencyFromNormStructureController processEvent",
+					e);
+			//don't let the client hang
+			try {
+				resBuilder
+						.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+						.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in RetrieveCurrencyFromNormStructureController processEvent",
+						e);
+			}
+		} finally {
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
+
+	private Map<String, StructureRetrieval> getStructureRetrievalMap(
+			List<StructRetrieval> structRetrievalProtos, List<String> duplicates) {
+		Map<String, StructureRetrieval> userStructIdToStructureRetrieval = new HashMap<String, StructureRetrieval>();
+		if (null == structRetrievalProtos || structRetrievalProtos.isEmpty()) {
+			log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
+			return userStructIdToStructureRetrieval;
+		}
+
+		for (StructRetrieval srProto : structRetrievalProtos) {
+			StructureRetrieval sr = new StructureRetrieval();
+			String userStructId = srProto.getUserStructUuid();
+
+			if (userStructIdToStructureRetrieval.containsKey(userStructId)) {
+				duplicates.add(userStructId);
+				continue;
+			}
+
+			sr.setUserStructId(userStructId);
+			Date timeOfRetrieval = null;
+			long retrievalTime = srProto.getTimeOfRetrieval();
+			if (retrievalTime > 0) {
+				timeOfRetrieval = new Date(retrievalTime);
+			}
+
+			sr.setTimeOfRetrieval(timeOfRetrieval);
+			sr.setAmountCollected(srProto.getAmountCollected());
+
+			userStructIdToStructureRetrieval.put(userStructId, sr);
+		}
+
+		return userStructIdToStructureRetrieval;
+	}
+
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+			RetrieveCurrencyFromNormStructureAction rcfnsa) {
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
+				rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
+				rcfnsa.getDetails());
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public StructureForUserRetrieveUtils2 getUserStructRetrieveUtil() {
+		return userStructRetrieveUtil;
+	}
+
+	public void setUserStructRetrieveUtil(
+			StructureForUserRetrieveUtils2 userStructRetrieveUtil) {
+		this.userStructRetrieveUtil = userStructRetrieveUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
 
 }

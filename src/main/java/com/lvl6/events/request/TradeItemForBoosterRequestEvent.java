@@ -12,37 +12,39 @@ import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 
 public class TradeItemForBoosterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      tradeItemForBoosterRequestProto = TradeItemForBoosterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = tradeItemForBoosterRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("TradeItemForBoosterRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public TradeItemForBoosterRequestProto getTradeItemForBoosterRequestProto() {
-    return tradeItemForBoosterRequestProto;
-  }
+	private TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto;
 
-  public void setTradeItemForBoosterRequestProto( TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto )
-  {
-	  this.tradeItemForBoosterRequestProto = tradeItemForBoosterRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			tradeItemForBoosterRequestProto = TradeItemForBoosterRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = tradeItemForBoosterRequestProto.getSender()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("TradeItemForBoosterRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "TradeItemForBoosterRequestEvent [tradeItemForBoosterRequestProto="
-		  + tradeItemForBoosterRequestProto
-		  + "]";
-  }
+	public TradeItemForBoosterRequestProto getTradeItemForBoosterRequestProto() {
+		return tradeItemForBoosterRequestProto;
+	}
+
+	public void setTradeItemForBoosterRequestProto(
+			TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto) {
+		this.tradeItemForBoosterRequestProto = tradeItemForBoosterRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "TradeItemForBoosterRequestEvent [tradeItemForBoosterRequestProto="
+				+ tradeItemForBoosterRequestProto + "]";
+	}
 
 }

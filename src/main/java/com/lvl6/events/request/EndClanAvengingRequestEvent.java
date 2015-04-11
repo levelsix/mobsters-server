@@ -12,32 +12,33 @@ import com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto;
 
 public class EndClanAvengingRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private EndClanAvengingRequestProto endClanAvengingRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      endClanAvengingRequestProto = EndClanAvengingRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = endClanAvengingRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("EndClanAvengingRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public EndClanAvengingRequestProto getEndClanAvengingRequestProto() {
-    return endClanAvengingRequestProto;
-  }
+	private EndClanAvengingRequestProto endClanAvengingRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "EndClanAvengingRequestEvent [endClanAvengingRequestProto="
-		  + endClanAvengingRequestProto
-		  + "]";
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			endClanAvengingRequestProto = EndClanAvengingRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = endClanAvengingRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("EndClanAvengingRequest exception", e);
+		}
+	}
+
+	public EndClanAvengingRequestProto getEndClanAvengingRequestProto() {
+		return endClanAvengingRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "EndClanAvengingRequestEvent [endClanAvengingRequestProto="
+				+ endClanAvengingRequestProto + "]";
+	}
 
 }

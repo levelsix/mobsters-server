@@ -12,31 +12,36 @@ import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
 
 public class ChangeClanSettingsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
+	private ChangeClanSettingsRequestProto changeClanSettingsRequestProto;
+
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			changeClanSettingsRequestProto = ChangeClanSettingsRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = changeClanSettingsRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("ChangeClanSettingsRequest exception");
+		}
+	}
+
+	public ChangeClanSettingsRequestProto getChangeClanSettingsRequestProto() {
+		return changeClanSettingsRequestProto;
+	}
+
+	public void setChangeClanSettingsRequestProto(ChangeClanSettingsRequestProto ccsrp) {
+		this.changeClanSettingsRequestProto = ccsrp;
+	}
 	
-  private ChangeClanSettingsRequestProto changeClanSettingsRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      changeClanSettingsRequestProto = ChangeClanSettingsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = changeClanSettingsRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("ChangeClanSettingsRequest exception");
-    }
-  }
-
-  public ChangeClanSettingsRequestProto getChangeClanSettingsRequestProto() {
-    return changeClanSettingsRequestProto;
-  }
-
-  @Override
-  public String toString()
-  {
-	  return "ChangeClanSettingsRequestEvent [changeClanSettingsRequestProto="
-		  + changeClanSettingsRequestProto
-		  + "]";
-  }
+	@Override
+	public String toString() {
+		return "ChangeClanSettingsRequestEvent [changeClanSettingsRequestProto="
+				+ changeClanSettingsRequestProto + "]";
+	}
 }

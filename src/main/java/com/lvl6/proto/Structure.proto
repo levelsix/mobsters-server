@@ -37,6 +37,7 @@ message StructureInfoProto {
 	optional float shadowVerticalOffset = 19;
 	optional float shadowHorizontalOfffset = 20;
 	optional float shadowScale = 21;
+	optional int32 strength = 22;
 	
 	enum StructType {
 		NO_STRUCT = 8;
@@ -52,6 +53,10 @@ message StructureInfoProto {
 		MINI_JOB = 9;
 		TEAM_CENTER = 10;
 		CLAN = 11;
+		MONEY_TREE = 12;
+		PVP_BOARD = 13;
+		RESEARCH_HOUSE = 14;
+		BATTLE_ITEM_FACTORY = 15;
 	}
 }
 
@@ -91,6 +96,25 @@ message ResourceStorageProto {
 
 //------------------------------------------------------------------------------------------
 
+message MoneyTreeProto {
+	optional StructureInfoProto structInfo = 1;	
+	optional float productionRate = 2;
+	optional int32 capacity = 3;
+	optional int32 daysOfDuration = 4;
+	optional int32 daysForRenewal = 5;
+	optional string iapProductId = 6;
+	optional string fakeIAPProductId = 7;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ResearchHouseProto {	
+	optional StructureInfoProto structInfo = 1;
+	optional float researchSpeedMultiplier = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
 message HospitalProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 queueSize = 2;
@@ -110,9 +134,7 @@ message LabProto {
 	
 	//IGNORE	//TODO: get rid of this since enhancing is instantaneous
 				//maybe convert monsters to points and it will take (points)(second/points)='x' seconds
-				//for a main monster to be enhanced with all those points
-	optional float pointsPerSecond = 3;
-	
+				//for a main monster to be enhanced with all those points	
 	optional float pointsMultiplier = 4;
 }
 
@@ -268,5 +290,48 @@ message ClanHouseProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 maxHelpersPerSolicitation = 2; 
 	optional int32 teamDonationPowerLimit = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message PvpBoardHouseProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 pvpBoardPowerLimit = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message PvpBoardObstacleProto {
+	optional int32 pvpBoardId = 1;
+	optional string name = 2;
+	optional BoardObstacleType obstacleType = 3;
+	optional int32 powerAmt = 4;
+	optional bool initiallyAvailable = 5;
+	
+}
+enum BoardObstacleType {
+	CLOUD = 1;
+	LOCK = 2;
+	HOLE = 3;
+}
+
+
+//------------------------------------------------------------------------------------------
+
+message UserPvpBoardObstacleProto {
+	optional int32 userPvpBoardObstacleId = 1;
+	optional string userUuid = 2;
+	optional int32 obstacleId = 3;
+	optional int32 posX = 4;
+	optional int32 posY = 5;
+	
+}
+
+//------------------------------------------------------------------------------------------
+
+message BattleItemFactoryProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 powerLimit = 2;
+
 }
 

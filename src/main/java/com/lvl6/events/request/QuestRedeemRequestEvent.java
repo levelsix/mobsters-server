@@ -11,33 +11,35 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto;
 
 public class QuestRedeemRequestEvent extends RequestEvent {
-	
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private QuestRedeemRequestProto questRedeemRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      questRedeemRequestProto = QuestRedeemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = questRedeemRequestProto.getSender().getMinUserProto().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("QuestRedeemRequest exception", e);
-    }
-  }
 
-  public QuestRedeemRequestProto getQuestRedeemRequestProto() {
-    return questRedeemRequestProto;
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Override
-  public String toString()
-  {
-	  return "QuestRedeemRequestEvent [questRedeemRequestProto="
-		  + questRedeemRequestProto
-		  + "]";
-  }
-  
+	private QuestRedeemRequestProto questRedeemRequestProto;
+
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			questRedeemRequestProto = QuestRedeemRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = questRedeemRequestProto.getSender().getMinUserProto()
+					.getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("QuestRedeemRequest exception", e);
+		}
+	}
+
+	public QuestRedeemRequestProto getQuestRedeemRequestProto() {
+		return questRedeemRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestRedeemRequestEvent [questRedeemRequestProto="
+				+ questRedeemRequestProto + "]";
+	}
+
 }

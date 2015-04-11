@@ -19,8 +19,8 @@ import com.lvl6.utils.ConnectedPlayer;
 public class GameEventHandler extends AbstractGameEventHandler {
 	private static final int DEFAULT_TTL = 9;
 
-	
-	private static final Logger log = LoggerFactory.getLogger(GameEventHandler.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(GameEventHandler.class);
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
@@ -68,18 +68,21 @@ public class GameEventHandler extends AbstractGameEventHandler {
 		ec.handleEvent(event);
 	}
 
-	protected void updatePlayerToServerMaps(RequestEvent event,	String ip_connection_id) {
-		log.debug("Updating player to server maps for player: "	+ event.getPlayerId());
+	protected void updatePlayerToServerMaps(RequestEvent event,
+			String ip_connection_id) {
+		log.debug("Updating player to server maps for player: "
+				+ event.getPlayerId());
 		if (playersByPlayerId.containsKey(event.getPlayerId())) {
 			ConnectedPlayer p = playersByPlayerId.get(event.getPlayerId());
 			if (p != null) {
 				p.setLastMessageSentToServer(new Date());
 				//if (!p.getIp_connection_id().equals(ip_connection_id)	|| !p.getServerHostName().equals(server.serverId())) {
-					//log.debug("Player is connected to a new socket or server");
-					p.setIp_connection_id(ip_connection_id);
-					p.setServerHostName(server.serverId());
+				//log.debug("Player is connected to a new socket or server");
+				p.setIp_connection_id(ip_connection_id);
+				p.setServerHostName(server.serverId());
 				//}
-				playersByPlayerId.put(event.getPlayerId(), p, DEFAULT_TTL, TimeUnit.MINUTES);
+				playersByPlayerId.put(event.getPlayerId(), p, DEFAULT_TTL,
+						TimeUnit.MINUTES);
 			} else {
 				addNewConnection(event, ip_connection_id);
 			}
@@ -96,10 +99,12 @@ public class GameEventHandler extends AbstractGameEventHandler {
 		if (!event.getPlayerId().equals("")) {
 			log.info("Player logged on: " + event.getPlayerId());
 			newp.setPlayerId(event.getPlayerId());
-			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL,TimeUnit.MINUTES);
+			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL,
+					TimeUnit.MINUTES);
 		} else {
 			newp.setUdid(((PreDatabaseRequestEvent) event).getUdid());
-			getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
+			getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp,
+					DEFAULT_TTL, TimeUnit.MINUTES);
 			log.info("New player with UdId: " + newp.getUdid());
 		}
 	}

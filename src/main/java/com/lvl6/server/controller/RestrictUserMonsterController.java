@@ -24,167 +24,179 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class RestrictUserMonsterController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class RestrictUserMonsterController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected Locker locker;
-  
-  @Autowired
-  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	@Autowired
+	protected Locker locker;
 
-  public RestrictUserMonsterController() {
-    numAllocatedThreads = 4;
-  }
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new RestrictUserMonsterRequestEvent();
-  }
+	public RestrictUserMonsterController() {
+		numAllocatedThreads = 4;
+	}
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_RESTRICT_USER_MONSTER_EVENT;
-  }
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new RestrictUserMonsterRequestEvent();
+	}
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    RestrictUserMonsterRequestProto reqProto = ((RestrictUserMonsterRequestEvent)event)
-    	.getRestrictUserMonsterRequestProto();
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_RESTRICT_USER_MONSTER_EVENT;
+	}
 
-    //get values sent from the client (the request proto)
-    MinimumUserProto senderProto = reqProto.getSender();
-    String userId = senderProto.getUserUuid();
-    List<String> userMonsterIdList = reqProto.getUserMonsterUuidsList();
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		RestrictUserMonsterRequestProto reqProto = ((RestrictUserMonsterRequestEvent) event)
+				.getRestrictUserMonsterRequestProto();
 
-    //set some values to send to the client (the response proto)
-    RestrictUserMonsterResponseProto.Builder resBuilder = RestrictUserMonsterResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
-    resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER); //default
+		//get values sent from the client (the request proto)
+		MinimumUserProto senderProto = reqProto.getSender();
+		String userId = senderProto.getUserUuid();
+		List<String> userMonsterIdList = reqProto.getUserMonsterUuidsList();
 
-    UUID userUuid = null;
-    UUID userMonsterUuid = null;
-    boolean invalidUuids = true;
-    try {
-      userUuid = UUID.fromString(userId);
+		//set some values to send to the client (the response proto)
+		RestrictUserMonsterResponseProto.Builder resBuilder = RestrictUserMonsterResponseProto
+				.newBuilder();
+		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER); //default
 
-      if (userMonsterIdList != null) {
-        for (String userMonsterId : userMonsterIdList) {
-          userMonsterUuid = UUID.fromString(userMonsterId);
-        }
-      }
+		UUID userUuid = null;
+		UUID userMonsterUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
 
-      invalidUuids = false;
-    } catch (Exception e) {
-      log.error(String.format(
-          "UUID error. incorrect userId=%s, userMonsterIdList=%s",
-          userId, userMonsterIdList), e);
-      invalidUuids = true;
-    }
+			if (userMonsterIdList != null) {
+				for (String userMonsterId : userMonsterIdList) {
+					userMonsterUuid = UUID.fromString(userMonsterId);
+				}
+			}
 
-    //UUID checks
-    if (invalidUuids) {
-      resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER);
-      RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      return;
-    }
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+					"UUID error. incorrect userId=%s, userMonsterIdList=%s",
+					userId, userMonsterIdList), e);
+			invalidUuids = true;
+		}
 
-//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    try {
-      //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+		//UUID checks
+		if (invalidUuids) {
+			resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER);
+			RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			return;
+		}
 
-    	//make sure it exists
-    	Map<String, MonsterForUser> mfuMap = getMonsterForUserRetrieveUtils()
-    		.getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIdList);
-    	
-      boolean legit = checkLegit(resBuilder, userId, userMonsterIdList, mfuMap);
+		//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		try {
+			//User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
-      boolean successful = false;
-      if(legit) {
-    	  successful = writeChangesToDb(userId, userMonsterIdList);
-      }
-      
-      if (successful) {
-    	  resBuilder.setStatus(RestrictUserMonsterStatus.SUCCESS);
-      }
-      
-      RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-//
-//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-//      resEventUpdate.setTag(event.getTag());
-//      server.writeEvent(resEventUpdate);
-    } catch (Exception e) {
-      log.error("exception in RestrictUserMonsterController processEvent", e);
-      //don't let the client hang
-      try {
-    	  resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER);
-    	  RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-      } catch (Exception e2) {
-    	  log.error("exception2 in RestrictUserMonsterController processEvent", e);
-      }
-    } finally {
-//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    }
-  }
+			//make sure it exists
+			Map<String, MonsterForUser> mfuMap = getMonsterForUserRetrieveUtils()
+					.getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
+							userMonsterIdList);
 
+			boolean legit = checkLegit(resBuilder, userId, userMonsterIdList,
+					mfuMap);
 
-  /*
-   * Return true if user request is valid; false otherwise and set the
-   * builder status to the appropriate value.
-   */
-  private boolean checkLegit(Builder resBuilder, String userId,
-  		List<String> userMonsterIdList, Map<String, MonsterForUser> mfuMap) {
-  	
-  	if (null == mfuMap || mfuMap.isEmpty()) {
-  		log.error(String.format(
-  			"no unrestricted monsters_for_user exist with ids=%s",
-  			userMonsterIdList));
-  		return false;
-  	}
+			boolean successful = false;
+			if (legit) {
+				successful = writeChangesToDb(userId, userMonsterIdList);
+			}
 
-  	resBuilder.setStatus(RestrictUserMonsterStatus.SUCCESS);
-  	return true;
-  }
-  
-  private boolean writeChangesToDb(String uId, List<String> userMonsterIdList) { 
-  	
-  	int numUpdated = UpdateUtils.get().updateRestrictUserMonsters(
-  		uId, userMonsterIdList);
-  	
-  	if (numUpdated == 0) {
-  		log.warn(String.format(
-  			"user monsters not updated. actual numUpdated=%d, expected: >0, userMonsterIdList=%s",
-  			numUpdated, userMonsterIdList));
-  	}
-	  return true;
-  }
+			if (successful) {
+				resBuilder.setStatus(RestrictUserMonsterStatus.SUCCESS);
+			}
 
-  public Locker getLocker() {
-	  return locker;
-  }
+			RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			//
+			//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+			//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+			//      resEventUpdate.setTag(event.getTag());
+			//      server.writeEvent(resEventUpdate);
+		} catch (Exception e) {
+			log.error(
+					"exception in RestrictUserMonsterController processEvent",
+					e);
+			//don't let the client hang
+			try {
+				resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER);
+				RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(
+						userId);
+				resEvent.setTag(event.getTag());
+				resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error(
+						"exception2 in RestrictUserMonsterController processEvent",
+						e);
+			}
+		} finally {
+			//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		}
+	}
 
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
+	/*
+	 * Return true if user request is valid; false otherwise and set the
+	 * builder status to the appropriate value.
+	 */
+	private boolean checkLegit(Builder resBuilder, String userId,
+			List<String> userMonsterIdList, Map<String, MonsterForUser> mfuMap) {
 
-  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
-    return monsterForUserRetrieveUtils;
-  }
+		if (null == mfuMap || mfuMap.isEmpty()) {
+			log.error(String.format(
+					"no unrestricted monsters_for_user exist with ids=%s",
+					userMonsterIdList));
+			return false;
+		}
 
-  public void setMonsterForUserRetrieveUtils(
-      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
-    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-  }
-  
+		resBuilder.setStatus(RestrictUserMonsterStatus.SUCCESS);
+		return true;
+	}
+
+	private boolean writeChangesToDb(String uId, List<String> userMonsterIdList) {
+
+		int numUpdated = UpdateUtils.get().updateRestrictUserMonsters(uId,
+				userMonsterIdList);
+
+		if (numUpdated == 0) {
+			log.warn(String
+					.format("user monsters not updated. actual numUpdated=%d, expected: >0, userMonsterIdList=%s",
+							numUpdated, userMonsterIdList));
+		}
+		return true;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+		return monsterForUserRetrieveUtils;
+	}
+
+	public void setMonsterForUserRetrieveUtils(
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
+
 }

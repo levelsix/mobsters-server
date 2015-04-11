@@ -4,20 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class EventPersistentForUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 385081006377018102L;
-	
+
 	private String userId;
 	private int eventPersistentId;
 	private Date timeOfEntry; // refers to time user started a daily event
 
-  public EventPersistentForUser()
-	{
+	public EventPersistentForUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-public EventPersistentForUser(String userId, int eventPersistentId,
+	public EventPersistentForUser(String userId, int eventPersistentId,
 			Date timeOfEntry) {
 		super();
 		this.userId = userId;
@@ -51,8 +49,9 @@ public EventPersistentForUser(String userId, int eventPersistentId,
 
 	@Override
 	public String toString() {
-		return "EventPersistentForUser [userId=" + userId + ", eventPersistentId="
-				+ eventPersistentId + ", timeOfEntry=" + timeOfEntry + "]";
+		return "EventPersistentForUser [userId=" + userId
+				+ ", eventPersistentId=" + eventPersistentId + ", timeOfEntry="
+				+ timeOfEntry + "]";
 	}
- 
+
 }

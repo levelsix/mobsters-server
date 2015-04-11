@@ -3,15 +3,18 @@
 
 import "AchievementStuff.proto";
 import "Battle.proto";
+import "BattleItem.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
+import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "Research.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
@@ -130,7 +133,17 @@ message StartupResponseProto {
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserItemSecretGiftProto gifts = 45;
 		
+		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
+
+	repeated UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
+	repeated BattleItemQueueForUserProto battleItemQueue = 48;
+	repeated UserBattleItemProto battleItem = 49;	
+	repeated UserResearchProto userResearchs = 50;
+	
+	optional DefaultLanguagesProto userDefaultLanguages = 51;
+
+	optional UserMiniEventProto userMiniEvent = 52;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -214,6 +227,9 @@ message StartupResponseProto {
 		optional int32 minsToResolicitTeamDonation = 39;
 	
 		repeated FileDownloadConstantProto fileDownloadProto = 40;
+		
+		optional int32 taskIdForUpgradeTutorial = 41;
+		
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

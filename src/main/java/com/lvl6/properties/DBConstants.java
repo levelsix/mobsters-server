@@ -6,7 +6,11 @@ public class DBConstants {
 	public static final String TABLE_ACHIEVEMENT_CONFIG = "achievement_config";
 	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
+	public static final String TABLE_BATTLE_ITEM_CONFIG = "battle_item_config";
+	public static final String TABLE_BATTLE_ITEM_FOR_USER = "battle_item_for_user";
+	public static final String TABLE_BATTLE_ITEM_QUEUE_FOR_USER = "battle_item_queue_for_user";
 	public static final String TABLE_BOARD_CONFIG = "board_config";
+	public static final String TABLE_BOARD_OBSTACLE_CONFIG = "board_obstacle_config";
 	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM_CONFIG = "booster_display_item_config";
 	public static final String TABLE_BOOSTER_ITEM_CONFIG = "booster_item_config";
@@ -21,6 +25,7 @@ public class DBConstants {
 	public static final String TABLE_CEPFU_RAID_HISTORY = "cepfu_raid_history";	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CEPFU_RAID_STAGE_HISTORY = "cepfu_raid_stage_history";
 	public static final String TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY = "cepfu_raid_stage_monster_history";
+	public static final String TABLE_CHAT_TRANSLATIONS = "chat_translations";
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_CONFIG = "clan_event_persistent_config";//EVENT TABLE FOR CLANS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY = "clan_event_persistent_for_clan_history";//HISTORY TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
@@ -31,7 +36,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_HELP_COUNT_FOR_USER = "clan_help_count_for_user";
 	public static final String TABLE_CLAN_ICON_CONFIG = "clan_icon_config";
 	public static final String TABLE_CLAN_INVITE = "clan_invite";
-	public static final String TABLE_CLAN_MEMBER_TEAM_DONATION = "clan_member_team_donation"; 
+	public static final String TABLE_CLAN_MEMBER_TEAM_DONATION = "clan_member_team_donation";
 	public static final String TABLE_CLAN_RAID_CONFIG = "clan_raid_config";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE_CONFIG = "clan_raid_stage_config";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG = "clan_raid_stage_monster_config";
@@ -50,7 +55,14 @@ public class DBConstants {
 	public static final String TABLE_LOCK_BOX_EVENT_CONFIG = "lock_box_event_config";			//TODO: delete
 	public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";		//TODO: delete
 	public static final String TABLE_LOCK_BOX_ITEM_CONFIG = "lock_box_item_config";				//TODO: delete
-	public static final String TABLE_LOGIN_HISTORY = "login_history";	
+	public static final String TABLE_LOGIN_HISTORY = "login_history";
+	public static final String TABLE_MINI_EVENT_CONFIG = "mini_event_config";
+	public static final String TABLE_MINI_EVENT_FOR_PLAYER_LVL_CONFIG = "mini_event_for_player_lvl_config";
+	public static final String TABLE_MINI_EVENT_FOR_USER = "mini_event_for_user";
+	public static final String TABLE_MINI_EVENT_GOAL_CONFIG = "mini_event_goal_config";
+	public static final String TABLE_MINI_EVENT_GOAL_FOR_USER = "mini_event_goal_for_user";
+	public static final String TABLE_MINI_EVENT_LEADERBOARD_REWARD_CONFIG = "mini_event_leaderboard_reward_config";
+	public static final String TABLE_MINI_EVENT_TIER_REWARD_CONFIG = "mini_event_tier_reward_config";
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
 	public static final String TABLE_MINI_JOB_FOR_USER = "mini_job_for_user";
 	public static final String TABLE_MINI_JOB_FOR_USER_HISTORY = "mini_job_for_user_history";
@@ -73,6 +85,7 @@ public class DBConstants {
 	public static final String TABLE_PROFANITY_CONFIG = "profanity_config";
 	public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
 	public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
+	public static final String TABLE_PVP_BOARD_OBSTACLE_FOR_USER = "pvp_board_obstacle_for_user";
 	public static final String TABLE_PVP_LEAGUE_CONFIG = "pvp_league_config";
 	public static final String TABLE_PVP_LEAGUE_FOR_USER = "pvp_league_for_user";
 	public static final String TABLE_QUEST_CONFIG = "quest_config";
@@ -86,11 +99,13 @@ public class DBConstants {
 	public static final String TABLE_RESEARCH_CONFIG = "research_config";
 	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
 	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
-	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config"; 
+	public static final String TABLE_REWARD_CONFIG = "reward_config";
+	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
 	public static final String TABLE_SKILL_PROPERTY_CONFIG = "skill_property_config";
 	public static final String TABLE_SKILL_SIDE_EFFECT_CONFIG = "skill_side_effect_config";
 	public static final String TABLE_STATIC_LEVEL_INFO_CONFIG = "static_level_info_config";
+	public static final String TABLE_STRUCTURE_BATTLE_ITEM_FACTORY_CONFIG = "structure_battle_item_factory_config";
 	public static final String TABLE_STRUCTURE_CONFIG = "structure_config";
 	public static final String TABLE_STRUCTURE_CLAN_HOUSE_CONFIG = "structure_clan_house_config";
 	public static final String TABLE_STRUCTURE_EVO_CHAMBER_CONFIG = "structure_evo_chamber_config";
@@ -98,11 +113,14 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_HOSPITAL_CONFIG = "structure_hospital_config";
 	public static final String TABLE_STRUCTURE_LAB_CONFIG = "structure_lab_config";
 	public static final String TABLE_STRUCTURE_MINI_JOB_CONFIG = "structure_mini_job_config";
+	public static final String TABLE_STRUCTURE_PVP_BOARD_CONFIG = "structure_pvp_board_config";
+	public static final String TABLE_STRUCTURE_RESEARCH_HOUSE_CONFIG = "structure_research_house_config";
 	public static final String TABLE_STRUCTURE_RESIDENCE_CONFIG = "structure_residence_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG = "structure_resource_generator_config";
 	public static final String TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG = "structure_resource_storage_config";
 	public static final String TABLE_STRUCTURE_TEAM_CENTER_CONFIG = "structure_team_center_config";
 	public static final String TABLE_STRUCTURE_TOWN_HALL_CONFIG = "structure_town_hall_config";
+	public static final String TABLE_STRUCTURE_MONEY_TREE_CONFIG = "structure_money_tree_config";
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
@@ -116,6 +134,7 @@ public class DBConstants {
 	public static final String TABLE_TOURNAMENT_EVENT_CONFIG = "tournament_event_config";		//TODO: delete
 	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";	//TODO: delete
 	public static final String TABLE_TOURNAMENT_REWARD_CONFIG = "tournament_reward_config";		//TODO: delete
+	public static final String TABLE_TRANSLATION_SETTINGS_FOR_USER = "translation_settings_for_user";
 	public static final String TABLE_USER = "user";
 	public static final String TABLE_BANNED_USER = "user_banned";
 	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
@@ -140,10 +159,23 @@ public class DBConstants {
 	/*AVAILABLE REFERRAL CODES*/
 	public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
 	public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
-	
+
+	/*BATTLE ITEM FOR USER*/
+	public static final String BATTLE_ITEM_FOR_USER__ID = GENERIC__ID;
+	public static final String BATTLE_ITEM_FOR_USER__USER_ID = "user_id";
+	public static final String BATTLE_ITEM_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
+	public static final String BATTLE_ITEM_FOR_USER__QUANTITY = "quantity";
+
+	/*BATTLE ITEM QUEUE FOR USER*/
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__PRIORITY = "priority";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__USER_ID = "user_id";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
+	public static final String BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME = "elapsed_time";
+
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
-	public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
+	public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID = "booster_pack_id";
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID = "booster_item_id";
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID = "monster_id";
@@ -163,8 +195,8 @@ public class DBConstants {
 	public static final String CLANS__DESCRIPTION = "description";
 	public static final String CLANS__TAG = "tag";
 	public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
-	public static final String CLANS__CLAN_ICON_ID = "clan_icon_id";  
-	
+	public static final String CLANS__CLAN_ICON_ID = "clan_icon_id";
+
 	/*CLAN AVENGE*/
 	public static final String CLAN_AVENGE__ID = GENERIC__ID;
 	public static final String CLAN_AVENGE__CLAN_ID = "clan_id";
@@ -178,7 +210,7 @@ public class DBConstants {
 	public static final String CLAN_AVENGE_USER__CLAN_AVENGE_ID = "clan_avenge_id";
 	public static final String CLAN_AVENGE_USER__USER_ID = "user_id";
 	public static final String CLAN_AVENGE_USER__AVENGE_TIME = "avenge_time";
-	
+
 	/*CLAN_CHAT_POSTS*/
 	public static final String CLAN_CHAT_POST__ID = GENERIC__ID;
 	public static final String CLAN_CHAT_POST__POSTER_ID = "poster_id";
@@ -246,8 +278,7 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_HISTORY__STAGE_HEALTH = "stage_health";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CRS_END_TIME = "crs_end_time";
 
-
-	//history of user's clan raid damage for a monster 
+	//history of user's clan raid damage for a monster
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_START_TIME = "crsm_start_time";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CLAN_ID = "clan_id";
@@ -256,6 +287,13 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_ID = "crsm_id";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_DMG_DONE = "crsm_dmg_done";
 	public static final String CEPFU_RAID_STAGE_MONSTER_HISTORY__CRSM_END_TIME = "crsm_end_time";
+
+	//translations of chats
+	public static final String CHAT_TRANSLATIONS__ID = GENERIC__ID;
+	public static final String CHAT_TRANSLATIONS__CHAT_TYPE = "chat_type";
+	public static final String CHAT_TRANSLATIONS__CHAT_ID = "chat_id";
+	public static final String CHAT_TRANSLATIONS__LANGUAGE = "language";
+	public static final String CHAT_TRANSLATIONS__TEXT = "text";
 
 	//TODO: FINISH THESE COLUMNS; THIS TABLE STORES THE REWARDS CLAN USERS GET FROM A RAID
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__ID = GENERIC__ID;
@@ -277,7 +315,7 @@ public class DBConstants {
 
 	/*CLAN HELP*/
 	public static final String CLAN_HELP__ID = GENERIC__ID;
-	public static final String CLAN_HELP__USER_ID	= GENERIC__USER_ID;
+	public static final String CLAN_HELP__USER_ID = GENERIC__USER_ID;
 	public static final String CLAN_HELP__USER_DATA_ID = "user_data_id";
 	public static final String CLAN_HELP__HELP_TYPE = "help_type";
 	public static final String CLAN_HELP__CLAN_ID = "clan_id";
@@ -293,14 +331,14 @@ public class DBConstants {
 	public static final String CLAN_HELP_COUNT_FOR_USER__DATE = "date";
 	public static final String CLAN_HELP_COUNT_FOR_USER__SOLICITED = "solicited";
 	public static final String CLAN_HELP_COUNT_FOR_USER__GIVEN = "given";
-	
+
 	/*CLAN INVITE*/
 	public static final String CLAN_INVITE__ID = GENERIC__ID;
 	public static final String CLAN_INVITE__USER_ID = GENERIC__USER_ID;
 	public static final String CLAN_INVITE__INVITER_ID = "inviter_id";
 	public static final String CLAN_INVITE__CLAN_ID = "clan_id";
 	public static final String CLAN_INVITE__TIME_OF_INVITE = "time_of_invite";
-	
+
 	/*CLAN_MEMBER_TEAM_DONATION*/
 	public static final String CLAN_MEMBER_TEAM_DONATION__ID = GENERIC__ID;
 	public static final String CLAN_MEMBER_TEAM_DONATION__USER_ID = GENERIC__USER_ID;
@@ -309,12 +347,11 @@ public class DBConstants {
 	public static final String CLAN_MEMBER_TEAM_DONATION__FULFILLED = "fulfilled";
 	public static final String CLAN_MEMBER_TEAM_DONATION__MSG = "msg";
 	public static final String CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION = "time_of_solicitation";
-	
+
 	/*EVENT PERSISTENT FOR USER*/
 	public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
 	public static final String EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID = "event_persistent_id";
 	public static final String EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY = "time_of_entry";
-
 
 	/*EXPANSION PURCHASE FOR USER*/
 	public static final String EXPANSION_PURCHASE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -323,14 +360,13 @@ public class DBConstants {
 	public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
 	public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
 
-	
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
 	public static final String IAP_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String IAP_HISTORY__TRANSACTION_ID = "transaction_id";
 	public static final String IAP_HISTORY__PURCHASE_DATE = "purchase_date";
 	public static final String IAP_HISTORY__PREMIUMCUR_PURCHASED = "premiumcur_purchased";
-//	public static final String IAP_HISTORY__REGCUR_PURCHASED = "regcur_purchased";
+	//	public static final String IAP_HISTORY__REGCUR_PURCHASED = "regcur_purchased";
 	public static final String IAP_HISTORY__CASH_SPENT = "cash_spent";
 	public static final String IAP_HISTORY__UDID = "udid";
 	public static final String IAP_HISTORY__PRODUCT_ID = "product_id";
@@ -344,7 +380,7 @@ public class DBConstants {
 	public static final String ITEM_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String ITEM_FOR_USER__ITEM_ID = "item_id";
 	public static final String ITEM_FOR_USER__QUANTITY = "quantity";
-	
+
 	/*ITEM FOR USER TABLE*/
 	public static final String ITEM_FOR_USER_USAGE__ID = GENERIC__ID;
 	public static final String ITEM_FOR_USER_USAGE__USER_ID = GENERIC__USER_ID;
@@ -352,7 +388,7 @@ public class DBConstants {
 	public static final String ITEM_FOR_USER_USAGE__TIME_OF_ENTRY = "time_of_entry";
 	public static final String ITEM_FOR_USER_USAGE__USER_DATA_ID = "user_data_id";
 	public static final String ITEM_FOR_USER_USAGE__ACTION_TYPE = "action_type";
-	
+
 	/*ITEM FOR USER TABLE*/
 	public static final String ITEM_SECRET_GIFT_FOR_USER__ID = GENERIC__ID;
 	public static final String ITEM_SECRET_GIFT_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -374,6 +410,19 @@ public class DBConstants {
 	public static final String LOGIN_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String LOGIN_HISTORY__DATE = "date";
 	public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
+
+	/*MINI EVENT FOR USER*/
+	public static final String MINI_EVENT_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_FOR_USER__USER_LVL = "user_lvl";
+	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED = "tier_one_redeemed";
+	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED = "tier_two_redeemed";
+	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED = "tier_three_redeemed";
+
+	/*MINI EVENT GOAL FOR USER*/
+	public static final String MINI_EVENT_GOAL_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID = "mini_event_goal_id";
+	public static final String MINI_EVENT_GOAL_FOR_USER__PROGRESS = "progress";
 
 	/*MINI TASK FOR USER*/
 	public static final String MINI_JOB_FOR_USER__ID = GENERIC__ID;
@@ -402,18 +451,15 @@ public class DBConstants {
 	public static final String MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE = "enhancing_complete";
 
 	/*MONSTER ENHANCING HISTORY*/
-	public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
+	public static final String MONSTER_ENHANCING_HISTORY__ID = GENERIC__ID;
 	public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
-	public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
-	public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
+	public static final String MONSTER_ENHANCING_HISTORY__MFU_ID_BEING_ENHANCED = "mfu_id_being_enhanced";
+	public static final String MONSTER_ENHANCING_HISTORY__FEEDER_MFU_ID = "feeder_mfu_id";
 	public static final String MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE = "current_experience";
 	public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE = "previous_experience";
 	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME = "enhancing_start_time";
 	public static final String MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
-	public static final String MONSTER_ENHANCING_HISTORY__IS_FEEDER = "is_feeder";
-	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_CANCELLED = "enhancing_cancelled";
 	public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_COST = "enhancing_cost";
-
 
 	/*MONSTER EVOLVING FOR USER*/
 	public static final String MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
@@ -423,13 +469,14 @@ public class DBConstants {
 	public static final String MONSTER_EVOLVING_FOR_USER__START_TIME = "start_time";
 
 	/*MONSTER EVOLVING HISTORY TABLE*/
-	public static final String MONSTER_EVOLVING_HISTORY__ID = "id";
+	public static final String MONSTER_EVOLVING_HISTORY__ID = GENERIC__ID;
 	public static final String MONSTER_EVOLVING_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE = "user_monster_id_one";
 	public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO = "user_monster_id_two";
 	public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
 	public static final String MONSTER_EVOLVING_HISTORY__START_TIME = "start_time";
 	public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
+	public static final String MONSTER_EVOLVING_HISTORY__END_TIME = "end_time";
 
 	/*MONSTER FOR USER*/
 	public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
@@ -439,11 +486,11 @@ public class DBConstants {
 	public static final String MONSTER_FOR_USER__CURRENT_LEVEL = "current_level";
 	public static final String MONSTER_FOR_USER__CURRENT_HEALTH = "current_health";
 	public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
-	public static final String MONSTER_FOR_USER__HAS_ALL_PIECES = "has_all_pieces";
 	public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
 	public static final String MONSTER_FOR_USER__COMBINE_START_TIME = "combine_start_time";
 	public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
 	public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
+	public static final String MONSTER_FOR_USER__HAS_ALL_PIECES = "has_all_pieces";
 	public static final String MONSTER_FOR_USER__RESTRICTED = "restricted";
 	public static final String MONSTER_FOR_USER__OFFENSIVE_SKILL_ID = "offensive_skill_id";
 	public static final String MONSTER_FOR_USER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
@@ -495,7 +542,6 @@ public class DBConstants {
 	public static final String MONSTER_SNAPSHOT_FOR_USER__OFF_SKILL_ID = "off_skill_id";
 	public static final String MONSTER_SNAPSHOT_FOR_USER__DEF_SKILL_ID = "def_skill_id";
 
-	
 	/*OBSTACLE FOR USER */
 	public static final String OBSTACLE_FOR_USER__ID = GENERIC__ID;
 	public static final String OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -551,6 +597,13 @@ public class DBConstants {
 	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
 
+	/*PVP_BOARD_OBSTACLE_FOR_USER*/
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__ID = GENERIC__ID;
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__OBSTACLE_ID = "obstacle_id";
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__POS_X = "pos_x";
+	public static final String PVP_BOARD_OBSTACLE_FOR_USER__POS_Y = "pos_y";
+
 	/*PVP LEAGUE FOR USER*/
 	public static final String PVP_LEAGUE_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID = "league_id";
@@ -568,15 +621,15 @@ public class DBConstants {
 	/*QUEST FOR USER TABLE*/
 	public static final String QUEST_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
-	public static final String QUEST_FOR_USER__IS_REDEEMED = "is_redeemed"; 
+	public static final String QUEST_FOR_USER__IS_REDEEMED = "is_redeemed";
 	public static final String QUEST_FOR_USER__IS_COMPLETE = "is_complete";
 
 	/*QUEST JOB FOR USER TABLE*/
 	public static final String QUEST_JOB_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String QUEST_JOB_FOR_USER__QUEST_ID = "quest_id";
-	public static final String QUEST_JOB_FOR_USER__QUEST_JOB_ID = "quest_job_id"; 
+	public static final String QUEST_JOB_FOR_USER__QUEST_JOB_ID = "quest_job_id";
 	public static final String QUEST_JOB_FOR_USER__IS_COMPLETE = "is_complete";
-	public static final String QUEST_JOB_FOR_USER__PROGRESS = "progress"; 
+	public static final String QUEST_JOB_FOR_USER__PROGRESS = "progress";
 
 	/*REFERRALS*/
 	public static final String REFERRALS__REFERRER_ID = "referrer_id";
@@ -590,7 +643,7 @@ public class DBConstants {
 	public static final String RESEARCH_FOR_USER__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_FOR_USER__TIME_PURCHASED = "time_purchased";
 	public static final String RESEARCH_FOR_USER__IS_COMPLETE = "is_complete";
-	
+
 	/*USER STRUCTS TABLE*/
 	public static final String STRUCTURE_FOR_USER__ID = GENERIC__ID;
 	public static final String STRUCTURE_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -614,7 +667,7 @@ public class DBConstants {
 	public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
 	public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 	public static final String TASK_FOR_USER_ONGOING__TASK_STAGE_ID = "task_stage_id";
-	
+
 	/*TASK FOR USER CLIENT STATE TABLE*/
 	public static final String TASK_FOR_USER_CLIENT_STATE__USER_ID = "user_id";
 	public static final String TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE = "client_state";
@@ -696,6 +749,14 @@ public class DBConstants {
 	public static final String TOURNAMENT_REWARD__GREEN = "green";
 	public static final String TOURNAMENT_REWARD__RED = "red";
 
+	/*USER TRANSLATION SETTINGS*/
+	public static final String TRANSLATION_SETTINGS_FOR_USER__ID = GENERIC__ID;
+	public static final String TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID = "sender_user_id";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__LANGUAGE = "language";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE = "chat_type";
+	public static final String TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON = "translations_on";
+
 	/*USER TABLE*/
 	public static final String USER__ID = GENERIC__ID;
 	public static final String USER__NAME = "name";
@@ -726,7 +787,7 @@ public class DBConstants {
 	public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
 	public static final String USER__FACEBOOK_ID = "facebook_id";
 	public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
-	public static final String USER__GAME_CENTER_ID = "game_center_id";  
+	public static final String USER__GAME_CENTER_ID = "game_center_id";
 	public static final String USER__UDID = "udid";
 	public static final String USER__LAST_OBSTACLE_SPAWNED_TIME = "last_obstacle_spawned_time";
 	public static final String USER__NUM_OBSTACLES_REMOVED = "num_obstacles_removed";
@@ -736,11 +797,11 @@ public class DBConstants {
 	public static final String USER__FB_DATA = "fb_data";
 	public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
 	public static final String USER__CLAN_HELPS = "clan_helps";
-    public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
-    public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
-    public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
-    public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
-    
+	public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
+	public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
+	public static final String USER__LAST_TEAM_DONATE_SOLICITATION = "last_team_donate_solicitation";
+	public static final String USER__BOUGHT_RIGGED_BOOSTER_PACK = "bought_rigged_booster_pack";
+	public static final String USER__TOTAL_STRENGTH = "total_strength";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -751,7 +812,7 @@ public class DBConstants {
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME = "create_time";
 
 	/*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
-  public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;
+	public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;
 	public static final String USER_CURRENCY_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String USER_CURRENCY_HISTORY__DATE = "date";
 	public static final String USER_CURRENCY_HISTORY__RESOURCE_TYPE = "resource_type";
@@ -777,14 +838,14 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID = "recipient_id";
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
-
+	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
+	
 	/*USER SESSIONS*/
 	public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
 	public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
 	public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
 
-
-	/**************CONFIGURATION DATA TABLES*****************************/
+	/************** CONFIGURATION DATA TABLES *****************************/
 
 	public static final String ACHIEVEMENT__ID = GENERIC__ID;
 	public static final String ACHIEVEMENT__NAME = "name";
@@ -809,12 +870,34 @@ public class DBConstants {
 
 	public static final String BANNED_USER__USER_ID = GENERIC__USER_ID;
 
+	/*BATTLE ITEM*/
+	public static final String BATTLE_ITEM__ID = GENERIC__ID;
+	public static final String BATTLE_ITEM__TYPE = "type";
+	public static final String BATTLE_ITEM__CATEGORY = "battle_item_category";
+	public static final String BATTLE_ITEM__CREATE_RESOURCE_TYPE = "create_resource_type";
+	public static final String BATTLE_ITEM__CREATE_COST = "create_cost";
+	public static final String BATTLE_ITEM__NAME = "name";
+	public static final String BATTLE_ITEM__DESCRIPTION = "description";
+	public static final String BATTLE_ITEM__POWER_AMOUNT = "power_amount";
+	public static final String BATTLE_ITEM__IMAGE_NAME = "image_name";
+	public static final String BATTLE_ITEM__PRIORITY = "priority";
+	public static final String BATTLE_ITEM__MINUTES_TO_CREATE = "minutes_to_create";
+	public static final String BATTLE_ITEM__IN_BATTLE_GEM_COST = "in_battle_gem_cost";
+	public static final String BATTLE_ITEM__AMOUNT = "amount";
+
 	/*BOARD*/
 	public static final String BOARD__ID = GENERIC__ID;
 	public static final String BOARD__WIDTH = "width";
 	public static final String BOARD__HEIGHT = "height";
 	public static final String BOARD__ORB_ELEMENTS = "orb_elements";
-	
+
+	/*BOARD OBSTACLE*/
+	public static final String BOARD_OBSTACLE__ID = "id";
+	public static final String BOARD_OBSTACLE__NAME = "name";
+	public static final String BOARD_OBSTACLE__TYPE = "type";
+	public static final String BOARD_OBSTACLE__POWER_AMT = "power_amt";
+	public static final String BOARD_OBSTACLE__INIT_AVAILABLE = "init_available";
+
 	/*BOARD PROPERTY*/
 	public static final String BOARD_PROPERTY__ID = GENERIC__ID;
 	public static final String BOARD_PROPERTY__BOARD_ID = "board_id";
@@ -824,7 +907,7 @@ public class DBConstants {
 	public static final String BOARD_PROPERTY__ELEMENT = "element";
 	public static final String BOARD_PROPERTY__VALUE = "value";
 	public static final String BOARD_PROPERTY__QUANTITY = "quantity";
-	
+
 	public static final String BOOSTER_DISPLAY_ITEM__ID = GENERIC__ID;
 	public static final String BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
 	public static final String BOOSTER_DISPLAY_ITEM__IS_MONSTER = "is_monster";
@@ -871,14 +954,14 @@ public class DBConstants {
 	public static final String CLAN_ICON__IS_AVAILABLE = "is_available";
 
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
-	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week"; 
+	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
 	public static final String EVENT_PERSISTENT__START_HOUR = "start_hour";
 	public static final String EVENT_PERSISTENT__EVENT_DURATION_MINUTES = "event_duration_minutes";
 	public static final String EVENT_PERSISTENT__TASK_ID = "task_id";
 	public static final String EVENT_PERSISTENT__COOLDOWN_MINUTES = "cooldown_minutes";
 	public static final String EVENT_PERSISTENT__EVENT_TYPE = "event_type";
 	public static final String EVENT_PERSISTENT__MONSTER_ELEMENT = "monster_element";
-	
+
 	public static final String FILE_DOWNLOAD__ID = "id";
 	public static final String FILE_DOWNLOAD__FILENAME = "filename";
 	public static final String FILE_DOWNLOAD__PRIORITY = "priority";
@@ -893,18 +976,53 @@ public class DBConstants {
 	public static final String ITEM__AMOUNT = "amount";
 	public static final String ITEM__SECRET_GIFT_CHANCE = "secret_gift_chance";
 	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
+	public static final String ITEM__SHORT_NAME = "short_name";
+	public static final String ITEM__ACTION_GAME_TYPE = "action_game_type";
+
+	public static final String MINI_EVENT__ID = GENERIC__ID;
+	public static final String MINI_EVENT__START_TIME = "start_time";
+	public static final String MINI_EVENT__END_TIME = "end_time";
+	public static final String MINI_EVENT__NAME = "name";
+	public static final String MINI_EVENT__DESCRIPTION = "description";
+	public static final String MINI_EVENT__IMG = "img";
+	public static final String MINI_EVENT__ICON = "icon";
+
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__ID = GENERIC__ID;
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__PLAYER_LVL_MIN = "player_lvl_min";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__PLAYER_LVL_MAX = "player_lvl_max";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_ONE_MIN_PTS = "tier_one_min_pts";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_TWO_MIN_PTS = "tier_two_min_pts";
+	public static final String MINI_EVENT_FOR_PLAYER_LVL__TIER_THREE_MIN_PTS = "tier_three_min_pts";
+
+	public static final String MINI_EVENT_GOAL__ID = GENERIC__ID;
+	public static final String MINI_EVENT_GOAL__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_GOAL__TYPE = "type";
+	public static final String MINI_EVENT_GOAL__AMT = "amt";
+	public static final String MINI_EVENT_GOAL__DESCRIPTION = "description";
+	public static final String MINI_EVENT_GOAL__PTS_REWARD = "pts_reward";
+
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__ID = GENERIC__ID;
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__REWARD_ID = "reward_id";
+	public static final String MINI_EVENT_LEADERBOARD_REWARD__LEADERBOARD_POS = "leaderboard_pos";
+
+	public static final String MINI_EVENT_TIER_REWARD__ID = GENERIC__ID;
+	public static final String MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID = "mini_event_for_player_lvl_id";
+	public static final String MINI_EVENT_TIER_REWARD__REWARD_ID = "reward_id";
+	public static final String MINI_EVENT_TIER_REWARD__REWARD_TIER = "reward_tier";
 
 	public static final String MINI_JOB__ID = GENERIC__ID;
-	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id"; 
+	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id";
 	public static final String MINI_JOB__NAME = "name";
 	public static final String MINI_JOB__CASH_REWARD = "cash_reward";
 	public static final String MINI_JOB__OIL_REWARD = "oil_reward";
 	public static final String MINI_JOB__GEM_REWARD = "gem_reward";
-    public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
-    public static final String MINI_JOB__ITEM_ID_REWARD = "item_id_reward";
-    public static final String MINI_JOB__ITEM_REWARD_QUANTITY = "item_reward_quantity";
-    public static final String MINI_JOB__SECOND_ITEM_ID_REWARD = "second_item_id_reward";
-    public static final String MINI_JOB__SECOND_ITEM_REWARD_QUANTITY = "second_item_reward_quantity";
+	public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
+	public static final String MINI_JOB__ITEM_ID_REWARD = "item_id_reward";
+	public static final String MINI_JOB__ITEM_REWARD_QUANTITY = "item_reward_quantity";
+	public static final String MINI_JOB__SECOND_ITEM_ID_REWARD = "second_item_id_reward";
+	public static final String MINI_JOB__SECOND_ITEM_REWARD_QUANTITY = "second_item_reward_quantity";
 	public static final String MINI_JOB__QUALITY = "quality";
 	public static final String MINI_JOB__MAX_NUM_MONSTERS_ALLOWED = "max_num_monsters_allowed";
 	public static final String MINI_JOB__CHANCE_TO_APPEAR = "chance_to_appear";
@@ -931,7 +1049,7 @@ public class DBConstants {
 	public static final String MONSTER__ELEMENT = "element";
 	public static final String MONSTER__IMAGE_PREFIX = "image_prefix";
 	public static final String MONSTER__NUM_PUZZLE_PIECES = "num_puzzle_pieces";
-	public static final String MONSTER__MINUTES_TO_COMBINE_PIECES = "minutes_to_combine_pieces"; 
+	public static final String MONSTER__MINUTES_TO_COMBINE_PIECES = "minutes_to_combine_pieces";
 	public static final String MONSTER__MAX_LEVEL = "max_level";
 	public static final String MONSTER__EVOLUTION_MONSTER_ID = "evolution_monster_id";
 	public static final String MONSTER__EVOLUTION_CATALYST_MONSTER_ID = "evolution_catalyst_monster_id";
@@ -981,15 +1099,17 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
-    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
-    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL_EXPONENT = "cost_to_fully_heal_exponent";
-    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
-    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
+	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL_EXPONENT = "cost_to_fully_heal_exponent";
+	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
-	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
-	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";
-	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT = "enhance_exp_per_sec_exponent";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent";
+	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER = "seconds_to_enhance_per_feeder";
+	public static final String MONSTER_LEVEL_INFO__SECONDS_TO_ENHANCE_PER_FEEDER_EXPONENT = "seconds_to_enhance_per_feeder_exponent";
 	public static final String MONSTER_LEVEL_INFO__PVP_DROP_RATE = "pvp_drop_rate";
+	public static final String MONSTER_LEVEL_INFO__STRENGTH = "strength";
+	public static final String MONSTER_LEVEL_INFO__STRENGTH_EXPONENT = "strength_exponent";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";
@@ -1044,7 +1164,6 @@ public class DBConstants {
 	public static final String QUEST__CARROT_ID = "carrot_id";
 	public static final String QUEST__MONSTER_ELEMENT = "monster_element";
 
-
 	public static final String QUEST_JOB__ID = GENERIC__ID;
 	public static final String QUEST_JOB__QUEST_ID = "quest_id";
 	public static final String QUEST_JOB__QUEST_JOB_TYPE = "quest_job_type";
@@ -1071,16 +1190,25 @@ public class DBConstants {
 	public static final String RESEARCH__DURATION_MIN = "duration_min";
 	public static final String RESEARCH__COST_AMT = "cost_amt";
 	public static final String RESEARCH__COST_TYPE = "cost_type";
-	
+	public static final String RESEARCH__LEVEL = "level";
+	public static final String RESEARCH__PRIORITY = "priority";
+	public static final String RESEARCH__TIER = "tier";
+	public static final String RESEARCH__STRENGTH = "strength";
+
 	public static final String RESEARCH_PROPERTY__ID = GENERIC__ID;
 	public static final String RESEARCH_PROPERTY__RESEARCH_ID = "research_id";
 	public static final String RESEARCH_PROPERTY__NAME = "name";
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
-	
+
+	public static final String REWARD__ID = GENERIC__ID;
+	public static final String REWARD__STATIC_DATA_ID = "static_data_id";
+	public static final String REWARD__TYPE ="type";
+	public static final String REWARD__AMT = "amt";
+
 	public static final String SERVER_TOGGLE__ID = GENERIC__ID;
 	public static final String SERVER_TOGGLE__NAME = "name";
 	public static final String SERVER_TOGGLE__ON = "on";
-	
+
 	public static final String SKILL__ID = GENERIC__ID;
 	public static final String SKILL__NAME = "name";
 	public static final String SKILL__ORB_COST = "orb_cost";
@@ -1092,15 +1220,17 @@ public class DBConstants {
 	public static final String SKILL__OFFENSIVE_DESC = "offensive_desc";
 	public static final String SKILL__IMG_NAME_PREFIX = "img_name_prefix";
 	public static final String SKILL__SKILL_EFFECT_DURATION = "skill_effect_duration";
-//	public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
+	public static final String SKILL__SHORT_DEF_DESC = "short_def_desc";
+	public static final String SKILL__SHORT_OFF_DESC = "short_off_desc";
+	//	public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
 	//Animation shown when skill activates.
-//	public static final String SKILL__LOGO_IMG_NAME = "logo_img_name";
+	//	public static final String SKILL__LOGO_IMG_NAME = "logo_img_name";
 
 	public static final String SKILL_PROPERTY__ID = GENERIC__ID;
 	public static final String SKILL_PROPERTY__NAME = "name";
 	public static final String SKILL_PROPERTY__VALUE = "value";
 	public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
-	
+
 	public static final String SKILL_SIDE_EFFECT__ID = GENERIC__ID;
 	public static final String SKILL_SIDE_EFFECT__NAME = "name";
 	public static final String SKILL_SIDE_EFFECT__DESC = "desc";
@@ -1111,7 +1241,7 @@ public class DBConstants {
 	public static final String SKILL_SIDE_EFFECT__IMG_PIXEL_OFFSET_Y = "img_pixel_offset_y";
 	public static final String SKILL_SIDE_EFFECT__ICON_IMG_NAME = "icon_img_name";
 	public static final String SKILL_SIDE_EFFECT__PFX_NAME = "pfx_name";
-	public static final String SKILL_SIDE_EFFECT__PFX_COLOR  = "pfx_color";
+	public static final String SKILL_SIDE_EFFECT__PFX_COLOR = "pfx_color";
 	public static final String SKILL_SIDE_EFFECT__POSITION_TYPE = "position_type";
 	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_X = "pfx_pixel_offset_x";
 	public static final String SKILL_SIDE_EFFECT__PFX_PIXEL_OFFSET_Y = "pfx_pixel_offset_y";
@@ -1142,6 +1272,10 @@ public class DBConstants {
 	public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
 	public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
 	public static final String STRUCTURE__EXP_REWARD = "exp_reward";
+	public static final String STRUCTURE__STRENGTH = "strength";
+
+	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_BATTLE_ITEM_FACTORY__POWER_LIMIT = "power_limit";
 
 	public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
 	//clan helps
@@ -1160,11 +1294,24 @@ public class DBConstants {
 	public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
 	public static final String STRUCTURE_LAB__POINTS_MULTIPLIER = "points_multiplier";
-	public static final String STRUCTURE_LAB__POINTS_PER_SECOND = "points_per_second";
 
 	public static final String STRUCTURE_MINI_JOB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT = "generated_job_limit";
 	public static final String STRUCTURE_MINI_JOB__HOURS_BETWEEN_JOB_GENERATION = "hours_between_job_generation";
+
+	public static final String STRUCTURE_MONEY_TREE__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_MONEY_TREE__PRODUCTION_RATE = "production_rate";
+	public static final String STRUCTURE_MONEY_TREE__CAPACITY = "capacity";
+	public static final String STRUCTURE_MONEY_TREE__DAYS_OF_DURATION = "days_of_duration";
+	public static final String STRUCTURE_MONEY_TREE__DAYS_FOR_RENEWAL = "days_for_renewal";
+	public static final String STRUCTURE_MONEY_TREE__IAP_PRODUCT_ID = "iap_product_id";
+	public static final String STRUCTURE_MONEY_TREE__FAKE_IAP_PRODUCT_ID = "fake_iap_product_id";
+
+	public static final String STRUCTURE_PVP_BOARD__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_PVP_BOARD__POWER_LIMIT = "power_limit";
+
+	public static final String STRUCTURE_RESEARCH_HOUSE__STRUCT_ID = "struct_id";
+	public static final String STRUCTURE_RESEARCH_HOUSE__RESEARCH_SPEED_MULTIPLIER = "research_speed_multiplier";
 
 	public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";
@@ -1183,10 +1330,10 @@ public class DBConstants {
 	public static final String STRUCTURE_RESOURCE_STORAGE__RESOURCE_TYPE_STORED = "resource_type_stored";
 	public static final String STRUCTURE_RESOURCE_STORAGE__CAPACITY = "capacity";
 
-	public static final String STRUCTURE_TEAM_CENTER__STRUCT_ID  = "struct_id";
+	public static final String STRUCTURE_TEAM_CENTER__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT = "team_cost_limit";
 
-	public static final String STRUCTURE_TOWN_HALL__STRUCT_ID  = "struct_id";
+	public static final String STRUCTURE_TOWN_HALL__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_GENERATORS = "num_resource_one_generators";
 	public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_STORAGES = "num_resource_one_storages";
 	public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_TWO_GENERATORS = "num_resource_two_generators";
@@ -1199,7 +1346,7 @@ public class DBConstants {
 	public static final String STRUCTURE_TOWN_HALL__RESOURCE_CAPACITY = "resource_capacity";
 	public static final String STRUCTURE_TOWN_HALL__NUM_EVO_CHAMBERS = "num_evo_chambers";
 
-	public static final String TASK__ID = "id"; 
+	public static final String TASK__ID = "id";
 	public static final String TASK__GOOD_NAME = "good_name";
 	public static final String TASK__DESCRIPTION = "description";
 	public static final String TASK__CITY_ID = "city_id";
@@ -1212,7 +1359,7 @@ public class DBConstants {
 	public static final String TASK__INIT_DEFEATED_DIALOGUE = "init_defeated_dialogue";
 	public static final String TASK__EXP_REWARD = "exp_reward";
 	public static final String TASK__BOARD_ID = "board_id";
-	
+
 	public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
 	public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
 	public static final String TASK_MAP_ELEMENT__X_POS = "x_pos";
@@ -1228,6 +1375,8 @@ public class DBConstants {
 	public static final String TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET = "char_vert_pixel_offset";
 	public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
 	public static final String TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR = "char_scale_factor";
+	public static final String TASK_MAP_ELEMENT__IS_FAKE = "is_fake";
+	public static final String TASK_MAP_ELEMENT__STRENGTH = "strength";
 
 	public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
 	public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

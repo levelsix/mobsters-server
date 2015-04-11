@@ -12,38 +12,38 @@ import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 
 public class RetrieveClanInfoRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private RetrieveClanInfoRequestProto retrieveClanInfoRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      retrieveClanInfoRequestProto = RetrieveClanInfoRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveClanInfoRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("RetrieveClanInfoRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public RetrieveClanInfoRequestProto getRetrieveClanInfoRequestProto() {
-    return retrieveClanInfoRequestProto;
-  }
+	private RetrieveClanInfoRequestProto retrieveClanInfoRequestProto;
 
-  public void setRetrieveClanInfoRequestProto(
-	  RetrieveClanInfoRequestProto retrieveClanInfoRequestProto )
-  {
-	  this.retrieveClanInfoRequestProto = retrieveClanInfoRequestProto;
-  }
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			retrieveClanInfoRequestProto = RetrieveClanInfoRequestProto
+					.parseFrom(ByteString.copyFrom(buff));
+			playerId = retrieveClanInfoRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("RetrieveClanInfoRequest exception", e);
+		}
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "RetrieveClanInfoRequestEvent [retrieveClanInfoRequestProto="
-		  + retrieveClanInfoRequestProto
-		  + "]";
-  }
+	public RetrieveClanInfoRequestProto getRetrieveClanInfoRequestProto() {
+		return retrieveClanInfoRequestProto;
+	}
+
+	public void setRetrieveClanInfoRequestProto(
+			RetrieveClanInfoRequestProto retrieveClanInfoRequestProto) {
+		this.retrieveClanInfoRequestProto = retrieveClanInfoRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "RetrieveClanInfoRequestEvent [retrieveClanInfoRequestProto="
+				+ retrieveClanInfoRequestProto + "]";
+	}
 
 }

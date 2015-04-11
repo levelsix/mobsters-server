@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Structure implements Serializable {
 
 	private static final long serialVersionUID = -6838514119131430513L;
-	
+
 	private int id;
 	private String name;
 	private int level;
@@ -27,15 +27,16 @@ public class Structure implements Serializable {
 	private float shadowHorizontalOffset;
 	private float shadowScale;
 	private int expReward;
-	
+	private int strength;
+
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
-			int width, int height,
-			int predecessorStructId, int successorStructId, String imgName,
+			int width, int height, int predecessorStructId,
+			int successorStructId, String imgName,
 			float imgVerticalPixelOffset, float imgHorizontalPixelOffset,
 			String description, String shortDescription, String shadowImgName,
 			float shadowVerticalOffset, float shadowHorizontalOffset,
-			float shadowScale, int expReward) {
+			float shadowScale, int expReward, int strength) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,6 +59,15 @@ public class Structure implements Serializable {
 		this.shadowHorizontalOffset = shadowHorizontalOffset;
 		this.shadowScale = shadowScale;
 		this.expReward = expReward;
+		this.strength = strength;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
 	}
 
 	public int getId() {
@@ -220,13 +230,11 @@ public class Structure implements Serializable {
 		this.shadowScale = shadowScale;
 	}
 
-	public int getExpReward()
-	{
+	public int getExpReward() {
 		return expReward;
 	}
 
-	public void setExpReward( int expReward )
-	{
+	public void setExpReward(int expReward) {
 		this.expReward = expReward;
 	}
 
@@ -246,7 +254,7 @@ public class Structure implements Serializable {
 				+ ", shadowVerticalOffset=" + shadowVerticalOffset
 				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset
 				+ ", shadowScale=" + shadowScale + ", expReward=" + expReward
-				+ "]";
+				+ ", strength=" + strength + "]";
 	}
 
 }

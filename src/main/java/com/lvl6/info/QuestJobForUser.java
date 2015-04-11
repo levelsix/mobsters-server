@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class QuestJobForUser implements Serializable {
 
 	private static final long serialVersionUID = -660828590530132960L;
-	
+
 	private String userId;
 	private int questId; //not really necessary but eh
 	private int questJobId;
 	private boolean isComplete;
 	private int progress;
-	
+
 	public QuestJobForUser() {
 		super();
 	}
-	
+
 	public QuestJobForUser(String userId, int questId, int questJobId,
 			boolean isComplete, int progress) {
 		super();
@@ -72,5 +72,5 @@ public class QuestJobForUser implements Serializable {
 				+ ", questJobId=" + questJobId + ", isComplete=" + isComplete
 				+ ", progress=" + progress + "]";
 	}
-	
+
 }

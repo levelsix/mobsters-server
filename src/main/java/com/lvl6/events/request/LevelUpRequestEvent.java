@@ -12,32 +12,33 @@ import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
 
 public class LevelUpRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
-  private LevelUpRequestProto levelUpRequestProto;
-  
-  /**
-   * read the event from the given ByteBuffer to populate this event
-   */
-  public void read(ByteBuffer buff) {
-    try {
-      levelUpRequestProto = LevelUpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = levelUpRequestProto.getSender().getUserUuid();
-    } catch (InvalidProtocolBufferException e) {
-      log.error("LevelUpRequest exception", e);
-    }
-  }
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-  public LevelUpRequestProto getLevelUpRequestProto() {
-    return levelUpRequestProto;
-  }
+	private LevelUpRequestProto levelUpRequestProto;
 
-  @Override
-  public String toString()
-  {
-	  return "LevelUpRequestEvent [levelUpRequestProto="
-		  + levelUpRequestProto
-		  + "]";
-  }
-  
+	/**
+	 * read the event from the given ByteBuffer to populate this event
+	 */
+	@Override
+	public void read(ByteBuffer buff) {
+		try {
+			levelUpRequestProto = LevelUpRequestProto.parseFrom(ByteString
+					.copyFrom(buff));
+			playerId = levelUpRequestProto.getSender().getUserUuid();
+		} catch (InvalidProtocolBufferException e) {
+			log.error("LevelUpRequest exception", e);
+		}
+	}
+
+	public LevelUpRequestProto getLevelUpRequestProto() {
+		return levelUpRequestProto;
+	}
+
+	@Override
+	public String toString() {
+		return "LevelUpRequestEvent [levelUpRequestProto="
+				+ levelUpRequestProto + "]";
+	}
+
 }

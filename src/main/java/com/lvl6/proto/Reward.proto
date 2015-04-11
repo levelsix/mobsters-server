@@ -1,0 +1,46 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "MonsterStuff.proto";
+import "Item.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "RewardsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message RewardProto {
+	optional int32 rewardId = 1;
+	//id in one of the *_config tables
+	optional int32 staticDataId = 2;
+	
+	optional RewardType typ = 3;
+	optional int32 amt = 4;
+	
+	//NOTE: if RewardType is MONSTER, then amt is repurposed to:
+	//amt = 0 means only one piece is given
+	//amt > 0 means one monster with a lvl equal to 'amt' is given  
+	
+	enum RewardType {
+		NO_REWARD = 1;
+		ITEM = 2;
+		GEMS = 3;
+		CASH = 4;
+		OIL = 5;
+		MONSTER = 6;
+	}
+	
+}
+
+//------------------------------------------------------------------------------------------
+//there is no analog of this in the db/server
+message UserRewardProto {
+	repeated FullUserMonsterProto updatedOrNewMonsters = 1;
+	repeated UserItemProto updatedUserItems = 2;
+	optional int32 gems = 3;
+	optional int32 cash = 4;
+	optional int32 oil = 5;
+}

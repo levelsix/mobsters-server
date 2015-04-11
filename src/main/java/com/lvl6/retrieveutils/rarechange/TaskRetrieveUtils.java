@@ -21,9 +21,12 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class TaskRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class TaskRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, List<Task>> cityIdsToTasks;
 	private static Map<Integer, Task> taskIdsToTasks;
@@ -32,8 +35,8 @@ import com.lvl6.utils.DBConnection;
 
 	//CONTROLLER LOGIC******************************************************************
 	public static int getTaskIdForCityElement(int cityId, int assetId) {
-		log.debug("retrieving task id for city element, cityId=" + cityId +
-			" assetId=" + assetId);
+		log.debug("retrieving task id for city element, cityId=" + cityId
+				+ " assetId=" + assetId);
 		if (null == cityIdsToTasks) {
 			setStaticCityIdsToTasks();
 		}
@@ -50,14 +53,13 @@ import com.lvl6.utils.DBConnection;
 				return aTask.getId();
 			}
 		}
-		log.error("no task id for city element, cityId=" + cityId +
-			" assetId=" + assetId);
+		log.error("no task id for city element, cityId=" + cityId + " assetId="
+				+ assetId);
 
 		return 0;
 	}
 
 	//RETRIEVE QUERIES*********************************************************************
-
 
 	public static Map<Integer, Task> getTaskIdsToTasks() {
 		log.debug("retrieving all tasks data map");
@@ -70,7 +72,7 @@ import com.lvl6.utils.DBConnection;
 	public static Task getTaskForTaskId(int taskId) {
 		log.debug("retrieve task data for task " + taskId);
 		if (taskIdsToTasks == null) {
-			setStaticTaskIdsToTasks();      
+			setStaticTaskIdsToTasks();
 		}
 		return taskIdsToTasks.get(taskId);
 	}
@@ -78,11 +80,11 @@ import com.lvl6.utils.DBConnection;
 	public static Map<Integer, Task> getTasksForTaskIds(List<Integer> ids) {
 		log.debug("retrieve task data for taskids " + ids);
 		if (taskIdsToTasks == null) {
-			setStaticTaskIdsToTasks();      
+			setStaticTaskIdsToTasks();
 		}
 		Map<Integer, Task> toreturn = new HashMap<Integer, Task>();
 		for (Integer id : ids) {
-			toreturn.put(id,  taskIdsToTasks.get(id));
+			toreturn.put(id, taskIdsToTasks.get(id));
 		}
 		return toreturn;
 	}
@@ -120,7 +122,6 @@ import com.lvl6.utils.DBConnection;
 			setStaticCityIdsToTasks();
 		}
 
-
 		if (!taskIdsToTasks.containsKey(taskId)) {
 			return 0;
 		}
@@ -143,13 +144,15 @@ import com.lvl6.utils.DBConnection;
 						rs.last();
 						rs.beforeFirst();
 						Map<Integer, List<Task>> cityIdToTasksTemp = new HashMap<Integer, List<Task>>();
-						while(rs.next()) {  //should only be one
+						while (rs.next()) {  //should only be one
 							Task task = convertRSRowToTask(rs);
 							if (task != null) {
 								if (cityIdToTasksTemp.get(task.getCityId()) == null) {
-									cityIdToTasksTemp.put(task.getCityId(), new ArrayList<Task>());
+									cityIdToTasksTemp.put(task.getCityId(),
+											new ArrayList<Task>());
 								}
-								cityIdToTasksTemp.get(task.getCityId()).add(task);
+								cityIdToTasksTemp.get(task.getCityId()).add(
+										task);
 							}
 						}
 						cityIdsToTasks = cityIdToTasksTemp;
@@ -157,7 +160,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("task retrieve db error.", e);
@@ -180,7 +183,7 @@ import com.lvl6.utils.DBConnection;
 						rs.last();
 						rs.beforeFirst();
 						HashMap<Integer, Task> taskIdsToTasksTemp = new HashMap<Integer, Task>();
-						while(rs.next()) {  //should only be one
+						while (rs.next()) {  //should only be one
 							Task task = convertRSRowToTask(rs);
 							if (task != null)
 								taskIdsToTasksTemp.put(task.getId(), task);
@@ -190,7 +193,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("task retrieve db error.", e);
@@ -213,25 +216,30 @@ import com.lvl6.utils.DBConnection;
 		String description = rs.getString(DBConstants.TASK__DESCRIPTION);
 		int cityId = rs.getInt(DBConstants.TASK__CITY_ID);
 		//    int energyCost = rs.getInt(DBConstants.);
-		int assetNumberWithinCity = rs.getInt(DBConstants.TASK__ASSET_NUM_WITHIN_CITY);
-		int prerequisiteTaskId = rs.getInt(DBConstants.TASK__PREREQUISITE_TASK_ID);
-		int prerequisiteQuestId = rs.getInt(DBConstants.TASK__PREREQUISITE_QUEST_ID);
+		int assetNumberWithinCity = rs
+				.getInt(DBConstants.TASK__ASSET_NUM_WITHIN_CITY);
+		int prerequisiteTaskId = rs
+				.getInt(DBConstants.TASK__PREREQUISITE_TASK_ID);
+		int prerequisiteQuestId = rs
+				.getInt(DBConstants.TASK__PREREQUISITE_QUEST_ID);
 		int boardWidth = rs.getInt(DBConstants.TASK__BOARD_WIDTH);
 		int boardHeight = rs.getInt(DBConstants.TASK__BOARD_HEIGHT);
-		String groundImgPrefix = rs.getString(DBConstants.TASK__GROUND_IMG_PREFIX);
-		String initDefeatedD =  rs.getString(DBConstants.TASK__INIT_DEFEATED_DIALOGUE);
+		String groundImgPrefix = rs
+				.getString(DBConstants.TASK__GROUND_IMG_PREFIX);
+		String initDefeatedD = rs
+				.getString(DBConstants.TASK__INIT_DEFEATED_DIALOGUE);
 		int expReward = rs.getInt(DBConstants.TASK__EXP_REWARD);
 		int boardId = rs.getInt(DBConstants.TASK__BOARD_ID);
-		
+
 		Dialogue initD = null;
 		if (null != initDefeatedD && !initDefeatedD.isEmpty()) {
 			initD = MiscMethods.createDialogue(initDefeatedD);
 		}
-		
 
-		Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
-			prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight,
-			groundImgPrefix, initDefeatedD, initD, expReward, boardId);
+		Task task = new Task(id, goodName, description, cityId,
+				assetNumberWithinCity, prerequisiteTaskId, prerequisiteQuestId,
+				boardWidth, boardHeight, groundImgPrefix, initDefeatedD, initD,
+				expReward, boardId);
 		return task;
 	}
 }

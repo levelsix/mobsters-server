@@ -15,52 +15,49 @@ import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 
 @Component
 public class ItemUtil {
-	
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-	
+
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
+
 	public static List<ItemForUserUsage> javafyUserItemUsageProto(
-		List<UserItemUsageProto> itemsUsedProtos)
-	{
-		
-		List<ItemForUserUsage> itemsUsed =
-			new ArrayList<ItemForUserUsage>();
-		
+			List<UserItemUsageProto> itemsUsedProtos) {
+
+		List<ItemForUserUsage> itemsUsed = new ArrayList<ItemForUserUsage>();
+
 		for (UserItemUsageProto uiup : itemsUsedProtos) {
 			ItemForUserUsage ifuu = new ItemForUserUsage();
-			
+
 			ifuu.setUserId(uiup.getUserUuid());
 			ifuu.setItemId(uiup.getItemId());
-			
+
 			Date timeOfEntry = new Date(uiup.getTimeOfEntry());
 			ifuu.setTimeOfEntry(timeOfEntry);
-			
+
 			ifuu.setUserDataId(uiup.getUserDataUuid());
-			
+
 			String gameActionType = uiup.getActionType().name();
 			ifuu.setActionType(gameActionType);
-			
+
 			itemsUsed.add(ifuu);
 		}
-			
+
 		return itemsUsed;
 	}
-	
+
 	public static List<ItemForUser> javafyUserItemProto(
-		List<UserItemProto> userItemsProtos)
-	{
-		List<ItemForUser> userItems =
-			new ArrayList<ItemForUser>();
-		
+			List<UserItemProto> userItemsProtos) {
+		List<ItemForUser> userItems = new ArrayList<ItemForUser>();
+
 		for (UserItemProto uip : userItemsProtos) {
 			ItemForUser ifu = new ItemForUser();
-			
+
 			ifu.setUserId(uip.getUserUuid());
 			ifu.setItemId(uip.getItemId());
 			ifu.setQuantity(uip.getQuantity());
-			
+
 			userItems.add(ifu);
 		}
-		
+
 		return userItems;
 	}
 }

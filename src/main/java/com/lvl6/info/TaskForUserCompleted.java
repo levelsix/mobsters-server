@@ -6,11 +6,11 @@ import java.util.Date;
 public class TaskForUserCompleted implements Serializable {
 
 	private static final long serialVersionUID = 5693952838622149076L;
-	
+
 	private String userId;
 	private int taskId;
 	private Date timeOfEntry;
-	
+
 	public TaskForUserCompleted(String userId, int taskId, Date timeOfEntry) {
 		super();
 		this.userId = userId;

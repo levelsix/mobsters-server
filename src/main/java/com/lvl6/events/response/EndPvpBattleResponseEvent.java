@@ -9,26 +9,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndPvpBattleResponseEvent extends NormalResponseEvent {
 
-  private EndPvpBattleResponseProto endPvpBattleResponseProto;
-  
-  public EndPvpBattleResponseEvent(String playerId){
-    super(playerId);
-    eventType = EventProtocolResponse.S_END_PVP_BATTLE_EVENT;
-  }
-  
-  @Override
-  public int write(ByteBuffer bb) {
-    ByteString b = endPvpBattleResponseProto.toByteString();
-    b.copyTo(bb);
-    return b.size();
-  }
+	private EndPvpBattleResponseProto endPvpBattleResponseProto;
 
-  public void setEndPvpBattleResponseProto(EndPvpBattleResponseProto endPvpBattleResponseProto) {
-    this.endPvpBattleResponseProto = endPvpBattleResponseProto;
-  }
+	public EndPvpBattleResponseEvent(String playerId) {
+		super(playerId);
+		eventType = EventProtocolResponse.S_END_PVP_BATTLE_EVENT;
+	}
 
-  public EndPvpBattleResponseProto getEndPvpBattleResponseProto() {   //because APNS required
-    return endPvpBattleResponseProto;
-  }
-  
+	@Override
+	public int write(ByteBuffer bb) {
+		ByteString b = endPvpBattleResponseProto.toByteString();
+		b.copyTo(bb);
+		return b.size();
+	}
+
+	public void setEndPvpBattleResponseProto(
+			EndPvpBattleResponseProto endPvpBattleResponseProto) {
+		this.endPvpBattleResponseProto = endPvpBattleResponseProto;
+	}
+
+	public EndPvpBattleResponseProto getEndPvpBattleResponseProto() {   //because APNS required
+		return endPvpBattleResponseProto;
+	}
+
 }

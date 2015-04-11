@@ -45,9 +45,12 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class SubmitMonsterEnhancementController extends EventController {
+@Component
+@DependsOn("gameServer")
+public class SubmitMonsterEnhancementController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -81,13 +84,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
-		SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent)event)
-			.getSubmitMonsterEnhancementRequestProto();
+		SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent) event)
+				.getSubmitMonsterEnhancementRequestProto();
 
 		log.info(String.format("reqProto=%s", reqProto));
 
 		//get data client sent
-		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
+				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		//		List<UserEnhancementItemProto> ueipDelete = reqProto.getUeipDeleteList();
 		//		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
@@ -98,13 +102,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//positive means refund, negative means charge user
 		int oilChange = reqProto.getOilChange();
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
-		int maxOil= senderResourcesProto.getMaxOil();
+		int maxOil = senderResourcesProto.getMaxOil();
 
-		Map<String, UserEnhancementItemProto> newMap = MonsterStuffUtils.
-			convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
+		Map<String, UserEnhancementItemProto> newMap = MonsterStuffUtils
+				.convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 
 		//set some values to send to the client (the response proto)
-		SubmitMonsterEnhancementResponseProto.Builder resBuilder = SubmitMonsterEnhancementResponseProto.newBuilder();
+		SubmitMonsterEnhancementResponseProto.Builder resBuilder = SubmitMonsterEnhancementResponseProto
+				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
 
@@ -122,17 +127,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
-				"UUID error. incorrect userId=%s, ueipNew=%s",
-				userId, ueipNew), e);
+					"UUID error. incorrect userId=%s, ueipNew=%s", userId,
+					ueipNew), e);
 			invalidUuids = true;
 		}
 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
-			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(userId);
+			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
+					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());
+			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 			return;
 		}
@@ -143,12 +150,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int previousGems = 0;
 			//get whatever we need from the database
 			User aUser = getUserRetrieveUtils().getUserById(userId);
-			Map<String, MonsterEnhancingForUser> alreadyEnhancing =
-				getMonsterEnhancingForUserRetrieveUtils().getMonstersForUser(userId);
-			Map<String, MonsterHealingForUser> alreadyHealing =
-				getMonsterHealingForUserRetrieveUtils().getMonstersForUser(userId);
+			Map<String, MonsterEnhancingForUser> alreadyEnhancing = getMonsterEnhancingForUserRetrieveUtils()
+					.getMonstersForUser(userId);
+			Map<String, MonsterHealingForUser> alreadyHealing = getMonsterHealingForUserRetrieveUtils()
+					.getMonstersForUser(userId);
 			MonsterEvolvingForUser evolution = getMonsterEvolvingForUserRetrieveUtils()
-				.getEvolutionForUser(userId);
+					.getEvolutionForUser(userId);
 
 			//retrieve the new monsters that will be used in enhancing, and
 			//the ones being updated
@@ -156,11 +163,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			newAndUpdatedIds.addAll(newMap.keySet());
 			//			newAndUpdatedIds.addAll(updateMap.keySet());
 			Map<String, MonsterForUser> existingUserMonsters = getMonsterForUserRetrieveUtils()
-				.getSpecificOrAllUserMonstersForUser(userId, newAndUpdatedIds);
+					.getSpecificOrAllUserMonstersForUser(userId,
+							newAndUpdatedIds);
 
-			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
-				alreadyEnhancing, alreadyHealing, newMap, evolution,
-				gemsSpent, oilChange);
+			boolean legitMonster = checkLegit(resBuilder, aUser, userId,
+					existingUserMonsters, alreadyEnhancing, alreadyHealing,
+					newMap, evolution, gemsSpent, oilChange);
 
 			boolean successful = false;
 			Map<String, Integer> money = new HashMap<String, Integer>();
@@ -168,45 +176,54 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			if (legitMonster) {
 				previousOil = aUser.getOil();
 				previousGems = aUser.getGems();
-				successful = writeChangesToDB(aUser, userId, gemsSpent, oilChange,
-					//						deleteMap, updateMap,
-					newMap, money, maxOil);
+				successful = writeChangesToDB(aUser, userId, gemsSpent,
+						oilChange,
+						//						deleteMap, updateMap,
+						newMap, money, maxOil);
 			}
 
 			if (successful) {
 				resBuilder.setStatus(SubmitMonsterEnhancementStatus.SUCCESS);
 			}
 
-			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserUuid());
+			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
+					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());  
+			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+					.build());
 			server.writeEvent(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
-					//						deleteMap, updateMap,
-					newMap);
+				writeToUserCurrencyHistory(aUser, clientTime, money,
+						previousOil, previousGems,
+						//						deleteMap, updateMap,
+						newMap);
 			}
 
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 			try {
 				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
-				SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(userId);
+				SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
+						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());
+				resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+						.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in SubmitMonsterEnhancementController processEvent", e);
+				log.error(
+						"exception2 in SubmitMonsterEnhancementController processEvent",
+						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, getClass().getSimpleName());   
+			locker.unlockPlayer(userUuid, getClass().getSimpleName());
 		}
 	}
 
@@ -227,21 +244,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	 * 
 	 */
 	private boolean checkLegit(Builder resBuilder, User u, String userId,
-		Map<String, MonsterForUser> existingUserMonsters,
-		Map<String, MonsterEnhancingForUser> alreadyEnhancing,
-		Map<String, MonsterHealingForUser> alreadyHealing,
-		Map<String, UserEnhancementItemProto> newMap, MonsterEvolvingForUser evolution,
-		int gemsSpent, int oilChange) {
-		if (null == u ) {
-			log.error( "user is null. userId={}, newMap={}",
-				userId, newMap );
+			Map<String, MonsterForUser> existingUserMonsters,
+			Map<String, MonsterEnhancingForUser> alreadyEnhancing,
+			Map<String, MonsterHealingForUser> alreadyHealing,
+			Map<String, UserEnhancementItemProto> newMap,
+			MonsterEvolvingForUser evolution, int gemsSpent, int oilChange) {
+		if (null == u) {
+			log.error("user is null. userId={}, newMap={}", userId, newMap);
 			return false;
 		}
 
-		if ( null != alreadyEnhancing && !alreadyEnhancing.isEmpty() ) {
-			log.error( "user already has monsters enhancing={}, user={}",
-				alreadyEnhancing, u );
-			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_ENHANCING);
+		if (null != alreadyEnhancing && !alreadyEnhancing.isEmpty()) {
+			log.error("user already has monsters enhancing={}, user={}",
+					alreadyEnhancing, u);
+			resBuilder
+					.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_ENHANCING);
 			return false;
 		}
 
@@ -251,26 +268,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Set<String> existingIds = existingUserMonsters.keySet();
 			if (!existingIds.containsAll(newMapIds)) {
 				log.error("some monsters not in the db. inDb={}, newMap={}",
-					existingUserMonsters, newMap);
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_NONEXISTENT);
+						existingUserMonsters, newMap);
+				resBuilder
+						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_NONEXISTENT);
 				return false;
 			}
 
 			Set<String> alreadyHealingIds = alreadyHealing.keySet();
 			if (!Collections.disjoint(newMapIds, alreadyHealingIds)) {
 				log.error("some monsters are healing. healing={}, newMap={}",
-					alreadyHealing, newMap);
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_HEALING);
+						alreadyHealing, newMap);
+				resBuilder
+						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_HEALING);
 				return false;
 			}
 
 			//retain only the userMonsters in newMap that are not in evolutions
-			Set<String> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(
-				evolution, null);
+			Set<String> idsInEvolutions = MonsterStuffUtils
+					.getUserMonsterIdsUsedInEvolution(evolution, null);
 			if (!Collections.disjoint(idsInEvolutions, newMapIds)) {
 				log.error("some monsters are evolving. evolving={}, newMap={}",
-					evolution, newMap);
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_EVOLUTION);
+						evolution, newMap);
+				resBuilder
+						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_EVOLUTION);
 				return false;
 			}
 
@@ -291,11 +311,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 
 			//monster is restricted, better be a base monster
-			if (ueip.getEnhancingCost() > 0 || ueip.getExpectedStartTimeMillis() > 0) {
-				String preface = "restricted not-base-monster in enhancing:"; 
+			if (ueip.getEnhancingCost() > 0
+					|| ueip.getExpectedStartTimeMillis() > 0) {
+				String preface = "restricted not-base-monster in enhancing:";
 				log.error("{} ueip={}. userMonsters= {}, newMap={}",
-					new Object[] { preface, ueip, existingUserMonsters, newMap });
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_RESTRICTED);
+						new Object[] { preface, ueip, existingUserMonsters,
+								newMap });
+				resBuilder
+						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_RESTRICTED);
 				return false;
 			}
 		}
@@ -314,10 +337,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private Set<String> restrictedUserMonsters(Map<String, MonsterForUser> existingUserMonsters) {
+	private Set<String> restrictedUserMonsters(
+			Map<String, MonsterForUser> existingUserMonsters) {
 
 		Set<String> restrictedUserMonsterIds = new HashSet<String>();
-		for ( MonsterForUser mfu : existingUserMonsters.values() ) {
+		for (MonsterForUser mfu : existingUserMonsters.values()) {
 			if (mfu.isRestricted()) {
 				restrictedUserMonsterIds.add(mfu.getId());
 			}
@@ -327,49 +351,51 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent,
-		int oilChange,
-		//			Map<Long, UserEnhancementItemProto> deleteMap,
-		//			Map<Long, UserEnhancementItemProto> updateMap,
-		Map<String, UserEnhancementItemProto> newMap) {
+			int oilChange,
+			//			Map<Long, UserEnhancementItemProto> deleteMap,
+			//			Map<Long, UserEnhancementItemProto> updateMap,
+			Map<String, UserEnhancementItemProto> newMap) {
 		int userGems = u.getGems();
 		//if user's aggregate gems is < cost, don't allow transaction
 		if (userGems < gemsSpent) {
-			log.error(String.format(
-				"insufficient gems. userGems=%s, gemsSpent=%s, newMap=%s, oilChange=%s, user=%s",
-				userGems, gemsSpent, newMap, oilChange, u));
-			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_GEMS);
+			log.error(String
+					.format("insufficient gems. userGems=%s, gemsSpent=%s, newMap=%s, oilChange=%s, user=%s",
+							userGems, gemsSpent, newMap, oilChange, u));
+			resBuilder
+					.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 		return true;
 	}
 
 	private boolean hasEnoughOil(Builder resBuilder, User u, int oilChange,
-		int gemsSpent,
-		//			Map<Long, UserEnhancementItemProto> deleteMap,
-		//			Map<Long, UserEnhancementItemProto> updateMap,
-		Map<String, UserEnhancementItemProto> newMap) {
-		int userOil = u.getOil(); 
+			int gemsSpent,
+			//			Map<Long, UserEnhancementItemProto> deleteMap,
+			//			Map<Long, UserEnhancementItemProto> updateMap,
+			Map<String, UserEnhancementItemProto> newMap) {
+		int userOil = u.getOil();
 		//positive 'cashChange' means refund, negative means charge user
 		int cost = -1 * oilChange;
 
 		//if user not spending gems and is just spending cash, check if he has enough
 		if (0 == gemsSpent && userOil < cost) {
-			log.error(String.format(
-				"insufficient oil. userOil=%s, cost=%s, newMap=%s, user=%s",
-				userOil, cost, newMap, u));
-			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_OIL);
+			log.error(String
+					.format("insufficient oil. userOil=%s, cost=%s, newMap=%s, user=%s",
+							userOil, cost, newMap, u));
+			resBuilder
+					.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_OIL);
 			return false;
 		}
 		return true;
 	}
 
-	private boolean writeChangesToDB(User user, String uId, int gemsSpent,
-		int oilChange,
-		//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
-		//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
-		Map<String, UserEnhancementItemProto> protoNewMap,
-		Map<String, Integer> money, int maxOil)
-	{
+	private boolean writeChangesToDB(User user, String uId,
+			int gemsSpent,
+			int oilChange,
+			//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
+			//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
+			Map<String, UserEnhancementItemProto> protoNewMap,
+			Map<String, Integer> money, int maxOil) {
 
 		//CHARGE THE USER
 		int cashChange = 0;
@@ -385,11 +411,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (0 != oilChange || 0 != gemChange) {
 
 			//			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
-			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
+			int numChange = user.updateRelativeCashAndOilAndGems(cashChange,
+					oilChange, gemChange);
 			if (1 != numChange) {
-				log.warn(String.format(
-					"problem with updating user stats: gemChange=%s, oilChange=%s, user=%s",
-					gemChange, oilChange, user));
+				log.warn(String
+						.format("problem with updating user stats: gemChange=%s, oilChange=%s, user=%s",
+								gemChange, oilChange, user));
 			} else {
 				//everything went well
 				if (0 != oilChange) {
@@ -403,7 +430,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//		log.info(String.format("deleteMap=%s", protoDeleteMap));
 		//		log.info(String.format("updateMap=%s", protoUpdateMap));
 		//		log.info(String.format("newMap=%s", protoNewMap));
-
 
 		int num = 0;
 		//		//delete everything left in the map, if there are any
@@ -419,8 +445,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//	  		uId, protoUpdateMap);
 		//		log.info(String.format("updateMap=%s", updateMap));
 		//		
-		List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
-			uId, protoNewMap);
+		List<MonsterEnhancingForUser> newMap = MonsterStuffUtils
+				.convertToMonsterEnhancingForUser(uId, protoNewMap);
 		log.info(String.format("newMap=%s", newMap));
 
 		List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
@@ -428,32 +454,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		updateAndNew.addAll(newMap);
 		//update everything in enhancing table that is in update and new map
 		if (null != updateAndNew && !updateAndNew.isEmpty()) {
-			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
+			num = UpdateUtils.get().updateUserMonsterEnhancing(uId,
+					updateAndNew);
 			log.info(String.format(
-				"updated monster enhancing rows. numInserted=%s", num));
+					"updated monster enhancing rows. numInserted=%s", num));
 		}
 
-		//for the new monsters, ensure that the monsters are "unequipped"
-		if (null != protoNewMap && !protoNewMap.isEmpty()) {
-			//for the new monsters, set the teamSlotNum to 0
-			int size = protoNewMap.size();
-			List<String> userMonsterIdList = new ArrayList<String>(protoNewMap.keySet());
-			List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
-			num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
-			log.info(String.format(
-				"updated user monster rows. numUpdated=%s", num));
-		}
+		//		//for the new monsters, ensure that the monsters are "unequipped"
+		//		if (null != protoNewMap && !protoNewMap.isEmpty()) {
+		//			//for the new monsters, set the teamSlotNum to 0
+		//			int size = protoNewMap.size();
+		//			List<String> userMonsterIdList = new ArrayList<String>(protoNewMap.keySet());
+		//			List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
+		//			num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
+		//			log.info(String.format(
+		//				"updated user monster rows. numUpdated=%s", num));
+		//		}
 
 		return true;
 	}
 
-
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
-		Map<String, Integer> currencyChange, int previousOil, int previousGems,
-		//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
-		//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
-		Map<String, UserEnhancementItemProto> protoNewMap)
-	{
+			Map<String, Integer> currencyChange, int previousOil,
+			int previousGems,
+			//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
+			//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
+			Map<String, UserEnhancementItemProto> protoNewMap) {
 
 		StringBuilder detailsSb = new StringBuilder();
 
@@ -503,8 +529,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		detailsMap.put(gems, detailsSb.toString());
 
 		MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
-			previousCurrency, currentCurrency, reasonsForChanges,
-			detailsMap);
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 	}
 
 	public Locker getLocker() {
@@ -520,15 +546,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	public void setMonsterEnhancingForUserRetrieveUtils(
-		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
+			MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
 		this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
 	}
+
 	public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
 		return monsterHealingForUserRetrieveUtils;
 	}
 
 	public void setMonsterHealingForUserRetrieveUtils(
-		MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
+			MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
 		this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
 	}
 
@@ -537,7 +564,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	public void setMonsterEvolvingForUserRetrieveUtils(
-		MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
+			MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
 		this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
 	}
 
@@ -554,7 +581,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 }

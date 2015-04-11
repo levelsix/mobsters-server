@@ -15,9 +15,12 @@ import com.lvl6.info.FileDownload;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class FileDownloadRetrieveUtils {
+@Component
+@DependsOn("gameServer")
+public class FileDownloadRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, FileDownload> idsToFileDownloads;
 
@@ -32,8 +35,8 @@ import com.lvl6.utils.DBConnection;
 	}
 
 	public static FileDownload getFileDownloadForId(int fileDownloadId) {
-		log.debug(String.format(
-			"retrieve skill data for skill=%s", fileDownloadId));
+		log.debug(String.format("retrieve skill data for skill=%s",
+				fileDownloadId));
 		if (null == idsToFileDownloads) {
 			setStaticIdsToFileDownloads();
 		}
@@ -53,10 +56,9 @@ import com.lvl6.utils.DBConnection;
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, FileDownload> idsToFileDownloadTemp =
-							new HashMap<Integer, FileDownload>();
+						Map<Integer, FileDownload> idsToFileDownloadTemp = new HashMap<Integer, FileDownload>();
 						//loop through each row and convert it into a java object
-						while(rs.next()) {  
+						while (rs.next()) {
 							FileDownload fd = convertRSRowToFileDownload(rs);
 							if (fd == null) {
 								continue;
@@ -71,7 +73,7 @@ import com.lvl6.utils.DBConnection;
 						log.error("problem with database call.", e);
 
 					}
-				}    
+				}
 			}
 		} catch (Exception e) {
 			log.error("skill retrieve db error.", e);
@@ -87,15 +89,19 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static FileDownload convertRSRowToFileDownload(ResultSet rs) throws SQLException {
+	private static FileDownload convertRSRowToFileDownload(ResultSet rs)
+			throws SQLException {
 		int id = rs.getInt(DBConstants.FILE_DOWNLOAD__ID);
 		String filename = rs.getString(DBConstants.FILE_DOWNLOAD__FILENAME);
 		int priority = rs.getInt(DBConstants.FILE_DOWNLOAD__PRIORITY);
-		boolean downloadOnlyOverWifi = rs.getBoolean(DBConstants.FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI);
-		boolean useIphone6Prefix = rs.getBoolean(DBConstants.FILE_DOWNLOAD__USE_IPHONE6_PREFIX);
-		
-		FileDownload fd = new FileDownload(id, filename, priority, downloadOnlyOverWifi, useIphone6Prefix);
+		boolean downloadOnlyOverWifi = rs
+				.getBoolean(DBConstants.FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI);
+		boolean useIphone6Prefix = rs
+				.getBoolean(DBConstants.FILE_DOWNLOAD__USE_IPHONE6_PREFIX);
+
+		FileDownload fd = new FileDownload(id, filename, priority,
+				downloadOnlyOverWifi, useIphone6Prefix);
 		return fd;
 	}
-	
+
 }

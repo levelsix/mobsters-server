@@ -186,6 +186,24 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message DestroyMoneyTreeStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string userStructUuid = 2;
+}
+
+message DestroyMoneyTreeStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional DestroyMoneyTreeStructureStatus status = 2;
+
+	enum DestroyMoneyTreeStructureStatus {
+		SUCCESS = 1;
+		FAIL_NOT_EXPIRED_YET = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
 /*TODO GET RID OF THIS*/
 																						//DONE
 message ExpansionWaitCompleteRequestProto {
