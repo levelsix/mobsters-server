@@ -64,16 +64,16 @@ public class SendGroupChatController extends EventController {
 
 	@Resource
 	protected EventWriter eventWriter;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -85,7 +85,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
-	
+
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
@@ -172,28 +172,31 @@ public class SendGroupChatController extends EventController {
 				server.writeEvent(resEventUpdate);
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
-				
-				Map<TranslateLanguages, String> translateMap = miscMethods.translate(null, null, censoredChatMessage);				
-					
+
+				Map<TranslateLanguages, String> translateMap = miscMethods.translate(null, null, censoredChatMessage);
+
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
-				
+
 				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
-				
-				chatProto.setMessage(gcmp);	
+
+				chatProto.setMessage(gcmp);
+
+				//legacy implementation
+				chatProto.setChatMessage(censoredChatMessage);
 
 				ReceivedGroupChatResponseProto rgcr = chatProto.build();
-				
+
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
 						censoredChatMessage, rgcr, globalLanguage);
-				
+
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
@@ -276,19 +279,19 @@ public class SendGroupChatController extends EventController {
 		// if (!user.updateRelativeNumGroupChatsRemainingAndDiamonds(-1, 0)) {
 		// log.error("problem with decrementing a global chat");
 		// }
-		
+
 		Map<TranslateLanguages, String> translatedTextMap;
 
 		if (scope == GroupChatScope.CLAN) {
 			String clanId = user.getClanId();
-			
+
 //			translatedTextMap = MiscMethods.translate(null, content);
 
 			String clanChatId = InsertUtils.get().insertClanChatPost(user.getId(), clanId, content,
 					timeOfPost);
-			
+
 //			ChatType chatType = ChatType.CLAN_CHAT;
-//			
+//
 //			boolean success = InsertUtils.get().insertTranslatedText(chatType, clanChatId, translatedTextMap);
 //			if(!success) {
 //				log.error("error inserting translated texts into table");
