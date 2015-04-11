@@ -254,7 +254,7 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 
 	protected void processPendingItems() {
 		//log.trace("Processing pending");
-		String item = pendingQueue.get(0);
+		String item = pendingQueue.remove(0);
 		if(item != null) {
 			String[] args = item.split(":");
 			if(args[0].equals("add")) {
@@ -269,7 +269,6 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 			else if(args[0].equals("increment")) {
 				doIncrement(args[1], Long.valueOf(args[2]));;
 			}
-			pendingQueue.remove(0);
 		}
 	}	
 	
