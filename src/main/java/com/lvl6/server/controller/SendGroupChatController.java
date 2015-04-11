@@ -178,6 +178,9 @@ public class SendGroupChatController extends EventController {
 				
 				chatProto.setMessage(gcmp);	
 
+                //legacy implementation
+                chatProto.setChatMessage(censoredChatMessage);
+
 				ReceivedGroupChatResponseProto rgcr = chatProto.build();
 				
 				sendChatMessage(userId, chatProto, event.getTag(),
