@@ -73,6 +73,12 @@ import java.util.HashMap
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto
+import com.lvl6.events.response.ForceLogoutResponseEvent
+import com.lvl6.server.EventWriter
+import com.lvl6.pvp.PvpUser
+import com.lvl6.info.PvpLeagueForUser
+import com.lvl6.info.PvpBattleForUser
 
 
 class StartupService extends LazyLogging{
@@ -117,7 +123,7 @@ class StartupService extends LazyLogging{
   @Autowired var  monsterSnapshotForUserRetrieveUtil : MonsterSnapshotForUserRetrieveUtil  = null
   @Autowired var  deleteUtil : DeleteUtil = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
-  
+  @Autowired var  eventWriter:EventWriter = null
   
   def loginExistingUser(
       udid:String, 
@@ -152,7 +158,16 @@ class StartupService extends LazyLogging{
   }
   
   def forceLogoutOthers(udid:String, playerId:String, user:User, fbId:String)={
-    
+    val logoutResponse = ForceLogoutResponseProto.newBuilder()
+    logoutResponse.setPreviousLoginTime(user.getLastLogin.getTime)
+    logoutResponse.setUdid(udid)
+    val logoutEvent = new ForceLogoutResponseEvent(playerId)
+    logoutEvent.setForceLogoutResponseProto(logoutResponse.build())
+    eventWriter.processPreDBResponseEvent(logoutEvent, udid)
+    eventWriter.handleEvent(logoutEvent)
+    if(fbId!=null && !fbId.isEmpty()) {
+      eventWriter.processPreDBFacebookEvent(logoutEvent, fbId)
+    }
   }
   
   def setInProgressAndAvailableQuests(resBuilder:Builder, userId:String):Future[Unit]= {
@@ -355,9 +370,63 @@ class StartupService extends LazyLogging{
     }
   }
   
-  def setPvpBoardObstacle(resBuilder:Builder, user:User, userId:String, isFreshRestart:Boolean, battleEndTime:Timestamp) {
+  def pvpBattleStuff(resBuilder:Builder, user:User, userId:String, isFreshRestart:Boolean, battleEndTime:Timestamp):Future[PvpLeagueForUser] ={
+    future{
+      val plfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(userId)
+      val pu = new PvpUser(plfu)
+      hazelcastPvpUtil.replacePvpUser(pu, userId)
+      if(isFreshRestart) {
+        val battle = pvpBattleForUserRetrieveUtils.getPvpBattleForUserForAttacker(userId);
+        if(battle != null) {
+        	val battleStartTime = new Timestamp(battle.getBattleStartTime.getTime)
+          var eloAttackerLoses = battle.getAttackerLoseEloChange
+          if(plfu.getElo+eloAttackerLoses < 0) {
+            eloAttackerLoses = -1*plfu.getElo
+          }
+          val defenderId = battle.getDefenderId
+          var eloDefenderWins = battle.getDefenderWinEloChange
+          penalizeUserForLeavingGameWhileInPvp(
+              userId, 
+              user, 
+              plfu, 
+              defenderId, 
+              eloAttackerLoses, 
+              eloDefenderWins, 
+              battleEndTime, 
+              battleStartTime, 
+              battle)
+        }
+      }
+      plfu
+    }
+  }
+  
+  
+  def penalizeUserForLeavingGameWhileInPvp(
+      userId:String, 
+      user:User, 
+      attackerPlfu:PvpLeagueForUser, 
+      defenderId:String,
+      eloAttackerLoses:Int, 
+      eloDefenderWins:Int,
+      battleEndTime:Timestamp,
+      battleStartTime:Timestamp,
+      battle:PvpBattleForUser)={
+    
     
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
 }
