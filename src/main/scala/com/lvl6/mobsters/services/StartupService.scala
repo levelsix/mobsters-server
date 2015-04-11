@@ -60,9 +60,22 @@ import com.lvl6.info.UserClan
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.info.MonsterForUser
 import com.lvl6.info.MonsterHealingForUser
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
+import com.typesafe.scalalogging.Logging
+import com.lvl6.utils.utilmethods.DeleteUtil
+import com.hazelcast.core.IList
+import javax.annotation.Resource
+import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
+import scala.util.Sorting
+import com.lvl6.info.TaskForUserOngoing
+import com.lvl6.info.TaskForUserClientState
+import java.util.HashMap
+import com.lvl6.info.TaskStageForUser
+import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil
+import com.typesafe.scalalogging.slf4j.LazyLogging
 
 
-class StartupService {
+class StartupService extends LazyLogging{
     
   @Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
   @Autowired var  timeUtils : TimeUtils  = null
@@ -71,6 +84,7 @@ class StartupService {
   @Autowired var  questJobForUserRetrieveUtil : QuestJobForUserRetrieveUtil  = null
   @Autowired var  pvpLeagueForUserRetrieveUtil : PvpLeagueForUserRetrieveUtil2  = null
   @Autowired var  pvpBattleHistoryRetrieveUtil : PvpBattleHistoryRetrieveUtil2  = null
+  @Autowired var  pvpBoardObstacleForUserRetrieveUtil : PvpBoardObstacleForUserRetrieveUtil = null 
   @Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
   @Autowired var  miniJobForUserRetrieveUtil : MiniJobForUserRetrieveUtil  = null
   @Autowired var  itemForUserRetrieveUtil : ItemForUserRetrieveUtil  = null
@@ -101,7 +115,8 @@ class StartupService {
   @Autowired var  itemSecretGiftForUserRetrieveUtil : ItemSecretGiftForUserRetrieveUtil  = null
   @Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
   @Autowired var  monsterSnapshotForUserRetrieveUtil : MonsterSnapshotForUserRetrieveUtil  = null
-
+  @Autowired var  deleteUtil : DeleteUtil = null
+  @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
   
   
   def loginExistingUser(
@@ -111,9 +126,33 @@ class StartupService {
       nowDate:Date, 
       now:Timestamp,
       user:User,
-      fbid:String,
+      fbId:String,
       freshRestart:Boolean)={
-      
+      try {
+        //force other devices on this account to logout
+        forceLogoutOthers(udid, playerId, user, fbId)
+        logger.info(s"no major update... getting user info")
+        val userId = playerId;
+        val userInfo:Future[Unit] = for{
+          sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
+          suci <-    setUserClanInfos(resBuilder, userId)
+          sntp <-    setNoticesToPlayers(resBuilder)
+          sums <-    setUserMonsterStuff(resBuilder, userId)
+          sbp  <-    setBoosterPurchases(resBuilder)
+          sts  <-    setTaskStuff(resBuilder, userId)
+          ses  <-    setEventStuff(resBuilder, userId)
+          spbo <-    setPvpBoardObstacles(resBuilder, userId)
+        } yield Unit
+        
+        
+        
+      }catch{
+        case t:Throwable => logger.error(s"", t)
+      }
+  }
+  
+  def forceLogoutOthers(udid:String, playerId:String, user:User, fbId:String)={
+    
   }
   
   def setInProgressAndAvailableQuests(resBuilder:Builder, userId:String):Future[Unit]= {
@@ -191,14 +230,134 @@ class StartupService {
   
   def setUserMonstersEnhancing(resBuilder:Builder, userId:String):Future[Unit]= {
     future{
-      
+      val userMonstersEnhancing = monsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId)
+      if(userMonstersEnhancing != null) {
+        var baseMonster:UserEnhancementItemProto = null;
+        val feederUserMonsterIds = new ArrayList[String]();
+        val feederProtos = new ArrayList[UserEnhancementItemProto]();
+        userMonstersEnhancing.values().foreach{mefu =>
+          val ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu)
+          val startTime = mefu.getExpectedStartTime;
+          if(startTime == null) {
+            baseMonster = ueip
+          }else {
+            feederProtos.add(ueip)
+            feederUserMonsterIds.add(mefu.getMonsterForUserId)
+          }
+        }
+        if(baseMonster == null) {
+          logger.error(s"no base monster enhancement. deleting inEnhancing=$userMonstersEnhancing.values()")
+          try {
+            val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(userId, feederUserMonsterIds)
+            logger.info(s"numDeleted enhancements: $numDeleted")
+          }catch{
+            case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
+          }
+        }else {
+          val uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
+          resBuilder.setEnhancements(uep)
+        }
+      }
     }
   }
   
   def setUserMonstersEvolving(resBuilder:Builder, userId:String):Future[Unit]= {
     future{
-      
+      val userMonstersEvolving = monsterEvolvingForUserRetrieveUtils.getCatalystIdsToEvolutionsForUser(userId)
+      if(userMonstersEvolving != null) {
+        userMonstersEvolving.values.foreach{ mefu =>
+          val eup = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu)
+          resBuilder.setEvolution(eup)
+        }
+      }
     }
   }
+  
+  
+  
+  def setBoosterPurchases(resBuilder : Builder):Future[Unit]= {
+    future{
+      val it = goodEquipsRecievedFromBoosterPacks.iterator()
+      val boosterPurchases = scala.collection.mutable.ArrayBuffer.empty[RareBoosterPurchaseProto]
+      while(it.hasNext()) {
+        boosterPurchases += it.next()
+      }
+      boosterPurchases.sortBy(x => x.getTimeOfPurchase).foreach(resBuilder.addRareBoosterPurchases(_))
+    }
+  }
+  
+  
+  def setTaskStuff(resBuilder:Builder, userId:String):Future[Unit]= {
+    def completedTasksFuture = future{
+      val utcList = taskForUserCompletedRetrieveUtils.getAllCompletedTasksForUser(userId)
+      resBuilder.addAllCompletedTasks(CreateInfoProtoUtils.createUserTaskCompletedProto(utcList))
+      val taskIds = taskForUserCompletedRetrieveUtils.getTaskIds(utcList)
+      resBuilder.addAllCompletedTaskIds(taskIds)
+    }
+    def ongoingTaskFuture = future{
+      val aTaskForUser = taskForUserOngoingRetrieveUtils.getUserTaskForUserId(userId)
+      if(aTaskForUser != null) {
+        val tfucs = taskForUserClientStateRetrieveUtil.getTaskForUserClientState(userId)
+        logger.warn(s"user has incompleted task userTask=$aTaskForUser")
+        setOngoingTask(resBuilder, userId, aTaskForUser, tfucs)
+      }
+    }
+    for{
+      ctf <- completedTasksFuture
+      otf <- ongoingTaskFuture
+    }yield Unit
+  }
+  
+  
+  def setOngoingTask(resBuilder:Builder, userId:String, aTaskForUser:TaskForUserOngoing, tfucs:TaskForUserClientState):Unit= {
+    try {
+      val mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(userId, aTaskForUser, tfucs)
+      resBuilder.setCurTask(mutp)
+      val userTaskId = aTaskForUser.getId
+      val taskStages = taskStageForUserRetrieveUtils.getTaskStagesForUserWithTaskForUserId(userTaskId)
+      val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUser]]()
+      taskStages.foreach{ tsfu  =>
+        val stageNum = tsfu.getStageNum
+        var tsfuList = stageNumToTsfu.get(stageNum)
+        if(tsfuList == null) {
+          tsfuList = new ArrayList[TaskStageForUser]()
+          stageNumToTsfu.put(stageNum, tsfuList)
+        }
+        tsfuList.add(tsfu)
+      }
+      val taskId = aTaskForUser.getTaskId
+      stageNumToTsfu.keySet.foreach{ stageNum =>
+        val tsp = CreateInfoProtoUtils.createTaskStageProto(taskId, stageNum, stageNumToTsfu.get(stageNum))
+        resBuilder.addCurTaskStages(tsp)
+      }
+    }catch{
+      case t:Throwable => logger.error(s"could not create existing task, letting it get deleted when user starts another task", t)
+    }
+  }
+  
+  
+  def setEventStuff(resBuilder:Builder, userId:String):Future[Unit]= {
+    future{
+      val events = eventPersistentForUserRetrieveUtils.getUserPersistentEventForUserId(userId)
+      events.foreach{ epfu =>
+        resBuilder.addUserEvents(CreateInfoProtoUtils.createUserPersistentEventProto(epfu))  
+      }
+    }
+  }
+  
+  
+  def setPvpBoardObstacles(resBuilder:Builder, userId:String):Future[Unit]= {
+    future{
+      val boList = pvpBoardObstacleForUserRetrieveUtil.getPvpBoardObstacleForUserId(userId)
+      boList.foreach{ pbofu => 
+        resBuilder.addUserPvpBoardObstacles(CreateInfoProtoUtils.createUserPvpBoardObstacleProto(pbofu))  
+      }
+    }
+  }
+  
+  def setPvpBoardObstacle(resBuilder:Builder, user:User, userId:String, isFreshRestart:Boolean, battleEndTime:Timestamp) {
+    
+  }
+  
   
 }

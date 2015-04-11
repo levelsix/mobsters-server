@@ -155,10 +155,9 @@
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
 		<amqp.client.messages.queue>clientMessages1.4</amqp.client.messages.queue>
-		<!-- <amqp.client.messages.bindings><![CDATA[
-		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
-		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
-		]]></amqp.client.messages.bindings> -->
+		<!-- <amqp.client.messages.bindings><![CDATA[ <rabbit:binding queue="clientMessages1.1" 
+			key="messagesFromPlayers" /> <rabbit:binding queue="clientMessages1.1" key="messagesFromPlayers1.1" 
+			/> ]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.1" />
@@ -293,7 +292,7 @@
 						<include>**/test/*.java</include>
 					</includes>
 				</configuration>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -487,6 +486,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.typesafe.scala-logging</groupId>
+				<artifactId>scala-logging-slf4j_2.11</artifactId>
+				<version>2.1.2</version>
+			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -704,9 +708,9 @@
 				<version>4.10</version>
 			</dependency>
 			<dependency>
-    			<groupId>org.mockito</groupId>
-    			<artifactId>mockito-core</artifactId>
-    			<version>2.0.3-beta</version>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>2.0.3-beta</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
@@ -818,49 +822,54 @@
 				<artifactId>microsoft-translator-java-api</artifactId>
 				<version>0.6.2</version>
 			</dependency>
-<!--     		<dependency> -->
-<!--         		<groupid>junit</groupId> -->
-<!--         		<artifactid>junit</artifactId> -->
-<!--         		<version>4.11</version> -->
-<!--         		<scope>test</scope> -->
-<!--         		<type>jar</type> -->
-<!--     		</dependency> -->
-    		<dependency>
-        		<groupId>org.mockito</groupId>
-        		<artifactId>mockito-core</artifactId>
-        		<version>1.9.5</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-module-junit4</artifactId>
-        		<version>1.5.1</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-api-mockito</artifactId>
-        		<version>1.5.1</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<!-- Required for PowerMockRule -->
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-module-junit4-rule-agent</artifactId>
-        		<version>1.5.1</version>
-        		<scope>test</scope>
+			<!-- <dependency> -->
+			<!-- <groupid>junit</groupId> -->
+			<!-- <artifactid>junit</artifactId> -->
+			<!-- <version>4.11</version> -->
+			<!-- <scope>test</scope> -->
+			<!-- <type>jar</type> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>1.9.5</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-classloading-xstream</artifactId>
-        		<version>1.5.1</version>
-        		<scope>test</scope>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>1.5.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>1.5.1</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Required for PowerMockRule -->
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4-rule-agent</artifactId>
+				<version>1.5.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-classloading-xstream</artifactId>
+				<version>1.5.1</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 
 	<dependencies>
+		<dependency>
+			<groupId>com.typesafe.scala-logging</groupId>
+			<artifactId>scala-logging-slf4j_2.11</artifactId>
+			<version>2.1.2</version>
+		</dependency>
 		<dependency>
 			<groupId>net.sf.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
