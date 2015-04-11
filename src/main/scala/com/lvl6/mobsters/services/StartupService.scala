@@ -79,6 +79,13 @@ import com.lvl6.server.EventWriter
 import com.lvl6.pvp.PvpUser
 import com.lvl6.info.PvpLeagueForUser
 import com.lvl6.info.PvpBattleForUser
+import java.util.UUID
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
+import com.lvl6.utils.utilmethods.UpdateUtil
+import com.lvl6.utils.utilmethods.InsertUtil
+import com.lvl6.server.Locker
+import com.lvl6.misc.MiscMethods
+import com.lvl6.info.MiniJobForUser
 
 
 class StartupService extends LazyLogging{
@@ -122,6 +129,9 @@ class StartupService extends LazyLogging{
   @Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
   @Autowired var  monsterSnapshotForUserRetrieveUtil : MonsterSnapshotForUserRetrieveUtil  = null
   @Autowired var  deleteUtil : DeleteUtil = null
+  @Autowired var  updateUtil : UpdateUtil = null
+  @Autowired var  insertUtil : InsertUtil = null
+  @Autowired var  locker :  Locker = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
   @Autowired var  eventWriter:EventWriter = null
   
@@ -411,10 +421,165 @@ class StartupService extends LazyLogging{
       eloDefenderWins:Int,
       battleEndTime:Timestamp,
       battleStartTime:Timestamp,
-      battle:PvpBattleForUser)={
-    
-    
+      battle:PvpBattleForUser):Unit={
+      var defenderUuid:UUID = null
+      var invalidUuids = true
+      if(defenderId == null || defenderId.isEmpty()) {
+        try {
+          defenderUuid = UUID.fromString(defenderId)
+          invalidUuids = false
+        }catch{
+          case t:Throwable => {
+            logger.error(s"UUID error. Incorrect defenderId=$defenderId", t)
+          }
+        }
+        if (invalidUuids) return
+        //only lock real users
+        if (null != defenderUuid)  locker.lockPlayer(defenderUuid, this.getClass().getSimpleName())
+      }
+      try {
+        var attackerEloBefore = attackerPlfu.getElo();
+        var defenderEloBefore = 0;
+        var attackerPrevLeague = attackerPlfu.getPvpLeagueId();
+        var attackerCurLeague = 0;
+        var defenderPrevLeague = 0;
+        var defenderCurLeague = 0;
+        var attackerPrevRank = attackerPlfu.getRank();
+        var attackerCurRank = 0;
+        var defenderPrevRank = 0;
+        var defenderCurRank = 0;
+        
+        var attackerCurElo = attackerPlfu.getElo + eloAttackerLoses
+        attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(attackerCurElo, attackerPrevLeague)
+        attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(attackerCurElo, attackerCurLeague);
+        var attacksLost = attackerPlfu.getAttacksLost+1
+        
+        var numUpdated = updateUtil.updatePvpLeagueForUser(userId,
+        attackerCurLeague, attackerCurRank, eloAttackerLoses, null, null, 0, 0, 1, 0, -1);
+        logger.info(s"num updated when changing attackers elo because of reset=$numUpdated")
+        
+        attackerPlfu.setElo(attackerCurElo);
+        attackerPlfu.setPvpLeagueId(attackerCurLeague);
+        attackerPlfu.setRank(attackerCurRank);
+        attackerPlfu.setAttacksLost(attacksLost);
+        val attackerPu = new PvpUser(attackerPlfu);
+        hazelcastPvpUtil.replacePvpUser(attackerPu, userId);
+        
+        if(defenderId != null) {
+          val defenderPlfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(defenderId);
+
+          defenderEloBefore = defenderPlfu.getElo();
+          defenderPrevLeague = defenderPlfu.getPvpLeagueId();
+          defenderPrevRank = defenderPlfu.getRank();
+          //update hazelcast map and ready arguments for pvp battle history
+          var defenderCurElo = defenderEloBefore + eloDefenderWins;
+          defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(defenderCurElo, defenderPrevLeague);
+          defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(defenderCurElo, defenderCurLeague);
+  
+          var defensesWon = defenderPlfu.getDefensesWon() + 1;
+  
+          numUpdated = updateUtil.updatePvpLeagueForUser(defenderId, defenderCurLeague, defenderCurRank, eloDefenderWins, null, null, 0, 1, 0, 0, -1);
+          logger.info(s"num updated when changing defender's elo because of reset=$numUpdated");
+  
+          defenderPlfu.setElo(defenderCurElo);
+          defenderPlfu.setPvpLeagueId(defenderCurLeague);
+          defenderPlfu.setRank(defenderCurRank);
+          defenderPlfu.setDefensesWon(defensesWon);
+          var defenderPu = new PvpUser(defenderPlfu);
+          hazelcastPvpUtil.replacePvpUser(defenderPu, defenderId);
+        }
+        var attackerWon = false;
+        var cancelled = false;
+        var defenderGotRevenge = false;
+        var displayToDefender = true;
+        var numInserted = insertUtil.insertIntoPvpBattleHistory(
+            userId, defenderId, battleEndTime, battleStartTime,
+            eloAttackerLoses, attackerEloBefore, eloDefenderWins,
+            defenderEloBefore, attackerPrevLeague, attackerCurLeague,
+            defenderPrevLeague, defenderCurLeague, attackerPrevRank,
+            attackerCurRank, defenderPrevRank, defenderCurRank, 0, 0,
+            0, 0, -1, attackerWon, cancelled, defenderGotRevenge,
+            displayToDefender);
+  
+        logger.info(s"numInserted into battle history=$numInserted");
+        //delete that this battle occurred
+        val numDeleted = deleteUtil.deletePvpBattleForUser(userId);
+        logger.info(s"successfully penalized, rewarded attacker and defender respectively. battle=$battle, numDeleted=$numDeleted");
+      }catch{
+        case t:Throwable => logger.error(s"tried to penalize, reward attacker and defender respectively. battle=$battle", t);
+      } finally {
+        if (null != defenderUuid) locker.unlockPlayer(defenderUuid, this.getClass().getSimpleName())
+      }
   }
+  
+  
+  def setAllStaticData(resBuilder:Builder, userId:String, userIdSet:Boolean):Future[Unit]= {
+    future{
+      val sdp = MiscMethods.getAllStaticData(userId, userIdSet, questForUserRetrieveUtils)
+      resBuilder.setStaticDataStuffProto(sdp)
+    }
+  }
+  
+  def setAchievementStuff(resBuilder:Builder, userId:String):Future[Unit]= {
+    future{
+      val achievementsIdToUserAchievements = achievementForUserRetrieveUtil.getSpecificOrAllAchievementIdToAchievementForUserId(userId, null)
+      achievementsIdToUserAchievements.values.foreach{ afu =>
+        resBuilder.addUserAchievements(CreateInfoProtoUtils.createUserAchievementProto(afu))  
+      }
+    }
+  }
+  
+  def setMiniJob(resBuilder:Builder, userId:String):Future[Unit]= {
+    future{
+      val miniJobIdtoUserMiniJobs = miniJobForUserRetrieveUtil.getSpecificOrAllIdToMiniJobForUser(userId, null)
+      if(!miniJobIdtoUserMiniJobs.isEmpty()) {
+        val mjfuList = new ArrayList[MiniJobForUser](miniJobIdtoUserMiniJobs.values)
+        resBuilder.addAllUserMiniJobProtos(CreateInfoProtoUtils.createUserMiniJobProtos(mjfuList, null))
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
