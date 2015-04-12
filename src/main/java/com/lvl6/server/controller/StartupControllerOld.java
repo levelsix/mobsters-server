@@ -180,7 +180,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component
+//@Component
 @DependsOn("gameServer")
 public class StartupControllerOld extends EventController {
 	//  private static String nameRulesFile = "namerulesElven.txt";
