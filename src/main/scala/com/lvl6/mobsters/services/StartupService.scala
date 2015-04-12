@@ -9,18 +9,15 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.concurrent.future
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -126,9 +123,29 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
+import com.lvl6.proto.EventStartupProto.StartupRequestProto
+import com.lvl6.utils.utilmethods.InsertUtils
+import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils
 
+
+case class StartupData(
+      resBuilder:Builder, 
+      udid:String,
+      fbId:String,
+      playerId:String, 
+      now:Timestamp,
+      nowDate:Date,
+      isLogin:Boolean, 
+      goingThroughTutorial:Boolean,
+      userIdSet:Boolean,
+      startupStatus:StartupStatus,
+      resEvent:StartupResponseEvent,
+      user:User,
+      apsalarId:String,
+      newNumConsecutiveDaysLoggedIn:Int,
+      freshRestart:Boolean)
 
 class StartupService extends LazyLogging{
     
@@ -225,34 +242,47 @@ class StartupService extends LazyLogging{
     val fbId = reqProto.getFbId();
     val freshRestart = reqProto.getIsFreshRestart();
     var newNumConsecutiveDaysLoggedIn = 0;
-    
+    if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
+        val users = userRetrieveUtils.getUserByUDIDorFbId(udid, fbId);
+        user = selectUser(users, udid, fbId);
+
+        val isLogin = true;
+        var goingThroughTutorial = false;
+        var userIdSet = true;
+
+        if (user != null) {
+          playerId = user.getId();
+          //if can't lock player, exception will be thrown
+          locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
+          startupStatus = StartupStatus.USER_IN_DB;
+          logger.info("No major update... getting user info");
+          val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
+          loginExistingUser(sd);
+        } else {
+          logger.info(s"tutorial player with udid=$udid");
+          goingThroughTutorial = true;
+          userIdSet = false;
+          tutorialUserAccounting(reqProto, udid, now);
+          val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
+          finishStartup(sd)
+        }
+      }
   }
   
   
-  def finishStartup(
-      resBuilder:Builder, 
-      udid:String, 
-      playerId:String, 
-      now:Timestamp, 
-      isLogin:Boolean, 
-      goingThroughTutorial:Boolean,
-      userIdSet:Boolean,
-      startupStatus:StartupStatus,
-      resEvent:StartupResponseEvent,
-      user:User,
-      apsalarId:String,
-      newNumConsecutiveDaysLoggedIn:Int)={
-    insertUtil.insertIntoLoginHistory(udid, playerId, now, isLogin, goingThroughTutorial);
-    setAllStaticData(resBuilder, playerId, userIdSet);
-    resBuilder.setStartupStatus(startupStatus);
-    setConstants(resBuilder, startupStatus);
+  def finishStartup(sd:StartupData)={
+    insertUtil.insertIntoLoginHistory(sd.udid, sd.playerId, sd.now, sd.isLogin, sd.goingThroughTutorial);
+    setAllStaticData(sd.resBuilder, sd.playerId, sd.userIdSet);
+    sd.resBuilder.setStartupStatus(sd.startupStatus);
+    setConstants(sd.resBuilder, sd.startupStatus);
 
-    resBuilder.setServerTimeMillis((new Date()).getTime())
-    resEvent.setStartupResponseProto(resBuilder.build())
+    sd.resBuilder.setServerTimeMillis((new Date()).getTime())
+    sd.resEvent.setStartupResponseProto(sd.resBuilder.build())
+    val resEvent = sd.resEvent
     logger.debug(s"Writing event response: $resEvent")
-    server.writePreDBEvent(resEvent, udid);
+    server.writePreDBEvent(resEvent, sd.udid);
 
-    updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+    updateLeaderboard(sd.apsalarId, sd.user, sd.now, sd.newNumConsecutiveDaysLoggedIn);
   }
   
   def getUpdateStatus(version:VersionNumberProto, clientVersionNum:Float):UpdateStatus ={
@@ -305,59 +335,112 @@ class StartupService extends LazyLogging{
   }
   
   
+  def selectUser(users:java.util.List[User], udid: String , fbId: String ):User = {
+    var numUsers = users.size();
+    if (numUsers > 2) {
+      logger.error(String
+          .format("more than 2 users with same udid, fbId. udid=%s, fbId=%s, users=%s",
+              udid, fbId, users));
+    }
+    if (1 == numUsers) {
+      return users.get(0);
+    }
 
-  
-  def loginExistingUser(
-      udid:String, 
-      playerId:String, 
-      resBuilder:Builder, 
-      nowDate:Date, 
-      now:Timestamp,
-      user:User,
-      fbId:String,
-      freshRestart:Boolean)={
-      try {
-        //force other devices on this account to logout
-        forceLogoutOthers(udid, playerId, user, fbId)
-        logger.info(s"no major update... getting user info")
-        val userId = playerId;
-        val userInfo:Future[PvpLeagueForUser] = for{
-          sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
-          suci <-    setUserClanInfos(resBuilder, userId)
-          sntp <-    setNoticesToPlayers(resBuilder)
-          sums <-    setUserMonsterStuff(resBuilder, userId)
-          sbp  <-    setBoosterPurchases(resBuilder)
-          sts  <-    setTaskStuff(resBuilder, userId)
-          ses  <-    setEventStuff(resBuilder, userId)
-          spbo <-    setPvpBoardObstacles(resBuilder, userId)
-          sas  <-    setAchievementStuff(resBuilder, playerId)
-          smj  <-    setMiniJob(resBuilder, playerId)
-          sui  <-    setUserItems(resBuilder, playerId);
-          swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
-          ssg  <-    setSecretGifts(resBuilder, playerId, now.getTime())
-          sr   <-    setResearch(resBuilder, playerId)
-          sbifu <-   setBattleItemForUser(resBuilder, playerId)
-          sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
-          smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
-          scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
-          plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
-        } yield plfu
-        
-        userInfo onSuccess {
-          case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, playerId, nowDate, plfu) 
-        }
-        
-        userInfo onFailure {
-          case t:Throwable => {
-            logger.error("Error running login futures", t)
-            loginFinished(playerId)
-          }
-        }
-        
-      }catch{
-        case t:Throwable => logger.error(s"", t)
-        loginFinished(playerId)
+    var udidUser:User = null;
+
+    users.foreach{ u =>
+      val userFbId = u.getFacebookId();
+      val userUdid = u.getUdid();
+
+      if (fbId != null && fbId.equals(userFbId)) {
+        return u;
+      } else if (null == udidUser && udid != null  && udid.equals(userUdid)) {
+        //so this is the first user with specified udid, don't change reference
+        //to this user once set
+        udidUser = u;
       }
+    }
+    //didn't find user with specified fbId
+    return udidUser;
+  }
+
+  def tutorialUserAccounting(reqProto:StartupRequestProto , udid:String , now:Timestamp )= {
+    val userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
+    //TODO: Retrieve from user table
+    val numOldAccounts = userRetrieveUtils.numAccountsForUDID(udid);
+    val alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
+    var isFirstTimeUser = false;
+    if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
+      isFirstTimeUser = true;
+    }
+
+    logger.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts="
+        + numOldAccounts + "\t alreadyInFirstTimeUsers="
+        + alreadyInFirstTimeUsers + "\t isFirstTimeUser="
+        + isFirstTimeUser);
+
+    if (isFirstTimeUser) {
+      logger.info("new player with udid " + udid);
+      insertUtil.insertIntoFirstTimeUsers(udid, null, reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
+    }
+
+    if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
+      sendOfferChartInstall(now, reqProto.getAdvertiserId());
+    }
+  }
+  
+  def loginExistingUser(sd:StartupData)={
+	  val udid:String = sd.udid 
+	  val playerId:String = sd.playerId 
+	  val resBuilder:Builder = sd.resBuilder 
+	  val nowDate:Date = sd.nowDate 
+	  val now:Timestamp = sd.now
+	  val user:User = sd.user
+	  val fbId:String = sd.fbId
+	  val freshRestart:Boolean = sd.freshRestart
+    try {
+      //force other devices on this account to logout
+      forceLogoutOthers(udid, playerId, user, fbId)
+      logger.info(s"no major update... getting user info")
+      val userId = playerId;
+      val userInfo:Future[PvpLeagueForUser] = for{
+        sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
+        suci <-    setUserClanInfos(resBuilder, userId)
+        sntp <-    setNoticesToPlayers(resBuilder)
+        sums <-    setUserMonsterStuff(resBuilder, userId)
+        sbp  <-    setBoosterPurchases(resBuilder)
+        sts  <-    setTaskStuff(resBuilder, userId)
+        ses  <-    setEventStuff(resBuilder, userId)
+        spbo <-    setPvpBoardObstacles(resBuilder, userId)
+        sas  <-    setAchievementStuff(resBuilder, playerId)
+        smj  <-    setMiniJob(resBuilder, playerId)
+        sui  <-    setUserItems(resBuilder, playerId);
+        swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
+        ssg  <-    setSecretGifts(resBuilder, playerId, now.getTime())
+        sr   <-    setResearch(resBuilder, playerId)
+        sbifu <-   setBattleItemForUser(resBuilder, playerId)
+        sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
+        smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
+        scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
+        plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
+      } yield plfu
+      
+      userInfo onSuccess {
+        case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, playerId, nowDate, plfu, sd) 
+      }
+      
+      userInfo onFailure {
+        case t:Throwable => {
+          logger.error("Error running login futures", t)
+          loginFinished(playerId)
+          exceptionInStartup(sd)
+        }
+      }
+      
+    }catch{
+      case t:Throwable => logger.error(s"", t)
+      loginFinished(playerId)
+    }
   }
   
   def loginFinished(playerId:String)= {
@@ -365,7 +448,7 @@ class StartupService extends LazyLogging{
   }
   
   
-  def finishLoginExisting(resBuilder:Builder, user:User, playerId:String, nowDate:Date, plfu:PvpLeagueForUser) = {
+  def finishLoginExisting(resBuilder:Builder, user:User, playerId:String, nowDate:Date, plfu:PvpLeagueForUser, sd:StartupData) = {
     try {
       val sgcma = new SetGlobalChatMessageAction(resBuilder, user, chatMessages);
       sgcma.execute();
@@ -464,12 +547,26 @@ class StartupService extends LazyLogging{
       }
       val fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
       resBuilder.setSender(fup);
+      finishStartup(sd)
     }catch{
       case t:Throwable => logger.error("Error finishing login for user: $playerId", t)
     }finally {
       loginFinished(playerId)
     }
   }
+  
+  
+  //TODO: figure out when to call this
+  def exceptionInStartup(sd:StartupData)={
+    try {
+      sd.resBuilder.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
+      sd.resEvent.setStartupResponseProto(sd.resBuilder.build());
+      eventWriter.processPreDBResponseEvent(sd.resEvent, sd.udid);
+    } catch{
+      case t:Throwable => logger.error("exception2 in StartupController processEvent", t);
+    }
+  }
+  
   
   def forceLogoutOthers(udid:String, playerId:String, user:User, fbId:String)={
     val logoutResponse = ForceLogoutResponseProto.newBuilder()
