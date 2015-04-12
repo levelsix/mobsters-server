@@ -187,8 +187,7 @@ public class StartupController extends EventController {
 	//  private static int syllablesInName1 = 2;
 	//  private static int syllablesInName2 = 3;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StartupController.class);
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
@@ -400,57 +399,10 @@ public class StartupController extends EventController {
 		}
 
 		if (null != version) {
-			int superNum = version.getSuperNum();
-			int majorNum = version.getMajorNum();
-			int minorNum = version.getMinorNum();
-
-			int serverSuperNum = Globals.VERSION_SUPER_NUMBER();
-			int serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
-			int serverMinorNum = Globals.VERSION_MINOR_NUMBER();
-
-			boolean clientSuperGreater = superNum > serverSuperNum;
-			boolean clientSuperEqual = superNum == serverSuperNum;
-
-			boolean clientMajorGreater = majorNum > serverMajorNum;
-			boolean clientMajorEqual = majorNum == serverMajorNum;
-
-			boolean clientMinorGreater = minorNum > serverMinorNum;
-
-			if (clientSuperGreater
-					|| (clientSuperEqual && clientMajorGreater)
-					|| (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
-				String preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
-				log.error(
-						"{} clientVersion={}.{}.{} \t serverVersion={}.{}.{}",
-						new Object[] { preface, superNum, majorNum, minorNum,
-								serverSuperNum, serverMajorNum, serverMinorNum });
-
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
-
-			if (superNum < serverSuperNum || majorNum < serverMajorNum) {
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
-				log.info("player has been notified of forced update");
-
-			} else if (minorNum < serverMinorNum) {
-				updateStatus = UpdateStatus.MINOR_UPDATE;
-				log.info("player has been notified of minor update");
-			} else {
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
+			updateStatus = checkVersion(version);
 
 		} else {
-			double tempClientVersionNum = reqProto.getVersionNum() * 10;
-			double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
-			// Check version number
-			if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
-				log.info("player has been notified of forced update");
-			} else if (tempClientVersionNum < tempLatestVersionNum) {
-				updateStatus = UpdateStatus.MINOR_UPDATE;
-			} else {
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
+			updateStatus = checkVersionNoVersionProto(reqProto);
 
 		}
 
@@ -559,6 +511,65 @@ public class StartupController extends EventController {
 		//UPDATE USER's LAST LOGIN
 		updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
 		//log.info("user after change user login via db. user=" + user);
+	}
+
+	protected UpdateStatus checkVersionNoVersionProto(StartupRequestProto reqProto) {
+		UpdateStatus updateStatus;
+		double tempClientVersionNum = reqProto.getVersionNum() * 10;
+		double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
+		// Check version number
+		if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
+			updateStatus = UpdateStatus.MAJOR_UPDATE;
+			log.info("player has been notified of forced update");
+		} else if (tempClientVersionNum < tempLatestVersionNum) {
+			updateStatus = UpdateStatus.MINOR_UPDATE;
+		} else {
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+		return updateStatus;
+	}
+
+	protected UpdateStatus checkVersion(VersionNumberProto version) {
+		UpdateStatus updateStatus;
+		int superNum = version.getSuperNum();
+		int majorNum = version.getMajorNum();
+		int minorNum = version.getMinorNum();
+
+		int serverSuperNum = Globals.VERSION_SUPER_NUMBER();
+		int serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
+		int serverMinorNum = Globals.VERSION_MINOR_NUMBER();
+
+		boolean clientSuperGreater = superNum > serverSuperNum;
+		boolean clientSuperEqual = superNum == serverSuperNum;
+
+		boolean clientMajorGreater = majorNum > serverMajorNum;
+		boolean clientMajorEqual = majorNum == serverMajorNum;
+
+		boolean clientMinorGreater = minorNum > serverMinorNum;
+
+		if (clientSuperGreater
+				|| (clientSuperEqual && clientMajorGreater)
+				|| (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
+			String preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
+			log.error(
+					"{} clientVersion={}.{}.{} \t serverVersion={}.{}.{}",
+					new Object[] { preface, superNum, majorNum, minorNum,
+							serverSuperNum, serverMajorNum, serverMinorNum });
+
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+
+		if (superNum < serverSuperNum || majorNum < serverMajorNum) {
+			updateStatus = UpdateStatus.MAJOR_UPDATE;
+			log.info("player has been notified of forced update");
+
+		} else if (minorNum < serverMinorNum) {
+			updateStatus = UpdateStatus.MINOR_UPDATE;
+			log.info("player has been notified of minor update");
+		} else {
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+		return updateStatus;
 	}
 
 	//priority of user returned is
