@@ -100,6 +100,19 @@ import com.lvl6.proto.MiniEventProtos.UserMiniEventProto
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
+import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
+import com.lvl6.server.controller.utils.MonsterStuffUtils
+import com.lvl6.info.ClanEventPersistentForUser
+import com.lvl6.properties.ControllerConstants
+import com.lvl6.info.ClanEventPersistentUserReward
+import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto
+import java.io.BufferedReader
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.HttpResponse
+import java.io.InputStreamReader
+import com.lvl6.info.ItemForUser
+import com.lvl6.info.ItemForUserUsage
 
 
 class StartupService extends LazyLogging{
@@ -123,7 +136,7 @@ class StartupService extends LazyLogging{
 	@Autowired var  iapHistoryRetrieveUtils : IAPHistoryRetrieveUtils  = null
 	@Autowired var  itemSecretGiftForUserRetrieveUtil : ItemSecretGiftForUserRetrieveUtil  = null
 	@Autowired var  miniEventForUserRetrieveUtil : MiniEventForUserRetrieveUtil = null
-  //@Autowired var  mini : MiniG= null
+  @Autowired var  miniEventGoalForUserRetrieveUtil : MiniEventGoalForUserRetrieveUtil = null
 	@Autowired var  miniJobForUserRetrieveUtil : MiniJobForUserRetrieveUtil  = null
 	@Autowired var  monsterEnhancingForUserRetrieveUtils : MonsterEnhancingForUserRetrieveUtils2  = null
 	@Autowired var  monsterEvolvingForUserRetrieveUtils : MonsterEvolvingForUserRetrieveUtils2  = null
@@ -171,6 +184,7 @@ class StartupService extends LazyLogging{
         forceLogoutOthers(udid, playerId, user, fbId)
         logger.info(s"no major update... getting user info")
         val userId = playerId;
+        val plfu = pvpBattleStuff(resBuilder, user, playerId, freshRestart, now);
         val userInfo:Future[Unit] = for{
           sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
           suci <-    setUserClanInfos(resBuilder, userId)
@@ -180,6 +194,15 @@ class StartupService extends LazyLogging{
           sts  <-    setTaskStuff(resBuilder, userId)
           ses  <-    setEventStuff(resBuilder, userId)
           spbo <-    setPvpBoardObstacles(resBuilder, userId)
+          sas  <-    setAchievementStuff(resBuilder, playerId)
+          smj  <-    setMiniJob(resBuilder, playerId)
+          sui  <-    setUserItems(resBuilder, playerId);
+          swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
+          ssg  <-    setSecretGifts(resBuilder, playerId, now.getTime())
+          sr   <-    setResearch(resBuilder, playerId)
+          sbifu <-   setBattleItemForUser(resBuilder, playerId)
+          sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
+          smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
         } yield Unit
         
         
@@ -561,6 +584,23 @@ class StartupService extends LazyLogging{
     }
   }
   
+  def setUserItems(resBuilder:Builder, userId:String):Future[Unit]= {
+    future{
+      /*NOTE: DB CALL*/
+      val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId, null);
+      if (!itemIdToUserItems.isEmpty()) {
+        val uipList = CreateInfoProtoUtils.createUserItemProtosFromUserItems(new ArrayList[ItemForUser](itemIdToUserItems.values()));
+        resBuilder.addAllUserItems(uipList);
+      }
+      /*NOTE: DB CALL*/
+      val itemsUsed = itemForUserUsageRetrieveUtil.getItemForUserUsage(userId, null);
+      itemsUsed.foreach{ ifuu =>
+        val uiup = CreateInfoProtoUtils.createUserItemUsageProto(ifuu);
+        resBuilder.addItemsInUse(uiup);
+      }
+    }
+  }
+  
   def setWhetherPlayerCompletedInAppPurchase(resBuilder:Builder, user:User):Future[Unit]= {
     future{
       /*NOTE: DB CALL*/
@@ -657,100 +697,139 @@ class StartupService extends LazyLogging{
   }
   
   def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
-    val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
-    val rmea = new RetrieveMiniEventAction(
-        userId, 
-        now, 
-        userRetrieveUtils,
-        miniEventForUserRetrieveUtil,
-        miniEventGoalForUserRetrieveUtil, 
-        insertUtil, 
-        deleteUtil);
-
-    rmea.execute(rmeaResBuilder);
-//    log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-//        MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-//    log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
-
-    if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
-        null != rmea.getCurActiveMiniEvent())
-    {
-      //get UserMiniEvent info and create the proto to set into resBuilder
-      //TODO: Consider protofying MiniEvent stuff
-      UserMiniEventProto umep = CreateInfoProtoUtils
-          .createUserMiniEventProto(
-              rmea.getMefu(), rmea.getCurActiveMiniEvent(),
-              rmea.getMegfus(),
-              rmea.getLvlEntered(), rmea.getRewards(),
-              rmea.getGoals(), rmea.getLeaderboardRewards());
-      resBuilder.setUserMiniEvent(umep);
+    future{
+      val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
+      val rmea = new RetrieveMiniEventAction(
+          userId, 
+          now, 
+          userRetrieveUtils,
+          miniEventForUserRetrieveUtil,
+          miniEventGoalForUserRetrieveUtil, 
+          insertUtil, 
+          deleteUtil);
+      rmea.execute(rmeaResBuilder);
+      if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
+        //get UserMiniEvent info and create the proto to set into resBuilder
+        //TODO: Consider protofying MiniEvent stuff
+        val  umep = CreateInfoProtoUtils.createUserMiniEventProto(
+                rmea.getMefu(), 
+                rmea.getCurActiveMiniEvent(),
+                rmea.getMegfus(),
+                rmea.getLvlEntered(), 
+                rmea.getRewards(),
+                rmea.getGoals(), 
+                rmea.getLeaderboardRewards());
+        resBuilder.setUserMiniEvent(umep);
+      }
     }
-
   }
 
-  def setClanRaidStuff(Builder resBuilder, User user, String userId,
-      Timestamp now) {
-    Date nowDate = new Date(now.getTime());
-    String clanId = user.getClanId();
-
-    if (clanId == null) {
-      return;
+  def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
+    future{
+      val nowDate = new Date(now.getTime());
+      val clanId = user.getClanId();
+      if (clanId != null) {
+        /*NOTE: DB CALL*/
+        //get the clan raid information for the clan
+        val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
+        if (null != cepfc) {
+          val pcecip = CreateInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
+          resBuilder.setCurRaidClanInfo(pcecip);
+          /*NOTE: DB CALL*/
+          //get the clan raid information for all the clan users
+          //shouldn't be null (per the retrieveUtils)
+          val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+          logger.info("the users involved in clan raid:$userIdToCepfu");
+          if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+            logger.info("no users involved in clan raid. clanRaid=$cepfc");
+          }else {
+            val userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+            /*NOTE: DB CALL*/
+            //TODO: when retrieving clan info, and user's current teams, maybe query for
+            //these monsters as well
+            val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
+            userIdToCepfu.values.foreach { cepfu =>
+              val pceuip = CreateInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+              resBuilder.addCurRaidClanUserInfo(pceuip);
+            }
+            setClanRaidHistoryStuff(resBuilder, userId, nowDate);
+          }
+        }else {
+          logger.info("no clan raid stuff existing for clan=$clanId, user=$user");
+        }
+      }
     }
-    /*NOTE: DB CALL*/
-    //get the clan raid information for the clan
-    ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
-        .getPersistentEventForClanId(clanId);
-
-    if (null == cepfc) {
-      log.info(String.format(
-          "no clan raid stuff existing for clan=%s, user=%s", clanId,
-          user));
-      return;
-    }
-
-    PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
-        .createPersistentClanEventClanInfoProto(cepfc);
-    resBuilder.setCurRaidClanInfo(pcecip);
-
-    /*NOTE: DB CALL*/
-    //get the clan raid information for all the clan users
-    //shouldn't be null (per the retrieveUtils)
-    Map<String, ClanEventPersistentForUser> userIdToCepfu = getClanEventPersistentForUserRetrieveUtils()
-        .getPersistentEventUserInfoForClanId(clanId);
-    log.info(String.format("the users involved in clan raid:%s",
-        userIdToCepfu));
-
-    if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-      log.info(String.format(
-          "no users involved in clan raid. clanRaid=%s", cepfc));
-      return;
-    }
-
-    List<String> userMonsterIds = MonsterStuffUtils
-        .getUserMonsterIdsInClanRaid(userIdToCepfu);
+  }
+  
+  def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
 
     /*NOTE: DB CALL*/
-    //TODO: when retrieving clan info, and user's current teams, maybe query for
-    //these monsters as well
-    Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
-        .getSpecificUserMonsters(userMonsterIds);
-
-    for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-      PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
-          .createPersistentClanEventUserInfoProto(cepfu,
-              idsToUserMonsters, null);
-      resBuilder.addCurRaidClanUserInfo(pceuip);
+    //the raid stage and reward history for past 7 days
+    val nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY;
+    val timesToRaidStageHistory = cepfuRaidStageHistoryRetrieveUtils
+      .getRaidStageHistoryForPastNDaysForUserId(userId, nDays, nowDate, timeUtils);
+    /*NOTE: DB CALL*/
+    val timesToUserRewards = clanEventPersistentUserRewardRetrieveUtils
+      .getCepUserRewardForPastNDaysForUserId(userId, nDays, nowDate, timeUtils);
+    //possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage
+    timesToRaidStageHistory.keySet.foreach{ aDate =>
+      val cepfursh = timesToRaidStageHistory.get(aDate);
+      var rewards:java.util.List[ClanEventPersistentUserReward]  = null;
+      if (timesToUserRewards.containsKey(aDate)) {
+        rewards = timesToUserRewards.get(aDate);
+      }
+      val stageProto = CreateInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
+      resBuilder.addRaidStageHistory(stageProto);
     }
-
-    setClanRaidHistoryStuff(resBuilder, userId, nowDate);
-
   }
   
   
   
+  def sendOfferChartInstall(installTime:Date , advertiserId:String):Future[Unit] ={
+    future{
+      val clientId = "15";
+      val appId = "648221050";
+      val geo = "N/A";
+      val installTimeStr = "" + installTime.getTime();
+      val devicePlatform = "iphone";
+      val deviceType = "iphone";
   
+      var urlString = new StringBuilder()
+          .append("http://offerchart.com/mobileapp/api/send_install_ping?")
+          .append("client_id=")
+          .append(clientId)
+          .append("&app_id=")
+          .append(appId)
+          .append("&device_id=")
+          .append(advertiserId)
+          .append("&device_type=")
+          .append(deviceType)
+          .append("&geo=")
+          .append(geo)
+          .append("&install_time=")
+          .append(installTimeStr)
+          .append("&device_platform=")
+          .append(devicePlatform)
+          .toString();
   
+      logger.info("Sending offerchart request:\n" + urlString);
+      val httpclient = new DefaultHttpClient();
+      val httpGet = new HttpGet(urlString);
   
+      try {
+        val response1 = httpclient.execute(httpGet);
+        val rd = new BufferedReader(new InputStreamReader(response1.getEntity().getContent()));
+        var responseString = "";
+        var line =""
+        while ((line = rd.readLine()) != null) {
+          responseString += line;
+        }
+        logger.info("Received response: " + responseString);
+      } catch {
+        case t:Throwable => logger.error("failed to make offer chart call", t);
+      }
+    }
+  }
   
   
   
