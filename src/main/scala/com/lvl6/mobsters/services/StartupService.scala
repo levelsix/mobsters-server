@@ -1,133 +1,133 @@
 package com.lvl6.mobsters.services
 
-import com.lvl6.proto.EventStartupProto.StartupRequestProto
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.sql.Timestamp
+import java.util.ArrayList
+import java.util.Collection
+import java.util.Date
+import java.util.HashMap
+import java.util.HashSet
+import java.util.UUID
+
+import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.JavaConversions.asScalaSet
+import scala.collection.JavaConversions.collectionAsScalaIterable
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.future
+
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.DefaultHttpClient
+import org.springframework.beans.factory.annotation.Autowired
+
+import com.hazelcast.core.IList
+import com.lvl6.events.RequestEvent
+import com.lvl6.events.request.StartupRequestEvent
+import com.lvl6.events.response.ForceLogoutResponseEvent
+import com.lvl6.events.response.StartupResponseEvent
+import com.lvl6.info.Clan
+import com.lvl6.info.ClanEventPersistentUserReward
+import com.lvl6.info.ItemForUser
+import com.lvl6.info.ItemSecretGiftForUser
+import com.lvl6.info.MiniJobForUser
+import com.lvl6.info.MonsterForUser
+import com.lvl6.info.MonsterHealingForUser
+import com.lvl6.info.PvpBattleForUser
+import com.lvl6.info.PvpLeagueForUser
+import com.lvl6.info.QuestForUser
+import com.lvl6.info.TaskForUserClientState
+import com.lvl6.info.TaskForUserOngoing
+import com.lvl6.info.TaskStageForUser
+import com.lvl6.info.User
+import com.lvl6.info.UserClan
+import com.lvl6.misc.MiscMethods
+import com.lvl6.properties.ControllerConstants
+import com.lvl6.properties.Globals
+import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
+import com.lvl6.proto.ChatProto.ChatType
+import com.lvl6.proto.ChatProto.DefaultLanguagesProto
+import com.lvl6.proto.ChatProto.GroupChatMessageProto
+import com.lvl6.proto.ClanProto.ClanDataProto
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
+import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto
 import com.lvl6.proto.EventStartupProto.StartupResponseProto
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
-import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
-import java.sql.Timestamp
-import java.util.Date
-import com.lvl6.info.User
-import scala.concurrent._
-import ExecutionContext.Implicits.global
-import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils
-import com.lvl6.retrieveutils.UserRetrieveUtils2
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2
-import com.lvl6.server.controller.utils.TimeUtils
-import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2
-import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2
-import com.lvl6.retrieveutils.UserClanRetrieveUtils2
-import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
-import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2
-import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2
-import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
-import org.springframework.beans.factory.annotation.Autowired
-import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2
-import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
-import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2
-import com.lvl6.retrieveutils.ClanRetrieveUtils2
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2
-import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2
-import java.util.ArrayList
-import com.lvl6.info.QuestForUser
-import java.util.HashSet
-import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils
-import scala.collection.JavaConversions._
-import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
-import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil
-import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
-import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil
-import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2
-import com.lvl6.pvp.HazelcastPvpUtil
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2
-import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil
-import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil
-import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil
-import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil
-import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
-import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
-import com.lvl6.utils.CreateInfoProtoUtils
-import com.lvl6.info.UserClan
-import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
-import com.lvl6.info.MonsterForUser
-import com.lvl6.info.MonsterHealingForUser
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.typesafe.scalalogging.Logging
-import com.lvl6.utils.utilmethods.DeleteUtil
-import com.hazelcast.core.IList
-import javax.annotation.Resource
-import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
-import scala.util.Sorting
-import com.lvl6.info.TaskForUserOngoing
-import com.lvl6.info.TaskForUserClientState
-import java.util.HashMap
-import com.lvl6.info.TaskStageForUser
-import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil
-import com.typesafe.scalalogging.slf4j.LazyLogging
-import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto
-import com.lvl6.events.response.ForceLogoutResponseEvent
-import com.lvl6.server.EventWriter
+import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
-import com.lvl6.info.PvpLeagueForUser
-import com.lvl6.info.PvpBattleForUser
-import java.util.UUID
-import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
-import com.lvl6.utils.utilmethods.UpdateUtil
-import com.lvl6.utils.utilmethods.InsertUtil
-import com.lvl6.server.Locker
-import com.lvl6.misc.MiscMethods
-import com.lvl6.info.MiniJobForUser
-import com.lvl6.info.ItemSecretGiftForUser
-import java.util.Collection
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
-import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils
-import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil
-import com.lvl6.proto.BattleItemsProto.UserBattleItemProto
+import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil
-import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil
-import com.lvl6.proto.ChatProto.DefaultLanguagesProto
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto
-import com.lvl6.proto.MiniEventProtos.UserMiniEventProto
-import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
+import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil
+import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2
+import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil
+import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
+import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
+import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
+import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
+import com.lvl6.retrieveutils.ClanRetrieveUtils2
+import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2
+import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
+import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
+import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
-import com.lvl6.server.controller.utils.MonsterStuffUtils
-import com.lvl6.info.ClanEventPersistentForUser
-import com.lvl6.properties.ControllerConstants
-import com.lvl6.info.ClanEventPersistentUserReward
-import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto
-import java.io.BufferedReader
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.impl.client.DefaultHttpClient
-import org.apache.http.HttpResponse
-import java.io.InputStreamReader
-import com.lvl6.info.ItemForUser
-import com.lvl6.info.ItemForUserUsage
-import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction
-import com.lvl6.info.Clan
-import com.lvl6.proto.ChatProto.ChatType
-import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
-import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
-import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
-import com.lvl6.server.controller.actionobjects.StartUpResource
-import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
-import com.lvl6.info.TranslationSettingsForUser
+import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2
+import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2
+import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil
+import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2
+import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2
+import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2
+import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2
+import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2
+import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils
+import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2
+import com.lvl6.retrieveutils.UserRetrieveUtils2
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
+import com.lvl6.server.EventWriter
+import com.lvl6.server.GameServer
+import com.lvl6.server.Locker
+import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
+import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
+import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
-import com.lvl6.proto.ClanProto.ClanDataProto
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction
-import com.lvl6.proto.UserProto.FullUserProto
-import com.lvl6.proto.ChatProto.GroupChatMessageProto
+import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
+import com.lvl6.server.controller.actionobjects.StartUpResource
+import com.lvl6.server.controller.utils.MonsterStuffUtils
+import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.utils.CreateInfoProtoUtils
+import com.lvl6.utils.utilmethods.DeleteUtil
+import com.lvl6.utils.utilmethods.InsertUtil
+import com.lvl6.utils.utilmethods.UpdateUtil
+import com.typesafe.scalalogging.slf4j.LazyLogging
+
+import javax.annotation.Resource
 
 
 class StartupService extends LazyLogging{
@@ -184,8 +184,128 @@ class StartupService extends LazyLogging{
   @Autowired var  locker :  Locker = null
   @Autowired var  eventWriter:EventWriter = null
   
+  @Autowired var globals:Globals = null
   @Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
+  
+  //TODO: Refactor GameServer class
+  @Autowired var  server:GameServer = null
+  
+  
+  def startup(event:RequestEvent)={
+    val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
+    logger.info(s"Processing startup request reqProto:$reqProto")
+    val udid = reqProto.getUdid();
+    var apsalarId:String = null
+    if(reqProto.hasApsalarId()) {
+      apsalarId = reqProto.getApsalarId()
+    }
+    var playerId:String = null;
+    MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
+    var version:VersionNumberProto  = null;
+    if (reqProto.hasVersionNumberProto()) {
+      version = reqProto.getVersionNumberProto();
+    }
+    var updateStatus:UpdateStatus  = getUpdateStatus(version, reqProto.getVersionNum)
+    val resBuilder = StartupResponseProto.newBuilder();
+    resBuilder.setUpdateStatus(updateStatus);
+    resBuilder.setAppStoreURL(Globals.APP_STORE_URL());
+    resBuilder.setReviewPageURL(Globals.REVIEW_PAGE_URL());
+    resBuilder.setReviewPageConfirmationMessage(Globals.REVIEW_PAGE_CONFIRMATION_MESSAGE);
+    val resEvent = new StartupResponseEvent(udid);
+    resEvent.setTag(event.getTag());
+
+    // Don't fill in other fields if it is a major update
+    var startupStatus = StartupStatus.USER_NOT_IN_DB;
+
+    var nowDate = new Date();
+    nowDate = timeUtils.createDateTruncateMillis(nowDate);
+    var now = new Timestamp(nowDate.getTime());
+    var user:User = null;
+    val fbId = reqProto.getFbId();
+    val freshRestart = reqProto.getIsFreshRestart();
+    var newNumConsecutiveDaysLoggedIn = 0;
+    
+  }
+  
+  
+  def finishStartup(
+      resBuilder:Builder, 
+      udid:String, 
+      playerId:String, 
+      now:Timestamp, 
+      isLogin:Boolean, 
+      goingThroughTutorial:Boolean,
+      userIdSet:Boolean,
+      startupStatus:StartupStatus,
+      resEvent:StartupResponseEvent,
+      user:User,
+      apsalarId:String,
+      newNumConsecutiveDaysLoggedIn:Int)={
+    insertUtil.insertIntoLoginHistory(udid, playerId, now, isLogin, goingThroughTutorial);
+    setAllStaticData(resBuilder, playerId, userIdSet);
+    resBuilder.setStartupStatus(startupStatus);
+    setConstants(resBuilder, startupStatus);
+
+    resBuilder.setServerTimeMillis((new Date()).getTime())
+    resEvent.setStartupResponseProto(resBuilder.build())
+    logger.debug(s"Writing event response: $resEvent")
+    server.writePreDBEvent(resEvent, udid);
+
+    updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+  }
+  
+  def getUpdateStatus(version:VersionNumberProto, clientVersionNum:Float):UpdateStatus ={
+    var updateStatus:UpdateStatus  = null
+    if (null != version) {
+      val superNum = version.getSuperNum();
+      val majorNum = version.getMajorNum();
+      val minorNum = version.getMinorNum();
+      val serverSuperNum = Globals.VERSION_SUPER_NUMBER();
+      val serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
+      val serverMinorNum = Globals.VERSION_MINOR_NUMBER();
+      val clientSuperGreater = superNum > serverSuperNum;
+      val clientSuperEqual = superNum == serverSuperNum;
+      val clientMajorGreater = majorNum > serverMajorNum;
+      val clientMajorEqual = majorNum == serverMajorNum;
+      val clientMinorGreater = minorNum > serverMinorNum;
+      if (clientSuperGreater
+          || (clientSuperEqual && clientMajorGreater)
+          || (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
+        val preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
+        logger.error(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
+        updateStatus = UpdateStatus.NO_UPDATE;
+      }
+
+      if (superNum < serverSuperNum || majorNum < serverMajorNum) {
+        updateStatus = UpdateStatus.MAJOR_UPDATE;
+        logger.info("player has been notified of forced update");
+
+      } else if (minorNum < serverMinorNum) {
+        updateStatus = UpdateStatus.MINOR_UPDATE;
+        logger.info("player has been notified of minor update");
+      } else {
+        updateStatus = UpdateStatus.NO_UPDATE;
+      }
+
+    } else {
+      val tempClientVersionNum = clientVersionNum * 10;
+      val tempLatestVersionNum = GameServer.clientVersionNumber * 10;
+      // Check version number
+      if (tempClientVersionNum < tempLatestVersionNum) {
+        updateStatus = UpdateStatus.MAJOR_UPDATE;
+        logger.info("player has been notified of forced update");
+      } else if (tempClientVersionNum < tempLatestVersionNum) {
+        updateStatus = UpdateStatus.MINOR_UPDATE;
+      } else {
+        updateStatus = UpdateStatus.NO_UPDATE;
+      }
+    }
+    return updateStatus
+  }
+  
+  
+
   
   def loginExistingUser(
       udid:String, 
@@ -971,10 +1091,47 @@ class StartupService extends LazyLogging{
   }
   
   
+  def syncApsalaridLastloginConsecutivedaysloggedinResetBadges(
+      user:User,
+      apsalarID:String, 
+      loginTime:Timestamp,
+      newNumConsecutiveDaysLoggedIn:Int) {
+    var apsalarId:String = null
+    if (user.getApsalarId() != null && apsalarID == null) {
+      apsalarId = user.getApsalarId();
+    }else {
+      apsalarId = apsalarID
+    }
+    if (!user.updateAbsoluteApsalaridLastloginBadgesNumConsecutiveDaysLoggedIn(
+            apsalarId, loginTime, 0, newNumConsecutiveDaysLoggedIn)) {
+      logger.error("problem with updating apsalar id to " + apsalarId
+          + ", last login to " + loginTime
+          + ", and badge count to 0 for " + user
+          + " and newNumConsecutiveDaysLoggedIn is "
+          + newNumConsecutiveDaysLoggedIn);
+    }
+    if (!insertUtil.insertLastLoginLastLogoutToUserSessions(user.getId(), loginTime, null)) {
+      logger.error("problem with inserting last login time for user " + user
+          + ", loginTime=" + loginTime);
+    }
+  }
+  
+  def setConstants(startupBuilder:Builder ,  startupStatus:StartupStatus )= {
+    startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto(globals));
+    if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
+      val tc = MiscMethods.createTutorialConstantsProto();
+      startupBuilder.setTutorialConstants(tc);
+    }
+  }  
   
   
-  
-  
+  def updateLeaderboard(apsalarId:String , user:User , now:Timestamp , newNumConsecutiveDaysLoggedIn:Int)= {
+    if (user != null) {
+      val userId = user.getId()
+      logger.info(s"Updating leaderboard for user $userId");
+      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn);
+    }
+  }
   
   
   
