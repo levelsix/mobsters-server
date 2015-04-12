@@ -28,7 +28,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private final String TABLE_NAME = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
+	private final static String TABLE_NAME = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 	private static final UserTranslationSettingsForClientMapper rowMapper = new UserTranslationSettingsForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
@@ -44,7 +44,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 
 		Object[] values = { userId, "GLOBAL_CHAT"};
 		String query = String.format("select * from %s where %s=? and %s=?", TABLE_NAME,
-				DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID, 
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE);
 
 		List<TranslationSettingsForUser> userTranslationSettingss = null;
@@ -59,7 +59,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 		}
 		return userTranslationSettingss;
 	}
-	
+
 	public List<TranslationSettingsForUser> getUserTranslationSettingsForUser(String recipientUserId) {
 		log.debug(String.format("retrieving user translation settings for userId %s",
 				recipientUserId));
@@ -80,6 +80,28 @@ public class TranslationSettingsForUserRetrieveUtil {
 		}
 		return userTranslationSettingss;
 	}
+
+	public List<TranslationSettingsForUser> getUserTranslationSettingsForUserForStartup(String userId) {
+		log.debug(String.format("retrieving user translation settings for userId %s",
+				userId));
+
+		Object[] values = { userId, userId };
+		String query = String.format("select * from %s where %s=? and %s=?", TABLE_NAME,
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID, DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID);
+
+		List<TranslationSettingsForUser> userTranslationSettingss = null;
+		try {
+			userTranslationSettingss = this.jdbcTemplate.query(query, values, rowMapper);
+
+		} catch (Exception e) {
+			log.error("translation settings for user retrieve db error.", e);
+			userTranslationSettingss = new ArrayList<TranslationSettingsForUser>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return userTranslationSettingss;
+	}
+
 
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
 	public Map<String, TranslationSettingsForUser> getSenderIdToUserTranslationSettingsForUser(
@@ -137,7 +159,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 
 		return userTranslationSettings;
 	}
-	
+
 	public TranslationSettingsForUser getSpecificUserGlobalTranslationSettings(String recipientUserId,
 			ChatType chatType) {
 		log.debug(

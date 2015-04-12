@@ -17,6 +17,7 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -34,7 +35,9 @@ public class TranslateSelectMessagesAction {
 	private boolean translateOn;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
-	
+	private MiscMethods miscMethods;
+	private ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
 
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
@@ -57,7 +60,7 @@ public class TranslateSelectMessagesAction {
 	private User senderUser;
 	private Language language;
 	private Map<String, PrivateChatPost> privateChatPostMap;
-	
+
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
@@ -84,7 +87,7 @@ public class TranslateSelectMessagesAction {
 			log.info("no translation");
 			return true;
 		}
-		
+
 		language = MiscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
@@ -97,7 +100,8 @@ public class TranslateSelectMessagesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
-			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId, 
+
+			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId,
 					languageEnum.toString(), translateOn);
 		}
 		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
@@ -105,15 +109,15 @@ public class TranslateSelectMessagesAction {
 					getUserTranslationSettingsForUserGlobal(recipientUserId);
 			if(tsfuList.isEmpty()) {
 
-				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId, 
+				successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId,
 						languageEnum.toString(), chatType.toString(), translateOn);
 			}
 			else {
-				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId, 
+				successfulUpdate = updateUtil.updateUserTranslationSettingGlobalLanguage(recipientUserId,
 						chatType.toString(), languageEnum.toString(), translateOn) ;
 			}
 		}
-		
+
 		if (!successfulUpdate) {
 			log.error("failed to update user language setting");
 			return false;
@@ -126,7 +130,7 @@ public class TranslateSelectMessagesAction {
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 					String message = pcp.getContent();
 					chatIdsToTranslations.put(pcp.getId(), message);
-					Map<TranslateLanguages, String> translatedMessage = MiscMethods.translate(null, language, message);
+					Map<TranslateLanguages, String> translatedMessage = miscMethods.translate(null, language, message);
 
 					for(TranslateLanguages tl : translatedMessage.keySet()) {
 						TranslatedText tt = new TranslatedText();
@@ -136,10 +140,10 @@ public class TranslateSelectMessagesAction {
 					}
 					privateChatPostMap.put(pcp.getId(), pcp);
 				}
-				
+
 				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
-						listOfPrivateChatPosts);
-				
+						listOfPrivateChatPosts, chatTranslationsRetrieveUtils);
+
 				if(successfulTranslationInsertion) {
 					return true;
 				}

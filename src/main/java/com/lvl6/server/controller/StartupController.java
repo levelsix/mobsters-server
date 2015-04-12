@@ -51,7 +51,6 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -75,7 +74,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -239,6 +237,9 @@ public class StartupController extends EventController {
 	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 
 	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
 	protected PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
 
 	@Autowired
@@ -357,6 +358,7 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -704,18 +706,23 @@ public class StartupController extends EventController {
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 					getUserTranslationSettingsForUser(playerId);
 			boolean tsfuListIsNull = false;
-			
+
 			if(tsfuList == null || tsfuList.isEmpty()) {
-				insertUtil.insertTranslateSettings(playerId, null, 
-						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE, 
-						ChatType.GLOBAL_CHAT.toString(), 
+				insertUtil.insertTranslateSettings(playerId, null,
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
+						ChatType.GLOBAL_CHAT.toString(),
 						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 				tsfuListIsNull = true;
 			}
-			
+
+			List<TranslationSettingsForUser> updatedTsfuList = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUser(playerId);
+
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil);
+					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
+					createInfoProtoUtils, translationSettingsForUserRetrieveUtil,
+					updatedTsfuList);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
@@ -762,12 +769,12 @@ public class StartupController extends EventController {
 
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
-			
+
 			//set this proto after executing privatechatprotos
 			setDefaultLanguagesForUser(resBuilder, playerId);
 			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 
-			
+
 			sfesa.execute(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			spbha.execute(fillMe);
@@ -1133,7 +1140,7 @@ public class StartupController extends EventController {
 		//NOTE: this lock ordering might result in a temp deadlock
 		//doesn't reeeally matter if can't penalize defender...
 
-		
+
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
 
@@ -1592,6 +1599,33 @@ public class StartupController extends EventController {
 		}
 	}
 
+//	private void setSalesForUser(Builder resBuilder, User user) {
+//		//update user jump two tier's value
+//		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+//		if(salesJumpTwoTiers) {
+//			Date lastPurchaseTime = user.getLastPurchaseTime();
+//			if(lastPurchaseTime == null) {
+//				lastPurchaseTime = new Date();
+//				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+//				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+//			}
+//			Date now = new Date();
+//			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+//			if(diffInDays > 5) {
+//				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+//				salesJumpTwoTiers = false;
+//			}
+//		}
+//
+//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+//		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+//				.getSalesItemIdsToSalesItemsForSalesPackIds();
+//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+//				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+//		int userSalesValue = user.getSalesValue();
+//
+//		double newMinPrice = 0.0;
+//
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);
@@ -1603,7 +1637,7 @@ public class StartupController extends EventController {
 		}
 	}
 
-	
+
 	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
 
 		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
@@ -1611,19 +1645,19 @@ public class StartupController extends EventController {
 
 		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 				getUserTranslationSettingsForUser(userId);
-		
+
 		log.info("tsfuList: " + tsfuList);
-		
+
 		DefaultLanguagesProto dlp = null;
 
 		if(tsfuList != null && !tsfuList.isEmpty()) {
-			dlp = CreateInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
+			dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
 		}
 
 		//if there's no default languages, they havent ever been set
 		if (null != dlp) {
 			resBuilder.setUserDefaultLanguages(dlp);
-		} 
+		}
 	}
 
 	private void setMiniEventForUser(

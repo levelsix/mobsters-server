@@ -179,6 +179,7 @@ import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -191,18 +192,53 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
 public class CreateInfoProtoUtils {
 
 	@Autowired
-	InsertUtil insertUtil;
-	
+	protected MiscMethods miscMethods;
+
+	@Autowired
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+
+	@Autowired
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+
+	@Autowired
+	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
+
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
+
+	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
+
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
+
+	@Autowired
+	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+
+	@Autowired
+	protected QuestJobRetrieveUtils questJobRetrieveUtils;
+
+	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
+
 
 	/** Achievement.proto ***************************************************/
 	public static AchievementProto createAchievementProto(Achievement a) {
@@ -1200,11 +1236,12 @@ public class CreateInfoProtoUtils {
 
 		return pcppb.build();
 	}
-	
+
 
 	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
-			MinimumUserProtoWithLevel mupwlRecipient) {
+			MinimumUserProtoWithLevel mupwlRecipient,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
 
 		pcppb.setPrivateChatPostUuid(p.getId());
@@ -1212,14 +1249,26 @@ public class CreateInfoProtoUtils {
 		pcppb.setRecipient(mupwlRecipient);
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
-		
+
+		if(p.getContentLanguage() != null) {
+			pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(p.getContentLanguage()));
+		}
+		else {
+			List<TranslationSettingsForUser> tsfu = translationSettingsForUserRetrieveUtil.
+					getUserTranslationSettingsForUserGlobal(p.getPosterId());
+			if(tsfu == null || tsfu.isEmpty()) {
+				pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE));
+			}
+			else pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(tsfu.get(0).getLanguage()));
+		}
+
 		List<String> chatIds = new ArrayList<String>();
 		chatIds.add(p.getId());
 		Map<String, List<ChatTranslations>> chatTranslationMap = ChatTranslationsRetrieveUtils.
 				getChatTranslationsForSpecificChatIds(chatIds);
-		
+
 		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-		
+
 		for(String chatId : chatTranslationMap.keySet()) {
 			List<ChatTranslations> list = chatTranslationMap.get(chatId);
 			for(ChatTranslations ct : list) {
@@ -1233,7 +1282,8 @@ public class CreateInfoProtoUtils {
 
 	public static List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos(
 			List<PrivateChatPost> pList,
-			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls) {
+			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 
 		for (PrivateChatPost pcp : pList) {
@@ -1243,7 +1293,7 @@ public class CreateInfoProtoUtils {
 					.getRecipientId());
 
 			PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-					pcp, mupwlPoster, mupwlRecipient);
+					pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 
 			pcppList.add(pcpp);
 		}
@@ -1261,7 +1311,8 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
 			List<String> privateChatPostIds,
-			Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
+			Map<String, PrivateChatPost> postIdsToPrivateChatPosts,
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();
@@ -1285,7 +1336,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient);
+						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		} else {
@@ -1298,7 +1349,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient);
+						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		}
@@ -1334,7 +1385,7 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
-			String chatId, Map<TranslateLanguages, String> translatedMap, 
+			String chatId, Map<TranslateLanguages, String> translatedMap,
 			TranslateLanguages contentLanguage) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
@@ -1343,11 +1394,11 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(user);
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
-		
+
 		if(contentLanguage != null) {
 			gcmpb.setContentLanguage(contentLanguage);
 		}
-		
+
 		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
@@ -1361,15 +1412,15 @@ public class CreateInfoProtoUtils {
 				gcmpb.addTranslatedContent(ttpb.build());
 			}
 		}
-		
+
 		if (chatId != null) {
 			gcmpb.setChatUuid(chatId);
 		}
-		
+
 		return gcmpb.build();
 	}
-	
-	public static DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
+
+	public DefaultLanguagesProto createDefaultLanguagesProto(List<TranslationSettingsForUser> tsfuList) {
 		DefaultLanguagesProto.Builder dlpb = DefaultLanguagesProto.newBuilder();
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 
@@ -1380,6 +1431,7 @@ public class CreateInfoProtoUtils {
 				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
 				pcdlpb.setSenderUserId(tsfu.getSenderUserId());
 				pcdlpb.setTranslateOn(tsfu.isTranslationsOn());
+
 				PrivateChatDefaultLanguageProto lala = pcdlpb.build();
 				pcdlpList.add(lala);
 			}
@@ -1389,10 +1441,10 @@ public class CreateInfoProtoUtils {
 				log.info("global translateon: " + tsfu.isTranslationsOn());
 			}
 		}
-		
+
 		dlpb.addAllPrivateDefaultLanguage(pcdlpList);
 		return dlpb.build();
-		
+
 	}
 
 
@@ -2059,11 +2111,11 @@ public class CreateInfoProtoUtils {
 		ipb.setSecretGiftChance(item.getSecretGiftChance());
 		ipb.setAlwaysDisplayToUser(item.isAlwaysDisplayToUser());
 
-		str = item.getGameType();
+		str = item.getActionGameType();
 		if(null != str) {
 			try {
 				GameType gt = GameType.valueOf(str);
-				ipb.setGameType(gt);
+				ipb.setActionGameType(gt);
 			} catch (Exception e) {
 				log.error(String.format(
 						"can't create enum type. gameType=%s. item=%s", str,
@@ -2357,6 +2409,11 @@ public class CreateInfoProtoUtils {
 		if (null != str) {
 			megpb.setGoalDesc(str);
 		}
+
+//		str = meg.getActionDescription();
+//		if(null != str) {
+//			megpb.setActionDescription(str);
+//		}
 
 		megpb.setPointsGained(meg.getPtsReward());
 		return megpb.build();
@@ -4992,6 +5049,9 @@ public class CreateInfoProtoUtils {
 
 		}
 
+		long totalStrength = u.getTotalStrength();
+		builder.setTotalStrength(totalStrength);
+
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
@@ -5109,5 +5169,68 @@ public class CreateInfoProtoUtils {
 			}
 		}
 	}
+
+	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
+
+//	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
+//			Collection<SalesItem> siList,
+//			Collection<SalesDisplayItem> sdiList) {
+//		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
+//		b.setSalesPackageId(sp.getId());
+//
+//		String str = sp.getName();
+//		if (null != str && !str.isEmpty()) {
+//			b.setSalesPackageName(str);
+//		}
+//
+//		b.setPrice((long)sp.getPrice());
+//
+//		str = sp.getUuid();
+//		if (null != str && !str.isEmpty()) {
+//			b.setUuid(str);
+//		}
+//
+//		if (siList != null) {
+//			for (SalesItem si : siList) {
+//				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
+//				b.addSip(sip);
+//			}
+//		}
+//
+//		if (null != sdiList) {
+//			for (SalesDisplayItem sdi : sdiList) {
+//				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
+//				b.addSdip(sdip);
+//			}
+//		}
+//
+//		return b.build();
+//	}
+//
+//	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+//		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
+//		sipb.setSalesItemId(si.getId());
+//		sipb.setSalesPackageId(si.getSalesPackageId());
+//		sipb.setMonsterId(si.getMonsterId());
+//		sipb.setMonsterQuantity(si.getMonsterQuantity());
+//		sipb.setItemId(si.getItemId());
+//		sipb.setItemQuantity(si.getItemQuantity());
+//
+//		return sipb.build();
+//	}
+//
+//	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+//		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
+//		sdipb.setSalesItemId(sdi.getId());
+//		sdipb.setSalesPackageId(sdi.getSalesPackageId());
+//		sdipb.setMonsterId(sdi.getMonsterId());
+//		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
+//		sdipb.setItemId(sdi.getItemId());
+//		sdipb.setItemQuantity(sdi.getItemQuantity());
+//
+//		return sdipb.build();
+//	}
+//
+
 
 }

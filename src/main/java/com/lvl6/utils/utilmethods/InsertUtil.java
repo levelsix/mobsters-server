@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -42,7 +40,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
-import com.memetix.mst.language.Language;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 
 
 public interface InsertUtil {
@@ -124,8 +122,8 @@ public interface InsertUtil {
 
 	public abstract String insertClanChatPost(String userId, String clanId,
 			String content, Timestamp timeOfPost);
-	
-//	public abstract boolean insertTranslatedText(ChatType chatType, String chatId, 
+
+//	public abstract boolean insertTranslatedText(ChatType chatType, String chatId,
 //			Map<TranslateLanguages, String> translatedTextMap);
 
 	//	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
@@ -162,12 +160,14 @@ public interface InsertUtil {
 	public abstract List<String> insertIntoPrivateChatPosts(
 			List<String> posterIds, List<String> recipientIds,
 			List<String> contents, List<Date> timeOfPosts);
-	
+
 	public abstract String insertIntoChatTranslations(ChatType chatType, String chatId,
 			TranslateLanguages language, String message);
-	
-	public abstract boolean insertTranslateSettings(String receiverId, String senderId, 
+
+	public abstract boolean insertTranslateSettings(String receiverId, String senderId,
 			String language, String chatType, boolean translateOn);
+
+	public abstract boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats);
 
 	public abstract String insertIntoUserTaskReturnId(String userId,
 			int taskId, int expGained, int cashGained, int oilGained,
@@ -336,5 +336,5 @@ public interface InsertUtil {
 			Collection<MiniEventGoalForUser> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts);
+			List<PrivateChatPost> listOfPrivateChatPosts, ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
 }

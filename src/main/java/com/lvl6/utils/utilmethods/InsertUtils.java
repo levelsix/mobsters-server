@@ -48,6 +48,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.ChatProto.ChatType;
@@ -907,6 +908,52 @@ public class InsertUtils implements InsertUtil {
 		return true;
 
 	}
+
+	@Override
+	public boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats) {
+		String tablename = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
+
+		//did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		int numRows = pairsOfChats.size();
+		List<String> ids = new ArrayList<String>();
+		List<String> posterIds = new ArrayList<String>();
+		List<String> recipientIds = new ArrayList<String>();
+		List<String> language = new ArrayList<String>();
+		List<String> chatType = new ArrayList<String>();
+		List<Boolean> translationsOn = new ArrayList<Boolean>();
+
+		for(String posterId : pairsOfChats.keySet()) {
+			ids.add(randomUUID());
+			posterIds.add(posterId);
+			recipientIds.add(pairsOfChats.get(posterId));
+			language.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+			chatType.add(ChatType.PRIVATE_CHAT.toString());
+			translationsOn.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+		}
+
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID,
+				ids);
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
+				recipientIds);
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID,
+				posterIds);
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
+				language);
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE,
+				chatType);
+		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
+				translationsOn);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tablename, insertParams, numRows);
+
+		if(numInserted == numRows)
+			return true;
+		else return false;
+
+	}
+
 
 	//returns the id
 	@Override
@@ -2641,7 +2688,8 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts) {
+			List<PrivateChatPost> listOfPrivateChatPosts,
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		if(listOfPrivateChatPosts == null) {
 			log.error("map containing ids to translations is null");
 		}
