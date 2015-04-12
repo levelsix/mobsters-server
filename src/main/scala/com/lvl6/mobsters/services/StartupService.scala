@@ -86,54 +86,76 @@ import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.server.Locker
 import com.lvl6.misc.MiscMethods
 import com.lvl6.info.MiniJobForUser
+import com.lvl6.info.ItemSecretGiftForUser
+import java.util.Collection
+import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
+import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils
+import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil
+import com.lvl6.proto.BattleItemsProto.UserBattleItemProto
+import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil
+import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil
+import com.lvl6.proto.ChatProto.DefaultLanguagesProto
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto
+import com.lvl6.proto.MiniEventProtos.UserMiniEventProto
+import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
+import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
+import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
 
 
 class StartupService extends LazyLogging{
     
-  @Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
-  @Autowired var  timeUtils : TimeUtils  = null
-  @Autowired var  userRetrieveUtils : UserRetrieveUtils2  = null
-  @Autowired var  questForUserRetrieveUtils : QuestForUserRetrieveUtils2  = null
-  @Autowired var  questJobForUserRetrieveUtil : QuestJobForUserRetrieveUtil  = null
+	@Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
+  @Autowired var  battleItemQueueForUserRetrieveUtil : BattleItemQueueForUserRetrieveUtil = null
+  @Autowired var  battleItemForUserRetrieveUtil : BattleItemForUserRetrieveUtil = null
+	@Autowired var  cepfuRaidStageHistoryRetrieveUtils : CepfuRaidStageHistoryRetrieveUtils2  = null
+	@Autowired var  clanAvengeRetrieveUtil : ClanAvengeRetrieveUtil  = null
+	@Autowired var  clanAvengeUserRetrieveUtil : ClanAvengeUserRetrieveUtil  = null
+	@Autowired var  clanChatPostRetrieveUtils : ClanChatPostRetrieveUtils2  = null
+	@Autowired var  clanEventPersistentForClanRetrieveUtils : ClanEventPersistentForClanRetrieveUtils2  = null
+	@Autowired var  clanEventPersistentForUserRetrieveUtils : ClanEventPersistentForUserRetrieveUtils2  = null
+	@Autowired var  clanEventPersistentUserRewardRetrieveUtils : ClanEventPersistentUserRewardRetrieveUtils2  = null
+	@Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
+	@Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
+	@Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
+	@Autowired var  eventPersistentForUserRetrieveUtils : EventPersistentForUserRetrieveUtils2  = null
+	@Autowired var  itemForUserRetrieveUtil : ItemForUserRetrieveUtil  = null
+	@Autowired var  itemForUserUsageRetrieveUtil : ItemForUserUsageRetrieveUtil  = null
+	@Autowired var  iapHistoryRetrieveUtils : IAPHistoryRetrieveUtils  = null
+	@Autowired var  itemSecretGiftForUserRetrieveUtil : ItemSecretGiftForUserRetrieveUtil  = null
+	@Autowired var  miniEventForUserRetrieveUtil : MiniEventForUserRetrieveUtil = null
+  //@Autowired var  mini : MiniG= null
+	@Autowired var  miniJobForUserRetrieveUtil : MiniJobForUserRetrieveUtil  = null
+	@Autowired var  monsterEnhancingForUserRetrieveUtils : MonsterEnhancingForUserRetrieveUtils2  = null
+	@Autowired var  monsterEvolvingForUserRetrieveUtils : MonsterEvolvingForUserRetrieveUtils2  = null
+	@Autowired var  monsterForUserRetrieveUtils : MonsterForUserRetrieveUtils2  = null
+	@Autowired var  monsterHealingForUserRetrieveUtils : MonsterHealingForUserRetrieveUtils2  = null
+	@Autowired var  monsterSnapshotForUserRetrieveUtil : MonsterSnapshotForUserRetrieveUtil  = null
+	@Autowired var  privateChatPostRetrieveUtils : PrivateChatPostRetrieveUtils2  = null
+	@Autowired var  pvpBattleForUserRetrieveUtils : PvpBattleForUserRetrieveUtils2  = null
   @Autowired var  pvpLeagueForUserRetrieveUtil : PvpLeagueForUserRetrieveUtil2  = null
   @Autowired var  pvpBattleHistoryRetrieveUtil : PvpBattleHistoryRetrieveUtil2  = null
   @Autowired var  pvpBoardObstacleForUserRetrieveUtil : PvpBoardObstacleForUserRetrieveUtil = null 
-  @Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
-  @Autowired var  miniJobForUserRetrieveUtil : MiniJobForUserRetrieveUtil  = null
-  @Autowired var  itemForUserRetrieveUtil : ItemForUserRetrieveUtil  = null
-  @Autowired var  itemForUserUsageRetrieveUtil : ItemForUserUsageRetrieveUtil  = null
-  @Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
-  @Autowired var  clanAvengeRetrieveUtil : ClanAvengeRetrieveUtil  = null
-  @Autowired var  clanAvengeUserRetrieveUtil : ClanAvengeUserRetrieveUtil  = null
-  @Autowired var  monsterEnhancingForUserRetrieveUtils : MonsterEnhancingForUserRetrieveUtils2  = null
-  @Autowired var  monsterHealingForUserRetrieveUtils : MonsterHealingForUserRetrieveUtils2  = null
-  @Autowired var  monsterEvolvingForUserRetrieveUtils : MonsterEvolvingForUserRetrieveUtils2  = null
-  @Autowired var  monsterForUserRetrieveUtils : MonsterForUserRetrieveUtils2  = null
+  @Autowired var  questForUserRetrieveUtils : QuestForUserRetrieveUtils2  = null
+  @Autowired var  questJobForUserRetrieveUtil : QuestJobForUserRetrieveUtil  = null
+  @Autowired var  researchForUserRetrieveUtil : ResearchForUserRetrieveUtils = null
   @Autowired var  taskForUserCompletedRetrieveUtils : TaskForUserCompletedRetrieveUtils  = null
-  @Autowired var  taskForUserOngoingRetrieveUtils : TaskForUserOngoingRetrieveUtils2  = null
   @Autowired var  taskForUserClientStateRetrieveUtil : TaskForUserClientStateRetrieveUtil  = null
+  @Autowired var  taskForUserOngoingRetrieveUtils : TaskForUserOngoingRetrieveUtils2  = null
   @Autowired var  taskStageForUserRetrieveUtils : TaskStageForUserRetrieveUtils2  = null
-  @Autowired var  eventPersistentForUserRetrieveUtils : EventPersistentForUserRetrieveUtils2  = null
-  @Autowired var  pvpBattleForUserRetrieveUtils : PvpBattleForUserRetrieveUtils2  = null
-  @Autowired var  iapHistoryRetrieveUtils : IAPHistoryRetrieveUtils  = null
-  @Autowired var  clanEventPersistentForClanRetrieveUtils : ClanEventPersistentForClanRetrieveUtils2  = null
-  @Autowired var  clanEventPersistentForUserRetrieveUtils : ClanEventPersistentForUserRetrieveUtils2  = null
-  @Autowired var  cepfuRaidStageHistoryRetrieveUtils : CepfuRaidStageHistoryRetrieveUtils2  = null
-  @Autowired var  clanEventPersistentUserRewardRetrieveUtils : ClanEventPersistentUserRewardRetrieveUtils2  = null
-  @Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
+  @Autowired var  translationSettingsForUserRetrieveUtil : TranslationSettingsForUserRetrieveUtil = null
   @Autowired var  userClanRetrieveUtils : UserClanRetrieveUtils2  = null
   @Autowired var  userFacebookInviteForSlotRetrieveUtils : UserFacebookInviteForSlotRetrieveUtils2  = null
-  @Autowired var  clanChatPostRetrieveUtils : ClanChatPostRetrieveUtils2  = null
-  @Autowired var  privateChatPostRetrieveUtils : PrivateChatPostRetrieveUtils2  = null
-  @Autowired var  itemSecretGiftForUserRetrieveUtil : ItemSecretGiftForUserRetrieveUtil  = null
-  @Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
-  @Autowired var  monsterSnapshotForUserRetrieveUtil : MonsterSnapshotForUserRetrieveUtil  = null
+  @Autowired var  userRetrieveUtils : UserRetrieveUtils2  = null
+  
+  @Autowired var  createInfoProtoUtils : CreateInfoProtoUtils =null
   @Autowired var  deleteUtil : DeleteUtil = null
-  @Autowired var  updateUtil : UpdateUtil = null
   @Autowired var  insertUtil : InsertUtil = null
+  @Autowired var  updateUtil : UpdateUtil = null
+  @Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
+  @Autowired var  timeUtils : TimeUtils  = null
   @Autowired var  locker :  Locker = null
-  @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
   @Autowired var  eventWriter:EventWriter = null
+  @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
   
   def loginExistingUser(
       udid:String, 
@@ -539,15 +561,190 @@ class StartupService extends LazyLogging{
     }
   }
   
+  def setWhetherPlayerCompletedInAppPurchase(resBuilder:Builder, user:User):Future[Unit]= {
+    future{
+      /*NOTE: DB CALL*/
+      val hasPurchased = iapHistoryRetrieveUtils.checkIfUserHasPurchased(user.getId());
+      resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
+    }
+  }
+
+  def setSecretGifts(resBuilder:Builder, userId:String , now:Long):Future[Unit]= {
+    future{
+      var gifts = itemSecretGiftForUserRetrieveUtil.getSpecificOrAllItemSecretGiftForUser(userId, null);
+      //need to enforce 2 gift minimum
+      var numGifts = 0;
+      if (null == gifts || gifts.isEmpty()) {
+        gifts = new ArrayList[ItemSecretGiftForUser]();
+        numGifts = 2;
   
+      } else if (null != gifts && gifts.size() == 1) {
+        numGifts = 1;
+      }
+      if (numGifts > 0) {
+        giveGifts(userId, now, gifts, numGifts);
+      }
+      val nuGiftsProtos = CreateInfoProtoUtils.createUserItemSecretGiftProto(gifts);
+      resBuilder.addAllGifts(nuGiftsProtos);
+    }
+  }
   
+    //need to enforce 2 gift minimum
+  def giveGifts(
+      userId:String, 
+      now:Long,
+      gifts:Collection[ItemSecretGiftForUser], 
+      numGifts:Int) {
+    var giftList = RedeemSecretGiftAction.calculateGiftsForUser(userId, numGifts, now);
+    var ids = insertUtil.insertIntoItemSecretGiftForUserGetId(giftList);
+    //need to set the ids
+    if (null != ids && ids.size() == giftList.size()) {
+      for (index:Int <- 0 to ids.size - 1) {
+        val id = ids.get(index);
+        val isgfu = giftList.get(index);
+        isgfu.setId(id);
+      }
+      gifts.addAll(giftList);
+    } else {
+      logger.error("Error calculating the new SecretGifts. nuGifts=$giftList, ids=$ids");
+    }
+
+  }
+
+  def setResearch(resBuilder:Builder , userId:String ):Future[Unit]= {
+    future{
+      val userResearchs = researchForUserRetrieveUtil.getAllResearchForUser(userId);
+      if(null != userResearchs && !userResearchs.isEmpty()) {
+        val urpList = CreateInfoProtoUtils.createUserResearchProto(userResearchs);
+        resBuilder.addAllUserResearchs(urpList);
+      }
+    }
+  }
+
+  def setBattleItemQueueForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+    future{
+      var biqfuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(userId)
+      if (null != biqfuList && !biqfuList.isEmpty()) {
+        val biqfupList = CreateInfoProtoUtils.createBattleItemQueueForUserProtoList(biqfuList);
+        resBuilder.addAllBattleItemQueue(biqfupList);
+      }
+    }
+  }
   
+  def setBattleItemForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+    future{
+      val bifuList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
+      if (null != bifuList && !bifuList.isEmpty()) {
+        val biqfupList = CreateInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
+        resBuilder.addAllBattleItem(biqfupList);
+      }
+    }
+  }
+
+  def setDefaultLanguagesForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+    future{
+      val tsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(userId);
+      logger.info("tsfuList: $tsfuList");
+      var dlp:DefaultLanguagesProto  = null;
+      if(tsfuList != null && !tsfuList.isEmpty()) {
+        dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
+      }
+      //if there's no default languages, they havent ever been set
+      if (null != dlp) {
+        resBuilder.setUserDefaultLanguages(dlp);
+      }
+    }
+  }
   
-  
-  
-  
-  
-  
+  def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
+    val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
+    val rmea = new RetrieveMiniEventAction(
+        userId, 
+        now, 
+        userRetrieveUtils,
+        miniEventForUserRetrieveUtil,
+        miniEventGoalForUserRetrieveUtil, 
+        insertUtil, 
+        deleteUtil);
+
+    rmea.execute(rmeaResBuilder);
+//    log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//        MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//    log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+
+    if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+        null != rmea.getCurActiveMiniEvent())
+    {
+      //get UserMiniEvent info and create the proto to set into resBuilder
+      //TODO: Consider protofying MiniEvent stuff
+      UserMiniEventProto umep = CreateInfoProtoUtils
+          .createUserMiniEventProto(
+              rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+              rmea.getMegfus(),
+              rmea.getLvlEntered(), rmea.getRewards(),
+              rmea.getGoals(), rmea.getLeaderboardRewards());
+      resBuilder.setUserMiniEvent(umep);
+    }
+
+  }
+
+  def setClanRaidStuff(Builder resBuilder, User user, String userId,
+      Timestamp now) {
+    Date nowDate = new Date(now.getTime());
+    String clanId = user.getClanId();
+
+    if (clanId == null) {
+      return;
+    }
+    /*NOTE: DB CALL*/
+    //get the clan raid information for the clan
+    ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
+        .getPersistentEventForClanId(clanId);
+
+    if (null == cepfc) {
+      log.info(String.format(
+          "no clan raid stuff existing for clan=%s, user=%s", clanId,
+          user));
+      return;
+    }
+
+    PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+        .createPersistentClanEventClanInfoProto(cepfc);
+    resBuilder.setCurRaidClanInfo(pcecip);
+
+    /*NOTE: DB CALL*/
+    //get the clan raid information for all the clan users
+    //shouldn't be null (per the retrieveUtils)
+    Map<String, ClanEventPersistentForUser> userIdToCepfu = getClanEventPersistentForUserRetrieveUtils()
+        .getPersistentEventUserInfoForClanId(clanId);
+    log.info(String.format("the users involved in clan raid:%s",
+        userIdToCepfu));
+
+    if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+      log.info(String.format(
+          "no users involved in clan raid. clanRaid=%s", cepfc));
+      return;
+    }
+
+    List<String> userMonsterIds = MonsterStuffUtils
+        .getUserMonsterIdsInClanRaid(userIdToCepfu);
+
+    /*NOTE: DB CALL*/
+    //TODO: when retrieving clan info, and user's current teams, maybe query for
+    //these monsters as well
+    Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
+        .getSpecificUserMonsters(userMonsterIds);
+
+    for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+      PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+          .createPersistentClanEventUserInfoProto(cepfu,
+              idsToUserMonsters, null);
+      resBuilder.addCurRaidClanUserInfo(pceuip);
+    }
+
+    setClanRaidHistoryStuff(resBuilder, userId, nowDate);
+
+  }
   
   
   
