@@ -113,6 +113,21 @@ import org.apache.http.HttpResponse
 import java.io.InputStreamReader
 import com.lvl6.info.ItemForUser
 import com.lvl6.info.ItemForUserUsage
+import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction
+import com.lvl6.info.Clan
+import com.lvl6.proto.ChatProto.ChatType
+import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
+import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
+import com.lvl6.server.controller.actionobjects.StartUpResource
+import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
+import com.lvl6.info.TranslationSettingsForUser
+import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
+import com.lvl6.proto.ClanProto.ClanDataProto
+import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction
+import com.lvl6.proto.UserProto.FullUserProto
+import com.lvl6.proto.ChatProto.GroupChatMessageProto
 
 
 class StartupService extends LazyLogging{
@@ -168,6 +183,8 @@ class StartupService extends LazyLogging{
   @Autowired var  timeUtils : TimeUtils  = null
   @Autowired var  locker :  Locker = null
   @Autowired var  eventWriter:EventWriter = null
+  
+  @Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
   
   def loginExistingUser(
@@ -184,8 +201,7 @@ class StartupService extends LazyLogging{
         forceLogoutOthers(udid, playerId, user, fbId)
         logger.info(s"no major update... getting user info")
         val userId = playerId;
-        val plfu = pvpBattleStuff(resBuilder, user, playerId, freshRestart, now);
-        val userInfo:Future[Unit] = for{
+        val userInfo:Future[PvpLeagueForUser] = for{
           sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
           suci <-    setUserClanInfos(resBuilder, userId)
           sntp <-    setNoticesToPlayers(resBuilder)
@@ -203,13 +219,136 @@ class StartupService extends LazyLogging{
           sbifu <-   setBattleItemForUser(resBuilder, playerId)
           sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
           smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
-        } yield Unit
+          scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
+          plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
+        } yield plfu
         
+        userInfo onSuccess {
+          case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, playerId, nowDate, plfu) 
+        }
         
+        userInfo onFailure {
+          case t:Throwable => {
+            logger.error("Error running login futures", t)
+            loginFinished(playerId)
+          }
+        }
         
       }catch{
         case t:Throwable => logger.error(s"", t)
+        loginFinished(playerId)
       }
+  }
+  
+  def loginFinished(playerId:String)= {
+    locker.unlockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
+  }
+  
+  
+  def finishLoginExisting(resBuilder:Builder, user:User, playerId:String, nowDate:Date, plfu:PvpLeagueForUser) = {
+    try {
+      val sgcma = new SetGlobalChatMessageAction(resBuilder, user, chatMessages);
+      sgcma.execute();
+      //fill up with userIds, and other ids to fetch from tables
+      val fillMe = new StartUpResource(userRetrieveUtils, clanRetrieveUtils);
+      // For creating the full user
+      fillMe.addUserId(user.getId());
+  
+      //get translationsettingforuser list of the player to check for defaults
+      val tsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(playerId);
+      var tsfuListIsNull = false;
+  
+      if(tsfuList == null || tsfuList.isEmpty()) {
+        insertUtil.insertTranslateSettings(
+            playerId, 
+            null,
+            ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
+            ChatType.GLOBAL_CHAT.toString(),
+            ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+        tsfuListIsNull = true;
+      }
+  
+      val updatedTsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(playerId);
+  
+      val spcma = new SetPrivateChatMessageAction(
+          resBuilder, 
+          user, 
+          playerId,
+          privateChatPostRetrieveUtils, 
+          tsfuListIsNull, 
+          insertUtil,
+          createInfoProtoUtils, 
+          translationSettingsForUserRetrieveUtil,
+          updatedTsfuList);
+      spcma.setUp(fillMe);
+  
+      val sfesa = new SetFacebookExtraSlotsAction(
+          resBuilder, 
+          user, 
+          playerId,
+          userFacebookInviteForSlotRetrieveUtils);
+      sfesa.setUp(fillMe);
+  
+      val spbha = new SetPvpBattleHistoryAction(
+          resBuilder, 
+          user, 
+          playerId, 
+          pvpBattleHistoryRetrieveUtil,
+          monsterForUserRetrieveUtils, 
+          clanRetrieveUtils,
+          hazelcastPvpUtil);
+      spbha.setUp(fillMe);
+  
+      //CLAN DATA
+      val cdpb = ClanDataProto.newBuilder();
+      val sccma = new SetClanChatMessageAction(cdpb, user, clanChatPostRetrieveUtils);
+      sccma.setUp(fillMe);
+  
+      val scha = new SetClanHelpingsAction(cdpb, user, playerId, clanHelpRetrieveUtil);
+      scha.setUp(fillMe);
+  
+      val scra = new SetClanRetaliationsAction(cdpb, user, playerId, clanAvengeRetrieveUtil, clanAvengeUserRetrieveUtil);
+      scra.setUp(fillMe);
+  
+      val scmtda = new SetClanMemberTeamDonationAction(
+          cdpb, 
+          user, 
+          playerId, 
+          clanMemberTeamDonationRetrieveUtil,
+          monsterSnapshotForUserRetrieveUtil);
+      scmtda.setUp(fillMe);
+      //Now since all the ids of resources are known, get them from db
+      fillMe.fetch();
+      spcma.execute(fillMe);
+      //set this proto after executing privatechatprotos
+      setDefaultLanguagesForUser(resBuilder, playerId);
+      sfesa.execute(fillMe);
+      spbha.execute(fillMe);
+      sccma.execute(fillMe);
+      scha.execute(fillMe);
+      scra.execute(fillMe);
+      scmtda.execute(fillMe);
+      resBuilder.setClanData(cdpb.build());
+      //TODO: DELETE IN FUTURE. This is for legacy client
+      resBuilder.addAllClanChats(cdpb.getClanChatsList());
+      resBuilder.addAllClanHelpings(cdpb.getClanHelpingsList());
+  
+      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
+      //log.info("before last login change, user=" + user);
+      user.setLastLogin(nowDate);
+      //log.info("after last login change, user=" + user);
+  
+      var clan:Clan = null;
+      if (user.getClanId() != null) {
+        clan = fillMe.getClanIdsToClans().get(user.getClanId());
+      }
+      val fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
+      resBuilder.setSender(fup);
+    }catch{
+      case t:Throwable => logger.error("Error finishing login for user: $playerId", t)
+    }finally {
+      loginFinished(playerId)
+    }
   }
   
   def forceLogoutOthers(udid:String, playerId:String, user:User, fbId:String)={
