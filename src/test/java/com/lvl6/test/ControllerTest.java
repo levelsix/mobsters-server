@@ -84,7 +84,7 @@ import com.lvl6.server.controller.InAppPurchaseController;
 import com.lvl6.server.controller.PerformResearchController;
 import com.lvl6.server.controller.RetrieveClanInfoController;
 import com.lvl6.server.controller.SellUserMonsterController;
-import com.lvl6.server.controller.StartupController;
+import com.lvl6.server.controller.StartupControllerOld;
 import com.lvl6.server.controller.SubmitMonsterEnhancementController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
 import com.lvl6.server.controller.UserCreateController;
@@ -111,7 +111,7 @@ public class ControllerTest extends TestCase {
 	//	PurchaseCityExpansionController purchaseCityExpansionController;
 
 	@Autowired
-	StartupController startupController;
+	StartupControllerOld startupController;
 
 	@Autowired
 	UserCreateController userCreateController;
@@ -1400,11 +1400,11 @@ public class ControllerTest extends TestCase {
 	//		this.purchaseCityExpansionController = purchaseCityExpansionController;
 	//	}
 
-	public StartupController getStartupController() {
+	public StartupControllerOld getStartupController() {
 		return startupController;
 	}
 
-	public void setStartupController(StartupController startupController) {
+	public void setStartupController(StartupControllerOld startupController) {
 		this.startupController = startupController;
 	}
 
