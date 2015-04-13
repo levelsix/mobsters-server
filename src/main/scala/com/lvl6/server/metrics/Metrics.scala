@@ -17,7 +17,7 @@ object Metrics {
   }
   
   def timed[T](timerName:String)(body: => T):T={
-    val timer = registry.timer(name(this.getClass.getSimpleName, timerName));
+    val timer = registry.timer(timerName);
     val context = timer.time();
     try {
         body
