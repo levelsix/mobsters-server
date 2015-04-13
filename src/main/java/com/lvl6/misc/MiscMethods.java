@@ -1797,10 +1797,52 @@ public class MiscMethods {
 			}
 			else {
 				for(Language language2 : listOfLanguages) {
-					if(sourceLanguage == null) {
-						translatedText = Translate.execute(text, language2);
+					if(sourceLanguage != null) {
+						if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
+							TranslateLanguages tl = convertFromLanguageToEnum(language2);
+							returnMap.put(tl, text);
+						}
 					}
-					else translatedText = Translate.execute(text, sourceLanguage, language2);
+					else {
+						if(sourceLanguage == null) {
+							translatedText = Translate.execute(text, language2);
+						}
+						else translatedText = Translate.execute(text, sourceLanguage, language2);
+						TranslateLanguages tl = convertFromLanguageToEnum(language2);
+						returnMap.put(tl, translatedText);
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnMap;
+	}
+
+	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
+		Translate.setClientId(pClientId);
+		Translate.setClientSecret(secretId);
+
+		String translatedText = "";
+		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
+
+		List<Language> listOfLanguages = new ArrayList<Language>();
+		listOfLanguages.add(Language.ARABIC);
+		listOfLanguages.add(Language.ENGLISH);
+		listOfLanguages.add(Language.FRENCH);
+		listOfLanguages.add(Language.GERMAN);
+		listOfLanguages.add(Language.SPANISH);
+		listOfLanguages.add(Language.RUSSIAN);
+
+		try {
+			for(Language language2 : listOfLanguages) {
+				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
+					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+					returnMap.put(tl, text);
+				}
+				else {
+					translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
 				}
@@ -1810,6 +1852,7 @@ public class MiscMethods {
 			e.printStackTrace();
 		}
 		return returnMap;
+
 	}
 
 	private TranslateLanguages convertFromLanguageToEnum(Language language) {

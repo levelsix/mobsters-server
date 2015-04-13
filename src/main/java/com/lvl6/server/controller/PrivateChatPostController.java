@@ -85,6 +85,8 @@ public class PrivateChatPostController extends EventController {
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
+	private PrivateChatPostResponseProto pcprp;
+
 	public PrivateChatPostController() {
 		numAllocatedThreads = 4;
 	}
@@ -310,8 +312,8 @@ public class PrivateChatPostController extends EventController {
 					// send to recipient of the private chat post
 					PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(
 							recipientId);
-					resEvent2.setPrivateChatPostResponseProto(resBuilder
-							.build());
+					pcprp = resBuilder.build();
+					resEvent2.setPrivateChatPostResponseProto(pcprp);
 					server.writeAPNSNotificationOrEvent(resEvent2);
 				}
 			}
@@ -420,5 +422,15 @@ public class PrivateChatPostController extends EventController {
 	public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
 		this.clanRetrieveUtils = clanRetrieveUtils;
 	}
+
+	public PrivateChatPostResponseProto getPcprp() {
+		return pcprp;
+	}
+
+	public void setPcprp(PrivateChatPostResponseProto pcprp) {
+		this.pcprp = pcprp;
+	}
+
+
 
 }
