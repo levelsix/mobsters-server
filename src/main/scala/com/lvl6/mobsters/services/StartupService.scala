@@ -9,15 +9,19 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.concurrent.future
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -49,6 +53,7 @@ import com.lvl6.proto.ClanProto.ClanDataProto
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto
+import com.lvl6.proto.EventStartupProto.StartupRequestProto
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto
 import com.lvl6.proto.EventStartupProto.StartupResponseProto
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
@@ -71,10 +76,12 @@ import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2
+import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil
+import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil
@@ -118,17 +125,14 @@ import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
 import com.lvl6.server.controller.actionobjects.StartUpResource
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.server.metrics.Metrics._
 import com.lvl6.utils.CreateInfoProtoUtils
 import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
-import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
-import com.lvl6.proto.EventStartupProto.StartupRequestProto
-import com.lvl6.utils.utilmethods.InsertUtils
-import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils
-import com.lvl6.server.metrics.Metrics._
 
 case class StartupData(
       resBuilder:Builder, 
@@ -146,7 +150,7 @@ case class StartupData(
       apsalarId:String,
       newNumConsecutiveDaysLoggedIn:Int,
       freshRestart:Boolean)
-
+@Component
 class StartupService extends LazyLogging{
     
 	@Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
@@ -1217,11 +1221,7 @@ class StartupService extends LazyLogging{
       try {
         val response1 = httpclient.execute(httpGet);
         val rd = new BufferedReader(new InputStreamReader(response1.getEntity().getContent()));
-        var responseString = "";
-        var line =""
-        while ((line = rd.readLine()) != null) {
-          responseString += line;
-        }
+        var responseString = Stream.continually(rd.readLine()).takeWhile(_ != null).mkString("\n")
         logger.info("Received response: " + responseString);
       } catch {
         case t:Throwable => logger.error("failed to make offer chart call", t);
@@ -1268,7 +1268,7 @@ class StartupService extends LazyLogging{
     if (user != null) {
       val userId = user.getId()
       logger.info(s"Updating leaderboard for user $userId");
-      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn);
+      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn)
     }
   }
 }
