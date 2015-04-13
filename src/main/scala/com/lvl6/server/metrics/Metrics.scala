@@ -3,12 +3,16 @@ package com.lvl6.server.metrics
 import com.lvl6.spring.AppContext
 import com.codahale.metrics.MetricRegistry
 import com.codahale.metrics.MetricRegistry._
+import org.springframework.stereotype.Component
 
 object Metrics {
   
   var reg:MetricRegistry = null
+  def setRegistry(registree:MetricRegistry)={
+    reg = registree
+  }
   def registry = {
-   if(reg == null) reg = AppContext.getApplicationContext.getBean("metrics").asInstanceOf[MetricRegistry]
+   //if(reg == null) reg = AppContext.getApplicationContext.getBean("metrics").asInstanceOf[MetricRegistry]
    reg
   }
   
